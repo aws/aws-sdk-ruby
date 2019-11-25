@@ -338,7 +338,7 @@ module Aws::AlexaForBusiness
     #   data as a hash:
     #
     #       {
-    #         interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #         interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #       }
     #
     # @!attribute [rw] interval
@@ -732,7 +732,7 @@ module Aws::AlexaForBusiness
     #         s3_key_prefix: "S3KeyPrefix",
     #         format: "CSV", # required, accepts CSV, CSV_ZIP
     #         content_range: { # required
-    #           interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #           interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #         },
     #         recurrence: {
     #           start_date: "Date",
@@ -955,6 +955,41 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # Creates settings for the end of meeting reminder feature that are
+    # applied to a room profile. The end of meeting reminder enables Alexa
+    # to remind users when a meeting is ending.
+    #
+    # @note When making an API call, you may pass CreateEndOfMeetingReminder
+    #   data as a hash:
+    #
+    #       {
+    #         reminder_at_minutes: [1], # required
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] reminder_at_minutes
+    #   A range of 3 to 15 minutes that determines when the reminder begins.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] reminder_type
+    #   The type of sound that users hear during the end of meeting
+    #   reminder.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether an end of meeting reminder is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateEndOfMeetingReminder AWS API Documentation
+    #
+    class CreateEndOfMeetingReminder < Struct.new(
+      :reminder_at_minutes,
+      :reminder_type,
+      :enabled)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateGatewayGroupRequest
     #   data as a hash:
     #
@@ -997,6 +1032,91 @@ module Aws::AlexaForBusiness
     #
     class CreateGatewayGroupResponse < Struct.new(
       :gateway_group_arn)
+      include Aws::Structure
+    end
+
+    # Creates settings for the instant booking feature that are applied to a
+    # room profile. When users start their meeting with Alexa, Alexa
+    # automatically books the room for the configured duration if the room
+    # is available.
+    #
+    # @note When making an API call, you may pass CreateInstantBooking
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_minutes: 1, # required
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] duration_in_minutes
+    #   Duration between 15 and 240 minutes at increments of 15 that
+    #   determines how long to book an available room when a meeting is
+    #   started with Alexa.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether instant booking is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateInstantBooking AWS API Documentation
+    #
+    class CreateInstantBooking < Struct.new(
+      :duration_in_minutes,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Creates meeting room settings of a room profile.
+    #
+    # @note When making an API call, you may pass CreateMeetingRoomConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         room_utilization_metrics_enabled: false,
+    #         end_of_meeting_reminder: {
+    #           reminder_at_minutes: [1], # required
+    #           reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #           enabled: false, # required
+    #         },
+    #         instant_booking: {
+    #           duration_in_minutes: 1, # required
+    #           enabled: false, # required
+    #         },
+    #         require_check_in: {
+    #           release_after_minutes: 1, # required
+    #           enabled: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] room_utilization_metrics_enabled
+    #   Whether room utilization metrics are enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_of_meeting_reminder
+    #   Creates settings for the end of meeting reminder feature that are
+    #   applied to a room profile. The end of meeting reminder enables Alexa
+    #   to remind users when a meeting is ending.
+    #   @return [Types::CreateEndOfMeetingReminder]
+    #
+    # @!attribute [rw] instant_booking
+    #   Settings to automatically book a room for a configured duration if
+    #   it's free when joining a meeting with Alexa.
+    #   @return [Types::CreateInstantBooking]
+    #
+    # @!attribute [rw] require_check_in
+    #   Settings for requiring a check in when a room is reserved. Alexa can
+    #   cancel a room reservation if it's not checked into to make the room
+    #   available for others. Users can check in by joining the meeting with
+    #   Alexa or an AVS device, or by saying “Alexa, check in.”
+    #   @return [Types::CreateRequireCheckIn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateMeetingRoomConfiguration AWS API Documentation
+    #
+    class CreateMeetingRoomConfiguration < Struct.new(
+      :room_utilization_metrics_enabled,
+      :end_of_meeting_reminder,
+      :instant_booking,
+      :require_check_in)
       include Aws::Structure
     end
 
@@ -1110,6 +1230,22 @@ module Aws::AlexaForBusiness
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
     #         pstn_enabled: false,
+    #         meeting_room_configuration: {
+    #           room_utilization_metrics_enabled: false,
+    #           end_of_meeting_reminder: {
+    #             reminder_at_minutes: [1], # required
+    #             reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #             enabled: false, # required
+    #           },
+    #           instant_booking: {
+    #             duration_in_minutes: 1, # required
+    #             enabled: false, # required
+    #           },
+    #           require_check_in: {
+    #             release_after_minutes: 1, # required
+    #             enabled: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] profile_name
@@ -1137,7 +1273,8 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   The locale of the room profile.
+    #   The locale of the room profile. (This is currently only available to
+    #   a limited preview audience.)
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1160,6 +1297,10 @@ module Aws::AlexaForBusiness
     #   Whether PSTN calling is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] meeting_room_configuration
+    #   The meeting room settings of a room profile.
+    #   @return [Types::CreateMeetingRoomConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateProfileRequest AWS API Documentation
     #
     class CreateProfileRequest < Struct.new(
@@ -1173,7 +1314,8 @@ module Aws::AlexaForBusiness
       :client_request_token,
       :setup_mode_disabled,
       :max_volume_limit,
-      :pstn_enabled)
+      :pstn_enabled,
+      :meeting_room_configuration)
       include Aws::Structure
     end
 
@@ -1185,6 +1327,36 @@ module Aws::AlexaForBusiness
     #
     class CreateProfileResponse < Struct.new(
       :profile_arn)
+      include Aws::Structure
+    end
+
+    # Creates settings for the require check in feature that are applied to
+    # a room profile. Require check in allows a meeting room’s Alexa or AVS
+    # device to prompt the user to check in; otherwise, the room will be
+    # released.
+    #
+    # @note When making an API call, you may pass CreateRequireCheckIn
+    #   data as a hash:
+    #
+    #       {
+    #         release_after_minutes: 1, # required
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] release_after_minutes
+    #   Duration between 5 and 20 minutes to determine when to release the
+    #   room if it's not checked into.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether require check in is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateRequireCheckIn AWS API Documentation
+    #
+    class CreateRequireCheckIn < Struct.new(
+      :release_after_minutes,
+      :enabled)
       include Aws::Structure
     end
 
@@ -2090,6 +2262,32 @@ module Aws::AlexaForBusiness
     #
     class DisassociateSkillGroupFromRoomResponse < Aws::EmptyStructure; end
 
+    # Settings for the end of meeting reminder feature that are applied to a
+    # room profile. The end of meeting reminder enables Alexa to remind
+    # users when a meeting is ending.
+    #
+    # @!attribute [rw] reminder_at_minutes
+    #   A range of 3 to 15 minutes that determines when the reminder begins.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] reminder_type
+    #   The type of sound that users hear during the end of meeting
+    #   reminder.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether an end of meeting reminder is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/EndOfMeetingReminder AWS API Documentation
+    #
+    class EndOfMeetingReminder < Struct.new(
+      :reminder_at_minutes,
+      :reminder_type,
+      :enabled)
+      include Aws::Structure
+    end
+
     # A filter name and value pair that is used to return a more specific
     # list of results. Filters can be used to match a set of resources by
     # various criteria.
@@ -2660,6 +2858,29 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # Settings for the instant booking feature that are applied to a room
+    # profile. When users start their meeting with Alexa, Alexa
+    # automatically books the room for the configured duration if the room
+    # is available.
+    #
+    # @!attribute [rw] duration_in_minutes
+    #   Duration between 15 and 240 minutes at increments of 15 that
+    #   determines how long to book an available room when a meeting is
+    #   started with Alexa.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether instant booking is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/InstantBooking AWS API Documentation
+    #
+    class InstantBooking < Struct.new(
+      :duration_in_minutes,
+      :enabled)
+      include Aws::Structure
+    end
+
     # The Certificate Authority can't issue or revoke a certificate.
     #
     # @!attribute [rw] message
@@ -2984,12 +3205,10 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] skill_group_arn
     #   The ARN of the skill group for which to list enabled skills.
-    #   Required.
     #   @return [String]
     #
     # @!attribute [rw] enablement_type
-    #   Whether the skill is enabled under the user's account, or if it
-    #   requires linking to be used.
+    #   Whether the skill is enabled under the user's account.
     #   @return [String]
     #
     # @!attribute [rw] skill_type
@@ -3000,14 +3219,14 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up
-    #   to the value specified by `MaxResults`. Required.
+    #   to the value specified by `MaxResults`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   retrieved.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsRequest AWS API Documentation
@@ -3220,6 +3439,40 @@ module Aws::AlexaForBusiness
     class ListTagsResponse < Struct.new(
       :tags,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Meeting room settings of a room profile.
+    #
+    # @!attribute [rw] room_utilization_metrics_enabled
+    #   Whether room utilization metrics are enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_of_meeting_reminder
+    #   Settings for the end of meeting reminder feature that are applied to
+    #   a room profile. The end of meeting reminder enables Alexa to remind
+    #   users when a meeting is ending.
+    #   @return [Types::EndOfMeetingReminder]
+    #
+    # @!attribute [rw] instant_booking
+    #   Settings to automatically book the room if available for a
+    #   configured duration when joining a meeting with Alexa.
+    #   @return [Types::InstantBooking]
+    #
+    # @!attribute [rw] require_check_in
+    #   Settings for requiring a check in when a room is reserved. Alexa can
+    #   cancel a room reservation if it's not checked into. This makes the
+    #   room available for others. Users can check in by joining the meeting
+    #   with Alexa or an AVS device, or by saying “Alexa, check in.”
+    #   @return [Types::RequireCheckIn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/MeetingRoomConfiguration AWS API Documentation
+    #
+    class MeetingRoomConfiguration < Struct.new(
+      :room_utilization_metrics_enabled,
+      :end_of_meeting_reminder,
+      :instant_booking,
+      :require_check_in)
       include Aws::Structure
     end
 
@@ -3495,7 +3748,8 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   The locale of a room profile.
+    #   The locale of a room profile. (This is currently available only to a
+    #   limited preview audience.)
     #   @return [String]
     #
     # @!attribute [rw] setup_mode_disabled
@@ -3514,6 +3768,10 @@ module Aws::AlexaForBusiness
     #   The ARN of the address book.
     #   @return [String]
     #
+    # @!attribute [rw] meeting_room_configuration
+    #   Meeting room settings of a room profile.
+    #   @return [Types::MeetingRoomConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Profile AWS API Documentation
     #
     class Profile < Struct.new(
@@ -3529,7 +3787,8 @@ module Aws::AlexaForBusiness
       :setup_mode_disabled,
       :max_volume_limit,
       :pstn_enabled,
-      :address_book_arn)
+      :address_book_arn,
+      :meeting_room_configuration)
       include Aws::Structure
     end
 
@@ -3552,7 +3811,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] timezone
-    #   The timezone of a room profile.
+    #   The time zone of a room profile.
     #   @return [String]
     #
     # @!attribute [rw] distance_unit
@@ -3568,7 +3827,8 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   The locale of a room profile.
+    #   The locale of a room profile. (This is currently available only to a
+    #   limited preview audience.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ProfileData AWS API Documentation
@@ -3804,6 +4064,27 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkillResponse AWS API Documentation
     #
     class RejectSkillResponse < Aws::EmptyStructure; end
+
+    # Settings for the require check in feature that are applied to a room
+    # profile. Require check in allows a meeting room’s Alexa or AVS device
+    # to prompt the user to check in; otherwise, the room will be released.
+    #
+    # @!attribute [rw] release_after_minutes
+    #   Duration between 5 and 20 minutes to determine when to release the
+    #   room if it's not checked into.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether require check in is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RequireCheckIn AWS API Documentation
+    #
+    class RequireCheckIn < Struct.new(
+      :release_after_minutes,
+      :enabled)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ResolveRoomRequest
     #   data as a hash:
@@ -5104,7 +5385,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of a tag. Tag values are case-sensitive and can be null.
+    #   The value of a tag. Tag values are case sensitive and can be null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Tag AWS API Documentation
@@ -5462,6 +5743,43 @@ module Aws::AlexaForBusiness
     #
     class UpdateDeviceResponse < Aws::EmptyStructure; end
 
+    # Settings for the end of meeting reminder feature that are applied to a
+    # room profile. The end of meeting reminder enables Alexa to remind
+    # users when a meeting is ending.
+    #
+    # @note When making an API call, you may pass UpdateEndOfMeetingReminder
+    #   data as a hash:
+    #
+    #       {
+    #         reminder_at_minutes: [1],
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] reminder_at_minutes
+    #   Updates settings for the end of meeting reminder feature that are
+    #   applied to a room profile. The end of meeting reminder enables Alexa
+    #   to remind users when a meeting is ending.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] reminder_type
+    #   The type of sound that users hear during the end of meeting
+    #   reminder.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether an end of meeting reminder is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateEndOfMeetingReminder AWS API Documentation
+    #
+    class UpdateEndOfMeetingReminder < Struct.new(
+      :reminder_at_minutes,
+      :reminder_type,
+      :enabled)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateGatewayGroupRequest
     #   data as a hash:
     #
@@ -5536,6 +5854,90 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayResponse AWS API Documentation
     #
     class UpdateGatewayResponse < Aws::EmptyStructure; end
+
+    # Updates settings for the instant booking feature that are applied to a
+    # room profile. If instant booking is enabled, Alexa automatically
+    # reserves a room if it is free when a user joins a meeting with Alexa.
+    #
+    # @note When making an API call, you may pass UpdateInstantBooking
+    #   data as a hash:
+    #
+    #       {
+    #         duration_in_minutes: 1,
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] duration_in_minutes
+    #   Duration between 15 and 240 minutes at increments of 15 that
+    #   determines how long to book an available room when a meeting is
+    #   started with Alexa.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether instant booking is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateInstantBooking AWS API Documentation
+    #
+    class UpdateInstantBooking < Struct.new(
+      :duration_in_minutes,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Updates meeting room settings of a room profile.
+    #
+    # @note When making an API call, you may pass UpdateMeetingRoomConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         room_utilization_metrics_enabled: false,
+    #         end_of_meeting_reminder: {
+    #           reminder_at_minutes: [1],
+    #           reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #           enabled: false,
+    #         },
+    #         instant_booking: {
+    #           duration_in_minutes: 1,
+    #           enabled: false,
+    #         },
+    #         require_check_in: {
+    #           release_after_minutes: 1,
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] room_utilization_metrics_enabled
+    #   Whether room utilization metrics are enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] end_of_meeting_reminder
+    #   Settings for the end of meeting reminder feature that are applied to
+    #   a room profile. The end of meeting reminder enables Alexa to remind
+    #   users when a meeting is ending.
+    #   @return [Types::UpdateEndOfMeetingReminder]
+    #
+    # @!attribute [rw] instant_booking
+    #   Settings to automatically book an available room available for a
+    #   configured duration when joining a meeting with Alexa.
+    #   @return [Types::UpdateInstantBooking]
+    #
+    # @!attribute [rw] require_check_in
+    #   Settings for requiring a check in when a room is reserved. Alexa can
+    #   cancel a room reservation if it's not checked into to make the room
+    #   available for others. Users can check in by joining the meeting with
+    #   Alexa or an AVS device, or by saying “Alexa, check in.”
+    #   @return [Types::UpdateRequireCheckIn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateMeetingRoomConfiguration AWS API Documentation
+    #
+    class UpdateMeetingRoomConfiguration < Struct.new(
+      :room_utilization_metrics_enabled,
+      :end_of_meeting_reminder,
+      :instant_booking,
+      :require_check_in)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateNetworkProfileRequest
     #   data as a hash:
@@ -5617,6 +6019,22 @@ module Aws::AlexaForBusiness
     #         setup_mode_disabled: false,
     #         max_volume_limit: 1,
     #         pstn_enabled: false,
+    #         meeting_room_configuration: {
+    #           room_utilization_metrics_enabled: false,
+    #           end_of_meeting_reminder: {
+    #             reminder_at_minutes: [1],
+    #             reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #             enabled: false,
+    #           },
+    #           instant_booking: {
+    #             duration_in_minutes: 1,
+    #             enabled: false,
+    #           },
+    #           require_check_in: {
+    #             release_after_minutes: 1,
+    #             enabled: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] profile_arn
@@ -5653,7 +6071,8 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] locale
-    #   The updated locale for the room profile.
+    #   The updated locale for the room profile. (This is currently only
+    #   available to a limited preview audience.)
     #   @return [String]
     #
     # @!attribute [rw] setup_mode_disabled
@@ -5667,6 +6086,10 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] pstn_enabled
     #   Whether the PSTN setting of the room profile is enabled.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] meeting_room_configuration
+    #   The updated meeting room settings of a room profile.
+    #   @return [Types::UpdateMeetingRoomConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfileRequest AWS API Documentation
     #
@@ -5682,13 +6105,44 @@ module Aws::AlexaForBusiness
       :locale,
       :setup_mode_disabled,
       :max_volume_limit,
-      :pstn_enabled)
+      :pstn_enabled,
+      :meeting_room_configuration)
       include Aws::Structure
     end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfileResponse AWS API Documentation
     #
     class UpdateProfileResponse < Aws::EmptyStructure; end
+
+    # Updates settings for the require check in feature that are applied to
+    # a room profile. Require check in allows a meeting room’s Alexa or AVS
+    # device to prompt the user to check in; otherwise, the room will be
+    # released.
+    #
+    # @note When making an API call, you may pass UpdateRequireCheckIn
+    #   data as a hash:
+    #
+    #       {
+    #         release_after_minutes: 1,
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] release_after_minutes
+    #   Duration between 5 and 20 minutes to determine when to release the
+    #   room if it's not checked into.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled
+    #   Whether require check in is enabled or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateRequireCheckIn AWS API Documentation
+    #
+    class UpdateRequireCheckIn < Struct.new(
+      :release_after_minutes,
+      :enabled)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateRoomRequest
     #   data as a hash:

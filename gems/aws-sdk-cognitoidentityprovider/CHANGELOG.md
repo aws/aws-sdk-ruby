@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-11-25)
+------------------
+
+* Feature - Amazon Cognito Userpools now supports Sign in with Apple as an Identity Provider.
+
 1.29.0 (2019-11-15)
 ------------------
 

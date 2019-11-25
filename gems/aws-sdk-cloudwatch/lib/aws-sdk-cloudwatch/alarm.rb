@@ -156,7 +156,7 @@ module Aws::CloudWatch
       data[:evaluation_periods]
     end
 
-    # The number of datapoints that must be breaching to trigger the alarm.
+    # The number of data points that must be breaching to trigger the alarm.
     # @return [Integer]
     def datapoints_to_alarm
       data[:datapoints_to_alarm]

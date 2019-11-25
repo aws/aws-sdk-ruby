@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-11-25)
+------------------
+
+* Feature - Amazon Lex adds "sessionId" attribute to the PostText and PostContent response.
+
 1.22.0 (2019-11-21)
 ------------------
 

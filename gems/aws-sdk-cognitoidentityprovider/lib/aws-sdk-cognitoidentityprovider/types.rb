@@ -2892,7 +2892,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         user_pool_id: "UserPoolIdType", # required
     #         provider_name: "ProviderNameTypeV1", # required
-    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
+    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #         provider_details: { # required
     #           "StringType" => "StringType",
     #         },

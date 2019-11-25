@@ -2274,6 +2274,86 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateScheduledActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_action_name: "String", # required
+    #         target_action: { # required
+    #           resize_cluster: {
+    #             cluster_identifier: "String", # required
+    #             cluster_type: "String",
+    #             node_type: "String",
+    #             number_of_nodes: 1, # required
+    #             classic: false,
+    #           },
+    #         },
+    #         schedule: "String", # required
+    #         iam_role: "String", # required
+    #         scheduled_action_description: "String",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         enable: false,
+    #       }
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action. The name must be unique within an
+    #   account. For more information about this parameter, see
+    #   ScheduledAction.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_action
+    #   A JSON format string of the Amazon Redshift API operation with input
+    #   parameters. For more information about this parameter, see
+    #   ScheduledAction.
+    #   @return [Types::ScheduledActionType]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule in `at( )` or `cron( )` format. For more information
+    #   about this parameter, see ScheduledAction.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role to assume to run the target action. For more
+    #   information about this parameter, see ScheduledAction.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   The description of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC of the scheduled action. Before this time, the
+    #   scheduled action does not trigger. For more information about this
+    #   parameter, see ScheduledAction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time in UTC of the scheduled action. After this time, the
+    #   scheduled action does not trigger. For more information about this
+    #   parameter, see ScheduledAction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enable
+    #   If true, the schedule is enabled. If false, the scheduled action
+    #   does not trigger. For more information about `state` of the
+    #   scheduled action, see ScheduledAction.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateScheduledActionMessage AWS API Documentation
+    #
+    class CreateScheduledActionMessage < Struct.new(
+      :scheduled_action_name,
+      :target_action,
+      :schedule,
+      :iam_role,
+      :scheduled_action_description,
+      :start_time,
+      :end_time,
+      :enable)
+      include Aws::Structure
+    end
+
     # The result of the `CreateSnapshotCopyGrant` action.
     #
     # @note When making an API call, you may pass CreateSnapshotCopyGrantMessage
@@ -2791,6 +2871,24 @@ module Aws::Redshift
     #
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteScheduledActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_action_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteScheduledActionMessage AWS API Documentation
+    #
+    class DeleteScheduledActionMessage < Struct.new(
+      :scheduled_action_name)
       include Aws::Structure
     end
 
@@ -3679,7 +3777,7 @@ module Aws::Redshift
     #
     #       {
     #         source_identifier: "String",
-    #         source_type: "cluster", # accepts cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot
+    #         source_type: "cluster", # accepts cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, scheduled-action
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         duration: 1,
@@ -3962,12 +4060,13 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         action_type: "restore-cluster", # required, accepts restore-cluster
+    #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config
+    #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
     #         owner_account: "String",
     #         filters: [
     #           {
-    #             name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #             name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent, Mode
     #             operator: "eq", # accepts eq, lt, gt, le, ge, in, between
     #             values: ["String"],
     #           },
@@ -3978,7 +4077,15 @@ module Aws::Redshift
     #
     # @!attribute [rw] action_type
     #   The action type to evaluate for possible node configurations.
-    #   Currently, it must be "restore-cluster".
+    #   Specify "restore-cluster" to get configuration combinations based
+    #   on an existing snapshot. Specify "recommend-node-config" to get
+    #   configuration recommendations based on an existing cluster or
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The identifier of the cluster to evaluate for possible node
+    #   configurations.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_identifier
@@ -4022,6 +4129,7 @@ module Aws::Redshift
     #
     class DescribeNodeConfigurationOptionsMessage < Struct.new(
       :action_type,
+      :cluster_identifier,
       :snapshot_identifier,
       :owner_account,
       :filters,
@@ -4193,6 +4301,90 @@ module Aws::Redshift
     #
     class DescribeResizeMessage < Struct.new(
       :cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeScheduledActionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_action_name: "String",
+    #         target_action_type: "ResizeCluster", # accepts ResizeCluster
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         active: false,
+    #         filters: [
+    #           {
+    #             name: "cluster-identifier", # required, accepts cluster-identifier, iam-role
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_action_type
+    #   The type of the scheduled actions to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC of the scheduled actions to retrieve. Only
+    #   active scheduled actions that have invocations after this time are
+    #   retrieved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time in UTC of the scheduled action to retrieve. Only active
+    #   scheduled actions that have invocations before this time are
+    #   retrieved.
+    #   @return [Time]
+    #
+    # @!attribute [rw] active
+    #   If true, retrieve only active scheduled actions. If false, retrieve
+    #   only disabled scheduled actions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   List of scheduled action filters.
+    #   @return [Array<Types::ScheduledActionFilter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeScheduledActions request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeScheduledActionsMessage AWS API Documentation
+    #
+    class DescribeScheduledActionsMessage < Struct.new(
+      :scheduled_action_name,
+      :target_action_type,
+      :start_time,
+      :end_time,
+      :active,
+      :filters,
+      :marker,
+      :max_records)
       include Aws::Structure
     end
 
@@ -6136,6 +6328,81 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyScheduledActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         scheduled_action_name: "String", # required
+    #         target_action: {
+    #           resize_cluster: {
+    #             cluster_identifier: "String", # required
+    #             cluster_type: "String",
+    #             node_type: "String",
+    #             number_of_nodes: 1, # required
+    #             classic: false,
+    #           },
+    #         },
+    #         schedule: "String",
+    #         iam_role: "String",
+    #         scheduled_action_description: "String",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         enable: false,
+    #       }
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_action
+    #   A modified JSON format of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #   @return [Types::ScheduledActionType]
+    #
+    # @!attribute [rw] schedule
+    #   A modified schedule in either `at( )` or `cron( )` format. For more
+    #   information about this parameter, see ScheduledAction.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   A different IAM role to assume to run the target action. For more
+    #   information about this parameter, see ScheduledAction.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   A modified description of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   A modified start time of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   A modified end time of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enable
+    #   A modified enable flag of the scheduled action. If true, the
+    #   scheduled action is active. If false, the scheduled action is
+    #   disabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyScheduledActionMessage AWS API Documentation
+    #
+    class ModifyScheduledActionMessage < Struct.new(
+      :scheduled_action_name,
+      :target_action,
+      :schedule,
+      :iam_role,
+      :scheduled_action_description,
+      :start_time,
+      :end_time,
+      :enable)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifySnapshotCopyRetentionPeriodMessage
     #   data as a hash:
     #
@@ -6244,12 +6511,17 @@ module Aws::Redshift
     #   The estimated disk utilizaton percentage.
     #   @return [Float]
     #
+    # @!attribute [rw] mode
+    #   The category of the node configuration recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NodeConfigurationOption AWS API Documentation
     #
     class NodeConfigurationOption < Struct.new(
       :node_type,
       :number_of_nodes,
-      :estimated_disk_utilization_percent)
+      :estimated_disk_utilization_percent,
+      :mode)
       include Aws::Structure
     end
 
@@ -6259,7 +6531,7 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent, Mode
     #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
     #         values: ["String"],
     #       }
@@ -7381,26 +7653,32 @@ module Aws::Redshift
     #
     # @!attribute [rw] current_restore_rate_in_mega_bytes_per_second
     #   The number of megabytes per second being transferred from the backup
-    #   storage. Returns the average rate for a completed backup.
+    #   storage. Returns the average rate for a completed backup. This field
+    #   is only updated when you restore to DC2 and DS2 node types.
     #   @return [Float]
     #
     # @!attribute [rw] snapshot_size_in_mega_bytes
     #   The size of the set of snapshot data used to restore the cluster.
+    #   This field is only updated when you restore to DC2 and DS2 node
+    #   types.
     #   @return [Integer]
     #
     # @!attribute [rw] progress_in_mega_bytes
     #   The number of megabytes that have been transferred from snapshot
-    #   storage.
+    #   storage. This field is only updated when you restore to DC2 and DS2
+    #   node types.
     #   @return [Integer]
     #
     # @!attribute [rw] elapsed_time_in_seconds
     #   The amount of time an in-progress restore has been running, or the
-    #   amount of time it took a completed restore to finish.
+    #   amount of time it took a completed restore to finish. This field is
+    #   only updated when you restore to DC2 and DS2 node types.
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_time_to_completion_in_seconds
     #   The estimate of the time remaining before the restore will complete.
-    #   Returns 0 for a completed restore.
+    #   Returns 0 for a completed restore. This field is only updated when
+    #   you restore to DC2 and DS2 node types.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreStatus AWS API Documentation
@@ -7653,6 +7931,168 @@ module Aws::Redshift
     #
     class RotateEncryptionKeyResult < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # Describes a scheduled action. You can use a scheduled action to
+    # trigger some Amazon Redshift API operations on a schedule. For
+    # information about which API operations can be scheduled, see
+    # ScheduledActionType.
+    #
+    # @!attribute [rw] scheduled_action_name
+    #   The name of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_action
+    #   A JSON format string of the Amazon Redshift API operation with input
+    #   parameters.
+    #
+    #   "`\{"ResizeCluster":\{"NodeType":"ds2.8xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3\}\}`".
+    #   @return [Types::ScheduledActionType]
+    #
+    # @!attribute [rw] schedule
+    #   The schedule for a one-time (at format) or recurring (cron format)
+    #   scheduled action. Schedule invocations must be separated by at least
+    #   one hour.
+    #
+    #   Format of at expressions is "`at(yyyy-mm-ddThh:mm:ss)`". For
+    #   example, "`at(2016-03-04T17:27:00)`".
+    #
+    #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
+    #   Month Day-of-week Year)`". For example, "`cron(0, 10, *, *, MON,
+    #   *)`". For more information, see [Cron Expressions][1] in the
+    #   *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role to assume to run the scheduled action. This IAM role
+    #   must have permission to run the Amazon Redshift API operation in the
+    #   scheduled action. This IAM role must allow the Amazon Redshift
+    #   scheduler (Principal scheduler.redshift.amazonaws.com) to assume
+    #   permissions on your behalf. For more information about the IAM role
+    #   to use with the Amazon Redshift scheduler, see [Using Identity-Based
+    #   Policies for Amazon Redshift][1] in the *Amazon Redshift Cluster
+    #   Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_action_description
+    #   The description of the scheduled action.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the scheduled action. For example, `DISABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_invocations
+    #   List of times when the scheduled action will run.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] start_time
+    #   The start time in UTC when the schedule is active. Before this time,
+    #   the scheduled action does not trigger.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time in UTC when the schedule is no longer active. After
+    #   this time, the scheduled action does not trigger.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledAction AWS API Documentation
+    #
+    class ScheduledAction < Struct.new(
+      :scheduled_action_name,
+      :target_action,
+      :schedule,
+      :iam_role,
+      :scheduled_action_description,
+      :state,
+      :next_invocations,
+      :start_time,
+      :end_time)
+      include Aws::Structure
+    end
+
+    # A set of elements to filter the returned scheduled actions.
+    #
+    # @note When making an API call, you may pass ScheduledActionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "cluster-identifier", # required, accepts cluster-identifier, iam-role
+    #         values: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The type of element to filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   List of values. Compare if the value (of type defined by `Name`)
+    #   equals an item in the list of scheduled actions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionFilter AWS API Documentation
+    #
+    class ScheduledActionFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The action type that specifies an Amazon Redshift API operation that
+    # is supported by the Amazon Redshift scheduler.
+    #
+    # @note When making an API call, you may pass ScheduledActionType
+    #   data as a hash:
+    #
+    #       {
+    #         resize_cluster: {
+    #           cluster_identifier: "String", # required
+    #           cluster_type: "String",
+    #           node_type: "String",
+    #           number_of_nodes: 1, # required
+    #           classic: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resize_cluster
+    #   An action that runs a `ResizeCluster` API operation.
+    #   @return [Types::ResizeClusterMessage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionType AWS API Documentation
+    #
+    class ScheduledActionType < Struct.new(
+      :resize_cluster)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeScheduledActions request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_actions
+    #   List of retrieved scheduled actions.
+    #   @return [Array<Types::ScheduledAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionsMessage AWS API Documentation
+    #
+    class ScheduledActionsMessage < Struct.new(
+      :marker,
+      :scheduled_actions)
       include Aws::Structure
     end
 

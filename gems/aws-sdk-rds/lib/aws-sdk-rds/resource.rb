@@ -1050,8 +1050,10 @@ module Aws::RDS
     #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
     #   Performance][1] in the *Amazon RDS User Guide*.
     #
-    #   Constraints: Must be a multiple between 1 and 50 of the storage amount
-    #   for the DB instance.
+    #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
+    #   must be a multiple between .5 and 50 of the storage amount for the DB
+    #   instance. For SQL Server DB instances, must be a multiple between 1
+    #   and 50 of the storage amount for the DB instance.
     #
     #
     #

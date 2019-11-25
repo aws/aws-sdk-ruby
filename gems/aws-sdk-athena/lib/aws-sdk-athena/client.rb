@@ -351,6 +351,10 @@ module Aws::Athena
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
+    #   resp.query_executions[0].statistics.total_execution_time_in_millis #=> Integer
+    #   resp.query_executions[0].statistics.query_queue_time_in_millis #=> Integer
+    #   resp.query_executions[0].statistics.query_planning_time_in_millis #=> Integer
+    #   resp.query_executions[0].statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_executions[0].work_group #=> String
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
@@ -623,6 +627,10 @@ module Aws::Athena
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_execution.statistics.data_manifest_location #=> String
+    #   resp.query_execution.statistics.total_execution_time_in_millis #=> Integer
+    #   resp.query_execution.statistics.query_queue_time_in_millis #=> Integer
+    #   resp.query_execution.statistics.query_planning_time_in_millis #=> Integer
+    #   resp.query_execution.statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_execution.work_group #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
@@ -1177,7 +1185,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

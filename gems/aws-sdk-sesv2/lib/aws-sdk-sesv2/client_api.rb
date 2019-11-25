@@ -56,6 +56,8 @@ module Aws::SESV2
     DeleteDedicatedIpPoolResponse = Shapes::StructureShape.new(name: 'DeleteDedicatedIpPoolResponse')
     DeleteEmailIdentityRequest = Shapes::StructureShape.new(name: 'DeleteEmailIdentityRequest')
     DeleteEmailIdentityResponse = Shapes::StructureShape.new(name: 'DeleteEmailIdentityResponse')
+    DeleteSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'DeleteSuppressedDestinationRequest')
+    DeleteSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'DeleteSuppressedDestinationResponse')
     DeliverabilityDashboardAccountStatus = Shapes::StringShape.new(name: 'DeliverabilityDashboardAccountStatus')
     DeliverabilityTestReport = Shapes::StructureShape.new(name: 'DeliverabilityTestReport')
     DeliverabilityTestReports = Shapes::ListShape.new(name: 'DeliverabilityTestReports')
@@ -88,6 +90,7 @@ module Aws::SESV2
     EventDestinations = Shapes::ListShape.new(name: 'EventDestinations')
     EventType = Shapes::StringShape.new(name: 'EventType')
     EventTypes = Shapes::ListShape.new(name: 'EventTypes')
+    FeedbackId = Shapes::StringShape.new(name: 'FeedbackId')
     GeneralEnforcementStatus = Shapes::StringShape.new(name: 'GeneralEnforcementStatus')
     GetAccountRequest = Shapes::StructureShape.new(name: 'GetAccountRequest')
     GetAccountResponse = Shapes::StructureShape.new(name: 'GetAccountResponse')
@@ -111,12 +114,15 @@ module Aws::SESV2
     GetDomainStatisticsReportResponse = Shapes::StructureShape.new(name: 'GetDomainStatisticsReportResponse')
     GetEmailIdentityRequest = Shapes::StructureShape.new(name: 'GetEmailIdentityRequest')
     GetEmailIdentityResponse = Shapes::StructureShape.new(name: 'GetEmailIdentityResponse')
+    GetSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'GetSuppressedDestinationRequest')
+    GetSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'GetSuppressedDestinationResponse')
     Identity = Shapes::StringShape.new(name: 'Identity')
     IdentityInfo = Shapes::StructureShape.new(name: 'IdentityInfo')
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
     ImageUrl = Shapes::StringShape.new(name: 'ImageUrl')
     InboxPlacementTrackingOption = Shapes::StructureShape.new(name: 'InboxPlacementTrackingOption')
+    InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     Ip = Shapes::StringShape.new(name: 'Ip')
     IpList = Shapes::ListShape.new(name: 'IpList')
     IspName = Shapes::StringShape.new(name: 'IspName')
@@ -137,6 +143,8 @@ module Aws::SESV2
     ListEmailIdentitiesRequest = Shapes::StructureShape.new(name: 'ListEmailIdentitiesRequest')
     ListEmailIdentitiesResponse = Shapes::StructureShape.new(name: 'ListEmailIdentitiesResponse')
     ListOfDedicatedIpPools = Shapes::ListShape.new(name: 'ListOfDedicatedIpPools')
+    ListSuppressedDestinationsRequest = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsRequest')
+    ListSuppressedDestinationsResponse = Shapes::StructureShape.new(name: 'ListSuppressedDestinationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MailFromAttributes = Shapes::StructureShape.new(name: 'MailFromAttributes')
@@ -167,12 +175,16 @@ module Aws::SESV2
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
     PutAccountSendingAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountSendingAttributesRequest')
     PutAccountSendingAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountSendingAttributesResponse')
+    PutAccountSuppressionAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountSuppressionAttributesRequest')
+    PutAccountSuppressionAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountSuppressionAttributesResponse')
     PutConfigurationSetDeliveryOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsRequest')
     PutConfigurationSetDeliveryOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetDeliveryOptionsResponse')
     PutConfigurationSetReputationOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetReputationOptionsRequest')
     PutConfigurationSetReputationOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetReputationOptionsResponse')
     PutConfigurationSetSendingOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetSendingOptionsRequest')
     PutConfigurationSetSendingOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetSendingOptionsResponse')
+    PutConfigurationSetSuppressionOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetSuppressionOptionsRequest')
+    PutConfigurationSetSuppressionOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetSuppressionOptionsResponse')
     PutConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'PutConfigurationSetTrackingOptionsRequest')
     PutConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'PutConfigurationSetTrackingOptionsResponse')
     PutDedicatedIpInPoolRequest = Shapes::StructureShape.new(name: 'PutDedicatedIpInPoolRequest')
@@ -187,6 +199,8 @@ module Aws::SESV2
     PutEmailIdentityFeedbackAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityFeedbackAttributesResponse')
     PutEmailIdentityMailFromAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityMailFromAttributesRequest')
     PutEmailIdentityMailFromAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityMailFromAttributesResponse')
+    PutSuppressedDestinationRequest = Shapes::StructureShape.new(name: 'PutSuppressedDestinationRequest')
+    PutSuppressedDestinationResponse = Shapes::StructureShape.new(name: 'PutSuppressedDestinationResponse')
     RawMessage = Shapes::StructureShape.new(name: 'RawMessage')
     RawMessageData = Shapes::BlobShape.new(name: 'RawMessageData')
     RblName = Shapes::StringShape.new(name: 'RblName')
@@ -202,6 +216,14 @@ module Aws::SESV2
     SentLast24Hours = Shapes::FloatShape.new(name: 'SentLast24Hours')
     SnsDestination = Shapes::StructureShape.new(name: 'SnsDestination')
     Subject = Shapes::StringShape.new(name: 'Subject')
+    SuppressedDestination = Shapes::StructureShape.new(name: 'SuppressedDestination')
+    SuppressedDestinationAttributes = Shapes::StructureShape.new(name: 'SuppressedDestinationAttributes')
+    SuppressedDestinationSummaries = Shapes::ListShape.new(name: 'SuppressedDestinationSummaries')
+    SuppressedDestinationSummary = Shapes::StructureShape.new(name: 'SuppressedDestinationSummary')
+    SuppressionAttributes = Shapes::StructureShape.new(name: 'SuppressionAttributes')
+    SuppressionListReason = Shapes::StringShape.new(name: 'SuppressionListReason')
+    SuppressionListReasons = Shapes::ListShape.new(name: 'SuppressionListReasons')
+    SuppressionOptions = Shapes::StructureShape.new(name: 'SuppressionOptions')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -269,6 +291,7 @@ module Aws::SESV2
     CreateConfigurationSetRequest.add_member(:reputation_options, Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
     CreateConfigurationSetRequest.add_member(:sending_options, Shapes::ShapeRef.new(shape: SendingOptions, location_name: "SendingOptions"))
     CreateConfigurationSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateConfigurationSetRequest.add_member(:suppression_options, Shapes::ShapeRef.new(shape: SuppressionOptions, location_name: "SuppressionOptions"))
     CreateConfigurationSetRequest.struct_class = Types::CreateConfigurationSetRequest
 
     CreateConfigurationSetResponse.struct_class = Types::CreateConfigurationSetResponse
@@ -333,6 +356,11 @@ module Aws::SESV2
     DeleteEmailIdentityRequest.struct_class = Types::DeleteEmailIdentityRequest
 
     DeleteEmailIdentityResponse.struct_class = Types::DeleteEmailIdentityResponse
+
+    DeleteSuppressedDestinationRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location: "uri", location_name: "EmailAddress"))
+    DeleteSuppressedDestinationRequest.struct_class = Types::DeleteSuppressedDestinationRequest
+
+    DeleteSuppressedDestinationResponse.struct_class = Types::DeleteSuppressedDestinationResponse
 
     DeliverabilityTestReport.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, location_name: "ReportId"))
     DeliverabilityTestReport.add_member(:report_name, Shapes::ShapeRef.new(shape: ReportName, location_name: "ReportName"))
@@ -426,11 +454,12 @@ module Aws::SESV2
 
     GetAccountRequest.struct_class = Types::GetAccountRequest
 
-    GetAccountResponse.add_member(:send_quota, Shapes::ShapeRef.new(shape: SendQuota, location_name: "SendQuota"))
-    GetAccountResponse.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
     GetAccountResponse.add_member(:dedicated_ip_auto_warmup_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "DedicatedIpAutoWarmupEnabled"))
     GetAccountResponse.add_member(:enforcement_status, Shapes::ShapeRef.new(shape: GeneralEnforcementStatus, location_name: "EnforcementStatus"))
     GetAccountResponse.add_member(:production_access_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "ProductionAccessEnabled"))
+    GetAccountResponse.add_member(:send_quota, Shapes::ShapeRef.new(shape: SendQuota, location_name: "SendQuota"))
+    GetAccountResponse.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
+    GetAccountResponse.add_member(:suppression_attributes, Shapes::ShapeRef.new(shape: SuppressionAttributes, location_name: "SuppressionAttributes"))
     GetAccountResponse.struct_class = Types::GetAccountResponse
 
     GetBlacklistReportsRequest.add_member(:blacklist_item_names, Shapes::ShapeRef.new(shape: BlacklistItemNames, required: true, location: "querystring", location_name: "BlacklistItemNames"))
@@ -454,6 +483,7 @@ module Aws::SESV2
     GetConfigurationSetResponse.add_member(:reputation_options, Shapes::ShapeRef.new(shape: ReputationOptions, location_name: "ReputationOptions"))
     GetConfigurationSetResponse.add_member(:sending_options, Shapes::ShapeRef.new(shape: SendingOptions, location_name: "SendingOptions"))
     GetConfigurationSetResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetConfigurationSetResponse.add_member(:suppression_options, Shapes::ShapeRef.new(shape: SuppressionOptions, location_name: "SuppressionOptions"))
     GetConfigurationSetResponse.struct_class = Types::GetConfigurationSetResponse
 
     GetDedicatedIpRequest.add_member(:ip, Shapes::ShapeRef.new(shape: Ip, required: true, location: "uri", location_name: "IP"))
@@ -515,6 +545,12 @@ module Aws::SESV2
     GetEmailIdentityResponse.add_member(:mail_from_attributes, Shapes::ShapeRef.new(shape: MailFromAttributes, location_name: "MailFromAttributes"))
     GetEmailIdentityResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     GetEmailIdentityResponse.struct_class = Types::GetEmailIdentityResponse
+
+    GetSuppressedDestinationRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location: "uri", location_name: "EmailAddress"))
+    GetSuppressedDestinationRequest.struct_class = Types::GetSuppressedDestinationRequest
+
+    GetSuppressedDestinationResponse.add_member(:suppressed_destination, Shapes::ShapeRef.new(shape: SuppressedDestination, required: true, location_name: "SuppressedDestination"))
+    GetSuppressedDestinationResponse.struct_class = Types::GetSuppressedDestinationResponse
 
     IdentityInfo.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     IdentityInfo.add_member(:identity_name, Shapes::ShapeRef.new(shape: Identity, location_name: "IdentityName"))
@@ -586,6 +622,17 @@ module Aws::SESV2
 
     ListOfDedicatedIpPools.member = Shapes::ShapeRef.new(shape: PoolName)
 
+    ListSuppressedDestinationsRequest.add_member(:reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location: "querystring", location_name: "Reason"))
+    ListSuppressedDestinationsRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "StartDate"))
+    ListSuppressedDestinationsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "EndDate"))
+    ListSuppressedDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListSuppressedDestinationsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
+    ListSuppressedDestinationsRequest.struct_class = Types::ListSuppressedDestinationsRequest
+
+    ListSuppressedDestinationsResponse.add_member(:suppressed_destination_summaries, Shapes::ShapeRef.new(shape: SuppressedDestinationSummaries, location_name: "SuppressedDestinationSummaries"))
+    ListSuppressedDestinationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSuppressedDestinationsResponse.struct_class = Types::ListSuppressedDestinationsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "querystring", location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -632,6 +679,11 @@ module Aws::SESV2
 
     PutAccountSendingAttributesResponse.struct_class = Types::PutAccountSendingAttributesResponse
 
+    PutAccountSuppressionAttributesRequest.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    PutAccountSuppressionAttributesRequest.struct_class = Types::PutAccountSuppressionAttributesRequest
+
+    PutAccountSuppressionAttributesResponse.struct_class = Types::PutAccountSuppressionAttributesResponse
+
     PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:tls_policy, Shapes::ShapeRef.new(shape: TlsPolicy, location_name: "TlsPolicy"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:sending_pool_name, Shapes::ShapeRef.new(shape: SendingPoolName, location_name: "SendingPoolName"))
@@ -650,6 +702,12 @@ module Aws::SESV2
     PutConfigurationSetSendingOptionsRequest.struct_class = Types::PutConfigurationSetSendingOptionsRequest
 
     PutConfigurationSetSendingOptionsResponse.struct_class = Types::PutConfigurationSetSendingOptionsResponse
+
+    PutConfigurationSetSuppressionOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
+    PutConfigurationSetSuppressionOptionsRequest.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    PutConfigurationSetSuppressionOptionsRequest.struct_class = Types::PutConfigurationSetSuppressionOptionsRequest
+
+    PutConfigurationSetSuppressionOptionsResponse.struct_class = Types::PutConfigurationSetSuppressionOptionsResponse
 
     PutConfigurationSetTrackingOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location: "uri", location_name: "ConfigurationSetName"))
     PutConfigurationSetTrackingOptionsRequest.add_member(:custom_redirect_domain, Shapes::ShapeRef.new(shape: CustomRedirectDomain, location_name: "CustomRedirectDomain"))
@@ -694,6 +752,12 @@ module Aws::SESV2
 
     PutEmailIdentityMailFromAttributesResponse.struct_class = Types::PutEmailIdentityMailFromAttributesResponse
 
+    PutSuppressedDestinationRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
+    PutSuppressedDestinationRequest.add_member(:reason, Shapes::ShapeRef.new(shape: SuppressionListReason, required: true, location_name: "Reason"))
+    PutSuppressedDestinationRequest.struct_class = Types::PutSuppressedDestinationRequest
+
+    PutSuppressedDestinationResponse.struct_class = Types::PutSuppressedDestinationResponse
+
     RawMessage.add_member(:data, Shapes::ShapeRef.new(shape: RawMessageData, required: true, location_name: "Data"))
     RawMessage.struct_class = Types::RawMessage
 
@@ -723,6 +787,31 @@ module Aws::SESV2
 
     SnsDestination.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "TopicArn"))
     SnsDestination.struct_class = Types::SnsDestination
+
+    SuppressedDestination.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
+    SuppressedDestination.add_member(:reason, Shapes::ShapeRef.new(shape: SuppressionListReason, required: true, location_name: "Reason"))
+    SuppressedDestination.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdateTime"))
+    SuppressedDestination.add_member(:attributes, Shapes::ShapeRef.new(shape: SuppressedDestinationAttributes, location_name: "Attributes"))
+    SuppressedDestination.struct_class = Types::SuppressedDestination
+
+    SuppressedDestinationAttributes.add_member(:message_id, Shapes::ShapeRef.new(shape: OutboundMessageId, location_name: "MessageId"))
+    SuppressedDestinationAttributes.add_member(:feedback_id, Shapes::ShapeRef.new(shape: FeedbackId, location_name: "FeedbackId"))
+    SuppressedDestinationAttributes.struct_class = Types::SuppressedDestinationAttributes
+
+    SuppressedDestinationSummaries.member = Shapes::ShapeRef.new(shape: SuppressedDestinationSummary)
+
+    SuppressedDestinationSummary.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
+    SuppressedDestinationSummary.add_member(:reason, Shapes::ShapeRef.new(shape: SuppressionListReason, required: true, location_name: "Reason"))
+    SuppressedDestinationSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdateTime"))
+    SuppressedDestinationSummary.struct_class = Types::SuppressedDestinationSummary
+
+    SuppressionAttributes.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    SuppressionAttributes.struct_class = Types::SuppressionAttributes
+
+    SuppressionListReasons.member = Shapes::ShapeRef.new(shape: SuppressionListReason)
+
+    SuppressionOptions.add_member(:suppressed_reasons, Shapes::ShapeRef.new(shape: SuppressionListReasons, location_name: "SuppressedReasons"))
+    SuppressionOptions.struct_class = Types::SuppressionOptions
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -899,6 +988,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:delete_suppressed_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSuppressedDestination"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/email/suppression/addresses/{EmailAddress}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSuppressedDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSuppressedDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccount"
         o.http_method = "GET"
@@ -1025,6 +1125,17 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_suppressed_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSuppressedDestination"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/suppression/addresses/{EmailAddress}"
+        o.input = Shapes::ShapeRef.new(shape: GetSuppressedDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSuppressedDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListConfigurationSets"
         o.http_method = "GET"
@@ -1107,6 +1218,23 @@ module Aws::SESV2
         )
       end)
 
+      api.add_operation(:list_suppressed_destinations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSuppressedDestinations"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/email/suppression/addresses"
+        o.input = Shapes::ShapeRef.new(shape: ListSuppressedDestinationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSuppressedDestinationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -1134,6 +1262,16 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/account/sending"
         o.input = Shapes::ShapeRef.new(shape: PutAccountSendingAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: PutAccountSendingAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_account_suppression_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountSuppressionAttributes"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/account/suppression"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountSuppressionAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountSuppressionAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
@@ -1166,6 +1304,17 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/configuration-sets/{ConfigurationSetName}/sending"
         o.input = Shapes::ShapeRef.new(shape: PutConfigurationSetSendingOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: PutConfigurationSetSendingOptionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_configuration_set_suppression_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConfigurationSetSuppressionOptions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/configuration-sets/{ConfigurationSetName}/suppression-options"
+        o.input = Shapes::ShapeRef.new(shape: PutConfigurationSetSuppressionOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConfigurationSetSuppressionOptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1248,6 +1397,16 @@ module Aws::SESV2
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_suppressed_destination, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutSuppressedDestination"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v2/email/suppression/addresses"
+        o.input = Shapes::ShapeRef.new(shape: PutSuppressedDestinationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutSuppressedDestinationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:send_email, Seahorse::Model::Operation.new.tap do |o|

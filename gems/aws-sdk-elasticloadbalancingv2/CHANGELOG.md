@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2019-11-25)
+------------------
+
+* Feature - This release of Elastic Load Balancing V2 adds new subnet features for Network Load Balancers and a new routing algorithm for Application Load Balancers.
+
 1.38.0 (2019-11-19)
 ------------------
 

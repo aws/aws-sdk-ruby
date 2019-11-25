@@ -87,12 +87,16 @@ module Aws::AlexaForBusiness
     CreateConferenceProviderResponse = Shapes::StructureShape.new(name: 'CreateConferenceProviderResponse')
     CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
     CreateContactResponse = Shapes::StructureShape.new(name: 'CreateContactResponse')
+    CreateEndOfMeetingReminder = Shapes::StructureShape.new(name: 'CreateEndOfMeetingReminder')
     CreateGatewayGroupRequest = Shapes::StructureShape.new(name: 'CreateGatewayGroupRequest')
     CreateGatewayGroupResponse = Shapes::StructureShape.new(name: 'CreateGatewayGroupResponse')
+    CreateInstantBooking = Shapes::StructureShape.new(name: 'CreateInstantBooking')
+    CreateMeetingRoomConfiguration = Shapes::StructureShape.new(name: 'CreateMeetingRoomConfiguration')
     CreateNetworkProfileRequest = Shapes::StructureShape.new(name: 'CreateNetworkProfileRequest')
     CreateNetworkProfileResponse = Shapes::StructureShape.new(name: 'CreateNetworkProfileResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
+    CreateRequireCheckIn = Shapes::StructureShape.new(name: 'CreateRequireCheckIn')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
     CreateRoomResponse = Shapes::StructureShape.new(name: 'CreateRoomResponse')
     CreateSkillGroupRequest = Shapes::StructureShape.new(name: 'CreateSkillGroupRequest')
@@ -167,6 +171,9 @@ module Aws::AlexaForBusiness
     Email = Shapes::StringShape.new(name: 'Email')
     EnablementType = Shapes::StringShape.new(name: 'EnablementType')
     EnablementTypeFilter = Shapes::StringShape.new(name: 'EnablementTypeFilter')
+    EndOfMeetingReminder = Shapes::StructureShape.new(name: 'EndOfMeetingReminder')
+    EndOfMeetingReminderMinutesList = Shapes::ListShape.new(name: 'EndOfMeetingReminderMinutesList')
+    EndOfMeetingReminderType = Shapes::StringShape.new(name: 'EndOfMeetingReminderType')
     EndUserLicenseAgreement = Shapes::StringShape.new(name: 'EndUserLicenseAgreement')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EnrollmentId = Shapes::StringShape.new(name: 'EnrollmentId')
@@ -222,6 +229,7 @@ module Aws::AlexaForBusiness
     GetSkillGroupResponse = Shapes::StructureShape.new(name: 'GetSkillGroupResponse')
     IPDialIn = Shapes::StructureShape.new(name: 'IPDialIn')
     IconUrl = Shapes::StringShape.new(name: 'IconUrl')
+    InstantBooking = Shapes::StructureShape.new(name: 'InstantBooking')
     InvalidCertificateAuthorityException = Shapes::StructureShape.new(name: 'InvalidCertificateAuthorityException')
     InvalidDeviceException = Shapes::StructureShape.new(name: 'InvalidDeviceException')
     InvalidSecretsManagerResourceException = Shapes::StructureShape.new(name: 'InvalidSecretsManagerResourceException')
@@ -254,7 +262,9 @@ module Aws::AlexaForBusiness
     MacAddress = Shapes::StringShape.new(name: 'MacAddress')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxVolumeLimit = Shapes::IntegerShape.new(name: 'MaxVolumeLimit')
+    MeetingRoomConfiguration = Shapes::StructureShape.new(name: 'MeetingRoomConfiguration')
     MeetingSetting = Shapes::StructureShape.new(name: 'MeetingSetting')
+    Minutes = Shapes::IntegerShape.new(name: 'Minutes')
     NameInUseException = Shapes::StructureShape.new(name: 'NameInUseException')
     NetworkEapMethod = Shapes::StringShape.new(name: 'NetworkEapMethod')
     NetworkProfile = Shapes::StructureShape.new(name: 'NetworkProfile')
@@ -298,6 +308,7 @@ module Aws::AlexaForBusiness
     RejectSkillRequest = Shapes::StructureShape.new(name: 'RejectSkillRequest')
     RejectSkillResponse = Shapes::StructureShape.new(name: 'RejectSkillResponse')
     ReleaseDate = Shapes::StringShape.new(name: 'ReleaseDate')
+    RequireCheckIn = Shapes::StructureShape.new(name: 'RequireCheckIn')
     RequirePin = Shapes::StringShape.new(name: 'RequirePin')
     ResolveRoomRequest = Shapes::StructureShape.new(name: 'ResolveRoomRequest')
     ResolveRoomResponse = Shapes::StructureShape.new(name: 'ResolveRoomResponse')
@@ -406,14 +417,18 @@ module Aws::AlexaForBusiness
     UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
     UpdateDeviceResponse = Shapes::StructureShape.new(name: 'UpdateDeviceResponse')
+    UpdateEndOfMeetingReminder = Shapes::StructureShape.new(name: 'UpdateEndOfMeetingReminder')
     UpdateGatewayGroupRequest = Shapes::StructureShape.new(name: 'UpdateGatewayGroupRequest')
     UpdateGatewayGroupResponse = Shapes::StructureShape.new(name: 'UpdateGatewayGroupResponse')
     UpdateGatewayRequest = Shapes::StructureShape.new(name: 'UpdateGatewayRequest')
     UpdateGatewayResponse = Shapes::StructureShape.new(name: 'UpdateGatewayResponse')
+    UpdateInstantBooking = Shapes::StructureShape.new(name: 'UpdateInstantBooking')
+    UpdateMeetingRoomConfiguration = Shapes::StructureShape.new(name: 'UpdateMeetingRoomConfiguration')
     UpdateNetworkProfileRequest = Shapes::StructureShape.new(name: 'UpdateNetworkProfileRequest')
     UpdateNetworkProfileResponse = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
+    UpdateRequireCheckIn = Shapes::StructureShape.new(name: 'UpdateRequireCheckIn')
     UpdateRoomRequest = Shapes::StructureShape.new(name: 'UpdateRoomRequest')
     UpdateRoomResponse = Shapes::StructureShape.new(name: 'UpdateRoomResponse')
     UpdateSkillGroupRequest = Shapes::StructureShape.new(name: 'UpdateSkillGroupRequest')
@@ -616,6 +631,11 @@ module Aws::AlexaForBusiness
     CreateContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
     CreateContactResponse.struct_class = Types::CreateContactResponse
 
+    CreateEndOfMeetingReminder.add_member(:reminder_at_minutes, Shapes::ShapeRef.new(shape: EndOfMeetingReminderMinutesList, required: true, location_name: "ReminderAtMinutes"))
+    CreateEndOfMeetingReminder.add_member(:reminder_type, Shapes::ShapeRef.new(shape: EndOfMeetingReminderType, required: true, location_name: "ReminderType"))
+    CreateEndOfMeetingReminder.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    CreateEndOfMeetingReminder.struct_class = Types::CreateEndOfMeetingReminder
+
     CreateGatewayGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, required: true, location_name: "Name"))
     CreateGatewayGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
     CreateGatewayGroupRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -623,6 +643,16 @@ module Aws::AlexaForBusiness
 
     CreateGatewayGroupResponse.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GatewayGroupArn"))
     CreateGatewayGroupResponse.struct_class = Types::CreateGatewayGroupResponse
+
+    CreateInstantBooking.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: Minutes, required: true, location_name: "DurationInMinutes"))
+    CreateInstantBooking.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    CreateInstantBooking.struct_class = Types::CreateInstantBooking
+
+    CreateMeetingRoomConfiguration.add_member(:room_utilization_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "RoomUtilizationMetricsEnabled"))
+    CreateMeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: CreateEndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
+    CreateMeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: CreateInstantBooking, location_name: "InstantBooking"))
+    CreateMeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: CreateRequireCheckIn, location_name: "RequireCheckIn"))
+    CreateMeetingRoomConfiguration.struct_class = Types::CreateMeetingRoomConfiguration
 
     CreateNetworkProfileRequest.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, required: true, location_name: "NetworkProfileName"))
     CreateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: NetworkProfileDescription, location_name: "Description"))
@@ -650,10 +680,15 @@ module Aws::AlexaForBusiness
     CreateProfileRequest.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     CreateProfileRequest.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     CreateProfileRequest.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    CreateProfileRequest.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: CreateMeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     CreateProfileRequest.struct_class = Types::CreateProfileRequest
 
     CreateProfileResponse.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     CreateProfileResponse.struct_class = Types::CreateProfileResponse
+
+    CreateRequireCheckIn.add_member(:release_after_minutes, Shapes::ShapeRef.new(shape: Minutes, required: true, location_name: "ReleaseAfterMinutes"))
+    CreateRequireCheckIn.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    CreateRequireCheckIn.struct_class = Types::CreateRequireCheckIn
 
     CreateRoomRequest.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, required: true, location_name: "RoomName"))
     CreateRoomRequest.add_member(:description, Shapes::ShapeRef.new(shape: RoomDescription, location_name: "Description"))
@@ -847,6 +882,13 @@ module Aws::AlexaForBusiness
 
     DisassociateSkillGroupFromRoomResponse.struct_class = Types::DisassociateSkillGroupFromRoomResponse
 
+    EndOfMeetingReminder.add_member(:reminder_at_minutes, Shapes::ShapeRef.new(shape: EndOfMeetingReminderMinutesList, location_name: "ReminderAtMinutes"))
+    EndOfMeetingReminder.add_member(:reminder_type, Shapes::ShapeRef.new(shape: EndOfMeetingReminderType, location_name: "ReminderType"))
+    EndOfMeetingReminder.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    EndOfMeetingReminder.struct_class = Types::EndOfMeetingReminder
+
+    EndOfMeetingReminderMinutesList.member = Shapes::ShapeRef.new(shape: Minutes)
+
     Features.member = Shapes::ShapeRef.new(shape: Feature)
 
     Filter.add_member(:key, Shapes::ShapeRef.new(shape: FilterKey, required: true, location_name: "Key"))
@@ -976,6 +1018,10 @@ module Aws::AlexaForBusiness
     IPDialIn.add_member(:comms_protocol, Shapes::ShapeRef.new(shape: CommsProtocol, required: true, location_name: "CommsProtocol"))
     IPDialIn.struct_class = Types::IPDialIn
 
+    InstantBooking.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "DurationInMinutes"))
+    InstantBooking.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    InstantBooking.struct_class = Types::InstantBooking
+
     InvalidCertificateAuthorityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidCertificateAuthorityException.struct_class = Types::InvalidCertificateAuthorityException
 
@@ -1083,6 +1129,12 @@ module Aws::AlexaForBusiness
     ListTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsResponse.struct_class = Types::ListTagsResponse
 
+    MeetingRoomConfiguration.add_member(:room_utilization_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "RoomUtilizationMetricsEnabled"))
+    MeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: EndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
+    MeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: InstantBooking, location_name: "InstantBooking"))
+    MeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: RequireCheckIn, location_name: "RequireCheckIn"))
+    MeetingRoomConfiguration.struct_class = Types::MeetingRoomConfiguration
+
     MeetingSetting.add_member(:require_pin, Shapes::ShapeRef.new(shape: RequirePin, required: true, location_name: "RequirePin"))
     MeetingSetting.struct_class = Types::MeetingSetting
 
@@ -1142,6 +1194,7 @@ module Aws::AlexaForBusiness
     Profile.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     Profile.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
     Profile.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
+    Profile.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: MeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     Profile.struct_class = Types::Profile
 
     ProfileData.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
@@ -1197,6 +1250,10 @@ module Aws::AlexaForBusiness
     RejectSkillRequest.struct_class = Types::RejectSkillRequest
 
     RejectSkillResponse.struct_class = Types::RejectSkillResponse
+
+    RequireCheckIn.add_member(:release_after_minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "ReleaseAfterMinutes"))
+    RequireCheckIn.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    RequireCheckIn.struct_class = Types::RequireCheckIn
 
     ResolveRoomRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     ResolveRoomRequest.add_member(:skill_id, Shapes::ShapeRef.new(shape: SkillId, required: true, location_name: "SkillId"))
@@ -1512,6 +1569,11 @@ module Aws::AlexaForBusiness
 
     UpdateDeviceResponse.struct_class = Types::UpdateDeviceResponse
 
+    UpdateEndOfMeetingReminder.add_member(:reminder_at_minutes, Shapes::ShapeRef.new(shape: EndOfMeetingReminderMinutesList, location_name: "ReminderAtMinutes"))
+    UpdateEndOfMeetingReminder.add_member(:reminder_type, Shapes::ShapeRef.new(shape: EndOfMeetingReminderType, location_name: "ReminderType"))
+    UpdateEndOfMeetingReminder.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    UpdateEndOfMeetingReminder.struct_class = Types::UpdateEndOfMeetingReminder
+
     UpdateGatewayGroupRequest.add_member(:gateway_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "GatewayGroupArn"))
     UpdateGatewayGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: GatewayGroupName, location_name: "Name"))
     UpdateGatewayGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: GatewayGroupDescription, location_name: "Description"))
@@ -1526,6 +1588,16 @@ module Aws::AlexaForBusiness
     UpdateGatewayRequest.struct_class = Types::UpdateGatewayRequest
 
     UpdateGatewayResponse.struct_class = Types::UpdateGatewayResponse
+
+    UpdateInstantBooking.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "DurationInMinutes"))
+    UpdateInstantBooking.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    UpdateInstantBooking.struct_class = Types::UpdateInstantBooking
+
+    UpdateMeetingRoomConfiguration.add_member(:room_utilization_metrics_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "RoomUtilizationMetricsEnabled"))
+    UpdateMeetingRoomConfiguration.add_member(:end_of_meeting_reminder, Shapes::ShapeRef.new(shape: UpdateEndOfMeetingReminder, location_name: "EndOfMeetingReminder"))
+    UpdateMeetingRoomConfiguration.add_member(:instant_booking, Shapes::ShapeRef.new(shape: UpdateInstantBooking, location_name: "InstantBooking"))
+    UpdateMeetingRoomConfiguration.add_member(:require_check_in, Shapes::ShapeRef.new(shape: UpdateRequireCheckIn, location_name: "RequireCheckIn"))
+    UpdateMeetingRoomConfiguration.struct_class = Types::UpdateMeetingRoomConfiguration
 
     UpdateNetworkProfileRequest.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "NetworkProfileArn"))
     UpdateNetworkProfileRequest.add_member(:network_profile_name, Shapes::ShapeRef.new(shape: NetworkProfileName, location_name: "NetworkProfileName"))
@@ -1550,9 +1622,14 @@ module Aws::AlexaForBusiness
     UpdateProfileRequest.add_member(:setup_mode_disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "SetupModeDisabled"))
     UpdateProfileRequest.add_member(:max_volume_limit, Shapes::ShapeRef.new(shape: MaxVolumeLimit, location_name: "MaxVolumeLimit"))
     UpdateProfileRequest.add_member(:pstn_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PSTNEnabled"))
+    UpdateProfileRequest.add_member(:meeting_room_configuration, Shapes::ShapeRef.new(shape: UpdateMeetingRoomConfiguration, location_name: "MeetingRoomConfiguration"))
     UpdateProfileRequest.struct_class = Types::UpdateProfileRequest
 
     UpdateProfileResponse.struct_class = Types::UpdateProfileResponse
+
+    UpdateRequireCheckIn.add_member(:release_after_minutes, Shapes::ShapeRef.new(shape: Minutes, location_name: "ReleaseAfterMinutes"))
+    UpdateRequireCheckIn.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    UpdateRequireCheckIn.struct_class = Types::UpdateRequireCheckIn
 
     UpdateRoomRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     UpdateRoomRequest.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))

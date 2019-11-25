@@ -820,6 +820,11 @@ module Aws::SSM
     # @option params [required, String] :content
     #   A valid JSON or YAML string.
     #
+    # @option params [Array<Types::DocumentRequires>] :requires
+    #   A list of SSM documents required by a document. For example, an
+    #   `ApplicationConfiguration` document requires an
+    #   `ApplicationConfigurationSchema` document.
+    #
     # @option params [Array<Types::AttachmentsSource>] :attachments
     #   A list of key and value pairs that describe attachments to a version
     #   of a document.
@@ -887,6 +892,12 @@ module Aws::SSM
     #
     #   resp = client.create_document({
     #     content: "DocumentContent", # required
+    #     requires: [
+    #       {
+    #         name: "DocumentARN", # required
+    #         version: "DocumentVersion",
+    #       },
+    #     ],
     #     attachments: [
     #       {
     #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
@@ -896,7 +907,7 @@ module Aws::SSM
     #     ],
     #     name: "DocumentName", # required
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy
     #     document_format: "YAML", # accepts YAML, JSON
     #     target_type: "TargetType",
     #     tags: [
@@ -927,7 +938,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -938,6 +949,9 @@ module Aws::SSM
     #   resp.document_description.tags[0].value #=> String
     #   resp.document_description.attachments_information #=> Array
     #   resp.document_description.attachments_information[0].name #=> String
+    #   resp.document_description.requires #=> Array
+    #   resp.document_description.requires[0].name #=> String
+    #   resp.document_description.requires[0].version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument AWS API Documentation
     #
@@ -1558,6 +1572,13 @@ module Aws::SSM
     #   The version name of the document that you want to delete. If not
     #   provided, all versions of the document are deleted.
     #
+    # @option params [Boolean] :force
+    #   Some SSM document types require that you specify a `Force` flag before
+    #   you can delete the document. For example, you must specify a `Force`
+    #   flag to delete a document of type `ApplicationConfigurationSchema`.
+    #   You can restrict access to the `Force` flag in an AWS Identity and
+    #   Access Management (IAM) policy.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1566,6 +1587,7 @@ module Aws::SSM
     #     name: "DocumentName", # required
     #     document_version: "DocumentVersion",
     #     version_name: "DocumentVersionName",
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument AWS API Documentation
@@ -2485,7 +2507,7 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
@@ -2496,6 +2518,9 @@ module Aws::SSM
     #   resp.document.tags[0].value #=> String
     #   resp.document.attachments_information #=> Array
     #   resp.document.attachments_information[0].name #=> String
+    #   resp.document.requires #=> Array
+    #   resp.document.requires[0].name #=> String
+    #   resp.document.requires[0].version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument AWS API Documentation
     #
@@ -2521,6 +2546,7 @@ module Aws::SSM
     # @return [Types::DescribeDocumentPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDocumentPermissionResponse#account_ids #account_ids} => Array&lt;String&gt;
+    #   * {Types::DescribeDocumentPermissionResponse#account_sharing_info_list #account_sharing_info_list} => Array&lt;Types::AccountSharingInfo&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2533,6 +2559,9 @@ module Aws::SSM
     #
     #   resp.account_ids #=> Array
     #   resp.account_ids[0] #=> String
+    #   resp.account_sharing_info_list #=> Array
+    #   resp.account_sharing_info_list[0].account_id #=> String
+    #   resp.account_sharing_info_list[0].shared_document_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission AWS API Documentation
     #
@@ -4399,6 +4428,7 @@ module Aws::SSM
     #   * {Types::GetDocumentResult#content #content} => String
     #   * {Types::GetDocumentResult#document_type #document_type} => String
     #   * {Types::GetDocumentResult#document_format #document_format} => String
+    #   * {Types::GetDocumentResult#requires #requires} => Array&lt;Types::DocumentRequires&gt;
     #   * {Types::GetDocumentResult#attachments_content #attachments_content} => Array&lt;Types::AttachmentContent&gt;
     #
     # @example Request syntax with placeholder values
@@ -4418,8 +4448,11 @@ module Aws::SSM
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
     #   resp.document_format #=> String, one of "YAML", "JSON"
+    #   resp.requires #=> Array
+    #   resp.requires[0].name #=> String
+    #   resp.requires[0].version #=> String
     #   resp.attachments_content #=> Array
     #   resp.attachments_content[0].name #=> String
     #   resp.attachments_content[0].size #=> Integer
@@ -5963,7 +5996,8 @@ module Aws::SSM
     # List all versions for a document.
     #
     # @option params [required, String] :name
-    #   The name of the document about which you want version information.
+    #   The name of the document. You can specify an Amazon Resource Name
+    #   (ARN).
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -5982,7 +6016,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_document_versions({
-    #     name: "DocumentName", # required
+    #     name: "DocumentARN", # required
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -6061,13 +6095,16 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
     #   resp.document_identifiers[0].target_type #=> String
     #   resp.document_identifiers[0].tags #=> Array
     #   resp.document_identifiers[0].tags[0].key #=> String
     #   resp.document_identifiers[0].tags[0].value #=> String
+    #   resp.document_identifiers[0].requires #=> Array
+    #   resp.document_identifiers[0].requires[0].name #=> String
+    #   resp.document_identifiers[0].requires[0].version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments AWS API Documentation
@@ -6351,6 +6388,10 @@ module Aws::SSM
     #   you specify an account ID to add and the same ID to remove, the system
     #   removes access to the document.
     #
+    # @option params [String] :shared_document_version
+    #   (Optional) The version of the document to share. If it's not
+    #   specified, the system choose the `Default` version to share.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6360,6 +6401,7 @@ module Aws::SSM
     #     permission_type: "Share", # required, accepts Share
     #     account_ids_to_add: ["AccountId"],
     #     account_ids_to_remove: ["AccountId"],
+    #     shared_document_version: "SharedDocumentVersion",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission AWS API Documentation
@@ -8118,7 +8160,7 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
@@ -8129,6 +8171,9 @@ module Aws::SSM
     #   resp.document_description.tags[0].value #=> String
     #   resp.document_description.attachments_information #=> Array
     #   resp.document_description.attachments_information[0].name #=> String
+    #   resp.document_description.requires #=> Array
+    #   resp.document_description.requires[0].name #=> String
+    #   resp.document_description.requires[0].version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument AWS API Documentation
     #
@@ -9095,7 +9140,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

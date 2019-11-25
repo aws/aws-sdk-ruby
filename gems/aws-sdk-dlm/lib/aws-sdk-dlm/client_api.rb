@@ -53,6 +53,7 @@ module Aws::DLM
     ResourceTypeValues = Shapes::StringShape.new(name: 'ResourceTypeValues')
     ResourceTypeValuesList = Shapes::ListShape.new(name: 'ResourceTypeValuesList')
     RetainRule = Shapes::StructureShape.new(name: 'RetainRule')
+    RetentionIntervalUnitValues = Shapes::StringShape.new(name: 'RetentionIntervalUnitValues')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
     ScheduleList = Shapes::ListShape.new(name: 'ScheduleList')
     ScheduleName = Shapes::StringShape.new(name: 'ScheduleName')
@@ -102,7 +103,9 @@ module Aws::DLM
 
     DeleteLifecyclePolicyResponse.struct_class = Types::DeleteLifecyclePolicyResponse
 
-    FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "Count"))
+    FastRestoreRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
+    FastRestoreRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    FastRestoreRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     FastRestoreRule.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZoneList, required: true, location_name: "AvailabilityZones"))
     FastRestoreRule.struct_class = Types::FastRestoreRule
 
@@ -185,7 +188,9 @@ module Aws::DLM
 
     ResourceTypeValuesList.member = Shapes::ShapeRef.new(shape: ResourceTypeValues)
 
-    RetainRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "Count"))
+    RetainRule.add_member(:count, Shapes::ShapeRef.new(shape: Count, location_name: "Count"))
+    RetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    RetainRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
     RetainRule.struct_class = Types::RetainRule
 
     Schedule.add_member(:name, Shapes::ShapeRef.new(shape: ScheduleName, location_name: "Name"))

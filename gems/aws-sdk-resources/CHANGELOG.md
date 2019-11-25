@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.62.0 (2019-11-25)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-wafv2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotsecuretunneling` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appconfig` gem.
+
 3.61.0 (2019-11-21)
 ------------------
 

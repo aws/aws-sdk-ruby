@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2019-11-25)
+------------------
+
+* Feature - This release adds: 1) APIs for fleet provisioning claim and template, 2) endpoint configuration and custom domains, 3) support for enhanced custom authentication, d) support for 4 additional audit checks: Device and CA certificate key quality checks, IoT role alias over-permissive check and IoT role alias access to unused services check, 5) extended capability of AWS IoT Rules Engine to support IoT SiteWise rule action. The IoT SiteWise rule action lets you send messages from IoT sensors and applications to IoT SiteWise asset properties
+
 1.40.0 (2019-11-19)
 ------------------
 

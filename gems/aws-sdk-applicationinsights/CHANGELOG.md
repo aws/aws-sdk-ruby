@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2019-11-25)
+------------------
+
+* Feature - CloudWatch Application Insights for .NET and SQL Server includes the follwing features: -Tagging Create and manage tags for your applications.-Custom log pattern matching. Define custom log patterns to be detected and monitored.-Resource-level permissions. Specify applications users can access.
+
 1.4.0 (2019-10-23)
 ------------------
 

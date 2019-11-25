@@ -528,7 +528,7 @@ module Aws::AlexaForBusiness
     #     s3_key_prefix: "S3KeyPrefix",
     #     format: "CSV", # required, accepts CSV, CSV_ZIP
     #     content_range: { # required
-    #       interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK
+    #       interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
     #     },
     #     recurrence: {
     #       start_date: "Date",
@@ -818,7 +818,8 @@ module Aws::AlexaForBusiness
     #   A wake word for Alexa, Echo, Amazon, or a computer.
     #
     # @option params [String] :locale
-    #   The locale of the room profile.
+    #   The locale of the room profile. (This is currently only available to a
+    #   limited preview audience.)
     #
     # @option params [String] :client_request_token
     #   The user-specified token that is used during the creation of a
@@ -835,6 +836,9 @@ module Aws::AlexaForBusiness
     #
     # @option params [Boolean] :pstn_enabled
     #   Whether PSTN calling is enabled.
+    #
+    # @option params [Types::CreateMeetingRoomConfiguration] :meeting_room_configuration
+    #   The meeting room settings of a room profile.
     #
     # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,6 +858,22 @@ module Aws::AlexaForBusiness
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
+    #     meeting_room_configuration: {
+    #       room_utilization_metrics_enabled: false,
+    #       end_of_meeting_reminder: {
+    #         reminder_at_minutes: [1], # required
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false, # required
+    #       },
+    #       instant_booking: {
+    #         duration_in_minutes: 1, # required
+    #         enabled: false, # required
+    #       },
+    #       require_check_in: {
+    #         release_after_minutes: 1, # required
+    #         enabled: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1828,6 +1848,15 @@ module Aws::AlexaForBusiness
     #   resp.profile.max_volume_limit #=> Integer
     #   resp.profile.pstn_enabled #=> Boolean
     #   resp.profile.address_book_arn #=> String
+    #   resp.profile.meeting_room_configuration.room_utilization_metrics_enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_at_minutes #=> Array
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_at_minutes[0] #=> Integer
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_type #=> String, one of "ANNOUNCEMENT_TIME_CHECK", "ANNOUNCEMENT_VARIABLE_TIME_LEFT", "CHIME", "KNOCK"
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.instant_booking.duration_in_minutes #=> Integer
+    #   resp.profile.meeting_room_configuration.instant_booking.enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.require_check_in.release_after_minutes #=> Integer
+    #   resp.profile.meeting_room_configuration.require_check_in.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile AWS API Documentation
     #
@@ -1940,7 +1969,10 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists the details of the schedules that a user configured.
+    # Lists the details of the schedules that a user configured. A download
+    # URL of the report associated with each schedule is returned every time
+    # this action is called. A new download URL is returned each time, and
+    # is valid for 24 hours.
     #
     # @option params [String] :next_token
     #   The token used to list the remaining schedules from the previous API
@@ -1969,7 +2001,7 @@ module Aws::AlexaForBusiness
     #   resp.business_report_schedules[0].s3_bucket_name #=> String
     #   resp.business_report_schedules[0].s3_key_prefix #=> String
     #   resp.business_report_schedules[0].format #=> String, one of "CSV", "CSV_ZIP"
-    #   resp.business_report_schedules[0].content_range.interval #=> String, one of "ONE_DAY", "ONE_WEEK"
+    #   resp.business_report_schedules[0].content_range.interval #=> String, one of "ONE_DAY", "ONE_WEEK", "THIRTY_DAYS"
     #   resp.business_report_schedules[0].recurrence.start_date #=> String
     #   resp.business_report_schedules[0].last_business_report.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
     #   resp.business_report_schedules[0].last_business_report.failure_code #=> String, one of "ACCESS_DENIED", "NO_SUCH_BUCKET", "INTERNAL_FAILURE"
@@ -2178,11 +2210,10 @@ module Aws::AlexaForBusiness
     # Lists all enabled skills in a specific skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The ARN of the skill group for which to list enabled skills. Required.
+    #   The ARN of the skill group for which to list enabled skills.
     #
     # @option params [String] :enablement_type
-    #   Whether the skill is enabled under the user's account, or if it
-    #   requires linking to be used.
+    #   Whether the skill is enabled under the user's account.
     #
     # @option params [String] :skill_type
     #   Whether the skill is publicly available or is a private skill.
@@ -2191,13 +2222,13 @@ module Aws::AlexaForBusiness
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up to
-    #   the value specified by `MaxResults`. Required.
+    #   the value specified by `MaxResults`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   retrieved.
     #
     # @return [Types::ListSkillsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3845,7 +3876,8 @@ module Aws::AlexaForBusiness
     #   The updated wake word for the room profile.
     #
     # @option params [String] :locale
-    #   The updated locale for the room profile.
+    #   The updated locale for the room profile. (This is currently only
+    #   available to a limited preview audience.)
     #
     # @option params [Boolean] :setup_mode_disabled
     #   Whether the setup mode of the profile is enabled.
@@ -3855,6 +3887,9 @@ module Aws::AlexaForBusiness
     #
     # @option params [Boolean] :pstn_enabled
     #   Whether the PSTN setting of the room profile is enabled.
+    #
+    # @option params [Types::UpdateMeetingRoomConfiguration] :meeting_room_configuration
+    #   The updated meeting room settings of a room profile.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3873,6 +3908,22 @@ module Aws::AlexaForBusiness
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
+    #     meeting_room_configuration: {
+    #       room_utilization_metrics_enabled: false,
+    #       end_of_meeting_reminder: {
+    #         reminder_at_minutes: [1],
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false,
+    #       },
+    #       instant_booking: {
+    #         duration_in_minutes: 1,
+    #         enabled: false,
+    #       },
+    #       require_check_in: {
+    #         release_after_minutes: 1,
+    #         enabled: false,
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfile AWS API Documentation
@@ -3965,7 +4016,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

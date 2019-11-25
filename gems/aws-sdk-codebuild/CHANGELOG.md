@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2019-11-25)
+------------------
+
+* Feature - CodeBuild adds support for test reporting
+
 1.44.0 (2019-11-22)
 ------------------
 

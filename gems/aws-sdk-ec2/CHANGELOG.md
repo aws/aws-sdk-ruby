@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2019-11-25)
+------------------
+
+* Feature - This release adds two new APIs: 1. ModifyDefaultCreditSpecification, which allows you to set default credit specification at the account level per AWS Region, per burstable performance instance family, so that all new burstable performance instances in the account launch using the new default credit specification. 2. GetDefaultCreditSpecification, which allows you to get current default credit specification per AWS Region, per burstable performance instance family. This release also adds new client exceptions for StartInstances and StopInstances.
+
 1.120.0 (2019-11-22)
 ------------------
 

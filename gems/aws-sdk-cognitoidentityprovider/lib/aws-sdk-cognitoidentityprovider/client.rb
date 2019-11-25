@@ -2396,7 +2396,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
     #     provider_name: "ProviderNameTypeV1", # required
-    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
+    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     provider_details: { # required
     #       "StringType" => "StringType",
     #     },
@@ -2410,7 +2410,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -3327,7 +3327,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -3948,7 +3948,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -4513,7 +4513,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.providers #=> Array
     #   resp.providers[0].provider_name #=> String
-    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.providers[0].last_modified_date #=> Time
     #   resp.providers[0].creation_date #=> Time
     #   resp.next_token #=> String
@@ -5950,7 +5950,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -6661,7 +6661,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

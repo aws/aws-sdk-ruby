@@ -848,6 +848,10 @@ module Aws::Lex
     #   Amazon Lex sends that message in the response.
     #   @return [IO]
     #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse AWS API Documentation
     #
     class PostContentResponse < Struct.new(
@@ -861,7 +865,8 @@ module Aws::Lex
       :dialog_state,
       :slot_to_elicit,
       :input_transcript,
-      :audio_stream)
+      :audio_stream,
+      :session_id)
       include Aws::Structure
     end
 
@@ -1088,6 +1093,10 @@ module Aws::Lex
     #   from a code hook (Lambda function).
     #   @return [Types::ResponseCard]
     #
+    # @!attribute [rw] session_id
+    #   A unique identifier for the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse AWS API Documentation
     #
     class PostTextResponse < Struct.new(
@@ -1099,7 +1108,8 @@ module Aws::Lex
       :message_format,
       :dialog_state,
       :slot_to_elicit,
-      :response_card)
+      :response_card,
+      :session_id)
       include Aws::Structure
     end
 

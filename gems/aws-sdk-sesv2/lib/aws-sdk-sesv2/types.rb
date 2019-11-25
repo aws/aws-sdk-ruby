@@ -272,6 +272,9 @@ module Aws::SESV2
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         suppression_options: {
+    #           suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #         },
     #       }
     #
     # @!attribute [rw] configuration_set_name
@@ -303,6 +306,11 @@ module Aws::SESV2
     #   want to associate with the configuration set.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] suppression_options
+    #   An object that contains information about your account's
+    #   suppression preferences.
+    #   @return [Types::SuppressionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -311,7 +319,8 @@ module Aws::SESV2
       :delivery_options,
       :reputation_options,
       :sending_options,
-      :tags)
+      :tags,
+      :suppression_options)
       include Aws::Structure
     end
 
@@ -727,6 +736,33 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteEmailIdentityResponse AWS API Documentation
     #
     class DeleteEmailIdentityResponse < Aws::EmptyStructure; end
+
+    # A request to delete a suppressed email destination.
+    #
+    # @note When making an API call, you may pass DeleteSuppressedDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   The suppressed email destination to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteSuppressedDestinationRequest AWS API Documentation
+    #
+    class DeleteSuppressedDestinationRequest < Struct.new(
+      :email_address)
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteSuppressedDestinationResponse AWS API Documentation
+    #
+    class DeleteSuppressedDestinationResponse < Aws::EmptyStructure; end
 
     # An object that contains metadata related to a predictive inbox
     # placement test.
@@ -1335,17 +1371,6 @@ module Aws::SESV2
     # A list of details about the email-sending capabilities of your Amazon
     # SES account in the current AWS Region.
     #
-    # @!attribute [rw] send_quota
-    #   An object that contains information about the per-day and per-second
-    #   sending limits for your Amazon SES account in the current AWS
-    #   Region.
-    #   @return [Types::SendQuota]
-    #
-    # @!attribute [rw] sending_enabled
-    #   Indicates whether or not email sending is enabled for your Amazon
-    #   SES account in the current AWS Region.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] dedicated_ip_auto_warmup_enabled
     #   Indicates whether or not the automatic warm-up feature is enabled
     #   for dedicated IP addresses that are associated with your account.
@@ -1385,14 +1410,31 @@ module Aws::SESV2
     #   vary based on your specific use case.
     #   @return [Boolean]
     #
+    # @!attribute [rw] send_quota
+    #   An object that contains information about the per-day and per-second
+    #   sending limits for your Amazon SES account in the current AWS
+    #   Region.
+    #   @return [Types::SendQuota]
+    #
+    # @!attribute [rw] sending_enabled
+    #   Indicates whether or not email sending is enabled for your Amazon
+    #   SES account in the current AWS Region.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] suppression_attributes
+    #   An object that contains information about your account's
+    #   suppression preferences.
+    #   @return [Types::SuppressionAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountResponse AWS API Documentation
     #
     class GetAccountResponse < Struct.new(
-      :send_quota,
-      :sending_enabled,
       :dedicated_ip_auto_warmup_enabled,
       :enforcement_status,
-      :production_access_enabled)
+      :production_access_enabled,
+      :send_quota,
+      :sending_enabled,
+      :suppression_attributes)
       include Aws::Structure
     end
 
@@ -1521,6 +1563,11 @@ module Aws::SESV2
     #   associated with the configuration set.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] suppression_options
+    #   An object that contains information about your account's
+    #   suppression preferences.
+    #   @return [Types::SuppressionOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetResponse AWS API Documentation
     #
     class GetConfigurationSetResponse < Struct.new(
@@ -1529,7 +1576,8 @@ module Aws::SESV2
       :delivery_options,
       :reputation_options,
       :sending_options,
-      :tags)
+      :tags,
+      :suppression_options)
       include Aws::Structure
     end
 
@@ -1934,6 +1982,40 @@ module Aws::SESV2
       :dkim_attributes,
       :mail_from_attributes,
       :tags)
+      include Aws::Structure
+    end
+
+    # A request to get a suppressed email destination.
+    #
+    # @note When making an API call, you may pass GetSuppressedDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   Email destination to fetch from the suppression list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetSuppressedDestinationRequest AWS API Documentation
+    #
+    class GetSuppressedDestinationRequest < Struct.new(
+      :email_address)
+      include Aws::Structure
+    end
+
+    # Information about the suppressed email destination.
+    #
+    # @!attribute [rw] suppressed_destination
+    #   An object containing information about the suppressed email
+    #   destination.
+    #   @return [Types::SuppressedDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetSuppressedDestinationResponse AWS API Documentation
+    #
+    class GetSuppressedDestinationResponse < Struct.new(
+      :suppressed_destination)
       include Aws::Structure
     end
 
@@ -2363,6 +2445,78 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # A request to obtain a list of suppressed email destinations.
+    #
+    # @note When making an API call, you may pass ListSuppressedDestinationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #         start_date: Time.now,
+    #         end_date: Time.now,
+    #         next_token: "NextToken",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] reasons
+    #   Filters email destinations suppressed by the given reasons.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_date
+    #   Filters email destinations suppressed before the given time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   Filters email destinations suppressed after the given time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to
+    #   `ListSuppressedDestinations` to indicate the position in the list of
+    #   suppressed email destinations.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListSuppressedDestinations`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListSuppressedDestinationsRequest AWS API Documentation
+    #
+    class ListSuppressedDestinationsRequest < Struct.new(
+      :reasons,
+      :start_date,
+      :end_date,
+      :next_token,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # A list of suppressed email destinations.
+    #
+    # @!attribute [rw] suppressed_destination_summaries
+    #   A list of summaries, each containing a summary for a suppressed
+    #   email destination.
+    #   @return [Array<Types::SuppressedDestinationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional suppressed
+    #   destinations to list. To view additional suppressed destinations,
+    #   issue another request to `ListSuppressedDestinations`, and pass this
+    #   token in the `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListSuppressedDestinationsResponse AWS API Documentation
+    #
+    class ListSuppressedDestinationsResponse < Struct.new(
+      :suppressed_destination_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -2687,6 +2841,40 @@ module Aws::SESV2
     #
     class PutAccountSendingAttributesResponse < Aws::EmptyStructure; end
 
+    # A request to change your account's suppression preferences.
+    #
+    # @note When making an API call, you may pass PutAccountSuppressionAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #       }
+    #
+    # @!attribute [rw] suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid
+    #   reasons are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributesRequest AWS API Documentation
+    #
+    class PutAccountSuppressionAttributesRequest < Struct.new(
+      :suppressed_reasons)
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributesResponse AWS API Documentation
+    #
+    class PutAccountSuppressionAttributesResponse < Aws::EmptyStructure; end
+
     # A request to associate a configuration set with a dedicated IP pool.
     #
     # @note When making an API call, you may pass PutConfigurationSetDeliveryOptionsRequest
@@ -2804,6 +2992,48 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSendingOptionsResponse AWS API Documentation
     #
     class PutConfigurationSetSendingOptionsResponse < Aws::EmptyStructure; end
+
+    # A request to change your account's suppression preferences for an
+    # specific configuration set.
+    #
+    # @note When making an API call, you may pass PutConfigurationSetSuppressionOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_set_name: "ConfigurationSetName", # required
+    #         suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #       }
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set that you want to enable or disable
+    #   email sending for.
+    #   @return [String]
+    #
+    # @!attribute [rw] suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid
+    #   reasons are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptionsRequest AWS API Documentation
+    #
+    class PutConfigurationSetSuppressionOptionsRequest < Struct.new(
+      :configuration_set_name,
+      :suppressed_reasons)
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptionsResponse AWS API Documentation
+    #
+    class PutConfigurationSetSuppressionOptionsResponse < Aws::EmptyStructure; end
 
     # A request to add a custom domain for tracking open and click events to
     # a configuration set.
@@ -3113,6 +3343,39 @@ module Aws::SESV2
     #
     class PutEmailIdentityMailFromAttributesResponse < Aws::EmptyStructure; end
 
+    # A request to suppress an email destination.
+    #
+    # @note When making an API call, you may pass PutSuppressedDestinationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailAddress", # required
+    #         reason: "BOUNCE", # required, accepts BOUNCE, COMPLAINT
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   Email destination to be suppressed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Reason for which the email destination is suppressed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutSuppressedDestinationRequest AWS API Documentation
+    #
+    class PutSuppressedDestinationRequest < Struct.new(
+      :email_address,
+      :reason)
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutSuppressedDestinationResponse AWS API Documentation
+    #
+    class PutSuppressedDestinationResponse < Aws::EmptyStructure; end
+
     # The raw email message.
     #
     # @note When making an API call, you may pass RawMessage
@@ -3386,6 +3649,128 @@ module Aws::SESV2
     #
     class SnsDestination < Struct.new(
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # An object containing information about the suppressed email
+    # destination.
+    #
+    # @!attribute [rw] email_address
+    #   The suppressed email destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for which the email destination is suppressed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last time the suppressed destination was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attributes
+    #   `Optional` value with information about the sources of the
+    #   suppression.
+    #   @return [Types::SuppressedDestinationAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestination AWS API Documentation
+    #
+    class SuppressedDestination < Struct.new(
+      :email_address,
+      :reason,
+      :last_update_time,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # An object containing additional attributes related to a suppressed
+    # destination.
+    #
+    # @!attribute [rw] message_id
+    #   A unique identifier of the message that caused the suppression of
+    #   the email destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_id
+    #   A unique identifier of the suppression cause.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestinationAttributes AWS API Documentation
+    #
+    class SuppressedDestinationAttributes < Struct.new(
+      :message_id,
+      :feedback_id)
+      include Aws::Structure
+    end
+
+    # A summary for the suppressed email destination.
+    #
+    # @!attribute [rw] email_address
+    #   The suppressed email destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for which the email destination is suppressed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The last time the suppressed destination was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestinationSummary AWS API Documentation
+    #
+    class SuppressedDestinationSummary < Struct.new(
+      :email_address,
+      :reason,
+      :last_update_time)
+      include Aws::Structure
+    end
+
+    # An object that contains information about your account's suppression
+    # preferences.
+    #
+    # @!attribute [rw] suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid
+    #   reasons are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionAttributes AWS API Documentation
+    #
+    class SuppressionAttributes < Struct.new(
+      :suppressed_reasons)
+      include Aws::Structure
+    end
+
+    # An object that contains information about your account's suppression
+    # preferences.
+    #
+    # @note When making an API call, you may pass SuppressionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #       }
+    #
+    # @!attribute [rw] suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid
+    #   reasons are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionOptions AWS API Documentation
+    #
+    class SuppressionOptions < Struct.new(
+      :suppressed_reasons)
       include Aws::Structure
     end
 

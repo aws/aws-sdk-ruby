@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2019-11-25)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports the ability to create a multiple program transport stream (MPTS).
+
 1.38.0 (2019-10-23)
 ------------------
 

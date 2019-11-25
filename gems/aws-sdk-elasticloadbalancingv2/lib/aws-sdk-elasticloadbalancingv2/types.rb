@@ -419,7 +419,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] load_balancer_addresses
     #   \[Network Load Balancers\] If you need static IP addresses for your
     #   load balancer, you can specify one Elastic IP address per
-    #   Availability Zone when you create the load balancer.
+    #   Availability Zone when you create an internal-facing load balancer.
+    #   For internal load balancers, you can specify a private IP address
+    #   from the IPv4 range of the subnet.
     #   @return [Array<Types::LoadBalancerAddress>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
@@ -642,6 +644,7 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
+    #             private_i_pv_4_address: "PrivateIPv4Address",
     #           },
     #         ],
     #         security_groups: ["SecurityGroupId"],
@@ -688,7 +691,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per
-    #   subnet if you need static IP addresses for your load balancer.
+    #   subnet if you need static IP addresses for your internet-facing load
+    #   balancer. For internal load balancers, you can specify one private
+    #   IP address per subnet from the IPv4 range of the subnet.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
@@ -2046,14 +2051,20 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] allocation_id
     #   \[Network Load Balancers\] The allocation ID of the Elastic IP
-    #   address.
+    #   address for an internal-facing load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_i_pv_4_address
+    #   \[Network Load Balancers\] The private IPv4 address for an internal
+    #   load balancer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAddress AWS API Documentation
     #
     class LoadBalancerAddress < Struct.new(
       :ip_address,
-      :allocation_id)
+      :allocation_id,
+      :private_i_pv_4_address)
       include Aws::Structure
     end
 
@@ -3258,6 +3269,7 @@ module Aws::ElasticLoadBalancingV2
     #           {
     #             subnet_id: "SubnetId",
     #             allocation_id: "AllocationId",
+    #             private_i_pv_4_address: "PrivateIPv4Address",
     #           },
     #         ],
     #       }
@@ -3274,12 +3286,19 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
-    #   The IDs of the public subnets. You must specify subnets from at
-    #   least two Availability Zones. You can specify only one subnet per
+    #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet
     #   mappings.
     #
-    #   You cannot specify Elastic IP addresses for your subnets.
+    #   \[Application Load Balancers\] You must specify subnets from at
+    #   least two Availability Zones. You cannot specify Elastic IP
+    #   addresses for your subnets.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. If you need static IP addresses for your
+    #   internet-facing load balancer, you can specify one Elastic IP
+    #   address per subnet. For internal load balancers, you can specify one
+    #   private IP address per subnet from the IPv4 range of the subnet.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -3365,6 +3384,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
+    #         private_i_pv_4_address: "PrivateIPv4Address",
     #       }
     #
     # @!attribute [rw] subnet_id
@@ -3373,14 +3393,20 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] allocation_id
     #   \[Network Load Balancers\] The allocation ID of the Elastic IP
-    #   address.
+    #   address for an internet-facing load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_i_pv_4_address
+    #   \[Network Load Balancers\] The private IPv4 address for an internal
+    #   load balancer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetMapping AWS API Documentation
     #
     class SubnetMapping < Struct.new(
       :subnet_id,
-      :allocation_id)
+      :allocation_id,
+      :private_i_pv_4_address)
       include Aws::Structure
     end
 
@@ -3606,6 +3632,11 @@ module Aws::ElasticLoadBalancingV2
     #
     #   The following attributes are supported by Application Load Balancers
     #   if the target is not a Lambda function:
+    #
+    #   * `load_balancing.algorithm.type` - The load balancing algorithm
+    #     determines how the load balancer selects targets when routing
+    #     requests. The value is `round_robin` or
+    #     `least_outstanding_requests`. The default is `round_robin`.
     #
     #   * `slow_start.duration_seconds` - The time period, in seconds,
     #     during which a newly registered target receives a linearly

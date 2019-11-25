@@ -22,6 +22,10 @@ module Aws::CodeBuild
     BatchGetBuildsOutput = Shapes::StructureShape.new(name: 'BatchGetBuildsOutput')
     BatchGetProjectsInput = Shapes::StructureShape.new(name: 'BatchGetProjectsInput')
     BatchGetProjectsOutput = Shapes::StructureShape.new(name: 'BatchGetProjectsOutput')
+    BatchGetReportGroupsInput = Shapes::StructureShape.new(name: 'BatchGetReportGroupsInput')
+    BatchGetReportGroupsOutput = Shapes::StructureShape.new(name: 'BatchGetReportGroupsOutput')
+    BatchGetReportsInput = Shapes::StructureShape.new(name: 'BatchGetReportsInput')
+    BatchGetReportsOutput = Shapes::StructureShape.new(name: 'BatchGetReportsOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildArtifacts = Shapes::StructureShape.new(name: 'BuildArtifacts')
@@ -31,6 +35,7 @@ module Aws::CodeBuild
     BuildPhase = Shapes::StructureShape.new(name: 'BuildPhase')
     BuildPhaseType = Shapes::StringShape.new(name: 'BuildPhaseType')
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
+    BuildReportArns = Shapes::ListShape.new(name: 'BuildReportArns')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
     CacheMode = Shapes::StringShape.new(name: 'CacheMode')
@@ -39,15 +44,23 @@ module Aws::CodeBuild
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
+    CreateReportGroupInput = Shapes::StructureShape.new(name: 'CreateReportGroupInput')
+    CreateReportGroupOutput = Shapes::StructureShape.new(name: 'CreateReportGroupOutput')
     CreateWebhookInput = Shapes::StructureShape.new(name: 'CreateWebhookInput')
     CreateWebhookOutput = Shapes::StructureShape.new(name: 'CreateWebhookOutput')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectOutput = Shapes::StructureShape.new(name: 'DeleteProjectOutput')
+    DeleteReportGroupInput = Shapes::StructureShape.new(name: 'DeleteReportGroupInput')
+    DeleteReportGroupOutput = Shapes::StructureShape.new(name: 'DeleteReportGroupOutput')
+    DeleteReportInput = Shapes::StructureShape.new(name: 'DeleteReportInput')
+    DeleteReportOutput = Shapes::StructureShape.new(name: 'DeleteReportOutput')
     DeleteSourceCredentialsInput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsInput')
     DeleteSourceCredentialsOutput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsOutput')
     DeleteWebhookInput = Shapes::StructureShape.new(name: 'DeleteWebhookInput')
     DeleteWebhookOutput = Shapes::StructureShape.new(name: 'DeleteWebhookOutput')
+    DescribeTestCasesInput = Shapes::StructureShape.new(name: 'DescribeTestCasesInput')
+    DescribeTestCasesOutput = Shapes::StructureShape.new(name: 'DescribeTestCasesOutput')
     EnvironmentImage = Shapes::StructureShape.new(name: 'EnvironmentImage')
     EnvironmentImages = Shapes::ListShape.new(name: 'EnvironmentImages')
     EnvironmentLanguage = Shapes::StructureShape.new(name: 'EnvironmentLanguage')
@@ -81,6 +94,12 @@ module Aws::CodeBuild
     ListCuratedEnvironmentImagesOutput = Shapes::StructureShape.new(name: 'ListCuratedEnvironmentImagesOutput')
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
+    ListReportGroupsInput = Shapes::StructureShape.new(name: 'ListReportGroupsInput')
+    ListReportGroupsOutput = Shapes::StructureShape.new(name: 'ListReportGroupsOutput')
+    ListReportsForReportGroupInput = Shapes::StructureShape.new(name: 'ListReportsForReportGroupInput')
+    ListReportsForReportGroupOutput = Shapes::StructureShape.new(name: 'ListReportsForReportGroupOutput')
+    ListReportsInput = Shapes::StructureShape.new(name: 'ListReportsInput')
+    ListReportsOutput = Shapes::StructureShape.new(name: 'ListReportsOutput')
     ListSourceCredentialsInput = Shapes::StructureShape.new(name: 'ListSourceCredentialsInput')
     ListSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ListSourceCredentialsOutput')
     LogsConfig = Shapes::StructureShape.new(name: 'LogsConfig')
@@ -89,6 +108,7 @@ module Aws::CodeBuild
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OAuthProviderException = Shapes::StructureShape.new(name: 'OAuthProviderException')
+    PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PhaseContext = Shapes::StructureShape.new(name: 'PhaseContext')
     PhaseContexts = Shapes::ListShape.new(name: 'PhaseContexts')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
@@ -109,9 +129,25 @@ module Aws::CodeBuild
     ProjectSources = Shapes::ListShape.new(name: 'ProjectSources')
     Projects = Shapes::ListShape.new(name: 'Projects')
     RegistryCredential = Shapes::StructureShape.new(name: 'RegistryCredential')
+    Report = Shapes::StructureShape.new(name: 'Report')
+    ReportArns = Shapes::ListShape.new(name: 'ReportArns')
+    ReportExportConfig = Shapes::StructureShape.new(name: 'ReportExportConfig')
+    ReportExportConfigType = Shapes::StringShape.new(name: 'ReportExportConfigType')
+    ReportFilter = Shapes::StructureShape.new(name: 'ReportFilter')
+    ReportGroup = Shapes::StructureShape.new(name: 'ReportGroup')
+    ReportGroupArns = Shapes::ListShape.new(name: 'ReportGroupArns')
+    ReportGroupName = Shapes::StringShape.new(name: 'ReportGroupName')
+    ReportGroupSortByType = Shapes::StringShape.new(name: 'ReportGroupSortByType')
+    ReportGroups = Shapes::ListShape.new(name: 'ReportGroups')
+    ReportPackagingType = Shapes::StringShape.new(name: 'ReportPackagingType')
+    ReportStatusCounts = Shapes::MapShape.new(name: 'ReportStatusCounts')
+    ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
+    ReportType = Shapes::StringShape.new(name: 'ReportType')
+    Reports = Shapes::ListShape.new(name: 'Reports')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3LogsConfig = Shapes::StructureShape.new(name: 'S3LogsConfig')
+    S3ReportExportConfig = Shapes::StructureShape.new(name: 'S3ReportExportConfig')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     ServerType = Shapes::StringShape.new(name: 'ServerType')
@@ -130,10 +166,16 @@ module Aws::CodeBuild
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TestCase = Shapes::StructureShape.new(name: 'TestCase')
+    TestCaseFilter = Shapes::StructureShape.new(name: 'TestCaseFilter')
+    TestCases = Shapes::ListShape.new(name: 'TestCases')
+    TestReportSummary = Shapes::StructureShape.new(name: 'TestReportSummary')
     TimeOut = Shapes::IntegerShape.new(name: 'TimeOut')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
+    UpdateReportGroupInput = Shapes::StructureShape.new(name: 'UpdateReportGroupInput')
+    UpdateReportGroupOutput = Shapes::StructureShape.new(name: 'UpdateReportGroupOutput')
     UpdateWebhookInput = Shapes::StructureShape.new(name: 'UpdateWebhookInput')
     UpdateWebhookOutput = Shapes::StructureShape.new(name: 'UpdateWebhookOutput')
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
@@ -166,6 +208,20 @@ module Aws::CodeBuild
     BatchGetProjectsOutput.add_member(:projects_not_found, Shapes::ShapeRef.new(shape: ProjectNames, location_name: "projectsNotFound"))
     BatchGetProjectsOutput.struct_class = Types::BatchGetProjectsOutput
 
+    BatchGetReportGroupsInput.add_member(:report_group_arns, Shapes::ShapeRef.new(shape: ReportGroupArns, required: true, location_name: "reportGroupArns"))
+    BatchGetReportGroupsInput.struct_class = Types::BatchGetReportGroupsInput
+
+    BatchGetReportGroupsOutput.add_member(:report_groups, Shapes::ShapeRef.new(shape: ReportGroups, location_name: "reportGroups"))
+    BatchGetReportGroupsOutput.add_member(:report_groups_not_found, Shapes::ShapeRef.new(shape: ReportGroupArns, location_name: "reportGroupsNotFound"))
+    BatchGetReportGroupsOutput.struct_class = Types::BatchGetReportGroupsOutput
+
+    BatchGetReportsInput.add_member(:report_arns, Shapes::ShapeRef.new(shape: ReportArns, required: true, location_name: "reportArns"))
+    BatchGetReportsInput.struct_class = Types::BatchGetReportsInput
+
+    BatchGetReportsOutput.add_member(:reports, Shapes::ShapeRef.new(shape: Reports, location_name: "reports"))
+    BatchGetReportsOutput.add_member(:reports_not_found, Shapes::ShapeRef.new(shape: ReportArns, location_name: "reportsNotFound"))
+    BatchGetReportsOutput.struct_class = Types::BatchGetReportsOutput
+
     Build.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
     Build.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     Build.add_member(:build_number, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "buildNumber"))
@@ -194,6 +250,7 @@ module Aws::CodeBuild
     Build.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     Build.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     Build.add_member(:exported_environment_variables, Shapes::ShapeRef.new(shape: ExportedEnvironmentVariables, location_name: "exportedEnvironmentVariables"))
+    Build.add_member(:report_arns, Shapes::ShapeRef.new(shape: BuildReportArns, location_name: "reportArns"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -221,6 +278,8 @@ module Aws::CodeBuild
     BuildPhase.struct_class = Types::BuildPhase
 
     BuildPhases.member = Shapes::ShapeRef.new(shape: BuildPhase)
+
+    BuildReportArns.member = Shapes::ShapeRef.new(shape: String)
 
     Builds.member = Shapes::ShapeRef.new(shape: Build)
 
@@ -254,6 +313,14 @@ module Aws::CodeBuild
     CreateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     CreateProjectOutput.struct_class = Types::CreateProjectOutput
 
+    CreateReportGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: ReportGroupName, required: true, location_name: "name"))
+    CreateReportGroupInput.add_member(:type, Shapes::ShapeRef.new(shape: ReportType, required: true, location_name: "type"))
+    CreateReportGroupInput.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, required: true, location_name: "exportConfig"))
+    CreateReportGroupInput.struct_class = Types::CreateReportGroupInput
+
+    CreateReportGroupOutput.add_member(:report_group, Shapes::ShapeRef.new(shape: ReportGroup, location_name: "reportGroup"))
+    CreateReportGroupOutput.struct_class = Types::CreateReportGroupOutput
+
     CreateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     CreateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
     CreateWebhookInput.add_member(:filter_groups, Shapes::ShapeRef.new(shape: FilterGroups, location_name: "filterGroups"))
@@ -267,6 +334,16 @@ module Aws::CodeBuild
 
     DeleteProjectOutput.struct_class = Types::DeleteProjectOutput
 
+    DeleteReportGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    DeleteReportGroupInput.struct_class = Types::DeleteReportGroupInput
+
+    DeleteReportGroupOutput.struct_class = Types::DeleteReportGroupOutput
+
+    DeleteReportInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    DeleteReportInput.struct_class = Types::DeleteReportInput
+
+    DeleteReportOutput.struct_class = Types::DeleteReportOutput
+
     DeleteSourceCredentialsInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
     DeleteSourceCredentialsInput.struct_class = Types::DeleteSourceCredentialsInput
 
@@ -277,6 +354,16 @@ module Aws::CodeBuild
     DeleteWebhookInput.struct_class = Types::DeleteWebhookInput
 
     DeleteWebhookOutput.struct_class = Types::DeleteWebhookOutput
+
+    DescribeTestCasesInput.add_member(:report_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reportArn"))
+    DescribeTestCasesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTestCasesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    DescribeTestCasesInput.add_member(:filter, Shapes::ShapeRef.new(shape: TestCaseFilter, location_name: "filter"))
+    DescribeTestCasesInput.struct_class = Types::DescribeTestCasesInput
+
+    DescribeTestCasesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTestCasesOutput.add_member(:test_cases, Shapes::ShapeRef.new(shape: TestCases, location_name: "testCases"))
+    DescribeTestCasesOutput.struct_class = Types::DescribeTestCasesOutput
 
     EnvironmentImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EnvironmentImage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -364,6 +451,37 @@ module Aws::CodeBuild
     ListProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListProjectsOutput.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectNames, location_name: "projects"))
     ListProjectsOutput.struct_class = Types::ListProjectsOutput
+
+    ListReportGroupsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
+    ListReportGroupsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ReportGroupSortByType, location_name: "sortBy"))
+    ListReportGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListReportGroupsInput.struct_class = Types::ListReportGroupsInput
+
+    ListReportGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportGroupsOutput.add_member(:report_groups, Shapes::ShapeRef.new(shape: ReportGroupArns, location_name: "reportGroups"))
+    ListReportGroupsOutput.struct_class = Types::ListReportGroupsOutput
+
+    ListReportsForReportGroupInput.add_member(:report_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reportGroupArn"))
+    ListReportsForReportGroupInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportsForReportGroupInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
+    ListReportsForReportGroupInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListReportsForReportGroupInput.add_member(:filter, Shapes::ShapeRef.new(shape: ReportFilter, location_name: "filter"))
+    ListReportsForReportGroupInput.struct_class = Types::ListReportsForReportGroupInput
+
+    ListReportsForReportGroupOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportsForReportGroupOutput.add_member(:reports, Shapes::ShapeRef.new(shape: ReportArns, location_name: "reports"))
+    ListReportsForReportGroupOutput.struct_class = Types::ListReportsForReportGroupOutput
+
+    ListReportsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
+    ListReportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListReportsInput.add_member(:filter, Shapes::ShapeRef.new(shape: ReportFilter, location_name: "filter"))
+    ListReportsInput.struct_class = Types::ListReportsInput
+
+    ListReportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListReportsOutput.add_member(:reports, Shapes::ShapeRef.new(shape: ReportArns, location_name: "reports"))
+    ListReportsOutput.struct_class = Types::ListReportsOutput
 
     ListSourceCredentialsInput.struct_class = Types::ListSourceCredentialsInput
 
@@ -479,10 +597,56 @@ module Aws::CodeBuild
     RegistryCredential.add_member(:credential_provider, Shapes::ShapeRef.new(shape: CredentialProviderType, required: true, location_name: "credentialProvider"))
     RegistryCredential.struct_class = Types::RegistryCredential
 
+    Report.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    Report.add_member(:type, Shapes::ShapeRef.new(shape: ReportType, location_name: "type"))
+    Report.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Report.add_member(:report_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reportGroupArn"))
+    Report.add_member(:execution_id, Shapes::ShapeRef.new(shape: String, location_name: "executionId"))
+    Report.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatusType, location_name: "status"))
+    Report.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+    Report.add_member(:expired, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expired"))
+    Report.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
+    Report.add_member(:truncated, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "truncated"))
+    Report.add_member(:test_summary, Shapes::ShapeRef.new(shape: TestReportSummary, location_name: "testSummary"))
+    Report.struct_class = Types::Report
+
+    ReportArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ReportExportConfig.add_member(:export_config_type, Shapes::ShapeRef.new(shape: ReportExportConfigType, location_name: "exportConfigType"))
+    ReportExportConfig.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3ReportExportConfig, location_name: "s3Destination"))
+    ReportExportConfig.struct_class = Types::ReportExportConfig
+
+    ReportFilter.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatusType, location_name: "status"))
+    ReportFilter.struct_class = Types::ReportFilter
+
+    ReportGroup.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    ReportGroup.add_member(:name, Shapes::ShapeRef.new(shape: ReportGroupName, location_name: "name"))
+    ReportGroup.add_member(:type, Shapes::ShapeRef.new(shape: ReportType, location_name: "type"))
+    ReportGroup.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
+    ReportGroup.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+    ReportGroup.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
+    ReportGroup.struct_class = Types::ReportGroup
+
+    ReportGroupArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ReportGroups.member = Shapes::ShapeRef.new(shape: ReportGroup)
+
+    ReportStatusCounts.key = Shapes::ShapeRef.new(shape: String)
+    ReportStatusCounts.value = Shapes::ShapeRef.new(shape: WrapperInt)
+
+    Reports.member = Shapes::ShapeRef.new(shape: Report)
+
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
     S3LogsConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
     S3LogsConfig.struct_class = Types::S3LogsConfig
+
+    S3ReportExportConfig.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bucket"))
+    S3ReportExportConfig.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
+    S3ReportExportConfig.add_member(:packaging, Shapes::ShapeRef.new(shape: ReportPackagingType, location_name: "packaging"))
+    S3ReportExportConfig.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
+    S3ReportExportConfig.add_member(:encryption_disabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "encryptionDisabled"))
+    S3ReportExportConfig.struct_class = Types::S3ReportExportConfig
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -544,6 +708,26 @@ module Aws::CodeBuild
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TestCase.add_member(:report_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "reportArn"))
+    TestCase.add_member(:test_raw_data_path, Shapes::ShapeRef.new(shape: String, location_name: "testRawDataPath"))
+    TestCase.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "prefix"))
+    TestCase.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    TestCase.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    TestCase.add_member(:duration_in_nano_seconds, Shapes::ShapeRef.new(shape: WrapperLong, location_name: "durationInNanoSeconds"))
+    TestCase.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    TestCase.add_member(:expired, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expired"))
+    TestCase.struct_class = Types::TestCase
+
+    TestCaseFilter.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    TestCaseFilter.struct_class = Types::TestCaseFilter
+
+    TestCases.member = Shapes::ShapeRef.new(shape: TestCase)
+
+    TestReportSummary.add_member(:total, Shapes::ShapeRef.new(shape: WrapperInt, required: true, location_name: "total"))
+    TestReportSummary.add_member(:status_counts, Shapes::ShapeRef.new(shape: ReportStatusCounts, required: true, location_name: "statusCounts"))
+    TestReportSummary.add_member(:duration_in_nano_seconds, Shapes::ShapeRef.new(shape: WrapperLong, required: true, location_name: "durationInNanoSeconds"))
+    TestReportSummary.struct_class = Types::TestReportSummary
+
     UpdateProjectInput.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
     UpdateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     UpdateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
@@ -566,6 +750,13 @@ module Aws::CodeBuild
 
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
+
+    UpdateReportGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    UpdateReportGroupInput.add_member(:export_config, Shapes::ShapeRef.new(shape: ReportExportConfig, location_name: "exportConfig"))
+    UpdateReportGroupInput.struct_class = Types::UpdateReportGroupInput
+
+    UpdateReportGroupOutput.add_member(:report_group, Shapes::ShapeRef.new(shape: ReportGroup, location_name: "reportGroup"))
+    UpdateReportGroupOutput.struct_class = Types::UpdateReportGroupOutput
 
     UpdateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
     UpdateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
@@ -639,12 +830,41 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
+      api.add_operation(:batch_get_report_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetReportGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetReportGroupsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetReportGroupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:batch_get_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetReports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetReportsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetReportsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateProject"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateProjectInput)
         o.output = Shapes::ShapeRef.new(shape: CreateProjectOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
+      end)
+
+      api.add_operation(:create_report_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateReportGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateReportGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateReportGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: AccountLimitExceededException)
@@ -671,6 +891,24 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
+      api.add_operation(:delete_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReportInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteReportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:delete_report_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReportGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReportGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteReportGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:delete_source_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSourceCredentials"
         o.http_method = "POST"
@@ -690,6 +928,16 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
+      end)
+
+      api.add_operation(:describe_test_cases, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTestCases"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTestCasesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTestCasesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:import_source_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -749,6 +997,34 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
+      api.add_operation(:list_report_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReportGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReportGroupsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReportGroupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_reports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReports"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReportsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReportsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_reports_for_report_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReportsForReportGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReportsForReportGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: ListReportsForReportGroupOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_source_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSourceCredentials"
         o.http_method = "POST"
@@ -784,6 +1060,16 @@ module Aws::CodeBuild
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateProjectInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_report_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateReportGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateReportGroupInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateReportGroupOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

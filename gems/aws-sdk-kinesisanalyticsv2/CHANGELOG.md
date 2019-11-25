@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-11-25)
+------------------
+
+* Feature - Kinesis Data Analytics service adds support to configure Java applications to access resources in a VPC. Also releasing support to configure Java applications to set allowNonRestoreState flag through the service APIs.
+
 1.11.0 (2019-10-23)
 ------------------
 

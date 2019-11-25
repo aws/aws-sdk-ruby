@@ -94,6 +94,12 @@ module Aws::ApplicationInsights
     #         resource_group_name: "ResourceGroupName", # required
     #         ops_center_enabled: false,
     #         ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -111,12 +117,19 @@ module Aws::ApplicationInsights
     #   to the opsItem.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   List of tags to add to the application. tag key (`Key`) and an
+    #   associated tag value (`Value`). The maximum length of a tag key is
+    #   128 characters. The maximum length of a tag value is 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplicationRequest AWS API Documentation
     #
     class CreateApplicationRequest < Struct.new(
       :resource_group_name,
       :ops_center_enabled,
-      :ops_item_sns_topic_arn)
+      :ops_item_sns_topic_arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -164,6 +177,64 @@ module Aws::ApplicationInsights
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateComponentResponse AWS API Documentation
     #
     class CreateComponentResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CreateLogPatternRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         pattern_set_name: "LogPatternSetName", # required
+    #         pattern_name: "LogPatternName", # required
+    #         pattern: "LogPatternRegex", # required
+    #         rank: 1, # required
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern set.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_name
+    #   The name of the log pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The log pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   Rank of the log pattern.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateLogPatternRequest AWS API Documentation
+    #
+    class CreateLogPatternRequest < Struct.new(
+      :resource_group_name,
+      :pattern_set_name,
+      :pattern_name,
+      :pattern,
+      :rank)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_pattern
+    #   The successfully created log pattern.
+    #   @return [Types::LogPattern]
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateLogPatternResponse AWS API Documentation
+    #
+    class CreateLogPatternResponse < Struct.new(
+      :log_pattern,
+      :resource_group_name)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteApplicationRequest
     #   data as a hash:
@@ -215,6 +286,40 @@ module Aws::ApplicationInsights
     #
     class DeleteComponentResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteLogPatternRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         pattern_set_name: "LogPatternSetName", # required
+    #         pattern_name: "LogPatternName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern set.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_name
+    #   The name of the log pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DeleteLogPatternRequest AWS API Documentation
+    #
+    class DeleteLogPatternRequest < Struct.new(
+      :resource_group_name,
+      :pattern_set_name,
+      :pattern_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DeleteLogPatternResponse AWS API Documentation
+    #
+    class DeleteLogPatternResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeApplicationRequest
     #   data as a hash:
     #
@@ -250,7 +355,7 @@ module Aws::ApplicationInsights
     #       {
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
-    #         tier: "Tier", # required
+    #         tier: "DEFAULT", # required, accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
     #       }
     #
     # @!attribute [rw] resource_group_name
@@ -263,7 +368,8 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_CORE`, `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and
+    #   `DEFAULT`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfigurationRecommendationRequest AWS API Documentation
@@ -317,7 +423,8 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`
+    #   `DOT_NET_CORE`, `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and
+    #   `DEFAULT`
     #   @return [String]
     #
     # @!attribute [rw] component_configuration
@@ -372,6 +479,52 @@ module Aws::ApplicationInsights
     class DescribeComponentResponse < Struct.new(
       :application_component,
       :resource_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLogPatternRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         pattern_set_name: "LogPatternSetName", # required
+    #         pattern_name: "LogPatternName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern set.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_name
+    #   The name of the log pattern.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeLogPatternRequest AWS API Documentation
+    #
+    class DescribeLogPatternRequest < Struct.new(
+      :resource_group_name,
+      :pattern_set_name,
+      :pattern_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_pattern
+    #   The successfully created log pattern.
+    #   @return [Types::LogPattern]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeLogPatternResponse AWS API Documentation
+    #
+    class DescribeLogPatternResponse < Struct.new(
+      :resource_group_name,
+      :log_pattern)
       include Aws::Structure
     end
 
@@ -566,6 +719,120 @@ module Aws::ApplicationInsights
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListLogPatternSetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternSetsRequest AWS API Documentation
+    #
+    class ListLogPatternSetsRequest < Struct.new(
+      :resource_group_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_pattern_sets
+    #   The list of log pattern sets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternSetsResponse AWS API Documentation
+    #
+    class ListLogPatternSetsResponse < Struct.new(
+      :resource_group_name,
+      :log_pattern_sets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLogPatternsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         pattern_set_name: "LogPatternSetName",
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern set.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternsRequest AWS API Documentation
+    #
+    class ListLogPatternsRequest < Struct.new(
+      :resource_group_name,
+      :pattern_set_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_patterns
+    #   The list of log patterns.
+    #   @return [Array<Types::LogPattern>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternsResponse AWS API Documentation
+    #
+    class ListLogPatternsResponse < Struct.new(
+      :resource_group_name,
+      :log_patterns,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListProblemsRequest
     #   data as a hash:
     #
@@ -627,6 +894,74 @@ module Aws::ApplicationInsights
     class ListProblemsResponse < Struct.new(
       :problem_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to
+    #   retrieve tag information for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   An array that lists all the tags that are associated with the
+    #   application. Each tag consists of a required tag key (`Key`) and an
+    #   associated tag value (`Value`).
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # An object that defines the log patterns that belongs to a
+    # `LogPatternSet`.
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern. A log pattern name can contains at many
+    #   as 30 characters, and it cannot be empty. The characters can be
+    #   Unicode letters, digits or one of the following symbols: period,
+    #   dash, underscore.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_name
+    #   The name of the log pattern. A log pattern name can contains at many
+    #   as 50 characters, and it cannot be empty. The characters can be
+    #   Unicode letters, digits or one of the following symbols: period,
+    #   dash, underscore.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   A regular expression that defines the log pattern. A log pattern can
+    #   contains at many as 50 characters, and it cannot be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   Rank of the log pattern.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/LogPattern AWS API Documentation
+    #
+    class LogPattern < Struct.new(
+      :pattern_set_name,
+      :pattern_name,
+      :pattern,
+      :rank)
       include Aws::Structure
     end
 
@@ -799,6 +1134,161 @@ module Aws::ApplicationInsights
       include Aws::Structure
     end
 
+    # An object that defines the tags associated with an application. A
+    # *tag* is a label that you optionally define and associate with an
+    # application. Tags can help you categorize and manage resources in
+    # different ways, such as by purpose, owner, environment, or other
+    # criteria.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for a more specific tag value. A tag value acts as
+    # a descriptor within a tag key. A tag key can contain as many as 128
+    # characters. A tag value can contain as many as 256 characters. The
+    # characters can be Unicode letters, digits, white space, or one of the
+    # following symbols: \_ . : / = + -. The following additional
+    # restrictions apply to tags:
+    #
+    # * Tag keys and values are case sensitive.
+    #
+    # * For each associated resource, each tag key must be unique and it can
+    #   have only one value.
+    #
+    # * The `aws:` prefix is reserved for use by AWS; you can’t use it in
+    #   any tag keys or values that you define. In addition, you can't edit
+    #   or remove tag keys or values that use this prefix.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One part of a key-value pair that defines a tag. The maximum length
+    #   of a tag key is 128 characters. The minimum length is 1 character.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional part of a key-value pair that defines a tag. The
+    #   maximum length of a tag value is 256 characters. The minimum length
+    #   is 0 characters. If you don't want an application to have a
+    #   specific tag value, don't specify a value for this parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to
+    #   add one or more tags to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags that to add to the application. A tag consists of a
+    #   required tag key (`Key`) and an associated tag value (`Value`). The
+    #   maximum length of a tag key is 128 characters. The maximum length of
+    #   a tag value is 256 characters.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Tags are already registered for the specified application ARN.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/TagsAlreadyExistException AWS API Documentation
+    #
+    class TagsAlreadyExistException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The number of the provided tags is beyond the limit, or the number of
+    # total tags you are trying to attach to the specified resource exceeds
+    # the limit.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource with too many tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to
+    #   remove one or more tags from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the application, append the
+    #   `TagKeys` parameter and argument for each additional tag to remove,
+    #   separated by an ampersand.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass UpdateApplicationRequest
     #   data as a hash:
     #
@@ -857,7 +1347,7 @@ module Aws::ApplicationInsights
     #         resource_group_name: "ResourceGroupName", # required
     #         component_name: "ComponentName", # required
     #         monitor: false,
-    #         tier: "Tier",
+    #         tier: "DEFAULT", # accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
     #         component_configuration: "ComponentConfiguration",
     #       }
     #
@@ -875,7 +1365,8 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `DOT_NET_CORE`, `SQL_SERVER`, and
+    #   `DEFAULT`.
     #   @return [String]
     #
     # @!attribute [rw] component_configuration
@@ -883,11 +1374,14 @@ module Aws::ApplicationInsights
     #   escaped JSON of the configuration. For more information about the
     #   JSON format, see [Working with JSON][1]. You can send a request to
     #   `DescribeComponentConfigurationRecommendation` to see the
-    #   recommended configuration for a component.
+    #   recommended configuration for a component. For the complete format
+    #   of the component configuration file, see [Component
+    #   Configuration][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponentConfigurationRequest AWS API Documentation
@@ -944,6 +1438,64 @@ module Aws::ApplicationInsights
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateComponentResponse AWS API Documentation
     #
     class UpdateComponentResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLogPatternRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName", # required
+    #         pattern_set_name: "LogPatternSetName", # required
+    #         pattern_name: "LogPatternName", # required
+    #         pattern: "LogPatternRegex",
+    #         rank: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_set_name
+    #   The name of the log pattern set.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern_name
+    #   The name of the log pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The log pattern.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   Rank of the log pattern.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateLogPatternRequest AWS API Documentation
+    #
+    class UpdateLogPatternRequest < Struct.new(
+      :resource_group_name,
+      :pattern_set_name,
+      :pattern_name,
+      :pattern,
+      :rank)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_group_name
+    #   The name of the resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_pattern
+    #   The successfully created log pattern.
+    #   @return [Types::LogPattern]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateLogPatternResponse AWS API Documentation
+    #
+    class UpdateLogPatternResponse < Struct.new(
+      :resource_group_name,
+      :log_pattern)
+      include Aws::Structure
+    end
 
     # The parameter is not valid.
     #

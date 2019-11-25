@@ -735,16 +735,20 @@ module Aws::IoT
     # @option params [required, String] :authorizer_function_arn
     #   The ARN of the authorizer's Lambda function.
     #
-    # @option params [required, String] :token_key_name
+    # @option params [String] :token_key_name
     #   The name of the token key used to extract the token from the HTTP
     #   headers.
     #
-    # @option params [required, Hash<String,String>] :token_signing_public_keys
+    # @option params [Hash<String,String>] :token_signing_public_keys
     #   The public keys used to verify the digital signature returned by your
     #   custom authentication service.
     #
     # @option params [String] :status
     #   The status of the create authorizer request.
+    #
+    # @option params [Boolean] :signing_disabled
+    #   Specifies whether AWS IoT validates the token signature in an
+    #   authorization request.
     #
     # @return [Types::CreateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -756,11 +760,12 @@ module Aws::IoT
     #   resp = client.create_authorizer({
     #     authorizer_name: "AuthorizerName", # required
     #     authorizer_function_arn: "AuthorizerFunctionArn", # required
-    #     token_key_name: "TokenKeyName", # required
-    #     token_signing_public_keys: { # required
+    #     token_key_name: "TokenKeyName",
+    #     token_signing_public_keys: {
     #       "KeyName" => "KeyValue",
     #     },
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     signing_disabled: false,
     #   })
     #
     # @example Response structure
@@ -898,6 +903,68 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_certificate_from_csr(params = {}, options = {})
       req = build_request(:create_certificate_from_csr, params)
+      req.send_request(options)
+    end
+
+    # Creates a domain configuration.
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :domain_configuration_name
+    #   The name of the domain configuration. This value must be unique to a
+    #   region.
+    #
+    # @option params [String] :domain_name
+    #   The name of the domain.
+    #
+    # @option params [Array<String>] :server_certificate_arns
+    #   The ARNs of the certificates that AWS IoT passes to the device during
+    #   the TLS handshake. Currently you can specify only one certificate ARN.
+    #   This value is not required for AWS-managed domains.
+    #
+    # @option params [String] :validation_certificate_arn
+    #   The certificate used to validate the server certificate and prove
+    #   domain name ownership. This certificate must be signed by a public
+    #   certificate authority. This value is not required for AWS-managed
+    #   domains.
+    #
+    # @option params [Types::AuthorizerConfig] :authorizer_config
+    #   An object that specifies the authorization service for a domain.
+    #
+    # @option params [String] :service_type
+    #   The type of service delivered by the endpoint.
+    #
+    # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
+    #   * {Types::CreateDomainConfigurationResponse#domain_configuration_arn #domain_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_domain_configuration({
+    #     domain_configuration_name: "DomainConfigurationName", # required
+    #     domain_name: "DomainName",
+    #     server_certificate_arns: ["AcmCertificateArn"],
+    #     validation_certificate_arn: "AcmCertificateArn",
+    #     authorizer_config: {
+    #       default_authorizer_name: "AuthorizerName",
+    #       allow_authorizer_override: false,
+    #     },
+    #     service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_configuration_name #=> String
+    #   resp.domain_configuration_arn #=> String
+    #
+    # @overload create_domain_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_domain_configuration(params = {}, options = {})
+      req = build_request(:create_domain_configuration, params)
       req.send_request(options)
     end
 
@@ -1108,10 +1175,16 @@ module Aws::IoT
     end
 
     # Creates a 2048-bit RSA key pair and issues an X.509 certificate using
-    # the issued public key.
+    # the issued public key. You can also call `CreateKeysAndCertificate`
+    # over MQTT from a device, for more information, see [Provisioning MQTT
+    # API][1].
     #
     # **Note** This is the only time AWS IoT issues the private key for this
     # certificate, so it is important to keep it in a secure location.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api
     #
     # @option params [Boolean] :set_as_active
     #   Specifies whether the certificate is active.
@@ -1433,6 +1506,146 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_policy_version(params = {}, options = {})
       req = build_request(:create_policy_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a provisioning claim.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the provisioning template to use.
+    #
+    # @return [Types::CreateProvisioningClaimResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProvisioningClaimResponse#certificate_id #certificate_id} => String
+    #   * {Types::CreateProvisioningClaimResponse#certificate_pem #certificate_pem} => String
+    #   * {Types::CreateProvisioningClaimResponse#key_pair #key_pair} => Types::KeyPair
+    #   * {Types::CreateProvisioningClaimResponse#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_provisioning_claim({
+    #     template_name: "TemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_id #=> String
+    #   resp.certificate_pem #=> String
+    #   resp.key_pair.public_key #=> String
+    #   resp.key_pair.private_key #=> String
+    #   resp.expiration #=> Time
+    #
+    # @overload create_provisioning_claim(params = {})
+    # @param [Hash] params ({})
+    def create_provisioning_claim(params = {}, options = {})
+      req = build_request(:create_provisioning_claim, params)
+      req.send_request(options)
+    end
+
+    # Creates a fleet provisioning template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template.
+    #
+    # @option params [String] :description
+    #   The description of the fleet provisioning template.
+    #
+    # @option params [required, String] :template_body
+    #   The JSON formatted contents of the fleet provisioning template.
+    #
+    # @option params [Boolean] :enabled
+    #   True to enable the fleet provisioning template, otherwise false.
+    #
+    # @option params [required, String] :provisioning_role_arn
+    #   The role ARN for the role associated with the fleet provisioning
+    #   template. This IoT role grants permission to provision a device.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the fleet provisioning template.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #
+    # @return [Types::CreateProvisioningTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProvisioningTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::CreateProvisioningTemplateResponse#template_name #template_name} => String
+    #   * {Types::CreateProvisioningTemplateResponse#default_version_id #default_version_id} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_provisioning_template({
+    #     template_name: "TemplateName", # required
+    #     description: "TemplateDescription",
+    #     template_body: "TemplateBody", # required
+    #     enabled: false,
+    #     provisioning_role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_arn #=> String
+    #   resp.template_name #=> String
+    #   resp.default_version_id #=> Integer
+    #
+    # @overload create_provisioning_template(params = {})
+    # @param [Hash] params ({})
+    def create_provisioning_template(params = {}, options = {})
+      req = build_request(:create_provisioning_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version of a fleet provisioning template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template.
+    #
+    # @option params [required, String] :template_body
+    #   The JSON formatted contents of the fleet provisioning template.
+    #
+    # @option params [Boolean] :set_as_default
+    #   Sets a fleet provision template version as the default version.
+    #
+    # @return [Types::CreateProvisioningTemplateVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProvisioningTemplateVersionResponse#template_arn #template_arn} => String
+    #   * {Types::CreateProvisioningTemplateVersionResponse#template_name #template_name} => String
+    #   * {Types::CreateProvisioningTemplateVersionResponse#version_id #version_id} => Integer
+    #   * {Types::CreateProvisioningTemplateVersionResponse#is_default_version #is_default_version} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_provisioning_template_version({
+    #     template_name: "TemplateName", # required
+    #     template_body: "TemplateBody", # required
+    #     set_as_default: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_arn #=> String
+    #   resp.template_name #=> String
+    #   resp.version_id #=> Integer
+    #   resp.is_default_version #=> Boolean
+    #
+    # @overload create_provisioning_template_version(params = {})
+    # @param [Hash] params ({})
+    def create_provisioning_template_version(params = {}, options = {})
+      req = build_request(:create_provisioning_template_version, params)
       req.send_request(options)
     end
 
@@ -1980,6 +2193,32 @@ module Aws::IoT
     #             message_id: "MessageId",
     #             role_arn: "AwsArn", # required
     #           },
+    #           iot_site_wise: {
+    #             put_asset_property_value_entries: [ # required
+    #               {
+    #                 entry_id: "AssetPropertyEntryId",
+    #                 asset_id: "AssetId",
+    #                 property_id: "AssetPropertyId",
+    #                 property_alias: "AssetPropertyAlias",
+    #                 property_values: [ # required
+    #                   {
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: { # required
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -2092,6 +2331,32 @@ module Aws::IoT
     #         iot_events: {
     #           input_name: "InputName", # required
     #           message_id: "MessageId",
+    #           role_arn: "AwsArn", # required
+    #         },
+    #         iot_site_wise: {
+    #           put_asset_property_value_entries: [ # required
+    #             {
+    #               entry_id: "AssetPropertyEntryId",
+    #               asset_id: "AssetId",
+    #               property_id: "AssetPropertyId",
+    #               property_alias: "AssetPropertyAlias",
+    #               property_values: [ # required
+    #                 {
+    #                   value: { # required
+    #                     string_value: "AssetPropertyStringValue",
+    #                     integer_value: "AssetPropertyIntegerValue",
+    #                     double_value: "AssetPropertyDoubleValue",
+    #                     boolean_value: "AssetPropertyBooleanValue",
+    #                   },
+    #                   timestamp: { # required
+    #                     time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                     offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                   },
+    #                   quality: "AssetPropertyQuality",
+    #                 },
+    #               ],
+    #             },
+    #           ],
     #           role_arn: "AwsArn", # required
     #         },
     #         step_functions: {
@@ -2281,6 +2546,31 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified domain configuration.
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :domain_configuration_name
+    #   The name of the domain configuration to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_domain_configuration({
+    #     domain_configuration_name: "DomainConfigurationName", # required
+    #   })
+    #
+    # @overload delete_domain_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_domain_configuration(params = {}, options = {})
+      req = build_request(:delete_domain_configuration, params)
       req.send_request(options)
     end
 
@@ -2510,6 +2800,50 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_policy_version(params = {}, options = {})
       req = build_request(:delete_policy_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes a fleet provisioning template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provision template to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_provisioning_template({
+    #     template_name: "TemplateName", # required
+    #   })
+    #
+    # @overload delete_provisioning_template(params = {})
+    # @param [Hash] params ({})
+    def delete_provisioning_template(params = {}, options = {})
+      req = build_request(:delete_provisioning_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes a fleet provisioning template version.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template version to delete.
+    #
+    # @option params [required, Integer] :version_id
+    #   The fleet provisioning template version ID to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_provisioning_template_version({
+    #     template_name: "TemplateName", # required
+    #     version_id: 1, # required
+    #   })
+    #
+    # @overload delete_provisioning_template_version(params = {})
+    # @param [Hash] params ({})
+    def delete_provisioning_template_version(params = {}, options = {})
+      req = build_request(:delete_provisioning_template_version, params)
       req.send_request(options)
     end
 
@@ -2833,7 +3167,7 @@ module Aws::IoT
     #   resp.finding.task_start_time #=> Time
     #   resp.finding.finding_time #=> Time
     #   resp.finding.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.finding.non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.finding.non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
     #   resp.finding.non_compliant_resource.resource_identifier.device_certificate_id #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.ca_certificate_id #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
@@ -2841,10 +3175,12 @@ module Aws::IoT
     #   resp.finding.non_compliant_resource.resource_identifier.policy_version_identifier.policy_name #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.policy_version_identifier.policy_version_id #=> String
     #   resp.finding.non_compliant_resource.resource_identifier.account #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.iam_role_arn #=> String
+    #   resp.finding.non_compliant_resource.resource_identifier.role_alias_arn #=> String
     #   resp.finding.non_compliant_resource.additional_info #=> Hash
     #   resp.finding.non_compliant_resource.additional_info["String"] #=> String
     #   resp.finding.related_resources #=> Array
-    #   resp.finding.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.finding.related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
     #   resp.finding.related_resources[0].resource_identifier.device_certificate_id #=> String
     #   resp.finding.related_resources[0].resource_identifier.ca_certificate_id #=> String
     #   resp.finding.related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
@@ -2852,6 +3188,8 @@ module Aws::IoT
     #   resp.finding.related_resources[0].resource_identifier.policy_version_identifier.policy_name #=> String
     #   resp.finding.related_resources[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
     #   resp.finding.related_resources[0].resource_identifier.account #=> String
+    #   resp.finding.related_resources[0].resource_identifier.iam_role_arn #=> String
+    #   resp.finding.related_resources[0].resource_identifier.role_alias_arn #=> String
     #   resp.finding.related_resources[0].additional_info #=> Hash
     #   resp.finding.related_resources[0].additional_info["String"] #=> String
     #   resp.finding.reason_for_non_compliance #=> String
@@ -3003,6 +3341,7 @@ module Aws::IoT
     #   resp.authorizer_description.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
+    #   resp.authorizer_description.signing_disabled #=> Boolean
     #
     # @overload describe_authorizer(params = {})
     # @param [Hash] params ({})
@@ -3148,11 +3487,61 @@ module Aws::IoT
     #   resp.authorizer_description.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
+    #   resp.authorizer_description.signing_disabled #=> Boolean
     #
     # @overload describe_default_authorizer(params = {})
     # @param [Hash] params ({})
     def describe_default_authorizer(params = {}, options = {})
       req = build_request(:describe_default_authorizer, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about a domain configuration.
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :domain_configuration_name
+    #   The name of the domain configuration.
+    #
+    # @return [Types::DescribeDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
+    #   * {Types::DescribeDomainConfigurationResponse#domain_configuration_arn #domain_configuration_arn} => String
+    #   * {Types::DescribeDomainConfigurationResponse#domain_name #domain_name} => String
+    #   * {Types::DescribeDomainConfigurationResponse#server_certificates #server_certificates} => Array&lt;Types::ServerCertificateSummary&gt;
+    #   * {Types::DescribeDomainConfigurationResponse#authorizer_config #authorizer_config} => Types::AuthorizerConfig
+    #   * {Types::DescribeDomainConfigurationResponse#domain_configuration_status #domain_configuration_status} => String
+    #   * {Types::DescribeDomainConfigurationResponse#service_type #service_type} => String
+    #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_configuration({
+    #     domain_configuration_name: "ReservedDomainConfigurationName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_configuration_name #=> String
+    #   resp.domain_configuration_arn #=> String
+    #   resp.domain_name #=> String
+    #   resp.server_certificates #=> Array
+    #   resp.server_certificates[0].server_certificate_arn #=> String
+    #   resp.server_certificates[0].server_certificate_status #=> String, one of "INVALID", "VALID"
+    #   resp.server_certificates[0].server_certificate_status_detail #=> String
+    #   resp.authorizer_config.default_authorizer_name #=> String
+    #   resp.authorizer_config.allow_authorizer_override #=> Boolean
+    #   resp.domain_configuration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
+    #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
+    #
+    # @overload describe_domain_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_configuration(params = {}, options = {})
+      req = build_request(:describe_domain_configuration, params)
       req.send_request(options)
     end
 
@@ -3408,6 +3797,84 @@ module Aws::IoT
     # @param [Hash] params ({})
     def describe_mitigation_action(params = {}, options = {})
       req = build_request(:describe_mitigation_action, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a fleet provisioning template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template.
+    #
+    # @return [Types::DescribeProvisioningTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProvisioningTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#template_name #template_name} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#description #description} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeProvisioningTemplateResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::DescribeProvisioningTemplateResponse#default_version_id #default_version_id} => Integer
+    #   * {Types::DescribeProvisioningTemplateResponse#template_body #template_body} => String
+    #   * {Types::DescribeProvisioningTemplateResponse#enabled #enabled} => Boolean
+    #   * {Types::DescribeProvisioningTemplateResponse#provisioning_role_arn #provisioning_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_provisioning_template({
+    #     template_name: "TemplateName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_arn #=> String
+    #   resp.template_name #=> String
+    #   resp.description #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.default_version_id #=> Integer
+    #   resp.template_body #=> String
+    #   resp.enabled #=> Boolean
+    #   resp.provisioning_role_arn #=> String
+    #
+    # @overload describe_provisioning_template(params = {})
+    # @param [Hash] params ({})
+    def describe_provisioning_template(params = {}, options = {})
+      req = build_request(:describe_provisioning_template, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a fleet provisioning template version.
+    #
+    # @option params [required, String] :template_name
+    #   The template name.
+    #
+    # @option params [required, Integer] :version_id
+    #   The fleet provisioning template version ID.
+    #
+    # @return [Types::DescribeProvisioningTemplateVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProvisioningTemplateVersionResponse#version_id #version_id} => Integer
+    #   * {Types::DescribeProvisioningTemplateVersionResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeProvisioningTemplateVersionResponse#template_body #template_body} => String
+    #   * {Types::DescribeProvisioningTemplateVersionResponse#is_default_version #is_default_version} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_provisioning_template_version({
+    #     template_name: "TemplateName", # required
+    #     version_id: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version_id #=> Integer
+    #   resp.creation_date #=> Time
+    #   resp.template_body #=> String
+    #   resp.is_default_version #=> Boolean
+    #
+    # @overload describe_provisioning_template_version(params = {})
+    # @param [Hash] params ({})
+    def describe_provisioning_template_version(params = {}, options = {})
+      req = build_request(:describe_provisioning_template_version, params)
       req.send_request(options)
     end
 
@@ -3981,7 +4448,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets the search configuration.
+    # Gets the indexing configuration.
     #
     # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4279,7 +4746,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets statistics about things that match the specified query.
+    # Returns the count, average, sum, minimum, maximum, sum of squares,
+    # variance, and standard deviation for the specified aggregated field.
+    # If the aggregation field is of type `String`, only the count statistic
+    # is returned.
     #
     # @option params [String] :index_name
     #   The name of the index to search. The default value is `AWS_Things`.
@@ -4289,7 +4759,7 @@ module Aws::IoT
     #   to get the count of all indexed things in your AWS account.
     #
     # @option params [String] :aggregation_field
-    #   The aggregation field name. Currently not supported.
+    #   The aggregation field name.
     #
     # @option params [String] :query_version
     #   The version of the query used to search.
@@ -4404,6 +4874,20 @@ module Aws::IoT
     #   resp.rule.actions[0].iot_events.input_name #=> String
     #   resp.rule.actions[0].iot_events.message_id #=> String
     #   resp.rule.actions[0].iot_events.role_arn #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries #=> Array
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].asset_id #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_id #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_alias #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values #=> Array
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.string_value #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.integer_value #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.double_value #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.boolean_value #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].timestamp.time_in_seconds #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].timestamp.offset_in_nanos #=> String
+    #   resp.rule.actions[0].iot_site_wise.put_asset_property_value_entries[0].property_values[0].quality #=> String
+    #   resp.rule.actions[0].iot_site_wise.role_arn #=> String
     #   resp.rule.actions[0].step_functions.execution_name_prefix #=> String
     #   resp.rule.actions[0].step_functions.state_machine_name #=> String
     #   resp.rule.actions[0].step_functions.role_arn #=> String
@@ -4472,6 +4956,20 @@ module Aws::IoT
     #   resp.rule.error_action.iot_events.input_name #=> String
     #   resp.rule.error_action.iot_events.message_id #=> String
     #   resp.rule.error_action.iot_events.role_arn #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries #=> Array
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].entry_id #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].asset_id #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_id #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_alias #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values #=> Array
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.string_value #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.integer_value #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.double_value #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].value.boolean_value #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].timestamp.time_in_seconds #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].timestamp.offset_in_nanos #=> String
+    #   resp.rule.error_action.iot_site_wise.put_asset_property_value_entries[0].property_values[0].quality #=> String
+    #   resp.rule.error_action.iot_site_wise.role_arn #=> String
     #   resp.rule.error_action.step_functions.execution_name_prefix #=> String
     #   resp.rule.error_action.step_functions.state_machine_name #=> String
     #   resp.rule.error_action.step_functions.role_arn #=> String
@@ -4699,6 +5197,8 @@ module Aws::IoT
     #         policy_version_id: "PolicyVersionId",
     #       },
     #       account: "AwsAccountId",
+    #       iam_role_arn: "RoleArn",
+    #       role_alias_arn: "RoleAliasArn",
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -4715,7 +5215,7 @@ module Aws::IoT
     #   resp.findings[0].task_start_time #=> Time
     #   resp.findings[0].finding_time #=> Time
     #   resp.findings[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
-    #   resp.findings[0].non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.findings[0].non_compliant_resource.resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
     #   resp.findings[0].non_compliant_resource.resource_identifier.device_certificate_id #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.ca_certificate_id #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.cognito_identity_pool_id #=> String
@@ -4723,10 +5223,12 @@ module Aws::IoT
     #   resp.findings[0].non_compliant_resource.resource_identifier.policy_version_identifier.policy_name #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.policy_version_identifier.policy_version_id #=> String
     #   resp.findings[0].non_compliant_resource.resource_identifier.account #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.iam_role_arn #=> String
+    #   resp.findings[0].non_compliant_resource.resource_identifier.role_alias_arn #=> String
     #   resp.findings[0].non_compliant_resource.additional_info #=> Hash
     #   resp.findings[0].non_compliant_resource.additional_info["String"] #=> String
     #   resp.findings[0].related_resources #=> Array
-    #   resp.findings[0].related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS"
+    #   resp.findings[0].related_resources[0].resource_type #=> String, one of "DEVICE_CERTIFICATE", "CA_CERTIFICATE", "IOT_POLICY", "COGNITO_IDENTITY_POOL", "CLIENT_ID", "ACCOUNT_SETTINGS", "ROLE_ALIAS", "IAM_ROLE"
     #   resp.findings[0].related_resources[0].resource_identifier.device_certificate_id #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.ca_certificate_id #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.cognito_identity_pool_id #=> String
@@ -4734,6 +5236,8 @@ module Aws::IoT
     #   resp.findings[0].related_resources[0].resource_identifier.policy_version_identifier.policy_name #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.policy_version_identifier.policy_version_id #=> String
     #   resp.findings[0].related_resources[0].resource_identifier.account #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.iam_role_arn #=> String
+    #   resp.findings[0].related_resources[0].resource_identifier.role_alias_arn #=> String
     #   resp.findings[0].related_resources[0].additional_info #=> Hash
     #   resp.findings[0].related_resources[0].additional_info["String"] #=> String
     #   resp.findings[0].reason_for_non_compliance #=> String
@@ -5136,11 +5640,56 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets a list of domain configurations for the user. This list is sorted
+    # alphabetically by domain configuration name.
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results.
+    #
+    # @option params [Integer] :page_size
+    #   The result page size.
+    #
+    # @option params [String] :service_type
+    #   The type of service delivered by the endpoint.
+    #
+    # @return [Types::ListDomainConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDomainConfigurationsResponse#domain_configurations #domain_configurations} => Array&lt;Types::DomainConfigurationSummary&gt;
+    #   * {Types::ListDomainConfigurationsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_domain_configurations({
+    #     marker: "Marker",
+    #     page_size: 1,
+    #     service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_configurations #=> Array
+    #   resp.domain_configurations[0].domain_configuration_name #=> String
+    #   resp.domain_configurations[0].domain_configuration_arn #=> String
+    #   resp.domain_configurations[0].service_type #=> String, one of "DATA", "CREDENTIAL_PROVIDER", "JOBS"
+    #   resp.next_marker #=> String
+    #
+    # @overload list_domain_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_domain_configurations(params = {}, options = {})
+      req = build_request(:list_domain_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists the search indices.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or null if there are no
-    #   additional results.
+    #   The token used to get the next set of results, or `null` if there are
+    #   no additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -5653,6 +6202,83 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_principal_things(params = {}, options = {})
       req = build_request(:list_principal_things, params)
+      req.send_request(options)
+    end
+
+    # A list of fleet provisioning template versions.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results.
+    #
+    # @return [Types::ListProvisioningTemplateVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisioningTemplateVersionsResponse#versions #versions} => Array&lt;Types::ProvisioningTemplateVersionSummary&gt;
+    #   * {Types::ListProvisioningTemplateVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioning_template_versions({
+    #     template_name: "TemplateName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.versions #=> Array
+    #   resp.versions[0].version_id #=> Integer
+    #   resp.versions[0].creation_date #=> Time
+    #   resp.versions[0].is_default_version #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload list_provisioning_template_versions(params = {})
+    # @param [Hash] params ({})
+    def list_provisioning_template_versions(params = {}, options = {})
+      req = build_request(:list_provisioning_template_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists the fleet provisioning templates in your AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next set of results.
+    #
+    # @return [Types::ListProvisioningTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisioningTemplatesResponse#templates #templates} => Array&lt;Types::ProvisioningTemplateSummary&gt;
+    #   * {Types::ListProvisioningTemplatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioning_templates({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.templates #=> Array
+    #   resp.templates[0].template_arn #=> String
+    #   resp.templates[0].template_name #=> String
+    #   resp.templates[0].description #=> String
+    #   resp.templates[0].creation_date #=> Time
+    #   resp.templates[0].last_modified_date #=> Time
+    #   resp.templates[0].enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload list_provisioning_templates(params = {})
+    # @param [Hash] params ({})
+    def list_provisioning_templates(params = {}, options = {})
+      req = build_request(:list_provisioning_templates, params)
       req.send_request(options)
     end
 
@@ -6629,7 +7255,16 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Provisions a thing.
+    # Provisions a thing in the device registry. RegisterThing calls other
+    # AWS IoT control plane APIs. These calls might exceed your account
+    # level [ AWS IoT Throttling Limits][1] and cause throttle errors.
+    # Please contact [AWS Customer Support][2] to raise your throttling
+    # limits if necessary.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot
+    # [2]: https://console.aws.amazon.com/support/home
     #
     # @option params [required, String] :template_body
     #   The provisioning template. See [Programmatic Provisioning][1] for more
@@ -6881,6 +7516,32 @@ module Aws::IoT
     #             message_id: "MessageId",
     #             role_arn: "AwsArn", # required
     #           },
+    #           iot_site_wise: {
+    #             put_asset_property_value_entries: [ # required
+    #               {
+    #                 entry_id: "AssetPropertyEntryId",
+    #                 asset_id: "AssetId",
+    #                 property_id: "AssetPropertyId",
+    #                 property_alias: "AssetPropertyAlias",
+    #                 property_values: [ # required
+    #                   {
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: { # required
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             role_arn: "AwsArn", # required
+    #           },
     #           step_functions: {
     #             execution_name_prefix: "ExecutionNamePrefix",
     #             state_machine_name: "StateMachineName", # required
@@ -6995,6 +7656,32 @@ module Aws::IoT
     #           message_id: "MessageId",
     #           role_arn: "AwsArn", # required
     #         },
+    #         iot_site_wise: {
+    #           put_asset_property_value_entries: [ # required
+    #             {
+    #               entry_id: "AssetPropertyEntryId",
+    #               asset_id: "AssetId",
+    #               property_id: "AssetPropertyId",
+    #               property_alias: "AssetPropertyAlias",
+    #               property_values: [ # required
+    #                 {
+    #                   value: { # required
+    #                     string_value: "AssetPropertyStringValue",
+    #                     integer_value: "AssetPropertyIntegerValue",
+    #                     double_value: "AssetPropertyDoubleValue",
+    #                     boolean_value: "AssetPropertyBooleanValue",
+    #                   },
+    #                   timestamp: { # required
+    #                     time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                     offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                   },
+    #                   quality: "AssetPropertyQuality",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           role_arn: "AwsArn", # required
+    #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
@@ -7037,8 +7724,8 @@ module Aws::IoT
     #   The search query string.
     #
     # @option params [String] :next_token
-    #   The token used to get the next set of results, or null if there are no
-    #   additional results.
+    #   The token used to get the next set of results, or `null` if there are
+    #   no additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return at one time.
@@ -7485,12 +8172,21 @@ module Aws::IoT
     # @option params [required, String] :authorizer_name
     #   The custom authorizer name.
     #
-    # @option params [required, String] :token
+    # @option params [String] :token
     #   The token returned by your custom authentication service.
     #
-    # @option params [required, String] :token_signature
+    # @option params [String] :token_signature
     #   The signature made with the token and your custom authentication
     #   service's private key.
+    #
+    # @option params [Types::HttpContext] :http_context
+    #   Specifies a test HTTP authorization request.
+    #
+    # @option params [Types::MqttContext] :mqtt_context
+    #   Specifies a test MQTT authorization request.&gt;
+    #
+    # @option params [Types::TlsContext] :tls_context
+    #   Specifies a test TLS authorization request.
     #
     # @return [Types::TestInvokeAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7504,8 +8200,22 @@ module Aws::IoT
     #
     #   resp = client.test_invoke_authorizer({
     #     authorizer_name: "AuthorizerName", # required
-    #     token: "Token", # required
-    #     token_signature: "TokenSignature", # required
+    #     token: "Token",
+    #     token_signature: "TokenSignature",
+    #     http_context: {
+    #       headers: {
+    #         "HttpHeaderName" => "HttpHeaderValue",
+    #       },
+    #       query_string: "HttpQueryString",
+    #     },
+    #     mqtt_context: {
+    #       username: "MqttUsername",
+    #       password: "data",
+    #       client_id: "MqttClientId",
+    #     },
+    #     tls_context: {
+    #       server_name: "ServerName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -7817,6 +8527,55 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates values stored in the domain configuration. Domain
+    # configurations for default endpoints can't be updated.
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :domain_configuration_name
+    #   The name of the domain configuration to be updated.
+    #
+    # @option params [Types::AuthorizerConfig] :authorizer_config
+    #   An object that specifies the authorization service for a domain.
+    #
+    # @option params [String] :domain_configuration_status
+    #   The status to which the domain configuration should be updated.
+    #
+    # @option params [Boolean] :remove_authorizer_config
+    #   Removes the authorization configuration from a domain.
+    #
+    # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
+    #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_arn #domain_configuration_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_domain_configuration({
+    #     domain_configuration_name: "ReservedDomainConfigurationName", # required
+    #     authorizer_config: {
+    #       default_authorizer_name: "AuthorizerName",
+    #       allow_authorizer_override: false,
+    #     },
+    #     domain_configuration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     remove_authorizer_config: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_configuration_name #=> String
+    #   resp.domain_configuration_arn #=> String
+    #
+    # @overload update_domain_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_domain_configuration(params = {}, options = {})
+      req = build_request(:update_domain_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates a dynamic thing group.
     #
     # @option params [required, String] :thing_group_name
@@ -8081,6 +8840,43 @@ module Aws::IoT
     # @param [Hash] params ({})
     def update_mitigation_action(params = {}, options = {})
       req = build_request(:update_mitigation_action, params)
+      req.send_request(options)
+    end
+
+    # Updates a fleet provisioning template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the fleet provisioning template.
+    #
+    # @option params [String] :description
+    #   The description of the fleet provisioning template.
+    #
+    # @option params [Boolean] :enabled
+    #   True to enable the fleet provisioning template, otherwise false.
+    #
+    # @option params [Integer] :default_version_id
+    #   The ID of the default provisioning template version.
+    #
+    # @option params [String] :provisioning_role_arn
+    #   The ARN of the role associated with the provisioning template. This
+    #   IoT role grants permission to provision a device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_provisioning_template({
+    #     template_name: "TemplateName", # required
+    #     description: "TemplateDescription",
+    #     enabled: false,
+    #     default_version_id: 1,
+    #     provisioning_role_arn: "RoleArn",
+    #   })
+    #
+    # @overload update_provisioning_template(params = {})
+    # @param [Hash] params ({})
+    def update_provisioning_template(params = {}, options = {})
+      req = build_request(:update_provisioning_template, params)
       req.send_request(options)
     end
 
@@ -8599,7 +9395,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2019-11-25)
+------------------
+
+* Feature - AWS Systems Manager Documents now supports more Document Types: ApplicationConfiguration, ApplicationConfigurationSchema and DeploymentStrategy. This release also extends Document Permissions capabilities and introduces a new Force flag for DeleteDocument API.
+
 1.64.0 (2019-11-22)
 ------------------
 

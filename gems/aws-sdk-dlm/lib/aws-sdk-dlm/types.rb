@@ -46,10 +46,14 @@ module Aws::DLM
     #                 times: ["Time"],
     #               },
     #               retain_rule: {
-    #                 count: 1, # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               },
     #               fast_restore_rule: {
-    #                 count: 1, # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 availability_zones: ["AvailabilityZone"], # required
     #               },
     #             },
@@ -166,19 +170,32 @@ module Aws::DLM
     #
     class DeleteLifecyclePolicyResponse < Aws::EmptyStructure; end
 
-    # Specifies when to enable fast snapshot restore.
+    # Specifies a rule for enabling fast snapshot restore. You can enable
+    # fast snapshot restore based on either a count or a time interval.
     #
     # @note When making an API call, you may pass FastRestoreRule
     #   data as a hash:
     #
     #       {
-    #         count: 1, # required
+    #         count: 1,
+    #         interval: 1,
+    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #         availability_zones: ["AvailabilityZone"], # required
     #       }
     #
     # @!attribute [rw] count
     #   The number of snapshots to be enabled with fast snapshot restore.
     #   @return [Integer]
+    #
+    # @!attribute [rw] interval
+    #   The amount of time to enable fast snapshot restore. The maximum is
+    #   100 years. This is equivalent to 1200 months, 5200 weeks, or 36500
+    #   days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_unit
+    #   The unit of time for enabling fast snapshot restore.
+    #   @return [String]
     #
     # @!attribute [rw] availability_zones
     #   The Availability Zones in which to enable fast snapshot restore.
@@ -188,6 +205,8 @@ module Aws::DLM
     #
     class FastRestoreRule < Struct.new(
       :count,
+      :interval,
+      :interval_unit,
       :availability_zones)
       include Aws::Structure
     end
@@ -522,10 +541,14 @@ module Aws::DLM
     #               times: ["Time"],
     #             },
     #             retain_rule: {
-    #               count: 1, # required
+    #               count: 1,
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             },
     #             fast_restore_rule: {
-    #               count: 1, # required
+    #               count: 1,
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               availability_zones: ["AvailabilityZone"], # required
     #             },
     #           },
@@ -594,24 +617,38 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies the number of snapshots to keep for each EBS volume.
+    # Specifies the retention rule for a lifecycle policy. You can retain
+    # snapshots based on either a count or a time interval.
     #
     # @note When making an API call, you may pass RetainRule
     #   data as a hash:
     #
     #       {
-    #         count: 1, # required
+    #         count: 1,
+    #         interval: 1,
+    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #       }
     #
     # @!attribute [rw] count
-    #   The number of snapshots to keep for each volume, up to a maximum of
-    #   1000.
+    #   The number of snapshots to retain for each volume, up to a maximum
+    #   of 1000.
     #   @return [Integer]
+    #
+    # @!attribute [rw] interval
+    #   The amount of time to retain each snapshot. The maximum is 100
+    #   years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_unit
+    #   The unit of time for time-based retention.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/RetainRule AWS API Documentation
     #
     class RetainRule < Struct.new(
-      :count)
+      :count,
+      :interval,
+      :interval_unit)
       include Aws::Structure
     end
 
@@ -641,10 +678,14 @@ module Aws::DLM
     #           times: ["Time"],
     #         },
     #         retain_rule: {
-    #           count: 1, # required
+    #           count: 1,
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #         },
     #         fast_restore_rule: {
-    #           count: 1, # required
+    #           count: 1,
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           availability_zones: ["AvailabilityZone"], # required
     #         },
     #       }
@@ -676,7 +717,7 @@ module Aws::DLM
     #   @return [Types::CreateRule]
     #
     # @!attribute [rw] retain_rule
-    #   The retain rule.
+    #   The retention rule.
     #   @return [Types::RetainRule]
     #
     # @!attribute [rw] fast_restore_rule
@@ -819,10 +860,14 @@ module Aws::DLM
     #                 times: ["Time"],
     #               },
     #               retain_rule: {
-    #                 count: 1, # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               },
     #               fast_restore_rule: {
-    #                 count: 1, # required
+    #                 count: 1,
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 availability_zones: ["AvailabilityZone"], # required
     #               },
     #             },

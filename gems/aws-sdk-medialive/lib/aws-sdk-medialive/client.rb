@@ -527,6 +527,10 @@ module Aws::MediaLive
     #             channel_id: "__stringMin1",
     #           },
     #         ],
+    #         multiplex_settings: {
+    #           multiplex_id: "__stringMin1",
+    #           program_name: "__stringMin1",
+    #         },
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -752,6 +756,10 @@ module Aws::MediaLive
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #       },
+    #       nielsen_configuration: {
+    #         distributor_id: "__string",
+    #         nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #       output_groups: [ # required
     #         {
     #           name: "__stringMax32",
@@ -881,6 +889,8 @@ module Aws::MediaLive
     #               timestamp_offset: "__string",
     #               timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #             },
+    #             multiplex_group_settings: {
+    #             },
     #             rtmp_group_settings: {
     #               authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -942,6 +952,7 @@ module Aws::MediaLive
     #                       fragment_time: 1.0,
     #                       klv: "NONE", # accepts NONE, PASSTHROUGH
     #                       klv_data_pids: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -986,6 +997,7 @@ module Aws::MediaLive
     #                         audio_frames_per_pes: 1,
     #                         audio_pids: "__string",
     #                         ecm_pid: "__string",
+    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         pat_interval: 1,
     #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                         pcr_period: 1,
@@ -1010,6 +1022,11 @@ module Aws::MediaLive
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   name_modifier: "__string",
+    #                 },
+    #                 multiplex_output_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
     #                 },
     #                 rtmp_output_settings: {
     #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -1061,6 +1078,7 @@ module Aws::MediaLive
     #                       fragment_time: 1.0,
     #                       klv: "NONE", # accepts NONE, PASSTHROUGH
     #                       klv_data_pids: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -1188,7 +1206,7 @@ module Aws::MediaLive
     #               par_numerator: 1,
     #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #               qvbr_quality_level: 1,
-    #               rate_control_mode: "CBR", # accepts CBR, QVBR
+    #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -1305,6 +1323,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].id #=> String
     #   resp.channel.destinations[0].media_package_settings #=> Array
     #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.program_name #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -1444,6 +1464,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -1580,6 +1602,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -1611,6 +1634,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -1628,6 +1652,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -1665,6 +1690,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -1753,7 +1779,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -1973,6 +1999,146 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Create a new multiplex.
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #
+    # @option params [required, Types::MultiplexSettings] :multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [required, String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #
+    # @return [Types::CreateMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMultiplexResponse#multiplex #multiplex} => Types::Multiplex
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_multiplex({
+    #     availability_zones: ["__string"], # required
+    #     multiplex_settings: { # required
+    #       maximum_video_buffer_delay_milliseconds: 1,
+    #       transport_stream_bitrate: 1, # required
+    #       transport_stream_id: 1, # required
+    #       transport_stream_reserved_bitrate: 1,
+    #     },
+    #     name: "__string", # required
+    #     request_id: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplex.arn #=> String
+    #   resp.multiplex.availability_zones #=> Array
+    #   resp.multiplex.availability_zones[0] #=> String
+    #   resp.multiplex.destinations #=> Array
+    #   resp.multiplex.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.multiplex.id #=> String
+    #   resp.multiplex.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.multiplex.name #=> String
+    #   resp.multiplex.pipelines_running_count #=> Integer
+    #   resp.multiplex.program_count #=> Integer
+    #   resp.multiplex.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.multiplex.tags #=> Hash
+    #   resp.multiplex.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplex AWS API Documentation
+    #
+    # @overload create_multiplex(params = {})
+    # @param [Hash] params ({})
+    def create_multiplex(params = {}, options = {})
+      req = build_request(:create_multiplex, params)
+      req.send_request(options)
+    end
+
+    # Create a new program in the multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [required, Types::MultiplexProgramSettings] :multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #
+    # @option params [required, String] :program_name
+    #
+    # @option params [required, String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateMultiplexProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMultiplexProgramResponse#multiplex_program #multiplex_program} => Types::MultiplexProgram
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_multiplex_program({
+    #     multiplex_id: "__string", # required
+    #     multiplex_program_settings: { # required
+    #       program_number: 1, # required
+    #       service_descriptor: {
+    #         provider_name: "__stringMax256", # required
+    #         service_name: "__stringMax256", # required
+    #       },
+    #       video_settings: {
+    #         constant_bitrate: 1,
+    #         statmux_settings: {
+    #           maximum_bitrate: 1,
+    #           minimum_bitrate: 1,
+    #         },
+    #       },
+    #     },
+    #     program_name: "__string", # required
+    #     request_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplex_program.channel_id #=> String
+    #   resp.multiplex_program.multiplex_program_settings.program_number #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.service_descriptor.provider_name #=> String
+    #   resp.multiplex_program.multiplex_program_settings.service_descriptor.service_name #=> String
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.constant_bitrate #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.statmux_settings.maximum_bitrate #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.statmux_settings.minimum_bitrate #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.audio_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.audio_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_sub_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.dvb_sub_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.etv_platform_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.etv_signal_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.klv_data_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.klv_data_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.pcr_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.pmt_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.private_metadata_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.scte_27_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.scte_27_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.scte_35_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.timed_metadata_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.video_pid #=> Integer
+    #   resp.multiplex_program.program_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexProgram AWS API Documentation
+    #
+    # @overload create_multiplex_program(params = {})
+    # @param [Hash] params ({})
+    def create_multiplex_program(params = {}, options = {})
+      req = build_request(:create_multiplex_program, params)
+      req.send_request(options)
+    end
+
     # Create tags for a resource
     #
     # @option params [required, String] :resource_arn
@@ -2035,6 +2201,8 @@ module Aws::MediaLive
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
     #   resp.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.destinations[0].multiplex_settings.program_name #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -2174,6 +2342,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -2310,6 +2480,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -2341,6 +2512,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -2358,6 +2530,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -2395,6 +2568,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -2483,7 +2657,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -2596,6 +2770,114 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Delete a multiplex. The multiplex must be idle.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @return [Types::DeleteMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMultiplexResponse#arn #arn} => String
+    #   * {Types::DeleteMultiplexResponse#availability_zones #availability_zones} => Array&lt;String&gt;
+    #   * {Types::DeleteMultiplexResponse#destinations #destinations} => Array&lt;Types::MultiplexOutputDestination&gt;
+    #   * {Types::DeleteMultiplexResponse#id #id} => String
+    #   * {Types::DeleteMultiplexResponse#multiplex_settings #multiplex_settings} => Types::MultiplexSettings
+    #   * {Types::DeleteMultiplexResponse#name #name} => String
+    #   * {Types::DeleteMultiplexResponse#pipelines_running_count #pipelines_running_count} => Integer
+    #   * {Types::DeleteMultiplexResponse#program_count #program_count} => Integer
+    #   * {Types::DeleteMultiplexResponse#state #state} => String
+    #   * {Types::DeleteMultiplexResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_multiplex({
+    #     multiplex_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.availability_zones #=> Array
+    #   resp.availability_zones[0] #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.id #=> String
+    #   resp.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.name #=> String
+    #   resp.pipelines_running_count #=> Integer
+    #   resp.program_count #=> Integer
+    #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplex AWS API Documentation
+    #
+    # @overload delete_multiplex(params = {})
+    # @param [Hash] params ({})
+    def delete_multiplex(params = {}, options = {})
+      req = build_request(:delete_multiplex, params)
+      req.send_request(options)
+    end
+
+    # Delete a program from a multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [required, String] :program_name
+    #
+    # @return [Types::DeleteMultiplexProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMultiplexProgramResponse#channel_id #channel_id} => String
+    #   * {Types::DeleteMultiplexProgramResponse#multiplex_program_settings #multiplex_program_settings} => Types::MultiplexProgramSettings
+    #   * {Types::DeleteMultiplexProgramResponse#packet_identifiers_map #packet_identifiers_map} => Types::MultiplexProgramPacketIdentifiersMap
+    #   * {Types::DeleteMultiplexProgramResponse#program_name #program_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_multiplex_program({
+    #     multiplex_id: "__string", # required
+    #     program_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_id #=> String
+    #   resp.multiplex_program_settings.program_number #=> Integer
+    #   resp.multiplex_program_settings.service_descriptor.provider_name #=> String
+    #   resp.multiplex_program_settings.service_descriptor.service_name #=> String
+    #   resp.multiplex_program_settings.video_settings.constant_bitrate #=> Integer
+    #   resp.multiplex_program_settings.video_settings.statmux_settings.maximum_bitrate #=> Integer
+    #   resp.multiplex_program_settings.video_settings.statmux_settings.minimum_bitrate #=> Integer
+    #   resp.packet_identifiers_map.audio_pids #=> Array
+    #   resp.packet_identifiers_map.audio_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.dvb_sub_pids #=> Array
+    #   resp.packet_identifiers_map.dvb_sub_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.dvb_teletext_pid #=> Integer
+    #   resp.packet_identifiers_map.etv_platform_pid #=> Integer
+    #   resp.packet_identifiers_map.etv_signal_pid #=> Integer
+    #   resp.packet_identifiers_map.klv_data_pids #=> Array
+    #   resp.packet_identifiers_map.klv_data_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.pcr_pid #=> Integer
+    #   resp.packet_identifiers_map.pmt_pid #=> Integer
+    #   resp.packet_identifiers_map.private_metadata_pid #=> Integer
+    #   resp.packet_identifiers_map.scte_27_pids #=> Array
+    #   resp.packet_identifiers_map.scte_27_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.scte_35_pid #=> Integer
+    #   resp.packet_identifiers_map.timed_metadata_pid #=> Integer
+    #   resp.packet_identifiers_map.video_pid #=> Integer
+    #   resp.program_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplexProgram AWS API Documentation
+    #
+    # @overload delete_multiplex_program(params = {})
+    # @param [Hash] params ({})
+    def delete_multiplex_program(params = {}, options = {})
+      req = build_request(:delete_multiplex_program, params)
+      req.send_request(options)
+    end
+
     # Delete an expired reservation.
     #
     # @option params [required, String] :reservation_id
@@ -2646,8 +2928,8 @@ module Aws::MediaLive
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
@@ -2746,6 +3028,8 @@ module Aws::MediaLive
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
     #   resp.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.destinations[0].multiplex_settings.program_name #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -2885,6 +3169,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -3021,6 +3307,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -3052,6 +3339,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -3069,6 +3357,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -3106,6 +3395,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -3194,7 +3484,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -3370,6 +3660,114 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Gets details about a multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @return [Types::DescribeMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMultiplexResponse#arn #arn} => String
+    #   * {Types::DescribeMultiplexResponse#availability_zones #availability_zones} => Array&lt;String&gt;
+    #   * {Types::DescribeMultiplexResponse#destinations #destinations} => Array&lt;Types::MultiplexOutputDestination&gt;
+    #   * {Types::DescribeMultiplexResponse#id #id} => String
+    #   * {Types::DescribeMultiplexResponse#multiplex_settings #multiplex_settings} => Types::MultiplexSettings
+    #   * {Types::DescribeMultiplexResponse#name #name} => String
+    #   * {Types::DescribeMultiplexResponse#pipelines_running_count #pipelines_running_count} => Integer
+    #   * {Types::DescribeMultiplexResponse#program_count #program_count} => Integer
+    #   * {Types::DescribeMultiplexResponse#state #state} => String
+    #   * {Types::DescribeMultiplexResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_multiplex({
+    #     multiplex_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.availability_zones #=> Array
+    #   resp.availability_zones[0] #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.id #=> String
+    #   resp.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.name #=> String
+    #   resp.pipelines_running_count #=> Integer
+    #   resp.program_count #=> Integer
+    #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplex AWS API Documentation
+    #
+    # @overload describe_multiplex(params = {})
+    # @param [Hash] params ({})
+    def describe_multiplex(params = {}, options = {})
+      req = build_request(:describe_multiplex, params)
+      req.send_request(options)
+    end
+
+    # Get the details for a program in a multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [required, String] :program_name
+    #
+    # @return [Types::DescribeMultiplexProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMultiplexProgramResponse#channel_id #channel_id} => String
+    #   * {Types::DescribeMultiplexProgramResponse#multiplex_program_settings #multiplex_program_settings} => Types::MultiplexProgramSettings
+    #   * {Types::DescribeMultiplexProgramResponse#packet_identifiers_map #packet_identifiers_map} => Types::MultiplexProgramPacketIdentifiersMap
+    #   * {Types::DescribeMultiplexProgramResponse#program_name #program_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_multiplex_program({
+    #     multiplex_id: "__string", # required
+    #     program_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_id #=> String
+    #   resp.multiplex_program_settings.program_number #=> Integer
+    #   resp.multiplex_program_settings.service_descriptor.provider_name #=> String
+    #   resp.multiplex_program_settings.service_descriptor.service_name #=> String
+    #   resp.multiplex_program_settings.video_settings.constant_bitrate #=> Integer
+    #   resp.multiplex_program_settings.video_settings.statmux_settings.maximum_bitrate #=> Integer
+    #   resp.multiplex_program_settings.video_settings.statmux_settings.minimum_bitrate #=> Integer
+    #   resp.packet_identifiers_map.audio_pids #=> Array
+    #   resp.packet_identifiers_map.audio_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.dvb_sub_pids #=> Array
+    #   resp.packet_identifiers_map.dvb_sub_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.dvb_teletext_pid #=> Integer
+    #   resp.packet_identifiers_map.etv_platform_pid #=> Integer
+    #   resp.packet_identifiers_map.etv_signal_pid #=> Integer
+    #   resp.packet_identifiers_map.klv_data_pids #=> Array
+    #   resp.packet_identifiers_map.klv_data_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.pcr_pid #=> Integer
+    #   resp.packet_identifiers_map.pmt_pid #=> Integer
+    #   resp.packet_identifiers_map.private_metadata_pid #=> Integer
+    #   resp.packet_identifiers_map.scte_27_pids #=> Array
+    #   resp.packet_identifiers_map.scte_27_pids[0] #=> Integer
+    #   resp.packet_identifiers_map.scte_35_pid #=> Integer
+    #   resp.packet_identifiers_map.timed_metadata_pid #=> Integer
+    #   resp.packet_identifiers_map.video_pid #=> Integer
+    #   resp.program_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplexProgram AWS API Documentation
+    #
+    # @overload describe_multiplex_program(params = {})
+    # @param [Hash] params ({})
+    def describe_multiplex_program(params = {}, options = {})
+      req = build_request(:describe_multiplex_program, params)
+      req.send_request(options)
+    end
+
     # Get details for an offering.
     #
     # @option params [required, String] :offering_id
@@ -3409,8 +3807,8 @@ module Aws::MediaLive
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.usage_price #=> Float
@@ -3474,8 +3872,8 @@ module Aws::MediaLive
     #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.start #=> String
@@ -3601,6 +3999,8 @@ module Aws::MediaLive
     #   resp.channels[0].destinations[0].id #=> String
     #   resp.channels[0].destinations[0].media_package_settings #=> Array
     #   resp.channels[0].destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.channels[0].destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.channels[0].destinations[0].multiplex_settings.program_name #=> String
     #   resp.channels[0].destinations[0].settings #=> Array
     #   resp.channels[0].destinations[0].settings[0].password_param #=> String
     #   resp.channels[0].destinations[0].settings[0].stream_name #=> String
@@ -3763,6 +4163,86 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # List the programs that currently exist for a specific multiplex.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListMultiplexProgramsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMultiplexProgramsResponse#multiplex_programs #multiplex_programs} => Array&lt;Types::MultiplexProgramSummary&gt;
+    #   * {Types::ListMultiplexProgramsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multiplex_programs({
+    #     max_results: 1,
+    #     multiplex_id: "__string", # required
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplex_programs #=> Array
+    #   resp.multiplex_programs[0].channel_id #=> String
+    #   resp.multiplex_programs[0].program_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexPrograms AWS API Documentation
+    #
+    # @overload list_multiplex_programs(params = {})
+    # @param [Hash] params ({})
+    def list_multiplex_programs(params = {}, options = {})
+      req = build_request(:list_multiplex_programs, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a list of the existing multiplexes.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListMultiplexesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMultiplexesResponse#multiplexes #multiplexes} => Array&lt;Types::MultiplexSummary&gt;
+    #   * {Types::ListMultiplexesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_multiplexes({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplexes #=> Array
+    #   resp.multiplexes[0].arn #=> String
+    #   resp.multiplexes[0].availability_zones #=> Array
+    #   resp.multiplexes[0].availability_zones[0] #=> String
+    #   resp.multiplexes[0].id #=> String
+    #   resp.multiplexes[0].multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplexes[0].name #=> String
+    #   resp.multiplexes[0].pipelines_running_count #=> Integer
+    #   resp.multiplexes[0].program_count #=> Integer
+    #   resp.multiplexes[0].state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.multiplexes[0].tags #=> Hash
+    #   resp.multiplexes[0].tags["__string"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexes AWS API Documentation
+    #
+    # @overload list_multiplexes(params = {})
+    # @param [Hash] params ({})
+    def list_multiplexes(params = {}, options = {})
+      req = build_request(:list_multiplexes, params)
+      req.send_request(options)
+    end
+
     # List offerings available for purchase.
     #
     # @option params [String] :channel_class
@@ -3770,6 +4250,8 @@ module Aws::MediaLive
     # @option params [String] :channel_configuration
     #
     # @option params [String] :codec
+    #
+    # @option params [String] :duration
     #
     # @option params [Integer] :max_results
     #
@@ -3798,6 +4280,7 @@ module Aws::MediaLive
     #     channel_class: "__string",
     #     channel_configuration: "__string",
     #     codec: "__string",
+    #     duration: "__string",
     #     max_results: 1,
     #     maximum_bitrate: "__string",
     #     maximum_framerate: "__string",
@@ -3825,8 +4308,8 @@ module Aws::MediaLive
     #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.offerings[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.offerings[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.offerings[0].usage_price #=> Float
@@ -3903,8 +4386,8 @@ module Aws::MediaLive
     #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.reservations[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.reservations[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservations[0].start #=> String
@@ -4002,8 +4485,8 @@ module Aws::MediaLive
     #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservation.start #=> String
@@ -4057,6 +4540,8 @@ module Aws::MediaLive
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
     #   resp.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.destinations[0].multiplex_settings.program_name #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -4196,6 +4681,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -4332,6 +4819,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -4363,6 +4851,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -4380,6 +4869,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -4417,6 +4907,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -4505,7 +4996,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -4576,6 +5067,58 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Start (run) the multiplex. Starting the multiplex does not start the
+    # channels. You must explicitly start each channel.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @return [Types::StartMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMultiplexResponse#arn #arn} => String
+    #   * {Types::StartMultiplexResponse#availability_zones #availability_zones} => Array&lt;String&gt;
+    #   * {Types::StartMultiplexResponse#destinations #destinations} => Array&lt;Types::MultiplexOutputDestination&gt;
+    #   * {Types::StartMultiplexResponse#id #id} => String
+    #   * {Types::StartMultiplexResponse#multiplex_settings #multiplex_settings} => Types::MultiplexSettings
+    #   * {Types::StartMultiplexResponse#name #name} => String
+    #   * {Types::StartMultiplexResponse#pipelines_running_count #pipelines_running_count} => Integer
+    #   * {Types::StartMultiplexResponse#program_count #program_count} => Integer
+    #   * {Types::StartMultiplexResponse#state #state} => String
+    #   * {Types::StartMultiplexResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_multiplex({
+    #     multiplex_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.availability_zones #=> Array
+    #   resp.availability_zones[0] #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.id #=> String
+    #   resp.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.name #=> String
+    #   resp.pipelines_running_count #=> Integer
+    #   resp.program_count #=> Integer
+    #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMultiplex AWS API Documentation
+    #
+    # @overload start_multiplex(params = {})
+    # @param [Hash] params ({})
+    def start_multiplex(params = {}, options = {})
+      req = build_request(:start_multiplex, params)
+      req.send_request(options)
+    end
+
     # Stops a running channel
     #
     # @option params [required, String] :channel_id
@@ -4612,6 +5155,8 @@ module Aws::MediaLive
     #   resp.destinations[0].id #=> String
     #   resp.destinations[0].media_package_settings #=> Array
     #   resp.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.destinations[0].multiplex_settings.program_name #=> String
     #   resp.destinations[0].settings #=> Array
     #   resp.destinations[0].settings[0].password_param #=> String
     #   resp.destinations[0].settings[0].stream_name #=> String
@@ -4751,6 +5296,8 @@ module Aws::MediaLive
     #   resp.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups #=> Array
     #   resp.encoder_settings.output_groups[0].name #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -4887,6 +5434,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -4918,6 +5466,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -4935,6 +5484,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -4972,6 +5522,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -5060,7 +5611,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -5131,6 +5682,58 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Stops a running multiplex. If the multiplex isn't running, this
+    # action has no effect.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @return [Types::StopMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopMultiplexResponse#arn #arn} => String
+    #   * {Types::StopMultiplexResponse#availability_zones #availability_zones} => Array&lt;String&gt;
+    #   * {Types::StopMultiplexResponse#destinations #destinations} => Array&lt;Types::MultiplexOutputDestination&gt;
+    #   * {Types::StopMultiplexResponse#id #id} => String
+    #   * {Types::StopMultiplexResponse#multiplex_settings #multiplex_settings} => Types::MultiplexSettings
+    #   * {Types::StopMultiplexResponse#name #name} => String
+    #   * {Types::StopMultiplexResponse#pipelines_running_count #pipelines_running_count} => Integer
+    #   * {Types::StopMultiplexResponse#program_count #program_count} => Integer
+    #   * {Types::StopMultiplexResponse#state #state} => String
+    #   * {Types::StopMultiplexResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_multiplex({
+    #     multiplex_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.availability_zones #=> Array
+    #   resp.availability_zones[0] #=> String
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.id #=> String
+    #   resp.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.name #=> String
+    #   resp.pipelines_running_count #=> Integer
+    #   resp.program_count #=> Integer
+    #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopMultiplex AWS API Documentation
+    #
+    # @overload stop_multiplex(params = {})
+    # @param [Hash] params ({})
+    def stop_multiplex(params = {}, options = {})
+      req = build_request(:stop_multiplex, params)
+      req.send_request(options)
+    end
+
     # Updates a channel.
     #
     # @option params [required, String] :channel_id
@@ -5167,6 +5770,10 @@ module Aws::MediaLive
     #             channel_id: "__stringMin1",
     #           },
     #         ],
+    #         multiplex_settings: {
+    #           multiplex_id: "__stringMin1",
+    #           program_name: "__stringMin1",
+    #         },
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -5392,6 +5999,10 @@ module Aws::MediaLive
     #         output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #         support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #       },
+    #       nielsen_configuration: {
+    #         distributor_id: "__string",
+    #         nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #       },
     #       output_groups: [ # required
     #         {
     #           name: "__stringMax32",
@@ -5521,6 +6132,8 @@ module Aws::MediaLive
     #               timestamp_offset: "__string",
     #               timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #             },
+    #             multiplex_group_settings: {
+    #             },
     #             rtmp_group_settings: {
     #               authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #               cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -5582,6 +6195,7 @@ module Aws::MediaLive
     #                       fragment_time: 1.0,
     #                       klv: "NONE", # accepts NONE, PASSTHROUGH
     #                       klv_data_pids: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -5626,6 +6240,7 @@ module Aws::MediaLive
     #                         audio_frames_per_pes: 1,
     #                         audio_pids: "__string",
     #                         ecm_pid: "__string",
+    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         pat_interval: 1,
     #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                         pcr_period: 1,
@@ -5650,6 +6265,11 @@ module Aws::MediaLive
     #                 ms_smooth_output_settings: {
     #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   name_modifier: "__string",
+    #                 },
+    #                 multiplex_output_settings: {
+    #                   destination: { # required
+    #                     destination_ref_id: "__string",
+    #                   },
     #                 },
     #                 rtmp_output_settings: {
     #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -5701,6 +6321,7 @@ module Aws::MediaLive
     #                       fragment_time: 1.0,
     #                       klv: "NONE", # accepts NONE, PASSTHROUGH
     #                       klv_data_pids: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -5828,7 +6449,7 @@ module Aws::MediaLive
     #               par_numerator: 1,
     #               profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #               qvbr_quality_level: 1,
-    #               rate_control_mode: "CBR", # accepts CBR, QVBR
+    #               rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #               scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #               scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #               slices: 1,
@@ -5940,6 +6561,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].id #=> String
     #   resp.channel.destinations[0].media_package_settings #=> Array
     #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.program_name #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -6079,6 +6702,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -6215,6 +6840,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -6246,6 +6872,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -6263,6 +6890,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -6300,6 +6928,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -6388,7 +7017,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -6486,6 +7115,10 @@ module Aws::MediaLive
     #             channel_id: "__stringMin1",
     #           },
     #         ],
+    #         multiplex_settings: {
+    #           multiplex_id: "__stringMin1",
+    #           program_name: "__stringMin1",
+    #         },
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -6506,6 +7139,8 @@ module Aws::MediaLive
     #   resp.channel.destinations[0].id #=> String
     #   resp.channel.destinations[0].media_package_settings #=> Array
     #   resp.channel.destinations[0].media_package_settings[0].channel_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.multiplex_id #=> String
+    #   resp.channel.destinations[0].multiplex_settings.program_name #=> String
     #   resp.channel.destinations[0].settings #=> Array
     #   resp.channel.destinations[0].settings[0].password_param #=> String
     #   resp.channel.destinations[0].settings[0].stream_name #=> String
@@ -6645,6 +7280,8 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.global_configuration.output_locking_mode #=> String, one of "EPOCH_LOCKING", "PIPELINE_LOCKING"
     #   resp.channel.encoder_settings.global_configuration.output_timing_source #=> String, one of "INPUT_CLOCK", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.global_configuration.support_low_framerate_inputs #=> String, one of "DISABLED", "ENABLED"
+    #   resp.channel.encoder_settings.nielsen_configuration.distributor_id #=> String
+    #   resp.channel.encoder_settings.nielsen_configuration.nielsen_pcm_to_id_3_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups #=> Array
     #   resp.channel.encoder_settings.output_groups[0].name #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.archive_group_settings.destination.destination_ref_id #=> String
@@ -6781,6 +7418,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -6812,6 +7450,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.ecm_pid #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.pcr_period #=> Integer
@@ -6829,6 +7468,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.segment_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.ms_smooth_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.multiplex_output_settings.destination.destination_ref_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.certificate_mode #=> String, one of "SELF_SIGNED", "VERIFY_AUTHENTICITY"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.connection_retry_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.rtmp_output_settings.destination.destination_ref_id #=> String
@@ -6866,6 +7506,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.klv_data_pids #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.nielsen_id_3_behavior #=> String, one of "NO_PASSTHROUGH", "PASSTHROUGH"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.udp_output_settings.container_settings.m2ts_settings.pcr_control #=> String, one of "CONFIGURED_PCR_PERIOD", "PCR_EVERY_PES_PACKET"
@@ -6954,7 +7595,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.par_numerator #=> Integer
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.profile #=> String, one of "MAIN", "MAIN_10BIT"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.qvbr_quality_level #=> Integer
-    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "QVBR"
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.rate_control_mode #=> String, one of "CBR", "MULTIPLEX", "QVBR"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scan_type #=> String, one of "PROGRESSIVE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h265_settings.slices #=> Integer
@@ -7156,6 +7797,131 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Updates a multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [Types::MultiplexSettings] :multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::UpdateMultiplexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMultiplexResponse#multiplex #multiplex} => Types::Multiplex
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_multiplex({
+    #     multiplex_id: "__string", # required
+    #     multiplex_settings: {
+    #       maximum_video_buffer_delay_milliseconds: 1,
+    #       transport_stream_bitrate: 1, # required
+    #       transport_stream_id: 1, # required
+    #       transport_stream_reserved_bitrate: 1,
+    #     },
+    #     name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplex.arn #=> String
+    #   resp.multiplex.availability_zones #=> Array
+    #   resp.multiplex.availability_zones[0] #=> String
+    #   resp.multiplex.destinations #=> Array
+    #   resp.multiplex.destinations[0].media_connect_settings.entitlement_arn #=> String
+    #   resp.multiplex.id #=> String
+    #   resp.multiplex.multiplex_settings.maximum_video_buffer_delay_milliseconds #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_bitrate #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_id #=> Integer
+    #   resp.multiplex.multiplex_settings.transport_stream_reserved_bitrate #=> Integer
+    #   resp.multiplex.name #=> String
+    #   resp.multiplex.pipelines_running_count #=> Integer
+    #   resp.multiplex.program_count #=> Integer
+    #   resp.multiplex.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED"
+    #   resp.multiplex.tags #=> Hash
+    #   resp.multiplex.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplex AWS API Documentation
+    #
+    # @overload update_multiplex(params = {})
+    # @param [Hash] params ({})
+    def update_multiplex(params = {}, options = {})
+      req = build_request(:update_multiplex, params)
+      req.send_request(options)
+    end
+
+    # Update a program in a multiplex.
+    #
+    # @option params [required, String] :multiplex_id
+    #
+    # @option params [Types::MultiplexProgramSettings] :multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #
+    # @option params [required, String] :program_name
+    #
+    # @return [Types::UpdateMultiplexProgramResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMultiplexProgramResponse#multiplex_program #multiplex_program} => Types::MultiplexProgram
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_multiplex_program({
+    #     multiplex_id: "__string", # required
+    #     multiplex_program_settings: {
+    #       program_number: 1, # required
+    #       service_descriptor: {
+    #         provider_name: "__stringMax256", # required
+    #         service_name: "__stringMax256", # required
+    #       },
+    #       video_settings: {
+    #         constant_bitrate: 1,
+    #         statmux_settings: {
+    #           maximum_bitrate: 1,
+    #           minimum_bitrate: 1,
+    #         },
+    #       },
+    #     },
+    #     program_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.multiplex_program.channel_id #=> String
+    #   resp.multiplex_program.multiplex_program_settings.program_number #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.service_descriptor.provider_name #=> String
+    #   resp.multiplex_program.multiplex_program_settings.service_descriptor.service_name #=> String
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.constant_bitrate #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.statmux_settings.maximum_bitrate #=> Integer
+    #   resp.multiplex_program.multiplex_program_settings.video_settings.statmux_settings.minimum_bitrate #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.audio_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.audio_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_sub_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.dvb_sub_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.dvb_teletext_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.etv_platform_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.etv_signal_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.klv_data_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.klv_data_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.pcr_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.pmt_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.private_metadata_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.scte_27_pids #=> Array
+    #   resp.multiplex_program.packet_identifiers_map.scte_27_pids[0] #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.scte_35_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.timed_metadata_pid #=> Integer
+    #   resp.multiplex_program.packet_identifiers_map.video_pid #=> Integer
+    #   resp.multiplex_program.program_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexProgram AWS API Documentation
+    #
+    # @overload update_multiplex_program(params = {})
+    # @param [Hash] params ({})
+    def update_multiplex_program(params = {}, options = {})
+      req = build_request(:update_multiplex_program, params)
+      req.send_request(options)
+    end
+
     # Update reservation.
     #
     # @option params [String] :name
@@ -7192,8 +7958,8 @@ module Aws::MediaLive
     #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
     #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
-    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
-    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "FHD", "UHD"
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "MULTIPLEX", "CHANNEL"
     #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
     #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
     #   resp.reservation.start #=> String
@@ -7224,7 +7990,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7290,12 +8056,16 @@ module Aws::MediaLive
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params              | :delay   | :max_attempts |
-    # | --------------- | ------------------- | -------- | ------------- |
-    # | channel_created | {#describe_channel} | 3        | 5             |
-    # | channel_deleted | {#describe_channel} | 5        | 20            |
-    # | channel_running | {#describe_channel} | 5        | 120           |
-    # | channel_stopped | {#describe_channel} | 5        | 28            |
+    # | waiter_name       | params                | :delay   | :max_attempts |
+    # | ----------------- | --------------------- | -------- | ------------- |
+    # | channel_created   | {#describe_channel}   | 3        | 5             |
+    # | channel_deleted   | {#describe_channel}   | 5        | 20            |
+    # | channel_running   | {#describe_channel}   | 5        | 120           |
+    # | channel_stopped   | {#describe_channel}   | 5        | 28            |
+    # | multiplex_created | {#describe_multiplex} | 3        | 5             |
+    # | multiplex_deleted | {#describe_multiplex} | 5        | 20            |
+    # | multiplex_running | {#describe_multiplex} | 5        | 120           |
+    # | multiplex_stopped | {#describe_multiplex} | 5        | 28            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -7349,7 +8119,11 @@ module Aws::MediaLive
         channel_created: Waiters::ChannelCreated,
         channel_deleted: Waiters::ChannelDeleted,
         channel_running: Waiters::ChannelRunning,
-        channel_stopped: Waiters::ChannelStopped
+        channel_stopped: Waiters::ChannelStopped,
+        multiplex_created: Waiters::MultiplexCreated,
+        multiplex_deleted: Waiters::MultiplexDeleted,
+        multiplex_running: Waiters::MultiplexRunning,
+        multiplex_stopped: Waiters::MultiplexStopped
       }
     end
 

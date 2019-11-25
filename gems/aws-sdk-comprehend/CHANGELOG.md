@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-11-25)
+------------------
+
+* Feature - Amazon Comprehend now supports real-time analysis with Custom Classification
+
 1.27.0 (2019-11-07)
 ------------------
 

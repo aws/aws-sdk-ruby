@@ -210,6 +210,7 @@ module Aws::MediaLive
     #           fragment_time: 1.0,
     #           klv: "NONE", # accepts NONE, PASSTHROUGH
     #           klv_data_pids: "__string",
+    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           null_packet_bitrate: 1.0,
     #           pat_interval: 1,
     #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -318,6 +319,7 @@ module Aws::MediaLive
     #             fragment_time: 1.0,
     #             klv: "NONE", # accepts NONE, PASSTHROUGH
     #             klv_data_pids: "__string",
+    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             null_packet_bitrate: 1.0,
     #             pat_interval: 1,
     #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -1546,8 +1548,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Output groups for this Live Event. Output groups contain information
-    # about where streams should be distributed.
+    # Caption Description
     #
     # @note When making an API call, you may pass CaptionDescription
     #   data as a hash:
@@ -2241,6 +2242,10 @@ module Aws::MediaLive
     #                 channel_id: "__stringMin1",
     #               },
     #             ],
+    #             multiplex_settings: {
+    #               multiplex_id: "__stringMin1",
+    #               program_name: "__stringMin1",
+    #             },
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -2466,6 +2471,10 @@ module Aws::MediaLive
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
+    #           nielsen_configuration: {
+    #             distributor_id: "__string",
+    #             nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           output_groups: [ # required
     #             {
     #               name: "__stringMax32",
@@ -2595,6 +2604,8 @@ module Aws::MediaLive
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #                 },
+    #                 multiplex_group_settings: {
+    #                 },
     #                 rtmp_group_settings: {
     #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -2656,6 +2667,7 @@ module Aws::MediaLive
     #                           fragment_time: 1.0,
     #                           klv: "NONE", # accepts NONE, PASSTHROUGH
     #                           klv_data_pids: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           null_packet_bitrate: 1.0,
     #                           pat_interval: 1,
     #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -2700,6 +2712,7 @@ module Aws::MediaLive
     #                             audio_frames_per_pes: 1,
     #                             audio_pids: "__string",
     #                             ecm_pid: "__string",
+    #                             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                             pat_interval: 1,
     #                             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                             pcr_period: 1,
@@ -2724,6 +2737,11 @@ module Aws::MediaLive
     #                     ms_smooth_output_settings: {
     #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       name_modifier: "__string",
+    #                     },
+    #                     multiplex_output_settings: {
+    #                       destination: { # required
+    #                         destination_ref_id: "__string",
+    #                       },
     #                     },
     #                     rtmp_output_settings: {
     #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -2775,6 +2793,7 @@ module Aws::MediaLive
     #                           fragment_time: 1.0,
     #                           klv: "NONE", # accepts NONE, PASSTHROUGH
     #                           klv_data_pids: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           null_packet_bitrate: 1.0,
     #                           pat_interval: 1,
     #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -2902,7 +2921,7 @@ module Aws::MediaLive
     #                   par_numerator: 1,
     #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -3312,6 +3331,200 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] availability_zones
+    #   A list of availability zones for the multiplex. You must specify
+    #   exactly two.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Configuration for a multiplex event.
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   Name of multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplex AWS API Documentation
+    #
+    class CreateMultiplex < Struct.new(
+      :availability_zones,
+      :multiplex_settings,
+      :name,
+      :request_id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program_settings
+    #   The settings for this multiplex program.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] program_name
+    #   Name of multiplex program.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexProgram AWS API Documentation
+    #
+    class CreateMultiplexProgram < Struct.new(
+      :multiplex_program_settings,
+      :program_name,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMultiplexProgramRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #         multiplex_program_settings: { # required
+    #           program_number: 1, # required
+    #           service_descriptor: {
+    #             provider_name: "__stringMax256", # required
+    #             service_name: "__stringMax256", # required
+    #           },
+    #           video_settings: {
+    #             constant_bitrate: 1,
+    #             statmux_settings: {
+    #               maximum_bitrate: 1,
+    #               minimum_bitrate: 1,
+    #             },
+    #           },
+    #         },
+    #         program_name: "__string", # required
+    #         request_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexProgramRequest AWS API Documentation
+    #
+    class CreateMultiplexProgramRequest < Struct.new(
+      :multiplex_id,
+      :multiplex_program_settings,
+      :program_name,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program
+    #   The multiplex program object.
+    #   @return [Types::MultiplexProgram]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexProgramResponse AWS API Documentation
+    #
+    class CreateMultiplexProgramResponse < Struct.new(
+      :multiplex_program)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program
+    #   The newly created multiplex program.
+    #   @return [Types::MultiplexProgram]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexProgramResultModel AWS API Documentation
+    #
+    class CreateMultiplexProgramResultModel < Struct.new(
+      :multiplex_program)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: ["__string"], # required
+    #         multiplex_settings: { # required
+    #           maximum_video_buffer_delay_milliseconds: 1,
+    #           transport_stream_bitrate: 1, # required
+    #           transport_stream_id: 1, # required
+    #           transport_stream_reserved_bitrate: 1,
+    #         },
+    #         name: "__string", # required
+    #         request_id: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexRequest AWS API Documentation
+    #
+    class CreateMultiplexRequest < Struct.new(
+      :availability_zones,
+      :multiplex_settings,
+      :name,
+      :request_id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex
+    #   The multiplex object.
+    #   @return [Types::Multiplex]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexResponse AWS API Documentation
+    #
+    class CreateMultiplexResponse < Struct.new(
+      :multiplex)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex
+    #   The newly created multiplex.
+    #   @return [Types::Multiplex]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateMultiplexResultModel AWS API Documentation
+    #
+    class CreateMultiplexResultModel < Struct.new(
+      :multiplex)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -3464,6 +3677,117 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteInputSecurityGroupResponse AWS API Documentation
     #
     class DeleteInputSecurityGroupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteMultiplexProgramRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #         program_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplexProgramRequest AWS API Documentation
+    #
+    class DeleteMultiplexProgramRequest < Struct.new(
+      :multiplex_id,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] packet_identifiers_map
+    #   Packet identifiers map for a given Multiplex program.
+    #   @return [Types::MultiplexProgramPacketIdentifiersMap]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplexProgramResponse AWS API Documentation
+    #
+    class DeleteMultiplexProgramResponse < Struct.new(
+      :channel_id,
+      :multiplex_program_settings,
+      :packet_identifiers_map,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplexRequest AWS API Documentation
+    #
+    class DeleteMultiplexRequest < Struct.new(
+      :multiplex_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::MultiplexOutputDestination>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteMultiplexResponse AWS API Documentation
+    #
+    class DeleteMultiplexResponse < Struct.new(
+      :arn,
+      :availability_zones,
+      :destinations,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteReservationRequest
     #   data as a hash:
@@ -3824,6 +4148,117 @@ module Aws::MediaLive
       :state,
       :tags,
       :whitelist_rules)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMultiplexProgramRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #         program_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplexProgramRequest AWS API Documentation
+    #
+    class DescribeMultiplexProgramRequest < Struct.new(
+      :multiplex_id,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] packet_identifiers_map
+    #   Packet identifiers map for a given Multiplex program.
+    #   @return [Types::MultiplexProgramPacketIdentifiersMap]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplexProgramResponse AWS API Documentation
+    #
+    class DescribeMultiplexProgramResponse < Struct.new(
+      :channel_id,
+      :multiplex_program_settings,
+      :packet_identifiers_map,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplexRequest AWS API Documentation
+    #
+    class DescribeMultiplexRequest < Struct.new(
+      :multiplex_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::MultiplexOutputDestination>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeMultiplexResponse AWS API Documentation
+    #
+    class DescribeMultiplexResponse < Struct.new(
+      :arn,
+      :availability_zones,
+      :destinations,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -4777,6 +5212,10 @@ module Aws::MediaLive
     #           output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #           support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #         },
+    #         nielsen_configuration: {
+    #           distributor_id: "__string",
+    #           nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
     #         output_groups: [ # required
     #           {
     #             name: "__stringMax32",
@@ -4906,6 +5345,8 @@ module Aws::MediaLive
     #                 timestamp_offset: "__string",
     #                 timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #               },
+    #               multiplex_group_settings: {
+    #               },
     #               rtmp_group_settings: {
     #                 authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -4967,6 +5408,7 @@ module Aws::MediaLive
     #                         fragment_time: 1.0,
     #                         klv: "NONE", # accepts NONE, PASSTHROUGH
     #                         klv_data_pids: "__string",
+    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         null_packet_bitrate: 1.0,
     #                         pat_interval: 1,
     #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -5011,6 +5453,7 @@ module Aws::MediaLive
     #                           audio_frames_per_pes: 1,
     #                           audio_pids: "__string",
     #                           ecm_pid: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           pat_interval: 1,
     #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                           pcr_period: 1,
@@ -5035,6 +5478,11 @@ module Aws::MediaLive
     #                   ms_smooth_output_settings: {
     #                     h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                     name_modifier: "__string",
+    #                   },
+    #                   multiplex_output_settings: {
+    #                     destination: { # required
+    #                       destination_ref_id: "__string",
+    #                     },
     #                   },
     #                   rtmp_output_settings: {
     #                     certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -5086,6 +5534,7 @@ module Aws::MediaLive
     #                         fragment_time: 1.0,
     #                         klv: "NONE", # accepts NONE, PASSTHROUGH
     #                         klv_data_pids: "__string",
+    #                         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                         null_packet_bitrate: 1.0,
     #                         pat_interval: 1,
     #                         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -5213,7 +5662,7 @@ module Aws::MediaLive
     #                 par_numerator: 1,
     #                 profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                 qvbr_quality_level: 1,
-    #                 rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                 rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #                 scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #                 scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                 slices: 1,
@@ -5254,6 +5703,10 @@ module Aws::MediaLive
     #   Configuration settings that apply to the event as a whole.
     #   @return [Types::GlobalConfiguration]
     #
+    # @!attribute [rw] nielsen_configuration
+    #   Nielsen configuration settings.
+    #   @return [Types::NielsenConfiguration]
+    #
     # @!attribute [rw] output_groups
     #   @return [Array<Types::OutputGroup>]
     #
@@ -5274,6 +5727,7 @@ module Aws::MediaLive
       :blackout_slate,
       :caption_descriptions,
       :global_configuration,
+      :nielsen_configuration,
       :output_groups,
       :timecode_config,
       :video_descriptions)
@@ -5442,8 +5896,9 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] capture_interval
-    #   The frequency, in seconds, for capturing frames for inclusion in the
-    #   output. For example, "10" means capture a frame every 10 seconds.
+    #   The frequency at which to capture frames for inclusion in the
+    #   output. May be specified in either seconds or milliseconds, as
+    #   specified by captureIntervalUnits.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings AWS API Documentation
@@ -5713,7 +6168,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] gop_size
     #   GOP size (keyframe interval) in units of either frames or seconds
-    #   per gopSizeUnits. Must be greater than zero.
+    #   per gopSizeUnits. If gopSizeUnits is frames, gopSize must be an
+    #   integer and must be greater than or equal to 1. If gopSizeUnits is
+    #   seconds, gopSize must be greater than 0, but need not be an integer.
     #   @return [Float]
     #
     # @!attribute [rw] gop_size_units
@@ -5738,14 +6195,14 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
-    #   Only meaningful if sceneChangeDetect is set to enabled. Enforces
-    #   separation between repeated (cadence) I-frames and I-frames inserted
-    #   by Scene Change Detection. If a scene change I-frame is within
-    #   I-interval frames of a cadence I-frame, the GOP is shrunk and/or
-    #   stretched to the scene change I-frame. GOP stretch requires enabling
-    #   lookahead as well as setting I-interval. The normal cadence resumes
-    #   for the next GOP. Note: Maximum GOP stretch = GOP size +
-    #   Min-I-interval - 1
+    #   Only meaningful if sceneChangeDetect is set to enabled. Defaults to
+    #   5 if multiplex rate control is used. Enforces separation between
+    #   repeated (cadence) I-frames and I-frames inserted by Scene Change
+    #   Detection. If a scene change I-frame is within I-interval frames of
+    #   a cadence I-frame, the GOP is shrunk and/or stretched to the scene
+    #   change I-frame. GOP stretch requires enabling lookahead as well as
+    #   setting I-interval. The normal cadence resumes for the next GOP.
+    #   Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
     #   @return [Integer]
     #
     # @!attribute [rw] num_ref_frames
@@ -5973,7 +6430,7 @@ module Aws::MediaLive
     #         par_numerator: 1,
     #         profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #         qvbr_quality_level: 1,
-    #         rate_control_mode: "CBR", # accepts CBR, QVBR
+    #         rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #         scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #         scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #         slices: 1,
@@ -6047,7 +6504,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] gop_size
     #   GOP size (keyframe interval) in units of either frames or seconds
-    #   per gopSizeUnits. Must be greater than zero.
+    #   per gopSizeUnits. If gopSizeUnits is frames, gopSize must be an
+    #   integer and must be greater than or equal to 1. If gopSizeUnits is
+    #   seconds, gopSize must be greater than 0, but need not be an integer.
     #   @return [Float]
     #
     # @!attribute [rw] gop_size_units
@@ -6070,14 +6529,14 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
-    #   Only meaningful if sceneChangeDetect is set to enabled. Enforces
-    #   separation between repeated (cadence) I-frames and I-frames inserted
-    #   by Scene Change Detection. If a scene change I-frame is within
-    #   I-interval frames of a cadence I-frame, the GOP is shrunk and/or
-    #   stretched to the scene change I-frame. GOP stretch requires enabling
-    #   lookahead as well as setting I-interval. The normal cadence resumes
-    #   for the next GOP. Note: Maximum GOP stretch = GOP size +
-    #   Min-I-interval - 1
+    #   Only meaningful if sceneChangeDetect is set to enabled. Defaults to
+    #   5 if multiplex rate control is used. Enforces separation between
+    #   repeated (cadence) I-frames and I-frames inserted by Scene Change
+    #   Detection. If a scene change I-frame is within I-interval frames of
+    #   a cadence I-frame, the GOP is shrunk and/or stretched to the scene
+    #   change I-frame. GOP stretch requires enabling lookahead as well as
+    #   setting I-interval. The normal cadence resumes for the next GOP.
+    #   Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
     #   @return [Integer]
     #
     # @!attribute [rw] par_denominator
@@ -6852,6 +7311,7 @@ module Aws::MediaLive
     #               audio_frames_per_pes: 1,
     #               audio_pids: "__string",
     #               ecm_pid: "__string",
+    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               pat_interval: 1,
     #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #               pcr_period: 1,
@@ -6916,6 +7376,7 @@ module Aws::MediaLive
     #             audio_frames_per_pes: 1,
     #             audio_pids: "__string",
     #             ecm_pid: "__string",
+    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             pat_interval: 1,
     #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #             pcr_period: 1,
@@ -8057,6 +8518,115 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMultiplexProgramsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         multiplex_id: "__string", # required
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexProgramsRequest AWS API Documentation
+    #
+    class ListMultiplexProgramsRequest < Struct.new(
+      :max_results,
+      :multiplex_id,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_programs
+    #   @return [Array<Types::MultiplexProgramSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexProgramsResponse AWS API Documentation
+    #
+    class ListMultiplexProgramsResponse < Struct.new(
+      :multiplex_programs,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_programs
+    #   List of multiplex programs.
+    #   @return [Array<Types::MultiplexProgramSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next ListMultiplexProgram request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexProgramsResultModel AWS API Documentation
+    #
+    class ListMultiplexProgramsResultModel < Struct.new(
+      :multiplex_programs,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMultiplexesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexesRequest AWS API Documentation
+    #
+    class ListMultiplexesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplexes
+    #   @return [Array<Types::MultiplexSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexesResponse AWS API Documentation
+    #
+    class ListMultiplexesResponse < Struct.new(
+      :multiplexes,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplexes
+    #   List of multiplexes.
+    #   @return [Array<Types::MultiplexSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for the next ListMultiplexes request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListMultiplexesResultModel AWS API Documentation
+    #
+    class ListMultiplexesResultModel < Struct.new(
+      :multiplexes,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOfferingsRequest
     #   data as a hash:
     #
@@ -8064,6 +8634,7 @@ module Aws::MediaLive
     #         channel_class: "__string",
     #         channel_configuration: "__string",
     #         codec: "__string",
+    #         duration: "__string",
     #         max_results: 1,
     #         maximum_bitrate: "__string",
     #         maximum_framerate: "__string",
@@ -8081,6 +8652,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] codec
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -8113,6 +8687,7 @@ module Aws::MediaLive
       :channel_class,
       :channel_configuration,
       :codec,
+      :duration,
       :max_results,
       :maximum_bitrate,
       :maximum_framerate,
@@ -8321,6 +8896,7 @@ module Aws::MediaLive
     #         fragment_time: 1.0,
     #         klv: "NONE", # accepts NONE, PASSTHROUGH
     #         klv_data_pids: "__string",
+    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #         null_packet_bitrate: 1.0,
     #         pat_interval: 1,
     #         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -8504,6 +9080,12 @@ module Aws::MediaLive
     #   0x1ff6).
     #   @return [String]
     #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
     # @!attribute [rw] null_packet_bitrate
     #   Value in bits per second of extra null packets to insert into the
     #   transport stream. This can be used if a downstream encryption system
@@ -8658,6 +9240,7 @@ module Aws::MediaLive
       :fragment_time,
       :klv,
       :klv_data_pids,
+      :nielsen_id_3_behavior,
       :null_packet_bitrate,
       :pat_interval,
       :pcr_control,
@@ -8689,6 +9272,7 @@ module Aws::MediaLive
     #         audio_frames_per_pes: 1,
     #         audio_pids: "__string",
     #         ecm_pid: "__string",
+    #         nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #         pat_interval: 1,
     #         pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #         pcr_period: 1,
@@ -8717,6 +9301,12 @@ module Aws::MediaLive
     #
     # @!attribute [rw] ecm_pid
     #   This parameter is unused and deprecated.
+    #   @return [String]
+    #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
     #   @return [String]
     #
     # @!attribute [rw] pat_interval
@@ -8795,6 +9385,7 @@ module Aws::MediaLive
       :audio_frames_per_pes,
       :audio_pids,
       :ecm_pid,
+      :nielsen_id_3_behavior,
       :pat_interval,
       :pcr_control,
       :pcr_period,
@@ -9117,6 +9708,516 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # The multiplex object.
+    #
+    # @!attribute [rw] arn
+    #   The unique arn of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   A list of availability zones for the multiplex.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   A list of the multiplex output destinations.
+    #   @return [Array<Types::MultiplexOutputDestination>]
+    #
+    # @!attribute [rw] id
+    #   The unique id of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Configuration for a multiplex event.
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   The name of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   The number of currently healthy pipelines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   The number of programs in the multiplex.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Multiplex AWS API Documentation
+    #
+    class Multiplex < Struct.new(
+      :arn,
+      :availability_zones,
+      :destinations,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_errors
+    #   A collection of validation error responses.
+    #   @return [Array<Types::MultiplexValidationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexConfigurationValidationError AWS API Documentation
+    #
+    class MultiplexConfigurationValidationError < Struct.new(
+      :message,
+      :validation_errors)
+      include Aws::Structure
+    end
+
+    # Multiplex Group Settings
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexGroupSettings AWS API Documentation
+    #
+    class MultiplexGroupSettings < Aws::EmptyStructure; end
+
+    # Multiplex MediaConnect output destination settings.
+    #
+    # @!attribute [rw] entitlement_arn
+    #   The MediaConnect entitlement ARN available as a Flow source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexMediaConnectOutputDestinationSettings AWS API Documentation
+    #
+    class MultiplexMediaConnectOutputDestinationSettings < Struct.new(
+      :entitlement_arn)
+      include Aws::Structure
+    end
+
+    # Multiplex output destination settings
+    #
+    # @!attribute [rw] media_connect_settings
+    #   Multiplex MediaConnect output destination settings.
+    #   @return [Types::MultiplexMediaConnectOutputDestinationSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexOutputDestination AWS API Documentation
+    #
+    class MultiplexOutputDestination < Struct.new(
+      :media_connect_settings)
+      include Aws::Structure
+    end
+
+    # Multiplex Output Settings
+    #
+    # @note When making an API call, you may pass MultiplexOutputSettings
+    #   data as a hash:
+    #
+    #       {
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   Destination is a Multiplex.
+    #   @return [Types::OutputLocationRef]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexOutputSettings AWS API Documentation
+    #
+    class MultiplexOutputSettings < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # The multiplex program object.
+    #
+    # @!attribute [rw] channel_id
+    #   The MediaLive channel associated with the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_program_settings
+    #   The settings for this multiplex program.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] packet_identifiers_map
+    #   The packet identifier map for this multiplex program.
+    #   @return [Types::MultiplexProgramPacketIdentifiersMap]
+    #
+    # @!attribute [rw] program_name
+    #   The name of the multiplex program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgram AWS API Documentation
+    #
+    class MultiplexProgram < Struct.new(
+      :channel_id,
+      :multiplex_program_settings,
+      :packet_identifiers_map,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # Multiplex Program Input Destination Settings for outputting a Channel
+    # to a Multiplex
+    #
+    # @note When making an API call, you may pass MultiplexProgramChannelDestinationSettings
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__stringMin1",
+    #         program_name: "__stringMin1",
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   The ID of the Multiplex that the encoder is providing output to. You
+    #   do not need to specify the individual inputs to the Multiplex;
+    #   MediaLive will handle the connection of the two MediaLive pipelines
+    #   to the two Multiplex instances. The Multiplex must be in the same
+    #   region as the Channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   The program name of the Multiplex program that the encoder is
+    #   providing output to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramChannelDestinationSettings AWS API Documentation
+    #
+    class MultiplexProgramChannelDestinationSettings < Struct.new(
+      :multiplex_id,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # Packet identifiers map for a given Multiplex program.
+    #
+    # @!attribute [rw] audio_pids
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] dvb_sub_pids
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] dvb_teletext_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] etv_platform_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] etv_signal_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] klv_data_pids
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] pcr_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pmt_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_metadata_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scte_27_pids
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] scte_35_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timed_metadata_pid
+    #   @return [Integer]
+    #
+    # @!attribute [rw] video_pid
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramPacketIdentifiersMap AWS API Documentation
+    #
+    class MultiplexProgramPacketIdentifiersMap < Struct.new(
+      :audio_pids,
+      :dvb_sub_pids,
+      :dvb_teletext_pid,
+      :etv_platform_pid,
+      :etv_signal_pid,
+      :klv_data_pids,
+      :pcr_pid,
+      :pmt_pid,
+      :private_metadata_pid,
+      :scte_27_pids,
+      :scte_35_pid,
+      :timed_metadata_pid,
+      :video_pid)
+      include Aws::Structure
+    end
+
+    # Transport stream service descriptor configuration for the Multiplex
+    # program.
+    #
+    # @note When making an API call, you may pass MultiplexProgramServiceDescriptor
+    #   data as a hash:
+    #
+    #       {
+    #         provider_name: "__stringMax256", # required
+    #         service_name: "__stringMax256", # required
+    #       }
+    #
+    # @!attribute [rw] provider_name
+    #   Name of the provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Name of the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramServiceDescriptor AWS API Documentation
+    #
+    class MultiplexProgramServiceDescriptor < Struct.new(
+      :provider_name,
+      :service_name)
+      include Aws::Structure
+    end
+
+    # Multiplex Program settings configuration.
+    #
+    # @note When making an API call, you may pass MultiplexProgramSettings
+    #   data as a hash:
+    #
+    #       {
+    #         program_number: 1, # required
+    #         service_descriptor: {
+    #           provider_name: "__stringMax256", # required
+    #           service_name: "__stringMax256", # required
+    #         },
+    #         video_settings: {
+    #           constant_bitrate: 1,
+    #           statmux_settings: {
+    #             maximum_bitrate: 1,
+    #             minimum_bitrate: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] program_number
+    #   Unique program number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_descriptor
+    #   Transport stream service descriptor configuration for the Multiplex
+    #   program.
+    #   @return [Types::MultiplexProgramServiceDescriptor]
+    #
+    # @!attribute [rw] video_settings
+    #   Program video settings configuration.
+    #   @return [Types::MultiplexVideoSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramSettings AWS API Documentation
+    #
+    class MultiplexProgramSettings < Struct.new(
+      :program_number,
+      :service_descriptor,
+      :video_settings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   The MediaLive Channel associated with the program.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_name
+    #   The name of the multiplex program.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexProgramSummary AWS API Documentation
+    #
+    class MultiplexProgramSummary < Struct.new(
+      :channel_id,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # Contains configuration for a Multiplex event
+    #
+    # @note When making an API call, you may pass MultiplexSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_video_buffer_delay_milliseconds: 1,
+    #         transport_stream_bitrate: 1, # required
+    #         transport_stream_id: 1, # required
+    #         transport_stream_reserved_bitrate: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_video_buffer_delay_milliseconds
+    #   Maximum video buffer delay in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transport_stream_bitrate
+    #   Transport stream bit rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transport_stream_id
+    #   Transport stream ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] transport_stream_reserved_bitrate
+    #   Transport stream reserved bit rate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexSettings AWS API Documentation
+    #
+    class MultiplexSettings < Struct.new(
+      :maximum_video_buffer_delay_milliseconds,
+      :transport_stream_bitrate,
+      :transport_stream_id,
+      :transport_stream_reserved_bitrate)
+      include Aws::Structure
+    end
+
+    # Contains summary configuration for a Multiplex event.
+    #
+    # @!attribute [rw] transport_stream_bitrate
+    #   Transport stream bit rate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexSettingsSummary AWS API Documentation
+    #
+    class MultiplexSettingsSummary < Struct.new(
+      :transport_stream_bitrate)
+      include Aws::Structure
+    end
+
+    # Statmux rate control settings
+    #
+    # @note When making an API call, you may pass MultiplexStatmuxVideoSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_bitrate: 1,
+    #         minimum_bitrate: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   Maximum statmux bitrate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_bitrate
+    #   Minimum statmux bitrate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexStatmuxVideoSettings AWS API Documentation
+    #
+    class MultiplexStatmuxVideoSettings < Struct.new(
+      :maximum_bitrate,
+      :minimum_bitrate)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The unique arn of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   A list of availability zones for the multiplex.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] id
+    #   The unique id of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Configuration for a multiplex event.
+    #   @return [Types::MultiplexSettingsSummary]
+    #
+    # @!attribute [rw] name
+    #   The name of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   The number of currently healthy pipelines.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   The number of programs in the multiplex.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexSummary AWS API Documentation
+    #
+    class MultiplexSummary < Struct.new(
+      :arn,
+      :availability_zones,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] element_path
+    #   Path to the source of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexValidationError AWS API Documentation
+    #
+    class MultiplexValidationError < Struct.new(
+      :element_path,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # The video configuration for each program in a multiplex.
+    #
+    # @note When making an API call, you may pass MultiplexVideoSettings
+    #   data as a hash:
+    #
+    #       {
+    #         constant_bitrate: 1,
+    #         statmux_settings: {
+    #           maximum_bitrate: 1,
+    #           minimum_bitrate: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] constant_bitrate
+    #   The constant bitrate configuration for the video encode. When this
+    #   field is defined, StatmuxSettings must be undefined.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statmux_settings
+    #   Statmux rate control settings. When this field is defined,
+    #   ConstantBitrate must be undefined.
+    #   @return [Types::MultiplexStatmuxVideoSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MultiplexVideoSettings AWS API Documentation
+    #
+    class MultiplexVideoSettings < Struct.new(
+      :constant_bitrate,
+      :statmux_settings)
+      include Aws::Structure
+    end
+
     # Network source to transcode. Must be accessible to the Elemental Live
     # node that is running the live event through a network connection.
     #
@@ -9152,6 +10253,32 @@ module Aws::MediaLive
     class NetworkInputSettings < Struct.new(
       :hls_input_settings,
       :server_validation)
+      include Aws::Structure
+    end
+
+    # Nielsen Configuration
+    #
+    # @note When making an API call, you may pass NielsenConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         distributor_id: "__string",
+    #         nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] distributor_id
+    #   Enter the Distributor ID assigned to your organization by Nielsen.
+    #   @return [String]
+    #
+    # @!attribute [rw] nielsen_pcm_to_id_3_tagging
+    #   Enables Nielsen PCM to ID3 tagging
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NielsenConfiguration AWS API Documentation
+    #
+    class NielsenConfiguration < Struct.new(
+      :distributor_id,
+      :nielsen_pcm_to_id_3_tagging)
       include Aws::Structure
     end
 
@@ -9283,6 +10410,7 @@ module Aws::MediaLive
     #                 fragment_time: 1.0,
     #                 klv: "NONE", # accepts NONE, PASSTHROUGH
     #                 klv_data_pids: "__string",
+    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                 null_packet_bitrate: 1.0,
     #                 pat_interval: 1,
     #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -9327,6 +10455,7 @@ module Aws::MediaLive
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: "__string",
     #                   ecm_pid: "__string",
+    #                   nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                   pat_interval: 1,
     #                   pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                   pcr_period: 1,
@@ -9351,6 +10480,11 @@ module Aws::MediaLive
     #           ms_smooth_output_settings: {
     #             h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #             name_modifier: "__string",
+    #           },
+    #           multiplex_output_settings: {
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
     #           },
     #           rtmp_output_settings: {
     #             certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -9402,6 +10536,7 @@ module Aws::MediaLive
     #                 fragment_time: 1.0,
     #                 klv: "NONE", # accepts NONE, PASSTHROUGH
     #                 klv_data_pids: "__string",
+    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                 null_packet_bitrate: 1.0,
     #                 pat_interval: 1,
     #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -9479,6 +10614,10 @@ module Aws::MediaLive
     #             channel_id: "__stringMin1",
     #           },
     #         ],
+    #         multiplex_settings: {
+    #           multiplex_id: "__stringMin1",
+    #           program_name: "__stringMin1",
+    #         },
     #         settings: [
     #           {
     #             password_param: "__string",
@@ -9498,6 +10637,11 @@ module Aws::MediaLive
     #   both encoders.
     #   @return [Array<Types::MediaPackageOutputDestinationSettings>]
     #
+    # @!attribute [rw] multiplex_settings
+    #   Destination settings for a Multiplex output; one destination for
+    #   both encoders.
+    #   @return [Types::MultiplexProgramChannelDestinationSettings]
+    #
     # @!attribute [rw] settings
     #   Destination settings for a standard output; one destination for each
     #   redundant encoder.
@@ -9508,6 +10652,7 @@ module Aws::MediaLive
     class OutputDestination < Struct.new(
       :id,
       :media_package_settings,
+      :multiplex_settings,
       :settings)
       include Aws::Structure
     end
@@ -9682,6 +10827,8 @@ module Aws::MediaLive
     #             timestamp_offset: "__string",
     #             timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #           },
+    #           multiplex_group_settings: {
+    #           },
     #           rtmp_group_settings: {
     #             authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -9743,6 +10890,7 @@ module Aws::MediaLive
     #                     fragment_time: 1.0,
     #                     klv: "NONE", # accepts NONE, PASSTHROUGH
     #                     klv_data_pids: "__string",
+    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     null_packet_bitrate: 1.0,
     #                     pat_interval: 1,
     #                     pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -9787,6 +10935,7 @@ module Aws::MediaLive
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: "__string",
     #                       ecm_pid: "__string",
+    #                       nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       pat_interval: 1,
     #                       pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                       pcr_period: 1,
@@ -9811,6 +10960,11 @@ module Aws::MediaLive
     #               ms_smooth_output_settings: {
     #                 h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                 name_modifier: "__string",
+    #               },
+    #               multiplex_output_settings: {
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
     #               },
     #               rtmp_output_settings: {
     #                 certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -9862,6 +11016,7 @@ module Aws::MediaLive
     #                     fragment_time: 1.0,
     #                     klv: "NONE", # accepts NONE, PASSTHROUGH
     #                     klv_data_pids: "__string",
+    #                     nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                     null_packet_bitrate: 1.0,
     #                     pat_interval: 1,
     #                     pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -10051,6 +11206,8 @@ module Aws::MediaLive
     #           timestamp_offset: "__string",
     #           timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #         },
+    #         multiplex_group_settings: {
+    #         },
     #         rtmp_group_settings: {
     #           authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -10086,6 +11243,10 @@ module Aws::MediaLive
     #   Ms Smooth Group Settings
     #   @return [Types::MsSmoothGroupSettings]
     #
+    # @!attribute [rw] multiplex_group_settings
+    #   Multiplex Group Settings
+    #   @return [Types::MultiplexGroupSettings]
+    #
     # @!attribute [rw] rtmp_group_settings
     #   Rtmp Group Settings
     #   @return [Types::RtmpGroupSettings]
@@ -10102,6 +11263,7 @@ module Aws::MediaLive
       :hls_group_settings,
       :media_package_group_settings,
       :ms_smooth_group_settings,
+      :multiplex_group_settings,
       :rtmp_group_settings,
       :udp_group_settings)
       include Aws::Structure
@@ -10173,6 +11335,7 @@ module Aws::MediaLive
     #               fragment_time: 1.0,
     #               klv: "NONE", # accepts NONE, PASSTHROUGH
     #               klv_data_pids: "__string",
+    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               null_packet_bitrate: 1.0,
     #               pat_interval: 1,
     #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -10217,6 +11380,7 @@ module Aws::MediaLive
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: "__string",
     #                 ecm_pid: "__string",
+    #                 nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                 pat_interval: 1,
     #                 pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                 pcr_period: 1,
@@ -10241,6 +11405,11 @@ module Aws::MediaLive
     #         ms_smooth_output_settings: {
     #           h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #           name_modifier: "__string",
+    #         },
+    #         multiplex_output_settings: {
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
     #         },
     #         rtmp_output_settings: {
     #           certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -10292,6 +11461,7 @@ module Aws::MediaLive
     #               fragment_time: 1.0,
     #               klv: "NONE", # accepts NONE, PASSTHROUGH
     #               klv_data_pids: "__string",
+    #               nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               null_packet_bitrate: 1.0,
     #               pat_interval: 1,
     #               pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -10344,6 +11514,10 @@ module Aws::MediaLive
     #   Ms Smooth Output Settings
     #   @return [Types::MsSmoothOutputSettings]
     #
+    # @!attribute [rw] multiplex_output_settings
+    #   Multiplex Output Settings
+    #   @return [Types::MultiplexOutputSettings]
+    #
     # @!attribute [rw] rtmp_output_settings
     #   Rtmp Output Settings
     #   @return [Types::RtmpOutputSettings]
@@ -10360,6 +11534,7 @@ module Aws::MediaLive
       :hls_output_settings,
       :media_package_output_settings,
       :ms_smooth_output_settings,
+      :multiplex_output_settings,
       :rtmp_output_settings,
       :udp_output_settings)
       include Aws::Structure
@@ -10735,7 +11910,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+    #   Resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
     #   @return [String]
     #
     # @!attribute [rw] special_feature
@@ -11706,6 +12881,7 @@ module Aws::MediaLive
     #           audio_frames_per_pes: 1,
     #           audio_pids: "__string",
     #           ecm_pid: "__string",
+    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           pat_interval: 1,
     #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #           pcr_period: 1,
@@ -11822,6 +12998,71 @@ module Aws::MediaLive
       :pipeline_details,
       :pipelines_running_count,
       :role_arn,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMultiplexRequest AWS API Documentation
+    #
+    class StartMultiplexRequest < Struct.new(
+      :multiplex_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::MultiplexOutputDestination>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMultiplexResponse AWS API Documentation
+    #
+    class StartMultiplexResponse < Struct.new(
+      :arn,
+      :availability_zones,
+      :destinations,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
       :state,
       :tags)
       include Aws::Structure
@@ -12096,6 +13337,71 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopMultiplexRequest AWS API Documentation
+    #
+    class StopMultiplexRequest < Struct.new(
+      :multiplex_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::MultiplexOutputDestination>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The current state of the multiplex.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StopMultiplexResponse AWS API Documentation
+    #
+    class StopMultiplexResponse < Struct.new(
+      :arn,
+      :availability_zones,
+      :destinations,
+      :id,
+      :multiplex_settings,
+      :name,
+      :pipelines_running_count,
+      :program_count,
+      :state,
+      :tags)
+      include Aws::Structure
+    end
+
     # Settings to identify the end of the clip.
     #
     # @note When making an API call, you may pass StopTimecode
@@ -12279,6 +13585,7 @@ module Aws::MediaLive
     #           fragment_time: 1.0,
     #           klv: "NONE", # accepts NONE, PASSTHROUGH
     #           klv_data_pids: "__string",
+    #           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           null_packet_bitrate: 1.0,
     #           pat_interval: 1,
     #           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -12398,6 +13705,7 @@ module Aws::MediaLive
     #             fragment_time: 1.0,
     #             klv: "NONE", # accepts NONE, PASSTHROUGH
     #             klv_data_pids: "__string",
+    #             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             null_packet_bitrate: 1.0,
     #             pat_interval: 1,
     #             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -12466,7 +13774,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] validation_errors
-    #   @return [Array<Types::ValidationError>]
+    #   @return [Array<Types::MultiplexValidationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UnprocessableEntityException AWS API Documentation
     #
@@ -12549,6 +13857,10 @@ module Aws::MediaLive
     #                 channel_id: "__stringMin1",
     #               },
     #             ],
+    #             multiplex_settings: {
+    #               multiplex_id: "__stringMin1",
+    #               program_name: "__stringMin1",
+    #             },
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -12604,6 +13916,10 @@ module Aws::MediaLive
     #                 channel_id: "__stringMin1",
     #               },
     #             ],
+    #             multiplex_settings: {
+    #               multiplex_id: "__stringMin1",
+    #               program_name: "__stringMin1",
+    #             },
     #             settings: [
     #               {
     #                 password_param: "__string",
@@ -12829,6 +14145,10 @@ module Aws::MediaLive
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
+    #           nielsen_configuration: {
+    #             distributor_id: "__string",
+    #             nielsen_pcm_to_id_3_tagging: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           output_groups: [ # required
     #             {
     #               name: "__stringMax32",
@@ -12958,6 +14278,8 @@ module Aws::MediaLive
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #                 },
+    #                 multiplex_group_settings: {
+    #                 },
     #                 rtmp_group_settings: {
     #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
     #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
@@ -13019,6 +14341,7 @@ module Aws::MediaLive
     #                           fragment_time: 1.0,
     #                           klv: "NONE", # accepts NONE, PASSTHROUGH
     #                           klv_data_pids: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           null_packet_bitrate: 1.0,
     #                           pat_interval: 1,
     #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -13063,6 +14386,7 @@ module Aws::MediaLive
     #                             audio_frames_per_pes: 1,
     #                             audio_pids: "__string",
     #                             ecm_pid: "__string",
+    #                             nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                             pat_interval: 1,
     #                             pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
     #                             pcr_period: 1,
@@ -13087,6 +14411,11 @@ module Aws::MediaLive
     #                     ms_smooth_output_settings: {
     #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       name_modifier: "__string",
+    #                     },
+    #                     multiplex_output_settings: {
+    #                       destination: { # required
+    #                         destination_ref_id: "__string",
+    #                       },
     #                     },
     #                     rtmp_output_settings: {
     #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
@@ -13138,6 +14467,7 @@ module Aws::MediaLive
     #                           fragment_time: 1.0,
     #                           klv: "NONE", # accepts NONE, PASSTHROUGH
     #                           klv_data_pids: "__string",
+    #                           nielsen_id_3_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           null_packet_bitrate: 1.0,
     #                           pat_interval: 1,
     #                           pcr_control: "CONFIGURED_PCR_PERIOD", # accepts CONFIGURED_PCR_PERIOD, PCR_EVERY_PES_PACKET
@@ -13265,7 +14595,7 @@ module Aws::MediaLive
     #                   par_numerator: 1,
     #                   profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #                   qvbr_quality_level: 1,
-    #                   rate_control_mode: "CBR", # accepts CBR, QVBR
+    #                   rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #                   scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #                   scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #                   slices: 1,
@@ -13610,6 +14940,151 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @!attribute [rw] multiplex_settings
+    #   The new settings for a multiplex.
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   Name of the multiplex.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplex AWS API Documentation
+    #
+    class UpdateMultiplex < Struct.new(
+      :multiplex_settings,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program_settings
+    #   The new settings for a multiplex program.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexProgram AWS API Documentation
+    #
+    class UpdateMultiplexProgram < Struct.new(
+      :multiplex_program_settings)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateMultiplexProgramRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #         multiplex_program_settings: {
+    #           program_number: 1, # required
+    #           service_descriptor: {
+    #             provider_name: "__stringMax256", # required
+    #             service_name: "__stringMax256", # required
+    #           },
+    #           video_settings: {
+    #             constant_bitrate: 1,
+    #             statmux_settings: {
+    #               maximum_bitrate: 1,
+    #               minimum_bitrate: 1,
+    #             },
+    #           },
+    #         },
+    #         program_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_program_settings
+    #   Multiplex Program settings configuration.
+    #   @return [Types::MultiplexProgramSettings]
+    #
+    # @!attribute [rw] program_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexProgramRequest AWS API Documentation
+    #
+    class UpdateMultiplexProgramRequest < Struct.new(
+      :multiplex_id,
+      :multiplex_program_settings,
+      :program_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program
+    #   The multiplex program object.
+    #   @return [Types::MultiplexProgram]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexProgramResponse AWS API Documentation
+    #
+    class UpdateMultiplexProgramResponse < Struct.new(
+      :multiplex_program)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex_program
+    #   The updated multiplex program.
+    #   @return [Types::MultiplexProgram]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexProgramResultModel AWS API Documentation
+    #
+    class UpdateMultiplexProgramResultModel < Struct.new(
+      :multiplex_program)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateMultiplexRequest
+    #   data as a hash:
+    #
+    #       {
+    #         multiplex_id: "__string", # required
+    #         multiplex_settings: {
+    #           maximum_video_buffer_delay_milliseconds: 1,
+    #           transport_stream_bitrate: 1, # required
+    #           transport_stream_id: 1, # required
+    #           transport_stream_reserved_bitrate: 1,
+    #         },
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] multiplex_id
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplex_settings
+    #   Contains configuration for a Multiplex event
+    #   @return [Types::MultiplexSettings]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexRequest AWS API Documentation
+    #
+    class UpdateMultiplexRequest < Struct.new(
+      :multiplex_id,
+      :multiplex_settings,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex
+    #   The multiplex object.
+    #   @return [Types::Multiplex]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexResponse AWS API Documentation
+    #
+    class UpdateMultiplexResponse < Struct.new(
+      :multiplex)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] multiplex
+    #   The updated multiplex.
+    #   @return [Types::Multiplex]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateMultiplexResultModel AWS API Documentation
+    #
+    class UpdateMultiplexResultModel < Struct.new(
+      :multiplex)
+      include Aws::Structure
+    end
+
     # UpdateReservation request
     #
     # @!attribute [rw] name
@@ -13773,7 +15248,7 @@ module Aws::MediaLive
     #           par_numerator: 1,
     #           profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #           qvbr_quality_level: 1,
-    #           rate_control_mode: "CBR", # accepts CBR, QVBR
+    #           rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #           scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #           scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #           slices: 1,
@@ -13894,7 +15369,7 @@ module Aws::MediaLive
     #             par_numerator: 1,
     #             profile: "MAIN", # accepts MAIN, MAIN_10BIT
     #             qvbr_quality_level: 1,
-    #             rate_control_mode: "CBR", # accepts CBR, QVBR
+    #             rate_control_mode: "CBR", # accepts CBR, MULTIPLEX, QVBR
     #             scan_type: "PROGRESSIVE", # accepts PROGRESSIVE
     #             scene_change_detect: "DISABLED", # accepts DISABLED, ENABLED
     #             slices: 1,

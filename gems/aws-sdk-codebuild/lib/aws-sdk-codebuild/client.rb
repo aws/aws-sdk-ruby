@@ -669,6 +669,8 @@ module Aws::CodeBuild
     #   resp.builds[0].exported_environment_variables #=> Array
     #   resp.builds[0].exported_environment_variables[0].name #=> String
     #   resp.builds[0].exported_environment_variables[0].value #=> String
+    #   resp.builds[0].report_arns #=> Array
+    #   resp.builds[0].report_arns[0] #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -807,6 +809,99 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Returns an array of report groups.
+    #
+    # @option params [required, Array<String>] :report_group_arns
+    #   An array of report group ARNs that identify the report groups to
+    #   return.
+    #
+    # @return [Types::BatchGetReportGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetReportGroupsOutput#report_groups #report_groups} => Array&lt;Types::ReportGroup&gt;
+    #   * {Types::BatchGetReportGroupsOutput#report_groups_not_found #report_groups_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_report_groups({
+    #     report_group_arns: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_groups #=> Array
+    #   resp.report_groups[0].arn #=> String
+    #   resp.report_groups[0].name #=> String
+    #   resp.report_groups[0].type #=> String, one of "TEST"
+    #   resp.report_groups[0].export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
+    #   resp.report_groups[0].export_config.s3_destination.bucket #=> String
+    #   resp.report_groups[0].export_config.s3_destination.path #=> String
+    #   resp.report_groups[0].export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
+    #   resp.report_groups[0].export_config.s3_destination.encryption_key #=> String
+    #   resp.report_groups[0].export_config.s3_destination.encryption_disabled #=> Boolean
+    #   resp.report_groups[0].created #=> Time
+    #   resp.report_groups[0].last_modified #=> Time
+    #   resp.report_groups_not_found #=> Array
+    #   resp.report_groups_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportGroups AWS API Documentation
+    #
+    # @overload batch_get_report_groups(params = {})
+    # @param [Hash] params ({})
+    def batch_get_report_groups(params = {}, options = {})
+      req = build_request(:batch_get_report_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of reports.
+    #
+    # @option params [required, Array<String>] :report_arns
+    #   An array of ARNs that identify the `Report` objects to return.
+    #
+    # @return [Types::BatchGetReportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetReportsOutput#reports #reports} => Array&lt;Types::Report&gt;
+    #   * {Types::BatchGetReportsOutput#reports_not_found #reports_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_reports({
+    #     report_arns: ["NonEmptyString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reports #=> Array
+    #   resp.reports[0].arn #=> String
+    #   resp.reports[0].type #=> String, one of "TEST"
+    #   resp.reports[0].name #=> String
+    #   resp.reports[0].report_group_arn #=> String
+    #   resp.reports[0].execution_id #=> String
+    #   resp.reports[0].status #=> String, one of "GENERATING", "SUCCEEDED", "FAILED", "INCOMPLETE", "DELETING"
+    #   resp.reports[0].created #=> Time
+    #   resp.reports[0].expired #=> Time
+    #   resp.reports[0].export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
+    #   resp.reports[0].export_config.s3_destination.bucket #=> String
+    #   resp.reports[0].export_config.s3_destination.path #=> String
+    #   resp.reports[0].export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
+    #   resp.reports[0].export_config.s3_destination.encryption_key #=> String
+    #   resp.reports[0].export_config.s3_destination.encryption_disabled #=> Boolean
+    #   resp.reports[0].truncated #=> Boolean
+    #   resp.reports[0].test_summary.total #=> Integer
+    #   resp.reports[0].test_summary.status_counts #=> Hash
+    #   resp.reports[0].test_summary.status_counts["String"] #=> Integer
+    #   resp.reports[0].test_summary.duration_in_nano_seconds #=> Integer
+    #   resp.reports_not_found #=> Array
+    #   resp.reports_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReports AWS API Documentation
+    #
+    # @overload batch_get_reports(params = {})
+    # @param [Hash] params ({})
+    def batch_get_reports(params = {}, options = {})
+      req = build_request(:batch_get_reports, params)
+      req.send_request(options)
+    end
+
     # Creates a build project.
     #
     # @option params [required, String] :name
@@ -826,7 +921,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
     #     that corresponds to the version of the source code you want to
@@ -1151,6 +1246,63 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Creates a report group. A report group contains a collection of
+    # reports.
+    #
+    # @option params [required, String] :name
+    #   The name of the report group.
+    #
+    # @option params [required, String] :type
+    #   The type of report group.
+    #
+    # @option params [required, Types::ReportExportConfig] :export_config
+    #   A `ReportExportConfig` object that contains information about where
+    #   the report group test results are exported.
+    #
+    # @return [Types::CreateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateReportGroupOutput#report_group #report_group} => Types::ReportGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_report_group({
+    #     name: "ReportGroupName", # required
+    #     type: "TEST", # required, accepts TEST
+    #     export_config: { # required
+    #       export_config_type: "S3", # accepts S3, NO_EXPORT
+    #       s3_destination: {
+    #         bucket: "NonEmptyString",
+    #         path: "String",
+    #         packaging: "ZIP", # accepts ZIP, NONE
+    #         encryption_key: "NonEmptyString",
+    #         encryption_disabled: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_group.arn #=> String
+    #   resp.report_group.name #=> String
+    #   resp.report_group.type #=> String, one of "TEST"
+    #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
+    #   resp.report_group.export_config.s3_destination.bucket #=> String
+    #   resp.report_group.export_config.s3_destination.path #=> String
+    #   resp.report_group.export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
+    #   resp.report_group.export_config.s3_destination.encryption_key #=> String
+    #   resp.report_group.export_config.s3_destination.encryption_disabled #=> Boolean
+    #   resp.report_group.created #=> Time
+    #   resp.report_group.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroup AWS API Documentation
+    #
+    # @overload create_report_group(params = {})
+    # @param [Hash] params ({})
+    def create_report_group(params = {}, options = {})
+      req = build_request(:create_report_group, params)
+      req.send_request(options)
+    end
+
     # For an existing AWS CodeBuild build project that has its source code
     # stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to
     # start rebuilding the source code every time a code change is pushed to
@@ -1257,6 +1409,60 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Deletes a report.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the report to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_report({
+    #     arn: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReport AWS API Documentation
+    #
+    # @overload delete_report(params = {})
+    # @param [Hash] params ({})
+    def delete_report(params = {}, options = {})
+      req = build_request(:delete_report, params)
+      req.send_request(options)
+    end
+
+    # `DeleteReportGroup`\: Deletes a report group. Before you delete a
+    # report group, you must delete its reports. Use
+    # [ListReportsForReportGroup][1] to get the reports in a report group.
+    # Use [DeleteReport][2] to delete the reports. If you call
+    # `DeleteReportGroup` for a report group that contains one or more
+    # reports, an exception is thrown.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html
+    # [2]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the report group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_report_group({
+    #     arn: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroup AWS API Documentation
+    #
+    # @overload delete_report_group(params = {})
+    # @param [Hash] params ({})
+    def delete_report_group(params = {}, options = {})
+      req = build_request(:delete_report_group, params)
+      req.send_request(options)
+    end
+
     # Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source
     # credentials.
     #
@@ -1308,6 +1514,66 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_webhook(params = {}, options = {})
       req = build_request(:delete_webhook, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of details about test cases for a report.
+    #
+    # @option params [required, String] :report_arn
+    #   The ARN of the report for which test cases are returned.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated test cases returned per response. Use
+    #   `nextToken` to iterate pages in the list of returned `TestCase`
+    #   objects. The default value is 100.
+    #
+    # @option params [Types::TestCaseFilter] :filter
+    #   A `TestCaseFilter` object used to filter the returned reports.
+    #
+    # @return [Types::DescribeTestCasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTestCasesOutput#next_token #next_token} => String
+    #   * {Types::DescribeTestCasesOutput#test_cases #test_cases} => Array&lt;Types::TestCase&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_test_cases({
+    #     report_arn: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filter: {
+    #       status: "String",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.test_cases #=> Array
+    #   resp.test_cases[0].report_arn #=> String
+    #   resp.test_cases[0].test_raw_data_path #=> String
+    #   resp.test_cases[0].prefix #=> String
+    #   resp.test_cases[0].name #=> String
+    #   resp.test_cases[0].status #=> String
+    #   resp.test_cases[0].duration_in_nano_seconds #=> Integer
+    #   resp.test_cases[0].message #=> String
+    #   resp.test_cases[0].expired #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeTestCases AWS API Documentation
+    #
+    # @overload describe_test_cases(params = {})
+    # @param [Hash] params ({})
+    def describe_test_cases(params = {}, options = {})
+      req = build_request(:describe_test_cases, params)
       req.send_request(options)
     end
 
@@ -1576,6 +1842,184 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Gets a list ARNs for the report groups in the current AWS account.
+    #
+    # @option params [String] :sort_order
+    #   Used to specify the order to sort the list of returned report groups.
+    #   Valid values are `ASCENDING` and `DESCENDING`.
+    #
+    # @option params [String] :sort_by
+    #   The criterion to be used to list build report groups. Valid values
+    #   include:
+    #
+    #   * `CREATED_TIME`\: List based on when each report group was created.
+    #
+    #   * `LAST_MODIFIED_TIME`\: List based on when each report group was last
+    #     changed.
+    #
+    #   * `NAME`\: List based on each report group's name.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated report groups returned per response.
+    #   Use `nextToken` to iterate pages in the list of returned `ReportGroup`
+    #   objects. The default value is 100.
+    #
+    # @return [Types::ListReportGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportGroupsOutput#next_token #next_token} => String
+    #   * {Types::ListReportGroupsOutput#report_groups #report_groups} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_report_groups({
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.report_groups #=> Array
+    #   resp.report_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportGroups AWS API Documentation
+    #
+    # @overload list_report_groups(params = {})
+    # @param [Hash] params ({})
+    def list_report_groups(params = {}, options = {})
+      req = build_request(:list_report_groups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ARNs for the reports in the current AWS account.
+    #
+    # @option params [String] :sort_order
+    #   Specifies the sort order for the list of returned reports. Valid
+    #   values are:
+    #
+    #   * `ASCENDING`\: return reports in chronological order based on their
+    #     creation date.
+    #
+    #   * `DESCENDING`\: return reports in the reverse chronological order
+    #     based on their creation date.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated reports returned per response. Use
+    #   `nextToken` to iterate pages in the list of returned `Report` objects.
+    #   The default value is 100.
+    #
+    # @option params [Types::ReportFilter] :filter
+    #   A `ReportFilter` object used to filter the returned reports.
+    #
+    # @return [Types::ListReportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportsOutput#next_token #next_token} => String
+    #   * {Types::ListReportsOutput#reports #reports} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reports({
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filter: {
+    #       status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reports #=> Array
+    #   resp.reports[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReports AWS API Documentation
+    #
+    # @overload list_reports(params = {})
+    # @param [Hash] params ({})
+    def list_reports(params = {}, options = {})
+      req = build_request(:list_reports, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ARNs for the reports that belong to a `ReportGroup`.
+    #
+    # @option params [required, String] :report_group_arn
+    #   The ARN of the report group for which you want to return report ARNs.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @option params [String] :sort_order
+    #   Use to specify whether the results are returned in ascending or
+    #   descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated reports in this report group returned
+    #   per response. Use `nextToken` to iterate pages in the list of returned
+    #   `Report` objects. The default value is 100.
+    #
+    # @option params [Types::ReportFilter] :filter
+    #   A `ReportFilter` object used to filter the returned reports.
+    #
+    # @return [Types::ListReportsForReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReportsForReportGroupOutput#next_token #next_token} => String
+    #   * {Types::ListReportsForReportGroupOutput#reports #reports} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reports_for_report_group({
+    #     report_group_arn: "String", # required
+    #     next_token: "String",
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     max_results: 1,
+    #     filter: {
+    #       status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reports #=> Array
+    #   resp.reports[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroup AWS API Documentation
+    #
+    # @overload list_reports_for_report_group(params = {})
+    # @param [Hash] params ({})
+    def list_reports_for_report_group(params = {}, options = {})
+      req = build_request(:list_reports_for_report_group, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `SourceCredentialsInfo` objects.
     #
     # @return [Types::ListSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1615,7 +2059,7 @@ module Aws::CodeBuild
     #   A version of the build input to be built, for this build only. If not
     #   specified, the latest version is used. If specified, must be one of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
     #     that corresponds to the version of the source code you want to
@@ -1974,6 +2418,8 @@ module Aws::CodeBuild
     #   resp.build.exported_environment_variables #=> Array
     #   resp.build.exported_environment_variables[0].name #=> String
     #   resp.build.exported_environment_variables[0].value #=> String
+    #   resp.build.report_arns #=> Array
+    #   resp.build.report_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -2101,6 +2547,8 @@ module Aws::CodeBuild
     #   resp.build.exported_environment_variables #=> Array
     #   resp.build.exported_environment_variables[0].name #=> String
     #   resp.build.exported_environment_variables[0].value #=> String
+    #   resp.build.report_arns #=> Array
+    #   resp.build.report_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -2135,7 +2583,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag name
     #     that corresponds to the version of the source code you want to
@@ -2460,6 +2908,61 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Updates a report group.
+    #
+    # @option params [required, String] :arn
+    #   The ARN of the report group to update.
+    #
+    # @option params [Types::ReportExportConfig] :export_config
+    #   Used to specify an updated export type. Valid values are:
+    #
+    #   * `S3`\: The report results are exported to an S3 bucket.
+    #
+    #   * `NO_EXPORT`\: The report results are not exported.
+    #
+    # @return [Types::UpdateReportGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateReportGroupOutput#report_group #report_group} => Types::ReportGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_report_group({
+    #     arn: "NonEmptyString", # required
+    #     export_config: {
+    #       export_config_type: "S3", # accepts S3, NO_EXPORT
+    #       s3_destination: {
+    #         bucket: "NonEmptyString",
+    #         path: "String",
+    #         packaging: "ZIP", # accepts ZIP, NONE
+    #         encryption_key: "NonEmptyString",
+    #         encryption_disabled: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.report_group.arn #=> String
+    #   resp.report_group.name #=> String
+    #   resp.report_group.type #=> String, one of "TEST"
+    #   resp.report_group.export_config.export_config_type #=> String, one of "S3", "NO_EXPORT"
+    #   resp.report_group.export_config.s3_destination.bucket #=> String
+    #   resp.report_group.export_config.s3_destination.path #=> String
+    #   resp.report_group.export_config.s3_destination.packaging #=> String, one of "ZIP", "NONE"
+    #   resp.report_group.export_config.s3_destination.encryption_key #=> String
+    #   resp.report_group.export_config.s3_destination.encryption_disabled #=> Boolean
+    #   resp.report_group.created #=> Time
+    #   resp.report_group.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroup AWS API Documentation
+    #
+    # @overload update_report_group(params = {})
+    # @param [Hash] params ({})
+    def update_report_group(params = {}, options = {})
+      req = build_request(:update_report_group, params)
+      req.send_request(options)
+    end
+
     # Updates the webhook associated with an AWS CodeBuild build project.
     #
     # <note markdown="1"> If you use Bitbucket for your repository, `rotateSecret` is ignored.
@@ -2487,7 +2990,7 @@ module Aws::CodeBuild
     #
     # @option params [Array<Array>] :filter_groups
     #   An array of arrays of `WebhookFilter` objects used to determine if a
-    #   webhook event can trigger a build. A filter group must pcontain at
+    #   webhook event can trigger a build. A filter group must contain at
     #   least one `EVENT` `WebhookFilter`.
     #
     # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2546,7 +3049,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

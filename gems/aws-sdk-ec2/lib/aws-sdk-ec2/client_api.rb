@@ -855,6 +855,8 @@ module Aws::EC2
     GetConsoleOutputResult = Shapes::StructureShape.new(name: 'GetConsoleOutputResult')
     GetConsoleScreenshotRequest = Shapes::StructureShape.new(name: 'GetConsoleScreenshotRequest')
     GetConsoleScreenshotResult = Shapes::StructureShape.new(name: 'GetConsoleScreenshotResult')
+    GetDefaultCreditSpecificationRequest = Shapes::StructureShape.new(name: 'GetDefaultCreditSpecificationRequest')
+    GetDefaultCreditSpecificationResult = Shapes::StructureShape.new(name: 'GetDefaultCreditSpecificationResult')
     GetEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdRequest')
     GetEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'GetEbsDefaultKmsKeyIdResult')
     GetEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'GetEbsEncryptionByDefaultRequest')
@@ -974,6 +976,7 @@ module Aws::EC2
     InstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'InstanceCreditSpecificationRequest')
     InstanceEventId = Shapes::StringShape.new(name: 'InstanceEventId')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
+    InstanceFamilyCreditSpecification = Shapes::StructureShape.new(name: 'InstanceFamilyCreditSpecification')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
@@ -1136,6 +1139,8 @@ module Aws::EC2
     ModifyCapacityReservationResult = Shapes::StructureShape.new(name: 'ModifyCapacityReservationResult')
     ModifyClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointRequest')
     ModifyClientVpnEndpointResult = Shapes::StructureShape.new(name: 'ModifyClientVpnEndpointResult')
+    ModifyDefaultCreditSpecificationRequest = Shapes::StructureShape.new(name: 'ModifyDefaultCreditSpecificationRequest')
+    ModifyDefaultCreditSpecificationResult = Shapes::StructureShape.new(name: 'ModifyDefaultCreditSpecificationResult')
     ModifyEbsDefaultKmsKeyIdRequest = Shapes::StructureShape.new(name: 'ModifyEbsDefaultKmsKeyIdRequest')
     ModifyEbsDefaultKmsKeyIdResult = Shapes::StructureShape.new(name: 'ModifyEbsDefaultKmsKeyIdResult')
     ModifyFleetRequest = Shapes::StructureShape.new(name: 'ModifyFleetRequest')
@@ -1667,6 +1672,7 @@ module Aws::EC2
     UnassignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesRequest')
     UnassignIpv6AddressesResult = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesResult')
     UnassignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'UnassignPrivateIpAddressesRequest')
+    UnlimitedSupportedInstanceFamily = Shapes::StringShape.new(name: 'UnlimitedSupportedInstanceFamily')
     UnmonitorInstancesRequest = Shapes::StructureShape.new(name: 'UnmonitorInstancesRequest')
     UnmonitorInstancesResult = Shapes::StructureShape.new(name: 'UnmonitorInstancesResult')
     UnsuccessfulInstanceCreditSpecificationErrorCode = Shapes::StringShape.new(name: 'UnsuccessfulInstanceCreditSpecificationErrorCode')
@@ -5099,6 +5105,13 @@ module Aws::EC2
     GetConsoleScreenshotResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     GetConsoleScreenshotResult.struct_class = Types::GetConsoleScreenshotResult
 
+    GetDefaultCreditSpecificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetDefaultCreditSpecificationRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: UnlimitedSupportedInstanceFamily, required: true, location_name: "InstanceFamily"))
+    GetDefaultCreditSpecificationRequest.struct_class = Types::GetDefaultCreditSpecificationRequest
+
+    GetDefaultCreditSpecificationResult.add_member(:instance_family_credit_specification, Shapes::ShapeRef.new(shape: InstanceFamilyCreditSpecification, location_name: "instanceFamilyCreditSpecification"))
+    GetDefaultCreditSpecificationResult.struct_class = Types::GetDefaultCreditSpecificationResult
+
     GetEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetEbsDefaultKmsKeyIdRequest.struct_class = Types::GetEbsDefaultKmsKeyIdRequest
 
@@ -5650,6 +5663,10 @@ module Aws::EC2
     InstanceExportDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     InstanceExportDetails.add_member(:target_environment, Shapes::ShapeRef.new(shape: ExportEnvironment, location_name: "targetEnvironment"))
     InstanceExportDetails.struct_class = Types::InstanceExportDetails
+
+    InstanceFamilyCreditSpecification.add_member(:instance_family, Shapes::ShapeRef.new(shape: UnlimitedSupportedInstanceFamily, location_name: "instanceFamily"))
+    InstanceFamilyCreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
+    InstanceFamilyCreditSpecification.struct_class = Types::InstanceFamilyCreditSpecification
 
     InstanceIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
@@ -6203,6 +6220,14 @@ module Aws::EC2
 
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyClientVpnEndpointResult.struct_class = Types::ModifyClientVpnEndpointResult
+
+    ModifyDefaultCreditSpecificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyDefaultCreditSpecificationRequest.add_member(:instance_family, Shapes::ShapeRef.new(shape: UnlimitedSupportedInstanceFamily, required: true, location_name: "InstanceFamily"))
+    ModifyDefaultCreditSpecificationRequest.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CpuCredits"))
+    ModifyDefaultCreditSpecificationRequest.struct_class = Types::ModifyDefaultCreditSpecificationRequest
+
+    ModifyDefaultCreditSpecificationResult.add_member(:instance_family_credit_specification, Shapes::ShapeRef.new(shape: InstanceFamilyCreditSpecification, location_name: "instanceFamilyCreditSpecification"))
+    ModifyDefaultCreditSpecificationResult.struct_class = Types::ModifyDefaultCreditSpecificationResult
 
     ModifyEbsDefaultKmsKeyIdRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "KmsKeyId"))
     ModifyEbsDefaultKmsKeyIdRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -11301,6 +11326,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: GetConsoleScreenshotResult)
       end)
 
+      api.add_operation(:get_default_credit_specification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDefaultCreditSpecification"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDefaultCreditSpecificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDefaultCreditSpecificationResult)
+      end)
+
       api.add_operation(:get_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEbsDefaultKmsKeyId"
         o.http_method = "POST"
@@ -11453,6 +11486,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyClientVpnEndpointResult)
+      end)
+
+      api.add_operation(:modify_default_credit_specification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyDefaultCreditSpecification"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyDefaultCreditSpecificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyDefaultCreditSpecificationResult)
       end)
 
       api.add_operation(:modify_ebs_default_kms_key_id, Seahorse::Model::Operation.new.tap do |o|

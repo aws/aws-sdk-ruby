@@ -512,6 +512,7 @@ module Aws::MediaPackageVod
     # @return [Types::CreatePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePackagingGroupResponse#arn #arn} => String
+    #   * {Types::CreatePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::CreatePackagingGroupResponse#id #id} => String
     #
     # @example Request syntax with placeholder values
@@ -523,6 +524,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.domain_name #=> String
     #   resp.id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/CreatePackagingGroup AWS API Documentation
@@ -736,6 +738,7 @@ module Aws::MediaPackageVod
     # @return [Types::DescribePackagingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePackagingGroupResponse#arn #arn} => String
+    #   * {Types::DescribePackagingGroupResponse#domain_name #domain_name} => String
     #   * {Types::DescribePackagingGroupResponse#id #id} => String
     #
     # @example Request syntax with placeholder values
@@ -747,6 +750,7 @@ module Aws::MediaPackageVod
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.domain_name #=> String
     #   resp.id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DescribePackagingGroup AWS API Documentation
@@ -915,6 +919,7 @@ module Aws::MediaPackageVod
     #   resp.next_token #=> String
     #   resp.packaging_groups #=> Array
     #   resp.packaging_groups[0].arn #=> String
+    #   resp.packaging_groups[0].domain_name #=> String
     #   resp.packaging_groups[0].id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/ListPackagingGroups AWS API Documentation
@@ -939,7 +944,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

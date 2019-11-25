@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-11-25)
+------------------
+
+* Feature - This release adds additional query lifecycle metrics to the QueryExecutionStatistics object in GetQueryExecution response.
+
 1.21.0 (2019-10-23)
 ------------------
 

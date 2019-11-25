@@ -673,6 +673,69 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Adds a Virtual Private Cloud (VPC) configuration to the application.
+    # Applications can use VPCs to store and access resources securely.
+    #
+    # Note the following about VPC configurations for Kinesis Data Analytics
+    # applications:
+    #
+    # * VPC configurations are not supported for SQL applications.
+    #
+    # * When a VPC is added to a Kinesis Data Analytics application, the
+    #   application can no longer be accessed from the Internet directly. To
+    #   enable Internet access to the application, add an Internet gateway
+    #   to your VPC.
+    #
+    # @option params [required, String] :application_name
+    #   The name of an existing application.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   The version of the application to which you want to add the input
+    #   processing configuration. You can use the DescribeApplication
+    #   operation to get the current application version. If the version
+    #   specified is not the current version, the
+    #   `ConcurrentModificationException` is returned.
+    #
+    # @option params [required, Types::VpcConfiguration] :vpc_configuration
+    #   Description of the VPC to add to the application.
+    #
+    # @return [Types::AddApplicationVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddApplicationVpcConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::AddApplicationVpcConfigurationResponse#application_version_id #application_version_id} => Integer
+    #   * {Types::AddApplicationVpcConfigurationResponse#vpc_configuration_description #vpc_configuration_description} => Types::VpcConfigurationDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_application_vpc_configuration({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     vpc_configuration: { # required
+    #       subnet_ids: ["SubnetId"], # required
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #   resp.application_version_id #=> Integer
+    #   resp.vpc_configuration_description.vpc_configuration_id #=> String
+    #   resp.vpc_configuration_description.vpc_id #=> String
+    #   resp.vpc_configuration_description.subnet_ids #=> Array
+    #   resp.vpc_configuration_description.subnet_ids[0] #=> String
+    #   resp.vpc_configuration_description.security_group_ids #=> Array
+    #   resp.vpc_configuration_description.security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/AddApplicationVpcConfiguration AWS API Documentation
+    #
+    # @overload add_application_vpc_configuration(params = {})
+    # @param [Hash] params ({})
+    def add_application_vpc_configuration(params = {}, options = {})
+      req = build_request(:add_application_vpc_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon Kinesis Data Analytics application. For information
     # about creating a Kinesis Data Analytics application, see [Creating an
     # Application][1].
@@ -708,12 +771,11 @@ module Aws::KinesisAnalyticsV2
     #   key-value pair that identifies an application. Note that the maximum
     #   number of application tags includes system tags. The maximum number of
     #   user-defined application tags is 50. For more information, see [Using
-    #   Cost Allocation Tags][1] in the *AWS Billing and Cost Management
-    #   Guide*.
+    #   Tagging][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #   [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -862,6 +924,12 @@ module Aws::KinesisAnalyticsV2
     #       application_snapshot_configuration: {
     #         snapshots_enabled: false, # required
     #       },
+    #       vpc_configurations: [
+    #         {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #         },
+    #       ],
     #     },
     #     cloud_watch_logging_options: [
     #       {
@@ -961,6 +1029,13 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -1248,6 +1323,45 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
+    # Removes a VPC configuration from a Kinesis Data Analytics application.
+    #
+    # @option params [required, String] :application_name
+    #   The name of an existing application.
+    #
+    # @option params [required, Integer] :current_application_version_id
+    #   The current application version ID. You can retrieve the application
+    #   version ID using DescribeApplication.
+    #
+    # @option params [required, String] :vpc_configuration_id
+    #   The ID of the VPC configuration to delete.
+    #
+    # @return [Types::DeleteApplicationVpcConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteApplicationVpcConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::DeleteApplicationVpcConfigurationResponse#application_version_id #application_version_id} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application_vpc_configuration({
+    #     application_name: "ApplicationName", # required
+    #     current_application_version_id: 1, # required
+    #     vpc_configuration_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #   resp.application_version_id #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/DeleteApplicationVpcConfiguration AWS API Documentation
+    #
+    # @overload delete_application_vpc_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_application_vpc_configuration(params = {}, options = {})
+      req = build_request(:delete_application_vpc_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific Amazon Kinesis Data Analytics
     # application.
     #
@@ -1357,6 +1471,13 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -1587,7 +1708,12 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Retrieves the list of key-value tags assigned to the application.
+    # Retrieves the list of key-value tags assigned to the application. For
+    # more information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the application for which to retrieve tags.
@@ -1635,6 +1761,9 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.start_application({
     #     application_name: "ApplicationName", # required
     #     run_configuration: { # required
+    #       flink_run_configuration: {
+    #         allow_non_restored_state: false,
+    #       },
     #       sql_run_configurations: [
     #         {
     #           input_id: "Id", # required
@@ -1685,7 +1814,12 @@ module Aws::KinesisAnalyticsV2
 
     # Adds one or more key-value tags to a Kinesis Analytics application.
     # Note that the maximum number of application tags includes system tags.
-    # The maximum number of user-defined application tags is 50.
+    # The maximum number of user-defined application tags is 50. For more
+    # information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the application to assign the tags.
@@ -1716,7 +1850,12 @@ module Aws::KinesisAnalyticsV2
       req.send_request(options)
     end
 
-    # Removes one or more tags from a Kinesis Analytics application.
+    # Removes one or more tags from a Kinesis Analytics application. For
+    # more information, see [Using Tagging][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the Kinesis Analytics application from which to remove the
@@ -1920,9 +2059,19 @@ module Aws::KinesisAnalyticsV2
     #       application_snapshot_configuration_update: {
     #         snapshots_enabled_update: false, # required
     #       },
+    #       vpc_configuration_updates: [
+    #         {
+    #           vpc_configuration_id: "Id", # required
+    #           subnet_id_updates: ["SubnetId"],
+    #           security_group_id_updates: ["SecurityGroupId"],
+    #         },
+    #       ],
     #     },
     #     service_execution_role_update: "RoleARN",
     #     run_configuration_update: {
+    #       flink_run_configuration: {
+    #         allow_non_restored_state: false,
+    #       },
     #       application_restore_configuration: {
     #         application_restore_type: "SKIP_RESTORE_FROM_SNAPSHOT", # required, accepts SKIP_RESTORE_FROM_SNAPSHOT, RESTORE_FROM_LATEST_SNAPSHOT, RESTORE_FROM_CUSTOM_SNAPSHOT
     #         snapshot_name: "SnapshotName",
@@ -2021,6 +2170,13 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map #=> Hash
     #   resp.application_detail.application_configuration_description.environment_property_descriptions.property_group_descriptions[0].property_map["PropertyKey"] #=> String
     #   resp.application_detail.application_configuration_description.application_snapshot_configuration_description.snapshots_enabled #=> Boolean
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_configuration_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].vpc_id #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].subnet_ids[0] #=> String
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids #=> Array
+    #   resp.application_detail.application_configuration_description.vpc_configuration_descriptions[0].security_group_ids[0] #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions #=> Array
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].cloud_watch_logging_option_id #=> String
     #   resp.application_detail.cloud_watch_logging_option_descriptions[0].log_stream_arn #=> String
@@ -2048,7 +2204,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

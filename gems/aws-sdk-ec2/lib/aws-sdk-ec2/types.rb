@@ -22671,6 +22671,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetDefaultCreditSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_family: "t2", # required, accepts t2, t3, t3a
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDefaultCreditSpecificationRequest AWS API Documentation
+    #
+    class GetDefaultCreditSpecificationRequest < Struct.new(
+      :dry_run,
+      :instance_family)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_family_credit_specification
+    #   The default credit option for CPU usage of the instance family.
+    #   @return [Types::InstanceFamilyCreditSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDefaultCreditSpecificationResult AWS API Documentation
+    #
+    class GetDefaultCreditSpecificationResult < Struct.new(
+      :instance_family_credit_specification)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetEbsDefaultKmsKeyIdRequest
     #   data as a hash:
     #
@@ -25547,7 +25585,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 or T3 instance.
+    # Describes the credit option for CPU usage of a burstable performance
+    # instance.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -25566,7 +25605,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the credit option for CPU usage of a T2 or T3 instance.
+    # Describes the credit option for CPU usage of a burstable performance
+    # instance.
     #
     # @note When making an API call, you may pass InstanceCreditSpecificationRequest
     #   data as a hash:
@@ -25608,6 +25648,26 @@ module Aws::EC2
     class InstanceExportDetails < Struct.new(
       :instance_id,
       :target_environment)
+      include Aws::Structure
+    end
+
+    # Describes the default credit option for CPU usage of a burstable
+    # performance instance family.
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family.
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu_credits
+    #   The default credit option for CPU usage of the instance family.
+    #   Valid values are `standard` and `unlimited`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceFamilyCreditSpecification AWS API Documentation
+    #
+    class InstanceFamilyCreditSpecification < Struct.new(
+      :instance_family,
+      :cpu_credits)
       include Aws::Structure
     end
 
@@ -28571,6 +28631,52 @@ module Aws::EC2
     #
     class ModifyClientVpnEndpointResult < Struct.new(
       :return)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDefaultCreditSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_family: "t2", # required, accepts t2, t3, t3a
+    #         cpu_credits: "String", # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_family
+    #   The instance family.
+    #   @return [String]
+    #
+    # @!attribute [rw] cpu_credits
+    #   The credit option for CPU usage of the instance family.
+    #
+    #   Valid Values: `standard` \| `unlimited`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyDefaultCreditSpecificationRequest AWS API Documentation
+    #
+    class ModifyDefaultCreditSpecificationRequest < Struct.new(
+      :dry_run,
+      :instance_family,
+      :cpu_credits)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_family_credit_specification
+    #   The default credit option for CPU usage of the instance family.
+    #   @return [Types::InstanceFamilyCreditSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyDefaultCreditSpecificationResult AWS API Documentation
+    #
+    class ModifyDefaultCreditSpecificationResult < Struct.new(
+      :instance_family_credit_specification)
       include Aws::Structure
     end
 
@@ -36901,13 +37007,14 @@ module Aws::EC2
     #   @return [Types::InstanceMarketOptionsRequest]
     #
     # @!attribute [rw] credit_specification
-    #   The credit option for CPU usage of the T2 or T3 instance. Valid
-    #   values are `standard` and `unlimited`. To change this attribute
-    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
-    #   information, see [Burstable Performance Instances][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   The credit option for CPU usage of the burstable performance
+    #   instance. Valid values are `standard` and `unlimited`. To change
+    #   this attribute after launch, use [
+    #   ModifyInstanceCreditSpecification][1]. For more information, see
+    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
     #
     #
@@ -40260,8 +40367,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the T2 or T3 instance whose credit option for CPU usage was
-    # successfully modified.
+    # Describes the burstable performance instance whose credit option for
+    # CPU usage was successfully modified.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -41784,16 +41891,16 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the T2 or T3 instance whose credit option for CPU usage was
-    # not modified.
+    # Describes the burstable performance instance whose credit option for
+    # CPU usage was not modified.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The applicable error for the T2 or T3 instance whose credit option
-    #   for CPU usage was not modified.
+    #   The applicable error for the burstable performance instance whose
+    #   credit option for CPU usage was not modified.
     #   @return [Types::UnsuccessfulInstanceCreditSpecificationItemError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulInstanceCreditSpecificationItem AWS API Documentation
@@ -41804,8 +41911,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Information about the error for the T2 or T3 instance whose credit
-    # option for CPU usage was not modified.
+    # Information about the error for the burstable performance instance
+    # whose credit option for CPU usage was not modified.
     #
     # @!attribute [rw] code
     #   The error code.

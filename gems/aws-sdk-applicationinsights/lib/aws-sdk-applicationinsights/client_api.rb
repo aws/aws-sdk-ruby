@@ -12,6 +12,7 @@ module Aws::ApplicationInsights
     include Seahorse::Model
 
     AffectedResource = Shapes::StringShape.new(name: 'AffectedResource')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ApplicationComponent = Shapes::StructureShape.new(name: 'ApplicationComponent')
     ApplicationComponentList = Shapes::ListShape.new(name: 'ApplicationComponentList')
     ApplicationInfo = Shapes::StructureShape.new(name: 'ApplicationInfo')
@@ -23,10 +24,14 @@ module Aws::ApplicationInsights
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateComponentRequest = Shapes::StructureShape.new(name: 'CreateComponentRequest')
     CreateComponentResponse = Shapes::StructureShape.new(name: 'CreateComponentResponse')
+    CreateLogPatternRequest = Shapes::StructureShape.new(name: 'CreateLogPatternRequest')
+    CreateLogPatternResponse = Shapes::StructureShape.new(name: 'CreateLogPatternResponse')
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteComponentRequest = Shapes::StructureShape.new(name: 'DeleteComponentRequest')
     DeleteComponentResponse = Shapes::StructureShape.new(name: 'DeleteComponentResponse')
+    DeleteLogPatternRequest = Shapes::StructureShape.new(name: 'DeleteLogPatternRequest')
+    DeleteLogPatternResponse = Shapes::StructureShape.new(name: 'DeleteLogPatternResponse')
     DescribeApplicationRequest = Shapes::StructureShape.new(name: 'DescribeApplicationRequest')
     DescribeApplicationResponse = Shapes::StructureShape.new(name: 'DescribeApplicationResponse')
     DescribeComponentConfigurationRecommendationRequest = Shapes::StructureShape.new(name: 'DescribeComponentConfigurationRecommendationRequest')
@@ -35,6 +40,8 @@ module Aws::ApplicationInsights
     DescribeComponentConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeComponentConfigurationResponse')
     DescribeComponentRequest = Shapes::StructureShape.new(name: 'DescribeComponentRequest')
     DescribeComponentResponse = Shapes::StructureShape.new(name: 'DescribeComponentResponse')
+    DescribeLogPatternRequest = Shapes::StructureShape.new(name: 'DescribeLogPatternRequest')
+    DescribeLogPatternResponse = Shapes::StructureShape.new(name: 'DescribeLogPatternResponse')
     DescribeObservationRequest = Shapes::StructureShape.new(name: 'DescribeObservationRequest')
     DescribeObservationResponse = Shapes::StructureShape.new(name: 'DescribeObservationResponse')
     DescribeProblemObservationsRequest = Shapes::StructureShape.new(name: 'DescribeProblemObservationsRequest')
@@ -43,6 +50,7 @@ module Aws::ApplicationInsights
     DescribeProblemResponse = Shapes::StructureShape.new(name: 'DescribeProblemResponse')
     EndTime = Shapes::TimestampShape.new(name: 'EndTime')
     ErrorMsg = Shapes::StringShape.new(name: 'ErrorMsg')
+    ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     Feedback = Shapes::MapShape.new(name: 'Feedback')
     FeedbackKey = Shapes::StringShape.new(name: 'FeedbackKey')
     FeedbackValue = Shapes::StringShape.new(name: 'FeedbackValue')
@@ -54,10 +62,23 @@ module Aws::ApplicationInsights
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
     ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
+    ListLogPatternSetsRequest = Shapes::StructureShape.new(name: 'ListLogPatternSetsRequest')
+    ListLogPatternSetsResponse = Shapes::StructureShape.new(name: 'ListLogPatternSetsResponse')
+    ListLogPatternsRequest = Shapes::StructureShape.new(name: 'ListLogPatternsRequest')
+    ListLogPatternsResponse = Shapes::StructureShape.new(name: 'ListLogPatternsResponse')
     ListProblemsRequest = Shapes::StructureShape.new(name: 'ListProblemsRequest')
     ListProblemsResponse = Shapes::StructureShape.new(name: 'ListProblemsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogFilter = Shapes::StringShape.new(name: 'LogFilter')
     LogGroup = Shapes::StringShape.new(name: 'LogGroup')
+    LogPattern = Shapes::StructureShape.new(name: 'LogPattern')
+    LogPatternList = Shapes::ListShape.new(name: 'LogPatternList')
+    LogPatternName = Shapes::StringShape.new(name: 'LogPatternName')
+    LogPatternRank = Shapes::IntegerShape.new(name: 'LogPatternRank')
+    LogPatternRegex = Shapes::StringShape.new(name: 'LogPatternRegex')
+    LogPatternSetList = Shapes::ListShape.new(name: 'LogPatternSetList')
+    LogPatternSetName = Shapes::StringShape.new(name: 'LogPatternSetName')
     LogText = Shapes::StringShape.new(name: 'LogText')
     MaxEntities = Shapes::IntegerShape.new(name: 'MaxEntities')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -87,15 +108,28 @@ module Aws::ApplicationInsights
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StartTime = Shapes::TimestampShape.new(name: 'StartTime')
     Status = Shapes::StringShape.new(name: 'Status')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TagsAlreadyExistException = Shapes::StructureShape.new(name: 'TagsAlreadyExistException')
     Tier = Shapes::StringShape.new(name: 'Tier')
     Title = Shapes::StringShape.new(name: 'Title')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
     UpdateComponentConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateComponentConfigurationRequest')
     UpdateComponentConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateComponentConfigurationResponse')
     UpdateComponentRequest = Shapes::StructureShape.new(name: 'UpdateComponentRequest')
     UpdateComponentResponse = Shapes::StructureShape.new(name: 'UpdateComponentResponse')
+    UpdateLogPatternRequest = Shapes::StructureShape.new(name: 'UpdateLogPatternRequest')
+    UpdateLogPatternResponse = Shapes::StructureShape.new(name: 'UpdateLogPatternResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::FloatShape.new(name: 'Value')
 
@@ -122,6 +156,7 @@ module Aws::ApplicationInsights
     CreateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     CreateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     CreateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
+    CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))
@@ -134,6 +169,17 @@ module Aws::ApplicationInsights
 
     CreateComponentResponse.struct_class = Types::CreateComponentResponse
 
+    CreateLogPatternRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    CreateLogPatternRequest.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, required: true, location_name: "PatternSetName"))
+    CreateLogPatternRequest.add_member(:pattern_name, Shapes::ShapeRef.new(shape: LogPatternName, required: true, location_name: "PatternName"))
+    CreateLogPatternRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: LogPatternRegex, required: true, location_name: "Pattern"))
+    CreateLogPatternRequest.add_member(:rank, Shapes::ShapeRef.new(shape: LogPatternRank, required: true, location_name: "Rank"))
+    CreateLogPatternRequest.struct_class = Types::CreateLogPatternRequest
+
+    CreateLogPatternResponse.add_member(:log_pattern, Shapes::ShapeRef.new(shape: LogPattern, location_name: "LogPattern"))
+    CreateLogPatternResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    CreateLogPatternResponse.struct_class = Types::CreateLogPatternResponse
+
     DeleteApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
@@ -144,6 +190,13 @@ module Aws::ApplicationInsights
     DeleteComponentRequest.struct_class = Types::DeleteComponentRequest
 
     DeleteComponentResponse.struct_class = Types::DeleteComponentResponse
+
+    DeleteLogPatternRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    DeleteLogPatternRequest.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, required: true, location_name: "PatternSetName"))
+    DeleteLogPatternRequest.add_member(:pattern_name, Shapes::ShapeRef.new(shape: LogPatternName, required: true, location_name: "PatternName"))
+    DeleteLogPatternRequest.struct_class = Types::DeleteLogPatternRequest
+
+    DeleteLogPatternResponse.struct_class = Types::DeleteLogPatternResponse
 
     DescribeApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     DescribeApplicationRequest.struct_class = Types::DescribeApplicationRequest
@@ -175,6 +228,15 @@ module Aws::ApplicationInsights
     DescribeComponentResponse.add_member(:application_component, Shapes::ShapeRef.new(shape: ApplicationComponent, location_name: "ApplicationComponent"))
     DescribeComponentResponse.add_member(:resource_list, Shapes::ShapeRef.new(shape: ResourceList, location_name: "ResourceList"))
     DescribeComponentResponse.struct_class = Types::DescribeComponentResponse
+
+    DescribeLogPatternRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    DescribeLogPatternRequest.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, required: true, location_name: "PatternSetName"))
+    DescribeLogPatternRequest.add_member(:pattern_name, Shapes::ShapeRef.new(shape: LogPatternName, required: true, location_name: "PatternName"))
+    DescribeLogPatternRequest.struct_class = Types::DescribeLogPatternRequest
+
+    DescribeLogPatternResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    DescribeLogPatternResponse.add_member(:log_pattern, Shapes::ShapeRef.new(shape: LogPattern, location_name: "LogPattern"))
+    DescribeLogPatternResponse.struct_class = Types::DescribeLogPatternResponse
 
     DescribeObservationRequest.add_member(:observation_id, Shapes::ShapeRef.new(shape: ObservationId, required: true, location_name: "ObservationId"))
     DescribeObservationRequest.struct_class = Types::DescribeObservationRequest
@@ -217,6 +279,27 @@ module Aws::ApplicationInsights
     ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListComponentsResponse.struct_class = Types::ListComponentsResponse
 
+    ListLogPatternSetsRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    ListLogPatternSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEntities, location_name: "MaxResults"))
+    ListLogPatternSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListLogPatternSetsRequest.struct_class = Types::ListLogPatternSetsRequest
+
+    ListLogPatternSetsResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    ListLogPatternSetsResponse.add_member(:log_pattern_sets, Shapes::ShapeRef.new(shape: LogPatternSetList, location_name: "LogPatternSets"))
+    ListLogPatternSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListLogPatternSetsResponse.struct_class = Types::ListLogPatternSetsResponse
+
+    ListLogPatternsRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    ListLogPatternsRequest.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, location_name: "PatternSetName"))
+    ListLogPatternsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEntities, location_name: "MaxResults"))
+    ListLogPatternsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListLogPatternsRequest.struct_class = Types::ListLogPatternsRequest
+
+    ListLogPatternsResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    ListLogPatternsResponse.add_member(:log_patterns, Shapes::ShapeRef.new(shape: LogPatternList, location_name: "LogPatterns"))
+    ListLogPatternsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListLogPatternsResponse.struct_class = Types::ListLogPatternsResponse
+
     ListProblemsRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
     ListProblemsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
     ListProblemsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "EndTime"))
@@ -227,6 +310,22 @@ module Aws::ApplicationInsights
     ListProblemsResponse.add_member(:problem_list, Shapes::ShapeRef.new(shape: ProblemList, location_name: "ProblemList"))
     ListProblemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListProblemsResponse.struct_class = Types::ListProblemsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    LogPattern.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, location_name: "PatternSetName"))
+    LogPattern.add_member(:pattern_name, Shapes::ShapeRef.new(shape: LogPatternName, location_name: "PatternName"))
+    LogPattern.add_member(:pattern, Shapes::ShapeRef.new(shape: LogPatternRegex, location_name: "Pattern"))
+    LogPattern.add_member(:rank, Shapes::ShapeRef.new(shape: LogPatternRank, location_name: "Rank"))
+    LogPattern.struct_class = Types::LogPattern
+
+    LogPatternList.member = Shapes::ShapeRef.new(shape: LogPattern)
+
+    LogPatternSetList.member = Shapes::ShapeRef.new(shape: LogPatternSetName)
 
     Observation.add_member(:id, Shapes::ShapeRef.new(shape: ObservationId, location_name: "Id"))
     Observation.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
@@ -270,6 +369,33 @@ module Aws::ApplicationInsights
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TagsAlreadyExistException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TagsAlreadyExistException.struct_class = Types::TagsAlreadyExistException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
     UpdateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     UpdateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
     UpdateApplicationRequest.add_member(:ops_item_sns_topic_arn, Shapes::ShapeRef.new(shape: OpsItemSNSTopicArn, location_name: "OpsItemSNSTopicArn"))
@@ -295,6 +421,17 @@ module Aws::ApplicationInsights
     UpdateComponentRequest.struct_class = Types::UpdateComponentRequest
 
     UpdateComponentResponse.struct_class = Types::UpdateComponentResponse
+
+    UpdateLogPatternRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
+    UpdateLogPatternRequest.add_member(:pattern_set_name, Shapes::ShapeRef.new(shape: LogPatternSetName, required: true, location_name: "PatternSetName"))
+    UpdateLogPatternRequest.add_member(:pattern_name, Shapes::ShapeRef.new(shape: LogPatternName, required: true, location_name: "PatternName"))
+    UpdateLogPatternRequest.add_member(:pattern, Shapes::ShapeRef.new(shape: LogPatternRegex, location_name: "Pattern"))
+    UpdateLogPatternRequest.add_member(:rank, Shapes::ShapeRef.new(shape: LogPatternRank, location_name: "Rank"))
+    UpdateLogPatternRequest.struct_class = Types::UpdateLogPatternRequest
+
+    UpdateLogPatternResponse.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    UpdateLogPatternResponse.add_member(:log_pattern, Shapes::ShapeRef.new(shape: LogPattern, location_name: "LogPattern"))
+    UpdateLogPatternResponse.struct_class = Types::UpdateLogPatternResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException
@@ -329,6 +466,7 @@ module Aws::ApplicationInsights
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TagsAlreadyExistException)
       end)
 
       api.add_operation(:create_component, Seahorse::Model::Operation.new.tap do |o|
@@ -337,6 +475,18 @@ module Aws::ApplicationInsights
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateComponentRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_log_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLogPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLogPatternRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLogPatternResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -363,6 +513,18 @@ module Aws::ApplicationInsights
         o.output = Shapes::ShapeRef.new(shape: DeleteComponentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_log_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLogPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLogPatternRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLogPatternResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -405,6 +567,17 @@ module Aws::ApplicationInsights
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeComponentConfigurationRecommendationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeComponentConfigurationRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_log_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLogPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLogPatternRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLogPatternResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -476,6 +649,40 @@ module Aws::ApplicationInsights
         )
       end)
 
+      api.add_operation(:list_log_pattern_sets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLogPatternSets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLogPatternSetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLogPatternSetsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_log_patterns, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLogPatterns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListLogPatternsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLogPatternsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_problems, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProblems"
         o.http_method = "POST"
@@ -491,6 +698,37 @@ module Aws::ApplicationInsights
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -522,6 +760,18 @@ module Aws::ApplicationInsights
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateComponentConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateComponentConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_log_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLogPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLogPatternRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLogPatternResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
