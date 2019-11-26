@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-11-26)
+------------------
+
+* Feature - This release will introduce optional encryption over LDAP network traffic using SSL certificates between customer's self-managed AD and AWS Directory Services instances. The release also provides APIs for Certificate management.
+
 1.22.0 (2019-10-23)
 ------------------
 

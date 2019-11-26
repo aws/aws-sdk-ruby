@@ -294,11 +294,13 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::CreateApplicationResponse#creation_time #creation_time} => String
     #   * {Types::CreateApplicationResponse#description #description} => String
     #   * {Types::CreateApplicationResponse#home_page_url #home_page_url} => String
+    #   * {Types::CreateApplicationResponse#is_verified_author #is_verified_author} => Boolean
     #   * {Types::CreateApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::CreateApplicationResponse#license_url #license_url} => String
     #   * {Types::CreateApplicationResponse#name #name} => String
     #   * {Types::CreateApplicationResponse#readme_url #readme_url} => String
     #   * {Types::CreateApplicationResponse#spdx_license_id #spdx_license_id} => String
+    #   * {Types::CreateApplicationResponse#verified_author_url #verified_author_url} => String
     #   * {Types::CreateApplicationResponse#version #version} => Types::Version
     #
     # @example Request syntax with placeholder values
@@ -328,12 +330,14 @@ module Aws::ServerlessApplicationRepository
     #   resp.creation_time #=> String
     #   resp.description #=> String
     #   resp.home_page_url #=> String
+    #   resp.is_verified_author #=> Boolean
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
     #   resp.name #=> String
     #   resp.readme_url #=> String
     #   resp.spdx_license_id #=> String
+    #   resp.verified_author_url #=> String
     #   resp.version.application_id #=> String
     #   resp.version.creation_time #=> String
     #   resp.version.parameter_definitions #=> Array
@@ -609,11 +613,13 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::GetApplicationResponse#creation_time #creation_time} => String
     #   * {Types::GetApplicationResponse#description #description} => String
     #   * {Types::GetApplicationResponse#home_page_url #home_page_url} => String
+    #   * {Types::GetApplicationResponse#is_verified_author #is_verified_author} => Boolean
     #   * {Types::GetApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::GetApplicationResponse#license_url #license_url} => String
     #   * {Types::GetApplicationResponse#name #name} => String
     #   * {Types::GetApplicationResponse#readme_url #readme_url} => String
     #   * {Types::GetApplicationResponse#spdx_license_id #spdx_license_id} => String
+    #   * {Types::GetApplicationResponse#verified_author_url #verified_author_url} => String
     #   * {Types::GetApplicationResponse#version #version} => Types::Version
     #
     # @example Request syntax with placeholder values
@@ -630,12 +636,14 @@ module Aws::ServerlessApplicationRepository
     #   resp.creation_time #=> String
     #   resp.description #=> String
     #   resp.home_page_url #=> String
+    #   resp.is_verified_author #=> Boolean
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
     #   resp.name #=> String
     #   resp.readme_url #=> String
     #   resp.spdx_license_id #=> String
+    #   resp.verified_author_url #=> String
     #   resp.version.application_id #=> String
     #   resp.version.creation_time #=> String
     #   resp.version.parameter_definitions #=> Array
@@ -935,11 +943,13 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::UpdateApplicationResponse#creation_time #creation_time} => String
     #   * {Types::UpdateApplicationResponse#description #description} => String
     #   * {Types::UpdateApplicationResponse#home_page_url #home_page_url} => String
+    #   * {Types::UpdateApplicationResponse#is_verified_author #is_verified_author} => Boolean
     #   * {Types::UpdateApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::UpdateApplicationResponse#license_url #license_url} => String
     #   * {Types::UpdateApplicationResponse#name #name} => String
     #   * {Types::UpdateApplicationResponse#readme_url #readme_url} => String
     #   * {Types::UpdateApplicationResponse#spdx_license_id #spdx_license_id} => String
+    #   * {Types::UpdateApplicationResponse#verified_author_url #verified_author_url} => String
     #   * {Types::UpdateApplicationResponse#version #version} => Types::Version
     #
     # @example Request syntax with placeholder values
@@ -961,12 +971,14 @@ module Aws::ServerlessApplicationRepository
     #   resp.creation_time #=> String
     #   resp.description #=> String
     #   resp.home_page_url #=> String
+    #   resp.is_verified_author #=> Boolean
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
     #   resp.name #=> String
     #   resp.readme_url #=> String
     #   resp.spdx_license_id #=> String
+    #   resp.verified_author_url #=> String
     #   resp.version.application_id #=> String
     #   resp.version.creation_time #=> String
     #   resp.version.parameter_definitions #=> Array
@@ -1015,7 +1027,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

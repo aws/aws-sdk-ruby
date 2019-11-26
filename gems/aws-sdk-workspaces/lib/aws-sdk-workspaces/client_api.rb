@@ -719,9 +719,11 @@ module Aws::WorkSpaces
     WorkspaceBundle.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     WorkspaceBundle.add_member(:owner, Shapes::ShapeRef.new(shape: BundleOwner, location_name: "Owner"))
     WorkspaceBundle.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    WorkspaceBundle.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
     WorkspaceBundle.add_member(:root_storage, Shapes::ShapeRef.new(shape: RootStorage, location_name: "RootStorage"))
     WorkspaceBundle.add_member(:user_storage, Shapes::ShapeRef.new(shape: UserStorage, location_name: "UserStorage"))
     WorkspaceBundle.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
+    WorkspaceBundle.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     WorkspaceBundle.struct_class = Types::WorkspaceBundle
 
     WorkspaceConnectionStatus.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))

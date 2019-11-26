@@ -12,6 +12,7 @@ module Aws::CognitoIdentityProvider
     include Seahorse::Model
 
     AWSAccountIdType = Shapes::StringShape.new(name: 'AWSAccountIdType')
+    AccountRecoverySettingType = Shapes::StructureShape.new(name: 'AccountRecoverySettingType')
     AccountTakeoverActionNotifyType = Shapes::BooleanShape.new(name: 'AccountTakeoverActionNotifyType')
     AccountTakeoverActionType = Shapes::StructureShape.new(name: 'AccountTakeoverActionType')
     AccountTakeoverActionsType = Shapes::StructureShape.new(name: 'AccountTakeoverActionsType')
@@ -309,6 +310,7 @@ module Aws::CognitoIdentityProvider
     PrecedenceType = Shapes::IntegerShape.new(name: 'PrecedenceType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PreventUserExistenceErrorTypes = Shapes::StringShape.new(name: 'PreventUserExistenceErrorTypes')
+    PriorityType = Shapes::IntegerShape.new(name: 'PriorityType')
     ProviderDescription = Shapes::StructureShape.new(name: 'ProviderDescription')
     ProviderDetailsType = Shapes::MapShape.new(name: 'ProviderDetailsType')
     ProviderNameType = Shapes::StringShape.new(name: 'ProviderNameType')
@@ -317,6 +319,9 @@ module Aws::CognitoIdentityProvider
     ProvidersListType = Shapes::ListShape.new(name: 'ProvidersListType')
     QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
     QueryLimitType = Shapes::IntegerShape.new(name: 'QueryLimitType')
+    RecoveryMechanismsType = Shapes::ListShape.new(name: 'RecoveryMechanismsType')
+    RecoveryOptionNameType = Shapes::StringShape.new(name: 'RecoveryOptionNameType')
+    RecoveryOptionType = Shapes::StructureShape.new(name: 'RecoveryOptionType')
     RedirectUrlType = Shapes::StringShape.new(name: 'RedirectUrlType')
     RefreshTokenValidityType = Shapes::IntegerShape.new(name: 'RefreshTokenValidityType')
     ResendConfirmationCodeRequest = Shapes::StructureShape.new(name: 'ResendConfirmationCodeRequest')
@@ -451,6 +456,9 @@ module Aws::CognitoIdentityProvider
     VerifySoftwareTokenResponseType = Shapes::StringShape.new(name: 'VerifySoftwareTokenResponseType')
     VerifyUserAttributeRequest = Shapes::StructureShape.new(name: 'VerifyUserAttributeRequest')
     VerifyUserAttributeResponse = Shapes::StructureShape.new(name: 'VerifyUserAttributeResponse')
+
+    AccountRecoverySettingType.add_member(:recovery_mechanisms, Shapes::ShapeRef.new(shape: RecoveryMechanismsType, location_name: "RecoveryMechanisms"))
+    AccountRecoverySettingType.struct_class = Types::AccountRecoverySettingType
 
     AccountTakeoverActionType.add_member(:notify, Shapes::ShapeRef.new(shape: AccountTakeoverActionNotifyType, required: true, location_name: "Notify"))
     AccountTakeoverActionType.add_member(:event_action, Shapes::ShapeRef.new(shape: AccountTakeoverEventActionType, required: true, location_name: "EventAction"))
@@ -925,6 +933,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     CreateUserPoolRequest.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "Schema"))
     CreateUserPoolRequest.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    CreateUserPoolRequest.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     CreateUserPoolRequest.struct_class = Types::CreateUserPoolRequest
 
     CreateUserPoolResponse.add_member(:user_pool, Shapes::ShapeRef.new(shape: UserPoolType, location_name: "UserPool"))
@@ -1419,6 +1428,12 @@ module Aws::CognitoIdentityProvider
 
     ProvidersListType.member = Shapes::ShapeRef.new(shape: ProviderDescription)
 
+    RecoveryMechanismsType.member = Shapes::ShapeRef.new(shape: RecoveryOptionType)
+
+    RecoveryOptionType.add_member(:priority, Shapes::ShapeRef.new(shape: PriorityType, required: true, location_name: "Priority"))
+    RecoveryOptionType.add_member(:name, Shapes::ShapeRef.new(shape: RecoveryOptionNameType, required: true, location_name: "Name"))
+    RecoveryOptionType.struct_class = Types::RecoveryOptionType
+
     ResendConfirmationCodeRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, required: true, location_name: "ClientId"))
     ResendConfirmationCodeRequest.add_member(:secret_hash, Shapes::ShapeRef.new(shape: SecretHashType, location_name: "SecretHash"))
     ResendConfirmationCodeRequest.add_member(:user_context_data, Shapes::ShapeRef.new(shape: UserContextDataType, location_name: "UserContextData"))
@@ -1729,6 +1744,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.add_member(:user_pool_tags, Shapes::ShapeRef.new(shape: UserPoolTagsType, location_name: "UserPoolTags"))
     UpdateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UpdateUserPoolRequest.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UpdateUserPoolRequest.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     UpdateUserPoolRequest.struct_class = Types::UpdateUserPoolRequest
 
     UpdateUserPoolResponse.struct_class = Types::UpdateUserPoolResponse
@@ -1851,6 +1867,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UserPoolType.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
     UserPoolType.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
+    UserPoolType.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     UserPoolType.struct_class = Types::UserPoolType
 
     UserType.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username"))

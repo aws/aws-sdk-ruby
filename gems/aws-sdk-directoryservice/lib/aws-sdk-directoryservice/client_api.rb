@@ -30,6 +30,20 @@ module Aws::DirectoryService
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     CancelSchemaExtensionRequest = Shapes::StructureShape.new(name: 'CancelSchemaExtensionRequest')
     CancelSchemaExtensionResult = Shapes::StructureShape.new(name: 'CancelSchemaExtensionResult')
+    Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateAlreadyExistsException = Shapes::StructureShape.new(name: 'CertificateAlreadyExistsException')
+    CertificateCN = Shapes::StringShape.new(name: 'CertificateCN')
+    CertificateData = Shapes::StringShape.new(name: 'CertificateData')
+    CertificateDoesNotExistException = Shapes::StructureShape.new(name: 'CertificateDoesNotExistException')
+    CertificateExpiryDateTime = Shapes::TimestampShape.new(name: 'CertificateExpiryDateTime')
+    CertificateId = Shapes::StringShape.new(name: 'CertificateId')
+    CertificateInUseException = Shapes::StructureShape.new(name: 'CertificateInUseException')
+    CertificateInfo = Shapes::StructureShape.new(name: 'CertificateInfo')
+    CertificateLimitExceededException = Shapes::StructureShape.new(name: 'CertificateLimitExceededException')
+    CertificateRegisteredDateTime = Shapes::TimestampShape.new(name: 'CertificateRegisteredDateTime')
+    CertificateState = Shapes::StringShape.new(name: 'CertificateState')
+    CertificateStateReason = Shapes::StringShape.new(name: 'CertificateStateReason')
+    CertificatesInfo = Shapes::ListShape.new(name: 'CertificatesInfo')
     CidrIp = Shapes::StringShape.new(name: 'CidrIp')
     CidrIps = Shapes::ListShape.new(name: 'CidrIps')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
@@ -74,8 +88,12 @@ module Aws::DirectoryService
     DeleteSnapshotResult = Shapes::StructureShape.new(name: 'DeleteSnapshotResult')
     DeleteTrustRequest = Shapes::StructureShape.new(name: 'DeleteTrustRequest')
     DeleteTrustResult = Shapes::StructureShape.new(name: 'DeleteTrustResult')
+    DeregisterCertificateRequest = Shapes::StructureShape.new(name: 'DeregisterCertificateRequest')
+    DeregisterCertificateResult = Shapes::StructureShape.new(name: 'DeregisterCertificateResult')
     DeregisterEventTopicRequest = Shapes::StructureShape.new(name: 'DeregisterEventTopicRequest')
     DeregisterEventTopicResult = Shapes::StructureShape.new(name: 'DeregisterEventTopicResult')
+    DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
+    DescribeCertificateResult = Shapes::StructureShape.new(name: 'DescribeCertificateResult')
     DescribeConditionalForwardersRequest = Shapes::StructureShape.new(name: 'DescribeConditionalForwardersRequest')
     DescribeConditionalForwardersResult = Shapes::StructureShape.new(name: 'DescribeConditionalForwardersResult')
     DescribeDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeDirectoriesRequest')
@@ -84,6 +102,8 @@ module Aws::DirectoryService
     DescribeDomainControllersResult = Shapes::StructureShape.new(name: 'DescribeDomainControllersResult')
     DescribeEventTopicsRequest = Shapes::StructureShape.new(name: 'DescribeEventTopicsRequest')
     DescribeEventTopicsResult = Shapes::StructureShape.new(name: 'DescribeEventTopicsResult')
+    DescribeLDAPSSettingsRequest = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsRequest')
+    DescribeLDAPSSettingsResult = Shapes::StructureShape.new(name: 'DescribeLDAPSSettingsResult')
     DescribeSharedDirectoriesRequest = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesRequest')
     DescribeSharedDirectoriesResult = Shapes::StructureShape.new(name: 'DescribeSharedDirectoriesResult')
     DescribeSnapshotsRequest = Shapes::StructureShape.new(name: 'DescribeSnapshotsRequest')
@@ -97,6 +117,7 @@ module Aws::DirectoryService
     DirectoryConnectSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryConnectSettingsDescription')
     DirectoryDescription = Shapes::StructureShape.new(name: 'DirectoryDescription')
     DirectoryDescriptions = Shapes::ListShape.new(name: 'DirectoryDescriptions')
+    DirectoryDoesNotExistException = Shapes::StructureShape.new(name: 'DirectoryDoesNotExistException')
     DirectoryEdition = Shapes::StringShape.new(name: 'DirectoryEdition')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryIds = Shapes::ListShape.new(name: 'DirectoryIds')
@@ -111,6 +132,8 @@ module Aws::DirectoryService
     DirectoryUnavailableException = Shapes::StructureShape.new(name: 'DirectoryUnavailableException')
     DirectoryVpcSettings = Shapes::StructureShape.new(name: 'DirectoryVpcSettings')
     DirectoryVpcSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryVpcSettingsDescription')
+    DisableLDAPSRequest = Shapes::StructureShape.new(name: 'DisableLDAPSRequest')
+    DisableLDAPSResult = Shapes::StructureShape.new(name: 'DisableLDAPSResult')
     DisableRadiusRequest = Shapes::StructureShape.new(name: 'DisableRadiusRequest')
     DisableRadiusResult = Shapes::StructureShape.new(name: 'DisableRadiusResult')
     DisableSsoRequest = Shapes::StructureShape.new(name: 'DisableSsoRequest')
@@ -123,6 +146,8 @@ module Aws::DirectoryService
     DomainControllerStatus = Shapes::StringShape.new(name: 'DomainControllerStatus')
     DomainControllerStatusReason = Shapes::StringShape.new(name: 'DomainControllerStatusReason')
     DomainControllers = Shapes::ListShape.new(name: 'DomainControllers')
+    EnableLDAPSRequest = Shapes::StructureShape.new(name: 'EnableLDAPSRequest')
+    EnableLDAPSResult = Shapes::StructureShape.new(name: 'EnableLDAPSResult')
     EnableRadiusRequest = Shapes::StructureShape.new(name: 'EnableRadiusRequest')
     EnableRadiusResult = Shapes::StructureShape.new(name: 'EnableRadiusResult')
     EnableSsoRequest = Shapes::StructureShape.new(name: 'EnableSsoRequest')
@@ -138,6 +163,8 @@ module Aws::DirectoryService
     GetSnapshotLimitsRequest = Shapes::StructureShape.new(name: 'GetSnapshotLimitsRequest')
     GetSnapshotLimitsResult = Shapes::StructureShape.new(name: 'GetSnapshotLimitsResult')
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
+    InvalidCertificateException = Shapes::StructureShape.new(name: 'InvalidCertificateException')
+    InvalidLDAPSStatusException = Shapes::StructureShape.new(name: 'InvalidLDAPSStatusException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
@@ -151,10 +178,17 @@ module Aws::DirectoryService
     IpRouteStatusReason = Shapes::StringShape.new(name: 'IpRouteStatusReason')
     IpRoutes = Shapes::ListShape.new(name: 'IpRoutes')
     IpRoutesInfo = Shapes::ListShape.new(name: 'IpRoutesInfo')
+    LDAPSSettingInfo = Shapes::StructureShape.new(name: 'LDAPSSettingInfo')
+    LDAPSSettingsInfo = Shapes::ListShape.new(name: 'LDAPSSettingsInfo')
+    LDAPSStatus = Shapes::StringShape.new(name: 'LDAPSStatus')
+    LDAPSStatusReason = Shapes::StringShape.new(name: 'LDAPSStatusReason')
+    LDAPSType = Shapes::StringShape.new(name: 'LDAPSType')
     LastUpdatedDateTime = Shapes::TimestampShape.new(name: 'LastUpdatedDateTime')
     LaunchTime = Shapes::TimestampShape.new(name: 'LaunchTime')
     LdifContent = Shapes::StringShape.new(name: 'LdifContent')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
+    ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
+    ListCertificatesResult = Shapes::StructureShape.new(name: 'ListCertificatesResult')
     ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
     ListIpRoutesResult = Shapes::StructureShape.new(name: 'ListIpRoutesResult')
     ListLogSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListLogSubscriptionsRequest')
@@ -168,10 +202,12 @@ module Aws::DirectoryService
     LogSubscriptions = Shapes::ListShape.new(name: 'LogSubscriptions')
     ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NoAvailableCertificateException = Shapes::StructureShape.new(name: 'NoAvailableCertificateException')
     Notes = Shapes::StringShape.new(name: 'Notes')
     OrganizationalUnitDN = Shapes::StringShape.new(name: 'OrganizationalUnitDN')
     OrganizationsException = Shapes::StructureShape.new(name: 'OrganizationsException')
     OwnerDirectoryDescription = Shapes::StructureShape.new(name: 'OwnerDirectoryDescription')
+    PageLimit = Shapes::IntegerShape.new(name: 'PageLimit')
     Password = Shapes::StringShape.new(name: 'Password')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     RadiusAuthenticationProtocol = Shapes::StringShape.new(name: 'RadiusAuthenticationProtocol')
@@ -181,6 +217,8 @@ module Aws::DirectoryService
     RadiusSharedSecret = Shapes::StringShape.new(name: 'RadiusSharedSecret')
     RadiusStatus = Shapes::StringShape.new(name: 'RadiusStatus')
     RadiusTimeout = Shapes::IntegerShape.new(name: 'RadiusTimeout')
+    RegisterCertificateRequest = Shapes::StructureShape.new(name: 'RegisterCertificateRequest')
+    RegisterCertificateResult = Shapes::StructureShape.new(name: 'RegisterCertificateResult')
     RegisterEventTopicRequest = Shapes::StructureShape.new(name: 'RegisterEventTopicRequest')
     RegisterEventTopicResult = Shapes::StructureShape.new(name: 'RegisterEventTopicResult')
     RejectSharedDirectoryRequest = Shapes::StructureShape.new(name: 'RejectSharedDirectoryRequest')
@@ -319,6 +357,37 @@ module Aws::DirectoryService
 
     CancelSchemaExtensionResult.struct_class = Types::CancelSchemaExtensionResult
 
+    Certificate.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
+    Certificate.add_member(:state, Shapes::ShapeRef.new(shape: CertificateState, location_name: "State"))
+    Certificate.add_member(:state_reason, Shapes::ShapeRef.new(shape: CertificateStateReason, location_name: "StateReason"))
+    Certificate.add_member(:common_name, Shapes::ShapeRef.new(shape: CertificateCN, location_name: "CommonName"))
+    Certificate.add_member(:registered_date_time, Shapes::ShapeRef.new(shape: CertificateRegisteredDateTime, location_name: "RegisteredDateTime"))
+    Certificate.add_member(:expiry_date_time, Shapes::ShapeRef.new(shape: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
+    Certificate.struct_class = Types::Certificate
+
+    CertificateAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CertificateAlreadyExistsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateAlreadyExistsException.struct_class = Types::CertificateAlreadyExistsException
+
+    CertificateDoesNotExistException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CertificateDoesNotExistException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateDoesNotExistException.struct_class = Types::CertificateDoesNotExistException
+
+    CertificateInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CertificateInUseException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateInUseException.struct_class = Types::CertificateInUseException
+
+    CertificateInfo.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
+    CertificateInfo.add_member(:common_name, Shapes::ShapeRef.new(shape: CertificateCN, location_name: "CommonName"))
+    CertificateInfo.add_member(:state, Shapes::ShapeRef.new(shape: CertificateState, location_name: "State"))
+    CertificateInfo.struct_class = Types::CertificateInfo
+
+    CertificateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CertificateLimitExceededException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    CertificateLimitExceededException.struct_class = Types::CertificateLimitExceededException
+
+    CertificatesInfo.member = Shapes::ShapeRef.new(shape: CertificateInfo)
+
     CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
 
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
@@ -453,11 +522,24 @@ module Aws::DirectoryService
     DeleteTrustResult.add_member(:trust_id, Shapes::ShapeRef.new(shape: TrustId, location_name: "TrustId"))
     DeleteTrustResult.struct_class = Types::DeleteTrustResult
 
+    DeregisterCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DeregisterCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
+    DeregisterCertificateRequest.struct_class = Types::DeregisterCertificateRequest
+
+    DeregisterCertificateResult.struct_class = Types::DeregisterCertificateResult
+
     DeregisterEventTopicRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DeregisterEventTopicRequest.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, required: true, location_name: "TopicName"))
     DeregisterEventTopicRequest.struct_class = Types::DeregisterEventTopicRequest
 
     DeregisterEventTopicResult.struct_class = Types::DeregisterEventTopicResult
+
+    DescribeCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location_name: "CertificateId"))
+    DescribeCertificateRequest.struct_class = Types::DescribeCertificateRequest
+
+    DescribeCertificateResult.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    DescribeCertificateResult.struct_class = Types::DescribeCertificateResult
 
     DescribeConditionalForwardersRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DescribeConditionalForwardersRequest.add_member(:remote_domain_names, Shapes::ShapeRef.new(shape: RemoteDomainNames, location_name: "RemoteDomainNames"))
@@ -491,6 +573,16 @@ module Aws::DirectoryService
 
     DescribeEventTopicsResult.add_member(:event_topics, Shapes::ShapeRef.new(shape: EventTopics, location_name: "EventTopics"))
     DescribeEventTopicsResult.struct_class = Types::DescribeEventTopicsResult
+
+    DescribeLDAPSSettingsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DescribeLDAPSSettingsRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
+    DescribeLDAPSSettingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeLDAPSSettingsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    DescribeLDAPSSettingsRequest.struct_class = Types::DescribeLDAPSSettingsRequest
+
+    DescribeLDAPSSettingsResult.add_member(:ldaps_settings_info, Shapes::ShapeRef.new(shape: LDAPSSettingsInfo, location_name: "LDAPSSettingsInfo"))
+    DescribeLDAPSSettingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeLDAPSSettingsResult.struct_class = Types::DescribeLDAPSSettingsResult
 
     DescribeSharedDirectoriesRequest.add_member(:owner_directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "OwnerDirectoryId"))
     DescribeSharedDirectoriesRequest.add_member(:shared_directory_ids, Shapes::ShapeRef.new(shape: DirectoryIds, location_name: "SharedDirectoryIds"))
@@ -568,6 +660,10 @@ module Aws::DirectoryService
 
     DirectoryDescriptions.member = Shapes::ShapeRef.new(shape: DirectoryDescription)
 
+    DirectoryDoesNotExistException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryDoesNotExistException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    DirectoryDoesNotExistException.struct_class = Types::DirectoryDoesNotExistException
+
     DirectoryIds.member = Shapes::ShapeRef.new(shape: DirectoryId)
 
     DirectoryLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
@@ -603,6 +699,12 @@ module Aws::DirectoryService
     DirectoryVpcSettingsDescription.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     DirectoryVpcSettingsDescription.struct_class = Types::DirectoryVpcSettingsDescription
 
+    DisableLDAPSRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    DisableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
+    DisableLDAPSRequest.struct_class = Types::DisableLDAPSRequest
+
+    DisableLDAPSResult.struct_class = Types::DisableLDAPSResult
+
     DisableRadiusRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     DisableRadiusRequest.struct_class = Types::DisableRadiusRequest
 
@@ -636,6 +738,12 @@ module Aws::DirectoryService
     DomainControllerLimitExceededException.struct_class = Types::DomainControllerLimitExceededException
 
     DomainControllers.member = Shapes::ShapeRef.new(shape: DomainController)
+
+    EnableLDAPSRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    EnableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
+    EnableLDAPSRequest.struct_class = Types::EnableLDAPSRequest
+
+    EnableLDAPSResult.struct_class = Types::EnableLDAPSResult
 
     EnableRadiusRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     EnableRadiusRequest.add_member(:radius_settings, Shapes::ShapeRef.new(shape: RadiusSettings, required: true, location_name: "RadiusSettings"))
@@ -682,6 +790,14 @@ module Aws::DirectoryService
     InsufficientPermissionsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     InsufficientPermissionsException.struct_class = Types::InsufficientPermissionsException
 
+    InvalidCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidCertificateException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidCertificateException.struct_class = Types::InvalidCertificateException
+
+    InvalidLDAPSStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidLDAPSStatusException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    InvalidLDAPSStatusException.struct_class = Types::InvalidLDAPSStatusException
+
     InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     InvalidNextTokenException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
@@ -719,6 +835,22 @@ module Aws::DirectoryService
     IpRoutes.member = Shapes::ShapeRef.new(shape: IpRoute)
 
     IpRoutesInfo.member = Shapes::ShapeRef.new(shape: IpRouteInfo)
+
+    LDAPSSettingInfo.add_member(:ldaps_status, Shapes::ShapeRef.new(shape: LDAPSStatus, location_name: "LDAPSStatus"))
+    LDAPSSettingInfo.add_member(:ldaps_status_reason, Shapes::ShapeRef.new(shape: LDAPSStatusReason, location_name: "LDAPSStatusReason"))
+    LDAPSSettingInfo.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: LastUpdatedDateTime, location_name: "LastUpdatedDateTime"))
+    LDAPSSettingInfo.struct_class = Types::LDAPSSettingInfo
+
+    LDAPSSettingsInfo.member = Shapes::ShapeRef.new(shape: LDAPSSettingInfo)
+
+    ListCertificatesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    ListCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCertificatesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PageLimit, location_name: "Limit"))
+    ListCertificatesRequest.struct_class = Types::ListCertificatesRequest
+
+    ListCertificatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCertificatesResult.add_member(:certificates_info, Shapes::ShapeRef.new(shape: CertificatesInfo, location_name: "CertificatesInfo"))
+    ListCertificatesResult.struct_class = Types::ListCertificatesResult
 
     ListIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     ListIpRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -763,6 +895,10 @@ module Aws::DirectoryService
 
     LogSubscriptions.member = Shapes::ShapeRef.new(shape: LogSubscription)
 
+    NoAvailableCertificateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NoAvailableCertificateException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
+    NoAvailableCertificateException.struct_class = Types::NoAvailableCertificateException
+
     OrganizationsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     OrganizationsException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     OrganizationsException.struct_class = Types::OrganizationsException
@@ -784,6 +920,13 @@ module Aws::DirectoryService
     RadiusSettings.add_member(:display_label, Shapes::ShapeRef.new(shape: RadiusDisplayLabel, location_name: "DisplayLabel"))
     RadiusSettings.add_member(:use_same_username, Shapes::ShapeRef.new(shape: UseSameUsername, location_name: "UseSameUsername"))
     RadiusSettings.struct_class = Types::RadiusSettings
+
+    RegisterCertificateRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    RegisterCertificateRequest.add_member(:certificate_data, Shapes::ShapeRef.new(shape: CertificateData, required: true, location_name: "CertificateData"))
+    RegisterCertificateRequest.struct_class = Types::RegisterCertificateRequest
+
+    RegisterCertificateResult.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
+    RegisterCertificateResult.struct_class = Types::RegisterCertificateResult
 
     RegisterEventTopicRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
     RegisterEventTopicRequest.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, required: true, location_name: "TopicName"))
@@ -1240,6 +1383,22 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:deregister_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:deregister_event_topic, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeregisterEventTopic"
         o.http_method = "POST"
@@ -1247,6 +1406,20 @@ module Aws::DirectoryService
         o.input = Shapes::ShapeRef.new(shape: DeregisterEventTopicRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterEventTopicResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:describe_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
@@ -1311,6 +1484,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:describe_ldaps_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLDAPSSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLDAPSSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLDAPSSettingsResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:describe_shared_directories, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSharedDirectories"
         o.http_method = "POST"
@@ -1352,6 +1539,21 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:disable_ldaps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableLDAPS"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableLDAPSRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableLDAPSResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLDAPSStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:disable_radius, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableRadius"
         o.http_method = "POST"
@@ -1372,6 +1574,22 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
         o.errors << Shapes::ShapeRef.new(shape: AuthenticationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:enable_ldaps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableLDAPS"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableLDAPSRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableLDAPSResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: NoAvailableCertificateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLDAPSStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
@@ -1424,6 +1642,20 @@ module Aws::DirectoryService
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
+      api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCertificatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:list_ip_routes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListIpRoutes"
         o.http_method = "POST"
@@ -1469,6 +1701,23 @@ module Aws::DirectoryService
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:register_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)

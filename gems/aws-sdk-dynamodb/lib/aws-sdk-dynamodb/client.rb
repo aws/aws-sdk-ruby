@@ -1347,7 +1347,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -1411,6 +1411,10 @@ module Aws::DynamoDB
     #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
+    #   resp.table_description.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_reason #=> String
+    #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1484,6 +1488,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
+    #   resp.backup_description.source_table_feature_details.sse_description.inaccessible_encryption_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup AWS API Documentation
     #
@@ -1836,7 +1841,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -1900,6 +1905,10 @@ module Aws::DynamoDB
     #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
+    #   resp.table_description.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_reason #=> String
+    #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -1974,6 +1983,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.backup_description.source_table_feature_details.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.backup_description.source_table_feature_details.sse_description.kms_master_key_arn #=> String
+    #   resp.backup_description.source_table_feature_details.sse_description.inaccessible_encryption_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup AWS API Documentation
     #
@@ -2027,6 +2037,51 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_continuous_backups(params = {}, options = {})
       req = build_request(:describe_continuous_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns information about contributor insights, for a given table or
+    # global secondary index.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to describe.
+    #
+    # @option params [String] :index_name
+    #   The name of the global secondary index to describe, if applicable.
+    #
+    # @return [Types::DescribeContributorInsightsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContributorInsightsOutput#table_name #table_name} => String
+    #   * {Types::DescribeContributorInsightsOutput#index_name #index_name} => String
+    #   * {Types::DescribeContributorInsightsOutput#contributor_insights_rule_list #contributor_insights_rule_list} => Array&lt;String&gt;
+    #   * {Types::DescribeContributorInsightsOutput#contributor_insights_status #contributor_insights_status} => String
+    #   * {Types::DescribeContributorInsightsOutput#last_update_date_time #last_update_date_time} => Time
+    #   * {Types::DescribeContributorInsightsOutput#failure_exception #failure_exception} => Types::FailureException
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_contributor_insights({
+    #     table_name: "TableName", # required
+    #     index_name: "IndexName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.index_name #=> String
+    #   resp.contributor_insights_rule_list #=> Array
+    #   resp.contributor_insights_rule_list[0] #=> String
+    #   resp.contributor_insights_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
+    #   resp.last_update_date_time #=> Time
+    #   resp.failure_exception.exception_name #=> String
+    #   resp.failure_exception.exception_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsights AWS API Documentation
+    #
+    # @overload describe_contributor_insights(params = {})
+    # @param [Hash] params ({})
+    def describe_contributor_insights(params = {}, options = {})
+      req = build_request(:describe_contributor_insights, params)
       req.send_request(options)
     end
 
@@ -2378,7 +2433,7 @@ module Aws::DynamoDB
     #   resp.table.key_schema #=> Array
     #   resp.table.key_schema[0].attribute_name #=> String
     #   resp.table.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table.creation_date_time #=> Time
     #   resp.table.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table.provisioned_throughput.last_decrease_date_time #=> Time
@@ -2442,6 +2497,10 @@ module Aws::DynamoDB
     #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table.sse_description.kms_master_key_arn #=> String
+    #   resp.table.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table.archival_summary.archival_date_time #=> Time
+    #   resp.table.archival_summary.archival_reason #=> String
+    #   resp.table.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
@@ -2479,7 +2538,7 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.table_auto_scaling_description.table_name #=> String
-    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_auto_scaling_description.replicas #=> Array
     #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
     #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
@@ -2842,6 +2901,48 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def list_backups(params = {}, options = {})
       req = build_request(:list_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of ContributorInsightsSummary for a table and all its
+    # global secondary indexes.
+    #
+    # @option params [String] :table_name
+    #   The name of the table.
+    #
+    # @option params [String] :next_token
+    #   A token to for the desired page, if there is one.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per page.
+    #
+    # @return [Types::ListContributorInsightsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListContributorInsightsOutput#contributor_insights_summaries #contributor_insights_summaries} => Array&lt;Types::ContributorInsightsSummary&gt;
+    #   * {Types::ListContributorInsightsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_contributor_insights({
+    #     table_name: "TableName",
+    #     next_token: "NextTokenString",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contributor_insights_summaries #=> Array
+    #   resp.contributor_insights_summaries[0].table_name #=> String
+    #   resp.contributor_insights_summaries[0].index_name #=> String
+    #   resp.contributor_insights_summaries[0].contributor_insights_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListContributorInsights AWS API Documentation
+    #
+    # @overload list_contributor_insights(params = {})
+    # @param [Hash] params ({})
+    def list_contributor_insights(params = {}, options = {})
+      req = build_request(:list_contributor_insights, params)
       req.send_request(options)
     end
 
@@ -3970,7 +4071,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -4034,6 +4135,10 @@ module Aws::DynamoDB
     #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
+    #   resp.table_description.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_reason #=> String
+    #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -4175,7 +4280,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -4239,6 +4344,10 @@ module Aws::DynamoDB
     #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
+    #   resp.table_description.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_reason #=> String
+    #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -5124,6 +5233,47 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def update_continuous_backups(params = {}, options = {})
       req = build_request(:update_continuous_backups, params)
+      req.send_request(options)
+    end
+
+    # Updates the status for contributor insights for a specific table or
+    # index.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [String] :index_name
+    #   The global secondary index name, if applicable.
+    #
+    # @option params [required, String] :contributor_insights_action
+    #   Represents the contributor insights action.
+    #
+    # @return [Types::UpdateContributorInsightsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContributorInsightsOutput#table_name #table_name} => String
+    #   * {Types::UpdateContributorInsightsOutput#index_name #index_name} => String
+    #   * {Types::UpdateContributorInsightsOutput#contributor_insights_status #contributor_insights_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contributor_insights({
+    #     table_name: "TableName", # required
+    #     index_name: "IndexName",
+    #     contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.index_name #=> String
+    #   resp.contributor_insights_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsights AWS API Documentation
+    #
+    # @overload update_contributor_insights(params = {})
+    # @param [Hash] params ({})
+    def update_contributor_insights(params = {}, options = {})
+      req = build_request(:update_contributor_insights, params)
       req.send_request(options)
     end
 
@@ -6050,7 +6200,7 @@ module Aws::DynamoDB
     #   resp.table_description.key_schema #=> Array
     #   resp.table_description.key_schema[0].attribute_name #=> String
     #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
-    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_description.creation_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
     #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
@@ -6114,6 +6264,10 @@ module Aws::DynamoDB
     #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "UPDATING"
     #   resp.table_description.sse_description.sse_type #=> String, one of "AES256", "KMS"
     #   resp.table_description.sse_description.kms_master_key_arn #=> String
+    #   resp.table_description.sse_description.inaccessible_encryption_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_date_time #=> Time
+    #   resp.table_description.archival_summary.archival_reason #=> String
+    #   resp.table_description.archival_summary.archival_backup_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -6237,7 +6391,7 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.table_auto_scaling_description.table_name #=> String
-    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_auto_scaling_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE", "INACCESSIBLE_ENCRYPTION_CREDENTIALS", "ARCHIVING", "ARCHIVED"
     #   resp.table_auto_scaling_description.replicas #=> Array
     #   resp.table_auto_scaling_description.replicas[0].region_name #=> String
     #   resp.table_auto_scaling_description.replicas[0].global_secondary_indexes #=> Array
@@ -6379,7 +6533,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

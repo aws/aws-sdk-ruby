@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2019-11-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ElasticInference`.
+
 1.245.0 (2019-11-25)
 ------------------
 

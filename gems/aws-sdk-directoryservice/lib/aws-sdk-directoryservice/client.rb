@@ -492,7 +492,7 @@ module Aws::DirectoryService
     #   The password for the on-premises user account.
     #
     # @option params [String] :description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #
     # @option params [required, String] :size
     #   The size of the directory.
@@ -681,32 +681,37 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Creates a Simple AD directory.
+    # Creates a Simple AD directory. For more information, see [Simple
+    # Active Directory][1] in the *AWS Directory Service Admin Guide*.
     #
     # Before you call `CreateDirectory`, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
     # about what permissions are required to run the `CreateDirectory`
     # operation, see [AWS Directory Service API Permissions: Actions,
-    # Resources, and Conditions Reference][1].
+    # Resources, and Conditions Reference][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+    # [1]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html
+    # [2]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
     #
     # @option params [required, String] :name
     #   The fully qualified name for the directory, such as
     #   `corp.example.com`.
     #
     # @option params [String] :short_name
-    #   The short name of the directory, such as `CORP`.
+    #   The NetBIOS name of the directory, such as `CORP`.
     #
     # @option params [required, String] :password
     #   The password for the directory administrator. The directory creation
     #   process creates a directory administrator account with the user name
     #   `Administrator` and this password.
     #
+    #   If you need to change the password for the administrator account, you
+    #   can use the ResetUserPassword API call.
+    #
     # @option params [String] :description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #
     # @option params [required, String] :size
     #   The size of the directory.
@@ -755,13 +760,13 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Creates a subscription to forward real time Directory Service domain
-    # controller security logs to the specified CloudWatch log group in your
-    # AWS account.
+    # Creates a subscription to forward real-time Directory Service domain
+    # controller security logs to the specified Amazon CloudWatch log group
+    # in your AWS account.
     #
     # @option params [required, String] :directory_id
-    #   Identifier (ID) of the directory to which you want to subscribe and
-    #   receive real-time logs to your specified CloudWatch log group.
+    #   Identifier of the directory to which you want to subscribe and receive
+    #   real-time logs to your specified CloudWatch log group.
     #
     # @option params [required, String] :log_group_name
     #   The name of the CloudWatch log group where the real-time domain
@@ -785,43 +790,49 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Creates an AWS Managed Microsoft AD directory.
+    # Creates a Microsoft AD directory in the AWS Cloud. For more
+    # information, see [AWS Managed Microsoft AD][1] in the *AWS Directory
+    # Service Admin Guide*.
     #
     # Before you call *CreateMicrosoftAD*, ensure that all of the required
     # permissions have been explicitly granted through a policy. For details
     # about what permissions are required to run the *CreateMicrosoftAD*
     # operation, see [AWS Directory Service API Permissions: Actions,
-    # Resources, and Conditions Reference][1].
+    # Resources, and Conditions Reference][2].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+    # [1]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html
+    # [2]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
     #
     # @option params [required, String] :name
-    #   The fully qualified domain name for the directory, such as
-    #   `corp.example.com`. This name will resolve inside your VPC only. It
-    #   does not need to be publicly resolvable.
+    #   The fully qualified domain name for the AWS Managed Microsoft AD
+    #   directory, such as `corp.example.com`. This name will resolve inside
+    #   your VPC only. It does not need to be publicly resolvable.
     #
     # @option params [String] :short_name
-    #   The NetBIOS name for your domain. A short identifier for your domain,
-    #   such as `CORP`. If you don't specify a NetBIOS name, it will default
-    #   to the first part of your directory DNS. For example, `CORP` for the
-    #   directory DNS `corp.example.com`.
+    #   The NetBIOS name for your domain, such as `CORP`. If you don't
+    #   specify a NetBIOS name, it will default to the first part of your
+    #   directory DNS. For example, `CORP` for the directory DNS
+    #   `corp.example.com`.
     #
     # @option params [required, String] :password
     #   The password for the default administrative user named `Admin`.
     #
+    #   If you need to change the password for the administrator account, you
+    #   can use the ResetUserPassword API call.
+    #
     # @option params [String] :description
-    #   A textual description for the directory. This label will appear on the
-    #   AWS console `Directory Details` page after the directory is created.
+    #   A description for the directory. This label will appear on the AWS
+    #   console `Directory Details` page after the directory is created.
     #
     # @option params [required, Types::DirectoryVpcSettings] :vpc_settings
     #   Contains VPC information for the CreateDirectory or CreateMicrosoftAD
     #   operation.
     #
     # @option params [String] :edition
-    #   AWS Managed Microsoft AD is available in two editions: Standard and
-    #   Enterprise. Enterprise is the default.
+    #   AWS Managed Microsoft AD is available in two editions: `Standard` and
+    #   `Enterprise`. `Enterprise` is the default.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be assigned to the AWS Managed Microsoft AD directory.
@@ -1035,8 +1046,7 @@ module Aws::DirectoryService
     # Deletes the specified log subscription.
     #
     # @option params [required, String] :directory_id
-    #   Identifier (ID) of the directory whose log subscription you want to
-    #   delete.
+    #   Identifier of the directory whose log subscription you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1116,6 +1126,33 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Deletes from the system the certificate that was registered for a
+    # secured LDAP connection.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, String] :certificate_id
+    #   The identifier of the certificate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_certificate({
+    #     directory_id: "DirectoryId", # required
+    #     certificate_id: "CertificateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificate AWS API Documentation
+    #
+    # @overload deregister_certificate(params = {})
+    # @param [Hash] params ({})
+    def deregister_certificate(params = {}, options = {})
+      req = build_request(:deregister_certificate, params)
+      req.send_request(options)
+    end
+
     # Removes the specified directory as a publisher to the specified SNS
     # topic.
     #
@@ -1142,6 +1179,44 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def deregister_event_topic(params = {}, options = {})
       req = build_request(:deregister_event_topic, params)
+      req.send_request(options)
+    end
+
+    # Displays information about the certificate registered for a secured
+    # LDAP connection.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, String] :certificate_id
+    #   The identifier of the certificate.
+    #
+    # @return [Types::DescribeCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCertificateResult#certificate #certificate} => Types::Certificate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_certificate({
+    #     directory_id: "DirectoryId", # required
+    #     certificate_id: "CertificateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate.certificate_id #=> String
+    #   resp.certificate.state #=> String, one of "Registering", "Registered", "RegisterFailed", "Deregistering", "Deregistered", "DeregisterFailed"
+    #   resp.certificate.state_reason #=> String
+    #   resp.certificate.common_name #=> String
+    #   resp.certificate.registered_date_time #=> Time
+    #   resp.certificate.expiry_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificate AWS API Documentation
+    #
+    # @overload describe_certificate(params = {})
+    # @param [Hash] params ({})
+    def describe_certificate(params = {}, options = {})
+      req = build_request(:describe_certificate, params)
       req.send_request(options)
     end
 
@@ -1413,6 +1488,52 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Describes the status of LDAP security for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [String] :type
+    #   The type of LDAP security the customer wants to enable, either server
+    #   or client. Currently supports only `Client`, (the default).
+    #
+    # @option params [String] :next_token
+    #   The type of next token used for pagination.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of items that should be displayed on one page.
+    #
+    # @return [Types::DescribeLDAPSSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLDAPSSettingsResult#ldaps_settings_info #ldaps_settings_info} => Array&lt;Types::LDAPSSettingInfo&gt;
+    #   * {Types::DescribeLDAPSSettingsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ldaps_settings({
+    #     directory_id: "DirectoryId", # required
+    #     type: "Client", # accepts Client
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ldaps_settings_info #=> Array
+    #   resp.ldaps_settings_info[0].ldaps_status #=> String, one of "Enabling", "Enabled", "EnableFailed", "Disabled"
+    #   resp.ldaps_settings_info[0].ldaps_status_reason #=> String
+    #   resp.ldaps_settings_info[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettings AWS API Documentation
+    #
+    # @overload describe_ldaps_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_ldaps_settings(params = {}, options = {})
+      req = build_request(:describe_ldaps_settings, params)
+      req.send_request(options)
+    end
+
     # Returns the shared directories in your account.
     #
     # @option params [required, String] :owner_directory_id
@@ -1591,6 +1712,34 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Deactivates LDAP secure calls for the specified directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [String] :type
+    #   The type of LDAP security that the customer wants to enable. The
+    #   security can be either server or client, but currently only the
+    #   default `Client` is supported.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_ldaps({
+    #     directory_id: "DirectoryId", # required
+    #     type: "Client", # accepts Client
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPS AWS API Documentation
+    #
+    # @overload disable_ldaps(params = {})
+    # @param [Hash] params ({})
+    def disable_ldaps(params = {}, options = {})
+      req = build_request(:disable_ldaps, params)
+      req.send_request(options)
+    end
+
     # Disables multi-factor authentication (MFA) with the Remote
     # Authentication Dial In User Service (RADIUS) server for an AD
     # Connector or Microsoft AD directory.
@@ -1655,6 +1804,35 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Activates the switch for the specific directory to always use LDAP
+    # secure calls.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [String] :type
+    #   The type of LDAP security the customer wants to enable. The security
+    #   can be either server or client, but currently only the default
+    #   `Client` is supported.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_ldaps({
+    #     directory_id: "DirectoryId", # required
+    #     type: "Client", # accepts Client
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPS AWS API Documentation
+    #
+    # @overload enable_ldaps(params = {})
+    # @param [Hash] params ({})
+    def enable_ldaps(params = {}, options = {})
+      req = build_request(:enable_ldaps, params)
+      req.send_request(options)
+    end
+
     # Enables multi-factor authentication (MFA) with the Remote
     # Authentication Dial In User Service (RADIUS) server for an AD
     # Connector or Microsoft AD directory.
@@ -1693,7 +1871,9 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Enables single sign-on for a directory.
+    # Enables single sign-on for a directory. Single sign-on allows users in
+    # your directory to access certain AWS services from a computer joined
+    # to the directory without having to enter their credentials separately.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory for which to enable single-sign on.
@@ -1733,7 +1913,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Obtains directory limit information for the current region.
+    # Obtains directory limit information for the current Region.
     #
     # @return [Types::GetDirectoryLimitsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1787,6 +1967,51 @@ module Aws::DirectoryService
     # @param [Hash] params ({})
     def get_snapshot_limits(params = {}, options = {})
       req = build_request(:get_snapshot_limits, params)
+      req.send_request(options)
+    end
+
+    # For the specified directory, lists all the certificates registered for
+    # a secured LDAP connection.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [String] :next_token
+    #   A token for requesting another page of certificates if the `NextToken`
+    #   response element indicates that more certificates are available. Use
+    #   the value of the returned `NextToken` element in your request until
+    #   the token comes back as `null`. Pass `null` if this is the first call.
+    #
+    # @option params [Integer] :limit
+    #   The number of items that should show up on one page
+    #
+    # @return [Types::ListCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificatesResult#next_token #next_token} => String
+    #   * {Types::ListCertificatesResult#certificates_info #certificates_info} => Array&lt;Types::CertificateInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificates({
+    #     directory_id: "DirectoryId", # required
+    #     next_token: "NextToken",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.certificates_info #=> Array
+    #   resp.certificates_info[0].certificate_id #=> String
+    #   resp.certificates_info[0].common_name #=> String
+    #   resp.certificates_info[0].state #=> String, one of "Registering", "Registered", "RegisterFailed", "Deregistering", "Deregistered", "DeregisterFailed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificates AWS API Documentation
+    #
+    # @overload list_certificates(params = {})
+    # @param [Hash] params ({})
+    def list_certificates(params = {}, options = {})
+      req = build_request(:list_certificates, params)
       req.send_request(options)
     end
 
@@ -1969,6 +2194,38 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Registers a certificate for secured LDAP connection.
+    #
+    # @option params [required, String] :directory_id
+    #   The identifier of the directory.
+    #
+    # @option params [required, String] :certificate_data
+    #   The certificate PEM string that needs to be registered.
+    #
+    # @return [Types::RegisterCertificateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterCertificateResult#certificate_id #certificate_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_certificate({
+    #     directory_id: "DirectoryId", # required
+    #     certificate_data: "CertificateData", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificate AWS API Documentation
+    #
+    # @overload register_certificate(params = {})
+    # @param [Hash] params ({})
+    def register_certificate(params = {}, options = {})
+      req = build_request(:register_certificate, params)
+      req.send_request(options)
+    end
+
     # Associates a directory with an SNS topic. This establishes the
     # directory as a publisher to the specified SNS topic. You can then
     # receive email or text (SMS) messages when the status of your directory
@@ -2087,6 +2344,25 @@ module Aws::DirectoryService
 
     # Resets the password for any user in your AWS Managed Microsoft AD or
     # Simple AD directory.
+    #
+    # You can reset the password for any user in your directory with the
+    # following exceptions:
+    #
+    # * For Simple AD, you cannot reset the password for any user that is a
+    #   member of either the **Domain Admins** or **Enterprise Admins**
+    #   group except for the administrator user.
+    #
+    # * For AWS Managed Microsoft AD, you can only reset the password for a
+    #   user that is in an OU based off of the NetBIOS name that you typed
+    #   when you created your directory. For example, you cannot reset the
+    #   password for a user in the **AWS Reserved** OU. For more information
+    #   about the OU structure for an AWS Managed Microsoft AD directory,
+    #   see [What Gets Created][1] in the *AWS Directory Service
+    #   Administration Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/ms_ad_getting_started_what_gets_created.html
     #
     # @option params [required, String] :directory_id
     #   Identifier of the AWS Managed Microsoft AD or Simple AD directory in
@@ -2484,7 +2760,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

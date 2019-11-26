@@ -8,6 +8,31 @@
 module Aws::CognitoIdentityProvider
   module Types
 
+    # The data type for `AccountRecoverySetting`.
+    #
+    # @note When making an API call, you may pass AccountRecoverySettingType
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_mechanisms: [
+    #           {
+    #             priority: 1, # required
+    #             name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] recovery_mechanisms
+    #   The list of `RecoveryOptionTypes`.
+    #   @return [Array<Types::RecoveryOptionType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AccountRecoverySettingType AWS API Documentation
+    #
+    class AccountRecoverySettingType < Struct.new(
+      :recovery_mechanisms)
+      include Aws::Structure
+    end
+
     # Account takeover action type.
     #
     # @note When making an API call, you may pass AccountTakeoverActionType
@@ -3459,6 +3484,14 @@ module Aws::CognitoIdentityProvider
     #         user_pool_add_ons: {
     #           advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
     #         },
+    #         account_recovery_setting: {
+    #           recovery_mechanisms: [
+    #             {
+    #               priority: 1, # required
+    #               name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] pool_name
@@ -3564,6 +3597,24 @@ module Aws::CognitoIdentityProvider
     #   `AdvancedSecurityMode` to the value "AUDIT".
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] account_recovery_setting
+    #   Use this setting to define which verified available method a user
+    #   can use to recover their password when they call `ForgotPassword`.
+    #   It allows you to define a preferred method when a user has more than
+    #   one method available. With this setting, SMS does not qualify for a
+    #   valid password recovery mechanism if the user also has SMS MFA
+    #   enabled. In the absence of this setting, Cognito uses the legacy
+    #   behavior to determine the recovery method where SMS is preferred
+    #   over email.
+    #
+    #   <note markdown="1"> Starting February 1, 2020, the value of `AccountRecoverySetting`
+    #   will default to `verified_email` first and `verified_phone_number`
+    #   as the second option for newly created user pools if no value is
+    #   provided.
+    #
+    #    </note>
+    #   @return [Types::AccountRecoverySettingType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolRequest AWS API Documentation
     #
     class CreateUserPoolRequest < Struct.new(
@@ -3585,7 +3636,8 @@ module Aws::CognitoIdentityProvider
       :user_pool_tags,
       :admin_create_user_config,
       :schema,
-      :user_pool_add_ons)
+      :user_pool_add_ons,
+      :account_recovery_setting)
       include Aws::Structure
     end
 
@@ -6590,6 +6642,34 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # A map containing a priority as a key, and recovery method name as a
+    # value.
+    #
+    # @note When making an API call, you may pass RecoveryOptionType
+    #   data as a hash:
+    #
+    #       {
+    #         priority: 1, # required
+    #         name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #       }
+    #
+    # @!attribute [rw] priority
+    #   A positive integer specifying priority of a method with 1 being the
+    #   highest priority.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   Specifies the recovery method for a user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RecoveryOptionType AWS API Documentation
+    #
+    class RecoveryOptionType < Struct.new(
+      :priority,
+      :name)
+      include Aws::Structure
+    end
+
     # Represents the request to resend the confirmation code.
     #
     # @note When making an API call, you may pass ResendConfirmationCodeRequest
@@ -8709,6 +8789,14 @@ module Aws::CognitoIdentityProvider
     #         user_pool_add_ons: {
     #           advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
     #         },
+    #         account_recovery_setting: {
+    #           recovery_mechanisms: [
+    #             {
+    #               priority: 1, # required
+    #               name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] user_pool_id
@@ -8789,6 +8877,17 @@ module Aws::CognitoIdentityProvider
     #   `AdvancedSecurityMode` to the value "AUDIT".
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] account_recovery_setting
+    #   Use this setting to define which verified available method a user
+    #   can use to recover their password when they call `ForgotPassword`.
+    #   It allows you to define a preferred method when a user has more than
+    #   one method available. With this setting, SMS does not qualify for a
+    #   valid password recovery mechanism if the user also has SMS MFA
+    #   enabled. In the absence of this setting, Cognito uses the legacy
+    #   behavior to determine the recovery method where SMS is preferred
+    #   over email.
+    #   @return [Types::AccountRecoverySettingType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolRequest AWS API Documentation
     #
     class UpdateUserPoolRequest < Struct.new(
@@ -8807,7 +8906,8 @@ module Aws::CognitoIdentityProvider
       :sms_configuration,
       :user_pool_tags,
       :admin_create_user_config,
-      :user_pool_add_ons)
+      :user_pool_add_ons,
+      :account_recovery_setting)
       include Aws::Structure
     end
 
@@ -9488,6 +9588,17 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Resource Name (ARN) for the user pool.
     #   @return [String]
     #
+    # @!attribute [rw] account_recovery_setting
+    #   Use this setting to define which verified available method a user
+    #   can use to recover their password when they call `ForgotPassword`.
+    #   It allows you to define a preferred method when a user has more than
+    #   one method available. With this setting, SMS does not qualify for a
+    #   valid password recovery mechanism if the user also has SMS MFA
+    #   enabled. In the absence of this setting, Cognito uses the legacy
+    #   behavior to determine the recovery method where SMS is preferred
+    #   over email.
+    #   @return [Types::AccountRecoverySettingType]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType AWS API Documentation
     #
     class UserPoolType < Struct.new(
@@ -9519,7 +9630,8 @@ module Aws::CognitoIdentityProvider
       :custom_domain,
       :admin_create_user_config,
       :user_pool_add_ons,
-      :arn)
+      :arn,
+      :account_recovery_setting)
       include Aws::Structure
     end
 

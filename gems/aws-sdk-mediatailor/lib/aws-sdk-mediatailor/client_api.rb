@@ -24,6 +24,7 @@ module Aws::MediaTailor
     ListPlaybackConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LivePreRollConfiguration = Shapes::StructureShape.new(name: 'LivePreRollConfiguration')
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
     PlaybackConfiguration = Shapes::StructureShape.new(name: 'PlaybackConfiguration')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
@@ -71,6 +72,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
+    GetPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     GetPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     GetPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))
@@ -98,6 +100,10 @@ module Aws::MediaTailor
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LivePreRollConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
+    LivePreRollConfiguration.add_member(:max_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "MaxDurationSeconds"))
+    LivePreRollConfiguration.struct_class = Types::LivePreRollConfiguration
+
     PlaybackConfiguration.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PlaybackConfiguration.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PlaybackConfiguration.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
@@ -115,6 +121,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationRequest.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfigurationForPut, location_name: "DashConfiguration"))
+    PutPlaybackConfigurationRequest.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PutPlaybackConfigurationRequest.add_member(:slate_ad_url, Shapes::ShapeRef.new(shape: __string, location_name: "SlateAdUrl"))
     PutPlaybackConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -126,6 +133,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:cdn_configuration, Shapes::ShapeRef.new(shape: CdnConfiguration, location_name: "CdnConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:dash_configuration, Shapes::ShapeRef.new(shape: DashConfiguration, location_name: "DashConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:hls_configuration, Shapes::ShapeRef.new(shape: HlsConfiguration, location_name: "HlsConfiguration"))
+    PutPlaybackConfigurationResponse.add_member(:live_pre_roll_configuration, Shapes::ShapeRef.new(shape: LivePreRollConfiguration, location_name: "LivePreRollConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     PutPlaybackConfigurationResponse.add_member(:playback_configuration_arn, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackConfigurationArn"))
     PutPlaybackConfigurationResponse.add_member(:playback_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "PlaybackEndpointPrefix"))

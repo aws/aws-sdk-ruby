@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-11-26)
+------------------
+
+* Feature - 1) Amazon Contributor Insights for Amazon DynamoDB is a diagnostic tool for identifying frequently accessed keys and understanding database traffic trends. 2) Support for displaying new fields when a table's encryption state is Inaccessible or the table have been Archived.
+
 1.39.0 (2019-11-21)
 ------------------
 

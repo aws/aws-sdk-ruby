@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2019-11-26)
+------------------
+
+* Feature - For the WorkspaceBundle API, added the image identifier and the time of the last update.
+
 1.31.0 (2019-11-15)
 ------------------
 

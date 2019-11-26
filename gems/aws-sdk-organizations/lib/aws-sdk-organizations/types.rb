@@ -33,7 +33,7 @@ module Aws::Organizations
     #   The unique identifier (ID) of the handshake that you want to accept.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -126,7 +126,7 @@ module Aws::Organizations
     #   The email address associated with the AWS account.
     #
     #   The [regex pattern][1] for this parameter is a string of characters
-    #   that represents a standard Internet email address.
+    #   that represents a standard internet email address.
     #
     #
     #
@@ -169,8 +169,8 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # We can't find an AWS account with the `AccountId` that you specified,
-    # or the account whose credentials you used to make this request isn't
+    # We can't find an AWS account with the `AccountId` that you specified.
+    # Or the account whose credentials you used to make this request isn't
     # a member of an organization.
     #
     # @!attribute [rw] message
@@ -229,7 +229,7 @@ module Aws::Organizations
     #   ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -246,14 +246,15 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -280,7 +281,7 @@ module Aws::Organizations
     #   You can get the ID from the ListHandshakesForOrganization operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -314,12 +315,13 @@ module Aws::Organizations
     #   The [regex pattern][1] for a child ID string requires one of the
     #   following:
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * Account: A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * Organizational unit (OU): A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that contains the OU) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     the root that contains the OU). This string is followed by a
+    #     second "-" dash and from 8 to 32 additional lower-case letters
+    #     or digits.
     #
     #
     #
@@ -365,11 +367,10 @@ module Aws::Organizations
     end
 
     # Performing this operation violates a minimum or maximum value limit.
-    # For example, attempting to remove the last service control policy
-    # (SCP) from an OU or root, inviting or creating too many accounts to
-    # the organization, or attaching too many policies to an account, OU, or
-    # root. This exception includes a reason that contains additional
-    # information about the violated limit.
+    # Examples include attempting to remove the last service control policy
+    # (SCP) from an OU or root, or attaching too many policies to an
+    # account, OU, or root. This exception includes a reason that contains
+    # additional information about the violated limit.
     #
     # Some of the reasons in the following list might not be applicable to
     # this specific API or operation:
@@ -452,9 +453,8 @@ module Aws::Organizations
     #   User Guide.*
     #
     # * MIN\_POLICY\_TYPE\_ATTACHMENT\_LIMIT\_EXCEEDED: You attempted to
-    #   detach a policy from an entity that would cause the entity to have
-    #   fewer than the minimum number of policies of a certain type
-    #   required.
+    #   detach a policy from an entity, which would cause the entity to have
+    #   fewer than the minimum number of policies of the required type.
     #
     # * OU\_DEPTH\_LIMIT\_EXCEEDED: You attempted to create an OU tree that
     #   is too many levels deep.
@@ -526,14 +526,13 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in
-    #   Your Organization][1] in the *AWS Organizations User Guide*, and
-    #   steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #   Your Organization][1] in the *AWS Organizations User Guide*. Also
+    #   see steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
     #   Using IAM Roles][2] in the *IAM User Guide.*
     #
-    #   The [regex pattern][3] that is used to validate this parameter is a
-    #   string of characters that can consist of uppercase letters,
-    #   lowercase letters, digits with no spaces, and any of the following
-    #   characters: =,.@-
+    #   The [regex pattern][3] that is used to validate this parameter. The
+    #   pattern can include uppercase letters, lowercase letters, digits
+    #   with no spaces, and any of the following characters: =,.@-
     #
     #
     #
@@ -550,9 +549,9 @@ module Aws::Organizations
     #   Access to the Billing and Cost Management Console][1] in the *AWS
     #   Billing and Cost Management User Guide*.
     #
-    #   If you don't specify this parameter, the value defaults to `ALLOW`,
-    #   and IAM users and roles with the required permissions can access
-    #   billing information for the new account.
+    #   If you don't specify this parameter, the value defaults to `ALLOW`.
+    #   This value allows IAM users and roles with the required permissions
+    #   to access billing information for the new account.
     #
     #
     #
@@ -601,7 +600,7 @@ module Aws::Organizations
     #   this value from the response of the initial CreateAccount request to
     #   create the account.
     #
-    #   The [regex pattern][1] for an create account request ID string
+    #   The [regex pattern][1] for a create account request ID string
     #   requires "car-" followed by from 8 to 32 lower-case letters or
     #   digits.
     #
@@ -667,7 +666,7 @@ module Aws::Organizations
     #
     #   * INTERNAL\_FAILURE: The account could not be created because of an
     #     internal failure. Try again later. If the problem persists,
-    #     contact Customer Support.
+    #     contact AWS Support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation
@@ -684,7 +683,7 @@ module Aws::Organizations
       include Aws::Structure
     end
 
-    # We can't find an create account request with the
+    # We can't find a create account request with the
     # `CreateAccountRequestId` that you specified.
     #
     # @!attribute [rw] message
@@ -715,8 +714,8 @@ module Aws::Organizations
     #   user of the account or remove an account that was created with an
     #   invalid email address. Like all request parameters for
     #   `CreateGovCloudAccount`, the request for the email address for the
-    #   AWS GovCloud (US) account originates from the commercial Region, not
-    #   from the AWS GovCloud (US) Region.
+    #   AWS GovCloud (US) account originates from the commercial Region. It
+    #   does not come from the AWS GovCloud (US) Region.
     #   @return [String]
     #
     # @!attribute [rw] account_name
@@ -738,14 +737,13 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in
-    #   Your Organization][1] in the *AWS Organizations User Guide* and
-    #   steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
+    #   Your Organization][1] in the *AWS Organizations User Guide*. See
+    #   also steps 2 and 3 in [Tutorial: Delegate Access Across AWS Accounts
     #   Using IAM Roles][2] in the *IAM User Guide.*
     #
-    #   The [regex pattern][3] that is used to validate this parameter is a
-    #   string of characters that can consist of uppercase letters,
-    #   lowercase letters, digits with no spaces, and any of the following
-    #   characters: =,.@-
+    #   The [regex pattern][3] that is used to validate this parameter. The
+    #   pattern can include uppercase letters, lowercase letters, digits
+    #   with no spaces, and any of the following characters: =,.@-
     #
     #
     #
@@ -814,11 +812,11 @@ module Aws::Organizations
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * `ALL`\: In addition to all the features supported by the
-    #     consolidated billing feature set, the master account can also
-    #     apply any policy type to any member account in the organization.
-    #     For more information, see [All features][2] in the *AWS
-    #     Organizations User Guide.*
+    #   * `ALL`\: In addition to all the features that consolidated billing
+    #     feature set supports, the master account can also apply any policy
+    #     type to any member account in the organization. For more
+    #     information, see [All features][2] in the *AWS Organizations User
+    #     Guide.*
     #
     #
     #
@@ -861,12 +859,13 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -903,16 +902,16 @@ module Aws::Organizations
     #         content: "PolicyContent", # required
     #         description: "PolicyDescription", # required
     #         name: "PolicyName", # required
-    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #         type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #       }
     #
     # @!attribute [rw] content
-    #   The policy content to add to the new policy. For example, if you
-    #   create a [service control policy][1] (SCP), this string must be JSON
-    #   text that specifies the permissions that admins in attached accounts
-    #   can delegate to their users, groups, and roles. For more information
-    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide.*
+    #   The policy content to add to the new policy. For example, you could
+    #   create a [service control policy][1] (SCP) that specifies the
+    #   permissions that administrators in attached accounts can delegate to
+    #   their users, groups, and roles. The string for this SCP must be JSON
+    #   text. For more information about the SCP syntax, see [Service
+    #   Control Policy Syntax][2] in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -937,11 +936,6 @@ module Aws::Organizations
     #
     # @!attribute [rw] type
     #   The type of policy to create.
-    #
-    #   <note markdown="1"> In the current release, the only type of policy that you can create
-    #   is a service control policy (SCP).
-    #
-    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreatePolicyRequest AWS API Documentation
@@ -978,7 +972,7 @@ module Aws::Organizations
     #   operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1017,9 +1011,10 @@ module Aws::Organizations
     #   ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the
-    #   ID of the root that contains the OU) followed by a second "-" dash
-    #   and from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a
+    #   second "-" dash and from 8 to 32 additional lowercase letters or
+    #   digits.
     #
     #
     #
@@ -1046,7 +1041,7 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -1111,7 +1106,7 @@ module Aws::Organizations
     #   request, or from the ListCreateAccountStatus operation.
     #
     #   The [regex pattern][1] for a create account request ID string
-    #   requires "car-" followed by from 8 to 32 lower-case letters or
+    #   requires "car-" followed by from 8 to 32 lowercase letters or
     #   digits.
     #
     #
@@ -1138,6 +1133,43 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEffectivePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_type: "TAG_POLICY", # required, accepts TAG_POLICY
+    #         target_id: "PolicyTargetId",
+    #       }
+    #
+    # @!attribute [rw] policy_type
+    #   The type of policy that you want information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   When you're signed in as the master account, specify the ID of the
+    #   account that you want details about. Specifying an organization root
+    #   or OU as the target is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicyRequest AWS API Documentation
+    #
+    class DescribeEffectivePolicyRequest < Struct.new(
+      :policy_type,
+      :target_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effective_policy
+    #   The contents of the effective policy.
+    #   @return [Types::EffectivePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicyResponse AWS API Documentation
+    #
+    class DescribeEffectivePolicyResponse < Struct.new(
+      :effective_policy)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeHandshakeRequest
     #   data as a hash:
     #
@@ -1152,7 +1184,7 @@ module Aws::Organizations
     #   ListHandshakesForAccount or ListHandshakesForOrganization.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1201,9 +1233,10 @@ module Aws::Organizations
     #   ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the
-    #   ID of the root that contains the OU) followed by a second "-" dash
-    #   and from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a
+    #   second "-" dash and from 8 to 32 additional lowercase letters or
+    #   digits.
     #
     #
     #
@@ -1241,7 +1274,7 @@ module Aws::Organizations
     #   ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -1293,7 +1326,7 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -1309,14 +1342,15 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -1356,7 +1390,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1364,7 +1398,7 @@ module Aws::Organizations
     #   a policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
-    #   by from 4 to 32 lower-case letters or digits.
+    #   by from 4 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1460,6 +1494,52 @@ module Aws::Organizations
       include Aws::Structure
     end
 
+    # Contains rules to be applied to the affected accounts. The effective
+    # policy is the aggregation of any policies the account inherits, plus
+    # any policy directly attached to the account.
+    #
+    # @!attribute [rw] policy_content
+    #   The text content of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   The time of the last update to this policy.
+    #   @return [Time]
+    #
+    # @!attribute [rw] target_id
+    #   The account ID of the policy target.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   The policy type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EffectivePolicy AWS API Documentation
+    #
+    class EffectivePolicy < Struct.new(
+      :policy_content,
+      :last_updated_timestamp,
+      :target_id,
+      :policy_type)
+      include Aws::Structure
+    end
+
+    # If you ran this action on the master account, this policy type is not
+    # enabled. If you ran the action on a member account, the account
+    # doesn't have an effective policy of this type. Contact the
+    # administrator of your organization about attaching a policy of this
+    # type to the account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EffectivePolicyNotFoundException AWS API Documentation
+    #
+    class EffectivePolicyNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableAWSServiceAccessRequest
     #   data as a hash:
     #
@@ -1503,7 +1583,7 @@ module Aws::Organizations
     #
     #       {
     #         root_id: "RootId", # required
-    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #         policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #       }
     #
     # @!attribute [rw] root_id
@@ -1511,7 +1591,7 @@ module Aws::Organizations
     #   policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
-    #   by from 4 to 32 lower-case letters or digits.
+    #   by from 4 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1584,12 +1664,13 @@ module Aws::Organizations
 
     # Contains information that must be exchanged to securely establish a
     # relationship between two accounts (an *originator* and a *recipient*).
-    # For example, when a master account (the originator) invites another
-    # account (the recipient) to join its organization, the two accounts
-    # exchange information as a series of handshake requests and responses.
+    # For example, assume that a master account (the originator) invites
+    # another account (the recipient) to join its organization. In that
+    # case, the two accounts exchange information as a series of handshake
+    # requests and responses.
     #
     # **Note:** Handshakes that are CANCELED, ACCEPTED, or DECLINED show up
-    # in lists for only 30 days after entering that state After that they
+    # in lists for only 30 days after entering that state. After that, they
     # are deleted.
     #
     # @!attribute [rw] id
@@ -1936,6 +2017,8 @@ module Aws::Organizations
     #
     # * INVALID\_ENUM: You specified an invalid value.
     #
+    # * INVALID\_ENUM\_POLICY\_TYPE: You specified an invalid policy type.
+    #
     # * INVALID\_FULL\_NAME\_TARGET: You specified a full name that contains
     #   invalid characters.
     #
@@ -2250,12 +2333,13 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -2398,11 +2482,11 @@ module Aws::Organizations
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the
     #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE_ALL_FEATURES`, or `APPROVE_ALL_FEATURES`. Alternatively, for
-    #   the `ENABLE_ALL_FEATURES` handshake that generates a separate child
-    #   handshake for each member account, you can specify
-    #   `ParentHandshakeId` to see only the handshakes that were generated
-    #   by that parent request.
+    #   `ENABLE_ALL_FEATURES`, or `APPROVE_ALL_FEATURES`. Alternatively, you
+    #   can specify the `ENABLE_ALL_FEATURES` handshake, which generates a
+    #   separate child handshake for each member account. When you do
+    #   specify `ParentHandshakeId` to see only the handshakes that were
+    #   generated by that parent request.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
@@ -2471,11 +2555,11 @@ module Aws::Organizations
     #   A filter of the handshakes that you want included in the response.
     #   The default is all types. Use the `ActionType` element to limit the
     #   output to only a specified type, such as `INVITE`,
-    #   `ENABLE-ALL-FEATURES`, or `APPROVE-ALL-FEATURES`. Alternatively, for
-    #   the `ENABLE-ALL-FEATURES` handshake that generates a separate child
-    #   handshake for each member account, you can specify the
-    #   `ParentHandshakeId` to see only the handshakes that were generated
-    #   by that parent request.
+    #   `ENABLE-ALL-FEATURES`, or `APPROVE-ALL-FEATURES`. Alternatively, you
+    #   can specify the `ENABLE-ALL-FEATURES` handshake, which generates a
+    #   separate child handshake for each member account. When you do,
+    #   specify the `ParentHandshakeId` to see only the handshakes that were
+    #   generated by that parent request.
     #   @return [Types::HandshakeFilter]
     #
     # @!attribute [rw] next_token
@@ -2545,12 +2629,13 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -2625,9 +2710,10 @@ module Aws::Organizations
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that contains the OU) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that contains the OU). This string is followed by a
+    #     second "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -2688,7 +2774,7 @@ module Aws::Organizations
     #
     #       {
     #         target_id: "PolicyTargetId", # required
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -2701,14 +2787,15 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -2773,7 +2860,7 @@ module Aws::Organizations
     #   data as a hash:
     #
     #       {
-    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #         filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -2951,7 +3038,7 @@ module Aws::Organizations
     #   to know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -3069,12 +3156,13 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -3089,12 +3177,13 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to
-    #     32 lower-case letters or digits.
+    #     32 lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or
+    #     digits.
     #
     #
     #
@@ -3113,7 +3202,7 @@ module Aws::Organizations
     # Contains details about an organization. An organization is a
     # collection of accounts that are centrally managed together using
     # consolidated billing, organized hierarchically with organizational
-    # units (OUs), and controlled with policies .
+    # units (OUs), and controlled with policies.
     #
     # @!attribute [rw] id
     #   The unique identifier (ID) of an organization.
@@ -3231,8 +3320,9 @@ module Aws::Organizations
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lower-case letters or digits (the
-    #   ID of the root that contains the OU) followed by a second "-" dash
-    #   and from 8 to 32 additional lower-case letters or digits.
+    #   ID of the root that contains the OU). This string is followed by a
+    #   second "-" dash and from 8 to 32 additional lower-case letters or
+    #   digits.
     #
     #
     #
@@ -3306,13 +3396,14 @@ module Aws::Organizations
     #   The [regex pattern][1] for a parent ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * Root: A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * Organizational unit (OU): A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lower-case letters or
+    #     digits.
     #
     #
     #
@@ -3360,6 +3451,19 @@ module Aws::Organizations
     class Policy < Struct.new(
       :policy_summary,
       :content)
+      include Aws::Structure
+    end
+
+    # Changes to the effective policy are in progress, and its contents
+    # can't be returned. Try the operation again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyChangesInProgressException AWS API Documentation
+    #
+    class PolicyChangesInProgressException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3447,7 +3551,7 @@ module Aws::Organizations
     #   @return [String]
     #
     # @!attribute [rw] aws_managed
-    #   A boolean value that indicates whether the specified policy is an
+    #   A Boolean value that indicates whether the specified policy is an
     #   AWS managed policy. If true, then you can attach the policy to
     #   roots, OUs, or accounts, but you cannot edit it.
     #   @return [Boolean]
@@ -3473,15 +3577,16 @@ module Aws::Organizations
     #   The [regex pattern][1] for a target ID string requires one of the
     #   following:
     #
-    #   * Root: a string that begins with "r-" followed by from 4 to 32
+    #   * Root: A string that begins with "r-" followed by from 4 to 32
     #     lower-case letters or digits.
     #
-    #   * Account: a string that consists of exactly 12 digits.
+    #   * Account: A string that consists of exactly 12 digits.
     #
-    #   * Organizational unit (OU): a string that begins with "ou-"
+    #   * Organizational unit (OU): A string that begins with "ou-"
     #     followed by from 4 to 32 lower-case letters or digits (the ID of
-    #     the root that the OU is in) followed by a second "-" dash and
-    #     from 8 to 32 additional lower-case letters or digits.
+    #     the root that the OU is in). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lower-case letters or
+    #     digits.
     #
     #
     #
@@ -3586,9 +3691,9 @@ module Aws::Organizations
     #
     # @!attribute [rw] status
     #   The status of the policy type as it relates to the associated root.
-    #   To attach a policy of the specified type to a root or to an OU or
-    #   account in that root, it must be available in the organization and
-    #   enabled for that root.
+    #   You can attach a policy of the specified type to a root or to an OU
+    #   or account in that root. To do so, the policy must be available in
+    #   the organization and enabled for that root.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/PolicyTypeSummary AWS API Documentation
@@ -3873,9 +3978,10 @@ module Aws::Organizations
     #   can get the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the
-    #   ID of the root that contains the OU) followed by a second "-" dash
-    #   and from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a
+    #   second "-" dash and from 8 to 32 additional lowercase letters or
+    #   digits.
     #
     #
     #
@@ -3927,7 +4033,7 @@ module Aws::Organizations
     #   The unique identifier (ID) of the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lower-case letters or digits.
+    #   followed by from 8 to 128 lowercase letters or digits.
     #
     #
     #

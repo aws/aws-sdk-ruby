@@ -87,6 +87,18 @@ module Aws::DynamoDB
     # * `DELETING` - The table is being deleted.
     #
     # * `ACTIVE` - The table is ready for use.
+    #
+    # * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The AWS KMS key used to
+    #   encrypt the table in inaccessible. Table operations may fail due to
+    #   failure to use the AWS KMS key. DynamoDB will initiate the table
+    #   archival process when a table's AWS KMS key remains inaccessible
+    #   for more than seven days.
+    #
+    # * `ARCHIVING` - The table is being archived. Operations are not
+    #   allowed until archival is complete.
+    #
+    # * `ARCHIVED` - The table has been archived. See the ArchivalReason for
+    #   more information.
     # @return [String]
     def table_status
       data[:table_status]
@@ -332,6 +344,12 @@ module Aws::DynamoDB
     # @return [Types::SSEDescription]
     def sse_description
       data[:sse_description]
+    end
+
+    # Contains information about the table archive.
+    # @return [Types::ArchivalSummary]
+    def archival_summary
+      data[:archival_summary]
     end
 
     # @!endgroup

@@ -37,6 +37,14 @@ module Aws::ServerlessApplicationRepository
     #   location of your GitHub repository for the application.
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   Whether the author of this application has been verified. This means
+    #   means that AWS has made a good faith review, as a reasonable and
+    #   prudent service provider, of the information provided by the
+    #   requester and has confirmed that the requester's identity is as
+    #   claimed.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
@@ -71,6 +79,11 @@ module Aws::ServerlessApplicationRepository
     #   A valid identifier from https://spdx.org/licenses/.
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   The URL to the public profile of a verified author. This URL is
+    #   submitted by the author.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Version information about the application.
     #   @return [Types::Version]
@@ -83,11 +96,13 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end
@@ -603,6 +618,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -618,6 +636,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -630,11 +651,13 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end
@@ -1174,6 +1197,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -1189,6 +1215,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -1201,11 +1230,13 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end
@@ -1921,6 +1952,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -1936,6 +1970,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -1948,11 +1985,13 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end

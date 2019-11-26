@@ -271,6 +271,8 @@ module Aws::RDSDataService
     # @option params [Array<Array>] :parameter_sets
     #   The parameter set for the batch operation.
     #
+    #   The maximum number of parameters in a parameter set is 1,000.
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
     #
@@ -303,6 +305,7 @@ module Aws::RDSDataService
     #       [
     #         {
     #           name: "ParameterName",
+    #           type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
     #           value: {
     #             array_value: {
     #               array_values: [
@@ -592,6 +595,7 @@ module Aws::RDSDataService
     #     parameters: [
     #       {
     #         name: "ParameterName",
+    #         type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
     #         value: {
     #           array_value: {
     #             array_values: [
@@ -736,7 +740,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

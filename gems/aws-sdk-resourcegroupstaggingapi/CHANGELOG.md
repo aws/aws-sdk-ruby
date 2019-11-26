@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2019-11-26)
+------------------
+
+* Feature - You can use tag policies to help standardize on tags across your organization's resources.
+
 1.19.0 (2019-10-23)
 ------------------
 

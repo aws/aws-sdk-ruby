@@ -304,7 +304,7 @@ module Aws::Organizations
     #   The unique identifier (ID) of the handshake that you want to accept.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -402,54 +402,23 @@ module Aws::Organizations
     end
 
     # Attaches a policy to a root, an organizational unit (OU), or an
-    # individual account. How the policy affects accounts depends on the
-    # type of policy:
+    # individual account.
     #
-    # * **Service control policy (SCP)** - An SCP specifies what permissions
-    #   can be delegated to users in affected member accounts. The scope of
-    #   influence for a policy depends on what you attach the policy to:
+    # How the policy affects accounts depends on the type of policy:
     #
-    #   * If you attach an SCP to a root, it affects all accounts in the
-    #     organization.
+    # * For more information about attaching SCPs, see [How SCPs Work][1] in
+    #   the *AWS Organizations User Guide.*
     #
-    #   * If you attach an SCP to an OU, it affects all accounts in that OU
-    #     and in any child OUs.
-    #
-    #   * If you attach the policy directly to an account, it affects only
-    #     that account.
-    #
-    #   SCPs are JSON policies that specify the maximum permissions for an
-    #   organization or organizational unit (OU). You can attach one SCP to
-    #   a higher level root or OU, and a different SCP to a child OU or to
-    #   an account. The child policy can further restrict only the
-    #   permissions that pass through the parent filter and are available to
-    #   the child. An SCP that is attached to a child can't grant a
-    #   permission that the parent hasn't already granted. For example,
-    #   imagine that the parent SCP allows permissions A, B, C, D, and E.
-    #   The child SCP allows C, D, E, F, and G. The result is that the
-    #   accounts affected by the child SCP are allowed to use only C, D, and
-    #   E. They can't use A or B because the child OU filtered them out.
-    #   They also can't use F and G because the parent OU filtered them
-    #   out. They can't be granted back by the child SCP; child SCPs can
-    #   only filter the permissions they receive from the parent SCP.
-    #
-    #   AWS Organizations attaches a default SCP named `"FullAWSAccess` to
-    #   every root, OU, and account. This default SCP allows all services
-    #   and actions, enabling any new child OU or account to inherit the
-    #   permissions of the parent root or OU. If you detach the default
-    #   policy, you must replace it with a policy that specifies the
-    #   permissions that you want to allow in that OU or account.
-    #
-    #   For more information about how AWS Organizations policies
-    #   permissions work, see [Using Service Control Policies][1] in the
-    #   *AWS Organizations User Guide.*
+    # * For information about attaching tag policies, see [How Policy
+    #   Inheritance Works][2] in the *AWS Organizations User Guide.*
     #
     # This operation can be called only from the organization's master
     # account.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_about-scps.html
+    # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
     #
     # @option params [required, String] :policy_id
     #   The unique identifier (ID) of the policy that you want to attach to
@@ -457,7 +426,7 @@ module Aws::Organizations
     #   ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -472,14 +441,14 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -538,7 +507,7 @@ module Aws::Organizations
     #   You can get the ID from the ListHandshakesForOrganization operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -679,14 +648,14 @@ module Aws::Organizations
     # Account in Your Organization][3] in the *AWS Organizations User
     # Guide.*
     #
-    # * When you create an account in an organization using the AWS
-    #   Organizations console, API, or CLI commands, the information
-    #   required for the account to operate as a standalone account, such as
-    #   a payment method and signing the end user license agreement (EULA)
-    #   is *not* automatically collected. If you must remove an account from
-    #   your organization later, you can do so only after you provide the
-    #   missing information. Follow the steps at [ To leave an organization
-    #   as a member account][4] in the *AWS Organizations User Guide*.
+    # * When you create an account in an organization, the information
+    #   required for the account to operate as a standalone account is *not*
+    #   automatically collected. For example, information about the payment
+    #   method and signing the end user license agreement (EULA) is not
+    #   collected. If you must remove an account from your organization
+    #   later, you can do so only after you provide the missing information.
+    #   Follow the steps at [ To leave an organization as a member
+    #   account][4] in the *AWS Organizations User Guide*.
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [AWS Support][5].
@@ -747,14 +716,13 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *AWS Organizations User Guide*, and steps 2
-    #   and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
+    #   Organization][1] in the *AWS Organizations User Guide*. Also see steps
+    #   2 and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
     #   Roles][2] in the *IAM User Guide.*
     #
-    #   The [regex pattern][3] that is used to validate this parameter is a
-    #   string of characters that can consist of uppercase letters, lowercase
-    #   letters, digits with no spaces, and any of the following characters:
-    #   =,.@-
+    #   The [regex pattern][3] that is used to validate this parameter. The
+    #   pattern can include uppercase letters, lowercase letters, digits with
+    #   no spaces, and any of the following characters: =,.@-
     #
     #
     #
@@ -770,9 +738,9 @@ module Aws::Organizations
     #   the Billing and Cost Management Console][1] in the *AWS Billing and
     #   Cost Management User Guide*.
     #
-    #   If you don't specify this parameter, the value defaults to `ALLOW`,
-    #   and IAM users and roles with the required permissions can access
-    #   billing information for the new account.
+    #   If you don't specify this parameter, the value defaults to `ALLOW`.
+    #   This value allows IAM users and roles with the required permissions to
+    #   access billing information for the new account.
     #
     #
     #
@@ -821,7 +789,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -896,24 +864,24 @@ module Aws::Organizations
     # allows the master account in the organization in the commercial Region
     # to assume it. An AWS GovCloud (US) account is then created and
     # associated with the commercial account that you just created. A role
-    # is created in the new AWS GovCloud (US) account that can be assumed by
-    # the AWS GovCloud (US) account that is associated with the master
-    # account of the commercial organization. For more information and to
-    # view a diagram that explains how account access works, see [AWS
+    # is created in the new AWS GovCloud (US) account. This role can be
+    # assumed by the AWS GovCloud (US) account that is associated with the
+    # master account of the commercial organization. For more information
+    # and to view a diagram that explains how account access works, see [AWS
     # Organizations][4] in the *AWS GovCloud User Guide.*
     #
     # For more information about creating accounts, see [Creating an AWS
     # Account in Your Organization][6] in the *AWS Organizations User
     # Guide.*
     #
-    # * When you create an account in an organization using the AWS
-    #   Organizations console, API, or CLI commands, the information
-    #   required for the account to operate as a standalone account, such as
-    #   a payment method and signing the end user license agreement (EULA)
-    #   is *not* automatically collected. If you must remove an account from
-    #   your organization later, you can do so only after you provide the
-    #   missing information. Follow the steps at [ To leave an organization
-    #   as a member account][7] in the *AWS Organizations User Guide.*
+    # * You can create an account in an organization using the AWS
+    #   Organizations console, API, or CLI commands. When you do, the
+    #   information required for the account to operate as a standalone
+    #   account, such as a payment method, is *not* automatically collected.
+    #   If you must remove an account from your organization later, you can
+    #   do so only after you provide the missing information. Follow the
+    #   steps at [ To leave an organization as a member account][7] in the
+    #   *AWS Organizations User Guide.*
     #
     # * If you get an exception that indicates that you exceeded your
     #   account limits for the organization, contact [AWS Support][8].
@@ -961,8 +929,8 @@ module Aws::Organizations
     #   of the account or remove an account that was created with an invalid
     #   email address. Like all request parameters for
     #   `CreateGovCloudAccount`, the request for the email address for the AWS
-    #   GovCloud (US) account originates from the commercial Region, not from
-    #   the AWS GovCloud (US) Region.
+    #   GovCloud (US) account originates from the commercial Region. It does
+    #   not come from the AWS GovCloud (US) Region.
     #
     # @option params [required, String] :account_name
     #   The friendly name of the member account.
@@ -982,14 +950,13 @@ module Aws::Organizations
     #
     #   For more information about how to use this role to access the member
     #   account, see [Accessing and Administering the Member Accounts in Your
-    #   Organization][1] in the *AWS Organizations User Guide* and steps 2 and
-    #   3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
+    #   Organization][1] in the *AWS Organizations User Guide*. See also steps
+    #   2 and 3 in [Tutorial: Delegate Access Across AWS Accounts Using IAM
     #   Roles][2] in the *IAM User Guide.*
     #
-    #   The [regex pattern][3] that is used to validate this parameter is a
-    #   string of characters that can consist of uppercase letters, lowercase
-    #   letters, digits with no spaces, and any of the following characters:
-    #   =,.@-
+    #   The [regex pattern][3] that is used to validate this parameter. The
+    #   pattern can include uppercase letters, lowercase letters, digits with
+    #   no spaces, and any of the following characters: =,.@-
     #
     #
     #
@@ -1035,7 +1002,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateGovCloudAccount AWS API Documentation
     #
@@ -1055,12 +1022,11 @@ module Aws::Organizations
     # must also have the relevant IAM permissions.
     #
     # By default (or if you set the `FeatureSet` parameter to `ALL`), the
-    # new organization is created with all features enabled and service
-    # control policies automatically enabled in the root. If you instead
-    # choose to create the organization supporting only the consolidated
-    # billing features by setting the `FeatureSet` parameter to
-    # `CONSOLIDATED_BILLING"`, no policy types are enabled by default, and
-    # you can't use organization policies.
+    # new organization is created with all features enabled. In addition,
+    # service control policies are automatically enabled in the root. If you
+    # instead create the organization supporting only the consolidated
+    # billing features, no policy types are enabled by default, and you
+    # can't use organization policies.
     #
     #
     #
@@ -1078,9 +1044,9 @@ module Aws::Organizations
     #     The consolidated billing feature subset isn't available for
     #     organizations in the AWS GovCloud (US) Region.
     #
-    #   * `ALL`\: In addition to all the features supported by the
-    #     consolidated billing feature set, the master account can also apply
-    #     any policy type to any member account in the organization. For more
+    #   * `ALL`\: In addition to all the features that consolidated billing
+    #     feature set supports, the master account can also apply any policy
+    #     type to any member account in the organization. For more
     #     information, see [All features][2] in the *AWS Organizations User
     #     Guide.*
     #
@@ -1159,7 +1125,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateOrganization AWS API Documentation
@@ -1196,12 +1162,12 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -1269,12 +1235,12 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html
     #
     # @option params [required, String] :content
-    #   The policy content to add to the new policy. For example, if you
-    #   create a [service control policy][1] (SCP), this string must be JSON
-    #   text that specifies the permissions that admins in attached accounts
-    #   can delegate to their users, groups, and roles. For more information
-    #   about the SCP syntax, see [Service Control Policy Syntax][2] in the
-    #   *AWS Organizations User Guide.*
+    #   The policy content to add to the new policy. For example, you could
+    #   create a [service control policy][1] (SCP) that specifies the
+    #   permissions that administrators in attached accounts can delegate to
+    #   their users, groups, and roles. The string for this SCP must be JSON
+    #   text. For more information about the SCP syntax, see [Service Control
+    #   Policy Syntax][2] in the *AWS Organizations User Guide.*
     #
     #
     #
@@ -1296,11 +1262,6 @@ module Aws::Organizations
     #
     # @option params [required, String] :type
     #   The type of policy to create.
-    #
-    #   <note markdown="1"> In the current release, the only type of policy that you can create is
-    #   a service control policy (SCP).
-    #
-    #    </note>
     #
     # @return [Types::CreatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1340,7 +1301,7 @@ module Aws::Organizations
     #     content: "PolicyContent", # required
     #     description: "PolicyDescription", # required
     #     name: "PolicyName", # required
-    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #     type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #   })
     #
     # @example Response structure
@@ -1349,7 +1310,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -1371,14 +1332,15 @@ module Aws::Organizations
     # reinitiate the process with a new handshake request.
     #
     # After you decline a handshake, it continues to appear in the results
-    # of relevant APIs for only 30 days. After that, it's deleted.
+    # of relevant API operations for only 30 days. After that, it's
+    # deleted.
     #
     # @option params [required, String] :handshake_id
     #   The unique identifier (ID) of the handshake that you want to decline.
     #   You can get the ID from the ListHandshakesForAccount operation.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1503,9 +1465,9 @@ module Aws::Organizations
     #   operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the ID
-    #   of the root that contains the OU) followed by a second "-" dash and
-    #   from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a second
+    #   "-" dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -1551,7 +1513,7 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -1584,7 +1546,7 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Retrieves AWS Organizations-related information about the specified
+    # Retrieves AWS Organizations related information about the specified
     # account.
     #
     # This operation can be called only from the organization's master
@@ -1662,7 +1624,7 @@ module Aws::Organizations
     #   or from the ListCreateAccountStatus operation.
     #
     #   The [regex pattern][1] for a create account request ID string requires
-    #   "car-" followed by from 8 to 32 lower-case letters or digits.
+    #   "car-" followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1707,7 +1669,7 @@ module Aws::Organizations
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
     #   resp.create_account_status.gov_cloud_account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -1715,6 +1677,57 @@ module Aws::Organizations
     # @param [Hash] params ({})
     def describe_create_account_status(params = {}, options = {})
       req = build_request(:describe_create_account_status, params)
+      req.send_request(options)
+    end
+
+    # Returns the contents of the effective tag policy for the account. The
+    # effective tag policy is the aggregation of any tag policies the
+    # account inherits, plus any policy directly that is attached to the
+    # account.
+    #
+    # This action returns information on tag policies only.
+    #
+    # For more information on policy inheritance, see [How Policy
+    # Inheritance Works][1] in the *AWS Organizations User Guide*.
+    #
+    # This operation can be called from any account in the organization.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies-inheritance.html
+    #
+    # @option params [required, String] :policy_type
+    #   The type of policy that you want information about.
+    #
+    # @option params [String] :target_id
+    #   When you're signed in as the master account, specify the ID of the
+    #   account that you want details about. Specifying an organization root
+    #   or OU as the target is not supported.
+    #
+    # @return [Types::DescribeEffectivePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEffectivePolicyResponse#effective_policy #effective_policy} => Types::EffectivePolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_effective_policy({
+    #     policy_type: "TAG_POLICY", # required, accepts TAG_POLICY
+    #     target_id: "PolicyTargetId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effective_policy.policy_content #=> String
+    #   resp.effective_policy.last_updated_timestamp #=> Time
+    #   resp.effective_policy.target_id #=> String
+    #   resp.effective_policy.policy_type #=> String, one of "TAG_POLICY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeEffectivePolicy AWS API Documentation
+    #
+    # @overload describe_effective_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_effective_policy(params = {}, options = {})
+      req = build_request(:describe_effective_policy, params)
       req.send_request(options)
     end
 
@@ -1735,7 +1748,7 @@ module Aws::Organizations
     #   ListHandshakesForAccount or ListHandshakesForOrganization.
     #
     #   The [regex pattern][1] for handshake ID string requires "h-"
-    #   followed by from 8 to 32 lower-case letters or digits.
+    #   followed by from 8 to 32 lowercase letters or digits.
     #
     #
     #
@@ -1878,7 +1891,7 @@ module Aws::Organizations
     #   resp.organization.master_account_id #=> String
     #   resp.organization.master_account_email #=> String
     #   resp.organization.available_policy_types #=> Array
-    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.organization.available_policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.organization.available_policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeOrganization AWS API Documentation
@@ -1901,9 +1914,9 @@ module Aws::Organizations
     #   ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the ID
-    #   of the root that contains the OU) followed by a second "-" dash and
-    #   from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a second
+    #   "-" dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -1963,7 +1976,7 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -2009,7 +2022,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -2028,15 +2041,15 @@ module Aws::Organizations
     # accounts are immediate.
     #
     # **Note:** Every root, OU, and account must have at least one SCP
-    # attached. If you want to replace the default `FullAWSAccess` policy
-    # with one that limits the permissions that can be delegated, you must
-    # attach the replacement policy before you can remove the default one.
-    # This is the authorization strategy of [whitelisting][1]. If you
-    # instead attach a second SCP and leave the `FullAWSAccess` SCP still
-    # attached, and specify `"Effect": "Deny"` in the second SCP to override
-    # the `"Effect": "Allow"` in the `FullAWSAccess` policy (or any other
-    # attached SCP), you're using the authorization strategy of
-    # [blacklisting][2] .
+    # attached. You can replace the default `FullAWSAccess` policy with one
+    # that limits the permissions that can be delegated. To do that, you
+    # must attach the replacement policy before you can remove the default
+    # one. This is the authorization strategy of using an [allow list][1].
+    # You could instead attach a second SCP and leave the `FullAWSAccess`
+    # SCP still attached. You could then specify `"Effect": "Deny"` in the
+    # second SCP to override the `"Effect": "Allow"` in the `FullAWSAccess`
+    # policy (or any other attached SCP). If you take these steps, you're
+    # using the authorization strategy of a [deny list][2].
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2051,7 +2064,7 @@ module Aws::Organizations
     #   get the ID from the ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -2066,14 +2079,14 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -2128,8 +2141,9 @@ module Aws::Organizations
     #
     # After you perform the `DisableAWSServiceAccess` operation, the
     # specified service can no longer perform operations in your
-    # organization's accounts unless the operations are explicitly
-    # permitted by the IAM policies that are attached to your roles.
+    # organization's accounts. The only exception is when the operations
+    # are explicitly permitted by IAM policies that are attached to your
+    # roles.
     #
     # For more information about integrating other services with AWS
     # Organizations, including the list of services that work with
@@ -2166,12 +2180,13 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Disables an organizational control policy type in a root. A policy of
-    # a certain type can be attached to entities in a root only if that type
-    # is enabled in the root. After you perform this operation, you no
-    # longer can attach policies of the specified type to that root or to
-    # any organizational unit (OU) or account in that root. You can undo
-    # this by using the EnablePolicyType operation.
+    # Disables an organizational control policy type in a root and detaches
+    # all policies of that type from the organization root, OUs, and
+    # accounts. A policy of a certain type can be attached to entities in a
+    # root only if that type is enabled in the root. After you perform this
+    # operation, you no longer can attach policies of the specified type to
+    # that root or to any organizational unit (OU) or account in that root.
+    # You can undo this by using the EnablePolicyType operation.
     #
     # This is an asynchronous request that AWS performs in the background.
     # If you disable a policy for a root, it still appears enabled for the
@@ -2194,7 +2209,7 @@ module Aws::Organizations
     #   policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
-    #   by from 4 to 32 lower-case letters or digits.
+    #   by from 4 to 32 lowercase letters or digits.
     #
     #
     #
@@ -2233,7 +2248,7 @@ module Aws::Organizations
     #
     #   resp = client.disable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #   })
     #
     # @example Response structure
@@ -2242,7 +2257,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DisablePolicyType AWS API Documentation
@@ -2307,7 +2322,7 @@ module Aws::Organizations
     # Enables all features in an organization. This enables the use of
     # organization policies that can restrict the services and actions that
     # can be called in each account. Until you enable all features, you have
-    # access only to consolidated billing, and you can't use any of the
+    # access only to consolidated billing. You can't use any of the
     # advanced account administration features that AWS Organizations
     # supports. For more information, see [Enabling All Features in Your
     # Organization][1] in the *AWS Organizations User Guide.*
@@ -2317,7 +2332,8 @@ module Aws::Organizations
     # Calling this operation sends a handshake to every invited account in
     # the organization. The feature set change can be finalized and the
     # additional features enabled only after all administrators in the
-    # invited accounts approve the change by accepting the handshake.
+    # invited accounts approve the change. Accepting the handshake approves
+    # the change.
     #
     # After you enable all features, you can separately enable or disable
     # individual policy types in a root using EnablePolicyType and
@@ -2428,7 +2444,7 @@ module Aws::Organizations
     #   policy type. You can get the ID from the ListRoots operation.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
-    #   by from 4 to 32 lower-case letters or digits.
+    #   by from 4 to 32 lowercase letters or digits.
     #
     #
     #
@@ -2471,7 +2487,7 @@ module Aws::Organizations
     #
     #   resp = client.enable_policy_type({
     #     root_id: "RootId", # required
-    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #     policy_type: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #   })
     #
     # @example Response structure
@@ -2480,7 +2496,7 @@ module Aws::Organizations
     #   resp.root.arn #=> String
     #   resp.root.name #=> String
     #   resp.root.policy_types #=> Array
-    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.root.policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.root.policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/EnablePolicyType AWS API Documentation
@@ -2499,18 +2515,18 @@ module Aws::Organizations
     # response.
     #
     # * You can invite AWS accounts only from the same seller as the master
-    #   account. For example, if your organization's master account was
-    #   created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller
-    #   in India, you can invite only other AISPL accounts to your
-    #   organization. You can't combine accounts from AISPL and AWS or from
-    #   any other AWS seller. For more information, see [Consolidated
+    #   account. For example, assume that your organization's master
+    #   account was created by Amazon Internet Services Pvt. Ltd (AISPL), an
+    #   AWS seller in India. You can invite only other AISPL accounts to
+    #   your organization. You can't combine accounts from AISPL and AWS or
+    #   from any other AWS seller. For more information, see [Consolidated
     #   Billing in India][1].
     #
-    # * If you receive an exception that indicates that you exceeded your
+    # * You might receive an exception that indicates that you exceeded your
     #   account limits for the organization or that the operation failed
-    #   because your organization is still initializing, wait one hour and
-    #   then try again. If the error persists after an hour, contact [AWS
-    #   Support][2].
+    #   because your organization is still initializing. If so, wait one
+    #   hour and then try again. If the error persists after an hour,
+    #   contact [AWS Support][2].
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2651,19 +2667,19 @@ module Aws::Organizations
     #
     # * The master account in an organization with all features enabled can
     #   set service control policies (SCPs) that can restrict what
-    #   administrators of member accounts can do, including preventing them
-    #   from successfully calling `LeaveOrganization` and leaving the
-    #   organization.
+    #   administrators of member accounts can do. These restrictions can
+    #   include preventing member accounts from successfully calling
+    #   `LeaveOrganization`.
     #
     # * You can leave an organization as a member account only if the
     #   account is configured with the information required to operate as a
     #   standalone account. When you create an account in an organization
-    #   using the AWS Organizations console, API, or CLI commands, the
-    #   information required of standalone accounts is *not* automatically
-    #   collected. For each account that you want to make standalone, you
-    #   must accept the end user license agreement (EULA), choose a support
-    #   plan, provide and verify the required contact information, and
-    #   provide a current payment method. AWS uses the payment method to
+    #   using the AWS Organizations console, API, or CLI, the information
+    #   required of standalone accounts is *not* automatically collected.
+    #   For each account that you want to make standalone, you must accept
+    #   the end user license agreement (EULA). You must also choose a
+    #   support plan, provide and verify the required contact information,
+    #   and provide a current payment method. AWS uses the payment method to
     #   charge for any billable (not free tier) AWS activity that occurs
     #   while the account isn't attached to an organization. Follow the
     #   steps at [ To leave an organization when all required account
@@ -3009,12 +3025,12 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -3204,7 +3220,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
     #   resp.create_account_statuses[0].gov_cloud_account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "CONCURRENT_ACCOUNT_MODIFICATION", "INTERNAL_FAILURE", "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -3237,10 +3253,11 @@ module Aws::Organizations
     #   Filters the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the output
     #   to only a specified type, such as `INVITE`, `ENABLE_ALL_FEATURES`, or
-    #   `APPROVE_ALL_FEATURES`. Alternatively, for the `ENABLE_ALL_FEATURES`
-    #   handshake that generates a separate child handshake for each member
-    #   account, you can specify `ParentHandshakeId` to see only the
-    #   handshakes that were generated by that parent request.
+    #   `APPROVE_ALL_FEATURES`. Alternatively, you can specify the
+    #   `ENABLE_ALL_FEATURES` handshake, which generates a separate child
+    #   handshake for each member account. When you do specify
+    #   `ParentHandshakeId` to see only the handshakes that were generated by
+    #   that parent request.
     #
     # @option params [String] :next_token
     #   Use this parameter if you receive a `NextToken` response in a previous
@@ -3384,10 +3401,11 @@ module Aws::Organizations
     #   A filter of the handshakes that you want included in the response. The
     #   default is all types. Use the `ActionType` element to limit the output
     #   to only a specified type, such as `INVITE`, `ENABLE-ALL-FEATURES`, or
-    #   `APPROVE-ALL-FEATURES`. Alternatively, for the `ENABLE-ALL-FEATURES`
-    #   handshake that generates a separate child handshake for each member
-    #   account, you can specify the `ParentHandshakeId` to see only the
-    #   handshakes that were generated by that parent request.
+    #   `APPROVE-ALL-FEATURES`. Alternatively, you can specify the
+    #   `ENABLE-ALL-FEATURES` handshake, which generates a separate child
+    #   handshake for each member account. When you do, specify the
+    #   `ParentHandshakeId` to see only the handshakes that were generated by
+    #   that parent request.
     #
     # @option params [String] :next_token
     #   Use this parameter if you receive a `NextToken` response in a previous
@@ -3570,12 +3588,12 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -3684,9 +3702,9 @@ module Aws::Organizations
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that contains the OU) followed by a second "-" dash and from
-    #     8 to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that contains the OU). This string is followed by a second
+    #     "-" dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -3840,7 +3858,7 @@ module Aws::Organizations
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3852,7 +3870,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -3888,14 +3906,14 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Account** - A string that consists of exactly 12 digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -3957,7 +3975,7 @@ module Aws::Organizations
     #
     #   resp = client.list_policies_for_target({
     #     target_id: "PolicyTargetId", # required
-    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY
+    #     filter: "SERVICE_CONTROL_POLICY", # required, accepts SERVICE_CONTROL_POLICY, TAG_POLICY
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3969,7 +3987,7 @@ module Aws::Organizations
     #   resp.policies[0].arn #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].description #=> String
-    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.policies[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.policies[0].aws_managed #=> Boolean
     #   resp.next_token #=> String
     #
@@ -4066,7 +4084,7 @@ module Aws::Organizations
     #   resp.roots[0].arn #=> String
     #   resp.roots[0].name #=> String
     #   resp.roots[0].policy_types #=> Array
-    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.roots[0].policy_types[0].type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.roots[0].policy_types[0].status #=> String, one of "ENABLED", "PENDING_ENABLE", "PENDING_DISABLE"
     #   resp.next_token #=> String
     #
@@ -4142,7 +4160,7 @@ module Aws::Organizations
     #   know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -4255,12 +4273,12 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -4274,12 +4292,12 @@ module Aws::Organizations
     #   following:
     #
     #   * **Root** - A string that begins with "r-" followed by from 4 to 32
-    #     lower-case letters or digits.
+    #     lowercase letters or digits.
     #
     #   * **Organizational unit (OU)** - A string that begins with "ou-"
-    #     followed by from 4 to 32 lower-case letters or digits (the ID of the
-    #     root that the OU is in) followed by a second "-" dash and from 8
-    #     to 32 additional lower-case letters or digits.
+    #     followed by from 4 to 32 lowercase letters or digits (the ID of the
+    #     root that the OU is in). This string is followed by a second "-"
+    #     dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -4330,15 +4348,15 @@ module Aws::Organizations
     # You can remove an account from your organization only if the account
     # is configured with the information required to operate as a standalone
     # account. When you create an account in an organization using the AWS
-    # Organizations console, API, or CLI commands, the information required
-    # of standalone accounts is *not* automatically collected. For an
-    # account that you want to make standalone, you must accept the end user
-    # license agreement (EULA), choose a support plan, provide and verify
-    # the required contact information, and provide a current payment
+    # Organizations console, API, or CLI, the information required of
+    # standalone accounts is *not* automatically collected. For an account
+    # that you want to make standalone, you must accept the end user license
+    # agreement (EULA). You must also choose a support plan, provide and
+    # verify the required contact information, and provide a current payment
     # method. AWS uses the payment method to charge for any billable (not
     # free tier) AWS activity that occurs while the account isn't attached
     # to an organization. To remove an account that doesn't yet have this
-    # information, you must sign in as the member account and follow the
+    # information, you must sign in as the member account. Then follow the
     # steps at [ To leave an organization when all required account
     # information has not yet been provided][1] in the *AWS Organizations
     # User Guide.*
@@ -4465,9 +4483,9 @@ module Aws::Organizations
     #   get the ID from the ListOrganizationalUnitsForParent operation.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
-    #   "ou-" followed by from 4 to 32 lower-case letters or digits (the ID
-    #   of the root that contains the OU) followed by a second "-" dash and
-    #   from 8 to 32 additional lower-case letters or digits.
+    #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
+    #   of the root that contains the OU). This string is followed by a second
+    #   "-" dash and from 8 to 32 additional lowercase letters or digits.
     #
     #
     #
@@ -4539,7 +4557,7 @@ module Aws::Organizations
     #   The unique identifier (ID) of the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lower-case letters or digits.
+    #   by from 8 to 128 lowercase letters or digits.
     #
     #
     #
@@ -4639,7 +4657,7 @@ module Aws::Organizations
     #   resp.policy.policy_summary.arn #=> String
     #   resp.policy.policy_summary.name #=> String
     #   resp.policy.policy_summary.description #=> String
-    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY"
+    #   resp.policy.policy_summary.type #=> String, one of "SERVICE_CONTROL_POLICY", "TAG_POLICY"
     #   resp.policy.policy_summary.aws_managed #=> Boolean
     #   resp.policy.content #=> String
     #
@@ -4665,7 +4683,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
