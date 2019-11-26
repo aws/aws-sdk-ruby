@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.406 (2019-11-26)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
