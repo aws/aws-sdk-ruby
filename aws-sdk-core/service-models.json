@@ -278,6 +278,10 @@
     "models": "elasticbeanstalk/2010-12-01",
     "endpoint": "elasticbeanstalk"
   },
+  "ElasticInference": {
+    "models": "elastic-inference/2017-07-25",
+    "endpoint": "api.elastic-inference"
+  },
   "ElasticLoadBalancing": {
     "models": "elasticloadbalancing/2012-06-01",
     "endpoint": "elasticloadbalancing"

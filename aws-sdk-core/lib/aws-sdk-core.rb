@@ -93,6 +93,7 @@ module Aws
     EMR
     ElastiCache
     ElasticBeanstalk
+    ElasticInference
     ElasticLoadBalancing
     ElasticLoadBalancingV2
     ElasticTranscoder

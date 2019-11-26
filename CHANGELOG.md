@@ -1,6 +1,28 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
+* Feature - Aws::QuickSight - Updated the documentation for Amazon QuickSight.
+
+* Feature - Aws::RDSDataService - Updated the API, and documentation for AWS RDS DataService.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the API, and documentation for AWS Resource Groups Tagging API.
+
+* Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
+* Feature - Aws::ElasticInference - Added support for a new service, Amazon Elastic  Inference.
+
 2.11.405 (2019-11-25)
 ------------------
 

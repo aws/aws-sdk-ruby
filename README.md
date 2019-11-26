@@ -386,6 +386,7 @@ to be backwards compatible.
 | Amazon EC2 Container Registry                         | ECR                             | 2015-09-21  |
 | Amazon EC2 Container Service                          | ECS                             | 2014-11-13  |
 | Amazon ElastiCache                                    | ElastiCache                     | 2015-02-02  |
+| Amazon Elastic  Inference                             | ElasticInference                | 2017-07-25  |
 | Amazon Elastic Compute Cloud                          | EC2                             | 2016-11-15  |
 | Amazon Elastic File System                            | EFS                             | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | EKS                             | 2017-11-01  |
@@ -402,8 +403,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -434,8 +435,8 @@ to be backwards compatible.
 | Amazon Route 53 Resolver                              | Route53Resolver                 | 2018-04-01  |
 | Amazon SageMaker Runtime                              | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                              | SageMaker                       | 2017-07-24  |
-| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Email Service                           | SES                             | 2010-12-01  |
+| Amazon Simple Email Service                           | SESV2                           | 2019-09-27  |
 | Amazon Simple Notification Service                    | SNS                             | 2010-03-31  |
 | Amazon Simple Queue Service                           | SQS                             | 2012-11-05  |
 | Amazon Simple Storage Service                         | S3                              | 2006-03-01  |
@@ -455,8 +456,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Service Quotas                                        | ServiceQuotas                   | 2019-06-24  |
