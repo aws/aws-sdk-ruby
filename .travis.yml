@@ -23,7 +23,7 @@ env:
 
 script: rake build && rake test:spec
 
-bundler_args: --without docs release repl
+bundler_args: --without docs repl
 
 matrix:
   exclude:

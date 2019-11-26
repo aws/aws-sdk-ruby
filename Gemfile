@@ -6,7 +6,50 @@ if RUBY_VERSION == '1.9.3'
 else
   gem 'rake', require: false
 end
+
 gem 'jmespath'
+
+if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
+  # http 2 requires ruby version >= 2.1
+  # over alpn with tls
+  # requires ruby version >= 2.3 and openssl >=1.0.2
+  gem 'http-2'
+end
+
+# faster xml libraries
+unless ENV['PURE_RUBY']
+  gem 'nokogiri', '1.6.8.1'
+  gem 'oga'
+
+  unless defined?(JRUBY_VERSION)
+    gem 'libxml-ruby'
+
+    if ENV['OLD_OX']
+      # As ox suggestion
+      gem 'ox', '~> 2.8.1'
+    else
+      gem 'ox'
+    end
+  end
+end
+
+# faster json libraries
+unless ENV['PURE_RUBY']
+  gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
+
+  unless defined?(JRUBY_VERSION)
+    if ENV['OLD_OJ']
+      gem 'oj', '1.3.0'
+    else
+      if RUBY_VERSION == '1.9.3'
+        # oj drop support for Ruby under 2.0 since 3.3.5
+        gem 'oj', '<= 3.3.4'
+      else
+        gem 'oj'
+      end
+    end
+  end
+end
 
 group :test do
   if RUBY_VERSION == '1.9.3'
@@ -41,44 +84,8 @@ group :test do
     gem 'cucumber'
   end
 
-  gem 'rspec'
-
-  gem 'json-schema'
   gem 'multipart-post'
-
-  # faster xml libraries
-  gem 'libxml-ruby', platforms: :ruby unless ENV['PURE_RUBY']
-  gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
-  gem 'oga'
-
-  # faster json libraries
-  unless ENV['PURE_RUBY']
-    gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
-    if ENV['OLD_OJ']
-      gem 'oj', '1.3.0', platforms: :ruby
-    else
-      if RUBY_VERSION == '1.9.3'
-        # oj drop support for Ruby under 2.0 since 3.3.5
-        gem 'oj', '<= 3.3.4', platforms: :ruby
-      else
-        gem 'oj', platforms: :ruby
-      end
-    end
-
-    if ENV['OLD_OX']
-      # As ox suggestion
-      gem 'ox', '~> 2.8.1', platforms: :ruby
-    else
-      gem 'ox', platforms: :ruby
-    end
-  end
-
-  if RUBY_VERSION >= '2.1' && !ENV['NO_H2']
-    # http 2 requires ruby version >= 2.1
-    # over alpn with tls
-    # requires ruby version >= 2.3 and openssl >=1.0.2
-    gem 'http-2'
-  end
+  gem 'rspec'
 end
 
 group :build do
