@@ -47,7 +47,7 @@ group :test do
   gem 'multipart-post'
 
   # faster xml libraries
-  gem 'libxml-ruby' unless ENV['PURE_RUBY']
+  gem 'libxml-ruby', platforms: :ruby unless ENV['PURE_RUBY']
   gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
   gem 'oga'
 
@@ -55,21 +55,21 @@ group :test do
   unless ENV['PURE_RUBY']
     gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
     if ENV['OLD_OJ']
-      gem 'oj', '1.3.0'
+      gem 'oj', '1.3.0', platforms: :ruby
     else
       if RUBY_VERSION == '1.9.3'
         # oj drop support for Ruby under 2.0 since 3.3.5
-        gem 'oj', '<= 3.3.4'
+        gem 'oj', '<= 3.3.4', platforms: :ruby
       else
-        gem 'oj'
+        gem 'oj', platforms: :ruby
       end
     end
 
     if ENV['OLD_OX']
       # As ox suggestion
-      gem 'ox', '~> 2.8.1'
+      gem 'ox', '~> 2.8.1', platforms: :ruby
     else
-      gem 'ox'
+      gem 'ox', platforms: :ruby
     end
   end
 
@@ -88,7 +88,7 @@ group :build do
 end
 
 group :docs do
-  gem 'rdiscount' unless defined?(JRUBY_VERSION)
+  gem 'rdiscount', platforms: :ruby
   gem 'yard', '~> 0.9.11'
   gem 'yard-sitemap', '~> 1.0'
 end
