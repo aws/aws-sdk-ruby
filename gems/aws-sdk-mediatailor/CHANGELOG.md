@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-11-26)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of the Live Pre-Roll feature for HLS and DASH streams.
+
 1.21.0 (2019-10-23)
 ------------------
 

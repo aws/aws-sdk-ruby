@@ -278,6 +278,11 @@ module Aws::ApplicationInsights
     #   the created opsItem. Allows you to receive notifications for updates
     #   to the opsItem.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   List of tags to add to the application. tag key (`Key`) and an
+    #   associated tag value (`Value`). The maximum length of a tag key is 128
+    #   characters. The maximum length of a tag value is 256 characters.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -288,6 +293,12 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     ops_center_enabled: false,
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -335,6 +346,55 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def create_component(params = {}, options = {})
       req = build_request(:create_component, params)
+      req.send_request(options)
+    end
+
+    # Adds an log pattern to a `LogPatternSet`.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :pattern_set_name
+    #   The name of the log pattern set.
+    #
+    # @option params [required, String] :pattern_name
+    #   The name of the log pattern.
+    #
+    # @option params [required, String] :pattern
+    #   The log pattern.
+    #
+    # @option params [required, Integer] :rank
+    #   Rank of the log pattern.
+    #
+    # @return [Types::CreateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLogPatternResponse#log_pattern #log_pattern} => Types::LogPattern
+    #   * {Types::CreateLogPatternResponse#resource_group_name #resource_group_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_log_pattern({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     pattern_set_name: "LogPatternSetName", # required
+    #     pattern_name: "LogPatternName", # required
+    #     pattern: "LogPatternRegex", # required
+    #     rank: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_pattern.pattern_set_name #=> String
+    #   resp.log_pattern.pattern_name #=> String
+    #   resp.log_pattern.pattern #=> String
+    #   resp.log_pattern.rank #=> Integer
+    #   resp.resource_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateLogPattern AWS API Documentation
+    #
+    # @overload create_log_pattern(params = {})
+    # @param [Hash] params ({})
+    def create_log_pattern(params = {}, options = {})
+      req = build_request(:create_log_pattern, params)
       req.send_request(options)
     end
 
@@ -386,6 +446,36 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def delete_component(params = {}, options = {})
       req = build_request(:delete_component, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified log pattern from a `LogPatternSet`.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :pattern_set_name
+    #   The name of the log pattern set.
+    #
+    # @option params [required, String] :pattern_name
+    #   The name of the log pattern.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_log_pattern({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     pattern_set_name: "LogPatternSetName", # required
+    #     pattern_name: "LogPatternName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DeleteLogPattern AWS API Documentation
+    #
+    # @overload delete_log_pattern(params = {})
+    # @param [Hash] params ({})
+    def delete_log_pattern(params = {}, options = {})
+      req = build_request(:delete_log_pattern, params)
       req.send_request(options)
     end
 
@@ -446,7 +536,7 @@ module Aws::ApplicationInsights
     #
     #   resp.application_component.component_name #=> String
     #   resp.application_component.resource_type #=> String
-    #   resp.application_component.tier #=> String
+    #   resp.application_component.tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
     #   resp.application_component.monitor #=> Boolean
     #   resp.resource_list #=> Array
     #   resp.resource_list[0] #=> String
@@ -484,7 +574,7 @@ module Aws::ApplicationInsights
     # @example Response structure
     #
     #   resp.monitor #=> Boolean
-    #   resp.tier #=> String
+    #   resp.tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
     #   resp.component_configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeComponentConfiguration AWS API Documentation
@@ -506,7 +596,8 @@ module Aws::ApplicationInsights
     #
     # @option params [required, String] :tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_CORE`, `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and
+    #   `DEFAULT`.
     #
     # @return [Types::DescribeComponentConfigurationRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -517,7 +608,7 @@ module Aws::ApplicationInsights
     #   resp = client.describe_component_configuration_recommendation({
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
-    #     tier: "Tier", # required
+    #     tier: "DEFAULT", # required, accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
     #   })
     #
     # @example Response structure
@@ -530,6 +621,47 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def describe_component_configuration_recommendation(params = {}, options = {})
       req = build_request(:describe_component_configuration_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Describe a specific log pattern from a `LogPatternSet`.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :pattern_set_name
+    #   The name of the log pattern set.
+    #
+    # @option params [required, String] :pattern_name
+    #   The name of the log pattern.
+    #
+    # @return [Types::DescribeLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLogPatternResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::DescribeLogPatternResponse#log_pattern #log_pattern} => Types::LogPattern
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_log_pattern({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     pattern_set_name: "LogPatternSetName", # required
+    #     pattern_name: "LogPatternName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_group_name #=> String
+    #   resp.log_pattern.pattern_set_name #=> String
+    #   resp.log_pattern.pattern_name #=> String
+    #   resp.log_pattern.pattern #=> String
+    #   resp.log_pattern.rank #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeLogPattern AWS API Documentation
+    #
+    # @overload describe_log_pattern(params = {})
+    # @param [Hash] params ({})
+    def describe_log_pattern(params = {}, options = {})
+      req = build_request(:describe_log_pattern, params)
       req.send_request(options)
     end
 
@@ -597,7 +729,7 @@ module Aws::ApplicationInsights
     #   resp.problem.affected_resource #=> String
     #   resp.problem.start_time #=> Time
     #   resp.problem.end_time #=> Time
-    #   resp.problem.severity_level #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.problem.severity_level #=> String, one of "Low", "Medium", "High"
     #   resp.problem.resource_group_name #=> String
     #   resp.problem.feedback #=> Hash
     #   resp.problem.feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
@@ -725,7 +857,7 @@ module Aws::ApplicationInsights
     #   resp.application_component_list #=> Array
     #   resp.application_component_list[0].component_name #=> String
     #   resp.application_component_list[0].resource_type #=> String
-    #   resp.application_component_list[0].tier #=> String
+    #   resp.application_component_list[0].tier #=> String, one of "DEFAULT", "DOT_NET_CORE", "DOT_NET_WORKER", "DOT_NET_WEB", "SQL_SERVER"
     #   resp.application_component_list[0].monitor #=> Boolean
     #   resp.next_token #=> String
     #
@@ -735,6 +867,99 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def list_components(params = {}, options = {})
       req = build_request(:list_components, params)
+      req.send_request(options)
+    end
+
+    # Lists the log pattern sets in the specific application.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::ListLogPatternSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogPatternSetsResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::ListLogPatternSetsResponse#log_pattern_sets #log_pattern_sets} => Array&lt;String&gt;
+    #   * {Types::ListLogPatternSetsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_pattern_sets({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_group_name #=> String
+    #   resp.log_pattern_sets #=> Array
+    #   resp.log_pattern_sets[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatternSets AWS API Documentation
+    #
+    # @overload list_log_pattern_sets(params = {})
+    # @param [Hash] params ({})
+    def list_log_pattern_sets(params = {}, options = {})
+      req = build_request(:list_log_pattern_sets, params)
+      req.send_request(options)
+    end
+
+    # Lists the log patterns in the specific log `LogPatternSet`.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [String] :pattern_set_name
+    #   The name of the log pattern set.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::ListLogPatternsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLogPatternsResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::ListLogPatternsResponse#log_patterns #log_patterns} => Array&lt;Types::LogPattern&gt;
+    #   * {Types::ListLogPatternsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_log_patterns({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     pattern_set_name: "LogPatternSetName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_group_name #=> String
+    #   resp.log_patterns #=> Array
+    #   resp.log_patterns[0].pattern_set_name #=> String
+    #   resp.log_patterns[0].pattern_name #=> String
+    #   resp.log_patterns[0].pattern #=> String
+    #   resp.log_patterns[0].rank #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListLogPatterns AWS API Documentation
+    #
+    # @overload list_log_patterns(params = {})
+    # @param [Hash] params ({})
+    def list_log_patterns(params = {}, options = {})
+      req = build_request(:list_log_patterns, params)
       req.send_request(options)
     end
 
@@ -785,7 +1010,7 @@ module Aws::ApplicationInsights
     #   resp.problem_list[0].affected_resource #=> String
     #   resp.problem_list[0].start_time #=> Time
     #   resp.problem_list[0].end_time #=> Time
-    #   resp.problem_list[0].severity_level #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.problem_list[0].severity_level #=> String, one of "Low", "Medium", "High"
     #   resp.problem_list[0].resource_group_name #=> String
     #   resp.problem_list[0].feedback #=> Hash
     #   resp.problem_list[0].feedback["FeedbackKey"] #=> String, one of "NOT_SPECIFIED", "USEFUL", "NOT_USEFUL"
@@ -797,6 +1022,120 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def list_problems(params = {}, options = {})
       req = build_request(:list_problems, params)
+      req.send_request(options)
+    end
+
+    # Retrieve a list of the tags (keys and values) that are associated with
+    # a specified application. A *tag* is a label that you optionally define
+    # and associate with an application. Each tag consists of a required
+    # *tag key* and an optional associated *tag value*. A tag key is a
+    # general label that acts as a category for more specific tag values. A
+    # tag value acts as a descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to
+    #   retrieve tag information for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Add one or more tags (keys and values) to a specified application. A
+    # *tag* is a label that you optionally define and associate with an
+    # application. Tags can help you categorize and manage application in
+    # different ways, such as by purpose, owner, environment, or other
+    # criteria.
+    #
+    # Each tag consists of a required *tag key* and an associated *tag
+    # value*, both of which you define. A tag key is a general label that
+    # acts as a category for more specific tag values. A tag value acts as a
+    # descriptor within a tag key.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to add
+    #   one or more tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags that to add to the application. A tag consists of a
+    #   required tag key (`Key`) and an associated tag value (`Value`). The
+    #   maximum length of a tag key is 128 characters. The maximum length of a
+    #   tag value is 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove one or more tags (keys and values) from a specified
+    # application.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the application that you want to
+    #   remove one or more tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tags (tag keys) that you want to remove from the resource. When
+    #   you specify a tag key, the action removes both that key and its
+    #   associated tag value.
+    #
+    #   To remove more than one tag from the application, append the `TagKeys`
+    #   parameter and argument for each additional tag to remove, separated by
+    #   an ampersand.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -899,18 +1238,21 @@ module Aws::ApplicationInsights
     #
     # @option params [String] :tier
     #   The tier of the application component. Supported tiers include
-    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `SQL_SERVER`, and `DEFAULT`.
+    #   `DOT_NET_WORKER`, `DOT_NET_WEB`, `DOT_NET_CORE`, `SQL_SERVER`, and
+    #   `DEFAULT`.
     #
     # @option params [String] :component_configuration
     #   The configuration settings of the component. The value is the escaped
     #   JSON of the configuration. For more information about the JSON format,
     #   see [Working with JSON][1]. You can send a request to
     #   `DescribeComponentConfigurationRecommendation` to see the recommended
-    #   configuration for a component.
+    #   configuration for a component. For the complete format of the
+    #   component configuration file, see [Component Configuration][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -920,7 +1262,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     monitor: false,
-    #     tier: "Tier",
+    #     tier: "DEFAULT", # accepts DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER
     #     component_configuration: "ComponentConfiguration",
     #   })
     #
@@ -930,6 +1272,55 @@ module Aws::ApplicationInsights
     # @param [Hash] params ({})
     def update_component_configuration(params = {}, options = {})
       req = build_request(:update_component_configuration, params)
+      req.send_request(options)
+    end
+
+    # Adds a log pattern to a `LogPatternSet`.
+    #
+    # @option params [required, String] :resource_group_name
+    #   The name of the resource group.
+    #
+    # @option params [required, String] :pattern_set_name
+    #   The name of the log pattern set.
+    #
+    # @option params [required, String] :pattern_name
+    #   The name of the log pattern.
+    #
+    # @option params [String] :pattern
+    #   The log pattern.
+    #
+    # @option params [Integer] :rank
+    #   Rank of the log pattern.
+    #
+    # @return [Types::UpdateLogPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLogPatternResponse#resource_group_name #resource_group_name} => String
+    #   * {Types::UpdateLogPatternResponse#log_pattern #log_pattern} => Types::LogPattern
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_log_pattern({
+    #     resource_group_name: "ResourceGroupName", # required
+    #     pattern_set_name: "LogPatternSetName", # required
+    #     pattern_name: "LogPatternName", # required
+    #     pattern: "LogPatternRegex",
+    #     rank: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_group_name #=> String
+    #   resp.log_pattern.pattern_set_name #=> String
+    #   resp.log_pattern.pattern_name #=> String
+    #   resp.log_pattern.pattern #=> String
+    #   resp.log_pattern.rank #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateLogPattern AWS API Documentation
+    #
+    # @overload update_log_pattern(params = {})
+    # @param [Hash] params ({})
+    def update_log_pattern(params = {}, options = {})
+      req = build_request(:update_log_pattern, params)
       req.send_request(options)
     end
 
@@ -946,7 +1337,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

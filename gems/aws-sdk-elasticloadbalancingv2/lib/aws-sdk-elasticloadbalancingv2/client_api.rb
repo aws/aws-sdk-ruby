@@ -179,6 +179,7 @@ module Aws::ElasticLoadBalancingV2
     PathPatternConditionConfig = Shapes::StructureShape.new(name: 'PathPatternConditionConfig')
     Port = Shapes::IntegerShape.new(name: 'Port')
     PriorityInUseException = Shapes::StructureShape.new(name: 'PriorityInUseException')
+    PrivateIPv4Address = Shapes::StringShape.new(name: 'PrivateIPv4Address')
     ProtocolEnum = Shapes::StringShape.new(name: 'ProtocolEnum')
     QueryStringConditionConfig = Shapes::StructureShape.new(name: 'QueryStringConditionConfig')
     QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
@@ -583,6 +584,7 @@ module Aws::ElasticLoadBalancingV2
 
     LoadBalancerAddress.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
     LoadBalancerAddress.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
+    LoadBalancerAddress.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
     LoadBalancerAddress.struct_class = Types::LoadBalancerAddress
 
     LoadBalancerAddresses.member = Shapes::ShapeRef.new(shape: LoadBalancerAddress)
@@ -769,6 +771,7 @@ module Aws::ElasticLoadBalancingV2
 
     SubnetMapping.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, location_name: "SubnetId"))
     SubnetMapping.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
+    SubnetMapping.add_member(:private_i_pv_4_address, Shapes::ShapeRef.new(shape: PrivateIPv4Address, location_name: "PrivateIPv4Address"))
     SubnetMapping.struct_class = Types::SubnetMapping
 
     SubnetMappings.member = Shapes::ShapeRef.new(shape: SubnetMapping)

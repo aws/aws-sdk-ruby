@@ -14,6 +14,8 @@ module Aws::SSM
     Account = Shapes::StringShape.new(name: 'Account')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+    AccountSharingInfo = Shapes::StructureShape.new(name: 'AccountSharingInfo')
+    AccountSharingInfoList = Shapes::ListShape.new(name: 'AccountSharingInfoList')
     Accounts = Shapes::ListShape.new(name: 'Accounts')
     Activation = Shapes::StructureShape.new(name: 'Activation')
     ActivationCode = Shapes::StringShape.new(name: 'ActivationCode')
@@ -318,6 +320,8 @@ module Aws::SSM
     DocumentParameterType = Shapes::StringShape.new(name: 'DocumentParameterType')
     DocumentPermissionLimit = Shapes::StructureShape.new(name: 'DocumentPermissionLimit')
     DocumentPermissionType = Shapes::StringShape.new(name: 'DocumentPermissionType')
+    DocumentRequires = Shapes::StructureShape.new(name: 'DocumentRequires')
+    DocumentRequiresList = Shapes::ListShape.new(name: 'DocumentRequiresList')
     DocumentSchemaVersion = Shapes::StringShape.new(name: 'DocumentSchemaVersion')
     DocumentSha1 = Shapes::StringShape.new(name: 'DocumentSha1')
     DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
@@ -925,6 +929,7 @@ module Aws::SSM
     SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SessionTarget = Shapes::StringShape.new(name: 'SessionTarget')
     SeveritySummary = Shapes::StructureShape.new(name: 'SeveritySummary')
+    SharedDocumentVersion = Shapes::StringShape.new(name: 'SharedDocumentVersion')
     SignalType = Shapes::StringShape.new(name: 'SignalType')
     SnapshotDownloadUrl = Shapes::StringShape.new(name: 'SnapshotDownloadUrl')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
@@ -1021,6 +1026,12 @@ module Aws::SSM
     Version = Shapes::StringShape.new(name: 'Version')
 
     AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    AccountSharingInfo.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AccountSharingInfo.add_member(:shared_document_version, Shapes::ShapeRef.new(shape: SharedDocumentVersion, location_name: "SharedDocumentVersion"))
+    AccountSharingInfo.struct_class = Types::AccountSharingInfo
+
+    AccountSharingInfoList.member = Shapes::ShapeRef.new(shape: AccountSharingInfo)
 
     Accounts.member = Shapes::ShapeRef.new(shape: Account)
 
@@ -1471,6 +1482,7 @@ module Aws::SSM
     CreateAssociationResult.struct_class = Types::CreateAssociationResult
 
     CreateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
+    CreateDocumentRequest.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     CreateDocumentRequest.add_member(:attachments, Shapes::ShapeRef.new(shape: AttachmentsSourceList, location_name: "Attachments"))
     CreateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     CreateDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
@@ -1558,6 +1570,7 @@ module Aws::SSM
     DeleteDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     DeleteDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DeleteDocumentRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: DocumentVersionName, location_name: "VersionName"))
+    DeleteDocumentRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     DeleteDocumentRequest.struct_class = Types::DeleteDocumentRequest
 
     DeleteDocumentResult.struct_class = Types::DeleteDocumentResult
@@ -1712,6 +1725,7 @@ module Aws::SSM
     DescribeDocumentPermissionRequest.struct_class = Types::DescribeDocumentPermissionRequest
 
     DescribeDocumentPermissionResponse.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIds"))
+    DescribeDocumentPermissionResponse.add_member(:account_sharing_info_list, Shapes::ShapeRef.new(shape: AccountSharingInfoList, location_name: "AccountSharingInfoList"))
     DescribeDocumentPermissionResponse.struct_class = Types::DescribeDocumentPermissionResponse
 
     DescribeDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
@@ -1980,6 +1994,7 @@ module Aws::SSM
     DocumentDescription.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     DocumentDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentDescription.add_member(:attachments_information, Shapes::ShapeRef.new(shape: AttachmentInformationList, location_name: "AttachmentsInformation"))
+    DocumentDescription.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))
@@ -1998,6 +2013,7 @@ module Aws::SSM
     DocumentIdentifier.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     DocumentIdentifier.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     DocumentIdentifier.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    DocumentIdentifier.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
     DocumentIdentifierList.member = Shapes::ShapeRef.new(shape: DocumentIdentifier)
@@ -2023,6 +2039,12 @@ module Aws::SSM
 
     DocumentPermissionLimit.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DocumentPermissionLimit.struct_class = Types::DocumentPermissionLimit
+
+    DocumentRequires.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
+    DocumentRequires.add_member(:version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "Version"))
+    DocumentRequires.struct_class = Types::DocumentRequires
+
+    DocumentRequiresList.member = Shapes::ShapeRef.new(shape: DocumentRequires)
 
     DocumentVersionInfo.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DocumentVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
@@ -2137,6 +2159,7 @@ module Aws::SSM
     GetDocumentResult.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, location_name: "Content"))
     GetDocumentResult.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     GetDocumentResult.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    GetDocumentResult.add_member(:requires, Shapes::ShapeRef.new(shape: DocumentRequiresList, location_name: "Requires"))
     GetDocumentResult.add_member(:attachments_content, Shapes::ShapeRef.new(shape: AttachmentContentList, location_name: "AttachmentsContent"))
     GetDocumentResult.struct_class = Types::GetDocumentResult
 
@@ -2756,7 +2779,7 @@ module Aws::SSM
     ListComplianceSummariesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListComplianceSummariesResult.struct_class = Types::ListComplianceSummariesResult
 
-    ListDocumentVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
+    ListDocumentVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     ListDocumentVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     ListDocumentVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDocumentVersionsRequest.struct_class = Types::ListDocumentVersionsRequest
@@ -2964,6 +2987,7 @@ module Aws::SSM
     ModifyDocumentPermissionRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: DocumentPermissionType, required: true, location_name: "PermissionType"))
     ModifyDocumentPermissionRequest.add_member(:account_ids_to_add, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIdsToAdd"))
     ModifyDocumentPermissionRequest.add_member(:account_ids_to_remove, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "AccountIdsToRemove"))
+    ModifyDocumentPermissionRequest.add_member(:shared_document_version, Shapes::ShapeRef.new(shape: SharedDocumentVersion, location_name: "SharedDocumentVersion"))
     ModifyDocumentPermissionRequest.struct_class = Types::ModifyDocumentPermissionRequest
 
     ModifyDocumentPermissionResponse.struct_class = Types::ModifyDocumentPermissionResponse

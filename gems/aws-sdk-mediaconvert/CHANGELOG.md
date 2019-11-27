@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-11-25)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for 8K outputs and support for QuickTime Animation Codec (RLE) inputs.
+
 1.39.0 (2019-11-15)
 ------------------
 

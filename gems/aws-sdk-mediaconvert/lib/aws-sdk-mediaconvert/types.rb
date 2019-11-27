@@ -1163,6 +1163,7 @@ module Aws::MediaConvert
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
+    #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #             x_position: 1,
     #             y_position: 1,
@@ -1282,6 +1283,7 @@ module Aws::MediaConvert
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
     #             shadow_y_offset: 1,
+    #             subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #             teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #             x_position: 1,
     #             y_position: 1,
@@ -1396,6 +1398,7 @@ module Aws::MediaConvert
     #           shadow_opacity: 1,
     #           shadow_x_offset: 1,
     #           shadow_y_offset: 1,
+    #           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #           x_position: 1,
     #           y_position: 1,
@@ -2380,6 +2383,7 @@ module Aws::MediaConvert
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
+    #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 hdr_10_metadata: {
@@ -2781,6 +2785,7 @@ module Aws::MediaConvert
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                           x_position: 1,
     #                           y_position: 1,
@@ -3434,6 +3439,7 @@ module Aws::MediaConvert
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
+    #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 hdr_10_metadata: {
@@ -3835,6 +3841,7 @@ module Aws::MediaConvert
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                           x_position: 1,
     #                           y_position: 1,
@@ -4474,6 +4481,7 @@ module Aws::MediaConvert
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
+    #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                   x_position: 1,
     #                   y_position: 1,
@@ -5621,6 +5629,7 @@ module Aws::MediaConvert
     #         shadow_opacity: 1,
     #         shadow_x_offset: 1,
     #         shadow_y_offset: 1,
+    #         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #         x_position: 1,
     #         y_position: 1,
@@ -5721,6 +5730,13 @@ module Aws::MediaConvert
     #   above the text. All burn-in and DVB-Sub font settings must match.
     #   @return [Integer]
     #
+    # @!attribute [rw] subtitling_type
+    #   Specify whether your DVB subtitles are standard or for hearing
+    #   impaired. Choose hearing impaired if your subtitles include audio
+    #   descriptions and dialogue. Choose standard if your subtitles include
+    #   only dialogue.
+    #   @return [String]
+    #
     # @!attribute [rw] teletext_spacing
     #   Only applies to jobs with input captions in Teletext or STL formats.
     #   Specify whether the spacing between letters in your captions is set
@@ -5769,6 +5785,7 @@ module Aws::MediaConvert
       :shadow_opacity,
       :shadow_x_offset,
       :shadow_y_offset,
+      :subtitling_type,
       :teletext_spacing,
       :x_position,
       :y_position)
@@ -8279,6 +8296,7 @@ module Aws::MediaConvert
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #         video_selector: {
+    #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #           hdr_10_metadata: {
@@ -8690,6 +8708,7 @@ module Aws::MediaConvert
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #         video_selector: {
+    #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #           hdr_10_metadata: {
@@ -9306,6 +9325,7 @@ module Aws::MediaConvert
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #             video_selector: {
+    #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #               hdr_10_metadata: {
@@ -9707,6 +9727,7 @@ module Aws::MediaConvert
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
+    #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                         x_position: 1,
     #                         y_position: 1,
@@ -10388,6 +10409,7 @@ module Aws::MediaConvert
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #             video_selector: {
+    #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #               hdr_10_metadata: {
@@ -10789,6 +10811,7 @@ module Aws::MediaConvert
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
     #                         shadow_y_offset: 1,
+    #                         subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                         teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                         x_position: 1,
     #                         y_position: 1,
@@ -13210,6 +13233,7 @@ module Aws::MediaConvert
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
+    #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                 x_position: 1,
     #                 y_position: 1,
@@ -14059,6 +14083,7 @@ module Aws::MediaConvert
     #                     shadow_opacity: 1,
     #                     shadow_x_offset: 1,
     #                     shadow_y_offset: 1,
+    #                     subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                     teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                     x_position: 1,
     #                     y_position: 1,
@@ -14971,6 +14996,7 @@ module Aws::MediaConvert
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
     #                 shadow_y_offset: 1,
+    #                 subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                 teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                 x_position: 1,
     #                 y_position: 1,
@@ -16553,6 +16579,7 @@ module Aws::MediaConvert
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
     #               video_selector: {
+    #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #                 hdr_10_metadata: {
@@ -16954,6 +16981,7 @@ module Aws::MediaConvert
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
     #                           shadow_y_offset: 1,
+    #                           subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                           teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                           x_position: 1,
     #                           y_position: 1,
@@ -17584,6 +17612,7 @@ module Aws::MediaConvert
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
     #                   shadow_y_offset: 1,
+    #                   subtitling_type: "HEARING_IMPAIRED", # accepts HEARING_IMPAIRED, STANDARD
     #                   teletext_spacing: "FIXED_GRID", # accepts FIXED_GRID, PROPORTIONAL
     #                   x_position: 1,
     #                   y_position: 1,
@@ -18800,6 +18829,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #         color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #         color_space_usage: "FORCE", # accepts FORCE, FALLBACK
     #         hdr_10_metadata: {
@@ -18820,6 +18850,15 @@ module Aws::MediaConvert
     #         program_number: 1,
     #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
     #       }
+    #
+    # @!attribute [rw] alpha_behavior
+    #   Ignore this setting unless this input is a QuickTime animation.
+    #   Specify which part of this input MediaConvert uses for your outputs.
+    #   Leave this setting set to DISCARD in order to delete the alpha
+    #   channel and preserve the video. Use REMAP\_TO\_LUMA for this setting
+    #   to delete the video and map the alpha channel to the luma channel of
+    #   your outputs.
+    #   @return [String]
     #
     # @!attribute [rw] color_space
     #   If your input video has accurate color space metadata, or if you
@@ -18896,6 +18935,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/VideoSelector AWS API Documentation
     #
     class VideoSelector < Struct.new(
+      :alpha_behavior,
       :color_space,
       :color_space_usage,
       :hdr_10_metadata,

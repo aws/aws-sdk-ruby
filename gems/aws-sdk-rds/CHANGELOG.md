@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2019-11-25)
+------------------
+
+* Feature - Cluster Endpoints can now be tagged by using --tags in the create-db-cluster-endpoint API
+
 1.71.0 (2019-11-18)
 ------------------
 

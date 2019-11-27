@@ -338,8 +338,8 @@ module Aws::Lambda
     # without specifying the source, other accounts could potentially
     # configure resources in their account to invoke your Lambda function.
     #
-    # This action adds a statement to a resource-based permission policy for
-    # the function. For more information about function policies, see
+    # This action adds a statement to a resource-based permissions policy
+    # for the function. For more information about function policies, see
     # [Lambda Function Policies][1].
     #
     #
@@ -541,17 +541,32 @@ module Aws::Lambda
     #
     # For details about each event source type, see the following topics.
     #
-    # * [Using AWS Lambda with Amazon Kinesis][1]
+    # * [Using AWS Lambda with Amazon DynamoDB][1]
     #
-    # * [Using AWS Lambda with Amazon SQS][2]
+    # * [Using AWS Lambda with Amazon Kinesis][2]
     #
-    # * [Using AWS Lambda with Amazon DynamoDB][3]
+    # * [Using AWS Lambda with Amazon SQS][3]
+    #
+    # The following error handling options are only available for stream
+    # sources (DynamoDB and Kinesis):
+    #
+    # * `BisectBatchOnFunctionError` - If the function returns an error,
+    #   split the batch in two and retry.
+    #
+    # * `DestinationConfig` - Send discarded records to an Amazon SQS queue
+    #   or Amazon SNS topic.
+    #
+    # * `MaximumRecordAgeInSeconds` - Discard records older than the
+    #   specified age.
+    #
+    # * `MaximumRetryAttempts` - Discard records after the specified number
+    #   of retries.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
-    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
-    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the event source.
@@ -594,6 +609,12 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
+    #   The maximum amount of time to gather records before invoking the
+    #   function, in seconds.
+    #
+    # @option params [Integer] :parallelization_factor
+    #   (Streams) The number of batches to process from each shard
+    #   concurrently.
     #
     # @option params [String] :starting_position
     #   The position in a stream from which to start reading. Required for
@@ -604,17 +625,38 @@ module Aws::Lambda
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
     #   start reading.
     #
+    # @option params [Types::DestinationConfig] :destination_config
+    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
+    #   discarded records.
+    #
+    # @option params [Integer] :maximum_record_age_in_seconds
+    #   (Streams) The maximum age of a record that Lambda sends to a function
+    #   for processing.
+    #
+    # @option params [Boolean] :bisect_batch_on_function_error
+    #   (Streams) If the function returns an error, split the batch in two and
+    #   retry.
+    #
+    # @option params [Integer] :maximum_retry_attempts
+    #   (Streams) The maximum number of times to retry when the function
+    #   returns an error.
+    #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
+    #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -624,8 +666,20 @@ module Aws::Lambda
     #     enabled: false,
     #     batch_size: 1,
     #     maximum_batching_window_in_seconds: 1,
+    #     parallelization_factor: 1,
     #     starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #     starting_position_timestamp: Time.now,
+    #     destination_config: {
+    #       on_success: {
+    #         destination: "DestinationArn",
+    #       },
+    #       on_failure: {
+    #         destination: "DestinationArn",
+    #       },
+    #     },
+    #     maximum_record_age_in_seconds: 1,
+    #     bisect_batch_on_function_error: false,
+    #     maximum_retry_attempts: 1,
     #   })
     #
     # @example Response structure
@@ -633,12 +687,18 @@ module Aws::Lambda
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
+    #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #   resp.maximum_record_age_in_seconds #=> Integer
+    #   resp.bisect_batch_on_function_error #=> Boolean
+    #   resp.maximum_retry_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
@@ -654,6 +714,14 @@ module Aws::Lambda
     # package contains your function code. The execution role grants the
     # function permission to use AWS services, such as Amazon CloudWatch
     # Logs for log streaming and AWS X-Ray for request tracing.
+    #
+    # When you create a function, Lambda provisions an instance of the
+    # function and its supporting resources. If your function connects to a
+    # VPC, this process can take a minute or so. During this time, you
+    # can't invoke or modify the function. The `State`, `StateReason`, and
+    # `StateReasonCode` fields in the response from GetFunctionConfiguration
+    # indicate when the function is ready to invoke. For more information,
+    # see [Function States][3].
     #
     # A function has an unpublished version, and can have published versions
     # and aliases. The unpublished version changes when you update your
@@ -678,13 +746,14 @@ module Aws::Lambda
     # To invoke your function directly, use Invoke. To invoke your function
     # in response to events in other AWS services, create an event source
     # mapping (CreateEventSourceMapping), or configure a function trigger in
-    # the other service. For more information, see [Invoking Functions][3].
+    # the other service. For more information, see [Invoking Functions][4].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html
     # [2]: https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role
-    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/invoking-lambda-functions.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -749,7 +818,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   A dead letter queue configuration that specifies the queue or topic
@@ -758,7 +827,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #
     # @option params [Types::Environment] :environment
     #   Environment variables that are accessible from function code during
@@ -810,6 +879,12 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
+    #   * {Types::FunctionConfiguration#state #state} => String
+    #   * {Types::FunctionConfiguration#state_reason #state_reason} => String
+    #   * {Types::FunctionConfiguration#state_reason_code #state_reason_code} => String
+    #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
     # @example Example: create-function
@@ -919,6 +994,12 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.state_reason #=> String
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status_reason #=> String
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -984,6 +1065,9 @@ module Aws::Lambda
     # Deletes an [event source mapping][1]. You can get the identifier of a
     # mapping from the output of ListEventSourceMappings.
     #
+    # When you delete an event source mapping, it enters a `Deleting` state
+    # and might not be completely deleted for several seconds.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html
@@ -996,12 +1080,17 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
+    #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #
     #
     # @example Example: To delete a Lambda function event source mapping
@@ -1035,12 +1124,18 @@ module Aws::Lambda
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
+    #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #   resp.maximum_record_age_in_seconds #=> Integer
+    #   resp.bisect_batch_on_function_error #=> Boolean
+    #   resp.maximum_retry_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
@@ -1140,6 +1235,50 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function_concurrency(params = {}, options = {})
       req = build_request(:delete_function_concurrency, params)
+      req.send_request(options)
+    end
+
+    # Deletes the configuration for asynchronous invocation for a function,
+    # version, or alias.
+    #
+    # To configure options for asynchronous invocation, use
+    # PutFunctionEventInvokeConfig.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   A version number or alias name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_event_invoke_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionEventInvokeConfig AWS API Documentation
+    #
+    # @overload delete_function_event_invoke_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_event_invoke_config(params = {}, options = {})
+      req = build_request(:delete_function_event_invoke_config, params)
       req.send_request(options)
     end
 
@@ -1310,12 +1449,17 @@ module Aws::Lambda
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
+    #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1349,12 +1493,18 @@ module Aws::Lambda
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
+    #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #   resp.maximum_record_age_in_seconds #=> Integer
+    #   resp.bisect_batch_on_function_error #=> Boolean
+    #   resp.maximum_retry_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
@@ -1479,6 +1629,12 @@ module Aws::Lambda
     #   resp.configuration.layers #=> Array
     #   resp.configuration.layers[0].arn #=> String
     #   resp.configuration.layers[0].code_size #=> Integer
+    #   resp.configuration.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.configuration.state_reason #=> String
+    #   resp.configuration.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.configuration.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.configuration.last_update_status_reason #=> String
+    #   resp.configuration.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -1544,6 +1700,12 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
+    #   * {Types::FunctionConfiguration#state #state} => String
+    #   * {Types::FunctionConfiguration#state_reason #state_reason} => String
+    #   * {Types::FunctionConfiguration#state_reason_code #state_reason_code} => String
+    #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1616,6 +1778,12 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.state_reason #=> String
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status_reason #=> String
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -1623,6 +1791,65 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function_configuration(params = {}, options = {})
       req = build_request(:get_function_configuration, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration for asynchronous invocation for a
+    # function, version, or alias.
+    #
+    # To configure options for asynchronous invocation, use
+    # PutFunctionEventInvokeConfig.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   A version number or alias name.
+    #
+    # @return [Types::FunctionEventInvokeConfig] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FunctionEventInvokeConfig#last_modified #last_modified} => Time
+    #   * {Types::FunctionEventInvokeConfig#function_arn #function_arn} => String
+    #   * {Types::FunctionEventInvokeConfig#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
+    #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_event_invoke_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.last_modified #=> Time
+    #   resp.function_arn #=> String
+    #   resp.maximum_retry_attempts #=> Integer
+    #   resp.maximum_event_age_in_seconds #=> Integer
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionEventInvokeConfig AWS API Documentation
+    #
+    # @overload get_function_event_invoke_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_event_invoke_config(params = {}, options = {})
+      req = build_request(:get_function_event_invoke_config, params)
       req.send_request(options)
     end
 
@@ -1841,22 +2068,27 @@ module Aws::Lambda
     # (and wait for the response), or asynchronously. To invoke a function
     # asynchronously, set `InvocationType` to `Event`.
     #
-    # For synchronous invocation, details about the function response,
+    # For [synchronous invocation][1], details about the function response,
     # including errors, are included in the response body and headers. For
     # either invocation type, you can find more information in the
-    # [execution log][1] and [trace][2]. To record function errors for
-    # asynchronous invocations, configure your function with a [dead letter
-    # queue][2].
+    # [execution log][2] and [trace][3].
     #
     # When an error occurs, your function may be invoked multiple times.
     # Retry behavior varies by error type, client, event source, and
     # invocation type. For example, if you invoke a function asynchronously
     # and it returns an error, Lambda executes the function up to two more
-    # times. For more information, see [Retry Behavior][3].
+    # times. For more information, see [Retry Behavior][4].
+    #
+    # For [asynchronous invocation][5], Lambda adds events to a queue before
+    # sending them to your function. If your function does not have enough
+    # capacity to keep up with the queue, events may be lost. Occasionally,
+    # your function may receive the same event multiple times, even if no
+    # error occurs. To retain events that were not processed, configure your
+    # function with a [dead-letter queue][6].
     #
     # The status code in the API response doesn't reflect function errors.
     # Error codes are reserved for errors that prevent your function from
-    # executing, such as permissions errors, [limit errors][4], or issues
+    # executing, such as permissions errors, [limit errors][7], or issues
     # with your function's code and configuration. For example, Lambda
     # returns `TooManyRequestsException` if executing the function would
     # cause you to exceed a concurrency limit at either the account level
@@ -1873,10 +2105,13 @@ module Aws::Lambda
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html
-    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
-    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html
-    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-sync.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html
+    # [3]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html
+    # [4]: https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html
+    # [5]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html
+    # [6]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
+    # [7]: https://docs.aws.amazon.com/lambda/latest/dg/limits.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
@@ -2187,12 +2422,18 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].uuid #=> String
     #   resp.event_source_mappings[0].batch_size #=> Integer
     #   resp.event_source_mappings[0].maximum_batching_window_in_seconds #=> Integer
+    #   resp.event_source_mappings[0].parallelization_factor #=> Integer
     #   resp.event_source_mappings[0].event_source_arn #=> String
     #   resp.event_source_mappings[0].function_arn #=> String
     #   resp.event_source_mappings[0].last_modified #=> Time
     #   resp.event_source_mappings[0].last_processing_result #=> String
     #   resp.event_source_mappings[0].state #=> String
     #   resp.event_source_mappings[0].state_transition_reason #=> String
+    #   resp.event_source_mappings[0].destination_config.on_success.destination #=> String
+    #   resp.event_source_mappings[0].destination_config.on_failure.destination #=> String
+    #   resp.event_source_mappings[0].maximum_record_age_in_seconds #=> Integer
+    #   resp.event_source_mappings[0].bisect_batch_on_function_error #=> Boolean
+    #   resp.event_source_mappings[0].maximum_retry_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
     #
@@ -2200,6 +2441,67 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_event_source_mappings(params = {}, options = {})
       req = build_request(:list_event_source_mappings, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of configurations for asynchronous invocation for a
+    # function.
+    #
+    # To configure options for asynchronous invocation, use
+    # PutFunctionEventInvokeConfig.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of configurations to return.
+    #
+    # @return [Types::ListFunctionEventInvokeConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionEventInvokeConfigsResponse#function_event_invoke_configs #function_event_invoke_configs} => Array&lt;Types::FunctionEventInvokeConfig&gt;
+    #   * {Types::ListFunctionEventInvokeConfigsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_function_event_invoke_configs({
+    #     function_name: "FunctionName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_event_invoke_configs #=> Array
+    #   resp.function_event_invoke_configs[0].last_modified #=> Time
+    #   resp.function_event_invoke_configs[0].function_arn #=> String
+    #   resp.function_event_invoke_configs[0].maximum_retry_attempts #=> Integer
+    #   resp.function_event_invoke_configs[0].maximum_event_age_in_seconds #=> Integer
+    #   resp.function_event_invoke_configs[0].destination_config.on_success.destination #=> String
+    #   resp.function_event_invoke_configs[0].destination_config.on_failure.destination #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionEventInvokeConfigs AWS API Documentation
+    #
+    # @overload list_function_event_invoke_configs(params = {})
+    # @param [Hash] params ({})
+    def list_function_event_invoke_configs(params = {}, options = {})
+      req = build_request(:list_function_event_invoke_configs, params)
       req.send_request(options)
     end
 
@@ -2291,6 +2593,12 @@ module Aws::Lambda
     #   resp.functions[0].layers #=> Array
     #   resp.functions[0].layers[0].arn #=> String
     #   resp.functions[0].layers[0].code_size #=> Integer
+    #   resp.functions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.functions[0].state_reason #=> String
+    #   resp.functions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.functions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.functions[0].last_update_status_reason #=> String
+    #   resp.functions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -2539,6 +2847,12 @@ module Aws::Lambda
     #   resp.versions[0].layers #=> Array
     #   resp.versions[0].layers[0].arn #=> String
     #   resp.versions[0].layers[0].code_size #=> Integer
+    #   resp.versions[0].state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.versions[0].state_reason #=> String
+    #   resp.versions[0].state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.versions[0].last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.versions[0].last_update_status_reason #=> String
+    #   resp.versions[0].last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -2550,8 +2864,8 @@ module Aws::Lambda
     end
 
     # Creates an [AWS Lambda layer][1] from a ZIP archive. Each time you
-    # call `PublishLayerVersion` with the same version name, a new version
-    # is created.
+    # call `PublishLayerVersion` with the same layer name, a new version is
+    # created.
     #
     # Add layers to your function with CreateFunction or
     # UpdateFunctionConfiguration.
@@ -2709,6 +3023,12 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
+    #   * {Types::FunctionConfiguration#state #state} => String
+    #   * {Types::FunctionConfiguration#state_reason #state_reason} => String
+    #   * {Types::FunctionConfiguration#state_reason_code #state_reason_code} => String
+    #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -2779,6 +3099,12 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.state_reason #=> String
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status_reason #=> String
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -2847,6 +3173,105 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def put_function_concurrency(params = {}, options = {})
       req = build_request(:put_function_concurrency, params)
+      req.send_request(options)
+    end
+
+    # Configures options for [asynchronous invocation][1] on a function,
+    # version, or alias.
+    #
+    # By default, Lambda retries an asynchronous invocation twice if the
+    # function returns an error. It retains events in a queue for up to six
+    # hours. When an event fails all processing attempts or stays in the
+    # asynchronous invocation queue for too long, Lambda discards it. To
+    # retain discarded events, configure a dead-letter queue with
+    # UpdateFunctionConfiguration.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   A version number or alias name.
+    #
+    # @option params [Integer] :maximum_retry_attempts
+    #   The maximum number of times to retry when the function returns an
+    #   error.
+    #
+    # @option params [Integer] :maximum_event_age_in_seconds
+    #   The maximum age of a request that Lambda sends to a function for
+    #   processing.
+    #
+    # @option params [Types::DestinationConfig] :destination_config
+    #   A destination for events after they have been sent to a function for
+    #   processing.
+    #
+    #   **Destinations**
+    #
+    #   * **Function** - The Amazon Resource Name (ARN) of a Lambda function.
+    #
+    #   * **Queue** - The ARN of an SQS queue.
+    #
+    #   * **Topic** - The ARN of an SNS topic.
+    #
+    #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
+    #
+    # @return [Types::FunctionEventInvokeConfig] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FunctionEventInvokeConfig#last_modified #last_modified} => Time
+    #   * {Types::FunctionEventInvokeConfig#function_arn #function_arn} => String
+    #   * {Types::FunctionEventInvokeConfig#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
+    #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function_event_invoke_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #     maximum_retry_attempts: 1,
+    #     maximum_event_age_in_seconds: 1,
+    #     destination_config: {
+    #       on_success: {
+    #         destination: "DestinationArn",
+    #       },
+    #       on_failure: {
+    #         destination: "DestinationArn",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.last_modified #=> Time
+    #   resp.function_arn #=> String
+    #   resp.maximum_retry_attempts #=> Integer
+    #   resp.maximum_event_age_in_seconds #=> Integer
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionEventInvokeConfig AWS API Documentation
+    #
+    # @overload put_function_event_invoke_config(params = {})
+    # @param [Hash] params ({})
+    def put_function_event_invoke_config(params = {}, options = {})
+      req = build_request(:put_function_event_invoke_config, params)
       req.send_request(options)
     end
 
@@ -3127,6 +3552,21 @@ module Aws::Lambda
     # Lambda invokes, or pause invocation and resume later from the same
     # location.
     #
+    # The following error handling options are only available for stream
+    # sources (DynamoDB and Kinesis):
+    #
+    # * `BisectBatchOnFunctionError` - If the function returns an error,
+    #   split the batch in two and retry.
+    #
+    # * `DestinationConfig` - Send discarded records to an Amazon SQS queue
+    #   or Amazon SNS topic.
+    #
+    # * `MaximumRecordAgeInSeconds` - Discard records older than the
+    #   specified age.
+    #
+    # * `MaximumRetryAttempts` - Discard records after the specified number
+    #   of retries.
+    #
     # @option params [required, String] :uuid
     #   The identifier of the event source mapping.
     #
@@ -3161,18 +3601,45 @@ module Aws::Lambda
     #   * **Amazon Simple Queue Service** - Default 10. Max 10.
     #
     # @option params [Integer] :maximum_batching_window_in_seconds
+    #   The maximum amount of time to gather records before invoking the
+    #   function, in seconds.
+    #
+    # @option params [Types::DestinationConfig] :destination_config
+    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
+    #   discarded records.
+    #
+    # @option params [Integer] :maximum_record_age_in_seconds
+    #   (Streams) The maximum age of a record that Lambda sends to a function
+    #   for processing.
+    #
+    # @option params [Boolean] :bisect_batch_on_function_error
+    #   (Streams) If the function returns an error, split the batch in two and
+    #   retry.
+    #
+    # @option params [Integer] :maximum_retry_attempts
+    #   (Streams) The maximum number of times to retry when the function
+    #   returns an error.
+    #
+    # @option params [Integer] :parallelization_factor
+    #   (Streams) The number of batches to process from each shard
+    #   concurrently.
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
     #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
     #   * {Types::EventSourceMappingConfiguration#maximum_batching_window_in_seconds #maximum_batching_window_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#parallelization_factor #parallelization_factor} => Integer
     #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
     #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
     #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
     #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
     #   * {Types::EventSourceMappingConfiguration#state #state} => String
     #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
+    #   * {Types::EventSourceMappingConfiguration#destination_config #destination_config} => Types::DestinationConfig
+    #   * {Types::EventSourceMappingConfiguration#maximum_record_age_in_seconds #maximum_record_age_in_seconds} => Integer
+    #   * {Types::EventSourceMappingConfiguration#bisect_batch_on_function_error #bisect_batch_on_function_error} => Boolean
+    #   * {Types::EventSourceMappingConfiguration#maximum_retry_attempts #maximum_retry_attempts} => Integer
     #
     #
     # @example Example: To update a Lambda function event source mapping
@@ -3206,6 +3673,18 @@ module Aws::Lambda
     #     enabled: false,
     #     batch_size: 1,
     #     maximum_batching_window_in_seconds: 1,
+    #     destination_config: {
+    #       on_success: {
+    #         destination: "DestinationArn",
+    #       },
+    #       on_failure: {
+    #         destination: "DestinationArn",
+    #       },
+    #     },
+    #     maximum_record_age_in_seconds: 1,
+    #     bisect_batch_on_function_error: false,
+    #     maximum_retry_attempts: 1,
+    #     parallelization_factor: 1,
     #   })
     #
     # @example Response structure
@@ -3213,12 +3692,18 @@ module Aws::Lambda
     #   resp.uuid #=> String
     #   resp.batch_size #=> Integer
     #   resp.maximum_batching_window_in_seconds #=> Integer
+    #   resp.parallelization_factor #=> Integer
     #   resp.event_source_arn #=> String
     #   resp.function_arn #=> String
     #   resp.last_modified #=> Time
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #   resp.maximum_record_age_in_seconds #=> Integer
+    #   resp.bisect_batch_on_function_error #=> Boolean
+    #   resp.maximum_retry_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
@@ -3300,6 +3785,12 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
+    #   * {Types::FunctionConfiguration#state #state} => String
+    #   * {Types::FunctionConfiguration#state_reason #state_reason} => String
+    #   * {Types::FunctionConfiguration#state_reason_code #state_reason_code} => String
+    #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
     # @example Example: To update a Lambda function's code
@@ -3377,6 +3868,12 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.state_reason #=> String
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status_reason #=> String
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -3389,6 +3886,16 @@ module Aws::Lambda
 
     # Modify the version-specific settings of a Lambda function.
     #
+    # When you update a function, Lambda provisions an instance of the
+    # function and its supporting resources. If your function connects to a
+    # VPC, this process can take a minute. During this time, you can't
+    # modify the function, but you can still invoke it. The
+    # `LastUpdateStatus`, `LastUpdateStatusReason`, and
+    # `LastUpdateStatusReasonCode` fields in the response from
+    # GetFunctionConfiguration indicate when the update is complete and the
+    # function is processing events with the new configuration. For more
+    # information, see [Function States][1].
+    #
     # These settings can vary between versions of a function and are locked
     # when you publish a version. You can't modify the configuration of a
     # published version, only the unpublished version.
@@ -3396,6 +3903,10 @@ module Aws::Lambda
     # To configure function concurrency, use PutFunctionConcurrency. To
     # grant invoke permissions to an account or AWS service, use
     # AddPermission.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -3446,7 +3957,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #
     # @option params [Types::Environment] :environment
     #   Environment variables that are accessible from function code during
@@ -3466,7 +3977,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #
     # @option params [String] :kms_key_arn
     #   The ARN of the AWS Key Management Service (AWS KMS) key that's used
@@ -3512,6 +4023,12 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
     #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #   * {Types::FunctionConfiguration#layers #layers} => Array&lt;Types::Layer&gt;
+    #   * {Types::FunctionConfiguration#state #state} => String
+    #   * {Types::FunctionConfiguration#state_reason #state_reason} => String
+    #   * {Types::FunctionConfiguration#state_reason_code #state_reason_code} => String
+    #   * {Types::FunctionConfiguration#last_update_status #last_update_status} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason #last_update_status_reason} => String
+    #   * {Types::FunctionConfiguration#last_update_status_reason_code #last_update_status_reason_code} => String
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -3609,6 +4126,12 @@ module Aws::Lambda
     #   resp.layers #=> Array
     #   resp.layers[0].arn #=> String
     #   resp.layers[0].code_size #=> Integer
+    #   resp.state #=> String, one of "Pending", "Active", "Inactive", "Failed"
+    #   resp.state_reason #=> String
+    #   resp.state_reason_code #=> String, one of "Idle", "Creating", "Restoring", "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError", "SubnetOutOfIPAddresses"
+    #   resp.last_update_status #=> String, one of "Successful", "Failed", "InProgress"
+    #   resp.last_update_status_reason #=> String
+    #   resp.last_update_status_reason_code #=> String, one of "EniLimitExceeded", "InsufficientRolePermissions", "InvalidConfiguration", "InternalError"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -3616,6 +4139,97 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def update_function_configuration(params = {}, options = {})
       req = build_request(:update_function_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration for asynchronous invocation for a function,
+    # version, or alias.
+    #
+    # To configure options for asynchronous invocation, use
+    # PutFunctionEventInvokeConfig.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   A version number or alias name.
+    #
+    # @option params [Integer] :maximum_retry_attempts
+    #   The maximum number of times to retry when the function returns an
+    #   error.
+    #
+    # @option params [Integer] :maximum_event_age_in_seconds
+    #   The maximum age of a request that Lambda sends to a function for
+    #   processing.
+    #
+    # @option params [Types::DestinationConfig] :destination_config
+    #   A destination for events after they have been sent to a function for
+    #   processing.
+    #
+    #   **Destinations**
+    #
+    #   * **Function** - The Amazon Resource Name (ARN) of a Lambda function.
+    #
+    #   * **Queue** - The ARN of an SQS queue.
+    #
+    #   * **Topic** - The ARN of an SNS topic.
+    #
+    #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
+    #
+    # @return [Types::FunctionEventInvokeConfig] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FunctionEventInvokeConfig#last_modified #last_modified} => Time
+    #   * {Types::FunctionEventInvokeConfig#function_arn #function_arn} => String
+    #   * {Types::FunctionEventInvokeConfig#maximum_retry_attempts #maximum_retry_attempts} => Integer
+    #   * {Types::FunctionEventInvokeConfig#maximum_event_age_in_seconds #maximum_event_age_in_seconds} => Integer
+    #   * {Types::FunctionEventInvokeConfig#destination_config #destination_config} => Types::DestinationConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function_event_invoke_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier",
+    #     maximum_retry_attempts: 1,
+    #     maximum_event_age_in_seconds: 1,
+    #     destination_config: {
+    #       on_success: {
+    #         destination: "DestinationArn",
+    #       },
+    #       on_failure: {
+    #         destination: "DestinationArn",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.last_modified #=> Time
+    #   resp.function_arn #=> String
+    #   resp.maximum_retry_attempts #=> Integer
+    #   resp.maximum_event_age_in_seconds #=> Integer
+    #   resp.destination_config.on_success.destination #=> String
+    #   resp.destination_config.on_failure.destination #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionEventInvokeConfig AWS API Documentation
+    #
+    # @overload update_function_event_invoke_config(params = {})
+    # @param [Hash] params ({})
+    def update_function_event_invoke_config(params = {}, options = {})
+      req = build_request(:update_function_event_invoke_config, params)
       req.send_request(options)
     end
 
@@ -3632,7 +4246,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3698,9 +4312,11 @@ module Aws::Lambda
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params          | :delay   | :max_attempts |
-    # | --------------- | --------------- | -------- | ------------- |
-    # | function_exists | {#get_function} | 1        | 20            |
+    # | waiter_name      | params                        | :delay   | :max_attempts |
+    # | ---------------- | ----------------------------- | -------- | ------------- |
+    # | function_active  | {#get_function_configuration} | 5        | 60            |
+    # | function_exists  | {#get_function}               | 1        | 20            |
+    # | function_updated | {#get_function_configuration} | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3751,7 +4367,9 @@ module Aws::Lambda
 
     def waiters
       {
-        function_exists: Waiters::FunctionExists
+        function_active: Waiters::FunctionActive,
+        function_exists: Waiters::FunctionExists,
+        function_updated: Waiters::FunctionUpdated
       }
     end
 

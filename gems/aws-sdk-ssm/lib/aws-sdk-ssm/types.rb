@@ -8,6 +8,25 @@
 module Aws::SSM
   module Types
 
+    # Information includes the AWS account ID where the current document is
+    # shared and the version shared with that account.
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID where the current document is shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_document_version
+    #   The version of the current document shared with the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AccountSharingInfo AWS API Documentation
+    #
+    class AccountSharingInfo < Struct.new(
+      :account_id,
+      :shared_document_version)
+      include Aws::Structure
+    end
+
     # An activation registers one or more on-premises servers or virtual
     # machines (VMs) with AWS so that you can configure those servers or VMs
     # using Run Command. A server or VM that has been registered with AWS is
@@ -2597,6 +2616,12 @@ module Aws::SSM
     #
     #       {
     #         content: "DocumentContent", # required
+    #         requires: [
+    #           {
+    #             name: "DocumentARN", # required
+    #             version: "DocumentVersion",
+    #           },
+    #         ],
     #         attachments: [
     #           {
     #             key: "SourceUrl", # accepts SourceUrl, S3FileUrl
@@ -2606,7 +2631,7 @@ module Aws::SSM
     #         ],
     #         name: "DocumentName", # required
     #         version_name: "DocumentVersionName",
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy
     #         document_format: "YAML", # accepts YAML, JSON
     #         target_type: "TargetType",
     #         tags: [
@@ -2620,6 +2645,12 @@ module Aws::SSM
     # @!attribute [rw] content
     #   A valid JSON or YAML string.
     #   @return [String]
+    #
+    # @!attribute [rw] requires
+    #   A list of SSM documents required by a document. For example, an
+    #   `ApplicationConfiguration` document requires an
+    #   `ApplicationConfigurationSchema` document.
+    #   @return [Array<Types::DocumentRequires>]
     #
     # @!attribute [rw] attachments
     #   A list of key and value pairs that describe attachments to a version
@@ -2692,6 +2723,7 @@ module Aws::SSM
     #
     class CreateDocumentRequest < Struct.new(
       :content,
+      :requires,
       :attachments,
       :name,
       :version_name,
@@ -3326,6 +3358,7 @@ module Aws::SSM
     #         name: "DocumentName", # required
     #         document_version: "DocumentVersion",
     #         version_name: "DocumentVersionName",
+    #         force: false,
     #       }
     #
     # @!attribute [rw] name
@@ -3342,12 +3375,21 @@ module Aws::SSM
     #   provided, all versions of the document are deleted.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   Some SSM document types require that you specify a `Force` flag
+    #   before you can delete the document. For example, you must specify a
+    #   `Force` flag to delete a document of type
+    #   `ApplicationConfigurationSchema`. You can restrict access to the
+    #   `Force` flag in an AWS Identity and Access Management (IAM) policy.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest AWS API Documentation
     #
     class DeleteDocumentRequest < Struct.new(
       :name,
       :document_version,
-      :version_name)
+      :version_name,
+      :force)
       include Aws::Structure
     end
 
@@ -4222,10 +4264,16 @@ module Aws::SSM
     #   can be either an AWS account or *All*.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_sharing_info_list
+    #   A list of of AWS accounts where the current document is shared and
+    #   the version shared with each account.
+    #   @return [Array<Types::AccountSharingInfo>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionResponse AWS API Documentation
     #
     class DescribeDocumentPermissionResponse < Struct.new(
-      :account_ids)
+      :account_ids,
+      :account_sharing_info_list)
       include Aws::Structure
     end
 
@@ -5926,6 +5974,12 @@ module Aws::SSM
     #   sizes, etc.
     #   @return [Array<Types::AttachmentInformation>]
     #
+    # @!attribute [rw] requires
+    #   A list of SSM documents required by a document. For example, an
+    #   `ApplicationConfiguration` document requires an
+    #   `ApplicationConfigurationSchema` document.
+    #   @return [Array<Types::DocumentRequires>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -5949,7 +6003,8 @@ module Aws::SSM
       :document_format,
       :target_type,
       :tags,
-      :attachments_information)
+      :attachments_information,
+      :requires)
       include Aws::Structure
     end
 
@@ -6030,6 +6085,12 @@ module Aws::SSM
     #   The tags, or metadata, that have been applied to the document.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] requires
+    #   A list of SSM documents required by a document. For example, an
+    #   `ApplicationConfiguration` document requires an
+    #   `ApplicationConfigurationSchema` document.
+    #   @return [Array<Types::DocumentRequires>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
@@ -6042,7 +6103,8 @@ module Aws::SSM
       :schema_version,
       :document_format,
       :target_type,
-      :tags)
+      :tags,
+      :requires)
       include Aws::Structure
     end
 
@@ -6158,6 +6220,33 @@ module Aws::SSM
     #
     class DocumentPermissionLimit < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # An SSM document required by the current document.
+    #
+    # @note When making an API call, you may pass DocumentRequires
+    #   data as a hash:
+    #
+    #       {
+    #         name: "DocumentARN", # required
+    #         version: "DocumentVersion",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the required SSM document. The name can be an Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The document version required by the current document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentRequires AWS API Documentation
+    #
+    class DocumentRequires < Struct.new(
+      :name,
+      :version)
       include Aws::Structure
     end
 
@@ -6805,6 +6894,12 @@ module Aws::SSM
     #   The document format, either JSON or YAML.
     #   @return [String]
     #
+    # @!attribute [rw] requires
+    #   A list of SSM documents required by a document. For example, an
+    #   `ApplicationConfiguration` document requires an
+    #   `ApplicationConfigurationSchema` document.
+    #   @return [Array<Types::DocumentRequires>]
+    #
     # @!attribute [rw] attachments_content
     #   A description of the document attachments, including names,
     #   locations, sizes, etc.
@@ -6821,6 +6916,7 @@ module Aws::SSM
       :content,
       :document_type,
       :document_format,
+      :requires,
       :attachments_content)
       include Aws::Structure
     end
@@ -10057,13 +10153,14 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         name: "DocumentName", # required
+    #         name: "DocumentARN", # required
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the document about which you want version information.
+    #   The name of the document. You can specify an Amazon Resource Name
+    #   (ARN).
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -11255,6 +11352,7 @@ module Aws::SSM
     #         permission_type: "Share", # required, accepts Share
     #         account_ids_to_add: ["AccountId"],
     #         account_ids_to_remove: ["AccountId"],
+    #         shared_document_version: "SharedDocumentVersion",
     #       }
     #
     # @!attribute [rw] name
@@ -11279,13 +11377,19 @@ module Aws::SSM
     #   system removes access to the document.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] shared_document_version
+    #   (Optional) The version of the document to share. If it's not
+    #   specified, the system choose the `Default` version to share.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermissionRequest AWS API Documentation
     #
     class ModifyDocumentPermissionRequest < Struct.new(
       :name,
       :permission_type,
       :account_ids_to_add,
-      :account_ids_to_remove)
+      :account_ids_to_remove,
+      :shared_document_version)
       include Aws::Structure
     end
 

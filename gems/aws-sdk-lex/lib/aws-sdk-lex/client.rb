@@ -579,6 +579,7 @@ module Aws::Lex
     #   * {Types::PostContentResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostContentResponse#input_transcript #input_transcript} => String
     #   * {Types::PostContentResponse#audio_stream #audio_stream} => IO
+    #   * {Types::PostContentResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -606,6 +607,7 @@ module Aws::Lex
     #   resp.slot_to_elicit #=> String
     #   resp.input_transcript #=> String
     #   resp.audio_stream #=> IO
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent AWS API Documentation
     #
@@ -742,6 +744,7 @@ module Aws::Lex
     #   * {Types::PostTextResponse#dialog_state #dialog_state} => String
     #   * {Types::PostTextResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostTextResponse#response_card #response_card} => Types::ResponseCard
+    #   * {Types::PostTextResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -781,6 +784,7 @@ module Aws::Lex
     #   resp.response_card.generic_attachments[0].buttons #=> Array
     #   resp.response_card.generic_attachments[0].buttons[0].text #=> String
     #   resp.response_card.generic_attachments[0].buttons[0].value #=> String
+    #   resp.session_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText AWS API Documentation
     #
@@ -955,7 +959,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -160,6 +160,7 @@ module Aws::MediaPackageVod
     CreatePackagingGroupRequest.struct_class = Types::CreatePackagingGroupRequest
 
     CreatePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreatePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     CreatePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     CreatePackagingGroupResponse.struct_class = Types::CreatePackagingGroupResponse
 
@@ -221,6 +222,7 @@ module Aws::MediaPackageVod
     DescribePackagingGroupRequest.struct_class = Types::DescribePackagingGroupRequest
 
     DescribePackagingGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribePackagingGroupResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     DescribePackagingGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     DescribePackagingGroupResponse.struct_class = Types::DescribePackagingGroupResponse
 
@@ -316,6 +318,7 @@ module Aws::MediaPackageVod
     PackagingConfigurationList.struct_class = Types::PackagingConfigurationList
 
     PackagingGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    PackagingGroup.add_member(:domain_name, Shapes::ShapeRef.new(shape: __string, location_name: "domainName"))
     PackagingGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     PackagingGroup.struct_class = Types::PackagingGroup
 

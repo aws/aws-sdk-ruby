@@ -276,6 +276,22 @@ module Aws::Organizations
 
     end
 
+    class EffectivePolicyNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::EffectivePolicyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class FinalizingOrganizationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -467,6 +483,22 @@ module Aws::Organizations
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Organizations::Types::ParentNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class PolicyChangesInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Organizations::Types::PolicyChangesInProgressException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

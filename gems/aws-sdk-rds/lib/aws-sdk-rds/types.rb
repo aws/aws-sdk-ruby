@@ -306,7 +306,8 @@ module Aws::RDS
     # @!attribute [rw] apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`
+    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`,
+    #   `ca-certificate-rotation`
     #   @return [String]
     #
     # @!attribute [rw] opt_in_type
@@ -1385,6 +1386,12 @@ module Aws::RDS
     #         endpoint_type: "String", # required
     #         static_members: ["String"],
     #         excluded_members: ["String"],
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -1413,6 +1420,10 @@ module Aws::RDS
     #   empty.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the Amazon RDS resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterEndpointMessage AWS API Documentation
     #
     class CreateDBClusterEndpointMessage < Struct.new(
@@ -1420,7 +1431,8 @@ module Aws::RDS
       :db_cluster_endpoint_identifier,
       :endpoint_type,
       :static_members,
-      :excluded_members)
+      :excluded_members,
+      :tags)
       include Aws::Structure
     end
 
@@ -2697,8 +2709,10 @@ module Aws::RDS
     #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to
     #   Improve Performance][1] in the *Amazon RDS User Guide*.
     #
-    #   Constraints: Must be a multiple between 1 and 50 of the storage
-    #   amount for the DB instance.
+    #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB
+    #   instances, must be a multiple between .5 and 50 of the storage
+    #   amount for the DB instance. For SQL Server DB instances, must be a
+    #   multiple between 1 and 50 of the storage amount for the DB instance.
     #
     #
     #
@@ -12914,8 +12928,8 @@ module Aws::RDS
     #
     # @!attribute [rw] action
     #   The type of pending maintenance action that is available for the
-    #   resource. Valid actions are `system-update`, `db-upgrade`, and
-    #   `hardware-maintenance`.
+    #   resource. Valid actions are `system-update`, `db-upgrade`,
+    #   `hardware-maintenance`, and `ca-certificate-rotation`.
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date

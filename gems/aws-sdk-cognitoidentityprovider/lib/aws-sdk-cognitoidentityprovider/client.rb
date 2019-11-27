@@ -1953,7 +1953,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Signs out users from all devices, as an administrator.
+    # Signs out users from all devices, as an administrator. It also
+    # invalidates all refresh tokens issued to a user. The user's current
+    # access and Id tokens remain valid until their expiry. Access and Id
+    # tokens expire one hour after they are issued.
     #
     # Calling this action requires developer credentials.
     #
@@ -2396,7 +2399,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
     #     provider_name: "ProviderNameTypeV1", # required
-    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
+    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, SignInWithApple, OIDC
     #     provider_details: { # required
     #       "StringType" => "StringType",
     #     },
@@ -2410,7 +2413,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -2620,6 +2623,21 @@ module Aws::CognitoIdentityProvider
     #   Used to enable advanced security risk detection. Set the key
     #   `AdvancedSecurityMode` to the value "AUDIT".
     #
+    # @option params [Types::AccountRecoverySettingType] :account_recovery_setting
+    #   Use this setting to define which verified available method a user can
+    #   use to recover their password when they call `ForgotPassword`. It
+    #   allows you to define a preferred method when a user has more than one
+    #   method available. With this setting, SMS does not qualify for a valid
+    #   password recovery mechanism if the user also has SMS MFA enabled. In
+    #   the absence of this setting, Cognito uses the legacy behavior to
+    #   determine the recovery method where SMS is preferred over email.
+    #
+    #   <note markdown="1"> Starting February 1, 2020, the value of `AccountRecoverySetting` will
+    #   default to `verified_email` first and `verified_phone_number` as the
+    #   second option for newly created user pools if no value is provided.
+    #
+    #    </note>
+    #
     # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolResponse#user_pool #user_pool} => Types::UserPoolType
@@ -2713,6 +2731,14 @@ module Aws::CognitoIdentityProvider
     #     user_pool_add_ons: {
     #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
     #     },
+    #     account_recovery_setting: {
+    #       recovery_mechanisms: [
+    #         {
+    #           priority: 1, # required
+    #           name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2788,6 +2814,9 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.arn #=> String
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms[0].priority #=> Integer
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms[0].name #=> String, one of "verified_email", "verified_phone_number", "admin_only"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool AWS API Documentation
     #
@@ -3327,7 +3356,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -3576,6 +3605,9 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #   resp.user_pool.arn #=> String
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms #=> Array
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms[0].priority #=> Integer
+    #   resp.user_pool.account_recovery_setting.recovery_mechanisms[0].name #=> String, one of "verified_email", "verified_phone_number", "admin_only"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool AWS API Documentation
     #
@@ -3948,7 +3980,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -4191,7 +4223,10 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Signs out users from all devices.
+    # Signs out users from all devices. It also invalidates all refresh
+    # tokens issued to a user. The user's current access and Id tokens
+    # remain valid until their expiry. Access and Id tokens expire one hour
+    # after they are issued.
     #
     # @option params [required, String] :access_token
     #   The access token.
@@ -4513,7 +4548,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.providers #=> Array
     #   resp.providers[0].provider_name #=> String
-    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.providers[0].last_modified_date #=> Time
     #   resp.providers[0].creation_date #=> Time
     #   resp.next_token #=> String
@@ -5950,7 +5985,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "SignInWithApple", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -6175,6 +6210,15 @@ module Aws::CognitoIdentityProvider
     #   Used to enable advanced security risk detection. Set the key
     #   `AdvancedSecurityMode` to the value "AUDIT".
     #
+    # @option params [Types::AccountRecoverySettingType] :account_recovery_setting
+    #   Use this setting to define which verified available method a user can
+    #   use to recover their password when they call `ForgotPassword`. It
+    #   allows you to define a preferred method when a user has more than one
+    #   method available. With this setting, SMS does not qualify for a valid
+    #   password recovery mechanism if the user also has SMS MFA enabled. In
+    #   the absence of this setting, Cognito uses the legacy behavior to
+    #   determine the recovery method where SMS is preferred over email.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -6246,6 +6290,14 @@ module Aws::CognitoIdentityProvider
     #     },
     #     user_pool_add_ons: {
     #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
+    #     },
+    #     account_recovery_setting: {
+    #       recovery_mechanisms: [
+    #         {
+    #           priority: 1, # required
+    #           name: "verified_email", # required, accepts verified_email, verified_phone_number, admin_only
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -6661,7 +6713,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

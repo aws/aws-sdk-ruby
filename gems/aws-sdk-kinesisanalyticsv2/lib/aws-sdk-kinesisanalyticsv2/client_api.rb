@@ -21,6 +21,8 @@ module Aws::KinesisAnalyticsV2
     AddApplicationOutputResponse = Shapes::StructureShape.new(name: 'AddApplicationOutputResponse')
     AddApplicationReferenceDataSourceRequest = Shapes::StructureShape.new(name: 'AddApplicationReferenceDataSourceRequest')
     AddApplicationReferenceDataSourceResponse = Shapes::StructureShape.new(name: 'AddApplicationReferenceDataSourceResponse')
+    AddApplicationVpcConfigurationRequest = Shapes::StructureShape.new(name: 'AddApplicationVpcConfigurationRequest')
+    AddApplicationVpcConfigurationResponse = Shapes::StructureShape.new(name: 'AddApplicationVpcConfigurationResponse')
     ApplicationCodeConfiguration = Shapes::StructureShape.new(name: 'ApplicationCodeConfiguration')
     ApplicationCodeConfigurationDescription = Shapes::StructureShape.new(name: 'ApplicationCodeConfigurationDescription')
     ApplicationCodeConfigurationUpdate = Shapes::StructureShape.new(name: 'ApplicationCodeConfigurationUpdate')
@@ -77,6 +79,8 @@ module Aws::KinesisAnalyticsV2
     DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteApplicationSnapshotRequest')
     DeleteApplicationSnapshotResponse = Shapes::StructureShape.new(name: 'DeleteApplicationSnapshotResponse')
+    DeleteApplicationVpcConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationRequest')
+    DeleteApplicationVpcConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationVpcConfigurationResponse')
     DescribeApplicationRequest = Shapes::StructureShape.new(name: 'DescribeApplicationRequest')
     DescribeApplicationResponse = Shapes::StructureShape.new(name: 'DescribeApplicationResponse')
     DescribeApplicationSnapshotRequest = Shapes::StructureShape.new(name: 'DescribeApplicationSnapshotRequest')
@@ -92,6 +96,7 @@ module Aws::KinesisAnalyticsV2
     FlinkApplicationConfiguration = Shapes::StructureShape.new(name: 'FlinkApplicationConfiguration')
     FlinkApplicationConfigurationDescription = Shapes::StructureShape.new(name: 'FlinkApplicationConfigurationDescription')
     FlinkApplicationConfigurationUpdate = Shapes::StructureShape.new(name: 'FlinkApplicationConfigurationUpdate')
+    FlinkRunConfiguration = Shapes::StructureShape.new(name: 'FlinkRunConfiguration')
     Id = Shapes::StringShape.new(name: 'Id')
     InAppStreamName = Shapes::StringShape.new(name: 'InAppStreamName')
     InAppStreamNames = Shapes::ListShape.new(name: 'InAppStreamNames')
@@ -210,6 +215,8 @@ module Aws::KinesisAnalyticsV2
     S3ReferenceDataSource = Shapes::StructureShape.new(name: 'S3ReferenceDataSource')
     S3ReferenceDataSourceDescription = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceDescription')
     S3ReferenceDataSourceUpdate = Shapes::StructureShape.new(name: 'S3ReferenceDataSourceUpdate')
+    SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
+    SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SnapshotDetails = Shapes::StructureShape.new(name: 'SnapshotDetails')
     SnapshotName = Shapes::StringShape.new(name: 'SnapshotName')
@@ -225,6 +232,8 @@ module Aws::KinesisAnalyticsV2
     StartApplicationResponse = Shapes::StructureShape.new(name: 'StartApplicationResponse')
     StopApplicationRequest = Shapes::StructureShape.new(name: 'StopApplicationRequest')
     StopApplicationResponse = Shapes::StructureShape.new(name: 'StopApplicationResponse')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -241,6 +250,13 @@ module Aws::KinesisAnalyticsV2
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpcConfigurationDescription = Shapes::StructureShape.new(name: 'VpcConfigurationDescription')
+    VpcConfigurationDescriptions = Shapes::ListShape.new(name: 'VpcConfigurationDescriptions')
+    VpcConfigurationUpdate = Shapes::StructureShape.new(name: 'VpcConfigurationUpdate')
+    VpcConfigurationUpdates = Shapes::ListShape.new(name: 'VpcConfigurationUpdates')
+    VpcConfigurations = Shapes::ListShape.new(name: 'VpcConfigurations')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
     ZipFileContent = Shapes::BlobShape.new(name: 'ZipFileContent')
 
     AddApplicationCloudWatchLoggingOptionRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -295,6 +311,16 @@ module Aws::KinesisAnalyticsV2
     AddApplicationReferenceDataSourceResponse.add_member(:reference_data_source_descriptions, Shapes::ShapeRef.new(shape: ReferenceDataSourceDescriptions, location_name: "ReferenceDataSourceDescriptions"))
     AddApplicationReferenceDataSourceResponse.struct_class = Types::AddApplicationReferenceDataSourceResponse
 
+    AddApplicationVpcConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    AddApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    AddApplicationVpcConfigurationRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "VpcConfiguration"))
+    AddApplicationVpcConfigurationRequest.struct_class = Types::AddApplicationVpcConfigurationRequest
+
+    AddApplicationVpcConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
+    AddApplicationVpcConfigurationResponse.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionId"))
+    AddApplicationVpcConfigurationResponse.add_member(:vpc_configuration_description, Shapes::ShapeRef.new(shape: VpcConfigurationDescription, location_name: "VpcConfigurationDescription"))
+    AddApplicationVpcConfigurationResponse.struct_class = Types::AddApplicationVpcConfigurationResponse
+
     ApplicationCodeConfiguration.add_member(:code_content, Shapes::ShapeRef.new(shape: CodeContent, location_name: "CodeContent"))
     ApplicationCodeConfiguration.add_member(:code_content_type, Shapes::ShapeRef.new(shape: CodeContentType, required: true, location_name: "CodeContentType"))
     ApplicationCodeConfiguration.struct_class = Types::ApplicationCodeConfiguration
@@ -312,6 +338,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfiguration.add_member(:environment_properties, Shapes::ShapeRef.new(shape: EnvironmentProperties, location_name: "EnvironmentProperties"))
     ApplicationConfiguration.add_member(:application_code_configuration, Shapes::ShapeRef.new(shape: ApplicationCodeConfiguration, required: true, location_name: "ApplicationCodeConfiguration"))
     ApplicationConfiguration.add_member(:application_snapshot_configuration, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfiguration, location_name: "ApplicationSnapshotConfiguration"))
+    ApplicationConfiguration.add_member(:vpc_configurations, Shapes::ShapeRef.new(shape: VpcConfigurations, location_name: "VpcConfigurations"))
     ApplicationConfiguration.struct_class = Types::ApplicationConfiguration
 
     ApplicationConfigurationDescription.add_member(:sql_application_configuration_description, Shapes::ShapeRef.new(shape: SqlApplicationConfigurationDescription, location_name: "SqlApplicationConfigurationDescription"))
@@ -320,6 +347,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationDescription.add_member(:flink_application_configuration_description, Shapes::ShapeRef.new(shape: FlinkApplicationConfigurationDescription, location_name: "FlinkApplicationConfigurationDescription"))
     ApplicationConfigurationDescription.add_member(:environment_property_descriptions, Shapes::ShapeRef.new(shape: EnvironmentPropertyDescriptions, location_name: "EnvironmentPropertyDescriptions"))
     ApplicationConfigurationDescription.add_member(:application_snapshot_configuration_description, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfigurationDescription, location_name: "ApplicationSnapshotConfigurationDescription"))
+    ApplicationConfigurationDescription.add_member(:vpc_configuration_descriptions, Shapes::ShapeRef.new(shape: VpcConfigurationDescriptions, location_name: "VpcConfigurationDescriptions"))
     ApplicationConfigurationDescription.struct_class = Types::ApplicationConfigurationDescription
 
     ApplicationConfigurationUpdate.add_member(:sql_application_configuration_update, Shapes::ShapeRef.new(shape: SqlApplicationConfigurationUpdate, location_name: "SqlApplicationConfigurationUpdate"))
@@ -327,6 +355,7 @@ module Aws::KinesisAnalyticsV2
     ApplicationConfigurationUpdate.add_member(:flink_application_configuration_update, Shapes::ShapeRef.new(shape: FlinkApplicationConfigurationUpdate, location_name: "FlinkApplicationConfigurationUpdate"))
     ApplicationConfigurationUpdate.add_member(:environment_property_updates, Shapes::ShapeRef.new(shape: EnvironmentPropertyUpdates, location_name: "EnvironmentPropertyUpdates"))
     ApplicationConfigurationUpdate.add_member(:application_snapshot_configuration_update, Shapes::ShapeRef.new(shape: ApplicationSnapshotConfigurationUpdate, location_name: "ApplicationSnapshotConfigurationUpdate"))
+    ApplicationConfigurationUpdate.add_member(:vpc_configuration_updates, Shapes::ShapeRef.new(shape: VpcConfigurationUpdates, location_name: "VpcConfigurationUpdates"))
     ApplicationConfigurationUpdate.struct_class = Types::ApplicationConfigurationUpdate
 
     ApplicationDetail.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ApplicationARN"))
@@ -494,6 +523,15 @@ module Aws::KinesisAnalyticsV2
 
     DeleteApplicationSnapshotResponse.struct_class = Types::DeleteApplicationSnapshotResponse
 
+    DeleteApplicationVpcConfigurationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    DeleteApplicationVpcConfigurationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
+    DeleteApplicationVpcConfigurationRequest.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "VpcConfigurationId"))
+    DeleteApplicationVpcConfigurationRequest.struct_class = Types::DeleteApplicationVpcConfigurationRequest
+
+    DeleteApplicationVpcConfigurationResponse.add_member(:application_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ApplicationARN"))
+    DeleteApplicationVpcConfigurationResponse.add_member(:application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, location_name: "ApplicationVersionId"))
+    DeleteApplicationVpcConfigurationResponse.struct_class = Types::DeleteApplicationVpcConfigurationResponse
+
     DescribeApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DescribeApplicationRequest.add_member(:include_additional_details, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "IncludeAdditionalDetails"))
     DescribeApplicationRequest.struct_class = Types::DescribeApplicationRequest
@@ -548,6 +586,9 @@ module Aws::KinesisAnalyticsV2
     FlinkApplicationConfigurationUpdate.add_member(:monitoring_configuration_update, Shapes::ShapeRef.new(shape: MonitoringConfigurationUpdate, location_name: "MonitoringConfigurationUpdate"))
     FlinkApplicationConfigurationUpdate.add_member(:parallelism_configuration_update, Shapes::ShapeRef.new(shape: ParallelismConfigurationUpdate, location_name: "ParallelismConfigurationUpdate"))
     FlinkApplicationConfigurationUpdate.struct_class = Types::FlinkApplicationConfigurationUpdate
+
+    FlinkRunConfiguration.add_member(:allow_non_restored_state, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "AllowNonRestoredState"))
+    FlinkRunConfiguration.struct_class = Types::FlinkRunConfiguration
 
     InAppStreamNames.member = Shapes::ShapeRef.new(shape: InAppStreamName)
 
@@ -833,6 +874,7 @@ module Aws::KinesisAnalyticsV2
     ResourceProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceProvisionedThroughputExceededException.struct_class = Types::ResourceProvisionedThroughputExceededException
 
+    RunConfiguration.add_member(:flink_run_configuration, Shapes::ShapeRef.new(shape: FlinkRunConfiguration, location_name: "FlinkRunConfiguration"))
     RunConfiguration.add_member(:sql_run_configurations, Shapes::ShapeRef.new(shape: SqlRunConfigurations, location_name: "SqlRunConfigurations"))
     RunConfiguration.add_member(:application_restore_configuration, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfiguration"))
     RunConfiguration.struct_class = Types::RunConfiguration
@@ -840,6 +882,7 @@ module Aws::KinesisAnalyticsV2
     RunConfigurationDescription.add_member(:application_restore_configuration_description, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfigurationDescription"))
     RunConfigurationDescription.struct_class = Types::RunConfigurationDescription
 
+    RunConfigurationUpdate.add_member(:flink_run_configuration, Shapes::ShapeRef.new(shape: FlinkRunConfiguration, location_name: "FlinkRunConfiguration"))
     RunConfigurationUpdate.add_member(:application_restore_configuration, Shapes::ShapeRef.new(shape: ApplicationRestoreConfiguration, location_name: "ApplicationRestoreConfiguration"))
     RunConfigurationUpdate.struct_class = Types::RunConfigurationUpdate
 
@@ -874,6 +917,8 @@ module Aws::KinesisAnalyticsV2
     S3ReferenceDataSourceUpdate.add_member(:bucket_arn_update, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARNUpdate"))
     S3ReferenceDataSourceUpdate.add_member(:file_key_update, Shapes::ShapeRef.new(shape: FileKey, location_name: "FileKeyUpdate"))
     S3ReferenceDataSourceUpdate.struct_class = Types::S3ReferenceDataSourceUpdate
+
+    SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -923,6 +968,8 @@ module Aws::KinesisAnalyticsV2
 
     StopApplicationResponse.struct_class = Types::StopApplicationResponse
 
+    SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -964,6 +1011,27 @@ module Aws::KinesisAnalyticsV2
 
     UpdateApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
+    VpcConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
+    VpcConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
+    VpcConfigurationDescription.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "VpcConfigurationId"))
+    VpcConfigurationDescription.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    VpcConfigurationDescription.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
+    VpcConfigurationDescription.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    VpcConfigurationDescription.struct_class = Types::VpcConfigurationDescription
+
+    VpcConfigurationDescriptions.member = Shapes::ShapeRef.new(shape: VpcConfigurationDescription)
+
+    VpcConfigurationUpdate.add_member(:vpc_configuration_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "VpcConfigurationId"))
+    VpcConfigurationUpdate.add_member(:subnet_id_updates, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIdUpdates"))
+    VpcConfigurationUpdate.add_member(:security_group_id_updates, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIdUpdates"))
+    VpcConfigurationUpdate.struct_class = Types::VpcConfigurationUpdate
+
+    VpcConfigurationUpdates.member = Shapes::ShapeRef.new(shape: VpcConfigurationUpdate)
+
+    VpcConfigurations.member = Shapes::ShapeRef.new(shape: VpcConfiguration)
 
 
     # @api private
@@ -1050,6 +1118,18 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:add_application_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddApplicationVpcConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddApplicationVpcConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddApplicationVpcConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1159,6 +1239,18 @@ module Aws::KinesisAnalyticsV2
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_application_vpc_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplicationVpcConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationVpcConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationVpcConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:describe_application, Seahorse::Model::Operation.new.tap do |o|

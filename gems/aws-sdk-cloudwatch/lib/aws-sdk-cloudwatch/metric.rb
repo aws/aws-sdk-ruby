@@ -218,8 +218,8 @@ module Aws::CloudWatch
     #   request.
     #
     #   The value specified is inclusive; results include data points with the
-    #   specified time stamp. The time stamp must be in ISO 8601 UTC format
-    #   (for example, 2016-10-03T23:00:00Z).
+    #   specified time stamp. In a raw HTTP query, the time stamp must be in
+    #   ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
     #
     #   CloudWatch rounds the specified time stamp as follows:
     #
@@ -246,8 +246,8 @@ module Aws::CloudWatch
     #   The time stamp that determines the last data point to return.
     #
     #   The value specified is exclusive; results include data points up to
-    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
-    #   format (for example, 2016-10-10T23:00:00Z).
+    #   the specified time stamp. In a raw HTTP query, the time stamp must be
+    #   in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
     # @option options [required, Integer] :period
     #   The granularity, in seconds, of the returned data points. For metrics
     #   with regular resolution, a period can be as short as one minute (60
@@ -491,7 +491,7 @@ module Aws::CloudWatch
     #   day, so this number multiplied by `Period` cannot be more than 86,400
     #   seconds.
     # @option options [Integer] :datapoints_to_alarm
-    #   The number of datapoints that must be breaching to trigger the alarm.
+    #   The number of data points that must be breaching to trigger the alarm.
     #   This is used only if you are setting an "M out of N" alarm. In that
     #   case, this value is the M. For more information, see [Evaluating an
     #   Alarm][1] in the *Amazon CloudWatch User Guide*.

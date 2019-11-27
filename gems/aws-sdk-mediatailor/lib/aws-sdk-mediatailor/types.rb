@@ -197,6 +197,10 @@ module Aws::MediaTailor
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
     #
+    # @!attribute [rw] live_pre_roll_configuration
+    #   The configuration for pre-roll ad insertion.
+    #   @return [Types::LivePreRollConfiguration]
+    #
     # @!attribute [rw] name
     #   The identifier for the playback configuration.
     #   @return [String]
@@ -248,6 +252,7 @@ module Aws::MediaTailor
       :cdn_configuration,
       :dash_configuration,
       :hls_configuration,
+      :live_pre_roll_configuration,
       :name,
       :playback_configuration_arn,
       :playback_endpoint_prefix,
@@ -400,6 +405,40 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for pre-roll ad insertion.
+    #
+    # @note When making an API call, you may pass LivePreRollConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         ad_decision_server_url: "__string",
+    #         max_duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] ad_decision_server_url
+    #   The URL for the ad decision server (ADS) for pre-roll ads. This
+    #   includes the specification of static parameters and placeholders for
+    #   dynamic parameters. AWS Elemental MediaTailor substitutes
+    #   player-specific and session-specific parameters as needed when
+    #   calling the ADS. Alternately, for testing, you can provide a static
+    #   VAST URL. The maximum length is 25,000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_duration_seconds
+    #   The maximum allowed duration for the pre-roll ad avail. AWS
+    #   Elemental MediaTailor won't play pre-roll ads to exceed this
+    #   duration, regardless of the total duration of ads that the ADS
+    #   returns.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/LivePreRollConfiguration AWS API Documentation
+    #
+    class LivePreRollConfiguration < Struct.new(
+      :ad_decision_server_url,
+      :max_duration_seconds)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutPlaybackConfigurationRequest
     #   data as a hash:
     #
@@ -412,6 +451,10 @@ module Aws::MediaTailor
     #         dash_configuration: {
     #           mpd_location: "__string",
     #           origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
+    #         },
+    #         live_pre_roll_configuration: {
+    #           ad_decision_server_url: "__string",
+    #           max_duration_seconds: 1,
     #         },
     #         name: "__string",
     #         slate_ad_url: "__string",
@@ -439,6 +482,10 @@ module Aws::MediaTailor
     # @!attribute [rw] dash_configuration
     #   The configuration for DASH content.
     #   @return [Types::DashConfigurationForPut]
+    #
+    # @!attribute [rw] live_pre_roll_configuration
+    #   The configuration for pre-roll ad insertion.
+    #   @return [Types::LivePreRollConfiguration]
     #
     # @!attribute [rw] name
     #   The identifier for the playback configuration.
@@ -476,6 +523,7 @@ module Aws::MediaTailor
       :ad_decision_server_url,
       :cdn_configuration,
       :dash_configuration,
+      :live_pre_roll_configuration,
       :name,
       :slate_ad_url,
       :tags,
@@ -499,6 +547,10 @@ module Aws::MediaTailor
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
+    #
+    # @!attribute [rw] live_pre_roll_configuration
+    #   The configuration for pre-roll ad insertion.
+    #   @return [Types::LivePreRollConfiguration]
     #
     # @!attribute [rw] name
     #   @return [String]
@@ -531,6 +583,7 @@ module Aws::MediaTailor
       :cdn_configuration,
       :dash_configuration,
       :hls_configuration,
+      :live_pre_roll_configuration,
       :name,
       :playback_configuration_arn,
       :playback_endpoint_prefix,

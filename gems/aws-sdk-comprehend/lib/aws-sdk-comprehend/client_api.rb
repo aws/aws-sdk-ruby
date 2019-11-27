@@ -32,16 +32,25 @@ module Aws::Comprehend
     BatchSizeLimitExceededException = Shapes::StructureShape.new(name: 'BatchSizeLimitExceededException')
     ClassifierEvaluationMetrics = Shapes::StructureShape.new(name: 'ClassifierEvaluationMetrics')
     ClassifierMetadata = Shapes::StructureShape.new(name: 'ClassifierMetadata')
+    ClassifyDocumentRequest = Shapes::StructureShape.new(name: 'ClassifyDocumentRequest')
+    ClassifyDocumentResponse = Shapes::StructureShape.new(name: 'ClassifyDocumentResponse')
     ClientRequestTokenString = Shapes::StringShape.new(name: 'ClientRequestTokenString')
     ComprehendArn = Shapes::StringShape.new(name: 'ComprehendArn')
     ComprehendArnName = Shapes::StringShape.new(name: 'ComprehendArnName')
+    ComprehendEndpointArn = Shapes::StringShape.new(name: 'ComprehendEndpointArn')
+    ComprehendEndpointName = Shapes::StringShape.new(name: 'ComprehendEndpointName')
+    ComprehendModelArn = Shapes::StringShape.new(name: 'ComprehendModelArn')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CreateDocumentClassifierRequest = Shapes::StructureShape.new(name: 'CreateDocumentClassifierRequest')
     CreateDocumentClassifierResponse = Shapes::StructureShape.new(name: 'CreateDocumentClassifierResponse')
+    CreateEndpointRequest = Shapes::StructureShape.new(name: 'CreateEndpointRequest')
+    CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
     CreateEntityRecognizerRequest = Shapes::StructureShape.new(name: 'CreateEntityRecognizerRequest')
     CreateEntityRecognizerResponse = Shapes::StructureShape.new(name: 'CreateEntityRecognizerResponse')
     DeleteDocumentClassifierRequest = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierRequest')
     DeleteDocumentClassifierResponse = Shapes::StructureShape.new(name: 'DeleteDocumentClassifierResponse')
+    DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
+    DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEntityRecognizerRequest = Shapes::StructureShape.new(name: 'DeleteEntityRecognizerRequest')
     DeleteEntityRecognizerResponse = Shapes::StructureShape.new(name: 'DeleteEntityRecognizerResponse')
     DescribeDocumentClassificationJobRequest = Shapes::StructureShape.new(name: 'DescribeDocumentClassificationJobRequest')
@@ -50,6 +59,8 @@ module Aws::Comprehend
     DescribeDocumentClassifierResponse = Shapes::StructureShape.new(name: 'DescribeDocumentClassifierResponse')
     DescribeDominantLanguageDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeDominantLanguageDetectionJobRequest')
     DescribeDominantLanguageDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeDominantLanguageDetectionJobResponse')
+    DescribeEndpointRequest = Shapes::StructureShape.new(name: 'DescribeEndpointRequest')
+    DescribeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeEndpointResponse')
     DescribeEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionJobRequest')
     DescribeEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeEntitiesDetectionJobResponse')
     DescribeEntityRecognizerRequest = Shapes::StructureShape.new(name: 'DescribeEntityRecognizerRequest')
@@ -70,10 +81,12 @@ module Aws::Comprehend
     DetectSentimentResponse = Shapes::StructureShape.new(name: 'DetectSentimentResponse')
     DetectSyntaxRequest = Shapes::StructureShape.new(name: 'DetectSyntaxRequest')
     DetectSyntaxResponse = Shapes::StructureShape.new(name: 'DetectSyntaxResponse')
+    DocumentClass = Shapes::StructureShape.new(name: 'DocumentClass')
     DocumentClassificationJobFilter = Shapes::StructureShape.new(name: 'DocumentClassificationJobFilter')
     DocumentClassificationJobProperties = Shapes::StructureShape.new(name: 'DocumentClassificationJobProperties')
     DocumentClassificationJobPropertiesList = Shapes::ListShape.new(name: 'DocumentClassificationJobPropertiesList')
     DocumentClassifierArn = Shapes::StringShape.new(name: 'DocumentClassifierArn')
+    DocumentClassifierEndpointArn = Shapes::StringShape.new(name: 'DocumentClassifierEndpointArn')
     DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
     DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
     DocumentClassifierOutputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierOutputDataConfig')
@@ -84,6 +97,10 @@ module Aws::Comprehend
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
     DominantLanguageDetectionJobPropertiesList = Shapes::ListShape.new(name: 'DominantLanguageDetectionJobPropertiesList')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EndpointFilter = Shapes::StructureShape.new(name: 'EndpointFilter')
+    EndpointProperties = Shapes::StructureShape.new(name: 'EndpointProperties')
+    EndpointPropertiesList = Shapes::ListShape.new(name: 'EndpointPropertiesList')
+    EndpointStatus = Shapes::StringShape.new(name: 'EndpointStatus')
     EntitiesDetectionJobFilter = Shapes::StructureShape.new(name: 'EntitiesDetectionJobFilter')
     EntitiesDetectionJobProperties = Shapes::StructureShape.new(name: 'EntitiesDetectionJobProperties')
     EntitiesDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EntitiesDetectionJobPropertiesList')
@@ -107,6 +124,7 @@ module Aws::Comprehend
     EntityTypesListItem = Shapes::StructureShape.new(name: 'EntityTypesListItem')
     Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    InferenceUnitsInteger = Shapes::IntegerShape.new(name: 'InferenceUnitsInteger')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InputFormat = Shapes::StringShape.new(name: 'InputFormat')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -130,12 +148,15 @@ module Aws::Comprehend
     ListDocumentClassifiersResponse = Shapes::StructureShape.new(name: 'ListDocumentClassifiersResponse')
     ListDominantLanguageDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListDominantLanguageDetectionJobsRequest')
     ListDominantLanguageDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListDominantLanguageDetectionJobsResponse')
+    ListEndpointsRequest = Shapes::StructureShape.new(name: 'ListEndpointsRequest')
+    ListEndpointsResponse = Shapes::StructureShape.new(name: 'ListEndpointsResponse')
     ListEntitiesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsRequest')
     ListEntitiesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListEntitiesDetectionJobsResponse')
     ListEntityRecognizersRequest = Shapes::StructureShape.new(name: 'ListEntityRecognizersRequest')
     ListEntityRecognizersResponse = Shapes::StructureShape.new(name: 'ListEntityRecognizersResponse')
     ListKeyPhrasesDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsRequest')
     ListKeyPhrasesDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListKeyPhrasesDetectionJobsResponse')
+    ListOfClasses = Shapes::ListShape.new(name: 'ListOfClasses')
     ListOfDetectDominantLanguageResult = Shapes::ListShape.new(name: 'ListOfDetectDominantLanguageResult')
     ListOfDetectEntitiesResult = Shapes::ListShape.new(name: 'ListOfDetectEntitiesResult')
     ListOfDetectKeyPhrasesResult = Shapes::ListShape.new(name: 'ListOfDetectKeyPhrasesResult')
@@ -217,6 +238,8 @@ module Aws::Comprehend
     UnsupportedLanguageException = Shapes::StructureShape.new(name: 'UnsupportedLanguageException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
+    UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
     BatchDetectDominantLanguageItemResult.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "Index"))
@@ -301,6 +324,13 @@ module Aws::Comprehend
     ClassifierMetadata.add_member(:evaluation_metrics, Shapes::ShapeRef.new(shape: ClassifierEvaluationMetrics, location_name: "EvaluationMetrics"))
     ClassifierMetadata.struct_class = Types::ClassifierMetadata
 
+    ClassifyDocumentRequest.add_member(:text, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Text"))
+    ClassifyDocumentRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: DocumentClassifierEndpointArn, required: true, location_name: "EndpointArn"))
+    ClassifyDocumentRequest.struct_class = Types::ClassifyDocumentRequest
+
+    ClassifyDocumentResponse.add_member(:classes, Shapes::ShapeRef.new(shape: ListOfClasses, location_name: "Classes"))
+    ClassifyDocumentResponse.struct_class = Types::ClassifyDocumentResponse
+
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
 
@@ -317,6 +347,16 @@ module Aws::Comprehend
 
     CreateDocumentClassifierResponse.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
     CreateDocumentClassifierResponse.struct_class = Types::CreateDocumentClassifierResponse
+
+    CreateEndpointRequest.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: ComprehendEndpointName, required: true, location_name: "EndpointName"))
+    CreateEndpointRequest.add_member(:model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "ModelArn"))
+    CreateEndpointRequest.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, required: true, location_name: "DesiredInferenceUnits"))
+    CreateEndpointRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEndpointRequest.struct_class = Types::CreateEndpointRequest
+
+    CreateEndpointResponse.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn"))
+    CreateEndpointResponse.struct_class = Types::CreateEndpointResponse
 
     CreateEntityRecognizerRequest.add_member(:recognizer_name, Shapes::ShapeRef.new(shape: ComprehendArnName, required: true, location_name: "RecognizerName"))
     CreateEntityRecognizerRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
@@ -335,6 +375,11 @@ module Aws::Comprehend
     DeleteDocumentClassifierRequest.struct_class = Types::DeleteDocumentClassifierRequest
 
     DeleteDocumentClassifierResponse.struct_class = Types::DeleteDocumentClassifierResponse
+
+    DeleteEndpointRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, required: true, location_name: "EndpointArn"))
+    DeleteEndpointRequest.struct_class = Types::DeleteEndpointRequest
+
+    DeleteEndpointResponse.struct_class = Types::DeleteEndpointResponse
 
     DeleteEntityRecognizerRequest.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, required: true, location_name: "EntityRecognizerArn"))
     DeleteEntityRecognizerRequest.struct_class = Types::DeleteEntityRecognizerRequest
@@ -358,6 +403,12 @@ module Aws::Comprehend
 
     DescribeDominantLanguageDetectionJobResponse.add_member(:dominant_language_detection_job_properties, Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobProperties, location_name: "DominantLanguageDetectionJobProperties"))
     DescribeDominantLanguageDetectionJobResponse.struct_class = Types::DescribeDominantLanguageDetectionJobResponse
+
+    DescribeEndpointRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, required: true, location_name: "EndpointArn"))
+    DescribeEndpointRequest.struct_class = Types::DescribeEndpointRequest
+
+    DescribeEndpointResponse.add_member(:endpoint_properties, Shapes::ShapeRef.new(shape: EndpointProperties, location_name: "EndpointProperties"))
+    DescribeEndpointResponse.struct_class = Types::DescribeEndpointResponse
 
     DescribeEntitiesDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeEntitiesDetectionJobRequest.struct_class = Types::DescribeEntitiesDetectionJobRequest
@@ -423,6 +474,10 @@ module Aws::Comprehend
 
     DetectSyntaxResponse.add_member(:syntax_tokens, Shapes::ShapeRef.new(shape: ListOfSyntaxTokens, location_name: "SyntaxTokens"))
     DetectSyntaxResponse.struct_class = Types::DetectSyntaxResponse
+
+    DocumentClass.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    DocumentClass.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    DocumentClass.struct_class = Types::DocumentClass
 
     DocumentClassificationJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     DocumentClassificationJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
@@ -500,6 +555,24 @@ module Aws::Comprehend
     DominantLanguageDetectionJobProperties.struct_class = Types::DominantLanguageDetectionJobProperties
 
     DominantLanguageDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: DominantLanguageDetectionJobProperties)
+
+    EndpointFilter.add_member(:model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    EndpointFilter.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
+    EndpointFilter.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    EndpointFilter.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    EndpointFilter.struct_class = Types::EndpointFilter
+
+    EndpointProperties.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, location_name: "EndpointArn"))
+    EndpointProperties.add_member(:status, Shapes::ShapeRef.new(shape: EndpointStatus, location_name: "Status"))
+    EndpointProperties.add_member(:message, Shapes::ShapeRef.new(shape: AnyLengthString, location_name: "Message"))
+    EndpointProperties.add_member(:model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    EndpointProperties.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "DesiredInferenceUnits"))
+    EndpointProperties.add_member(:current_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, location_name: "CurrentInferenceUnits"))
+    EndpointProperties.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    EndpointProperties.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    EndpointProperties.struct_class = Types::EndpointProperties
+
+    EndpointPropertiesList.member = Shapes::ShapeRef.new(shape: EndpointProperties)
 
     EntitiesDetectionJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     EntitiesDetectionJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
@@ -670,6 +743,15 @@ module Aws::Comprehend
     ListDominantLanguageDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDominantLanguageDetectionJobsResponse.struct_class = Types::ListDominantLanguageDetectionJobsResponse
 
+    ListEndpointsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EndpointFilter, location_name: "Filter"))
+    ListEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListEndpointsRequest.struct_class = Types::ListEndpointsRequest
+
+    ListEndpointsResponse.add_member(:endpoint_properties_list, Shapes::ShapeRef.new(shape: EndpointPropertiesList, location_name: "EndpointPropertiesList"))
+    ListEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEndpointsResponse.struct_class = Types::ListEndpointsResponse
+
     ListEntitiesDetectionJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: EntitiesDetectionJobFilter, location_name: "Filter"))
     ListEntitiesDetectionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListEntitiesDetectionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
@@ -696,6 +778,8 @@ module Aws::Comprehend
     ListKeyPhrasesDetectionJobsResponse.add_member(:key_phrases_detection_job_properties_list, Shapes::ShapeRef.new(shape: KeyPhrasesDetectionJobPropertiesList, location_name: "KeyPhrasesDetectionJobPropertiesList"))
     ListKeyPhrasesDetectionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListKeyPhrasesDetectionJobsResponse.struct_class = Types::ListKeyPhrasesDetectionJobsResponse
+
+    ListOfClasses.member = Shapes::ShapeRef.new(shape: DocumentClass)
 
     ListOfDetectDominantLanguageResult.member = Shapes::ShapeRef.new(shape: BatchDetectDominantLanguageItemResult)
 
@@ -980,6 +1064,12 @@ module Aws::Comprehend
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateEndpointRequest.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: ComprehendEndpointArn, required: true, location_name: "EndpointArn"))
+    UpdateEndpointRequest.add_member(:desired_inference_units, Shapes::ShapeRef.new(shape: InferenceUnitsInteger, required: true, location_name: "DesiredInferenceUnits"))
+    UpdateEndpointRequest.struct_class = Types::UpdateEndpointRequest
+
+    UpdateEndpointResponse.struct_class = Types::UpdateEndpointResponse
+
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
     VpcConfig.struct_class = Types::VpcConfig
@@ -1067,6 +1157,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:classify_document, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ClassifyDocument"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ClassifyDocumentRequest)
+        o.output = Shapes::ShapeRef.new(shape: ClassifyDocumentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_document_classifier, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDocumentClassifier"
         o.http_method = "POST"
@@ -1080,6 +1182,22 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
         o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1110,6 +1228,19 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1160,6 +1291,18 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1334,6 +1477,17 @@ module Aws::Comprehend
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEndpointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_entities_detection_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1604,6 +1758,21 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end

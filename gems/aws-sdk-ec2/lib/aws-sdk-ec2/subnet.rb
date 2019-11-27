@@ -622,13 +622,13 @@ module Aws::EC2
     #   when **InstanceInterruptionBehavior** is set to either `hibernate` or
     #   `stop`.
     # @option options [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the T2 or T3 instance. Valid values
-    #   are `standard` and `unlimited`. To change this attribute after launch,
-    #   use [ ModifyInstanceCreditSpecification][1]. For more information, see
-    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The credit option for CPU usage of the burstable performance instance.
+    #   Valid values are `standard` and `unlimited`. To change this attribute
+    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
+    #   information, see [Burstable Performance Instances][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
     #
     #

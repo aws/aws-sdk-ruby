@@ -65,6 +65,8 @@ module Aws::Organizations
     DescribeAccountResponse = Shapes::StructureShape.new(name: 'DescribeAccountResponse')
     DescribeCreateAccountStatusRequest = Shapes::StructureShape.new(name: 'DescribeCreateAccountStatusRequest')
     DescribeCreateAccountStatusResponse = Shapes::StructureShape.new(name: 'DescribeCreateAccountStatusResponse')
+    DescribeEffectivePolicyRequest = Shapes::StructureShape.new(name: 'DescribeEffectivePolicyRequest')
+    DescribeEffectivePolicyResponse = Shapes::StructureShape.new(name: 'DescribeEffectivePolicyResponse')
     DescribeHandshakeRequest = Shapes::StructureShape.new(name: 'DescribeHandshakeRequest')
     DescribeHandshakeResponse = Shapes::StructureShape.new(name: 'DescribeHandshakeResponse')
     DescribeOrganizationResponse = Shapes::StructureShape.new(name: 'DescribeOrganizationResponse')
@@ -82,6 +84,9 @@ module Aws::Organizations
     DuplicateOrganizationalUnitException = Shapes::StructureShape.new(name: 'DuplicateOrganizationalUnitException')
     DuplicatePolicyAttachmentException = Shapes::StructureShape.new(name: 'DuplicatePolicyAttachmentException')
     DuplicatePolicyException = Shapes::StructureShape.new(name: 'DuplicatePolicyException')
+    EffectivePolicy = Shapes::StructureShape.new(name: 'EffectivePolicy')
+    EffectivePolicyNotFoundException = Shapes::StructureShape.new(name: 'EffectivePolicyNotFoundException')
+    EffectivePolicyType = Shapes::StringShape.new(name: 'EffectivePolicyType')
     Email = Shapes::StringShape.new(name: 'Email')
     EnableAWSServiceAccessRequest = Shapes::StructureShape.new(name: 'EnableAWSServiceAccessRequest')
     EnableAllFeaturesRequest = Shapes::StructureShape.new(name: 'EnableAllFeaturesRequest')
@@ -172,6 +177,7 @@ module Aws::Organizations
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
+    PolicyChangesInProgressException = Shapes::StructureShape.new(name: 'PolicyChangesInProgressException')
     PolicyContent = Shapes::StringShape.new(name: 'PolicyContent')
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
@@ -363,6 +369,13 @@ module Aws::Organizations
     DescribeCreateAccountStatusResponse.add_member(:create_account_status, Shapes::ShapeRef.new(shape: CreateAccountStatus, location_name: "CreateAccountStatus"))
     DescribeCreateAccountStatusResponse.struct_class = Types::DescribeCreateAccountStatusResponse
 
+    DescribeEffectivePolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, required: true, location_name: "PolicyType"))
+    DescribeEffectivePolicyRequest.add_member(:target_id, Shapes::ShapeRef.new(shape: PolicyTargetId, location_name: "TargetId"))
+    DescribeEffectivePolicyRequest.struct_class = Types::DescribeEffectivePolicyRequest
+
+    DescribeEffectivePolicyResponse.add_member(:effective_policy, Shapes::ShapeRef.new(shape: EffectivePolicy, location_name: "EffectivePolicy"))
+    DescribeEffectivePolicyResponse.struct_class = Types::DescribeEffectivePolicyResponse
+
     DescribeHandshakeRequest.add_member(:handshake_id, Shapes::ShapeRef.new(shape: HandshakeId, required: true, location_name: "HandshakeId"))
     DescribeHandshakeRequest.struct_class = Types::DescribeHandshakeRequest
 
@@ -415,6 +428,15 @@ module Aws::Organizations
 
     DuplicatePolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     DuplicatePolicyException.struct_class = Types::DuplicatePolicyException
+
+    EffectivePolicy.add_member(:policy_content, Shapes::ShapeRef.new(shape: PolicyContent, location_name: "PolicyContent"))
+    EffectivePolicy.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTimestamp"))
+    EffectivePolicy.add_member(:target_id, Shapes::ShapeRef.new(shape: PolicyTargetId, location_name: "TargetId"))
+    EffectivePolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: EffectivePolicyType, location_name: "PolicyType"))
+    EffectivePolicy.struct_class = Types::EffectivePolicy
+
+    EffectivePolicyNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    EffectivePolicyNotFoundException.struct_class = Types::EffectivePolicyNotFoundException
 
     EnableAWSServiceAccessRequest.add_member(:service_principal, Shapes::ShapeRef.new(shape: ServicePrincipal, required: true, location_name: "ServicePrincipal"))
     EnableAWSServiceAccessRequest.struct_class = Types::EnableAWSServiceAccessRequest
@@ -668,6 +690,9 @@ module Aws::Organizations
     Policy.add_member(:content, Shapes::ShapeRef.new(shape: PolicyContent, location_name: "Content"))
     Policy.struct_class = Types::Policy
 
+    PolicyChangesInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    PolicyChangesInProgressException.struct_class = Types::PolicyChangesInProgressException
+
     PolicyInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     PolicyInUseException.struct_class = Types::PolicyInUseException
 
@@ -825,6 +850,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
       end)
 
       api.add_operation(:cancel_handshake, Seahorse::Model::Operation.new.tap do |o|
@@ -926,6 +953,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotAvailableForOrganizationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:decline_handshake, Seahorse::Model::Operation.new.tap do |o|
@@ -989,6 +1017,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:describe_account, Seahorse::Model::Operation.new.tap do |o|
@@ -1017,6 +1046,23 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+      end)
+
+      api.add_operation(:describe_effective_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEffectivePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEffectivePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEffectivePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EffectivePolicyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
@@ -1073,6 +1119,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:detach_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1091,6 +1138,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
       end)
 
       api.add_operation(:disable_aws_service_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1123,6 +1172,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: RootNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
       end)
 
       api.add_operation(:enable_aws_service_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1171,6 +1222,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotAvailableForOrganizationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
       end)
 
       api.add_operation(:invite_account_to_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1397,6 +1450,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1417,6 +1471,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1475,6 +1530,7 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1582,6 +1638,8 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyChangesInProgressException)
       end)
     end
 

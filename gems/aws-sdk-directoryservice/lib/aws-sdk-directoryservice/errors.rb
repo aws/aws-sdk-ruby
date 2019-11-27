@@ -52,6 +52,90 @@ module Aws::DirectoryService
 
     end
 
+    class CertificateAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::CertificateAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class CertificateDoesNotExistException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::CertificateDoesNotExistException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class CertificateInUseException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::CertificateInUseException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class CertificateLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::CertificateLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
     class ClientException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -78,6 +162,27 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::DirectoryAlreadySharedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class DirectoryDoesNotExistException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::DirectoryDoesNotExistException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -241,6 +346,48 @@ module Aws::DirectoryService
 
     end
 
+    class InvalidCertificateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::InvalidCertificateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class InvalidLDAPSStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::InvalidLDAPSStatusException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
     class InvalidNextTokenException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -330,6 +477,27 @@ module Aws::DirectoryService
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DirectoryService::Types::IpRouteLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+    end
+
+    class NoAvailableCertificateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DirectoryService::Types::NoAvailableCertificateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

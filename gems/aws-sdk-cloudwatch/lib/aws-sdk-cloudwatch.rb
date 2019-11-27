@@ -45,6 +45,6 @@ require_relative 'aws-sdk-cloudwatch/customizations'
 # @service
 module Aws::CloudWatch
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end

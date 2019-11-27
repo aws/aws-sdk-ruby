@@ -87,11 +87,13 @@ module Aws::ServerlessApplicationRepository
     Application.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     Application.add_member(:description, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "description"))
     Application.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    Application.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     Application.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     Application.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     Application.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     Application.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     Application.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    Application.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     Application.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     Application.struct_class = Types::Application
 
@@ -182,11 +184,13 @@ module Aws::ServerlessApplicationRepository
     CreateApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     CreateApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    CreateApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     CreateApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     CreateApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     CreateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     CreateApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    CreateApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     CreateApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
 
@@ -285,11 +289,13 @@ module Aws::ServerlessApplicationRepository
     GetApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     GetApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     GetApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    GetApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     GetApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     GetApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     GetApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     GetApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     GetApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    GetApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     GetApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
@@ -414,11 +420,13 @@ module Aws::ServerlessApplicationRepository
     UpdateApplicationResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: __string, location_name: "creationTime"))
     UpdateApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateApplicationResponse.add_member(:home_page_url, Shapes::ShapeRef.new(shape: __string, location_name: "homePageUrl"))
+    UpdateApplicationResponse.add_member(:is_verified_author, Shapes::ShapeRef.new(shape: __boolean, location_name: "isVerifiedAuthor"))
     UpdateApplicationResponse.add_member(:labels, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "labels"))
     UpdateApplicationResponse.add_member(:license_url, Shapes::ShapeRef.new(shape: __string, location_name: "licenseUrl"))
     UpdateApplicationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateApplicationResponse.add_member(:readme_url, Shapes::ShapeRef.new(shape: __string, location_name: "readmeUrl"))
     UpdateApplicationResponse.add_member(:spdx_license_id, Shapes::ShapeRef.new(shape: __string, location_name: "spdxLicenseId"))
+    UpdateApplicationResponse.add_member(:verified_author_url, Shapes::ShapeRef.new(shape: __string, location_name: "verifiedAuthorUrl"))
     UpdateApplicationResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 

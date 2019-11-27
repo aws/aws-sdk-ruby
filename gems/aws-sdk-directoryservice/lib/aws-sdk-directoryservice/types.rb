@@ -266,6 +266,142 @@ module Aws::DirectoryService
     #
     class CancelSchemaExtensionResult < Aws::EmptyStructure; end
 
+    # Information about the certificate.
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Describes a state change for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] common_name
+    #   The common name for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_date_time
+    #   The date and time that the certificate was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date_time
+    #   The date and time when the certificate will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :certificate_id,
+      :state,
+      :state_reason,
+      :common_name,
+      :registered_date_time,
+      :expiry_date_time)
+      include Aws::Structure
+    end
+
+    # The certificate has already been registered into the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateAlreadyExistsException AWS API Documentation
+    #
+    class CertificateAlreadyExistsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate is not present in the system for describe or
+    # deregister activities.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateDoesNotExistException AWS API Documentation
+    #
+    class CertificateDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate is being used for the LDAP security connection and
+    # cannot be removed without disabling LDAP security.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInUseException AWS API Documentation
+    #
+    class CertificateInUseException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Contains general information about a certificate.
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] common_name
+    #   The common name for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInfo AWS API Documentation
+    #
+    class CertificateInfo < Struct.new(
+      :certificate_id,
+      :common_name,
+      :state)
+      include Aws::Structure
+    end
+
+    # The certificate could not be added because the certificate limit has
+    # been reached.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateLimitExceededException AWS API Documentation
+    #
+    class CertificateLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # A client exception has occurred.
     #
     # @!attribute [rw] message
@@ -377,7 +513,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -607,17 +743,20 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] short_name
-    #   The short name of the directory, such as `CORP`.
+    #   The NetBIOS name of the directory, such as `CORP`.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password for the directory administrator. The directory creation
     #   process creates a directory administrator account with the user name
     #   `Administrator` and this password.
+    #
+    #   If you need to change the password for the administrator account,
+    #   you can use the ResetUserPassword API call.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -668,7 +807,7 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] directory_id
-    #   Identifier (ID) of the directory to which you want to subscribe and
+    #   Identifier of the directory to which you want to subscribe and
     #   receive real-time logs to your specified CloudWatch log group.
     #   @return [String]
     #
@@ -713,26 +852,28 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] name
-    #   The fully qualified domain name for the directory, such as
-    #   `corp.example.com`. This name will resolve inside your VPC only. It
-    #   does not need to be publicly resolvable.
+    #   The fully qualified domain name for the AWS Managed Microsoft AD
+    #   directory, such as `corp.example.com`. This name will resolve inside
+    #   your VPC only. It does not need to be publicly resolvable.
     #   @return [String]
     #
     # @!attribute [rw] short_name
-    #   The NetBIOS name for your domain. A short identifier for your
-    #   domain, such as `CORP`. If you don't specify a NetBIOS name, it
-    #   will default to the first part of your directory DNS. For example,
-    #   `CORP` for the directory DNS `corp.example.com`.
+    #   The NetBIOS name for your domain, such as `CORP`. If you don't
+    #   specify a NetBIOS name, it will default to the first part of your
+    #   directory DNS. For example, `CORP` for the directory DNS
+    #   `corp.example.com`.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password for the default administrative user named `Admin`.
+    #
+    #   If you need to change the password for the administrator account,
+    #   you can use the ResetUserPassword API call.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory. This label will appear on
-    #   the AWS console `Directory Details` page after the directory is
-    #   created.
+    #   A description for the directory. This label will appear on the AWS
+    #   console `Directory Details` page after the directory is created.
     #   @return [String]
     #
     # @!attribute [rw] vpc_settings
@@ -741,8 +882,8 @@ module Aws::DirectoryService
     #   @return [Types::DirectoryVpcSettings]
     #
     # @!attribute [rw] edition
-    #   AWS Managed Microsoft AD is available in two editions: Standard and
-    #   Enterprise. Enterprise is the default.
+    #   AWS Managed Microsoft AD is available in two editions: `Standard`
+    #   and `Enterprise`. `Enterprise` is the default.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -971,7 +1112,7 @@ module Aws::DirectoryService
     #       }
     #
     # @!attribute [rw] directory_id
-    #   Identifier (ID) of the directory whose log subscription you want to
+    #   Identifier of the directory whose log subscription you want to
     #   delete.
     #   @return [String]
     #
@@ -1059,6 +1200,34 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeregisterCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_id: "CertificateId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificateRequest AWS API Documentation
+    #
+    class DeregisterCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificateResult AWS API Documentation
+    #
+    class DeregisterCertificateResult < Aws::EmptyStructure; end
+
     # Removes the specified directory as a publisher to the specified SNS
     # topic.
     #
@@ -1093,6 +1262,43 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult AWS API Documentation
     #
     class DeregisterEventTopicResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_id: "CertificateId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificateRequest AWS API Documentation
+    #
+    class DescribeCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   Information about the certificate, including registered date time,
+    #   certificate state, the reason for the state, expiration date time,
+    #   and certificate common name.
+    #   @return [Types::Certificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificateResult AWS API Documentation
+    #
+    class DescribeCertificateResult < Struct.new(
+      :certificate)
+      include Aws::Structure
+    end
 
     # Describes a conditional forwarder.
     #
@@ -1302,6 +1508,62 @@ module Aws::DirectoryService
     #
     class DescribeEventTopicsResult < Struct.new(
       :event_topics)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLDAPSSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # accepts Client
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security the customer wants to enable, either
+    #   server or client. Currently supports only `Client`, (the default).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The type of next token used for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of items that should be displayed on one page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettingsRequest AWS API Documentation
+    #
+    class DescribeLDAPSSettingsRequest < Struct.new(
+      :directory_id,
+      :type,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ldaps_settings_info
+    #   Information about LDAP security for the specified directory,
+    #   including status of enablement, state last updated date time, and
+    #   the reason for the state.
+    #   @return [Array<Types::LDAPSSettingInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used to retrieve the LDAPS settings if the number of
+    #   setting types exceeds page limit and there is another page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettingsResult AWS API Documentation
+    #
+    class DescribeLDAPSSettingsResult < Struct.new(
+      :ldaps_settings_info,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1575,7 +1837,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet identifiers in the VPC that the AD connector is in.
+    #   A list of subnet identifiers in the VPC that the AD Connector is in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
@@ -1642,7 +1904,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The textual description for the directory.
+    #   The description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] dns_ip_addrs
@@ -1759,6 +2021,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The specified directory does not exist in the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDoesNotExistException AWS API Documentation
+    #
+    class DirectoryDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # The maximum number of directories in the region has been reached. You
     # can use the GetDirectoryLimits operation to determine your directory
     # limits in the region.
@@ -1779,14 +2059,14 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Contains directory limit information for a region.
+    # Contains directory limit information for a Region.
     #
     # @!attribute [rw] cloud_only_directories_limit
-    #   The maximum number of cloud directories allowed in the region.
+    #   The maximum number of cloud directories allowed in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_directories_current_count
-    #   The current number of cloud directories in the region.
+    #   The current number of cloud directories in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_directories_limit_reached
@@ -1809,11 +2089,11 @@ module Aws::DirectoryService
     #   @return [Boolean]
     #
     # @!attribute [rw] connected_directories_limit
-    #   The maximum number of connected directories allowed in the region.
+    #   The maximum number of connected directories allowed in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] connected_directories_current_count
-    #   The current number of connected directories in the region.
+    #   The current number of connected directories in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] connected_directories_limit_reached
@@ -1928,6 +2208,36 @@ module Aws::DirectoryService
       :availability_zones)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisableLDAPSRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # accepts Client
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security that the customer wants to enable. The
+    #   security can be either server or client, but currently only the
+    #   default `Client` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPSRequest AWS API Documentation
+    #
+    class DisableLDAPSRequest < Struct.new(
+      :directory_id,
+      :type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPSResult AWS API Documentation
+    #
+    class DisableLDAPSResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the DisableRadius operation.
     #
@@ -2082,6 +2392,36 @@ module Aws::DirectoryService
       :request_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass EnableLDAPSRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # accepts Client
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security the customer wants to enable. The security
+    #   can be either server or client, but currently only the default
+    #   `Client` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPSRequest AWS API Documentation
+    #
+    class EnableLDAPSRequest < Struct.new(
+      :directory_id,
+      :type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPSResult AWS API Documentation
+    #
+    class EnableLDAPSResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the EnableRadius operation.
     #
@@ -2258,7 +2598,7 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] directory_limits
     #   A DirectoryLimits object that contains the directory limits for the
-    #   current region.
+    #   current rRegion.
     #   @return [Types::DirectoryLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsResult AWS API Documentation
@@ -2316,6 +2656,43 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InsufficientPermissionsException AWS API Documentation
     #
     class InsufficientPermissionsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate PEM that was provided has incorrect encoding.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidCertificateException AWS API Documentation
+    #
+    class InvalidCertificateException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The LDAP activities could not be performed because they are limited by
+    # the LDAPS status.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidLDAPSStatusException AWS API Documentation
+    #
+    class InvalidLDAPSStatusException < Struct.new(
       :message,
       :request_id)
       include Aws::Structure
@@ -2478,6 +2855,81 @@ module Aws::DirectoryService
     class IpRouteLimitExceededException < Struct.new(
       :message,
       :request_id)
+      include Aws::Structure
+    end
+
+    # Contains general information about the LDAPS settings.
+    #
+    # @!attribute [rw] ldaps_status
+    #   The state of the LDAPS settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ldaps_status_reason
+    #   Describes a state change for LDAPS.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time when the LDAPS settings were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LDAPSSettingInfo AWS API Documentation
+    #
+    class LDAPSSettingInfo < Struct.new(
+      :ldaps_status,
+      :ldaps_status_reason,
+      :last_updated_date_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCertificatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token for requesting another page of certificates if the
+    #   `NextToken` response element indicates that more certificates are
+    #   available. Use the value of the returned `NextToken` element in your
+    #   request until the token comes back as `null`. Pass `null` if this is
+    #   the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The number of items that should show up on one page
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificatesRequest AWS API Documentation
+    #
+    class ListCertificatesRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Indicates whether another page of certificates is available when the
+    #   number of available certificates exceeds the page limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificates_info
+    #   A list of certificates with basic details including certificate ID,
+    #   certificate common name, certificate state.
+    #   @return [Array<Types::CertificateInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificatesResult AWS API Documentation
+    #
+    class ListCertificatesResult < Struct.new(
+      :next_token,
+      :certificates_info)
       include Aws::Structure
     end
 
@@ -2706,6 +3158,25 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The LDAP activities could not be performed because at least one valid
+    # certificate must be registered with the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/NoAvailableCertificateException AWS API Documentation
+    #
+    class NoAvailableCertificateException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Exception encountered while trying to access your AWS organization.
     #
     # @!attribute [rw] message
@@ -2831,6 +3302,41 @@ module Aws::DirectoryService
       :authentication_protocol,
       :display_label,
       :use_same_username)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_data: "CertificateData", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_data
+    #   The certificate PEM string that needs to be registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateRequest AWS API Documentation
+    #
+    class RegisterCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateResult AWS API Documentation
+    #
+    class RegisterCertificateResult < Struct.new(
+      :certificate_id)
       include Aws::Structure
     end
 

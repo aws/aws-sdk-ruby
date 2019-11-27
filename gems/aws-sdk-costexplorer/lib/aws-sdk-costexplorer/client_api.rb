@@ -14,11 +14,21 @@ module Aws::CostExplorer
     AccountScope = Shapes::StringShape.new(name: 'AccountScope')
     AmortizedRecurringFee = Shapes::StringShape.new(name: 'AmortizedRecurringFee')
     AmortizedUpfrontFee = Shapes::StringShape.new(name: 'AmortizedUpfrontFee')
+    Arn = Shapes::StringShape.new(name: 'Arn')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
+    CostCategory = Shapes::StructureShape.new(name: 'CostCategory')
+    CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
+    CostCategoryReference = Shapes::StructureShape.new(name: 'CostCategoryReference')
+    CostCategoryReferencesList = Shapes::ListShape.new(name: 'CostCategoryReferencesList')
+    CostCategoryRule = Shapes::StructureShape.new(name: 'CostCategoryRule')
+    CostCategoryRuleVersion = Shapes::StringShape.new(name: 'CostCategoryRuleVersion')
+    CostCategoryRulesList = Shapes::ListShape.new(name: 'CostCategoryRulesList')
+    CostCategoryValue = Shapes::StringShape.new(name: 'CostCategoryValue')
+    CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     Coverage = Shapes::StructureShape.new(name: 'Coverage')
     CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
     CoverageCost = Shapes::StructureShape.new(name: 'CoverageCost')
@@ -27,9 +37,15 @@ module Aws::CostExplorer
     CoverageNormalizedUnits = Shapes::StructureShape.new(name: 'CoverageNormalizedUnits')
     CoverageNormalizedUnitsPercentage = Shapes::StringShape.new(name: 'CoverageNormalizedUnitsPercentage')
     CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
+    CreateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'CreateCostCategoryDefinitionRequest')
+    CreateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'CreateCostCategoryDefinitionResponse')
     CurrentInstance = Shapes::StructureShape.new(name: 'CurrentInstance')
     DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
+    DeleteCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'DeleteCostCategoryDefinitionRequest')
+    DeleteCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'DeleteCostCategoryDefinitionResponse')
+    DescribeCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'DescribeCostCategoryDefinitionRequest')
+    DescribeCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'DescribeCostCategoryDefinitionResponse')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
     DimensionValuesWithAttributes = Shapes::StructureShape.new(name: 'DimensionValuesWithAttributes')
@@ -89,6 +105,8 @@ module Aws::CostExplorer
     Key = Shapes::StringShape.new(name: 'Key')
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
+    ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Metric = Shapes::StringShape.new(name: 'Metric')
@@ -131,6 +149,7 @@ module Aws::CostExplorer
     ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
     ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUtilization = Shapes::StructureShape.new(name: 'ResourceUtilization')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
@@ -158,6 +177,7 @@ module Aws::CostExplorer
     SavingsPlansUtilizationDetails = Shapes::ListShape.new(name: 'SavingsPlansUtilizationDetails')
     SavingsPlansUtilizationsByTime = Shapes::ListShape.new(name: 'SavingsPlansUtilizationsByTime')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
+    ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ServiceSpecification = Shapes::StructureShape.new(name: 'ServiceSpecification')
     SupportedSavingsPlansType = Shapes::StringShape.new(name: 'SupportedSavingsPlansType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -177,6 +197,8 @@ module Aws::CostExplorer
     UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
+    UpdateCostCategoryDefinitionRequest = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionRequest')
+    UpdateCostCategoryDefinitionResponse = Shapes::StructureShape.new(name: 'UpdateCostCategoryDefinitionResponse')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
     UtilizationPercentage = Shapes::StringShape.new(name: 'UtilizationPercentage')
     UtilizationPercentageInUnits = Shapes::StringShape.new(name: 'UtilizationPercentageInUnits')
@@ -184,12 +206,39 @@ module Aws::CostExplorer
     Value = Shapes::StringShape.new(name: 'Value')
     Values = Shapes::ListShape.new(name: 'Values')
     YearMonthDay = Shapes::StringShape.new(name: 'YearMonthDay')
+    ZonedDateTime = Shapes::StringShape.new(name: 'ZonedDateTime')
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     BillExpirationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BillExpirationException.struct_class = Types::BillExpirationException
+
+    CostCategory.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
+    CostCategory.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, required: true, location_name: "EffectiveStart"))
+    CostCategory.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
+    CostCategory.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
+    CostCategory.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
+    CostCategory.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    CostCategory.struct_class = Types::CostCategory
+
+    CostCategoryReference.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    CostCategoryReference.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Name"))
+    CostCategoryReference.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
+    CostCategoryReference.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
+    CostCategoryReference.struct_class = Types::CostCategoryReference
+
+    CostCategoryReferencesList.member = Shapes::ShapeRef.new(shape: CostCategoryReference)
+
+    CostCategoryRule.add_member(:value, Shapes::ShapeRef.new(shape: CostCategoryValue, required: true, location_name: "Value"))
+    CostCategoryRule.add_member(:rule, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Rule"))
+    CostCategoryRule.struct_class = Types::CostCategoryRule
+
+    CostCategoryRulesList.member = Shapes::ShapeRef.new(shape: CostCategoryRule)
+
+    CostCategoryValues.add_member(:key, Shapes::ShapeRef.new(shape: CostCategoryName, location_name: "Key"))
+    CostCategoryValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
+    CostCategoryValues.struct_class = Types::CostCategoryValues
 
     Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
     Coverage.add_member(:coverage_normalized_units, Shapes::ShapeRef.new(shape: CoverageNormalizedUnits, location_name: "CoverageNormalizedUnits"))
@@ -218,6 +267,15 @@ module Aws::CostExplorer
 
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
+    CreateCostCategoryDefinitionRequest.add_member(:name, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "Name"))
+    CreateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
+    CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    CreateCostCategoryDefinitionRequest.struct_class = Types::CreateCostCategoryDefinitionRequest
+
+    CreateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    CreateCostCategoryDefinitionResponse.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
+    CreateCostCategoryDefinitionResponse.struct_class = Types::CreateCostCategoryDefinitionResponse
+
     CurrentInstance.add_member(:resource_id, Shapes::ShapeRef.new(shape: GenericString, location_name: "ResourceId"))
     CurrentInstance.add_member(:tags, Shapes::ShapeRef.new(shape: TagValuesList, location_name: "Tags"))
     CurrentInstance.add_member(:resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "ResourceDetails"))
@@ -236,6 +294,20 @@ module Aws::CostExplorer
     DateInterval.add_member(:start, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "Start"))
     DateInterval.add_member(:end, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "End"))
     DateInterval.struct_class = Types::DateInterval
+
+    DeleteCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
+    DeleteCostCategoryDefinitionRequest.struct_class = Types::DeleteCostCategoryDefinitionRequest
+
+    DeleteCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    DeleteCostCategoryDefinitionResponse.add_member(:effective_end, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveEnd"))
+    DeleteCostCategoryDefinitionResponse.struct_class = Types::DeleteCostCategoryDefinitionResponse
+
+    DescribeCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
+    DescribeCostCategoryDefinitionRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
+    DescribeCostCategoryDefinitionRequest.struct_class = Types::DescribeCostCategoryDefinitionRequest
+
+    DescribeCostCategoryDefinitionResponse.add_member(:cost_category, Shapes::ShapeRef.new(shape: CostCategory, location_name: "CostCategory"))
+    DescribeCostCategoryDefinitionResponse.struct_class = Types::DescribeCostCategoryDefinitionResponse
 
     DimensionValues.add_member(:key, Shapes::ShapeRef.new(shape: Dimension, location_name: "Key"))
     DimensionValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
@@ -296,6 +368,7 @@ module Aws::CostExplorer
     Expression.add_member(:not, Shapes::ShapeRef.new(shape: Expression, location_name: "Not"))
     Expression.add_member(:dimensions, Shapes::ShapeRef.new(shape: DimensionValues, location_name: "Dimensions"))
     Expression.add_member(:tags, Shapes::ShapeRef.new(shape: TagValues, location_name: "Tags"))
+    Expression.add_member(:cost_categories, Shapes::ShapeRef.new(shape: CostCategoryValues, location_name: "CostCategories"))
     Expression.struct_class = Types::Expression
 
     Expressions.member = Shapes::ShapeRef.new(shape: Expression)
@@ -508,6 +581,14 @@ module Aws::CostExplorer
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListCostCategoryDefinitionsRequest.add_member(:effective_on, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveOn"))
+    ListCostCategoryDefinitionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryDefinitionsRequest.struct_class = Types::ListCostCategoryDefinitionsRequest
+
+    ListCostCategoryDefinitionsResponse.add_member(:cost_category_references, Shapes::ShapeRef.new(shape: CostCategoryReferencesList, location_name: "CostCategoryReferences"))
+    ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
+    ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
+
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
 
     MetricValue.add_member(:amount, Shapes::ShapeRef.new(shape: MetricAmount, location_name: "Amount"))
@@ -616,6 +697,9 @@ module Aws::CostExplorer
 
     ResourceDetails.add_member(:ec2_resource_details, Shapes::ShapeRef.new(shape: EC2ResourceDetails, location_name: "EC2ResourceDetails"))
     ResourceDetails.struct_class = Types::ResourceDetails
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceUtilization.add_member(:ec2_resource_utilization, Shapes::ShapeRef.new(shape: EC2ResourceUtilization, location_name: "EC2ResourceUtilization"))
     ResourceUtilization.struct_class = Types::ResourceUtilization
@@ -748,6 +832,9 @@ module Aws::CostExplorer
 
     SavingsPlansUtilizationsByTime.member = Shapes::ShapeRef.new(shape: SavingsPlansUtilizationByTime)
 
+    ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
     ServiceSpecification.add_member(:ec2_specification, Shapes::ShapeRef.new(shape: EC2Specification, location_name: "EC2Specification"))
     ServiceSpecification.struct_class = Types::ServiceSpecification
 
@@ -775,6 +862,15 @@ module Aws::CostExplorer
 
     UnresolvableUsageUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnresolvableUsageUnitException.struct_class = Types::UnresolvableUsageUnitException
+
+    UpdateCostCategoryDefinitionRequest.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CostCategoryArn"))
+    UpdateCostCategoryDefinitionRequest.add_member(:rule_version, Shapes::ShapeRef.new(shape: CostCategoryRuleVersion, required: true, location_name: "RuleVersion"))
+    UpdateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
+    UpdateCostCategoryDefinitionRequest.struct_class = Types::UpdateCostCategoryDefinitionRequest
+
+    UpdateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
+    UpdateCostCategoryDefinitionResponse.add_member(:effective_start, Shapes::ShapeRef.new(shape: ZonedDateTime, location_name: "EffectiveStart"))
+    UpdateCostCategoryDefinitionResponse.struct_class = Types::UpdateCostCategoryDefinitionResponse
 
     UtilizationByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
     UtilizationByTime.add_member(:groups, Shapes::ShapeRef.new(shape: ReservationUtilizationGroups, location_name: "Groups"))
@@ -804,6 +900,36 @@ module Aws::CostExplorer
         "targetPrefix" => "AWSInsightsIndexService",
         "uid" => "ce-2017-10-25",
       }
+
+      api.add_operation(:create_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCostCategoryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCostCategoryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCostCategoryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:delete_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCostCategoryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCostCategoryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCostCategoryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:describe_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCostCategoryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCostCategoryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCostCategoryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
 
       api.add_operation(:get_cost_and_usage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCostAndUsage"
@@ -973,6 +1099,26 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: UnresolvableUsageUnitException)
+      end)
+
+      api.add_operation(:list_cost_category_definitions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCostCategoryDefinitions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCostCategoryDefinitionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_cost_category_definition, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCostCategoryDefinition"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCostCategoryDefinitionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCostCategoryDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

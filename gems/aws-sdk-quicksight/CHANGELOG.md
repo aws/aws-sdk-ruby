@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-11-26)
+------------------
+
+* Feature - Documentation updates for QuickSight
+
 1.14.0 (2019-11-20)
 ------------------
 

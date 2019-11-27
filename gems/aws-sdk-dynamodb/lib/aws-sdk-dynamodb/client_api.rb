@@ -11,6 +11,8 @@ module Aws::DynamoDB
 
     include Seahorse::Model
 
+    ArchivalReason = Shapes::StringShape.new(name: 'ArchivalReason')
+    ArchivalSummary = Shapes::StructureShape.new(name: 'ArchivalSummary')
     AttributeAction = Shapes::StringShape.new(name: 'AttributeAction')
     AttributeDefinition = Shapes::StructureShape.new(name: 'AttributeDefinition')
     AttributeDefinitions = Shapes::ListShape.new(name: 'AttributeDefinitions')
@@ -76,6 +78,12 @@ module Aws::DynamoDB
     ContinuousBackupsDescription = Shapes::StructureShape.new(name: 'ContinuousBackupsDescription')
     ContinuousBackupsStatus = Shapes::StringShape.new(name: 'ContinuousBackupsStatus')
     ContinuousBackupsUnavailableException = Shapes::StructureShape.new(name: 'ContinuousBackupsUnavailableException')
+    ContributorInsightsAction = Shapes::StringShape.new(name: 'ContributorInsightsAction')
+    ContributorInsightsRule = Shapes::StringShape.new(name: 'ContributorInsightsRule')
+    ContributorInsightsRuleList = Shapes::ListShape.new(name: 'ContributorInsightsRuleList')
+    ContributorInsightsStatus = Shapes::StringShape.new(name: 'ContributorInsightsStatus')
+    ContributorInsightsSummaries = Shapes::ListShape.new(name: 'ContributorInsightsSummaries')
+    ContributorInsightsSummary = Shapes::StructureShape.new(name: 'ContributorInsightsSummary')
     CreateBackupInput = Shapes::StructureShape.new(name: 'CreateBackupInput')
     CreateBackupOutput = Shapes::StructureShape.new(name: 'CreateBackupOutput')
     CreateGlobalSecondaryIndexAction = Shapes::StructureShape.new(name: 'CreateGlobalSecondaryIndexAction')
@@ -101,6 +109,8 @@ module Aws::DynamoDB
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
     DescribeContinuousBackupsOutput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsOutput')
+    DescribeContributorInsightsInput = Shapes::StructureShape.new(name: 'DescribeContributorInsightsInput')
+    DescribeContributorInsightsOutput = Shapes::StructureShape.new(name: 'DescribeContributorInsightsOutput')
     DescribeEndpointsRequest = Shapes::StructureShape.new(name: 'DescribeEndpointsRequest')
     DescribeEndpointsResponse = Shapes::StructureShape.new(name: 'DescribeEndpointsResponse')
     DescribeGlobalTableInput = Shapes::StructureShape.new(name: 'DescribeGlobalTableInput')
@@ -119,12 +129,15 @@ module Aws::DynamoDB
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     Endpoints = Shapes::ListShape.new(name: 'Endpoints')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExceptionDescription = Shapes::StringShape.new(name: 'ExceptionDescription')
+    ExceptionName = Shapes::StringShape.new(name: 'ExceptionName')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
     ExpressionAttributeNameMap = Shapes::MapShape.new(name: 'ExpressionAttributeNameMap')
     ExpressionAttributeNameVariable = Shapes::StringShape.new(name: 'ExpressionAttributeNameVariable')
     ExpressionAttributeValueMap = Shapes::MapShape.new(name: 'ExpressionAttributeValueMap')
     ExpressionAttributeValueVariable = Shapes::StringShape.new(name: 'ExpressionAttributeValueVariable')
+    FailureException = Shapes::StructureShape.new(name: 'FailureException')
     FilterConditionMap = Shapes::MapShape.new(name: 'FilterConditionMap')
     Get = Shapes::StructureShape.new(name: 'Get')
     GetItemInput = Shapes::StructureShape.new(name: 'GetItemInput')
@@ -178,10 +191,14 @@ module Aws::DynamoDB
     KeySchemaElement = Shapes::StructureShape.new(name: 'KeySchemaElement')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KeysAndAttributes = Shapes::StructureShape.new(name: 'KeysAndAttributes')
+    LastUpdateDateTime = Shapes::TimestampShape.new(name: 'LastUpdateDateTime')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAttributeValue = Shapes::ListShape.new(name: 'ListAttributeValue')
     ListBackupsInput = Shapes::StructureShape.new(name: 'ListBackupsInput')
     ListBackupsOutput = Shapes::StructureShape.new(name: 'ListBackupsOutput')
+    ListContributorInsightsInput = Shapes::StructureShape.new(name: 'ListContributorInsightsInput')
+    ListContributorInsightsLimit = Shapes::IntegerShape.new(name: 'ListContributorInsightsLimit')
+    ListContributorInsightsOutput = Shapes::StructureShape.new(name: 'ListContributorInsightsOutput')
     ListGlobalTablesInput = Shapes::StructureShape.new(name: 'ListGlobalTablesInput')
     ListGlobalTablesOutput = Shapes::StructureShape.new(name: 'ListGlobalTablesOutput')
     ListTablesInput = Shapes::StructureShape.new(name: 'ListTablesInput')
@@ -332,6 +349,8 @@ module Aws::DynamoDB
     Update = Shapes::StructureShape.new(name: 'Update')
     UpdateContinuousBackupsInput = Shapes::StructureShape.new(name: 'UpdateContinuousBackupsInput')
     UpdateContinuousBackupsOutput = Shapes::StructureShape.new(name: 'UpdateContinuousBackupsOutput')
+    UpdateContributorInsightsInput = Shapes::StructureShape.new(name: 'UpdateContributorInsightsInput')
+    UpdateContributorInsightsOutput = Shapes::StructureShape.new(name: 'UpdateContributorInsightsOutput')
     UpdateExpression = Shapes::StringShape.new(name: 'UpdateExpression')
     UpdateGlobalSecondaryIndexAction = Shapes::StructureShape.new(name: 'UpdateGlobalSecondaryIndexAction')
     UpdateGlobalTableInput = Shapes::StructureShape.new(name: 'UpdateGlobalTableInput')
@@ -349,6 +368,11 @@ module Aws::DynamoDB
     UpdateTimeToLiveOutput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveOutput')
     WriteRequest = Shapes::StructureShape.new(name: 'WriteRequest')
     WriteRequests = Shapes::ListShape.new(name: 'WriteRequests')
+
+    ArchivalSummary.add_member(:archival_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ArchivalDateTime"))
+    ArchivalSummary.add_member(:archival_reason, Shapes::ShapeRef.new(shape: ArchivalReason, location_name: "ArchivalReason"))
+    ArchivalSummary.add_member(:archival_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "ArchivalBackupArn"))
+    ArchivalSummary.struct_class = Types::ArchivalSummary
 
     AttributeDefinition.add_member(:attribute_name, Shapes::ShapeRef.new(shape: KeySchemaAttributeName, required: true, location_name: "AttributeName"))
     AttributeDefinition.add_member(:attribute_type, Shapes::ShapeRef.new(shape: ScalarAttributeType, required: true, location_name: "AttributeType"))
@@ -531,6 +555,15 @@ module Aws::DynamoDB
     ContinuousBackupsUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ContinuousBackupsUnavailableException.struct_class = Types::ContinuousBackupsUnavailableException
 
+    ContributorInsightsRuleList.member = Shapes::ShapeRef.new(shape: ContributorInsightsRule)
+
+    ContributorInsightsSummaries.member = Shapes::ShapeRef.new(shape: ContributorInsightsSummary)
+
+    ContributorInsightsSummary.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    ContributorInsightsSummary.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    ContributorInsightsSummary.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
+    ContributorInsightsSummary.struct_class = Types::ContributorInsightsSummary
+
     CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     CreateBackupInput.add_member(:backup_name, Shapes::ShapeRef.new(shape: BackupName, required: true, location_name: "BackupName"))
     CreateBackupInput.struct_class = Types::CreateBackupInput
@@ -636,6 +669,18 @@ module Aws::DynamoDB
     DescribeContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     DescribeContinuousBackupsOutput.struct_class = Types::DescribeContinuousBackupsOutput
 
+    DescribeContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    DescribeContributorInsightsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    DescribeContributorInsightsInput.struct_class = Types::DescribeContributorInsightsInput
+
+    DescribeContributorInsightsOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    DescribeContributorInsightsOutput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    DescribeContributorInsightsOutput.add_member(:contributor_insights_rule_list, Shapes::ShapeRef.new(shape: ContributorInsightsRuleList, location_name: "ContributorInsightsRuleList"))
+    DescribeContributorInsightsOutput.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
+    DescribeContributorInsightsOutput.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: LastUpdateDateTime, location_name: "LastUpdateDateTime"))
+    DescribeContributorInsightsOutput.add_member(:failure_exception, Shapes::ShapeRef.new(shape: FailureException, location_name: "FailureException"))
+    DescribeContributorInsightsOutput.struct_class = Types::DescribeContributorInsightsOutput
+
     DescribeEndpointsRequest.struct_class = Types::DescribeEndpointsRequest
 
     DescribeEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, required: true, location_name: "Endpoints"))
@@ -700,6 +745,10 @@ module Aws::DynamoDB
 
     ExpressionAttributeValueMap.key = Shapes::ShapeRef.new(shape: ExpressionAttributeValueVariable)
     ExpressionAttributeValueMap.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    FailureException.add_member(:exception_name, Shapes::ShapeRef.new(shape: ExceptionName, location_name: "ExceptionName"))
+    FailureException.add_member(:exception_description, Shapes::ShapeRef.new(shape: ExceptionDescription, location_name: "ExceptionDescription"))
+    FailureException.struct_class = Types::FailureException
 
     FilterConditionMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     FilterConditionMap.value = Shapes::ShapeRef.new(shape: Condition)
@@ -864,6 +913,15 @@ module Aws::DynamoDB
     ListBackupsOutput.add_member(:backup_summaries, Shapes::ShapeRef.new(shape: BackupSummaries, location_name: "BackupSummaries"))
     ListBackupsOutput.add_member(:last_evaluated_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "LastEvaluatedBackupArn"))
     ListBackupsOutput.struct_class = Types::ListBackupsOutput
+
+    ListContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    ListContributorInsightsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListContributorInsightsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContributorInsightsLimit, location_name: "MaxResults"))
+    ListContributorInsightsInput.struct_class = Types::ListContributorInsightsInput
+
+    ListContributorInsightsOutput.add_member(:contributor_insights_summaries, Shapes::ShapeRef.new(shape: ContributorInsightsSummaries, location_name: "ContributorInsightsSummaries"))
+    ListContributorInsightsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListContributorInsightsOutput.struct_class = Types::ListContributorInsightsOutput
 
     ListGlobalTablesInput.add_member(:exclusive_start_global_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "ExclusiveStartGlobalTableName"))
     ListGlobalTablesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "Limit"))
@@ -1166,6 +1224,7 @@ module Aws::DynamoDB
     SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
     SSEDescription.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
     SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
+    SSEDescription.add_member(:inaccessible_encryption_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "InaccessibleEncryptionDateTime"))
     SSEDescription.struct_class = Types::SSEDescription
 
     SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, location_name: "Enabled"))
@@ -1253,6 +1312,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:replicas, Shapes::ShapeRef.new(shape: ReplicaDescriptionList, location_name: "Replicas"))
     TableDescription.add_member(:restore_summary, Shapes::ShapeRef.new(shape: RestoreSummary, location_name: "RestoreSummary"))
     TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
+    TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1343,6 +1403,16 @@ module Aws::DynamoDB
 
     UpdateContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
     UpdateContinuousBackupsOutput.struct_class = Types::UpdateContinuousBackupsOutput
+
+    UpdateContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    UpdateContributorInsightsInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    UpdateContributorInsightsInput.add_member(:contributor_insights_action, Shapes::ShapeRef.new(shape: ContributorInsightsAction, required: true, location_name: "ContributorInsightsAction"))
+    UpdateContributorInsightsInput.struct_class = Types::UpdateContributorInsightsInput
+
+    UpdateContributorInsightsOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    UpdateContributorInsightsOutput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
+    UpdateContributorInsightsOutput.add_member(:contributor_insights_status, Shapes::ShapeRef.new(shape: ContributorInsightsStatus, location_name: "ContributorInsightsStatus"))
+    UpdateContributorInsightsOutput.struct_class = Types::UpdateContributorInsightsOutput
 
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
@@ -1593,6 +1663,16 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_contributor_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeContributorInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeContributorInsightsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeContributorInsightsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeEndpoints"
         o.http_method = "POST"
@@ -1694,6 +1774,22 @@ module Aws::DynamoDB
         o.input = Shapes::ShapeRef.new(shape: ListBackupsInput)
         o.output = Shapes::ShapeRef.new(shape: ListBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:list_contributor_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContributorInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContributorInsightsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListContributorInsightsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_global_tables, Seahorse::Model::Operation.new.tap do |o|
@@ -1896,6 +1992,16 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: UpdateContinuousBackupsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ContinuousBackupsUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_contributor_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContributorInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContributorInsightsInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContributorInsightsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

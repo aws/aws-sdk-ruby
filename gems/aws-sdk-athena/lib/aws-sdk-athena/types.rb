@@ -807,9 +807,9 @@ module Aws::Athena
     #   @return [Types::QueryExecutionStatus]
     #
     # @!attribute [rw] statistics
-    #   The location of a manifest file that tracks file locations generated
-    #   by the query, the amount of data scanned by the query, and the
-    #   amount of time that it took the query to run.
+    #   The amount of data scanned during the query execution and the amount
+    #   of time that it took to execute, and the type of statement that was
+    #   run.
     #   @return [Types::QueryExecutionStatistics]
     #
     # @!attribute [rw] work_group
@@ -850,9 +850,9 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The location of a manifest file that tracks file locations generated
-    # by the query, the amount of data scanned by the query, and the amount
-    # of time that it took the query to run.
+    # The amount of data scanned during the query execution and the amount
+    # of time that it took to execute, and the type of statement that was
+    # run.
     #
     # @!attribute [rw] engine_execution_time_in_millis
     #   The number of milliseconds that the query took to execute.
@@ -864,24 +864,52 @@ module Aws::Athena
     #
     # @!attribute [rw] data_manifest_location
     #   The location and file name of a data manifest file. The manifest
-    #   file is saved to the Athena query results location in Amazon S3. It
-    #   tracks files that the query wrote to Amazon S3. If the query fails,
-    #   the manifest file also tracks files that the query intended to
-    #   write. The manifest is useful for identifying orphaned files
-    #   resulting from a failed query. For more information, see [Working
-    #   with Query Output Files][1] in the *Amazon Athena User Guide*.
+    #   file is saved to the Athena query results location in Amazon S3. The
+    #   manifest file tracks files that the query wrote to Amazon S3. If the
+    #   query fails, the manifest file also tracks files that the query
+    #   intended to write. The manifest is useful for identifying orphaned
+    #   files resulting from a failed query. For more information, see
+    #   [Working with Query Results, Output Files, and Query History][1] in
+    #   the *Amazon Athena User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
     #   @return [String]
     #
+    # @!attribute [rw] total_execution_time_in_millis
+    #   The number of milliseconds that Athena took to run the query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_queue_time_in_millis
+    #   The number of milliseconds that the query was in your query queue
+    #   waiting for resources. Note that if transient errors occur, Athena
+    #   might automatically add the query back to the queue.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_planning_time_in_millis
+    #   The number of milliseconds that Athena took to plan the query
+    #   processing flow. This includes the time spent retrieving table
+    #   partitions from the data source. Note that because the query engine
+    #   performs the query planning, query planning time is a subset of
+    #   engine processing time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_processing_time_in_millis
+    #   The number of milliseconds that Athena took to finalize and publish
+    #   the query results after the query engine finished running the query.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics AWS API Documentation
     #
     class QueryExecutionStatistics < Struct.new(
       :engine_execution_time_in_millis,
       :data_scanned_in_bytes,
-      :data_manifest_location)
+      :data_manifest_location,
+      :total_execution_time_in_millis,
+      :query_queue_time_in_millis,
+      :query_planning_time_in_millis,
+      :service_processing_time_in_millis)
       include Aws::Structure
     end
 

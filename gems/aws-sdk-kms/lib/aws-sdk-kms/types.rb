@@ -360,7 +360,7 @@ module Aws::KMS
     #         key_id: "KeyIdType", # required
     #         grantee_principal: "PrincipalIdType", # required
     #         retiring_principal: "PrincipalIdType",
-    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, CreateGrant, RetireGrant, DescribeKey
+    #         operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext
     #         constraints: {
     #           encryption_context_subset: {
     #             "EncryptionContextKey" => "EncryptionContextValue",
@@ -515,7 +515,8 @@ module Aws::KMS
     #       {
     #         policy: "PolicyType",
     #         description: "DescriptionType",
-    #         key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
+    #         key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT
+    #         customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT
     #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM
     #         custom_key_store_id: "CustomKeyStoreIdType",
     #         bypass_policy_lockout_safety_check: false,
@@ -571,28 +572,91 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_usage
-    #   The cryptographic operations for which you can use the CMK. The only
-    #   valid value is `ENCRYPT_DECRYPT`, which means you can use the CMK to
-    #   encrypt and decrypt data.
+    #   Determines the cryptographic operations for which you can use the
+    #   CMK. The default value is `ENCRYPT_DECRYPT`. This parameter is
+    #   required only for asymmetric CMKs. You can't change the `KeyUsage`
+    #   value after the CMK is created.
+    #
+    #   Select only one valid value.
+    #
+    #   * For symmetric CMKs, omit the parameter or specify
+    #     `ENCRYPT_DECRYPT`.
+    #
+    #   * For asymmetric CMKs with RSA key material, specify
+    #     `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #
+    #   * For asymmetric CMKs with ECC key material, specify `SIGN_VERIFY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_master_key_spec
+    #   Specifies the type of CMK to create. The `CustomerMasterKeySpec`
+    #   determines whether the CMK contains a symmetric key or an asymmetric
+    #   key pair. It also determines the encryption algorithms or signing
+    #   algorithms that the CMK supports. You can't change the
+    #   `CustomerMasterKeySpec` after the CMK is created. To further
+    #   restrict the algorithms that can be used with the CMK, use its key
+    #   policy or IAM policy.
+    #
+    #   For help with choosing a key spec for your CMK, see [Selecting a
+    #   Customer Master Key Spec][1] in the *AWS Key Management Service
+    #   Developer Guide*.
+    #
+    #   The default value, `SYMMETRIC_DEFAULT`, creates a CMK with a 256-bit
+    #   symmetric key.
+    #
+    #   AWS KMS supports the following key specs for CMKs:
+    #
+    #   * Symmetric key (default)
+    #
+    #     * `SYMMETRIC_DEFAULT` (AES-256-GCM)
+    #
+    #     ^
+    #
+    #   * Asymmetric RSA key pairs
+    #
+    #     * `RSA_2048`
+    #
+    #     * `RSA_3072`
+    #
+    #     * `RSA_4096`
+    #
+    #   * Asymmetric NIST-recommended elliptic curve key pairs
+    #
+    #     * `ECC_NIST_P256` (secp256r1)
+    #
+    #     * `ECC_NIST_P384` (secp384r1)
+    #
+    #     * `ECC_NIST_P521` (secp521r1)
+    #
+    #   * Other asymmetric elliptic curve key pairs
+    #
+    #     * `ECC_SECG_P256K1` (secp256k1), commonly used for
+    #       cryptocurrencies.
+    #
+    #     ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#cmk-key-spec
     #   @return [String]
     #
     # @!attribute [rw] origin
     #   The source of the key material for the CMK. You cannot change the
-    #   origin after you create the CMK.
-    #
-    #   The default is `AWS_KMS`, which means AWS KMS creates the key
-    #   material in its own key store.
+    #   origin after you create the CMK. The default is `AWS_KMS`, which
+    #   means AWS KMS creates the key material.
     #
     #   When the parameter value is `EXTERNAL`, AWS KMS creates a CMK
     #   without key material so that you can import key material from your
     #   existing key management infrastructure. For more information about
     #   importing key material into AWS KMS, see [Importing Key Material][1]
-    #   in the *AWS Key Management Service Developer Guide*.
+    #   in the *AWS Key Management Service Developer Guide*. This value is
+    #   valid only for symmetric CMKs.
     #
     #   When the parameter value is `AWS_CLOUDHSM`, AWS KMS creates the CMK
     #   in an AWS KMS [custom key store][2] and creates its key material in
     #   the associated AWS CloudHSM cluster. You must also use the
-    #   `CustomKeyStoreId` parameter to identify the custom key store.
+    #   `CustomKeyStoreId` parameter to identify the custom key store. This
+    #   value is valid only for symmetric CMKs.
     #
     #
     #
@@ -607,6 +671,9 @@ module Aws::KMS
     #   with a value of `AWS_CLOUDHSM`. The AWS CloudHSM cluster that is
     #   associated with the custom key store must have at least two active
     #   HSMs, each in a different Availability Zone in the Region.
+    #
+    #   This parameter is valid only for symmetric CMKs. You cannot create
+    #   an asymmetric CMK in a custom key store.
     #
     #   To find the ID of a custom key store, use the
     #   DescribeCustomKeyStores operation.
@@ -648,12 +715,20 @@ module Aws::KMS
     #
     # @!attribute [rw] tags
     #   One or more tags. Each tag consists of a tag key and a tag value.
-    #   Tag keys and tag values are both required, but tag values can be
-    #   empty (null) strings.
+    #   Both the tag key and the tag value are required, but the tag value
+    #   can be an empty (null) string.
     #
-    #   Use this parameter to tag the CMK when it is created. Alternately,
-    #   you can omit this parameter and instead tag the CMK after it is
-    #   created using TagResource.
+    #   When you add tags to an AWS resource, AWS generates a cost
+    #   allocation report with usage and costs aggregated by tags. For
+    #   information about adding, changing, deleting and listing tags for
+    #   CMKs, see [Tagging Keys][1].
+    #
+    #   Use this parameter to tag the CMK when it is created. To add tags to
+    #   an existing CMK, use the TagResource operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest AWS API Documentation
@@ -662,6 +737,7 @@ module Aws::KMS
       :policy,
       :description,
       :key_usage,
+      :customer_master_key_spec,
       :origin,
       :custom_key_store_id,
       :bypass_policy_lockout_safety_check,
@@ -862,6 +938,8 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         grant_tokens: ["GrantTokenType"],
+    #         key_id: "KeyIdType",
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
     #       }
     #
     # @!attribute [rw] ciphertext_blob
@@ -869,9 +947,20 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
-    #   The encryption context. If this was specified in the Encrypt
-    #   function, it must be specified here or the decryption operation will
-    #   fail. For more information, see [Encryption Context][1].
+    #   Specifies the encryption context to use when decrypting the data. An
+    #   encryption context is valid only for cryptographic operations with a
+    #   symmetric CMK. The standard asymmetric encryption algorithms that
+    #   AWS KMS uses do not support an encryption context.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -889,30 +978,83 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] key_id
+    #   Specifies the customer master key (CMK) that AWS KMS will use to
+    #   decrypt the ciphertext. Enter a key ID of the CMK that was used to
+    #   encrypt the ciphertext.
+    #
+    #   If you specify a `KeyId` value, the `Decrypt` operation succeeds
+    #   only if the specified CMK was used to encrypt the ciphertext.
+    #
+    #   This parameter is required only when the ciphertext was encrypted
+    #   under an asymmetric CMK. Otherwise, AWS KMS uses the metadata that
+    #   it adds to the ciphertext blob to determine which CMK was used to
+    #   encrypt the ciphertext. However, you can use this parameter to
+    #   ensure that a particular CMK (of any kind) is used to decrypt the
+    #   ciphertext.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_algorithm
+    #   Specifies the encryption algorithm that will be used to decrypt the
+    #   ciphertext. Specify the same algorithm that was used to encrypt the
+    #   data. If you specify a different algorithm, the `Decrypt` operation
+    #   fails.
+    #
+    #   This parameter is required only when the ciphertext was encrypted
+    #   under an asymmetric CMK. The default value, `SYMMETRIC_DEFAULT`,
+    #   represents the only supported algorithm that is valid for symmetric
+    #   CMKs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
     #
     class DecryptRequest < Struct.new(
       :ciphertext_blob,
       :encryption_context,
-      :grant_tokens)
+      :grant_tokens,
+      :key_id,
+      :encryption_algorithm)
       include Aws::Structure
     end
 
     # @!attribute [rw] key_id
-    #   ARN of the key used to perform the decryption. This value is
-    #   returned if no errors are encountered during the operation.
+    #   The ARN of the customer master key that was used to perform the
+    #   decryption.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
     #   Decrypted plaintext data. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_algorithm
+    #   The encryption algorithm that was used to decrypt the ciphertext.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse AWS API Documentation
     #
     class DecryptResponse < Struct.new(
       :key_id,
-      :plaintext)
+      :plaintext,
+      :encryption_algorithm)
       include Aws::Structure
     end
 
@@ -1186,7 +1328,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Identifies a symmetric customer master key (CMK). You cannot enable
+    #   automatic rotation of [asymmetric CMKs][1], CMKs with [imported key
+    #   material][2], or CMKs in a [custom key store][3].
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -1199,6 +1343,12 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or
     #   DescribeKey.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#asymmetric-cmks
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationRequest AWS API Documentation
@@ -1282,7 +1432,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key (CMK).
+    #   Identifies a symmetric customer master key (CMK). You cannot enable
+    #   automatic rotation of asymmetric CMKs, CMKs with imported key
+    #   material, or CMKs in a [custom key store][1].
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -1295,6 +1447,10 @@ module Aws::KMS
     #
     #   To get the key ID and key ARN for a CMK, use ListKeys or
     #   DescribeKey.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
@@ -1314,6 +1470,7 @@ module Aws::KMS
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
     #         grant_tokens: ["GrantTokenType"],
+    #         encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
     #       }
     #
     # @!attribute [rw] key_id
@@ -1344,10 +1501,20 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
-    #   Name-value pair that specifies the encryption context to be used for
-    #   authenticated encryption. If used here, the same value must be
-    #   supplied to the `Decrypt` API or decryption will fail. For more
-    #   information, see [Encryption Context][1].
+    #   Specifies the encryption context that will be used to encrypt the
+    #   data. An encryption context is valid only for cryptographic
+    #   operations with a symmetric CMK. The standard asymmetric encryption
+    #   algorithms that AWS KMS uses do not support an encryption context.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -1365,37 +1532,54 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @!attribute [rw] encryption_algorithm
+    #   Specifies the encryption algorithm that AWS KMS will use to encrypt
+    #   the plaintext message. The algorithm must be compatible with the CMK
+    #   that you specify.
+    #
+    #   This parameter is required only for asymmetric CMKs. The default
+    #   value, `SYMMETRIC_DEFAULT`, is the algorithm used for symmetric
+    #   CMKs. If you are using an asymmetric CMK, we recommend
+    #   RSAES\_OAEP\_SHA\_256.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
     #
     class EncryptRequest < Struct.new(
       :key_id,
       :plaintext,
       :encryption_context,
-      :grant_tokens)
+      :grant_tokens,
+      :encryption_algorithm)
       include Aws::Structure
     end
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted plaintext. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
     #   The ID of the key used during encryption.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_algorithm
+    #   The encryption algorithm that was used to encrypt the plaintext.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptResponse AWS API Documentation
     #
     class EncryptResponse < Struct.new(
       :ciphertext_blob,
-      :key_id)
+      :key_id,
+      :encryption_algorithm)
       include Aws::Structure
     end
 
-    # The request was rejected because the provided import token is expired.
-    # Use GetParametersForImport to get a new import token and public key,
-    # use the new public key to encrypt the key material, and then try the
-    # request again.
+    # The request was rejected because the specified import token is
+    # expired. Use GetParametersForImport to get a new import token and
+    # public key, use the new public key to encrypt the key material, and
+    # then try the request again.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1404,6 +1588,259 @@ module Aws::KMS
     #
     class ExpiredImportTokenException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GenerateDataKeyPairRequest
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue",
+    #         },
+    #         key_id: "KeyIdType", # required
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] encryption_context
+    #   Specifies the encryption context that will be used when encrypting
+    #   the private key in the data key pair.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] key_id
+    #   Specifies the symmetric CMK that encrypts the private key in the
+    #   data key pair. You cannot specify an asymmetric CMKs.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_spec
+    #   Determines the type of data key pair that is generated.
+    #
+    #   The AWS KMS rule that restricts the use of asymmetric RSA CMKs to
+    #   encrypt and decrypt or to sign and verify (but not both), and the
+    #   rule that permits you to use ECC CMKs only to sign and verify, are
+    #   not effective outside of AWS KMS.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   For more information, see [Grant Tokens][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairRequest AWS API Documentation
+    #
+    class GenerateDataKeyPairRequest < Struct.new(
+      :encryption_context,
+      :key_id,
+      :key_pair_spec,
+      :grant_tokens)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_key_ciphertext_blob
+    #   The encrypted copy of the private key. When you use the HTTP API or
+    #   the AWS CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key_plaintext
+    #   The plaintext copy of the private key. When you use the HTTP API or
+    #   the AWS CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public key (in plaintext).
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   The identifier of the CMK that encrypted the private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_spec
+    #   The type of data key pair that was generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairResponse AWS API Documentation
+    #
+    class GenerateDataKeyPairResponse < Struct.new(
+      :private_key_ciphertext_blob,
+      :private_key_plaintext,
+      :public_key,
+      :key_id,
+      :key_pair_spec)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GenerateDataKeyPairWithoutPlaintextRequest
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_context: {
+    #           "EncryptionContextKey" => "EncryptionContextValue",
+    #         },
+    #         key_id: "KeyIdType", # required
+    #         key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] encryption_context
+    #   Specifies the encryption context that will be used when encrypting
+    #   the private key in the data key pair.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] key_id
+    #   Specifies the CMK that encrypts the private key in the data key
+    #   pair. You must specify a symmetric CMK. You cannot use an asymmetric
+    #   CMK.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_spec
+    #   Determines the type of data key pair that is generated.
+    #
+    #   The AWS KMS rule that restricts the use of asymmetric RSA CMKs to
+    #   encrypt and decrypt or to sign and verify (but not both), and the
+    #   rule that permits you to use ECC CMKs only to sign and verify, are
+    #   not effective outside of AWS KMS.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   For more information, see [Grant Tokens][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairWithoutPlaintextRequest AWS API Documentation
+    #
+    class GenerateDataKeyPairWithoutPlaintextRequest < Struct.new(
+      :encryption_context,
+      :key_id,
+      :key_pair_spec,
+      :grant_tokens)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] private_key_ciphertext_blob
+    #   The encrypted copy of the private key. When you use the HTTP API or
+    #   the AWS CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The public key (in plaintext).
+    #   @return [String]
+    #
+    # @!attribute [rw] key_id
+    #   Specifies the CMK that encrypted the private key in the data key
+    #   pair. You must specify a symmetric CMK. You cannot use an asymmetric
+    #   CMK.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_spec
+    #   The type of data key pair that was generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairWithoutPlaintextResponse AWS API Documentation
+    #
+    class GenerateDataKeyPairWithoutPlaintextResponse < Struct.new(
+      :private_key_ciphertext_blob,
+      :public_key,
+      :key_id,
+      :key_pair_spec)
       include Aws::Structure
     end
 
@@ -1421,7 +1858,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   An identifier for the CMK that encrypts the data key.
+    #   Identifies the symmetric CMK that encrypts the data key.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -1444,8 +1881,15 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
-    #   A set of key-value pairs that represents additional authenticated
-    #   data.
+    #   Specifies the encryption context that will be used when encrypting
+    #   the data key.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
     #
     #   For more information, see [Encryption Context][1] in the *AWS Key
     #   Management Service Developer Guide*.
@@ -1456,15 +1900,22 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] number_of_bytes
-    #   The length of the data key in bytes. For example, use the value 64
-    #   to generate a 512-bit data key (64 bytes is 512 bits). For common
-    #   key lengths (128-bit and 256-bit symmetric keys), we recommend that
-    #   you use the `KeySpec` field instead of this one.
+    #   Specifies the length of the data key in bytes. For example, use the
+    #   value 64 to generate a 512-bit data key (64 bytes is 512 bits). For
+    #   128-bit (16-byte) and 256-bit (32-byte) data keys, use the `KeySpec`
+    #   parameter.
+    #
+    #   You must specify either the `KeySpec` or the `NumberOfBytes`
+    #   parameter (but not both) in every `GenerateDataKey` request.
     #   @return [Integer]
     #
     # @!attribute [rw] key_spec
-    #   The length of the data key. Use `AES_128` to generate a 128-bit
-    #   symmetric key, or `AES_256` to generate a 256-bit symmetric key.
+    #   Specifies the length of the data key. Use `AES_128` to generate a
+    #   128-bit symmetric key, or `AES_256` to generate a 256-bit symmetric
+    #   key.
+    #
+    #   You must specify either the `KeySpec` or the `NumberOfBytes`
+    #   parameter (but not both) in every `GenerateDataKey` request.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -1491,14 +1942,15 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted copy of the data key. When you use the HTTP API or the
-    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not encoded.
+    #   AWS CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] plaintext
     #   The plaintext data key. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded. Use this
-    #   data key to encrypt your data outside of KMS. Then, remove it from
-    #   memory as soon as possible.
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
+    #   Use this data key to encrypt your data outside of KMS. Then, remove
+    #   it from memory as soon as possible.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1528,8 +1980,8 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the customer master key (CMK) that encrypts the
-    #   data key.
+    #   The identifier of the symmetric customer master key (CMK) that
+    #   encrypts the data key.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -1552,8 +2004,15 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
-    #   A set of key-value pairs that represents additional authenticated
-    #   data.
+    #   Specifies the encryption context that will be used when encrypting
+    #   the data key.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
     #
     #   For more information, see [Encryption Context][1] in the *AWS Key
     #   Management Service Developer Guide*.
@@ -1599,7 +2058,7 @@ module Aws::KMS
 
     # @!attribute [rw] ciphertext_blob
     #   The encrypted data key. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1646,7 +2105,7 @@ module Aws::KMS
 
     # @!attribute [rw] plaintext
     #   The random byte string. When you use the HTTP API or the AWS CLI,
-    #   the value is Base64-encoded. Otherwise, it is not encoded.
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
@@ -1756,8 +2215,8 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK into which you will import key material.
-    #   The CMK's `Origin` must be `EXTERNAL`.
+    #   The identifier of the symmetric CMK into which you will import key
+    #   material. The `Origin` of the CMK must be `EXTERNAL`.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -1826,6 +2285,117 @@ module Aws::KMS
       :import_token,
       :public_key,
       :parameters_valid_to)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPublicKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   Identifies the asymmetric CMK that includes the public key.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   For more information, see [Grant Tokens][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKeyRequest AWS API Documentation
+    #
+    class GetPublicKeyRequest < Struct.new(
+      :key_id,
+      :grant_tokens)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The identifier of the asymmetric CMK from which the public key was
+    #   downloaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The exported public key.
+    #
+    #   This value is returned as a binary [Distinguished Encoding Rules][1]
+    #   (DER)-encoded object. To decode it, use an ASN.1 parsing tool, such
+    #   as [OpenSSL asn1parse][2].
+    #
+    #
+    #
+    #   [1]: https://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf
+    #   [2]: https://www.openssl.org/docs/man1.0.2/man1/asn1parse.html
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_master_key_spec
+    #   The type of the of the public key that was downloaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_usage
+    #   The permitted use of the public key. Valid values are
+    #   `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #
+    #   This information is critical. If a public key with `SIGN_VERIFY` key
+    #   usage encrypts data outside of AWS KMS, the ciphertext cannot be
+    #   decrypted.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_algorithms
+    #   The encryption algorithms that AWS KMS supports for this key.
+    #
+    #   This information is critical. If a public key encrypts data outside
+    #   of AWS KMS by using an unsupported encryption algorithm, the
+    #   ciphertext cannot be decrypted.
+    #
+    #   This field appears in the response only when the `KeyUsage` of the
+    #   public key is `ENCRYPT_DECRYPT`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] signing_algorithms
+    #   The signing algorithms that AWS KMS supports for this key.
+    #
+    #   This field appears in the response only when the `KeyUsage` of the
+    #   public key is `SIGN_VERIFY`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKeyResponse AWS API Documentation
+    #
+    class GetPublicKeyResponse < Struct.new(
+      :key_id,
+      :public_key,
+      :customer_master_key_spec,
+      :key_usage,
+      :encryption_algorithms,
+      :signing_algorithms)
       include Aws::Structure
     end
 
@@ -1974,8 +2544,10 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   The identifier of the CMK to import the key material into. The
-    #   CMK's `Origin` must be `EXTERNAL`.
+    #   The identifier of the symmetric CMK that receives the imported key
+    #   material. The CMK's `Origin` must be `EXTERNAL`. This must be the
+    #   same CMK specified in the `KeyID` parameter of the corresponding
+    #   GetParametersForImport request.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -1998,10 +2570,10 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] encrypted_key_material
-    #   The encrypted key material to import. It must be encrypted with the
-    #   public key that you received in the response to a previous
-    #   GetParametersForImport request, using the wrapping algorithm that
-    #   you specified in that request.
+    #   The encrypted key material to import. The key material must be
+    #   encrypted with the public wrapping key that GetParametersForImport
+    #   returned, using the wrapping algorithm that you specified in the
+    #   same `GetParametersForImport` request.
     #   @return [String]
     #
     # @!attribute [rw] valid_to
@@ -2035,9 +2607,24 @@ module Aws::KMS
     #
     class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
-    # The request was rejected because the provided key material is invalid
-    # or is not the same key material that was previously imported into this
-    # customer master key (CMK).
+    # The request was rejected because the specified CMK cannot decrypt the
+    # data. The `KeyId` in a Decrypt request and the `SourceKeyId` in a
+    # ReEncrypt request must identify the same CMK that was used to encrypt
+    # the ciphertext.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/IncorrectKeyException AWS API Documentation
+    #
+    class IncorrectKeyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the key material in the request is,
+    # expired, invalid, or is not the same key material that was previously
+    # imported into this customer master key (CMK).
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2096,10 +2683,13 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the specified ciphertext, or
-    # additional authenticated data incorporated into the ciphertext, such
-    # as the encryption context, is corrupted, missing, or otherwise
-    # invalid.
+    # From the Decrypt or ReEncrypt operation, the request was rejected
+    # because the specified ciphertext, or additional authenticated data
+    # incorporated into the ciphertext, such as the encryption context, is
+    # corrupted, missing, or otherwise invalid.
+    #
+    # From the ImportKeyMaterial operation, the request was rejected because
+    # AWS KMS could not decrypt the encrypted (wrapped) key material.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2149,8 +2739,22 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the specified `KeySpec` value is not
-    # valid.
+    # The request was rejected for one of the following reasons:
+    #
+    # * The `KeyUsage` value of the CMK is incompatible with the API
+    #   operation.
+    #
+    # * The encryption algorithm or signing algorithm specified for the
+    #   operation is incompatible with the type of key material in the CMK
+    #   `(CustomerMasterKeySpec`).
+    #
+    # For encrypting, decrypting, re-encrypting, and generating data keys,
+    # the `KeyUsage` must be `ENCRYPT_DECRYPT`. For signing and verifying,
+    # the `KeyUsage` must be `SIGN_VERIFY`. To find the `KeyUsage` of a CMK,
+    # use the DescribeKey operation.
+    #
+    # To find the encryption or signing algorithms supported for a
+    # particular CMK, use the DescribeKey operation.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2192,8 +2796,8 @@ module Aws::KMS
     # is not valid for this request.
     #
     # For more information about how key state affects the use of a CMK, see
-    # [How Key State Affects Use of a Customer Master Key][1] in the *AWS
-    # Key Management Service Developer Guide*.
+    # [How Key State Affects Use of a Customer Master Key][1] in the <i>
+    # <i>AWS Key Management Service Developer Guide</i> </i>.
     #
     #
     #
@@ -2264,9 +2868,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_usage
-    #   The cryptographic operations for which you can use the CMK. The only
-    #   valid value is `ENCRYPT_DECRYPT`, which means you can use the CMK to
-    #   encrypt and decrypt data.
+    #   The cryptographic operations for which you can use the CMK.
     #   @return [String]
     #
     # @!attribute [rw] key_state
@@ -2342,6 +2944,26 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys
     #   @return [String]
     #
+    # @!attribute [rw] customer_master_key_spec
+    #   Describes the type of key material in the CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_algorithms
+    #   A list of encryption algorithms that the CMK supports. You cannot
+    #   use the CMK with other encryption algorithms within AWS KMS.
+    #
+    #   This field appears only when the `KeyUsage` of the CMK is
+    #   `ENCRYPT_DECRYPT`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] signing_algorithms
+    #   A list of signing algorithms that the CMK supports. You cannot use
+    #   the CMK with other signing algorithms within AWS KMS.
+    #
+    #   This field appears only when the `KeyUsage` of the CMK is
+    #   `SIGN_VERIFY`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
     #
     class KeyMetadata < Struct.new(
@@ -2359,12 +2981,15 @@ module Aws::KMS
       :custom_key_store_id,
       :cloud_hsm_cluster_id,
       :expiration_model,
-      :key_manager)
+      :key_manager,
+      :customer_master_key_spec,
+      :encryption_algorithms,
+      :signing_algorithms)
       include Aws::Structure
     end
 
     # The request was rejected because the specified CMK was not available.
-    # The request can be retried.
+    # You can retry the request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -2929,10 +3554,13 @@ module Aws::KMS
     #         source_encryption_context: {
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
+    #         source_key_id: "KeyIdType",
     #         destination_key_id: "KeyIdType", # required
     #         destination_encryption_context: {
     #           "EncryptionContextKey" => "EncryptionContextValue",
     #         },
+    #         source_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+    #         destination_encryption_algorithm: "SYMMETRIC_DEFAULT", # accepts SYMMETRIC_DEFAULT, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
     #         grant_tokens: ["GrantTokenType"],
     #       }
     #
@@ -2941,12 +3569,64 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] source_encryption_context
-    #   Encryption context used to encrypt and decrypt the data specified in
-    #   the `CiphertextBlob` parameter.
+    #   Specifies the encryption context to use to decrypt the ciphertext.
+    #   Enter the same encryption context that was used to encrypt the
+    #   ciphertext.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] source_key_id
+    #   A unique identifier for the CMK that is used to decrypt the
+    #   ciphertext before it reencrypts it using the destination CMK.
+    #
+    #   This parameter is required only when the ciphertext was encrypted
+    #   under an asymmetric CMK. Otherwise, AWS KMS uses the metadata that
+    #   it adds to the ciphertext blob to determine which CMK was used to
+    #   encrypt the ciphertext. However, you can use this parameter to
+    #   ensure that a particular CMK (of any kind) is used to decrypt the
+    #   ciphertext before it is reencrypted.
+    #
+    #   If you specify a `KeyId` value, the decrypt part of the `ReEncrypt`
+    #   operation succeeds only if the specified CMK was used to encrypt the
+    #   ciphertext.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
     #
     # @!attribute [rw] destination_key_id
     #   A unique identifier for the CMK that is used to reencrypt the data.
+    #   Specify a symmetric or asymmetric CMK with a `KeyUsage` value of
+    #   `ENCRYPT_DECRYPT`. To find the `KeyUsage` value of a CMK, use the
+    #   DescribeKey operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -2969,8 +3649,50 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] destination_encryption_context
-    #   Encryption context to use when the data is reencrypted.
+    #   Specifies that encryption context to use when the reencrypting the
+    #   data.
+    #
+    #   A destination encryption context is valid only when the destination
+    #   CMK is a symmetric CMK. The standard ciphertext format for
+    #   asymmetric CMKs does not include fields for metadata.
+    #
+    #   An *encryption context* is a collection of non-secret key-value
+    #   pairs that represents additional authenticated data. When you use an
+    #   encryption context to encrypt data, you must specify the same (an
+    #   exact case-sensitive match) encryption context to decrypt the data.
+    #   An encryption context is optional when encrypting with a symmetric
+    #   CMK, but it is highly recommended.
+    #
+    #   For more information, see [Encryption Context][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] source_encryption_algorithm
+    #   Specifies the encryption algorithm that AWS KMS will use to decrypt
+    #   the ciphertext before it is reencrypted. The default value,
+    #   `SYMMETRIC_DEFAULT`, represents the algorithm used for symmetric
+    #   CMKs.
+    #
+    #   Specify the same algorithm that was used to encrypt the ciphertext.
+    #   If you specify a different algorithm, the decrypt attempt fails.
+    #
+    #   This parameter is required only when the ciphertext was encrypted
+    #   under an asymmetric CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_encryption_algorithm
+    #   Specifies the encryption algorithm that AWS KMS will use to reecrypt
+    #   the data after it has decrypted it. The default value,
+    #   `SYMMETRIC_DEFAULT`, represents the encryption algorithm used for
+    #   symmetric CMKs.
+    #
+    #   This parameter is required only when the destination CMK is an
+    #   asymmetric CMK.
+    #   @return [String]
     #
     # @!attribute [rw] grant_tokens
     #   A list of grant tokens.
@@ -2988,15 +3710,18 @@ module Aws::KMS
     class ReEncryptRequest < Struct.new(
       :ciphertext_blob,
       :source_encryption_context,
+      :source_key_id,
       :destination_key_id,
       :destination_encryption_context,
+      :source_encryption_algorithm,
+      :destination_encryption_algorithm,
       :grant_tokens)
       include Aws::Structure
     end
 
     # @!attribute [rw] ciphertext_blob
     #   The reencrypted data. When you use the HTTP API or the AWS CLI, the
-    #   value is Base64-encoded. Otherwise, it is not encoded.
+    #   value is Base64-encoded. Otherwise, it is not Base64-encoded.
     #   @return [String]
     #
     # @!attribute [rw] source_key_id
@@ -3007,12 +3732,23 @@ module Aws::KMS
     #   Unique identifier of the CMK used to reencrypt the data.
     #   @return [String]
     #
+    # @!attribute [rw] source_encryption_algorithm
+    #   The encryption algorithm that was used to decrypt the ciphertext
+    #   before it was reencrypted.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_encryption_algorithm
+    #   The encryption algorithm that was used to reencrypt the data.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptResponse AWS API Documentation
     #
     class ReEncryptResponse < Struct.new(
       :ciphertext_blob,
       :source_key_id,
-      :key_id)
+      :key_id,
+      :source_encryption_algorithm,
+      :destination_encryption_algorithm)
       include Aws::Structure
     end
 
@@ -3148,6 +3884,108 @@ module Aws::KMS
     class ScheduleKeyDeletionResponse < Struct.new(
       :key_id,
       :deletion_date)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SignRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         message: "data", # required
+    #         message_type: "RAW", # accepts RAW, DIGEST
+    #         grant_tokens: ["GrantTokenType"],
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   Identifies an asymmetric CMK. AWS KMS uses the private key in the
+    #   asymmetric CMK to sign the message. The `KeyUsage` type of the CMK
+    #   must be `SIGN_VERIFY`. To find the `KeyUsage` of a CMK, use the
+    #   DescribeKey operation.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies the message or message digest to sign. Messages can be
+    #   0-4096 bytes. To sign a larger message, provide the message digest.
+    #
+    #   If you provide a message, AWS KMS generates a hash digest of the
+    #   message and then signs it.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_type
+    #   Tells AWS KMS whether the value of the `Message` parameter is a
+    #   message or message digest. To indicate a message, enter `RAW`. To
+    #   indicate a message digest, enter `DIGEST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   For more information, see [Grant Tokens][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   Specifies the signing algorithm to use when signing the message.
+    #
+    #   Choose an algorithm that is compatible with the type and size of the
+    #   specified asymmetric CMK.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/SignRequest AWS API Documentation
+    #
+    class SignRequest < Struct.new(
+      :key_id,
+      :message,
+      :message_type,
+      :grant_tokens,
+      :signing_algorithm)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The Amazon Resource Name (ARN) of the asymmetric CMK that was used
+    #   to sign the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The cryptographic signature that was generated for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The signing algorithm that was used to sign the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/SignResponse AWS API Documentation
+    #
+    class SignResponse < Struct.new(
+      :key_id,
+      :signature,
+      :signing_algorithm)
       include Aws::Structure
     end
 
@@ -3298,15 +4136,20 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] alias_name
-    #   Specifies the name of the alias to change. This value must begin
+    #   Identifies the alias that is changing its CMK. This value must begin
     #   with `alias/` followed by the alias name, such as
-    #   `alias/ExampleAlias`.
+    #   `alias/ExampleAlias`. You cannot use UpdateAlias to change the alias
+    #   name.
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   Unique identifier of the customer master key (CMK) to be mapped to
-    #   the alias. When the update operation completes, the alias will point
-    #   to this CMK.
+    #   Identifies the CMK to associate with the alias. When the update
+    #   operation completes, the alias will point to this CMK.
+    #
+    #   The CMK must be in the same AWS account and Region as the alias.
+    #   Also, the new target CMK must be the same type as the current target
+    #   CMK (both symmetric or both asymmetric) and they must have the same
+    #   key usage.
     #
     #   Specify the key ID or the Amazon Resource Name (ARN) of the CMK.
     #
@@ -3428,6 +4271,119 @@ module Aws::KMS
     class UpdateKeyDescriptionRequest < Struct.new(
       :key_id,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass VerifyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         message: "data", # required
+    #         message_type: "RAW", # accepts RAW, DIGEST
+    #         signature: "data", # required
+    #         signing_algorithm: "RSASSA_PSS_SHA_256", # required, accepts RSASSA_PSS_SHA_256, RSASSA_PSS_SHA_384, RSASSA_PSS_SHA_512, RSASSA_PKCS1_V1_5_SHA_256, RSASSA_PKCS1_V1_5_SHA_384, RSASSA_PKCS1_V1_5_SHA_512, ECDSA_SHA_256, ECDSA_SHA_384, ECDSA_SHA_512
+    #         grant_tokens: ["GrantTokenType"],
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   Identifies the asymmetric CMK that will be used to verify the
+    #   signature. This must be the same CMK that was used to generate the
+    #   signature. If you specify a different CMK, the value of the
+    #   `SignatureValid` field in the response will be `False`.
+    #
+    #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
+    #   name, or alias ARN. When using an alias name, prefix it with
+    #   `"alias/"`. To specify a CMK in a different AWS account, you must
+    #   use the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a CMK, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies the message that was signed, or a hash digest of that
+    #   message. Messages can be 0-4096 bytes. To verify a larger message,
+    #   provide a hash digest of the message.
+    #
+    #   If the digest of the message specified here is different from the
+    #   message digest that was signed, the `SignatureValid` value in the
+    #   response will be `False`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_type
+    #   Tells AWS KMS whether the value of the `Message` parameter is a
+    #   message or message digest. To indicate a message, enter `RAW`. To
+    #   indicate a message digest, enter `DIGEST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The signature that the `Sign` operation generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The signing algorithm that was used to sign the message. If you
+    #   submit a different algorithm, the value of the `SignatureValid`
+    #   field in the response will be `False`.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   For more information, see [Grant Tokens][1] in the *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyRequest AWS API Documentation
+    #
+    class VerifyRequest < Struct.new(
+      :key_id,
+      :message,
+      :message_type,
+      :signature,
+      :signing_algorithm,
+      :grant_tokens)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The unique identifier for the asymmetric CMK that was used to verify
+    #   the signature.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature_valid
+    #   A Boolean value that indicates whether the signature was verified. A
+    #   value of True indicates that the `Signature` was produced by signing
+    #   the `Message` with the specified KeyID and `SigningAlgorithm.` A
+    #   value of False indicates that the message, the algorithm, or the key
+    #   changed since the message was signed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] signing_algorithm
+    #   The signing algorithm that was used to verify the signature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/VerifyResponse AWS API Documentation
+    #
+    class VerifyResponse < Struct.new(
+      :key_id,
+      :signature_valid,
+      :signing_algorithm)
       include Aws::Structure
     end
 

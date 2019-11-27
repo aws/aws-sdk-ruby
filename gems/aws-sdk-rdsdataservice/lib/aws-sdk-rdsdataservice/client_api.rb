@@ -72,6 +72,7 @@ module Aws::RDSDataService
     StringArray = Shapes::ListShape.new(name: 'StringArray')
     StructValue = Shapes::StructureShape.new(name: 'StructValue')
     TransactionStatus = Shapes::StringShape.new(name: 'TransactionStatus')
+    TypeHint = Shapes::StringShape.new(name: 'TypeHint')
     UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateResults = Shapes::ListShape.new(name: 'UpdateResults')
     Value = Shapes::StructureShape.new(name: 'Value')
@@ -215,6 +216,7 @@ module Aws::RDSDataService
     Row.member = Shapes::ShapeRef.new(shape: Value)
 
     SqlParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
+    SqlParameter.add_member(:type_hint, Shapes::ShapeRef.new(shape: TypeHint, location_name: "typeHint"))
     SqlParameter.add_member(:value, Shapes::ShapeRef.new(shape: Field, location_name: "value"))
     SqlParameter.struct_class = Types::SqlParameter
 
@@ -307,6 +309,7 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: CommitTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: CommitTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
@@ -346,6 +349,7 @@ module Aws::RDSDataService
         o.input = Shapes::ShapeRef.new(shape: RollbackTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: RollbackTransactionResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)

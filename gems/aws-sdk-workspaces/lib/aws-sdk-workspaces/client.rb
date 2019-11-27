@@ -877,9 +877,11 @@ module Aws::WorkSpaces
     #   resp.bundles[0].name #=> String
     #   resp.bundles[0].owner #=> String
     #   resp.bundles[0].description #=> String
+    #   resp.bundles[0].image_id #=> String
     #   resp.bundles[0].root_storage.capacity #=> String
     #   resp.bundles[0].user_storage.capacity #=> String
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.bundles[0].last_updated_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -1930,7 +1932,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-11-25)
+------------------
+
+* Feature - This release adds a new feature called "Contributor Insights". "Contributor Insights" supports the following 6 new APIs (PutInsightRule, DeleteInsightRules, EnableInsightRules, DisableInsightRules, DescribeInsightRules and GetInsightRuleReport).
+
 1.30.0 (2019-10-23)
 ------------------
 

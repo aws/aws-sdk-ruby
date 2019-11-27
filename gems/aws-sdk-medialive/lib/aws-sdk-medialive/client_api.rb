@@ -96,6 +96,14 @@ module Aws::MediaLive
     CreateInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupRequest')
     CreateInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupResponse')
     CreateInputSecurityGroupResultModel = Shapes::StructureShape.new(name: 'CreateInputSecurityGroupResultModel')
+    CreateMultiplex = Shapes::StructureShape.new(name: 'CreateMultiplex')
+    CreateMultiplexProgram = Shapes::StructureShape.new(name: 'CreateMultiplexProgram')
+    CreateMultiplexProgramRequest = Shapes::StructureShape.new(name: 'CreateMultiplexProgramRequest')
+    CreateMultiplexProgramResponse = Shapes::StructureShape.new(name: 'CreateMultiplexProgramResponse')
+    CreateMultiplexProgramResultModel = Shapes::StructureShape.new(name: 'CreateMultiplexProgramResultModel')
+    CreateMultiplexRequest = Shapes::StructureShape.new(name: 'CreateMultiplexRequest')
+    CreateMultiplexResponse = Shapes::StructureShape.new(name: 'CreateMultiplexResponse')
+    CreateMultiplexResultModel = Shapes::StructureShape.new(name: 'CreateMultiplexResultModel')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
@@ -103,6 +111,10 @@ module Aws::MediaLive
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeleteInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupRequest')
     DeleteInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupResponse')
+    DeleteMultiplexProgramRequest = Shapes::StructureShape.new(name: 'DeleteMultiplexProgramRequest')
+    DeleteMultiplexProgramResponse = Shapes::StructureShape.new(name: 'DeleteMultiplexProgramResponse')
+    DeleteMultiplexRequest = Shapes::StructureShape.new(name: 'DeleteMultiplexRequest')
+    DeleteMultiplexResponse = Shapes::StructureShape.new(name: 'DeleteMultiplexResponse')
     DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
     DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
     DeleteScheduleRequest = Shapes::StructureShape.new(name: 'DeleteScheduleRequest')
@@ -114,6 +126,10 @@ module Aws::MediaLive
     DescribeInputResponse = Shapes::StructureShape.new(name: 'DescribeInputResponse')
     DescribeInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupRequest')
     DescribeInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupResponse')
+    DescribeMultiplexProgramRequest = Shapes::StructureShape.new(name: 'DescribeMultiplexProgramRequest')
+    DescribeMultiplexProgramResponse = Shapes::StructureShape.new(name: 'DescribeMultiplexProgramResponse')
+    DescribeMultiplexRequest = Shapes::StructureShape.new(name: 'DescribeMultiplexRequest')
+    DescribeMultiplexResponse = Shapes::StructureShape.new(name: 'DescribeMultiplexResponse')
     DescribeOfferingRequest = Shapes::StructureShape.new(name: 'DescribeOfferingRequest')
     DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
     DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
@@ -292,6 +308,12 @@ module Aws::MediaLive
     ListInputsRequest = Shapes::StructureShape.new(name: 'ListInputsRequest')
     ListInputsResponse = Shapes::StructureShape.new(name: 'ListInputsResponse')
     ListInputsResultModel = Shapes::StructureShape.new(name: 'ListInputsResultModel')
+    ListMultiplexProgramsRequest = Shapes::StructureShape.new(name: 'ListMultiplexProgramsRequest')
+    ListMultiplexProgramsResponse = Shapes::StructureShape.new(name: 'ListMultiplexProgramsResponse')
+    ListMultiplexProgramsResultModel = Shapes::StructureShape.new(name: 'ListMultiplexProgramsResultModel')
+    ListMultiplexesRequest = Shapes::StructureShape.new(name: 'ListMultiplexesRequest')
+    ListMultiplexesResponse = Shapes::StructureShape.new(name: 'ListMultiplexesResponse')
+    ListMultiplexesResultModel = Shapes::StructureShape.new(name: 'ListMultiplexesResultModel')
     ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
     ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
     ListOfferingsResultModel = Shapes::StructureShape.new(name: 'ListOfferingsResultModel')
@@ -313,6 +335,7 @@ module Aws::MediaLive
     M2tsEbpPlacement = Shapes::StringShape.new(name: 'M2tsEbpPlacement')
     M2tsEsRateInPes = Shapes::StringShape.new(name: 'M2tsEsRateInPes')
     M2tsKlv = Shapes::StringShape.new(name: 'M2tsKlv')
+    M2tsNielsenId3Behavior = Shapes::StringShape.new(name: 'M2tsNielsenId3Behavior')
     M2tsPcrControl = Shapes::StringShape.new(name: 'M2tsPcrControl')
     M2tsRateMode = Shapes::StringShape.new(name: 'M2tsRateMode')
     M2tsScte35Control = Shapes::StringShape.new(name: 'M2tsScte35Control')
@@ -320,6 +343,7 @@ module Aws::MediaLive
     M2tsSegmentationStyle = Shapes::StringShape.new(name: 'M2tsSegmentationStyle')
     M2tsSettings = Shapes::StructureShape.new(name: 'M2tsSettings')
     M2tsTimedMetadataBehavior = Shapes::StringShape.new(name: 'M2tsTimedMetadataBehavior')
+    M3u8NielsenId3Behavior = Shapes::StringShape.new(name: 'M3u8NielsenId3Behavior')
     M3u8PcrControl = Shapes::StringShape.new(name: 'M3u8PcrControl')
     M3u8Scte35Behavior = Shapes::StringShape.new(name: 'M3u8Scte35Behavior')
     M3u8Settings = Shapes::StructureShape.new(name: 'M3u8Settings')
@@ -335,8 +359,29 @@ module Aws::MediaLive
     MsSmoothGroupSettings = Shapes::StructureShape.new(name: 'MsSmoothGroupSettings')
     MsSmoothH265PackagingType = Shapes::StringShape.new(name: 'MsSmoothH265PackagingType')
     MsSmoothOutputSettings = Shapes::StructureShape.new(name: 'MsSmoothOutputSettings')
+    Multiplex = Shapes::StructureShape.new(name: 'Multiplex')
+    MultiplexConfigurationValidationError = Shapes::StructureShape.new(name: 'MultiplexConfigurationValidationError')
+    MultiplexGroupSettings = Shapes::StructureShape.new(name: 'MultiplexGroupSettings')
+    MultiplexMediaConnectOutputDestinationSettings = Shapes::StructureShape.new(name: 'MultiplexMediaConnectOutputDestinationSettings')
+    MultiplexOutputDestination = Shapes::StructureShape.new(name: 'MultiplexOutputDestination')
+    MultiplexOutputSettings = Shapes::StructureShape.new(name: 'MultiplexOutputSettings')
+    MultiplexProgram = Shapes::StructureShape.new(name: 'MultiplexProgram')
+    MultiplexProgramChannelDestinationSettings = Shapes::StructureShape.new(name: 'MultiplexProgramChannelDestinationSettings')
+    MultiplexProgramPacketIdentifiersMap = Shapes::StructureShape.new(name: 'MultiplexProgramPacketIdentifiersMap')
+    MultiplexProgramServiceDescriptor = Shapes::StructureShape.new(name: 'MultiplexProgramServiceDescriptor')
+    MultiplexProgramSettings = Shapes::StructureShape.new(name: 'MultiplexProgramSettings')
+    MultiplexProgramSummary = Shapes::StructureShape.new(name: 'MultiplexProgramSummary')
+    MultiplexSettings = Shapes::StructureShape.new(name: 'MultiplexSettings')
+    MultiplexSettingsSummary = Shapes::StructureShape.new(name: 'MultiplexSettingsSummary')
+    MultiplexState = Shapes::StringShape.new(name: 'MultiplexState')
+    MultiplexStatmuxVideoSettings = Shapes::StructureShape.new(name: 'MultiplexStatmuxVideoSettings')
+    MultiplexSummary = Shapes::StructureShape.new(name: 'MultiplexSummary')
+    MultiplexValidationError = Shapes::StructureShape.new(name: 'MultiplexValidationError')
+    MultiplexVideoSettings = Shapes::StructureShape.new(name: 'MultiplexVideoSettings')
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
+    NielsenConfiguration = Shapes::StructureShape.new(name: 'NielsenConfiguration')
+    NielsenPcmToId3TaggingState = Shapes::StringShape.new(name: 'NielsenPcmToId3TaggingState')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     OfferingDurationUnits = Shapes::StringShape.new(name: 'OfferingDurationUnits')
@@ -418,12 +463,16 @@ module Aws::MediaLive
     StandardHlsSettings = Shapes::StructureShape.new(name: 'StandardHlsSettings')
     StartChannelRequest = Shapes::StructureShape.new(name: 'StartChannelRequest')
     StartChannelResponse = Shapes::StructureShape.new(name: 'StartChannelResponse')
+    StartMultiplexRequest = Shapes::StructureShape.new(name: 'StartMultiplexRequest')
+    StartMultiplexResponse = Shapes::StructureShape.new(name: 'StartMultiplexResponse')
     StartTimecode = Shapes::StructureShape.new(name: 'StartTimecode')
     StaticImageActivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageActivateScheduleActionSettings')
     StaticImageDeactivateScheduleActionSettings = Shapes::StructureShape.new(name: 'StaticImageDeactivateScheduleActionSettings')
     StaticKeySettings = Shapes::StructureShape.new(name: 'StaticKeySettings')
     StopChannelRequest = Shapes::StructureShape.new(name: 'StopChannelRequest')
     StopChannelResponse = Shapes::StructureShape.new(name: 'StopChannelResponse')
+    StopMultiplexRequest = Shapes::StructureShape.new(name: 'StopMultiplexRequest')
+    StopMultiplexResponse = Shapes::StructureShape.new(name: 'StopMultiplexResponse')
     StopTimecode = Shapes::StructureShape.new(name: 'StopTimecode')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TagsModel = Shapes::StructureShape.new(name: 'TagsModel')
@@ -453,6 +502,14 @@ module Aws::MediaLive
     UpdateInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupRequest')
     UpdateInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResponse')
     UpdateInputSecurityGroupResultModel = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResultModel')
+    UpdateMultiplex = Shapes::StructureShape.new(name: 'UpdateMultiplex')
+    UpdateMultiplexProgram = Shapes::StructureShape.new(name: 'UpdateMultiplexProgram')
+    UpdateMultiplexProgramRequest = Shapes::StructureShape.new(name: 'UpdateMultiplexProgramRequest')
+    UpdateMultiplexProgramResponse = Shapes::StructureShape.new(name: 'UpdateMultiplexProgramResponse')
+    UpdateMultiplexProgramResultModel = Shapes::StructureShape.new(name: 'UpdateMultiplexProgramResultModel')
+    UpdateMultiplexRequest = Shapes::StructureShape.new(name: 'UpdateMultiplexRequest')
+    UpdateMultiplexResponse = Shapes::StructureShape.new(name: 'UpdateMultiplexResponse')
+    UpdateMultiplexResultModel = Shapes::StructureShape.new(name: 'UpdateMultiplexResultModel')
     UpdateReservation = Shapes::StructureShape.new(name: 'UpdateReservation')
     UpdateReservationRequest = Shapes::StructureShape.new(name: 'UpdateReservationRequest')
     UpdateReservationResponse = Shapes::StructureShape.new(name: 'UpdateReservationResponse')
@@ -472,10 +529,7 @@ module Aws::MediaLive
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
-    __doubleMin0Max1000000000 = Shapes::FloatShape.new(name: '__doubleMin0Max1000000000')
-    __doubleMin0Max65535 = Shapes::FloatShape.new(name: '__doubleMin0Max65535')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
-    __doubleMin10000Max1000000000 = Shapes::FloatShape.new(name: '__doubleMin10000Max1000000000')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0 = Shapes::IntegerShape.new(name: '__integerMin0')
@@ -484,6 +538,7 @@ module Aws::MediaLive
     __integerMin0Max1000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000')
     __integerMin0Max10000 = Shapes::IntegerShape.new(name: '__integerMin0Max10000')
     __integerMin0Max1000000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000000')
+    __integerMin0Max100000000 = Shapes::IntegerShape.new(name: '__integerMin0Max100000000')
     __integerMin0Max128 = Shapes::IntegerShape.new(name: '__integerMin0Max128')
     __integerMin0Max15 = Shapes::IntegerShape.new(name: '__integerMin0Max15')
     __integerMin0Max255 = Shapes::IntegerShape.new(name: '__integerMin0Max255')
@@ -498,8 +553,11 @@ module Aws::MediaLive
     __integerMin0Max8191 = Shapes::IntegerShape.new(name: '__integerMin0Max8191')
     __integerMin1 = Shapes::IntegerShape.new(name: '__integerMin1')
     __integerMin1000 = Shapes::IntegerShape.new(name: '__integerMin1000')
+    __integerMin1000000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin1000000Max100000000')
+    __integerMin100000Max100000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max100000000')
     __integerMin100000Max40000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max40000000')
     __integerMin100000Max80000000 = Shapes::IntegerShape.new(name: '__integerMin100000Max80000000')
+    __integerMin1000Max3000 = Shapes::IntegerShape.new(name: '__integerMin1000Max3000')
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
@@ -508,7 +566,7 @@ module Aws::MediaLive
     __integerMin1Max3003 = Shapes::IntegerShape.new(name: '__integerMin1Max3003')
     __integerMin1Max31 = Shapes::IntegerShape.new(name: '__integerMin1Max31')
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
-    __integerMin1Max3600 = Shapes::IntegerShape.new(name: '__integerMin1Max3600')
+    __integerMin1Max3600000 = Shapes::IntegerShape.new(name: '__integerMin1Max3600000')
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max5 = Shapes::IntegerShape.new(name: '__integerMin1Max5')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
@@ -544,6 +602,10 @@ module Aws::MediaLive
     __listOfMediaConnectFlow = Shapes::ListShape.new(name: '__listOfMediaConnectFlow')
     __listOfMediaConnectFlowRequest = Shapes::ListShape.new(name: '__listOfMediaConnectFlowRequest')
     __listOfMediaPackageOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfMediaPackageOutputDestinationSettings')
+    __listOfMultiplexOutputDestination = Shapes::ListShape.new(name: '__listOfMultiplexOutputDestination')
+    __listOfMultiplexProgramSummary = Shapes::ListShape.new(name: '__listOfMultiplexProgramSummary')
+    __listOfMultiplexSummary = Shapes::ListShape.new(name: '__listOfMultiplexSummary')
+    __listOfMultiplexValidationError = Shapes::ListShape.new(name: '__listOfMultiplexValidationError')
     __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
@@ -556,6 +618,7 @@ module Aws::MediaLive
     __listOfScte35Descriptor = Shapes::ListShape.new(name: '__listOfScte35Descriptor')
     __listOfValidationError = Shapes::ListShape.new(name: '__listOfValidationError')
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
+    __listOf__integer = Shapes::ListShape.new(name: '__listOf__integer')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __longMin0Max1099511627775 = Shapes::IntegerShape.new(name: '__longMin0Max1099511627775')
@@ -884,6 +947,43 @@ module Aws::MediaLive
     CreateInputSecurityGroupResultModel.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
     CreateInputSecurityGroupResultModel.struct_class = Types::CreateInputSecurityGroupResultModel
 
+    CreateMultiplex.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "availabilityZones"))
+    CreateMultiplex.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, required: true, location_name: "multiplexSettings"))
+    CreateMultiplex.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateMultiplex.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplex.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateMultiplex.struct_class = Types::CreateMultiplex
+
+    CreateMultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, required: true, location_name: "multiplexProgramSettings"))
+    CreateMultiplexProgram.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "programName"))
+    CreateMultiplexProgram.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexProgram.struct_class = Types::CreateMultiplexProgram
+
+    CreateMultiplexProgramRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    CreateMultiplexProgramRequest.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, required: true, location_name: "multiplexProgramSettings"))
+    CreateMultiplexProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "programName"))
+    CreateMultiplexProgramRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexProgramRequest.struct_class = Types::CreateMultiplexProgramRequest
+
+    CreateMultiplexProgramResponse.add_member(:multiplex_program, Shapes::ShapeRef.new(shape: MultiplexProgram, location_name: "multiplexProgram"))
+    CreateMultiplexProgramResponse.struct_class = Types::CreateMultiplexProgramResponse
+
+    CreateMultiplexProgramResultModel.add_member(:multiplex_program, Shapes::ShapeRef.new(shape: MultiplexProgram, location_name: "multiplexProgram"))
+    CreateMultiplexProgramResultModel.struct_class = Types::CreateMultiplexProgramResultModel
+
+    CreateMultiplexRequest.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "availabilityZones"))
+    CreateMultiplexRequest.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, required: true, location_name: "multiplexSettings"))
+    CreateMultiplexRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateMultiplexRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    CreateMultiplexRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateMultiplexRequest.struct_class = Types::CreateMultiplexRequest
+
+    CreateMultiplexResponse.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
+    CreateMultiplexResponse.struct_class = Types::CreateMultiplexResponse
+
+    CreateMultiplexResultModel.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
+    CreateMultiplexResultModel.struct_class = Types::CreateMultiplexResultModel
+
     CreateTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "resource-arn"))
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
@@ -917,6 +1017,31 @@ module Aws::MediaLive
     DeleteInputSecurityGroupRequest.struct_class = Types::DeleteInputSecurityGroupRequest
 
     DeleteInputSecurityGroupResponse.struct_class = Types::DeleteInputSecurityGroupResponse
+
+    DeleteMultiplexProgramRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    DeleteMultiplexProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
+    DeleteMultiplexProgramRequest.struct_class = Types::DeleteMultiplexProgramRequest
+
+    DeleteMultiplexProgramResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    DeleteMultiplexProgramResponse.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
+    DeleteMultiplexProgramResponse.add_member(:packet_identifiers_map, Shapes::ShapeRef.new(shape: MultiplexProgramPacketIdentifiersMap, location_name: "packetIdentifiersMap"))
+    DeleteMultiplexProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "programName"))
+    DeleteMultiplexProgramResponse.struct_class = Types::DeleteMultiplexProgramResponse
+
+    DeleteMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    DeleteMultiplexRequest.struct_class = Types::DeleteMultiplexRequest
+
+    DeleteMultiplexResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteMultiplexResponse.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    DeleteMultiplexResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
+    DeleteMultiplexResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DeleteMultiplexResponse.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    DeleteMultiplexResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteMultiplexResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    DeleteMultiplexResponse.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    DeleteMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    DeleteMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeleteMultiplexResponse.struct_class = Types::DeleteMultiplexResponse
 
     DeleteReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
     DeleteReservationRequest.struct_class = Types::DeleteReservationRequest
@@ -999,6 +1124,31 @@ module Aws::MediaLive
     DescribeInputSecurityGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     DescribeInputSecurityGroupResponse.struct_class = Types::DescribeInputSecurityGroupResponse
+
+    DescribeMultiplexProgramRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    DescribeMultiplexProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
+    DescribeMultiplexProgramRequest.struct_class = Types::DescribeMultiplexProgramRequest
+
+    DescribeMultiplexProgramResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    DescribeMultiplexProgramResponse.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
+    DescribeMultiplexProgramResponse.add_member(:packet_identifiers_map, Shapes::ShapeRef.new(shape: MultiplexProgramPacketIdentifiersMap, location_name: "packetIdentifiersMap"))
+    DescribeMultiplexProgramResponse.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "programName"))
+    DescribeMultiplexProgramResponse.struct_class = Types::DescribeMultiplexProgramResponse
+
+    DescribeMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    DescribeMultiplexRequest.struct_class = Types::DescribeMultiplexRequest
+
+    DescribeMultiplexResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeMultiplexResponse.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    DescribeMultiplexResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
+    DescribeMultiplexResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeMultiplexResponse.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    DescribeMultiplexResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeMultiplexResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    DescribeMultiplexResponse.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    DescribeMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    DescribeMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DescribeMultiplexResponse.struct_class = Types::DescribeMultiplexResponse
 
     DescribeOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
     DescribeOfferingRequest.struct_class = Types::DescribeOfferingRequest
@@ -1124,6 +1274,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:blackout_slate, Shapes::ShapeRef.new(shape: BlackoutSlate, location_name: "blackoutSlate"))
     EncoderSettings.add_member(:caption_descriptions, Shapes::ShapeRef.new(shape: __listOfCaptionDescription, location_name: "captionDescriptions"))
     EncoderSettings.add_member(:global_configuration, Shapes::ShapeRef.new(shape: GlobalConfiguration, location_name: "globalConfiguration"))
+    EncoderSettings.add_member(:nielsen_configuration, Shapes::ShapeRef.new(shape: NielsenConfiguration, location_name: "nielsenConfiguration"))
     EncoderSettings.add_member(:output_groups, Shapes::ShapeRef.new(shape: __listOfOutputGroup, required: true, location_name: "outputGroups"))
     EncoderSettings.add_member(:timecode_config, Shapes::ShapeRef.new(shape: TimecodeConfig, required: true, location_name: "timecodeConfig"))
     EncoderSettings.add_member(:video_descriptions, Shapes::ShapeRef.new(shape: __listOfVideoDescription, required: true, location_name: "videoDescriptions"))
@@ -1150,7 +1301,7 @@ module Aws::MediaLive
     FrameCaptureOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     FrameCaptureOutputSettings.struct_class = Types::FrameCaptureOutputSettings
 
-    FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600, required: true, location_name: "captureInterval"))
+    FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, required: true, location_name: "captureInterval"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
 
     GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1185,7 +1336,7 @@ module Aws::MediaLive
     H264Settings.add_member(:gop_b_reference, Shapes::ShapeRef.new(shape: H264GopBReference, location_name: "gopBReference"))
     H264Settings.add_member(:gop_closed_cadence, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "gopClosedCadence"))
     H264Settings.add_member(:gop_num_b_frames, Shapes::ShapeRef.new(shape: __integerMin0Max7, location_name: "gopNumBFrames"))
-    H264Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin1, location_name: "gopSize"))
+    H264Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __double, location_name: "gopSize"))
     H264Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: H264GopSizeUnits, location_name: "gopSizeUnits"))
     H264Settings.add_member(:level, Shapes::ShapeRef.new(shape: H264Level, location_name: "level"))
     H264Settings.add_member(:look_ahead_rate_control, Shapes::ShapeRef.new(shape: H264LookAheadRateControl, location_name: "lookAheadRateControl"))
@@ -1227,7 +1378,7 @@ module Aws::MediaLive
     H265Settings.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max3003, required: true, location_name: "framerateDenominator"))
     H265Settings.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1, required: true, location_name: "framerateNumerator"))
     H265Settings.add_member(:gop_closed_cadence, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "gopClosedCadence"))
-    H265Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __doubleMin1, location_name: "gopSize"))
+    H265Settings.add_member(:gop_size, Shapes::ShapeRef.new(shape: __double, location_name: "gopSize"))
     H265Settings.add_member(:gop_size_units, Shapes::ShapeRef.new(shape: H265GopSizeUnits, location_name: "gopSizeUnits"))
     H265Settings.add_member(:level, Shapes::ShapeRef.new(shape: H265Level, location_name: "level"))
     H265Settings.add_member(:look_ahead_rate_control, Shapes::ShapeRef.new(shape: H265LookAheadRateControl, location_name: "lookAheadRateControl"))
@@ -1502,9 +1653,35 @@ module Aws::MediaLive
     ListInputsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListInputsResultModel.struct_class = Types::ListInputsResultModel
 
+    ListMultiplexProgramsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMultiplexProgramsRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    ListMultiplexProgramsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListMultiplexProgramsRequest.struct_class = Types::ListMultiplexProgramsRequest
+
+    ListMultiplexProgramsResponse.add_member(:multiplex_programs, Shapes::ShapeRef.new(shape: __listOfMultiplexProgramSummary, location_name: "multiplexPrograms"))
+    ListMultiplexProgramsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexProgramsResponse.struct_class = Types::ListMultiplexProgramsResponse
+
+    ListMultiplexProgramsResultModel.add_member(:multiplex_programs, Shapes::ShapeRef.new(shape: __listOfMultiplexProgramSummary, location_name: "multiplexPrograms"))
+    ListMultiplexProgramsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexProgramsResultModel.struct_class = Types::ListMultiplexProgramsResultModel
+
+    ListMultiplexesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListMultiplexesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListMultiplexesRequest.struct_class = Types::ListMultiplexesRequest
+
+    ListMultiplexesResponse.add_member(:multiplexes, Shapes::ShapeRef.new(shape: __listOfMultiplexSummary, location_name: "multiplexes"))
+    ListMultiplexesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexesResponse.struct_class = Types::ListMultiplexesResponse
+
+    ListMultiplexesResultModel.add_member(:multiplexes, Shapes::ShapeRef.new(shape: __listOfMultiplexSummary, location_name: "multiplexes"))
+    ListMultiplexesResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListMultiplexesResultModel.struct_class = Types::ListMultiplexesResultModel
+
     ListOfferingsRequest.add_member(:channel_class, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelClass"))
     ListOfferingsRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelConfiguration"))
     ListOfferingsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
+    ListOfferingsRequest.add_member(:duration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "duration"))
     ListOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListOfferingsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
     ListOfferingsRequest.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumFramerate"))
@@ -1576,6 +1753,7 @@ module Aws::MediaLive
     M2tsSettings.add_member(:fragment_time, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "fragmentTime"))
     M2tsSettings.add_member(:klv, Shapes::ShapeRef.new(shape: M2tsKlv, location_name: "klv"))
     M2tsSettings.add_member(:klv_data_pids, Shapes::ShapeRef.new(shape: __string, location_name: "klvDataPids"))
+    M2tsSettings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: M2tsNielsenId3Behavior, location_name: "nielsenId3Behavior"))
     M2tsSettings.add_member(:null_packet_bitrate, Shapes::ShapeRef.new(shape: __doubleMin0, location_name: "nullPacketBitrate"))
     M2tsSettings.add_member(:pat_interval, Shapes::ShapeRef.new(shape: __integerMin0Max1000, location_name: "patInterval"))
     M2tsSettings.add_member(:pcr_control, Shapes::ShapeRef.new(shape: M2tsPcrControl, location_name: "pcrControl"))
@@ -1600,6 +1778,7 @@ module Aws::MediaLive
     M3u8Settings.add_member(:audio_frames_per_pes, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "audioFramesPerPes"))
     M3u8Settings.add_member(:audio_pids, Shapes::ShapeRef.new(shape: __string, location_name: "audioPids"))
     M3u8Settings.add_member(:ecm_pid, Shapes::ShapeRef.new(shape: __string, location_name: "ecmPid"))
+    M3u8Settings.add_member(:nielsen_id_3_behavior, Shapes::ShapeRef.new(shape: M3u8NielsenId3Behavior, location_name: "nielsenId3Behavior"))
     M3u8Settings.add_member(:pat_interval, Shapes::ShapeRef.new(shape: __integerMin0Max1000, location_name: "patInterval"))
     M3u8Settings.add_member(:pcr_control, Shapes::ShapeRef.new(shape: M3u8PcrControl, location_name: "pcrControl"))
     M3u8Settings.add_member(:pcr_period, Shapes::ShapeRef.new(shape: __integerMin0Max500, location_name: "pcrPeriod"))
@@ -1659,9 +1838,110 @@ module Aws::MediaLive
     MsSmoothOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     MsSmoothOutputSettings.struct_class = Types::MsSmoothOutputSettings
 
+    Multiplex.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Multiplex.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    Multiplex.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
+    Multiplex.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Multiplex.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    Multiplex.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Multiplex.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    Multiplex.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    Multiplex.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    Multiplex.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Multiplex.struct_class = Types::Multiplex
+
+    MultiplexConfigurationValidationError.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    MultiplexConfigurationValidationError.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfMultiplexValidationError, location_name: "validationErrors"))
+    MultiplexConfigurationValidationError.struct_class = Types::MultiplexConfigurationValidationError
+
+    MultiplexGroupSettings.struct_class = Types::MultiplexGroupSettings
+
+    MultiplexMediaConnectOutputDestinationSettings.add_member(:entitlement_arn, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "entitlementArn"))
+    MultiplexMediaConnectOutputDestinationSettings.struct_class = Types::MultiplexMediaConnectOutputDestinationSettings
+
+    MultiplexOutputDestination.add_member(:media_connect_settings, Shapes::ShapeRef.new(shape: MultiplexMediaConnectOutputDestinationSettings, location_name: "mediaConnectSettings"))
+    MultiplexOutputDestination.struct_class = Types::MultiplexOutputDestination
+
+    MultiplexOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    MultiplexOutputSettings.struct_class = Types::MultiplexOutputSettings
+
+    MultiplexProgram.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    MultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
+    MultiplexProgram.add_member(:packet_identifiers_map, Shapes::ShapeRef.new(shape: MultiplexProgramPacketIdentifiersMap, location_name: "packetIdentifiersMap"))
+    MultiplexProgram.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "programName"))
+    MultiplexProgram.struct_class = Types::MultiplexProgram
+
+    MultiplexProgramChannelDestinationSettings.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "multiplexId"))
+    MultiplexProgramChannelDestinationSettings.add_member(:program_name, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "programName"))
+    MultiplexProgramChannelDestinationSettings.struct_class = Types::MultiplexProgramChannelDestinationSettings
+
+    MultiplexProgramPacketIdentifiersMap.add_member(:audio_pids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "audioPids"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:dvb_sub_pids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "dvbSubPids"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:dvb_teletext_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "dvbTeletextPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:etv_platform_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "etvPlatformPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:etv_signal_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "etvSignalPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:klv_data_pids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "klvDataPids"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:pcr_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "pcrPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:pmt_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "pmtPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:private_metadata_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "privateMetadataPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:scte_27_pids, Shapes::ShapeRef.new(shape: __listOf__integer, location_name: "scte27Pids"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:scte_35_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "scte35Pid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:timed_metadata_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "timedMetadataPid"))
+    MultiplexProgramPacketIdentifiersMap.add_member(:video_pid, Shapes::ShapeRef.new(shape: __integer, location_name: "videoPid"))
+    MultiplexProgramPacketIdentifiersMap.struct_class = Types::MultiplexProgramPacketIdentifiersMap
+
+    MultiplexProgramServiceDescriptor.add_member(:provider_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "providerName"))
+    MultiplexProgramServiceDescriptor.add_member(:service_name, Shapes::ShapeRef.new(shape: __stringMax256, required: true, location_name: "serviceName"))
+    MultiplexProgramServiceDescriptor.struct_class = Types::MultiplexProgramServiceDescriptor
+
+    MultiplexProgramSettings.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMin0Max65535, required: true, location_name: "programNumber"))
+    MultiplexProgramSettings.add_member(:service_descriptor, Shapes::ShapeRef.new(shape: MultiplexProgramServiceDescriptor, location_name: "serviceDescriptor"))
+    MultiplexProgramSettings.add_member(:video_settings, Shapes::ShapeRef.new(shape: MultiplexVideoSettings, location_name: "videoSettings"))
+    MultiplexProgramSettings.struct_class = Types::MultiplexProgramSettings
+
+    MultiplexProgramSummary.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    MultiplexProgramSummary.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, location_name: "programName"))
+    MultiplexProgramSummary.struct_class = Types::MultiplexProgramSummary
+
+    MultiplexSettings.add_member(:maximum_video_buffer_delay_milliseconds, Shapes::ShapeRef.new(shape: __integerMin1000Max3000, location_name: "maximumVideoBufferDelayMilliseconds"))
+    MultiplexSettings.add_member(:transport_stream_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000000Max100000000, required: true, location_name: "transportStreamBitrate"))
+    MultiplexSettings.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, required: true, location_name: "transportStreamId"))
+    MultiplexSettings.add_member(:transport_stream_reserved_bitrate, Shapes::ShapeRef.new(shape: __integerMin0Max100000000, location_name: "transportStreamReservedBitrate"))
+    MultiplexSettings.struct_class = Types::MultiplexSettings
+
+    MultiplexSettingsSummary.add_member(:transport_stream_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000000Max100000000, location_name: "transportStreamBitrate"))
+    MultiplexSettingsSummary.struct_class = Types::MultiplexSettingsSummary
+
+    MultiplexStatmuxVideoSettings.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "maximumBitrate"))
+    MultiplexStatmuxVideoSettings.add_member(:minimum_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "minimumBitrate"))
+    MultiplexStatmuxVideoSettings.struct_class = Types::MultiplexStatmuxVideoSettings
+
+    MultiplexSummary.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    MultiplexSummary.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    MultiplexSummary.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    MultiplexSummary.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettingsSummary, location_name: "multiplexSettings"))
+    MultiplexSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    MultiplexSummary.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    MultiplexSummary.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    MultiplexSummary.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    MultiplexSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    MultiplexSummary.struct_class = Types::MultiplexSummary
+
+    MultiplexValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
+    MultiplexValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
+    MultiplexValidationError.struct_class = Types::MultiplexValidationError
+
+    MultiplexVideoSettings.add_member(:constant_bitrate, Shapes::ShapeRef.new(shape: __integerMin100000Max100000000, location_name: "constantBitrate"))
+    MultiplexVideoSettings.add_member(:statmux_settings, Shapes::ShapeRef.new(shape: MultiplexStatmuxVideoSettings, location_name: "statmuxSettings"))
+    MultiplexVideoSettings.struct_class = Types::MultiplexVideoSettings
+
     NetworkInputSettings.add_member(:hls_input_settings, Shapes::ShapeRef.new(shape: HlsInputSettings, location_name: "hlsInputSettings"))
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
+
+    NielsenConfiguration.add_member(:distributor_id, Shapes::ShapeRef.new(shape: __string, location_name: "distributorId"))
+    NielsenConfiguration.add_member(:nielsen_pcm_to_id_3_tagging, Shapes::ShapeRef.new(shape: NielsenPcmToId3TaggingState, location_name: "nielsenPcmToId3Tagging"))
+    NielsenConfiguration.struct_class = Types::NielsenConfiguration
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
@@ -1688,6 +1968,7 @@ module Aws::MediaLive
 
     OutputDestination.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     OutputDestination.add_member(:media_package_settings, Shapes::ShapeRef.new(shape: __listOfMediaPackageOutputDestinationSettings, location_name: "mediaPackageSettings"))
+    OutputDestination.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexProgramChannelDestinationSettings, location_name: "multiplexSettings"))
     OutputDestination.add_member(:settings, Shapes::ShapeRef.new(shape: __listOfOutputDestinationSettings, location_name: "settings"))
     OutputDestination.struct_class = Types::OutputDestination
 
@@ -1707,6 +1988,7 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:hls_group_settings, Shapes::ShapeRef.new(shape: HlsGroupSettings, location_name: "hlsGroupSettings"))
     OutputGroupSettings.add_member(:media_package_group_settings, Shapes::ShapeRef.new(shape: MediaPackageGroupSettings, location_name: "mediaPackageGroupSettings"))
     OutputGroupSettings.add_member(:ms_smooth_group_settings, Shapes::ShapeRef.new(shape: MsSmoothGroupSettings, location_name: "msSmoothGroupSettings"))
+    OutputGroupSettings.add_member(:multiplex_group_settings, Shapes::ShapeRef.new(shape: MultiplexGroupSettings, location_name: "multiplexGroupSettings"))
     OutputGroupSettings.add_member(:rtmp_group_settings, Shapes::ShapeRef.new(shape: RtmpGroupSettings, location_name: "rtmpGroupSettings"))
     OutputGroupSettings.add_member(:udp_group_settings, Shapes::ShapeRef.new(shape: UdpGroupSettings, location_name: "udpGroupSettings"))
     OutputGroupSettings.struct_class = Types::OutputGroupSettings
@@ -1719,6 +2001,7 @@ module Aws::MediaLive
     OutputSettings.add_member(:hls_output_settings, Shapes::ShapeRef.new(shape: HlsOutputSettings, location_name: "hlsOutputSettings"))
     OutputSettings.add_member(:media_package_output_settings, Shapes::ShapeRef.new(shape: MediaPackageOutputSettings, location_name: "mediaPackageOutputSettings"))
     OutputSettings.add_member(:ms_smooth_output_settings, Shapes::ShapeRef.new(shape: MsSmoothOutputSettings, location_name: "msSmoothOutputSettings"))
+    OutputSettings.add_member(:multiplex_output_settings, Shapes::ShapeRef.new(shape: MultiplexOutputSettings, location_name: "multiplexOutputSettings"))
     OutputSettings.add_member(:rtmp_output_settings, Shapes::ShapeRef.new(shape: RtmpOutputSettings, location_name: "rtmpOutputSettings"))
     OutputSettings.add_member(:udp_output_settings, Shapes::ShapeRef.new(shape: UdpOutputSettings, location_name: "udpOutputSettings"))
     OutputSettings.struct_class = Types::OutputSettings
@@ -1926,6 +2209,21 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartChannelResponse.struct_class = Types::StartChannelResponse
 
+    StartMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    StartMultiplexRequest.struct_class = Types::StartMultiplexRequest
+
+    StartMultiplexResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    StartMultiplexResponse.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    StartMultiplexResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
+    StartMultiplexResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    StartMultiplexResponse.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    StartMultiplexResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    StartMultiplexResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    StartMultiplexResponse.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    StartMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    StartMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StartMultiplexResponse.struct_class = Types::StartMultiplexResponse
+
     StartTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
     StartTimecode.struct_class = Types::StartTimecode
 
@@ -1969,6 +2267,21 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StopChannelResponse.struct_class = Types::StopChannelResponse
 
+    StopMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    StopMultiplexRequest.struct_class = Types::StopMultiplexRequest
+
+    StopMultiplexResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    StopMultiplexResponse.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
+    StopMultiplexResponse.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMultiplexOutputDestination, location_name: "destinations"))
+    StopMultiplexResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    StopMultiplexResponse.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    StopMultiplexResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    StopMultiplexResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
+    StopMultiplexResponse.add_member(:program_count, Shapes::ShapeRef.new(shape: __integer, location_name: "programCount"))
+    StopMultiplexResponse.add_member(:state, Shapes::ShapeRef.new(shape: MultiplexState, location_name: "state"))
+    StopMultiplexResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    StopMultiplexResponse.struct_class = Types::StopMultiplexResponse
+
     StopTimecode.add_member(:last_frame_clipping_behavior, Shapes::ShapeRef.new(shape: LastFrameClippingBehavior, location_name: "lastFrameClippingBehavior"))
     StopTimecode.add_member(:timecode, Shapes::ShapeRef.new(shape: __string, location_name: "timecode"))
     StopTimecode.struct_class = Types::StopTimecode
@@ -2009,7 +2322,7 @@ module Aws::MediaLive
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
 
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
-    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
+    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfMultiplexValidationError, location_name: "validationErrors"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
@@ -2082,6 +2395,35 @@ module Aws::MediaLive
 
     UpdateInputSecurityGroupResultModel.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
     UpdateInputSecurityGroupResultModel.struct_class = Types::UpdateInputSecurityGroupResultModel
+
+    UpdateMultiplex.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    UpdateMultiplex.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateMultiplex.struct_class = Types::UpdateMultiplex
+
+    UpdateMultiplexProgram.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
+    UpdateMultiplexProgram.struct_class = Types::UpdateMultiplexProgram
+
+    UpdateMultiplexProgramRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    UpdateMultiplexProgramRequest.add_member(:multiplex_program_settings, Shapes::ShapeRef.new(shape: MultiplexProgramSettings, location_name: "multiplexProgramSettings"))
+    UpdateMultiplexProgramRequest.add_member(:program_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "programName"))
+    UpdateMultiplexProgramRequest.struct_class = Types::UpdateMultiplexProgramRequest
+
+    UpdateMultiplexProgramResponse.add_member(:multiplex_program, Shapes::ShapeRef.new(shape: MultiplexProgram, location_name: "multiplexProgram"))
+    UpdateMultiplexProgramResponse.struct_class = Types::UpdateMultiplexProgramResponse
+
+    UpdateMultiplexProgramResultModel.add_member(:multiplex_program, Shapes::ShapeRef.new(shape: MultiplexProgram, location_name: "multiplexProgram"))
+    UpdateMultiplexProgramResultModel.struct_class = Types::UpdateMultiplexProgramResultModel
+
+    UpdateMultiplexRequest.add_member(:multiplex_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "multiplexId"))
+    UpdateMultiplexRequest.add_member(:multiplex_settings, Shapes::ShapeRef.new(shape: MultiplexSettings, location_name: "multiplexSettings"))
+    UpdateMultiplexRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateMultiplexRequest.struct_class = Types::UpdateMultiplexRequest
+
+    UpdateMultiplexResponse.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
+    UpdateMultiplexResponse.struct_class = Types::UpdateMultiplexResponse
+
+    UpdateMultiplexResultModel.add_member(:multiplex, Shapes::ShapeRef.new(shape: Multiplex, location_name: "multiplex"))
+    UpdateMultiplexResultModel.struct_class = Types::UpdateMultiplexResultModel
 
     UpdateReservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateReservation.struct_class = Types::UpdateReservation
@@ -2175,6 +2517,14 @@ module Aws::MediaLive
 
     __listOfMediaPackageOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: MediaPackageOutputDestinationSettings)
 
+    __listOfMultiplexOutputDestination.member = Shapes::ShapeRef.new(shape: MultiplexOutputDestination)
+
+    __listOfMultiplexProgramSummary.member = Shapes::ShapeRef.new(shape: MultiplexProgramSummary)
+
+    __listOfMultiplexSummary.member = Shapes::ShapeRef.new(shape: MultiplexSummary)
+
+    __listOfMultiplexValidationError.member = Shapes::ShapeRef.new(shape: MultiplexValidationError)
+
     __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
 
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
@@ -2198,6 +2548,8 @@ module Aws::MediaLive
     __listOfValidationError.member = Shapes::ShapeRef.new(shape: ValidationError)
 
     __listOfVideoDescription.member = Shapes::ShapeRef.new(shape: VideoDescription)
+
+    __listOf__integer.member = Shapes::ShapeRef.new(shape: __integer)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
@@ -2280,6 +2632,38 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:create_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMultiplex"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/multiplexes"
+        o.input = Shapes::ShapeRef.new(shape: CreateMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMultiplexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_multiplex_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMultiplexProgram"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/programs"
+        o.input = Shapes::ShapeRef.new(shape: CreateMultiplexProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMultiplexProgramResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTags"
         o.http_method = "POST"
@@ -2337,6 +2721,38 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMultiplex"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMultiplexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_multiplex_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMultiplexProgram"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/programs/{programName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMultiplexProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMultiplexProgramResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_reservation, Seahorse::Model::Operation.new.tap do |o|
@@ -2418,6 +2834,36 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/inputSecurityGroups/{inputSecurityGroupId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeInputSecurityGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInputSecurityGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMultiplex"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMultiplexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_multiplex_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeMultiplexProgram"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/programs/{programName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeMultiplexProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeMultiplexProgramResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2538,6 +2984,47 @@ module Aws::MediaLive
         )
       end)
 
+      api.add_operation(:list_multiplex_programs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMultiplexPrograms"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/programs"
+        o.input = Shapes::ShapeRef.new(shape: ListMultiplexProgramsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMultiplexProgramsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_multiplexes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMultiplexes"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/multiplexes"
+        o.input = Shapes::ShapeRef.new(shape: ListMultiplexesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMultiplexesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_offerings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOfferings"
         o.http_method = "GET"
@@ -2622,12 +3109,44 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:start_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMultiplex"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/start"
+        o.input = Shapes::ShapeRef.new(shape: StartMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartMultiplexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:stop_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopChannel"
         o.http_method = "POST"
         o.http_request_uri = "/prod/channels/{channelId}/stop"
         o.input = Shapes::ShapeRef.new(shape: StopChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: StopChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:stop_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopMultiplex"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopMultiplexResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2692,6 +3211,38 @@ module Aws::MediaLive
         o.input = Shapes::ShapeRef.new(shape: UpdateInputSecurityGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateInputSecurityGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_multiplex, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMultiplex"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMultiplexRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMultiplexResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_multiplex_program, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMultiplexProgram"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/multiplexes/{multiplexId}/programs/{programName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMultiplexProgramRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateMultiplexProgramResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)

@@ -87,6 +87,7 @@ module Aws::RDSDataService
     #           [
     #             {
     #               name: "ParameterName",
+    #               type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
     #               value: {
     #                 array_value: {
     #                   array_values: [
@@ -122,6 +123,8 @@ module Aws::RDSDataService
     #
     # @!attribute [rw] parameter_sets
     #   The parameter set for the batch operation.
+    #
+    #   The maximum number of parameters in a parameter set is 1,000.
     #   @return [Array<Array<Types::SqlParameter>>]
     #
     # @!attribute [rw] resource_arn
@@ -431,6 +434,7 @@ module Aws::RDSDataService
     #         parameters: [
     #           {
     #             name: "ParameterName",
+    #             type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
     #             value: {
     #               array_value: {
     #                 array_values: [
@@ -785,6 +789,7 @@ module Aws::RDSDataService
     #
     #       {
     #         name: "ParameterName",
+    #         type_hint: "DATE", # accepts DATE, DECIMAL, TIME, TIMESTAMP
     #         value: {
     #           array_value: {
     #             array_values: [
@@ -810,6 +815,27 @@ module Aws::RDSDataService
     #   The name of the parameter.
     #   @return [String]
     #
+    # @!attribute [rw] type_hint
+    #   A hint that specifies the correct object type for data type mapping.
+    #
+    #   **Values:**
+    #
+    #   * `DECIMAL` - The corresponding `String` parameter value is sent as
+    #     an object of `DECIMAL` type to the database.
+    #
+    #   * `TIMESTAMP` - The corresponding `String` parameter value is sent
+    #     as an object of `TIMESTAMP` type to the database. The accepted
+    #     format is `YYYY-MM-DD HH:MM:SS[.FFF]`.
+    #
+    #   * `TIME` - The corresponding `String` parameter value is sent as an
+    #     object of `TIME` type to the database. The accepted format is
+    #     `HH:MM:SS[.FFF]`.
+    #
+    #   * `DATE` - The corresponding `String` parameter value is sent as an
+    #     object of `DATE` type to the database. The accepted format is
+    #     `YYYY-MM-DD`.
+    #   @return [String]
+    #
     # @!attribute [rw] value
     #   The value of the parameter.
     #   @return [Types::Field]
@@ -818,6 +844,7 @@ module Aws::RDSDataService
     #
     class SqlParameter < Struct.new(
       :name,
+      :type_hint,
       :value)
       include Aws::Structure
     end

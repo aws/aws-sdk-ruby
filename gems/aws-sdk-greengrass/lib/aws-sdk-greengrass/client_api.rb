@@ -215,6 +215,7 @@ module Aws::Greengrass
     ResourceAccessPolicy = Shapes::StructureShape.new(name: 'ResourceAccessPolicy')
     ResourceDataContainer = Shapes::StructureShape.new(name: 'ResourceDataContainer')
     ResourceDefinitionVersion = Shapes::StructureShape.new(name: 'ResourceDefinitionVersion')
+    ResourceDownloadOwnerSetting = Shapes::StructureShape.new(name: 'ResourceDownloadOwnerSetting')
     S3MachineLearningModelResourceData = Shapes::StructureShape.new(name: 'S3MachineLearningModelResourceData')
     S3UrlSignerRole = Shapes::StringShape.new(name: 'S3UrlSignerRole')
     SageMakerMachineLearningModelResourceData = Shapes::StructureShape.new(name: 'SageMakerMachineLearningModelResourceData')
@@ -1243,11 +1244,17 @@ module Aws::Greengrass
     ResourceDefinitionVersion.add_member(:resources, Shapes::ShapeRef.new(shape: __listOfResource, location_name: "Resources"))
     ResourceDefinitionVersion.struct_class = Types::ResourceDefinitionVersion
 
+    ResourceDownloadOwnerSetting.add_member(:group_owner, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "GroupOwner"))
+    ResourceDownloadOwnerSetting.add_member(:group_permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "GroupPermission"))
+    ResourceDownloadOwnerSetting.struct_class = Types::ResourceDownloadOwnerSetting
+
     S3MachineLearningModelResourceData.add_member(:destination_path, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationPath"))
+    S3MachineLearningModelResourceData.add_member(:owner_setting, Shapes::ShapeRef.new(shape: ResourceDownloadOwnerSetting, location_name: "OwnerSetting"))
     S3MachineLearningModelResourceData.add_member(:s3_uri, Shapes::ShapeRef.new(shape: __string, location_name: "S3Uri"))
     S3MachineLearningModelResourceData.struct_class = Types::S3MachineLearningModelResourceData
 
     SageMakerMachineLearningModelResourceData.add_member(:destination_path, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationPath"))
+    SageMakerMachineLearningModelResourceData.add_member(:owner_setting, Shapes::ShapeRef.new(shape: ResourceDownloadOwnerSetting, location_name: "OwnerSetting"))
     SageMakerMachineLearningModelResourceData.add_member(:sage_maker_job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "SageMakerJobArn"))
     SageMakerMachineLearningModelResourceData.struct_class = Types::SageMakerMachineLearningModelResourceData
 

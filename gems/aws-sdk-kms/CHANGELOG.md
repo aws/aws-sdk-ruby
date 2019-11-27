@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2019-11-25)
+------------------
+
+* Feature - AWS Key Management Service (KMS) now enables creation and use of asymmetric Customer Master Keys (CMKs) and the generation of asymmetric data key pairs.
+
 1.25.0 (2019-10-23)
 ------------------
 

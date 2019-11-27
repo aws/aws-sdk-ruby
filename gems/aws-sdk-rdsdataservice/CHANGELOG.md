@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-11-26)
+------------------
+
+* Feature - Type hints to improve handling of some specific parameter types (date/time, decimal etc) for ExecuteStatement and BatchExecuteStatement APIs
+
 1.13.0 (2019-10-23)
 ------------------
 

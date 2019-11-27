@@ -111,6 +111,77 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetReportGroupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_group_arns: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] report_group_arns
+    #   An array of report group ARNs that identify the report groups to
+    #   return.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportGroupsInput AWS API Documentation
+    #
+    class BatchGetReportGroupsInput < Struct.new(
+      :report_group_arns)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_groups
+    #   The array of report groups returned by `BatchGetReportGroups`.
+    #   @return [Array<Types::ReportGroup>]
+    #
+    # @!attribute [rw] report_groups_not_found
+    #   An array of ARNs passed to `BatchGetReportGroups` that are not
+    #   associated with a `ReportGroup`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportGroupsOutput AWS API Documentation
+    #
+    class BatchGetReportGroupsOutput < Struct.new(
+      :report_groups,
+      :report_groups_not_found)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetReportsInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_arns: ["NonEmptyString"], # required
+    #       }
+    #
+    # @!attribute [rw] report_arns
+    #   An array of ARNs that identify the `Report` objects to return.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportsInput AWS API Documentation
+    #
+    class BatchGetReportsInput < Struct.new(
+      :report_arns)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reports
+    #   The array of `Report` objects returned by `BatchGetReports`.
+    #   @return [Array<Types::Report>]
+    #
+    # @!attribute [rw] reports_not_found
+    #   An array of ARNs passed to `BatchGetReportGroups` that are not
+    #   associated with a `Report`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetReportsOutput AWS API Documentation
+    #
+    class BatchGetReportsOutput < Struct.new(
+      :reports,
+      :reports_not_found)
+      include Aws::Structure
+    end
+
     # Information about a build.
     #
     # @!attribute [rw] id
@@ -203,7 +274,7 @@ module Aws::CodeBuild
     #   An array of `ProjectSourceVersion` objects. Each
     #   `ProjectSourceVersion` must be one of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -303,6 +374,10 @@ module Aws::CodeBuild
     #   A list of exported environment variables for this build.
     #   @return [Array<Types::ExportedEnvironmentVariable>]
     #
+    # @!attribute [rw] report_arns
+    #   An array of the ARNs associated with this build's reports.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -333,7 +408,8 @@ module Aws::CodeBuild
       :vpc_config,
       :network_interface,
       :encryption_key,
-      :exported_environment_variables)
+      :exported_environment_variables,
+      :report_arns)
       include Aws::Structure
     end
 
@@ -695,7 +771,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -838,6 +914,57 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateReportGroupInput
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ReportGroupName", # required
+    #         type: "TEST", # required, accepts TEST
+    #         export_config: { # required
+    #           export_config_type: "S3", # accepts S3, NO_EXPORT
+    #           s3_destination: {
+    #             bucket: "NonEmptyString",
+    #             path: "String",
+    #             packaging: "ZIP", # accepts ZIP, NONE
+    #             encryption_key: "NonEmptyString",
+    #             encryption_disabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the report group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of report group.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_config
+    #   A `ReportExportConfig` object that contains information about where
+    #   the report group test results are exported.
+    #   @return [Types::ReportExportConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroupInput AWS API Documentation
+    #
+    class CreateReportGroupInput < Struct.new(
+      :name,
+      :type,
+      :export_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_group
+    #   Information about the report group that was created.
+    #   @return [Types::ReportGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateReportGroupOutput AWS API Documentation
+    #
+    class CreateReportGroupOutput < Struct.new(
+      :report_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateWebhookInput
     #   data as a hash:
     #
@@ -924,6 +1051,50 @@ module Aws::CodeBuild
     #
     class DeleteProjectOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteReportGroupInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the report group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroupInput AWS API Documentation
+    #
+    class DeleteReportGroupInput < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportGroupOutput AWS API Documentation
+    #
+    class DeleteReportGroupOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteReportInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the report to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportInput AWS API Documentation
+    #
+    class DeleteReportInput < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteReportOutput AWS API Documentation
+    #
+    class DeleteReportOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSourceCredentialsInput
     #   data as a hash:
     #
@@ -974,6 +1145,74 @@ module Aws::CodeBuild
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookOutput AWS API Documentation
     #
     class DeleteWebhookOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeTestCasesInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_arn: "String", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         filter: {
+    #           status: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] report_arn
+    #   The ARN of the report for which test cases are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated test cases returned per response.
+    #   Use `nextToken` to iterate pages in the list of returned `TestCase`
+    #   objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   A `TestCaseFilter` object used to filter the returned reports.
+    #   @return [Types::TestCaseFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeTestCasesInput AWS API Documentation
+    #
+    class DescribeTestCasesInput < Struct.new(
+      :report_arn,
+      :next_token,
+      :max_results,
+      :filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_cases
+    #   The returned list of test cases.
+    #   @return [Array<Types::TestCase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DescribeTestCasesOutput AWS API Documentation
+    #
+    class DescribeTestCasesOutput < Struct.new(
+      :next_token,
+      :test_cases)
+      include Aws::Structure
+    end
 
     # Information about a Docker image that is managed by AWS CodeBuild.
     #
@@ -1069,7 +1308,7 @@ module Aws::CodeBuild
     #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
     #     Systems Manager Parameter Store.
     #
-    #   * `PLAINTEXT`\: An environment variable in plaintext format.
+    #   * `PLAINTEXT`\: An environment variable in plain text format.
     #
     #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
     #     Manager.
@@ -1422,6 +1661,233 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListReportGroupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] sort_order
+    #   Used to specify the order to sort the list of returned report
+    #   groups. Valid values are `ASCENDING` and `DESCENDING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The criterion to be used to list build report groups. Valid values
+    #   include:
+    #
+    #   * `CREATED_TIME`\: List based on when each report group was created.
+    #
+    #   * `LAST_MODIFIED_TIME`\: List based on when each report group was
+    #     last changed.
+    #
+    #   * `NAME`\: List based on each report group's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated report groups returned per response.
+    #   Use `nextToken` to iterate pages in the list of returned
+    #   `ReportGroup` objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportGroupsInput AWS API Documentation
+    #
+    class ListReportGroupsInput < Struct.new(
+      :sort_order,
+      :sort_by,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_groups
+    #   The list of ARNs for the report groups in the current AWS account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportGroupsOutput AWS API Documentation
+    #
+    class ListReportGroupsOutput < Struct.new(
+      :next_token,
+      :report_groups)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListReportsForReportGroupInput
+    #   data as a hash:
+    #
+    #       {
+    #         report_group_arn: "String", # required
+    #         next_token: "String",
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         max_results: 1,
+    #         filter: {
+    #           status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] report_group_arn
+    #   The ARN of the report group for which you want to return report
+    #   ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Use to specify whether the results are returned in ascending or
+    #   descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated reports in this report group
+    #   returned per response. Use `nextToken` to iterate pages in the list
+    #   of returned `Report` objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   A `ReportFilter` object used to filter the returned reports.
+    #   @return [Types::ReportFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroupInput AWS API Documentation
+    #
+    class ListReportsForReportGroupInput < Struct.new(
+      :report_group_arn,
+      :next_token,
+      :sort_order,
+      :max_results,
+      :filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] reports
+    #   The list of returned report group ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsForReportGroupOutput AWS API Documentation
+    #
+    class ListReportsForReportGroupOutput < Struct.new(
+      :next_token,
+      :reports)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListReportsInput
+    #   data as a hash:
+    #
+    #       {
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         next_token: "String",
+    #         max_results: 1,
+    #         filter: {
+    #           status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sort_order
+    #   Specifies the sort order for the list of returned reports. Valid
+    #   values are:
+    #
+    #   * `ASCENDING`\: return reports in chronological order based on their
+    #     creation date.
+    #
+    #   * `DESCENDING`\: return reports in the reverse chronological order
+    #     based on their creation date.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated reports returned per response. Use
+    #   `nextToken` to iterate pages in the list of returned `Report`
+    #   objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   A `ReportFilter` object used to filter the returned reports.
+    #   @return [Types::ReportFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsInput AWS API Documentation
+    #
+    class ListReportsInput < Struct.new(
+      :sort_order,
+      :next_token,
+      :max_results,
+      :filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] reports
+    #   The list of returned ARNs for the reports in the current AWS
+    #   account.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListReportsOutput AWS API Documentation
+    #
+    class ListReportsOutput < Struct.new(
+      :next_token,
+      :reports)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSourceCredentialsInput AWS API Documentation
@@ -1605,7 +2071,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -2017,9 +2483,9 @@ module Aws::CodeBuild
     #     * Symlinks are used to reference cached directories.
     #
     #     * Cached directories are linked to your build before it downloads
-    #       its project sources. Cached items are overriden if a source item
-    #       has the same name. Directories are specified using cache paths
-    #       in the buildspec file.
+    #       its project sources. Cached items are overridden if a source
+    #       item has the same name. Directories are specified using cache
+    #       paths in the buildspec file.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache AWS API Documentation
@@ -2376,7 +2842,7 @@ module Aws::CodeBuild
     #   The source version for the corresponding source identifier. If
     #   specified, must be one of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -2456,6 +2922,180 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about the results from running a series of test cases
+    # during the run of a build project. The test cases are specified in the
+    # buildspec for the build project using one or more paths to the test
+    # case files. You can specify any type of tests you want, such as unit
+    # tests, integration tests, and functional tests.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the report run.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the report that was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the report that was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_group_arn
+    #   The ARN of the report group associated with this report.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The ARN of the build run that generated this report.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of this report.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The date and time this report run occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expired
+    #   The date and time a report expires. A report expires 30 days after
+    #   it is created. An expired report is not available to view in
+    #   CodeBuild.
+    #   @return [Time]
+    #
+    # @!attribute [rw] export_config
+    #   Information about where the raw data used to generate this report
+    #   was exported.
+    #   @return [Types::ReportExportConfig]
+    #
+    # @!attribute [rw] truncated
+    #   A boolean that specifies if this report run is truncated. The list
+    #   of test cases is truncated after the maximum number of test cases is
+    #   reached.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] test_summary
+    #   A `TestReportSummary` object that contains information about this
+    #   test report.
+    #   @return [Types::TestReportSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Report AWS API Documentation
+    #
+    class Report < Struct.new(
+      :arn,
+      :type,
+      :name,
+      :report_group_arn,
+      :execution_id,
+      :status,
+      :created,
+      :expired,
+      :export_config,
+      :truncated,
+      :test_summary)
+      include Aws::Structure
+    end
+
+    # Information about the location where the run of a report is exported.
+    #
+    # @note When making an API call, you may pass ReportExportConfig
+    #   data as a hash:
+    #
+    #       {
+    #         export_config_type: "S3", # accepts S3, NO_EXPORT
+    #         s3_destination: {
+    #           bucket: "NonEmptyString",
+    #           path: "String",
+    #           packaging: "ZIP", # accepts ZIP, NONE
+    #           encryption_key: "NonEmptyString",
+    #           encryption_disabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] export_config_type
+    #   The export configuration type. Valid values are:
+    #
+    #   * `S3`\: The report results are exported to an S3 bucket.
+    #
+    #   * `NO_EXPORT`\: The report results are not exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   A `S3ReportExportConfig` object that contains information about the
+    #   S3 bucket where the run of a report is exported.
+    #   @return [Types::S3ReportExportConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportExportConfig AWS API Documentation
+    #
+    class ReportExportConfig < Struct.new(
+      :export_config_type,
+      :s3_destination)
+      include Aws::Structure
+    end
+
+    # A filter used to return reports with the status specified by the input
+    # `status` parameter.
+    #
+    # @note When making an API call, you may pass ReportFilter
+    #   data as a hash:
+    #
+    #       {
+    #         status: "GENERATING", # accepts GENERATING, SUCCEEDED, FAILED, INCOMPLETE, DELETING
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status used to filter reports. You can filter using one status
+    #   only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportFilter AWS API Documentation
+    #
+    class ReportFilter < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # A series of reports. Each report contains information about the
+    # results from running a series of test cases. You specify the test
+    # cases for a report group in the buildspec for a build project using
+    # one or more paths to the test case files.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of a `ReportGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of a `ReportGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the `ReportGroup`. The one valid value is `TEST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_config
+    #   Information about the destination where the raw data of this
+    #   `ReportGroup` is exported.
+    #   @return [Types::ReportExportConfig]
+    #
+    # @!attribute [rw] created
+    #   The date and time this `ReportGroup` was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time this `ReportGroup` was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ReportGroup AWS API Documentation
+    #
+    class ReportGroup < Struct.new(
+      :arn,
+      :name,
+      :type,
+      :export_config,
+      :created,
+      :last_modified)
+      include Aws::Structure
+    end
+
     # Information about S3 logs for a build project.
     #
     # @note When making an API call, you may pass S3LogsConfig
@@ -2492,6 +3132,59 @@ module Aws::CodeBuild
     class S3LogsConfig < Struct.new(
       :status,
       :location,
+      :encryption_disabled)
+      include Aws::Structure
+    end
+
+    # Information about the S3 bucket where the raw data of a report are
+    # exported.
+    #
+    # @note When making an API call, you may pass S3ReportExportConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "NonEmptyString",
+    #         path: "String",
+    #         packaging: "ZIP", # accepts ZIP, NONE
+    #         encryption_key: "NonEmptyString",
+    #         encryption_disabled: false,
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket where the raw data of a report are
+    #   exported.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to the exported report's raw data results.
+    #   @return [String]
+    #
+    # @!attribute [rw] packaging
+    #   The type of build output artifact to create. Valid values include:
+    #
+    #   * `NONE`\: AWS CodeBuild creates the raw data in the output bucket.
+    #     This is the default if packaging is not specified.
+    #
+    #   * `ZIP`\: AWS CodeBuild creates a ZIP file with the raw data in the
+    #     output bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key
+    #   The encryption key for the report's encrypted raw data.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_disabled
+    #   A boolean value that specifies if the results of a report are
+    #   encrypted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/S3ReportExportConfig AWS API Documentation
+    #
+    class S3ReportExportConfig < Struct.new(
+      :bucket,
+      :path,
+      :packaging,
+      :encryption_key,
       :encryption_disabled)
       include Aws::Structure
     end
@@ -2684,7 +3377,7 @@ module Aws::CodeBuild
     #   not specified, the latest version is used. If specified, must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -2960,6 +3653,110 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about a test case created using a framework such as NUnit
+    # or Cucumber. A test case might be a unit test or a configuration test.
+    #
+    # @!attribute [rw] report_arn
+    #   The ARN of the report to which the test case belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] test_raw_data_path
+    #   The path to the raw data file that contains the test result.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   A string that is applied to a series of related test cases.
+    #   CodeBuild generates the prefix. The prefix depends on the framework
+    #   used to generate the tests.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the test case.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status returned by the test case after it was run. Valid
+    #   statuses are `SUCCEEDED`, `FAILED`, `ERROR`, `SKIPPED`, and
+    #   `UNKNOWN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_in_nano_seconds
+    #   The number of nanoseconds it took to run this test case.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   A message associated with a test case. For example, an error message
+    #   or stack trace.
+    #   @return [String]
+    #
+    # @!attribute [rw] expired
+    #   The date and time a test case expires. A test case expires 30 days
+    #   after it is created. An expired test case is not available to view
+    #   in CodeBuild.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TestCase AWS API Documentation
+    #
+    class TestCase < Struct.new(
+      :report_arn,
+      :test_raw_data_path,
+      :prefix,
+      :name,
+      :status,
+      :duration_in_nano_seconds,
+      :message,
+      :expired)
+      include Aws::Structure
+    end
+
+    # A filter used to return specific types of test cases.
+    #
+    # @note When making an API call, you may pass TestCaseFilter
+    #   data as a hash:
+    #
+    #       {
+    #         status: "String",
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status used to filter test cases. Valid statuses are
+    #   `SUCCEEDED`, `FAILED`, `ERROR`, `SKIPPED`, and `UNKNOWN`. A
+    #   `TestCaseFilter` can have one status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TestCaseFilter AWS API Documentation
+    #
+    class TestCaseFilter < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # Information about a test report.
+    #
+    # @!attribute [rw] total
+    #   The number of test cases in this `TestReportSummary`. The total
+    #   includes truncated test cases.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_counts
+    #   A map that contains the number of each type of status returned by
+    #   the test results in this `TestReportSummary`.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] duration_in_nano_seconds
+    #   The number of nanoseconds it took to run all of the test cases in
+    #   this report.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TestReportSummary AWS API Documentation
+    #
+    class TestReportSummary < Struct.new(
+      :total,
+      :status_counts,
+      :duration_in_nano_seconds)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateProjectInput
     #   data as a hash:
     #
@@ -3111,7 +3908,7 @@ module Aws::CodeBuild
     #   specified, the latest version is used. If specified, it must be one
     #   of:
     #
-    #   * For AWS CodeCommit: the commit ID to use.
+    #   * For AWS CodeCommit: the commit ID, branch, or Git tag to use.
     #
     #   * For GitHub: the commit ID, pull request ID, branch name, or tag
     #     name that corresponds to the version of the source code you want
@@ -3254,6 +4051,54 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateReportGroupInput
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString", # required
+    #         export_config: {
+    #           export_config_type: "S3", # accepts S3, NO_EXPORT
+    #           s3_destination: {
+    #             bucket: "NonEmptyString",
+    #             path: "String",
+    #             packaging: "ZIP", # accepts ZIP, NONE
+    #             encryption_key: "NonEmptyString",
+    #             encryption_disabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the report group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_config
+    #   Used to specify an updated export type. Valid values are:
+    #
+    #   * `S3`\: The report results are exported to an S3 bucket.
+    #
+    #   * `NO_EXPORT`\: The report results are not exported.
+    #   @return [Types::ReportExportConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroupInput AWS API Documentation
+    #
+    class UpdateReportGroupInput < Struct.new(
+      :arn,
+      :export_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] report_group
+    #   Information about the updated report group.
+    #   @return [Types::ReportGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateReportGroupOutput AWS API Documentation
+    #
+    class UpdateReportGroupOutput < Struct.new(
+      :report_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateWebhookInput
     #   data as a hash:
     #
@@ -3296,7 +4141,7 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] filter_groups
     #   An array of arrays of `WebhookFilter` objects used to determine if a
-    #   webhook event can trigger a build. A filter group must pcontain at
+    #   webhook event can trigger a build. A filter group must contain at
     #   least one `EVENT` `WebhookFilter`.
     #   @return [Array<Array<Types::WebhookFilter>>]
     #

@@ -254,7 +254,7 @@ module Aws::QuickSight
 
     # @!group API Operations
 
-    # Cancels an on-going ingestion of data into SPICE.
+    # Cancels an ongoing ingestion of data into SPICE.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
@@ -307,11 +307,6 @@ module Aws::QuickSight
     # the correct permissions, you can create a dashboard from a template
     # that exists in a different AWS account.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight create-dashboard --cli-input-json
-    # file://create-dashboard.json`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID where you want to create the dashboard.
     #
@@ -335,11 +330,11 @@ module Aws::QuickSight
     #
     # @option params [required, Types::DashboardSourceEntity] :source_entity
     #   Source entity from which the dashboard is created. The souce entity
-    #   accepts the ARN of the source template or analysis and also references
-    #   the replacement datasets for the placeholders set when creating the
-    #   template. The replacement datasets need to follow the same schema as
-    #   the datasets for which placeholders were created when creating the
-    #   template.
+    #   accepts the Amazon Resource Name (ARN) of the source template or
+    #   analysis and also references the replacement datasets for the
+    #   placeholders set when creating the template. The replacement datasets
+    #   need to follow the same schema as the datasets for which placeholders
+    #   were created when creating the template.
     #
     #   If you are creating a dashboard from a source entity in a different
     #   AWS account, use the ARN of the source template.
@@ -366,10 +361,6 @@ module Aws::QuickSight
     #   * VisibilityState for SheetControlsOption - This can be either
     #     `COLLAPSED` or `EXPANDED`. The sheet controls pane is collapsed by
     #     default when set to true. Collapsed by default.
-    #
-    #   Shorthand Syntax:
-    #
-    #   `AdHocFilteringDisabled=boolean,ExportToCSVDisabled=boolean,SheetControlsCollapsed=boolean`
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -469,51 +460,12 @@ module Aws::QuickSight
 
     # Creates a dataset.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight create-data-set `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-set-id=unique-data-set-id `
-    #
-    # `--name='My dataset' `
-    #
-    # `--import-mode=SPICE `
-    #
-    # `--physical-table-map='\{`
-    #
-    # ` "physical-table-id": \{`
-    #
-    # ` "RelationalTable": \{`
-    #
-    # ` "DataSourceArn":
-    # "arn:aws:quicksight:us-west-2:111111111111:datasource/data-source-id",`
-    #
-    # ` "Name": "table1",`
-    #
-    # ` "InputColumns": [`
-    #
-    # ` \{`
-    #
-    # ` "Name": "column1",`
-    #
-    # ` "Type": "STRING"`
-    #
-    # ` \}`
-    #
-    # ` ]`
-    #
-    # ` \}`
-    #
-    # ` \}'`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
     #
     # @option params [required, String] :data_set_id
-    #   An ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   An ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -531,7 +483,7 @@ module Aws::QuickSight
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
     #   Groupings of columns that work together in certain QuickSight
-    #   features. Currently only geospatial hierarchy is supported.
+    #   features. Currently, only geospatial hierarchy is supported.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A list of resource permissions on the dataset.
@@ -698,68 +650,41 @@ module Aws::QuickSight
 
     # Creates a data source.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:datasource/data-source-id`
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight create-data-source `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-source-id=unique-data-source-id `
-    #
-    # `--name='My Data Source' `
-    #
-    # `--type=POSTGRESQL `
-    #
-    # `--data-source-parameters='\{ "PostgreSqlParameters": \{`
-    #
-    # ` "Host": "my-db-host.example.com",`
-    #
-    # ` "Port": 1234,`
-    #
-    # ` "Database": "my-db" \} \}' `
-    #
-    # `--credentials='\{ "CredentialPair": \{`
-    #
-    # ` "Username": "username",`
-    #
-    # ` "Password": "password" \} \}'`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   An ID for the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   An ID for the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
     #
     # @option params [required, String] :type
-    #   The type of the data source. Currently the supported types for this
+    #   The type of the data source. Currently, the supported types for this
     #   operation are: `ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL,
     #   POSTGRESQL, PRESTO, REDSHIFT, S3, SNOWFLAKE, SPARK, SQLSERVER,
     #   TERADATA`. Use `ListDataSources` to return a list of all data sources.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
-    #   The parameters QuickSight uses to connect to your underlying source.
+    #   The parameters that QuickSight uses to connect to your underlying
+    #   source.
     #
     # @option params [Types::DataSourceCredentials] :credentials
-    #   The credentials QuickSight uses to connect to your underlying source.
-    #   Currently only username/password based credentials are supported.
+    #   The credentials QuickSight that uses to connect to your underlying
+    #   source. Currently, only credentials based on user name and password
+    #   are supported.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A list of resource permissions on the data source.
     #
     # @option params [Types::VpcConnectionProperties] :vpc_connection_properties
-    #   You need to use this parameter only when you want QuickSight to use a
-    #   VPC connection when connecting to your underlying source.
+    #   Use this parameter only when you want QuickSight to use a VPC
+    #   connection when connecting to your underlying source.
     #
     # @option params [Types::SslProperties] :ssl_properties
-    #   SSL properties that apply when QuickSight connects to your underlying
-    #   source.
+    #   Secure Socket Layer (SSL) properties that apply when QuickSight
+    #   connects to your underlying source.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -917,12 +842,6 @@ module Aws::QuickSight
     #
     # The response is a group object.
     #
-    # **CLI Sample:**
-    #
-    # `aws quicksight create-group --aws-account-id=111122223333
-    # --namespace=default --group-name="Sales-Management"
-    # --description="Sales Management - Forecasting" `
-    #
     # @option params [required, String] :group_name
     #   A name for the group that you want to create.
     #
@@ -972,21 +891,6 @@ module Aws::QuickSight
 
     # Adds an Amazon QuickSight user to an Amazon QuickSight group.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # The condition resource is the user name.
-    #
-    # The condition key is `quicksight:UserName`.
-    #
-    # The response is the group member object.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight create-group-membership --aws-account-id=111122223333
-    # --namespace=default --group-name=Sales --member-name=Pat `
-    #
     # @option params [required, String] :member_name
     #   The name of the user that you want to add to the group membership.
     #
@@ -1032,17 +936,9 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an assignment with one specified IAM policy ARN and will
-    # assigned to specified groups or users of QuickSight. Users and groups
-    # need to be in the same namespace.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight create-iam-policy-assignment
-    # --aws-account-id=111122223333 --assignment-name=helpAssignment
-    # --policy-arn=arn:aws:iam::aws:policy/AdministratorAccess
-    # --identities="user=user5,engineer123,group=QS-Admin"
-    # --namespace=default --region=us-west-2`
+    # Creates an assignment with one specified IAM policy Amazon Resource
+    # Name (ARN) and will assigned to specified groups or users of
+    # QuickSight. Users and groups need to be in the same namespace.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID where you want to assign QuickSight users or groups
@@ -1064,8 +960,8 @@ module Aws::QuickSight
     #     creating the data source.
     #
     # @option params [String] :policy_arn
-    #   An IAM policy ARN that you want to apply to the QuickSight users and
-    #   groups specified in this assignment.
+    #   An IAM policy Amazon Resource Name (ARN) that you want to apply to the
+    #   QuickSight users and groups specified in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
     #   QuickSight users and/or groups that you want to assign the policy to.
@@ -1120,10 +1016,10 @@ module Aws::QuickSight
     # Creates and starts a new SPICE ingestion on a dataset
     #
     # Any ingestions operating on tagged datasets inherit the same tags
-    # automatically for use in access-control. For an example, see [How do I
+    # automatically for use in access control. For an example, see [How do I
     # create an IAM policy to control access to Amazon EC2 resources using
-    # tags?][1]. Tags will be visible on the tagged dataset, but not on the
-    # ingestion resource.
+    # tags?][1] in the AWS Knowledge Center. Tags are visible on the tagged
+    # dataset, but not on the ingestion resource.
     #
     #
     #
@@ -1182,31 +1078,6 @@ module Aws::QuickSight
     # follow the same schema that was used to create the source analysis and
     # template.
     #
-    # To create a template from an existing analysis, use the analysis's
-    # ARN, `aws-account-id`, `template-id`, `source-entity`, and
-    # `data-set-references`.
-    #
-    # CLI syntax to create a template:
-    #
-    # `aws quicksight create-template —cli-input-json
-    # file://create-template.json`
-    #
-    # CLI syntax to create a template from another template in the same AWS
-    # account:
-    #
-    # `aws quicksight create-template --aws-account-id 111122223333
-    # --template-id reports_test_template --data-set-references
-    # DataSetPlaceholder=reports,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/0dfc789c-81f6-4f4f-b9ac-7db2453eefc8
-    # DataSetPlaceholder=Elblogs,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/f60da323-af68-45db-9016-08e0d1d7ded5
-    # --source-entity
-    # SourceAnalysis='\{Arn=arn:aws:quicksight:us-west-2:111122223333:analysis/7fb74527-c36d-4be8-8139-ac1be4c97365\}'`
-    #
-    # To create template from another account’s template, you need to grant
-    # cross account resource permission for DescribeTemplate the account
-    # that contains the template.
-    #
-    # You can use a file to pass JSON to the function if you prefer.
-    #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the group is in. Currently, you use
     #   the ID for the AWS account that contains your Amazon QuickSight
@@ -1220,15 +1091,13 @@ module Aws::QuickSight
     #   A display name for the template.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
-    #   A list of resource permissions to be set on the template. The
-    #   shorthand syntax should look similar to this: `Shorthand Syntax:
-    #   Principal=string,Actions=string,string ... `
+    #   A list of resource permissions to be set on the template.
     #
     # @option params [required, Types::TemplateSourceEntity] :source_entity
-    #   The ARN of the source entity from which this template is being
-    #   created. Templates can be currently created from an analysis or
-    #   another template. If the ARN is for an analysis, you must include its
-    #   dataset references.
+    #   The Amazon Resource Name (ARN) of the source entity from which this
+    #   template is being created. Templates can be currently created from an
+    #   analysis or another template. If the ARN is for an analysis, you must
+    #   include its dataset references.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -1305,12 +1174,6 @@ module Aws::QuickSight
 
     # Creates a template alias for a template.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight create-template-alias --aws-account-id 111122223333
-    # --template-id 'reports_test_template' --alias-name PROD
-    # —version-number 1`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template you are aliasing.
     #
@@ -1318,10 +1181,8 @@ module Aws::QuickSight
     #   An ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The name you want to give the template's alias. Alias names can't
-    #   begin with a `$`, which is reserved by QuickSight. Alias names that
-    #   start with ‘$’ sign are QuickSight reserved naming and can't be
-    #   deleted.
+    #   The name that you want to give to the template alias that you're
+    #   creating. Aliases that start with `$` are reserved by QuickSight.
     #
     # @option params [required, Integer] :template_version_number
     #   The version number of the template.
@@ -1359,14 +1220,6 @@ module Aws::QuickSight
     end
 
     # Deletes a dashboard.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight delete-dashboard --aws-account-id 111122223333
-    # —dashboard-id 123123123`
-    #
-    # `aws quicksight delete-dashboard --aws-account-id 111122223333
-    # —dashboard-id 123123123 —version-number 3`
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are deleting.
@@ -1411,20 +1264,12 @@ module Aws::QuickSight
 
     # Deletes a dataset.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight delete-data-set `
-    #
-    # `--aws-account-id=111111111111 `
-    #
-    # `--data-set-id=unique-data-set-id`
-    #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   The ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @return [Types::DeleteDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1459,20 +1304,12 @@ module Aws::QuickSight
     # Deletes the data source permanently. This action breaks all the
     # datasets that reference the deleted data source.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight delete-data-source `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-source-id=unique-data-source-id `
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @return [Types::DeleteDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1505,15 +1342,6 @@ module Aws::QuickSight
     end
 
     # Removes a user group from Amazon QuickSight.
-    #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight delete-group -\-aws-account-id=111122223333
-    # -\-namespace=default -\-group-name=Sales-Management `
     #
     # @option params [required, String] :group_name
     #   The name of the group that you want to delete.
@@ -1555,20 +1383,6 @@ module Aws::QuickSight
 
     # Removes a user from a group so that the user is no longer a member of
     # the group.
-    #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # The condition resource is the user name.
-    #
-    # The condition key is `quicksight:UserName`.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight delete-group-membership --aws-account-id=111122223333
-    # --namespace=default --group-name=Sales-Management
-    # --member-name=Charlie `
     #
     # @option params [required, String] :member_name
     #   The name of the user that you want to delete from the group
@@ -1615,12 +1429,6 @@ module Aws::QuickSight
 
     # Deletes an existing assignment.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight delete-iam-policy-assignment
-    # --aws-account-id=111122223333 --assignment-name=testtest
-    # --region=us-east-1 --namespace=default`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID where you want to delete an IAM policy assignment.
     #
@@ -1661,30 +1469,6 @@ module Aws::QuickSight
 
     # Deletes a template.
     #
-    # CLI syntax:
-    #
-    # * `aws quicksight delete-template --aws-account-id 111122223333
-    #   —-template-id reports_test_template --version-number 2 `
-    #
-    # * `aws quicksight delete-template —aws-account-id 111122223333
-    #   —template-id reports_test_template —alias-name STAGING `
-    #
-    # * `aws quicksight delete-template —aws-account-id 111122223333
-    #   —template-id reports_test_template —alias-name ‘\$LATEST’ `
-    #
-    # * `aws quicksight delete-template --aws-account-id 111122223333
-    #   —-template-id reports_test_template`
-    #
-    # If version number which is an optional field is not passed the
-    # template (including all the versions) is deleted by the API, if
-    # version number is provided, the specific template version is deleted
-    # by the API.
-    #
-    # Users can explicitly describe the latest version of the template by
-    # passing `$LATEST` to the `alias-name` parameter. `$LATEST` is an
-    # internally supported alias, which points to the latest version of the
-    # template.
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template you are deleting.
     #
@@ -1692,7 +1476,9 @@ module Aws::QuickSight
     #   An ID for the template you want to delete.
     #
     # @option params [Integer] :version_number
-    #   The version number
+    #   Specifies the version of the template that you want to delete. If you
+    #   don't provide a version number, `DeleteTemplate` deletes all versions
+    #   of the template.
     #
     # @return [Types::DeleteTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1727,11 +1513,6 @@ module Aws::QuickSight
 
     # Update template alias of given template.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight delete-template-alias --aws-account-id 111122223333
-    # --template-id 'reports_test_template' --alias-name 'STAGING'`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template alias you are deleting.
     #
@@ -1739,9 +1520,10 @@ module Aws::QuickSight
     #   An ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The alias of the template. If alias-name is provided, the version that
-    #   the alias-name points to is deleted. Alias names that start with `$`
-    #   are reserved by QuickSight and can't be deleted.”
+    #   The alias of the template that you want to delete. If you provide a
+    #   specific alias, you delete the version that the alias points to. You
+    #   can specify the latest version of the template by providing the
+    #   keyword `$LATEST` in the `AliasName` parameter.
     #
     # @return [Types::DeleteTemplateAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1780,11 +1562,6 @@ module Aws::QuickSight
     # identity of the AWS Identity and Access Management (IAM) user or role
     # that's making the call. The IAM user isn't deleted as a result of
     # this call.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight delete-user --aws-account-id=111122223333
-    # --namespace=default --user-name=Pat `
     #
     # @option params [required, String] :user_name
     #   The name of the user that you want to delete.
@@ -1825,12 +1602,6 @@ module Aws::QuickSight
 
     # Deletes a user identified by its principal ID.
     #
-    # **CLI Sample:**
-    #
-    # `aws quicksight delete-user-by-principal-id
-    # --aws-account-id=111122223333 --namespace=default
-    # --principal-id=ABCDEFJA26JLI7EUUOEHS `
-    #
     # @option params [required, String] :principal_id
     #   The principal ID of the user.
     #
@@ -1869,14 +1640,6 @@ module Aws::QuickSight
     end
 
     # Provides a summary for a dashboard.
-    #
-    # CLI syntax:
-    #
-    # * `aws quicksight describe-dashboard --aws-account-id 111122223333
-    #   —dashboard-id reports_test_report -version-number 2`
-    #
-    # * ` aws quicksight describe-dashboard --aws-account-id 111122223333
-    #   —dashboard-id reports_test_report -alias-name ‘$PUBLISHED’ `
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are describing.
@@ -1937,11 +1700,6 @@ module Aws::QuickSight
 
     # Describes read and write permissions on a dashboard.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-dashboard-permissions --aws-account-id
-    # 735340738645 —dashboard-id reports_test_bob_report`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are describing
     #   permissions of.
@@ -1986,20 +1744,12 @@ module Aws::QuickSight
 
     # Describes a dataset.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-data-set `
-    #
-    # `--aws-account-id=111111111111 `
-    #
-    # `--data-set-id=unique-data-set-id`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   The ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @return [Types::DescribeDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2093,22 +1843,14 @@ module Aws::QuickSight
     # Describes the permissions on a dataset.
     #
     # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-data-set-permissions `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-set-id=unique-data-set-id `
+    # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   The ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @return [Types::DescribeDataSetPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2147,15 +1889,12 @@ module Aws::QuickSight
 
     # Describes a data source.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:datasource/data-source-id`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @return [Types::DescribeDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2241,15 +1980,12 @@ module Aws::QuickSight
 
     # Describes the resource permissions for a data source.
     #
-    # The permissions resource is
-    # `aws:quicksight:region:aws-account-id:datasource/data-source-id`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @return [Types::DescribeDataSourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2288,17 +2024,6 @@ module Aws::QuickSight
 
     # Returns an Amazon QuickSight group's description and Amazon Resource
     # Name (ARN).
-    #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<relevant-aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # The response is the group object.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight describe-group -\-aws-account-id=11112222333
-    # -\-namespace=default -\-group-name=Sales `
     #
     # @option params [required, String] :group_name
     #   The name of the group that you want to describe.
@@ -2345,12 +2070,6 @@ module Aws::QuickSight
 
     # Describes an existing IAMPolicy Assignment by specified assignment
     # name.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-iam-policy-assignment
-    # --aws-account-id=111122223333 --assignment-name=testtest
-    # --namespace=default --region=us-east-1 `
     #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID that contains the assignment you want to describe.
@@ -2452,22 +2171,6 @@ module Aws::QuickSight
 
     # Describes a template's metadata.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-template --aws-account-id 111122223333
-    # --template-id reports_test_template `
-    #
-    # `aws quicksight describe-template --aws-account-id 111122223333
-    # --template-id reports_test_template --version-number-2`
-    #
-    # `aws quicksight describe-template --aws-account-id 111122223333
-    # --template-id reports_test_template --alias-name '\$LATEST' `
-    #
-    # Users can explicitly describe the latest version of the dashboard by
-    # passing `$LATEST` to the `alias-name` parameter. `$LATEST` is an
-    # internally supported alias, which points to the latest version of the
-    # dashboard.
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template you are describing.
     #
@@ -2480,10 +2183,11 @@ module Aws::QuickSight
     #   version of the template is described.
     #
     # @option params [String] :alias_name
-    #   This is an optional field, when an alias name is provided, the version
-    #   referenced by the alias is described. Refer to `CreateTemplateAlias`
-    #   to create a template alias. `$PUBLISHED` is not supported for
-    #   template.
+    #   The alias of the template that you want to describe. If you provide a
+    #   specific alias, you describe the version that the alias points to. You
+    #   can specify the latest version of the template by providing the
+    #   keyword `$LATEST` in the `AliasName` parameter. The keyword
+    #   `$PUBLISHED` doesn't apply to templates.
     #
     # @return [Types::DescribeTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2537,11 +2241,6 @@ module Aws::QuickSight
 
     # Describes the template aliases of a template.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-template-alias --aws-account-id 111122223333
-    # --template-id 'reports_test_template' --alias-name 'STAGING'`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template alias you are describing.
     #
@@ -2549,7 +2248,11 @@ module Aws::QuickSight
     #   An ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The alias name. `$PUBLISHED` is not supported for template.
+    #   The alias of the template that you want to describe. If you provide a
+    #   specific alias, you describe the version that the alias points to. You
+    #   can specify the latest version of the template by providing the
+    #   keyword `$LATEST` in the `AliasName` parameter. The keyword
+    #   `$PUBLISHED` doesn't apply to templates.
     #
     # @return [Types::DescribeTemplateAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2583,11 +2286,6 @@ module Aws::QuickSight
     end
 
     # Describes read and write permissions on a template.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight describe-template-permissions —aws-account-id
-    # 735340738645 —template-id reports_test_template`
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template you are describing.
@@ -2631,15 +2329,6 @@ module Aws::QuickSight
     end
 
     # Returns information about a user, given the user name.
-    #
-    # The response is a user object that contains the user's Amazon
-    # Resource Name (ARN), AWS Identity and Access Management (IAM) role,
-    # and email address.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight describe-user --aws-account-id=111122223333
-    # --namespace=default --user-name=Pat `
     #
     # @option params [required, String] :user_name
     #   The name of the user that you want to describe.
@@ -2688,49 +2377,18 @@ module Aws::QuickSight
 
     # Generates a server-side embeddable URL and authorization code. Before
     # this can work properly, first you need to configure the dashboards and
-    # user permissions. For more information, see [ Embedding Amazon
-    # QuickSight Dashboards][1].
+    # user permissions. For more information, see the Amazon QuickSight User
+    # Guide section on [Embedding Amazon QuickSight Dashboards][1] or see
+    # the Amazon QuickSight API Reference section on [Embedding Amazon
+    # QuickSight Dashboards][2] .
     #
     # Currently, you can use `GetDashboardEmbedURL` only from the server,
     # not from the user’s browser.
     #
-    # **CLI Sample:**
-    #
-    # Assume the role with permissions enabled for actions:
-    # `quickSight:RegisterUser` and `quicksight:GetDashboardEmbedURL`. You
-    # can use assume-role, assume-role-with-web-identity, or
-    # assume-role-with-saml.
-    #
-    # `aws sts assume-role --role-arn
-    # "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
-    # --role-session-name embeddingsession`
-    #
-    # If the user does not exist in QuickSight, register the user:
-    #
-    # `aws quicksight register-user --aws-account-id 111122223333
-    # --namespace default --identity-type IAM --iam-arn
-    # "arn:aws:iam::111122223333:role/embedding_quicksight_dashboard_role"
-    # --user-role READER --session-name "embeddingsession" --email
-    # user123@example.com --region us-east-1`
-    #
-    # Get the URL for the embedded dashboard (`IAM` identity
-    # authentication):
-    #
-    # `aws quicksight get-dashboard-embed-url --aws-account-id 111122223333
-    # --dashboard-id 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type
-    # IAM`
-    #
-    # Get the URL for the embedded dashboard (`QUICKSIGHT` identity
-    # authentication):
-    #
-    # `aws quicksight get-dashboard-embed-url --aws-account-id 111122223333
-    # --dashboard-id 1a1ac2b2-3fc3-4b44-5e5d-c6db6778df89 --identity-type
-    # QUICKSIGHT --user-arn
-    # arn:aws:quicksight:us-east-1:111122223333:user/default/embedding_quicksight_dashboard_role/embeddingsession`
     #
     #
-    #
-    # [1]: https://docs.aws.example.com/en_us/quicksight/latest/user/embedding.html
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html
+    # [2]: https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are embedding.
@@ -2739,7 +2397,7 @@ module Aws::QuickSight
     #   The ID for the dashboard, also added to IAM policy
     #
     # @option params [required, String] :identity_type
-    #   The authentication method the user uses to sign in (IAM only).
+    #   The authentication method the user uses to sign in.
     #
     # @option params [Integer] :session_lifetime_in_minutes
     #   How many minutes the session is valid. The session lifetime must be
@@ -2754,9 +2412,10 @@ module Aws::QuickSight
     #   which allows the reset button.
     #
     # @option params [String] :user_arn
-    #   The Amazon QuickSight user's ARN, for use with `QUICKSIGHT` identity
-    #   type. You can use this for any Amazon QuickSight users in your account
-    #   (readers, authors, or admins) authenticated as one of the following:
+    #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
+    #   `QUICKSIGHT` identity type. You can use this for any Amazon QuickSight
+    #   users in your account (readers, authors, or admins) authenticated as
+    #   one of the following:
     #
     #   * Active Directory (AD) users or group members
     #
@@ -2801,11 +2460,6 @@ module Aws::QuickSight
 
     # Lists all the versions of the dashboards in the Quicksight
     # subscription.
-    #
-    # CLI syntax:
-    #
-    # aws quicksight list-template-versions —aws-account-id 111122223333
-    # —template-id reports-test-template
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are listing.
@@ -2860,11 +2514,6 @@ module Aws::QuickSight
 
     # Lists dashboards in the AWS account.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight list-dashboards --aws-account-id 111122223333
-    # --max-results 5 —next-token 'next-10'`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboards you are listing.
     #
@@ -2916,10 +2565,7 @@ module Aws::QuickSight
     # Lists all of the datasets belonging to this account in an AWS region.
     #
     # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:dataset/*`
-    #
-    # CLI syntax: `aws quicksight list-data-sets
-    # --aws-account-id=111111111111`
+    # `arn:aws:quicksight:region:aws-account-id:dataset/*`.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
@@ -2970,14 +2616,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists data sources in current AWS region that belong to this AWS
+    # Lists data sources in current AWS Region that belong to this AWS
     # account.
-    #
-    # The permissions resource is:
-    # `arn:aws:quicksight:region:aws-account-id:datasource/*`
-    #
-    # CLI syntax: `aws quicksight list-data-sources
-    # --aws-account-id=111122223333`
     #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
@@ -3077,17 +2717,6 @@ module Aws::QuickSight
 
     # Lists member users in a group.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # The response is a list of group member objects.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight list-group-memberships -\-aws-account-id=111122223333
-    # -\-namespace=default `
-    #
     # @option params [required, String] :group_name
     #   The name of the group that you want to see a membership list of.
     #
@@ -3142,16 +2771,6 @@ module Aws::QuickSight
 
     # Lists all user groups in Amazon QuickSight.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/*`.
-    #
-    # The response is a list of group objects.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight list-groups -\-aws-account-id=111122223333
-    # -\-namespace=default `
-    #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the group is in. Currently, you use
     #   the ID for the AWS account that contains your Amazon QuickSight
@@ -3204,13 +2823,6 @@ module Aws::QuickSight
 
     # Lists assignments in current QuickSight account.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight list-iam-policy-assignments
-    # --aws-account-id=111122223333 --max-result=5
-    # --assignment-status=ENABLED --namespace=default --region=us-east-1
-    # --next-token=3 `
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID that contains this IAM policy assignment.
     #
@@ -3262,15 +2874,9 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the assignments and the ARNs for the associated IAM policies
-    # assigned to the specified user and the group or groups that the user
-    # belongs to.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight list-iam-policy-assignments-for-user
-    # --aws-account-id=111122223333 --user-name=user5 --namespace=default
-    # --max-result=6 --region=us-east-1 `
+    # Lists all the assignments and the Amazon Resource Names (ARNs) for the
+    # associated IAM policies assigned to the specified user and the group
+    # or groups that the user belongs to.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID that contains the assignment.
@@ -3386,16 +2992,9 @@ module Aws::QuickSight
 
     # Lists the tags assigned to a resource.
     #
-    # CLI syntax:
-    #
-    # * `aws quicksight list-tags-for-resource --resource-arn
-    #   arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1 --region
-    #   us-east-1`
-    #
-    # ^
-    #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource you want a list of tags for.
+    #   The Amazon Resource Name (ARN) of the resource that you want a list of
+    #   tags for.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3427,11 +3026,6 @@ module Aws::QuickSight
     end
 
     # Lists all the aliases of a template.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight list-template-aliases --aws-account-id 111122223333
-    # —template-id 'reports_test_template'`
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template aliases you are listing.
@@ -3482,11 +3076,6 @@ module Aws::QuickSight
     end
 
     # Lists all the versions of the templates in the Quicksight account.
-    #
-    # CLI syntax:
-    #
-    # aws quicksight list-template-versions --aws-account-id 111122223333
-    # --aws-account-id 196359894473 --template-id reports-test-template
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the templates you are listing.
@@ -3540,11 +3129,6 @@ module Aws::QuickSight
 
     # Lists all the templates in the QuickSight account.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight list-templates --aws-account-id 111122223333
-    # --max-results 1 —next-token AYADeJuxwOypAndSoOn`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the templates you are listing.
     #
@@ -3594,14 +3178,6 @@ module Aws::QuickSight
 
     # Lists the Amazon QuickSight groups that an Amazon QuickSight user is a
     # member of.
-    #
-    # The response is a one or more group objects.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight list-user-groups -\-user-name=Pat
-    # -\-aws-account-id=111122223333 -\-namespace=default
-    # -\-region=us-east-1 `
     #
     # @option params [required, String] :user_name
     #   The Amazon QuickSight user name that you want to list group
@@ -3660,15 +3236,6 @@ module Aws::QuickSight
     # Returns a list of all of the Amazon QuickSight users belonging to this
     # account.
     #
-    # The response is a list of user objects, containing each user's Amazon
-    # Resource Name (ARN), AWS Identity and Access Management (IAM) role,
-    # and email address.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight list-users --aws-account-id=111122223333
-    # --namespace=default `
-    #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the user is in. Currently, you use the
     #   ID for the AWS account that contains your Amazon QuickSight account.
@@ -3724,12 +3291,6 @@ module Aws::QuickSight
     # Creates an Amazon QuickSight user, whose identity is associated with
     # the AWS Identity and Access Management (IAM) identity or role
     # specified in the request.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight register-user -\-aws-account-id=111122223333
-    # -\-namespace=default -\-email=pat@example.com -\-identity-type=IAM
-    # -\-user-role=AUTHOR -\-iam-arn=arn:aws:iam::111122223333:user/Pat `
     #
     # @option params [required, String] :identity_type
     #   Amazon QuickSight supports several ways of managing the identity of
@@ -3829,42 +3390,33 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Assigns a tag or tags to a resource.
-    #
     # Assigns one or more tags (key-value pairs) to the specified QuickSight
-    # resource. Tags can help you organize and categorize your resources.
-    # You can also use them to scope user permissions, by granting a user
-    # permission to access or change only resources with certain tag values.
-    # You can use the TagResource action with a resource that already has
-    # tags. If you specify a new tag key for the resource, this tag is
-    # appended to the list of tags associated with the resource. If you
-    # specify a tag key that is already associated with the resource, the
-    # new tag value that you specify replaces the previous value for that
-    # tag.
+    # resource.
+    #
+    # Tags can help you organize and categorize your resources. You can also
+    # use them to scope user permissions, by granting a user permission to
+    # access or change only resources with certain tag values. You can use
+    # the `TagResource` operation with a resource that already has tags. If
+    # you specify a new tag key for the resource, this tag is appended to
+    # the list of tags associated with the resource. If you specify a tag
+    # key that is already associated with the resource, the new tag value
+    # that you specify replaces the previous value for that tag.
     #
     # You can associate as many as 50 tags with a resource. QuickSight
-    # supports tagging on data-set, data-source, dashboard, template.
+    # supports tagging on data set, data source, dashboard, and template.
     #
-    # Tagging for QuickSight works in a similar was to tagging for other AWS
+    # Tagging for QuickSight works in a similar way to tagging for other AWS
     # services, except for the following:
     #
-    # * You can't use tags to track AWS costs for QuickSight, because
-    #   QuickSight costs are based on users and SPICE capacity, which
-    #   aren't taggable resources.
+    # * You can't use tags to track AWS costs for QuickSight. This
+    #   restriction is because QuickSight costs are based on users and SPICE
+    #   capacity, which aren't taggable resources.
     #
     # * QuickSight doesn't currently support the Tag Editor for AWS
     #   Resource Groups.
     #
-    # CLI syntax to tag a resource:
-    #
-    # * `aws quicksight tag-resource --resource-arn
-    #   arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1 --tags
-    #   Key=K1,Value=V1 Key=K2,Value=V2 --region us-east-1`
-    #
-    # ^
-    #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource you want to tag.
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -3903,16 +3455,8 @@ module Aws::QuickSight
 
     # Removes a tag or tags from a resource.
     #
-    # CLI syntax:
-    #
-    # * `aws quicksight untag-resource --resource-arn
-    #   arn:aws:quicksight:us-east-1:111111111111:dataset/dataset1
-    #   --tag-keys K1 K2 --region us-east-1`
-    #
-    # ^
-    #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource you to untag.
+    #   The Amazon Resource Name (ARN) of the resource that you want to untag.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the key-value pairs for the resource tag or tags assigned
@@ -3945,18 +3489,6 @@ module Aws::QuickSight
     end
 
     # Updates a dashboard in the AWS account.
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight update-dashboard --aws-account-id 111122223333
-    # --dashboard-id 123123123 --dashboard-name "test-update102"
-    # --source-entity
-    # SourceTemplate=\{Arn=arn:aws:quicksight:us-west-2:111122223333:template/sales-report-template2\}
-    # --data-set-references
-    # DataSetPlaceholder=SalesDataSet,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/0e251aef-9ebf-46e1-b852-eb4fa33c1d3a`
-    #
-    # `aws quicksight update-dashboard --cli-input-json
-    # file://update-dashboard.json `
     #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are updating.
@@ -4083,73 +3615,6 @@ module Aws::QuickSight
 
     # Updates read and write permissions on a dashboard.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight update-dashboard-permissions —cli-input-json
-    # file://update-permission.json`
-    #
-    # A sample update-permissions.json for granting read only permissions:
-    #
-    # `\{ "AwsAccountId": "111122223333", "DashboardId":
-    # "reports_test_report", "GrantPermissions": [ \{ "Principal":
-    # "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-    # "Actions": [ "quicksight:DescribeDashboard",
-    # "quicksight:ListDashboardVersions",
-    # "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard" ]
-    # \} ] \}`
-    #
-    # A sample update-permissions.json for granting read and write
-    # permissions:
-    #
-    # `\{ "AwsAccountId": "111122223333", "DashboardId":
-    # "reports_test_report", "GrantPermissions": [ \{ "Principal":
-    # "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-    # "Actions": [ "quicksight:DescribeDashboard",
-    # "quicksight:ListDashboardVersions",
-    # "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard",
-    # "quicksight:DescribeDashboardPermissions",
-    # "quicksight:UpdateDashboardPermissions",
-    # "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard",
-    # "quicksight:UpdateDashboard",
-    # "quicksight:UpdateDashboardPublishedVersion", ] \} ] \}`
-    #
-    # A sample update-permissions.json for revoking write permissions:
-    #
-    # `\{ "AwsAccountId": "111122223333", "DashboardId":
-    # "reports_test_report", "RevokePermissions": [ \{ "Principal":
-    # "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-    # "Actions": [ "quicksight:DescribeDashboardPermissions",
-    # "quicksight:UpdateDashboardPermissions",
-    # "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard",
-    # "quicksight:UpdateDashboard",
-    # "quicksight:UpdateDashboardPublishedVersion", ] \} ] \}`
-    #
-    # A sample update-permissions.json for revoking read and write
-    # permissions:
-    #
-    # `\{ "AwsAccountId": "111122223333", "DashboardId":
-    # "reports_test_report", "RevokePermissions": [ \{ "Principal":
-    # "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-    # "Actions": [ "quicksight:DescribeDashboard",
-    # "quicksight:ListDashboardVersions",
-    # "quicksight:DescribeDashboardVersion", "quicksight:QueryDashboard",
-    # "quicksight:DescribeDashboardPermissions",
-    # "quicksight:UpdateDashboardPermissions",
-    # "quicksight:DeleteDashboardVersion", "quicksight:DeleteDashboard",
-    # "quicksight:UpdateDashboard",
-    # "quicksight:UpdateDashboardPublishedVersion", ] \} ] \}`
-    #
-    # To obtain the principal name of a QuickSight user or group, you can
-    # use describe-group or describe-user. For example:
-    #
-    # `aws quicksight describe-user --aws-account-id 111122223333
-    # --namespace default --user-name user2 --region us-east-1 \{ "User": \{
-    # "Arn": "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",
-    # "Active": true, "Email": "user2@example.com", "Role": "ADMIN",
-    # "UserName": "user2", "PrincipalId":
-    # "federated/iam/abcd2abcdabcdeabc5ab5" \}, "RequestId":
-    # "8f74bb31-6291-448a-a71c-a765a44bae31", "Status": 200 \}`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are updating.
     #
@@ -4211,11 +3676,6 @@ module Aws::QuickSight
 
     # Updates the published version of a dashboard.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight update-dashboard-published-version --aws-account-id
-    # 111122223333 --dashboard-id dashboard-w1 ---version-number 2`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the dashboard you are updating.
     #
@@ -4258,51 +3718,12 @@ module Aws::QuickSight
 
     # Updates a dataset.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight update-data-set `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-set-id=unique-data-set-id `
-    #
-    # `--name='My dataset' `
-    #
-    # `--import-mode=SPICE `
-    #
-    # `--physical-table-map='\{`
-    #
-    # ` "physical-table-id": \{`
-    #
-    # ` "RelationalTable": \{`
-    #
-    # ` "DataSourceArn":
-    # "arn:aws:quicksight:us-west-2:111111111111:datasource/data-source-id",`
-    #
-    # ` "Name": "table1",`
-    #
-    # ` "InputColumns": [`
-    #
-    # ` \{`
-    #
-    # ` "Name": "column1",`
-    #
-    # ` "Type": "STRING"`
-    #
-    # ` \}`
-    #
-    # ` ]`
-    #
-    # ` \}`
-    #
-    # ` \}'`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   The ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @option params [required, String] :name
     #   The display name for the dataset.
@@ -4320,7 +3741,7 @@ module Aws::QuickSight
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
     #   Groupings of columns that work together in certain QuickSight
-    #   features. Currently only geospatial hierarchy is supported.
+    #   features. Currently, only geospatial hierarchy is supported.
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
     #   Row-level security configuration on the data you want to create.
@@ -4469,27 +3890,14 @@ module Aws::QuickSight
     # Updates the permissions on a dataset.
     #
     # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight update-data-set-permissions `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-set-id=unique-data-set-id `
-    #
-    # `--grant-permissions='[\{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSet","quicksight:DescribeDataSetPermissions","quicksight:PassDataSet","quicksight:ListIngestions","quicksight:DescribeIngestion"]\}]'
-    # `
-    #
-    # `--revoke-permissions='[\{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSet","quicksight:DeleteDataSet","quicksight:UpdateDataSetPermissions","quicksight:CreateIngestion","quicksight:CancelIngestion"]\}]'`
+    # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
     #   The AWS Account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset you want to create. This is unique per region
-    #   per AWS account.
+    #   The ID for the dataset that you want to create. This ID is unique per
+    #   AWS Region for each AWS account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   The resource permissions that you want to grant to the dataset.
@@ -4541,48 +3949,32 @@ module Aws::QuickSight
 
     # Updates a data source.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:datasource/data-source-id`
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight update-data-source `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-source-id=unique-data-source-id `
-    #
-    # `--name='My Data Source' `
-    #
-    # `--data-source-parameters='\{"PostgreSqlParameters":\{"Host":"my-db-host.example.com","Port":1234,"Database":"my-db"\}\}'
-    # `
-    #
-    # `--credentials='\{"CredentialPair":\{"Username":"username","Password":"password"\}\}`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @option params [required, String] :name
     #   A display name for the data source.
     #
     # @option params [Types::DataSourceParameters] :data_source_parameters
-    #   The parameters QuickSight uses to connect to your underlying source.
+    #   The parameters that QuickSight uses to connect to your underlying
+    #   source.
     #
     # @option params [Types::DataSourceCredentials] :credentials
-    #   The credentials QuickSight uses to connect to your underlying source.
-    #   Currently only username/password based credentials are supported.
+    #   The credentials that QuickSight that uses to connect to your
+    #   underlying source. Currently, only credentials based on user name and
+    #   password are supported.
     #
     # @option params [Types::VpcConnectionProperties] :vpc_connection_properties
-    #   You need to use this parameter only when you want QuickSight to use a
-    #   VPC connection when connecting to your underlying source.
+    #   Use this parameter only when you want QuickSight to use a VPC
+    #   connection when connecting to your underlying source.
     #
     # @option params [Types::SslProperties] :ssl_properties
-    #   SSL properties that apply when QuickSight connects to your underlying
-    #   source.
+    #   Secure Socket Layer (SSL) properties that apply when QuickSight
+    #   connects to your underlying source.
     #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4717,30 +4109,12 @@ module Aws::QuickSight
 
     # Updates the permissions to a data source.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:region:aws-account-id:datasource/data-source-id`
-    #
-    # CLI syntax:
-    #
-    # `aws quicksight update-data-source-permissions `
-    #
-    # `--aws-account-id=111122223333 `
-    #
-    # `--data-source-id=unique-data-source-id `
-    #
-    # `--name='My Data Source' `
-    #
-    # `--grant-permissions='[\{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user1","Actions":["quicksight:DescribeDataSource","quicksight:DescribeDataSourcePermissions","quicksight:PassDataSource"]\}]'
-    # `
-    #
-    # `--revoke-permissions='[\{"Principal":"arn:aws:quicksight:us-east-1:111122223333:user/default/user2","Actions":["quicksight:UpdateDataSource","quicksight:DeleteDataSource","quicksight:UpdateDataSourcePermissions"]\}]'`
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID.
     #
     # @option params [required, String] :data_source_id
-    #   The ID of the data source. This is unique per AWS Region per AWS
-    #   account.
+    #   The ID of the data source. This ID is unique per AWS Region for each
+    #   AWS account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   A list of resource permissions that you want to grant on the data
@@ -4794,18 +4168,6 @@ module Aws::QuickSight
 
     # Changes a group description.
     #
-    # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<aws-account-id>:group/default/<group-name>
-    # `.
-    #
-    # The response is a group object.
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight update-group --aws-account-id=111122223333
-    # --namespace=default --group-name=Sales --description="Sales BI
-    # Dashboards" `
-    #
     # @option params [required, String] :group_name
     #   The name of the group that you want to update.
     #
@@ -4856,15 +4218,6 @@ module Aws::QuickSight
     # Updates an existing assignment. This operation updates only the
     # optional parameter or parameters that are specified in the request.
     #
-    # CLI syntax:
-    #
-    # ``aws quicksight update-iam-policy-assignment
-    # --aws-account-id=111122223333 --assignment-name=FullAccessAssignment
-    # --assignment-status=DRAFT
-    # --policy-arns=arn:aws:iam::aws:policy/AdministratorAccess
-    # --identities="user=user-1,user-2,group=admin" --namespace=default
-    # --region=us-east-1
-    #
     # @option params [required, String] :aws_account_id
     #   The AWS account ID that contains the IAM policy assignment.
     #
@@ -4887,8 +4240,8 @@ module Aws::QuickSight
     #     creating the data source.
     #
     # @option params [String] :policy_arn
-    #   An IAM policy ARN that will be applied to specified QuickSight users
-    #   and groups in this assignment.
+    #   An IAM policy Amazon Resource Name (ARN) that will be applied to
+    #   specified QuickSight users and groups in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
     #   QuickSight users and/or groups that you want to assign to the
@@ -4940,18 +4293,6 @@ module Aws::QuickSight
 
     # Updates a template from an existing QuickSight analysis.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight update-template --aws-account-id 111122223333
-    # --template-id reports_test_template --data-set-references
-    # DataSetPlaceholder=reports,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/c684a204-d134-4c53-a63c-451f72c60c28
-    # DataSetPlaceholder=Elblogs,DataSetArn=arn:aws:quicksight:us-west-2:111122223333:dataset/15840b7d-b542-4491-937b-602416b367b3
-    # —source-entity
-    # SourceAnalysis=’\{Arn=arn:aws:quicksight:us-west-2:111122223333:analysis/c5731fe9-4708-4598-8f6d-cf2a70875b6d\}`
-    #
-    # You can also pass in a json file: `aws quicksight update-template
-    # —cli-input-json file://create-template.json`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template you are updating.
     #
@@ -4964,11 +4305,10 @@ module Aws::QuickSight
     #   another template.
     #
     # @option params [String] :version_description
-    #   A description of the current template version being created. This API
-    #   created the first version of the template. Every time UpdateTemplate
-    #   is called a new version is created. Each version of the template
-    #   maintains a description of the version in the VersionDescription
-    #   field.
+    #   A description of the current template version being updated. Every
+    #   time you cal `UpdateTemplate` you create a new version. Each version
+    #   of the template maintains a description of the version in the
+    #   `VersionDescription` field.
     #
     # @option params [String] :name
     #   The name for the template.
@@ -5025,12 +4365,6 @@ module Aws::QuickSight
 
     # Updates the template alias of a template.
     #
-    # CLI syntax:
-    #
-    # `aws quicksight update-template-alias --aws-account-id 111122223333
-    # --template-id 'reports_test_template' --alias-name STAGING
-    # —template-version-number 2 `
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template aliases you are updating.
     #
@@ -5038,7 +4372,11 @@ module Aws::QuickSight
     #   The ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The alias name.
+    #   The alias of the template that you want to update. If you provide a
+    #   specific alias, you update the version that the alias points to. You
+    #   can specify the latest version of the template by providing the
+    #   keyword `$LATEST` in the `AliasName` parameter. The keyword
+    #   `$PUBLISHED` doesn't apply to templates.
     #
     # @option params [required, Integer] :template_version_number
     #   The version number of the template.
@@ -5077,90 +4415,6 @@ module Aws::QuickSight
 
     # Updates the permissions on a template.
     #
-    # CLI syntax:
-    #
-    # * `aws quicksight describe-template-permissions —aws-account-id
-    #   111122223333 —template-id reports_test_template`
-    #
-    # * `aws quicksight update-template-permissions —cli-input-json
-    #   file://update-permission.json `
-    #
-    # * The structure of `update-permissions.json` to add permissions:
-    #
-    #   `\{ "AwsAccountId": "111122223333",`
-    #
-    #   ` "DashboardId": "reports_test_template",`
-    #
-    #   ` "GrantPermissions": [`
-    #
-    #   ` \{ "Principal":
-    #   "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",`
-    #
-    #   ` "Actions": [`
-    #
-    #   ` "quicksight:DescribeTemplate",`
-    #
-    #   ` "quicksight:ListTemplateVersions"`
-    #
-    #   ` ] \} ] \}`
-    #
-    #   The structure of `update-permissions.json` to add permissions:
-    #
-    #   `\{ "AwsAccountId": "111122223333",`
-    #
-    #   ` "DashboardId": "reports_test_template",`
-    #
-    #   ` "RevokePermissions": [`
-    #
-    #   ` \{ "Principal":
-    #   "arn:aws:quicksight:us-east-1:196359894473:user/default/user3",`
-    #
-    #   ` "Actions": [`
-    #
-    #   ` "quicksight:DescribeTemplate",`
-    #
-    #   ` "quicksight:ListTemplateVersions"`
-    #
-    #   ` ] \} ] \}`
-    #
-    #   To obtain the principal name of a QuickSight group or user, use user
-    #   describe-group or describe-user. For example:
-    #
-    #   `aws quicksight describe-user `
-    #
-    #   `--aws-account-id 111122223333`
-    #
-    #   `--namespace default`
-    #
-    #   `--user-name user2 `
-    #
-    #   `--region us-east-1`
-    #
-    #   `\{`
-    #
-    #   ` "User": \{`
-    #
-    #   ` "Arn":
-    #   "arn:aws:quicksight:us-east-1:111122223333:user/default/user2",`
-    #
-    #   ` "Active": true,`
-    #
-    #   ` "Email": "user2@example.com",`
-    #
-    #   ` "Role": "ADMIN",`
-    #
-    #   ` "UserName": "user2",`
-    #
-    #   ` "PrincipalId": "federated/iam/abcd2abcdabcdeabc5ab5"`
-    #
-    #   ` \},`
-    #
-    #   ` "RequestId": "8f74bb31-6291-448a-a71c-a765a44bae31",`
-    #
-    #   ` "Status": 200`
-    #
-    #   `\}`
-    #
     # @option params [required, String] :aws_account_id
     #   AWS account ID that contains the template.
     #
@@ -5168,15 +4422,10 @@ module Aws::QuickSight
     #   The ID for the template.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
-    #   A list of resource permissions to be granted on the template. The
-    #   following example shows the shorthand syntax:
-    #
-    #   `Shorthand Syntax: Principal=string,Actions=string,string ... `
+    #   A list of resource permissions to be granted on the template.
     #
     # @option params [Array<Types::ResourcePermission>] :revoke_permissions
     #   A list of resource permissions to be revoked from the template.
-    #   Shorthand syntax: `Shorthand Syntax:
-    #   Principal=string,Actions=string,string ... `
     #
     # @return [Types::UpdateTemplatePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5226,17 +4475,6 @@ module Aws::QuickSight
     end
 
     # Updates an Amazon QuickSight user.
-    #
-    # The response is a user object that contains the user's Amazon
-    # QuickSight user name, email address, active or inactive status in
-    # Amazon QuickSight, Amazon QuickSight role, and Amazon Resource Name
-    # (ARN).
-    #
-    # **CLI Sample:**
-    #
-    # `aws quicksight update-user --user-name=Pat --role=ADMIN
-    # --email=new_address@example.com --aws-account-id=111122223333
-    # --namespace=default --region=us-east-1 `
     #
     # @option params [required, String] :user_name
     #   The Amazon QuickSight user name that you want to update.
@@ -5313,7 +4551,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

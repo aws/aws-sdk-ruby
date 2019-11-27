@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2019-11-25)
+------------------
+
+* Feature - You can now set time based retention policies on Data Lifecycle Manager. With this launch, DLM allows you to set snapshot retention period in the following interval units: days, weeks, months and years.
+
 1.21.0 (2019-11-20)
 ------------------
 

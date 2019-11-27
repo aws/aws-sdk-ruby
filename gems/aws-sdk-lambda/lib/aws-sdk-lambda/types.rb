@@ -8,7 +8,7 @@
 module Aws::Lambda
   module Types
 
-    # Limits that are related to concurrency and code storage. All file and
+    # Limits that are related to concurrency and storage. All file and
     # storage sizes are in bytes.
     #
     # @!attribute [rw] total_code_size
@@ -17,8 +17,8 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] code_size_unzipped
-    #   The maximum size of your function's code and layers when they're
-    #   extracted.
+    #   The maximum size of a function's deployment package and layers when
+    #   they're extracted.
     #   @return [Integer]
     #
     # @!attribute [rw] code_size_zipped
@@ -429,8 +429,20 @@ module Aws::Lambda
     #         enabled: false,
     #         batch_size: 1,
     #         maximum_batching_window_in_seconds: 1,
+    #         parallelization_factor: 1,
     #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #         starting_position_timestamp: Time.now,
+    #         destination_config: {
+    #           on_success: {
+    #             destination: "DestinationArn",
+    #           },
+    #           on_failure: {
+    #             destination: "DestinationArn",
+    #           },
+    #         },
+    #         maximum_record_age_in_seconds: 1,
+    #         bisect_batch_on_function_error: false,
+    #         maximum_retry_attempts: 1,
     #       }
     #
     # @!attribute [rw] event_source_arn
@@ -478,6 +490,13 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum amount of time to gather records before invoking the
+    #   function, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parallelization_factor
+    #   (Streams) The number of batches to process from each shard
+    #   concurrently.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
@@ -491,6 +510,26 @@ module Aws::Lambda
     #   to start reading.
     #   @return [Time]
     #
+    # @!attribute [rw] destination_config
+    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
+    #   discarded records.
+    #   @return [Types::DestinationConfig]
+    #
+    # @!attribute [rw] maximum_record_age_in_seconds
+    #   (Streams) The maximum age of a record that Lambda sends to a
+    #   function for processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bisect_batch_on_function_error
+    #   (Streams) If the function returns an error, split the batch in two
+    #   and retry.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   (Streams) The maximum number of times to retry when the function
+    #   returns an error.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
     class CreateEventSourceMappingRequest < Struct.new(
@@ -499,8 +538,13 @@ module Aws::Lambda
       :enabled,
       :batch_size,
       :maximum_batching_window_in_seconds,
+      :parallelization_factor,
       :starting_position,
-      :starting_position_timestamp)
+      :starting_position_timestamp,
+      :destination_config,
+      :maximum_record_age_in_seconds,
+      :bisect_batch_on_function_error,
+      :maximum_retry_attempts)
       include Aws::Structure
     end
 
@@ -616,7 +660,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] dead_letter_config
@@ -626,7 +670,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -684,11 +728,11 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The [dead letter queue][1] for failed asynchronous invocations.
+    # The [dead-letter queue][1] for failed asynchronous invocations.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #
     # @note When making an API call, you may pass DeadLetterConfig
     #   data as a hash:
@@ -793,6 +837,44 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFunctionEventInvokeConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   A version number or alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionEventInvokeConfigRequest AWS API Documentation
+    #
+    class DeleteFunctionEventInvokeConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteFunctionRequest
     #   data as a hash:
     #
@@ -856,6 +938,37 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # A configuration object that specifies the destination of an event
+    # after Lambda processes it.
+    #
+    # @note When making an API call, you may pass DestinationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         on_success: {
+    #           destination: "DestinationArn",
+    #         },
+    #         on_failure: {
+    #           destination: "DestinationArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] on_success
+    #   The destination configuration for successful invocations.
+    #   @return [Types::OnSuccess]
+    #
+    # @!attribute [rw] on_failure
+    #   The destination configuration for failed invocations.
+    #   @return [Types::OnFailure]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DestinationConfig AWS API Documentation
+    #
+    class DestinationConfig < Struct.new(
+      :on_success,
+      :on_failure)
+      include Aws::Structure
+    end
+
     # Need additional permissions to configure VPC settings.
     #
     # @!attribute [rw] type
@@ -911,9 +1024,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # AWS Lambda was not able to create an Elastic Network Interface (ENI)
-    # in the VPC, specified as part of Lambda function configuration,
-    # because the limit for network interfaces has been reached.
+    # AWS Lambda was not able to create an elastic network interface in the
+    # VPC, specified as part of Lambda function configuration, because the
+    # limit for network interfaces has been reached.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -969,8 +1082,10 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The results of a configuration update that applied environment
-    # variables.
+    # The results of an operation to update or read environment variables.
+    # If the operation is successful, the response contains the environment
+    # variables. If it failed, the response contains details about the
+    # error.
     #
     # @!attribute [rw] variables
     #   Environment variable key-value pairs.
@@ -1000,6 +1115,13 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum amount of time to gather records before invoking the
+    #   function, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parallelization_factor
+    #   (Streams) The number of batches to process from each shard
+    #   concurrently.
     #   @return [Integer]
     #
     # @!attribute [rw] event_source_arn
@@ -1011,7 +1133,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] last_modified
-    #   The date that the event source mapping was last updated.
+    #   The date that the event source mapping was last updated, or its
+    #   state changed.
     #   @return [Time]
     #
     # @!attribute [rw] last_processing_result
@@ -1026,9 +1149,29 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The cause of the last state change, either `User initiated` or
-    #   `Lambda initiated`.
+    #   Indicates whether the last change to the event source mapping was
+    #   made by a user, or by the Lambda service.
     #   @return [String]
+    #
+    # @!attribute [rw] destination_config
+    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
+    #   discarded records.
+    #   @return [Types::DestinationConfig]
+    #
+    # @!attribute [rw] maximum_record_age_in_seconds
+    #   (Streams) The maximum age of a record that Lambda sends to a
+    #   function for processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bisect_batch_on_function_error
+    #   (Streams) If the function returns an error, split the batch in two
+    #   and retry.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   (Streams) The maximum number of times to retry when the function
+    #   returns an error.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
@@ -1036,12 +1179,17 @@ module Aws::Lambda
       :uuid,
       :batch_size,
       :maximum_batching_window_in_seconds,
+      :parallelization_factor,
       :event_source_arn,
       :function_arn,
       :last_modified,
       :last_processing_result,
       :state,
-      :state_transition_reason)
+      :state_transition_reason,
+      :destination_config,
+      :maximum_record_age_in_seconds,
+      :bisect_batch_on_function_error,
+      :maximum_retry_attempts)
       include Aws::Structure
     end
 
@@ -1176,7 +1324,7 @@ module Aws::Lambda
     # @!attribute [rw] kms_key_arn
     #   The KMS key that's used to encrypt the function's environment
     #   variables. This key is only returned if you've configured a
-    #   customer-managed CMK.
+    #   customer managed CMK.
     #   @return [String]
     #
     # @!attribute [rw] tracing_config
@@ -1198,6 +1346,33 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
     #   @return [Array<Types::Layer>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the function. When the state is `Inactive`, you
+    #   can reactivate the function by invoking it.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason for the function's current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason_code
+    #   The reason code for the function's current state. When the code is
+    #   `Creating`, you can't invoke or modify the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_status
+    #   The status of the last update that was performed on the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_status_reason
+    #   The reason for the last update that was performed on the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_status_reason_code
+    #   The reason code for the last update that was performed on the
+    #   function.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
@@ -1221,7 +1396,58 @@ module Aws::Lambda
       :tracing_config,
       :master_arn,
       :revision_id,
-      :layers)
+      :layers,
+      :state,
+      :state_reason,
+      :state_reason_code,
+      :last_update_status,
+      :last_update_status_reason,
+      :last_update_status_reason_code)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] last_modified
+    #   The date and time that the configuration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The maximum number of times to retry when the function returns an
+    #   error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_event_age_in_seconds
+    #   The maximum age of a request that Lambda sends to a function for
+    #   processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_config
+    #   A destination for events after they have been sent to a function for
+    #   processing.
+    #
+    #   **Destinations**
+    #
+    #   * **Function** - The Amazon Resource Name (ARN) of a Lambda
+    #     function.
+    #
+    #   * **Queue** - The ARN of an SQS queue.
+    #
+    #   * **Topic** - The ARN of an SNS topic.
+    #
+    #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
+    #   @return [Types::DestinationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionEventInvokeConfig AWS API Documentation
+    #
+    class FunctionEventInvokeConfig < Struct.new(
+      :last_modified,
+      :function_arn,
+      :maximum_retry_attempts,
+      :maximum_event_age_in_seconds,
+      :destination_config)
       include Aws::Structure
     end
 
@@ -1335,6 +1561,44 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest AWS API Documentation
     #
     class GetFunctionConfigurationRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionEventInvokeConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   A version number or alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionEventInvokeConfigRequest AWS API Documentation
+    #
+    class GetFunctionEventInvokeConfigRequest < Struct.new(
       :function_name,
       :qualifier)
       include Aws::Structure
@@ -1600,10 +1864,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # One of the parameters in the request is invalid. For example, if you
-    # provided an IAM role for AWS Lambda to assume in the `CreateFunction`
-    # or the `UpdateFunctionConfiguration` API, that AWS Lambda is unable to
-    # assume you will get this exception.
+    # One of the parameters in the request is invalid.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -2251,6 +2512,65 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListFunctionEventInvokeConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of configurations to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionEventInvokeConfigsRequest AWS API Documentation
+    #
+    class ListFunctionEventInvokeConfigsRequest < Struct.new(
+      :function_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_event_invoke_configs
+    #   A list of configurations.
+    #   @return [Array<Types::FunctionEventInvokeConfig>]
+    #
+    # @!attribute [rw] next_marker
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionEventInvokeConfigsResponse AWS API Documentation
+    #
+    class ListFunctionEventInvokeConfigsResponse < Struct.new(
+      :function_event_invoke_configs,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListFunctionsRequest
     #   data as a hash:
     #
@@ -2495,6 +2815,46 @@ module Aws::Lambda
     class ListVersionsByFunctionResponse < Struct.new(
       :next_marker,
       :versions)
+      include Aws::Structure
+    end
+
+    # A destination for events that failed processing.
+    #
+    # @note When making an API call, you may pass OnFailure
+    #   data as a hash:
+    #
+    #       {
+    #         destination: "DestinationArn",
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   The Amazon Resource Name (ARN) of the destination resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/OnFailure AWS API Documentation
+    #
+    class OnFailure < Struct.new(
+      :destination)
+      include Aws::Structure
+    end
+
+    # A destination for events that were processed successfully.
+    #
+    # @note When making an API call, you may pass OnSuccess
+    #   data as a hash:
+    #
+    #       {
+    #         destination: "DestinationArn",
+    #       }
+    #
+    # @!attribute [rw] destination
+    #   The Amazon Resource Name (ARN) of the destination resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/OnSuccess AWS API Documentation
+    #
+    class OnSuccess < Struct.new(
+      :destination)
       include Aws::Structure
     end
 
@@ -2743,6 +3103,83 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutFunctionEventInvokeConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier",
+    #         maximum_retry_attempts: 1,
+    #         maximum_event_age_in_seconds: 1,
+    #         destination_config: {
+    #           on_success: {
+    #             destination: "DestinationArn",
+    #           },
+    #           on_failure: {
+    #             destination: "DestinationArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   A version number or alias name.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The maximum number of times to retry when the function returns an
+    #   error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_event_age_in_seconds
+    #   The maximum age of a request that Lambda sends to a function for
+    #   processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_config
+    #   A destination for events after they have been sent to a function for
+    #   processing.
+    #
+    #   **Destinations**
+    #
+    #   * **Function** - The Amazon Resource Name (ARN) of a Lambda
+    #     function.
+    #
+    #   * **Queue** - The ARN of an SQS queue.
+    #
+    #   * **Topic** - The ARN of an SNS topic.
+    #
+    #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
+    #   @return [Types::DestinationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionEventInvokeConfigRequest AWS API Documentation
+    #
+    class PutFunctionEventInvokeConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :maximum_retry_attempts,
+      :maximum_event_age_in_seconds,
+      :destination_config)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveLayerVersionPermissionRequest
     #   data as a hash:
     #
@@ -2855,7 +3292,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The resource already exists.
+    # The resource already exists, or another operation is in progress.
     #
     # @!attribute [rw] type
     #   The exception type.
@@ -2892,8 +3329,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The resource (for example, a Lambda function or access policy
-    # statement) specified in the request does not exist.
+    # The resource specified in the request does not exist.
     #
     # @!attribute [rw] type
     #   @return [String]
@@ -2904,6 +3340,25 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # The function is inactive and its VPC connection is no longer
+    # available. Wait for the VPC connection to reestablish and try again.
+    #
+    # @!attribute [rw] type
+    #   The exception type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ResourceNotReadyException AWS API Documentation
+    #
+    class ResourceNotReadyException < Struct.new(
       :type,
       :message)
       include Aws::Structure
@@ -2968,7 +3423,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # Request throughput limit exceeded.
+    # The request throughput limit was exceeded.
     #
     # @!attribute [rw] retry_after_seconds
     #   The number of seconds the caller should wait before retrying.
@@ -3145,6 +3600,18 @@ module Aws::Lambda
     #         enabled: false,
     #         batch_size: 1,
     #         maximum_batching_window_in_seconds: 1,
+    #         destination_config: {
+    #           on_success: {
+    #             destination: "DestinationArn",
+    #           },
+    #           on_failure: {
+    #             destination: "DestinationArn",
+    #           },
+    #         },
+    #         maximum_record_age_in_seconds: 1,
+    #         bisect_batch_on_function_error: false,
+    #         maximum_retry_attempts: 1,
+    #         parallelization_factor: 1,
     #       }
     #
     # @!attribute [rw] uuid
@@ -3185,6 +3652,33 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum amount of time to gather records before invoking the
+    #   function, in seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_config
+    #   (Streams) An Amazon SQS queue or Amazon SNS topic destination for
+    #   discarded records.
+    #   @return [Types::DestinationConfig]
+    #
+    # @!attribute [rw] maximum_record_age_in_seconds
+    #   (Streams) The maximum age of a record that Lambda sends to a
+    #   function for processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bisect_batch_on_function_error
+    #   (Streams) If the function returns an error, split the batch in two
+    #   and retry.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   (Streams) The maximum number of times to retry when the function
+    #   returns an error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parallelization_factor
+    #   (Streams) The number of batches to process from each shard
+    #   concurrently.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
@@ -3194,7 +3688,12 @@ module Aws::Lambda
       :function_name,
       :enabled,
       :batch_size,
-      :maximum_batching_window_in_seconds)
+      :maximum_batching_window_in_seconds,
+      :destination_config,
+      :maximum_record_age_in_seconds,
+      :bisect_batch_on_function_error,
+      :maximum_retry_attempts,
+      :parallelization_factor)
       include Aws::Structure
     end
 
@@ -3364,7 +3863,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/vpc.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] environment
@@ -3387,7 +3886,7 @@ module Aws::Lambda
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/dlq.html
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
@@ -3436,8 +3935,89 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateFunctionEventInvokeConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier",
+    #         maximum_retry_attempts: 1,
+    #         maximum_event_age_in_seconds: 1,
+    #         destination_config: {
+    #           on_success: {
+    #             destination: "DestinationArn",
+    #           },
+    #           on_failure: {
+    #             destination: "DestinationArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function, version, or alias.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function` (name-only), `my-function:v1`
+    #     (with alias).
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   You can append a version number or alias to any of the formats. The
+    #   length constraint applies only to the full ARN. If you specify only
+    #   the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   A version number or alias name.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_retry_attempts
+    #   The maximum number of times to retry when the function returns an
+    #   error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_event_age_in_seconds
+    #   The maximum age of a request that Lambda sends to a function for
+    #   processing.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_config
+    #   A destination for events after they have been sent to a function for
+    #   processing.
+    #
+    #   **Destinations**
+    #
+    #   * **Function** - The Amazon Resource Name (ARN) of a Lambda
+    #     function.
+    #
+    #   * **Queue** - The ARN of an SQS queue.
+    #
+    #   * **Topic** - The ARN of an SNS topic.
+    #
+    #   * **Event Bus** - The ARN of an Amazon EventBridge event bus.
+    #   @return [Types::DestinationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionEventInvokeConfigRequest AWS API Documentation
+    #
+    class UpdateFunctionEventInvokeConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :maximum_retry_attempts,
+      :maximum_event_age_in_seconds,
+      :destination_config)
+      include Aws::Structure
+    end
+
     # The VPC security groups and subnets that are attached to a Lambda
-    # function.
+    # function. For more information, see [VPC Settings][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

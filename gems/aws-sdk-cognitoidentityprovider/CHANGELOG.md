@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2019-11-26)
+------------------
+
+* Feature - This release adds a new setting for a user pool to configure which recovery methods a user can use to recover their account via the forgot password operation.
+
+1.30.0 (2019-11-25)
+------------------
+
+* Feature - Amazon Cognito Userpools now supports Sign in with Apple as an Identity Provider.
+
 1.29.0 (2019-11-15)
 ------------------
 

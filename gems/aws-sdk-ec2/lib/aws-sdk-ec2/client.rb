@@ -14301,20 +14301,21 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the credit option for CPU usage of the specified T2 or T3
-    # instances. The credit options are `standard` and `unlimited`.
+    # Describes the credit option for CPU usage of the specified burstable
+    # performance instances. The credit options are `standard` and
+    # `unlimited`.
     #
-    # If you do not specify an instance ID, Amazon EC2 returns T2 and T3
-    # instances with the `unlimited` credit option, as well as instances
-    # that were previously configured as T2 or T3 with the `unlimited`
-    # credit option. For example, if you resize a T2 instance, while it is
-    # configured as `unlimited`, to an M4 instance, Amazon EC2 returns the
-    # M4 instance.
+    # If you do not specify an instance ID, Amazon EC2 returns burstable
+    # performance instances with the `unlimited` credit option, as well as
+    # instances that were previously configured as T2, T3, and T3a with the
+    # `unlimited` credit option. For example, if you resize a T2 instance,
+    # while it is configured as `unlimited`, to an M4 instance, Amazon EC2
+    # returns the M4 instance.
     #
     # If you specify one or more instance IDs, Amazon EC2 returns the credit
     # option (`standard` or `unlimited`) of those instances. If you specify
-    # an instance ID that is not valid, such as an instance that is not a T2
-    # or T3 instance, an error is returned.
+    # an instance ID that is not valid, such as an instance that is not a
+    # burstable performance instance, an error is returned.
     #
     # Recently terminated instances might appear in the returned results.
     # This interval is usually less than one hour.
@@ -24278,6 +24279,50 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the default credit option for CPU usage of a burstable
+    # performance instance family.
+    #
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_family
+    #   The instance family.
+    #
+    # @return [Types::GetDefaultCreditSpecificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDefaultCreditSpecificationResult#instance_family_credit_specification #instance_family_credit_specification} => Types::InstanceFamilyCreditSpecification
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_default_credit_specification({
+    #     dry_run: false,
+    #     instance_family: "t2", # required, accepts t2, t3, t3a
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a"
+    #   resp.instance_family_credit_specification.cpu_credits #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDefaultCreditSpecification AWS API Documentation
+    #
+    # @overload get_default_credit_specification(params = {})
+    # @param [Hash] params ({})
+    def get_default_credit_specification(params = {}, options = {})
+      req = build_request(:get_default_credit_specification, params)
+      req.send_request(options)
+    end
+
     # Describes the default customer master key (CMK) for EBS encryption by
     # default for your account in this Region. You can change the default
     # CMK for encryption by default using ModifyEbsDefaultKmsKeyId or
@@ -25735,6 +25780,68 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the default credit option for CPU usage of burstable
+    # performance instances. The default credit option is set at the account
+    # level per AWS Region, and is specified per instance family. All new
+    # burstable performance instances in the account launch using the
+    # default credit option.
+    #
+    # `ModifyDefaultCreditSpecification` is an asynchronous operation, which
+    # works at an AWS Region level and modifies the credit option for each
+    # Availability Zone. All zones in a Region are updated within five
+    # minutes. But if instances are launched during this operation, they
+    # might not get the new credit option until the zone is updated. To
+    # verify whether the update has occurred, you can call
+    # `GetDefaultCreditSpecification` and check `DefaultCreditSpecification`
+    # for updates.
+    #
+    # For more information, see [Burstable Performance Instances][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_family
+    #   The instance family.
+    #
+    # @option params [required, String] :cpu_credits
+    #   The credit option for CPU usage of the instance family.
+    #
+    #   Valid Values: `standard` \| `unlimited`
+    #
+    # @return [Types::ModifyDefaultCreditSpecificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDefaultCreditSpecificationResult#instance_family_credit_specification #instance_family_credit_specification} => Types::InstanceFamilyCreditSpecification
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_default_credit_specification({
+    #     dry_run: false,
+    #     instance_family: "t2", # required, accepts t2, t3, t3a
+    #     cpu_credits: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a"
+    #   resp.instance_family_credit_specification.cpu_credits #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyDefaultCreditSpecification AWS API Documentation
+    #
+    # @overload modify_default_credit_specification(params = {})
+    # @param [Hash] params ({})
+    def modify_default_credit_specification(params = {}, options = {})
+      req = build_request(:modify_default_credit_specification, params)
+      req.send_request(options)
+    end
+
     # Changes the default customer master key (CMK) for EBS encryption by
     # default for your account in this Region.
     #
@@ -26598,8 +26705,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the credit option for CPU usage on a running or stopped T2 or
-    # T3 instance. The credit options are `standard` and `unlimited`.
+    # Modifies the credit option for CPU usage on a running or stopped
+    # burstable performance instance. The credit options are `standard` and
+    # `unlimited`.
     #
     # For more information, see [Burstable Performance Instances][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
@@ -31874,13 +31982,13 @@ module Aws::EC2
     #   `stop`.
     #
     # @option params [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the T2 or T3 instance. Valid values
-    #   are `standard` and `unlimited`. To change this attribute after launch,
-    #   use [ ModifyInstanceCreditSpecification][1]. For more information, see
-    #   [Burstable Performance Instances][2] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The credit option for CPU usage of the burstable performance instance.
+    #   Valid values are `standard` and `unlimited`. To change this attribute
+    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
+    #   information, see [Burstable Performance Instances][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
-    #   Default: `standard` (T2 instances) or `unlimited` (T3 instances)
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
     #
     #
@@ -33395,7 +33503,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.120.0'
+      context[:gem_version] = '1.121.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

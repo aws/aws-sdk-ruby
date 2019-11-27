@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2019-11-26)
+------------------
+
+* Feature - AWS Serverless Application Repository now supports verified authors. Verified means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+
 1.22.0 (2019-10-23)
 ------------------
 

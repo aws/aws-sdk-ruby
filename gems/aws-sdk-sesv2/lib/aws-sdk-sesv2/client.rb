@@ -284,6 +284,10 @@ module Aws::SESV2
     #   An array of objects that define the tags (keys and values) that you
     #   want to associate with the configuration set.
     #
+    # @option params [Types::SuppressionOptions] :suppression_options
+    #   An object that contains information about your account's suppression
+    #   preferences.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -310,6 +314,9 @@ module Aws::SESV2
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     suppression_options: {
+    #       suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSet AWS API Documentation
@@ -672,26 +679,52 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Used to delete a suppressed email destination from your suppression
+    # list.
+    #
+    # @option params [required, String] :email_address
+    #   The suppressed email destination to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_suppressed_destination({
+    #     email_address: "EmailAddress", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteSuppressedDestination AWS API Documentation
+    #
+    # @overload delete_suppressed_destination(params = {})
+    # @param [Hash] params ({})
+    def delete_suppressed_destination(params = {}, options = {})
+      req = build_request(:delete_suppressed_destination, params)
+      req.send_request(options)
+    end
+
     # Obtain information about the email-sending status and capabilities of
     # your Amazon SES account in the current AWS Region.
     #
     # @return [Types::GetAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetAccountResponse#send_quota #send_quota} => Types::SendQuota
-    #   * {Types::GetAccountResponse#sending_enabled #sending_enabled} => Boolean
     #   * {Types::GetAccountResponse#dedicated_ip_auto_warmup_enabled #dedicated_ip_auto_warmup_enabled} => Boolean
     #   * {Types::GetAccountResponse#enforcement_status #enforcement_status} => String
     #   * {Types::GetAccountResponse#production_access_enabled #production_access_enabled} => Boolean
+    #   * {Types::GetAccountResponse#send_quota #send_quota} => Types::SendQuota
+    #   * {Types::GetAccountResponse#sending_enabled #sending_enabled} => Boolean
+    #   * {Types::GetAccountResponse#suppression_attributes #suppression_attributes} => Types::SuppressionAttributes
     #
     # @example Response structure
     #
+    #   resp.dedicated_ip_auto_warmup_enabled #=> Boolean
+    #   resp.enforcement_status #=> String
+    #   resp.production_access_enabled #=> Boolean
     #   resp.send_quota.max_24_hour_send #=> Float
     #   resp.send_quota.max_send_rate #=> Float
     #   resp.send_quota.sent_last_24_hours #=> Float
     #   resp.sending_enabled #=> Boolean
-    #   resp.dedicated_ip_auto_warmup_enabled #=> Boolean
-    #   resp.enforcement_status #=> String
-    #   resp.production_access_enabled #=> Boolean
+    #   resp.suppression_attributes.suppressed_reasons #=> Array
+    #   resp.suppression_attributes.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccount AWS API Documentation
     #
@@ -759,6 +792,7 @@ module Aws::SESV2
     #   * {Types::GetConfigurationSetResponse#reputation_options #reputation_options} => Types::ReputationOptions
     #   * {Types::GetConfigurationSetResponse#sending_options #sending_options} => Types::SendingOptions
     #   * {Types::GetConfigurationSetResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::GetConfigurationSetResponse#suppression_options #suppression_options} => Types::SuppressionOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -778,6 +812,8 @@ module Aws::SESV2
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #   resp.suppression_options.suppressed_reasons #=> Array
+    #   resp.suppression_options.suppressed_reasons[0] #=> String, one of "BOUNCE", "COMPLAINT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSet AWS API Documentation
     #
@@ -1179,6 +1215,39 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Used to fetch a single suppressed email destination from your
+    # suppression list.
+    #
+    # @option params [required, String] :email_address
+    #   Email destination to fetch from the suppression list.
+    #
+    # @return [Types::GetSuppressedDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSuppressedDestinationResponse#suppressed_destination #suppressed_destination} => Types::SuppressedDestination
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_suppressed_destination({
+    #     email_address: "EmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.suppressed_destination.email_address #=> String
+    #   resp.suppressed_destination.reason #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.suppressed_destination.last_update_time #=> Time
+    #   resp.suppressed_destination.attributes.message_id #=> String
+    #   resp.suppressed_destination.attributes.feedback_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetSuppressedDestination AWS API Documentation
+    #
+    # @overload get_suppressed_destination(params = {})
+    # @param [Hash] params ({})
+    def get_suppressed_destination(params = {}, options = {})
+      req = build_request(:get_suppressed_destination, params)
+      req.send_request(options)
+    end
+
     # List all of the configuration sets associated with your account in the
     # current region.
     #
@@ -1439,6 +1508,60 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Used to fetch a list suppressed email destinations from your
+    # suppression list.
+    #
+    # @option params [Array<String>] :reasons
+    #   Filters email destinations suppressed by the given reasons.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   Filters email destinations suppressed before the given time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   Filters email destinations suppressed after the given time.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to `ListSuppressedDestinations`
+    #   to indicate the position in the list of suppressed email destinations.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListSuppressedDestinations`. If the number of results is larger than
+    #   the number you specified in this parameter, then the response includes
+    #   a `NextToken` element, which you can use to obtain additional results.
+    #
+    # @return [Types::ListSuppressedDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSuppressedDestinationsResponse#suppressed_destination_summaries #suppressed_destination_summaries} => Array&lt;Types::SuppressedDestinationSummary&gt;
+    #   * {Types::ListSuppressedDestinationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_suppressed_destinations({
+    #     reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.suppressed_destination_summaries #=> Array
+    #   resp.suppressed_destination_summaries[0].email_address #=> String
+    #   resp.suppressed_destination_summaries[0].reason #=> String, one of "BOUNCE", "COMPLAINT"
+    #   resp.suppressed_destination_summaries[0].last_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListSuppressedDestinations AWS API Documentation
+    #
+    # @overload list_suppressed_destinations(params = {})
+    # @param [Hash] params ({})
+    def list_suppressed_destinations(params = {}, options = {})
+      req = build_request(:list_suppressed_destinations, params)
+      req.send_request(options)
+    end
+
     # Retrieve a list of the tags (keys and values) that are associated with
     # a specified resource. A *tag* is a label that you optionally define
     # and associate with a resource. Each tag consists of a required *tag
@@ -1527,6 +1650,35 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def put_account_sending_attributes(params = {}, options = {})
       req = build_request(:put_account_sending_attributes, params)
+      req.send_request(options)
+    end
+
+    # Change your account's suppression preferences for your account.
+    #
+    # @option params [Array<String>] :suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid reasons
+    #   are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_suppression_attributes({
+    #     suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributes AWS API Documentation
+    #
+    # @overload put_account_suppression_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_account_suppression_attributes(params = {}, options = {})
+      req = build_request(:put_account_suppression_attributes, params)
       req.send_request(options)
     end
 
@@ -1624,6 +1776,41 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def put_configuration_set_sending_options(params = {}, options = {})
       req = build_request(:put_configuration_set_sending_options, params)
+      req.send_request(options)
+    end
+
+    # Specify your account's suppression preferences for a configuration
+    # set.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set that you want to enable or disable
+    #   email sending for.
+    #
+    # @option params [Array<String>] :suppressed_reasons
+    #   A list of reasons to suppress email addresses. The only valid reasons
+    #   are:
+    #
+    #   * `COMPLAINT` – Amazon SES will suppress an email address that
+    #     receives a complaint.
+    #
+    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
+    #     bounces.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_configuration_set_suppression_options({
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     suppressed_reasons: ["BOUNCE"], # accepts BOUNCE, COMPLAINT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptions AWS API Documentation
+    #
+    # @overload put_configuration_set_suppression_options(params = {})
+    # @param [Hash] params ({})
+    def put_configuration_set_suppression_options(params = {}, options = {})
+      req = build_request(:put_configuration_set_suppression_options, params)
       req.send_request(options)
     end
 
@@ -1897,6 +2084,32 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Puts (overwrites) an email destination in your suppression list.
+    #
+    # @option params [required, String] :email_address
+    #   Email destination to be suppressed.
+    #
+    # @option params [required, String] :reason
+    #   Reason for which the email destination is suppressed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_suppressed_destination({
+    #     email_address: "EmailAddress", # required
+    #     reason: "BOUNCE", # required, accepts BOUNCE, COMPLAINT
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutSuppressedDestination AWS API Documentation
+    #
+    # @overload put_suppressed_destination(params = {})
+    # @param [Hash] params ({})
+    def put_suppressed_destination(params = {}, options = {})
+      req = build_request(:put_suppressed_destination, params)
+      req.send_request(options)
+    end
+
     # Sends an email message. You can use the Amazon SES API v2 to send two
     # types of messages:
     #
@@ -2153,7 +2366,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

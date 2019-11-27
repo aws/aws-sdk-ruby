@@ -192,6 +192,32 @@ module Aws::IoT
     #           message_id: "MessageId",
     #           role_arn: "AwsArn", # required
     #         },
+    #         iot_site_wise: {
+    #           put_asset_property_value_entries: [ # required
+    #             {
+    #               entry_id: "AssetPropertyEntryId",
+    #               asset_id: "AssetId",
+    #               property_id: "AssetPropertyId",
+    #               property_alias: "AssetPropertyAlias",
+    #               property_values: [ # required
+    #                 {
+    #                   value: { # required
+    #                     string_value: "AssetPropertyStringValue",
+    #                     integer_value: "AssetPropertyIntegerValue",
+    #                     double_value: "AssetPropertyDoubleValue",
+    #                     boolean_value: "AssetPropertyBooleanValue",
+    #                   },
+    #                   timestamp: { # required
+    #                     time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                     offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                   },
+    #                   quality: "AssetPropertyQuality",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           role_arn: "AwsArn", # required
+    #         },
     #         step_functions: {
     #           execution_name_prefix: "ExecutionNamePrefix",
     #           state_machine_name: "StateMachineName", # required
@@ -278,6 +304,11 @@ module Aws::IoT
     #   Sends an input to an AWS IoT Events detector.
     #   @return [Types::IotEventsAction]
     #
+    # @!attribute [rw] iot_site_wise
+    #   Sends data from the MQTT message that triggered the rule to AWS IoT
+    #   SiteWise asset properties.
+    #   @return [Types::IotSiteWiseAction]
+    #
     # @!attribute [rw] step_functions
     #   Starts execution of a Step Functions state machine.
     #   @return [Types::StepFunctionsAction]
@@ -302,6 +333,7 @@ module Aws::IoT
       :salesforce,
       :iot_analytics,
       :iot_events,
+      :iot_site_wise,
       :step_functions,
       :http)
       include Aws::Structure
@@ -494,6 +526,112 @@ module Aws::IoT
     #
     class Allowed < Struct.new(
       :policies)
+      include Aws::Structure
+    end
+
+    # An asset property timestamp entry containing the following
+    # information.
+    #
+    # @note When making an API call, you may pass AssetPropertyTimestamp
+    #   data as a hash:
+    #
+    #       {
+    #         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #       }
+    #
+    # @!attribute [rw] time_in_seconds
+    #   A string that contains the time in seconds since epoch. Accepts
+    #   substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] offset_in_nanos
+    #   Optional. A string that contains the nanosecond time offset. Accepts
+    #   substitution templates.
+    #   @return [String]
+    #
+    class AssetPropertyTimestamp < Struct.new(
+      :time_in_seconds,
+      :offset_in_nanos)
+      include Aws::Structure
+    end
+
+    # An asset property value entry containing the following information.
+    #
+    # @note When making an API call, you may pass AssetPropertyValue
+    #   data as a hash:
+    #
+    #       {
+    #         value: { # required
+    #           string_value: "AssetPropertyStringValue",
+    #           integer_value: "AssetPropertyIntegerValue",
+    #           double_value: "AssetPropertyDoubleValue",
+    #           boolean_value: "AssetPropertyBooleanValue",
+    #         },
+    #         timestamp: { # required
+    #           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #         },
+    #         quality: "AssetPropertyQuality",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of the asset property.
+    #   @return [Types::AssetPropertyVariant]
+    #
+    # @!attribute [rw] timestamp
+    #   The asset property value timestamp.
+    #   @return [Types::AssetPropertyTimestamp]
+    #
+    # @!attribute [rw] quality
+    #   Optional. A string that describes the quality of the value. Accepts
+    #   substitution templates. Must be `GOOD`, `BAD`, or `UNCERTAIN`.
+    #   @return [String]
+    #
+    class AssetPropertyValue < Struct.new(
+      :value,
+      :timestamp,
+      :quality)
+      include Aws::Structure
+    end
+
+    # Contains an asset property value (of a single type).
+    #
+    # @note When making an API call, you may pass AssetPropertyVariant
+    #   data as a hash:
+    #
+    #       {
+    #         string_value: "AssetPropertyStringValue",
+    #         integer_value: "AssetPropertyIntegerValue",
+    #         double_value: "AssetPropertyDoubleValue",
+    #         boolean_value: "AssetPropertyBooleanValue",
+    #       }
+    #
+    # @!attribute [rw] string_value
+    #   Optional. The string value of the value entry. Accepts substitution
+    #   templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] integer_value
+    #   Optional. A string that contains the integer value of the value
+    #   entry. Accepts substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] double_value
+    #   Optional. A string that contains the double value of the value
+    #   entry. Accepts substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] boolean_value
+    #   Optional. A string that contains the boolean value (`true` or
+    #   `false`) of the value entry. Accepts substitution templates.
+    #   @return [String]
+    #
+    class AssetPropertyVariant < Struct.new(
+      :string_value,
+      :integer_value,
+      :double_value,
+      :boolean_value)
       include Aws::Structure
     end
 
@@ -1039,6 +1177,31 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # An object that specifies the authorization service for a domain.
+    #
+    # @note When making an API call, you may pass AuthorizerConfig
+    #   data as a hash:
+    #
+    #       {
+    #         default_authorizer_name: "AuthorizerName",
+    #         allow_authorizer_override: false,
+    #       }
+    #
+    # @!attribute [rw] default_authorizer_name
+    #   The name of the authorization service for a domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] allow_authorizer_override
+    #   A Boolean that specifies whether the domain configuration's
+    #   authorization service can be overridden.
+    #   @return [Boolean]
+    #
+    class AuthorizerConfig < Struct.new(
+      :default_authorizer_name,
+      :allow_authorizer_override)
+      include Aws::Structure
+    end
+
     # The authorizer description.
     #
     # @!attribute [rw] authorizer_name
@@ -1074,6 +1237,11 @@ module Aws::IoT
     #   The UNIX timestamp of when the authorizer was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] signing_disabled
+    #   Specifies whether AWS IoT validates the token signature in an
+    #   authorization request.
+    #   @return [Boolean]
+    #
     class AuthorizerDescription < Struct.new(
       :authorizer_name,
       :authorizer_arn,
@@ -1082,7 +1250,8 @@ module Aws::IoT
       :token_signing_public_keys,
       :status,
       :creation_date,
-      :last_modified_date)
+      :last_modified_date,
+      :signing_disabled)
       include Aws::Structure
     end
 
@@ -1934,11 +2103,12 @@ module Aws::IoT
     #       {
     #         authorizer_name: "AuthorizerName", # required
     #         authorizer_function_arn: "AuthorizerFunctionArn", # required
-    #         token_key_name: "TokenKeyName", # required
-    #         token_signing_public_keys: { # required
+    #         token_key_name: "TokenKeyName",
+    #         token_signing_public_keys: {
     #           "KeyName" => "KeyValue",
     #         },
     #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         signing_disabled: false,
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -1963,12 +2133,18 @@ module Aws::IoT
     #   The status of the create authorizer request.
     #   @return [String]
     #
+    # @!attribute [rw] signing_disabled
+    #   Specifies whether AWS IoT validates the token signature in an
+    #   authorization request.
+    #   @return [Boolean]
+    #
     class CreateAuthorizerRequest < Struct.new(
       :authorizer_name,
       :authorizer_function_arn,
       :token_key_name,
       :token_signing_public_keys,
-      :status)
+      :status,
+      :signing_disabled)
       include Aws::Structure
     end
 
@@ -2084,6 +2260,75 @@ module Aws::IoT
       :certificate_arn,
       :certificate_id,
       :certificate_pem)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDomainConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_configuration_name: "DomainConfigurationName", # required
+    #         domain_name: "DomainName",
+    #         server_certificate_arns: ["AcmCertificateArn"],
+    #         validation_certificate_arn: "AcmCertificateArn",
+    #         authorizer_config: {
+    #           default_authorizer_name: "AuthorizerName",
+    #           allow_authorizer_override: false,
+    #         },
+    #         service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #       }
+    #
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration. This value must be unique to a
+    #   region.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificate_arns
+    #   The ARNs of the certificates that AWS IoT passes to the device
+    #   during the TLS handshake. Currently you can specify only one
+    #   certificate ARN. This value is not required for AWS-managed domains.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] validation_certificate_arn
+    #   The certificate used to validate the server certificate and prove
+    #   domain name ownership. This certificate must be signed by a public
+    #   certificate authority. This value is not required for AWS-managed
+    #   domains.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_config
+    #   An object that specifies the authorization service for a domain.
+    #   @return [Types::AuthorizerConfig]
+    #
+    # @!attribute [rw] service_type
+    #   The type of service delivered by the endpoint.
+    #   @return [String]
+    #
+    class CreateDomainConfigurationRequest < Struct.new(
+      :domain_configuration_name,
+      :domain_name,
+      :server_certificate_arns,
+      :validation_certificate_arn,
+      :authorizer_config,
+      :service_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_configuration_arn
+    #   The ARN of the domain configuration.
+    #   @return [String]
+    #
+    class CreateDomainConfigurationResponse < Struct.new(
+      :domain_configuration_name,
+      :domain_configuration_arn)
       include Aws::Structure
     end
 
@@ -2731,6 +2976,182 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateProvisioningClaimRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the provisioning template to use.
+    #   @return [String]
+    #
+    class CreateProvisioningClaimRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_id
+    #   The ID of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_pem
+    #   The provisioning claim certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair
+    #   The provisioning claim key pair.
+    #   @return [Types::KeyPair]
+    #
+    # @!attribute [rw] expiration
+    #   The provisioning claim expiration time.
+    #   @return [Time]
+    #
+    class CreateProvisioningClaimResponse < Struct.new(
+      :certificate_id,
+      :certificate_pem,
+      :key_pair,
+      :expiration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProvisioningTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         description: "TemplateDescription",
+    #         template_body: "TemplateBody", # required
+    #         enabled: false,
+    #         provisioning_role_arn: "RoleArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The JSON formatted contents of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   True to enable the fleet provisioning template, otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] provisioning_role_arn
+    #   The role ARN for the role associated with the fleet provisioning
+    #   template. This IoT role grants permission to provision a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the fleet provisioning
+    #   template.
+    #
+    #   <note markdown="1"> For URI Request parameters use format:
+    #   ...key1=value1&amp;key2=value2...
+    #
+    #    For the CLI command-line parameter use format: &amp;&amp;tags
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    For the cli-input-json file use format: "tags":
+    #   "key1=value1&amp;key2=value2..."
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateProvisioningTemplateRequest < Struct.new(
+      :template_name,
+      :description,
+      :template_body,
+      :enabled,
+      :provisioning_role_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The ARN that identifies the provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_id
+    #   The default version of the fleet provisioning template.
+    #   @return [Integer]
+    #
+    class CreateProvisioningTemplateResponse < Struct.new(
+      :template_arn,
+      :template_name,
+      :default_version_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProvisioningTemplateVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         template_body: "TemplateBody", # required
+    #         set_as_default: false,
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The JSON formatted contents of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] set_as_default
+    #   Sets a fleet provision template version as the default version.
+    #   @return [Boolean]
+    #
+    class CreateProvisioningTemplateVersionRequest < Struct.new(
+      :template_name,
+      :template_body,
+      :set_as_default)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The ARN that identifies the provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version of the fleet provisioning template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_default_version
+    #   True if the fleet provisioning template version is the default
+    #   version, otherwise false.
+    #   @return [Boolean]
+    #
+    class CreateProvisioningTemplateVersionResponse < Struct.new(
+      :template_arn,
+      :template_name,
+      :version_id,
+      :is_default_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRoleAliasRequest
     #   data as a hash:
     #
@@ -3341,6 +3762,32 @@ module Aws::IoT
     #                 message_id: "MessageId",
     #                 role_arn: "AwsArn", # required
     #               },
+    #               iot_site_wise: {
+    #                 put_asset_property_value_entries: [ # required
+    #                   {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_values: [ # required
+    #                       {
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: { # required
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 role_arn: "AwsArn", # required
+    #               },
     #               step_functions: {
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
@@ -3453,6 +3900,32 @@ module Aws::IoT
     #             iot_events: {
     #               input_name: "InputName", # required
     #               message_id: "MessageId",
+    #               role_arn: "AwsArn", # required
+    #             },
+    #             iot_site_wise: {
+    #               put_asset_property_value_entries: [ # required
+    #                 {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_values: [ # required
+    #                     {
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: { # required
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
     #               role_arn: "AwsArn", # required
     #             },
     #             step_functions: {
@@ -3677,6 +4150,24 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDomainConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_configuration_name: "DomainConfigurationName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration to be deleted.
+    #   @return [String]
+    #
+    class DeleteDomainConfigurationRequest < Struct.new(
+      :domain_configuration_name)
+      include Aws::Structure
+    end
+
+    class DeleteDomainConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteDynamicThingGroupRequest
     #   data as a hash:
     #
@@ -3880,6 +4371,48 @@ module Aws::IoT
       :policy_version_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteProvisioningTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provision template to delete.
+    #   @return [String]
+    #
+    class DeleteProvisioningTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    class DeleteProvisioningTemplateResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteProvisioningTemplateVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template version to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The fleet provisioning template version ID to delete.
+    #   @return [Integer]
+    #
+    class DeleteProvisioningTemplateVersionRequest < Struct.new(
+      :template_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    class DeleteProvisioningTemplateVersionResponse < Aws::EmptyStructure; end
 
     # The input for the DeleteRegistrationCode operation.
     #
@@ -4475,6 +5008,68 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDomainConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_configuration_name: "ReservedDomainConfigurationName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration.
+    #   @return [String]
+    #
+    class DescribeDomainConfigurationRequest < Struct.new(
+      :domain_configuration_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_configuration_arn
+    #   The ARN of the domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificates
+    #   A list containing summary information about the server certificate
+    #   included in the domain configuration.
+    #   @return [Array<Types::ServerCertificateSummary>]
+    #
+    # @!attribute [rw] authorizer_config
+    #   An object that specifies the authorization service for a domain.
+    #   @return [Types::AuthorizerConfig]
+    #
+    # @!attribute [rw] domain_configuration_status
+    #   A Boolean value that specifies the current state of the domain
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   The type of service delivered by the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_type
+    #   The type of the domain.
+    #   @return [String]
+    #
+    class DescribeDomainConfigurationResponse < Struct.new(
+      :domain_configuration_name,
+      :domain_configuration_arn,
+      :domain_name,
+      :server_certificates,
+      :authorizer_config,
+      :domain_configuration_status,
+      :service_type,
+      :domain_type)
+      include Aws::Structure
+    end
+
     # The input for the DescribeEndpoint operation.
     #
     # @note When making an API call, you may pass DescribeEndpointRequest
@@ -4724,6 +5319,120 @@ module Aws::IoT
       :action_params,
       :creation_date,
       :last_modified_date)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProvisioningTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    class DescribeProvisioningTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_arn
+    #   The ARN of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the fleet provisioning template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the fleet provisioning template was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] default_version_id
+    #   The default fleet template version ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] template_body
+    #   The JSON formatted contents of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   True if the fleet provisioning template is enabled, otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] provisioning_role_arn
+    #   The ARN of the role associated with the provisioning template. This
+    #   IoT role grants permission to provision a device.
+    #   @return [String]
+    #
+    class DescribeProvisioningTemplateResponse < Struct.new(
+      :template_arn,
+      :template_name,
+      :description,
+      :creation_date,
+      :last_modified_date,
+      :default_version_id,
+      :template_body,
+      :enabled,
+      :provisioning_role_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProvisioningTemplateVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The fleet provisioning template version ID.
+    #   @return [Integer]
+    #
+    class DescribeProvisioningTemplateVersionRequest < Struct.new(
+      :template_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version_id
+    #   The fleet provisioning template version ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the fleet provisioning template version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] template_body
+    #   The JSON formatted contents of the fleet provisioning template
+    #   version.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default_version
+    #   True if the fleet provisioning template version is the default
+    #   version.
+    #   @return [Boolean]
+    #
+    class DescribeProvisioningTemplateVersionResponse < Struct.new(
+      :version_id,
+      :creation_date,
+      :template_body,
+      :is_default_version)
       include Aws::Structure
     end
 
@@ -5327,6 +6036,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The summary of a domain configuration. A domain configuration
+    # specifies custom IoT-specific information about a domain. A domain
+    # configuration can be associated with an AWS-managed domain (for
+    # example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer
+    # managed domain, or a default endpoint.
+    #
+    # * Data
+    #
+    # * Jobs
+    #
+    # * CredentialProvider
+    #
+    # <note markdown="1"> The domain configuration feature is in public preview and is subject
+    # to change.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration. This value must be unique to a
+    #   region.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_configuration_arn
+    #   The ARN of the domain configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_type
+    #   The type of service delivered by the endpoint.
+    #   @return [String]
+    #
+    class DomainConfigurationSummary < Struct.new(
+      :domain_configuration_name,
+      :domain_configuration_arn,
+      :service_type)
+      include Aws::Structure
+    end
+
     # Describes an action to write to a DynamoDB table.
     #
     # The `tableName`, `hashKeyField`, and `rangeKeyField` values must match
@@ -5626,7 +6372,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # The field to aggregate.
+    # Describes the name and data type at a field.
     #
     # @note When making an API call, you may pass Field
     #   data as a hash:
@@ -5641,7 +6387,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The data type of the field.
+    #   The datatype of the field.
     #   @return [String]
     #
     class Field < Struct.new(
@@ -6040,11 +6786,11 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
-    #   The date the policy version was created.
+    #   The date the policy was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
-    #   The date the policy version was last modified.
+    #   The date the policy was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] generation_id
@@ -6100,7 +6846,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] aggregation_field
-    #   The aggregation field name. Currently not supported.
+    #   The aggregation field name.
     #   @return [String]
     #
     # @!attribute [rw] query_version
@@ -6330,6 +7076,32 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Specifies the HTTP context to use for the test authorizer request.
+    #
+    # @note When making an API call, you may pass HttpContext
+    #   data as a hash:
+    #
+    #       {
+    #         headers: {
+    #           "HttpHeaderName" => "HttpHeaderValue",
+    #         },
+    #         query_string: "HttpQueryString",
+    #       }
+    #
+    # @!attribute [rw] headers
+    #   The header keys and values in an HTTP authorization request.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] query_string
+    #   The query string keys and values in an HTTP authorization request.
+    #   @return [String]
+    #
+    class HttpContext < Struct.new(
+      :headers,
+      :query_string)
+      include Aws::Structure
+    end
+
     # HTTP URL destination configuration used by the topic rule's HTTP
     # action.
     #
@@ -6539,6 +7311,56 @@ module Aws::IoT
     class IotEventsAction < Struct.new(
       :input_name,
       :message_id,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Describes an action to send data from an MQTT message that triggered
+    # the rule to AWS IoT SiteWise asset properties.
+    #
+    # @note When making an API call, you may pass IotSiteWiseAction
+    #   data as a hash:
+    #
+    #       {
+    #         put_asset_property_value_entries: [ # required
+    #           {
+    #             entry_id: "AssetPropertyEntryId",
+    #             asset_id: "AssetId",
+    #             property_id: "AssetPropertyId",
+    #             property_alias: "AssetPropertyAlias",
+    #             property_values: [ # required
+    #               {
+    #                 value: { # required
+    #                   string_value: "AssetPropertyStringValue",
+    #                   integer_value: "AssetPropertyIntegerValue",
+    #                   double_value: "AssetPropertyDoubleValue",
+    #                   boolean_value: "AssetPropertyBooleanValue",
+    #                 },
+    #                 timestamp: { # required
+    #                   time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                   offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                 },
+    #                 quality: "AssetPropertyQuality",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         role_arn: "AwsArn", # required
+    #       }
+    #
+    # @!attribute [rw] put_asset_property_value_entries
+    #   A list of asset property value entries.
+    #   @return [Array<Types::PutAssetPropertyValueEntry>]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that grants AWS IoT permission to send an asset
+    #   property value to AWS IoTSiteWise. (`"Action":
+    #   "iotsitewise:BatchPutAssetPropertyValue"`). The trust policy can
+    #   restrict access to specific asset hierarchy paths.
+    #   @return [String]
+    #
+    class IotSiteWiseAction < Struct.new(
+      :put_asset_property_value_entries,
       :role_arn)
       include Aws::Structure
     end
@@ -7136,6 +7958,8 @@ module Aws::IoT
     #             policy_version_id: "PolicyVersionId",
     #           },
     #           account: "AwsAccountId",
+    #           iam_role_arn: "RoleArn",
+    #           role_alias_arn: "RoleAliasArn",
     #         },
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -7647,6 +8471,49 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDomainConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "Marker",
+    #         page_size: 1,
+    #         service_type: "DATA", # accepts DATA, CREDENTIAL_PROVIDER, JOBS
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The result page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] service_type
+    #   The type of service delivered by the endpoint.
+    #   @return [String]
+    #
+    class ListDomainConfigurationsRequest < Struct.new(
+      :marker,
+      :page_size,
+      :service_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_configurations
+    #   A list of objects that contain summary information about the user's
+    #   domain configurations.
+    #   @return [Array<Types::DomainConfigurationSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   The marker for the next set of results.
+    #   @return [String]
+    #
+    class ListDomainConfigurationsResponse < Struct.new(
+      :domain_configurations,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIndicesRequest
     #   data as a hash:
     #
@@ -7656,8 +8523,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or null if there are
-    #   no additional results.
+    #   The token used to get the next set of results, or `null` if there
+    #   are no additional results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7675,8 +8542,8 @@ module Aws::IoT
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or null if there are
-    #   no additional results.
+    #   The token used to get the next set of results, or `null` if there
+    #   are no additional results.
     #   @return [String]
     #
     class ListIndicesResponse < Struct.new(
@@ -8214,6 +9081,84 @@ module Aws::IoT
     #
     class ListPrincipalThingsResponse < Struct.new(
       :things,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListProvisioningTemplateVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListProvisioningTemplateVersionsRequest < Struct.new(
+      :template_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] versions
+    #   The list of fleet provisioning template versions.
+    #   @return [Array<Types::ProvisioningTemplateVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListProvisioningTemplateVersionsResponse < Struct.new(
+      :versions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListProvisioningTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListProvisioningTemplatesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] templates
+    #   A list of fleet provisioning templates
+    #   @return [Array<Types::ProvisioningTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to retrieve the next set of results.
+    #   @return [String]
+    #
+    class ListProvisioningTemplatesResponse < Struct.new(
+      :templates,
       :next_token)
       include Aws::Structure
     end
@@ -9402,6 +10347,36 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Specifies the MQTT context to use for the test authorizer request
+    #
+    # @note When making an API call, you may pass MqttContext
+    #   data as a hash:
+    #
+    #       {
+    #         username: "MqttUsername",
+    #         password: "data",
+    #         client_id: "MqttClientId",
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The value of the `username` key in an MQTT authorization request.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The value of the `password` key in an MQTT authorization request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The value of the `clientId` key in an MQTT authorization request.
+    #   @return [String]
+    #
+    class MqttContext < Struct.new(
+      :username,
+      :password,
+      :client_id)
+      include Aws::Structure
+    end
+
     # Information about the resource that was noncompliant with the audit
     # check.
     #
@@ -9761,6 +10736,65 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A summary of information about a fleet provisioning template.
+    #
+    # @!attribute [rw] template_arn
+    #   The ARN of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the fleet provisioning template summary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the fleet provisioning template summary was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] enabled
+    #   True if the fleet provision template is enabled, otherwise false.
+    #   @return [Boolean]
+    #
+    class ProvisioningTemplateSummary < Struct.new(
+      :template_arn,
+      :template_name,
+      :description,
+      :creation_date,
+      :last_modified_date,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # A summary of information about a fleet provision template version.
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the fleet privisioning template version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the fleet provisioning template version was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] is_default_version
+    #   True if the fleet provisioning template version is the default
+    #   version, otherwise false.
+    #   @return [Boolean]
+    #
+    class ProvisioningTemplateVersionSummary < Struct.new(
+      :version_id,
+      :creation_date,
+      :is_default_version)
+      include Aws::Structure
+    end
+
     # Parameters to define a mitigation action that publishes findings to
     # Amazon SNS. You can implement your own custom actions in response to
     # the Amazon SNS messages.
@@ -9778,6 +10812,71 @@ module Aws::IoT
     #
     class PublishFindingToSnsParams < Struct.new(
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # An asset property value entry containing the following information.
+    #
+    # @note When making an API call, you may pass PutAssetPropertyValueEntry
+    #   data as a hash:
+    #
+    #       {
+    #         entry_id: "AssetPropertyEntryId",
+    #         asset_id: "AssetId",
+    #         property_id: "AssetPropertyId",
+    #         property_alias: "AssetPropertyAlias",
+    #         property_values: [ # required
+    #           {
+    #             value: { # required
+    #               string_value: "AssetPropertyStringValue",
+    #               integer_value: "AssetPropertyIntegerValue",
+    #               double_value: "AssetPropertyDoubleValue",
+    #               boolean_value: "AssetPropertyBooleanValue",
+    #             },
+    #             timestamp: { # required
+    #               time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #               offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #             },
+    #             quality: "AssetPropertyQuality",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] entry_id
+    #   Optional. A unique identifier for this entry that you can define to
+    #   better track which message caused an error in case of failure.
+    #   Accepts substitution templates. Defaults to a new UUID.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the AWS IoT SiteWise asset. You must specify either a
+    #   `propertyAlias` or both an `analiasId` and a `propertyId`. Accepts
+    #   substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset's property. You must specify either a
+    #   `propertyAlias` or both an `analiasId` and a `propertyId`. Accepts
+    #   substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The name of the property alias associated with your asset property.
+    #   You must specify either a `propertyAlias` or both an `aliasId` and a
+    #   `propertyId`. Accepts substitution templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_values
+    #   A list of property values to insert that each contain timestamp,
+    #   quality, and value (TQV) information.
+    #   @return [Array<Types::AssetPropertyValue>]
+    #
+    class PutAssetPropertyValueEntry < Struct.new(
+      :entry_id,
+      :asset_id,
+      :property_id,
+      :property_alias,
+      :property_values)
       include Aws::Structure
     end
 
@@ -10263,6 +11362,32 @@ module Aws::IoT
     #                 message_id: "MessageId",
     #                 role_arn: "AwsArn", # required
     #               },
+    #               iot_site_wise: {
+    #                 put_asset_property_value_entries: [ # required
+    #                   {
+    #                     entry_id: "AssetPropertyEntryId",
+    #                     asset_id: "AssetId",
+    #                     property_id: "AssetPropertyId",
+    #                     property_alias: "AssetPropertyAlias",
+    #                     property_values: [ # required
+    #                       {
+    #                         value: { # required
+    #                           string_value: "AssetPropertyStringValue",
+    #                           integer_value: "AssetPropertyIntegerValue",
+    #                           double_value: "AssetPropertyDoubleValue",
+    #                           boolean_value: "AssetPropertyBooleanValue",
+    #                         },
+    #                         timestamp: { # required
+    #                           time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                           offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                         },
+    #                         quality: "AssetPropertyQuality",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 role_arn: "AwsArn", # required
+    #               },
     #               step_functions: {
     #                 execution_name_prefix: "ExecutionNamePrefix",
     #                 state_machine_name: "StateMachineName", # required
@@ -10377,6 +11502,32 @@ module Aws::IoT
     #               message_id: "MessageId",
     #               role_arn: "AwsArn", # required
     #             },
+    #             iot_site_wise: {
+    #               put_asset_property_value_entries: [ # required
+    #                 {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_values: [ # required
+    #                     {
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: { # required
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               role_arn: "AwsArn", # required
+    #             },
     #             step_functions: {
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
@@ -10484,6 +11635,8 @@ module Aws::IoT
     #           policy_version_id: "PolicyVersionId",
     #         },
     #         account: "AwsAccountId",
+    #         iam_role_arn: "RoleArn",
+    #         role_alias_arn: "RoleAliasArn",
     #       }
     #
     # @!attribute [rw] device_certificate_id
@@ -10510,13 +11663,23 @@ module Aws::IoT
     #   The account with which the resource is associated.
     #   @return [String]
     #
+    # @!attribute [rw] iam_role_arn
+    #   The ARN of the IAM role that has overly permissive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_alias_arn
+    #   The ARN of the role alias that has overly permissive actions.
+    #   @return [String]
+    #
     class ResourceIdentifier < Struct.new(
       :device_certificate_id,
       :ca_certificate_id,
       :cognito_identity_pool_id,
       :client_id,
       :policy_version_identifier,
-      :account)
+      :account,
+      :iam_role_arn,
+      :role_alias_arn)
       include Aws::Structure
     end
 
@@ -10763,8 +11926,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or null if there are
-    #   no additional results.
+    #   The token used to get the next set of results, or `null` if there
+    #   are no additional results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -10785,8 +11948,8 @@ module Aws::IoT
     end
 
     # @!attribute [rw] next_token
-    #   The token used to get the next set of results, or null if there are
-    #   no additional results.
+    #   The token used to get the next set of results, or `null` if there
+    #   are no additional results.
     #   @return [String]
     #
     # @!attribute [rw] things
@@ -10847,6 +12010,27 @@ module Aws::IoT
     class SecurityProfileTargetMapping < Struct.new(
       :security_profile_identifier,
       :target)
+      include Aws::Structure
+    end
+
+    # An object that contains information about a server certificate.
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The ARN of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificate_status
+    #   The status of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_certificate_status_detail
+    #   Details that explain the status of the server certificate.
+    #   @return [String]
+    #
+    class ServerCertificateSummary < Struct.new(
+      :server_certificate_arn,
+      :server_certificate_status,
+      :server_certificate_status_detail)
       include Aws::Structure
     end
 
@@ -11342,23 +12526,19 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] average
-    #   The average of the aggregated fields. If the field data type is
-    #   String this value is indeterminate.
+    #   The average of the aggregated field values.
     #   @return [Float]
     #
     # @!attribute [rw] sum
-    #   The sum of the aggregated fields. If the field data type is String
-    #   this value is indeterminate.
+    #   The sum of the aggregated field values.
     #   @return [Float]
     #
     # @!attribute [rw] minimum
-    #   The minimum value of the aggregated fields. If the field data type
-    #   is String this value is indeterminate.
+    #   The minimum aggregated field value.
     #   @return [Float]
     #
     # @!attribute [rw] maximum
-    #   The maximum value of the aggregated fields. If the field data type
-    #   is String this value is indeterminate.
+    #   The maximum aggregated field value.
     #   @return [Float]
     #
     # @!attribute [rw] sum_of_squares
@@ -11774,8 +12954,22 @@ module Aws::IoT
     #
     #       {
     #         authorizer_name: "AuthorizerName", # required
-    #         token: "Token", # required
-    #         token_signature: "TokenSignature", # required
+    #         token: "Token",
+    #         token_signature: "TokenSignature",
+    #         http_context: {
+    #           headers: {
+    #             "HttpHeaderName" => "HttpHeaderValue",
+    #           },
+    #           query_string: "HttpQueryString",
+    #         },
+    #         mqtt_context: {
+    #           username: "MqttUsername",
+    #           password: "data",
+    #           client_id: "MqttClientId",
+    #         },
+    #         tls_context: {
+    #           server_name: "ServerName",
+    #         },
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -11791,10 +12985,25 @@ module Aws::IoT
     #   service's private key.
     #   @return [String]
     #
+    # @!attribute [rw] http_context
+    #   Specifies a test HTTP authorization request.
+    #   @return [Types::HttpContext]
+    #
+    # @!attribute [rw] mqtt_context
+    #   Specifies a test MQTT authorization request.&gt;
+    #   @return [Types::MqttContext]
+    #
+    # @!attribute [rw] tls_context
+    #   Specifies a test TLS authorization request.
+    #   @return [Types::TlsContext]
+    #
     class TestInvokeAuthorizerRequest < Struct.new(
       :authorizer_name,
       :token,
-      :token_signature)
+      :token_signature,
+      :http_context,
+      :mqtt_context,
+      :tls_context)
       include Aws::Structure
     end
 
@@ -11978,13 +13187,16 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] managed_fields
-    #   A list of automatically indexed thing group fields.
+    #   Contains fields that are indexed and whose types are already known
+    #   by the Fleet Indexing service.
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
     #   A list of thing group fields to index. This list cannot contain any
     #   managed fields. Use the GetIndexingConfiguration API to get a list
     #   of managed fields.
+    #
+    #   Contains custom field names and their data type.
     #   @return [Array<Types::Field>]
     #
     class ThingGroupIndexingConfiguration < Struct.new(
@@ -12093,13 +13305,12 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] managed_fields
-    #   A list of automatically indexed thing fields.
+    #   Contains fields that are indexed and whose types are already known
+    #   by the Fleet Indexing service.
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
-    #   A list of thing fields to index. This list cannot contain any
-    #   managed fields. Use the GetIndexingConfiguration API to get a list
-    #   of managed fields.
+    #   Contains custom field names and their data type.
     #   @return [Array<Types::Field>]
     #
     class ThingIndexingConfiguration < Struct.new(
@@ -12227,6 +13438,24 @@ module Aws::IoT
     #
     class TimeoutConfig < Struct.new(
       :in_progress_timeout_in_minutes)
+      include Aws::Structure
+    end
+
+    # Specifies the TLS context to use for the test authorizer request.
+    #
+    # @note When making an API call, you may pass TlsContext
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName",
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The value of the `serverName` key in a TLS authorization request.
+    #   @return [String]
+    #
+    class TlsContext < Struct.new(
+      :server_name)
       include Aws::Structure
     end
 
@@ -12536,6 +13765,32 @@ module Aws::IoT
     #               message_id: "MessageId",
     #               role_arn: "AwsArn", # required
     #             },
+    #             iot_site_wise: {
+    #               put_asset_property_value_entries: [ # required
+    #                 {
+    #                   entry_id: "AssetPropertyEntryId",
+    #                   asset_id: "AssetId",
+    #                   property_id: "AssetPropertyId",
+    #                   property_alias: "AssetPropertyAlias",
+    #                   property_values: [ # required
+    #                     {
+    #                       value: { # required
+    #                         string_value: "AssetPropertyStringValue",
+    #                         integer_value: "AssetPropertyIntegerValue",
+    #                         double_value: "AssetPropertyDoubleValue",
+    #                         boolean_value: "AssetPropertyBooleanValue",
+    #                       },
+    #                       timestamp: { # required
+    #                         time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                         offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                       },
+    #                       quality: "AssetPropertyQuality",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               role_arn: "AwsArn", # required
+    #             },
     #             step_functions: {
     #               execution_name_prefix: "ExecutionNamePrefix",
     #               state_machine_name: "StateMachineName", # required
@@ -12648,6 +13903,32 @@ module Aws::IoT
     #           iot_events: {
     #             input_name: "InputName", # required
     #             message_id: "MessageId",
+    #             role_arn: "AwsArn", # required
+    #           },
+    #           iot_site_wise: {
+    #             put_asset_property_value_entries: [ # required
+    #               {
+    #                 entry_id: "AssetPropertyEntryId",
+    #                 asset_id: "AssetId",
+    #                 property_id: "AssetPropertyId",
+    #                 property_alias: "AssetPropertyAlias",
+    #                 property_values: [ # required
+    #                   {
+    #                     value: { # required
+    #                       string_value: "AssetPropertyStringValue",
+    #                       integer_value: "AssetPropertyIntegerValue",
+    #                       double_value: "AssetPropertyDoubleValue",
+    #                       boolean_value: "AssetPropertyBooleanValue",
+    #                     },
+    #                     timestamp: { # required
+    #                       time_in_seconds: "AssetPropertyTimeInSeconds", # required
+    #                       offset_in_nanos: "AssetPropertyOffsetInNanos",
+    #                     },
+    #                     quality: "AssetPropertyQuality",
+    #                   },
+    #                 ],
+    #               },
+    #             ],
     #             role_arn: "AwsArn", # required
     #           },
     #           step_functions: {
@@ -13120,6 +14401,57 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDomainConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_configuration_name: "ReservedDomainConfigurationName", # required
+    #         authorizer_config: {
+    #           default_authorizer_name: "AuthorizerName",
+    #           allow_authorizer_override: false,
+    #         },
+    #         domain_configuration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         remove_authorizer_config: false,
+    #       }
+    #
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_config
+    #   An object that specifies the authorization service for a domain.
+    #   @return [Types::AuthorizerConfig]
+    #
+    # @!attribute [rw] domain_configuration_status
+    #   The status to which the domain configuration should be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_authorizer_config
+    #   Removes the authorization configuration from a domain.
+    #   @return [Boolean]
+    #
+    class UpdateDomainConfigurationRequest < Struct.new(
+      :domain_configuration_name,
+      :authorizer_config,
+      :domain_configuration_status,
+      :remove_authorizer_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_configuration_name
+    #   The name of the domain configuration that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_configuration_arn
+    #   The ARN of the domain configuration that was updated.
+    #   @return [String]
+    #
+    class UpdateDomainConfigurationResponse < Struct.new(
+      :domain_configuration_name,
+      :domain_configuration_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDynamicThingGroupRequest
     #   data as a hash:
     #
@@ -13405,6 +14737,49 @@ module Aws::IoT
       :action_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateProvisioningTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         description: "TemplateDescription",
+    #         enabled: false,
+    #         default_version_id: 1,
+    #         provisioning_role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the fleet provisioning template.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   True to enable the fleet provisioning template, otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_version_id
+    #   The ID of the default provisioning template version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioning_role_arn
+    #   The ARN of the role associated with the provisioning template. This
+    #   IoT role grants permission to provision a device.
+    #   @return [String]
+    #
+    class UpdateProvisioningTemplateRequest < Struct.new(
+      :template_name,
+      :description,
+      :enabled,
+      :default_version_id,
+      :provisioning_role_arn)
+      include Aws::Structure
+    end
+
+    class UpdateProvisioningTemplateResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateRoleAliasRequest
     #   data as a hash:

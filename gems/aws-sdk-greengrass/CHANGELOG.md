@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2019-11-25)
+------------------
+
+* Feature - IoT Greengrass supports machine learning resources in 'No container' mode.
+
 1.27.0 (2019-10-23)
 ------------------
 

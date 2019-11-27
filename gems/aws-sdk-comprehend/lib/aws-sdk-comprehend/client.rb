@@ -321,9 +321,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::BatchDetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -370,9 +369,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::BatchDetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -420,9 +418,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::BatchDetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -470,7 +467,7 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
     #   or Portuguese ("pt"). All documents must be in the same language.
     #
@@ -511,6 +508,42 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Creates a new document classification request to analyze a single
+    # document in real-time, using a previously created and trained custom
+    # model and an endpoint.
+    #
+    # @option params [required, String] :text
+    #   The document text to be analyzed.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #
+    # @return [Types::ClassifyDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClassifyDocumentResponse#classes #classes} => Array&lt;Types::DocumentClass&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.classify_document({
+    #     text: "String", # required
+    #     endpoint_arn: "DocumentClassifierEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.classes #=> Array
+    #   resp.classes[0].name #=> String
+    #   resp.classes[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocument AWS API Documentation
+    #
+    # @overload classify_document(params = {})
+    # @param [Hash] params ({})
+    def classify_document(params = {}, options = {})
+      req = build_request(:classify_document, params)
+      req.send_request(options)
+    end
+
     # Creates a new document classifier that you can use to categorize
     # documents. To create a classifier you provide a set of training
     # documents that labeled with the categories that you want to use. After
@@ -548,7 +581,7 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
     #   or Portuguese ("pt"). All documents must be in the same language.
     #
@@ -613,6 +646,68 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def create_document_classifier(params = {}, options = {})
       req = build_request(:create_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Creates a model-specific endpoint for synchronous inference for a
+    # previously trained custom model
+    #
+    # @option params [required, String] :endpoint_name
+    #   This is the descriptive suffix that becomes part of the `EndpointArn`
+    #   used for all subsequent requests to this resource.
+    #
+    # @option params [required, String] :model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   will be attached.
+    #
+    # @option params [required, Integer] :desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #
+    # @option params [String] :client_request_token
+    #   An idempotency token provided by the customer. If this token matches a
+    #   previous endpoint creation request, Amazon Comprehend will not return
+    #   a `ResourceInUseException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags associated with the endpoint being created. A tag is a key-value
+    #   pair that adds metadata to the endpoint. For example, a tag with
+    #   "Sales" as the key might be added to an endpoint to indicate its use
+    #   by the sales department.
+    #
+    # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEndpointResponse#endpoint_arn #endpoint_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_endpoint({
+    #     endpoint_name: "ComprehendEndpointName", # required
+    #     model_arn: "ComprehendModelArn", # required
+    #     desired_inference_units: 1, # required
+    #     client_request_token: "ClientRequestTokenString",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpoint AWS API Documentation
+    #
+    # @overload create_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_endpoint(params = {}, options = {})
+      req = build_request(:create_endpoint, params)
       req.send_request(options)
     end
 
@@ -755,6 +850,30 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def delete_document_classifier(params = {}, options = {})
       req = build_request(:delete_document_classifier, params)
+      req.send_request(options)
+    end
+
+    # Deletes a model-specific endpoint for a previously-trained custom
+    # model. All endpoints must be deleted in order for the model to be
+    # deleted.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint({
+    #     endpoint_arn: "ComprehendEndpointArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEndpoint AWS API Documentation
+    #
+    # @overload delete_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint(params = {}, options = {})
+      req = build_request(:delete_endpoint, params)
       req.send_request(options)
     end
 
@@ -929,6 +1048,42 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def describe_dominant_language_detection_job(params = {}, options = {})
       req = build_request(:describe_dominant_language_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with a specific endpoint. Use this
+    # operation to get the status of an endpoint.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being described.
+    #
+    # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointResponse#endpoint_properties #endpoint_properties} => Types::EndpointProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint({
+    #     endpoint_arn: "ComprehendEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_properties.endpoint_arn #=> String
+    #   resp.endpoint_properties.status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
+    #   resp.endpoint_properties.message #=> String
+    #   resp.endpoint_properties.model_arn #=> String
+    #   resp.endpoint_properties.desired_inference_units #=> Integer
+    #   resp.endpoint_properties.current_inference_units #=> Integer
+    #   resp.endpoint_properties.creation_time #=> Time
+    #   resp.endpoint_properties.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpoint AWS API Documentation
+    #
+    # @overload describe_endpoint(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint(params = {}, options = {})
+      req = build_request(:describe_endpoint, params)
       req.send_request(options)
     end
 
@@ -1221,9 +1376,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1262,9 +1416,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::DetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1303,9 +1456,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @return [Types::DetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1345,7 +1497,7 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language code of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
     #   or Portuguese ("pt").
     #
@@ -1572,6 +1724,60 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_dominant_language_detection_jobs(params = {}, options = {})
       req = build_request(:list_dominant_language_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of all existing endpoints that you've created.
+    #
+    # @option params [Types::EndpointFilter] :filter
+    #   Filters the endpoints that are returned. You can filter endpoints on
+    #   their name, model, status, or the date and time that they were
+    #   created. You can only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEndpointsResponse#endpoint_properties_list #endpoint_properties_list} => Array&lt;Types::EndpointProperties&gt;
+    #   * {Types::ListEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_endpoints({
+    #     filter: {
+    #       model_arn: "ComprehendModelArn",
+    #       status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
+    #       creation_time_before: Time.now,
+    #       creation_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_properties_list #=> Array
+    #   resp.endpoint_properties_list[0].endpoint_arn #=> String
+    #   resp.endpoint_properties_list[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "IN_SERVICE", "UPDATING"
+    #   resp.endpoint_properties_list[0].message #=> String
+    #   resp.endpoint_properties_list[0].model_arn #=> String
+    #   resp.endpoint_properties_list[0].desired_inference_units #=> Integer
+    #   resp.endpoint_properties_list[0].current_inference_units #=> Integer
+    #   resp.endpoint_properties_list[0].creation_time #=> Time
+    #   resp.endpoint_properties_list[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpoints AWS API Documentation
+    #
+    # @overload list_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_endpoints(params = {}, options = {})
+      req = build_request(:list_endpoints, params)
       req.send_request(options)
     end
 
@@ -2157,10 +2363,8 @@ module Aws::Comprehend
     # @option params [required, String] :language_code
     #   The language of the input documents. All documents must be in the same
     #   language. You can specify any of the languages supported by Amazon
-    #   Comprehend: English ("en"), Spanish ("es"), French ("fr"),
-    #   German ("de"), Italian ("it"), or Portuguese ("pt"). If custom
-    #   entities recognition is used, this parameter is ignored and the
-    #   language used for training the model is used instead.
+    #   Comprehend. If custom entities recognition is used, this parameter is
+    #   ignored and the language used for training the model is used instead.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -2255,9 +2459,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -2351,9 +2554,8 @@ module Aws::Comprehend
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian ("it"),
-    #   or Portuguese ("pt"). All documents must be in the same language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -2815,6 +3017,34 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Updates information about the specified endpoint.
+    #
+    # @option params [required, String] :endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being updated.
+    #
+    # @option params [required, Integer] :desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_endpoint({
+    #     endpoint_arn: "ComprehendEndpointArn", # required
+    #     desired_inference_units: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpoint AWS API Documentation
+    #
+    # @overload update_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_endpoint(params = {}, options = {})
+      req = build_request(:update_endpoint, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2828,7 +3058,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

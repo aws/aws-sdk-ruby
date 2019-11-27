@@ -1865,6 +1865,105 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Creates a scheduled action. A scheduled action contains a schedule and
+    # an Amazon Redshift API action. For example, you can create a schedule
+    # of when to run the `ResizeCluster` API operation.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action. The name must be unique within an
+    #   account. For more information about this parameter, see
+    #   ScheduledAction.
+    #
+    # @option params [required, Types::ScheduledActionType] :target_action
+    #   A JSON format string of the Amazon Redshift API operation with input
+    #   parameters. For more information about this parameter, see
+    #   ScheduledAction.
+    #
+    # @option params [required, String] :schedule
+    #   The schedule in `at( )` or `cron( )` format. For more information
+    #   about this parameter, see ScheduledAction.
+    #
+    # @option params [required, String] :iam_role
+    #   The IAM role to assume to run the target action. For more information
+    #   about this parameter, see ScheduledAction.
+    #
+    # @option params [String] :scheduled_action_description
+    #   The description of the scheduled action.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time in UTC of the scheduled action. Before this time, the
+    #   scheduled action does not trigger. For more information about this
+    #   parameter, see ScheduledAction.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time in UTC of the scheduled action. After this time, the
+    #   scheduled action does not trigger. For more information about this
+    #   parameter, see ScheduledAction.
+    #
+    # @option params [Boolean] :enable
+    #   If true, the schedule is enabled. If false, the scheduled action does
+    #   not trigger. For more information about `state` of the scheduled
+    #   action, see ScheduledAction.
+    #
+    # @return [Types::ScheduledAction] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ScheduledAction#scheduled_action_name #scheduled_action_name} => String
+    #   * {Types::ScheduledAction#target_action #target_action} => Types::ScheduledActionType
+    #   * {Types::ScheduledAction#schedule #schedule} => String
+    #   * {Types::ScheduledAction#iam_role #iam_role} => String
+    #   * {Types::ScheduledAction#scheduled_action_description #scheduled_action_description} => String
+    #   * {Types::ScheduledAction#state #state} => String
+    #   * {Types::ScheduledAction#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::ScheduledAction#start_time #start_time} => Time
+    #   * {Types::ScheduledAction#end_time #end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_scheduled_action({
+    #     scheduled_action_name: "String", # required
+    #     target_action: { # required
+    #       resize_cluster: {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       },
+    #     },
+    #     schedule: "String", # required
+    #     iam_role: "String", # required
+    #     scheduled_action_description: "String",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     enable: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action_name #=> String
+    #   resp.target_action.resize_cluster.cluster_identifier #=> String
+    #   resp.target_action.resize_cluster.cluster_type #=> String
+    #   resp.target_action.resize_cluster.node_type #=> String
+    #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
+    #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.schedule #=> String
+    #   resp.iam_role #=> String
+    #   resp.scheduled_action_description #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.next_invocations #=> Array
+    #   resp.next_invocations[0] #=> Time
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateScheduledAction AWS API Documentation
+    #
+    # @overload create_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def create_scheduled_action(params = {}, options = {})
+      req = build_request(:create_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Creates a snapshot copy grant that permits Amazon Redshift to use a
     # customer master key (CMK) from AWS Key Management Service (AWS KMS) to
     # encrypt copied snapshots in a destination region.
@@ -2480,6 +2579,28 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def delete_hsm_configuration(params = {}, options = {})
       req = build_request(:delete_hsm_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes a scheduled action.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_scheduled_action({
+    #     scheduled_action_name: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteScheduledAction AWS API Documentation
+    #
+    # @overload delete_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def delete_scheduled_action(params = {}, options = {})
+      req = build_request(:delete_scheduled_action, params)
       req.send_request(options)
     end
 
@@ -3896,7 +4017,7 @@ module Aws::Redshift
     #
     #   resp = client.describe_events({
     #     source_identifier: "String",
-    #     source_type: "cluster", # accepts cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot
+    #     source_type: "cluster", # accepts cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, scheduled-action
     #     start_time: Time.now,
     #     end_time: Time.now,
     #     duration: 1,
@@ -3909,7 +4030,7 @@ module Aws::Redshift
     #   resp.marker #=> String
     #   resp.events #=> Array
     #   resp.events[0].source_identifier #=> String
-    #   resp.events[0].source_type #=> String, one of "cluster", "cluster-parameter-group", "cluster-security-group", "cluster-snapshot"
+    #   resp.events[0].source_type #=> String, one of "cluster", "cluster-parameter-group", "cluster-security-group", "cluster-snapshot", "scheduled-action"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_categories #=> Array
     #   resp.events[0].event_categories[0] #=> String
@@ -4158,8 +4279,15 @@ module Aws::Redshift
     # number of nodes, and disk usage for the specified action type.
     #
     # @option params [required, String] :action_type
-    #   The action type to evaluate for possible node configurations.
-    #   Currently, it must be "restore-cluster".
+    #   The action type to evaluate for possible node configurations. Specify
+    #   "restore-cluster" to get configuration combinations based on an
+    #   existing snapshot. Specify "recommend-node-config" to get
+    #   configuration recommendations based on an existing cluster or
+    #   snapshot.
+    #
+    # @option params [String] :cluster_identifier
+    #   The identifier of the cluster to evaluate for possible node
+    #   configurations.
     #
     # @option params [String] :snapshot_identifier
     #   The identifier of the snapshot to evaluate for possible node
@@ -4201,12 +4329,13 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_node_configuration_options({
-    #     action_type: "restore-cluster", # required, accepts restore-cluster
+    #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config
+    #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
     #     owner_account: "String",
     #     filters: [
     #       {
-    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent
+    #         name: "NodeType", # accepts NodeType, NumberOfNodes, EstimatedDiskUtilizationPercent, Mode
     #         operator: "eq", # accepts eq, lt, gt, le, ge, in, between
     #         values: ["String"],
     #       },
@@ -4221,6 +4350,7 @@ module Aws::Redshift
     #   resp.node_configuration_option_list[0].node_type #=> String
     #   resp.node_configuration_option_list[0].number_of_nodes #=> Integer
     #   resp.node_configuration_option_list[0].estimated_disk_utilization_percent #=> Float
+    #   resp.node_configuration_option_list[0].mode #=> String, one of "standard", "high-performance"
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeNodeConfigurationOptions AWS API Documentation
@@ -4525,6 +4655,102 @@ module Aws::Redshift
     # @param [Hash] params ({})
     def describe_resize(params = {}, options = {})
       req = build_request(:describe_resize, params)
+      req.send_request(options)
+    end
+
+    # Describes properties of scheduled actions.
+    #
+    # @option params [String] :scheduled_action_name
+    #   The name of the scheduled action to retrieve.
+    #
+    # @option params [String] :target_action_type
+    #   The type of the scheduled actions to retrieve.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time in UTC of the scheduled actions to retrieve. Only
+    #   active scheduled actions that have invocations after this time are
+    #   retrieved.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time in UTC of the scheduled action to retrieve. Only active
+    #   scheduled actions that have invocations before this time are
+    #   retrieved.
+    #
+    # @option params [Boolean] :active
+    #   If true, retrieve only active scheduled actions. If false, retrieve
+    #   only disabled scheduled actions.
+    #
+    # @option params [Array<Types::ScheduledActionFilter>] :filters
+    #   List of scheduled action filters.
+    #
+    # @option params [String] :marker
+    #   An optional parameter that specifies the starting point to return a
+    #   set of response records. When the results of a
+    #   DescribeScheduledActions request exceed the value specified in
+    #   `MaxRecords`, AWS returns a value in the `Marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned marker value in the `Marker` parameter and
+    #   retrying the request.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of response records to return in each call. If the
+    #   number of remaining response records exceeds the specified
+    #   `MaxRecords` value, a value is returned in a `marker` field of the
+    #   response. You can retrieve the next set of records by retrying the
+    #   command with the returned marker value.
+    #
+    #   Default: `100`
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #
+    # @return [Types::ScheduledActionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ScheduledActionsMessage#marker #marker} => String
+    #   * {Types::ScheduledActionsMessage#scheduled_actions #scheduled_actions} => Array&lt;Types::ScheduledAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_scheduled_actions({
+    #     scheduled_action_name: "String",
+    #     target_action_type: "ResizeCluster", # accepts ResizeCluster
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     active: false,
+    #     filters: [
+    #       {
+    #         name: "cluster-identifier", # required, accepts cluster-identifier, iam-role
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.scheduled_actions #=> Array
+    #   resp.scheduled_actions[0].scheduled_action_name #=> String
+    #   resp.scheduled_actions[0].target_action.resize_cluster.cluster_identifier #=> String
+    #   resp.scheduled_actions[0].target_action.resize_cluster.cluster_type #=> String
+    #   resp.scheduled_actions[0].target_action.resize_cluster.node_type #=> String
+    #   resp.scheduled_actions[0].target_action.resize_cluster.number_of_nodes #=> Integer
+    #   resp.scheduled_actions[0].target_action.resize_cluster.classic #=> Boolean
+    #   resp.scheduled_actions[0].schedule #=> String
+    #   resp.scheduled_actions[0].iam_role #=> String
+    #   resp.scheduled_actions[0].scheduled_action_description #=> String
+    #   resp.scheduled_actions[0].state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.scheduled_actions[0].next_invocations #=> Array
+    #   resp.scheduled_actions[0].next_invocations[0] #=> Time
+    #   resp.scheduled_actions[0].start_time #=> Time
+    #   resp.scheduled_actions[0].end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeScheduledActions AWS API Documentation
+    #
+    # @overload describe_scheduled_actions(params = {})
+    # @param [Hash] params ({})
+    def describe_scheduled_actions(params = {}, options = {})
+      req = build_request(:describe_scheduled_actions, params)
       req.send_request(options)
     end
 
@@ -6667,6 +6893,97 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Modify a scheduled action.
+    #
+    # @option params [required, String] :scheduled_action_name
+    #   The name of the scheduled action to modify.
+    #
+    # @option params [Types::ScheduledActionType] :target_action
+    #   A modified JSON format of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #
+    # @option params [String] :schedule
+    #   A modified schedule in either `at( )` or `cron( )` format. For more
+    #   information about this parameter, see ScheduledAction.
+    #
+    # @option params [String] :iam_role
+    #   A different IAM role to assume to run the target action. For more
+    #   information about this parameter, see ScheduledAction.
+    #
+    # @option params [String] :scheduled_action_description
+    #   A modified description of the scheduled action.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   A modified start time of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   A modified end time of the scheduled action. For more information
+    #   about this parameter, see ScheduledAction.
+    #
+    # @option params [Boolean] :enable
+    #   A modified enable flag of the scheduled action. If true, the scheduled
+    #   action is active. If false, the scheduled action is disabled.
+    #
+    # @return [Types::ScheduledAction] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ScheduledAction#scheduled_action_name #scheduled_action_name} => String
+    #   * {Types::ScheduledAction#target_action #target_action} => Types::ScheduledActionType
+    #   * {Types::ScheduledAction#schedule #schedule} => String
+    #   * {Types::ScheduledAction#iam_role #iam_role} => String
+    #   * {Types::ScheduledAction#scheduled_action_description #scheduled_action_description} => String
+    #   * {Types::ScheduledAction#state #state} => String
+    #   * {Types::ScheduledAction#next_invocations #next_invocations} => Array&lt;Time&gt;
+    #   * {Types::ScheduledAction#start_time #start_time} => Time
+    #   * {Types::ScheduledAction#end_time #end_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_scheduled_action({
+    #     scheduled_action_name: "String", # required
+    #     target_action: {
+    #       resize_cluster: {
+    #         cluster_identifier: "String", # required
+    #         cluster_type: "String",
+    #         node_type: "String",
+    #         number_of_nodes: 1, # required
+    #         classic: false,
+    #       },
+    #     },
+    #     schedule: "String",
+    #     iam_role: "String",
+    #     scheduled_action_description: "String",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     enable: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scheduled_action_name #=> String
+    #   resp.target_action.resize_cluster.cluster_identifier #=> String
+    #   resp.target_action.resize_cluster.cluster_type #=> String
+    #   resp.target_action.resize_cluster.node_type #=> String
+    #   resp.target_action.resize_cluster.number_of_nodes #=> Integer
+    #   resp.target_action.resize_cluster.classic #=> Boolean
+    #   resp.schedule #=> String
+    #   resp.iam_role #=> String
+    #   resp.scheduled_action_description #=> String
+    #   resp.state #=> String, one of "ACTIVE", "DISABLED"
+    #   resp.next_invocations #=> Array
+    #   resp.next_invocations[0] #=> Time
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyScheduledAction AWS API Documentation
+    #
+    # @overload modify_scheduled_action(params = {})
+    # @param [Hash] params ({})
+    def modify_scheduled_action(params = {}, options = {})
+      req = build_request(:modify_scheduled_action, params)
+      req.send_request(options)
+    end
+
     # Modifies the number of days to retain snapshots in the destination AWS
     # Region after they are copied from the source AWS Region. By default,
     # this operation only changes the retention period of copied automated
@@ -8065,7 +8382,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

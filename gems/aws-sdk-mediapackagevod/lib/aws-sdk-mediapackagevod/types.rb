@@ -499,6 +499,9 @@ module Aws::MediaPackageVod
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -506,6 +509,7 @@ module Aws::MediaPackageVod
     #
     class CreatePackagingGroupResponse < Struct.new(
       :arn,
+      :domain_name,
       :id)
       include Aws::Structure
     end
@@ -826,6 +830,9 @@ module Aws::MediaPackageVod
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] domain_name
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   @return [String]
     #
@@ -833,6 +840,7 @@ module Aws::MediaPackageVod
     #
     class DescribePackagingGroupResponse < Struct.new(
       :arn,
+      :domain_name,
       :id)
       include Aws::Structure
     end
@@ -1385,6 +1393,10 @@ module Aws::MediaPackageVod
     #   The ARN of the PackagingGroup.
     #   @return [String]
     #
+    # @!attribute [rw] domain_name
+    #   The fully qualified domain name for Assets in the PackagingGroup.
+    #   @return [String]
+    #
     # @!attribute [rw] id
     #   The ID of the PackagingGroup.
     #   @return [String]
@@ -1393,6 +1405,7 @@ module Aws::MediaPackageVod
     #
     class PackagingGroup < Struct.new(
       :arn,
+      :domain_name,
       :id)
       include Aws::Structure
     end

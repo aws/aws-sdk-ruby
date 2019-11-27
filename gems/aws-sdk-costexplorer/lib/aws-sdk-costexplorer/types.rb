@@ -20,6 +20,193 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # The structure of Cost Categories. This includes detailed metadata and
+    # the set of rules for the `CostCategory` object.
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_end
+    #   The Cost Category's effective end date.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_version
+    #   The rule schema version in this particular Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   Rules are processed in order. If there are multiple rules that match
+    #   the line item, then the first rule to match is used to determine
+    #   that Cost Category value.
+    #   @return [Array<Types::CostCategoryRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategory AWS API Documentation
+    #
+    class CostCategory < Struct.new(
+      :cost_category_arn,
+      :effective_start,
+      :effective_end,
+      :name,
+      :rule_version,
+      :rules)
+      include Aws::Structure
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # A reference to a Cost Category containing only enough information to
+    # identify the Cost Category.
+    #
+    # You can use this information to retrieve the full Cost Category
+    # information using `DescribeCostCategory`.
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category Reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The unique name of the Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_end
+    #   The Cost Category's effective end date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryReference AWS API Documentation
+    #
+    class CostCategoryReference < Struct.new(
+      :cost_category_arn,
+      :name,
+      :effective_start,
+      :effective_end)
+      include Aws::Structure
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Rules are processed in order. If there are multiple rules that match
+    # the line item, then the first rule to match is used to determine that
+    # Cost Category value.
+    #
+    # @note When making an API call, you may pass CostCategoryRule
+    #   data as a hash:
+    #
+    #       {
+    #         value: "CostCategoryValue", # required
+    #         rule: { # required
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value a line item will be categorized as, if it matches the
+    #   rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule
+    #   An [Expression][1] object used to categorize costs. This supports
+    #   dimensions, Tags, and nested expressions. Currently the only
+    #   dimensions supported is `LINKED_ACCOUNT`.
+    #
+    #   Root level `OR` is not supported. We recommend you create a separate
+    #   rule instead.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
+    #   @return [Types::Expression]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryRule AWS API Documentation
+    #
+    class CostCategoryRule < Struct.new(
+      :value,
+      :rule)
+      include Aws::Structure
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # The values that are available for Cost Categories.
+    #
+    # @note When making an API call, you may pass CostCategoryValues
+    #   data as a hash:
+    #
+    #       {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The unique name of the Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The specific value of the Cost Category.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CostCategoryValues AWS API Documentation
+    #
+    class CostCategoryValues < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
     # The amount of instance usage that a reservation covered.
     #
     # @!attribute [rw] coverage_hours
@@ -155,6 +342,85 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCostCategoryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "CostCategoryName", # required
+    #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
+    #         rules: [ # required
+    #           {
+    #             value: "CostCategoryValue", # required
+    #             rule: { # required
+    #               or: [
+    #                 {
+    #                   # recursive Expression
+    #                 },
+    #               ],
+    #               and: [
+    #                 {
+    #                   # recursive Expression
+    #                 },
+    #               ],
+    #               not: {
+    #                 # recursive Expression
+    #               },
+    #               dimensions: {
+    #                 key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #                 values: ["Value"],
+    #               },
+    #               tags: {
+    #                 key: "TagKey",
+    #                 values: ["Value"],
+    #               },
+    #               cost_categories: {
+    #                 key: "CostCategoryName",
+    #                 values: ["Value"],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The unique name of the Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_version
+    #   The rule schema version in this particular Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   Rules are processed in order. If there are multiple rules that match
+    #   the line item, then the first rule to match is used to determine
+    #   that Cost Category value.
+    #   @return [Array<Types::CostCategoryRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinitionRequest AWS API Documentation
+    #
+    class CreateCostCategoryDefinitionRequest < Struct.new(
+      :name,
+      :rule_version,
+      :rules)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your newly created Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinitionResponse AWS API Documentation
+    #
+    class CreateCostCategoryDefinitionResponse < Struct.new(
+      :cost_category_arn,
+      :effective_start)
+      include Aws::Structure
+    end
+
     # Context about the current instance.
     #
     # @!attribute [rw] resource_id
@@ -259,6 +525,84 @@ module Aws::CostExplorer
     class DateInterval < Struct.new(
       :start,
       :end)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCostCategoryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cost_category_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinitionRequest AWS API Documentation
+    #
+    class DeleteCostCategoryDefinitionRequest < Struct.new(
+      :cost_category_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_end
+    #   The effective end date of the Cost Category as a result of deleting
+    #   it. No costs after this date will be categorized by the deleted Cost
+    #   Category.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinitionResponse AWS API Documentation
+    #
+    class DeleteCostCategoryDefinitionResponse < Struct.new(
+      :cost_category_arn,
+      :effective_end)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeCostCategoryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cost_category_arn: "Arn", # required
+    #         effective_on: "ZonedDateTime",
+    #       }
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_on
+    #   The date when the Cost Category was effective.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinitionRequest AWS API Documentation
+    #
+    class DescribeCostCategoryDefinitionRequest < Struct.new(
+      :cost_category_arn,
+      :effective_on)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category
+    #   <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    #   Management and is subject to change. Your use of Cost Categories is
+    #   subject to the Beta Service Participation terms of the <a
+    #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    #   (Section 1.10).</b> </i>
+    #
+    #   The structure of Cost Categories. This includes detailed metadata
+    #   and the set of rules for the `CostCategory` object.
+    #   @return [Types::CostCategory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinitionResponse AWS API Documentation
+    #
+    class DescribeCostCategoryDefinitionResponse < Struct.new(
+      :cost_category)
       include Aws::Structure
     end
 
@@ -611,6 +955,10 @@ module Aws::CostExplorer
     #               key: "TagKey",
     #               values: ["Value"],
     #             },
+    #             cost_categories: {
+    #               key: "CostCategoryName",
+    #               values: ["Value"],
+    #             },
     #           },
     #         ],
     #         and: [
@@ -630,6 +978,10 @@ module Aws::CostExplorer
     #             },
     #             tags: {
     #               key: "TagKey",
+    #               values: ["Value"],
+    #             },
+    #             cost_categories: {
+    #               key: "CostCategoryName",
     #               values: ["Value"],
     #             },
     #           },
@@ -656,6 +1008,10 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         dimensions: {
     #           key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
@@ -663,6 +1019,10 @@ module Aws::CostExplorer
     #         },
     #         tags: {
     #           key: "TagKey",
+    #           values: ["Value"],
+    #         },
+    #         cost_categories: {
+    #           key: "CostCategoryName",
     #           values: ["Value"],
     #         },
     #       }
@@ -687,6 +1047,16 @@ module Aws::CostExplorer
     #   The specific `Tag` to use for `Expression`.
     #   @return [Types::TagValues]
     #
+    # @!attribute [rw] cost_categories
+    #   <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    #   Management and is subject to change. Your use of Cost Categories is
+    #   subject to the Beta Service Participation terms of the <a
+    #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    #   (Section 1.10).</b> </i>
+    #
+    #   The specific `CostCategory` used for `Expression`.
+    #   @return [Types::CostCategoryValues]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Expression AWS API Documentation
     #
     class Expression < Struct.new(
@@ -694,7 +1064,8 @@ module Aws::CostExplorer
       :and,
       :not,
       :dimensions,
-      :tags)
+      :tags,
+      :cost_categories)
       include Aws::Structure
     end
 
@@ -757,11 +1128,15 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         metrics: ["MetricName"],
     #         group_by: [
     #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #             key: "GroupDefinitionKey",
     #           },
     #         ],
@@ -905,11 +1280,15 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         metrics: ["MetricName"],
     #         group_by: [
     #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #             key: "GroupDefinitionKey",
     #           },
     #         ],
@@ -1050,6 +1429,10 @@ module Aws::CostExplorer
     #           },
     #           tags: {
     #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
     #             values: ["Value"],
     #           },
     #         },
@@ -1434,7 +1817,7 @@ module Aws::CostExplorer
     #         },
     #         group_by: [
     #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #             key: "GroupDefinitionKey",
     #           },
     #         ],
@@ -1459,6 +1842,10 @@ module Aws::CostExplorer
     #           },
     #           tags: {
     #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
     #             values: ["Value"],
     #           },
     #         },
@@ -1713,7 +2100,7 @@ module Aws::CostExplorer
     #         },
     #         group_by: [
     #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #             key: "GroupDefinitionKey",
     #           },
     #         ],
@@ -1738,6 +2125,10 @@ module Aws::CostExplorer
     #           },
     #           tags: {
     #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
     #             values: ["Value"],
     #           },
     #         },
@@ -1870,6 +2261,10 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         service: "GenericString", # required
     #         page_size: 1,
@@ -1986,7 +2381,7 @@ module Aws::CostExplorer
     #         },
     #         group_by: [
     #           {
-    #             type: "DIMENSION", # accepts DIMENSION, TAG
+    #             type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #             key: "GroupDefinitionKey",
     #           },
     #         ],
@@ -2011,6 +2406,10 @@ module Aws::CostExplorer
     #           },
     #           tags: {
     #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
     #             values: ["Value"],
     #           },
     #         },
@@ -2214,6 +2613,10 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         next_token: "NextPageToken",
     #         max_results: 1,
@@ -2328,6 +2731,10 @@ module Aws::CostExplorer
     #           },
     #           tags: {
     #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
     #             values: ["Value"],
     #           },
     #         },
@@ -2505,6 +2912,10 @@ module Aws::CostExplorer
     #             key: "TagKey",
     #             values: ["Value"],
     #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
     #         },
     #         prediction_interval_level: 1,
     #       }
@@ -2604,7 +3015,7 @@ module Aws::CostExplorer
     #   data as a hash:
     #
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       }
     #
@@ -2678,6 +3089,54 @@ module Aws::CostExplorer
     #
     class LimitExceededException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCostCategoryDefinitionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         effective_on: "ZonedDateTime",
+    #         next_token: "NextPageToken",
+    #       }
+    #
+    # @!attribute [rw] effective_on
+    #   The date when the Cost Category was effective.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    #   You can use this information to retrieve the full Cost Category
+    #   information using `DescribeCostCategory`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitionsRequest AWS API Documentation
+    #
+    class ListCostCategoryDefinitionsRequest < Struct.new(
+      :effective_on,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_references
+    #   A reference to a Cost Category containing enough information to
+    #   identify the Cost Category.
+    #   @return [Array<Types::CostCategoryReference>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitionsResponse AWS API Documentation
+    #
+    class ListCostCategoryDefinitionsResponse < Struct.new(
+      :cost_category_references,
+      :next_token)
       include Aws::Structure
     end
 
@@ -3181,6 +3640,18 @@ module Aws::CostExplorer
     #
     class ResourceDetails < Struct.new(
       :ec2_resource_details)
+      include Aws::Structure
+    end
+
+    # The specified ARN in the request doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -3819,6 +4290,19 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # You've reached the limit on the number of resources you can create,
+    # or exceeded the size of an individual resources.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Hardware specifications for the service that you want recommendations
     # for.
     #
@@ -3939,6 +4423,85 @@ module Aws::CostExplorer
     #
     class UnresolvableUsageUnitException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCostCategoryDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cost_category_arn: "Arn", # required
+    #         rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
+    #         rules: [ # required
+    #           {
+    #             value: "CostCategoryValue", # required
+    #             rule: { # required
+    #               or: [
+    #                 {
+    #                   # recursive Expression
+    #                 },
+    #               ],
+    #               and: [
+    #                 {
+    #                   # recursive Expression
+    #                 },
+    #               ],
+    #               not: {
+    #                 # recursive Expression
+    #               },
+    #               dimensions: {
+    #                 key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #                 values: ["Value"],
+    #               },
+    #               tags: {
+    #                 key: "TagKey",
+    #                 values: ["Value"],
+    #               },
+    #               cost_categories: {
+    #                 key: "CostCategoryName",
+    #                 values: ["Value"],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_version
+    #   The rule schema version in this particular Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules
+    #   Rules are processed in order. If there are multiple rules that match
+    #   the line item, then the first rule to match is used to determine
+    #   that Cost Category value.
+    #   @return [Array<Types::CostCategoryRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinitionRequest AWS API Documentation
+    #
+    class UpdateCostCategoryDefinitionRequest < Struct.new(
+      :cost_category_arn,
+      :rule_version,
+      :rules)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #   @return [String]
+    #
+    # @!attribute [rw] effective_start
+    #   The Cost Category's effective start date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinitionResponse AWS API Documentation
+    #
+    class UpdateCostCategoryDefinitionResponse < Struct.new(
+      :cost_category_arn,
+      :effective_start)
       include Aws::Structure
     end
 

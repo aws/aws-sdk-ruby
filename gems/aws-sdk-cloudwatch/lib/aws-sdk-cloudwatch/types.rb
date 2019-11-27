@@ -42,7 +42,7 @@ module Aws::CloudWatch
     end
 
     # An anomaly detection model associated with a particular CloudWatch
-    # metric athresnd statistic. You can use the model to display a band of
+    # metric and statistic. You can use the model to display a band of
     # expected normal values when the metric is graphed.
     #
     # @!attribute [rw] namespace
@@ -338,6 +338,37 @@ module Aws::CloudWatch
     #
     class DeleteDashboardsOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_names: ["InsightRuleName"], # required
+    #       }
+    #
+    # @!attribute [rw] rule_names
+    #   An array of the rule names to delete. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteInsightRulesInput AWS API Documentation
+    #
+    class DeleteInsightRulesInput < Struct.new(
+      :rule_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failures
+    #   An array listing the rules that could not be deleted. You cannot
+    #   delete built-in rules.
+    #   @return [Array<Types::PartialFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteInsightRulesOutput AWS API Documentation
+    #
+    class DeleteInsightRulesOutput < Struct.new(
+      :failures)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAlarmHistoryInput
     #   data as a hash:
     #
@@ -621,6 +652,47 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   This parameter is not currently used. Reserved for future use. If it
+    #   is used in the future, the maximum value may be different.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRulesInput AWS API Documentation
+    #
+    class DescribeInsightRulesInput < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] insight_rules
+    #   The rules returned by the operation.
+    #   @return [Array<Types::InsightRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRulesOutput AWS API Documentation
+    #
+    class DescribeInsightRulesOutput < Struct.new(
+      :next_token,
+      :insight_rules)
+      include Aws::Structure
+    end
+
     # Expands the identity of a metric.
     #
     # @note When making an API call, you may pass Dimension
@@ -691,6 +763,37 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_names: ["InsightRuleName"], # required
+    #       }
+    #
+    # @!attribute [rw] rule_names
+    #   An array of the rule names to disable. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableInsightRulesInput AWS API Documentation
+    #
+    class DisableInsightRulesInput < Struct.new(
+      :rule_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failures
+    #   An array listing the rules that could not be disabled. You cannot
+    #   disable built-in rules.
+    #   @return [Array<Types::PartialFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableInsightRulesOutput AWS API Documentation
+    #
+    class DisableInsightRulesOutput < Struct.new(
+      :failures)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableAlarmActionsInput
     #   data as a hash:
     #
@@ -706,6 +809,37 @@ module Aws::CloudWatch
     #
     class EnableAlarmActionsInput < Struct.new(
       :alarm_names)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableInsightRulesInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_names: ["InsightRuleName"], # required
+    #       }
+    #
+    # @!attribute [rw] rule_names
+    #   An array of the rule names to enable. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableInsightRulesInput AWS API Documentation
+    #
+    class EnableInsightRulesInput < Struct.new(
+      :rule_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] failures
+    #   An array listing the rules that could not be enabled. You cannot
+    #   disable or enable built-in rules.
+    #   @return [Array<Types::PartialFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableInsightRulesOutput AWS API Documentation
+    #
+    class EnableInsightRulesOutput < Struct.new(
+      :failures)
       include Aws::Structure
     end
 
@@ -748,6 +882,141 @@ module Aws::CloudWatch
       :dashboard_arn,
       :dashboard_body,
       :dashboard_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInsightRuleReportInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "InsightRuleName", # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         period: 1, # required
+    #         max_contributor_count: 1,
+    #         metrics: ["InsightRuleMetricName"],
+    #         order_by: "InsightRuleOrderBy",
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   The name of the rule that you want to see data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the data to use in the report. When used in a raw
+    #   HTTP Query API, it is formatted as `yyyy-MM-dd'T'HH:mm:ss`. For
+    #   example, `2019-07-01T23:59:59`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the data to use in the report. When used in a raw
+    #   HTTP Query API, it is formatted as `yyyy-MM-dd'T'HH:mm:ss`. For
+    #   example, `2019-07-01T23:59:59`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, to use for the statistics in the
+    #   `InsightRuleMetricDatapoint` results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_contributor_count
+    #   The maximum number of contributors to include in the report. The
+    #   range is 1 to 100. If you omit this, the default of 10 is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metrics
+    #   Specifies which metrics to use for aggregation of contributor values
+    #   for the report. You can specify one or more of the following
+    #   metrics:
+    #
+    #   * `UniqueContributors` -- the number of unique contributors for each
+    #     data point.
+    #
+    #   * `MaxContributorValue` -- the value of the top contributor for each
+    #     data point. The identity of the contributor may change for each
+    #     data point in the graph.
+    #
+    #     If this rule aggregates by COUNT, the top contributor for each
+    #     data point is the contributor with the most occurrences in that
+    #     period. If the rule aggregates by SUM, the top contributor is the
+    #     contributor with the highest sum in the log field specified by the
+    #     rule's `Value`, during that period.
+    #
+    #   * `SampleCount` -- the number of data points matched by the rule.
+    #
+    #   * `Sum` -- the sum of the values from all contributors during the
+    #     time period represented by that data point.
+    #
+    #   * `Minimum` -- the minimum value from a single observation during
+    #     the time period represented by that data point.
+    #
+    #   * `Maximum` -- the maximum value from a single observation during
+    #     the time period represented by that data point.
+    #
+    #   * `Average` -- the average value from all contributors during the
+    #     time period represented by that data point.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] order_by
+    #   Determines what statistic to use to rank the contributors. Valid
+    #   values are SUM and MAXIMUM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetInsightRuleReportInput AWS API Documentation
+    #
+    class GetInsightRuleReportInput < Struct.new(
+      :rule_name,
+      :start_time,
+      :end_time,
+      :period,
+      :max_contributor_count,
+      :metrics,
+      :order_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_labels
+    #   An array of the strings used as the keys for this rule. The keys are
+    #   the dimensions used to classify contributors. If the rule contains
+    #   more than one key, then each unique combination of values for the
+    #   keys is counted as a unique contributor.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] aggregation_statistic
+    #   Specifies whether this rule aggregates contributor data by COUNT or
+    #   SUM.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_value
+    #   The sum of the values from all individual contributors that match
+    #   the rule.
+    #   @return [Float]
+    #
+    # @!attribute [rw] approximate_unique_count
+    #   An approximate count of the unique contributors found by this rule
+    #   in this time period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] contributors
+    #   An array of the unique contributors found by this rule in this time
+    #   period. If the rule contains multiple keys, each combination of
+    #   values for the keys counts as a unique contributor.
+    #   @return [Array<Types::InsightRuleContributor>]
+    #
+    # @!attribute [rw] metric_datapoints
+    #   A time series of metric data points that matches the time period in
+    #   the rule request.
+    #   @return [Array<Types::InsightRuleMetricDatapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetInsightRuleReportOutput AWS API Documentation
+    #
+    class GetInsightRuleReportOutput < Struct.new(
+      :key_labels,
+      :aggregation_statistic,
+      :aggregate_value,
+      :approximate_unique_count,
+      :contributors,
+      :metric_datapoints)
       include Aws::Structure
     end
 
@@ -955,8 +1224,8 @@ module Aws::CloudWatch
     #   the request.
     #
     #   The value specified is inclusive; results include data points with
-    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
-    #   format (for example, 2016-10-03T23:00:00Z).
+    #   the specified time stamp. In a raw HTTP query, the time stamp must
+    #   be in ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
     #
     #   CloudWatch rounds the specified time stamp as follows:
     #
@@ -985,8 +1254,8 @@ module Aws::CloudWatch
     #   The time stamp that determines the last data point to return.
     #
     #   The value specified is exclusive; results include data points up to
-    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
-    #   format (for example, 2016-10-10T23:00:00Z).
+    #   the specified time stamp. In a raw HTTP query, the time stamp must
+    #   be in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
     #   @return [Time]
     #
     # @!attribute [rw] period
@@ -1141,6 +1410,181 @@ module Aws::CloudWatch
     #
     class GetMetricWidgetImageOutput < Struct.new(
       :metric_widget_image)
+      include Aws::Structure
+    end
+
+    # This structure contains the definition for a Contributor Insights
+    # rule.
+    #
+    # @!attribute [rw] name
+    #   The name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Indicates whether the rule is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   For rules that you create, this is always `\{"Name":
+    #   "CloudWatchLogRule", "Version": 1\}`. For built-in rules, this is
+    #   `\{"Name": "ServiceLogRule", "Version": 1\}`
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The definition of the rule, as a JSON object. The definition
+    #   contains the keywords used to define contributors, the value to
+    #   aggregate on if this rule returns a sum instead of a count, and the
+    #   filters. For details on the valid syntax, see [Contributor Insights
+    #   Rule Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InsightRule AWS API Documentation
+    #
+    class InsightRule < Struct.new(
+      :name,
+      :state,
+      :schema,
+      :definition)
+      include Aws::Structure
+    end
+
+    # One of the unique contributors found by a Contributor Insights rule.
+    # If the rule contains multiple keys, then a unique contributor is a
+    # unique combination of values from all the keys in the rule.
+    #
+    # If the rule contains a single key, then each unique contributor is
+    # each unique value for this key.
+    #
+    # For more information, see GetInsightRuleReport.
+    #
+    # @!attribute [rw] keys
+    #   One of the log entry field keywords that is used to define
+    #   contributors for this rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] approximate_aggregate_value
+    #   An approximation of the aggregate value that comes from this
+    #   contributor.
+    #   @return [Float]
+    #
+    # @!attribute [rw] datapoints
+    #   An array of the data points where this contributor is present. Only
+    #   the data points when this contributor appeared are included in the
+    #   array.
+    #   @return [Array<Types::InsightRuleContributorDatapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InsightRuleContributor AWS API Documentation
+    #
+    class InsightRuleContributor < Struct.new(
+      :keys,
+      :approximate_aggregate_value,
+      :datapoints)
+      include Aws::Structure
+    end
+
+    # One data point related to one contributor.
+    #
+    # For more information, see GetInsightRuleReport and
+    # InsightRuleContributor.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the data point.
+    #   @return [Time]
+    #
+    # @!attribute [rw] approximate_value
+    #   The approximate value that this contributor added during this
+    #   timestamp.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InsightRuleContributorDatapoint AWS API Documentation
+    #
+    class InsightRuleContributorDatapoint < Struct.new(
+      :timestamp,
+      :approximate_value)
+      include Aws::Structure
+    end
+
+    # One data point from the metric time series returned in a Contributor
+    # Insights rule report.
+    #
+    # For more information, see GetInsightRuleReport.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the data point.
+    #   @return [Time]
+    #
+    # @!attribute [rw] unique_contributors
+    #   The number of unique contributors who published data during this
+    #   timestamp.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_contributor_value
+    #   The maximum value provided by one contributor during this timestamp.
+    #   Each timestamp is evaluated separately, so the identity of the max
+    #   contributor could be different for each timestamp.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sample_count
+    #   The number of occurrences that matched the rule during this data
+    #   point.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] average
+    #   The average value from all contributors during the time period
+    #   represented by that data point.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] sum
+    #   The sum of the values from all contributors during the time period
+    #   represented by that data point.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] minimum
+    #   The minimum value from a single contributor during the time period
+    #   represented by that data point.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @!attribute [rw] maximum
+    #   The maximum value from a single occurence from a single contributor
+    #   during the time period represented by that data point.
+    #
+    #   This statistic is returned only if you included it in the `Metrics`
+    #   array in your request.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/InsightRuleMetricDatapoint AWS API Documentation
+    #
+    class InsightRuleMetricDatapoint < Struct.new(
+      :timestamp,
+      :unique_contributors,
+      :max_contributor_value,
+      :sample_count,
+      :average,
+      :sum,
+      :minimum,
+      :maximum)
       include Aws::Structure
     end
 
@@ -1507,7 +1951,7 @@ module Aws::CloudWatch
     #   @return [Integer]
     #
     # @!attribute [rw] datapoints_to_alarm
-    #   The number of datapoints that must be breaching to trigger the
+    #   The number of data points that must be breaching to trigger the
     #   alarm.
     #   @return [Integer]
     #
@@ -1707,10 +2151,10 @@ module Aws::CloudWatch
     #   `PutMetricData` operation that includes a `StorageResolution of 1
     #   second`.
     #
-    #   Use this field only when you are performing a `GetMetricData`
-    #   operation, and only when you are specifying the `Expression` field.
-    #   Do not use this field with a `PutMetricAlarm` operation or when you
-    #   are specifying a `MetricStat` in a `GetMetricData` operation.
+    #   If you are performing a `GetMetricData` operation, use this field
+    #   only if you are specifying an `Expression`. Do not use this field
+    #   when you are specifying a `MetricStat` in a `GetMetricData`
+    #   operation.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
@@ -1823,9 +2267,8 @@ module Aws::CloudWatch
     #
     #   Although the parameter accepts numbers of type Double, CloudWatch
     #   rejects values that are either too small or too large. Values must
-    #   be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or
-    #   2e-360 to 2e360 (Base 2). In addition, special values (for example,
-    #   NaN, +Infinity, -Infinity) are not supported.
+    #   be in the range of -2^360 to 2^360. In addition, special values (for
+    #   example, NaN, +Infinity, -Infinity) are not supported.
     #   @return [Float]
     #
     # @!attribute [rw] statistic_values
@@ -1842,9 +2285,8 @@ module Aws::CloudWatch
     #
     #   Although the `Values` array accepts numbers of type `Double`,
     #   CloudWatch rejects values that are either too small or too large.
-    #   Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
-    #   10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
-    #   example, NaN, +Infinity, -Infinity) are not supported.
+    #   Values must be in the range of -2^360 to 2^360. In addition, special
+    #   values (for example, NaN, +Infinity, -Infinity) are not supported.
     #   @return [Array<Float>]
     #
     # @!attribute [rw] counts
@@ -1989,6 +2431,36 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # This array is empty if the API operation was successful for all the
+    # rules specified in the request. If the operation could not process one
+    # of the rules, the following data is returned for each of those rules.
+    #
+    # @!attribute [rw] failure_resource
+    #   The specified rule that could not be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] exception_type
+    #   The type of error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The code of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_description
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PartialFailure AWS API Documentation
+    #
+    class PartialFailure < Struct.new(
+      :failure_resource,
+      :exception_type,
+      :failure_code,
+      :failure_description)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAnomalyDetectorInput
     #   data as a hash:
     #
@@ -2108,6 +2580,45 @@ module Aws::CloudWatch
       :dashboard_validation_messages)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutInsightRuleInput
+    #   data as a hash:
+    #
+    #       {
+    #         rule_name: "InsightRuleName", # required
+    #         rule_state: "InsightRuleState",
+    #         rule_definition: "InsightRuleDefinition", # required
+    #       }
+    #
+    # @!attribute [rw] rule_name
+    #   A unique name for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_state
+    #   The state of the rule. Valid values are ENABLED and DISABLED.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_definition
+    #   The definition of the rule, as a JSON object. For details on the
+    #   valid syntax, see [Contributor Insights Rule Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutInsightRuleInput AWS API Documentation
+    #
+    class PutInsightRuleInput < Struct.new(
+      :rule_name,
+      :rule_state,
+      :rule_definition)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutInsightRuleOutput AWS API Documentation
+    #
+    class PutInsightRuleOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutMetricAlarmInput
     #   data as a hash:
@@ -2347,7 +2858,7 @@ module Aws::CloudWatch
     #   @return [Integer]
     #
     # @!attribute [rw] datapoints_to_alarm
-    #   The number of datapoints that must be breaching to trigger the
+    #   The number of data points that must be breaching to trigger the
     #   alarm. This is used only if you are setting an "M out of N" alarm.
     #   In that case, this value is the M. For more information, see
     #   [Evaluating an Alarm][1] in the *Amazon CloudWatch User Guide*.

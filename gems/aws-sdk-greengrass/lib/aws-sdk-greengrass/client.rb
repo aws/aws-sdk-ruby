@@ -1202,10 +1202,18 @@ module Aws::Greengrass
     #             },
     #             s3_machine_learning_model_resource_data: {
     #               destination_path: "__string",
+    #               owner_setting: {
+    #                 group_owner: "__string", # required
+    #                 group_permission: "ro", # required, accepts ro, rw
+    #               },
     #               s3_uri: "__string",
     #             },
     #             sage_maker_machine_learning_model_resource_data: {
     #               destination_path: "__string",
+    #               owner_setting: {
+    #                 group_owner: "__string", # required
+    #                 group_permission: "ro", # required, accepts ro, rw
+    #               },
     #               sage_maker_job_arn: "__string",
     #             },
     #             secrets_manager_secret_resource_data: {
@@ -1284,10 +1292,18 @@ module Aws::Greengrass
     #           },
     #           s3_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             s3_uri: "__string",
     #           },
     #           sage_maker_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             sage_maker_job_arn: "__string",
     #           },
     #           secrets_manager_secret_resource_data: {
@@ -1358,8 +1374,8 @@ module Aws::Greengrass
     #     software_to_update: "core", # required, accepts core, ota_agent
     #     update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
     #     update_targets: ["__string"], # required
-    #     update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64, openwrt
-    #     update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux
+    #     update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64
+    #     update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux, openwrt
     #   })
     #
     # @example Response structure
@@ -2541,8 +2557,12 @@ module Aws::Greengrass
     #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.group_owner_setting.group_owner #=> String
     #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.source_path #=> String
     #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.destination_path #=> String
+    #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.owner_setting.group_owner #=> String
+    #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.owner_setting.group_permission #=> String, one of "ro", "rw"
     #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.s3_uri #=> String
     #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.destination_path #=> String
+    #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.owner_setting.group_owner #=> String
+    #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.owner_setting.group_permission #=> String, one of "ro", "rw"
     #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.sage_maker_job_arn #=> String
     #   resp.definition.resources[0].resource_data_container.secrets_manager_secret_resource_data.arn #=> String
     #   resp.definition.resources[0].resource_data_container.secrets_manager_secret_resource_data.additional_staging_labels_to_download #=> Array
@@ -3946,7 +3966,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

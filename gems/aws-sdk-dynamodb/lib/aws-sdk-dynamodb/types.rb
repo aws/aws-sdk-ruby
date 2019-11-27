@@ -8,6 +8,40 @@
 module Aws::DynamoDB
   module Types
 
+    # Contains details of a table archival operation.
+    #
+    # @!attribute [rw] archival_date_time
+    #   The date and time when table archival was initiated by DynamoDB, in
+    #   UNIX epoch time format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] archival_reason
+    #   The reason DynamoDB archived the table. Currently, the only possible
+    #   value is:
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The table was archived due
+    #     to the table's AWS KMS key being inaccessible for more than seven
+    #     days. An On-Demand backup was created at the archival time.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] archival_backup_arn
+    #   The Amazon Resource Name (ARN) of the backup the table was archived
+    #   to, when applicable in the archival reason. If you wish to restore
+    #   this backup to the same table name, you will need to delete the
+    #   original table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ArchivalSummary AWS API Documentation
+    #
+    class ArchivalSummary < Struct.new(
+      :archival_date_time,
+      :archival_reason,
+      :archival_backup_arn)
+      include Aws::Structure
+    end
+
     # Represents an attribute for describing the key schema for the table
     # and indexes.
     #
@@ -1552,6 +1586,30 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents a Contributor Insights summary entry..
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table associated with the summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   Name of the index associated with the summary, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor_insights_status
+    #   Describes the current status for contributor insights for the given
+    #   table and index, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContributorInsightsSummary AWS API Documentation
+    #
+    class ContributorInsightsSummary < Struct.new(
+      :table_name,
+      :index_name,
+      :contributor_insights_status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateBackupInput
     #   data as a hash:
     #
@@ -2632,6 +2690,82 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeContributorInsightsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         index_name: "IndexName",
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index to describe, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsightsInput AWS API Documentation
+    #
+    class DescribeContributorInsightsInput < Struct.new(
+      :table_name,
+      :index_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor_insights_rule_list
+    #   List of names of the associated Alpine rules.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] contributor_insights_status
+    #   Current Status contributor insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_date_time
+    #   Timestamp of the last time the status was changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_exception
+    #   Returns information about the last failure that encountered.
+    #
+    #   The most common exceptions for a FAILED status are:
+    #
+    #   * LimitExceededException - Per-account Amazon CloudWatch Contributor
+    #     Insights rule limit reached. Please disable Contributor Insights
+    #     for other tables/indexes OR disable Contributor Insights rules
+    #     before retrying.
+    #
+    #   * AccessDeniedException - Amazon CloudWatch Contributor Insights
+    #     rules cannot be modified due to insufficient permissions.
+    #
+    #   * AccessDeniedException - Failed to create service-linked role for
+    #     Contributor Insights due to insufficient permissions.
+    #
+    #   * InternalServerError - Failed to create Amazon CloudWatch
+    #     Contributor Insights rules. Please retry request.
+    #   @return [Types::FailureException]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContributorInsightsOutput AWS API Documentation
+    #
+    class DescribeContributorInsightsOutput < Struct.new(
+      :table_name,
+      :index_name,
+      :contributor_insights_rule_list,
+      :contributor_insights_status,
+      :last_update_date_time,
+      :failure_exception)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeEndpointsRequest AWS API Documentation
@@ -3138,6 +3272,24 @@ module Aws::DynamoDB
       :exists,
       :comparison_operator,
       :attribute_value_list)
+      include Aws::Structure
+    end
+
+    # Represents a failure a contributor insights operation.
+    #
+    # @!attribute [rw] exception_name
+    #   Exception name.
+    #   @return [String]
+    #
+    # @!attribute [rw] exception_description
+    #   Description of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/FailureException AWS API Documentation
+    #
+    class FailureException < Struct.new(
+      :exception_name,
+      :exception_description)
       include Aws::Structure
     end
 
@@ -4268,6 +4420,52 @@ module Aws::DynamoDB
     class ListBackupsOutput < Struct.new(
       :backup_summaries,
       :last_evaluated_backup_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListContributorInsightsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName",
+    #         next_token: "NextTokenString",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to for the desired page, if there is one.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListContributorInsightsInput AWS API Documentation
+    #
+    class ListContributorInsightsInput < Struct.new(
+      :table_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contributor_insights_summaries
+    #   A list of ContributorInsightsSummary.
+    #   @return [Array<Types::ContributorInsightsSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to go to the next page if there is one.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListContributorInsightsOutput AWS API Documentation
+    #
+    class ListContributorInsightsOutput < Struct.new(
+      :contributor_insights_summaries,
+      :next_token)
       include Aws::Structure
     end
 
@@ -6779,12 +6977,22 @@ module Aws::DynamoDB
     #   encryption.
     #   @return [String]
     #
+    # @!attribute [rw] inaccessible_encryption_date_time
+    #   Indicates the time, in UNIX epoch date format, when DynamoDB
+    #   detected that the table's AWS KMS key was inaccessible. This
+    #   attribute will automatically be cleared when DynamoDB detects that
+    #   the table's AWS KMS key is accessible again. DynamoDB will initiate
+    #   the table archival process when table's AWS KMS key remains
+    #   inaccessible for more than seven days from this date.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
     #
     class SSEDescription < Struct.new(
       :status,
       :sse_type,
-      :kms_master_key_arn)
+      :kms_master_key_arn,
+      :inaccessible_encryption_date_time)
       include Aws::Structure
     end
 
@@ -7526,6 +7734,18 @@ module Aws::DynamoDB
     #   * `DELETING` - The table is being deleted.
     #
     #   * `ACTIVE` - The table is ready for use.
+    #
+    #   * `INACCESSIBLE_ENCRYPTION_CREDENTIALS` - The AWS KMS key used to
+    #     encrypt the table in inaccessible. Table operations may fail due
+    #     to failure to use the AWS KMS key. DynamoDB will initiate the
+    #     table archival process when a table's AWS KMS key remains
+    #     inaccessible for more than seven days.
+    #
+    #   * `ARCHIVING` - The table is being archived. Operations are not
+    #     allowed until archival is complete.
+    #
+    #   * `ARCHIVED` - The table has been archived. See the ArchivalReason
+    #     for more information.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -7740,6 +7960,10 @@ module Aws::DynamoDB
     #   specified table.
     #   @return [Types::SSEDescription]
     #
+    # @!attribute [rw] archival_summary
+    #   Contains information about the table archive.
+    #   @return [Types::ArchivalSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -7762,7 +7986,8 @@ module Aws::DynamoDB
       :global_table_version,
       :replicas,
       :restore_summary,
-      :sse_description)
+      :sse_description,
+      :archival_summary)
       include Aws::Structure
     end
 
@@ -8594,6 +8819,57 @@ module Aws::DynamoDB
     #
     class UpdateContinuousBackupsOutput < Struct.new(
       :continuous_backups_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContributorInsightsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         index_name: "IndexName",
+    #         contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The global secondary index name, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor_insights_action
+    #   Represents the contributor insights action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsightsInput AWS API Documentation
+    #
+    class UpdateContributorInsightsInput < Struct.new(
+      :table_name,
+      :index_name,
+      :contributor_insights_action)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] contributor_insights_status
+    #   The status of contributor insights
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContributorInsightsOutput AWS API Documentation
+    #
+    class UpdateContributorInsightsOutput < Struct.new(
+      :table_name,
+      :index_name,
+      :contributor_insights_status)
       include Aws::Structure
     end
 

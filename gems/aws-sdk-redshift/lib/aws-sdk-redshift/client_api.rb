@@ -114,6 +114,7 @@ module Aws::Redshift
     CreateHsmClientCertificateResult = Shapes::StructureShape.new(name: 'CreateHsmClientCertificateResult')
     CreateHsmConfigurationMessage = Shapes::StructureShape.new(name: 'CreateHsmConfigurationMessage')
     CreateHsmConfigurationResult = Shapes::StructureShape.new(name: 'CreateHsmConfigurationResult')
+    CreateScheduledActionMessage = Shapes::StructureShape.new(name: 'CreateScheduledActionMessage')
     CreateSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantMessage')
     CreateSnapshotCopyGrantResult = Shapes::StructureShape.new(name: 'CreateSnapshotCopyGrantResult')
     CreateSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'CreateSnapshotScheduleMessage')
@@ -135,6 +136,7 @@ module Aws::Redshift
     DeleteEventSubscriptionMessage = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionMessage')
     DeleteHsmClientCertificateMessage = Shapes::StructureShape.new(name: 'DeleteHsmClientCertificateMessage')
     DeleteHsmConfigurationMessage = Shapes::StructureShape.new(name: 'DeleteHsmConfigurationMessage')
+    DeleteScheduledActionMessage = Shapes::StructureShape.new(name: 'DeleteScheduledActionMessage')
     DeleteSnapshotCopyGrantMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotCopyGrantMessage')
     DeleteSnapshotScheduleMessage = Shapes::StructureShape.new(name: 'DeleteSnapshotScheduleMessage')
     DeleteTagsMessage = Shapes::StructureShape.new(name: 'DeleteTagsMessage')
@@ -163,6 +165,7 @@ module Aws::Redshift
     DescribeReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodeOfferingsMessage')
     DescribeReservedNodesMessage = Shapes::StructureShape.new(name: 'DescribeReservedNodesMessage')
     DescribeResizeMessage = Shapes::StructureShape.new(name: 'DescribeResizeMessage')
+    DescribeScheduledActionsMessage = Shapes::StructureShape.new(name: 'DescribeScheduledActionsMessage')
     DescribeSnapshotCopyGrantsMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotCopyGrantsMessage')
     DescribeSnapshotSchedulesMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotSchedulesMessage')
     DescribeSnapshotSchedulesOutputMessage = Shapes::StructureShape.new(name: 'DescribeSnapshotSchedulesOutputMessage')
@@ -239,6 +242,7 @@ module Aws::Redshift
     InvalidS3BucketNameFault = Shapes::StructureShape.new(name: 'InvalidS3BucketNameFault')
     InvalidS3KeyPrefixFault = Shapes::StructureShape.new(name: 'InvalidS3KeyPrefixFault')
     InvalidScheduleFault = Shapes::StructureShape.new(name: 'InvalidScheduleFault')
+    InvalidScheduledActionFault = Shapes::StructureShape.new(name: 'InvalidScheduledActionFault')
     InvalidSnapshotCopyGrantStateFault = Shapes::StructureShape.new(name: 'InvalidSnapshotCopyGrantStateFault')
     InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
     InvalidSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidSubscriptionStateFault')
@@ -250,6 +254,7 @@ module Aws::Redshift
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongOptional = Shapes::IntegerShape.new(name: 'LongOptional')
     MaintenanceTrack = Shapes::StructureShape.new(name: 'MaintenanceTrack')
+    Mode = Shapes::StringShape.new(name: 'Mode')
     ModifyClusterDbRevisionMessage = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionMessage')
     ModifyClusterDbRevisionResult = Shapes::StructureShape.new(name: 'ModifyClusterDbRevisionResult')
     ModifyClusterIamRolesMessage = Shapes::StructureShape.new(name: 'ModifyClusterIamRolesMessage')
@@ -266,6 +271,7 @@ module Aws::Redshift
     ModifyClusterSubnetGroupResult = Shapes::StructureShape.new(name: 'ModifyClusterSubnetGroupResult')
     ModifyEventSubscriptionMessage = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionMessage')
     ModifyEventSubscriptionResult = Shapes::StructureShape.new(name: 'ModifyEventSubscriptionResult')
+    ModifyScheduledActionMessage = Shapes::StructureShape.new(name: 'ModifyScheduledActionMessage')
     ModifySnapshotCopyRetentionPeriodMessage = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodMessage')
     ModifySnapshotCopyRetentionPeriodResult = Shapes::StructureShape.new(name: 'ModifySnapshotCopyRetentionPeriodResult')
     ModifySnapshotScheduleMessage = Shapes::StructureShape.new(name: 'ModifySnapshotScheduleMessage')
@@ -332,6 +338,20 @@ module Aws::Redshift
     ScheduleDefinitionList = Shapes::ListShape.new(name: 'ScheduleDefinitionList')
     ScheduleDefinitionTypeUnsupportedFault = Shapes::StructureShape.new(name: 'ScheduleDefinitionTypeUnsupportedFault')
     ScheduleState = Shapes::StringShape.new(name: 'ScheduleState')
+    ScheduledAction = Shapes::StructureShape.new(name: 'ScheduledAction')
+    ScheduledActionAlreadyExistsFault = Shapes::StructureShape.new(name: 'ScheduledActionAlreadyExistsFault')
+    ScheduledActionFilter = Shapes::StructureShape.new(name: 'ScheduledActionFilter')
+    ScheduledActionFilterList = Shapes::ListShape.new(name: 'ScheduledActionFilterList')
+    ScheduledActionFilterName = Shapes::StringShape.new(name: 'ScheduledActionFilterName')
+    ScheduledActionList = Shapes::ListShape.new(name: 'ScheduledActionList')
+    ScheduledActionNotFoundFault = Shapes::StructureShape.new(name: 'ScheduledActionNotFoundFault')
+    ScheduledActionQuotaExceededFault = Shapes::StructureShape.new(name: 'ScheduledActionQuotaExceededFault')
+    ScheduledActionState = Shapes::StringShape.new(name: 'ScheduledActionState')
+    ScheduledActionTimeList = Shapes::ListShape.new(name: 'ScheduledActionTimeList')
+    ScheduledActionType = Shapes::StructureShape.new(name: 'ScheduledActionType')
+    ScheduledActionTypeUnsupportedFault = Shapes::StructureShape.new(name: 'ScheduledActionTypeUnsupportedFault')
+    ScheduledActionTypeValues = Shapes::StringShape.new(name: 'ScheduledActionTypeValues')
+    ScheduledActionsMessage = Shapes::StructureShape.new(name: 'ScheduledActionsMessage')
     ScheduledSnapshotTimeList = Shapes::ListShape.new(name: 'ScheduledSnapshotTimeList')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     Snapshot = Shapes::StructureShape.new(name: 'Snapshot')
@@ -762,6 +782,16 @@ module Aws::Redshift
     CreateHsmConfigurationResult.add_member(:hsm_configuration, Shapes::ShapeRef.new(shape: HsmConfiguration, location_name: "HsmConfiguration"))
     CreateHsmConfigurationResult.struct_class = Types::CreateHsmConfigurationResult
 
+    CreateScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
+    CreateScheduledActionMessage.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, required: true, location_name: "TargetAction"))
+    CreateScheduledActionMessage.add_member(:schedule, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Schedule"))
+    CreateScheduledActionMessage.add_member(:iam_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRole"))
+    CreateScheduledActionMessage.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionDescription"))
+    CreateScheduledActionMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    CreateScheduledActionMessage.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    CreateScheduledActionMessage.add_member(:enable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enable"))
+    CreateScheduledActionMessage.struct_class = Types::CreateScheduledActionMessage
+
     CreateSnapshotCopyGrantMessage.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotCopyGrantName"))
     CreateSnapshotCopyGrantMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateSnapshotCopyGrantMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -843,6 +873,9 @@ module Aws::Redshift
 
     DeleteHsmConfigurationMessage.add_member(:hsm_configuration_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "HsmConfigurationIdentifier"))
     DeleteHsmConfigurationMessage.struct_class = Types::DeleteHsmConfigurationMessage
+
+    DeleteScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
+    DeleteScheduledActionMessage.struct_class = Types::DeleteScheduledActionMessage
 
     DeleteSnapshotCopyGrantMessage.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotCopyGrantName"))
     DeleteSnapshotCopyGrantMessage.struct_class = Types::DeleteSnapshotCopyGrantMessage
@@ -966,6 +999,7 @@ module Aws::Redshift
     DescribeLoggingStatusMessage.struct_class = Types::DescribeLoggingStatusMessage
 
     DescribeNodeConfigurationOptionsMessage.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, required: true, location_name: "ActionType"))
+    DescribeNodeConfigurationOptionsMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ClusterIdentifier"))
     DescribeNodeConfigurationOptionsMessage.add_member(:snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotIdentifier"))
     DescribeNodeConfigurationOptionsMessage.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccount"))
     DescribeNodeConfigurationOptionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: NodeConfigurationOptionsFilterList, location_name: "Filter"))
@@ -991,6 +1025,16 @@ module Aws::Redshift
 
     DescribeResizeMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     DescribeResizeMessage.struct_class = Types::DescribeResizeMessage
+
+    DescribeScheduledActionsMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionName"))
+    DescribeScheduledActionsMessage.add_member(:target_action_type, Shapes::ShapeRef.new(shape: ScheduledActionTypeValues, location_name: "TargetActionType"))
+    DescribeScheduledActionsMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    DescribeScheduledActionsMessage.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    DescribeScheduledActionsMessage.add_member(:active, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Active"))
+    DescribeScheduledActionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: ScheduledActionFilterList, location_name: "Filters"))
+    DescribeScheduledActionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeScheduledActionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeScheduledActionsMessage.struct_class = Types::DescribeScheduledActionsMessage
 
     DescribeSnapshotCopyGrantsMessage.add_member(:snapshot_copy_grant_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotCopyGrantName"))
     DescribeSnapshotCopyGrantsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1284,6 +1328,16 @@ module Aws::Redshift
     ModifyEventSubscriptionResult.add_member(:event_subscription, Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription"))
     ModifyEventSubscriptionResult.struct_class = Types::ModifyEventSubscriptionResult
 
+    ModifyScheduledActionMessage.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ScheduledActionName"))
+    ModifyScheduledActionMessage.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, location_name: "TargetAction"))
+    ModifyScheduledActionMessage.add_member(:schedule, Shapes::ShapeRef.new(shape: String, location_name: "Schedule"))
+    ModifyScheduledActionMessage.add_member(:iam_role, Shapes::ShapeRef.new(shape: String, location_name: "IamRole"))
+    ModifyScheduledActionMessage.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionDescription"))
+    ModifyScheduledActionMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    ModifyScheduledActionMessage.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    ModifyScheduledActionMessage.add_member(:enable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Enable"))
+    ModifyScheduledActionMessage.struct_class = Types::ModifyScheduledActionMessage
+
     ModifySnapshotCopyRetentionPeriodMessage.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterIdentifier"))
     ModifySnapshotCopyRetentionPeriodMessage.add_member(:retention_period, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "RetentionPeriod"))
     ModifySnapshotCopyRetentionPeriodMessage.add_member(:manual, Shapes::ShapeRef.new(shape: Boolean, location_name: "Manual"))
@@ -1299,6 +1353,7 @@ module Aws::Redshift
     NodeConfigurationOption.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     NodeConfigurationOption.add_member(:number_of_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfNodes"))
     NodeConfigurationOption.add_member(:estimated_disk_utilization_percent, Shapes::ShapeRef.new(shape: DoubleOptional, location_name: "EstimatedDiskUtilizationPercent"))
+    NodeConfigurationOption.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
     NodeConfigurationOption.struct_class = Types::NodeConfigurationOption
 
     NodeConfigurationOptionList.member = Shapes::ShapeRef.new(shape: NodeConfigurationOption, location_name: "NodeConfigurationOption")
@@ -1535,6 +1590,34 @@ module Aws::Redshift
     RotateEncryptionKeyResult.struct_class = Types::RotateEncryptionKeyResult
 
     ScheduleDefinitionList.member = Shapes::ShapeRef.new(shape: String, location_name: "ScheduleDefinition")
+
+    ScheduledAction.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionName"))
+    ScheduledAction.add_member(:target_action, Shapes::ShapeRef.new(shape: ScheduledActionType, location_name: "TargetAction"))
+    ScheduledAction.add_member(:schedule, Shapes::ShapeRef.new(shape: String, location_name: "Schedule"))
+    ScheduledAction.add_member(:iam_role, Shapes::ShapeRef.new(shape: String, location_name: "IamRole"))
+    ScheduledAction.add_member(:scheduled_action_description, Shapes::ShapeRef.new(shape: String, location_name: "ScheduledActionDescription"))
+    ScheduledAction.add_member(:state, Shapes::ShapeRef.new(shape: ScheduledActionState, location_name: "State"))
+    ScheduledAction.add_member(:next_invocations, Shapes::ShapeRef.new(shape: ScheduledActionTimeList, location_name: "NextInvocations"))
+    ScheduledAction.add_member(:start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "StartTime"))
+    ScheduledAction.add_member(:end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EndTime"))
+    ScheduledAction.struct_class = Types::ScheduledAction
+
+    ScheduledActionFilter.add_member(:name, Shapes::ShapeRef.new(shape: ScheduledActionFilterName, required: true, location_name: "Name"))
+    ScheduledActionFilter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "Values"))
+    ScheduledActionFilter.struct_class = Types::ScheduledActionFilter
+
+    ScheduledActionFilterList.member = Shapes::ShapeRef.new(shape: ScheduledActionFilter, location_name: "ScheduledActionFilter")
+
+    ScheduledActionList.member = Shapes::ShapeRef.new(shape: ScheduledAction, location_name: "ScheduledAction")
+
+    ScheduledActionTimeList.member = Shapes::ShapeRef.new(shape: TStamp, location_name: "ScheduledActionTime")
+
+    ScheduledActionType.add_member(:resize_cluster, Shapes::ShapeRef.new(shape: ResizeClusterMessage, location_name: "ResizeCluster"))
+    ScheduledActionType.struct_class = Types::ScheduledActionType
+
+    ScheduledActionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ScheduledActionsMessage.add_member(:scheduled_actions, Shapes::ShapeRef.new(shape: ScheduledActionList, location_name: "ScheduledActions"))
+    ScheduledActionsMessage.struct_class = Types::ScheduledActionsMessage
 
     ScheduledSnapshotTimeList.member = Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotTime")
 
@@ -1930,6 +2013,20 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
       end)
 
+      api.add_operation(:create_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateScheduledActionMessage)
+        o.output = Shapes::ShapeRef.new(shape: ScheduledAction)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionQuotaExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionTypeUnsupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScheduleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScheduledActionFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+      end)
+
       api.add_operation(:create_snapshot_copy_grant, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSnapshotCopyGrant"
         o.http_method = "POST"
@@ -2050,6 +2147,16 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidHsmConfigurationStateFault)
         o.errors << Shapes::ShapeRef.new(shape: HsmConfigurationNotFoundFault)
+      end)
+
+      api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduledActionMessage)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
       end)
 
       api.add_operation(:delete_snapshot_copy_grant, Seahorse::Model::Operation.new.tap do |o|
@@ -2321,6 +2428,8 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: NodeConfigurationOptionsMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterSnapshotStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessToSnapshotDeniedFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -2384,6 +2493,22 @@ module Aws::Redshift
         o.output = Shapes::ShapeRef.new(shape: ResizeProgressMessage)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResizeNotFoundFault)
+      end)
+
+      api.add_operation(:describe_scheduled_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeScheduledActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeScheduledActionsMessage)
+        o.output = Shapes::ShapeRef.new(shape: ScheduledActionsMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_snapshot_copy_grants, Seahorse::Model::Operation.new.tap do |o|
@@ -2627,6 +2752,19 @@ module Aws::Redshift
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionSeverityNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: SourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubscriptionStateFault)
+      end)
+
+      api.add_operation(:modify_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyScheduledAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyScheduledActionMessage)
+        o.output = Shapes::ShapeRef.new(shape: ScheduledAction)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ScheduledActionTypeUnsupportedFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScheduleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScheduledActionFault)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
       end)
 
       api.add_operation(:modify_snapshot_copy_retention_period, Seahorse::Model::Operation.new.tap do |o|

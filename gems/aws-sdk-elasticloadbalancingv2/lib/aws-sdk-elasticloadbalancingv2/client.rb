@@ -723,7 +723,9 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Network Load Balancers\] You can specify subnets from one or more
     #   Availability Zones. You can specify one Elastic IP address per subnet
-    #   if you need static IP addresses for your load balancer.
+    #   if you need static IP addresses for your internet-facing load
+    #   balancer. For internal load balancers, you can specify one private IP
+    #   address per subnet from the IPv4 range of the subnet.
     #
     # @option params [Array<String>] :security_groups
     #   \[Application Load Balancers\] The IDs of the security groups for the
@@ -861,6 +863,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
+    #         private_i_pv_4_address: "PrivateIPv4Address",
     #       },
     #     ],
     #     security_groups: ["SecurityGroupId"],
@@ -894,6 +897,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
+    #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -1987,6 +1991,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses #=> Array
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
+    #   resp.load_balancers[0].availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
@@ -3979,11 +3984,13 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Enables the Availability Zone for the specified public subnets for the
-    # specified Application Load Balancer. The specified subnets replace the
+    # Enables the Availability Zones for the specified public subnets for
+    # the specified load balancer. The specified subnets replace the
     # previously enabled subnets.
     #
-    # You can't change the subnets for a Network Load Balancer.
+    # When you specify subnets for a Network Load Balancer, you must include
+    # all subnets that were enabled previously, with their existing
+    # configurations, plus any additional subnets.
     #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
@@ -3994,11 +4001,18 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zone. You must specify either subnets or subnet mappings.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
-    #   The IDs of the public subnets. You must specify subnets from at least
-    #   two Availability Zones. You can specify only one subnet per
+    #   The IDs of the public subnets. You can specify only one subnet per
     #   Availability Zone. You must specify either subnets or subnet mappings.
     #
-    #   You cannot specify Elastic IP addresses for your subnets.
+    #   \[Application Load Balancers\] You must specify subnets from at least
+    #   two Availability Zones. You cannot specify Elastic IP addresses for
+    #   your subnets.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. If you need static IP addresses for your
+    #   internet-facing load balancer, you can specify one Elastic IP address
+    #   per subnet. For internal load balancers, you can specify one private
+    #   IP address per subnet from the IPv4 range of the subnet.
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4040,6 +4054,7 @@ module Aws::ElasticLoadBalancingV2
     #       {
     #         subnet_id: "SubnetId",
     #         allocation_id: "AllocationId",
+    #         private_i_pv_4_address: "PrivateIPv4Address",
     #       },
     #     ],
     #   })
@@ -4052,6 +4067,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones[0].load_balancer_addresses #=> Array
     #   resp.availability_zones[0].load_balancer_addresses[0].ip_address #=> String
     #   resp.availability_zones[0].load_balancer_addresses[0].allocation_id #=> String
+    #   resp.availability_zones[0].load_balancer_addresses[0].private_i_pv_4_address #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
@@ -4075,7 +4091,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

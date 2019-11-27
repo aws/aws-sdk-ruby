@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2019-11-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ElasticInference`.
+
+1.245.0 (2019-11-25)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WAFV2`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTSecureTunneling`.
+
+* Feature - Added support for enumerating regions for `Aws::AppConfig`.
+
 1.244.0 (2019-11-22)
 ------------------
 

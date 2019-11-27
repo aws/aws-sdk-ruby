@@ -23,6 +23,9 @@
   "ApiGatewayV2": {
     "models": "apigatewayv2/2018-11-29"
   },
+  "AppConfig": {
+    "models": "appconfig/2019-10-09"
+  },
   "AppMesh": {
     "models": "appmesh/2019-01-25"
   },
@@ -232,6 +235,9 @@
   "ElasticBeanstalk": {
     "models": "elasticbeanstalk/2010-12-01"
   },
+  "ElasticInference": {
+    "models": "elastic-inference/2017-07-25"
+  },
   "ElasticLoadBalancing": {
     "models": "elasticloadbalancing/2012-06-01"
   },
@@ -324,6 +330,9 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
+  },
+  "IoTSecureTunneling": {
+    "models": "iotsecuretunneling/2018-10-05"
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
@@ -677,6 +686,9 @@
   },
   "WAFRegional": {
     "models": "waf-regional/2016-11-28"
+  },
+  "WAFV2": {
+    "models": "wafv2/2019-07-29"
   },
   "WorkDocs": {
     "models": "workdocs/2016-05-01"

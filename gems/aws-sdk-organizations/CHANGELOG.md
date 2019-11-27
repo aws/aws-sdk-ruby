@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-11-26)
+------------------
+
+* Feature - Introduces the DescribeEffectivePolicy action, which returns the contents of the policy that's in effect for the account.
+
 1.34.0 (2019-10-23)
 ------------------
 

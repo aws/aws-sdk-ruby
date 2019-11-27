@@ -264,6 +264,185 @@ module Aws::CostExplorer
 
     # @!group API Operations
 
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Creates a new Cost Category with the requested name and rules.
+    #
+    # @option params [required, String] :name
+    #   The unique name of the Cost Category.
+    #
+    # @option params [required, String] :rule_version
+    #   The rule schema version in this particular Cost Category.
+    #
+    # @option params [required, Array<Types::CostCategoryRule>] :rules
+    #   Rules are processed in order. If there are multiple rules that match
+    #   the line item, then the first rule to match is used to determine that
+    #   Cost Category value.
+    #
+    # @return [Types::CreateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
+    #   * {Types::CreateCostCategoryDefinitionResponse#effective_start #effective_start} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cost_category_definition({
+    #     name: "CostCategoryName", # required
+    #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
+    #     rules: [ # required
+    #       {
+    #         value: "CostCategoryValue", # required
+    #         rule: { # required
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category_arn #=> String
+    #   resp.effective_start #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinition AWS API Documentation
+    #
+    # @overload create_cost_category_definition(params = {})
+    # @param [Hash] params ({})
+    def create_cost_category_definition(params = {}, options = {})
+      req = build_request(:create_cost_category_definition, params)
+      req.send_request(options)
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Deletes a Cost Category. Expenses from this month going forward will
+    # no longer be categorized with this Cost Category.
+    #
+    # @option params [required, String] :cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #
+    # @return [Types::DeleteCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
+    #   * {Types::DeleteCostCategoryDefinitionResponse#effective_end #effective_end} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cost_category_definition({
+    #     cost_category_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category_arn #=> String
+    #   resp.effective_end #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DeleteCostCategoryDefinition AWS API Documentation
+    #
+    # @overload delete_cost_category_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_cost_category_definition(params = {}, options = {})
+      req = build_request(:delete_cost_category_definition, params)
+      req.send_request(options)
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Returns the name, ARN, rules, definition, and effective dates of a
+    # Cost Category that's defined in the account.
+    #
+    # You have the option to use `EffectiveOn` to return a Cost Category
+    # that is active on a specific date. If there is no `EffectiveOn`
+    # specified, you’ll see a Cost Category that is effective on the current
+    # date. If Cost Category is still effective, `EffectiveEnd` is omitted
+    # in the response.
+    #
+    # @option params [required, String] :cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #
+    # @option params [String] :effective_on
+    #   The date when the Cost Category was effective.
+    #
+    # @return [Types::DescribeCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCostCategoryDefinitionResponse#cost_category #cost_category} => Types::CostCategory
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_cost_category_definition({
+    #     cost_category_arn: "Arn", # required
+    #     effective_on: "ZonedDateTime",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category.cost_category_arn #=> String
+    #   resp.cost_category.effective_start #=> String
+    #   resp.cost_category.effective_end #=> String
+    #   resp.cost_category.name #=> String
+    #   resp.cost_category.rule_version #=> String, one of "CostCategoryExpression.v1"
+    #   resp.cost_category.rules #=> Array
+    #   resp.cost_category.rules[0].value #=> String
+    #   resp.cost_category.rules[0].rule.or #=> Array
+    #   resp.cost_category.rules[0].rule.or[0] #=> Types::Expression
+    #   resp.cost_category.rules[0].rule.and #=> Array
+    #   resp.cost_category.rules[0].rule.and[0] #=> Types::Expression
+    #   resp.cost_category.rules[0].rule.not #=> Types::Expression
+    #   resp.cost_category.rules[0].rule.dimensions.key #=> String, one of "AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION"
+    #   resp.cost_category.rules[0].rule.dimensions.values #=> Array
+    #   resp.cost_category.rules[0].rule.dimensions.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.tags.key #=> String
+    #   resp.cost_category.rules[0].rule.tags.values #=> Array
+    #   resp.cost_category.rules[0].rule.tags.values[0] #=> String
+    #   resp.cost_category.rules[0].rule.cost_categories.key #=> String
+    #   resp.cost_category.rules[0].rule.cost_categories.values #=> Array
+    #   resp.cost_category.rules[0].rule.cost_categories.values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DescribeCostCategoryDefinition AWS API Documentation
+    #
+    # @overload describe_cost_category_definition(params = {})
+    # @param [Hash] params ({})
+    def describe_cost_category_definition(params = {}, options = {})
+      req = build_request(:describe_cost_category_definition, params)
+      req.send_request(options)
+    end
+
     # Retrieves cost and usage metrics for your account. You can specify
     # which cost and usage-related metric, such as `BlendedCosts` or
     # `UsageQuantity`, that you want the request to return. You can also
@@ -377,11 +556,15 @@ module Aws::CostExplorer
     #         key: "TagKey",
     #         values: ["Value"],
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       },
     #     },
     #     metrics: ["MetricName"],
     #     group_by: [
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
@@ -392,7 +575,7 @@ module Aws::CostExplorer
     #
     #   resp.next_page_token #=> String
     #   resp.group_definitions #=> Array
-    #   resp.group_definitions[0].type #=> String, one of "DIMENSION", "TAG"
+    #   resp.group_definitions[0].type #=> String, one of "DIMENSION", "TAG", "COST_CATEGORY"
     #   resp.group_definitions[0].key #=> String
     #   resp.results_by_time #=> Array
     #   resp.results_by_time[0].time_period.start #=> String
@@ -537,11 +720,15 @@ module Aws::CostExplorer
     #         key: "TagKey",
     #         values: ["Value"],
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       },
     #     },
     #     metrics: ["MetricName"],
     #     group_by: [
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
@@ -552,7 +739,7 @@ module Aws::CostExplorer
     #
     #   resp.next_page_token #=> String
     #   resp.group_definitions #=> Array
-    #   resp.group_definitions[0].type #=> String, one of "DIMENSION", "TAG"
+    #   resp.group_definitions[0].type #=> String, one of "DIMENSION", "TAG", "COST_CATEGORY"
     #   resp.group_definitions[0].key #=> String
     #   resp.results_by_time #=> Array
     #   resp.results_by_time[0].time_period.start #=> String
@@ -658,6 +845,10 @@ module Aws::CostExplorer
     #       },
     #       tags: {
     #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
     #     },
@@ -998,7 +1189,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
@@ -1023,6 +1214,10 @@ module Aws::CostExplorer
     #       },
     #       tags: {
     #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
     #     },
@@ -1316,7 +1511,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
@@ -1341,6 +1536,10 @@ module Aws::CostExplorer
     #       },
     #       tags: {
     #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
     #     },
@@ -1512,6 +1711,10 @@ module Aws::CostExplorer
     #         key: "TagKey",
     #         values: ["Value"],
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       },
     #     },
     #     service: "GenericString", # required
     #     page_size: 1,
@@ -1664,7 +1867,7 @@ module Aws::CostExplorer
     #     },
     #     group_by: [
     #       {
-    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         type: "DIMENSION", # accepts DIMENSION, TAG, COST_CATEGORY
     #         key: "GroupDefinitionKey",
     #       },
     #     ],
@@ -1689,6 +1892,10 @@ module Aws::CostExplorer
     #       },
     #       tags: {
     #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
     #     },
@@ -1893,6 +2100,10 @@ module Aws::CostExplorer
     #         key: "TagKey",
     #         values: ["Value"],
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       },
     #     },
     #   })
     #
@@ -2014,6 +2225,10 @@ module Aws::CostExplorer
     #       },
     #       tags: {
     #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
     #         values: ["Value"],
     #       },
     #     },
@@ -2191,6 +2406,10 @@ module Aws::CostExplorer
     #         key: "TagKey",
     #         values: ["Value"],
     #       },
+    #       cost_categories: {
+    #         key: "CostCategoryName",
+    #         values: ["Value"],
+    #       },
     #     },
     #     prediction_interval_level: 1,
     #   })
@@ -2215,6 +2434,140 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Returns the name, ARN and effective dates of all Cost Categories
+    # defined in the account. You have the option to use `EffectiveOn` to
+    # return a list of Cost Categories that were active on a specific date.
+    # If there is no `EffectiveOn` specified, you’ll see Cost Categories
+    # that are effective on the current date. If Cost Category is still
+    # effective, `EffectiveEnd` is omitted in the response.
+    #
+    # @option params [String] :effective_on
+    #   The date when the Cost Category was effective.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    #   You can use this information to retrieve the full Cost Category
+    #   information using `DescribeCostCategory`.
+    #
+    # @return [Types::ListCostCategoryDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCostCategoryDefinitionsResponse#cost_category_references #cost_category_references} => Array&lt;Types::CostCategoryReference&gt;
+    #   * {Types::ListCostCategoryDefinitionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cost_category_definitions({
+    #     effective_on: "ZonedDateTime",
+    #     next_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category_references #=> Array
+    #   resp.cost_category_references[0].cost_category_arn #=> String
+    #   resp.cost_category_references[0].name #=> String
+    #   resp.cost_category_references[0].effective_start #=> String
+    #   resp.cost_category_references[0].effective_end #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostCategoryDefinitions AWS API Documentation
+    #
+    # @overload list_cost_category_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_cost_category_definitions(params = {}, options = {})
+      req = build_request(:list_cost_category_definitions, params)
+      req.send_request(options)
+    end
+
+    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # Management and is subject to change. Your use of Cost Categories is
+    # subject to the Beta Service Participation terms of the <a
+    # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
+    # (Section 1.10).</b> </i>
+    #
+    # Updates an existing Cost Category. Changes made to the Cost Category
+    # rules will be used to categorize the current month’s expenses and
+    # future expenses. This won’t change categorization for the previous
+    # months.
+    #
+    # @option params [required, String] :cost_category_arn
+    #   The unique identifier for your Cost Category.
+    #
+    # @option params [required, String] :rule_version
+    #   The rule schema version in this particular Cost Category.
+    #
+    # @option params [required, Array<Types::CostCategoryRule>] :rules
+    #   Rules are processed in order. If there are multiple rules that match
+    #   the line item, then the first rule to match is used to determine that
+    #   Cost Category value.
+    #
+    # @return [Types::UpdateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCostCategoryDefinitionResponse#cost_category_arn #cost_category_arn} => String
+    #   * {Types::UpdateCostCategoryDefinitionResponse#effective_start #effective_start} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_cost_category_definition({
+    #     cost_category_arn: "Arn", # required
+    #     rule_version: "CostCategoryExpression.v1", # required, accepts CostCategoryExpression.v1
+    #     rules: [ # required
+    #       {
+    #         value: "CostCategoryValue", # required
+    #         rule: { # required
+    #           or: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           and: [
+    #             {
+    #               # recursive Expression
+    #             },
+    #           ],
+    #           not: {
+    #             # recursive Expression
+    #           },
+    #           dimensions: {
+    #             key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY, BILLING_ENTITY, RESERVATION_ID, RESOURCE_ID, RIGHTSIZING_TYPE, SAVINGS_PLANS_TYPE, SAVINGS_PLAN_ARN, PAYMENT_OPTION
+    #             values: ["Value"],
+    #           },
+    #           tags: {
+    #             key: "TagKey",
+    #             values: ["Value"],
+    #           },
+    #           cost_categories: {
+    #             key: "CostCategoryName",
+    #             values: ["Value"],
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cost_category_arn #=> String
+    #   resp.effective_start #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UpdateCostCategoryDefinition AWS API Documentation
+    #
+    # @overload update_cost_category_definition(params = {})
+    # @param [Hash] params ({})
+    def update_cost_category_definition(params = {}, options = {})
+      req = build_request(:update_cost_category_definition, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2228,7 +2581,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

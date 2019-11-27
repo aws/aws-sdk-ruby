@@ -492,7 +492,8 @@ module Aws::RDS
     # @option params [required, String] :apply_action
     #   The pending maintenance action to apply to this resource.
     #
-    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`
+    #   Valid values: `system-update`, `db-upgrade`, `hardware-maintenance`,
+    #   `ca-certificate-rotation`
     #
     # @option params [required, String] :opt_in_type
     #   A value that specifies the type of opt-in request, or undoes an opt-in
@@ -2234,6 +2235,9 @@ module Aws::RDS
     #   endpoint group. All other eligible instances are reachable through the
     #   custom endpoint. Only relevant if the list of static members is empty.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the Amazon RDS resource.
+    #
     # @return [Types::DBClusterEndpoint] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DBClusterEndpoint#db_cluster_endpoint_identifier #db_cluster_endpoint_identifier} => String
@@ -2255,6 +2259,12 @@ module Aws::RDS
     #     endpoint_type: "String", # required
     #     static_members: ["String"],
     #     excluded_members: ["String"],
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3080,8 +3090,10 @@ module Aws::RDS
     #   valid Iops values, see [Amazon RDS Provisioned IOPS Storage to Improve
     #   Performance][1] in the *Amazon RDS User Guide*.
     #
-    #   Constraints: Must be a multiple between 1 and 50 of the storage amount
-    #   for the DB instance.
+    #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL DB instances,
+    #   must be a multiple between .5 and 50 of the storage amount for the DB
+    #   instance. For SQL Server DB instances, must be a multiple between 1
+    #   and 50 of the storage amount for the DB instance.
     #
     #
     #
@@ -10749,6 +10761,12 @@ module Aws::RDS
     # the `DescribeDBClusterParameters` action to verify that your DB
     # cluster parameter group has been created or modified.
     #
+    #  If the modified DB cluster parameter group is used by an Aurora
+    # Serverless cluster, Aurora applies the update immediately. The cluster
+    # restart might interrupt your workload. In that case, your application
+    # must reopen any connections and retry any transactions that were
+    # active when the parameter changes took effect.
+    #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
     #  </note>
@@ -17017,7 +17035,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

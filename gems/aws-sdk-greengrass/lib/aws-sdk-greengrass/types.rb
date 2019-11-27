@@ -1402,10 +1402,18 @@ module Aws::Greengrass
     #                 },
     #                 s3_machine_learning_model_resource_data: {
     #                   destination_path: "__string",
+    #                   owner_setting: {
+    #                     group_owner: "__string", # required
+    #                     group_permission: "ro", # required, accepts ro, rw
+    #                   },
     #                   s3_uri: "__string",
     #                 },
     #                 sage_maker_machine_learning_model_resource_data: {
     #                   destination_path: "__string",
+    #                   owner_setting: {
+    #                     group_owner: "__string", # required
+    #                     group_permission: "ro", # required, accepts ro, rw
+    #                   },
     #                   sage_maker_job_arn: "__string",
     #                 },
     #                 secrets_manager_secret_resource_data: {
@@ -1508,10 +1516,18 @@ module Aws::Greengrass
     #               },
     #               s3_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 s3_uri: "__string",
     #               },
     #               sage_maker_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 sage_maker_job_arn: "__string",
     #               },
     #               secrets_manager_secret_resource_data: {
@@ -1574,8 +1590,8 @@ module Aws::Greengrass
     #         software_to_update: "core", # required, accepts core, ota_agent
     #         update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
     #         update_targets: ["__string"], # required
-    #         update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64, openwrt
-    #         update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux
+    #         update_targets_architecture: "armv6l", # required, accepts armv6l, armv7l, x86_64, aarch64
+    #         update_targets_operating_system: "ubuntu", # required, accepts ubuntu, raspbian, amazon_linux, openwrt
     #       }
     #
     # @!attribute [rw] amzn_client_token
@@ -5071,10 +5087,18 @@ module Aws::Greengrass
     #           },
     #           s3_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             s3_uri: "__string",
     #           },
     #           sage_maker_machine_learning_model_resource_data: {
     #             destination_path: "__string",
+    #             owner_setting: {
+    #               group_owner: "__string", # required
+    #               group_permission: "ro", # required, accepts ro, rw
+    #             },
     #             sage_maker_job_arn: "__string",
     #           },
     #           secrets_manager_secret_resource_data: {
@@ -5167,10 +5191,18 @@ module Aws::Greengrass
     #         },
     #         s3_machine_learning_model_resource_data: {
     #           destination_path: "__string",
+    #           owner_setting: {
+    #             group_owner: "__string", # required
+    #             group_permission: "ro", # required, accepts ro, rw
+    #           },
     #           s3_uri: "__string",
     #         },
     #         sage_maker_machine_learning_model_resource_data: {
     #           destination_path: "__string",
+    #           owner_setting: {
+    #             group_owner: "__string", # required
+    #             group_permission: "ro", # required, accepts ro, rw
+    #           },
     #           sage_maker_job_arn: "__string",
     #         },
     #         secrets_manager_secret_resource_data: {
@@ -5240,10 +5272,18 @@ module Aws::Greengrass
     #               },
     #               s3_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 s3_uri: "__string",
     #               },
     #               sage_maker_machine_learning_model_resource_data: {
     #                 destination_path: "__string",
+    #                 owner_setting: {
+    #                   group_owner: "__string", # required
+    #                   group_permission: "ro", # required, accepts ro, rw
+    #                 },
     #                 sage_maker_job_arn: "__string",
     #               },
     #               secrets_manager_secret_resource_data: {
@@ -5266,6 +5306,35 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # The owner setting for downloaded machine learning resources.
+    #
+    # @note When making an API call, you may pass ResourceDownloadOwnerSetting
+    #   data as a hash:
+    #
+    #       {
+    #         group_owner: "__string", # required
+    #         group_permission: "ro", # required, accepts ro, rw
+    #       }
+    #
+    # @!attribute [rw] group_owner
+    #   The group owner of the resource. This is the name of an existing
+    #   Linux OS group on the system or a GID. The group's permissions are
+    #   added to the Lambda process.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_permission
+    #   The permissions that the group owner has to the resource. Valid
+    #   values are ''rw'' (read/write) or ''ro'' (read-only).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDownloadOwnerSetting AWS API Documentation
+    #
+    class ResourceDownloadOwnerSetting < Struct.new(
+      :group_owner,
+      :group_permission)
+      include Aws::Structure
+    end
+
     # Attributes that define an Amazon S3 machine learning resource.
     #
     # @note When making an API call, you may pass S3MachineLearningModelResourceData
@@ -5273,6 +5342,10 @@ module Aws::Greengrass
     #
     #       {
     #         destination_path: "__string",
+    #         owner_setting: {
+    #           group_owner: "__string", # required
+    #           group_permission: "ro", # required, accepts ro, rw
+    #         },
     #         s3_uri: "__string",
     #       }
     #
@@ -5280,6 +5353,10 @@ module Aws::Greengrass
     #   The absolute local path of the resource inside the Lambda
     #   environment.
     #   @return [String]
+    #
+    # @!attribute [rw] owner_setting
+    #   The owner setting for downloaded machine learning resources.
+    #   @return [Types::ResourceDownloadOwnerSetting]
     #
     # @!attribute [rw] s3_uri
     #   The URI of the source model in an S3 bucket. The model package must
@@ -5290,6 +5367,7 @@ module Aws::Greengrass
     #
     class S3MachineLearningModelResourceData < Struct.new(
       :destination_path,
+      :owner_setting,
       :s3_uri)
       include Aws::Structure
     end
@@ -5301,6 +5379,10 @@ module Aws::Greengrass
     #
     #       {
     #         destination_path: "__string",
+    #         owner_setting: {
+    #           group_owner: "__string", # required
+    #           group_permission: "ro", # required, accepts ro, rw
+    #         },
     #         sage_maker_job_arn: "__string",
     #       }
     #
@@ -5308,6 +5390,10 @@ module Aws::Greengrass
     #   The absolute local path of the resource inside the Lambda
     #   environment.
     #   @return [String]
+    #
+    # @!attribute [rw] owner_setting
+    #   The owner setting for downloaded machine learning resources.
+    #   @return [Types::ResourceDownloadOwnerSetting]
     #
     # @!attribute [rw] sage_maker_job_arn
     #   The ARN of the Amazon SageMaker training job that represents the
@@ -5318,6 +5404,7 @@ module Aws::Greengrass
     #
     class SageMakerMachineLearningModelResourceData < Struct.new(
       :destination_path,
+      :owner_setting,
       :sage_maker_job_arn)
       include Aws::Structure
     end

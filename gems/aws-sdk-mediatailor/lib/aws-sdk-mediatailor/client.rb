@@ -285,6 +285,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#name #name} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::GetPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
@@ -309,6 +310,8 @@ module Aws::MediaTailor
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
+    #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.name #=> String
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
@@ -427,6 +430,9 @@ module Aws::MediaTailor
     # @option params [Types::DashConfigurationForPut] :dash_configuration
     #   The configuration for DASH content.
     #
+    # @option params [Types::LivePreRollConfiguration] :live_pre_roll_configuration
+    #   The configuration for pre-roll ad insertion.
+    #
     # @option params [String] :name
     #   The identifier for the playback configuration.
     #
@@ -458,6 +464,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#name #name} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_configuration_arn #playback_configuration_arn} => String
     #   * {Types::PutPlaybackConfigurationResponse#playback_endpoint_prefix #playback_endpoint_prefix} => String
@@ -479,6 +486,10 @@ module Aws::MediaTailor
     #       mpd_location: "__string",
     #       origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
     #     },
+    #     live_pre_roll_configuration: {
+    #       ad_decision_server_url: "__string",
+    #       max_duration_seconds: 1,
+    #     },
     #     name: "__string",
     #     slate_ad_url: "__string",
     #     tags: {
@@ -497,6 +508,8 @@ module Aws::MediaTailor
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
     #   resp.hls_configuration.manifest_endpoint_prefix #=> String
+    #   resp.live_pre_roll_configuration.ad_decision_server_url #=> String
+    #   resp.live_pre_roll_configuration.max_duration_seconds #=> Integer
     #   resp.name #=> String
     #   resp.playback_configuration_arn #=> String
     #   resp.playback_endpoint_prefix #=> String
@@ -581,7 +594,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

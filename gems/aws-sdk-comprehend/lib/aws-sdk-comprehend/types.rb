@@ -107,10 +107,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectEntitiesRequest AWS API Documentation
@@ -179,10 +177,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectKeyPhrasesRequest AWS API Documentation
@@ -256,10 +252,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectSentimentRequest AWS API Documentation
@@ -328,7 +322,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian
     #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
@@ -474,6 +468,45 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ClassifyDocumentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "String", # required
+    #         endpoint_arn: "DocumentClassifierEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The document text to be analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentRequest AWS API Documentation
+    #
+    class ClassifyDocumentRequest < Struct.new(
+      :text,
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] classes
+    #   The classes used by the document being analyzed. These are used for
+    #   multi-class trained models. Individual classes are mutually
+    #   exclusive and each document is expected to have only a single class
+    #   assigned to it. For example, an animal can be a dog or a cat, but
+    #   not both at the same time.
+    #   @return [Array<Types::DocumentClass>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentResponse AWS API Documentation
+    #
+    class ClassifyDocumentResponse < Struct.new(
+      :classes)
+      include Aws::Structure
+    end
+
     # Concurrent modification of the tags associated with an Amazon
     # Comprehend resource is not supported.
     #
@@ -552,7 +585,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian
     #   ("it"), or Portuguese ("pt"). All documents must be in the same
     #   language.
@@ -604,6 +637,76 @@ module Aws::Comprehend
     #
     class CreateDocumentClassifierResponse < Struct.new(
       :document_classifier_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_name: "ComprehendEndpointName", # required
+    #         model_arn: "ComprehendModelArn", # required
+    #         desired_inference_units: 1, # required
+    #         client_request_token: "ClientRequestTokenString",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] endpoint_name
+    #   This is the descriptive suffix that becomes part of the
+    #   `EndpointArn` used for all subsequent requests to this resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   will be attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_request_token
+    #   An idempotency token provided by the customer. If this token matches
+    #   a previous endpoint creation request, Amazon Comprehend will not
+    #   return a `ResourceInUseException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the endpoint being created. A tag is a
+    #   key-value pair that adds metadata to the endpoint. For example, a
+    #   tag with "Sales" as the key might be added to an endpoint to
+    #   indicate its use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointRequest AWS API Documentation
+    #
+    class CreateEndpointRequest < Struct.new(
+      :endpoint_name,
+      :model_arn,
+      :desired_inference_units,
+      :client_request_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEndpointResponse AWS API Documentation
+    #
+    class CreateEndpointResponse < Struct.new(
+      :endpoint_arn)
       include Aws::Structure
     end
 
@@ -755,6 +858,28 @@ module Aws::Comprehend
     #
     class DeleteDocumentClassifierResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEndpointRequest AWS API Documentation
+    #
+    class DeleteEndpointRequest < Struct.new(
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEndpointResponse AWS API Documentation
+    #
+    class DeleteEndpointResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteEntityRecognizerRequest
     #   data as a hash:
     #
@@ -868,6 +993,35 @@ module Aws::Comprehend
     #
     class DescribeDominantLanguageDetectionJobResponse < Struct.new(
       :dominant_language_detection_job_properties)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpointRequest AWS API Documentation
+    #
+    class DescribeEndpointRequest < Struct.new(
+      :endpoint_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_properties
+    #   Describes information associated with the specific endpoint.
+    #   @return [Types::EndpointProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEndpointResponse AWS API Documentation
+    #
+    class DescribeEndpointResponse < Struct.new(
+      :endpoint_properties)
       include Aws::Structure
     end
 
@@ -1077,10 +1231,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest AWS API Documentation
@@ -1121,10 +1273,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectKeyPhrasesRequest AWS API Documentation
@@ -1165,10 +1315,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectSentimentRequest AWS API Documentation
@@ -1212,7 +1360,7 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language code of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
+    #   following languages supported by Amazon Comprehend: German ("de"),
     #   English ("en"), Spanish ("es"), French ("fr"), Italian
     #   ("it"), or Portuguese ("pt").
     #   @return [String]
@@ -1237,6 +1385,25 @@ module Aws::Comprehend
     #
     class DetectSyntaxResponse < Struct.new(
       :syntax_tokens)
+      include Aws::Structure
+    end
+
+    # Specifies the class that categorizes the document being analyzed
+    #
+    # @!attribute [rw] name
+    #   The name of the class.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score that Amazon Comprehend has this class correctly
+    #   attributed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClass AWS API Documentation
+    #
+    class DocumentClass < Struct.new(
+      :name,
+      :score)
       include Aws::Structure
     end
 
@@ -1756,6 +1923,104 @@ module Aws::Comprehend
       :data_access_role_arn,
       :volume_kms_key_id,
       :vpc_config)
+      include Aws::Structure
+    end
+
+    # The filter used to determine which endpoints are are returned. You can
+    # filter jobs on their name, model, status, or the date and time that
+    # they were created. You can only set one filter at a time.
+    #
+    # @note When making an API call, you may pass EndpointFilter
+    #   data as a hash:
+    #
+    #       {
+    #         model_arn: "ComprehendModelArn",
+    #         status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the endpoint being returned. Possible values
+    #   are: Creating, Ready, Updating, Deleting, Failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   Specifies a date before which the returned endpoint or endpoints
+    #   were created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   Specifies a date after which the returned endpoint or endpoints were
+    #   created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointFilter AWS API Documentation
+    #
+    class EndpointFilter < Struct.new(
+      :model_arn,
+      :status,
+      :creation_time_before,
+      :creation_time_after)
+      include Aws::Structure
+    end
+
+    # Specifies information about the specified endpoint.
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the endpoint. Because the endpoint updates
+    #   and creation are asynchronous, so customers will need to wait for
+    #   the endpoint to be `Ready` status before making inference requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Specifies a reason for failure in cases of `Failed` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Number (ARN) of the model to which the endpoint
+    #   is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_inference_units
+    #   The number of inference units currently used by the model using this
+    #   endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation date and time of the endpoint.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the endpoint was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EndpointProperties AWS API Documentation
+    #
+    class EndpointProperties < Struct.new(
+      :endpoint_arn,
+      :status,
+      :message,
+      :model_arn,
+      :desired_inference_units,
+      :current_inference_units,
+      :creation_time,
+      :last_modified_time)
       include Aws::Structure
     end
 
@@ -2766,6 +3031,61 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           model_arn: "ComprehendModelArn",
+    #           status: "CREATING", # accepts CREATING, DELETING, FAILED, IN_SERVICE, UPDATING
+    #           creation_time_before: Time.now,
+    #           creation_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the endpoints that are returned. You can filter endpoints on
+    #   their name, model, status, or the date and time that they were
+    #   created. You can only set one filter at a time.
+    #   @return [Types::EndpointFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpointsRequest AWS API Documentation
+    #
+    class ListEndpointsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_properties_list
+    #   Displays a list of endpoint properties being retrieved by the
+    #   service in response to the request.
+    #   @return [Array<Types::EndpointProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEndpointsResponse AWS API Documentation
+    #
+    class ListEndpointsResponse < Struct.new(
+      :endpoint_properties_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListEntitiesDetectionJobsRequest
     #   data as a hash:
     #
@@ -3657,10 +3977,9 @@ module Aws::Comprehend
     # @!attribute [rw] language_code
     #   The language of the input documents. All documents must be in the
     #   same language. You can specify any of the languages supported by
-    #   Amazon Comprehend: English ("en"), Spanish ("es"), French
-    #   ("fr"), German ("de"), Italian ("it"), or Portuguese ("pt").
-    #   If custom entities recognition is used, this parameter is ignored
-    #   and the language used for training the model is used instead.
+    #   Amazon Comprehend. If custom entities recognition is used, this
+    #   parameter is ignored and the language used for training the model is
+    #   used instead.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3789,10 +4108,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -3915,10 +4232,8 @@ module Aws::Comprehend
     #
     # @!attribute [rw] language_code
     #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend: German ("de"),
-    #   English ("en"), Spanish ("es"), French ("fr"), Italian
-    #   ("it"), or Portuguese ("pt"). All documents must be in the same
-    #   language.
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -4653,6 +4968,36 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_arn: "ComprehendEndpointArn", # required
+    #         desired_inference_units: 1, # required
+    #       }
+    #
+    # @!attribute [rw] endpoint_arn
+    #   The Amazon Resource Number (ARN) of the endpoint being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] desired_inference_units
+    #   The desired number of inference units to be used by the model using
+    #   this endpoint. Each inference unit represents of a throughput of 100
+    #   characters per second.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpointRequest AWS API Documentation
+    #
+    class UpdateEndpointRequest < Struct.new(
+      :endpoint_arn,
+      :desired_inference_units)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/UpdateEndpointResponse AWS API Documentation
+    #
+    class UpdateEndpointResponse < Aws::EmptyStructure; end
 
     # Configuration parameters for an optional private Virtual Private Cloud
     # (VPC) containing the resources you are using for the job. For For more

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2019-11-25)
+------------------
+
+* Feature - Adds a domain name to PackagingGroups, representing the fully qualified domain name for Assets created in the group.
+
 1.7.0 (2019-11-22)
 ------------------
 

@@ -172,6 +172,7 @@ module Aws::Lex
     PostContentResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slot-to-elicit"))
     PostContentResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-input-transcript"))
     PostContentResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
+    PostContentResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-id"))
     PostContentResponse.struct_class = Types::PostContentResponse
     PostContentResponse[:payload] = :audio_stream
     PostContentResponse[:payload_member] = PostContentResponse.member(:audio_stream)
@@ -193,6 +194,7 @@ module Aws::Lex
     PostTextResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location_name: "dialogState"))
     PostTextResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location_name: "slotToElicit"))
     PostTextResponse.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
+    PostTextResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: String, location_name: "sessionId"))
     PostTextResponse.struct_class = Types::PostTextResponse
 
     PutSessionRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))

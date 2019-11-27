@@ -341,6 +341,43 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Permanently deletes the specified Contributor Insights rules.
+    #
+    # If you create a rule, delete it, and then re-create it with the same
+    # name, historical data from the first time the rule was created may or
+    # may not be available.
+    #
+    # @option params [required, Array<String>] :rule_names
+    #   An array of the rule names to delete. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #
+    # @return [Types::DeleteInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInsightRulesOutput#failures #failures} => Array&lt;Types::PartialFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_insight_rules({
+    #     rule_names: ["InsightRuleName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].failure_resource #=> String
+    #   resp.failures[0].exception_type #=> String
+    #   resp.failures[0].failure_code #=> String
+    #   resp.failures[0].failure_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteInsightRules AWS API Documentation
+    #
+    # @overload delete_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def delete_insight_rules(params = {}, options = {})
+      req = build_request(:delete_insight_rules, params)
+      req.send_request(options)
+    end
+
     # Retrieves the history for the specified alarm. You can filter the
     # results by date range or item type. If an alarm name is not specified,
     # the histories for all alarms are returned.
@@ -684,6 +721,53 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Returns a list of all the Contributor Insights rules in your account.
+    # All rules in your account are returned with a single operation.
+    #
+    # For more information about Contributor Insights, see [Using
+    # Contributor Insights to Analyze High-Cardinality Data][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html
+    #
+    # @option params [String] :next_token
+    #   Reserved for future use.
+    #
+    # @option params [Integer] :max_results
+    #   This parameter is not currently used. Reserved for future use. If it
+    #   is used in the future, the maximum value may be different.
+    #
+    # @return [Types::DescribeInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInsightRulesOutput#next_token #next_token} => String
+    #   * {Types::DescribeInsightRulesOutput#insight_rules #insight_rules} => Array&lt;Types::InsightRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_insight_rules({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.insight_rules #=> Array
+    #   resp.insight_rules[0].name #=> String
+    #   resp.insight_rules[0].state #=> String
+    #   resp.insight_rules[0].schema #=> String
+    #   resp.insight_rules[0].definition #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeInsightRules AWS API Documentation
+    #
+    # @overload describe_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_insight_rules(params = {}, options = {})
+      req = build_request(:describe_insight_rules, params)
+      req.send_request(options)
+    end
+
     # Disables the actions for the specified alarms. When an alarm's
     # actions are disabled, the alarm actions do not execute when the alarm
     # state changes.
@@ -708,6 +792,40 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Disables the specified Contributor Insights rules. When rules are
+    # disabled, they do not analyze log groups and do not incur costs.
+    #
+    # @option params [required, Array<String>] :rule_names
+    #   An array of the rule names to disable. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #
+    # @return [Types::DisableInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableInsightRulesOutput#failures #failures} => Array&lt;Types::PartialFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_insight_rules({
+    #     rule_names: ["InsightRuleName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].failure_resource #=> String
+    #   resp.failures[0].exception_type #=> String
+    #   resp.failures[0].failure_code #=> String
+    #   resp.failures[0].failure_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableInsightRules AWS API Documentation
+    #
+    # @overload disable_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def disable_insight_rules(params = {}, options = {})
+      req = build_request(:disable_insight_rules, params)
+      req.send_request(options)
+    end
+
     # Enables the actions for the specified alarms.
     #
     # @option params [required, Array<String>] :alarm_names
@@ -727,6 +845,40 @@ module Aws::CloudWatch
     # @param [Hash] params ({})
     def enable_alarm_actions(params = {}, options = {})
       req = build_request(:enable_alarm_actions, params)
+      req.send_request(options)
+    end
+
+    # Enables the specified Contributor Insights rules. When rules are
+    # enabled, they immediately begin analyzing log data.
+    #
+    # @option params [required, Array<String>] :rule_names
+    #   An array of the rule names to enable. If you need to find out the
+    #   names of your rules, use DescribeInsightRules.
+    #
+    # @return [Types::EnableInsightRulesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableInsightRulesOutput#failures #failures} => Array&lt;Types::PartialFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_insight_rules({
+    #     rule_names: ["InsightRuleName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failures #=> Array
+    #   resp.failures[0].failure_resource #=> String
+    #   resp.failures[0].exception_type #=> String
+    #   resp.failures[0].failure_code #=> String
+    #   resp.failures[0].failure_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableInsightRules AWS API Documentation
+    #
+    # @overload enable_insight_rules(params = {})
+    # @param [Hash] params ({})
+    def enable_insight_rules(params = {}, options = {})
+      req = build_request(:enable_insight_rules, params)
       req.send_request(options)
     end
 
@@ -766,9 +918,153 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # This operation returns the time series data collected by a Contributor
+    # Insights rule. The data includes the identity and number of
+    # contributors to the log group.
+    #
+    # You can also optionally return one or more statistics about each data
+    # point in the time series. These statistics can include the following:
+    #
+    # * `UniqueContributors` -- the number of unique contributors for each
+    #   data point.
+    #
+    # * `MaxContributorValue` -- the value of the top contributor for each
+    #   data point. The identity of the contributor may change for each data
+    #   point in the graph.
+    #
+    #   If this rule aggregates by COUNT, the top contributor for each data
+    #   point is the contributor with the most occurrences in that period.
+    #   If the rule aggregates by SUM, the top contributor is the
+    #   contributor with the highest sum in the log field specified by the
+    #   rule's `Value`, during that period.
+    #
+    # * `SampleCount` -- the number of data points matched by the rule.
+    #
+    # * `Sum` -- the sum of the values from all contributors during the time
+    #   period represented by that data point.
+    #
+    # * `Minimum` -- the minimum value from a single observation during the
+    #   time period represented by that data point.
+    #
+    # * `Maximum` -- the maximum value from a single observation during the
+    #   time period represented by that data point.
+    #
+    # * `Average` -- the average value from all contributors during the time
+    #   period represented by that data point.
+    #
+    # @option params [required, String] :rule_name
+    #   The name of the rule that you want to see data from.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start time of the data to use in the report. When used in a raw
+    #   HTTP Query API, it is formatted as `yyyy-MM-dd'T'HH:mm:ss`. For
+    #   example, `2019-07-01T23:59:59`.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end time of the data to use in the report. When used in a raw HTTP
+    #   Query API, it is formatted as `yyyy-MM-dd'T'HH:mm:ss`. For example,
+    #   `2019-07-01T23:59:59`.
+    #
+    # @option params [required, Integer] :period
+    #   The period, in seconds, to use for the statistics in the
+    #   `InsightRuleMetricDatapoint` results.
+    #
+    # @option params [Integer] :max_contributor_count
+    #   The maximum number of contributors to include in the report. The range
+    #   is 1 to 100. If you omit this, the default of 10 is used.
+    #
+    # @option params [Array<String>] :metrics
+    #   Specifies which metrics to use for aggregation of contributor values
+    #   for the report. You can specify one or more of the following metrics:
+    #
+    #   * `UniqueContributors` -- the number of unique contributors for each
+    #     data point.
+    #
+    #   * `MaxContributorValue` -- the value of the top contributor for each
+    #     data point. The identity of the contributor may change for each data
+    #     point in the graph.
+    #
+    #     If this rule aggregates by COUNT, the top contributor for each data
+    #     point is the contributor with the most occurrences in that period.
+    #     If the rule aggregates by SUM, the top contributor is the
+    #     contributor with the highest sum in the log field specified by the
+    #     rule's `Value`, during that period.
+    #
+    #   * `SampleCount` -- the number of data points matched by the rule.
+    #
+    #   * `Sum` -- the sum of the values from all contributors during the time
+    #     period represented by that data point.
+    #
+    #   * `Minimum` -- the minimum value from a single observation during the
+    #     time period represented by that data point.
+    #
+    #   * `Maximum` -- the maximum value from a single observation during the
+    #     time period represented by that data point.
+    #
+    #   * `Average` -- the average value from all contributors during the time
+    #     period represented by that data point.
+    #
+    # @option params [String] :order_by
+    #   Determines what statistic to use to rank the contributors. Valid
+    #   values are SUM and MAXIMUM.
+    #
+    # @return [Types::GetInsightRuleReportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInsightRuleReportOutput#key_labels #key_labels} => Array&lt;String&gt;
+    #   * {Types::GetInsightRuleReportOutput#aggregation_statistic #aggregation_statistic} => String
+    #   * {Types::GetInsightRuleReportOutput#aggregate_value #aggregate_value} => Float
+    #   * {Types::GetInsightRuleReportOutput#approximate_unique_count #approximate_unique_count} => Integer
+    #   * {Types::GetInsightRuleReportOutput#contributors #contributors} => Array&lt;Types::InsightRuleContributor&gt;
+    #   * {Types::GetInsightRuleReportOutput#metric_datapoints #metric_datapoints} => Array&lt;Types::InsightRuleMetricDatapoint&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_insight_rule_report({
+    #     rule_name: "InsightRuleName", # required
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     period: 1, # required
+    #     max_contributor_count: 1,
+    #     metrics: ["InsightRuleMetricName"],
+    #     order_by: "InsightRuleOrderBy",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_labels #=> Array
+    #   resp.key_labels[0] #=> String
+    #   resp.aggregation_statistic #=> String
+    #   resp.aggregate_value #=> Float
+    #   resp.approximate_unique_count #=> Integer
+    #   resp.contributors #=> Array
+    #   resp.contributors[0].keys #=> Array
+    #   resp.contributors[0].keys[0] #=> String
+    #   resp.contributors[0].approximate_aggregate_value #=> Float
+    #   resp.contributors[0].datapoints #=> Array
+    #   resp.contributors[0].datapoints[0].timestamp #=> Time
+    #   resp.contributors[0].datapoints[0].approximate_value #=> Float
+    #   resp.metric_datapoints #=> Array
+    #   resp.metric_datapoints[0].timestamp #=> Time
+    #   resp.metric_datapoints[0].unique_contributors #=> Float
+    #   resp.metric_datapoints[0].max_contributor_value #=> Float
+    #   resp.metric_datapoints[0].sample_count #=> Float
+    #   resp.metric_datapoints[0].average #=> Float
+    #   resp.metric_datapoints[0].sum #=> Float
+    #   resp.metric_datapoints[0].minimum #=> Float
+    #   resp.metric_datapoints[0].maximum #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetInsightRuleReport AWS API Documentation
+    #
+    # @overload get_insight_rule_report(params = {})
+    # @param [Hash] params ({})
+    def get_insight_rule_report(params = {}, options = {})
+      req = build_request(:get_insight_rule_report, params)
+      req.send_request(options)
+    end
+
     # You can use the `GetMetricData` API to retrieve as many as 100
     # different metrics in a single request, with a total of as many as
-    # 100,800 datapoints. You can also optionally perform math expressions
+    # 100,800 data points. You can also optionally perform math expressions
     # on the values of the returned statistics, to create new time series
     # that represent new insights into your data. For example, using Lambda
     # metrics, you could divide the Errors metric by the Invocations metric
@@ -1043,8 +1339,8 @@ module Aws::CloudWatch
     #   request.
     #
     #   The value specified is inclusive; results include data points with the
-    #   specified time stamp. The time stamp must be in ISO 8601 UTC format
-    #   (for example, 2016-10-03T23:00:00Z).
+    #   specified time stamp. In a raw HTTP query, the time stamp must be in
+    #   ISO 8601 UTC format (for example, 2016-10-03T23:00:00Z).
     #
     #   CloudWatch rounds the specified time stamp as follows:
     #
@@ -1072,8 +1368,8 @@ module Aws::CloudWatch
     #   The time stamp that determines the last data point to return.
     #
     #   The value specified is exclusive; results include data points up to
-    #   the specified time stamp. The time stamp must be in ISO 8601 UTC
-    #   format (for example, 2016-10-10T23:00:00Z).
+    #   the specified time stamp. In a raw HTTP query, the time stamp must be
+    #   in ISO 8601 UTC format (for example, 2016-10-10T23:00:00Z).
     #
     # @option params [required, Integer] :period
     #   The granularity, in seconds, of the returned data points. For metrics
@@ -1529,6 +1825,52 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # Creates a Contributor Insights rule. Rules evaluate log events in a
+    # CloudWatch Logs log group, enabling you to find contributor data for
+    # the log events in that log group. For more information, see [Using
+    # Contributor Insights to Analyze High-Cardinality Data][1].
+    #
+    # If you create a rule, delete it, and then re-create it with the same
+    # name, historical data from the first time the rule was created may or
+    # may not be available.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html
+    #
+    # @option params [required, String] :rule_name
+    #   A unique name for the rule.
+    #
+    # @option params [String] :rule_state
+    #   The state of the rule. Valid values are ENABLED and DISABLED.
+    #
+    # @option params [required, String] :rule_definition
+    #   The definition of the rule, as a JSON object. For details on the valid
+    #   syntax, see [Contributor Insights Rule Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights-RuleSyntax.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_insight_rule({
+    #     rule_name: "InsightRuleName", # required
+    #     rule_state: "InsightRuleState",
+    #     rule_definition: "InsightRuleDefinition", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutInsightRule AWS API Documentation
+    #
+    # @overload put_insight_rule(params = {})
+    # @param [Hash] params ({})
+    def put_insight_rule(params = {}, options = {})
+      req = build_request(:put_insight_rule, params)
+      req.send_request(options)
+    end
+
     # Creates or updates an alarm and associates it with the specified
     # metric, metric math expression, or anomaly detection model.
     #
@@ -1742,7 +2084,7 @@ module Aws::CloudWatch
     #   seconds.
     #
     # @option params [Integer] :datapoints_to_alarm
-    #   The number of datapoints that must be breaching to trigger the alarm.
+    #   The number of data points that must be breaching to trigger the alarm.
     #   This is used only if you are setting an "M out of N" alarm. In that
     #   case, this value is the M. For more information, see [Evaluating an
     #   Alarm][1] in the *Amazon CloudWatch User Guide*.
@@ -1922,9 +2264,8 @@ module Aws::CloudWatch
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # CloudWatch rejects values that are either too small or too large.
-    # Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
-    # 10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
-    # example, NaN, +Infinity, -Infinity) are not supported.
+    # Values must be in the range of -2^360 to 2^360. In addition, special
+    # values (for example, NaN, +Infinity, -Infinity) are not supported.
     #
     # You can use up to 10 dimensions per metric to further clarify what
     # data the metric collects. Each dimension consists of a Name and Value
@@ -2139,7 +2480,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-11-25)
+------------------
+
+* Feature - This launch provides customers with access to Cost Category Public Beta APIs.
+
 1.33.0 (2019-11-18)
 ------------------
 

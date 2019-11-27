@@ -401,16 +401,16 @@ module Aws::WorkSpaces
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
-    #   Specifies whether to automatically assign a public IP address to
-    #   WorkSpaces in this directory by default. If enabled, the public IP
-    #   address allows outbound internet access from your WorkSpaces when
-    #   you’re using an internet gateway in the Amazon VPC in which your
-    #   WorkSpaces are located. If you're using a Network Address
-    #   Translation (NAT) gateway for outbound internet access from your
-    #   VPC, or if your WorkSpaces are in public subnets and you manually
-    #   assign them Elastic IP addresses, you should disable this setting.
-    #   This setting applies to new WorkSpaces that you launch or to
-    #   existing WorkSpaces that you rebuild. For more information, see [
+    #   Specifies whether to automatically assign an Elastic public IP
+    #   address to WorkSpaces in this directory by default. If enabled, the
+    #   Elastic public IP address allows outbound internet access from your
+    #   WorkSpaces when you’re using an internet gateway in the Amazon VPC
+    #   in which your WorkSpaces are located. If you're using a Network
+    #   Address Translation (NAT) gateway for outbound internet access from
+    #   your VPC, or if your WorkSpaces are in public subnets and you
+    #   manually assign them Elastic IP addresses, you should disable this
+    #   setting. This setting applies to new WorkSpaces that you launch or
+    #   to existing WorkSpaces that you rebuild. For more information, see [
     #   Configure a VPC for Amazon WorkSpaces][1].
     #
     #
@@ -2417,6 +2417,10 @@ module Aws::WorkSpaces
     #   A description.
     #   @return [String]
     #
+    # @!attribute [rw] image_id
+    #   The image identifier of the bundle.
+    #   @return [String]
+    #
     # @!attribute [rw] root_storage
     #   The size of the root volume.
     #   @return [Types::RootStorage]
@@ -2434,6 +2438,10 @@ module Aws::WorkSpaces
     #   [1]: http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles
     #   @return [Types::ComputeType]
     #
+    # @!attribute [rw] last_updated_time
+    #   The last time that the bundle was updated.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle AWS API Documentation
     #
     class WorkspaceBundle < Struct.new(
@@ -2441,9 +2449,11 @@ module Aws::WorkSpaces
       :name,
       :owner,
       :description,
+      :image_id,
       :root_storage,
       :user_storage,
-      :compute_type)
+      :compute_type,
+      :last_updated_time)
       include Aws::Structure
     end
 

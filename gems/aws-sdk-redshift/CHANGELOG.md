@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-11-25)
+------------------
+
+* Feature - This release contains changes for 1. Redshift Scheduler 2. Update to the DescribeNodeConfigurationOptions to include a new action type recommend-node-config
+
 1.33.0 (2019-10-23)
 ------------------
 

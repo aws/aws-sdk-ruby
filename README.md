@@ -356,6 +356,7 @@ to be backwards compatible.
 | AWS IoT Events                                        | Aws::IoTEvents                       | aws-sdk-iotevents                       | 2018-07-27  |
 | AWS IoT Events Data                                   | Aws::IoTEventsData                   | aws-sdk-ioteventsdata                   | 2018-10-23  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
+| AWS IoT Secure Tunneling                              | Aws::IoTSecureTunneling              | aws-sdk-iotsecuretunneling              | 2018-10-05  |
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
@@ -397,11 +398,13 @@ to be backwards compatible.
 | AWS Transfer for SFTP                                 | Aws::Transfer                        | aws-sdk-transfer                        | 2018-11-05  |
 | AWS WAF                                               | Aws::WAF                             | aws-sdk-waf                             | 2015-08-24  |
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
+| AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering             | aws-sdk-marketplacemetering             | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository | aws-sdk-serverlessapplicationrepository | 2017-09-08  |
 | Alexa For Business                                    | Aws::AlexaForBusiness                | aws-sdk-alexaforbusiness                | 2017-11-09  |
 | Amazon API Gateway                                    | Aws::APIGateway                      | aws-sdk-apigateway                      | 2015-07-09  |
+| Amazon AppConfig                                      | Aws::AppConfig                       | aws-sdk-appconfig                       | 2019-10-09  |
 | Amazon AppStream                                      | Aws::AppStream                       | aws-sdk-appstream                       | 2016-12-01  |
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
 | Amazon Chime                                          | Aws::Chime                           | aws-sdk-chime                           | 2018-05-01  |
@@ -428,6 +431,7 @@ to be backwards compatible.
 | Amazon EC2 Container Registry                         | Aws::ECR                             | aws-sdk-ecr                             | 2015-09-21  |
 | Amazon EC2 Container Service                          | Aws::ECS                             | aws-sdk-ecs                             | 2014-11-13  |
 | Amazon ElastiCache                                    | Aws::ElastiCache                     | aws-sdk-elasticache                     | 2015-02-02  |
+| Amazon Elastic  Inference                             | Aws::ElasticInference                | aws-sdk-elasticinference                | 2017-07-25  |
 | Amazon Elastic Compute Cloud                          | Aws::EC2                             | aws-sdk-ec2                             | 2016-11-15  |
 | Amazon Elastic File System                            | Aws::EFS                             | aws-sdk-efs                             | 2015-02-01  |
 | Amazon Elastic Kubernetes Service                     | Aws::EKS                             | aws-sdk-eks                             | 2017-11-01  |
@@ -444,8 +448,8 @@ to be backwards compatible.
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
@@ -498,8 +502,8 @@ to be backwards compatible.
 | AmazonMQ                                              | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Service Quotas                                        | Aws::ServiceQuotas                   | aws-sdk-servicequotas                   | 2019-06-24  |
