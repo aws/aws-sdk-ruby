@@ -52,9 +52,7 @@ Given(/^I create a DNS compatible bucket$/) do
 end
 
 When(/^I create a bucket with the location constraint "(.*?)"$/) do |loc|
-  create_bucket(create_bucket_configuration: {
-                  location_constraint: loc
-                })
+  create_bucket(create_bucket_configuration: { location_constraint: loc })
 end
 
 Then(/^the bucket should have a location constraint of "(.*?)"$/) do |loc|
@@ -410,7 +408,7 @@ end
 
 When(/^I select it with query "([^"]*)" with Proc Object$/) do |query|
   @tracker = Hash.new([])
-  handler = proc do |stream|
+  handler = Proc.new do |stream|
     stream.on_records_event do |e|
       @tracker[:records] << e
     end
