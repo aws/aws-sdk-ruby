@@ -74,7 +74,7 @@ module BuildTools
     private
 
     def read
-      if File.exists?(path)
+      if File.exist?(path)
         File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
       else
         ''
