@@ -109,6 +109,7 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
+          @doc_default = nil
           options.each_pair do |opt_name, opt_value|
             self.send("#{opt_name}=", opt_value)
           end
