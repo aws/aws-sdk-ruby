@@ -24,6 +24,7 @@ module Aws::SQS
       @receipt_handle = extract_receipt_handle(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

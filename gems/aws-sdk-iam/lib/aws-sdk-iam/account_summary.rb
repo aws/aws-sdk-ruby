@@ -16,6 +16,7 @@ module Aws::IAM
       options = Hash === args.last ? args.pop.dup : {}
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

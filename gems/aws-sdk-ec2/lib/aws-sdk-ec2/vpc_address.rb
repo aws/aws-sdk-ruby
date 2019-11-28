@@ -21,6 +21,7 @@ module Aws::EC2
       @allocation_id = extract_allocation_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

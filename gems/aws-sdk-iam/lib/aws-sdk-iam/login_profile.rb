@@ -21,6 +21,7 @@ module Aws::IAM
       @user_name = extract_user_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

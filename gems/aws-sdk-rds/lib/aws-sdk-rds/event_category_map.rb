@@ -21,6 +21,7 @@ module Aws::RDS
       @source_type = extract_source_type(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

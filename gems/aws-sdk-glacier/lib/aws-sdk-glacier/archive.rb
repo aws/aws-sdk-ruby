@@ -27,6 +27,7 @@ module Aws::Glacier
       @id = extract_id(args, options)
       @data = Aws::EmptyStructure.new
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
