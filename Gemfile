@@ -18,7 +18,7 @@ end
 
 # faster xml libraries
 unless ENV['PURE_RUBY']
-  gem 'nokogiri', '1.6.8.1'
+  gem 'nokogiri', '>= 1.10.4'
 
   if RUBY_VERSION == '1.9.3'
     # oga syntax breaks for 1.9.3 on newer versions
