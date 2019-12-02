@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2019-12-02)
+------------------
+
+* Feature - AWS License Manager now automates discovery of bring-your-own-license usage across the customers organization. With few simple settings, customers can add bring your own license product information along with licensing rules, which would enable License Manager to automatically track the instances that have the specified products installed. If License Manager detects any violation of licensing rules, it would notify the customers designated license administrator to take corrective action.
+
 1.10.0 (2019-10-23)
 ------------------
 
