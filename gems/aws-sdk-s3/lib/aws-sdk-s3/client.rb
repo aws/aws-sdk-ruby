@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/iad_regional_endpoint.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
+require 'aws-sdk-s3/plugins/bucket_arn.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/expect_100_continue.rb'
 require 'aws-sdk-s3/plugins/http_200_errors.rb'
@@ -76,6 +77,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::IADRegionalEndpoint)
     add_plugin(Aws::S3::Plugins::Accelerate)
     add_plugin(Aws::S3::Plugins::Dualstack)
+    add_plugin(Aws::S3::Plugins::BucketARN)
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::Expect100Continue)
     add_plugin(Aws::S3::Plugins::Http200Errors)
@@ -249,6 +251,11 @@ module Aws::S3
     #   @option options [String] :s3_us_east_1_regional_endpoint ("legacy")
     #     Passing in `regional` to enable regional endpoint for S3's `us-east-1`
     #     region. Defaults to `legacy` mode using global endpoint.
+    #
+    #   @option options [Boolean] :s3_use_arn_region (true)
+    #     By default, the SDK will use the S3 ARN region, and cross-region
+    #     requests could be made. Set to `false` to not use the region from
+    #     the S3 ARN.
     #
     #   @option options [String] :secret_access_key
     #

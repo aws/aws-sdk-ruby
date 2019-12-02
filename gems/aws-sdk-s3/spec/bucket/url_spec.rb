@@ -47,6 +47,17 @@ module Aws
           bucket = Bucket.new('name', client: client)
           expect(bucket.url).to eq('http://localhost:8080/name')
         end
+
+        it 'accepts an accesspoint arn' do
+          bucket = Bucket.new(
+            'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+            client: client
+          )
+          expect(bucket.url).to eq(
+            'https://myendpoint-123456789012.s3-accesspoint'\
+            '.us-west-2.amazonaws.com'
+          )
+        end
       end
     end
   end

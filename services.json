@@ -554,6 +554,7 @@
       "Aws::S3::Plugins::IADRegionalEndpoint",
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::Dualstack",
+      "Aws::S3::Plugins::BucketARN",
       "Aws::S3::Plugins::BucketDns",
       "Aws::S3::Plugins::Expect100Continue",
       "Aws::S3::Plugins::Http200Errors",

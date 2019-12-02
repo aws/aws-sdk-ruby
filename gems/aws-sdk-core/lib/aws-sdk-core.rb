@@ -79,6 +79,10 @@ require_relative 'aws-sdk-core/endpoint_cache'
 require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
 require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 
+# arn
+require_relative 'aws-sdk-core/arn'
+require_relative 'aws-sdk-core/arn_parser'
+
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 
 require 'aws-sdk-sts'
