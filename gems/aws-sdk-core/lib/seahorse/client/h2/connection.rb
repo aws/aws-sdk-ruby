@@ -48,6 +48,8 @@ module Seahorse
           @errors = []
           @status = :ready
           @mutex = Mutex.new # connection can be shared across requests
+          @socket = nil
+          @socket_thread = nil
         end
 
         OPTIONS.keys.each do |attr_name|

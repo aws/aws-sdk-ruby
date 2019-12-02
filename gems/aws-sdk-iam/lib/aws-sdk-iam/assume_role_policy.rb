@@ -21,6 +21,7 @@ module Aws::IAM
       @role_name = extract_role_name(args, options)
       @data = Aws::EmptyStructure.new
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

@@ -7,7 +7,7 @@ module Aws
         Dir.glob(File.expand_path('../suite/**', __FILE__)).each do |path|
 
           prefix = File.join(path, File.basename(path))
-          next unless File.exists?("#{prefix}.req")
+          next unless File.exist?("#{prefix}.req")
 
           describe(File.basename(prefix)) do
 

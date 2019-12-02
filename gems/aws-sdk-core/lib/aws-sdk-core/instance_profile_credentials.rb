@@ -66,6 +66,7 @@ module Aws
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
       @token_ttl = options[:token_ttl] || 21600
+      @token = nil
       super
     end
 

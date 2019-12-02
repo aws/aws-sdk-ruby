@@ -30,6 +30,7 @@ module {{module_name}}
       @data = Aws::EmptyStructure.new
       {{/shape}}
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes

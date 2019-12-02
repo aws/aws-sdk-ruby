@@ -15,7 +15,7 @@ module BuildTools
     end
 
     def write_file(path, code)
-      if File.exists?(path)
+      if File.exist?(path)
         if skip?(path)
           skip(path)
         else

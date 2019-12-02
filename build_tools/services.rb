@@ -119,7 +119,7 @@ module BuildTools
 
     def gem_version(gem_name)
       path = "#{$GEMS_DIR}/#{gem_name}/VERSION"
-      if File.exists?(path)
+      if File.exist?(path)
         File.read(path).rstrip
       else
         "1.0.0"
@@ -143,7 +143,7 @@ module BuildTools
 
     def model_path(model_name, models_dir)
       path = File.expand_path("../../apis/#{models_dir}/#{model_name}", __FILE__)
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
 
     def eventstream?(api)

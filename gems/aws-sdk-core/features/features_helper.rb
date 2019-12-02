@@ -71,7 +71,7 @@ class IntegrationTestConfig
     end
 
     def load!
-      @cfg = new(File.exists?(path) ? Aws::Json.load_file(path) : {})
+      @cfg = new(File.exist?(path) ? Aws::Json.load_file(path) : {})
     end
 
     private

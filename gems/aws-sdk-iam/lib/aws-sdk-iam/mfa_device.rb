@@ -24,6 +24,7 @@ module Aws::IAM
       @serial_number = extract_serial_number(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
