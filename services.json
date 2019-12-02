@@ -300,6 +300,9 @@
   "IAM": {
     "models": "iam/2010-05-08"
   },
+  "Imagebuilder": {
+    "models": "imagebuilder/2019-12-02"
+  },
   "ImportExport": {
     "models": "importexport/2010-06-01"
   },
@@ -626,6 +629,9 @@
   },
   "SavingsPlans": {
     "models": "savingsplans/2019-06-28"
+  },
+  "Schemas": {
+    "models": "schemas/2019-12-02"
   },
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17"

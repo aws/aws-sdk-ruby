@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.64.0 (2019-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-schemas` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-imagebuilder` gem.
+
 3.63.0 (2019-11-26)
 ------------------
 

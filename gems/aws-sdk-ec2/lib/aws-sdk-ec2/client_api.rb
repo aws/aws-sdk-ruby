@@ -5264,6 +5264,7 @@ module Aws::EC2
     Host.add_member(:allows_multiple_instance_types, Shapes::ShapeRef.new(shape: AllowsMultipleInstanceTypes, location_name: "allowsMultipleInstanceTypes"))
     Host.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     Host.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    Host.add_member(:member_of_service_linked_resource_group, Shapes::ShapeRef.new(shape: Boolean, location_name: "memberOfServiceLinkedResourceGroup"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -6105,6 +6106,7 @@ module Aws::EC2
     LaunchTemplatePlacement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     LaunchTemplatePlacement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     LaunchTemplatePlacement.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "spreadDomain"))
+    LaunchTemplatePlacement.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "hostResourceGroupArn"))
     LaunchTemplatePlacement.struct_class = Types::LaunchTemplatePlacement
 
     LaunchTemplatePlacementRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
@@ -6113,6 +6115,7 @@ module Aws::EC2
     LaunchTemplatePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "HostId"))
     LaunchTemplatePlacementRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "Tenancy"))
     LaunchTemplatePlacementRequest.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "SpreadDomain"))
+    LaunchTemplatePlacementRequest.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "HostResourceGroupArn"))
     LaunchTemplatePlacementRequest.struct_class = Types::LaunchTemplatePlacementRequest
 
     LaunchTemplateSet.member = Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "item")
@@ -6353,6 +6356,7 @@ module Aws::EC2
     ModifyInstancePlacementRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     ModifyInstancePlacementRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: HostTenancy, location_name: "tenancy"))
     ModifyInstancePlacementRequest.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
+    ModifyInstancePlacementRequest.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "HostResourceGroupArn"))
     ModifyInstancePlacementRequest.struct_class = Types::ModifyInstancePlacementRequest
 
     ModifyInstancePlacementResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -6856,6 +6860,7 @@ module Aws::EC2
     Placement.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
     Placement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     Placement.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "spreadDomain"))
+    Placement.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "hostResourceGroupArn"))
     Placement.struct_class = Types::Placement
 
     PlacementGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))

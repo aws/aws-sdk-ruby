@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2019-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Schemas`.
+
+* Feature - Added support for enumerating regions for `Aws::Imagebuilder`.
+
 1.246.0 (2019-11-26)
 ------------------
 

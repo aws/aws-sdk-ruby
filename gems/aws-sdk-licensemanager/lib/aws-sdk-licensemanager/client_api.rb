@@ -13,6 +13,7 @@ module Aws::LicenseManager
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AuthorizationException = Shapes::StructureShape.new(name: 'AuthorizationException')
+    AutomatedDiscoveryInformation = Shapes::StructureShape.new(name: 'AutomatedDiscoveryInformation')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxBoolean = Shapes::BooleanShape.new(name: 'BoxBoolean')
     BoxInteger = Shapes::IntegerShape.new(name: 'BoxInteger')
@@ -48,11 +49,15 @@ module Aws::LicenseManager
     LicenseConfigurationUsageList = Shapes::ListShape.new(name: 'LicenseConfigurationUsageList')
     LicenseConfigurations = Shapes::ListShape.new(name: 'LicenseConfigurations')
     LicenseCountingType = Shapes::StringShape.new(name: 'LicenseCountingType')
+    LicenseOperationFailure = Shapes::StructureShape.new(name: 'LicenseOperationFailure')
+    LicenseOperationFailureList = Shapes::ListShape.new(name: 'LicenseOperationFailureList')
     LicenseSpecification = Shapes::StructureShape.new(name: 'LicenseSpecification')
     LicenseSpecifications = Shapes::ListShape.new(name: 'LicenseSpecifications')
     LicenseUsageException = Shapes::StructureShape.new(name: 'LicenseUsageException')
     ListAssociationsForLicenseConfigurationRequest = Shapes::StructureShape.new(name: 'ListAssociationsForLicenseConfigurationRequest')
     ListAssociationsForLicenseConfigurationResponse = Shapes::StructureShape.new(name: 'ListAssociationsForLicenseConfigurationResponse')
+    ListFailuresForLicenseConfigurationOperationsRequest = Shapes::StructureShape.new(name: 'ListFailuresForLicenseConfigurationOperationsRequest')
+    ListFailuresForLicenseConfigurationOperationsResponse = Shapes::StructureShape.new(name: 'ListFailuresForLicenseConfigurationOperationsResponse')
     ListLicenseConfigurationsRequest = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsRequest')
     ListLicenseConfigurationsResponse = Shapes::StructureShape.new(name: 'ListLicenseConfigurationsResponse')
     ListLicenseSpecificationsForResourceRequest = Shapes::StructureShape.new(name: 'ListLicenseSpecificationsForResourceRequest')
@@ -66,7 +71,13 @@ module Aws::LicenseManager
     ManagedResourceSummary = Shapes::StructureShape.new(name: 'ManagedResourceSummary')
     ManagedResourceSummaryList = Shapes::ListShape.new(name: 'ManagedResourceSummaryList')
     Message = Shapes::StringShape.new(name: 'Message')
+    Metadata = Shapes::StructureShape.new(name: 'Metadata')
+    MetadataList = Shapes::ListShape.new(name: 'MetadataList')
     OrganizationConfiguration = Shapes::StructureShape.new(name: 'OrganizationConfiguration')
+    ProductInformation = Shapes::StructureShape.new(name: 'ProductInformation')
+    ProductInformationFilter = Shapes::StructureShape.new(name: 'ProductInformationFilter')
+    ProductInformationFilterList = Shapes::ListShape.new(name: 'ProductInformationFilterList')
+    ProductInformationList = Shapes::ListShape.new(name: 'ProductInformationList')
     RateLimitExceededException = Shapes::StructureShape.new(name: 'RateLimitExceededException')
     ResourceInventory = Shapes::StructureShape.new(name: 'ResourceInventory')
     ResourceInventoryList = Shapes::ListShape.new(name: 'ResourceInventoryList')
@@ -95,6 +106,9 @@ module Aws::LicenseManager
     AuthorizationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AuthorizationException.struct_class = Types::AuthorizationException
 
+    AutomatedDiscoveryInformation.add_member(:last_run_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastRunTime"))
+    AutomatedDiscoveryInformation.struct_class = Types::AutomatedDiscoveryInformation
+
     ConsumedLicenseSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConsumedLicenseSummary.add_member(:consumed_licenses, Shapes::ShapeRef.new(shape: BoxLong, location_name: "ConsumedLicenses"))
     ConsumedLicenseSummary.struct_class = Types::ConsumedLicenseSummary
@@ -108,6 +122,7 @@ module Aws::LicenseManager
     CreateLicenseConfigurationRequest.add_member(:license_count_hard_limit, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
     CreateLicenseConfigurationRequest.add_member(:license_rules, Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseRules"))
     CreateLicenseConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLicenseConfigurationRequest.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
     CreateLicenseConfigurationRequest.struct_class = Types::CreateLicenseConfigurationRequest
 
     CreateLicenseConfigurationResponse.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseConfigurationArn"))
@@ -149,6 +164,8 @@ module Aws::LicenseManager
     GetLicenseConfigurationResponse.add_member(:consumed_license_summary_list, Shapes::ShapeRef.new(shape: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
     GetLicenseConfigurationResponse.add_member(:managed_resource_summary_list, Shapes::ShapeRef.new(shape: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
     GetLicenseConfigurationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    GetLicenseConfigurationResponse.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
+    GetLicenseConfigurationResponse.add_member(:automated_discovery_information, Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
     GetLicenseConfigurationResponse.struct_class = Types::GetLicenseConfigurationResponse
 
     GetServiceSettingsRequest.struct_class = Types::GetServiceSettingsRequest
@@ -157,6 +174,7 @@ module Aws::LicenseManager
     GetServiceSettingsResponse.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: String, location_name: "SnsTopicArn"))
     GetServiceSettingsResponse.add_member(:organization_configuration, Shapes::ShapeRef.new(shape: OrganizationConfiguration, location_name: "OrganizationConfiguration"))
     GetServiceSettingsResponse.add_member(:enable_cross_accounts_discovery, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "EnableCrossAccountsDiscovery"))
+    GetServiceSettingsResponse.add_member(:license_manager_resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "LicenseManagerResourceShareArn"))
     GetServiceSettingsResponse.struct_class = Types::GetServiceSettingsResponse
 
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -185,6 +203,8 @@ module Aws::LicenseManager
     LicenseConfiguration.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccountId"))
     LicenseConfiguration.add_member(:consumed_license_summary_list, Shapes::ShapeRef.new(shape: ConsumedLicenseSummaryList, location_name: "ConsumedLicenseSummaryList"))
     LicenseConfiguration.add_member(:managed_resource_summary_list, Shapes::ShapeRef.new(shape: ManagedResourceSummaryList, location_name: "ManagedResourceSummaryList"))
+    LicenseConfiguration.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
+    LicenseConfiguration.add_member(:automated_discovery_information, Shapes::ShapeRef.new(shape: AutomatedDiscoveryInformation, location_name: "AutomatedDiscoveryInformation"))
     LicenseConfiguration.struct_class = Types::LicenseConfiguration
 
     LicenseConfigurationAssociation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
@@ -207,6 +227,18 @@ module Aws::LicenseManager
 
     LicenseConfigurations.member = Shapes::ShapeRef.new(shape: LicenseConfiguration)
 
+    LicenseOperationFailure.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceArn"))
+    LicenseOperationFailure.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    LicenseOperationFailure.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    LicenseOperationFailure.add_member(:failure_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "FailureTime"))
+    LicenseOperationFailure.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "OperationName"))
+    LicenseOperationFailure.add_member(:resource_owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceOwnerId"))
+    LicenseOperationFailure.add_member(:operation_requested_by, Shapes::ShapeRef.new(shape: String, location_name: "OperationRequestedBy"))
+    LicenseOperationFailure.add_member(:metadata_list, Shapes::ShapeRef.new(shape: MetadataList, location_name: "MetadataList"))
+    LicenseOperationFailure.struct_class = Types::LicenseOperationFailure
+
+    LicenseOperationFailureList.member = Shapes::ShapeRef.new(shape: LicenseOperationFailure)
+
     LicenseSpecification.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseConfigurationArn"))
     LicenseSpecification.struct_class = Types::LicenseSpecification
 
@@ -223,6 +255,15 @@ module Aws::LicenseManager
     ListAssociationsForLicenseConfigurationResponse.add_member(:license_configuration_associations, Shapes::ShapeRef.new(shape: LicenseConfigurationAssociations, location_name: "LicenseConfigurationAssociations"))
     ListAssociationsForLicenseConfigurationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAssociationsForLicenseConfigurationResponse.struct_class = Types::ListAssociationsForLicenseConfigurationResponse
+
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:license_configuration_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseConfigurationArn"))
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
+    ListFailuresForLicenseConfigurationOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFailuresForLicenseConfigurationOperationsRequest.struct_class = Types::ListFailuresForLicenseConfigurationOperationsRequest
+
+    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:license_operation_failure_list, Shapes::ShapeRef.new(shape: LicenseOperationFailureList, location_name: "LicenseOperationFailureList"))
+    ListFailuresForLicenseConfigurationOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFailuresForLicenseConfigurationOperationsResponse.struct_class = Types::ListFailuresForLicenseConfigurationOperationsResponse
 
     ListLicenseConfigurationsRequest.add_member(:license_configuration_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "LicenseConfigurationArns"))
     ListLicenseConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxInteger, location_name: "MaxResults"))
@@ -274,8 +315,27 @@ module Aws::LicenseManager
 
     ManagedResourceSummaryList.member = Shapes::ShapeRef.new(shape: ManagedResourceSummary)
 
+    Metadata.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Metadata.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    Metadata.struct_class = Types::Metadata
+
+    MetadataList.member = Shapes::ShapeRef.new(shape: Metadata)
+
     OrganizationConfiguration.add_member(:enable_integration, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnableIntegration"))
     OrganizationConfiguration.struct_class = Types::OrganizationConfiguration
+
+    ProductInformation.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    ProductInformation.add_member(:product_information_filter_list, Shapes::ShapeRef.new(shape: ProductInformationFilterList, required: true, location_name: "ProductInformationFilterList"))
+    ProductInformation.struct_class = Types::ProductInformation
+
+    ProductInformationFilter.add_member(:product_information_filter_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductInformationFilterName"))
+    ProductInformationFilter.add_member(:product_information_filter_value, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "ProductInformationFilterValue"))
+    ProductInformationFilter.add_member(:product_information_filter_comparator, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProductInformationFilterComparator"))
+    ProductInformationFilter.struct_class = Types::ProductInformationFilter
+
+    ProductInformationFilterList.member = Shapes::ShapeRef.new(shape: ProductInformationFilter)
+
+    ProductInformationList.member = Shapes::ShapeRef.new(shape: ProductInformation)
 
     RateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     RateLimitExceededException.struct_class = Types::RateLimitExceededException
@@ -325,6 +385,7 @@ module Aws::LicenseManager
     UpdateLicenseConfigurationRequest.add_member(:license_count_hard_limit, Shapes::ShapeRef.new(shape: BoxBoolean, location_name: "LicenseCountHardLimit"))
     UpdateLicenseConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     UpdateLicenseConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    UpdateLicenseConfigurationRequest.add_member(:product_information_list, Shapes::ShapeRef.new(shape: ProductInformationList, location_name: "ProductInformationList"))
     UpdateLicenseConfigurationRequest.struct_class = Types::UpdateLicenseConfigurationRequest
 
     UpdateLicenseConfigurationResponse.struct_class = Types::UpdateLicenseConfigurationResponse
@@ -422,6 +483,19 @@ module Aws::LicenseManager
         o.output = Shapes::ShapeRef.new(shape: ListAssociationsForLicenseConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: FilterLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RateLimitExceededException)
+      end)
+
+      api.add_operation(:list_failures_for_license_configuration_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFailuresForLicenseConfigurationOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFailuresForLicenseConfigurationOperationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFailuresForLicenseConfigurationOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
