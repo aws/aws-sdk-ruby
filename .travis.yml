@@ -12,6 +12,7 @@ rvm:
   - 2.4
   - 2.5
   - 2.6
+  - jruby-19mode
   - jruby
 
 sudo: false
@@ -20,22 +21,25 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
-script: bundle exec rake test:spec
+script: rake build && rake test:spec
 
-bundler_args: --without docs release repl
+bundler_args: --without docs repl
 
 matrix:
   exclude:
-    - rvm: jruby-9.1.16.0
+    - rvm: jruby-19mode
+      env: KITCHEN_SINK=1
+    - rvm: jruby
       env: KITCHEN_SINK=1
   include:
     - rvm: 2.3
       env: OLD_OJ=1
     - rvm: 2.3
       env: OLD_OX=1
-    - rvm: 2.5
+    - rvm: 2.3
       env: NO_H2=1
   allow_failures:
+    - rvm: jruby-19mode
     - rvm: jruby
 
 notifications:

@@ -14,7 +14,7 @@ Background:
   Scenario: Call Aws::WAFV2::Client#list_web_acls and expect it to succeed
   When I call the operation 'list_web_acls' with params:
     """
-{"limit":20}
+{"scope":"REGIONAL","limit":20}
     """
   Then I expect an error was not raised
 
