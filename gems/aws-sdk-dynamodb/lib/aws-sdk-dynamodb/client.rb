@@ -190,7 +190,7 @@ module Aws::DynamoDB
     #
     #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
     #
-    #   @option options [Integer] :retry_limit (10)
+    #   @option options [Integer] :retry_limit (3)
     #     The maximum number of times to retry failed requests.  Only
     #     ~ 500 level server errors and certain ~ 400 level client errors
     #     are retried.  Generally, these are throttling errors, data
@@ -6533,7 +6533,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

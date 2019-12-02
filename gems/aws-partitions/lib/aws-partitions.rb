@@ -224,6 +224,7 @@ module Aws
             'ACM' => 'acm',
             'ACMPCA' => 'acm-pca',
             'APIGateway' => 'apigateway',
+            'AccessAnalyzer' => 'access-analyzer',
             'AlexaForBusiness' => 'a4b',
             'Amplify' => 'amplify',
             'ApiGatewayManagementApi' => 'execute-api',

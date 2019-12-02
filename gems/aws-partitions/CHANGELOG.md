@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2019-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AccessAnalyzer`.
+
 1.247.0 (2019-12-02)
 ------------------
 

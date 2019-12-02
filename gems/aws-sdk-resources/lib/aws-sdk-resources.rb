@@ -6,6 +6,7 @@ module Aws
   autoload :ACM, 'aws-sdk-acm'
   autoload :ACMPCA, 'aws-sdk-acmpca'
   autoload :APIGateway, 'aws-sdk-apigateway'
+  autoload :AccessAnalyzer, 'aws-sdk-accessanalyzer'
   autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'
   autoload :Amplify, 'aws-sdk-amplify'
   autoload :ApiGatewayManagementApi, 'aws-sdk-apigatewaymanagementapi'

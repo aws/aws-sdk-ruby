@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.65.0 (2019-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-accessanalyzer` gem.
+
 3.64.0 (2019-12-02)
 ------------------
 

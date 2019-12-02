@@ -11,6 +11,9 @@
       "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
     ]
   },
+  "AccessAnalyzer": {
+    "models": "accessanalyzer/2019-11-01"
+  },
   "AlexaForBusiness": {
     "models": "alexaforbusiness/2017-11-09"
   },
