@@ -4,13 +4,12 @@ module Aws
   module STS
     # Allows you to create presigned URLs for STS operations.
     #
-    # Example Use:
+    # @example
     #
     #   signer = Aws::STS::Presigner.new
     #   url = signer.get_caller_identity_presigned_url(
     #     headers: {"X-K8s-Aws-Id" => 'my-eks-cluster'}
     #   )
-    #
     class Presigner
       # @option options [Client] :client Optionally provide an existing
       #   STS client
@@ -25,9 +24,6 @@ module Aws
       #   x-amz-* headers must be present during signing. Other headers are
       #   optional.
       #
-      # @option options [Integer] :expires_in (60) Number of seconds before
-      #   the presigned URL expires.
-      #
       # @return [String] A presigned url string.
       #
       # @example
@@ -39,7 +35,6 @@ module Aws
       # This can be easily converted to a token used by the EKS service:
       # {https://ruby-doc.org/stdlib-2.3.1/libdoc/base64/rdoc/Base64.html#method-i-encode64}
       # "k8s-aws-v1." + Base64.urlsafe_encode64(url).chomp("==")
-      #
       def get_caller_identity_presigned_url(options = {})
         req = @client.build_request(:get_session_token, {})
 
@@ -64,8 +59,7 @@ module Aws
           http_method: 'GET',
           url: url,
           body: '',
-          headers: options[:headers],
-          expires_in: options[:expires_in] || 60
+          headers: options[:headers]
         ).to_s
       end
     end
