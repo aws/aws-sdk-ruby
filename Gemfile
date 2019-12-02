@@ -19,7 +19,13 @@ end
 # faster xml libraries
 unless ENV['PURE_RUBY']
   gem 'nokogiri', '1.6.8.1'
-  gem 'oga'
+
+  if RUBY_VERSION == '1.9.3'
+    # oga syntax breaks for 1.9.3 on newer versions
+    gem 'oga', '2.15'
+  else
+    gem 'oga'
+  end
 
   unless defined?(JRUBY_VERSION)
     gem 'libxml-ruby'
