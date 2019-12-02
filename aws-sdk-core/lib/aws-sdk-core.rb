@@ -113,6 +113,7 @@ module Aws
     GuardDuty
     Health
     IAM
+    Imagebuilder
     ImportExport
     Inspector
     IoT
@@ -202,6 +203,7 @@ module Aws
     SageMaker
     SageMakerRuntime
     SavingsPlans
+    Schemas
     SecretsManager
     SecurityHub
     ServerlessApplicationRepository

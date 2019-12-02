@@ -358,6 +358,10 @@
     "models": "iam/2010-05-08",
     "endpoint": "iam"
   },
+  "Imagebuilder": {
+    "models": "imagebuilder/2019-12-02",
+    "endpoint": "imagebuilder"
+  },
   "ImportExport": {
     "models": "importexport/2010-06-01",
     "endpoint": "importexport"
@@ -713,6 +717,10 @@
   "SavingsPlans": {
     "models": "savingsplans/2019-06-28",
     "endpoint": "savingsplans"
+  },
+  "Schemas": {
+    "models": "schemas/2019-12-02",
+    "endpoint": "schemas"
   },
   "SecretsManager": {
     "models": "secretsmanager/2017-10-17",

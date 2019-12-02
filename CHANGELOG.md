@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::LicenseManager - Updated the API, and documentation for AWS License Manager.
+
+* Feature - Aws::Imagebuilder - Added support for a new service, EC2 Image Builder.
+
+* Feature - Aws::Schemas - Added support for a new service, Schemas.
+
 2.11.406 (2019-11-26)
 ------------------
 
