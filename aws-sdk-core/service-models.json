@@ -11,6 +11,10 @@
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
   },
+  "AccessAnalyzer": {
+    "models": "accessanalyzer/2019-11-01",
+    "endpoint": "access-analyzer"
+  },
   "AlexaForBusiness": {
     "models": "alexaforbusiness/2017-11-09",
     "endpoint": "a4b"

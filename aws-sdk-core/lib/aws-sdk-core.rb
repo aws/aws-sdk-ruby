@@ -26,6 +26,7 @@ module Aws
     ACM
     ACMPCA
     APIGateway
+    AccessAnalyzer
     AlexaForBusiness
     Amplify
     ApiGatewayManagementApi

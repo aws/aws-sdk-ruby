@@ -357,6 +357,7 @@ to be backwards compatible.
 | AWS X-Ray                                             | XRay                            | 2016-04-12  |
 | AWSMarketplace Metering                               | MarketplaceMetering             | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | ServerlessApplicationRepository | 2017-09-08  |
+| Access Analyzer                                       | AccessAnalyzer                  | 2019-11-01  |
 | Alexa For Business                                    | AlexaForBusiness                | 2017-11-09  |
 | Amazon API Gateway                                    | APIGateway                      | 2015-07-09  |
 | Amazon AppConfig                                      | AppConfig                       | 2019-10-09  |
@@ -457,8 +458,8 @@ to be backwards compatible.
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Schemas                                               | Schemas                         | 2019-12-02  |
