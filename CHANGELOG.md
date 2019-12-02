@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.408 (2019-12-02)
+------------------
+
 * Feature - Aws::AccessAnalyzer - Added support for a new service, Access Analyzer.
 
 2.11.407 (2019-12-02)
