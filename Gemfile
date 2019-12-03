@@ -24,7 +24,7 @@ gem 'libxml-ruby' unless ENV['PURE_RUBY']
 # nokogiri dropped support for Ruby <= 2.0.0 in version 1.7.0
 gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
 # oga dropped support for Ruby 1.9.3 on version 3
-gem 'oga', '<~ 2'
+gem 'oga', '~> 2'
 
 group :test do
 
