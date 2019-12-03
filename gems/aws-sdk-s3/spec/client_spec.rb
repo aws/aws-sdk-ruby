@@ -434,7 +434,7 @@ module Aws
           expect do
             client.list_objects(bucket: 'bucket-name/key-prefix')
           end.to raise_error(
-            ArgumentError, ':bucket option must not contain a forward-slash (/)'
+            ArgumentError, 'bucket name must not contain a forward-slash (/)'
           )
         end
 

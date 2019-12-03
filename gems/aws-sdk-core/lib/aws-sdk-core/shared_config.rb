@@ -183,6 +183,21 @@ module Aws
       end
     end
 
+    def s3_use_arn_region(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          value = @parsed_credentials.fetch(p, {})["s3_use_arn_region"]
+        end
+        if @parsed_config
+          value ||= @parsed_config.fetch(p, {})["s3_use_arn_region"]
+        end
+        value
+      else
+        nil
+      end
+    end
+
     def endpoint_discovery(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config

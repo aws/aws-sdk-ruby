@@ -1,5 +1,3 @@
-require 'thread'
-
 module Aws
   module Errors
 
@@ -123,6 +121,29 @@ module Aws
       # @return [String]
       attr_reader :error_message
 
+    end
+
+    # Raised when ARN string input doesn't follow the standard:
+    # https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-arns
+    class InvalidARNError < RuntimeError; end
+
+    # Raised when the region from the ARN string is different from the :region
+    # configured on the service client.
+    class InvalidARNRegionError < RuntimeError
+      def initialize(*args)
+        msg = 'ARN region is different from the configured client region.'
+        super(msg)
+      end
+    end
+
+    # Raised when the partition of the ARN region is different than the
+    # partition of the :region configured on the service client.
+    class InvalidARNPartitionError < RuntimeError
+      def initialize(*args)
+        msg = 'ARN region partition is different from the configured '\
+              'client region partition.'
+        super(msg)
+      end
     end
 
     # Various plugins perform client-side checksums of responses.

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 module Aws
   describe SharedConfig do
@@ -162,6 +162,26 @@ module Aws
           profile_name: "s3_iad_legacy"
         )
         expect(config.s3_us_east_1_regional_endpoint).to eq('legacy')
+      end
+
+    end
+
+    context 's3_use_arn_region' do
+
+      it 'can resolve s3_use_arn_region from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_use_arn_region'
+        )
+        expect(config.s3_use_arn_region).to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_do_not_use_arn_region'
+        )
+        expect(config.s3_use_arn_region).to eq('false')
       end
 
     end
