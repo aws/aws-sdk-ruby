@@ -158,7 +158,7 @@ the S3 ARN.
           def url_path(path, arn)
             path = path.sub("/#{Seahorse::Util.uri_escape(arn.to_s)}", '')
                        .sub("/#{arn}", '')
-            "/#{path}" unless path.match?(/^\//)
+            "/#{path}" unless path.match(/^\//)
             path
           end
 
