@@ -74,6 +74,12 @@ module Aws::EC2
       data[:mac_address]
     end
 
+    # The Amazon Resource Name (ARN) of the Outpost.
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
+    end
+
     # The AWS account ID of the owner of the network interface.
     # @return [String]
     def owner_id

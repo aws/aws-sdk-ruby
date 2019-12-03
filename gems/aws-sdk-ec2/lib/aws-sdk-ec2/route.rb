@@ -87,6 +87,12 @@ module Aws::EC2
       data[:transit_gateway_id]
     end
 
+    # The ID of the local gateway.
+    # @return [String]
+    def local_gateway_id
+      data[:local_gateway_id]
+    end
+
     # The ID of the network interface.
     # @return [String]
     def network_interface_id
@@ -282,8 +288,10 @@ module Aws::EC2
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
     #     gateway_id: "RouteTableGatewayId",
     #     instance_id: "InstanceId",
+    #     local_target: false,
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "String",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
@@ -303,10 +311,15 @@ module Aws::EC2
     #   The ID of an internet gateway or virtual private gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC.
+    # @option options [Boolean] :local_target
+    #   Specifies whether to reset the local route to its default target
+    #   (`local`).
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :transit_gateway_id
     #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

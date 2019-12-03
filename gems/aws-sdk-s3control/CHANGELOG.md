@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-12-03)
+------------------
+
+* Feature - Amazon S3 Access Points is a new S3 feature that simplifies managing data access at scale for shared data sets on Amazon S3. Access Points provide a customizable way to access the objects in a bucket, with a unique hostname and access policy that enforces the specific permissions and network controls for any request made through the access point. This represents a new way of provisioning access to shared data sets.
+
 1.13.0 (2019-10-23)
 ------------------
 

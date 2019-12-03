@@ -11,16 +11,30 @@ module Aws::S3Control
 
     include Seahorse::Model
 
+    AccessPoint = Shapes::StructureShape.new(name: 'AccessPoint')
+    AccessPointList = Shapes::ListShape.new(name: 'AccessPointList')
+    AccessPointName = Shapes::StringShape.new(name: 'AccessPointName')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
     ConfirmationRequired = Shapes::BooleanShape.new(name: 'ConfirmationRequired')
+    CreateAccessPointRequest = Shapes::StructureShape.new(name: 'CreateAccessPointRequest')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResult = Shapes::StructureShape.new(name: 'CreateJobResult')
+    CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
+    DeleteAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointPolicyRequest')
+    DeleteAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointRequest')
     DeletePublicAccessBlockRequest = Shapes::StructureShape.new(name: 'DeletePublicAccessBlockRequest')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+    GetAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'GetAccessPointPolicyRequest')
+    GetAccessPointPolicyResult = Shapes::StructureShape.new(name: 'GetAccessPointPolicyResult')
+    GetAccessPointPolicyStatusRequest = Shapes::StructureShape.new(name: 'GetAccessPointPolicyStatusRequest')
+    GetAccessPointPolicyStatusResult = Shapes::StructureShape.new(name: 'GetAccessPointPolicyStatusResult')
+    GetAccessPointRequest = Shapes::StructureShape.new(name: 'GetAccessPointRequest')
+    GetAccessPointResult = Shapes::StructureShape.new(name: 'GetAccessPointResult')
     GetPublicAccessBlockOutput = Shapes::StructureShape.new(name: 'GetPublicAccessBlockOutput')
     GetPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'GetPublicAccessBlockRequest')
     IAMRoleArn = Shapes::StringShape.new(name: 'IAMRoleArn')
@@ -28,6 +42,7 @@ module Aws::S3Control
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IsPublic = Shapes::BooleanShape.new(name: 'IsPublic')
     JobArn = Shapes::StringShape.new(name: 'JobArn')
     JobCreationTime = Shapes::TimestampShape.new(name: 'JobCreationTime')
     JobDescriptor = Shapes::StructureShape.new(name: 'JobDescriptor')
@@ -60,10 +75,13 @@ module Aws::S3Control
     JobTotalNumberOfTasks = Shapes::IntegerShape.new(name: 'JobTotalNumberOfTasks')
     KmsKeyArnString = Shapes::StringShape.new(name: 'KmsKeyArnString')
     LambdaInvokeOperation = Shapes::StructureShape.new(name: 'LambdaInvokeOperation')
+    ListAccessPointsRequest = Shapes::StructureShape.new(name: 'ListAccessPointsRequest')
+    ListAccessPointsResult = Shapes::StructureShape.new(name: 'ListAccessPointsResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NetworkOrigin = Shapes::StringShape.new(name: 'NetworkOrigin')
     NoSuchPublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'NoSuchPublicAccessBlockConfiguration')
     NoSuchPublicAccessBlockConfigurationMessage = Shapes::StringShape.new(name: 'NoSuchPublicAccessBlockConfigurationMessage')
     NonEmptyMaxLength1024String = Shapes::StringShape.new(name: 'NonEmptyMaxLength1024String')
@@ -72,7 +90,10 @@ module Aws::S3Control
     NonEmptyMaxLength64String = Shapes::StringShape.new(name: 'NonEmptyMaxLength64String')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OperationName = Shapes::StringShape.new(name: 'OperationName')
+    Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyStatus = Shapes::StructureShape.new(name: 'PolicyStatus')
     PublicAccessBlockConfiguration = Shapes::StructureShape.new(name: 'PublicAccessBlockConfiguration')
+    PutAccessPointPolicyRequest = Shapes::StructureShape.new(name: 'PutAccessPointPolicyRequest')
     PutPublicAccessBlockRequest = Shapes::StructureShape.new(name: 'PutPublicAccessBlockRequest')
     ReportPrefixString = Shapes::StringShape.new(name: 'ReportPrefixString')
     RequestedJobStatus = Shapes::StringShape.new(name: 'RequestedJobStatus')
@@ -113,9 +134,26 @@ module Aws::S3Control
     UpdateJobPriorityResult = Shapes::StructureShape.new(name: 'UpdateJobPriorityResult')
     UpdateJobStatusRequest = Shapes::StructureShape.new(name: 'UpdateJobStatusRequest')
     UpdateJobStatusResult = Shapes::StructureShape.new(name: 'UpdateJobStatusResult')
+    VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    AccessPoint.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "Name"))
+    AccessPoint.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, required: true, location_name: "NetworkOrigin"))
+    AccessPoint.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    AccessPoint.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    AccessPoint.struct_class = Types::AccessPoint
+
+    AccessPointList.member = Shapes::ShapeRef.new(shape: AccessPoint, location_name: "AccessPoint")
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CreateAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    CreateAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    CreateAccessPointRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    CreateAccessPointRequest.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    CreateAccessPointRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
+    CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
 
     CreateJobRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     CreateJobRequest.add_member(:confirmation_required, Shapes::ShapeRef.new(shape: ConfirmationRequired, location_name: "ConfirmationRequired", metadata: {"box"=>true}))
@@ -131,6 +169,14 @@ module Aws::S3Control
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     CreateJobResult.struct_class = Types::CreateJobResult
 
+    DeleteAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    DeleteAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    DeleteAccessPointPolicyRequest.struct_class = Types::DeleteAccessPointPolicyRequest
+
+    DeleteAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    DeleteAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    DeleteAccessPointRequest.struct_class = Types::DeleteAccessPointRequest
+
     DeletePublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     DeletePublicAccessBlockRequest.struct_class = Types::DeletePublicAccessBlockRequest
 
@@ -140,6 +186,32 @@ module Aws::S3Control
 
     DescribeJobResult.add_member(:job, Shapes::ShapeRef.new(shape: JobDescriptor, location_name: "Job"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
+
+    GetAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    GetAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointPolicyRequest.struct_class = Types::GetAccessPointPolicyRequest
+
+    GetAccessPointPolicyResult.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    GetAccessPointPolicyResult.struct_class = Types::GetAccessPointPolicyResult
+
+    GetAccessPointPolicyStatusRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    GetAccessPointPolicyStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointPolicyStatusRequest.struct_class = Types::GetAccessPointPolicyStatusRequest
+
+    GetAccessPointPolicyStatusResult.add_member(:policy_status, Shapes::ShapeRef.new(shape: PolicyStatus, location_name: "PolicyStatus"))
+    GetAccessPointPolicyStatusResult.struct_class = Types::GetAccessPointPolicyStatusResult
+
+    GetAccessPointRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    GetAccessPointRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    GetAccessPointRequest.struct_class = Types::GetAccessPointRequest
+
+    GetAccessPointResult.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, location_name: "Name"))
+    GetAccessPointResult.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location_name: "Bucket"))
+    GetAccessPointResult.add_member(:network_origin, Shapes::ShapeRef.new(shape: NetworkOrigin, location_name: "NetworkOrigin"))
+    GetAccessPointResult.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
+    GetAccessPointResult.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
+    GetAccessPointResult.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
+    GetAccessPointResult.struct_class = Types::GetAccessPointResult
 
     GetPublicAccessBlockOutput.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, location_name: "PublicAccessBlockConfiguration"))
     GetPublicAccessBlockOutput.struct_class = Types::GetPublicAccessBlockOutput
@@ -240,6 +312,16 @@ module Aws::S3Control
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "FunctionArn"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
 
+    ListAccessPointsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    ListAccessPointsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, location: "querystring", location_name: "bucket"))
+    ListAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
+    ListAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAccessPointsRequest.struct_class = Types::ListAccessPointsRequest
+
+    ListAccessPointsResult.add_member(:access_point_list, Shapes::ShapeRef.new(shape: AccessPointList, location_name: "AccessPointList"))
+    ListAccessPointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "NextToken"))
+    ListAccessPointsResult.struct_class = Types::ListAccessPointsResult
+
     ListJobsRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
     ListJobsRequest.add_member(:job_statuses, Shapes::ShapeRef.new(shape: JobStatusList, location: "querystring", location_name: "jobStatuses"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location: "querystring", location_name: "nextToken"))
@@ -256,11 +338,19 @@ module Aws::S3Control
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     NotFoundException.struct_class = Types::NotFoundException
 
+    PolicyStatus.add_member(:is_public, Shapes::ShapeRef.new(shape: IsPublic, location_name: "IsPublic"))
+    PolicyStatus.struct_class = Types::PolicyStatus
+
     PublicAccessBlockConfiguration.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicAcls"))
     PublicAccessBlockConfiguration.add_member(:ignore_public_acls, Shapes::ShapeRef.new(shape: Setting, location_name: "IgnorePublicAcls"))
     PublicAccessBlockConfiguration.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: Setting, location_name: "BlockPublicPolicy"))
     PublicAccessBlockConfiguration.add_member(:restrict_public_buckets, Shapes::ShapeRef.new(shape: Setting, location_name: "RestrictPublicBuckets"))
     PublicAccessBlockConfiguration.struct_class = Types::PublicAccessBlockConfiguration
+
+    PutAccessPointPolicyRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
+    PutAccessPointPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location: "uri", location_name: "name"))
+    PutAccessPointPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutAccessPointPolicyRequest.struct_class = Types::PutAccessPointPolicyRequest
 
     PutPublicAccessBlockRequest.add_member(:public_access_block_configuration, Shapes::ShapeRef.new(shape: PublicAccessBlockConfiguration, required: true, location_name: "PublicAccessBlockConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}}))
     PutPublicAccessBlockRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id"))
@@ -364,6 +454,9 @@ module Aws::S3Control
     UpdateJobStatusResult.add_member(:status_update_reason, Shapes::ShapeRef.new(shape: JobStatusUpdateReason, location_name: "StatusUpdateReason"))
     UpdateJobStatusResult.struct_class = Types::UpdateJobStatusResult
 
+    VpcConfiguration.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
+    VpcConfiguration.struct_class = Types::VpcConfiguration
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -381,6 +474,19 @@ module Aws::S3Control
         "uid" => "s3control-2018-08-20",
       }
 
+      api.add_operation(:create_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessPoint"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/accesspoint/{name}"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessPointRequest,
+          location_name: "CreateAccessPointRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateJob"
         o.http_method = "POST"
@@ -396,6 +502,22 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessPoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accesspoint/{name}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessPointPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:delete_public_access_block, Seahorse::Model::Operation.new.tap do |o|
@@ -418,6 +540,30 @@ module Aws::S3Control
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:get_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessPoint"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accesspoint/{name}"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessPointResult)
+      end)
+
+      api.add_operation(:get_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessPointPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyResult)
+      end)
+
+      api.add_operation(:get_access_point_policy_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessPointPolicyStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accesspoint/{name}/policyStatus"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessPointPolicyStatusResult)
+      end)
+
       api.add_operation(:get_public_access_block, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPublicAccessBlock"
         o.http_method = "GET"
@@ -425,6 +571,20 @@ module Aws::S3Control
         o.input = Shapes::ShapeRef.new(shape: GetPublicAccessBlockRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPublicAccessBlockOutput)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchPublicAccessBlockConfiguration)
+      end)
+
+      api.add_operation(:list_access_points, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessPoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/v20180820/accesspoint"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessPointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessPointsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -442,6 +602,19 @@ module Aws::S3Control
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_access_point_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccessPointPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v20180820/accesspoint/{name}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutAccessPointPolicyRequest,
+          location_name: "PutAccessPointPolicyRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://awss3control.amazonaws.com/doc/2018-08-20/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:put_public_access_block, Seahorse::Model::Operation.new.tap do |o|

@@ -461,6 +461,143 @@ module Aws::EKS
       req.send_request(options)
     end
 
+    # Creates an AWS Fargate profile for your Amazon EKS cluster. You must
+    # have at least one Fargate profile in a cluster to be able to schedule
+    # pods on Fargate infrastructure.
+    #
+    # The Fargate profile allows an administrator to declare which pods run
+    # on Fargate infrastructure and specify which pods run on which Fargate
+    # profile. This declaration is done through the profile’s selectors.
+    # Each profile can have up to five selectors that contain a namespace
+    # and labels. A namespace is required for every selector. The label
+    # field consists of multiple optional key-value pairs. Pods that match
+    # the selectors are scheduled on Fargate infrastructure. If a
+    # to-be-scheduled pod matches any of the selectors in the Fargate
+    # profile, then that pod is scheduled on Fargate infrastructure.
+    #
+    # When you create a Fargate profile, you must specify a pod execution
+    # role to use with the pods that are scheduled with the profile. This
+    # role is added to the cluster's Kubernetes [Role Based Access
+    # Control][1] (RBAC) for authorization so that the `kubelet` that is
+    # running on the Fargate infrastructure can register with your Amazon
+    # EKS cluster. This role is what allows Fargate infrastructure to appear
+    # in your cluster as nodes. The pod execution role also provides IAM
+    # permissions to the Fargate infrastructure to allow read access to
+    # Amazon ECR image repositories. For more information, see [Pod
+    # Execution Role][2] in the *Amazon EKS User Guide*.
+    #
+    # Fargate profiles are immutable. However, you can create a new updated
+    # profile to replace an existing profile and then delete the original
+    # after the updated profile has finished creating.
+    #
+    # If any Fargate profiles in a cluster are in the `DELETING` status, you
+    # must wait for that Fargate profile to finish deleting before you can
+    # create any other profiles in that cluster.
+    #
+    # For more information, see [AWS Fargate Profile][3] in the *Amazon EKS
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://kubernetes.io/docs/admin/authorization/rbac/
+    # [2]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
+    # [3]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
+    #
+    # @option params [required, String] :fargate_profile_name
+    #   The name of the Fargate profile.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster to apply the Fargate profile to.
+    #
+    # @option params [required, String] :pod_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the pod execution role to use for
+    #   pods that match the selectors in the Fargate profile. The pod
+    #   execution role allows Fargate infrastructure to register with your
+    #   cluster as a node, and it provides read access to Amazon ECR image
+    #   repositories. For more information, see [Pod Execution Role][1] in the
+    #   *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
+    #
+    # @option params [Array<String>] :subnets
+    #   The IDs of subnets to launch Fargate pods into. At this time, Fargate
+    #   pods are not assigned public IP addresses, so only private subnets
+    #   (with no direct route to an Internet Gateway) are accepted for this
+    #   parameter.
+    #
+    # @option params [Array<Types::FargateProfileSelector>] :selectors
+    #   The selectors to match for pods to use this Fargate profile. Each
+    #   selector must have an associated namespace. Optionally, you can also
+    #   specify labels for a namespace. You may specify up to five selectors
+    #   in a Fargate profile.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata to apply to the Fargate profile to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Fargate profile tags do not
+    #   propagate to any other resources associated with the Fargate profile,
+    #   such as the pods that are scheduled with it.
+    #
+    # @return [Types::CreateFargateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFargateProfileResponse#fargate_profile #fargate_profile} => Types::FargateProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fargate_profile({
+    #     fargate_profile_name: "String", # required
+    #     cluster_name: "String", # required
+    #     pod_execution_role_arn: "String", # required
+    #     subnets: ["String"],
+    #     selectors: [
+    #       {
+    #         namespace: "String",
+    #         labels: {
+    #           "String" => "String",
+    #         },
+    #       },
+    #     ],
+    #     client_request_token: "String",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fargate_profile.fargate_profile_name #=> String
+    #   resp.fargate_profile.fargate_profile_arn #=> String
+    #   resp.fargate_profile.cluster_name #=> String
+    #   resp.fargate_profile.created_at #=> Time
+    #   resp.fargate_profile.pod_execution_role_arn #=> String
+    #   resp.fargate_profile.subnets #=> Array
+    #   resp.fargate_profile.subnets[0] #=> String
+    #   resp.fargate_profile.selectors #=> Array
+    #   resp.fargate_profile.selectors[0].namespace #=> String
+    #   resp.fargate_profile.selectors[0].labels #=> Hash
+    #   resp.fargate_profile.selectors[0].labels["String"] #=> String
+    #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.fargate_profile.tags #=> Hash
+    #   resp.fargate_profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfile AWS API Documentation
+    #
+    # @overload create_fargate_profile(params = {})
+    # @param [Hash] params ({})
+    def create_fargate_profile(params = {}, options = {})
+      req = build_request(:create_fargate_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a managed worker node group for an Amazon EKS cluster. You can
     # only create a node group for your cluster that is equal to the current
     # Kubernetes version for the cluster. All node groups are created with
@@ -484,7 +621,7 @@ module Aws::EKS
     #   The unique name to give your node group.
     #
     # @option params [Types::NodegroupScalingConfig] :scaling_config
-    #   The scaling configuration details for the AutoScaling group that is
+    #   The scaling configuration details for the Auto Scaling group that is
     #   created for your node group.
     #
     # @option params [Integer] :disk_size
@@ -492,7 +629,7 @@ module Aws::EKS
     #   default disk size is 20 GiB.
     #
     # @option params [required, Array<String>] :subnets
-    #   The subnets to use for the AutoScaling group that is created for your
+    #   The subnets to use for the Auto Scaling group that is created for your
     #   node group. These subnets must have the tag key
     #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
     #   `CLUSTER_NAME` is replaced with the name of your cluster.
@@ -506,7 +643,7 @@ module Aws::EKS
     # @option params [String] :ami_type
     #   The AMI type for your node group. GPU instance types should use the
     #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
-    #   AMI with GPU support; non-GPU instances should use the `AL2_x86_64`
+    #   AMI with GPU support. Non-GPU instances should use the `AL2_x86_64`
     #   AMI type, which uses the Amazon EKS-optimized Linux AMI.
     #
     # @option params [Types::RemoteAccessConfig] :remote_access
@@ -648,8 +785,9 @@ module Aws::EKS
     # being able to delete the VPC. For more information, see [Deleting a
     # Cluster][1] in the *Amazon EKS User Guide*.
     #
-    # If you have managed node groups attached to the cluster, you must
-    # delete them first. For more information, see DeleteNodegroup.
+    # If you have managed node groups or Fargate profiles attached to the
+    # cluster, you must delete them first. For more information, see
+    # DeleteNodegroup andDeleteFargateProfile.
     #
     #
     #
@@ -715,6 +853,62 @@ module Aws::EKS
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
       req = build_request(:delete_cluster, params)
+      req.send_request(options)
+    end
+
+    # Deletes an AWS Fargate profile.
+    #
+    # When you delete a Fargate profile, any pods that were scheduled onto
+    # Fargate infrastructure with the profile are deleted. If those pods
+    # match another Fargate profile, then they are scheduled on Fargate
+    # infrastructure with that profile. If they no longer match any Fargate
+    # profiles, then they are not scheduled on Fargate infrastructure.
+    #
+    # Only one Fargate profile in a cluster can be in the `DELETING` status
+    # at a time. You must wait for a Fargate profile to finish deleting
+    # before you can delete any other profiles in that cluster.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster associated with the Fargate profile
+    #   to delete.
+    #
+    # @option params [required, String] :fargate_profile_name
+    #   The name of the Fargate profile to delete.
+    #
+    # @return [Types::DeleteFargateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFargateProfileResponse#fargate_profile #fargate_profile} => Types::FargateProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fargate_profile({
+    #     cluster_name: "String", # required
+    #     fargate_profile_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fargate_profile.fargate_profile_name #=> String
+    #   resp.fargate_profile.fargate_profile_arn #=> String
+    #   resp.fargate_profile.cluster_name #=> String
+    #   resp.fargate_profile.created_at #=> Time
+    #   resp.fargate_profile.pod_execution_role_arn #=> String
+    #   resp.fargate_profile.subnets #=> Array
+    #   resp.fargate_profile.subnets[0] #=> String
+    #   resp.fargate_profile.selectors #=> Array
+    #   resp.fargate_profile.selectors[0].namespace #=> String
+    #   resp.fargate_profile.selectors[0].labels #=> Hash
+    #   resp.fargate_profile.selectors[0].labels["String"] #=> String
+    #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.fargate_profile.tags #=> Hash
+    #   resp.fargate_profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteFargateProfile AWS API Documentation
+    #
+    # @overload delete_fargate_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_fargate_profile(params = {}, options = {})
+      req = build_request(:delete_fargate_profile, params)
       req.send_request(options)
     end
 
@@ -881,6 +1075,52 @@ module Aws::EKS
     # @param [Hash] params ({})
     def describe_cluster(params = {}, options = {})
       req = build_request(:describe_cluster, params)
+      req.send_request(options)
+    end
+
+    # Returns descriptive information about an AWS Fargate profile.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster associated with the Fargate
+    #   profile.
+    #
+    # @option params [required, String] :fargate_profile_name
+    #   The name of the Fargate profile to describe.
+    #
+    # @return [Types::DescribeFargateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFargateProfileResponse#fargate_profile #fargate_profile} => Types::FargateProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fargate_profile({
+    #     cluster_name: "String", # required
+    #     fargate_profile_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fargate_profile.fargate_profile_name #=> String
+    #   resp.fargate_profile.fargate_profile_arn #=> String
+    #   resp.fargate_profile.cluster_name #=> String
+    #   resp.fargate_profile.created_at #=> Time
+    #   resp.fargate_profile.pod_execution_role_arn #=> String
+    #   resp.fargate_profile.subnets #=> Array
+    #   resp.fargate_profile.subnets[0] #=> String
+    #   resp.fargate_profile.selectors #=> Array
+    #   resp.fargate_profile.selectors[0].namespace #=> String
+    #   resp.fargate_profile.selectors[0].labels #=> Hash
+    #   resp.fargate_profile.selectors[0].labels["String"] #=> String
+    #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.fargate_profile.tags #=> Hash
+    #   resp.fargate_profile.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeFargateProfile AWS API Documentation
+    #
+    # @overload describe_fargate_profile(params = {})
+    # @param [Hash] params ({})
+    def describe_fargate_profile(params = {}, options = {})
+      req = build_request(:describe_fargate_profile, params)
       req.send_request(options)
     end
 
@@ -1065,6 +1305,59 @@ module Aws::EKS
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Lists the AWS Fargate profiles associated with the specified cluster
+    # in your AWS account in the specified Region.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name of the Amazon EKS cluster that you would like to listFargate
+    #   profiles in.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of Fargate profile results returned by
+    #   `ListFargateProfiles` in paginated output. When you use this
+    #   parameter, `ListFargateProfiles` returns only `maxResults` results in
+    #   a single page along with a `nextToken` response element. You can see
+    #   the remaining results of the initial request by sending another
+    #   `ListFargateProfiles` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If you don't use this parameter,
+    #   `ListFargateProfiles` returns up to 100 results and a `nextToken`
+    #   value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListFargateProfiles` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    # @return [Types::ListFargateProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFargateProfilesResponse#fargate_profile_names #fargate_profile_names} => Array&lt;String&gt;
+    #   * {Types::ListFargateProfilesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_fargate_profiles({
+    #     cluster_name: "String", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fargate_profile_names #=> Array
+    #   resp.fargate_profile_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListFargateProfiles AWS API Documentation
+    #
+    # @overload list_fargate_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_fargate_profiles(params = {}, options = {})
+      req = build_request(:list_fargate_profiles, params)
       req.send_request(options)
     end
 
@@ -1487,7 +1780,7 @@ module Aws::EKS
     #   after the update.
     #
     # @option params [Types::NodegroupScalingConfig] :scaling_config
-    #   The scaling configuration details for the AutoScaling group after the
+    #   The scaling configuration details for the Auto Scaling group after the
     #   update.
     #
     # @option params [String] :client_request_token
@@ -1592,10 +1885,10 @@ module Aws::EKS
     #
     # @option params [Boolean] :force
     #   Force the update if the existing node group's pods are unable to be
-    #   drained due to a pod disruption budget issue. If a previous update
-    #   fails because pods could not be drained, you can force the update
-    #   after it fails to terminate the old node regardless of whether or not
-    #   any pods are running on the node.
+    #   drained due to a pod disruption budget issue. If an update fails
+    #   because pods could not be drained, you can force the update after it
+    #   fails to terminate the old node whether or not any pods are running on
+    #   the node.
     #
     # @option params [String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -1656,7 +1949,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

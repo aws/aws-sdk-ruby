@@ -57,6 +57,7 @@ module Aws::ElasticsearchService
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
     ESPartitionInstanceType = Shapes::StringShape.new(name: 'ESPartitionInstanceType')
+    ESWarmPartitionInstanceType = Shapes::StringShape.new(name: 'ESWarmPartitionInstanceType')
     ElasticsearchClusterConfig = Shapes::StructureShape.new(name: 'ElasticsearchClusterConfig')
     ElasticsearchClusterConfigStatus = Shapes::StructureShape.new(name: 'ElasticsearchClusterConfigStatus')
     ElasticsearchDomainConfig = Shapes::StructureShape.new(name: 'ElasticsearchDomainConfig')
@@ -316,6 +317,9 @@ module Aws::ElasticsearchService
     ElasticsearchClusterConfig.add_member(:zone_awareness_config, Shapes::ShapeRef.new(shape: ZoneAwarenessConfig, location_name: "ZoneAwarenessConfig"))
     ElasticsearchClusterConfig.add_member(:dedicated_master_type, Shapes::ShapeRef.new(shape: ESPartitionInstanceType, location_name: "DedicatedMasterType"))
     ElasticsearchClusterConfig.add_member(:dedicated_master_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "DedicatedMasterCount"))
+    ElasticsearchClusterConfig.add_member(:warm_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "WarmEnabled"))
+    ElasticsearchClusterConfig.add_member(:warm_type, Shapes::ShapeRef.new(shape: ESWarmPartitionInstanceType, location_name: "WarmType"))
+    ElasticsearchClusterConfig.add_member(:warm_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "WarmCount"))
     ElasticsearchClusterConfig.struct_class = Types::ElasticsearchClusterConfig
 
     ElasticsearchClusterConfigStatus.add_member(:options, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, required: true, location_name: "Options"))

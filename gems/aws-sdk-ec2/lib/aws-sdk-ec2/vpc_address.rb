@@ -87,6 +87,24 @@ module Aws::EC2
       data[:public_ipv_4_pool]
     end
 
+    # The name of the location from which the IP address is advertised.
+    # @return [String]
+    def network_border_group
+      data[:network_border_group]
+    end
+
+    # The customer-owned IP address.
+    # @return [String]
+    def customer_owned_ip
+      data[:customer_owned_ip]
+    end
+
+    # The ID of the customer-owned address pool.
+    # @return [String]
+    def customer_owned_ipv_4_pool
+      data[:customer_owned_ipv_4_pool]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -273,11 +291,29 @@ module Aws::EC2
     #
     #   vpc_address.release({
     #     public_ip: "String",
+    #     network_border_group: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :public_ip
     #   \[EC2-Classic\] The Elastic IP address. Required for EC2-Classic.
+    # @option options [String] :network_border_group
+    #   The location that the IP address is released from.
+    #
+    #   If you provide an incorrect network border group, you will receive an
+    #   `InvalidAddress.NotFound` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 classic, you will receive an
+    #   `InvalidParameterCombination` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

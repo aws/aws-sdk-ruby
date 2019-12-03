@@ -428,23 +428,35 @@ module Aws::EC2
     #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
+    #     outpost_arn: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :availability_zone
-    #   The Availability Zone for the subnet.
+    #   The Availability Zone or Local Zone for the subnet.
     #
     #   Default: AWS selects one for you. If you create more than one subnet
-    #   in your VPC, we may not necessarily select a different zone for each
+    #   in your VPC, we do not necessarily select a different zone for each
     #   subnet.
+    #
+    #   To create a subnet in a Local Zone, set this value to the Local Zone
+    #   ID, for example `us-west-2-lax-1a`. For information about the Regions
+    #   that support Local Zones, see [Available Regions][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
     # @option options [String] :availability_zone_id
-    #   The AZ ID of the subnet.
+    #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

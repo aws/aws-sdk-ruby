@@ -8,11 +8,11 @@
 module Aws::EKS
   module Types
 
-    # An AutoScaling group that is associated with an Amazon EKS managed
+    # An Auto Scaling group that is associated with an Amazon EKS managed
     # node group.
     #
     # @!attribute [rw] name
-    #   The name of the AutoScaling group associated with an Amazon EKS
+    #   The name of the Auto Scaling group associated with an Amazon EKS
     #   managed node group.
     #   @return [String]
     #
@@ -63,6 +63,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -297,6 +298,103 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFargateProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fargate_profile_name: "String", # required
+    #         cluster_name: "String", # required
+    #         pod_execution_role_arn: "String", # required
+    #         subnets: ["String"],
+    #         selectors: [
+    #           {
+    #             namespace: "String",
+    #             labels: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
+    #         client_request_token: "String",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The name of the Fargate profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster to apply the Fargate profile to.
+    #   @return [String]
+    #
+    # @!attribute [rw] pod_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the pod execution role to use for
+    #   pods that match the selectors in the Fargate profile. The pod
+    #   execution role allows Fargate infrastructure to register with your
+    #   cluster as a node, and it provides read access to Amazon ECR image
+    #   repositories. For more information, see [Pod Execution Role][1] in
+    #   the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   The IDs of subnets to launch Fargate pods into. At this time,
+    #   Fargate pods are not assigned public IP addresses, so only private
+    #   subnets (with no direct route to an Internet Gateway) are accepted
+    #   for this parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] selectors
+    #   The selectors to match for pods to use this Fargate profile. Each
+    #   selector must have an associated namespace. Optionally, you can also
+    #   specify labels for a namespace. You may specify up to five selectors
+    #   in a Fargate profile.
+    #   @return [Array<Types::FargateProfileSelector>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata to apply to the Fargate profile to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Fargate profile tags do
+    #   not propagate to any other resources associated with the Fargate
+    #   profile, such as the pods that are scheduled with it.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfileRequest AWS API Documentation
+    #
+    class CreateFargateProfileRequest < Struct.new(
+      :fargate_profile_name,
+      :cluster_name,
+      :pod_execution_role_arn,
+      :subnets,
+      :selectors,
+      :client_request_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fargate_profile
+    #   The full description of your new Fargate profile.
+    #   @return [Types::FargateProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfileResponse AWS API Documentation
+    #
+    class CreateFargateProfileResponse < Struct.new(
+      :fargate_profile)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateNodegroupRequest
     #   data as a hash:
     #
@@ -337,7 +435,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] scaling_config
-    #   The scaling configuration details for the AutoScaling group that is
+    #   The scaling configuration details for the Auto Scaling group that is
     #   created for your node group.
     #   @return [Types::NodegroupScalingConfig]
     #
@@ -347,7 +445,7 @@ module Aws::EKS
     #   @return [Integer]
     #
     # @!attribute [rw] subnets
-    #   The subnets to use for the AutoScaling group that is created for
+    #   The subnets to use for the Auto Scaling group that is created for
     #   your node group. These subnets must have the tag key
     #   `kubernetes.io/cluster/CLUSTER_NAME` with a value of `shared`, where
     #   `CLUSTER_NAME` is replaced with the name of your cluster.
@@ -364,7 +462,7 @@ module Aws::EKS
     # @!attribute [rw] ami_type
     #   The AMI type for your node group. GPU instance types should use the
     #   `AL2_x86_64_GPU` AMI type, which uses the Amazon EKS-optimized Linux
-    #   AMI with GPU support; non-GPU instances should use the `AL2_x86_64`
+    #   AMI with GPU support. Non-GPU instances should use the `AL2_x86_64`
     #   AMI type, which uses the Amazon EKS-optimized Linux AMI.
     #   @return [String]
     #
@@ -486,6 +584,42 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteFargateProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         fargate_profile_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster associated with the Fargate
+    #   profile to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The name of the Fargate profile to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteFargateProfileRequest AWS API Documentation
+    #
+    class DeleteFargateProfileRequest < Struct.new(
+      :cluster_name,
+      :fargate_profile_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fargate_profile
+    #   The deleted Fargate profile.
+    #   @return [Types::FargateProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteFargateProfileResponse AWS API Documentation
+    #
+    class DeleteFargateProfileResponse < Struct.new(
+      :fargate_profile)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteNodegroupRequest
     #   data as a hash:
     #
@@ -548,6 +682,42 @@ module Aws::EKS
     #
     class DescribeClusterResponse < Struct.new(
       :cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFargateProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         fargate_profile_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster associated with the Fargate
+    #   profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The name of the Fargate profile to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeFargateProfileRequest AWS API Documentation
+    #
+    class DescribeFargateProfileRequest < Struct.new(
+      :cluster_name,
+      :fargate_profile_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fargate_profile
+    #   The full description of your Fargate profile.
+    #   @return [Types::FargateProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeFargateProfileResponse AWS API Documentation
+    #
+    class DescribeFargateProfileResponse < Struct.new(
+      :fargate_profile)
       include Aws::Structure
     end
 
@@ -673,6 +843,99 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # An object representing an AWS Fargate profile.
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The name of the Fargate profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_profile_arn
+    #   The full Amazon Resource Name (ARN) of the Fargate profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that the Fargate profile belongs
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The Unix epoch timestamp in seconds for when the Fargate profile was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] pod_execution_role_arn
+    #   The Amazon Resource Name (ARN) of the pod execution role to use for
+    #   pods that match the selectors in the Fargate profile. For more
+    #   information, see [Pod Execution
+    #   Role](eks/latest/userguide/pod-execution-role.html) in the *Amazon
+    #   EKS User Guide*.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   The IDs of subnets to launch Fargate pods into.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] selectors
+    #   The selectors to match for pods to use this Fargate profile.
+    #   @return [Array<Types::FargateProfileSelector>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Fargate profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The metadata applied to the Fargate profile to assist with
+    #   categorization and organization. Each tag consists of a key and an
+    #   optional value, both of which you define. Fargate profile tags do
+    #   not propagate to any other resources associated with the Fargate
+    #   profile, such as the pods that are scheduled with it.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfile AWS API Documentation
+    #
+    class FargateProfile < Struct.new(
+      :fargate_profile_name,
+      :fargate_profile_arn,
+      :cluster_name,
+      :created_at,
+      :pod_execution_role_arn,
+      :subnets,
+      :selectors,
+      :status,
+      :tags)
+      include Aws::Structure
+    end
+
+    # An object representing an AWS Fargate profile selector.
+    #
+    # @note When making an API call, you may pass FargateProfileSelector
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "String",
+    #         labels: {
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The Kubernetes namespace that the selector should match.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   The Kubernetes labels that the selector should match. A pod must
+    #   contain all of the labels that are specified in the selector for it
+    #   to be considered a match.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfileSelector AWS API Documentation
+    #
+    class FargateProfileSelector < Struct.new(
+      :namespace,
+      :labels)
+      include Aws::Structure
+    end
+
     # An object representing an identity provider for authentication
     # credentials.
     #
@@ -700,6 +963,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The Fargate profile associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -710,6 +978,7 @@ module Aws::EKS
     class InvalidParameterException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :fargate_profile_name,
       :message)
       include Aws::Structure
     end
@@ -722,6 +991,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -759,7 +1029,7 @@ module Aws::EKS
     #   * **Ec2LaunchTemplateVersionMismatch**\: The Amazon EC2 launch
     #     template version for your managed node group does not match the
     #     version that Amazon EKS created. You may be able to revert to the
-    #     Amazon EKS-created version to recover.
+    #     version that Amazon EKS created to recover.
     #
     #   * **IamInstanceProfileNotFound**\: We couldn't find the IAM
     #     instance profile for your managed node group. You may be able to
@@ -772,6 +1042,11 @@ module Aws::EKS
     #   * **AsgInstanceLaunchFailures**\: Your Auto Scaling group is
     #     experiencing failures while attempting to launch instances.
     #
+    #   * **NodeCreationFailure**\: Your launched instances are unable to
+    #     register with your Amazon EKS cluster. Common causes of this
+    #     failure are insufficient [worker node IAM role][1] permissions or
+    #     lack of outbound internet access for the nodes.
+    #
     #   * **InstanceLimitExceeded**\: Your AWS account is unable to launch
     #     any more instances of the specified instance type. You may be able
     #     to request an Amazon EC2 instance limit increase to recover.
@@ -780,11 +1055,15 @@ module Aws::EKS
     #     associated with your managed node group does not have enough
     #     available IP addresses for new nodes.
     #
-    #   * **AccessDenied**\: Amazon EKS and or one or more of your managed
-    #     nodes is unable to communicate with your cluster API server.
+    #   * **AccessDenied**\: Amazon EKS or one or more of your managed nodes
+    #     is unable to communicate with your cluster API server.
     #
     #   * **InternalFailure**\: These errors are usually caused by an Amazon
     #     EKS server-side issue.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -860,6 +1139,70 @@ module Aws::EKS
     #
     class ListClustersResponse < Struct.new(
       :clusters,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFargateProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "String", # required
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the Amazon EKS cluster that you would like to
+    #   listFargate profiles in.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Fargate profile results returned by
+    #   `ListFargateProfiles` in paginated output. When you use this
+    #   parameter, `ListFargateProfiles` returns only `maxResults` results
+    #   in a single page along with a `nextToken` response element. You can
+    #   see the remaining results of the initial request by sending another
+    #   `ListFargateProfiles` request with the returned `nextToken` value.
+    #   This value can be between 1 and 100. If you don't use this
+    #   parameter, `ListFargateProfiles` returns up to 100 results and a
+    #   `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListFargateProfiles` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListFargateProfilesRequest AWS API Documentation
+    #
+    class ListFargateProfilesRequest < Struct.new(
+      :cluster_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fargate_profile_names
+    #   A list of all of the Fargate profiles associated with the specified
+    #   cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListFargateProfiles`
+    #   request. When the results of a `ListFargateProfiles` request exceed
+    #   `maxResults`, you can use this value to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListFargateProfilesResponse AWS API Documentation
+    #
+    class ListFargateProfilesResponse < Struct.new(
+      :fargate_profile_names,
       :next_token)
       include Aws::Structure
     end
@@ -1123,7 +1466,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] scaling_config
-    #   The scaling configuration details for the AutoScaling group that is
+    #   The scaling configuration details for the Auto Scaling group that is
     #   associated with your node group.
     #   @return [Types::NodegroupScalingConfig]
     #
@@ -1132,7 +1475,7 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnets
-    #   The subnets allowed for the AutoScaling group that is associated
+    #   The subnets allowed for the Auto Scaling group that is associated
     #   with your node group. These subnets must have the following tag:
     #   `kubernetes.io/cluster/CLUSTER_NAME`, where `CLUSTER_NAME` is
     #   replaced with the name of your cluster.
@@ -1146,7 +1489,7 @@ module Aws::EKS
     # @!attribute [rw] ami_type
     #   The AMI type associated with your node group. GPU instance types
     #   should use the `AL2_x86_64_GPU` AMI type, which uses the Amazon
-    #   EKS-optimized Linux AMI with GPU support; non-GPU instances should
+    #   EKS-optimized Linux AMI with GPU support. Non-GPU instances should
     #   use the `AL2_x86_64` AMI type, which uses the Amazon EKS-optimized
     #   Linux AMI.
     #   @return [String]
@@ -1177,7 +1520,7 @@ module Aws::EKS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resources
-    #   The resources associated with the nodegroup, such as AutoScaling
+    #   The resources associated with the node group, such as Auto Scaling
     #   groups and security groups for remote access.
     #   @return [Types::NodegroupResources]
     #
@@ -1192,7 +1535,7 @@ module Aws::EKS
     #   @return [Types::NodegroupHealth]
     #
     # @!attribute [rw] tags
-    #   The metadata applied the node group to assist with categorization
+    #   The metadata applied to the node group to assist with categorization
     #   and organization. Each tag consists of a key and an optional value,
     #   both of which you define. Node group tags do not propagate to any
     #   other resources associated with the node group, such as the Amazon
@@ -1237,11 +1580,11 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the resources associated with the nodegroup,
-    # such as AutoScaling groups and security groups for remote access.
+    # An object representing the resources associated with the node group,
+    # such as Auto Scaling groups and security groups for remote access.
     #
     # @!attribute [rw] auto_scaling_groups
-    #   The autoscaling groups associated with the node group.
+    #   The Auto Scaling groups associated with the node group.
     #   @return [Array<Types::AutoScalingGroup>]
     #
     # @!attribute [rw] remote_access_security_group
@@ -1257,8 +1600,8 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the scaling configuration details for the
-    # AutoScaling group that is associated with your node group.
+    # An object representing the scaling configuration details for the Auto
+    # Scaling group that is associated with your node group.
     #
     # @note When making an API call, you may pass NodegroupScalingConfig
     #   data as a hash:
@@ -1348,12 +1691,12 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] source_security_groups
-    #   The security groups to allow SSH access (port 22) from on the worker
-    #   nodes. If you specify an Amazon EC2 SSH key, but you do not specify
-    #   a source security group when you create a managed node group, port
-    #   22 on the worker nodes is opened to the internet (0.0.0.0/0). For
-    #   more information, see [Security Groups for Your VPC][1] in the
-    #   *Amazon Virtual Private Cloud User Guide*.
+    #   The security groups that are allowed SSH access (port 22) to the
+    #   worker nodes. If you specify an Amazon EC2 SSH key but do not
+    #   specify a source security group when you create a managed node
+    #   group, then port 22 on the worker nodes is opened to the internet
+    #   (0.0.0.0/0). For more information, see [Security Groups for Your
+    #   VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -1375,6 +1718,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1396,6 +1740,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1420,6 +1765,11 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_profile_name
+    #   The Fargate profile associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1430,6 +1780,7 @@ module Aws::EKS
     class ResourceNotFoundException < Struct.new(
       :cluster_name,
       :nodegroup_name,
+      :fargate_profile_name,
       :message)
       include Aws::Structure
     end
@@ -1441,6 +1792,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1513,6 +1865,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] nodegroup_name
+    #   The Amazon EKS managed node group associated with the exception.
     #   @return [String]
     #
     # @!attribute [rw] valid_zones
@@ -1787,7 +2140,7 @@ module Aws::EKS
     #   @return [Types::UpdateLabelsPayload]
     #
     # @!attribute [rw] scaling_config
-    #   The scaling configuration details for the AutoScaling group after
+    #   The scaling configuration details for the Auto Scaling group after
     #   the update.
     #   @return [Types::NodegroupScalingConfig]
     #
@@ -1864,10 +2217,10 @@ module Aws::EKS
     #
     # @!attribute [rw] force
     #   Force the update if the existing node group's pods are unable to be
-    #   drained due to a pod disruption budget issue. If a previous update
-    #   fails because pods could not be drained, you can force the update
-    #   after it fails to terminate the old node regardless of whether or
-    #   not any pods are running on the node.
+    #   drained due to a pod disruption budget issue. If an update fails
+    #   because pods could not be drained, you can force the update after it
+    #   fails to terminate the old node whether or not any pods are running
+    #   on the node.
     #   @return [Boolean]
     #
     # @!attribute [rw] client_request_token
@@ -2000,8 +2353,8 @@ module Aws::EKS
     #
     # @!attribute [rw] cluster_security_group_id
     #   The cluster security group that was created by Amazon EKS for the
-    #   cluster. Managed node groups use this security group for control
-    #   plane to data plane communication.
+    #   cluster. Managed node groups use this security group for
+    #   control-plane-to-data-plane communication.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id

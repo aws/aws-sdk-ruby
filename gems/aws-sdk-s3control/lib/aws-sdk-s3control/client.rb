@@ -264,6 +264,62 @@ module Aws::S3Control
 
     # @!group API Operations
 
+    # Creates an access point and associates it with the specified bucket.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID for the owner of the bucket for which you want to
+    #   create an access point.
+    #
+    # @option params [required, String] :name
+    #   The name you want to assign to this access point.
+    #
+    # @option params [required, String] :bucket
+    #   The name of the bucket that you want to associate this access point
+    #   with.
+    #
+    # @option params [Types::VpcConfiguration] :vpc_configuration
+    #   If you include this field, Amazon S3 restricts access to this access
+    #   point to requests from the specified Virtual Private Cloud (VPC).
+    #
+    # @option params [Types::PublicAccessBlockConfiguration] :public_access_block_configuration
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_point({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #     bucket: "BucketName", # required
+    #     vpc_configuration: {
+    #       vpc_id: "VpcId", # required
+    #     },
+    #     public_access_block_configuration: {
+    #       block_public_acls: false,
+    #       ignore_public_acls: false,
+    #       block_public_policy: false,
+    #       restrict_public_buckets: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPoint AWS API Documentation
+    #
+    # @overload create_access_point(params = {})
+    # @param [Hash] params ({})
+    def create_access_point(params = {}, options = {})
+      req = build_request(:create_access_point, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon S3 batch operations job.
     #
     # @option params [required, String] :account_id
@@ -440,12 +496,64 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Deletes the block public access configuration for the specified
-    # account.
+    # Deletes the specified access point.
     #
     # @option params [required, String] :account_id
-    #   The account ID for the AWS account whose block public access
-    #   configuration you want to delete.
+    #   The account ID for the account that owns the specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_point({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPoint AWS API Documentation
+    #
+    # @overload delete_access_point(params = {})
+    # @param [Hash] params ({})
+    def delete_access_point(params = {}, options = {})
+      req = build_request(:delete_access_point, params)
+      req.send_request(options)
+    end
+
+    # Deletes the access point policy for the specified access point.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point whose policy you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_point_policy({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicy AWS API Documentation
+    #
+    # @overload delete_access_point_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_access_point_policy(params = {}, options = {})
+      req = build_request(:delete_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # Removes the `PublicAccessBlock` configuration for an Amazon Web
+    # Services account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -571,7 +679,130 @@ module Aws::S3Control
       req.send_request(options)
     end
 
+    # Returns configuration information about the specified access point.
+    #
     # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point whose configuration information you want
+    #   to retrieve.
+    #
+    # @return [Types::GetAccessPointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointResult#name #name} => String
+    #   * {Types::GetAccessPointResult#bucket #bucket} => String
+    #   * {Types::GetAccessPointResult#network_origin #network_origin} => String
+    #   * {Types::GetAccessPointResult#vpc_configuration #vpc_configuration} => Types::VpcConfiguration
+    #   * {Types::GetAccessPointResult#public_access_block_configuration #public_access_block_configuration} => Types::PublicAccessBlockConfiguration
+    #   * {Types::GetAccessPointResult#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.bucket #=> String
+    #   resp.network_origin #=> String, one of "Internet", "VPC"
+    #   resp.vpc_configuration.vpc_id #=> String
+    #   resp.public_access_block_configuration.block_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.ignore_public_acls #=> Boolean
+    #   resp.public_access_block_configuration.block_public_policy #=> Boolean
+    #   resp.public_access_block_configuration.restrict_public_buckets #=> Boolean
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPoint AWS API Documentation
+    #
+    # @overload get_access_point(params = {})
+    # @param [Hash] params ({})
+    def get_access_point(params = {}, options = {})
+      req = build_request(:get_access_point, params)
+      req.send_request(options)
+    end
+
+    # Returns the access point policy associated with the specified access
+    # point.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point whose policy you want to retrieve.
+    #
+    # @return [Types::GetAccessPointPolicyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointPolicyResult#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_policy({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicy AWS API Documentation
+    #
+    # @overload get_access_point_policy(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_policy(params = {}, options = {})
+      req = build_request(:get_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # Indicates whether the specified access point currently has a policy
+    # that allows public access. For more information about public access
+    # through access points, see [Managing Data Access with Amazon S3 Access
+    # Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the account that owns the specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point whose policy status you want to retrieve.
+    #
+    # @return [Types::GetAccessPointPolicyStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessPointPolicyStatusResult#policy_status #policy_status} => Types::PolicyStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_point_policy_status({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_status.is_public #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatus AWS API Documentation
+    #
+    # @overload get_access_point_policy_status(params = {})
+    # @param [Hash] params ({})
+    def get_access_point_policy_status(params = {}, options = {})
+      req = build_request(:get_access_point_policy_status, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the `PublicAccessBlock` configuration for an Amazon Web
+    # Services account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to retrieve.
     #
     # @return [Types::GetPublicAccessBlockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -596,6 +827,65 @@ module Aws::S3Control
     # @param [Hash] params ({})
     def get_public_access_block(params = {}, options = {})
       req = build_request(:get_public_access_block, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the access points currently associated with the
+    # specified bucket. You can retrieve up to 1000 access points per call.
+    # If the specified bucket has more than 1000 access points (or the
+    # number specified in `maxResults`, whichever is less), then the
+    # response will include a continuation token that you can use to list
+    # the additional access points.
+    #
+    # @option params [required, String] :account_id
+    #   The AWS account ID for owner of the bucket whose access points you
+    #   want to list.
+    #
+    # @option params [String] :bucket
+    #   The name of the bucket whose associated access points you want to
+    #   list.
+    #
+    # @option params [String] :next_token
+    #   A continuation token. If a previous call to `ListAccessPoints`
+    #   returned a continuation token in the `NextToken` field, then providing
+    #   that value here causes Amazon S3 to retrieve the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of access points that you want to include in the
+    #   list. If the specified bucket has more than this number of access
+    #   points, then the response will include a continuation token in the
+    #   `NextToken` field that you can use to retrieve the next page of access
+    #   points.
+    #
+    # @return [Types::ListAccessPointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessPointsResult#access_point_list #access_point_list} => Array&lt;Types::AccessPoint&gt;
+    #   * {Types::ListAccessPointsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_points({
+    #     account_id: "AccountId", # required
+    #     bucket: "BucketName",
+    #     next_token: "NonEmptyMaxLength1024String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_point_list #=> Array
+    #   resp.access_point_list[0].name #=> String
+    #   resp.access_point_list[0].network_origin #=> String, one of "Internet", "VPC"
+    #   resp.access_point_list[0].vpc_configuration.vpc_id #=> String
+    #   resp.access_point_list[0].bucket #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPoints AWS API Documentation
+    #
+    # @overload list_access_points(params = {})
+    # @param [Hash] params ({})
+    def list_access_points(params = {}, options = {})
+      req = build_request(:list_access_points, params)
       req.send_request(options)
     end
 
@@ -657,9 +947,58 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
+    # Associates an access policy with the specified access point. Each
+    # access point can have only one policy, so a request made to this API
+    # replaces any existing policy associated with the specified access
+    # point.
     #
     # @option params [required, String] :account_id
+    #   The AWS account ID for owner of the bucket associated with the
+    #   specified access point.
+    #
+    # @option params [required, String] :name
+    #   The name of the access point that you want to associate with the
+    #   specified policy.
+    #
+    # @option params [required, String] :policy
+    #   The policy that you want to apply to the specified access point. For
+    #   more information about access point policies, see [Managing Data
+    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple Storage
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_access_point_policy({
+    #     account_id: "AccountId", # required
+    #     name: "AccessPointName", # required
+    #     policy: "Policy", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicy AWS API Documentation
+    #
+    # @overload put_access_point_policy(params = {})
+    # @param [Hash] params ({})
+    def put_access_point_policy(params = {}, options = {})
+      req = build_request(:put_access_point_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or modifies the `PublicAccessBlock` configuration for an
+    # Amazon Web Services account.
+    #
+    # @option params [required, Types::PublicAccessBlockConfiguration] :public_access_block_configuration
+    #   The `PublicAccessBlock` configuration that you want to apply to the
+    #   specified Amazon Web Services account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to set.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -779,7 +1118,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+3.66.0 (2019-12-03)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-outposts` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-networkmanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kendra` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-frauddetector` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-computeoptimizer` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codegurureviewer` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codeguruprofiler` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-augmentedairuntime` gem.
+
 3.65.0 (2019-12-02)
 ------------------
 

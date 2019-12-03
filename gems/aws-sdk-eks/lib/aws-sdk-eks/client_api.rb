@@ -26,14 +26,20 @@ module Aws::EKS
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
+    CreateFargateProfileRequest = Shapes::StructureShape.new(name: 'CreateFargateProfileRequest')
+    CreateFargateProfileResponse = Shapes::StructureShape.new(name: 'CreateFargateProfileResponse')
     CreateNodegroupRequest = Shapes::StructureShape.new(name: 'CreateNodegroupRequest')
     CreateNodegroupResponse = Shapes::StructureShape.new(name: 'CreateNodegroupResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
+    DeleteFargateProfileRequest = Shapes::StructureShape.new(name: 'DeleteFargateProfileRequest')
+    DeleteFargateProfileResponse = Shapes::StructureShape.new(name: 'DeleteFargateProfileResponse')
     DeleteNodegroupRequest = Shapes::StructureShape.new(name: 'DeleteNodegroupRequest')
     DeleteNodegroupResponse = Shapes::StructureShape.new(name: 'DeleteNodegroupResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
     DescribeClusterResponse = Shapes::StructureShape.new(name: 'DescribeClusterResponse')
+    DescribeFargateProfileRequest = Shapes::StructureShape.new(name: 'DescribeFargateProfileRequest')
+    DescribeFargateProfileResponse = Shapes::StructureShape.new(name: 'DescribeFargateProfileResponse')
     DescribeNodegroupRequest = Shapes::StructureShape.new(name: 'DescribeNodegroupRequest')
     DescribeNodegroupResponse = Shapes::StructureShape.new(name: 'DescribeNodegroupResponse')
     DescribeUpdateRequest = Shapes::StructureShape.new(name: 'DescribeUpdateRequest')
@@ -41,6 +47,12 @@ module Aws::EKS
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
+    FargateProfile = Shapes::StructureShape.new(name: 'FargateProfile')
+    FargateProfileLabel = Shapes::MapShape.new(name: 'FargateProfileLabel')
+    FargateProfileSelector = Shapes::StructureShape.new(name: 'FargateProfileSelector')
+    FargateProfileSelectors = Shapes::ListShape.new(name: 'FargateProfileSelectors')
+    FargateProfileStatus = Shapes::StringShape.new(name: 'FargateProfileStatus')
+    FargateProfilesRequestMaxResults = Shapes::IntegerShape.new(name: 'FargateProfilesRequestMaxResults')
     Identity = Shapes::StructureShape.new(name: 'Identity')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -49,6 +61,8 @@ module Aws::EKS
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersRequestMaxResults = Shapes::IntegerShape.new(name: 'ListClustersRequestMaxResults')
     ListClustersResponse = Shapes::StructureShape.new(name: 'ListClustersResponse')
+    ListFargateProfilesRequest = Shapes::StructureShape.new(name: 'ListFargateProfilesRequest')
+    ListFargateProfilesResponse = Shapes::StructureShape.new(name: 'ListFargateProfilesResponse')
     ListNodegroupsRequest = Shapes::StructureShape.new(name: 'ListNodegroupsRequest')
     ListNodegroupsRequestMaxResults = Shapes::IntegerShape.new(name: 'ListNodegroupsRequestMaxResults')
     ListNodegroupsResponse = Shapes::StructureShape.new(name: 'ListNodegroupsResponse')
@@ -154,6 +168,18 @@ module Aws::EKS
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
+    CreateFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fargateProfileName"))
+    CreateFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    CreateFargateProfileRequest.add_member(:pod_execution_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "podExecutionRoleArn"))
+    CreateFargateProfileRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
+    CreateFargateProfileRequest.add_member(:selectors, Shapes::ShapeRef.new(shape: FargateProfileSelectors, location_name: "selectors"))
+    CreateFargateProfileRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: String, location_name: "clientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateFargateProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateFargateProfileRequest.struct_class = Types::CreateFargateProfileRequest
+
+    CreateFargateProfileResponse.add_member(:fargate_profile, Shapes::ShapeRef.new(shape: FargateProfile, location_name: "fargateProfile"))
+    CreateFargateProfileResponse.struct_class = Types::CreateFargateProfileResponse
+
     CreateNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     CreateNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "nodegroupName"))
     CreateNodegroupRequest.add_member(:scaling_config, Shapes::ShapeRef.new(shape: NodegroupScalingConfig, location_name: "scalingConfig"))
@@ -179,6 +205,13 @@ module Aws::EKS
     DeleteClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DeleteClusterResponse.struct_class = Types::DeleteClusterResponse
 
+    DeleteFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DeleteFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "fargateProfileName"))
+    DeleteFargateProfileRequest.struct_class = Types::DeleteFargateProfileRequest
+
+    DeleteFargateProfileResponse.add_member(:fargate_profile, Shapes::ShapeRef.new(shape: FargateProfile, location_name: "fargateProfile"))
+    DeleteFargateProfileResponse.struct_class = Types::DeleteFargateProfileResponse
+
     DeleteNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DeleteNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
     DeleteNodegroupRequest.struct_class = Types::DeleteNodegroupRequest
@@ -191,6 +224,13 @@ module Aws::EKS
 
     DescribeClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
     DescribeClusterResponse.struct_class = Types::DescribeClusterResponse
+
+    DescribeFargateProfileRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    DescribeFargateProfileRequest.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "fargateProfileName"))
+    DescribeFargateProfileRequest.struct_class = Types::DescribeFargateProfileRequest
+
+    DescribeFargateProfileResponse.add_member(:fargate_profile, Shapes::ShapeRef.new(shape: FargateProfile, location_name: "fargateProfile"))
+    DescribeFargateProfileResponse.struct_class = Types::DescribeFargateProfileResponse
 
     DescribeNodegroupRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     DescribeNodegroupRequest.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "nodegroupName"))
@@ -214,11 +254,32 @@ module Aws::EKS
 
     ErrorDetails.member = Shapes::ShapeRef.new(shape: ErrorDetail)
 
+    FargateProfile.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
+    FargateProfile.add_member(:fargate_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileArn"))
+    FargateProfile.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
+    FargateProfile.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    FargateProfile.add_member(:pod_execution_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "podExecutionRoleArn"))
+    FargateProfile.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "subnets"))
+    FargateProfile.add_member(:selectors, Shapes::ShapeRef.new(shape: FargateProfileSelectors, location_name: "selectors"))
+    FargateProfile.add_member(:status, Shapes::ShapeRef.new(shape: FargateProfileStatus, location_name: "status"))
+    FargateProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    FargateProfile.struct_class = Types::FargateProfile
+
+    FargateProfileLabel.key = Shapes::ShapeRef.new(shape: String)
+    FargateProfileLabel.value = Shapes::ShapeRef.new(shape: String)
+
+    FargateProfileSelector.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    FargateProfileSelector.add_member(:labels, Shapes::ShapeRef.new(shape: FargateProfileLabel, location_name: "labels"))
+    FargateProfileSelector.struct_class = Types::FargateProfileSelector
+
+    FargateProfileSelectors.member = Shapes::ShapeRef.new(shape: FargateProfileSelector)
+
     Identity.add_member(:oidc, Shapes::ShapeRef.new(shape: OIDC, location_name: "oidc"))
     Identity.struct_class = Types::Identity
 
     InvalidParameterException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     InvalidParameterException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
+    InvalidParameterException.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
     InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
@@ -241,6 +302,15 @@ module Aws::EKS
     ListClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: StringList, location_name: "clusters"))
     ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
+
+    ListFargateProfilesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
+    ListFargateProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: FargateProfilesRequestMaxResults, location: "querystring", location_name: "maxResults"))
+    ListFargateProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListFargateProfilesRequest.struct_class = Types::ListFargateProfilesRequest
+
+    ListFargateProfilesResponse.add_member(:fargate_profile_names, Shapes::ShapeRef.new(shape: StringList, location_name: "fargateProfileNames"))
+    ListFargateProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListFargateProfilesResponse.struct_class = Types::ListFargateProfilesResponse
 
     ListNodegroupsRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "name"))
     ListNodegroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListNodegroupsRequestMaxResults, location: "querystring", location_name: "maxResults"))
@@ -333,6 +403,7 @@ module Aws::EKS
 
     ResourceNotFoundException.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     ResourceNotFoundException.add_member(:nodegroup_name, Shapes::ShapeRef.new(shape: String, location_name: "nodegroupName"))
+    ResourceNotFoundException.add_member(:fargate_profile_name, Shapes::ShapeRef.new(shape: String, location_name: "fargateProfileName"))
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -478,6 +549,20 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZoneException)
       end)
 
+      api.add_operation(:create_fargate_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFargateProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/clusters/{name}/fargate-profiles"
+        o.input = Shapes::ShapeRef.new(shape: CreateFargateProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFargateProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZoneException)
+      end)
+
       api.add_operation(:create_nodegroup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNodegroup"
         o.http_method = "POST"
@@ -506,6 +591,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:delete_fargate_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFargateProfile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/clusters/{name}/fargate-profiles/{fargateProfileName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFargateProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFargateProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:delete_nodegroup, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteNodegroup"
         o.http_method = "DELETE"
@@ -530,6 +627,18 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:describe_fargate_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFargateProfile"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/fargate-profiles/{fargateProfileName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFargateProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFargateProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_nodegroup, Seahorse::Model::Operation.new.tap do |o|
@@ -567,6 +676,24 @@ module Aws::EKS
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_fargate_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFargateProfiles"
+        o.http_method = "GET"
+        o.http_request_uri = "/clusters/{name}/fargate-profiles"
+        o.input = Shapes::ShapeRef.new(shape: ListFargateProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFargateProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

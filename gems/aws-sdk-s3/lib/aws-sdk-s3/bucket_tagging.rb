@@ -203,7 +203,7 @@ module Aws::S3
     #
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [required, Types::Tagging] :tagging
-    #   Container for the TagSet and Tag elements.
+    #   Container for the `TagSet` and `Tag` elements.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

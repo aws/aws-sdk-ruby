@@ -60,7 +60,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket to which the upload was taking place.
+    #   The bucket name to which the upload was taking place.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -74,9 +87,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadRequest AWS API Documentation
@@ -618,7 +635,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Describes how a uncompressed comma-separated values (CSV)-formatted
+    # Describes how an uncompressed comma-separated values (CSV)-formatted
     # input object is formatted.
     #
     # @note When making an API call, you may pass CSVInput
@@ -791,7 +808,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] invocation_role
-    #   The role supporting the invocation of the lambda function
+    #   The role supporting the invocation of the Lambda function
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CloudFunctionConfiguration AWS API Documentation
@@ -864,8 +881,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -925,9 +942,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest AWS API Documentation
@@ -1021,7 +1042,7 @@ module Aws::S3
     #   example, to redirect requests for `ExamplePage.html`, the key prefix
     #   will be `ExamplePage.html`. To redirect request for all pages with
     #   the prefix `docs/`, the key prefix will be `/docs`, which identifies
-    #   all objects in the docs/ folder. Required when the parent element
+    #   all objects in the `docs/` folder. Required when the parent element
     #   `Condition` is specified and sibling `HttpErrorCodeReturnedEquals`
     #   is not specified. If both conditions are specified, both must be
     #   true for the redirect to be applied.
@@ -1060,8 +1081,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1073,13 +1094,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1249,8 +1270,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -1265,30 +1286,35 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
     #   Specifies the AWS KMS key ID to use for object encryption. All GET
     #   and PUT requests for an object protected by AWS KMS will fail if not
-    #   made via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   made via SSL or using SigV4. For information about configuring using
+    #   any of the officially supported AWS SDKs and AWS CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1299,7 +1325,7 @@ module Aws::S3
     #
     # @!attribute [rw] copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
-    #   (e.g., AES256).
+    #   (for example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] copy_source_sse_customer_key
@@ -1311,21 +1337,25 @@ module Aws::S3
     # @!attribute [rw] copy_source_sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
     #   The tag-set for the object destination object this value must be
-    #   used in conjunction with the TaggingDirective. The tag-set must be
-    #   encoded as URL Query parameters
+    #   used in conjunction with the `TaggingDirective`. The tag-set must be
+    #   encoded as URL Query parameters.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
@@ -1385,7 +1415,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # &gt;Container for all response elements.
+    # Container for all response elements.
     #
     # @!attribute [rw] etag
     #   Returns the ETag of the new object. The ETag reflects only changes
@@ -1433,8 +1463,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] location_constraint
-    #   Specifies the region where the bucket will be created. If you don't
-    #   specify a region, the bucket is created in US East (N. Virginia)
+    #   Specifies the Region where the bucket will be created. If you don't
+    #   specify a Region, the bucket is created in the US East (N. Virginia)
     #   Region (us-east-1).
     #   @return [String]
     #
@@ -1446,8 +1476,8 @@ module Aws::S3
     end
 
     # @!attribute [rw] location
-    #   Specifies the region where the bucket will be created. If you are
-    #   creating a bucket on the US East (N. Virginia) region (us-east-1),
+    #   Specifies the Region where the bucket will be created. If you are
+    #   creating a bucket on the US East (N. Virginia) Region (us-east-1),
     #   you do not need to specify the location.
     #   @return [String]
     #
@@ -1538,7 +1568,7 @@ module Aws::S3
     #   information, see [ Aborting Incomplete Multipart Uploads Using a
     #   Bucket Lifecycle Policy][1].
     #
-    #   The response also includes the x-amz-abort-rule-id header that
+    #   The response also includes the `x-amz-abort-rule-id` header that
     #   provides the ID of the lifecycle configuration rule that defines
     #   this action.
     #
@@ -1548,13 +1578,26 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] abort_rule_id
-    #   This header is returned along with the x-amz-abort-date header. It
+    #   This header is returned along with the `x-amz-abort-date` header. It
     #   identifies the applicable lifecycle configuration rule that defines
     #   the action to abort incomplete multipart uploads.
     #   @return [String]
     #
     # @!attribute [rw] bucket
     #   Name of the bucket to which the multipart upload was initiated.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -1566,8 +1609,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -1579,13 +1622,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1712,8 +1755,8 @@ module Aws::S3
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -1728,30 +1771,35 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
     #   Specifies the AWS KMS key ID to use for object encryption. All GET
     #   and PUT requests for an object protected by AWS KMS will fail if not
-    #   made via SSL or using SigV4. Documentation on configuring any of the
-    #   officially supported AWS SDKs and CLI can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   made via SSL or using SigV4. For information about configuring using
+    #   any of the officially supported AWS SDKs and AWS CLI, see
+    #   [Specifying the Signature Version in Request Authentication][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1763,14 +1811,18 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
-    #   parameters
+    #   parameters.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_mode
@@ -2151,7 +2203,7 @@ module Aws::S3
     # &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
     # see [Basic Rule Configuration][1].
     #
-    # <note markdown="1"> If you don't specify the Filter element, Amazon S3 assumes the
+    # <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that the
     # replication configuration is the earlier version, V1. In the earlier
     # version, Amazon S3 handled replication of delete markers differently.
     # For more information, see [Backward Compatibility][2].
@@ -2224,6 +2276,19 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   The bucket name of the bucket containing the object.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2233,8 +2298,8 @@ module Aws::S3
     # @!attribute [rw] mfa
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication
-    #   device. Required to permanently delete a versionedobject if
-    #   versioning is configured with MFA Deleteenabled.
+    #   device. Required to permanently delete a versioned object if
+    #   versioning is configured with MFA delete enabled.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -2244,9 +2309,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
@@ -2287,7 +2356,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket containing the objects from which to remove the tags.
+    #   The bucket name containing the objects from which to remove the
+    #   tags.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -2352,6 +2435,19 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   The bucket name containing the objects to delete.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] delete
@@ -2362,15 +2458,19 @@ module Aws::S3
     #   The concatenation of the authentication device's serial number, a
     #   space, and the value that is displayed on your authentication
     #   device. Required to permanently delete a versioned object if
-    #   versioning is configured with MFA Delete enabled.
+    #   versioning is configured with MFA delete enabled.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
@@ -2444,7 +2544,8 @@ module Aws::S3
     end
 
     # Specifies information about where to publish analysis or configuration
-    # results for an Amazon S3 bucket.
+    # results for an Amazon S3 bucket and S3 Replication Time Control (S3
+    # RTC).
     #
     # @note When making an API call, you may pass Destination
     #   data as a hash:
@@ -2484,8 +2585,8 @@ module Aws::S3
     #   that owns the destination bucket by specifying the
     #   `AccessControlTranslation` property, this is the account ID of the
     #   destination bucket owner. For more information, see [Replication
-    #   Additional Configuration: Change Replica Owner][1] in the *Amazon
-    #   Simple Storage Service Developer Guide*.
+    #   Additional Configuration: Changing the Replica Owner][1] in the
+    #   *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
@@ -2522,17 +2623,16 @@ module Aws::S3
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] replication_time
-    #   A container specifying the time when all objects and operations on
-    #   objects are replicated. Must be specified together with a `Metrics`
-    #   block.
+    #   A container specifying S3 Replication Time Control (S3 RTC),
+    #   including whether S3 RTC is enabled and the time when all objects
+    #   and operations on objects must be replicated. Must be specified
+    #   together with a `Metrics` block.
     #   @return [Types::ReplicationTime]
     #
     # @!attribute [rw] metrics
-    #   A container specifying replication metrics-related information,
-    #   including whether emitting metrics and Amazon S3 events for
-    #   replication are enabled. In addition, contains configurations
-    #   related to specific metrics or events. Must be specified together
-    #   with a `ReplicationTime` block.
+    #   A container specifying replication metrics-related settings enabling
+    #   metrics and Amazon S3 events for S3 Replication Time Control (S3
+    #   RTC). Must be specified together with a `ReplicationTime` block.
     #   @return [Types::Metrics]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
@@ -2561,16 +2661,16 @@ module Aws::S3
     #
     # @!attribute [rw] encryption_type
     #   The server-side encryption algorithm used when storing job results
-    #   in Amazon S3 (e.g., AES256, aws:kms).
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   If the encryption type is aws:kms, this optional value specifies the
-    #   AWS KMS key ID to use for encryption of job results.
+    #   If the encryption type is `aws:kms`, this optional value specifies
+    #   the AWS KMS key ID to use for encryption of job results.
     #   @return [String]
     #
     # @!attribute [rw] kms_context
-    #   If the encryption type is aws:kms, this optional value can be used
+    #   If the encryption type is `aws:kms`, this optional value can be used
     #   to specify the encryption context for the restore results.
     #   @return [String]
     #
@@ -2701,13 +2801,13 @@ module Aws::S3
     #
     #     * *Description:* The bucket you tried to create already exists,
     #       and you own it. Amazon S3 returns this error in all AWS Regions
-    #       except in the North Virginia region. For legacy compatibility,
+    #       except in the North Virginia Region. For legacy compatibility,
     #       if you re-create an existing bucket that you already own in the
-    #       North Virginia region, Amazon S3 returns 200 OK and resets the
+    #       North Virginia Region, Amazon S3 returns 200 OK and resets the
     #       bucket access control lists (ACLs).
     #
-    #     * *Code:* 409 Conflict (in all regions except the North Virginia
-    #       region)
+    #     * *Code:* 409 Conflict (in all Regions except the North Virginia
+    #       Region)
     #
     #     * *SOAP Fault Code Prefix:* Client
     #
@@ -3466,9 +3566,10 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container that specifies information about existing object
-    # replication. You can choose whether to enable or disable the
-    # replication of existing objects.
+    # Optional configuration to replicate existing source bucket objects.
+    # For more information, see [Replicating Existing Objects](
+    # https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
+    # in the *Amazon S3 Developer Guide*.
     #
     # @note When making an API call, you may pass ExistingObjectReplication
     #   data as a hash:
@@ -3478,7 +3579,6 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] status
-    #   Specifies whether existing object replication is enabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ExistingObjectReplication AWS API Documentation
@@ -3738,7 +3838,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket for which to the the lifecycle information.
+    #   The name of the bucket for which to get the lifecycle information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationRequest AWS API Documentation
@@ -3767,7 +3867,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket for which to the the lifecycle information.
+    #   The name of the bucket for which to get the lifecycle information.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleRequest AWS API Documentation
@@ -3778,8 +3878,8 @@ module Aws::S3
     end
 
     # @!attribute [rw] location_constraint
-    #   Specifies the region where the bucket resides. For a list of all the
-    #   Amazon S3 supported location constraints by region, see [Regions and
+    #   Specifies the Region where the bucket resides. For a list of all the
+    #   Amazon S3 supported location constraints by Region, see [Regions and
     #   Endpoints][1].
     #
     #
@@ -4166,7 +4266,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket name of the object for which to get the ACL information.
+    #   The bucket name that contains the object for which to get the ACL
+    #   information.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -4180,9 +4294,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclRequest AWS API Documentation
@@ -4217,8 +4335,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket containing the object whose Legal Hold status you want to
-    #   retrieve.
+    #   The bucket name containing the object whose Legal Hold status you
+    #   want to retrieve.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -4234,9 +4365,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLegalHoldRequest AWS API Documentation
@@ -4289,13 +4424,13 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] accept_ranges
-    #   Indicates that a range of bytes was specifed.
+    #   Indicates that a range of bytes was specified.
     #   @return [String]
     #
     # @!attribute [rw] expiration
     #   If the object expiration is configured (see PUT Bucket lifecycle),
     #   the response includes this header. It includes the expiry-date and
-    #   rule-id key value pairs providing object expiration information. The
+    #   rule-id key-value pairs providing object expiration information. The
     #   value of the rule-id is URL encoded.
     #   @return [String]
     #
@@ -4314,13 +4449,13 @@ module Aws::S3
     #
     # @!attribute [rw] etag
     #   An ETag is an opaque identifier assigned by a web server to a
-    #   specific version of a resource found at a URL
+    #   specific version of a resource found at a URL.
     #   @return [String]
     #
     # @!attribute [rw] missing_meta
     #   This is set to the number of metadata entries not returned in
-    #   x-amz-meta headers. This can happen if you create metadata using an
-    #   API like SOAP that supports more flexible metadata than the REST
+    #   `x-amz-meta` headers. This can happen if you create metadata using
+    #   an API like SOAP that supports more flexible metadata than the REST
     #   API. For example, using SOAP, you can create metadata whose values
     #   are not legal HTTP headers.
     #   @return [Integer]
@@ -4370,8 +4505,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -4387,13 +4522,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -4499,6 +4634,19 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   The bucket name containing the object.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] if_match
@@ -4527,32 +4675,32 @@ module Aws::S3
     #
     # @!attribute [rw] range
     #   Downloads the specified range bytes of an object. For more
-    #   information about the HTTP Range header, go to
-    #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+    #   information about the HTTP Range header, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
     #   @return [String]
     #
     # @!attribute [rw] response_cache_control
-    #   Sets the Cache-Control header of the response.
+    #   Sets the `Cache-Control` header of the response.
     #   @return [String]
     #
     # @!attribute [rw] response_content_disposition
-    #   Sets the Content-Disposition header of the response
+    #   Sets the `Content-Disposition` header of the response
     #   @return [String]
     #
     # @!attribute [rw] response_content_encoding
-    #   Sets the Content-Encoding header of the response.
+    #   Sets the `Content-Encoding` header of the response.
     #   @return [String]
     #
     # @!attribute [rw] response_content_language
-    #   Sets the Content-Language header of the response.
+    #   Sets the `Content-Language` header of the response.
     #   @return [String]
     #
     # @!attribute [rw] response_content_type
-    #   Sets the Content-Type header of the response.
+    #   Sets the `Content-Type` header of the response.
     #   @return [String]
     #
     # @!attribute [rw] response_expires
-    #   Sets the Expires header of the response.
+    #   Sets the `Expires` header of the response.
     #   @return [Time]
     #
     # @!attribute [rw] version_id
@@ -4560,30 +4708,34 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] part_number
@@ -4640,8 +4792,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket containing the object whose retention settings you want
-    #   to retrieve.
+    #   The bucket name containing the object whose retention settings you
+    #   want to retrieve.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -4657,9 +4822,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRetentionRequest AWS API Documentation
@@ -4701,6 +4870,19 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   The bucket name containing the object for which to get the tagging
     #   information.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -4759,9 +4941,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentRequest AWS API Documentation
@@ -4925,13 +5111,13 @@ module Aws::S3
     #   @return [Boolean]
     #
     # @!attribute [rw] accept_ranges
-    #   Indicates that a range of bytes was specifed.
+    #   Indicates that a range of bytes was specified.
     #   @return [String]
     #
     # @!attribute [rw] expiration
     #   If the object expiration is configured (see PUT Bucket lifecycle),
     #   the response includes this header. It includes the expiry-date and
-    #   rule-id key value pairs providing object expiration information. The
+    #   rule-id key-value pairs providing object expiration information. The
     #   value of the rule-id is URL encoded.
     #   @return [String]
     #
@@ -4968,13 +5154,13 @@ module Aws::S3
     #
     # @!attribute [rw] etag
     #   An ETag is an opaque identifier assigned by a web server to a
-    #   specific version of a resource found at a URL
+    #   specific version of a resource found at a URL.
     #   @return [String]
     #
     # @!attribute [rw] missing_meta
     #   This is set to the number of metadata entries not returned in
-    #   x-amz-meta headers. This can happen if you create metadata using an
-    #   API like SOAP that supports more flexible metadata than the REST
+    #   `x-amz-meta` headers. This can happen if you create metadata using
+    #   an API like SOAP that supports more flexible metadata than the REST
     #   API. For example, using SOAP, you can create metadata whose values
     #   are not legal HTTP headers.
     #   @return [Integer]
@@ -5023,8 +5209,8 @@ module Aws::S3
     #   If the object is stored using server-side encryption either with an
     #   AWS KMS customer master key (CMK) or an Amazon S3-managed encryption
     #   key, the response includes this header with the value of the
-    #   Server-side encryption algorithm used when storing this object in S3
-    #   (e.g., AES256, aws:kms).
+    #   server-side encryption algorithm used when storing this object in
+    #   Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -5040,13 +5226,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -5070,28 +5256,29 @@ module Aws::S3
     #   Amazon S3 can return this header if your request involves a bucket
     #   that is either a source or destination in a replication rule.
     #
-    #   In replication you have a source bucket on which you configure
+    #   In replication, you have a source bucket on which you configure
     #   replication and destination bucket where Amazon S3 stores object
-    #   replicas. When you request an object (GetObject) or object metadata
-    #   (HeadObject) from these buckets, Amazon S3 will return the
-    #   x-amz-replication-status header in the response as follows:
+    #   replicas. When you request an object (`GetObject`) or object
+    #   metadata (`HeadObject`) from these buckets, Amazon S3 will return
+    #   the `x-amz-replication-status` header in the response as follows:
     #
-    #   * If requesting object from the source bucket — Amazon S3 will
-    #     return the x-amz-replication-status header if object in your
+    #   * If requesting an object from the source bucket — Amazon S3 will
+    #     return the `x-amz-replication-status` header if the object in your
     #     request is eligible for replication.
     #
-    #     For example, suppose in your replication configuration you specify
-    #     object prefix "TaxDocs" requesting Amazon S3 to replicate
-    #     objects with key prefix "TaxDocs". Then any objects you upload
-    #     with this key name prefix, for example "TaxDocs/document1.pdf",
-    #     is eligible for replication. For any object request with this key
-    #     name prefix Amazon S3 will return the x-amz-replication-status
+    #     For example, suppose that in your replication configuration, you
+    #     specify object prefix `TaxDocs` requesting Amazon S3 to replicate
+    #     objects with key prefix `TaxDocs`. Any objects you upload with
+    #     this key name prefix, for example `TaxDocs/document1.pdf`, are
+    #     eligible for replication. For any object request with this key
+    #     name prefix, Amazon S3 will return the `x-amz-replication-status`
     #     header with value PENDING, COMPLETED or FAILED indicating object
     #     replication status.
     #
-    #   * If requesting object from the destination bucket — Amazon S3 will
-    #     return the x-amz-replication-status header with value REPLICA if
-    #     object in your request is a replica that Amazon S3 created.
+    #   * If requesting an object from the destination bucket — Amazon S3
+    #     will return the `x-amz-replication-status` header with value
+    #     REPLICA if the object in your request is a replica that Amazon S3
+    #     created.
     #
     #   For more information, see [Replication][1].
     #
@@ -5218,8 +5405,8 @@ module Aws::S3
     #
     # @!attribute [rw] range
     #   Downloads the specified range bytes of an object. For more
-    #   information about the HTTP Range header, go to
-    #   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
+    #   information about the HTTP Range header, see
+    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]().
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -5227,30 +5414,34 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] part_number
@@ -5279,7 +5470,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for the Suffix element.
+    # Container for the `Suffix` element.
     #
     # @note When making an API call, you may pass IndexDocument
     #   data as a hash:
@@ -5290,10 +5481,10 @@ module Aws::S3
     #
     # @!attribute [rw] suffix
     #   A suffix that is appended to a request that is for a directory on
-    #   the website endpoint (e.g. if the suffix is index.html and you make
-    #   a request to samplebucket/images/ the data that is returned will be
-    #   for the object with the key name images/index.html) The suffix must
-    #   not be empty and must not include a slash character.
+    #   the website endpoint (for example,if the suffix is index.html and
+    #   you make a request to samplebucket/images/ the data that is returned
+    #   will be for the object with the key name images/index.html) The
+    #   suffix must not be empty and must not include a slash character.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IndexDocument AWS API Documentation
@@ -5303,7 +5494,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container element that identifies who initiated the ultipart upload.
+    # Container element that identifies who initiated the multipart upload.
     #
     # @!attribute [rw] id
     #   If the principal is an AWS account, it provides the Canonical User
@@ -5508,11 +5699,11 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] sses3
-    #   Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
+    #   Specifies the use of SSE-S3 to encrypt delivered inventory reports.
     #   @return [Types::SSES3]
     #
     # @!attribute [rw] ssekms
-    #   Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
+    #   Specifies the use of SSE-KMS to encrypt delivered inventory reports.
     #   @return [Types::SSEKMS]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryEncryption AWS API Documentation
@@ -5570,7 +5761,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] bucket
-    #   The Amazon resource name (ARN) of the bucket where inventory results
+    #   The Amazon Resource Name (ARN) of the bucket where inventory results
     #   will be published.
     #   @return [String]
     #
@@ -5867,12 +6058,13 @@ module Aws::S3
     #
     # @!attribute [rw] prefix
     #   Prefix identifying one or more objects to which the rule applies.
-    #   This is No longer used; use Filter instead.
+    #   This is No longer used; use `Filter` instead.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   The Filter is used to identify objects that a Lifecycle Rule applies
-    #   to. A Filter must have exactly one of Prefix, Tag, or And specified.
+    #   The `Filter` is used to identify objects that a Lifecycle Rule
+    #   applies to. A `Filter` must have exactly one of `Prefix`, `Tag`, or
+    #   `And` specified.
     #   @return [Types::LifecycleRuleFilter]
     #
     # @!attribute [rw] status
@@ -5887,11 +6079,11 @@ module Aws::S3
     #
     # @!attribute [rw] noncurrent_version_transitions
     #   Specifies the transition rule for the lifecycle rule that describes
-    #   when noncurrent objects transition to the a specific storage class.
-    #   If your bucket is versioning-enabled (or versioning is suspended),
-    #   you can set this action to request that Amazon S3 transition
-    #   noncurrent object versions to the a specifc storage class at a set
-    #   period in the object's lifetime.
+    #   when noncurrent objects transition to a specific storage class. If
+    #   your bucket is versioning-enabled (or versioning is suspended), you
+    #   can set this action to request that Amazon S3 transition noncurrent
+    #   object versions to a specific storage class at a set period in the
+    #   object's lifetime.
     #   @return [Array<Types::NoncurrentVersionTransition>]
     #
     # @!attribute [rw] noncurrent_version_expiration
@@ -5964,8 +6156,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The Filter is used to identify objects that a Lifecycle Rule applies
-    # to. A Filter must have exactly one of Prefix, Tag, or And specified.
+    # The `Filter` is used to identify objects that a Lifecycle Rule applies
+    # to. A `Filter` must have exactly one of `Prefix`, `Tag`, or `And`
+    # specified.
     #
     # @note When making an API call, you may pass LifecycleRuleFilter
     #   data as a hash:
@@ -6025,9 +6218,9 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] next_continuation_token
-    #   NextContinuationToken is sent when isTruncated is true, which
+    #   `NextContinuationToken` is sent when `isTruncated` is true, which
     #   indicates that there are more analytics configurations to list. The
-    #   next request must include this NextContinuationToken. The token is
+    #   next request must include this `NextContinuationToken`. The token is
     #   obfuscated and is not a usable value.
     #   @return [String]
     #
@@ -6088,7 +6281,7 @@ module Aws::S3
     #
     # @!attribute [rw] next_continuation_token
     #   The marker used to continue this inventory configuration listing.
-    #   Use the NextContinuationToken from this response to continue the
+    #   Use the `NextContinuationToken` from this response to continue the
     #   listing in a subsequent request. The continuation token is an opaque
     #   value that Amazon S3 understands.
     #   @return [String]
@@ -6146,7 +6339,7 @@ module Aws::S3
     #
     # @!attribute [rw] next_continuation_token
     #   The marker used to continue a metrics configuration listing that has
-    #   been truncated. Use the NextContinuationToken from a previously
+    #   been truncated. Use the `NextContinuationToken` from a previously
     #   truncated list response to continue the listing. The continuation
     #   token is an opaque value that Amazon S3 understands.
     #   @return [String]
@@ -6241,7 +6434,7 @@ module Aws::S3
     #
     # @!attribute [rw] next_upload_id_marker
     #   When a list is truncated, this element specifies the value that
-    #   should be used for the upload-id-marker request parameter in a
+    #   should be used for the `upload-id-marker` request parameter in a
     #   subsequent request.
     #   @return [String]
     #
@@ -6259,14 +6452,14 @@ module Aws::S3
     #
     # @!attribute [rw] uploads
     #   Container for elements related to a particular multipart upload. A
-    #   response can contain zero or more Upload elements.
+    #   response can contain zero or more `Upload` elements.
     #   @return [Array<Types::MultipartUpload>]
     #
     # @!attribute [rw] common_prefixes
     #   If you specify a delimiter in the request, then the result returns
     #   each distinct key prefix containing the delimiter in a
-    #   CommonPrefixes element. The distinct key prefixes are returned in
-    #   the Prefix child element.
+    #   `CommonPrefixes` element. The distinct key prefixes are returned in
+    #   the `Prefix` child element.
     #   @return [Array<Types::CommonPrefix>]
     #
     # @!attribute [rw] encoding_type
@@ -6313,6 +6506,19 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   Name of the bucket to which the multipart upload was initiated.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -6369,7 +6575,7 @@ module Aws::S3
     #   upload-id-marker parameter is ignored. Otherwise, any multipart
     #   uploads for a key equal to the key-marker might be included in the
     #   list only if they have an upload ID lexicographically greater than
-    #   the specified upload-id-marker.
+    #   the specified `upload-id-marker`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest AWS API Documentation
@@ -6386,32 +6592,32 @@ module Aws::S3
     end
 
     # @!attribute [rw] is_truncated
-    #   A flag that indicates whether or not Amazon S3 returned all of the
-    #   results that satisfied the search criteria. If your results were
-    #   truncated, you can make a follow-up paginated request using the
-    #   NextKeyMarker and NextVersionIdMarker response parameters as a
-    #   starting place in another request to return the rest of the results.
+    #   A flag that indicates whether Amazon S3 returned all of the results
+    #   that satisfied the search criteria. If your results were truncated,
+    #   you can make a follow-up paginated request using the NextKeyMarker
+    #   and NextVersionIdMarker response parameters as a starting place in
+    #   another request to return the rest of the results.
     #   @return [Boolean]
     #
     # @!attribute [rw] key_marker
-    #   Marks the last Key returned in a truncated response.
+    #   Marks the last key returned in a truncated response.
     #   @return [String]
     #
     # @!attribute [rw] version_id_marker
-    #   Marks the last version of the Key returned in a truncated response.
+    #   Marks the last version of the key returned in a truncated response.
     #   @return [String]
     #
     # @!attribute [rw] next_key_marker
-    #   When the number of responses exceeds the value of MaxKeys,
-    #   NextKeyMarker specifies the first key not returned that satisfies
+    #   When the number of responses exceeds the value of `MaxKeys`,
+    #   `NextKeyMarker` specifies the first key not returned that satisfies
     #   the search criteria. Use this value for the key-marker request
     #   parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] next_version_id_marker
-    #   When the number of responses exceeds the value of MaxKeys,
-    #   NextVersionIdMarker specifies the first object version not returned
-    #   that satisfies the search criteria. Use this value for the
+    #   When the number of responses exceeds the value of `MaxKeys`,
+    #   `NextVersionIdMarker` specifies the first object version not
+    #   returned that satisfies the search criteria. Use this value for the
     #   version-id-marker request parameter in a subsequent request.
     #   @return [String]
     #
@@ -6424,7 +6630,7 @@ module Aws::S3
     #   @return [Array<Types::DeleteMarkerEntry>]
     #
     # @!attribute [rw] name
-    #   Bucket owner's name.
+    #   Bucket name.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -6433,10 +6639,10 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] delimiter
-    #   The delimeter grouping the included keys. A delimiter is a character
+    #   The delimiter grouping the included keys. A delimiter is a character
     #   that you specify to group keys. All keys that contain the same
     #   string between the prefix and the first occurrence of the delimiter
-    #   are grouped under a single result element in CommonPrefixes. These
+    #   are grouped under a single result element in `CommonPrefixes`. These
     #   groups are counted as one result against the max-keys limitation.
     #   These keys are not returned elsewhere in the response.
     #   @return [String]
@@ -6494,7 +6700,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket that contains the objects.
+    #   The bucket name that contains the objects.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -6555,8 +6774,8 @@ module Aws::S3
     end
 
     # @!attribute [rw] is_truncated
-    #   A flag that indicates whether or not Amazon S3 returned all of the
-    #   results that satisfied the search criteria.
+    #   A flag that indicates whether Amazon S3 returned all of the results
+    #   that satisfied the search criteria.
     #   @return [Boolean]
     #
     # @!attribute [rw] marker
@@ -6580,7 +6799,7 @@ module Aws::S3
     #   @return [Array<Types::Object>]
     #
     # @!attribute [rw] name
-    #   Name of the bucket.
+    #   Bucket name.
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -6590,9 +6809,9 @@ module Aws::S3
     # @!attribute [rw] delimiter
     #   Causes keys that contain the same string between the prefix and the
     #   first occurrence of the delimiter to be rolled up into a single
-    #   result element in the CommonPrefixes collection. These rolled-up
+    #   result element in the `CommonPrefixes` collection. These rolled-up
     #   keys are not returned elsewhere in the response. Each rolled-up
-    #   result counts as only one return against the MaxKeys value.
+    #   result counts as only one return against the `MaxKeys` value.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -6712,7 +6931,20 @@ module Aws::S3
     #   @return [Array<Types::Object>]
     #
     # @!attribute [rw] name
-    #   Name of the bucket.
+    #   Bucket name.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -6724,7 +6956,7 @@ module Aws::S3
     #   first occurrence of the delimiter to be rolled up into a single
     #   result element in the CommonPrefixes collection. These rolled-up
     #   keys are not returned elsewhere in the response. Each rolled-up
-    #   result counts as only one return against the MaxKeys value.
+    #   result counts as only one return against the `MaxKeys` value.
     #   @return [String]
     #
     # @!attribute [rw] max_keys
@@ -6775,11 +7007,11 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] next_continuation_token
-    #   NextContinuationToken is sent when isTruncated is true which means
-    #   there are more keys in the bucket that can be listed. The next list
-    #   requests to Amazon S3 can be continued with this
-    #   NextContinuationToken. NextContinuationToken is obfuscated and is
-    #   not a real key
+    #   `NextContinuationToken` is sent when `isTruncated` is true, which
+    #   means there are more keys in the bucket that can be listed. The next
+    #   list requests to Amazon S3 can be continued with this
+    #   `NextContinuationToken`. `NextContinuationToken` is obfuscated and
+    #   is not a real key
     #   @return [String]
     #
     # @!attribute [rw] start_after
@@ -6821,7 +7053,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   Name of the bucket to list.
+    #   Bucket name to list.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] delimiter
@@ -6851,7 +7096,7 @@ module Aws::S3
     # @!attribute [rw] fetch_owner
     #   The owner field is not present in listV2 by default, if you want to
     #   return owner field with each key in the result then set the fetch
-    #   owner field to true
+    #   owner field to true.
     #   @return [Boolean]
     #
     # @!attribute [rw] start_after
@@ -6890,7 +7135,7 @@ module Aws::S3
     #   [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
     #   Policy][1].
     #
-    #   The response will also include the x-amz-abort-rule-id header that
+    #   The response will also include the `x-amz-abort-rule-id` header that
     #   will provide the ID of the lifecycle configuration rule that defines
     #   this action.
     #
@@ -6900,7 +7145,7 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] abort_rule_id
-    #   This header is returned along with the x-amz-abort-date header. It
+    #   This header is returned along with the `x-amz-abort-date` header. It
     #   identifies applicable lifecycle configuration rule that defines the
     #   action to abort incomplete multipart uploads.
     #   @return [String]
@@ -6943,14 +7188,14 @@ module Aws::S3
     #
     # @!attribute [rw] parts
     #   Container for elements related to a particular part. A response can
-    #   contain zero or more Part elements.
+    #   contain zero or more `Part` elements.
     #   @return [Array<Types::Part>]
     #
     # @!attribute [rw] initiator
     #   Container element that identifies who initiated the multipart
     #   upload. If the initiator is an AWS account, this element provides
-    #   the same information as the Owner element. If the initiator is an
-    #   IAM User, then this element provides the user ARN and display name.
+    #   the same information as the `Owner` element. If the initiator is an
+    #   IAM User, this element provides the user ARN and display name.
     #   @return [Types::Initiator]
     #
     # @!attribute [rw] owner
@@ -7002,7 +7247,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   Name of the bucket to which the parts are being uploaded.-&gt;
+    #   Name of the bucket to which the parts are being uploaded.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -7026,9 +7284,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsRequest AWS API Documentation
@@ -7077,8 +7339,8 @@ module Aws::S3
     #   logs. You can have your logs delivered to any bucket that you own,
     #   including the same bucket that is being logged. You can also
     #   configure multiple buckets to deliver their logs to the same target
-    #   bucket. In this case you should choose a different TargetPrefix for
-    #   each source bucket so that the delivered log files can be
+    #   bucket. In this case, you should choose a different `TargetPrefix`
+    #   for each source bucket so that the delivered log files can be
     #   distinguished by key.
     #   @return [String]
     #
@@ -7127,11 +7389,9 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container specifying replication metrics-related information,
-    # including whether emitting metrics and Amazon S3 events for
-    # replication are enabled. In addition, contains configurations related
-    # to specific metrics or events. Must be specified together with a
-    # `ReplicationTime` block.
+    # A container specifying replication metrics-related settings enabling
+    # metrics and Amazon S3 events for S3 Replication Time Control (S3 RTC).
+    # Must be specified together with a `ReplicationTime` block.
     #
     # @note When making an API call, you may pass Metrics
     #   data as a hash:
@@ -7295,7 +7555,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for the MultipartUpload for the Amazon S3 object.
+    # Container for the `MultipartUpload` for the Amazon S3 object.
     #
     # @!attribute [rw] upload_id
     #   Upload ID that identifies the multipart upload.
@@ -7351,8 +7611,8 @@ module Aws::S3
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
     #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the Amazon Simple Storage Service
-    #   Developer Guide.
+    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
+    #   Developer Guide*.
     #
     #
     #
@@ -7386,13 +7646,13 @@ module Aws::S3
     # @!attribute [rw] noncurrent_days
     #   Specifies the number of days an object is noncurrent before Amazon
     #   S3 can perform the associated action. For information about the
-    #   noncurrent days calculations, see [How Amazon S3 Calculates When an
-    #   Object Became Noncurrent][1] in the *Amazon Simple Storage Service
-    #   Developer Guide*.
+    #   noncurrent days calculations, see [How Amazon S3 Calculates How Long
+    #   an Object Has Been Noncurrent][1] in the *Amazon Simple Storage
+    #   Service Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
     #   @return [Integer]
     #
     # @!attribute [rw] storage_class
@@ -7518,7 +7778,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] topic_configuration
-    #   This data type is deperecated. A container for specifying the
+    #   This data type is deprecated. A container for specifying the
     #   configuration for publication of messages to an Amazon Simple
     #   Notification Service (Amazon SNS) topic when Amazon S3 detects
     #   specified events.
@@ -7749,7 +8009,7 @@ module Aws::S3
     # The version of an object.
     #
     # @!attribute [rw] etag
-    #   The entity tag is an MD5 hash of that version of the object
+    #   The entity tag is an MD5 hash of that version of the object.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -7778,7 +8038,7 @@ module Aws::S3
     #   @return [Time]
     #
     # @!attribute [rw] owner
-    #   Specifies the Owner of the object.
+    #   Specifies the owner of the object.
     #   @return [Types::Owner]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectVersion AWS API Documentation
@@ -7886,7 +8146,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for the owner's display name and ID
+    # Container for the owner's display name and ID.
     #
     # @note When making an API call, you may pass Owner
     #   data as a hash:
@@ -7897,11 +8157,11 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] display_name
-    #   Container for the display name of the owner
+    #   Container for the display name of the owner.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Container for the ID of the owner
+    #   Container for the ID of the owner.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Owner AWS API Documentation
@@ -8005,11 +8265,11 @@ module Aws::S3
     # Amazon S3 bucket. You can enable the configuration options in any
     # combination. For more information about when Amazon S3 considers a
     # bucket or object public, see [The Meaning of "Public"][1] in the
-    # Amazon Simple Storage Service Developer Guide.
+    # *Amazon Simple Storage Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev//access-control-block-public-access.html#access-control-block-public-access-policy-status
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
     #
     # @note When making an API call, you may pass PublicAccessBlockConfiguration
     #   data as a hash:
@@ -8284,8 +8544,8 @@ module Aws::S3
     # @!attribute [rw] cors_configuration
     #   Describes the cross-origin access configuration for objects in an
     #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
-    #   Resource Sharing][1] in the Amazon Simple Storage Service Developer
-    #   Guide.
+    #   Resource Sharing][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
     #
     #
     #
@@ -8980,7 +9240,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] tagging
-    #   Container for the TagSet and Tag elements.
+    #   Container for the `TagSet` and `Tag` elements.
     #   @return [Types::Tagging]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingRequest AWS API Documentation
@@ -9152,7 +9412,7 @@ module Aws::S3
     #
     # @!attribute [rw] acl
     #   The canned ACL to apply to the object. For more information, see
-    #   [Canned ACL][1]
+    #   [Canned ACL][1].
     #
     #
     #
@@ -9165,7 +9425,21 @@ module Aws::S3
     #   @return [Types::AccessControlPolicy]
     #
     # @!attribute [rw] bucket
-    #   The name of the bucket to which the ACL is being added.
+    #   The bucket name that contains the object to which you want to attach
+    #   the ACL.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] content_md5
@@ -9208,9 +9482,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -9262,8 +9540,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket containing the object that you want to place a Legal Hold
-    #   on.
+    #   The bucket name containing the object that you want to place a Legal
+    #   Hold on.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -9278,9 +9569,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -9348,9 +9643,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] token
@@ -9404,14 +9703,14 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If the x-amz-server-side-encryption is present and has the value of
-    #   aws:kms, this header specifies the ID of the AWS Key Management
-    #   Service (KMS) customer master key (CMK) that was used for the
+    #   If `x-amz-server-side-encryption` is present and has the value of
+    #   `aws:kms`, this header specifies the ID of the AWS Key Management
+    #   Service (AWS KMS) customer master key (CMK) that was used for the
     #   object.
     #   @return [String]
     #
@@ -9494,7 +9793,20 @@ module Aws::S3
     #   @return [IO]
     #
     # @!attribute [rw] bucket
-    #   Name of the bucket to which the PUT operation was initiated.
+    #   Bucket name to which the PUT operation was initiated.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] cache_control
@@ -9604,8 +9916,8 @@ module Aws::S3
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -9617,7 +9929,8 @@ module Aws::S3
     #   If the bucket is configured as a website, redirects requests for
     #   this object to another object in the same bucket or to an external
     #   URL. Amazon S3 stores the value of this header in the object
-    #   metadata. For information about object metadata, see .
+    #   metadata. For information about object metadata, see [Object Key and
+    #   Metadata][1].
     #
     #   In the following example, the request header sets the redirect to an
     #   object (anotherPage.html) in the same bucket:
@@ -9630,45 +9943,46 @@ module Aws::S3
     #   `x-amz-website-redirect-location: http://www.example.com/`
     #
     #   For more information about website hosting in Amazon S3, see
-    #   [Hosting Websites on Amazon S3][1] and [How to Configure Website
-    #   Page Redirects][2].
+    #   [Hosting Websites on Amazon S3][2] and [How to Configure Website
+    #   Page Redirects][3].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
-    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header.
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If the x-amz-server-side-encryption is present and has the value of
-    #   aws:kms, this header specifies the ID of the AWS Key Management
+    #   If `x-amz-server-side-encryption` is present and has the value of
+    #   `aws:kms`, this header specifies the ID of the AWS Key Management
     #   Service (AWS KMS) customer master key (CMK) that was used for the
     #   object.
     #
-    #   If the value of x-amz-server-side-encryption is aws:kms, this header
-    #   specifies the ID of the AWS KMS CMK that will be used for the
-    #   object. If you specify x-amz-server-side-encryption:aws:kms, but do
-    #   not provide x-amz-server-side-encryption-aws-kms-key-id, Amazon S3
-    #   uses the AWS managed CMK in AWS to protect the data.
+    #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
+    #   header specifies the ID of the AWS KMS CMK that will be used for the
+    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but
+    #   do not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon
+    #   S3 uses the AWS managed CMK in AWS to protect the data.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -9680,9 +9994,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -9773,8 +10091,21 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket that contains the object you want to apply this Object
-    #   Retention configuration to.
+    #   The bucket name that contains the object you want to apply this
+    #   Object Retention configuration to.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -9789,9 +10120,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -9851,7 +10186,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket containing the object.
+    #   The bucket name containing the object.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -9867,7 +10215,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] tagging
-    #   Container for the TagSet and Tag elements
+    #   Container for the `TagSet` and `Tag` elements
     #   @return [Types::Tagging]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest AWS API Documentation
@@ -9961,7 +10309,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   A collection of bucket events for which to send notiications
+    #   A collection of bucket events for which to send notifications
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter
@@ -9984,10 +10332,10 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # This data type is deprecated. Please use QueueConfiguration for the
-    # same purposes. This dat type specifies the configuration for
-    # publishing messages to an Amazon Simple Queue Service (Amazon SQS)
-    # queue when Amazon S3 detects specified events.
+    # This data type is deprecated. Use QueueConfiguration for the same
+    # purposes. This data type specifies the configuration for publishing
+    # messages to an Amazon Simple Queue Service (Amazon SQS) queue when
+    # Amazon S3 detects specified events.
     #
     # @note When making an API call, you may pass QueueConfigurationDeprecated
     #   data as a hash:
@@ -10010,7 +10358,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] events
-    #   A collection of bucket events for which to send notiications
+    #   A collection of bucket events for which to send notifications
     #   @return [Array<String>]
     #
     # @!attribute [rw] queue
@@ -10295,19 +10643,19 @@ module Aws::S3
     #   same object based on a specified filter, the rule with higher
     #   priority takes precedence. For example:
     #
-    #   * Same object quality prefix based filter criteria If prefixes you
+    #   * Same object quality prefix-based filter criteria if prefixes you
     #     specified in multiple rules overlap
     #
-    #   * Same object qualify tag based filter criteria specified in
+    #   * Same object qualify tag-based filter criteria specified in
     #     multiple rules
     #
     #   For more information, see [Replication](
     #   https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in
-    #   the *Amazon S3 Developer Guide*.
+    #   the *Amazon Simple Storage Service Developer Guide*.
     #   @return [Integer]
     #
     # @!attribute [rw] prefix
-    #   An object keyname prefix that identifies the object or objects to
+    #   An object key name prefix that identifies the object or objects to
     #   which the rule applies. The maximum prefix length is 1,024
     #   characters. To include all objects in a bucket, specify an empty
     #   string.
@@ -10333,13 +10681,12 @@ module Aws::S3
     #   @return [Types::SourceSelectionCriteria]
     #
     # @!attribute [rw] existing_object_replication
-    #   A container that specifies information about existing object
-    #   replication. You can choose whether to enable or disable the
-    #   replication of existing objects.
     #   @return [Types::ExistingObjectReplication]
     #
     # @!attribute [rw] destination
-    #   A container for information about the replication destination.
+    #   A container for information about the replication destination and
+    #   its configurations including enabling the S3 Replication Time
+    #   Control (S3 RTC).
     #   @return [Types::Destination]
     #
     # @!attribute [rw] delete_marker_replication
@@ -10351,9 +10698,9 @@ module Aws::S3
     #   &lt;Status&gt;Disabled&lt;/Status&gt;. For an example configuration,
     #   see [Basic Rule Configuration][1].
     #
-    #   <note markdown="1"> If you don't specify the Filter element, Amazon S3 assumes the
-    #   replication configuration is the earlier version, V1. In the earlier
-    #   version, Amazon S3 handled replication of delete markers
+    #   <note markdown="1"> If you don't specify the `Filter` element, Amazon S3 assumes that
+    #   the replication configuration is the earlier version, V1. In the
+    #   earlier version, Amazon S3 handled replication of delete markers
     #   differently. For more information, see [Backward Compatibility][2].
     #
     #    </note>
@@ -10385,11 +10732,11 @@ module Aws::S3
     #
     # For example:
     #
-    # * If you specify both a Prefix and a Tag filter, wrap these filters in
-    #   an And tag.
+    # * If you specify both a `Prefix` and a `Tag` filter, wrap these
+    #   filters in an `And` tag.
     #
-    # * If you specify a filter based on multiple tags, wrap the Tag
-    #   elements in an And tag
+    # * If you specify a filter based on multiple tags, wrap the `Tag`
+    #   elements in an `And` tag
     #
     # @note When making an API call, you may pass ReplicationRuleAndOperator
     #   data as a hash:
@@ -10405,7 +10752,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] prefix
-    #   An object keyname prefix that identifies the subset of objects to
+    #   An object key name prefix that identifies the subset of objects to
     #   which the rule applies.
     #   @return [String]
     #
@@ -10446,7 +10793,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] prefix
-    #   An object keyname prefix that identifies the subset of objects to
+    #   An object key name prefix that identifies the subset of objects to
     #   which the rule applies.
     #   @return [String]
     #
@@ -10477,9 +10824,10 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container specifying the time when all objects and operations on
-    # objects are replicated. Must be specified together with a `Metrics`
-    # block.
+    # A container specifying S3 Replication Time Control (S3 RTC) related
+    # information, including whether S3 RTC is enabled and the time when all
+    # objects and operations on objects must be replicated. Must be
+    # specified together with a `Metrics` block.
     #
     # @note When making an API call, you may pass ReplicationTime
     #   data as a hash:
@@ -10496,8 +10844,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] time
-    #   A container specifying the time by which replication should complete
-    #   for all objects and operations on objects.
+    #   A container specifying the time by which replication should be
+    #   complete for all objects and operations on objects.
     #   @return [Types::ReplicationTimeValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationTime AWS API Documentation
@@ -10508,7 +10856,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # A container specifying the time value.
+    # A container specifying the time value for S3 Replication Time Control
+    # (S3 RTC) and replication metrics `EventThreshold`.
     #
     # @note When making an API call, you may pass ReplicationTimeValue
     #   data as a hash:
@@ -10519,6 +10868,8 @@ module Aws::S3
     #
     # @!attribute [rw] minutes
     #   Contains an integer specifying time in minutes.
+    #
+    #   Valid values: 15 minutes.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationTimeValue AWS API Documentation
@@ -10548,8 +10899,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for specifiying if periodic QueryProgress messages should be
-    # sent.
+    # Container for specifying if periodic `QueryProgress` messages should
+    # be sent.
     #
     # @note When making an API call, you may pass RequestProgress
     #   data as a hash:
@@ -10680,7 +11031,20 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket name.
+    #   The bucket name or containing the object to restore.
+    #
+    #   When using this API with an access point, you must direct requests
+    #   to the access point hostname. The access point hostname takes the
+    #   form
+    #   *AccessPointName*-*AccountId*.s3-accesspoint.*Region*.amazonaws.com.
+    #   When using this operation using an access point through the AWS
+    #   SDKs, you provide the access point ARN in place of the bucket name.
+    #   For more information about access point ARNs, see [Using Access
+    #   Points][1] in the *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -10698,9 +11062,13 @@ module Aws::S3
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectRequest AWS API Documentation
@@ -10803,12 +11171,12 @@ module Aws::S3
     #
     # @!attribute [rw] days
     #   Lifetime of the active copy in days. Do not use with restores that
-    #   specify OutputLocation.
+    #   specify `OutputLocation`.
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_parameters
     #   Glacier related parameters pertaining to this job. Do not use with
-    #   restores that specify OutputLocation.
+    #   restores that specify `OutputLocation`.
     #   @return [Types::GlacierJobParameters]
     #
     # @!attribute [rw] type
@@ -11006,7 +11374,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] filter_rules
-    #   A list of containers for the key value pair that defines the
+    #   A list of containers for the key-value pair that defines the
     #   criteria for the filter rule.
     #   @return [Array<Types::FilterRule>]
     #
@@ -11017,8 +11385,8 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Describes an S3 location that will receive the results of the restore
-    # request.
+    # Describes an Amazon S3 location that will receive the results of the
+    # restore request.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -11108,7 +11476,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the use of SSE-KMS to encrypt delivered Inventory reports.
+    # Specifies the use of SSE-KMS to encrypt delivered inventory reports.
     #
     # @note When making an API call, you may pass SSEKMS
     #   data as a hash:
@@ -11118,8 +11486,8 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] key_id
-    #   Specifies the ID of the AWS Key Management Service (KMS) customer
-    #   master key (CMK) to use for encrypting Inventory reports.
+    #   Specifies the ID of the AWS Key Management Service (AWS KMS)
+    #   customer master key (CMK) to use for encrypting inventory reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -11129,7 +11497,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Specifies the use of SSE-S3 to encrypt delivered Inventory reports.
+    # Specifies the use of SSE-S3 to encrypt delivered inventory reports.
     #
     # @api private
     #
@@ -11137,6 +11505,12 @@ module Aws::S3
     #
     class SSES3 < Aws::EmptyStructure; end
 
+    # Specifies the byte range of the object to get the records from. A
+    # record is processed when its first byte is contained by the range.
+    # This parameter is optional, but when specified, it must not be empty.
+    # See RFC 2616, Section 14.35.1 about how to specify the start and end
+    # of the range.
+    #
     # @note When making an API call, you may pass ScanRange
     #   data as a hash:
     #
@@ -11158,7 +11532,7 @@ module Aws::S3
     #   Valid values: non-negative integers. The default value is one less
     #   than the size of the object being queried. If only the End parameter
     #   is supplied, it is interpreted to mean scan the last N bytes of the
-    #   file. For example; `<scanrange><end>50</end></scanrange>` means scan
+    #   file. For example, `<scanrange><end>50</end></scanrange>` means scan
     #   the last 50 bytes.
     #   @return [Integer]
     #
@@ -11253,7 +11627,7 @@ module Aws::S3
     #
     # @!attribute [rw] sse_customer_algorithm
     #   The SSE Algorithm used to encrypt the object. For more information,
-    #   see [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   see [Server-Side Encryption (Using Customer-Provided Encryption
     #   Keys][1].
     #
     #
@@ -11262,7 +11636,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
-    #   The SSE Customer Key. For more information, see [ Server-Side
+    #   The SSE Customer Key. For more information, see [Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -11271,7 +11645,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
-    #   The SSE Customer Key MD5. For more information, see [ Server-Side
+    #   The SSE Customer Key MD5. For more information, see [Server-Side
     #   Encryption (Using Customer-Provided Encryption Keys][1].
     #
     #
@@ -11284,7 +11658,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] expression_type
-    #   The type of the provided expression (for example., SQL).
+    #   The type of the provided expression (for example, SQL).
     #   @return [String]
     #
     # @!attribute [rw] request_progress
@@ -11383,7 +11757,7 @@ module Aws::S3
     #   @return [Types::InputSerialization]
     #
     # @!attribute [rw] expression_type
-    #   The type of the provided expression (e.g., SQL).
+    #   The type of the provided expression (for example, SQL).
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -11676,7 +12050,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # Container for TagSet elements.
+    # Container for `TagSet` elements.
     #
     # @note When making an API call, you may pass Tagging
     #   data as a hash:
@@ -11691,7 +12065,7 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] tag_set
-    #   A collection for a a set of tags
+    #   A collection for a set of tags
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tagging AWS API Documentation
@@ -11800,8 +12174,8 @@ module Aws::S3
 
     # A container for specifying the configuration for publication of
     # messages to an Amazon Simple Notification Service (Amazon SNS) topic
-    # when Amazon S3 detects specified events. This data type is
-    # deperecated. Please use TopicConfiguration instead.
+    # when Amazon S3 detects specified events. This data type is deprecated.
+    # Use TopicConfiguration instead.
     #
     # @note When making an API call, you may pass TopicConfigurationDeprecated
     #   data as a hash:
@@ -11888,8 +12262,8 @@ module Aws::S3
     #   @return [Types::CopyPartResult]
     #
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
@@ -11901,13 +12275,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) that was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -11983,8 +12357,8 @@ module Aws::S3
     #   The range of bytes to copy from the source object. The range value
     #   must use the form bytes=first-last, where the first and last are the
     #   zero-based byte offsets to copy. For example, bytes=0-9 indicates
-    #   that you want to copy the first ten bytes of the source. You can
-    #   copy a range only if the source object is greater than 5 MB.
+    #   that you want to copy the first 10 bytes of the source. You can copy
+    #   a range only if the source object is greater than 5 MB.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -12002,29 +12376,29 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header. This must
-    #   be the same encryption key specified in the initiate multipart
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm` header. This
+    #   must be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] copy_source_sse_customer_algorithm
     #   Specifies the algorithm to use when decrypting the source object
-    #   (e.g., AES256).
+    #   (for example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] copy_source_sse_customer_key
@@ -12036,15 +12410,19 @@ module Aws::S3
     # @!attribute [rw] copy_source_sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyRequest AWS API Documentation
@@ -12071,8 +12449,8 @@ module Aws::S3
     end
 
     # @!attribute [rw] server_side_encryption
-    #   The Server-side encryption algorithm used when storing this object
-    #   in S3 (e.g., AES256, aws:kms).
+    #   The server-side encryption algorithm used when storing this object
+    #   in Amazon S3 (for example, AES256, aws:kms).
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -12088,13 +12466,13 @@ module Aws::S3
     # @!attribute [rw] sse_customer_key_md5
     #   If server-side encryption with a customer-provided encryption key
     #   was requested, the response will include this header to provide
-    #   round trip message integrity verification of the customer-provided
+    #   round-trip message integrity verification of the customer-provided
     #   encryption key.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   If present, specifies the ID of the AWS Key Management Service (KMS)
-    #   customer master key (CMK) was used for the object.
+    #   If present, specifies the ID of the AWS Key Management Service (AWS
+    #   KMS) customer master key (CMK) was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -12147,7 +12525,7 @@ module Aws::S3
     # @!attribute [rw] content_md5
     #   The base64-encoded 128-bit MD5 digest of the part data. This
     #   parameter is auto-populated when using the command from the CLI.
-    #   This parameted is required if object lock parameters are specified.
+    #   This parameter is required if object lock parameters are specified.
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -12165,32 +12543,36 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_algorithm
-    #   Specifies the algorithm to use to when encrypting the object (e.g.,
-    #   AES256).
+    #   Specifies the algorithm to use to when encrypting the object (for
+    #   example, AES256).
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key
     #   Specifies the customer-provided encryption key for Amazon S3 to use
     #   in encrypting data. This value is used to store the object and then
-    #   it is discarded; Amazon does not store the encryption key. The key
-    #   must be appropriate for use with the algorithm specified in the
-    #   x-amz-server-side​-encryption​-customer-algorithm header. This must
-    #   be the same encryption key specified in the initiate multipart
+    #   it is discarded; Amazon S3 does not store the encryption key. The
+    #   key must be appropriate for use with the algorithm specified in the
+    #   `x-amz-server-side​-encryption​-customer-algorithm header`. This
+    #   must be the same encryption key specified in the initiate multipart
     #   upload request.
     #   @return [String]
     #
     # @!attribute [rw] sse_customer_key_md5
     #   Specifies the 128-bit MD5 digest of the encryption key according to
     #   RFC 1321. Amazon S3 uses this header for a message integrity check
-    #   to ensure the encryption key was transmitted without error.
+    #   to ensure that the encryption key was transmitted without error.
     #   @return [String]
     #
     # @!attribute [rw] request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartRequest AWS API Documentation
@@ -12308,7 +12690,7 @@ module Aws::S3
       include Aws::Structure
     end
 
-    # The continer for selecting objects from a content event stream.
+    # The container for selecting objects from a content event stream.
     #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream

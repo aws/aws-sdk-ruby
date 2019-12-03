@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2019-12-03)
+------------------
+
+* Feature - This release supports ECS Capacity Providers, Fargate Spot, and ECS Cluster Auto Scaling.  These features enable new ways for ECS to manage compute capacity used by tasks.
+
 1.53.0 (2019-11-20)
 ------------------
 

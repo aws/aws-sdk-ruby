@@ -225,6 +225,12 @@ module Aws::EC2
       data[:elastic_inference_accelerator_associations]
     end
 
+    # The Amazon Resource Name (ARN) of the Outpost.
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
+    end
+
     # The device name of the root device volume (for example, `/dev/sda1`).
     # @return [String]
     def root_device_name

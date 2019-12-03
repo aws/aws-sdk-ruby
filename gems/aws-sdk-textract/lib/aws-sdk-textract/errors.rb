@@ -10,5 +10,31 @@ module Aws::Textract
 
     extend Aws::Errors::DynamicErrors
 
+    class HumanLoopQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Textract::Types::HumanLoopQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+    end
+
   end
 end

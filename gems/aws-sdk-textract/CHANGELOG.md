@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-12-03)
+------------------
+
+* Feature - This SDK Release introduces Amazon Augmented AI support for Amazon Textract AnalyzeDocument API. Image byte payloads for synchronous operations have increased from 5 MB to 10 MB.
+
 1.11.0 (2019-10-23)
 ------------------
 

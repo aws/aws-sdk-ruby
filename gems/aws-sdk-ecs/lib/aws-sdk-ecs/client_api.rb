@@ -22,11 +22,21 @@ module Aws::ECS
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
     AttributeLimitExceededException = Shapes::StructureShape.new(name: 'AttributeLimitExceededException')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
+    AutoScalingGroupProvider = Shapes::StructureShape.new(name: 'AutoScalingGroupProvider')
     AwsVpcConfiguration = Shapes::StructureShape.new(name: 'AwsVpcConfiguration')
     BlockedException = Shapes::StructureShape.new(name: 'BlockedException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
+    CapacityProvider = Shapes::StructureShape.new(name: 'CapacityProvider')
+    CapacityProviderField = Shapes::StringShape.new(name: 'CapacityProviderField')
+    CapacityProviderFieldList = Shapes::ListShape.new(name: 'CapacityProviderFieldList')
+    CapacityProviderStatus = Shapes::StringShape.new(name: 'CapacityProviderStatus')
+    CapacityProviderStrategy = Shapes::ListShape.new(name: 'CapacityProviderStrategy')
+    CapacityProviderStrategyItem = Shapes::StructureShape.new(name: 'CapacityProviderStrategyItem')
+    CapacityProviderStrategyItemBase = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemBase')
+    CapacityProviderStrategyItemWeight = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemWeight')
+    CapacityProviders = Shapes::ListShape.new(name: 'CapacityProviders')
     ClientException = Shapes::StructureShape.new(name: 'ClientException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterContainsContainerInstancesException = Shapes::StructureShape.new(name: 'ClusterContainsContainerInstancesException')
@@ -58,6 +68,8 @@ module Aws::ECS
     ContainerStateChange = Shapes::StructureShape.new(name: 'ContainerStateChange')
     ContainerStateChanges = Shapes::ListShape.new(name: 'ContainerStateChanges')
     Containers = Shapes::ListShape.new(name: 'Containers')
+    CreateCapacityProviderRequest = Shapes::StructureShape.new(name: 'CreateCapacityProviderRequest')
+    CreateCapacityProviderResponse = Shapes::StructureShape.new(name: 'CreateCapacityProviderResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
@@ -83,6 +95,8 @@ module Aws::ECS
     DeregisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceResponse')
     DeregisterTaskDefinitionRequest = Shapes::StructureShape.new(name: 'DeregisterTaskDefinitionRequest')
     DeregisterTaskDefinitionResponse = Shapes::StructureShape.new(name: 'DeregisterTaskDefinitionResponse')
+    DescribeCapacityProvidersRequest = Shapes::StructureShape.new(name: 'DescribeCapacityProvidersRequest')
+    DescribeCapacityProvidersResponse = Shapes::StructureShape.new(name: 'DescribeCapacityProvidersResponse')
     DescribeClustersRequest = Shapes::StructureShape.new(name: 'DescribeClustersRequest')
     DescribeClustersResponse = Shapes::StructureShape.new(name: 'DescribeClustersResponse')
     DescribeContainerInstancesRequest = Shapes::StructureShape.new(name: 'DescribeContainerInstancesRequest')
@@ -127,6 +141,7 @@ module Aws::ECS
     KernelCapabilities = Shapes::StructureShape.new(name: 'KernelCapabilities')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
     LaunchType = Shapes::StringShape.new(name: 'LaunchType')
+    LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
     ListAccountSettingsRequest = Shapes::StructureShape.new(name: 'ListAccountSettingsRequest')
     ListAccountSettingsResponse = Shapes::StructureShape.new(name: 'ListAccountSettingsResponse')
@@ -152,6 +167,11 @@ module Aws::ECS
     LogConfigurationOptionsMap = Shapes::MapShape.new(name: 'LogConfigurationOptionsMap')
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    ManagedScaling = Shapes::StructureShape.new(name: 'ManagedScaling')
+    ManagedScalingStatus = Shapes::StringShape.new(name: 'ManagedScalingStatus')
+    ManagedScalingStepSize = Shapes::IntegerShape.new(name: 'ManagedScalingStepSize')
+    ManagedScalingTargetCapacity = Shapes::IntegerShape.new(name: 'ManagedScalingTargetCapacity')
+    ManagedTerminationProtection = Shapes::StringShape.new(name: 'ManagedTerminationProtection')
     MissingVersionException = Shapes::StructureShape.new(name: 'MissingVersionException')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
     MountPointList = Shapes::ListShape.new(name: 'MountPointList')
@@ -186,6 +206,8 @@ module Aws::ECS
     PutAccountSettingResponse = Shapes::StructureShape.new(name: 'PutAccountSettingResponse')
     PutAttributesRequest = Shapes::StructureShape.new(name: 'PutAttributesRequest')
     PutAttributesResponse = Shapes::StructureShape.new(name: 'PutAttributesResponse')
+    PutClusterCapacityProvidersRequest = Shapes::StructureShape.new(name: 'PutClusterCapacityProvidersRequest')
+    PutClusterCapacityProvidersResponse = Shapes::StructureShape.new(name: 'PutClusterCapacityProvidersResponse')
     RegisterContainerInstanceRequest = Shapes::StructureShape.new(name: 'RegisterContainerInstanceRequest')
     RegisterContainerInstanceResponse = Shapes::StructureShape.new(name: 'RegisterContainerInstanceResponse')
     RegisterTaskDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterTaskDefinitionRequest')
@@ -193,6 +215,7 @@ module Aws::ECS
     RepositoryCredentials = Shapes::StructureShape.new(name: 'RepositoryCredentials')
     RequiresAttributes = Shapes::ListShape.new(name: 'RequiresAttributes')
     Resource = Shapes::StructureShape.new(name: 'Resource')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
     ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
@@ -317,10 +340,33 @@ module Aws::ECS
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
+    AutoScalingGroupProvider.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "autoScalingGroupArn"))
+    AutoScalingGroupProvider.add_member(:managed_scaling, Shapes::ShapeRef.new(shape: ManagedScaling, location_name: "managedScaling"))
+    AutoScalingGroupProvider.add_member(:managed_termination_protection, Shapes::ShapeRef.new(shape: ManagedTerminationProtection, location_name: "managedTerminationProtection"))
+    AutoScalingGroupProvider.struct_class = Types::AutoScalingGroupProvider
+
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroups"))
     AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "assignPublicIp"))
     AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
+
+    CapacityProvider.add_member(:capacity_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityProviderArn"))
+    CapacityProvider.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CapacityProvider.add_member(:status, Shapes::ShapeRef.new(shape: CapacityProviderStatus, location_name: "status"))
+    CapacityProvider.add_member(:auto_scaling_group_provider, Shapes::ShapeRef.new(shape: AutoScalingGroupProvider, location_name: "autoScalingGroupProvider"))
+    CapacityProvider.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CapacityProvider.struct_class = Types::CapacityProvider
+
+    CapacityProviderFieldList.member = Shapes::ShapeRef.new(shape: CapacityProviderField)
+
+    CapacityProviderStrategy.member = Shapes::ShapeRef.new(shape: CapacityProviderStrategyItem)
+
+    CapacityProviderStrategyItem.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: String, required: true, location_name: "capacityProvider"))
+    CapacityProviderStrategyItem.add_member(:weight, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight"))
+    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
+    CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
+
+    CapacityProviders.member = Shapes::ShapeRef.new(shape: CapacityProvider)
 
     ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ClientException.struct_class = Types::ClientException
@@ -335,6 +381,10 @@ module Aws::ECS
     Cluster.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, location_name: "statistics"))
     Cluster.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     Cluster.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, location_name: "settings"))
+    Cluster.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: StringList, location_name: "capacityProviders"))
+    Cluster.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "defaultCapacityProviderStrategy"))
+    Cluster.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
+    Cluster.add_member(:attachments_status, Shapes::ShapeRef.new(shape: String, location_name: "attachmentsStatus"))
     Cluster.struct_class = Types::Cluster
 
     ClusterFieldList.member = Shapes::ShapeRef.new(shape: ClusterField)
@@ -417,6 +467,7 @@ module Aws::ECS
 
     ContainerInstance.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     ContainerInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceId"))
+    ContainerInstance.add_member(:capacity_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "capacityProviderName"))
     ContainerInstance.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
     ContainerInstance.add_member(:version_info, Shapes::ShapeRef.new(shape: VersionInfo, location_name: "versionInfo"))
     ContainerInstance.add_member(:remaining_resources, Shapes::ShapeRef.new(shape: Resources, location_name: "remainingResources"))
@@ -461,9 +512,19 @@ module Aws::ECS
 
     Containers.member = Shapes::ShapeRef.new(shape: Container)
 
+    CreateCapacityProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateCapacityProviderRequest.add_member(:auto_scaling_group_provider, Shapes::ShapeRef.new(shape: AutoScalingGroupProvider, required: true, location_name: "autoScalingGroupProvider"))
+    CreateCapacityProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateCapacityProviderRequest.struct_class = Types::CreateCapacityProviderRequest
+
+    CreateCapacityProviderResponse.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, location_name: "capacityProvider"))
+    CreateCapacityProviderResponse.struct_class = Types::CreateCapacityProviderResponse
+
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateClusterRequest.add_member(:settings, Shapes::ShapeRef.new(shape: ClusterSettings, location_name: "settings"))
+    CreateClusterRequest.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: StringList, location_name: "capacityProviders"))
+    CreateClusterRequest.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "defaultCapacityProviderStrategy"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
@@ -477,6 +538,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateServiceRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    CreateServiceRequest.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     CreateServiceRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     CreateServiceRequest.add_member(:role, Shapes::ShapeRef.new(shape: String, location_name: "role"))
     CreateServiceRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
@@ -502,6 +564,7 @@ module Aws::ECS
     CreateTaskSetRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
     CreateTaskSetRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     CreateTaskSetRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    CreateTaskSetRequest.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     CreateTaskSetRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     CreateTaskSetRequest.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
     CreateTaskSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -555,6 +618,7 @@ module Aws::ECS
     Deployment.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
     Deployment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     Deployment.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    Deployment.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     Deployment.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     Deployment.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Deployment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
@@ -582,6 +646,17 @@ module Aws::ECS
 
     DeregisterTaskDefinitionResponse.add_member(:task_definition, Shapes::ShapeRef.new(shape: TaskDefinition, location_name: "taskDefinition"))
     DeregisterTaskDefinitionResponse.struct_class = Types::DeregisterTaskDefinitionResponse
+
+    DescribeCapacityProvidersRequest.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: StringList, location_name: "capacityProviders"))
+    DescribeCapacityProvidersRequest.add_member(:include, Shapes::ShapeRef.new(shape: CapacityProviderFieldList, location_name: "include"))
+    DescribeCapacityProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
+    DescribeCapacityProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityProvidersRequest.struct_class = Types::DescribeCapacityProvidersRequest
+
+    DescribeCapacityProvidersResponse.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: CapacityProviders, location_name: "capacityProviders"))
+    DescribeCapacityProvidersResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
+    DescribeCapacityProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeCapacityProvidersResponse.struct_class = Types::DescribeCapacityProvidersResponse
 
     DescribeClustersRequest.add_member(:clusters, Shapes::ShapeRef.new(shape: StringList, location_name: "clusters"))
     DescribeClustersRequest.add_member(:include, Shapes::ShapeRef.new(shape: ClusterFieldList, location_name: "include"))
@@ -837,6 +912,12 @@ module Aws::ECS
     LogConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     LogConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
 
+    ManagedScaling.add_member(:status, Shapes::ShapeRef.new(shape: ManagedScalingStatus, location_name: "status"))
+    ManagedScaling.add_member(:target_capacity, Shapes::ShapeRef.new(shape: ManagedScalingTargetCapacity, location_name: "targetCapacity"))
+    ManagedScaling.add_member(:minimum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "minimumScalingStepSize"))
+    ManagedScaling.add_member(:maximum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "maximumScalingStepSize"))
+    ManagedScaling.struct_class = Types::ManagedScaling
+
     MountPoint.add_member(:source_volume, Shapes::ShapeRef.new(shape: String, location_name: "sourceVolume"))
     MountPoint.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
     MountPoint.add_member(:read_only, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "readOnly"))
@@ -916,6 +997,14 @@ module Aws::ECS
     PutAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     PutAttributesResponse.struct_class = Types::PutAttributesResponse
 
+    PutClusterCapacityProvidersRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
+    PutClusterCapacityProvidersRequest.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "capacityProviders"))
+    PutClusterCapacityProvidersRequest.add_member(:default_capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, required: true, location_name: "defaultCapacityProviderStrategy"))
+    PutClusterCapacityProvidersRequest.struct_class = Types::PutClusterCapacityProvidersRequest
+
+    PutClusterCapacityProvidersResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "cluster"))
+    PutClusterCapacityProvidersResponse.struct_class = Types::PutClusterCapacityProvidersResponse
+
     RegisterContainerInstanceRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     RegisterContainerInstanceRequest.add_member(:instance_identity_document, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentityDocument"))
     RegisterContainerInstanceRequest.add_member(:instance_identity_document_signature, Shapes::ShapeRef.new(shape: String, location_name: "instanceIdentityDocumentSignature"))
@@ -972,6 +1061,7 @@ module Aws::ECS
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
+    RunTaskRequest.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     RunTaskRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     RunTaskRequest.add_member(:count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "count"))
     RunTaskRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
@@ -1016,6 +1106,7 @@ module Aws::ECS
     Service.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
     Service.add_member(:pending_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingCount"))
     Service.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    Service.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     Service.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Service.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
     Service.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
@@ -1151,6 +1242,7 @@ module Aws::ECS
     Task.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     Task.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     Task.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    Task.add_member(:capacity_provider_name, Shapes::ShapeRef.new(shape: String, location_name: "capacityProviderName"))
     Task.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Task.add_member(:connectivity, Shapes::ShapeRef.new(shape: Connectivity, location_name: "connectivity"))
     Task.add_member(:connectivity_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "connectivityAt"))
@@ -1235,6 +1327,7 @@ module Aws::ECS
     TaskSet.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     TaskSet.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     TaskSet.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    TaskSet.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     TaskSet.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     TaskSet.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     TaskSet.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
@@ -1303,6 +1396,7 @@ module Aws::ECS
     UpdateServiceRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     UpdateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
     UpdateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinition"))
+    UpdateServiceRequest.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "capacityProviderStrategy"))
     UpdateServiceRequest.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     UpdateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     UpdateServiceRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
@@ -1358,6 +1452,18 @@ module Aws::ECS
         "targetPrefix" => "AmazonEC2ContainerServiceV20141113",
         "uid" => "ecs-2014-11-13",
       }
+
+      api.add_operation(:create_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCapacityProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCapacityProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCapacityProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCluster"
@@ -1439,6 +1545,7 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsContainerInstancesException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsServicesException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterContainsTasksException)
+        o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
       end)
 
       api.add_operation(:delete_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1489,6 +1596,17 @@ module Aws::ECS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeregisterTaskDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterTaskDefinitionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:describe_capacity_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCapacityProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCapacityProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCapacityProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1597,6 +1715,12 @@ module Aws::ECS
         o.output = Shapes::ShapeRef.new(shape: ListAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -1749,6 +1873,20 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AttributeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:put_cluster_capacity_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutClusterCapacityProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutClusterCapacityProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutClusterCapacityProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: UpdateInProgressException)
       end)
 
       api.add_operation(:register_container_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -1942,7 +2080,6 @@ module Aws::ECS
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceNotActiveException)
         o.errors << Shapes::ShapeRef.new(shape: TaskSetNotFoundException)

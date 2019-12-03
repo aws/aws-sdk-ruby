@@ -118,6 +118,63 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The details of the Auto Scaling group for the capacity provider.
+    #
+    # @note When making an API call, you may pass AutoScalingGroupProvider
+    #   data as a hash:
+    #
+    #       {
+    #         auto_scaling_group_arn: "String", # required
+    #         managed_scaling: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #           target_capacity: 1,
+    #           minimum_scaling_step_size: 1,
+    #           maximum_scaling_step_size: 1,
+    #         },
+    #         managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] auto_scaling_group_arn
+    #   The Amazon Resource Name (ARN) that identifies the Auto Scaling
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] managed_scaling
+    #   The managed scaling settings for the Auto Scaling group capacity
+    #   provider.
+    #   @return [Types::ManagedScaling]
+    #
+    # @!attribute [rw] managed_termination_protection
+    #   The managed termination protection setting to use for the Auto
+    #   Scaling group capacity provider. This determines whether the Auto
+    #   Scaling group has managed termination protection.
+    #
+    #   When managed termination protection is enabled, Amazon ECS prevents
+    #   the Amazon EC2 instances in an Auto Scaling group that contain tasks
+    #   from being terminated during a scale-in action. The Auto Scaling
+    #   group and each instance in the Auto Scaling group must have instance
+    #   protection from scale-in actions enabled as well. For more
+    #   information, see [Instance Protection][1] in the *AWS Auto Scaling
+    #   User Guide*.
+    #
+    #   When managed termination protection is disabled, your Amazon EC2
+    #   instances are not protected from termination when the Auto Scaling
+    #   group scales in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AutoScalingGroupProvider AWS API Documentation
+    #
+    class AutoScalingGroupProvider < Struct.new(
+      :auto_scaling_group_arn,
+      :managed_scaling,
+      :managed_termination_protection)
+      include Aws::Structure
+    end
+
     # An object representing the networking details for a task or service.
     #
     # @note When making an API call, you may pass AwsVpcConfiguration
@@ -160,6 +217,113 @@ module Aws::ECS
       :subnets,
       :security_groups,
       :assign_public_ip)
+      include Aws::Structure
+    end
+
+    # The details of a capacity provider.
+    #
+    # @!attribute [rw] capacity_provider_arn
+    #   The Amazon Resource Name (ARN) that identifies the capacity
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the capacity provider. Only capacity providers
+    #   in an `ACTIVE` state can be used in a cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_group_provider
+    #   The Auto Scaling group settings for the capacity provider.
+    #   @return [Types::AutoScalingGroupProvider]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the capacity provider to help you
+    #   categorize and organize it. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CapacityProvider AWS API Documentation
+    #
+    class CapacityProvider < Struct.new(
+      :capacity_provider_arn,
+      :name,
+      :status,
+      :auto_scaling_group_provider,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The details of a capacity provider strategy.
+    #
+    # @note When making an API call, you may pass CapacityProviderStrategyItem
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       }
+    #
+    # @!attribute [rw] capacity_provider
+    #   The short name or full Amazon Resource Name (ARN) of the capacity
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] weight
+    #   The *weight* value designates the relative percentage of the total
+    #   number of tasks launched that should use the specified capacity
+    #   provider.
+    #
+    #   For example, if you have a strategy that contains two capacity
+    #   providers and both have a weight of `1`, then when the `base` is
+    #   satisfied, the tasks will be split evenly across the two capacity
+    #   providers. Using that same logic, if you specify a weight of `1` for
+    #   *capacityProviderA* and a weight of `4` for *capacityProviderB*,
+    #   then for every one task that is run using *capacityProviderA*, four
+    #   tasks would use *capacityProviderB*.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] base
+    #   The *base* value designates how many tasks, at a minimum, to run on
+    #   the specified capacity provider. Only one capacity provider in a
+    #   capacity provider strategy can have a *base* defined.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CapacityProviderStrategyItem AWS API Documentation
+    #
+    class CapacityProviderStrategyItem < Struct.new(
+      :capacity_provider,
+      :weight,
+      :base)
       include Aws::Structure
     end
 
@@ -278,6 +442,42 @@ module Aws::ECS
     #   CloudWatch Container Insights is enabled or disabled for a cluster.
     #   @return [Array<Types::ClusterSetting>]
     #
+    # @!attribute [rw] capacity_providers
+    #   The capacity providers associated with the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_capacity_provider_strategy
+    #   The default capacity provider strategy for the cluster. When
+    #   services or tasks are run in the cluster with no launch type or
+    #   capacity provider strategy specified, the default capacity provider
+    #   strategy is used.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
+    # @!attribute [rw] attachments
+    #   The resources attached to a cluster. When using a capacity provider
+    #   with a cluster, the Auto Scaling plan that is created will be
+    #   returned as a cluster attachment.
+    #   @return [Array<Types::Attachment>]
+    #
+    # @!attribute [rw] attachments_status
+    #   The status of the capacity providers associated with the cluster.
+    #   The following are the states that will be returned:
+    #
+    #   UPDATE\_IN\_PROGRESS
+    #
+    #   : The available capacity providers for the cluster are updating.
+    #     This occurs when the Auto Scaling plan is provisioning or
+    #     deprovisioning.
+    #
+    #   UPDATE\_COMPLETE
+    #
+    #   : The capacity providers have successfully updated.
+    #
+    #   UPDATE\_FAILED
+    #
+    #   : The capacity provider updates failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -290,7 +490,11 @@ module Aws::ECS
       :active_services_count,
       :statistics,
       :tags,
-      :settings)
+      :settings,
+      :capacity_providers,
+      :default_capacity_provider_strategy,
+      :attachments,
+      :attachments_status)
       include Aws::Structure
     end
 
@@ -1544,6 +1748,10 @@ module Aws::ECS
     #   The EC2 instance ID of the container instance.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_provider_name
+    #   The capacity provider associated with the container instance.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The version counter for the container instance. Every time a
     #   container instance experiences a change that triggers a CloudWatch
@@ -1688,6 +1896,7 @@ module Aws::ECS
     class ContainerInstance < Struct.new(
       :container_instance_arn,
       :ec2_instance_id,
+      :capacity_provider_name,
       :version,
       :version_info,
       :remaining_resources,
@@ -1854,6 +2063,91 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCapacityProviderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         auto_scaling_group_provider: { # required
+    #           auto_scaling_group_arn: "String", # required
+    #           managed_scaling: {
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #             target_capacity: 1,
+    #             minimum_scaling_step_size: 1,
+    #             maximum_scaling_step_size: 1,
+    #           },
+    #           managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the capacity provider. Up to 255 characters are allowed,
+    #   including letters (upper and lowercase), numbers, underscores, and
+    #   hyphens. The name cannot be prefixed with "`aws`", "`ecs`", or
+    #   "`fargate`".
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_group_provider
+    #   The details of the Auto Scaling group for the capacity provider.
+    #   @return [Types::AutoScalingGroupProvider]
+    #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the capacity provider to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCapacityProviderRequest AWS API Documentation
+    #
+    class CreateCapacityProviderRequest < Struct.new(
+      :name,
+      :auto_scaling_group_provider,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_provider
+    #   The full description of the new capacity provider.
+    #   @return [Types::CapacityProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCapacityProviderResponse AWS API Documentation
+    #
+    class CreateCapacityProviderResponse < Struct.new(
+      :capacity_provider)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateClusterRequest
     #   data as a hash:
     #
@@ -1869,6 +2163,14 @@ module Aws::ECS
     #           {
     #             name: "containerInsights", # accepts containerInsights
     #             value: "String",
+    #           },
+    #         ],
+    #         capacity_providers: ["String"],
+    #         default_capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
     #           },
     #         ],
     #       }
@@ -1917,12 +2219,62 @@ module Aws::ECS
     #   with PutAccountSetting or PutAccountSettingDefault.
     #   @return [Array<Types::ClusterSetting>]
     #
+    # @!attribute [rw] capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers to associate with the cluster.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created and not already
+    #   associated with another cluster. New capacity providers can be
+    #   created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_capacity_provider_strategy
+    #   The capacity provider strategy to use by default for the cluster.
+    #
+    #   When creating a service or running a task on a cluster, if no
+    #   capacity provider or launch type is specified then the default
+    #   capacity provider strategy for the cluster is used.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   If a default capacity provider strategy is not defined for a cluster
+    #   during creation, it can be defined later with the
+    #   PutClusterCapacityProviders API operation.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :cluster_name,
       :tags,
-      :settings)
+      :settings,
+      :capacity_providers,
+      :default_capacity_provider_strategy)
       include Aws::Structure
     end
 
@@ -1963,6 +2315,13 @@ module Aws::ECS
     #         desired_count: 1,
     #         client_token: "String",
     #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
     #         platform_version: "String",
     #         role: "String",
     #         deployment_configuration: {
@@ -2120,10 +2479,43 @@ module Aws::ECS
     #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to use for the service.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
     #   The platform version that your tasks in the service are running on.
@@ -2152,10 +2544,10 @@ module Aws::ECS
     #   specify a role here. The service-linked role is required if your
     #   task definition uses the `awsvpc` network mode or if the service is
     #   configured to use service discovery, an external deployment
-    #   controller, or multiple target groups in which case you should not
-    #   specify a role here. For more information, see [Using Service-Linked
-    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   controller, multiple target groups, or Elastic Inference
+    #   accelerators in which case you should not specify a role here. For
+    #   more information, see [Using Service-Linked Roles for Amazon ECS][1]
+    #   in the *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must
     #   either specify the full role ARN (this is recommended) or prefix the
@@ -2312,6 +2704,7 @@ module Aws::ECS
       :desired_count,
       :client_token,
       :launch_type,
+      :capacity_provider_strategy,
       :platform_version,
       :role,
       :deployment_configuration,
@@ -2379,6 +2772,13 @@ module Aws::ECS
     #           },
     #         ],
     #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
     #         platform_version: "String",
     #         scale: {
     #           value: 1.0,
@@ -2434,10 +2834,43 @@ module Aws::ECS
     #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to use for the task set.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
     #
     # @!attribute [rw] platform_version
     #   The platform version that the tasks in the task set should use. A
@@ -2467,6 +2900,7 @@ module Aws::ECS
       :load_balancers,
       :service_registries,
       :launch_type,
+      :capacity_provider_strategy,
       :platform_version,
       :scale,
       :client_token)
@@ -2764,6 +3198,10 @@ module Aws::ECS
     #   The Unix timestamp for when the service deployment was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy that the deployment is using.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @!attribute [rw] launch_type
     #   The launch type the tasks in the service are using. For more
     #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
@@ -2804,6 +3242,7 @@ module Aws::ECS
       :running_count,
       :created_at,
       :updated_at,
+      :capacity_provider_strategy,
       :launch_type,
       :platform_version,
       :network_configuration)
@@ -3022,12 +3461,96 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCapacityProvidersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         capacity_providers: ["String"],
+    #         include: ["TAGS"], # accepts TAGS
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers. Up to `100` capacity providers can be described
+    #   in an action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] include
+    #   Specifies whether or not you want to see the resource tags for the
+    #   capacity provider. If `TAGS` is specified, the tags are included in
+    #   the response. If this field is omitted, tags are not included in the
+    #   response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of account setting results returned by
+    #   `DescribeCapacityProviders` in paginated output. When this parameter
+    #   is used, `DescribeCapacityProviders` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `DescribeCapacityProviders` request with the returned
+    #   `nextToken` value. This value can be between 1 and 10. If this
+    #   parameter is not used, then `DescribeCapacityProviders` returns up
+    #   to 10 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeCapacityProviders` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeCapacityProvidersRequest AWS API Documentation
+    #
+    class DescribeCapacityProvidersRequest < Struct.new(
+      :capacity_providers,
+      :include,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_providers
+    #   The list of capacity providers.
+    #   @return [Array<Types::CapacityProvider>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeCapacityProviders` request. When the results of a
+    #   `DescribeCapacityProviders` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeCapacityProvidersResponse AWS API Documentation
+    #
+    class DescribeCapacityProvidersResponse < Struct.new(
+      :capacity_providers,
+      :failures,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeClustersRequest
     #   data as a hash:
     #
     #       {
     #         clusters: ["String"],
-    #         include: ["STATISTICS"], # accepts STATISTICS, TAGS
+    #         include: ["ATTACHMENTS"], # accepts ATTACHMENTS, SETTINGS, STATISTICS, TAGS
     #       }
     #
     # @!attribute [rw] clusters
@@ -3037,8 +3560,18 @@ module Aws::ECS
     #   @return [Array<String>]
     #
     # @!attribute [rw] include
-    #   Additional information about your clusters to be separated by launch
-    #   type, including:
+    #   Whether to include additional information about your clusters in the
+    #   response. If this field is omitted, the attachments, statistics, and
+    #   tags are not included.
+    #
+    #   If `ATTACHMENTS` is specified, the attachments for the container
+    #   instances or tasks within the cluster are included.
+    #
+    #   If `SETTINGS` is specified, the settings for the cluster are
+    #   included.
+    #
+    #   If `STATISTICS` is specified, the following additional information,
+    #   separated by launch type, is included:
     #
     #   * runningEC2TasksCount
     #
@@ -3055,6 +3588,9 @@ module Aws::ECS
     #   * drainingEC2ServiceCount
     #
     #   * drainingFargateServiceCount
+    #
+    #   If `TAGS` is specified, the metadata tags associated with the
+    #   cluster are included.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersRequest AWS API Documentation
@@ -3583,10 +4119,18 @@ module Aws::ECS
     #
     # @!attribute [rw] options
     #   The options to use when configuring the log router. This field is
-    #   optional and can be used to add additional metadata, such as the
-    #   task, task definition, cluster, and container instance details to
-    #   the log event. If specified, the syntax to use is
-    #   `"options":\{"enable-ecs-log-metadata":"true|false"\}`.
+    #   optional and can be used to specify a custom configuration file or
+    #   to add additional metadata, such as the task, task definition,
+    #   cluster, and container instance details to the log event. If
+    #   specified, the syntax to use is
+    #   `"options":\{"enable-ecs-log-metadata":"true|false","config-file-type:"s3|file","config-file-value":"arn:aws:s3:::mybucket/fluent.conf|filepath"\}`.
+    #   For more information, see [Creating a Task Definition that Uses a
+    #   FireLens Configuration][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-taskdef
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/FirelensConfiguration AWS API Documentation
@@ -4998,6 +5542,66 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The managed scaling settings for the Auto Scaling group capacity
+    # provider.
+    #
+    # When managed scaling is enabled, Amazon ECS manages the scale-in and
+    # scale-out actions of the Auto Scaling group. Amazon ECS manages a
+    # target tracking scaling policy using an Amazon ECS-managed CloudWatch
+    # metric with the specified `targetCapacity` value as the target value
+    # for the metric. For more information, see [Using Managed Scaling][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    # If managed scaling is disabled, the user must manage the scaling of
+    # the Auto Scaling group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling
+    #
+    # @note When making an API call, you may pass ManagedScaling
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         target_capacity: 1,
+    #         minimum_scaling_step_size: 1,
+    #         maximum_scaling_step_size: 1,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Whether or not to enable managed scaling for the capacity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_capacity
+    #   The target capacity value for the capacity provider. The specified
+    #   value must be greater than `0` and less than or equal to `100`. A
+    #   value of `100` will result in the Amazon EC2 instances in your Auto
+    #   Scaling group being completely utilized.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_scaling_step_size
+    #   The minimum number of container instances that Amazon ECS will scale
+    #   in or scale out at one time. If this parameter is omitted, the
+    #   default value of `1` is used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_scaling_step_size
+    #   The maximum number of container instances that Amazon ECS will scale
+    #   in or scale out at one time. If this parameter is omitted, the
+    #   default value of `10000` is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedScaling AWS API Documentation
+    #
+    class ManagedScaling < Struct.new(
+      :status,
+      :target_capacity,
+      :minimum_scaling_step_size,
+      :maximum_scaling_step_size)
+      include Aws::Structure
+    end
+
     # Details on a volume mount point that is used in a container
     # definition.
     #
@@ -5575,6 +6179,91 @@ module Aws::ECS
     #
     class PutAttributesResponse < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutClusterCapacityProvidersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String", # required
+    #         capacity_providers: ["String"], # required
+    #         default_capacity_provider_strategy: [ # required
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   modify the capacity provider settings for. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers to associate with the cluster.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] default_capacity_provider_strategy
+    #   The capacity provider strategy to use by default for the cluster.
+    #
+    #   When creating a service or running a task on a cluster, if no
+    #   capacity provider or launch type is specified then the default
+    #   capacity provider strategy for the cluster is used.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProvidersRequest AWS API Documentation
+    #
+    class PutClusterCapacityProvidersRequest < Struct.new(
+      :cluster,
+      :capacity_providers,
+      :default_capacity_provider_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   A regional grouping of one or more container instances on which you
+    #   can run task requests. Each account receives a default cluster the
+    #   first time you use the Amazon ECS service, but you may also create
+    #   other clusters. Clusters may contain more than one instance type
+    #   simultaneously.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProvidersResponse AWS API Documentation
+    #
+    class PutClusterCapacityProvidersResponse < Struct.new(
+      :cluster)
       include Aws::Structure
     end
 
@@ -6393,6 +7082,13 @@ module Aws::ECS
     #   data as a hash:
     #
     #       {
+    #         capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
     #         cluster: "String",
     #         count: 1,
     #         enable_ecs_managed_tags: false,
@@ -6463,6 +7159,36 @@ module Aws::ECS
     #         task_definition: "String", # required
     #       }
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to use for the task.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in
+    #   a capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group,
+    #   the capacity provider must already be created. New capacity
+    #   providers can be created with the CreateCapacityProvider API
+    #   operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be
+    #   associated with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
     #   which to run your task. If you do not specify a cluster, the default
@@ -6494,6 +7220,9 @@ module Aws::ECS
     #   The launch type on which to run your task. For more information, see
     #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
+    #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
     #
     #
     #
@@ -6620,6 +7349,7 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
     #
     class RunTaskRequest < Struct.new(
+      :capacity_provider_strategy,
       :cluster,
       :count,
       :enable_ecs_managed_tags,
@@ -6814,6 +7544,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy associated with the service.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @!attribute [rw] platform_version
     #   The platform version on which to run your service. A platform
     #   version is only specified for tasks using the Fargate launch type.
@@ -6983,6 +7717,7 @@ module Aws::ECS
       :running_count,
       :pending_count,
       :launch_type,
+      :capacity_provider_strategy,
       :platform_version,
       :task_definition,
       :deployment_configuration,
@@ -7708,8 +8443,9 @@ module Aws::ECS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon ECS tasks, services,
-    #   task definitions, clusters, and container instances.
+    #   Currently, the supported resources are Amazon ECS capacity
+    #   providers, tasks, services, task definitions, clusters, and
+    #   container instances.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -7767,6 +8503,10 @@ module Aws::ECS
     #
     # @!attribute [rw] availability_zone
     #   The availability zone of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_name
+    #   The capacity provider associated with the task.
     #   @return [String]
     #
     # @!attribute [rw] cluster_arn
@@ -8025,6 +8765,7 @@ module Aws::ECS
       :attachments,
       :attributes,
       :availability_zone,
+      :capacity_provider_name,
       :cluster_arn,
       :connectivity,
       :connectivity_at,
@@ -8606,6 +9347,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
     #   @return [String]
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy associated with the task set.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @!attribute [rw] platform_version
     #   The platform version on which the tasks in the task set are running.
     #   A platform version is only specified for tasks using the Fargate
@@ -8682,6 +9427,7 @@ module Aws::ECS
       :created_at,
       :updated_at,
       :launch_type,
+      :capacity_provider_strategy,
       :platform_version,
       :network_configuration,
       :load_balancers,
@@ -8774,8 +9520,9 @@ module Aws::ECS
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon ECS tasks,
-    #   services, task definitions, clusters, and container instances.
+    #   tags. Currently, the supported resources are Amazon ECS capacity
+    #   providers, tasks, services, task definitions, clusters, and
+    #   container instances.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -8989,6 +9736,13 @@ module Aws::ECS
     #         service: "String", # required
     #         desired_count: 1,
     #         task_definition: "String",
+    #         capacity_provider_strategy: [
+    #           {
+    #             capacity_provider: "String", # required
+    #             weight: 1,
+    #             base: 1,
+    #           },
+    #         ],
     #         deployment_configuration: {
     #           maximum_percent: 1,
     #           minimum_healthy_percent: 1,
@@ -9029,6 +9783,16 @@ module Aws::ECS
     #   after the new version is running.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to update the service to use.
+    #
+    #   If the service is using the default capacity provider strategy for
+    #   the cluster, the service can be updated to use one or more capacity
+    #   providers. However, when a service is using a non-default capacity
+    #   provider strategy, the service cannot be updated to use the
+    #   cluster's default capacity provider strategy.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
     #   during the deployment and the ordering of stopping and starting
@@ -9036,33 +9800,17 @@ module Aws::ECS
     #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] network_configuration
-    #   The network configuration for the service. This parameter is
-    #   required for task definitions that use the `awsvpc` network mode to
-    #   receive their own elastic network interface, and it is not supported
-    #   for other network modes. For more information, see [Task
-    #   Networking][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
-    #
-    #   <note markdown="1"> Updating a service to add a subnet to a list of existing subnets
-    #   does not trigger a service deployment. For example, if your network
-    #   configuration change is to keep the existing subnets and simply add
-    #   another subnet to the network configuration, this does not trigger a
-    #   new service deployment.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   An object representing the network configuration for a task or
+    #   service.
     #   @return [Types::NetworkConfiguration]
     #
     # @!attribute [rw] platform_version
     #   The platform version on which your tasks in the service are running.
     #   A platform version is only specified for tasks using the Fargate
-    #   launch type. If one is not specified, the `LATEST` platform version
-    #   is used by default. For more information, see [AWS Fargate Platform
-    #   Versions][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   launch type. If a platform version is not specified, the `LATEST`
+    #   platform version is used by default. For more information, see [AWS
+    #   Fargate Platform Versions][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
     #
     #
     #
@@ -9085,11 +9833,11 @@ module Aws::ECS
     #   your service is configured to use a load balancer. If your
     #   service's tasks take a while to start and respond to Elastic Load
     #   Balancing health checks, you can specify a health check grace period
-    #   of up to 2,147,483,647 seconds. During that time, the ECS service
-    #   scheduler ignores the Elastic Load Balancing health check status.
-    #   This grace period can prevent the ECS service scheduler from marking
-    #   tasks as unhealthy and stopping them before they have time to come
-    #   up.
+    #   of up to 2,147,483,647 seconds. During that time, the Amazon ECS
+    #   service scheduler ignores the Elastic Load Balancing health check
+    #   status. This grace period can prevent the ECS service scheduler from
+    #   marking tasks as unhealthy and stopping them before they have time
+    #   to come up.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
@@ -9099,6 +9847,7 @@ module Aws::ECS
       :service,
       :desired_count,
       :task_definition,
+      :capacity_provider_strategy,
       :deployment_configuration,
       :network_configuration,
       :platform_version,

@@ -51,6 +51,9 @@
   "Athena": {
     "models": "athena/2017-05-18"
   },
+  "AugmentedAIRuntime": {
+    "models": "sagemaker-a2i-runtime/2019-11-07"
+  },
   "AutoScaling": {
     "models": "autoscaling/2011-01-01"
   },
@@ -124,6 +127,12 @@
   "CodeDeploy": {
     "models": "codedeploy/2014-10-06"
   },
+  "CodeGuruProfiler": {
+    "models": "codeguruprofiler/2019-07-18"
+  },
+  "CodeGuruReviewer": {
+    "models": "codeguru-reviewer/2019-09-19"
+  },
   "CodePipeline": {
     "models": "codepipeline/2015-07-09"
   },
@@ -147,6 +156,9 @@
   },
   "ComprehendMedical": {
     "models": "comprehendmedical/2018-10-30"
+  },
+  "ComputeOptimizer": {
+    "models": "compute-optimizer/2019-11-01"
   },
   "ConfigService": {
     "models": "config/2014-11-12"
@@ -271,6 +283,9 @@
   "ForecastService": {
     "models": "forecast/2018-06-26"
   },
+  "FraudDetector": {
+    "models": "frauddetector/2019-11-15"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01"
   },
@@ -348,6 +363,9 @@
   },
   "Kafka": {
     "models": "kafka/2018-11-14"
+  },
+  "Kendra": {
+    "models": "kendra/2019-02-03"
   },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
@@ -454,6 +472,9 @@
   "Neptune": {
     "models": "neptune/2014-10-31"
   },
+  "NetworkManager": {
+    "models": "networkmanager/2019-07-05"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },
@@ -462,6 +483,9 @@
   },
   "Organizations": {
     "models": "organizations/2016-11-28"
+  },
+  "Outposts": {
+    "models": "outposts/2019-12-03"
   },
   "PI": {
     "models": "pi/2018-02-27"

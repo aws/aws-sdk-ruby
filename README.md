@@ -323,6 +323,7 @@ to be backwards compatible.
 | AWS CodeStar                                          | Aws::CodeStar                        | aws-sdk-codestar                        | 2017-04-19  |
 | AWS CodeStar Notifications                            | Aws::CodeStarNotifications           | aws-sdk-codestarnotifications           | 2019-10-15  |
 | AWS Comprehend Medical                                | Aws::ComprehendMedical               | aws-sdk-comprehendmedical               | 2018-10-30  |
+| AWS Compute Optimizer                                 | Aws::ComputeOptimizer                | aws-sdk-computeoptimizer                | 2019-11-01  |
 | AWS Config                                            | Aws::ConfigService                   | aws-sdk-configservice                   | 2014-11-12  |
 | AWS Cost Explorer Service                             | Aws::CostExplorer                    | aws-sdk-costexplorer                    | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | Aws::CostandUsageReportService       | aws-sdk-costandusagereportservice       | 2017-01-06  |
@@ -360,8 +361,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | Aws::IoTThingsGraph                  | aws-sdk-iotthingsgraph                  | 2018-09-06  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
 | AWS Lake Formation                                    | Aws::LakeFormation                   | aws-sdk-lakeformation                   | 2017-03-31  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS License Manager                                   | Aws::LicenseManager                  | aws-sdk-licensemanager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | Aws::MarketplaceCatalog              | aws-sdk-marketplacecatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
@@ -371,9 +372,11 @@ to be backwards compatible.
 | AWS Migration Hub                                     | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
 | AWS Migration Hub Config                              | Aws::MigrationHubConfig              | aws-sdk-migrationhubconfig              | 2019-06-30  |
 | AWS Mobile                                            | Aws::Mobile                          | aws-sdk-mobile                          | 2017-07-01  |
+| AWS Network Manager                                   | Aws::NetworkManager                  | aws-sdk-networkmanager                  | 2019-07-05  |
 | AWS OpsWorks                                          | Aws::OpsWorks                        | aws-sdk-opsworks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | Aws::OpsWorksCM                      | aws-sdk-opsworkscm                      | 2016-11-01  |
 | AWS Organizations                                     | Aws::Organizations                   | aws-sdk-organizations                   | 2016-11-28  |
+| AWS Outposts                                          | Aws::Outposts                        | aws-sdk-outposts                        | 2019-12-03  |
 | AWS Performance Insights                              | Aws::PI                              | aws-sdk-pi                              | 2018-02-27  |
 | AWS Price List Service                                | Aws::Pricing                         | aws-sdk-pricing                         | 2017-10-15  |
 | AWS RDS DataService                                   | Aws::RDSDataService                  | aws-sdk-rdsdataservice                  | 2018-08-01  |
@@ -400,6 +403,7 @@ to be backwards compatible.
 | AWS WAF Regional                                      | Aws::WAFRegional                     | aws-sdk-wafregional                     | 2016-11-28  |
 | AWS WAFV2                                             | Aws::WAFV2                           | aws-sdk-wafv2                           | 2019-07-29  |
 | AWS X-Ray                                             | Aws::XRay                            | aws-sdk-xray                            | 2016-04-12  |
+| AWSKendraFrontendService                              | Aws::Kendra                          | aws-sdk-kendra                          | 2019-02-03  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering             | aws-sdk-marketplacemetering             | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository | aws-sdk-serverlessapplicationrepository | 2017-09-08  |
 | Access Analyzer                                       | Aws::AccessAnalyzer                  | aws-sdk-accessanalyzer                  | 2019-11-01  |
@@ -408,6 +412,7 @@ to be backwards compatible.
 | Amazon AppConfig                                      | Aws::AppConfig                       | aws-sdk-appconfig                       | 2019-10-09  |
 | Amazon AppStream                                      | Aws::AppStream                       | aws-sdk-appstream                       | 2016-12-01  |
 | Amazon Athena                                         | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
+| Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime              | aws-sdk-augmentedairuntime              | 2019-11-07  |
 | Amazon Chime                                          | Aws::Chime                           | aws-sdk-chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2017-01-11  |
 | Amazon CloudFront                                     | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2019-03-26  |
@@ -418,6 +423,8 @@ to be backwards compatible.
 | Amazon CloudWatch Application Insights                | Aws::ApplicationInsights             | aws-sdk-applicationinsights             | 2018-11-25  |
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                | aws-sdk-cloudwatchevents                | 2015-10-07  |
 | Amazon CloudWatch Logs                                | Aws::CloudWatchLogs                  | aws-sdk-cloudwatchlogs                  | 2014-03-28  |
+| Amazon CodeGuru Profiler                              | Aws::CodeGuruProfiler                | aws-sdk-codeguruprofiler                | 2019-07-18  |
+| Amazon CodeGuru Reviewer                              | Aws::CodeGuruReviewer                | aws-sdk-codegurureviewer                | 2019-09-19  |
 | Amazon Cognito Identity                               | Aws::CognitoIdentity                 | aws-sdk-cognitoidentity                 | 2014-06-30  |
 | Amazon Cognito Identity Provider                      | Aws::CognitoIdentityProvider         | aws-sdk-cognitoidentityprovider         | 2016-04-18  |
 | Amazon Cognito Sync                                   | Aws::CognitoSync                     | aws-sdk-cognitosync                     | 2014-06-30  |
@@ -443,14 +450,15 @@ to be backwards compatible.
 | Amazon FSx                                            | Aws::FSx                             | aws-sdk-fsx                             | 2018-03-01  |
 | Amazon Forecast Query Service                         | Aws::ForecastQueryService            | aws-sdk-forecastqueryservice            | 2018-06-26  |
 | Amazon Forecast Service                               | Aws::ForecastService                 | aws-sdk-forecastservice                 | 2018-06-26  |
+| Amazon Fraud Detector                                 | Aws::FraudDetector                   | aws-sdk-frauddetector                   | 2019-11-15  |
 | Amazon GameLift                                       | Aws::GameLift                        | aws-sdk-gamelift                        | 2015-10-01  |
 | Amazon Glacier                                        | Aws::Glacier                         | aws-sdk-glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | Aws::GuardDuty                       | aws-sdk-guardduty                       | 2017-11-28  |
 | Amazon Import/Export Snowball                         | Aws::Snowball                        | aws-sdk-snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                       | aws-sdk-inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Aws::Kinesis                         | aws-sdk-kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
@@ -504,8 +512,8 @@ to be backwards compatible.
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |

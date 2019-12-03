@@ -72,6 +72,11 @@ module Aws::EKS
       end
 
       # @return [String]
+      def fargate_profile_name
+        @data[:fargate_profile_name]
+      end
+
+      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -189,6 +194,11 @@ module Aws::EKS
       # @return [String]
       def nodegroup_name
         @data[:nodegroup_name]
+      end
+
+      # @return [String]
+      def fargate_profile_name
+        @data[:fargate_profile_name]
       end
 
       # @return [String]

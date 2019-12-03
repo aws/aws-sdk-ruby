@@ -227,7 +227,7 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :acl
     #   The canned ACL to apply to the object. For more information, see
-    #   [Canned ACL][1]
+    #   [Canned ACL][1].
     #
     #
     #
@@ -259,9 +259,13 @@ module Aws::S3
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   requests. For information about downloading objects from Requester
+    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @return [Types::PutObjectAclOutput]

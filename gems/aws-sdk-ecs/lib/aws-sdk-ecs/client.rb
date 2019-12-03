@@ -264,18 +264,116 @@ module Aws::ECS
 
     # @!group API Operations
 
+    # Creates a new capacity provider. Capacity providers are associated
+    # with an Amazon ECS cluster and are used in capacity provider
+    # strategies to facilitate cluster auto scaling.
+    #
+    # Only capacity providers using an Auto Scaling group can be created.
+    # Amazon ECS tasks on AWS Fargate use the `FARGATE` and `FARGATE_SPOT`
+    # capacity providers which are already created and available to all
+    # accounts in Regions supported by AWS Fargate.
+    #
+    # @option params [required, String] :name
+    #   The name of the capacity provider. Up to 255 characters are allowed,
+    #   including letters (upper and lowercase), numbers, underscores, and
+    #   hyphens. The name cannot be prefixed with "`aws`", "`ecs`", or
+    #   "`fargate`".
+    #
+    # @option params [required, Types::AutoScalingGroupProvider] :auto_scaling_group_provider
+    #   The details of the Auto Scaling group for the capacity provider.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the capacity provider to help you
+    #   categorize and organize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
+    #
+    # @return [Types::CreateCapacityProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCapacityProviderResponse#capacity_provider #capacity_provider} => Types::CapacityProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_capacity_provider({
+    #     name: "String", # required
+    #     auto_scaling_group_provider: { # required
+    #       auto_scaling_group_arn: "String", # required
+    #       managed_scaling: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #         target_capacity: 1,
+    #         minimum_scaling_step_size: 1,
+    #         maximum_scaling_step_size: 1,
+    #       },
+    #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_provider.capacity_provider_arn #=> String
+    #   resp.capacity_provider.name #=> String
+    #   resp.capacity_provider.status #=> String, one of "ACTIVE"
+    #   resp.capacity_provider.auto_scaling_group_provider.auto_scaling_group_arn #=> String
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.tags #=> Array
+    #   resp.capacity_provider.tags[0].key #=> String
+    #   resp.capacity_provider.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCapacityProvider AWS API Documentation
+    #
+    # @overload create_capacity_provider(params = {})
+    # @param [Hash] params ({})
+    def create_capacity_provider(params = {}, options = {})
+      req = build_request(:create_capacity_provider, params)
+      req.send_request(options)
+    end
+
     # Creates a new Amazon ECS cluster. By default, your account receives a
     # `default` cluster when you launch your first container instance.
     # However, you can create your own cluster with a unique name with the
     # `CreateCluster` action.
     #
     # <note markdown="1"> When you call the CreateCluster API operation, Amazon ECS attempts to
-    # create the service-linked role for your account so that required
-    # resources in other AWS services can be managed on your behalf.
-    # However, if the IAM user that makes the call does not have permissions
-    # to create the service-linked role, it is not created. For more
-    # information, see [Using Service-Linked Roles for Amazon ECS][1] in the
-    # *Amazon Elastic Container Service Developer Guide*.
+    # create the Amazon ECS service-linked role for your account so that
+    # required resources in other AWS services can be managed on your
+    # behalf. However, if the IAM user that makes the call does not have
+    # permissions to create the service-linked role, it is not created. For
+    # more information, see [Using Service-Linked Roles for Amazon ECS][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
     #
     #  </note>
     #
@@ -324,6 +422,51 @@ module Aws::ECS
     #   specified, it will override the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
+    # @option params [Array<String>] :capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers to associate with the cluster.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created and not already associated
+    #   with another cluster. New capacity providers can be created with the
+    #   CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #
+    # @option params [Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
+    #   The capacity provider strategy to use by default for the cluster.
+    #
+    #   When creating a service or running a task on a cluster, if no capacity
+    #   provider or launch type is specified then the default capacity
+    #   provider strategy for the cluster is used.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   If a default capacity provider strategy is not defined for a cluster
+    #   during creation, it can be defined later with the
+    #   PutClusterCapacityProviders API operation.
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -366,6 +509,14 @@ module Aws::ECS
     #         value: "String",
     #       },
     #     ],
+    #     capacity_providers: ["String"],
+    #     default_capacity_provider_strategy: [
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -386,6 +537,20 @@ module Aws::ECS
     #   resp.cluster.settings #=> Array
     #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
     #   resp.cluster.settings[0].value #=> String
+    #   resp.cluster.capacity_providers #=> Array
+    #   resp.cluster.capacity_providers[0] #=> String
+    #   resp.cluster.default_capacity_provider_strategy #=> Array
+    #   resp.cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.cluster.attachments #=> Array
+    #   resp.cluster.attachments[0].id #=> String
+    #   resp.cluster.attachments[0].type #=> String
+    #   resp.cluster.attachments[0].status #=> String
+    #   resp.cluster.attachments[0].details #=> Array
+    #   resp.cluster.attachments[0].details[0].name #=> String
+    #   resp.cluster.attachments[0].details[0].value #=> String
+    #   resp.cluster.attachments_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
     #
@@ -623,9 +788,40 @@ module Aws::ECS
     #   see [Amazon ECS Launch Types][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #
+    # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
+    #   The capacity provider strategy to use for the service.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
     #
     # @option params [String] :platform_version
     #   The platform version that your tasks in the service are running on. A
@@ -652,10 +848,10 @@ module Aws::ECS
     #   a role here. The service-linked role is required if your task
     #   definition uses the `awsvpc` network mode or if the service is
     #   configured to use service discovery, an external deployment
-    #   controller, or multiple target groups in which case you should not
-    #   specify a role here. For more information, see [Using Service-Linked
-    #   Roles for Amazon ECS][1] in the *Amazon Elastic Container Service
-    #   Developer Guide*.
+    #   controller, multiple target groups, or Elastic Inference accelerators
+    #   in which case you should not specify a role here. For more
+    #   information, see [Using Service-Linked Roles for Amazon ECS][1] in the
+    #   *Amazon Elastic Container Service Developer Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
     #   specify the full role ARN (this is recommended) or prefix the role
@@ -933,6 +1129,13 @@ module Aws::ECS
     #     desired_count: 1,
     #     client_token: "String",
     #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     capacity_provider_strategy: [
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
     #     platform_version: "String",
     #     role: "String",
     #     deployment_configuration: {
@@ -993,6 +1196,10 @@ module Aws::ECS
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
     #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.capacity_provider_strategy #=> Array
+    #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
@@ -1012,6 +1219,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
     #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -1041,6 +1252,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].capacity_provider_strategy #=> Array
+    #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -1133,9 +1348,40 @@ module Aws::ECS
     #   information, see [Amazon ECS Launch Types][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
+    #
+    # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
+    #   The capacity provider strategy to use for the task set.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
     #
     # @option params [String] :platform_version
     #   The platform version that the tasks in the task set should use. A
@@ -1186,6 +1432,13 @@ module Aws::ECS
     #       },
     #     ],
     #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     capacity_provider_strategy: [
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
     #     platform_version: "String",
     #     scale: {
     #       value: 1.0,
@@ -1210,6 +1463,10 @@ module Aws::ECS
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
     #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.capacity_provider_strategy #=> Array
+    #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -1431,6 +1688,20 @@ module Aws::ECS
     #   resp.cluster.settings #=> Array
     #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
     #   resp.cluster.settings[0].value #=> String
+    #   resp.cluster.capacity_providers #=> Array
+    #   resp.cluster.capacity_providers[0] #=> String
+    #   resp.cluster.default_capacity_provider_strategy #=> Array
+    #   resp.cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.cluster.attachments #=> Array
+    #   resp.cluster.attachments[0].id #=> String
+    #   resp.cluster.attachments[0].type #=> String
+    #   resp.cluster.attachments[0].status #=> String
+    #   resp.cluster.attachments[0].details #=> Array
+    #   resp.cluster.attachments[0].details[0].name #=> String
+    #   resp.cluster.attachments[0].details[0].value #=> String
+    #   resp.cluster.attachments_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
@@ -1523,6 +1794,10 @@ module Aws::ECS
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
     #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.capacity_provider_strategy #=> Array
+    #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
@@ -1542,6 +1817,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
     #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -1571,6 +1850,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].capacity_provider_strategy #=> Array
+    #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -1668,6 +1951,10 @@ module Aws::ECS
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
     #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.capacity_provider_strategy #=> Array
+    #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -1778,6 +2065,7 @@ module Aws::ECS
     #
     #   resp.container_instance.container_instance_arn #=> String
     #   resp.container_instance.ec2_instance_id #=> String
+    #   resp.container_instance.capacity_provider_name #=> String
     #   resp.container_instance.version #=> Integer
     #   resp.container_instance.version_info.agent_version #=> String
     #   resp.container_instance.version_info.agent_hash #=> String
@@ -2016,6 +2304,88 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Describes one or more of your capacity providers.
+    #
+    # @option params [Array<String>] :capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers. Up to `100` capacity providers can be described in
+    #   an action.
+    #
+    # @option params [Array<String>] :include
+    #   Specifies whether or not you want to see the resource tags for the
+    #   capacity provider. If `TAGS` is specified, the tags are included in
+    #   the response. If this field is omitted, tags are not included in the
+    #   response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of account setting results returned by
+    #   `DescribeCapacityProviders` in paginated output. When this parameter
+    #   is used, `DescribeCapacityProviders` only returns `maxResults` results
+    #   in a single page along with a `nextToken` response element. The
+    #   remaining results of the initial request can be seen by sending
+    #   another `DescribeCapacityProviders` request with the returned
+    #   `nextToken` value. This value can be between 1 and 10. If this
+    #   parameter is not used, then `DescribeCapacityProviders` returns up to
+    #   10 results and a `nextToken` value if applicable.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeCapacityProviders` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @return [Types::DescribeCapacityProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCapacityProvidersResponse#capacity_providers #capacity_providers} => Array&lt;Types::CapacityProvider&gt;
+    #   * {Types::DescribeCapacityProvidersResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #   * {Types::DescribeCapacityProvidersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_capacity_providers({
+    #     capacity_providers: ["String"],
+    #     include: ["TAGS"], # accepts TAGS
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_providers #=> Array
+    #   resp.capacity_providers[0].capacity_provider_arn #=> String
+    #   resp.capacity_providers[0].name #=> String
+    #   resp.capacity_providers[0].status #=> String, one of "ACTIVE"
+    #   resp.capacity_providers[0].auto_scaling_group_provider.auto_scaling_group_arn #=> String
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.target_capacity #=> Integer
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.minimum_scaling_step_size #=> Integer
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_providers[0].tags #=> Array
+    #   resp.capacity_providers[0].tags[0].key #=> String
+    #   resp.capacity_providers[0].tags[0].value #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #   resp.failures[0].detail #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeCapacityProviders AWS API Documentation
+    #
+    # @overload describe_capacity_providers(params = {})
+    # @param [Hash] params ({})
+    def describe_capacity_providers(params = {}, options = {})
+      req = build_request(:describe_capacity_providers, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of your clusters.
     #
     # @option params [Array<String>] :clusters
@@ -2024,8 +2394,17 @@ module Aws::ECS
     #   assumed.
     #
     # @option params [Array<String>] :include
-    #   Additional information about your clusters to be separated by launch
-    #   type, including:
+    #   Whether to include additional information about your clusters in the
+    #   response. If this field is omitted, the attachments, statistics, and
+    #   tags are not included.
+    #
+    #   If `ATTACHMENTS` is specified, the attachments for the container
+    #   instances or tasks within the cluster are included.
+    #
+    #   If `SETTINGS` is specified, the settings for the cluster are included.
+    #
+    #   If `STATISTICS` is specified, the following additional information,
+    #   separated by launch type, is included:
     #
     #   * runningEC2TasksCount
     #
@@ -2042,6 +2421,9 @@ module Aws::ECS
     #   * drainingEC2ServiceCount
     #
     #   * drainingFargateServiceCount
+    #
+    #   If `TAGS` is specified, the metadata tags associated with the cluster
+    #   are included.
     #
     # @return [Types::DescribeClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2076,7 +2458,7 @@ module Aws::ECS
     #
     #   resp = client.describe_clusters({
     #     clusters: ["String"],
-    #     include: ["STATISTICS"], # accepts STATISTICS, TAGS
+    #     include: ["ATTACHMENTS"], # accepts ATTACHMENTS, SETTINGS, STATISTICS, TAGS
     #   })
     #
     # @example Response structure
@@ -2098,6 +2480,20 @@ module Aws::ECS
     #   resp.clusters[0].settings #=> Array
     #   resp.clusters[0].settings[0].name #=> String, one of "containerInsights"
     #   resp.clusters[0].settings[0].value #=> String
+    #   resp.clusters[0].capacity_providers #=> Array
+    #   resp.clusters[0].capacity_providers[0] #=> String
+    #   resp.clusters[0].default_capacity_provider_strategy #=> Array
+    #   resp.clusters[0].default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.clusters[0].default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.clusters[0].default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.clusters[0].attachments #=> Array
+    #   resp.clusters[0].attachments[0].id #=> String
+    #   resp.clusters[0].attachments[0].type #=> String
+    #   resp.clusters[0].attachments[0].status #=> String
+    #   resp.clusters[0].attachments[0].details #=> Array
+    #   resp.clusters[0].attachments[0].details[0].name #=> String
+    #   resp.clusters[0].attachments[0].details[0].value #=> String
+    #   resp.clusters[0].attachments_status #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2239,6 +2635,7 @@ module Aws::ECS
     #   resp.container_instances #=> Array
     #   resp.container_instances[0].container_instance_arn #=> String
     #   resp.container_instances[0].ec2_instance_id #=> String
+    #   resp.container_instances[0].capacity_provider_name #=> String
     #   resp.container_instances[0].version #=> Integer
     #   resp.container_instances[0].version_info.agent_version #=> String
     #   resp.container_instances[0].version_info.agent_hash #=> String
@@ -2402,6 +2799,10 @@ module Aws::ECS
     #   resp.services[0].running_count #=> Integer
     #   resp.services[0].pending_count #=> Integer
     #   resp.services[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].capacity_provider_strategy #=> Array
+    #   resp.services[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.services[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.services[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].platform_version #=> String
     #   resp.services[0].task_definition #=> String
     #   resp.services[0].deployment_configuration.maximum_percent #=> Integer
@@ -2421,6 +2822,10 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].created_at #=> Time
     #   resp.services[0].task_sets[0].updated_at #=> Time
     #   resp.services[0].task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.services[0].task_sets[0].capacity_provider_strategy #=> Array
+    #   resp.services[0].task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.services[0].task_sets[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.services[0].task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].task_sets[0].platform_version #=> String
     #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.services[0].task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -2450,6 +2855,10 @@ module Aws::ECS
     #   resp.services[0].deployments[0].running_count #=> Integer
     #   resp.services[0].deployments[0].created_at #=> Time
     #   resp.services[0].deployments[0].updated_at #=> Time
+    #   resp.services[0].deployments[0].capacity_provider_strategy #=> Array
+    #   resp.services[0].deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.services[0].deployments[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.services[0].deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.services[0].deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
     #   resp.services[0].deployments[0].platform_version #=> String
     #   resp.services[0].deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -2796,6 +3205,10 @@ module Aws::ECS
     #   resp.task_sets[0].created_at #=> Time
     #   resp.task_sets[0].updated_at #=> Time
     #   resp.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_sets[0].capacity_provider_strategy #=> Array
+    #   resp.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.task_sets[0].platform_version #=> String
     #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -2926,6 +3339,7 @@ module Aws::ECS
     #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.tasks[0].attributes[0].target_id #=> String
     #   resp.tasks[0].availability_zone #=> String
+    #   resp.tasks[0].capacity_provider_name #=> String
     #   resp.tasks[0].cluster_arn #=> String
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
@@ -4208,6 +4622,126 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Modifies the available capacity providers and the default capacity
+    # provider strategy for a cluster.
+    #
+    # You must specify both the available capacity providers and a default
+    # capacity provider strategy for the cluster. If the specified cluster
+    # has existing capacity providers associated with it, you must specify
+    # all existing capacity providers in addition to any new ones you want
+    # to add. Any existing capacity providers associated with a cluster that
+    # are omitted from a PutClusterCapacityProviders API call will be
+    # disassociated with the cluster. You can only disassociate an existing
+    # capacity provider from a cluster if it's not being used by any
+    # existing tasks.
+    #
+    # When creating a service or running a task on a cluster, if no capacity
+    # provider or launch type is specified, then the cluster's default
+    # capacity provider strategy is used. It is recommended to define a
+    # default capacity provider strategy for your cluster, however you may
+    # specify an empty array (`[]`) to bypass defining a default strategy.
+    #
+    # @option params [required, String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   modify the capacity provider settings for. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #
+    # @option params [required, Array<String>] :capacity_providers
+    #   The short name or full Amazon Resource Name (ARN) of one or more
+    #   capacity providers to associate with the cluster.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    # @option params [required, Array<Types::CapacityProviderStrategyItem>] :default_capacity_provider_strategy
+    #   The capacity provider strategy to use by default for the cluster.
+    #
+    #   When creating a service or running a task on a cluster, if no capacity
+    #   provider or launch type is specified then the default capacity
+    #   provider strategy for the cluster is used.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    # @return [Types::PutClusterCapacityProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutClusterCapacityProvidersResponse#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_cluster_capacity_providers({
+    #     cluster: "String", # required
+    #     capacity_providers: ["String"], # required
+    #     default_capacity_provider_strategy: [ # required
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.status #=> String
+    #   resp.cluster.registered_container_instances_count #=> Integer
+    #   resp.cluster.running_tasks_count #=> Integer
+    #   resp.cluster.pending_tasks_count #=> Integer
+    #   resp.cluster.active_services_count #=> Integer
+    #   resp.cluster.statistics #=> Array
+    #   resp.cluster.statistics[0].name #=> String
+    #   resp.cluster.statistics[0].value #=> String
+    #   resp.cluster.tags #=> Array
+    #   resp.cluster.tags[0].key #=> String
+    #   resp.cluster.tags[0].value #=> String
+    #   resp.cluster.settings #=> Array
+    #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
+    #   resp.cluster.settings[0].value #=> String
+    #   resp.cluster.capacity_providers #=> Array
+    #   resp.cluster.capacity_providers[0] #=> String
+    #   resp.cluster.default_capacity_provider_strategy #=> Array
+    #   resp.cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.cluster.attachments #=> Array
+    #   resp.cluster.attachments[0].id #=> String
+    #   resp.cluster.attachments[0].type #=> String
+    #   resp.cluster.attachments[0].status #=> String
+    #   resp.cluster.attachments[0].details #=> Array
+    #   resp.cluster.attachments[0].details[0].name #=> String
+    #   resp.cluster.attachments[0].details[0].value #=> String
+    #   resp.cluster.attachments_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutClusterCapacityProviders AWS API Documentation
+    #
+    # @overload put_cluster_capacity_providers(params = {})
+    # @param [Hash] params ({})
+    def put_cluster_capacity_providers(params = {}, options = {})
+      req = build_request(:put_cluster_capacity_providers, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action is only used by the Amazon ECS agent, and it is not
     # intended for use outside of the agent.
     #
@@ -4333,6 +4867,7 @@ module Aws::ECS
     #
     #   resp.container_instance.container_instance_arn #=> String
     #   resp.container_instance.ec2_instance_id #=> String
+    #   resp.container_instance.capacity_provider_name #=> String
     #   resp.container_instance.version #=> Integer
     #   resp.container_instance.version_info.agent_version #=> String
     #   resp.container_instance.version_info.agent_hash #=> String
@@ -5147,6 +5682,34 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
+    # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
+    #   The capacity provider strategy to use for the task.
+    #
+    #   A capacity provider strategy consists of one or more capacity
+    #   providers along with the `base` and `weight` to assign to them. A
+    #   capacity provider must be associated with the cluster to be used in a
+    #   capacity provider strategy. The PutClusterCapacityProviders API is
+    #   used to associate a capacity provider with a cluster. Only capacity
+    #   providers with an `ACTIVE` or `UPDATING` status can be used.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   `launchType` is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #
+    #   If specifying a capacity provider that uses an Auto Scaling group, the
+    #   capacity provider must already be created. New capacity providers can
+    #   be created with the CreateCapacityProvider API operation.
+    #
+    #   To use a AWS Fargate capacity provider, specify either the `FARGATE`
+    #   or `FARGATE_SPOT` capacity providers. The AWS Fargate capacity
+    #   providers are available to all accounts and only need to be associated
+    #   with a cluster to be used.
+    #
+    #   The PutClusterCapacityProviders API operation is used to update the
+    #   list of available capacity providers for a cluster after the cluster
+    #   is created.
+    #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
     #   which to run your task. If you do not specify a cluster, the default
@@ -5174,6 +5737,9 @@ module Aws::ECS
     #   The launch type on which to run your task. For more information, see
     #   [Amazon ECS Launch Types][1] in the *Amazon Elastic Container Service
     #   Developer Guide*.
+    #
+    #   If a `launchType` is specified, the `capacityProviderStrategy`
+    #   parameter must be omitted.
     #
     #
     #
@@ -5332,6 +5898,13 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.run_task({
+    #     capacity_provider_strategy: [
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
     #     cluster: "String",
     #     count: 1,
     #     enable_ecs_managed_tags: false,
@@ -5418,6 +5991,7 @@ module Aws::ECS
     #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.tasks[0].attributes[0].target_id #=> String
     #   resp.tasks[0].availability_zone #=> String
+    #   resp.tasks[0].capacity_provider_name #=> String
     #   resp.tasks[0].cluster_arn #=> String
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
@@ -5698,6 +6272,7 @@ module Aws::ECS
     #   resp.tasks[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.tasks[0].attributes[0].target_id #=> String
     #   resp.tasks[0].availability_zone #=> String
+    #   resp.tasks[0].capacity_provider_name #=> String
     #   resp.tasks[0].cluster_arn #=> String
     #   resp.tasks[0].connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.tasks[0].connectivity_at #=> Time
@@ -5851,6 +6426,7 @@ module Aws::ECS
     #   resp.task.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.task.attributes[0].target_id #=> String
     #   resp.task.availability_zone #=> String
+    #   resp.task.capacity_provider_name #=> String
     #   resp.task.cluster_arn #=> String
     #   resp.task.connectivity #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.task.connectivity_at #=> Time
@@ -6144,8 +6720,8 @@ module Aws::ECS
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to which to add tags.
-    #   Currently, the supported resources are Amazon ECS tasks, services,
-    #   task definitions, clusters, and container instances.
+    #   Currently, the supported resources are Amazon ECS capacity providers,
+    #   tasks, services, task definitions, clusters, and container instances.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
@@ -6221,8 +6797,9 @@ module Aws::ECS
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource from which to delete
-    #   tags. Currently, the supported resources are Amazon ECS tasks,
-    #   services, task definitions, clusters, and container instances.
+    #   tags. Currently, the supported resources are Amazon ECS capacity
+    #   providers, tasks, services, task definitions, clusters, and container
+    #   instances.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -6306,6 +6883,20 @@ module Aws::ECS
     #   resp.cluster.settings #=> Array
     #   resp.cluster.settings[0].name #=> String, one of "containerInsights"
     #   resp.cluster.settings[0].value #=> String
+    #   resp.cluster.capacity_providers #=> Array
+    #   resp.cluster.capacity_providers[0] #=> String
+    #   resp.cluster.default_capacity_provider_strategy #=> Array
+    #   resp.cluster.default_capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.cluster.default_capacity_provider_strategy[0].weight #=> Integer
+    #   resp.cluster.default_capacity_provider_strategy[0].base #=> Integer
+    #   resp.cluster.attachments #=> Array
+    #   resp.cluster.attachments[0].id #=> String
+    #   resp.cluster.attachments[0].type #=> String
+    #   resp.cluster.attachments[0].status #=> String
+    #   resp.cluster.attachments[0].details #=> Array
+    #   resp.cluster.attachments[0].details[0].name #=> String
+    #   resp.cluster.attachments[0].details[0].value #=> String
+    #   resp.cluster.attachments_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateClusterSettings AWS API Documentation
     #
@@ -6358,6 +6949,7 @@ module Aws::ECS
     #
     #   resp.container_instance.container_instance_arn #=> String
     #   resp.container_instance.ec2_instance_id #=> String
+    #   resp.container_instance.capacity_provider_name #=> String
     #   resp.container_instance.version #=> Integer
     #   resp.container_instance.version_info.agent_version #=> String
     #   resp.container_instance.version_info.agent_hash #=> String
@@ -6500,6 +7092,7 @@ module Aws::ECS
     #   resp.container_instances #=> Array
     #   resp.container_instances[0].container_instance_arn #=> String
     #   resp.container_instances[0].ec2_instance_id #=> String
+    #   resp.container_instances[0].capacity_provider_name #=> String
     #   resp.container_instances[0].version #=> Integer
     #   resp.container_instances[0].version_info.agent_version #=> String
     #   resp.container_instances[0].version_info.agent_hash #=> String
@@ -6686,36 +7279,30 @@ module Aws::ECS
     #   the new version of the task definition and then stops an old task
     #   after the new version is running.
     #
+    # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
+    #   The capacity provider strategy to update the service to use.
+    #
+    #   If the service is using the default capacity provider strategy for the
+    #   cluster, the service can be updated to use one or more capacity
+    #   providers. However, when a service is using a non-default capacity
+    #   provider strategy, the service cannot be updated to use the cluster's
+    #   default capacity provider strategy.
+    #
     # @option params [Types::DeploymentConfiguration] :deployment_configuration
     #   Optional deployment parameters that control how many tasks run during
     #   the deployment and the ordering of stopping and starting tasks.
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
-    #   The network configuration for the service. This parameter is required
-    #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own elastic network interface, and it is not supported for other
-    #   network modes. For more information, see [Task Networking][1] in the
-    #   *Amazon Elastic Container Service Developer Guide*.
-    #
-    #   <note markdown="1"> Updating a service to add a subnet to a list of existing subnets does
-    #   not trigger a service deployment. For example, if your network
-    #   configuration change is to keep the existing subnets and simply add
-    #   another subnet to the network configuration, this does not trigger a
-    #   new service deployment.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+    #   An object representing the network configuration for a task or
+    #   service.
     #
     # @option params [String] :platform_version
     #   The platform version on which your tasks in the service are running. A
     #   platform version is only specified for tasks using the Fargate launch
-    #   type. If one is not specified, the `LATEST` platform version is used
-    #   by default. For more information, see [AWS Fargate Platform
-    #   Versions][1] in the *Amazon Elastic Container Service Developer
-    #   Guide*.
+    #   type. If a platform version is not specified, the `LATEST` platform
+    #   version is used by default. For more information, see [AWS Fargate
+    #   Platform Versions][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
     #
     #
     #
@@ -6736,8 +7323,8 @@ module Aws::ECS
     #   configured to use a load balancer. If your service's tasks take a
     #   while to start and respond to Elastic Load Balancing health checks,
     #   you can specify a health check grace period of up to 2,147,483,647
-    #   seconds. During that time, the ECS service scheduler ignores the
-    #   Elastic Load Balancing health check status. This grace period can
+    #   seconds. During that time, the Amazon ECS service scheduler ignores
+    #   the Elastic Load Balancing health check status. This grace period can
     #   prevent the ECS service scheduler from marking tasks as unhealthy and
     #   stopping them before they have time to come up.
     #
@@ -6779,6 +7366,13 @@ module Aws::ECS
     #     service: "String", # required
     #     desired_count: 1,
     #     task_definition: "String",
+    #     capacity_provider_strategy: [
+    #       {
+    #         capacity_provider: "String", # required
+    #         weight: 1,
+    #         base: 1,
+    #       },
+    #     ],
     #     deployment_configuration: {
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
@@ -6815,6 +7409,10 @@ module Aws::ECS
     #   resp.service.running_count #=> Integer
     #   resp.service.pending_count #=> Integer
     #   resp.service.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.capacity_provider_strategy #=> Array
+    #   resp.service.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.capacity_provider_strategy[0].base #=> Integer
     #   resp.service.platform_version #=> String
     #   resp.service.task_definition #=> String
     #   resp.service.deployment_configuration.maximum_percent #=> Integer
@@ -6834,6 +7432,10 @@ module Aws::ECS
     #   resp.service.task_sets[0].created_at #=> Time
     #   resp.service.task_sets[0].updated_at #=> Time
     #   resp.service.task_sets[0].launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.service.task_sets[0].capacity_provider_strategy #=> Array
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.task_sets[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.task_sets[0].platform_version #=> String
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.service.task_sets[0].network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -6863,6 +7465,10 @@ module Aws::ECS
     #   resp.service.deployments[0].running_count #=> Integer
     #   resp.service.deployments[0].created_at #=> Time
     #   resp.service.deployments[0].updated_at #=> Time
+    #   resp.service.deployments[0].capacity_provider_strategy #=> Array
+    #   resp.service.deployments[0].capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.service.deployments[0].capacity_provider_strategy[0].weight #=> Integer
+    #   resp.service.deployments[0].capacity_provider_strategy[0].base #=> Integer
     #   resp.service.deployments[0].launch_type #=> String, one of "EC2", "FARGATE"
     #   resp.service.deployments[0].platform_version #=> String
     #   resp.service.deployments[0].network_configuration.awsvpc_configuration.subnets #=> Array
@@ -6957,6 +7563,10 @@ module Aws::ECS
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
     #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.capacity_provider_strategy #=> Array
+    #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -7044,6 +7654,10 @@ module Aws::ECS
     #   resp.task_set.created_at #=> Time
     #   resp.task_set.updated_at #=> Time
     #   resp.task_set.launch_type #=> String, one of "EC2", "FARGATE"
+    #   resp.task_set.capacity_provider_strategy #=> Array
+    #   resp.task_set.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.task_set.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.task_set.capacity_provider_strategy[0].base #=> Integer
     #   resp.task_set.platform_version #=> String
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.task_set.network_configuration.awsvpc_configuration.subnets[0] #=> String
@@ -7087,7 +7701,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

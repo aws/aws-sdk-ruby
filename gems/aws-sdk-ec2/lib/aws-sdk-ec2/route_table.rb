@@ -192,7 +192,8 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     dry_run: false,
-    #     subnet_id: "SubnetId", # required
+    #     subnet_id: "String",
+    #     gateway_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -200,8 +201,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :subnet_id
+    # @option options [String] :subnet_id
     #   The ID of the subnet.
+    # @option options [String] :gateway_id
+    #   The ID of the internet gateway or virtual private gateway.
     # @return [RouteTableAssociation]
     def associate_with_subnet(options = {})
       options = options.merge(route_table_id: @id)
@@ -223,6 +226,7 @@ module Aws::EC2
     #     instance_id: "InstanceId",
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "String",
     #     network_interface_id: "NetworkInterfaceId",
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
@@ -251,6 +255,8 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     # @option options [String] :transit_gateway_id
     #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

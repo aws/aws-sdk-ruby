@@ -20,6 +20,8 @@ module Aws::Textract
     BlockType = Shapes::StringShape.new(name: 'BlockType')
     BoundingBox = Shapes::StructureShape.new(name: 'BoundingBox')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
+    ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
     DetectDocumentTextRequest = Shapes::StructureShape.new(name: 'DetectDocumentTextRequest')
     DetectDocumentTextResponse = Shapes::StructureShape.new(name: 'DetectDocumentTextResponse')
     Document = Shapes::StructureShape.new(name: 'Document')
@@ -32,11 +34,21 @@ module Aws::Textract
     FeatureType = Shapes::StringShape.new(name: 'FeatureType')
     FeatureTypes = Shapes::ListShape.new(name: 'FeatureTypes')
     Float = Shapes::FloatShape.new(name: 'Float')
+    FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     Geometry = Shapes::StructureShape.new(name: 'Geometry')
     GetDocumentAnalysisRequest = Shapes::StructureShape.new(name: 'GetDocumentAnalysisRequest')
     GetDocumentAnalysisResponse = Shapes::StructureShape.new(name: 'GetDocumentAnalysisResponse')
     GetDocumentTextDetectionRequest = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionRequest')
     GetDocumentTextDetectionResponse = Shapes::StructureShape.new(name: 'GetDocumentTextDetectionResponse')
+    HumanLoopActivationConditionsEvaluationResults = Shapes::StringShape.new(name: 'HumanLoopActivationConditionsEvaluationResults')
+    HumanLoopActivationOutput = Shapes::StructureShape.new(name: 'HumanLoopActivationOutput')
+    HumanLoopActivationReason = Shapes::StringShape.new(name: 'HumanLoopActivationReason')
+    HumanLoopActivationReasons = Shapes::ListShape.new(name: 'HumanLoopActivationReasons')
+    HumanLoopArn = Shapes::StringShape.new(name: 'HumanLoopArn')
+    HumanLoopConfig = Shapes::StructureShape.new(name: 'HumanLoopConfig')
+    HumanLoopDataAttributes = Shapes::StructureShape.new(name: 'HumanLoopDataAttributes')
+    HumanLoopName = Shapes::StringShape.new(name: 'HumanLoopName')
+    HumanLoopQuotaExceededException = Shapes::StructureShape.new(name: 'HumanLoopQuotaExceededException')
     IdList = Shapes::ListShape.new(name: 'IdList')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     ImageBlob = Shapes::BlobShape.new(name: 'ImageBlob')
@@ -81,10 +93,13 @@ module Aws::Textract
 
     AnalyzeDocumentRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     AnalyzeDocumentRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
+    AnalyzeDocumentRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
     AnalyzeDocumentRequest.struct_class = Types::AnalyzeDocumentRequest
 
     AnalyzeDocumentResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
     AnalyzeDocumentResponse.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
+    AnalyzeDocumentResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
+    AnalyzeDocumentResponse.add_member(:analyze_document_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeDocumentModelVersion"))
     AnalyzeDocumentResponse.struct_class = Types::AnalyzeDocumentResponse
 
     Block.add_member(:block_type, Shapes::ShapeRef.new(shape: BlockType, location_name: "BlockType"))
@@ -110,11 +125,14 @@ module Aws::Textract
     BoundingBox.add_member(:top, Shapes::ShapeRef.new(shape: Float, location_name: "Top"))
     BoundingBox.struct_class = Types::BoundingBox
 
+    ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
+
     DetectDocumentTextRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     DetectDocumentTextRequest.struct_class = Types::DetectDocumentTextRequest
 
     DetectDocumentTextResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
     DetectDocumentTextResponse.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
+    DetectDocumentTextResponse.add_member(:detect_document_text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "DetectDocumentTextModelVersion"))
     DetectDocumentTextResponse.struct_class = Types::DetectDocumentTextResponse
 
     Document.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
@@ -146,6 +164,7 @@ module Aws::Textract
     GetDocumentAnalysisResponse.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
     GetDocumentAnalysisResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetDocumentAnalysisResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetDocumentAnalysisResponse.add_member(:analyze_document_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeDocumentModelVersion"))
     GetDocumentAnalysisResponse.struct_class = Types::GetDocumentAnalysisResponse
 
     GetDocumentTextDetectionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -159,7 +178,28 @@ module Aws::Textract
     GetDocumentTextDetectionResponse.add_member(:blocks, Shapes::ShapeRef.new(shape: BlockList, location_name: "Blocks"))
     GetDocumentTextDetectionResponse.add_member(:warnings, Shapes::ShapeRef.new(shape: Warnings, location_name: "Warnings"))
     GetDocumentTextDetectionResponse.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    GetDocumentTextDetectionResponse.add_member(:detect_document_text_model_version, Shapes::ShapeRef.new(shape: String, location_name: "DetectDocumentTextModelVersion"))
     GetDocumentTextDetectionResponse.struct_class = Types::GetDocumentTextDetectionResponse
+
+    HumanLoopActivationOutput.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_reasons, Shapes::ShapeRef.new(shape: HumanLoopActivationReasons, location_name: "HumanLoopActivationReasons"))
+    HumanLoopActivationOutput.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationConditionsEvaluationResults, location_name: "HumanLoopActivationConditionsEvaluationResults", metadata: {"jsonvalue"=>true}))
+    HumanLoopActivationOutput.struct_class = Types::HumanLoopActivationOutput
+
+    HumanLoopActivationReasons.member = Shapes::ShapeRef.new(shape: HumanLoopActivationReason)
+
+    HumanLoopConfig.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location_name: "HumanLoopName"))
+    HumanLoopConfig.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location_name: "FlowDefinitionArn"))
+    HumanLoopConfig.add_member(:data_attributes, Shapes::ShapeRef.new(shape: HumanLoopDataAttributes, location_name: "DataAttributes"))
+    HumanLoopConfig.struct_class = Types::HumanLoopConfig
+
+    HumanLoopDataAttributes.add_member(:content_classifiers, Shapes::ShapeRef.new(shape: ContentClassifiers, location_name: "ContentClassifiers"))
+    HumanLoopDataAttributes.struct_class = Types::HumanLoopDataAttributes
+
+    HumanLoopQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    HumanLoopQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "QuotaCode"))
+    HumanLoopQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
+    HumanLoopQuotaExceededException.struct_class = Types::HumanLoopQuotaExceededException
 
     IdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -244,6 +284,7 @@ module Aws::Textract
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: HumanLoopQuotaExceededException)
       end)
 
       api.add_operation(:detect_document_text, Seahorse::Model::Operation.new.tap do |o|

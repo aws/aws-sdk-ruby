@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+1.249.0 (2019-12-03)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Outposts`.
+
+* Feature - Added support for enumerating regions for `Aws::NetworkManager`.
+
+* Feature - Added support for enumerating regions for `Aws::Kendra`.
+
+* Feature - Added support for enumerating regions for `Aws::FraudDetector`.
+
+* Feature - Added support for enumerating regions for `Aws::ComputeOptimizer`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeGuruReviewer`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeGuruProfiler`.
+
+* Feature - Added support for enumerating regions for `Aws::AugmentedAIRuntime`.
+
 1.248.0 (2019-12-02)
 ------------------
 

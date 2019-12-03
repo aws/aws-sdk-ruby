@@ -51,6 +51,18 @@ module Aws::EC2
       data[:subnet_id]
     end
 
+    # The ID of the internet gateway or virtual private gateway.
+    # @return [String]
+    def gateway_id
+      data[:gateway_id]
+    end
+
+    # The state of the association.
+    # @return [Types::RouteTableAssociationState]
+    def association_state
+      data[:association_state]
+    end
+
     # @!endgroup
 
     # @return [Client]

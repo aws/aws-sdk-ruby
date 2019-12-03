@@ -8,6 +8,40 @@
 module Aws::S3Control
   module Types
 
+    # An access point used to access a bucket.
+    #
+    # @!attribute [rw] name
+    #   The name of this access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_origin
+    #   Indicates whether this access point allows access from the public
+    #   Internet. If `VpcConfiguration` is specified for this access point,
+    #   then `NetworkOrigin` is `VPC`, and the access point doesn't allow
+    #   access from the public Internet. Otherwise, `NetworkOrigin` is
+    #   `Internet`, and the access point allows access from the public
+    #   Internet, subject to the access point and bucket access policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   The Virtual Private Cloud (VPC) configuration for this access point,
+    #   if one exists.
+    #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket associated with this access point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/AccessPoint AWS API Documentation
+    #
+    class AccessPoint < Struct.new(
+      :name,
+      :network_origin,
+      :vpc_configuration,
+      :bucket)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -15,6 +49,66 @@ module Aws::S3Control
     #
     class BadRequestException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #         bucket: "BucketName", # required
+    #         vpc_configuration: {
+    #           vpc_id: "VpcId", # required
+    #         },
+    #         public_access_block_configuration: {
+    #           block_public_acls: false,
+    #           ignore_public_acls: false,
+    #           block_public_policy: false,
+    #           restrict_public_buckets: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID for the owner of the bucket for which you want to
+    #   create an access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you want to assign to this access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket that you want to associate this access point
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   If you include this field, Amazon S3 restricts access to this access
+    #   point to requests from the specified Virtual Private Cloud (VPC).
+    #   @return [Types::VpcConfiguration]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/CreateAccessPointRequest AWS API Documentation
+    #
+    class CreateAccessPointRequest < Struct.new(
+      :account_id,
+      :name,
+      :bucket,
+      :vpc_configuration,
+      :public_access_block_configuration)
       include Aws::Structure
     end
 
@@ -213,6 +307,54 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAccessPointPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point whose policy you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointPolicyRequest AWS API Documentation
+    #
+    class DeleteAccessPointPolicyRequest < Struct.new(
+      :account_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeleteAccessPointRequest AWS API Documentation
+    #
+    class DeleteAccessPointRequest < Struct.new(
+      :account_id,
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeletePublicAccessBlockRequest
     #   data as a hash:
     #
@@ -221,8 +363,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
-    #   The account ID for the AWS account whose block public access
-    #   configuration you want to delete.
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DeletePublicAccessBlockRequest AWS API Documentation
@@ -267,7 +409,155 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAccessPointPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point whose policy you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyRequest < Struct.new(
+      :account_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The access point policy associated with the specified access point.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyResult AWS API Documentation
+    #
+    class GetAccessPointPolicyResult < Struct.new(
+      :policy)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointPolicyStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point whose policy status you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusRequest AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusRequest < Struct.new(
+      :account_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_status
+    #   Indicates the current policy status of the specified access point.
+    #   @return [Types::PolicyStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointPolicyStatusResult AWS API Documentation
+    #
+    class GetAccessPointPolicyStatusResult < Struct.new(
+      :policy_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAccessPointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID for the account that owns the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point whose configuration information you
+    #   want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointRequest AWS API Documentation
+    #
+    class GetAccessPointRequest < Struct.new(
+      :account_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket associated with the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_origin
+    #   Indicates whether this access point allows access from the public
+    #   Internet. If `VpcConfiguration` is specified for this access point,
+    #   then `NetworkOrigin` is `VPC`, and the access point doesn't allow
+    #   access from the public Internet. Otherwise, `NetworkOrigin` is
+    #   `Internet`, and the access point allows access from the public
+    #   Internet, subject to the access point and bucket access policies.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Contains the Virtual Private Cloud (VPC) configuration for the
+    #   specified access point.
+    #   @return [Types::VpcConfiguration]
+    #
     # @!attribute [rw] public_access_block_configuration
+    #   The `PublicAccessBlock` configuration that you want to apply to this
+    #   Amazon S3 bucket. You can enable the configuration options in any
+    #   combination. For more information about when Amazon S3 considers a
+    #   bucket or object public, see [The Meaning of "Public"][1] in the
+    #   Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #   @return [Types::PublicAccessBlockConfiguration]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the specified access point was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetAccessPointResult AWS API Documentation
+    #
+    class GetAccessPointResult < Struct.new(
+      :name,
+      :bucket,
+      :network_origin,
+      :vpc_configuration,
+      :public_access_block_configuration,
+      :creation_date)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] public_access_block_configuration
+    #   The `PublicAccessBlock` configuration currently in effect for this
+    #   Amazon Web Services account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockOutput AWS API Documentation
@@ -285,6 +575,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] account_id
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetPublicAccessBlockRequest AWS API Documentation
@@ -784,7 +1076,8 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] bucket
-    #   The bucket where specified job-completion report will be stored.
+    #   The Amazon Resource Name (ARN) for the bucket where specified
+    #   job-completion report will be stored.
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -850,6 +1143,71 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAccessPointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         bucket: "BucketName",
+    #         next_token: "NonEmptyMaxLength1024String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID for owner of the bucket whose access points you
+    #   want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the bucket whose associated access points you want to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token. If a previous call to `ListAccessPoints`
+    #   returned a continuation token in the `NextToken` field, then
+    #   providing that value here causes Amazon S3 to retrieve the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of access points that you want to include in the
+    #   list. If the specified bucket has more than this number of access
+    #   points, then the response will include a continuation token in the
+    #   `NextToken` field that you can use to retrieve the next page of
+    #   access points.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsRequest AWS API Documentation
+    #
+    class ListAccessPointsRequest < Struct.new(
+      :account_id,
+      :bucket,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_point_list
+    #   Contains identification and configuration information for one or
+    #   more access points associated with the specified bucket.
+    #   @return [Array<Types::AccessPoint>]
+    #
+    # @!attribute [rw] next_token
+    #   If the specified bucket has more access points than can be returned
+    #   in one call to this API, then this field contains a continuation
+    #   token that you can provide in subsequent calls to this API to
+    #   retrieve additional access points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListAccessPointsResult AWS API Documentation
+    #
+    class ListAccessPointsResult < Struct.new(
+      :access_point_list,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListJobsRequest
     #   data as a hash:
     #
@@ -910,6 +1268,10 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Amazon S3 throws this exception if you make a `GetPublicAccessBlock`
+    # request against an account that doesn't have a
+    # `PublicAccessBlockConfiguration` set.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -930,6 +1292,35 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Indicates whether this access point policy is public. For more
+    # information about how Amazon S3 evaluates policies to determine
+    # whether they are public, see [The Meaning of "Public"][1] in the
+    # *Amazon Simple Storage Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #
+    # @!attribute [rw] is_public
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PolicyStatus AWS API Documentation
+    #
+    class PolicyStatus < Struct.new(
+      :is_public)
+      include Aws::Structure
+    end
+
+    # The `PublicAccessBlock` configuration that you want to apply to this
+    # Amazon S3 bucket. You can enable the configuration options in any
+    # combination. For more information about when Amazon S3 considers a
+    # bucket or object public, see [The Meaning of "Public"][1] in the
+    # Amazon Simple Storage Service Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
+    #
     # @note When making an API call, you may pass PublicAccessBlockConfiguration
     #   data as a hash:
     #
@@ -941,15 +1332,49 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] block_public_acls
+    #   Specifies whether Amazon S3 should block public access control lists
+    #   (ACLs) for buckets in this account. Setting this element to `TRUE`
+    #   causes the following behavior:
+    #
+    #   * PUT Bucket acl and PUT Object acl calls fail if the specified ACL
+    #     is public.
+    #
+    #   * PUT Object calls fail if the request includes a public ACL.
+    #
+    #   * PUT Bucket calls fail if the request includes a public ACL.
+    #
+    #   Enabling this setting doesn't affect existing policies or ACLs.
     #   @return [Boolean]
     #
     # @!attribute [rw] ignore_public_acls
+    #   Specifies whether Amazon S3 should ignore public ACLs for buckets in
+    #   this account. Setting this element to `TRUE` causes Amazon S3 to
+    #   ignore all public ACLs on buckets in this account and any objects
+    #   that they contain.
+    #
+    #   Enabling this setting doesn't affect the persistence of any
+    #   existing ACLs and doesn't prevent new public ACLs from being set.
     #   @return [Boolean]
     #
     # @!attribute [rw] block_public_policy
+    #   Specifies whether Amazon S3 should block public bucket policies for
+    #   buckets in this account. Setting this element to `TRUE` causes
+    #   Amazon S3 to reject calls to PUT Bucket policy if the specified
+    #   bucket policy allows public access.
+    #
+    #   Enabling this setting doesn't affect existing bucket policies.
     #   @return [Boolean]
     #
     # @!attribute [rw] restrict_public_buckets
+    #   Specifies whether Amazon S3 should restrict public bucket policies
+    #   for buckets in this account. Setting this element to `TRUE`
+    #   restricts access to buckets with public policies to only AWS
+    #   services and authorized users within this account.
+    #
+    #   Enabling this setting doesn't affect previously stored bucket
+    #   policies, except that public and cross-account access within any
+    #   public bucket policy, including non-public delegation to specific
+    #   accounts, is blocked.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PublicAccessBlockConfiguration AWS API Documentation
@@ -959,6 +1384,45 @@ module Aws::S3Control
       :ignore_public_acls,
       :block_public_policy,
       :restrict_public_buckets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAccessPointPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         name: "AccessPointName", # required
+    #         policy: "Policy", # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The AWS account ID for owner of the bucket associated with the
+    #   specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access point that you want to associate with the
+    #   specified policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy that you want to apply to the specified access point. For
+    #   more information about access point policies, see [Managing Data
+    #   Access with Amazon S3 Access Points][1] in the *Amazon Simple
+    #   Storage Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutAccessPointPolicyRequest AWS API Documentation
+    #
+    class PutAccessPointPolicyRequest < Struct.new(
+      :account_id,
+      :name,
+      :policy)
       include Aws::Structure
     end
 
@@ -976,9 +1440,13 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] public_access_block_configuration
+    #   The `PublicAccessBlock` configuration that you want to apply to the
+    #   specified Amazon Web Services account.
     #   @return [Types::PublicAccessBlockConfiguration]
     #
     # @!attribute [rw] account_id
+    #   The account ID for the Amazon Web Services account whose
+    #   `PublicAccessBlock` configuration you want to set.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/PutPublicAccessBlockRequest AWS API Documentation
@@ -1571,6 +2039,27 @@ module Aws::S3Control
       :job_id,
       :status,
       :status_update_reason)
+      include Aws::Structure
+    end
+
+    # The Virtual Private Cloud (VPC) configuration for an access point.
+    #
+    # @note When making an API call, you may pass VpcConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "VpcId", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   If this field is specified, this access point will only allow
+    #   connections from the specified VPC ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/VpcConfiguration AWS API Documentation
+    #
+    class VpcConfiguration < Struct.new(
+      :vpc_id)
       include Aws::Structure
     end
 

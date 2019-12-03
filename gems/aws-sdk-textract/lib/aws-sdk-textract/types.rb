@@ -21,31 +21,47 @@ module Aws::Textract
     #           },
     #         },
     #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS
+    #         human_loop_config: {
+    #           human_loop_name: "HumanLoopName", # required
+    #           flow_definition_arn: "FlowDefinitionArn", # required
+    #           data_attributes: {
+    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
-    #   can't pass image bytes. The document must be an image in JPG or PNG
-    #   format.
+    #   can't pass image bytes. The document must be an image in JPEG or
+    #   PNG format.
     #
-    #   If you are using an AWS SDK to call Amazon Textract, you might not
-    #   need to base64-encode image bytes passed using the `Bytes` field.
+    #   If you're using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes that are passed using the `Bytes`
+    #   field.
     #   @return [Types::Document]
     #
     # @!attribute [rw] feature_types
     #   A list of the types of analysis to perform. Add TABLES to the list
-    #   to return information about the tables detected in the input
-    #   document. Add FORMS to return detected fields and the associated
-    #   text. To perform both types of analysis, add TABLES and FORMS to
-    #   `FeatureTypes`.
+    #   to return information about the tables that are detected in the
+    #   input document. Add FORMS to return detected form data. To perform
+    #   both types of analysis, add TABLES and FORMS to `FeatureTypes`. All
+    #   lines and words detected in the document are included in the
+    #   response (including text that isn't related to the value of
+    #   `FeatureTypes`).
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] human_loop_config
+    #   Sets the configuration for the human in the loop workflow for
+    #   analyzing documents.
+    #   @return [Types::HumanLoopConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeDocumentRequest AWS API Documentation
     #
     class AnalyzeDocumentRequest < Struct.new(
       :document,
-      :feature_types)
+      :feature_types,
+      :human_loop_config)
       include Aws::Structure
     end
 
@@ -55,24 +71,34 @@ module Aws::Textract
     #   @return [Types::DocumentMetadata]
     #
     # @!attribute [rw] blocks
-    #   The text that's detected and analyzed by `AnalyzeDocument`.
+    #   The items that are detected and analyzed by `AnalyzeDocument`.
     #   @return [Array<Types::Block>]
+    #
+    # @!attribute [rw] human_loop_activation_output
+    #   Shows the results of the human in the loop evaluation.
+    #   @return [Types::HumanLoopActivationOutput]
+    #
+    # @!attribute [rw] analyze_document_model_version
+    #   The version of the model used to analyze the document.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeDocumentResponse AWS API Documentation
     #
     class AnalyzeDocumentResponse < Struct.new(
       :document_metadata,
-      :blocks)
+      :blocks,
+      :human_loop_activation_output,
+      :analyze_document_model_version)
       include Aws::Structure
     end
 
     # A `Block` represents items that are recognized in a document within a
     # group of pixels close to each other. The information returned in a
-    # `Block` depends on the type of operation. In document-text detection
-    # (for example DetectDocumentText), you get information about the
-    # detected words and lines of text. In text analysis (for example
+    # `Block` object depends on the type of operation. In text detection for
+    # documents (for example DetectDocumentText), you get information about
+    # the detected words and lines of text. In text analysis (for example
     # AnalyzeDocument), you can also get information about the fields,
-    # tables and selection elements that are detected in the document.
+    # tables, and selection elements that are detected in the document.
     #
     # An array of `Block` objects is returned by both synchronous and
     # asynchronous operations. In synchronous operations, such as
@@ -87,51 +113,51 @@ module Aws::Textract
     # [1]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
     #
     # @!attribute [rw] block_type
-    #   The type of text that's recognized in a block. In text-detection
-    #   operations, the following types are returned:
+    #   The type of text item that's recognized. In operations for text
+    #   detection, the following types are returned:
     #
-    #   * *PAGE* - Contains a list of the LINE Block objects that are
+    #   * *PAGE* - Contains a list of the LINE `Block` objects that are
     #     detected on a document page.
     #
     #   * *WORD* - A word detected on a document page. A word is one or more
     #     ISO basic Latin script characters that aren't separated by
     #     spaces.
     #
-    #   * *LINE* - A string of tab-delimited, contiguous words that's
+    #   * *LINE* - A string of tab-delimited, contiguous words that are
     #     detected on a document page.
     #
     #   In text analysis operations, the following types are returned:
     #
-    #   * *PAGE* - Contains a list of child Block objects that are detected
-    #     on a document page.
+    #   * *PAGE* - Contains a list of child `Block` objects that are
+    #     detected on a document page.
     #
-    #   * *KEY\_VALUE\_SET* - Stores the KEY and VALUE Block objects for a
-    #     field that's detected on a document page. Use the `EntityType`
-    #     field to determine if a KEY\_VALUE\_SET object is a KEY Block
-    #     object or a VALUE Block object.
+    #   * *KEY\_VALUE\_SET* - Stores the KEY and VALUE `Block` objects for
+    #     linked text that's detected on a document page. Use the
+    #     `EntityType` field to determine if a KEY\_VALUE\_SET object is a
+    #     KEY `Block` object or a VALUE `Block` object.
     #
-    #   * *WORD* - A word detected on a document page. A word is one or more
-    #     ISO basic Latin script characters that aren't separated by spaces
-    #     that's detected on a document page.
+    #   * *WORD* - A word that's detected on a document page. A word is one
+    #     or more ISO basic Latin script characters that aren't separated
+    #     by spaces.
     #
-    #   * *LINE* - A string of tab-delimited, contiguous words that's
+    #   * *LINE* - A string of tab-delimited, contiguous words that are
     #     detected on a document page.
     #
     #   * *TABLE* - A table that's detected on a document page. A table is
-    #     any grid-based information with 2 or more rows or columns with a
-    #     cell span of 1 row and 1 column each.
+    #     grid-based information with two or more rows or columns, with a
+    #     cell span of one row and one column each.
     #
     #   * *CELL* - A cell within a detected table. The cell is the parent of
     #     the block that contains the text in the cell.
     #
-    #   * *SELECTION\_ELEMENT* - A selectable element such as a radio button
-    #     or checkbox that's detected on a document page. Use the value of
-    #     `SelectionStatus` to determine the status of the selection
-    #     element.
+    #   * *SELECTION\_ELEMENT* - A selection element such as an option
+    #     button (radio button) or a check box that's detected on a
+    #     document page. Use the value of `SelectionStatus` to determine the
+    #     status of the selection element.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   The confidence that Amazon Textract has in the accuracy of the
+    #   The confidence score that Amazon Textract has in the accuracy of the
     #   recognized text and the accuracy of the geometry points around the
     #   recognized text.
     #   @return [Float]
@@ -153,13 +179,17 @@ module Aws::Textract
     #   @return [Integer]
     #
     # @!attribute [rw] row_span
-    #   The number of rows that a table spans. `RowSpan` isn't returned by
-    #   `DetectDocumentText` and `GetDocumentTextDetection`.
+    #   The number of rows that a table cell spans. Currently this value is
+    #   always 1, even if the number of rows spanned is greater than 1.
+    #   `RowSpan` isn't returned by `DetectDocumentText` and
+    #   `GetDocumentTextDetection`.
     #   @return [Integer]
     #
     # @!attribute [rw] column_span
-    #   The number of columns that a table cell spans. `ColumnSpan` isn't
-    #   returned by `DetectDocumentText` and `GetDocumentTextDetection`.
+    #   The number of columns that a table cell spans. Currently this value
+    #   is always 1, even if the number of columns spanned is greater than
+    #   1. `ColumnSpan` isn't returned by `DetectDocumentText` and
+    #   `GetDocumentTextDetection`.
     #   @return [Integer]
     #
     # @!attribute [rw] geometry
@@ -174,7 +204,7 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] relationships
-    #   A list of child blocks of the current block. For example a LINE
+    #   A list of child blocks of the current block. For example, a LINE
     #   object has child blocks for each WORD block that's part of the line
     #   of text. There aren't Relationship objects in the list for
     #   relationships that don't exist, such as when the current block has
@@ -197,18 +227,18 @@ module Aws::Textract
     #   @return [Array<String>]
     #
     # @!attribute [rw] selection_status
-    #   The selection status of a selectable element such as a radio button
-    #   or checkbox.
+    #   The selection status of a selection element, such as an option
+    #   button or check box.
     #   @return [String]
     #
     # @!attribute [rw] page
-    #   The page in which a block was detected. `Page` is returned by
+    #   The page on which a block was detected. `Page` is returned by
     #   asynchronous operations. Page values greater than 1 are only
-    #   returned for multi-page documents that are in PDF format. A scanned
-    #   image (JPG/PNG), even if it contains multiple document pages, is
-    #   always considered to be a single-page document and the value of
-    #   `Page` is always 1. Synchronous operations don't return `Page` as
-    #   every input document is considered to be a single-page document.
+    #   returned for multipage documents that are in PDF format. A scanned
+    #   image (JPEG/PNG), even if it contains multiple document pages, is
+    #   considered to be a single-page document. The value of `Page` is
+    #   always 1. Synchronous operations don't return `Page` because every
+    #   input document is considered to be a single-page document.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Block AWS API Documentation
@@ -230,11 +260,11 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # The bounding box around the recognized text, key, value, table or
-    # table cell on a document page. The `left` (x-coordinate) and `top`
-    # (y-coordinate) are coordinates that represent the top and left sides
-    # of the bounding box. Note that the upper-left corner of the image is
-    # the origin (0,0).
+    # The bounding box around the detected page, text, key-value pair,
+    # table, table cell, or selection element on a document page. The `left`
+    # (x-coordinate) and `top` (y-coordinate) are coordinates that represent
+    # the top and left sides of the bounding box. Note that the upper-left
+    # corner of the image is the origin (0,0).
     #
     # The `top` and `left` values returned are ratios of the overall
     # document page size. For example, if the input image is 700 x 200
@@ -294,11 +324,12 @@ module Aws::Textract
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
-    #   can't pass image bytes. The document must be an image in JPG or PNG
-    #   format.
+    #   can't pass image bytes. The document must be an image in JPEG or
+    #   PNG format.
     #
-    #   If you are using an AWS SDK to call Amazon Textract, you might not
-    #   need to base64-encode image bytes passed using the `Bytes` field.
+    #   If you're using an AWS SDK to call Amazon Textract, you might not
+    #   need to base64-encode image bytes that are passed using the `Bytes`
+    #   field.
     #   @return [Types::Document]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentTextRequest AWS API Documentation
@@ -309,20 +340,24 @@ module Aws::Textract
     end
 
     # @!attribute [rw] document_metadata
-    #   Metadata about the document. Contains the number of pages that are
-    #   detected in the document.
+    #   Metadata about the document. It contains the number of pages that
+    #   are detected in the document.
     #   @return [Types::DocumentMetadata]
     #
     # @!attribute [rw] blocks
-    #   An array of Block objects containing the text detected in the
-    #   document.
+    #   An array of `Block` objects that contain the text that's detected
+    #   in the document.
     #   @return [Array<Types::Block>]
+    #
+    # @!attribute [rw] detect_document_text_model_version
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DetectDocumentTextResponse AWS API Documentation
     #
     class DetectDocumentTextResponse < Struct.new(
       :document_metadata,
-      :blocks)
+      :blocks,
+      :detect_document_text_model_version)
       include Aws::Structure
     end
 
@@ -363,17 +398,17 @@ module Aws::Textract
     #       }
     #
     # @!attribute [rw] bytes
-    #   A blob of base-64 encoded documents bytes. The maximum size of a
+    #   A blob of base64-encoded document bytes. The maximum size of a
     #   document that's provided in a blob of bytes is 5 MB. The document
-    #   bytes must be in PNG or JPG format.
+    #   bytes must be in PNG or JPEG format.
     #
-    #   If you are using an AWS SDK to call Amazon Textract, you might not
+    #   If you're using an AWS SDK to call Amazon Textract, you might not
     #   need to base64-encode image bytes passed using the `Bytes` field.
     #   @return [String]
     #
     # @!attribute [rw] s3_object
     #   Identifies an S3 object as the document source. The maximum size of
-    #   a document stored in an S3 bucket is 5 MB.
+    #   a document that's stored in an S3 bucket is 5 MB.
     #   @return [Types::S3Object]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Document AWS API Documentation
@@ -387,7 +422,7 @@ module Aws::Textract
     # The Amazon S3 bucket that contains the document to be processed. It's
     # used by asynchronous operations such as StartDocumentTextDetection.
     #
-    # The input document can be an image file in JPG or PNG format. It can
+    # The input document can be an image file in JPEG or PNG format. It can
     # also be a file in PDF format.
     #
     # @note When making an API call, you may pass DocumentLocation
@@ -415,7 +450,7 @@ module Aws::Textract
     # Information about the input document.
     #
     # @!attribute [rw] pages
-    #   The number of pages detected in the document.
+    #   The number of pages that are detected in the document.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentMetadata AWS API Documentation
@@ -425,17 +460,18 @@ module Aws::Textract
       include Aws::Structure
     end
 
-    # Information about where a recognized text, key, value, table, or table
-    # cell is located on a document page.
+    # Information about where the following items are located on a document
+    # page: detected page, text, key-value pairs, tables, table cells, and
+    # selection elements.
     #
     # @!attribute [rw] bounding_box
     #   An axis-aligned coarse representation of the location of the
-    #   recognized text on the document page.
+    #   recognized item on the document page.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] polygon
     #   Within the bounding box, a fine-grained polygon around the
-    #   recognized text.
+    #   recognized item.
     #   @return [Array<Types::Point>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Geometry AWS API Documentation
@@ -457,7 +493,8 @@ module Aws::Textract
     #
     # @!attribute [rw] job_id
     #   A unique identifier for the text-detection job. The `JobId` is
-    #   returned from `StartDocumentAnalysis`.
+    #   returned from `StartDocumentAnalysis`. A `JobId` value is only valid
+    #   for 7 days.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -500,16 +537,19 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] blocks
-    #   The results of the text analysis operation.
+    #   The results of the text-analysis operation.
     #   @return [Array<Types::Block>]
     #
     # @!attribute [rw] warnings
-    #   A list of warnings that occurred during the document analysis
+    #   A list of warnings that occurred during the document-analysis
     #   operation.
     #   @return [Array<Types::Warning>]
     #
     # @!attribute [rw] status_message
-    #   The current status of an asynchronous document analysis operation.
+    #   The current status of an asynchronous document-analysis operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] analyze_document_model_version
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentAnalysisResponse AWS API Documentation
@@ -520,7 +560,8 @@ module Aws::Textract
       :next_token,
       :blocks,
       :warnings,
-      :status_message)
+      :status_message,
+      :analyze_document_model_version)
       include Aws::Structure
     end
 
@@ -535,7 +576,8 @@ module Aws::Textract
     #
     # @!attribute [rw] job_id
     #   A unique identifier for the text detection job. The `JobId` is
-    #   returned from `StartDocumentTextDetection`.
+    #   returned from `StartDocumentTextDetection`. A `JobId` value is only
+    #   valid for 7 days.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -582,13 +624,16 @@ module Aws::Textract
     #   @return [Array<Types::Block>]
     #
     # @!attribute [rw] warnings
-    #   A list of warnings that occurred during the document text-detection
-    #   operation.
+    #   A list of warnings that occurred during the text-detection operation
+    #   for the document.
     #   @return [Array<Types::Warning>]
     #
     # @!attribute [rw] status_message
-    #   The current status of an asynchronous document text-detection
-    #   operation.
+    #   The current status of an asynchronous text-detection operation for
+    #   the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] detect_document_text_model_version
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/GetDocumentTextDetectionResponse AWS API Documentation
@@ -599,7 +644,114 @@ module Aws::Textract
       :next_token,
       :blocks,
       :warnings,
-      :status_message)
+      :status_message,
+      :detect_document_text_model_version)
+      include Aws::Structure
+    end
+
+    # Shows the results of the human in the loop evaluation. If there is no
+    # HumanLoopArn, the input did not trigger human review.
+    #
+    # @!attribute [rw] human_loop_arn
+    #   The Amazon Resource Name (ARN) of the HumanLoop created.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_loop_activation_reasons
+    #   Shows if and why human review was needed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] human_loop_activation_conditions_evaluation_results
+    #   Shows the result of condition evaluations, including those
+    #   conditions which activated a human review.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/HumanLoopActivationOutput AWS API Documentation
+    #
+    class HumanLoopActivationOutput < Struct.new(
+      :human_loop_arn,
+      :human_loop_activation_reasons,
+      :human_loop_activation_conditions_evaluation_results)
+      include Aws::Structure
+    end
+
+    # Sets up the human review workflow the document will be sent to if one
+    # of the conditions is met. You can also set certain attributes of the
+    # image before review.
+    #
+    # @note When making an API call, you may pass HumanLoopConfig
+    #   data as a hash:
+    #
+    #       {
+    #         human_loop_name: "HumanLoopName", # required
+    #         flow_definition_arn: "FlowDefinitionArn", # required
+    #         data_attributes: {
+    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #         },
+    #       }
+    #
+    # @!attribute [rw] human_loop_name
+    #   The name of the human workflow used for this image. This should be
+    #   kept unique within a region.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_definition_arn
+    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_attributes
+    #   Sets attributes of the input data.
+    #   @return [Types::HumanLoopDataAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/HumanLoopConfig AWS API Documentation
+    #
+    class HumanLoopConfig < Struct.new(
+      :human_loop_name,
+      :flow_definition_arn,
+      :data_attributes)
+      include Aws::Structure
+    end
+
+    # Allows you to set attributes of the image. Currently, you can declare
+    # an image as free of personally identifiable information and adult
+    # content.
+    #
+    # @note When making an API call, you may pass HumanLoopDataAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #       }
+    #
+    # @!attribute [rw] content_classifiers
+    #   Sets whether the input image is free of personally identifiable
+    #   information or adult content.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/HumanLoopDataAttributes AWS API Documentation
+    #
+    class HumanLoopDataAttributes < Struct.new(
+      :content_classifiers)
+      include Aws::Structure
+    end
+
+    # Indicates you have exceeded the maximum number of active human in the
+    # loop workflows available
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/HumanLoopQuotaExceededException AWS API Documentation
+    #
+    class HumanLoopQuotaExceededException < Struct.new(
+      :resource_type,
+      :quota_code,
+      :service_code)
       include Aws::Structure
     end
 
@@ -634,10 +786,10 @@ module Aws::Textract
     end
 
     # The X and Y coordinates of a point on a document page. The X and Y
-    # values returned are ratios of the overall document page size. For
-    # example, if the input document is 700 x 200 and the operation returns
-    # X=0.5 and Y=0.25, then the point is at the (350,50) pixel coordinate
-    # on the document page.
+    # values that are returned are ratios of the overall document page size.
+    # For example, if the input document is 700 x 200 and the operation
+    # returns X=0.5 and Y=0.25, then the point is at the (350,50) pixel
+    # coordinate on the document page.
     #
     # An array of `Point` objects, `Polygon`, is returned by
     # DetectDocumentText. `Polygon` represents a fine-grained polygon around
@@ -669,7 +821,11 @@ module Aws::Textract
     #
     # @!attribute [rw] type
     #   The type of relationship that the blocks in the IDs array have with
-    #   the current block. The relationship can be `VALUE` or `CHILD`.
+    #   the current block. The relationship can be `VALUE` or `CHILD`. A
+    #   relationship of type VALUE is a list that contains the ID of the
+    #   VALUE block that's associated with the KEY of a key-value pair. A
+    #   relationship of type CHILD is a list of IDs that identify WORD
+    #   blocks.
     #   @return [String]
     #
     # @!attribute [rw] ids
@@ -707,8 +863,9 @@ module Aws::Textract
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The file name of the input document. It must be an image file (.JPG
-    #   or .PNG format). Asynchronous operations also support PDF files.
+    #   The file name of the input document. Synchronous operations can use
+    #   image files that are in JPEG or PNG format. Asynchronous operations
+    #   also support PDF format files.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -752,11 +909,11 @@ module Aws::Textract
     # @!attribute [rw] feature_types
     #   A list of the types of analysis to perform. Add TABLES to the list
     #   to return information about the tables that are detected in the
-    #   input document. Add FORMS to return detected fields and the
-    #   associated text. To perform both types of analysis, add TABLES and
-    #   FORMS to `FeatureTypes`. All selectable elements
-    #   (`SELECTION_ELEMENT`) that are detected are returned, whatever the
-    #   value of `FeatureTypes`.
+    #   input document. Add FORMS to return detected form data. To perform
+    #   both types of analysis, add TABLES and FORMS to `FeatureTypes`. All
+    #   lines and words detected in the document are included in the
+    #   response (including text that isn't related to the value of
+    #   `FeatureTypes`).
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_request_token
@@ -764,13 +921,19 @@ module Aws::Textract
     #   you use the same token with multiple `StartDocumentAnalysis`
     #   requests, the same `JobId` is returned. Use `ClientRequestToken` to
     #   prevent the same job from being accidentally started more than once.
+    #   For more information, see [Calling Amazon Textract Asynchronous
+    #   Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   An identifier you specify that's included in the completion
-    #   notification that's published to the Amazon SNS topic. For example,
-    #   you can use `JobTag` to identify the type of document, such as a tax
-    #   form or a receipt, that the completion notification corresponds to.
+    #   An identifier that you specify that's included in the completion
+    #   notification published to the Amazon SNS topic. For example, you can
+    #   use `JobTag` to identify the type of document that the completion
+    #   notification corresponds to (such as a tax form or a receipt).
     #   @return [String]
     #
     # @!attribute [rw] notification_channel
@@ -791,7 +954,8 @@ module Aws::Textract
 
     # @!attribute [rw] job_id
     #   The identifier for the document text detection job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetDocumentAnalysis`.
+    #   identify the job in a subsequent call to `GetDocumentAnalysis`. A
+    #   `JobId` value is only valid for 7 days.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysisResponse AWS API Documentation
@@ -829,13 +993,19 @@ module Aws::Textract
     #   you use the same token with multiple `StartDocumentTextDetection`
     #   requests, the same `JobId` is returned. Use `ClientRequestToken` to
     #   prevent the same job from being accidentally started more than once.
+    #   For more information, see [Calling Amazon Textract Asynchronous
+    #   Operations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
     #   @return [String]
     #
     # @!attribute [rw] job_tag
-    #   An identifier you specify that's included in the completion
-    #   notification that's published to the Amazon SNS topic. For example,
-    #   you can use `JobTag` to identify the type of document, such as a tax
-    #   form or a receipt, that the completion notification corresponds to.
+    #   An identifier that you specify that's included in the completion
+    #   notification published to the Amazon SNS topic. For example, you can
+    #   use `JobTag` to identify the type of document that the completion
+    #   notification corresponds to (such as a tax form or a receipt).
     #   @return [String]
     #
     # @!attribute [rw] notification_channel
@@ -854,8 +1024,10 @@ module Aws::Textract
     end
 
     # @!attribute [rw] job_id
-    #   The identifier for the document text-detection job. Use `JobId` to
-    #   identify the job in a subsequent call to `GetDocumentTextDetection`.
+    #   The identifier of the text detection job for the document. Use
+    #   `JobId` to identify the job in a subsequent call to
+    #   `GetDocumentTextDetection`. A `JobId` value is only valid for 7
+    #   days.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentTextDetectionResponse AWS API Documentation
@@ -866,7 +1038,7 @@ module Aws::Textract
     end
 
     # A warning about an issue that occurred during asynchronous text
-    # analysis (StartDocumentAnalysis) or asynchronous document-text
+    # analysis (StartDocumentAnalysis) or asynchronous document text
     # detection (StartDocumentTextDetection).
     #
     # @!attribute [rw] error_code
