@@ -278,6 +278,7 @@ to be backwards compatible.
 | AWS CodeStar                                          | CodeStar                        | 2017-04-19  |
 | AWS CodeStar Notifications                            | CodeStarNotifications           | 2019-10-15  |
 | AWS Comprehend Medical                                | ComprehendMedical               | 2018-10-30  |
+| AWS Compute Optimizer                                 | ComputeOptimizer                | 2019-11-01  |
 | AWS Config                                            | ConfigService                   | 2014-11-12  |
 | AWS Cost Explorer Service                             | CostExplorer                    | 2017-10-25  |
 | AWS Cost and Usage Report Service                     | CostandUsageReportService       | 2017-01-06  |
@@ -315,8 +316,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -326,9 +327,11 @@ to be backwards compatible.
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
 | AWS Migration Hub Config                              | MigrationHubConfig              | 2019-06-30  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
+| AWS Network Manager                                   | NetworkManager                  | 2019-07-05  |
 | AWS OpsWorks                                          | OpsWorks                        | 2013-02-18  |
 | AWS OpsWorks CM                                       | OpsWorksCM                      | 2016-11-01  |
 | AWS Organizations                                     | Organizations                   | 2016-11-28  |
+| AWS Outposts                                          | Outposts                        | 2019-12-03  |
 | AWS Performance Insights                              | PI                              | 2018-02-27  |
 | AWS Price List Service                                | Pricing                         | 2017-10-15  |
 | AWS RDS DataService                                   | RDSDataService                  | 2018-08-01  |
@@ -355,6 +358,7 @@ to be backwards compatible.
 | AWS WAF Regional                                      | WAFRegional                     | 2016-11-28  |
 | AWS WAFV2                                             | WAFV2                           | 2019-07-29  |
 | AWS X-Ray                                             | XRay                            | 2016-04-12  |
+| AWSKendraFrontendService                              | Kendra                          | 2019-02-03  |
 | AWSMarketplace Metering                               | MarketplaceMetering             | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | ServerlessApplicationRepository | 2017-09-08  |
 | Access Analyzer                                       | AccessAnalyzer                  | 2019-11-01  |
@@ -363,6 +367,7 @@ to be backwards compatible.
 | Amazon AppConfig                                      | AppConfig                       | 2019-10-09  |
 | Amazon AppStream                                      | AppStream                       | 2016-12-01  |
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
+| Amazon Augmented AI Runtime                           | AugmentedAIRuntime              | 2019-11-07  |
 | Amazon Chime                                          | Chime                           | 2018-05-01  |
 | Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
 | Amazon CloudFront                                     | CloudFront                      | 2019-03-26  |
@@ -373,6 +378,8 @@ to be backwards compatible.
 | Amazon CloudWatch Application Insights                | ApplicationInsights             | 2018-11-25  |
 | Amazon CloudWatch Events                              | CloudWatchEvents                | 2015-10-07  |
 | Amazon CloudWatch Logs                                | CloudWatchLogs                  | 2014-03-28  |
+| Amazon CodeGuru Profiler                              | CodeGuruProfiler                | 2019-07-18  |
+| Amazon CodeGuru Reviewer                              | CodeGuruReviewer                | 2019-09-19  |
 | Amazon Cognito Identity                               | CognitoIdentity                 | 2014-06-30  |
 | Amazon Cognito Identity Provider                      | CognitoIdentityProvider         | 2016-04-18  |
 | Amazon Cognito Sync                                   | CognitoSync                     | 2014-06-30  |
@@ -398,14 +405,15 @@ to be backwards compatible.
 | Amazon FSx                                            | FSx                             | 2018-03-01  |
 | Amazon Forecast Query Service                         | ForecastQueryService            | 2018-06-26  |
 | Amazon Forecast Service                               | ForecastService                 | 2018-06-26  |
+| Amazon Fraud Detector                                 | FraudDetector                   | 2019-11-15  |
 | Amazon GameLift                                       | GameLift                        | 2015-10-01  |
 | Amazon Glacier                                        | Glacier                         | 2012-06-01  |
 | Amazon GuardDuty                                      | GuardDuty                       | 2017-11-28  |
 | Amazon Import/Export Snowball                         | Snowball                        | 2016-06-30  |
 | Amazon Inspector                                      | Inspector                       | 2016-02-16  |
 | Amazon Kinesis                                        | Kinesis                         | 2013-12-02  |
-| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Analytics                              | KinesisAnalyticsV2              | 2018-05-23  |
+| Amazon Kinesis Analytics                              | KinesisAnalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Firehose                        | 2015-08-04  |
 | Amazon Kinesis Video Streams                          | KinesisVideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | KinesisVideoArchivedMedia       | 2017-09-30  |
@@ -458,8 +466,8 @@ to be backwards compatible.
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Schemas                                               | Schemas                         | 2019-12-02  |

@@ -39,6 +39,7 @@ module Aws
     ApplicationDiscoveryService
     ApplicationInsights
     Athena
+    AugmentedAIRuntime
     AutoScaling
     AutoScalingPlans
     Backup
@@ -60,6 +61,8 @@ module Aws
     CodeBuild
     CodeCommit
     CodeDeploy
+    CodeGuruProfiler
+    CodeGuruReviewer
     CodePipeline
     CodeStar
     CodeStarNotifications
@@ -68,6 +71,7 @@ module Aws
     CognitoSync
     Comprehend
     ComprehendMedical
+    ComputeOptimizer
     ConfigService
     Connect
     ConnectParticipant
@@ -105,6 +109,7 @@ module Aws
     Firehose
     ForecastQueryService
     ForecastService
+    FraudDetector
     GameLift
     Glacier
     GlobalAccelerator
@@ -129,6 +134,7 @@ module Aws
     IoTThingsGraph
     KMS
     Kafka
+    Kendra
     Kinesis
     KinesisAnalytics
     KinesisAnalyticsV2
@@ -163,9 +169,11 @@ module Aws
     MigrationHubConfig
     Mobile
     Neptune
+    NetworkManager
     OpsWorks
     OpsWorksCM
     Organizations
+    Outposts
     PI
     Personalize
     PersonalizeEvents

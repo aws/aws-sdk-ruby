@@ -63,6 +63,10 @@
     "models": "athena/2017-05-18",
     "endpoint": "athena"
   },
+  "AugmentedAIRuntime": {
+    "models": "sagemaker-a2i-runtime/2019-11-07",
+    "endpoint": "a2i-runtime.sagemaker"
+  },
   "AutoScaling": {
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
@@ -146,6 +150,14 @@
     "models": "codedeploy/2014-10-06",
     "endpoint": "codedeploy"
   },
+  "CodeGuruProfiler": {
+    "models": "codeguruprofiler/2019-07-18",
+    "endpoint": "codeguru-profiler"
+  },
+  "CodeGuruReviewer": {
+    "models": "codeguru-reviewer/2019-09-19",
+    "endpoint": "codeguru-reviewer"
+  },
   "CodePipeline": {
     "models": "codepipeline/2015-07-09",
     "endpoint": "codepipeline"
@@ -177,6 +189,10 @@
   "ComprehendMedical": {
     "models": "comprehendmedical/2018-10-30",
     "endpoint": "comprehendmedical"
+  },
+  "ComputeOptimizer": {
+    "models": "compute-optimizer/2019-11-01",
+    "endpoint": "compute-optimizer"
   },
   "ConfigService": {
     "models": "config/2014-11-12",
@@ -326,6 +342,10 @@
     "models": "forecast/2018-06-26",
     "endpoint": "forecast"
   },
+  "FraudDetector": {
+    "models": "frauddetector/2019-11-15",
+    "endpoint": "frauddetector"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01",
     "endpoint": "gamelift"
@@ -421,6 +441,10 @@
   "Kafka": {
     "models": "kafka/2018-11-14",
     "endpoint": "kafka"
+  },
+  "Kendra": {
+    "models": "kendra/2019-02-03",
+    "endpoint": "kendra"
   },
   "Kinesis": {
     "models": "kinesis/2013-12-02",
@@ -558,6 +582,10 @@
     "models": "neptune/2014-10-31",
     "endpoint": "rds"
   },
+  "NetworkManager": {
+    "models": "networkmanager/2019-07-05",
+    "endpoint": "networkmanager"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",
     "endpoint": "opsworks"
@@ -569,6 +597,10 @@
   "Organizations": {
     "models": "organizations/2016-11-28",
     "endpoint": "organizations"
+  },
+  "Outposts": {
+    "models": "outposts/2019-12-03",
+    "endpoint": "outposts"
   },
   "PI": {
     "models": "pi/2018-02-27",

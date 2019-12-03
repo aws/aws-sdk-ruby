@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::S3Control - Updated the API, and documentation for AWS S3 Control.
+
+* Feature - Aws::Textract - Updated the API, and documentation for Amazon Textract.
+
+* Feature - Aws::CodeGuruReviewer - Added support for a new service, Amazon CodeGuru Reviewer.
+
+* Feature - Aws::CodeGuruProfiler - Added support for a new service, Amazon CodeGuru Profiler.
+
+* Feature - Aws::ComputeOptimizer - Added support for a new service, AWS Compute Optimizer.
+
+* Feature - Aws::FraudDetector - Added support for a new service, Amazon Fraud Detector.
+
+* Feature - Aws::Kendra - Added support for a new service, AWSKendraFrontendService.
+
+* Feature - Aws::NetworkManager - Added support for a new service, AWS Network Manager.
+
+* Feature - Aws::Outposts - Added support for a new service, AWS Outposts.
+
+* Feature - Aws::AugmentedAIRuntime - Added support for a new service, Amazon Augmented AI Runtime.
+
 2.11.408 (2019-12-02)
 ------------------
 
