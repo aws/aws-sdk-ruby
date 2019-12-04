@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed an issue with Access Point ARNs not resigning correctly.
+
 1.58.0 (2019-12-03)
 ------------------
 
