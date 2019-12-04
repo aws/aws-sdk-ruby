@@ -29,6 +29,32 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Assets are the images that you use to train and evaluate a model
+    # version. Assets are referenced by Sagemaker GroundTruth manifest
+    # files.
+    #
+    # @note When making an API call, you may pass Asset
+    #   data as a hash:
+    #
+    #       {
+    #         ground_truth_manifest: {
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ground_truth_manifest
+    #   The S3 bucket that contains the Ground Truth manifest file.
+    #   @return [Types::GroundTruthManifest]
+    #
+    class Asset < Struct.new(
+      :ground_truth_manifest)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face has a beard, and the confidence
     # level in the determination.
     #
@@ -266,12 +292,12 @@ module Aws::Rekognition
     #   to identify faces. Filtered faces aren't compared. If you specify
     #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
     #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
-    #   meet the chosen quality bar. The default value is `AUTO`. The
-    #   quality bar is based on a variety of common use cases. Low-quality
-    #   detections can occur for a number of reasons. Some examples are an
-    #   object that's misidentified as a face, a face that's too blurry,
-    #   or a face with a pose that's too extreme to use. If you specify
-    #   `NONE`, no filtering is performed.
+    #   meet the chosen quality bar. The quality bar is based on a variety
+    #   of common use cases. Low-quality detections can occur for a number
+    #   of reasons. Some examples are an object that's misidentified as a
+    #   face, a face that's too blurry, or a face with a pose that's too
+    #   extreme to use. If you specify `NONE`, no filtering is performed.
+    #   The default value is `NONE`.
     #
     #   To use quality filtering, the collection you are using must be
     #   associated with version 3 of the face model or higher.
@@ -452,6 +478,112 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateProjectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project to create.
+    #   @return [String]
+    #
+    class CreateProjectRequest < Struct.new(
+      :project_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the new project. You can use the
+    #   ARN to configure IAM access to the project.
+    #   @return [String]
+    #
+    class CreateProjectResponse < Struct.new(
+      :project_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         version_name: "VersionName", # required
+    #         output_config: { # required
+    #           s3_bucket: "S3Bucket",
+    #           s3_key_prefix: "S3KeyPrefix",
+    #         },
+    #         training_data: { # required
+    #           assets: [
+    #             {
+    #               ground_truth_manifest: {
+    #                 s3_object: {
+    #                   bucket: "S3Bucket",
+    #                   name: "S3ObjectName",
+    #                   version: "S3ObjectVersion",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         testing_data: { # required
+    #           assets: [
+    #             {
+    #               ground_truth_manifest: {
+    #                 s3_object: {
+    #                   bucket: "S3Bucket",
+    #                   name: "S3ObjectName",
+    #                   version: "S3ObjectVersion",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           auto_create: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The ARN of the Amazon Rekognition Custom Labels project that manages
+    #   the model that you want to train.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   A name for the version of the model. This value must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_config
+    #   The Amazon S3 location to store the results of training.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] training_data
+    #   The dataset to use for training.
+    #   @return [Types::TrainingData]
+    #
+    # @!attribute [rw] testing_data
+    #   The dataset to use for testing.
+    #   @return [Types::TestingData]
+    #
+    class CreateProjectVersionRequest < Struct.new(
+      :project_arn,
+      :version_name,
+      :output_config,
+      :training_data,
+      :testing_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_version_arn
+    #   The ARN of the model version that was created. Use
+    #   `DescribeProjectVersion` to get the current status of the training
+    #   operation.
+    #   @return [String]
+    #
+    class CreateProjectVersionResponse < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateStreamProcessorRequest
     #   data as a hash:
     #
@@ -520,6 +652,32 @@ module Aws::Rekognition
     #
     class CreateStreamProcessorResponse < Struct.new(
       :stream_processor_arn)
+      include Aws::Structure
+    end
+
+    # A custom label detected in an image by a call to DetectCustomLabels.
+    #
+    # @!attribute [rw] name
+    #   The name of the custom label.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that the model has in the detection of the custom
+    #   label. The range is 0-100. A higher value indicates a higher
+    #   confidence.
+    #   @return [Float]
+    #
+    # @!attribute [rw] geometry
+    #   The location of the detected object on the image that corresponds to
+    #   the custom label. Includes an axis aligned coarse bounding box
+    #   surrounding the object and a finer grain polygon for more accurate
+    #   spatial information.
+    #   @return [Types::Geometry]
+    #
+    class CustomLabel < Struct.new(
+      :name,
+      :confidence,
+      :geometry)
       include Aws::Structure
     end
 
@@ -644,6 +802,113 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeProjectVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "ProjectArn", # required
+    #         version_names: ["VersionName"],
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project that contains the
+    #   models you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_names
+    #   A list of model version names that you want to describe. You can add
+    #   up to 10 model version names to the list. If you don't specify a
+    #   value, all model descriptions are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class DescribeProjectVersionsRequest < Struct.new(
+      :project_arn,
+      :version_names,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_version_descriptions
+    #   A list of model descriptions. The list is sorted by the creation
+    #   date and time of the model versions, latest to earliest.
+    #   @return [Array<Types::ProjectVersionDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class DescribeProjectVersionsResponse < Struct.new(
+      :project_version_descriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProjectsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "ExtendedPaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #   @return [Integer]
+    #
+    class DescribeProjectsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] project_descriptions
+    #   A list of project descriptions. The list is sorted by the date and
+    #   time the projects are created.
+    #   @return [Array<Types::ProjectDescription>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   results to retrieve), Amazon Rekognition Custom Labels returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of results.
+    #   @return [String]
+    #
+    class DescribeProjectsResponse < Struct.new(
+      :project_descriptions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeStreamProcessorRequest
     #   data as a hash:
     #
@@ -716,6 +981,88 @@ module Aws::Rekognition
       :output,
       :role_arn,
       :settings)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectCustomLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         max_results: 1,
+    #         min_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The ARN of the model version that you want to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   Provides the input image either as bytes or an S3 object.
+    #
+    #   You pass image bytes to an Amazon Rekognition API operation by using
+    #   the `Bytes` property. For example, you would use the `Bytes`
+    #   property to pass an image loaded from a local file system. Image
+    #   bytes passed by using the `Bytes` property must be base64-encoded.
+    #   Your code may not need to encode image bytes if you are using an AWS
+    #   SDK to call Amazon Rekognition API operations.
+    #
+    #   For more information, see Analyzing an Image Loaded from a Local
+    #   File System in the Amazon Rekognition Developer Guide.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Rekognition API
+    #   operation by using the `S3Object` property. Images stored in an S3
+    #   bucket do not need to be base64-encoded.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   If you use the AWS CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results you want the service to return in the
+    #   response. The service returns the specified number of highest
+    #   confidence labels ranked from highest confidence to lowest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence level for the labels to return.
+    #   Amazon Rekognition doesn't return any labels with a confidence
+    #   lower than this specified value. If you specify a value of 0, all
+    #   labels are return, regardless of the default thresholds that the
+    #   model version applies.
+    #   @return [Float]
+    #
+    class DetectCustomLabelsRequest < Struct.new(
+      :project_version_arn,
+      :image,
+      :max_results,
+      :min_confidence)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_labels
+    #   An array of custom labels detected in the input image.
+    #   @return [Array<Types::CustomLabel>]
+    #
+    class DetectCustomLabelsResponse < Struct.new(
+      :custom_labels)
       include Aws::Structure
     end
 
@@ -888,6 +1235,13 @@ module Aws::Rekognition
     #           },
     #         },
     #         min_confidence: 1.0,
+    #         human_loop_config: {
+    #           human_loop_name: "HumanLoopName", # required
+    #           flow_definition_arn: "FlowDefinitionArn", # required
+    #           data_attributes: {
+    #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] image
@@ -910,9 +1264,15 @@ module Aws::Rekognition
     #   with confidence values greater than or equal to 50 percent.
     #   @return [Float]
     #
+    # @!attribute [rw] human_loop_config
+    #   Sets up the configuration for human evaluation, including the
+    #   FlowDefinition the image will be sent to.
+    #   @return [Types::HumanLoopConfig]
+    #
     class DetectModerationLabelsRequest < Struct.new(
       :image,
-      :min_confidence)
+      :min_confidence,
+      :human_loop_config)
       include Aws::Structure
     end
 
@@ -926,9 +1286,14 @@ module Aws::Rekognition
     #   detect unsafe content.
     #   @return [String]
     #
+    # @!attribute [rw] human_loop_activation_output
+    #   Shows the results of the human in the loop evaluation.
+    #   @return [Types::HumanLoopActivationOutput]
+    #
     class DetectModerationLabelsResponse < Struct.new(
       :moderation_labels,
-      :moderation_model_version)
+      :moderation_model_version,
+      :human_loop_activation_output)
       include Aws::Structure
     end
 
@@ -989,6 +1354,26 @@ module Aws::Rekognition
     class Emotion < Struct.new(
       :type,
       :confidence)
+      include Aws::Structure
+    end
+
+    # The evaluation results for the training of a model.
+    #
+    # @!attribute [rw] f1_score
+    #   The F1 score for the evaluation of all labels. The F1 score metric
+    #   evaluates the overall precision and recall performance of the model
+    #   as a single value. A higher value indicates better precision and
+    #   recall performance. A lower score indicates that precision, recall,
+    #   or both are performing poorly.
+    #   @return [Float]
+    #
+    # @!attribute [rw] summary
+    #   The S3 bucket that contains the training summary.
+    #   @return [Types::Summary]
+    #
+    class EvaluationResult < Struct.new(
+      :f1_score,
+      :summary)
       include Aws::Structure
     end
 
@@ -1299,17 +1684,17 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Information about where the text detected by DetectText is located on
-    # an image.
+    # Information about where an object (DetectCustomLabels) or text
+    # (DetectText) is located on an image.
     #
     # @!attribute [rw] bounding_box
-    #   An axis-aligned coarse representation of the detected text's
+    #   An axis-aligned coarse representation of the detected item's
     #   location on the image.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] polygon
     #   Within the bounding box, a fine-grained polygon around the detected
-    #   text.
+    #   item.
     #   @return [Array<Types::Point>]
     #
     class Geometry < Struct.new(
@@ -1835,6 +2220,132 @@ module Aws::Rekognition
       :video_metadata,
       :next_token,
       :persons)
+      include Aws::Structure
+    end
+
+    # The S3 bucket that contains the Ground Truth manifest file.
+    #
+    # @note When making an API call, you may pass GroundTruthManifest
+    #   data as a hash:
+    #
+    #       {
+    #         s3_object: {
+    #           bucket: "S3Bucket",
+    #           name: "S3ObjectName",
+    #           version: "S3ObjectVersion",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class GroundTruthManifest < Struct.new(
+      :s3_object)
+      include Aws::Structure
+    end
+
+    # Shows the results of the human in the loop evaluation. If there is no
+    # HumanLoopArn, the input did not trigger human review.
+    #
+    # @!attribute [rw] human_loop_arn
+    #   The Amazon Resource Name (ARN) of the HumanLoop created.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_loop_activation_reasons
+    #   Shows if and why human review was needed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] human_loop_activation_conditions_evaluation_results
+    #   Shows the result of condition evaluations, including those
+    #   conditions which activated a human review.
+    #   @return [String]
+    #
+    class HumanLoopActivationOutput < Struct.new(
+      :human_loop_arn,
+      :human_loop_activation_reasons,
+      :human_loop_activation_conditions_evaluation_results)
+      include Aws::Structure
+    end
+
+    # Sets up the flow definition the image will be sent to if one of the
+    # conditions is met. You can also set certain attributes of the image
+    # before review.
+    #
+    # @note When making an API call, you may pass HumanLoopConfig
+    #   data as a hash:
+    #
+    #       {
+    #         human_loop_name: "HumanLoopName", # required
+    #         flow_definition_arn: "FlowDefinitionArn", # required
+    #         data_attributes: {
+    #           content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #         },
+    #       }
+    #
+    # @!attribute [rw] human_loop_name
+    #   The name of the human review used for this image. This should be
+    #   kept unique within a region.
+    #   @return [String]
+    #
+    # @!attribute [rw] flow_definition_arn
+    #   The Amazon Resource Name (ARN) of the flow definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_attributes
+    #   Sets attributes of the input data.
+    #   @return [Types::HumanLoopDataAttributes]
+    #
+    class HumanLoopConfig < Struct.new(
+      :human_loop_name,
+      :flow_definition_arn,
+      :data_attributes)
+      include Aws::Structure
+    end
+
+    # Allows you to set attributes of the image. Currently, you can declare
+    # an image as free of personally identifiable information.
+    #
+    # @note When making an API call, you may pass HumanLoopDataAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #       }
+    #
+    # @!attribute [rw] content_classifiers
+    #   Sets whether the input image is free of personally identifiable
+    #   information.
+    #   @return [Array<String>]
+    #
+    class HumanLoopDataAttributes < Struct.new(
+      :content_classifiers)
+      include Aws::Structure
+    end
+
+    # The number of in-progress human reviews you have has exceeded the
+    # number allowed.
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   @return [String]
+    #
+    class HumanLoopQuotaExceededException < Struct.new(
+      :resource_type,
+      :quota_code,
+      :service_code)
       include Aws::Structure
     end
 
@@ -2438,6 +2949,30 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The S3 bucket and folder location where training output is placed.
+    #
+    # @note When making an API call, you may pass OutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "S3Bucket",
+    #         s3_key_prefix: "S3KeyPrefix",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket where training output is placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   The prefix applied to the training output files.
+    #   @return [String]
+    #
+    class OutputConfig < Struct.new(
+      :s3_bucket,
+      :s3_key_prefix)
+      include Aws::Structure
+    end
+
     # A parent label for a label. A label can have 0, 1, or more parents.
     #
     # @!attribute [rw] name
@@ -2528,10 +3063,10 @@ module Aws::Rekognition
     # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
     # then the point is at the (350,50) pixel coordinate on the image.
     #
-    # An array of `Point` objects, `Polygon`, is returned by DetectText.
-    # `Polygon` represents a fine-grained polygon around detected text. For
-    # more information, see Geometry in the Amazon Rekognition Developer
-    # Guide.
+    # An array of `Point` objects, `Polygon`, is returned by DetectText and
+    # by DetectCustomLabels. `Polygon` represents a fine-grained polygon
+    # around a detected item. For more information, see Geometry in the
+    # Amazon Rekognition Developer Guide.
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -2566,6 +3101,93 @@ module Aws::Rekognition
       :roll,
       :yaw,
       :pitch)
+      include Aws::Structure
+    end
+
+    # A description of a Amazon Rekognition Custom Labels project.
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix timestamp for the date and time that the project was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the project.
+    #   @return [String]
+    #
+    class ProjectDescription < Struct.new(
+      :project_arn,
+      :creation_timestamp,
+      :status)
+      include Aws::Structure
+    end
+
+    # The description of a version of a model.
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The Unix datetime for the date and time that training started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units used by the model. For more
+    #   information, see StartProjectVersion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The current status of the model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A descriptive message for an error or warning that occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] billable_training_time_in_seconds
+    #   The duration, in seconds, that the model version has been billed for
+    #   training. This value is only returned if the model version has been
+    #   successfully trained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] training_end_timestamp
+    #   The Unix date and time that training of the model ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_config
+    #   The location where training results are saved.
+    #   @return [Types::OutputConfig]
+    #
+    # @!attribute [rw] training_data_result
+    #   The manifest file that represents the training results.
+    #   @return [Types::TrainingDataResult]
+    #
+    # @!attribute [rw] testing_data_result
+    #   The manifest file that represents the testing results.
+    #   @return [Types::TestingDataResult]
+    #
+    # @!attribute [rw] evaluation_result
+    #   The training results. `EvaluationResult` is only returned if
+    #   training is successful.
+    #   @return [Types::EvaluationResult]
+    #
+    class ProjectVersionDescription < Struct.new(
+      :project_version_arn,
+      :creation_timestamp,
+      :min_inference_units,
+      :status,
+      :status_message,
+      :billable_training_time_in_seconds,
+      :training_end_timestamp,
+      :output_config,
+      :training_data_result,
+      :testing_data_result,
+      :evaluation_result)
       include Aws::Structure
     end
 
@@ -2722,11 +3344,11 @@ module Aws::Rekognition
     #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
     #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
     #   removes all faces that don’t meet the chosen quality bar. The
-    #   default value is `AUTO`. The quality bar is based on a variety of
-    #   common use cases. Low-quality detections can occur for a number of
-    #   reasons. Some examples are an object that's misidentified as a
-    #   face, a face that's too blurry, or a face with a pose that's too
-    #   extreme to use. If you specify `NONE`, no filtering is performed.
+    #   quality bar is based on a variety of common use cases. Low-quality
+    #   detections can occur for a number of reasons. Some examples are an
+    #   object that's misidentified as a face, a face that's too blurry,
+    #   or a face with a pose that's too extreme to use. If you specify
+    #   `NONE`, no filtering is performed. The default value is `NONE`.
     #
     #   To use quality filtering, the collection you are using must be
     #   associated with version 3 of the face model or higher.
@@ -3265,6 +3887,42 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #         min_inference_units: 1, # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name(ARN) of the model version that you want to
+    #   start.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_inference_units
+    #   The minimum number of inference units to use. A single inference
+    #   unit represents 1 hour of processing and can support up to 5
+    #   Transaction Pers Second (TPS). Use a higher number to increase the
+    #   TPS throughput of your model. You are charged for the number of
+    #   inference units that you use.
+    #   @return [Integer]
+    #
+    class StartProjectVersionRequest < Struct.new(
+      :project_version_arn,
+      :min_inference_units)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current running status of the model.
+    #   @return [String]
+    #
+    class StartProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartStreamProcessorRequest
     #   data as a hash:
     #
@@ -3282,6 +3940,35 @@ module Aws::Rekognition
     end
 
     class StartStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopProjectVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_version_arn: "ProjectVersionArn", # required
+    #       }
+    #
+    # @!attribute [rw] project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    #   This operation requires permissions to perform the
+    #   `rekognition:StopProjectVersion` action.
+    #   @return [String]
+    #
+    class StopProjectVersionRequest < Struct.new(
+      :project_version_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the stop operation.
+    #   @return [String]
+    #
+    class StopProjectVersionResponse < Struct.new(
+      :status)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass StopStreamProcessorRequest
     #   data as a hash:
@@ -3389,6 +4076,29 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The S3 bucket that contains the training summary. The training summary
+    # includes aggregated evaluation metrics for the entire testing dataset
+    # and metrics for each individual label.
+    #
+    # You get the training summary S3 bucket location by calling
+    # DescribeProjectVersions.
+    #
+    # @!attribute [rw] s3_object
+    #   Provides the S3 bucket name and object name.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   @return [Types::S3Object]
+    #
+    class Summary < Struct.new(
+      :s3_object)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face is wearing sunglasses, and the
     # confidence level in the determination.
     #
@@ -3404,6 +4114,62 @@ module Aws::Rekognition
     class Sunglasses < Struct.new(
       :value,
       :confidence)
+      include Aws::Structure
+    end
+
+    # The dataset used for testing. Optionally, if `AutoCreate` is set,
+    # Amazon Rekognition Custom Labels creates a testing dataset using an
+    # 80/20 split of the training dataset.
+    #
+    # @note When making an API call, you may pass TestingData
+    #   data as a hash:
+    #
+    #       {
+    #         assets: [
+    #           {
+    #             ground_truth_manifest: {
+    #               s3_object: {
+    #                 bucket: "S3Bucket",
+    #                 name: "S3ObjectName",
+    #                 version: "S3ObjectVersion",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         auto_create: false,
+    #       }
+    #
+    # @!attribute [rw] assets
+    #   The assets used for testing.
+    #   @return [Array<Types::Asset>]
+    #
+    # @!attribute [rw] auto_create
+    #   If specified, Amazon Rekognition Custom Labels creates a testing
+    #   dataset with an 80/20 split of the training dataset.
+    #   @return [Boolean]
+    #
+    class TestingData < Struct.new(
+      :assets,
+      :auto_create)
+      include Aws::Structure
+    end
+
+    # A Sagemaker Groundtruth format manifest file representing the dataset
+    # used for testing.
+    #
+    # @!attribute [rw] input
+    #   The testing dataset that was supplied for training.
+    #   @return [Types::TestingData]
+    #
+    # @!attribute [rw] output
+    #   The subset of the dataset that was actually tested. Some images
+    #   (assets) might not be tested due to file formatting and other
+    #   issues.
+    #   @return [Types::TestingData]
+    #
+    class TestingDataResult < Struct.new(
+      :input,
+      :output)
       include Aws::Structure
     end
 
@@ -3458,6 +4224,53 @@ module Aws::Rekognition
       :parent_id,
       :confidence,
       :geometry)
+      include Aws::Structure
+    end
+
+    # The dataset used for training.
+    #
+    # @note When making an API call, you may pass TrainingData
+    #   data as a hash:
+    #
+    #       {
+    #         assets: [
+    #           {
+    #             ground_truth_manifest: {
+    #               s3_object: {
+    #                 bucket: "S3Bucket",
+    #                 name: "S3ObjectName",
+    #                 version: "S3ObjectVersion",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] assets
+    #   A Sagemaker GroundTruth manifest file that contains the training
+    #   images (assets).
+    #   @return [Array<Types::Asset>]
+    #
+    class TrainingData < Struct.new(
+      :assets)
+      include Aws::Structure
+    end
+
+    # A Sagemaker Groundtruth format manifest file that represents the
+    # dataset used for training.
+    #
+    # @!attribute [rw] input
+    #   The training assets that you supplied for training.
+    #   @return [Types::TrainingData]
+    #
+    # @!attribute [rw] output
+    #   The images (assets) that were actually trained by Amazon Rekognition
+    #   Custom Labels.
+    #   @return [Types::TrainingData]
+    #
+    class TrainingDataResult < Struct.new(
+      :input,
+      :output)
       include Aws::Structure
     end
 

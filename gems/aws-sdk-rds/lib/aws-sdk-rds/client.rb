@@ -4292,6 +4292,128 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Creates a new DB proxy.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier for the proxy. This name must be unique for all proxies
+    #   owned by your AWS account in the specified AWS Region. An identifier
+    #   must begin with a letter and must contain only ASCII letters, digits,
+    #   and hyphens; it can't end with a hyphen or contain two consecutive
+    #   hyphens.
+    #
+    # @option params [required, String] :engine_family
+    #   The kinds of databases that the proxy can connect to. This value
+    #   determines which database network protocol the proxy recognizes when
+    #   it interprets network traffic to and from the database. Currently,
+    #   this value is always `MYSQL`. The engine family applies to both RDS
+    #   MySQL and Aurora MySQL.
+    #
+    # @option params [required, Array<Types::UserAuthConfig>] :auth
+    #   The authorization mechanism that the proxy uses.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the proxy uses to
+    #   access secrets in AWS Secrets Manager.
+    #
+    # @option params [required, Array<String>] :vpc_subnet_ids
+    #   One or more VPC subnet IDs to associate with the new proxy.
+    #
+    # @option params [Array<String>] :vpc_security_group_ids
+    #   One or more VPC security group IDs to associate with the new proxy.
+    #
+    # @option params [Boolean] :require_tls
+    #   A Boolean parameter that specifies whether Transport Layer Security
+    #   (TLS) encryption is required for connections to the proxy. By enabling
+    #   this setting, you can enforce encrypted TLS connections to the proxy.
+    #
+    # @option params [Integer] :idle_client_timeout
+    #   The number of seconds that a connection to the proxy can be inactive
+    #   before the proxy disconnects it. You can set this value higher or
+    #   lower than the connection timeout limit for the associated database.
+    #
+    # @option params [Boolean] :debug_logging
+    #   Whether the proxy includes detailed information about SQL statements
+    #   in its logs. This information helps you to debug issues involving SQL
+    #   behavior or the performance and scalability of the proxy connections.
+    #   The debug information includes the text of SQL statements that you
+    #   submit through the proxy. Thus, only enable this setting when needed
+    #   for debugging, and only when you have security measures in place to
+    #   safeguard any sensitive information that appears in the logs.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An optional set of key-value pairs to associate arbitrary data of your
+    #   choosing with the proxy.
+    #
+    # @return [Types::CreateDBProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDBProxyResponse#db_proxy #db_proxy} => Types::DBProxy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_proxy({
+    #     db_proxy_name: "String", # required
+    #     engine_family: "MYSQL", # required, accepts MYSQL
+    #     auth: [ # required
+    #       {
+    #         description: "String",
+    #         user_name: "String",
+    #         auth_scheme: "SECRETS", # accepts SECRETS
+    #         secret_arn: "String",
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #       },
+    #     ],
+    #     role_arn: "String", # required
+    #     vpc_subnet_ids: ["String"], # required
+    #     vpc_security_group_ids: ["String"],
+    #     require_tls: false,
+    #     idle_client_timeout: 1,
+    #     debug_logging: false,
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy.db_proxy_name #=> String
+    #   resp.db_proxy.db_proxy_arn #=> String
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_security_group_ids #=> Array
+    #   resp.db_proxy.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy.vpc_subnet_ids #=> Array
+    #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.auth #=> Array
+    #   resp.db_proxy.auth[0].description #=> String
+    #   resp.db_proxy.auth[0].user_name #=> String
+    #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
+    #   resp.db_proxy.auth[0].secret_arn #=> String
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.role_arn #=> String
+    #   resp.db_proxy.endpoint #=> String
+    #   resp.db_proxy.require_tls #=> Boolean
+    #   resp.db_proxy.idle_client_timeout #=> Integer
+    #   resp.db_proxy.debug_logging #=> Boolean
+    #   resp.db_proxy.created_date #=> Time
+    #   resp.db_proxy.updated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxy AWS API Documentation
+    #
+    # @overload create_db_proxy(params = {})
+    # @param [Hash] params ({})
+    def create_db_proxy(params = {}, options = {})
+      req = build_request(:create_db_proxy, params)
+      req.send_request(options)
+    end
+
     # Creates a new DB security group. DB security groups control access to
     # a DB instance.
     #
@@ -5659,6 +5781,59 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Deletes an existing proxy.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The name of the DB proxy to delete.
+    #
+    # @return [Types::DeleteDBProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDBProxyResponse#db_proxy #db_proxy} => Types::DBProxy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_db_proxy({
+    #     db_proxy_name: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy.db_proxy_name #=> String
+    #   resp.db_proxy.db_proxy_arn #=> String
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_security_group_ids #=> Array
+    #   resp.db_proxy.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy.vpc_subnet_ids #=> Array
+    #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.auth #=> Array
+    #   resp.db_proxy.auth[0].description #=> String
+    #   resp.db_proxy.auth[0].user_name #=> String
+    #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
+    #   resp.db_proxy.auth[0].secret_arn #=> String
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.role_arn #=> String
+    #   resp.db_proxy.endpoint #=> String
+    #   resp.db_proxy.require_tls #=> Boolean
+    #   resp.db_proxy.idle_client_timeout #=> Integer
+    #   resp.db_proxy.debug_logging #=> Boolean
+    #   resp.db_proxy.created_date #=> Time
+    #   resp.db_proxy.updated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxy AWS API Documentation
+    #
+    # @overload delete_db_proxy(params = {})
+    # @param [Hash] params ({})
+    def delete_db_proxy(params = {}, options = {})
+      req = build_request(:delete_db_proxy, params)
+      req.send_request(options)
+    end
+
     # Deletes a DB security group.
     #
     # <note markdown="1"> The specified DB security group must not be associated with any DB
@@ -6012,6 +6187,47 @@ module Aws::RDS
     # @param [Hash] params ({})
     def delete_option_group(params = {}, options = {})
       req = build_request(:delete_option_group, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Remove the association between one or more `DBProxyTarget` data
+    # structures and a `DBProxyTargetGroup`.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier of the `DBProxy` that is associated with the
+    #   `DBProxyTargetGroup`.
+    #
+    # @option params [String] :target_group_name
+    #   The identifier of the `DBProxyTargetGroup`.
+    #
+    # @option params [Array<String>] :db_instance_identifiers
+    #   One or more DB instance identifiers.
+    #
+    # @option params [Array<String>] :db_cluster_identifiers
+    #   One or more DB cluster identifiers.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_db_proxy_targets({
+    #     db_proxy_name: "String", # required
+    #     target_group_name: "String",
+    #     db_instance_identifiers: ["String"],
+    #     db_cluster_identifiers: ["String"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeregisterDBProxyTargets AWS API Documentation
+    #
+    # @overload deregister_db_proxy_targets(params = {})
+    # @param [Hash] params ({})
+    def deregister_db_proxy_targets(params = {}, options = {})
+      req = build_request(:deregister_db_proxy_targets, params)
       req.send_request(options)
     end
 
@@ -7805,6 +8021,239 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_db_parameters(params = {}, options = {})
       req = build_request(:describe_db_parameters, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Returns information about DB proxies.
+    #
+    # @option params [String] :db_proxy_name
+    #   The name of the DB proxy.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribeDBProxiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBProxiesResponse#db_proxies #db_proxies} => Array&lt;Types::DBProxy&gt;
+    #   * {Types::DescribeDBProxiesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_proxies({
+    #     db_proxy_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxies #=> Array
+    #   resp.db_proxies[0].db_proxy_name #=> String
+    #   resp.db_proxies[0].db_proxy_arn #=> String
+    #   resp.db_proxies[0].status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxies[0].engine_family #=> String
+    #   resp.db_proxies[0].vpc_security_group_ids #=> Array
+    #   resp.db_proxies[0].vpc_security_group_ids[0] #=> String
+    #   resp.db_proxies[0].vpc_subnet_ids #=> Array
+    #   resp.db_proxies[0].vpc_subnet_ids[0] #=> String
+    #   resp.db_proxies[0].auth #=> Array
+    #   resp.db_proxies[0].auth[0].description #=> String
+    #   resp.db_proxies[0].auth[0].user_name #=> String
+    #   resp.db_proxies[0].auth[0].auth_scheme #=> String, one of "SECRETS"
+    #   resp.db_proxies[0].auth[0].secret_arn #=> String
+    #   resp.db_proxies[0].auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxies[0].role_arn #=> String
+    #   resp.db_proxies[0].endpoint #=> String
+    #   resp.db_proxies[0].require_tls #=> Boolean
+    #   resp.db_proxies[0].idle_client_timeout #=> Integer
+    #   resp.db_proxies[0].debug_logging #=> Boolean
+    #   resp.db_proxies[0].created_date #=> Time
+    #   resp.db_proxies[0].updated_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxies AWS API Documentation
+    #
+    # @overload describe_db_proxies(params = {})
+    # @param [Hash] params ({})
+    def describe_db_proxies(params = {}, options = {})
+      req = build_request(:describe_db_proxies, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Returns information about DB proxy target groups, represented by
+    # `DBProxyTargetGroup` data structures.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier of the `DBProxy` associated with the target group.
+    #
+    # @option params [String] :target_group_name
+    #   The identifier of the `DBProxyTargetGroup` to describe.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribeDBProxyTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBProxyTargetGroupsResponse#target_groups #target_groups} => Array&lt;Types::DBProxyTargetGroup&gt;
+    #   * {Types::DescribeDBProxyTargetGroupsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_proxy_target_groups({
+    #     db_proxy_name: "String", # required
+    #     target_group_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_groups #=> Array
+    #   resp.target_groups[0].db_proxy_name #=> String
+    #   resp.target_groups[0].target_group_name #=> String
+    #   resp.target_groups[0].target_group_arn #=> String
+    #   resp.target_groups[0].is_default #=> Boolean
+    #   resp.target_groups[0].status #=> String
+    #   resp.target_groups[0].connection_pool_config.max_connections_percent #=> Integer
+    #   resp.target_groups[0].connection_pool_config.max_idle_connections_percent #=> Integer
+    #   resp.target_groups[0].connection_pool_config.connection_borrow_timeout #=> Integer
+    #   resp.target_groups[0].connection_pool_config.session_pinning_filters #=> Array
+    #   resp.target_groups[0].connection_pool_config.session_pinning_filters[0] #=> String
+    #   resp.target_groups[0].connection_pool_config.init_query #=> String
+    #   resp.target_groups[0].created_date #=> Time
+    #   resp.target_groups[0].updated_date #=> Time
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargetGroups AWS API Documentation
+    #
+    # @overload describe_db_proxy_target_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_db_proxy_target_groups(params = {}, options = {})
+      req = build_request(:describe_db_proxy_target_groups, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Returns information about `DBProxyTarget` objects. This API supports
+    # pagination.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier of the `DBProxyTarget` to describe.
+    #
+    # @option params [String] :target_group_name
+    #   The identifier of the `DBProxyTargetGroup` to describe.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter is not currently supported.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::DescribeDBProxyTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBProxyTargetsResponse#targets #targets} => Array&lt;Types::DBProxyTarget&gt;
+    #   * {Types::DescribeDBProxyTargetsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_proxy_targets({
+    #     db_proxy_name: "String", # required
+    #     target_group_name: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targets #=> Array
+    #   resp.targets[0].target_arn #=> String
+    #   resp.targets[0].endpoint #=> String
+    #   resp.targets[0].tracked_cluster_id #=> String
+    #   resp.targets[0].rds_resource_id #=> String
+    #   resp.targets[0].port #=> Integer
+    #   resp.targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargets AWS API Documentation
+    #
+    # @overload describe_db_proxy_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_db_proxy_targets(params = {}, options = {})
+      req = build_request(:describe_db_proxy_targets, params)
       req.send_request(options)
     end
 
@@ -11860,6 +12309,176 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Changes the settings for an existing DB proxy.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier for the `DBProxy` to modify.
+    #
+    # @option params [String] :new_db_proxy_name
+    #   The new identifier for the `DBProxy`. An identifier must begin with a
+    #   letter and must contain only ASCII letters, digits, and hyphens; it
+    #   can't end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [Array<Types::UserAuthConfig>] :auth
+    #   The new authentication settings for the `DBProxy`.
+    #
+    # @option params [Boolean] :require_tls
+    #   Whether Transport Layer Security (TLS) encryption is required for
+    #   connections to the proxy. By enabling this setting, you can enforce
+    #   encrypted TLS connections to the proxy, even if the associated
+    #   database doesn't use TLS.
+    #
+    # @option params [Integer] :idle_client_timeout
+    #   The number of seconds that a connection to the proxy can be inactive
+    #   before the proxy disconnects it. You can set this value higher or
+    #   lower than the connection timeout limit for the associated database.
+    #
+    # @option params [Boolean] :debug_logging
+    #   Whether the proxy includes detailed information about SQL statements
+    #   in its logs. This information helps you to debug issues involving SQL
+    #   behavior or the performance and scalability of the proxy connections.
+    #   The debug information includes the text of SQL statements that you
+    #   submit through the proxy. Thus, only enable this setting when needed
+    #   for debugging, and only when you have security measures in place to
+    #   safeguard any sensitive information that appears in the logs.
+    #
+    # @option params [String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the proxy uses to
+    #   access secrets in AWS Secrets Manager.
+    #
+    # @option params [Array<String>] :security_groups
+    #   The new list of security groups for the `DBProxy`.
+    #
+    # @return [Types::ModifyDBProxyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBProxyResponse#db_proxy #db_proxy} => Types::DBProxy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_proxy({
+    #     db_proxy_name: "String", # required
+    #     new_db_proxy_name: "String",
+    #     auth: [
+    #       {
+    #         description: "String",
+    #         user_name: "String",
+    #         auth_scheme: "SECRETS", # accepts SECRETS
+    #         secret_arn: "String",
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #       },
+    #     ],
+    #     require_tls: false,
+    #     idle_client_timeout: 1,
+    #     debug_logging: false,
+    #     role_arn: "String",
+    #     security_groups: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy.db_proxy_name #=> String
+    #   resp.db_proxy.db_proxy_arn #=> String
+    #   resp.db_proxy.status #=> String, one of "available", "modifying", "incompatible-network", "insufficient-resource-limits", "creating", "deleting"
+    #   resp.db_proxy.engine_family #=> String
+    #   resp.db_proxy.vpc_security_group_ids #=> Array
+    #   resp.db_proxy.vpc_security_group_ids[0] #=> String
+    #   resp.db_proxy.vpc_subnet_ids #=> Array
+    #   resp.db_proxy.vpc_subnet_ids[0] #=> String
+    #   resp.db_proxy.auth #=> Array
+    #   resp.db_proxy.auth[0].description #=> String
+    #   resp.db_proxy.auth[0].user_name #=> String
+    #   resp.db_proxy.auth[0].auth_scheme #=> String, one of "SECRETS"
+    #   resp.db_proxy.auth[0].secret_arn #=> String
+    #   resp.db_proxy.auth[0].iam_auth #=> String, one of "DISABLED", "REQUIRED"
+    #   resp.db_proxy.role_arn #=> String
+    #   resp.db_proxy.endpoint #=> String
+    #   resp.db_proxy.require_tls #=> Boolean
+    #   resp.db_proxy.idle_client_timeout #=> Integer
+    #   resp.db_proxy.debug_logging #=> Boolean
+    #   resp.db_proxy.created_date #=> Time
+    #   resp.db_proxy.updated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxy AWS API Documentation
+    #
+    # @overload modify_db_proxy(params = {})
+    # @param [Hash] params ({})
+    def modify_db_proxy(params = {}, options = {})
+      req = build_request(:modify_db_proxy, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Modifies the properties of a `DBProxyTargetGroup`.
+    #
+    # @option params [required, String] :target_group_name
+    #   The name of the new target group to assign to the proxy.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The name of the new proxy to which to assign the target group.
+    #
+    # @option params [Types::ConnectionPoolConfiguration] :connection_pool_config
+    #   The settings that determine the size and behavior of the connection
+    #   pool for the target group.
+    #
+    # @option params [String] :new_name
+    #   The new name for the modified `DBProxyTarget`. An identifier must
+    #   begin with a letter and must contain only ASCII letters, digits, and
+    #   hyphens; it can't end with a hyphen or contain two consecutive
+    #   hyphens.
+    #
+    # @return [Types::ModifyDBProxyTargetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBProxyTargetGroupResponse#db_proxy_target_group #db_proxy_target_group} => Types::DBProxyTargetGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_proxy_target_group({
+    #     target_group_name: "String", # required
+    #     db_proxy_name: "String", # required
+    #     connection_pool_config: {
+    #       max_connections_percent: 1,
+    #       max_idle_connections_percent: 1,
+    #       connection_borrow_timeout: 1,
+    #       session_pinning_filters: ["String"],
+    #       init_query: "String",
+    #     },
+    #     new_name: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_target_group.db_proxy_name #=> String
+    #   resp.db_proxy_target_group.target_group_name #=> String
+    #   resp.db_proxy_target_group.target_group_arn #=> String
+    #   resp.db_proxy_target_group.is_default #=> Boolean
+    #   resp.db_proxy_target_group.status #=> String
+    #   resp.db_proxy_target_group.connection_pool_config.max_connections_percent #=> Integer
+    #   resp.db_proxy_target_group.connection_pool_config.max_idle_connections_percent #=> Integer
+    #   resp.db_proxy_target_group.connection_pool_config.connection_borrow_timeout #=> Integer
+    #   resp.db_proxy_target_group.connection_pool_config.session_pinning_filters #=> Array
+    #   resp.db_proxy_target_group.connection_pool_config.session_pinning_filters[0] #=> String
+    #   resp.db_proxy_target_group.connection_pool_config.init_query #=> String
+    #   resp.db_proxy_target_group.created_date #=> Time
+    #   resp.db_proxy_target_group.updated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyTargetGroup AWS API Documentation
+    #
+    # @overload modify_db_proxy_target_group(params = {})
+    # @param [Hash] params ({})
+    def modify_db_proxy_target_group(params = {}, options = {})
+      req = build_request(:modify_db_proxy_target_group, params)
+      req.send_request(options)
+    end
+
     # Updates a manual DB snapshot, which can be encrypted or not encrypted,
     # with a new engine version.
     #
@@ -13039,6 +13658,59 @@ module Aws::RDS
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
       req = build_request(:reboot_db_instance, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Associate one or more `DBProxyTarget` data structures with a
+    # `DBProxyTargetGroup`.
+    #
+    # @option params [required, String] :db_proxy_name
+    #   The identifier of the `DBProxy` that is associated with the
+    #   `DBProxyTargetGroup`.
+    #
+    # @option params [String] :target_group_name
+    #   The identifier of the `DBProxyTargetGroup`.
+    #
+    # @option params [Array<String>] :db_instance_identifiers
+    #   One or more DB instance identifiers.
+    #
+    # @option params [Array<String>] :db_cluster_identifiers
+    #   One or more DB cluster identifiers.
+    #
+    # @return [Types::RegisterDBProxyTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterDBProxyTargetsResponse#db_proxy_targets #db_proxy_targets} => Array&lt;Types::DBProxyTarget&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_db_proxy_targets({
+    #     db_proxy_name: "String", # required
+    #     target_group_name: "String",
+    #     db_instance_identifiers: ["String"],
+    #     db_cluster_identifiers: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_proxy_targets #=> Array
+    #   resp.db_proxy_targets[0].target_arn #=> String
+    #   resp.db_proxy_targets[0].endpoint #=> String
+    #   resp.db_proxy_targets[0].tracked_cluster_id #=> String
+    #   resp.db_proxy_targets[0].rds_resource_id #=> String
+    #   resp.db_proxy_targets[0].port #=> Integer
+    #   resp.db_proxy_targets[0].type #=> String, one of "RDS_INSTANCE", "RDS_SERVERLESS_ENDPOINT", "TRACKED_CLUSTER"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargets AWS API Documentation
+    #
+    # @overload register_db_proxy_targets(params = {})
+    # @param [Hash] params ({})
+    def register_db_proxy_targets(params = {}, options = {})
+      req = build_request(:register_db_proxy_targets, params)
       req.send_request(options)
     end
 
@@ -17035,7 +17707,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

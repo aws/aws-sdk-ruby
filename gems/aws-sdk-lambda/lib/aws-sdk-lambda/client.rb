@@ -1314,6 +1314,44 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Deletes the provisioned concurrency configuration for a function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [required, String] :qualifier
+    #   The version number or alias name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_provisioned_concurrency_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteProvisionedConcurrencyConfig AWS API Documentation
+    #
+    # @overload delete_provisioned_concurrency_config(params = {})
+    # @param [Hash] params ({})
+    def delete_provisioned_concurrency_config(params = {}, options = {})
+      req = build_request(:delete_provisioned_concurrency_config, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about your account's [limits][1] and usage in an
     # AWS Region.
     #
@@ -1647,6 +1685,47 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function(params = {}, options = {})
       req = build_request(:get_function, params)
+      req.send_request(options)
+    end
+
+    # Returns details about the concurrency configuration for a function. To
+    # set a concurrency limit for a function, use PutFunctionConcurrency.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @return [Types::GetFunctionConcurrencyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionConcurrencyResponse#reserved_concurrent_executions #reserved_concurrent_executions} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_concurrency({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reserved_concurrent_executions #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConcurrency AWS API Documentation
+    #
+    # @overload get_function_concurrency(params = {})
+    # @param [Hash] params ({})
+    def get_function_concurrency(params = {}, options = {})
+      req = build_request(:get_function_concurrency, params)
       req.send_request(options)
     end
 
@@ -2061,6 +2140,61 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_policy(params = {}, options = {})
       req = build_request(:get_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the provisioned concurrency configuration for a function's
+    # alias or version.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [required, String] :qualifier
+    #   The version number or alias name.
+    #
+    # @return [Types::GetProvisionedConcurrencyConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#requested_provisioned_concurrent_executions #requested_provisioned_concurrent_executions} => Integer
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#available_provisioned_concurrent_executions #available_provisioned_concurrent_executions} => Integer
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#allocated_provisioned_concurrent_executions #allocated_provisioned_concurrent_executions} => Integer
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#status #status} => String
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#status_reason #status_reason} => String
+    #   * {Types::GetProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_provisioned_concurrency_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.requested_provisioned_concurrent_executions #=> Integer
+    #   resp.available_provisioned_concurrent_executions #=> Integer
+    #   resp.allocated_provisioned_concurrent_executions #=> Integer
+    #   resp.status #=> String, one of "IN_PROGRESS", "READY", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetProvisionedConcurrencyConfig AWS API Documentation
+    #
+    # @overload get_provisioned_concurrency_config(params = {})
+    # @param [Hash] params ({})
+    def get_provisioned_concurrency_config(params = {}, options = {})
+      req = build_request(:get_provisioned_concurrency_config, params)
       req.send_request(options)
     end
 
@@ -2720,6 +2854,65 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Retrieves a list of provisioned concurrency configurations for a
+    # function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   Specify a number to limit the number of configurations returned.
+    #
+    # @return [Types::ListProvisionedConcurrencyConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisionedConcurrencyConfigsResponse#provisioned_concurrency_configs #provisioned_concurrency_configs} => Array&lt;Types::ProvisionedConcurrencyConfigListItem&gt;
+    #   * {Types::ListProvisionedConcurrencyConfigsResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioned_concurrency_configs({
+    #     function_name: "FunctionName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_concurrency_configs #=> Array
+    #   resp.provisioned_concurrency_configs[0].function_arn #=> String
+    #   resp.provisioned_concurrency_configs[0].requested_provisioned_concurrent_executions #=> Integer
+    #   resp.provisioned_concurrency_configs[0].available_provisioned_concurrent_executions #=> Integer
+    #   resp.provisioned_concurrency_configs[0].allocated_provisioned_concurrent_executions #=> Integer
+    #   resp.provisioned_concurrency_configs[0].status #=> String, one of "IN_PROGRESS", "READY", "FAILED"
+    #   resp.provisioned_concurrency_configs[0].status_reason #=> String
+    #   resp.provisioned_concurrency_configs[0].last_modified #=> Time
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListProvisionedConcurrencyConfigs AWS API Documentation
+    #
+    # @overload list_provisioned_concurrency_configs(params = {})
+    # @param [Hash] params ({})
+    def list_provisioned_concurrency_configs(params = {}, options = {})
+      req = build_request(:list_provisioned_concurrency_configs, params)
+      req.send_request(options)
+    end
+
     # Returns a function's [tags][1]. You can also view tags with
     # GetFunction.
     #
@@ -3124,7 +3317,7 @@ module Aws::Lambda
     # number of events simultaneously, and prevents it from scaling beyond
     # that level. Use GetFunction to see the current setting for a function.
     #
-    # Use GetAccountSettings to see your regional concurrency limit. You can
+    # Use GetAccountSettings to see your Regional concurrency limit. You can
     # reserve concurrency for as many functions as you like, as long as you
     # leave at least 100 simultaneous executions unreserved for functions
     # that aren't configured with a per-function limit. For more
@@ -3272,6 +3465,66 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def put_function_event_invoke_config(params = {}, options = {})
       req = build_request(:put_function_event_invoke_config, params)
+      req.send_request(options)
+    end
+
+    # Adds a provisioned concurrency configuration to a function's alias or
+    # version.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [required, String] :qualifier
+    #   The version number or alias name.
+    #
+    # @option params [required, Integer] :provisioned_concurrent_executions
+    #   The amount of provisioned concurrency to allocate for the version or
+    #   alias.
+    #
+    # @return [Types::PutProvisionedConcurrencyConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#requested_provisioned_concurrent_executions #requested_provisioned_concurrent_executions} => Integer
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#available_provisioned_concurrent_executions #available_provisioned_concurrent_executions} => Integer
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#allocated_provisioned_concurrent_executions #allocated_provisioned_concurrent_executions} => Integer
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#status #status} => String
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#status_reason #status_reason} => String
+    #   * {Types::PutProvisionedConcurrencyConfigResponse#last_modified #last_modified} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_provisioned_concurrency_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "Qualifier", # required
+    #     provisioned_concurrent_executions: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.requested_provisioned_concurrent_executions #=> Integer
+    #   resp.available_provisioned_concurrent_executions #=> Integer
+    #   resp.allocated_provisioned_concurrent_executions #=> Integer
+    #   resp.status #=> String, one of "IN_PROGRESS", "READY", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutProvisionedConcurrencyConfig AWS API Documentation
+    #
+    # @overload put_provisioned_concurrency_config(params = {})
+    # @param [Hash] params ({})
+    def put_provisioned_concurrency_config(params = {}, options = {})
+      req = build_request(:put_provisioned_concurrency_config, params)
       req.send_request(options)
     end
 
@@ -4246,7 +4499,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -194,6 +194,25 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CloudWatchLogsLogGroup
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_arn: "Arn",
+    #       }
+    #
+    # @!attribute [rw] log_group_arn
+    #   The ARN of the the CloudWatch log group to which you want your logs
+    #   emitted to. The ARN must end with `:*`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CloudWatchLogsLogGroup AWS API Documentation
+    #
+    class CloudWatchLogsLogGroup < Struct.new(
+      :log_group_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateActivityInput
     #   data as a hash:
     #
@@ -277,6 +296,18 @@ module Aws::States
     #         name: "Name", # required
     #         definition: "Definition", # required
     #         role_arn: "Arn", # required
+    #         type: "STANDARD", # accepts STANDARD, EXPRESS
+    #         logging_configuration: {
+    #           level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #           include_execution_data: false,
+    #           destinations: [
+    #             {
+    #               cloud_watch_logs_log_group: {
+    #                 log_group_arn: "Arn",
+    #               },
+    #             },
+    #           ],
+    #         },
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -315,6 +346,16 @@ module Aws::States
     #   machine.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   Determines whether a Standard or Express state machine is created.
+    #   If not set, Standard is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_configuration
+    #   Defines what execution history events are logged and where they are
+    #   logged.
+    #   @return [Types::LoggingConfiguration]
+    #
     # @!attribute [rw] tags
     #   Tags to be added when creating a state machine.
     #
@@ -337,6 +378,8 @@ module Aws::States
       :name,
       :definition,
       :role_arn,
+      :type,
+      :logging_configuration,
       :tags)
       include Aws::Structure
     end
@@ -650,9 +693,15 @@ module Aws::States
     #   Step Functions access to AWS resources.)
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date the state machine is created.
     #   @return [Time]
+    #
+    # @!attribute [rw] logging_configuration
+    #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
     #
@@ -662,7 +711,9 @@ module Aws::States
       :status,
       :definition,
       :role_arn,
-      :creation_date)
+      :type,
+      :creation_date,
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -1195,6 +1246,16 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InvalidLoggingConfiguration AWS API Documentation
+    #
+    class InvalidLoggingConfiguration < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The provided name is invalid.
     #
     # @!attribute [rw] message
@@ -1553,6 +1614,70 @@ module Aws::States
     #
     class ListTagsForResourceOutput < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LogDestination
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_logs_log_group: {
+    #           log_group_arn: "Arn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_logs_log_group
+    #   An object describing a CloudWatch log group. For more information,
+    #   see [AWS::Logs::LogGroup][1] in the AWS CloudFormation User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html
+    #   @return [Types::CloudWatchLogsLogGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LogDestination AWS API Documentation
+    #
+    class LogDestination < Struct.new(
+      :cloud_watch_logs_log_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LoggingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #         include_execution_data: false,
+    #         destinations: [
+    #           {
+    #             cloud_watch_logs_log_group: {
+    #               log_group_arn: "Arn",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] level
+    #   Defines which category of execution history events are logged.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_execution_data
+    #   Determines whether execution history data is included in your log.
+    #   When set to `FALSE`, data is excluded.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] destinations
+    #   An object that describes where your execution history events will be
+    #   logged. Limited to size 1. Required, if your log level is not set to
+    #   `OFF`.
+    #   @return [Array<Types::LogDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LoggingConfiguration AWS API Documentation
+    #
+    class LoggingConfiguration < Struct.new(
+      :level,
+      :include_execution_data,
+      :destinations)
       include Aws::Structure
     end
 
@@ -1915,6 +2040,9 @@ module Aws::States
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
     # @!attribute [rw] creation_date
     #   The date the state machine is created.
     #   @return [Time]
@@ -1924,7 +2052,18 @@ module Aws::States
     class StateMachineListItem < Struct.new(
       :state_machine_arn,
       :name,
+      :type,
       :creation_date)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineTypeNotSupported AWS API Documentation
+    #
+    class StateMachineTypeNotSupported < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2335,6 +2474,17 @@ module Aws::States
     #         state_machine_arn: "Arn", # required
     #         definition: "Definition",
     #         role_arn: "Arn",
+    #         logging_configuration: {
+    #           level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #           include_execution_data: false,
+    #           destinations: [
+    #             {
+    #               cloud_watch_logs_log_group: {
+    #                 log_group_arn: "Arn",
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] state_machine_arn
@@ -2354,12 +2504,16 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
     #   @return [String]
     #
+    # @!attribute [rw] logging_configuration
+    #   @return [Types::LoggingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput AWS API Documentation
     #
     class UpdateStateMachineInput < Struct.new(
       :state_machine_arn,
       :definition,
-      :role_arn)
+      :role_arn,
+      :logging_configuration)
       include Aws::Structure
     end
 

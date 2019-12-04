@@ -404,6 +404,14 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the IAM role to use for this state
     #   machine.
     #
+    # @option params [String] :type
+    #   Determines whether a Standard or Express state machine is created. If
+    #   not set, Standard is created.
+    #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   Defines what execution history events are logged and where they are
+    #   logged.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be added when creating a state machine.
     #
@@ -430,6 +438,18 @@ module Aws::States
     #     name: "Name", # required
     #     definition: "Definition", # required
     #     role_arn: "Arn", # required
+    #     type: "STANDARD", # accepts STANDARD, EXPRESS
+    #     logging_configuration: {
+    #       level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #       include_execution_data: false,
+    #       destinations: [
+    #         {
+    #           cloud_watch_logs_log_group: {
+    #             log_group_arn: "Arn",
+    #           },
+    #         },
+    #       ],
+    #     },
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -605,7 +625,9 @@ module Aws::States
     #   * {Types::DescribeStateMachineOutput#status #status} => String
     #   * {Types::DescribeStateMachineOutput#definition #definition} => String
     #   * {Types::DescribeStateMachineOutput#role_arn #role_arn} => String
+    #   * {Types::DescribeStateMachineOutput#type #type} => String
     #   * {Types::DescribeStateMachineOutput#creation_date #creation_date} => Time
+    #   * {Types::DescribeStateMachineOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -620,7 +642,12 @@ module Aws::States
     #   resp.status #=> String, one of "ACTIVE", "DELETING"
     #   resp.definition #=> String
     #   resp.role_arn #=> String
+    #   resp.type #=> String, one of "STANDARD", "EXPRESS"
     #   resp.creation_date #=> Time
+    #   resp.logging_configuration.level #=> String, one of "ALL", "ERROR", "FATAL", "OFF"
+    #   resp.logging_configuration.include_execution_data #=> Boolean
+    #   resp.logging_configuration.destinations #=> Array
+    #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
@@ -1050,6 +1077,7 @@ module Aws::States
     #   resp.state_machines #=> Array
     #   resp.state_machines[0].state_machine_arn #=> String
     #   resp.state_machines[0].name #=> String
+    #   resp.state_machines[0].type #=> String, one of "STANDARD", "EXPRESS"
     #   resp.state_machines[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
@@ -1437,6 +1465,8 @@ module Aws::States
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
     #
+    # @option params [Types::LoggingConfiguration] :logging_configuration
+    #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStateMachineOutput#update_date #update_date} => Time
@@ -1447,6 +1477,17 @@ module Aws::States
     #     state_machine_arn: "Arn", # required
     #     definition: "Definition",
     #     role_arn: "Arn",
+    #     logging_configuration: {
+    #       level: "ALL", # accepts ALL, ERROR, FATAL, OFF
+    #       include_execution_data: false,
+    #       destinations: [
+    #         {
+    #           cloud_watch_logs_log_group: {
+    #             log_group_arn: "Arn",
+    #           },
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -1475,7 +1516,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

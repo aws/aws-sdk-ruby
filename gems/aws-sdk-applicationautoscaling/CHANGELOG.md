@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-12-04)
+------------------
+
+* Feature - This release supports auto scaling of provisioned concurrency for AWS Lambda.
+
 1.34.0 (2019-11-25)
 ------------------
 

@@ -154,6 +154,22 @@ module Aws::States
 
     end
 
+    class InvalidLoggingConfiguration < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::InvalidLoggingConfiguration] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class InvalidName < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -292,6 +308,22 @@ module Aws::States
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::States::Types::StateMachineLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class StateMachineTypeNotSupported < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::States::Types::StateMachineTypeNotSupported] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

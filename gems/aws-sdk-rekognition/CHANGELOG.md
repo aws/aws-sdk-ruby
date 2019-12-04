@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2019-12-04)
+------------------
+
+* Feature - This SDK Release introduces APIs for Amazon Rekognition Custom Labels feature (CreateProjects, CreateProjectVersion,DescribeProjects, DescribeProjectVersions, StartProjectVersion, StopProjectVersion and DetectCustomLabels).  Also new is  AugmentedAI (Human In The Loop) Support for DetectModerationLabels in Amazon Rekognition.
+
 1.32.0 (2019-11-22)
 ------------------
 

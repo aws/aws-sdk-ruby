@@ -44,6 +44,7 @@ module Aws::Lambda
     DeleteFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'DeleteFunctionEventInvokeConfigRequest')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     DeleteLayerVersionRequest = Shapes::StructureShape.new(name: 'DeleteLayerVersionRequest')
+    DeleteProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'DeleteProvisionedConcurrencyConfigRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationConfig = Shapes::StructureShape.new(name: 'DestinationConfig')
@@ -75,6 +76,8 @@ module Aws::Lambda
     GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
     GetAliasRequest = Shapes::StructureShape.new(name: 'GetAliasRequest')
     GetEventSourceMappingRequest = Shapes::StructureShape.new(name: 'GetEventSourceMappingRequest')
+    GetFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'GetFunctionConcurrencyRequest')
+    GetFunctionConcurrencyResponse = Shapes::StructureShape.new(name: 'GetFunctionConcurrencyResponse')
     GetFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'GetFunctionConfigurationRequest')
     GetFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'GetFunctionEventInvokeConfigRequest')
     GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
@@ -86,6 +89,8 @@ module Aws::Lambda
     GetLayerVersionResponse = Shapes::StructureShape.new(name: 'GetLayerVersionResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
+    GetProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigRequest')
+    GetProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'GetProvisionedConcurrencyConfigResponse')
     Handler = Shapes::StringShape.new(name: 'Handler')
     HttpStatus = Shapes::IntegerShape.new(name: 'HttpStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -136,6 +141,8 @@ module Aws::Lambda
     ListLayerVersionsResponse = Shapes::StructureShape.new(name: 'ListLayerVersionsResponse')
     ListLayersRequest = Shapes::StructureShape.new(name: 'ListLayersRequest')
     ListLayersResponse = Shapes::StructureShape.new(name: 'ListLayersResponse')
+    ListProvisionedConcurrencyConfigsRequest = Shapes::StructureShape.new(name: 'ListProvisionedConcurrencyConfigsRequest')
+    ListProvisionedConcurrencyConfigsResponse = Shapes::StructureShape.new(name: 'ListProvisionedConcurrencyConfigsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListVersionsByFunctionRequest = Shapes::StructureShape.new(name: 'ListVersionsByFunctionRequest')
@@ -146,6 +153,7 @@ module Aws::Lambda
     MaxFunctionEventInvokeConfigListItems = Shapes::IntegerShape.new(name: 'MaxFunctionEventInvokeConfigListItems')
     MaxLayerListItems = Shapes::IntegerShape.new(name: 'MaxLayerListItems')
     MaxListItems = Shapes::IntegerShape.new(name: 'MaxListItems')
+    MaxProvisionedConcurrencyConfigListItems = Shapes::IntegerShape.new(name: 'MaxProvisionedConcurrencyConfigListItems')
     MaximumBatchingWindowInSeconds = Shapes::IntegerShape.new(name: 'MaximumBatchingWindowInSeconds')
     MaximumEventAgeInSeconds = Shapes::IntegerShape.new(name: 'MaximumEventAgeInSeconds')
     MaximumRecordAgeInSeconds = Shapes::IntegerShape.new(name: 'MaximumRecordAgeInSeconds')
@@ -155,18 +163,26 @@ module Aws::Lambda
     NameSpacedFunctionArn = Shapes::StringShape.new(name: 'NameSpacedFunctionArn')
     NamespacedFunctionName = Shapes::StringShape.new(name: 'NamespacedFunctionName')
     NamespacedStatementId = Shapes::StringShape.new(name: 'NamespacedStatementId')
+    NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     OnFailure = Shapes::StructureShape.new(name: 'OnFailure')
     OnSuccess = Shapes::StructureShape.new(name: 'OnSuccess')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
     ParallelizationFactor = Shapes::IntegerShape.new(name: 'ParallelizationFactor')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
+    PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    ProvisionedConcurrencyConfigList = Shapes::ListShape.new(name: 'ProvisionedConcurrencyConfigList')
+    ProvisionedConcurrencyConfigListItem = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigListItem')
+    ProvisionedConcurrencyConfigNotFoundException = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigNotFoundException')
+    ProvisionedConcurrencyStatusEnum = Shapes::StringShape.new(name: 'ProvisionedConcurrencyStatusEnum')
     PublishLayerVersionRequest = Shapes::StructureShape.new(name: 'PublishLayerVersionRequest')
     PublishLayerVersionResponse = Shapes::StructureShape.new(name: 'PublishLayerVersionResponse')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
     PutFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'PutFunctionConcurrencyRequest')
     PutFunctionEventInvokeConfigRequest = Shapes::StructureShape.new(name: 'PutFunctionEventInvokeConfigRequest')
+    PutProvisionedConcurrencyConfigRequest = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigRequest')
+    PutProvisionedConcurrencyConfigResponse = Shapes::StructureShape.new(name: 'PutProvisionedConcurrencyConfigResponse')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
     RemoveLayerVersionPermissionRequest = Shapes::StructureShape.new(name: 'RemoveLayerVersionPermissionRequest')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
@@ -348,6 +364,10 @@ module Aws::Lambda
     DeleteLayerVersionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
     DeleteLayerVersionRequest.struct_class = Types::DeleteLayerVersionRequest
 
+    DeleteProvisionedConcurrencyConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    DeleteProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
+    DeleteProvisionedConcurrencyConfigRequest.struct_class = Types::DeleteProvisionedConcurrencyConfigRequest
+
     DestinationConfig.add_member(:on_success, Shapes::ShapeRef.new(shape: OnSuccess, location_name: "OnSuccess"))
     DestinationConfig.add_member(:on_failure, Shapes::ShapeRef.new(shape: OnFailure, location_name: "OnFailure"))
     DestinationConfig.struct_class = Types::DestinationConfig
@@ -463,6 +483,12 @@ module Aws::Lambda
     GetEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     GetEventSourceMappingRequest.struct_class = Types::GetEventSourceMappingRequest
 
+    GetFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetFunctionConcurrencyRequest.struct_class = Types::GetFunctionConcurrencyRequest
+
+    GetFunctionConcurrencyResponse.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, location_name: "ReservedConcurrentExecutions"))
+    GetFunctionConcurrencyResponse.struct_class = Types::GetFunctionConcurrencyResponse
+
     GetFunctionConfigurationRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
     GetFunctionConfigurationRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     GetFunctionConfigurationRequest.struct_class = Types::GetFunctionConfigurationRequest
@@ -513,6 +539,18 @@ module Aws::Lambda
     GetPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
     GetPolicyResponse.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
+
+    GetProvisionedConcurrencyConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    GetProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
+    GetProvisionedConcurrencyConfigRequest.struct_class = Types::GetProvisionedConcurrencyConfigRequest
+
+    GetProvisionedConcurrencyConfigResponse.add_member(:requested_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "RequestedProvisionedConcurrentExecutions"))
+    GetProvisionedConcurrencyConfigResponse.add_member(:available_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AvailableProvisionedConcurrentExecutions"))
+    GetProvisionedConcurrencyConfigResponse.add_member(:allocated_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AllocatedProvisionedConcurrentExecutions"))
+    GetProvisionedConcurrencyConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProvisionedConcurrencyStatusEnum, location_name: "Status"))
+    GetProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    GetProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
+    GetProvisionedConcurrencyConfigResponse.struct_class = Types::GetProvisionedConcurrencyConfigResponse
 
     InvalidParameterValueException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -676,6 +714,15 @@ module Aws::Lambda
     ListLayersResponse.add_member(:layers, Shapes::ShapeRef.new(shape: LayersList, location_name: "Layers"))
     ListLayersResponse.struct_class = Types::ListLayersResponse
 
+    ListProvisionedConcurrencyConfigsRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    ListProvisionedConcurrencyConfigsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
+    ListProvisionedConcurrencyConfigsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxProvisionedConcurrencyConfigListItems, location: "querystring", location_name: "MaxItems"))
+    ListProvisionedConcurrencyConfigsRequest.struct_class = Types::ListProvisionedConcurrencyConfigsRequest
+
+    ListProvisionedConcurrencyConfigsResponse.add_member(:provisioned_concurrency_configs, Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigList, location_name: "ProvisionedConcurrencyConfigs"))
+    ListProvisionedConcurrencyConfigsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: String, location_name: "NextMarker"))
+    ListProvisionedConcurrencyConfigsResponse.struct_class = Types::ListProvisionedConcurrencyConfigsResponse
+
     ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
 
@@ -704,6 +751,21 @@ module Aws::Lambda
     PreconditionFailedException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     PreconditionFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PreconditionFailedException.struct_class = Types::PreconditionFailedException
+
+    ProvisionedConcurrencyConfigList.member = Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigListItem)
+
+    ProvisionedConcurrencyConfigListItem.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "FunctionArn"))
+    ProvisionedConcurrencyConfigListItem.add_member(:requested_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "RequestedProvisionedConcurrentExecutions"))
+    ProvisionedConcurrencyConfigListItem.add_member(:available_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AvailableProvisionedConcurrentExecutions"))
+    ProvisionedConcurrencyConfigListItem.add_member(:allocated_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AllocatedProvisionedConcurrentExecutions"))
+    ProvisionedConcurrencyConfigListItem.add_member(:status, Shapes::ShapeRef.new(shape: ProvisionedConcurrencyStatusEnum, location_name: "Status"))
+    ProvisionedConcurrencyConfigListItem.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    ProvisionedConcurrencyConfigListItem.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
+    ProvisionedConcurrencyConfigListItem.struct_class = Types::ProvisionedConcurrencyConfigListItem
+
+    ProvisionedConcurrencyConfigNotFoundException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    ProvisionedConcurrencyConfigNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ProvisionedConcurrencyConfigNotFoundException.struct_class = Types::ProvisionedConcurrencyConfigNotFoundException
 
     PublishLayerVersionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     PublishLayerVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -738,6 +800,19 @@ module Aws::Lambda
     PutFunctionEventInvokeConfigRequest.add_member(:maximum_event_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumEventAgeInSeconds, location_name: "MaximumEventAgeInSeconds"))
     PutFunctionEventInvokeConfigRequest.add_member(:destination_config, Shapes::ShapeRef.new(shape: DestinationConfig, location_name: "DestinationConfig"))
     PutFunctionEventInvokeConfigRequest.struct_class = Types::PutFunctionEventInvokeConfigRequest
+
+    PutProvisionedConcurrencyConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    PutProvisionedConcurrencyConfigRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, required: true, location: "querystring", location_name: "Qualifier"))
+    PutProvisionedConcurrencyConfigRequest.add_member(:provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "ProvisionedConcurrentExecutions"))
+    PutProvisionedConcurrencyConfigRequest.struct_class = Types::PutProvisionedConcurrencyConfigRequest
+
+    PutProvisionedConcurrencyConfigResponse.add_member(:requested_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "RequestedProvisionedConcurrentExecutions"))
+    PutProvisionedConcurrencyConfigResponse.add_member(:available_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AvailableProvisionedConcurrentExecutions"))
+    PutProvisionedConcurrencyConfigResponse.add_member(:allocated_provisioned_concurrent_executions, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "AllocatedProvisionedConcurrentExecutions"))
+    PutProvisionedConcurrencyConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: ProvisionedConcurrencyStatusEnum, location_name: "Status"))
+    PutProvisionedConcurrencyConfigResponse.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "StatusReason"))
+    PutProvisionedConcurrencyConfigResponse.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
+    PutProvisionedConcurrencyConfigResponse.struct_class = Types::PutProvisionedConcurrencyConfigResponse
 
     RemoveLayerVersionPermissionRequest.add_member(:layer_name, Shapes::ShapeRef.new(shape: LayerName, required: true, location: "uri", location_name: "LayerName"))
     RemoveLayerVersionPermissionRequest.add_member(:version_number, Shapes::ShapeRef.new(shape: LayerVersionNumber, required: true, location: "uri", location_name: "VersionNumber"))
@@ -968,6 +1043,7 @@ module Aws::Lambda
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1032,6 +1108,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteProvisionedConcurrencyConfig"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2019-09-30/functions/{FunctionName}/provisioned-concurrency"
+        o.input = Shapes::ShapeRef.new(shape: DeleteProvisionedConcurrencyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccountSettings"
         o.http_method = "GET"
@@ -1076,6 +1165,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:get_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFunctionConcurrency"
+        o.http_method = "GET"
+        o.http_request_uri = "/2019-09-30/functions/{FunctionName}/concurrency"
+        o.input = Shapes::ShapeRef.new(shape: GetFunctionConcurrencyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFunctionConcurrencyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:get_function_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1148,6 +1249,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:get_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProvisionedConcurrencyConfig"
+        o.http_method = "GET"
+        o.http_request_uri = "/2019-09-30/functions/{FunctionName}/provisioned-concurrency"
+        o.input = Shapes::ShapeRef.new(shape: GetProvisionedConcurrencyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProvisionedConcurrencyConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedConcurrencyConfigNotFoundException)
       end)
 
       api.add_operation(:invoke, Seahorse::Model::Operation.new.tap do |o|
@@ -1300,6 +1414,24 @@ module Aws::Lambda
         )
       end)
 
+      api.add_operation(:list_provisioned_concurrency_configs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProvisionedConcurrencyConfigs"
+        o.http_method = "GET"
+        o.http_request_uri = "/2019-09-30/functions/{FunctionName}/provisioned-concurrency?List=ALL"
+        o.input = Shapes::ShapeRef.new(shape: ListProvisionedConcurrencyConfigsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListProvisionedConcurrencyConfigsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTags"
         o.http_method = "GET"
@@ -1381,6 +1513,19 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:put_provisioned_concurrency_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutProvisionedConcurrencyConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2019-09-30/functions/{FunctionName}/provisioned-concurrency"
+        o.input = Shapes::ShapeRef.new(shape: PutProvisionedConcurrencyConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutProvisionedConcurrencyConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)
 
       api.add_operation(:remove_layer_version_permission, Seahorse::Model::Operation.new.tap do |o|

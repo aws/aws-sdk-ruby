@@ -300,11 +300,10 @@ module Aws::Rekognition
     #
     # The `QualityFilter` input parameter allows you to filter out detected
     # faces that don’t meet a required quality bar. The quality bar is based
-    # on a variety of common use cases. By default, `CompareFaces` chooses
-    # the quality bar that's used to filter faces. You can also explicitly
-    # choose the quality bar. Use `QualityFilter`, to set the quality bar by
-    # specifying `LOW`, `MEDIUM`, or `HIGH`. If you do not want to filter
-    # detected faces, specify `NONE`.
+    # on a variety of common use cases. Use `QualityFilter` to set the
+    # quality bar by specifying `LOW`, `MEDIUM`, or `HIGH`. If you do not
+    # want to filter detected faces, specify `NONE`. The default value is
+    # `NONE`.
     #
     # <note markdown="1"> To use quality filtering, you need a collection associated with
     # version 3 of the face model or higher. To get the version of the face
@@ -359,12 +358,12 @@ module Aws::Rekognition
     #   to identify faces. Filtered faces aren't compared. If you specify
     #   `AUTO`, Amazon Rekognition chooses the quality bar. If you specify
     #   `LOW`, `MEDIUM`, or `HIGH`, filtering removes all faces that don’t
-    #   meet the chosen quality bar. The default value is `AUTO`. The quality
-    #   bar is based on a variety of common use cases. Low-quality detections
-    #   can occur for a number of reasons. Some examples are an object that's
-    #   misidentified as a face, a face that's too blurry, or a face with a
-    #   pose that's too extreme to use. If you specify `NONE`, no filtering
-    #   is performed.
+    #   meet the chosen quality bar. The quality bar is based on a variety of
+    #   common use cases. Low-quality detections can occur for a number of
+    #   reasons. Some examples are an object that's misidentified as a face,
+    #   a face that's too blurry, or a face with a pose that's too extreme
+    #   to use. If you specify `NONE`, no filtering is performed. The default
+    #   value is `NONE`.
     #
     #   To use quality filtering, the collection you are using must be
     #   associated with version 3 of the face model or higher.
@@ -554,6 +553,124 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def create_collection(params = {}, options = {})
       req = build_request(:create_collection, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon Rekognition Custom Labels project. A project is a
+    # logical grouping of resources (images, Labels, models) and operations
+    # (training, evaluation and detection).
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:CreateProject` action.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project to create.
+    #
+    # @return [Types::CreateProjectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProjectResponse#project_arn #project_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_project({
+    #     project_name: "ProjectName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_arn #=> String
+    #
+    # @overload create_project(params = {})
+    # @param [Hash] params ({})
+    def create_project(params = {}, options = {})
+      req = build_request(:create_project, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version of a model and begins training. Models are
+    # managed as part of an Amazon Rekognition Custom Labels project. You
+    # can specify one training dataset and one testing dataset. The response
+    # from `CreateProjectVersion` is an Amazon Resource Name (ARN) for the
+    # version of the model.
+    #
+    # Training takes a while to complete. You can get the current status by
+    # calling DescribeProjectVersions.
+    #
+    # Once training has successfully completed, call DescribeProjectVersions
+    # to get the training results and evaluate the model.
+    #
+    # After evaluating the model, you start the model by calling
+    # StartProjectVersion.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:CreateProjectVersion` action.
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the Amazon Rekognition Custom Labels project that manages
+    #   the model that you want to train.
+    #
+    # @option params [required, String] :version_name
+    #   A name for the version of the model. This value must be unique.
+    #
+    # @option params [required, Types::OutputConfig] :output_config
+    #   The Amazon S3 location to store the results of training.
+    #
+    # @option params [required, Types::TrainingData] :training_data
+    #   The dataset to use for training.
+    #
+    # @option params [required, Types::TestingData] :testing_data
+    #   The dataset to use for testing.
+    #
+    # @return [Types::CreateProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProjectVersionResponse#project_version_arn #project_version_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_project_version({
+    #     project_arn: "ProjectArn", # required
+    #     version_name: "VersionName", # required
+    #     output_config: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key_prefix: "S3KeyPrefix",
+    #     },
+    #     training_data: { # required
+    #       assets: [
+    #         {
+    #           ground_truth_manifest: {
+    #             s3_object: {
+    #               bucket: "S3Bucket",
+    #               name: "S3ObjectName",
+    #               version: "S3ObjectVersion",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     testing_data: { # required
+    #       assets: [
+    #         {
+    #           ground_truth_manifest: {
+    #             s3_object: {
+    #               bucket: "S3Bucket",
+    #               name: "S3ObjectName",
+    #               version: "S3ObjectVersion",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       auto_create: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_version_arn #=> String
+    #
+    # @overload create_project_version(params = {})
+    # @param [Hash] params ({})
+    def create_project_version(params = {}, options = {})
+      req = build_request(:create_project_version, params)
       req.send_request(options)
     end
 
@@ -799,6 +916,137 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Lists and describes the models in an Amazon Rekognition Custom Labels
+    # project. You can specify up to 10 model versions in
+    # `ProjectVersionArns`. If you don't specify a value, descriptions for
+    # all models are returned.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DescribeProjectVersions` action.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project that contains the models
+    #   you want to describe.
+    #
+    # @option params [Array<String>] :version_names
+    #   A list of model version names that you want to describe. You can add
+    #   up to 10 model version names to the list. If you don't specify a
+    #   value, all model descriptions are returned.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #
+    # @return [Types::DescribeProjectVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProjectVersionsResponse#project_version_descriptions #project_version_descriptions} => Array&lt;Types::ProjectVersionDescription&gt;
+    #   * {Types::DescribeProjectVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_project_versions({
+    #     project_arn: "ProjectArn", # required
+    #     version_names: ["VersionName"],
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_version_descriptions #=> Array
+    #   resp.project_version_descriptions[0].project_version_arn #=> String
+    #   resp.project_version_descriptions[0].creation_timestamp #=> Time
+    #   resp.project_version_descriptions[0].min_inference_units #=> Integer
+    #   resp.project_version_descriptions[0].status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #   resp.project_version_descriptions[0].status_message #=> String
+    #   resp.project_version_descriptions[0].billable_training_time_in_seconds #=> Integer
+    #   resp.project_version_descriptions[0].training_end_timestamp #=> Time
+    #   resp.project_version_descriptions[0].output_config.s3_bucket #=> String
+    #   resp.project_version_descriptions[0].output_config.s3_key_prefix #=> String
+    #   resp.project_version_descriptions[0].training_data_result.input.assets #=> Array
+    #   resp.project_version_descriptions[0].training_data_result.input.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].training_data_result.input.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].training_data_result.input.assets[0].ground_truth_manifest.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].training_data_result.output.assets #=> Array
+    #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].training_data_result.output.assets[0].ground_truth_manifest.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.input.assets #=> Array
+    #   resp.project_version_descriptions[0].testing_data_result.input.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.input.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.input.assets[0].ground_truth_manifest.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.input.auto_create #=> Boolean
+    #   resp.project_version_descriptions[0].testing_data_result.output.assets #=> Array
+    #   resp.project_version_descriptions[0].testing_data_result.output.assets[0].ground_truth_manifest.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.output.assets[0].ground_truth_manifest.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.output.assets[0].ground_truth_manifest.s3_object.version #=> String
+    #   resp.project_version_descriptions[0].testing_data_result.output.auto_create #=> Boolean
+    #   resp.project_version_descriptions[0].evaluation_result.f1_score #=> Float
+    #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.bucket #=> String
+    #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.name #=> String
+    #   resp.project_version_descriptions[0].evaluation_result.summary.s3_object.version #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_project_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_project_versions(params = {}, options = {})
+      req = build_request(:describe_project_versions, params)
+      req.send_request(options)
+    end
+
+    # Lists and gets information about your Amazon Rekognition Custom Labels
+    # projects.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DescribeProjects` action.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more results
+    #   to retrieve), Amazon Rekognition Custom Labels returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per paginated call. The
+    #   largest value you can specify is 100. If you specify a value greater
+    #   than 100, a ValidationException error occurs. The default value is
+    #   100.
+    #
+    # @return [Types::DescribeProjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProjectsResponse#project_descriptions #project_descriptions} => Array&lt;Types::ProjectDescription&gt;
+    #   * {Types::DescribeProjectsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_projects({
+    #     next_token: "ExtendedPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.project_descriptions #=> Array
+    #   resp.project_descriptions[0].project_arn #=> String
+    #   resp.project_descriptions[0].creation_timestamp #=> Time
+    #   resp.project_descriptions[0].status #=> String, one of "CREATING", "CREATED", "DELETING"
+    #   resp.next_token #=> String
+    #
+    # @overload describe_projects(params = {})
+    # @param [Hash] params ({})
+    def describe_projects(params = {}, options = {})
+      req = build_request(:describe_projects, params)
+      req.send_request(options)
+    end
+
     # Provides information about a stream processor created by
     # CreateStreamProcessor. You can get information about the input and
     # output streams, the input parameters for the face recognition being
@@ -844,6 +1092,127 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def describe_stream_processor(params = {}, options = {})
       req = build_request(:describe_stream_processor, params)
+      req.send_request(options)
+    end
+
+    # Detects custom labels in a supplied image by using an Amazon
+    # Rekognition Custom Labels model.
+    #
+    # You specify which version of a model version to use by using the
+    # `ProjectVersionArn` input parameter.
+    #
+    # You pass the input image as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
+    # For each object that the model version detects on an image, the API
+    # returns a (`CustomLabel`) object in an array (`CustomLabels`). Each
+    # `CustomLabel` object provides the label name (`Name`), the level of
+    # confidence that the image contains the object (`Confidence`), and
+    # object location information, if it exists, for the label on the image
+    # (`Geometry`).
+    #
+    # During training model calculates a threshold value that determines if
+    # a prediction for a label is true. By default, `DetectCustomLabels`
+    # doesn't return labels whose confidence value is below the model's
+    # calculated threshold value. To filter labels that are returned,
+    # specify a value for `MinConfidence` that is higher than the model's
+    # calculated threshold. You can get the model's calculated threshold
+    # from the model's training results shown in the Amazon Rekognition
+    # Custom Labels console. To get all labels, regardless of confidence,
+    # specify a `MinConfidence` value of 0.
+    #
+    # You can also add the `MaxResults` parameter to limit the number of
+    # labels returned.
+    #
+    # This is a stateless API operation. That is, the operation does not
+    # persist any data.
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:DetectCustomLabels` action.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The ARN of the model version that you want to use.
+    #
+    # @option params [required, Types::Image] :image
+    #   Provides the input image either as bytes or an S3 object.
+    #
+    #   You pass image bytes to an Amazon Rekognition API operation by using
+    #   the `Bytes` property. For example, you would use the `Bytes` property
+    #   to pass an image loaded from a local file system. Image bytes passed
+    #   by using the `Bytes` property must be base64-encoded. Your code may
+    #   not need to encode image bytes if you are using an AWS SDK to call
+    #   Amazon Rekognition API operations.
+    #
+    #   For more information, see Analyzing an Image Loaded from a Local File
+    #   System in the Amazon Rekognition Developer Guide.
+    #
+    #   You pass images stored in an S3 bucket to an Amazon Rekognition API
+    #   operation by using the `S3Object` property. Images stored in an S3
+    #   bucket do not need to be base64-encoded.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   If you use the AWS CLI to call Amazon Rekognition operations, passing
+    #   image bytes using the Bytes property is not supported. You must first
+    #   upload the image to an Amazon S3 bucket and then call the operation
+    #   using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see Resource
+    #   Based Policies in the Amazon Rekognition Developer Guide.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results you want the service to return in the
+    #   response. The service returns the specified number of highest
+    #   confidence labels ranked from highest confidence to lowest.
+    #
+    # @option params [Float] :min_confidence
+    #   Specifies the minimum confidence level for the labels to return.
+    #   Amazon Rekognition doesn't return any labels with a confidence lower
+    #   than this specified value. If you specify a value of 0, all labels are
+    #   return, regardless of the default thresholds that the model version
+    #   applies.
+    #
+    # @return [Types::DetectCustomLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectCustomLabelsResponse#custom_labels #custom_labels} => Array&lt;Types::CustomLabel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_custom_labels({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     max_results: 1,
+    #     min_confidence: 1.0,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_labels #=> Array
+    #   resp.custom_labels[0].name #=> String
+    #   resp.custom_labels[0].confidence #=> Float
+    #   resp.custom_labels[0].geometry.bounding_box.width #=> Float
+    #   resp.custom_labels[0].geometry.bounding_box.height #=> Float
+    #   resp.custom_labels[0].geometry.bounding_box.left #=> Float
+    #   resp.custom_labels[0].geometry.bounding_box.top #=> Float
+    #   resp.custom_labels[0].geometry.polygon #=> Array
+    #   resp.custom_labels[0].geometry.polygon[0].x #=> Float
+    #   resp.custom_labels[0].geometry.polygon[0].y #=> Float
+    #
+    # @overload detect_custom_labels(params = {})
+    # @param [Hash] params ({})
+    def detect_custom_labels(params = {}, options = {})
+      req = build_request(:detect_custom_labels, params)
       req.send_request(options)
     end
 
@@ -1237,10 +1606,15 @@ module Aws::Rekognition
     #   If you don't specify `MinConfidence`, the operation returns labels
     #   with confidence values greater than or equal to 50 percent.
     #
+    # @option params [Types::HumanLoopConfig] :human_loop_config
+    #   Sets up the configuration for human evaluation, including the
+    #   FlowDefinition the image will be sent to.
+    #
     # @return [Types::DetectModerationLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectModerationLabelsResponse#moderation_labels #moderation_labels} => Array&lt;Types::ModerationLabel&gt;
     #   * {Types::DetectModerationLabelsResponse#moderation_model_version #moderation_model_version} => String
+    #   * {Types::DetectModerationLabelsResponse#human_loop_activation_output #human_loop_activation_output} => Types::HumanLoopActivationOutput
     #
     # @example Request syntax with placeholder values
     #
@@ -1254,6 +1628,13 @@ module Aws::Rekognition
     #       },
     #     },
     #     min_confidence: 1.0,
+    #     human_loop_config: {
+    #       human_loop_name: "HumanLoopName", # required
+    #       flow_definition_arn: "FlowDefinitionArn", # required
+    #       data_attributes: {
+    #         content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1263,6 +1644,10 @@ module Aws::Rekognition
     #   resp.moderation_labels[0].name #=> String
     #   resp.moderation_labels[0].parent_name #=> String
     #   resp.moderation_model_version #=> String
+    #   resp.human_loop_activation_output.human_loop_arn #=> String
+    #   resp.human_loop_activation_output.human_loop_activation_reasons #=> Array
+    #   resp.human_loop_activation_output.human_loop_activation_reasons[0] #=> String
+    #   resp.human_loop_activation_output.human_loop_activation_conditions_evaluation_results #=> String
     #
     # @overload detect_moderation_labels(params = {})
     # @param [Hash] params ({})
@@ -3161,11 +3546,10 @@ module Aws::Rekognition
     #
     # The `QualityFilter` input parameter allows you to filter out detected
     # faces that don’t meet a required quality bar. The quality bar is based
-    # on a variety of common use cases. By default, Amazon Rekognition
-    # chooses the quality bar that's used to filter faces. You can also
-    # explicitly choose the quality bar. Use `QualityFilter`, to set the
+    # on a variety of common use cases. Use `QualityFilter` to set the
     # quality bar for filtering by specifying `LOW`, `MEDIUM`, or `HIGH`. If
-    # you do not want to filter detected faces, specify `NONE`.
+    # you do not want to filter detected faces, specify `NONE`. The default
+    # value is `NONE`.
     #
     # <note markdown="1"> To use quality filtering, you need a collection associated with
     # version 3 of the face model or higher. To get the version of the face
@@ -3203,12 +3587,12 @@ module Aws::Rekognition
     #   to identify faces. Filtered faces aren't searched for in the
     #   collection. If you specify `AUTO`, Amazon Rekognition chooses the
     #   quality bar. If you specify `LOW`, `MEDIUM`, or `HIGH`, filtering
-    #   removes all faces that don’t meet the chosen quality bar. The default
-    #   value is `AUTO`. The quality bar is based on a variety of common use
-    #   cases. Low-quality detections can occur for a number of reasons. Some
-    #   examples are an object that's misidentified as a face, a face that's
-    #   too blurry, or a face with a pose that's too extreme to use. If you
-    #   specify `NONE`, no filtering is performed.
+    #   removes all faces that don’t meet the chosen quality bar. The quality
+    #   bar is based on a variety of common use cases. Low-quality detections
+    #   can occur for a number of reasons. Some examples are an object that's
+    #   misidentified as a face, a face that's too blurry, or a face with a
+    #   pose that's too extreme to use. If you specify `NONE`, no filtering
+    #   is performed. The default value is `NONE`.
     #
     #   To use quality filtering, the collection you are using must be
     #   associated with version 3 of the face model or higher.
@@ -3773,6 +4157,54 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Starts the running of the version of a model. Starting a model takes a
+    # while to complete. To check the current state of the model, use
+    # DescribeProjectVersions.
+    #
+    # Once the model is running, you can detect custom labels in new images
+    # by calling DetectCustomLabels.
+    #
+    # <note markdown="1"> You are charged for the amount of time that the model is running. To
+    # stop a running model, call StopProjectVersion.
+    #
+    #  </note>
+    #
+    # This operation requires permissions to perform the
+    # `rekognition:StartProjectVersion` action.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The Amazon Resource Name(ARN) of the model version that you want to
+    #   start.
+    #
+    # @option params [required, Integer] :min_inference_units
+    #   The minimum number of inference units to use. A single inference unit
+    #   represents 1 hour of processing and can support up to 5 Transaction
+    #   Pers Second (TPS). Use a higher number to increase the TPS throughput
+    #   of your model. You are charged for the number of inference units that
+    #   you use.
+    #
+    # @return [Types::StartProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartProjectVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_project_version({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #     min_inference_units: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #
+    # @overload start_project_version(params = {})
+    # @param [Hash] params ({})
+    def start_project_version(params = {}, options = {})
+      req = build_request(:start_project_version, params)
+      req.send_request(options)
+    end
+
     # Starts processing a stream processor. You create a stream processor by
     # calling CreateStreamProcessor. To tell `StartStreamProcessor` which
     # stream processor to start, use the value of the `Name` field specified
@@ -3793,6 +4225,37 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def start_stream_processor(params = {}, options = {})
       req = build_request(:start_stream_processor, params)
+      req.send_request(options)
+    end
+
+    # Stops a running model. The operation might take a while to complete.
+    # To check the current status, call DescribeProjectVersions.
+    #
+    # @option params [required, String] :project_version_arn
+    #   The Amazon Resource Name (ARN) of the model version that you want to
+    #   delete.
+    #
+    #   This operation requires permissions to perform the
+    #   `rekognition:StopProjectVersion` action.
+    #
+    # @return [Types::StopProjectVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopProjectVersionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_project_version({
+    #     project_version_arn: "ProjectVersionArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "TRAINING_IN_PROGRESS", "TRAINING_COMPLETED", "TRAINING_FAILED", "STARTING", "RUNNING", "FAILED", "STOPPING", "STOPPED", "DELETING"
+    #
+    # @overload stop_project_version(params = {})
+    # @param [Hash] params ({})
+    def stop_project_version(params = {}, options = {})
+      req = build_request(:stop_project_version, params)
       req.send_request(options)
     end
 
@@ -3830,14 +4293,129 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                        | params                       | :delay   | :max_attempts |
+    # | ---------------------------------- | ---------------------------- | -------- | ------------- |
+    # | project_version_running            | {#describe_project_versions} | 30       | 40            |
+    # | project_version_training_completed | {#describe_project_versions} | 120      | 360           |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        project_version_running: Waiters::ProjectVersionRunning,
+        project_version_training_completed: Waiters::ProjectVersionTrainingCompleted
+      }
     end
 
     class << self

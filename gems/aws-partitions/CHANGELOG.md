@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.250.0 (2019-12-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EBS`.
+
 1.249.0 (2019-12-03)
 ------------------
 

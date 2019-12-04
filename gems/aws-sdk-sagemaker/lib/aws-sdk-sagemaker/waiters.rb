@@ -233,6 +233,61 @@ module Aws::SageMaker
 
     end
 
+    class ProcessingJobCompletedOrStopped
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (60)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 60,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_processing_job,
+            acceptors: [
+              {
+                "expected" => "Completed",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "processing_job_status"
+              },
+              {
+                "expected" => "Stopped",
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "processing_job_status"
+              },
+              {
+                "expected" => "Failed",
+                "matcher" => "path",
+                "state" => "failure",
+                "argument" => "processing_job_status"
+              },
+              {
+                "expected" => "ValidationException",
+                "matcher" => "error",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_processing_job)
+      # @return (see Client#describe_processing_job)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
     class TrainingJobCompletedOrStopped
 
       # @param [Hash] options

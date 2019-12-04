@@ -286,6 +286,7 @@ module Aws
             'DocDB' => 'rds',
             'DynamoDB' => 'dynamodb',
             'DynamoDBStreams' => 'streams.dynamodb',
+            'EBS' => 'ebs',
             'EC2' => 'ec2',
             'EC2InstanceConnect' => 'ec2-instance-connect',
             'ECR' => 'api.ecr',

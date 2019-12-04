@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.67.0 (2019-12-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ebs` gem.
+
 3.66.0 (2019-12-03)
 ------------------
 

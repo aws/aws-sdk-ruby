@@ -651,6 +651,155 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Specifies the settings that control the size and behavior of the
+    # connection pool associated with a `DBProxyTargetGroup`.
+    #
+    # @note When making an API call, you may pass ConnectionPoolConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         max_connections_percent: 1,
+    #         max_idle_connections_percent: 1,
+    #         connection_borrow_timeout: 1,
+    #         session_pinning_filters: ["String"],
+    #         init_query: "String",
+    #       }
+    #
+    # @!attribute [rw] max_connections_percent
+    #   The maximum size of the connection pool for each target in a target
+    #   group. For Aurora MySQL, it is expressed as a percentage of the
+    #   `max_connections` setting for the RDS DB instance or Aurora DB
+    #   cluster used by the target group.
+    #
+    #   Default: 100
+    #
+    #   Constraints: between 1 and 100
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_idle_connections_percent
+    #   Controls how actively the proxy closes idle database connections in
+    #   the connection pool. A high value enables the proxy to leave a high
+    #   percentage of idle connections open. A low value causes the proxy to
+    #   close idle client connections and return the underlying database
+    #   connections to the connection pool. For Aurora MySQL, it is
+    #   expressed as a percentage of the `max_connections` setting for the
+    #   RDS DB instance or Aurora DB cluster used by the target group.
+    #
+    #   Default: 50
+    #
+    #   Constraints: between 0 and `MaxConnectionsPercent`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_borrow_timeout
+    #   The number of seconds for a proxy to wait for a connection to become
+    #   available in the connection pool. Only applies when the proxy has
+    #   opened its maximum number of connections and all connections are
+    #   busy with client sessions.
+    #
+    #   Default: 120
+    #
+    #   Constraints: between 1 and 3600, or 0 representing unlimited
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_pinning_filters
+    #   Each item in the list represents a class of SQL operations that
+    #   normally cause all later statements in a session using a proxy to be
+    #   pinned to the same underlying database connection. Including an item
+    #   in the list exempts that class of SQL operations from the pinning
+    #   behavior.
+    #
+    #   Default: no session pinning filters
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] init_query
+    #   One or more SQL statements for the proxy to run when opening each
+    #   new database connection. Typically used with `SET` statements to
+    #   make sure that each connection has identical settings such as time
+    #   zone and character set. For multiple statements, use semicolons as
+    #   the separator. You can also include multiple variables in a single
+    #   `SET` statement, such as `SET x=1, y=2`.
+    #
+    #   Default: no initialization query
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfiguration AWS API Documentation
+    #
+    class ConnectionPoolConfiguration < Struct.new(
+      :max_connections_percent,
+      :max_idle_connections_percent,
+      :connection_borrow_timeout,
+      :session_pinning_filters,
+      :init_query)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Displays the settings that control the size and behavior of the
+    # connection pool associated with a `DBProxyTarget`.
+    #
+    # @!attribute [rw] max_connections_percent
+    #   The maximum size of the connection pool for each target in a target
+    #   group. For Aurora MySQL, it is expressed as a percentage of the
+    #   `max_connections` setting for the RDS DB instance or Aurora DB
+    #   cluster used by the target group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_idle_connections_percent
+    #   Controls how actively the proxy closes idle database connections in
+    #   the connection pool. A high value enables the proxy to leave a high
+    #   percentage of idle connections open. A low value causes the proxy to
+    #   close idle client connections and return the underlying database
+    #   connections to the connection pool. For Aurora MySQL, it is
+    #   expressed as a percentage of the `max_connections` setting for the
+    #   RDS DB instance or Aurora DB cluster used by the target group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_borrow_timeout
+    #   The number of seconds for a proxy to wait for a connection to become
+    #   available in the connection pool. Only applies when the proxy has
+    #   opened its maximum number of connections and all connections are
+    #   busy with client sessions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_pinning_filters
+    #   Each item in the list represents a class of SQL operations that
+    #   normally cause all later statements in a session using a proxy to be
+    #   pinned to the same underlying database connection. Including an item
+    #   in the list exempts that class of SQL operations from the pinning
+    #   behavior. Currently, the only allowed value is
+    #   `EXCLUDE_VARIABLE_SETS`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] init_query
+    #   One or more SQL statements for the proxy to run when opening each
+    #   new database connection. Typically used with `SET` statements to
+    #   make sure that each connection has identical settings such as time
+    #   zone and character set. This setting is empty by default. For
+    #   multiple statements, use semicolons as the separator. You can also
+    #   include multiple variables in a single `SET` statement, such as `SET
+    #   x=1, y=2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ConnectionPoolConfigurationInfo AWS API Documentation
+    #
+    class ConnectionPoolConfigurationInfo < Struct.new(
+      :max_connections_percent,
+      :max_idle_connections_percent,
+      :connection_borrow_timeout,
+      :session_pinning_filters,
+      :init_query)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopyDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -3674,6 +3823,124 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateDBProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         engine_family: "MYSQL", # required, accepts MYSQL
+    #         auth: [ # required
+    #           {
+    #             description: "String",
+    #             user_name: "String",
+    #             auth_scheme: "SECRETS", # accepts SECRETS
+    #             secret_arn: "String",
+    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #           },
+    #         ],
+    #         role_arn: "String", # required
+    #         vpc_subnet_ids: ["String"], # required
+    #         vpc_security_group_ids: ["String"],
+    #         require_tls: false,
+    #         idle_client_timeout: 1,
+    #         debug_logging: false,
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier for the proxy. This name must be unique for all
+    #   proxies owned by your AWS account in the specified AWS Region. An
+    #   identifier must begin with a letter and must contain only ASCII
+    #   letters, digits, and hyphens; it can't end with a hyphen or contain
+    #   two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_family
+    #   The kinds of databases that the proxy can connect to. This value
+    #   determines which database network protocol the proxy recognizes when
+    #   it interprets network traffic to and from the database. Currently,
+    #   this value is always `MYSQL`. The engine family applies to both RDS
+    #   MySQL and Aurora MySQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth
+    #   The authorization mechanism that the proxy uses.
+    #   @return [Array<Types::UserAuthConfig>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the proxy uses
+    #   to access secrets in AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   One or more VPC subnet IDs to associate with the new proxy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   One or more VPC security group IDs to associate with the new proxy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] require_tls
+    #   A Boolean parameter that specifies whether Transport Layer Security
+    #   (TLS) encryption is required for connections to the proxy. By
+    #   enabling this setting, you can enforce encrypted TLS connections to
+    #   the proxy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idle_client_timeout
+    #   The number of seconds that a connection to the proxy can be inactive
+    #   before the proxy disconnects it. You can set this value higher or
+    #   lower than the connection timeout limit for the associated database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] debug_logging
+    #   Whether the proxy includes detailed information about SQL statements
+    #   in its logs. This information helps you to debug issues involving
+    #   SQL behavior or the performance and scalability of the proxy
+    #   connections. The debug information includes the text of SQL
+    #   statements that you submit through the proxy. Thus, only enable this
+    #   setting when needed for debugging, and only when you have security
+    #   measures in place to safeguard any sensitive information that
+    #   appears in the logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An optional set of key-value pairs to associate arbitrary data of
+    #   your choosing with the proxy.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyRequest AWS API Documentation
+    #
+    class CreateDBProxyRequest < Struct.new(
+      :db_proxy_name,
+      :engine_family,
+      :auth,
+      :role_arn,
+      :vpc_subnet_ids,
+      :vpc_security_group_ids,
+      :require_tls,
+      :idle_client_timeout,
+      :debug_logging,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy
+    #   The `DBProxy` structure corresponding to the new proxy.
+    #   @return [Types::DBProxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBProxyResponse AWS API Documentation
+    #
+    class CreateDBProxyResponse < Struct.new(
+      :db_proxy)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDBSecurityGroupMessage
     #   data as a hash:
     #
@@ -6082,6 +6349,237 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # The data structure representing a proxy managed by the RDS Proxy.
+    #
+    # This data type is used as a response element in the
+    # `DescribeDBProxies` action.
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier for the proxy. This name must be unique for all
+    #   proxies owned by your AWS account in the specified AWS Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_arn
+    #   The Amazon Resource Name (ARN) for the proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of this proxy. A status of `available` means the
+    #   proxy is ready to handle requests. Other values indicate that you
+    #   must wait for the proxy to be ready, or take some action to resolve
+    #   an issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_family
+    #   Currently, this value is always `MYSQL`. The engine family applies
+    #   to both RDS MySQL and Aurora MySQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_security_group_ids
+    #   Provides a list of VPC security groups that the proxy belongs to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_subnet_ids
+    #   The EC2 subnet IDs for the proxy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auth
+    #   One or more data structures specifying the authorization mechanism
+    #   to connect to the associated RDS DB instance or Aurora DB cluster.
+    #   @return [Array<Types::UserAuthConfigInfo>]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that the proxy uses
+    #   to access Amazon Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint that you can use to connect to the proxy. You include
+    #   the endpoint value in the connection string for a database client
+    #   application.
+    #   @return [String]
+    #
+    # @!attribute [rw] require_tls
+    #   Indicates whether Transport Layer Security (TLS) encryption is
+    #   required for connections to the proxy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idle_client_timeout
+    #   The number of seconds a connection to the proxy can have no activity
+    #   before the proxy drops the client connection. The proxy keeps the
+    #   underlying database connection open and puts it back into the
+    #   connection pool for reuse by later connection requests.
+    #
+    #   Default: 1800 (30 minutes)
+    #
+    #   Constraints: 1 to 28,800
+    #   @return [Integer]
+    #
+    # @!attribute [rw] debug_logging
+    #   Whether the proxy includes detailed information about SQL statements
+    #   in its logs. This information helps you to debug issues involving
+    #   SQL behavior or the performance and scalability of the proxy
+    #   connections. The debug information includes the text of SQL
+    #   statements that you submit through the proxy. Thus, only enable this
+    #   setting when needed for debugging, and only when you have security
+    #   measures in place to safeguard any sensitive information that
+    #   appears in the logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time when the proxy was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_date
+    #   The date and time when the proxy was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxy AWS API Documentation
+    #
+    class DBProxy < Struct.new(
+      :db_proxy_name,
+      :db_proxy_arn,
+      :status,
+      :engine_family,
+      :vpc_security_group_ids,
+      :vpc_subnet_ids,
+      :auth,
+      :role_arn,
+      :endpoint,
+      :require_tls,
+      :idle_client_timeout,
+      :debug_logging,
+      :created_date,
+      :updated_date)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Contains the details for an RDS Proxy target. It represents an RDS DB
+    # instance or Aurora DB cluster that the proxy can connect to. One or
+    # more targets are associated with an RDS Proxy target group.
+    #
+    # This data type is used as a response element in the
+    # `DescribeDBProxyTargets` action.
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The writer endpoint for the RDS DB instance or Aurora DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracked_cluster_id
+    #   The DB cluster identifier when the target represents an Aurora DB
+    #   cluster. This field is blank when the target represents an
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_resource_id
+    #   The identifier representing the target. It can be the instance
+    #   identifier for an RDS DB instance, or the cluster identifier for an
+    #   Aurora DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port that the RDS Proxy uses to connect to the target RDS DB
+    #   instance or Aurora DB cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   Specifies the kind of database, such as an RDS DB instance or an
+    #   Aurora DB cluster, that the target represents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTarget AWS API Documentation
+    #
+    class DBProxyTarget < Struct.new(
+      :target_arn,
+      :endpoint,
+      :tracked_cluster_id,
+      :rds_resource_id,
+      :port,
+      :type)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Represents a set of RDS DB instances, Aurora DB clusters, or both that
+    # a proxy can connect to. Currently, each target group is associated
+    # with exactly one RDS DB instance or Aurora DB cluster.
+    #
+    # This data type is used as a response element in the
+    # `DescribeDBProxyTargetGroups` action.
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier for the RDS proxy associated with this target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_name
+    #   The identifier for the target group. This name must be unique for
+    #   all target groups owned by your AWS account in the specified AWS
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_arn
+    #   The Amazon Resource Name (ARN) representing the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Whether this target group is the first one used for connection
+    #   requests by the associated proxy. Because each proxy is currently
+    #   associated with a single target group, currently this setting is
+    #   always `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current status of this target group. A status of `available`
+    #   means the target group is correctly associated with a database.
+    #   Other values indicate that you must wait for the target group to be
+    #   ready, or take some action to resolve an issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_pool_config
+    #   The settings that determine the size and behavior of the connection
+    #   pool for the target group.
+    #   @return [Types::ConnectionPoolConfigurationInfo]
+    #
+    # @!attribute [rw] created_date
+    #   The date and time when the target group was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_date
+    #   The date and time when the target group was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetGroup AWS API Documentation
+    #
+    class DBProxyTargetGroup < Struct.new(
+      :db_proxy_name,
+      :target_group_name,
+      :target_group_arn,
+      :is_default,
+      :status,
+      :connection_pool_config,
+      :created_date,
+      :updated_date)
+      include Aws::Structure
+    end
+
     # Contains the details for an Amazon RDS DB security group.
     #
     # This data type is used as a response element in the
@@ -6828,6 +7326,36 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteDBProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The name of the DB proxy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxyRequest AWS API Documentation
+    #
+    class DeleteDBProxyRequest < Struct.new(
+      :db_proxy_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy
+    #   The data structure representing the details of the DB proxy that you
+    #   delete.
+    #   @return [Types::DBProxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBProxyResponse AWS API Documentation
+    #
+    class DeleteDBProxyResponse < Struct.new(
+      :db_proxy)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDBSecurityGroupMessage
     #   data as a hash:
     #
@@ -7023,6 +7551,47 @@ module Aws::RDS
       :option_group_name)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeregisterDBProxyTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         target_group_name: "String",
+    #         db_instance_identifiers: ["String"],
+    #         db_cluster_identifiers: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier of the `DBProxy` that is associated with the
+    #   `DBProxyTargetGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_name
+    #   The identifier of the `DBProxyTargetGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifiers
+    #   One or more DB instance identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_identifiers
+    #   One or more DB cluster identifiers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeregisterDBProxyTargetsRequest AWS API Documentation
+    #
+    class DeregisterDBProxyTargetsRequest < Struct.new(
+      :db_proxy_name,
+      :target_group_name,
+      :db_instance_identifiers,
+      :db_cluster_identifiers)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeregisterDBProxyTargetsResponse AWS API Documentation
+    #
+    class DeregisterDBProxyTargetsResponse < Aws::EmptyStructure; end
 
     # @api private
     #
@@ -8204,6 +8773,225 @@ module Aws::RDS
       :source,
       :filters,
       :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBProxiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The name of the DB proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter is not currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxiesRequest AWS API Documentation
+    #
+    class DescribeDBProxiesRequest < Struct.new(
+      :db_proxy_name,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxies
+    #   A return value representing an arbitrary number of `DBProxy` data
+    #   structures.
+    #   @return [Array<Types::DBProxy>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxiesResponse AWS API Documentation
+    #
+    class DescribeDBProxiesResponse < Struct.new(
+      :db_proxies,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBProxyTargetGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         target_group_name: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier of the `DBProxy` associated with the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_name
+    #   The identifier of the `DBProxyTargetGroup` to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter is not currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargetGroupsRequest AWS API Documentation
+    #
+    class DescribeDBProxyTargetGroupsRequest < Struct.new(
+      :db_proxy_name,
+      :target_group_name,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_groups
+    #   An arbitrary number of `DBProxyTargetGroup` objects, containing
+    #   details of the corresponding target groups.
+    #   @return [Array<Types::DBProxyTargetGroup>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargetGroupsResponse AWS API Documentation
+    #
+    class DescribeDBProxyTargetGroupsResponse < Struct.new(
+      :target_groups,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDBProxyTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         target_group_name: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: 1,
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier of the `DBProxyTarget` to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_name
+    #   The identifier of the `DBProxyTargetGroup` to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter is not currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargetsRequest AWS API Documentation
+    #
+    class DescribeDBProxyTargetsRequest < Struct.new(
+      :db_proxy_name,
+      :target_group_name,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] targets
+    #   An arbitrary number of `DBProxyTarget` objects, containing details
+    #   of the corresponding targets.
+    #   @return [Array<Types::DBProxyTarget>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBProxyTargetsResponse AWS API Documentation
+    #
+    class DescribeDBProxyTargetsResponse < Struct.new(
+      :targets,
       :marker)
       include Aws::Structure
     end
@@ -11766,6 +12554,157 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyDBProxyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         new_db_proxy_name: "String",
+    #         auth: [
+    #           {
+    #             description: "String",
+    #             user_name: "String",
+    #             auth_scheme: "SECRETS", # accepts SECRETS
+    #             secret_arn: "String",
+    #             iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #           },
+    #         ],
+    #         require_tls: false,
+    #         idle_client_timeout: 1,
+    #         debug_logging: false,
+    #         role_arn: "String",
+    #         security_groups: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier for the `DBProxy` to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_db_proxy_name
+    #   The new identifier for the `DBProxy`. An identifier must begin with
+    #   a letter and must contain only ASCII letters, digits, and hyphens;
+    #   it can't end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth
+    #   The new authentication settings for the `DBProxy`.
+    #   @return [Array<Types::UserAuthConfig>]
+    #
+    # @!attribute [rw] require_tls
+    #   Whether Transport Layer Security (TLS) encryption is required for
+    #   connections to the proxy. By enabling this setting, you can enforce
+    #   encrypted TLS connections to the proxy, even if the associated
+    #   database doesn't use TLS.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idle_client_timeout
+    #   The number of seconds that a connection to the proxy can be inactive
+    #   before the proxy disconnects it. You can set this value higher or
+    #   lower than the connection timeout limit for the associated database.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] debug_logging
+    #   Whether the proxy includes detailed information about SQL statements
+    #   in its logs. This information helps you to debug issues involving
+    #   SQL behavior or the performance and scalability of the proxy
+    #   connections. The debug information includes the text of SQL
+    #   statements that you submit through the proxy. Thus, only enable this
+    #   setting when needed for debugging, and only when you have security
+    #   measures in place to safeguard any sensitive information that
+    #   appears in the logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the proxy uses
+    #   to access secrets in AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The new list of security groups for the `DBProxy`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyRequest AWS API Documentation
+    #
+    class ModifyDBProxyRequest < Struct.new(
+      :db_proxy_name,
+      :new_db_proxy_name,
+      :auth,
+      :require_tls,
+      :idle_client_timeout,
+      :debug_logging,
+      :role_arn,
+      :security_groups)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy
+    #   The `DBProxy` object representing the new settings for the proxy.
+    #   @return [Types::DBProxy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyResponse AWS API Documentation
+    #
+    class ModifyDBProxyResponse < Struct.new(
+      :db_proxy)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyDBProxyTargetGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_group_name: "String", # required
+    #         db_proxy_name: "String", # required
+    #         connection_pool_config: {
+    #           max_connections_percent: 1,
+    #           max_idle_connections_percent: 1,
+    #           connection_borrow_timeout: 1,
+    #           session_pinning_filters: ["String"],
+    #           init_query: "String",
+    #         },
+    #         new_name: "String",
+    #       }
+    #
+    # @!attribute [rw] target_group_name
+    #   The name of the new target group to assign to the proxy.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The name of the new proxy to which to assign the target group.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_pool_config
+    #   The settings that determine the size and behavior of the connection
+    #   pool for the target group.
+    #   @return [Types::ConnectionPoolConfiguration]
+    #
+    # @!attribute [rw] new_name
+    #   The new name for the modified `DBProxyTarget`. An identifier must
+    #   begin with a letter and must contain only ASCII letters, digits, and
+    #   hyphens; it can't end with a hyphen or contain two consecutive
+    #   hyphens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyTargetGroupRequest AWS API Documentation
+    #
+    class ModifyDBProxyTargetGroupRequest < Struct.new(
+      :target_group_name,
+      :db_proxy_name,
+      :connection_pool_config,
+      :new_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_target_group
+    #   The settings of the modified `DBProxyTarget`.
+    #   @return [Types::DBProxyTargetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBProxyTargetGroupResponse AWS API Documentation
+    #
+    class ModifyDBProxyTargetGroupResponse < Struct.new(
+      :db_proxy_target_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyDBSnapshotAttributeMessage
     #   data as a hash:
     #
@@ -13440,6 +14379,55 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterDBProxyTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         db_proxy_name: "String", # required
+    #         target_group_name: "String",
+    #         db_instance_identifiers: ["String"],
+    #         db_cluster_identifiers: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_proxy_name
+    #   The identifier of the `DBProxy` that is associated with the
+    #   `DBProxyTargetGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_group_name
+    #   The identifier of the `DBProxyTargetGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifiers
+    #   One or more DB instance identifiers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] db_cluster_identifiers
+    #   One or more DB cluster identifiers.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargetsRequest AWS API Documentation
+    #
+    class RegisterDBProxyTargetsRequest < Struct.new(
+      :db_proxy_name,
+      :target_group_name,
+      :db_instance_identifiers,
+      :db_cluster_identifiers)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_proxy_targets
+    #   One or more `DBProxyTarget` objects that are created when you
+    #   register targets with a target group.
+    #   @return [Array<Types::DBProxyTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RegisterDBProxyTargetsResponse AWS API Documentation
+    #
+    class RegisterDBProxyTargetsResponse < Struct.new(
+      :db_proxy_targets)
       include Aws::Structure
     end
 
@@ -16917,6 +17905,105 @@ module Aws::RDS
       :description,
       :auto_upgrade,
       :is_major_version_upgrade)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Specifies the details of authentication used by a proxy to log in as a
+    # specific database user.
+    #
+    # @note When making an API call, you may pass UserAuthConfig
+    #   data as a hash:
+    #
+    #       {
+    #         description: "String",
+    #         user_name: "String",
+    #         auth_scheme: "SECRETS", # accepts SECRETS
+    #         secret_arn: "String",
+    #         iam_auth: "DISABLED", # accepts DISABLED, REQUIRED
+    #       }
+    #
+    # @!attribute [rw] description
+    #   A user-specified description about the authentication used by a
+    #   proxy to log in as a specific database user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the database user to which the proxy connects.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_scheme
+    #   The type of authentication that the proxy uses for connections from
+    #   the proxy to the underlying database.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) representing the secret that the
+    #   proxy uses to authenticate to the RDS DB instance or Aurora DB
+    #   cluster. These secrets are stored within Amazon Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_auth
+    #   Whether to require or disallow AWS Identity and Access Management
+    #   (IAM) authentication for connections to the proxy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfig AWS API Documentation
+    #
+    class UserAuthConfig < Struct.new(
+      :description,
+      :user_name,
+      :auth_scheme,
+      :secret_arn,
+      :iam_auth)
+      include Aws::Structure
+    end
+
+    # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
+    # preview release. It is subject to change.
+    #
+    #  </note>
+    #
+    # Returns the details of authentication used by a proxy to log in as a
+    # specific database user.
+    #
+    # @!attribute [rw] description
+    #   A user-specified description about the authentication used by a
+    #   proxy to log in as a specific database user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the database user to which the proxy connects.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_scheme
+    #   The type of authentication that the proxy uses for connections from
+    #   the proxy to the underlying database.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) representing the secret that the
+    #   proxy uses to authenticate to the RDS DB instance or Aurora DB
+    #   cluster. These secrets are stored within Amazon Secrets Manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_auth
+    #   Whether to require or disallow AWS Identity and Access Management
+    #   (IAM) authentication for connections to the proxy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UserAuthConfigInfo AWS API Documentation
+    #
+    class UserAuthConfigInfo < Struct.new(
+      :description,
+      :user_name,
+      :auth_scheme,
+      :secret_arn,
+      :iam_auth)
       include Aws::Structure
     end
 

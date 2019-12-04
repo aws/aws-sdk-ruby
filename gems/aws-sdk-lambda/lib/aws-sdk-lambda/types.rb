@@ -938,6 +938,42 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteProvisionedConcurrencyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier", # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The version number or alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteProvisionedConcurrencyConfigRequest AWS API Documentation
+    #
+    class DeleteProvisionedConcurrencyConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      include Aws::Structure
+    end
+
     # A configuration object that specifies the destination of an event
     # after Lambda processes it.
     #
@@ -1527,6 +1563,48 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetFunctionConcurrencyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConcurrencyRequest AWS API Documentation
+    #
+    class GetFunctionConcurrencyRequest < Struct.new(
+      :function_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reserved_concurrent_executions
+    #   The number of simultaneous executions that are reserved for the
+    #   function.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConcurrencyResponse AWS API Documentation
+    #
+    class GetFunctionConcurrencyResponse < Struct.new(
+      :reserved_concurrent_executions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetFunctionConfigurationRequest
     #   data as a hash:
     #
@@ -1861,6 +1939,84 @@ module Aws::Lambda
     class GetPolicyResponse < Struct.new(
       :policy,
       :revision_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetProvisionedConcurrencyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier", # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The version number or alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetProvisionedConcurrencyConfigRequest AWS API Documentation
+    #
+    class GetProvisionedConcurrencyConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] requested_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the allocation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   For failed allocations, the reason that provisioned concurrency
+    #   could not be allocated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that a user last updated the configuration, in
+    #   [ISO 8601 format][1].
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetProvisionedConcurrencyConfigResponse AWS API Documentation
+    #
+    class GetProvisionedConcurrencyConfigResponse < Struct.new(
+      :requested_provisioned_concurrent_executions,
+      :available_provisioned_concurrent_executions,
+      :allocated_provisioned_concurrent_executions,
+      :status,
+      :status_reason,
+      :last_modified)
       include Aws::Structure
     end
 
@@ -2730,6 +2886,65 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListProvisionedConcurrencyConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   Specify a number to limit the number of configurations returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListProvisionedConcurrencyConfigsRequest AWS API Documentation
+    #
+    class ListProvisionedConcurrencyConfigsRequest < Struct.new(
+      :function_name,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_concurrency_configs
+    #   A list of provisioned concurrency configurations.
+    #   @return [Array<Types::ProvisionedConcurrencyConfigListItem>]
+    #
+    # @!attribute [rw] next_marker
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListProvisionedConcurrencyConfigsResponse AWS API Documentation
+    #
+    class ListProvisionedConcurrencyConfigsResponse < Struct.new(
+      :provisioned_concurrency_configs,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsRequest
     #   data as a hash:
     #
@@ -2893,6 +3108,72 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PreconditionFailedException AWS API Documentation
     #
     class PreconditionFailedException < Struct.new(
+      :type,
+      :message)
+      include Aws::Structure
+    end
+
+    # Details about the provisioned concurrency configuration for a function
+    # alias or version.
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of the alias or version.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the allocation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   For failed allocations, the reason that provisioned concurrency
+    #   could not be allocated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that a user last updated the configuration, in
+    #   [ISO 8601 format][1].
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ProvisionedConcurrencyConfigListItem AWS API Documentation
+    #
+    class ProvisionedConcurrencyConfigListItem < Struct.new(
+      :function_arn,
+      :requested_provisioned_concurrent_executions,
+      :available_provisioned_concurrent_executions,
+      :allocated_provisioned_concurrent_executions,
+      :status,
+      :status_reason,
+      :last_modified)
+      include Aws::Structure
+    end
+
+    # The specified configuration does not exist.
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ProvisionedConcurrencyConfigNotFoundException AWS API Documentation
+    #
+    class ProvisionedConcurrencyConfigNotFoundException < Struct.new(
       :type,
       :message)
       include Aws::Structure
@@ -3177,6 +3458,91 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutProvisionedConcurrencyConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "Qualifier", # required
+    #         provisioned_concurrent_executions: 1, # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The version number or alias name.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_concurrent_executions
+    #   The amount of provisioned concurrency to allocate for the version or
+    #   alias.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutProvisionedConcurrencyConfigRequest AWS API Documentation
+    #
+    class PutProvisionedConcurrencyConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :provisioned_concurrent_executions)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] requested_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency requested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allocated_provisioned_concurrent_executions
+    #   The amount of provisioned concurrency allocated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the allocation process.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   For failed allocations, the reason that provisioned concurrency
+    #   could not be allocated.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that a user last updated the configuration, in
+    #   [ISO 8601 format][1].
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutProvisionedConcurrencyConfigResponse AWS API Documentation
+    #
+    class PutProvisionedConcurrencyConfigResponse < Struct.new(
+      :requested_provisioned_concurrent_executions,
+      :available_provisioned_concurrent_executions,
+      :allocated_provisioned_concurrent_executions,
+      :status,
+      :status_reason,
+      :last_modified)
       include Aws::Structure
     end
 

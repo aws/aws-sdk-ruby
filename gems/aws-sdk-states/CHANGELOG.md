@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-12-04)
+------------------
+
+* Feature - This release of the AWS Step Functions SDK introduces support for Express Workflows.
+
 1.23.0 (2019-10-23)
 ------------------
 

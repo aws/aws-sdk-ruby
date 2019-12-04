@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2019-12-04)
+------------------
+
+* Feature - This release adds support for the Amazon RDS Proxy
+
 1.72.0 (2019-11-25)
 ------------------
 
