@@ -25,7 +25,7 @@ the S3 ARN.
           def call(context)
             bucket_member = _bucket_member(context.operation.input.shape)
             if bucket_member && (bucket = context.params[bucket_member])
-              _resolved_bucket, resolved_region, arn = BucketARN.resolve_arn!(
+              _resolved_bucket, _resolved_region, arn = BucketARN.resolve_arn!(
                 bucket,
                 context.config.region,
                 context.config.s3_use_arn_region
@@ -33,7 +33,6 @@ the S3 ARN.
               if arn
                 if arn.resource.start_with?('accesspoint')
                   validate_config!(context.config)
-                  context.config.region = resolved_region
                 end
 
                 dualstack = extract_dualstack_config!(context)

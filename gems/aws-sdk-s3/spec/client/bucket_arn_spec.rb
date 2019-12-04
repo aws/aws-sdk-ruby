@@ -63,7 +63,6 @@ module Aws
         arn = 'arn:aws:s3:us-east-1:123456789012:accesspoint/myendpoint'
         resp = client.get_object(bucket: arn, key: 'obj')
         host = 'myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com'
-        expect(resp.context.config.region).to eq('us-east-1')
         expect(resp.context.http_request.endpoint.host).to eq(host)
         expect(resp.context.http_request.endpoint.path).to eq('/obj')
       end
