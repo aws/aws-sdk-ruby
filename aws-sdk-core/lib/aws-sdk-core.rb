@@ -89,6 +89,7 @@ module Aws
     DocDB
     DynamoDB
     DynamoDBStreams
+    EBS
     EC2
     EC2InstanceConnect
     ECR

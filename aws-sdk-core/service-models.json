@@ -262,6 +262,10 @@
     "models": "streams.dynamodb/2012-08-10",
     "endpoint": "streams.dynamodb"
   },
+  "EBS": {
+    "models": "ebs/2019-11-02",
+    "endpoint": "ebs"
+  },
   "EC2": {
     "models": "ec2/2016-11-15",
     "endpoint": "ec2"

@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the API, documentation, and waiters for Amazon Rekognition.
+
+* Feature - Aws::SageMaker - Updated the API, documentation, and waiters for Amazon SageMaker Service.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
+* Feature - Aws::EBS - Added support for a new service, Amazon Elastic Block Store.
+
 2.11.409 (2019-12-03)
 ------------------
 
