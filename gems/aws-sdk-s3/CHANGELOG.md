@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Fixed an issue with Access Point ARNs not resigning correctly.
 
+* Issue - Fixed gemspec to require minimum core version 3.83.0.
+
 1.58.0 (2019-12-03)
 ------------------
 
