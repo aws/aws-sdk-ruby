@@ -4,7 +4,7 @@ Unreleased Changes
 1.34.0 (2019-12-04)
 ------------------
 
-* Feature - - Added the ProvisionedConcurrency type and operations. Allocate provisioned concurrency to enable your function to scale up without fluctuations in latency. Use PutProvisionedConcurrencyConfig to configure provisioned concurrency on a version of a function, or on an alias.
+* Feature - Added the ProvisionedConcurrency type and operations. Allocate provisioned concurrency to enable your function to scale up without fluctuations in latency. Use PutProvisionedConcurrencyConfig to configure provisioned concurrency on a version of a function, or on an alias.
 
 1.33.0 (2019-11-25)
 ------------------
