@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.410 (2019-12-04)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
