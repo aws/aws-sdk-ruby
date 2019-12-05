@@ -142,6 +142,7 @@ module Aws
     KinesisVideo
     KinesisVideoArchivedMedia
     KinesisVideoMedia
+    KinesisVideoSignalingChannels
     LakeFormation
     Lambda
     LambdaPreview

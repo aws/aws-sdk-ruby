@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApiGatewayV2 - Updated the API, and documentation for AmazonApiGatewayV2.
+
+* Feature - Aws::KinesisVideo - Updated the API, and documentation for Amazon Kinesis Video Streams.
+
+* Feature - Aws::KinesisVideoSignalingChannels - Added support for a new service, Amazon Kinesis Video Signaling Channels.
+
 2.11.410 (2019-12-04)
 ------------------
 
