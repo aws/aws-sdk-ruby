@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.59.0 (2019-12-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Fixed an issue with Access Point ARNs not resigning correctly.
 
 * Issue - Fixed S3 gemspec to require a minimum core version to support S3 Access Point ARNs. (GitHub PR #2184)

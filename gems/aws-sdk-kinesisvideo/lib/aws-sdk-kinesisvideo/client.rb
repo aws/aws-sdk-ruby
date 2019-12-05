@@ -254,6 +254,59 @@ module Aws::KinesisVideo
 
     # @!group API Operations
 
+    # Creates a signaling channel.
+    #
+    # `CreateSignalingChannel` is an asynchronous operation.
+    #
+    # @option params [required, String] :channel_name
+    #   A name for the signaling channel that you are creating. It must be
+    #   unique for each account and region.
+    #
+    # @option params [String] :channel_type
+    #   A type of the signaling channel that you are creating. Currently,
+    #   `SINGLE_MASTER` is the only supported channel type.
+    #
+    # @option params [Types::SingleMasterConfiguration] :single_master_configuration
+    #   A structure containing the configuration for the `SINGLE_MASTER`
+    #   channel type.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A set of tags (key/value pairs) that you want to associate with this
+    #   channel.
+    #
+    # @return [Types::CreateSignalingChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSignalingChannelOutput#channel_arn #channel_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_signaling_channel({
+    #     channel_name: "ChannelName", # required
+    #     channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER
+    #     single_master_configuration: {
+    #       message_ttl_seconds: 1,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateSignalingChannel AWS API Documentation
+    #
+    # @overload create_signaling_channel(params = {})
+    # @param [Hash] params ({})
+    def create_signaling_channel(params = {}, options = {})
+      req = build_request(:create_signaling_channel, params)
+      req.send_request(options)
+    end
+
     # Creates a new Kinesis video stream.
     #
     # When you create a new stream, Kinesis Video Streams assigns it a
@@ -289,6 +342,9 @@ module Aws::KinesisVideo
     #   information when processing the stream. For more information about
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
+    #
+    #   Example valid values include "video/h264" and
+    #   "video/h264,audio/aac".
     #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
@@ -359,6 +415,36 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Deletes a specified signaling channel. `DeleteSignalingChannel` is an
+    # asynchronous operation. If you don't specify the channel's current
+    # version, the most recent version is deleted.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the signaling channel that you want to delete.
+    #
+    # @option params [String] :current_version
+    #   The current version of the signaling channel that you want to delete.
+    #   You can obtain the current version by invoking the
+    #   `DescribeSignalingChannel` or `ListSignalingChannels` APIs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_signaling_channel({
+    #     channel_arn: "ResourceARN", # required
+    #     current_version: "Version",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteSignalingChannel AWS API Documentation
+    #
+    # @overload delete_signaling_channel(params = {})
+    # @param [Hash] params ({})
+    def delete_signaling_channel(params = {}, options = {})
+      req = build_request(:delete_signaling_channel, params)
+      req.send_request(options)
+    end
+
     # Deletes a Kinesis video stream and the data contained in the stream.
     #
     # This method marks the stream for deletion, and makes the data in the
@@ -403,6 +489,46 @@ module Aws::KinesisVideo
     # @param [Hash] params ({})
     def delete_stream(params = {}, options = {})
       req = build_request(:delete_stream, params)
+      req.send_request(options)
+    end
+
+    # Returns the most current information about the signaling channel. You
+    # must specify either the name or the ARN of the channel that you want
+    # to describe.
+    #
+    # @option params [String] :channel_name
+    #   The name of the signaling channel that you want to describe.
+    #
+    # @option params [String] :channel_arn
+    #   The ARN of the signaling channel that you want to describe.
+    #
+    # @return [Types::DescribeSignalingChannelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSignalingChannelOutput#channel_info #channel_info} => Types::ChannelInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_signaling_channel({
+    #     channel_name: "ChannelName",
+    #     channel_arn: "ResourceARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_info.channel_name #=> String
+    #   resp.channel_info.channel_arn #=> String
+    #   resp.channel_info.channel_type #=> String, one of "SINGLE_MASTER"
+    #   resp.channel_info.channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.channel_info.creation_time #=> Time
+    #   resp.channel_info.single_master_configuration.message_ttl_seconds #=> Integer
+    #   resp.channel_info.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeSignalingChannel AWS API Documentation
+    #
+    # @overload describe_signaling_channel(params = {})
+    # @param [Hash] params ({})
+    def describe_signaling_channel(params = {}, options = {})
+      req = build_request(:describe_signaling_channel, params)
       req.send_request(options)
     end
 
@@ -497,6 +623,113 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Provides an endpoint for the specified signaling channel to send and
+    # receive messages. This API uses the
+    # `SingleMasterChannelEndpointConfiguration` input parameter, which
+    # consists of the `Protocols` and `Role` properties.
+    #
+    # `Protocols` is used to determine the communication mechanism. For
+    # example, specifying `WSS` as the protocol, results in this API
+    # producing a secure websocket endpoint, and specifying `HTTPS` as the
+    # protocol, results in this API generating an HTTPS endpoint.
+    #
+    # `Role` determines the messaging permissions. A `MASTER` role results
+    # in this API generating an endpoint that a client can use to
+    # communicate with any of the viewers on the channel. A `VIEWER` role
+    # results in this API generating an endpoint that a client can use to
+    # communicate only with a `MASTER`.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the signalling channel for which you want to get an
+    #   endpoint.
+    #
+    # @option params [Types::SingleMasterChannelEndpointConfiguration] :single_master_channel_endpoint_configuration
+    #   A structure containing the endpoint configuration for the
+    #   `SINGLE_MASTER` channel type.
+    #
+    # @return [Types::GetSignalingChannelEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSignalingChannelEndpointOutput#resource_endpoint_list #resource_endpoint_list} => Array&lt;Types::ResourceEndpointListItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_signaling_channel_endpoint({
+    #     channel_arn: "ResourceARN", # required
+    #     single_master_channel_endpoint_configuration: {
+    #       protocols: ["WSS"], # accepts WSS, HTTPS
+    #       role: "MASTER", # accepts MASTER, VIEWER
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_endpoint_list #=> Array
+    #   resp.resource_endpoint_list[0].protocol #=> String, one of "WSS", "HTTPS"
+    #   resp.resource_endpoint_list[0].resource_endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetSignalingChannelEndpoint AWS API Documentation
+    #
+    # @overload get_signaling_channel_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_signaling_channel_endpoint(params = {}, options = {})
+      req = build_request(:get_signaling_channel_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of `ChannelInfo` objects. Each object describes a
+    # signaling channel. To retrieve only those channels that satisfy a
+    # specific condition, you can specify a `ChannelNameCondition`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of channels to return in the response. The default
+    #   is 500.
+    #
+    # @option params [String] :next_token
+    #   If you specify this parameter, when the result of a
+    #   `ListSignalingChannels` operation is truncated, the call returns the
+    #   `NextToken` in the response. To get another batch of channels, provide
+    #   this token in your next request.
+    #
+    # @option params [Types::ChannelNameCondition] :channel_name_condition
+    #   Optional: Returns only the channels that satisfy a specific condition.
+    #
+    # @return [Types::ListSignalingChannelsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSignalingChannelsOutput#channel_info_list #channel_info_list} => Array&lt;Types::ChannelInfo&gt;
+    #   * {Types::ListSignalingChannelsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_signaling_channels({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     channel_name_condition: {
+    #       comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
+    #       comparison_value: "ChannelName",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.channel_info_list #=> Array
+    #   resp.channel_info_list[0].channel_name #=> String
+    #   resp.channel_info_list[0].channel_arn #=> String
+    #   resp.channel_info_list[0].channel_type #=> String, one of "SINGLE_MASTER"
+    #   resp.channel_info_list[0].channel_status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING"
+    #   resp.channel_info_list[0].creation_time #=> Time
+    #   resp.channel_info_list[0].single_master_configuration.message_ttl_seconds #=> Integer
+    #   resp.channel_info_list[0].version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListSignalingChannels AWS API Documentation
+    #
+    # @overload list_signaling_channels(params = {})
+    # @param [Hash] params ({})
+    def list_signaling_channels(params = {}, options = {})
+      req = build_request(:list_signaling_channels, params)
+      req.send_request(options)
+    end
+
     # Returns an array of `StreamInfo` objects. Each object describes a
     # stream. To retrieve only streams that satisfy a specific condition,
     # you can specify a `StreamNameCondition`.
@@ -555,6 +788,44 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Returns a list of tags associated with the specified signaling
+    # channel.
+    #
+    # @option params [String] :next_token
+    #   If you specify this parameter and the result of a ListTagsForResource
+    #   call is truncated, the response includes a token that you can use in
+    #   the next request to fetch the next batch of tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the signaling channel for which you want to list tags.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     next_token: "NextToken",
+    #     resource_arn: "ResourceARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Returns a list of tags associated with the specified stream.
     #
     # In the request, you must specify either the `StreamName` or the
@@ -597,6 +868,47 @@ module Aws::KinesisVideo
     # @param [Hash] params ({})
     def list_tags_for_stream(params = {}, options = {})
       req = build_request(:list_tags_for_stream, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more tags to a signaling channel. A *tag* is a key-value
+    # pair (the value is optional) that you can define and assign to AWS
+    # resources. If you specify a tag that already exists, the tag value is
+    # replaced with the value that you specify in the request. For more
+    # information, see [Using Cost Allocation Tags][1] in the *AWS Billing
+    # and Cost Management User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the signaling channel to which you want to add tags.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags to associate with the specified signaling channel. Each
+    #   tag is a key-value pair.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceARN", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -647,6 +959,34 @@ module Aws::KinesisVideo
     # @param [Hash] params ({})
     def tag_stream(params = {}, options = {})
       req = build_request(:tag_stream, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from a signaling channel. In the request,
+    # specify only a tag key or keys; don't specify the value. If you
+    # specify a tag key that does not exist, it's ignored.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the signaling channel from which you want to remove tags.
+    #
+    # @option params [required, Array<String>] :tag_key_list
+    #   A list of the keys of the tags that you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceARN", # required
+    #     tag_key_list: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -754,6 +1094,45 @@ module Aws::KinesisVideo
       req.send_request(options)
     end
 
+    # Updates the existing signaling channel. This is an asynchronous
+    # operation and takes time to complete.
+    #
+    # If the `MessageTtlSeconds` value is updated (either increased or
+    # reduced), then it only applies to new messages sent via this channel
+    # after it's been updated. Existing messages are still expire as per
+    # the previous `MessageTtlSeconds` value.
+    #
+    # @option params [required, String] :channel_arn
+    #   The ARN of the signaling channel that you want to update.
+    #
+    # @option params [required, String] :current_version
+    #   The current version of the signaling channel that you want to update.
+    #
+    # @option params [Types::SingleMasterConfiguration] :single_master_configuration
+    #   The structure containing the configuration for the `SINGLE_MASTER`
+    #   type of the signaling channel that you want to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_signaling_channel({
+    #     channel_arn: "ResourceARN", # required
+    #     current_version: "Version", # required
+    #     single_master_configuration: {
+    #       message_ttl_seconds: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateSignalingChannel AWS API Documentation
+    #
+    # @overload update_signaling_channel(params = {})
+    # @param [Hash] params ({})
+    def update_signaling_channel(params = {}, options = {})
+      req = build_request(:update_signaling_channel, params)
+      req.send_request(options)
+    end
+
     # Updates stream metadata, such as the device name and media type.
     #
     # You must provide the stream name or the Amazon Resource Name (ARN) of
@@ -837,7 +1216,7 @@ module Aws::KinesisVideo
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisvideo'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

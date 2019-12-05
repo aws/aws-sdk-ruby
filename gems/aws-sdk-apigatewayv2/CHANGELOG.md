@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-12-05)
+------------------
+
+* Feature - Amazon API Gateway now supports HTTP APIs (beta), enabling customers to quickly build high performance RESTful APIs that are up to 71% cheaper than REST APIs also available from API Gateway. HTTP APIs are optimized for building APIs that proxy to AWS Lambda functions or HTTP backends, making them ideal for serverless workloads. Using HTTP APIs, you can secure your APIs using OIDC and OAuth 2 out of box, quickly build web applications using a simple CORS experience, and get started immediately with automatic deployment and simple create workflows.
+
 1.14.0 (2019-10-23)
 ------------------
 

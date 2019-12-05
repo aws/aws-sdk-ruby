@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-12-05)
+------------------
+
+* Feature - Introduces management of signaling channels for Kinesis Video Streams.
+
 1.20.0 (2019-10-23)
 ------------------
 

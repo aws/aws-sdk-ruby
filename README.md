@@ -461,6 +461,7 @@ to be backwards compatible.
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalyticsV2              | aws-sdk-kinesisanalyticsv2              | 2018-05-23  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                | aws-sdk-kinesisanalytics                | 2015-08-14  |
 | Amazon Kinesis Firehose                               | Aws::Firehose                        | aws-sdk-firehose                        | 2015-08-04  |
+| Amazon Kinesis Video Signaling Channels               | Aws::KinesisVideoSignalingChannels   | aws-sdk-kinesisvideosignalingchannels   | 2019-12-04  |
 | Amazon Kinesis Video Streams                          | Aws::KinesisVideo                    | aws-sdk-kinesisvideo                    | 2017-09-30  |
 | Amazon Kinesis Video Streams Archived Media           | Aws::KinesisVideoArchivedMedia       | aws-sdk-kinesisvideoarchivedmedia       | 2017-09-30  |
 | Amazon Kinesis Video Streams Media                    | Aws::KinesisVideoMedia               | aws-sdk-kinesisvideomedia               | 2017-09-30  |
@@ -513,8 +514,8 @@ to be backwards compatible.
 | Application Auto Scaling                              | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                          | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                    | aws-sdk-imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Firewall Management Service                           | Aws::FMS                             | aws-sdk-fms                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Aws::Kafka                           | aws-sdk-kafka                           | 2018-11-14  |
 | Schemas                                               | Aws::Schemas                         | aws-sdk-schemas                         | 2019-12-02  |

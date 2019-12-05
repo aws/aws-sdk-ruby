@@ -388,6 +388,9 @@
   "KinesisVideoMedia": {
     "models": "kinesis-video-media/2017-09-30"
   },
+  "KinesisVideoSignalingChannels": {
+    "models": "kinesis-video-signaling/2019-12-04"
+  },
   "LakeFormation": {
     "models": "lakeformation/2017-03-31"
   },

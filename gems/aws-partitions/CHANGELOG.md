@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.251.0 (2019-12-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::KinesisVideoSignalingChannels`.
+
 1.250.0 (2019-12-04)
 ------------------
 

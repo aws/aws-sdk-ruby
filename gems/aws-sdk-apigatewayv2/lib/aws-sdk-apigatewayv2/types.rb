@@ -8,6 +8,14 @@
 module Aws::ApiGatewayV2
   module Types
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Settings for logging access in a stage.
     #
     # @note When making an API call, you may pass AccessLogSettings
@@ -48,13 +56,17 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_key_selection_expression
-    #   An API key selection expression. See [API Key Selection
-    #   Expressions][1].
+    #   An API key selection expression. Supported only for WebSocket APIs.
+    #   See [API Key Selection Expressions][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   A CORS configuration. Supported only for HTTP APIs.
+    #   @return [Types::Cors]
     #
     # @!attribute [rw] created_date
     #   The timestamp when the API was created.
@@ -65,20 +77,34 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] disable_schema_validation
-    #   Avoid validating models when creating a deployment.
+    #   Avoid validating models when creating a deployment. Supported only
+    #   for WebSocket APIs.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] import_info
+    #   The validation information during API import. This may include
+    #   particular properties of your OpenAPI definition which are ignored
+    #   during import. Supported only for HTTP APIs.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The API protocol: Currently only WEBSOCKET is supported.
+    #   The API protocol.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
-    #   The route selection expression for the API.
+    #   The route selection expression for the API. For HTTP APIs, the
+    #   routeSelectionExpression must be $\\\{request.method\\}
+    #   $\\\{request.path\\}. If not provided, this will be the default for
+    #   HTTP APIs. This property is required for WebSocket APIs.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A collection of tags associated with the API.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] version
     #   A version identifier for the API.
@@ -89,23 +115,21 @@ module Aws::ApiGatewayV2
     #   during API import.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tags
-    #   Tags for the API.
-    #   @return [Hash<String,String>]
-    #
     class Api < Struct.new(
       :api_endpoint,
       :api_id,
       :api_key_selection_expression,
+      :cors_configuration,
       :created_date,
       :description,
       :disable_schema_validation,
+      :import_info,
       :name,
       :protocol_type,
       :route_selection_expression,
+      :tags,
       :version,
-      :warnings,
-      :tags)
+      :warnings)
       include Aws::Structure
     end
 
@@ -176,6 +200,7 @@ module Aws::ApiGatewayV2
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
     #   resource-based permissions on the Lambda function, specify null.
+    #   Supported only for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -183,63 +208,74 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   The time to live (TTL), in seconds, of cached authorizer results. If
-    #   it equals 0, authorization caching is disabled. If it is greater
-    #   than 0, API Gateway will cache authorizer responses. If this field
-    #   is not set, the default value is 300. The maximum value is 3600, or
-    #   1 hour.
+    #   Authorizer caching is not currently supported. Don't specify this
+    #   value for authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
     #   The authorizer's Uniform Resource Identifier (URI). ForREQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\\\{account\_id\\}:function:\\\{lambda\_function\_name\\}/invocations.
-    #   In general, the URI has this form:
-    #   arn:aws:apigateway:\\\{region\\}:lambda:path/\\\{service\_api\\} ,
-    #   where \\\{region\\} is the same as the region hosting the Lambda
-    #   function, path indicates that the remaining substring in the URI
-    #   should be treated as the path to the resource, including the initial
-    #   /. For Lambda functions, this is usually of the form
-    #   /2015-03-31/functions/\[FunctionARN\]/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
+    #
+    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
+    #
+    #   /invocations. In general, the URI has this form:
+    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
+    #
+    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
+    #
+    #    , where <replaceable />
+    #
+    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   path indicates that the remaining substring in the URI should be
+    #   treated as the path to the resource, including the initial /. For
+    #   Lambda functions, this is usually of the form
+    #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
+    #   for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
     #   The identity source for which authorization is requested.
     #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
-    #   example, if an Auth header and a Name query string parameters are
-    #   defined as identity sources, this value is
-    #   method.request.header.Auth, method.request.querystring.Name. These
-    #   parameters will be used to derive the authorization caching key and
-    #   to perform runtime validation of the REQUEST authorizer by verifying
-    #   all of the identity-related request parameters are present, not
-    #   null, and non-empty. Only when this is true does the authorizer
-    #   invoke the authorizer Lambda function, otherwise, it returns a 401
-    #   Unauthorized response without calling the Lambda function. The valid
-    #   value is a string of comma-separated mapping expressions of the
-    #   specified request parameters. When the authorization caching is not
-    #   enabled, this property is optional.
+    #   For a REQUEST authorizer, this is optional. The value is a set of
+    #   one or more mapping expressions of the specified request parameters.
+    #   Currently, the identity source can be headers, query string
+    #   parameters, stage variables, and context parameters. For example, if
+    #   an Auth header and a Name query string parameter are defined as
+    #   identity sources, this value is route.request.header.Auth,
+    #   route.request.querystring.Name. These parameters will be used to
+    #   perform runtime validation for Lambda-based authorizers by verifying
+    #   all of the identity-related request parameters are present in the
+    #   request, not null, and non-empty. Only when this is true does the
+    #   authorizer invoke the authorizer Lambda function. Otherwise, it
+    #   returns a 401 Unauthorized response without calling the Lambda
+    #   function.
+    #
+    #   For JWT, a single entry that specifies where to extract the JSON Web
+    #   Token (JWT) from inbound requests. Currently only header-based and
+    #   query parameter-based selections are supported, for example
+    #   "$request.header.Authorization".
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
     #   The validation expression does not apply to the REQUEST authorizer.
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   The name of the authorizer.
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class Authorizer < Struct.new(
       :authorizer_credentials_arn,
@@ -249,8 +285,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -297,15 +333,94 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Represents a CORS configuration. Supported only for HTTP APIs. See
+    # [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #
+    # @note When making an API call, you may pass Cors
+    #   data as a hash:
+    #
+    #       {
+    #         allow_credentials: false,
+    #         allow_headers: ["__string"],
+    #         allow_methods: ["StringWithLengthBetween1And64"],
+    #         allow_origins: ["__string"],
+    #         expose_headers: ["__string"],
+    #         max_age: 1,
+    #       }
+    #
+    # @!attribute [rw] allow_credentials
+    #   Specifies whether credentials are included in the CORS request.
+    #   Supported only for HTTP APIs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_headers
+    #   Represents a collection of allowed headers. Supported only for HTTP
+    #   APIs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_methods
+    #   Represents a collection of allowed HTTP methods. Supported only for
+    #   HTTP APIs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_origins
+    #   Represents a collection of allowed origins. Supported only for HTTP
+    #   APIs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] expose_headers
+    #   Represents a collection of exposed headers. Supported only for HTTP
+    #   APIs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_age
+    #   The number of seconds that the browser should cache preflight
+    #   request results. Supported only for HTTP APIs.
+    #   @return [Integer]
+    #
+    class Cors < Struct.new(
+      :allow_credentials,
+      :allow_headers,
+      :allow_methods,
+      :allow_origins,
+      :expose_headers,
+      :max_age)
+      include Aws::Structure
+    end
+
     # Represents the input parameters for a CreateApi request.
     #
     # @!attribute [rw] api_key_selection_expression
-    #   An API key selection expression. See [API Key Selection
-    #   Expressions][1].
+    #   An API key selection expression. Supported only for WebSocket APIs.
+    #   See [API Key Selection Expressions][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   A CORS configuration. Supported only for HTTP APIs. See [Configuring
+    #   CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] credentials_arn
+    #   This property is part of quick create. It specifies the credentials
+    #   required for the integration, if any. For a Lambda integration,
+    #   three options are available. To specify an IAM Role for API Gateway
+    #   to assume, use the role's Amazon Resource Name (ARN). To require
+    #   that the caller's identity be passed through from the request,
+    #   specify arn:aws:iam::*:user/*. To use resource-based permissions
+    #   on supported AWS services, specify null. Currently, this property is
+    #   not used for HTTP integrations. Supported only for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -313,7 +428,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] disable_schema_validation
-    #   Avoid validating models when creating a deployment.
+    #   Avoid validating models when creating a deployment. Supported only
+    #   for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
@@ -321,30 +437,57 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
-    #   The API protocol: Currently only WEBSOCKET is supported.
+    #   The API protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_key
+    #   This property is part of quick create. If you don't specify a
+    #   routeKey, a default route of $default is created. The $default route
+    #   acts as a catch-all for any request made to your API, for a
+    #   particular stage. The $default route key can't be modified. You can
+    #   add routes after creating the API, and you can update the route keys
+    #   of additional routes. Supported only for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
-    #   The route selection expression for the API.
+    #   The route selection expression for the API. For HTTP APIs, the
+    #   routeSelectionExpression must be $\\\{request.method\\}
+    #   $\\\{request.path\\}. If not provided, this will be the default for
+    #   HTTP APIs. This property is required for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target
+    #   This property is part of quick create. Quick create produces an API
+    #   with an integration, a default catch-all route, and a default stage
+    #   which is configured to automatically deploy changes. For HTTP
+    #   integrations, specify a fully qualified URL. For Lambda
+    #   integrations, specify a function ARN. The type of the integration
+    #   will be HTTP\_PROXY or AWS\_PROXY, respectively. Supported only for
+    #   HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   A version identifier for the API.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   Tags for the API.
-    #   @return [Hash<String,String>]
-    #
     class CreateApiInput < Struct.new(
       :api_key_selection_expression,
+      :cors_configuration,
+      :credentials_arn,
       :description,
       :disable_schema_validation,
       :name,
       :protocol_type,
+      :route_key,
       :route_selection_expression,
-      :version,
-      :tags)
+      :tags,
+      :target,
+      :version)
       include Aws::Structure
     end
 
@@ -355,6 +498,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
+    #   The API mapping key.
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -383,7 +527,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -417,7 +561,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -444,11 +588,25 @@ module Aws::ApiGatewayV2
     #
     #       {
     #         api_key_selection_expression: "SelectionExpression",
+    #         cors_configuration: {
+    #           allow_credentials: false,
+    #           allow_headers: ["__string"],
+    #           allow_methods: ["StringWithLengthBetween1And64"],
+    #           allow_origins: ["__string"],
+    #           expose_headers: ["__string"],
+    #           max_age: 1,
+    #         },
+    #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         disable_schema_validation: false,
     #         name: "StringWithLengthBetween1And128", # required
-    #         protocol_type: "WEBSOCKET", # required, accepts WEBSOCKET
-    #         route_selection_expression: "SelectionExpression", # required
+    #         protocol_type: "WEBSOCKET", # required, accepts WEBSOCKET, HTTP
+    #         route_key: "SelectionKey",
+    #         route_selection_expression: "SelectionExpression",
+    #         tags: {
+    #           "__string" => "StringWithLengthBetween1And1600",
+    #         },
+    #         target: "UriWithLengthBetween1And2048",
     #         version: "StringWithLengthBetween1And64",
     #       }
     #
@@ -459,6 +617,19 @@ module Aws::ApiGatewayV2
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] credentials_arn
+    #   Represents an Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -473,6 +644,18 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_key
+    #   After evaluating a selection expression, the result is compared
+    #   against one or more selection keys to find a matching key. See
+    #   [Selection Expressions][1] for a list of expressions and each
+    #   expression's associated selection key type.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -484,17 +667,30 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target
+    #   A string representation of a URI with a length between \[1-2048\].
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   A string with a length between \[1-64\].
     #   @return [String]
     #
     class CreateApiRequest < Struct.new(
       :api_key_selection_expression,
+      :cors_configuration,
+      :credentials_arn,
       :description,
       :disable_schema_validation,
       :name,
       :protocol_type,
+      :route_key,
       :route_selection_expression,
+      :tags,
+      :target,
       :version)
       include Aws::Structure
     end
@@ -515,6 +711,15 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -525,11 +730,15 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] import_info
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -540,6 +749,10 @@ module Aws::ApiGatewayV2
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] version
     #   A string with a length between \[1-64\].
@@ -552,12 +765,15 @@ module Aws::ApiGatewayV2
       :api_endpoint,
       :api_id,
       :api_key_selection_expression,
+      :cors_configuration,
       :created_date,
       :description,
       :disable_schema_validation,
+      :import_info,
       :name,
       :protocol_type,
       :route_selection_expression,
+      :tags,
       :version,
       :warnings)
       include Aws::Structure
@@ -570,66 +786,78 @@ module Aws::ApiGatewayV2
     #   invoke the authorizer. To specify an IAM role for API Gateway to
     #   assume, use the role's Amazon Resource Name (ARN). To use
     #   resource-based permissions on the Lambda function, specify null.
+    #   Supported only for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   The time to live (TTL), in seconds, of cached authorizer results. If
-    #   it equals 0, authorization caching is disabled. If it is greater
-    #   than 0, API Gateway will cache authorizer responses. If this field
-    #   is not set, the default value is 300. The maximum value is 3600, or
-    #   1 hour.
+    #   Authorizer caching is not currently supported. Don't specify this
+    #   value for authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\\\{account\_id\\}:function:\\\{lambda\_function\_name\\}/invocations.
-    #   In general, the URI has this form:
-    #   arn:aws:apigateway:\\\{region\\}:lambda:path/\\\{service\_api\\} ,
-    #   where \\\{region\\} is the same as the region hosting the Lambda
-    #   function, path indicates that the remaining substring in the URI
-    #   should be treated as the path to the resource, including the initial
-    #   /. For Lambda functions, this is usually of the form
-    #   /2015-03-31/functions/\[FunctionARN\]/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
+    #
+    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
+    #
+    #   /invocations. In general, the URI has this form:
+    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
+    #
+    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
+    #
+    #    , where <replaceable />
+    #
+    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   path indicates that the remaining substring in the URI should be
+    #   treated as the path to the resource, including the initial /. For
+    #   Lambda functions, this is usually of the form
+    #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
+    #   for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
     #   The identity source for which authorization is requested.
     #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
-    #   example, if an Auth header and a Name query string parameters are
-    #   defined as identity sources, this value is
-    #   method.request.header.Auth, method.request.querystring.Name. These
-    #   parameters will be used to derive the authorization caching key and
-    #   to perform runtime validation of the REQUEST authorizer by verifying
-    #   all of the identity-related request parameters are present, not
-    #   null, and non-empty. Only when this is true does the authorizer
-    #   invoke the authorizer Lambda function, otherwise, it returns a 401
-    #   Unauthorized response without calling the Lambda function. The valid
-    #   value is a string of comma-separated mapping expressions of the
-    #   specified request parameters. When the authorization caching is not
-    #   enabled, this property is optional.
+    #   For a REQUEST authorizer, this is optional. The value is a set of
+    #   one or more mapping expressions of the specified request parameters.
+    #   Currently, the identity source can be headers, query string
+    #   parameters, stage variables, and context parameters. For example, if
+    #   an Auth header and a Name query string parameter are defined as
+    #   identity sources, this value is route.request.header.Auth,
+    #   route.request.querystring.Name. These parameters will be used to
+    #   perform runtime validation for Lambda-based authorizers by verifying
+    #   all of the identity-related request parameters are present in the
+    #   request, not null, and non-empty. Only when this is true does the
+    #   authorizer invoke the authorizer Lambda function. Otherwise, it
+    #   returns a 401 Unauthorized response without calling the Lambda
+    #   function.
+    #
+    #   For JWT, a single entry that specifies where to extract the JSON Web
+    #   Token (JWT )from inbound requests. Currently only header-based and
+    #   query parameter-based selections are supported, for example
+    #   "$request.header.Authorization".
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
-    #   The validation expression does not apply to the REQUEST authorizer.
+    #   This parameter is not used.
     #   @return [String]
+    #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
     #
     # @!attribute [rw] name
     #   The name of the authorizer.
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class CreateAuthorizerInput < Struct.new(
       :authorizer_credentials_arn,
@@ -638,8 +866,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -650,12 +878,15 @@ module Aws::ApiGatewayV2
     #         api_id: "__string", # required
     #         authorizer_credentials_arn: "Arn",
     #         authorizer_result_ttl_in_seconds: 1,
-    #         authorizer_type: "REQUEST", # required, accepts REQUEST
-    #         authorizer_uri: "UriWithLengthBetween1And2048", # required
+    #         authorizer_type: "REQUEST", # required, accepts REQUEST, JWT
+    #         authorizer_uri: "UriWithLengthBetween1And2048",
     #         identity_source: ["__string"], # required
     #         identity_validation_expression: "StringWithLengthBetween0And1024",
+    #         jwt_configuration: {
+    #           audience: ["__string"],
+    #           issuer: "UriWithLengthBetween1And2048",
+    #         },
     #         name: "StringWithLengthBetween1And128", # required
-    #         provider_arns: ["Arn"],
     #       }
     #
     # @!attribute [rw] api_id
@@ -670,8 +901,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -701,13 +933,14 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class CreateAuthorizerRequest < Struct.new(
       :api_id,
@@ -717,8 +950,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -735,8 +968,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -766,13 +1000,14 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class CreateAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
@@ -782,8 +1017,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -831,6 +1066,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_deployed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -850,6 +1088,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class CreateDeploymentResponse < Struct.new(
+      :auto_deployed,
       :created_date,
       :deployment_id,
       :deployment_status,
@@ -869,7 +1108,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   Tags for the DomainName.
+    #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
     #
     class CreateDomainNameInput < Struct.new(
@@ -890,11 +1129,11 @@ module Aws::ApiGatewayV2
     #             certificate_arn: "Arn",
     #             certificate_name: "StringWithLengthBetween1And128",
     #             certificate_upload_date: Time.now,
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
-    #             domain_name_status_message: "__string",
     #           },
     #         ],
     #         tags: {
@@ -911,8 +1150,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class CreateDomainNameRequest < Struct.new(
@@ -940,8 +1178,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class CreateDomainNameResponse < Struct.new(
@@ -965,9 +1202,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
-    #   Specifies how to handle response payload content type conversions.
-    #   Supported values are CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with
-    #   the following behaviors:
+    #   Supported only for WebSocket APIs. Specifies how to handle response
+    #   payload content type conversions. Supported values are
+    #   CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with the following
+    #   behaviors:
     #
     #   CONVERT\_TO\_BINARY: Converts a response payload from a
     #   Base64-encoded string to the corresponding binary blob.
@@ -1004,7 +1242,7 @@ module Aws::ApiGatewayV2
     #   action, including the Lambda function-invoking action. With the
     #   Lambda function-invoking action, this is referred to as the Lambda
     #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration.
+    #   as AWS integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with the
     #   Lambda function-invoking action with the client request passed
@@ -1012,15 +1250,16 @@ module Aws::ApiGatewayV2
     #   integration.
     #
     #   HTTP: for integrating the route or method request with an HTTP
-    #   endpoint. This integration is also referred to as HTTP custom
-    #   integration.
+    #   endpoint. This integration is also referred to as the HTTP custom
+    #   integration. Supported only for WebSocket APIs.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
     #   endpoint, with the client request passed through as-is. This is also
     #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
-    #   as a "loopback" endpoint without invoking any backend.
+    #   as a "loopback" endpoint without invoking any backend. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
@@ -1033,7 +1272,7 @@ module Aws::ApiGatewayV2
     #   the Content-Type header in the request, and the available mapping
     #   templates specified as the requestTemplates property on the
     #   Integration resource. There are three valid values: WHEN\_NO\_MATCH,
-    #   WHEN\_NO\_TEMPLATES, and NEVER.
+    #   WHEN\_NO\_TEMPLATES, and NEVER. Supported only for WebSocket APIs.
     #
     #   WHEN\_NO\_MATCH passes the request body for unmapped content types
     #   through to the integration backend without transformation.
@@ -1047,6 +1286,11 @@ module Aws::ApiGatewayV2
     #   the same HTTP 415 Unsupported Media Type response.
     #   @return [String]
     #
+    # @!attribute [rw] payload_format_version
+    #   Specifies the format of the payload sent to an integration. Required
+    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   @return [String]
+    #
     # @!attribute [rw] request_parameters
     #   A key-value map specifying request parameters that are passed from
     #   the method request to the backend. The key is an integration request
@@ -1054,16 +1298,25 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.\\\{location\\}.\\\{name\\} , where \\\{location\\}
-    #   is querystring, path, or header; and \\\{name\\} must be a valid and
-    #   unique method request parameter name.
+    #   method.request.<replaceable>\{location\}</replaceable>
+    #
+    #   .<replaceable>\{name\}</replaceable>
+    #
+    #    , where <replaceable>\{location\}</replaceable>
+    #
+    #    is querystring, path, or header; and
+    #   <replaceable>\{name\}</replaceable>
+    #
+    #    must be a valid and unique method request parameter name. Supported
+    #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
     #   Represents a map of Velocity templates that are applied on the
     #   request payload based on the value of the Content-Type header sent
     #   by the client. The content type value is the key in this map, and
-    #   the template (as a String) is the value.
+    #   the template (as a String) is the value. Supported only for
+    #   WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_selection_expression
@@ -1072,7 +1325,8 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
+    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
     #   @return [Integer]
     #
     class CreateIntegrationInput < Struct.new(
@@ -1085,6 +1339,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -1106,6 +1361,7 @@ module Aws::ApiGatewayV2
     #         integration_type: "AWS", # required, accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_uri: "UriWithLengthBetween1And2048",
     #         passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
+    #         payload_format_version: "StringWithLengthBetween1And64",
     #         request_parameters: {
     #           "__string" => "StringWithLengthBetween1And512",
     #         },
@@ -1129,6 +1385,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] credentials_arn
@@ -1153,6 +1410,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] passthrough_behavior
     #   Represents passthrough behavior for an integration response.
+    #   Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_version
+    #   A string with a length between \[1-64\].
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -1200,6 +1462,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -1207,6 +1470,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connection_id
     #   A string with a length between \[1-1024\].
     #   @return [String]
@@ -1217,6 +1483,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] credentials_arn
@@ -1254,6 +1521,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] passthrough_behavior
     #   Represents passthrough behavior for an integration response.
+    #   Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_version
+    #   A string with a length between \[1-64\].
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -1291,6 +1563,7 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     class CreateIntegrationResult < Struct.new(
+      :api_gateway_managed,
       :connection_id,
       :connection_type,
       :content_handling_strategy,
@@ -1302,6 +1575,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -1357,6 +1631,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] template_selection_expression
     #   The template selection expression for the integration response.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     class CreateIntegrationResponseInput < Struct.new(
@@ -1390,13 +1665,14 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_id
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -1449,6 +1725,7 @@ module Aws::ApiGatewayV2
 
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
@@ -1456,7 +1733,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -1604,7 +1881,8 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for a CreateRoute request.
     #
     # @!attribute [rw] api_key_required
-    #   Specifies whether an API key is required for the route.
+    #   Specifies whether an API key is required for the route. Supported
+    #   only for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
@@ -1612,20 +1890,22 @@ module Aws::ApiGatewayV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer.
+    #   The authorization type for the route. For WebSocket APIs, valid
+    #   values are NONE for open access, AWS\_IAM for using AWS IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
+    #   valid values are NONE for open access, or JWT for using JSON Web
+    #   Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route, if the authorizationType is CUSTOM . The authorizer
-    #   identifier is generated by API Gateway when you created the
-    #   authorizer.
+    #   route. The authorizer identifier is generated by API Gateway when
+    #   you created the authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
-    #   The model selection expression for the route.
+    #   The model selection expression for the route. Supported only for
+    #   WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -1633,11 +1913,12 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_models
-    #   The request models for the route.
+    #   The request models for the route. Supported only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_parameters
-    #   The request parameters for the route.
+    #   The request parameters for the route. Supported only for WebSocket
+    #   APIs.
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_key
@@ -1645,7 +1926,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
-    #   The route response selection expression for the route.
+    #   The route response selection expression for the route. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -1674,7 +1956,7 @@ module Aws::ApiGatewayV2
     #         api_id: "__string", # required
     #         api_key_required: false,
     #         authorization_scopes: ["StringWithLengthBetween1And64"],
-    #         authorization_type: "NONE", # accepts NONE, AWS_IAM, CUSTOM
+    #         authorization_type: "NONE", # accepts NONE, AWS_IAM, CUSTOM, JWT
     #         authorizer_id: "Id",
     #         model_selection_expression: "SelectionExpression",
     #         operation_name: "StringWithLengthBetween1And64",
@@ -1699,20 +1981,21 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type. Valid values are NONE for open access,
-    #   AWS\_IAM for using AWS IAM permissions, and CUSTOM for using a
-    #   Lambda authorizer.
+    #   The authorization type. For WebSocket APIs, valid values are NONE
+    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
+    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
+    #   for open access, or JWT for using JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -1741,7 +2024,7 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -1780,25 +2063,29 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_key_required
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type. Valid values are NONE for open access,
-    #   AWS\_IAM for using AWS IAM permissions, and CUSTOM for using a
-    #   Lambda authorizer.
+    #   The authorization type. For WebSocket APIs, valid values are NONE
+    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
+    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
+    #   for open access, or JWT for using JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -1831,7 +2118,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -1855,6 +2142,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class CreateRouteResult < Struct.new(
+      :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
       :authorization_type,
@@ -1873,7 +2161,8 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for an CreateRouteResponse request.
     #
     # @!attribute [rw] model_selection_expression
-    #   The model selection expression for the route response.
+    #   The model selection expression for the route response. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -1938,7 +2227,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -1980,7 +2269,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -2005,8 +2294,14 @@ module Aws::ApiGatewayV2
     #   Settings for logging access in this stage.
     #   @return [Types::AccessLogSettings]
     #
+    # @!attribute [rw] auto_deploy
+    #   Specifies whether updates to an API automatically trigger a new
+    #   deployment. The default value is false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
-    #   The identifier of a client certificate for a Stage.
+    #   The identifier of a client certificate for a Stage. Supported only
+    #   for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] default_route_settings
@@ -2022,7 +2317,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_settings
-    #   Route settings for the stage.
+    #   Route settings for the stage, by routeKey.
     #   @return [Hash<String,Types::RouteSettings>]
     #
     # @!attribute [rw] stage_name
@@ -2032,15 +2327,18 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a Stage. Variable names
     #   can have alphanumeric and underscore characters, and the values must
-    #   match \[A-Za-z0-9-.\_~:/?#&=,\]+.
+    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only for WebSocket
+    #   APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   Tags for the Stage.
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
     #   @return [Hash<String,String>]
     #
     class CreateStageInput < Struct.new(
       :access_log_settings,
+      :auto_deploy,
       :client_certificate_id,
       :default_route_settings,
       :deployment_id,
@@ -2061,6 +2359,7 @@ module Aws::ApiGatewayV2
     #           format: "StringWithLengthBetween1And1024",
     #         },
     #         api_id: "__string", # required
+    #         auto_deploy: false,
     #         client_certificate_id: "Id",
     #         default_route_settings: {
     #           data_trace_enabled: false,
@@ -2096,6 +2395,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_id
     #   @return [String]
     #
+    # @!attribute [rw] auto_deploy
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
     #   The identifier.
     #   @return [String]
@@ -2125,13 +2427,13 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class CreateStageRequest < Struct.new(
       :access_log_settings,
       :api_id,
+      :auto_deploy,
       :client_certificate_id,
       :default_route_settings,
       :deployment_id,
@@ -2146,6 +2448,12 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] access_log_settings
     #   Settings for logging access in a stage.
     #   @return [Types::AccessLogSettings]
+    #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_deploy
+    #   @return [Boolean]
     #
     # @!attribute [rw] client_certificate_id
     #   The identifier.
@@ -2166,6 +2474,9 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] last_deployment_status_message
+    #   @return [String]
+    #
     # @!attribute [rw] last_updated_date
     #   @return [Time]
     #
@@ -2182,17 +2493,19 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class CreateStageResponse < Struct.new(
       :access_log_settings,
+      :api_gateway_managed,
+      :auto_deploy,
       :client_certificate_id,
       :created_date,
       :default_route_settings,
       :deployment_id,
       :description,
+      :last_deployment_status_message,
       :last_updated_date,
       :route_settings,
       :stage_name,
@@ -2253,6 +2566,21 @@ module Aws::ApiGatewayV2
     class DeleteAuthorizerRequest < Struct.new(
       :api_id,
       :authorizer_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCorsConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    class DeleteCorsConfigurationRequest < Struct.new(
+      :api_id)
       include Aws::Structure
     end
 
@@ -2401,6 +2729,39 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRouteSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         route_key: "SelectionKey", # required
+    #         stage_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] route_key
+    #   After evaluating a selection expression, the result is compared
+    #   against one or more selection keys to find a matching key. See
+    #   [Selection Expressions][1] for a list of expressions and each
+    #   expression's associated selection key type.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_name
+    #   @return [String]
+    #
+    class DeleteRouteSettingsRequest < Struct.new(
+      :api_id,
+      :route_key,
+      :stage_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteStageRequest
     #   data as a hash:
     #
@@ -2425,6 +2786,10 @@ module Aws::ApiGatewayV2
     # Deployment must be associated with a Stage for it to be callable over
     # the internet.
     #
+    # @!attribute [rw] auto_deployed
+    #   Specifies whether a deployment was automatically released.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_date
     #   The date and time when the Deployment resource was created.
     #   @return [Time]
@@ -2446,6 +2811,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class Deployment < Struct.new(
+      :auto_deployed,
       :created_date,
       :deployment_id,
       :deployment_status,
@@ -2489,7 +2855,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   Tags for the DomainName.
+    #   The collection of tags associated with a domain name.
     #   @return [Hash<String,String>]
     #
     class DomainName < Struct.new(
@@ -2510,15 +2876,15 @@ module Aws::ApiGatewayV2
     #         certificate_arn: "Arn",
     #         certificate_name: "StringWithLengthBetween1And128",
     #         certificate_upload_date: Time.now,
+    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #         domain_name_status_message: "__string",
     #         endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #         hosted_zone_id: "__string",
     #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #         domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
-    #         domain_name_status_message: "__string",
     #       }
     #
     # @!attribute [rw] api_gateway_domain_name
-    #   A domain name for the WebSocket API.
+    #   A domain name for the API.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -2537,6 +2903,18 @@ module Aws::ApiGatewayV2
     #   endpoint for this domain name was uploaded.
     #   @return [Time]
     #
+    # @!attribute [rw] domain_name_status
+    #   The status of the domain name migration. The valid values are
+    #   AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot
+    #   be modified further until the existing operation is complete. If it
+    #   is AVAILABLE, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the domain name migration.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_type
     #   The endpoint type.
     #   @return [String]
@@ -2550,28 +2928,16 @@ module Aws::ApiGatewayV2
     #   for this domain name. The valid values are TLS\_1\_0 and TLS\_1\_2.
     #   @return [String]
     #
-    # @!attribute [rw] domain_name_status
-    #   The status of the domain name migration. The valid values are
-    #   AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot
-    #   be modified further until the existing operation is complete. If it
-    #   is AVAILABLE, the domain can be updated.
-    #   @return [String]
-    #
-    # @!attribute [rw] domain_name_status_message
-    #   An optional text message containing detailed information about
-    #   status of the domain name migration.
-    #   @return [String]
-    #
     class DomainNameConfiguration < Struct.new(
       :api_gateway_domain_name,
       :certificate_arn,
       :certificate_name,
       :certificate_upload_date,
+      :domain_name_status,
+      :domain_name_status_message,
       :endpoint_type,
       :hosted_zone_id,
-      :security_policy,
-      :domain_name_status,
-      :domain_name_status_message)
+      :security_policy)
       include Aws::Structure
     end
 
@@ -2621,7 +2987,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -2713,6 +3079,15 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -2723,11 +3098,15 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] import_info
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -2739,6 +3118,10 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] version
     #   A string with a length between \[1-64\].
     #   @return [String]
@@ -2746,24 +3129,21 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] warnings
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
-    #   @return [Hash<String,String>]
-    #
     class GetApiResponse < Struct.new(
       :api_endpoint,
       :api_id,
       :api_key_selection_expression,
+      :cors_configuration,
       :created_date,
       :description,
       :disable_schema_validation,
+      :import_info,
       :name,
       :protocol_type,
       :route_selection_expression,
+      :tags,
       :version,
-      :warnings,
-      :tags)
+      :warnings)
       include Aws::Structure
     end
 
@@ -2834,8 +3214,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -2865,13 +3246,14 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class GetAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
@@ -2881,8 +3263,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -2945,6 +3327,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_deployed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -2964,6 +3349,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class GetDeploymentResponse < Struct.new(
+      :auto_deployed,
       :created_date,
       :deployment_id,
       :deployment_status,
@@ -3044,8 +3430,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class GetDomainNameResponse < Struct.new(
@@ -3110,6 +3495,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connection_id
     #   A string with a length between \[1-1024\].
     #   @return [String]
@@ -3120,6 +3508,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] credentials_arn
@@ -3157,6 +3546,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] passthrough_behavior
     #   Represents passthrough behavior for an integration response.
+    #   Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_version
+    #   A string with a length between \[1-64\].
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -3194,6 +3588,7 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     class GetIntegrationResult < Struct.new(
+      :api_gateway_managed,
       :connection_id,
       :connection_type,
       :content_handling_strategy,
@@ -3205,6 +3600,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -3239,6 +3635,7 @@ module Aws::ApiGatewayV2
 
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
@@ -3246,7 +3643,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -3515,25 +3912,29 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_key_required
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type. Valid values are NONE for open access,
-    #   AWS\_IAM for using AWS IAM permissions, and CUSTOM for using a
-    #   Lambda authorizer.
+    #   The authorization type. For WebSocket APIs, valid values are NONE
+    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
+    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
+    #   for open access, or JWT for using JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -3566,7 +3967,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -3590,6 +3991,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class GetRouteResult < Struct.new(
+      :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
       :authorization_type,
@@ -3652,7 +4054,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -3778,6 +4180,12 @@ module Aws::ApiGatewayV2
     #   Settings for logging access in a stage.
     #   @return [Types::AccessLogSettings]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_deploy
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
     #   The identifier.
     #   @return [String]
@@ -3797,6 +4205,9 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] last_deployment_status_message
+    #   @return [String]
+    #
     # @!attribute [rw] last_updated_date
     #   @return [Time]
     #
@@ -3813,17 +4224,19 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class GetStageResponse < Struct.new(
       :access_log_settings,
+      :api_gateway_managed,
+      :auto_deploy,
       :client_certificate_id,
       :created_date,
       :default_route_settings,
       :deployment_id,
       :description,
+      :last_deployment_status_message,
       :last_updated_date,
       :route_settings,
       :stage_name,
@@ -3871,7 +4284,158 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    class GetTagsRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    class GetTagsResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # Represents the input to ImportAPI. Supported only for HTTP APIs.
+    #
+    # @!attribute [rw] body
+    #   The OpenAPI definition. Supported only for HTTP APIs.
+    #   @return [String]
+    #
+    class ImportApiInput < Struct.new(
+      :body)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportApiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         basepath: "__string",
+    #         body: "__string", # required
+    #         fail_on_warnings: false,
+    #       }
+    #
+    # @!attribute [rw] basepath
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   @return [String]
+    #
+    # @!attribute [rw] fail_on_warnings
+    #   @return [Boolean]
+    #
+    class ImportApiRequest < Struct.new(
+      :basepath,
+      :body,
+      :fail_on_warnings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_selection_expression
+    #   An expression used to extract information at runtime. See [Selection
+    #   Expressions][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] created_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A string with a length between \[0-1024\].
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_schema_validation
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] import_info
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_selection_expression
+    #   An expression used to extract information at runtime. See [Selection
+    #   Expressions][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<String>]
+    #
+    class ImportApiResponse < Struct.new(
+      :api_endpoint,
+      :api_id,
+      :api_key_selection_expression,
+      :cors_configuration,
+      :created_date,
+      :description,
+      :disable_schema_validation,
+      :import_info,
+      :name,
+      :protocol_type,
+      :route_selection_expression,
+      :tags,
+      :version,
+      :warnings)
+      include Aws::Structure
+    end
+
     # Represents an integration.
+    #
+    # @!attribute [rw] api_gateway_managed
+    #   Specifies whether an integration is managed by API Gateway. If you
+    #   created an API using using quick create, the resulting integration
+    #   is managed by API Gateway. You can update a managed integration, but
+    #   you can't delete it.
+    #   @return [Boolean]
     #
     # @!attribute [rw] connection_id
     #   The connection ID.
@@ -3884,9 +4448,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
-    #   Specifies how to handle response payload content type conversions.
-    #   Supported values are CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with
-    #   the following behaviors:
+    #   Supported only for WebSocket APIs. Specifies how to handle response
+    #   payload content type conversions. Supported values are
+    #   CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with the following
+    #   behaviors:
     #
     #   CONVERT\_TO\_BINARY: Converts a response payload from a
     #   Base64-encoded string to the corresponding binary blob.
@@ -3922,7 +4487,8 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] integration_response_selection_expression
     #   The integration response selection expression for the integration.
-    #   See [Integration Response Selection Expressions][1].
+    #   Supported only for WebSocket APIs. See [Integration Response
+    #   Selection Expressions][1].
     #
     #
     #
@@ -3936,7 +4502,7 @@ module Aws::ApiGatewayV2
     #   action, including the Lambda function-invoking action. With the
     #   Lambda function-invoking action, this is referred to as the Lambda
     #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration.
+    #   as AWS integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with the
     #   Lambda function-invoking action with the client request passed
@@ -3945,14 +4511,15 @@ module Aws::ApiGatewayV2
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
-    #   integration.
+    #   integration. Supported only for WebSocket APIs.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
     #   endpoint, with the client request passed through as-is. This is also
     #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
-    #   as a "loopback" endpoint without invoking any backend.
+    #   as a "loopback" endpoint without invoking any backend. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
@@ -3965,7 +4532,7 @@ module Aws::ApiGatewayV2
     #   the Content-Type header in the request, and the available mapping
     #   templates specified as the requestTemplates property on the
     #   Integration resource. There are three valid values: WHEN\_NO\_MATCH,
-    #   WHEN\_NO\_TEMPLATES, and NEVER.
+    #   WHEN\_NO\_TEMPLATES, and NEVER. Supported only for WebSocket APIs.
     #
     #   WHEN\_NO\_MATCH passes the request body for unmapped content types
     #   through to the integration backend without transformation.
@@ -3979,6 +4546,11 @@ module Aws::ApiGatewayV2
     #   the same HTTP 415 Unsupported Media Type response.
     #   @return [String]
     #
+    # @!attribute [rw] payload_format_version
+    #   Specifies the format of the payload sent to an integration. Required
+    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   @return [String]
+    #
     # @!attribute [rw] request_parameters
     #   A key-value map specifying request parameters that are passed from
     #   the method request to the backend. The key is an integration request
@@ -3986,28 +4558,40 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.\\\{location\\}.\\\{name\\} , where \\\{location\\}
-    #   is querystring, path, or header; and \\\{name\\} must be a valid and
-    #   unique method request parameter name.
+    #   method.request.<replaceable>\{location\}</replaceable>
+    #
+    #   .<replaceable>\{name\}</replaceable>
+    #
+    #    , where <replaceable>\{location\}</replaceable>
+    #
+    #    is querystring, path, or header; and
+    #   <replaceable>\{name\}</replaceable>
+    #
+    #    must be a valid and unique method request parameter name. Supported
+    #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
     #   Represents a map of Velocity templates that are applied on the
     #   request payload based on the value of the Content-Type header sent
     #   by the client. The content type value is the key in this map, and
-    #   the template (as a String) is the value.
+    #   the template (as a String) is the value. Supported only for
+    #   WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_selection_expression
-    #   The template selection expression for the integration.
+    #   The template selection expression for the integration. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
+    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
     #   @return [Integer]
     #
     class Integration < Struct.new(
+      :api_gateway_managed,
       :connection_id,
       :connection_type,
       :content_handling_strategy,
@@ -4019,6 +4603,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -4029,9 +4614,10 @@ module Aws::ApiGatewayV2
     # Represents an integration response.
     #
     # @!attribute [rw] content_handling_strategy
-    #   Specifies how to handle response payload content type conversions.
-    #   Supported values are CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with
-    #   the following behaviors:
+    #   Supported only for WebSocket APIs. Specifies how to handle response
+    #   payload content type conversions. Supported values are
+    #   CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with the following
+    #   behaviors:
     #
     #   CONVERT\_TO\_BINARY: Converts a response payload from a
     #   Base64-encoded string to the corresponding binary blob.
@@ -4122,6 +4708,44 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Represents the configuration of a JWT authorizer. Required for the JWT
+    # authorizer type. Supported only for HTTP APIs.
+    #
+    # @note When making an API call, you may pass JWTConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         audience: ["__string"],
+    #         issuer: "UriWithLengthBetween1And2048",
+    #       }
+    #
+    # @!attribute [rw] audience
+    #   A list of the intended recipients of the JWT. A valid JWT must
+    #   provide an aud that matches at least one entry in this list. See
+    #   [RFC 7519][1]. Supported only for HTTP APIs.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc7519#section-4.1.3
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issuer
+    #   The base domain of the identity provider that issues JSON Web
+    #   Tokens. For example, an Amazon Cognito user pool has the following
+    #   format: https://cognito-idp.<replaceable>\{region\}</replaceable>
+    #
+    #   .amazonaws.com/<replaceable>\{userPoolId\}</replaceable>
+    #
+    #    . Required for the JWT authorizer type. Supported only for HTTP
+    #   APIs.
+    #   @return [String]
+    #
+    class JWTConfiguration < Struct.new(
+      :audience,
+      :issuer)
+      include Aws::Structure
+    end
+
     # A limit has been exceeded. See the accompanying error message for
     # details.
     #
@@ -4139,31 +4763,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass GetTagsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   @return [String]
-    #
-    class GetTagsRequest < Struct.new(
-      :resource_arn)
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] tags
-    #   @return [Hash<String,String>]
-    #
-    class GetTagsResponse < Struct.new(
-      :tags)
-      include Aws::Structure
-    end
-
-    # Represents a data model for an API. See [Create Models and Mapping
-    # Templates for Request and Response Mappings][1].
+    # Represents a data model for an API. Supported only for WebSocket APIs.
+    # See [Create Models and Mapping Templates for Request and Response
+    # Mappings][1].
     #
     #
     #
@@ -4257,39 +4859,174 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # Overwrites the configuration of an existing API using the provided
+    # definition. Supported only for HTTP APIs.
+    #
+    # @!attribute [rw] body
+    #   The OpenAPI definition. Supported only for HTTP APIs.
+    #   @return [String]
+    #
+    class ReimportApiInput < Struct.new(
+      :body)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ReimportApiRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "__string", # required
+    #         basepath: "__string",
+    #         body: "__string", # required
+    #         fail_on_warnings: false,
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   @return [String]
+    #
+    # @!attribute [rw] basepath
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   @return [String]
+    #
+    # @!attribute [rw] fail_on_warnings
+    #   @return [Boolean]
+    #
+    class ReimportApiRequest < Struct.new(
+      :api_id,
+      :basepath,
+      :body,
+      :fail_on_warnings)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] api_id
+    #   The identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_selection_expression
+    #   An expression used to extract information at runtime. See [Selection
+    #   Expressions][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] created_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A string with a length between \[0-1024\].
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_schema_validation
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] import_info
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   A string with a length between \[1-128\].
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_selection_expression
+    #   An expression used to extract information at runtime. See [Selection
+    #   Expressions][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] version
+    #   A string with a length between \[1-64\].
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   @return [Array<String>]
+    #
+    class ReimportApiResponse < Struct.new(
+      :api_endpoint,
+      :api_id,
+      :api_key_selection_expression,
+      :cors_configuration,
+      :created_date,
+      :description,
+      :disable_schema_validation,
+      :import_info,
+      :name,
+      :protocol_type,
+      :route_selection_expression,
+      :tags,
+      :version,
+      :warnings)
+      include Aws::Structure
+    end
+
     # Represents a route.
     #
+    # @!attribute [rw] api_gateway_managed
+    #   Specifies whether a route is managed by API Gateway. If you created
+    #   an API using quick create, the $default route is managed by API
+    #   Gateway. You can't modify the $default route key.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_key_required
-    #   Specifies whether an API key is required for this route.
+    #   Specifies whether an API key is required for this route. Supported
+    #   only for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer
+    #   The authorization type for the route. For WebSocket APIs, valid
+    #   values are NONE for open access, AWS\_IAM for using AWS IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
+    #   valid values are NONE for open access, or JWT for using JSON Web
+    #   Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route, if the authorizationType is CUSTOM . The authorizer
-    #   identifier is generated by API Gateway when you created the
-    #   authorizer.
+    #   route. The authorizer identifier is generated by API Gateway when
+    #   you created the authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
-    #   The model selection expression for the route.
+    #   The model selection expression for the route. Supported only for
+    #   WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -4297,11 +5034,12 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_models
-    #   The request models for the route.
+    #   The request models for the route. Supported only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_parameters
-    #   The request parameters for the route.
+    #   The request parameters for the route. Supported only for WebSocket
+    #   APIs.
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_id
@@ -4313,7 +5051,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
-    #   The route response selection expression for the route.
+    #   The route response selection expression for the route. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -4321,6 +5060,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class Route < Struct.new(
+      :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
       :authorization_type,
@@ -4340,6 +5080,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] model_selection_expression
     #   Represents the model selection expression of a route response.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -4400,7 +5141,7 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] data_trace_enabled
     #   Specifies whether (true) or not (false) data trace logging is
     #   enabled for this route. This property affects the log entries pushed
-    #   to Amazon CloudWatch Logs.
+    #   to Amazon CloudWatch Logs. Supported only for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] detailed_metrics_enabled
@@ -4408,17 +5149,19 @@ module Aws::ApiGatewayV2
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_level
-    #   Specifies the logging level for this route: DEBUG, INFO, or WARN.
+    #   Specifies the logging level for this route: INFO, ERROR, or OFF.
     #   This property affects the log entries pushed to Amazon CloudWatch
-    #   Logs.
+    #   Logs. Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] throttling_burst_limit
-    #   Specifies the throttling burst limit.
+    #   Specifies the throttling burst limit. Supported only for WebSocket
+    #   APIs.
     #   @return [Integer]
     #
     # @!attribute [rw] throttling_rate_limit
-    #   Specifies the throttling rate limit.
+    #   Specifies the throttling rate limit. Supported only for WebSocket
+    #   APIs.
     #   @return [Float]
     #
     class RouteSettings < Struct.new(
@@ -4453,8 +5196,20 @@ module Aws::ApiGatewayV2
     #   Settings for logging access in this stage.
     #   @return [Types::AccessLogSettings]
     #
+    # @!attribute [rw] api_gateway_managed
+    #   Specifies whether a stage is managed by API Gateway. If you created
+    #   an API using quick create, the $default stage is managed by API
+    #   Gateway. You can't modify the $default stage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_deploy
+    #   Specifies whether updates to an API automatically trigger a new
+    #   deployment. The default value is false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
-    #   The identifier of a client certificate for a Stage.
+    #   The identifier of a client certificate for a Stage. Supported only
+    #   for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] created_date
@@ -4467,10 +5222,16 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] deployment_id
     #   The identifier of the Deployment that the Stage is associated with.
+    #   Can't be updated if autoDeploy is enabled.
     #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of the stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_deployment_status_message
+    #   Describes the status of the last deployment of a stage. Supported
+    #   only for stages with autoDeploy enabled.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_date
@@ -4478,7 +5239,7 @@ module Aws::ApiGatewayV2
     #   @return [Time]
     #
     # @!attribute [rw] route_settings
-    #   Route settings for the stage.
+    #   Route settings for the stage, by routeKey.
     #   @return [Hash<String,Types::RouteSettings>]
     #
     # @!attribute [rw] stage_name
@@ -4488,20 +5249,25 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a stage resource.
     #   Variable names can have alphanumeric and underscore characters, and
-    #   the values must match \[A-Za-z0-9-.\_~:/?#&=,\]+.
+    #   the values must match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only
+    #   for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   Tags for the Stage.
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
     #   @return [Hash<String,String>]
     #
     class Stage < Struct.new(
       :access_log_settings,
+      :api_gateway_managed,
+      :auto_deploy,
       :client_certificate_id,
       :created_date,
       :default_route_settings,
       :deployment_id,
       :description,
+      :last_deployment_status_message,
       :last_updated_date,
       :route_settings,
       :stage_name,
@@ -4531,7 +5297,8 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for a TagResource request.
     #
     # @!attribute [rw] tags
-    #   Tags for the resource arn.
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
     #   @return [Hash<String,String>]
     #
     class TagResourceInput < Struct.new(
@@ -4553,8 +5320,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class TagResourceRequest < Struct.new(
@@ -4564,26 +5330,6 @@ module Aws::ApiGatewayV2
     end
 
     class TagResourceResponse < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass UntagResourceRequest
-    #   data as a hash:
-    #
-    #       {
-    #         resource_arn: "__string", # required
-    #         tag_keys: ["__string"], # required
-    #       }
-    #
-    # @!attribute [rw] resource_arn
-    #   @return [String]
-    #
-    # @!attribute [rw] tag_keys
-    #   @return [Array<String>]
-    #
-    class UntagResourceRequest < Struct.new(
-      :resource_arn,
-      :tag_keys)
-      include Aws::Structure
-    end
 
     # Represents a template.
     #
@@ -4611,15 +5357,52 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "__string", # required
+    #         tag_keys: ["__string"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # Represents the input parameters for an UpdateApi request.
     #
     # @!attribute [rw] api_key_selection_expression
-    #   An API key selection expression. See [API Key Selection
-    #   Expressions][1].
+    #   An API key selection expression. Supported only for WebSocket APIs.
+    #   See [API Key Selection Expressions][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_configuration
+    #   A CORS configuration. Supported only for HTTP APIs.
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] credentials_arn
+    #   This property is part of quick create. It specifies the credentials
+    #   required for the integration, if any. For a Lambda integration,
+    #   three options are available. To specify an IAM Role for API Gateway
+    #   to assume, use the role's Amazon Resource Name (ARN). To require
+    #   that the caller's identity be passed through from the request,
+    #   specify arn:aws:iam::*:user/*. To use resource-based permissions
+    #   on supported AWS services, specify null. Currently, this property is
+    #   not used for HTTP integrations. If provided, this value replaces the
+    #   credentials associated with the quick create integration. Supported
+    #   only for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4627,15 +5410,35 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] disable_schema_validation
-    #   Avoid validating models when creating a deployment.
+    #   Avoid validating models when creating a deployment. Supported only
+    #   for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] name
     #   The name of the API.
     #   @return [String]
     #
+    # @!attribute [rw] route_key
+    #   This property is part of quick create. If not specified, the route
+    #   created using quick create is kept. Otherwise, this value replaces
+    #   the route key of the quick create route. Additional routes may still
+    #   be added after the API is updated. Supported only for HTTP APIs.
+    #   @return [String]
+    #
     # @!attribute [rw] route_selection_expression
-    #   The route selection expression for the API.
+    #   The route selection expression for the API. For HTTP APIs, the
+    #   routeSelectionExpression must be $\\\{request.method\\}
+    #   $\\\{request.path\\}. If not provided, this will be the default for
+    #   HTTP APIs. This property is required for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   This property is part of quick create. For HTTP integrations,
+    #   specify a fully qualified URL. For Lambda integrations, specify a
+    #   function ARN. The type of the integration will be HTTP\_PROXY or
+    #   AWS\_PROXY, respectively. The value provided updates the integration
+    #   URI and integration type. You can update a quick-created target, but
+    #   you can't remove it from an API. Supported only for HTTP APIs.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4644,10 +5447,14 @@ module Aws::ApiGatewayV2
     #
     class UpdateApiInput < Struct.new(
       :api_key_selection_expression,
+      :cors_configuration,
+      :credentials_arn,
       :description,
       :disable_schema_validation,
       :name,
+      :route_key,
       :route_selection_expression,
+      :target,
       :version)
       include Aws::Structure
     end
@@ -4692,7 +5499,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -4727,7 +5534,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] api_mapping_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -4755,10 +5562,21 @@ module Aws::ApiGatewayV2
     #       {
     #         api_id: "__string", # required
     #         api_key_selection_expression: "SelectionExpression",
+    #         cors_configuration: {
+    #           allow_credentials: false,
+    #           allow_headers: ["__string"],
+    #           allow_methods: ["StringWithLengthBetween1And64"],
+    #           allow_origins: ["__string"],
+    #           expose_headers: ["__string"],
+    #           max_age: 1,
+    #         },
+    #         credentials_arn: "Arn",
     #         description: "StringWithLengthBetween0And1024",
     #         disable_schema_validation: false,
     #         name: "StringWithLengthBetween1And128",
+    #         route_key: "SelectionKey",
     #         route_selection_expression: "SelectionExpression",
+    #         target: "UriWithLengthBetween1And2048",
     #         version: "StringWithLengthBetween1And64",
     #       }
     #
@@ -4774,6 +5592,19 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] credentials_arn
+    #   Represents an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A string with a length between \[0-1024\].
     #   @return [String]
@@ -4785,6 +5616,17 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
+    # @!attribute [rw] route_key
+    #   After evaluating a selection expression, the result is compared
+    #   against one or more selection keys to find a matching key. See
+    #   [Selection Expressions][1] for a list of expressions and each
+    #   expression's associated selection key type.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
+    #   @return [String]
+    #
     # @!attribute [rw] route_selection_expression
     #   An expression used to extract information at runtime. See [Selection
     #   Expressions][1] for more information.
@@ -4794,6 +5636,10 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] target
+    #   A string representation of a URI with a length between \[1-2048\].
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   A string with a length between \[1-64\].
     #   @return [String]
@@ -4801,10 +5647,14 @@ module Aws::ApiGatewayV2
     class UpdateApiRequest < Struct.new(
       :api_id,
       :api_key_selection_expression,
+      :cors_configuration,
+      :credentials_arn,
       :description,
       :disable_schema_validation,
       :name,
+      :route_key,
       :route_selection_expression,
+      :target,
       :version)
       include Aws::Structure
     end
@@ -4825,6 +5675,15 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] cors_configuration
+    #   Represents a CORS configuration. Supported only for HTTP APIs. See
+    #   [Configuring CORS][1] for more information.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
+    #   @return [Types::Cors]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -4835,11 +5694,15 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] disable_schema_validation
     #   @return [Boolean]
     #
+    # @!attribute [rw] import_info
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
     #
     # @!attribute [rw] protocol_type
+    #   Represents a protocol type.
     #   @return [String]
     #
     # @!attribute [rw] route_selection_expression
@@ -4851,6 +5714,10 @@ module Aws::ApiGatewayV2
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Represents a collection of tags associated with the resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] version
     #   A string with a length between \[1-64\].
     #   @return [String]
@@ -4858,24 +5725,21 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] warnings
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
-    #   @return [Hash<String,String>]
-    #
     class UpdateApiResponse < Struct.new(
       :api_endpoint,
       :api_id,
       :api_key_selection_expression,
+      :cors_configuration,
       :created_date,
       :description,
       :disable_schema_validation,
+      :import_info,
       :name,
       :protocol_type,
       :route_selection_expression,
+      :tags,
       :version,
-      :warnings,
-      :tags)
+      :warnings)
       include Aws::Structure
     end
 
@@ -4889,63 +5753,74 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
-    #   The time to live (TTL), in seconds, of cached authorizer results. If
-    #   it is zero, authorization caching is disabled. If it is greater than
-    #   zero, API Gateway will cache authorizer responses. If this field is
-    #   not set, the default value is 300. The maximum value is 3600, or 1
-    #   hour.
+    #   Authorizer caching is not currently supported. Don't specify this
+    #   value for authorizers.
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
     #   The authorizer's Uniform Resource Identifier (URI). For REQUEST
     #   authorizers, this must be a well-formed Lambda function URI, for
     #   example,
-    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\\\{account\_id\\}:function:\\\{lambda\_function\_name\\}/invocations.
-    #   In general, the URI has this form:
-    #   arn:aws:apigateway:\\\{region\\}:lambda:path/\\\{service\_api\\} ,
-    #   where \\\{region\\} is the same as the region hosting the Lambda
-    #   function, path indicates that the remaining substring in the URI
-    #   should be treated as the path to the resource, including the initial
-    #   /. For Lambda functions, this is usually of the form
-    #   /2015-03-31/functions/\[FunctionARN\]/invocations.
+    #   arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:<replaceable>\{account_id\}</replaceable>
+    #
+    #   \:function:<replaceable>\{lambda_function_name\}</replaceable>
+    #
+    #   /invocations. In general, the URI has this form:
+    #   arn:aws:apigateway:<replaceable>\{region\}</replaceable>
+    #
+    #   \:lambda:path/<replaceable>\{service_api\}</replaceable>
+    #
+    #    , where <replaceable />
+    #
+    #   \\\{region\\} is the same as the region hosting the Lambda function,
+    #   path indicates that the remaining substring in the URI should be
+    #   treated as the path to the resource, including the initial /. For
+    #   Lambda functions, this is usually of the form
+    #   /2015-03-31/functions/\[FunctionARN\]/invocations. Supported only
+    #   for REQUEST authorizers.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
     #   The identity source for which authorization is requested.
     #
-    #   For the REQUEST authorizer, this is required when authorization
-    #   caching is enabled. The value is a comma-separated string of one or
-    #   more mapping expressions of the specified request parameters. For
-    #   example, if an Auth header, a Name query string parameter are
-    #   defined as identity sources, this value is
-    #   $method.request.header.Auth, $method.request.querystring.Name. These
-    #   parameters will be used to derive the authorization caching key and
-    #   to perform runtime validation of the REQUEST authorizer by verifying
-    #   all of the identity-related request parameters are present, not null
-    #   and non-empty. Only when this is true does the authorizer invoke the
-    #   authorizer Lambda function, otherwise, it returns a 401 Unauthorized
-    #   response without calling the Lambda function. The valid value is a
-    #   string of comma-separated mapping expressions of the specified
-    #   request parameters. When the authorization caching is not enabled,
-    #   this property is optional.
+    #   For a REQUEST authorizer, this is optional. The value is a set of
+    #   one or more mapping expressions of the specified request parameters.
+    #   Currently, the identity source can be headers, query string
+    #   parameters, stage variables, and context parameters. For example, if
+    #   an Auth header and a Name query string parameter are defined as
+    #   identity sources, this value is route.request.header.Auth,
+    #   route.request.querystring.Name. These parameters will be used to
+    #   perform runtime validation for Lambda-based authorizers by verifying
+    #   all of the identity-related request parameters are present in the
+    #   request, not null, and non-empty. Only when this is true does the
+    #   authorizer invoke the authorizer Lambda function. Otherwise, it
+    #   returns a 401 Unauthorized response without calling the Lambda
+    #   function.
+    #
+    #   For JWT, a single entry that specifies where to extract the JSON Web
+    #   Token (JWT) from inbound requests. Currently only header-based and
+    #   query parameter-based selections are supported, for example
+    #   "$request.header.Authorization".
     #   @return [Array<String>]
     #
     # @!attribute [rw] identity_validation_expression
-    #   The validation expression does not apply to the REQUEST authorizer.
+    #   This parameter is not used.
     #   @return [String]
+    #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
     #
     # @!attribute [rw] name
     #   The name of the authorizer.
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class UpdateAuthorizerInput < Struct.new(
       :authorizer_credentials_arn,
@@ -4954,8 +5829,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -4967,12 +5842,15 @@ module Aws::ApiGatewayV2
     #         authorizer_credentials_arn: "Arn",
     #         authorizer_id: "__string", # required
     #         authorizer_result_ttl_in_seconds: 1,
-    #         authorizer_type: "REQUEST", # accepts REQUEST
+    #         authorizer_type: "REQUEST", # accepts REQUEST, JWT
     #         authorizer_uri: "UriWithLengthBetween1And2048",
     #         identity_source: ["__string"],
     #         identity_validation_expression: "StringWithLengthBetween0And1024",
+    #         jwt_configuration: {
+    #           audience: ["__string"],
+    #           issuer: "UriWithLengthBetween1And2048",
+    #         },
     #         name: "StringWithLengthBetween1And128",
-    #         provider_arns: ["Arn"],
     #       }
     #
     # @!attribute [rw] api_id
@@ -4990,8 +5868,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -5021,13 +5900,14 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class UpdateAuthorizerRequest < Struct.new(
       :api_id,
@@ -5038,8 +5918,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -5056,8 +5936,9 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     # @!attribute [rw] authorizer_type
-    #   The authorizer type. Currently the only valid value is REQUEST, for
-    #   a Lambda function using incoming request parameters.
+    #   The authorizer type. For WebSocket APIs, specify REQUEST for a
+    #   Lambda function using incoming request parameters. For HTTP APIs,
+    #   specify JWT to use JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_uri
@@ -5087,13 +5968,14 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] jwt_configuration
+    #   Represents the configuration of a JWT authorizer. Required for the
+    #   JWT authorizer type. Supported only for HTTP APIs.
+    #   @return [Types::JWTConfiguration]
+    #
     # @!attribute [rw] name
     #   A string with a length between \[1-128\].
     #   @return [String]
-    #
-    # @!attribute [rw] provider_arns
-    #   For REQUEST authorizer, this is not defined.
-    #   @return [Array<String>]
     #
     class UpdateAuthorizerResponse < Struct.new(
       :authorizer_credentials_arn,
@@ -5103,8 +5985,8 @@ module Aws::ApiGatewayV2
       :authorizer_uri,
       :identity_source,
       :identity_validation_expression,
-      :name,
-      :provider_arns)
+      :jwt_configuration,
+      :name)
       include Aws::Structure
     end
 
@@ -5145,6 +6027,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] auto_deployed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_date
     #   @return [Time]
     #
@@ -5164,6 +6049,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class UpdateDeploymentResponse < Struct.new(
+      :auto_deployed,
       :created_date,
       :deployment_id,
       :deployment_status,
@@ -5194,11 +6080,11 @@ module Aws::ApiGatewayV2
     #             certificate_arn: "Arn",
     #             certificate_name: "StringWithLengthBetween1And128",
     #             certificate_upload_date: Time.now,
+    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
+    #             domain_name_status_message: "__string",
     #             endpoint_type: "REGIONAL", # accepts REGIONAL, EDGE
     #             hosted_zone_id: "__string",
     #             security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
-    #             domain_name_status: "AVAILABLE", # accepts AVAILABLE, UPDATING
-    #             domain_name_status_message: "__string",
     #           },
     #         ],
     #       }
@@ -5234,8 +6120,7 @@ module Aws::ApiGatewayV2
     #   @return [Array<Types::DomainNameConfiguration>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class UpdateDomainNameResponse < Struct.new(
@@ -5259,9 +6144,10 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] content_handling_strategy
-    #   Specifies how to handle response payload content type conversions.
-    #   Supported values are CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with
-    #   the following behaviors:
+    #   Supported only for WebSocket APIs. Specifies how to handle response
+    #   payload content type conversions. Supported values are
+    #   CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with the following
+    #   behaviors:
     #
     #   CONVERT\_TO\_BINARY: Converts a response payload from a
     #   Base64-encoded string to the corresponding binary blob.
@@ -5298,7 +6184,7 @@ module Aws::ApiGatewayV2
     #   action, including the Lambda function-invoking action. With the
     #   Lambda function-invoking action, this is referred to as the Lambda
     #   custom integration. With any other AWS service action, this is known
-    #   as AWS integration.
+    #   as AWS integration. Supported only for WebSocket APIs.
     #
     #   AWS\_PROXY: for integrating the route or method request with the
     #   Lambda function-invoking action with the client request passed
@@ -5307,14 +6193,15 @@ module Aws::ApiGatewayV2
     #
     #   HTTP: for integrating the route or method request with an HTTP
     #   endpoint. This integration is also referred to as the HTTP custom
-    #   integration.
+    #   integration. Supported only for WebSocket APIs.
     #
     #   HTTP\_PROXY: for integrating route or method request with an HTTP
     #   endpoint, with the client request passed through as-is. This is also
     #   referred to as HTTP proxy integration.
     #
     #   MOCK: for integrating the route or method request with API Gateway
-    #   as a "loopback" endpoint without invoking any backend.
+    #   as a "loopback" endpoint without invoking any backend. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_uri
@@ -5327,7 +6214,7 @@ module Aws::ApiGatewayV2
     #   the Content-Type header in the request, and the available mapping
     #   templates specified as the requestTemplates property on the
     #   Integration resource. There are three valid values: WHEN\_NO\_MATCH,
-    #   WHEN\_NO\_TEMPLATES, and NEVER.
+    #   WHEN\_NO\_TEMPLATES, and NEVER. Supported only for WebSocket APIs.
     #
     #   WHEN\_NO\_MATCH passes the request body for unmapped content types
     #   through to the integration backend without transformation.
@@ -5341,6 +6228,11 @@ module Aws::ApiGatewayV2
     #   the same HTTP 415 Unsupported Media Type response.
     #   @return [String]
     #
+    # @!attribute [rw] payload_format_version
+    #   Specifies the format of the payload sent to an integration. Required
+    #   for HTTP APIs. Currently, the only supported value is 1.0.
+    #   @return [String]
+    #
     # @!attribute [rw] request_parameters
     #   A key-value map specifying request parameters that are passed from
     #   the method request to the backend. The key is an integration request
@@ -5348,16 +6240,25 @@ module Aws::ApiGatewayV2
     #   parameter value or static value that must be enclosed within single
     #   quotes and pre-encoded as required by the backend. The method
     #   request parameter value must match the pattern of
-    #   method.request.\\\{location\\}.\\\{name\\} , where \\\{location\\}
-    #   is querystring, path, or header; and \\\{name\\} must be a valid and
-    #   unique method request parameter name.
+    #   method.request.<replaceable>\{location\}</replaceable>
+    #
+    #   .<replaceable>\{name\}</replaceable>
+    #
+    #    , where <replaceable>\{location\}</replaceable>
+    #
+    #    is querystring, path, or header; and
+    #   <replaceable>\{name\}</replaceable>
+    #
+    #    must be a valid and unique method request parameter name. Supported
+    #   only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_templates
     #   Represents a map of Velocity templates that are applied on the
     #   request payload based on the value of the Content-Type header sent
     #   by the client. The content type value is the key in this map, and
-    #   the template (as a String) is the value.
+    #   the template (as a String) is the value. Supported only for
+    #   WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] template_selection_expression
@@ -5366,7 +6267,8 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] timeout_in_millis
     #   Custom timeout between 50 and 29,000 milliseconds. The default value
-    #   is 29,000 milliseconds or 29 seconds.
+    #   is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default
+    #   value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
     #   @return [Integer]
     #
     class UpdateIntegrationInput < Struct.new(
@@ -5379,6 +6281,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -5401,6 +6304,7 @@ module Aws::ApiGatewayV2
     #         integration_type: "AWS", # accepts AWS, HTTP, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_uri: "UriWithLengthBetween1And2048",
     #         passthrough_behavior: "WHEN_NO_MATCH", # accepts WHEN_NO_MATCH, NEVER, WHEN_NO_TEMPLATES
+    #         payload_format_version: "StringWithLengthBetween1And64",
     #         request_parameters: {
     #           "__string" => "StringWithLengthBetween1And512",
     #         },
@@ -5424,6 +6328,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] credentials_arn
@@ -5451,6 +6356,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] passthrough_behavior
     #   Represents passthrough behavior for an integration response.
+    #   Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_version
+    #   A string with a length between \[1-64\].
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5499,6 +6409,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -5506,6 +6417,9 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connection_id
     #   A string with a length between \[1-1024\].
     #   @return [String]
@@ -5516,6 +6430,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] credentials_arn
@@ -5553,6 +6468,11 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] passthrough_behavior
     #   Represents passthrough behavior for an integration response.
+    #   Supported only for WebSocket APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_format_version
+    #   A string with a length between \[1-64\].
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5590,6 +6510,7 @@ module Aws::ApiGatewayV2
     #   @return [Integer]
     #
     class UpdateIntegrationResult < Struct.new(
+      :api_gateway_managed,
       :connection_id,
       :connection_type,
       :content_handling_strategy,
@@ -5601,6 +6522,7 @@ module Aws::ApiGatewayV2
       :integration_type,
       :integration_uri,
       :passthrough_behavior,
+      :payload_format_version,
       :request_parameters,
       :request_templates,
       :template_selection_expression,
@@ -5612,9 +6534,10 @@ module Aws::ApiGatewayV2
     # request.
     #
     # @!attribute [rw] content_handling_strategy
-    #   Specifies how to handle response payload content type conversions.
-    #   Supported values are CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with
-    #   the following behaviors:
+    #   Supported only for WebSocket APIs. Specifies how to handle response
+    #   payload content type conversions. Supported values are
+    #   CONVERT\_TO\_BINARY and CONVERT\_TO\_TEXT, with the following
+    #   behaviors:
     #
     #   CONVERT\_TO\_BINARY: Converts a response payload from a
     #   Base64-encoded string to the corresponding binary blob.
@@ -5638,13 +6561,21 @@ module Aws::ApiGatewayV2
     #   response header value, a static value enclosed within a pair of
     #   single quotes, or a JSON expression from the integration response
     #   body. The mapping key must match the pattern of
-    #   method.response.header.\\\{name\\} , where name is a valid and
-    #   unique header name. The mapped non-static value must match the
-    #   pattern of integration.response.header.\\\{name\\} or
-    #   integration.response.body.\\\{JSON-expression\\} , where \\\{name\\}
-    #   is a valid and unique response header name and
-    #   \\\{JSON-expression\\} is a valid JSON expression without the $
-    #   prefix.
+    #   method.response.header.<replaceable>\{name\}</replaceable>
+    #
+    #    , where name is a valid and unique header name. The mapped
+    #   non-static value must match the pattern of
+    #   integration.response.header.<replaceable>\{name\}</replaceable>
+    #
+    #    or
+    #   integration.response.body.<replaceable>\{JSON-expression\}</replaceable>
+    #
+    #    , where <replaceable>\{name\}</replaceable>
+    #
+    #    is a valid and unique response header name and
+    #   <replaceable>\{JSON-expression\}</replaceable>
+    #
+    #    is a valid JSON expression without the $ prefix.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] response_templates
@@ -5656,6 +6587,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] template_selection_expression
     #   The template selection expression for the integration response.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     class UpdateIntegrationResponseInput < Struct.new(
@@ -5690,6 +6622,7 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_id
@@ -5699,7 +6632,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -5753,6 +6686,7 @@ module Aws::ApiGatewayV2
 
     # @!attribute [rw] content_handling_strategy
     #   Specifies how to handle response payload content type conversions.
+    #   Supported only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] integration_response_id
@@ -5760,7 +6694,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] integration_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -5810,7 +6744,8 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
-    # Represents the input parameters for an UpdateModel request.
+    # Represents the input parameters for an UpdateModel request. Supported
+    # only for WebSocket APIs.
     #
     # @!attribute [rw] content_type
     #   The content-type for the model, for example, "application/json".
@@ -5913,7 +6848,8 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for an UpdateRoute request.
     #
     # @!attribute [rw] api_key_required
-    #   Specifies whether an API key is required for the route.
+    #   Specifies whether an API key is required for the route. Supported
+    #   only for WebSocket APIs.
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
@@ -5921,20 +6857,22 @@ module Aws::ApiGatewayV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type for the route. Valid values are NONE for open
-    #   access, AWS\_IAM for using AWS IAM permissions, and CUSTOM for using
-    #   a Lambda authorizer.
+    #   The authorization type for the route. For WebSocket APIs, valid
+    #   values are NONE for open access, AWS\_IAM for using AWS IAM
+    #   permissions, and CUSTOM for using a Lambda authorizer For HTTP APIs,
+    #   valid values are NONE for open access, or JWT for using JSON Web
+    #   Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   The identifier of the Authorizer resource to be associated with this
-    #   route, if the authorizationType is CUSTOM . The authorizer
-    #   identifier is generated by API Gateway when you created the
-    #   authorizer.
+    #   route. The authorizer identifier is generated by API Gateway when
+    #   you created the authorizer.
     #   @return [String]
     #
     # @!attribute [rw] model_selection_expression
-    #   The model selection expression for the route.
+    #   The model selection expression for the route. Supported only for
+    #   WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] operation_name
@@ -5942,11 +6880,12 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] request_models
-    #   The request models for the route.
+    #   The request models for the route. Supported only for WebSocket APIs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_parameters
-    #   The request parameters for the route.
+    #   The request parameters for the route. Supported only for WebSocket
+    #   APIs.
     #   @return [Hash<String,Types::ParameterConstraints>]
     #
     # @!attribute [rw] route_key
@@ -5954,7 +6893,8 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_selection_expression
-    #   The route response selection expression for the route.
+    #   The route response selection expression for the route. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] target
@@ -5983,7 +6923,7 @@ module Aws::ApiGatewayV2
     #         api_id: "__string", # required
     #         api_key_required: false,
     #         authorization_scopes: ["StringWithLengthBetween1And64"],
-    #         authorization_type: "NONE", # accepts NONE, AWS_IAM, CUSTOM
+    #         authorization_type: "NONE", # accepts NONE, AWS_IAM, CUSTOM, JWT
     #         authorizer_id: "Id",
     #         model_selection_expression: "SelectionExpression",
     #         operation_name: "StringWithLengthBetween1And64",
@@ -6009,20 +6949,21 @@ module Aws::ApiGatewayV2
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type. Valid values are NONE for open access,
-    #   AWS\_IAM for using AWS IAM permissions, and CUSTOM for using a
-    #   Lambda authorizer.
+    #   The authorization type. For WebSocket APIs, valid values are NONE
+    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
+    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
+    #   for open access, or JWT for using JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -6054,7 +6995,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -6094,25 +7035,29 @@ module Aws::ApiGatewayV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
     # @!attribute [rw] api_key_required
     #   @return [Boolean]
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on a route. The scopes are
-    #   used with a COGNITO\_USER\_POOLS authorizer to authorize the method
-    #   invocation. The authorization works by matching the route scopes
-    #   against the scopes parsed from the access token in the incoming
-    #   request. The method invocation is authorized if any route scope
-    #   matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the route scope is configured,
-    #   the client must provide an access token instead of an identity token
-    #   for authorization purposes.
+    #   used with a JWT authorizer to authorize the method invocation. The
+    #   authorization works by matching the route scopes against the scopes
+    #   parsed from the access token in the incoming request. The method
+    #   invocation is authorized if any route scope matches a claimed scope
+    #   in the access token. Otherwise, the invocation is not authorized.
+    #   When the route scope is configured, the client must provide an
+    #   access token instead of an identity token for authorization
+    #   purposes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authorization_type
-    #   The authorization type. Valid values are NONE for open access,
-    #   AWS\_IAM for using AWS IAM permissions, and CUSTOM for using a
-    #   Lambda authorizer.
+    #   The authorization type. For WebSocket APIs, valid values are NONE
+    #   for open access, AWS\_IAM for using AWS IAM permissions, and CUSTOM
+    #   for using a Lambda authorizer. For HTTP APIs, valid values are NONE
+    #   for open access, or JWT for using JSON Web Tokens.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -6145,7 +7090,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -6169,6 +7114,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     class UpdateRouteResult < Struct.new(
+      :api_gateway_managed,
       :api_key_required,
       :authorization_scopes,
       :authorization_type,
@@ -6187,7 +7133,8 @@ module Aws::ApiGatewayV2
     # Represents the input parameters for an UpdateRouteResponse request.
     #
     # @!attribute [rw] model_selection_expression
-    #   The model selection expression for the route response.
+    #   The model selection expression for the route response. Supported
+    #   only for WebSocket APIs.
     #   @return [String]
     #
     # @!attribute [rw] response_models
@@ -6256,7 +7203,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -6299,7 +7246,7 @@ module Aws::ApiGatewayV2
     #   @return [String]
     #
     # @!attribute [rw] route_response_key
-    #   After evaulating a selection expression, the result is compared
+    #   After evaluating a selection expression, the result is compared
     #   against one or more selection keys to find a matching key. See
     #   [Selection Expressions][1] for a list of expressions and each
     #   expression's associated selection key type.
@@ -6324,6 +7271,11 @@ module Aws::ApiGatewayV2
     #   Settings for logging access in this stage.
     #   @return [Types::AccessLogSettings]
     #
+    # @!attribute [rw] auto_deploy
+    #   Specifies whether updates to an API automatically trigger a new
+    #   deployment. The default value is false.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
     #   The identifier of a client certificate for a Stage.
     #   @return [String]
@@ -6333,7 +7285,8 @@ module Aws::ApiGatewayV2
     #   @return [Types::RouteSettings]
     #
     # @!attribute [rw] deployment_id
-    #   The deployment identifier for the API stage.
+    #   The deployment identifier for the API stage. Can't be updated if
+    #   autoDeploy is enabled.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6347,11 +7300,13 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] stage_variables
     #   A map that defines the stage variables for a Stage. Variable names
     #   can have alphanumeric and underscore characters, and the values must
-    #   match \[A-Za-z0-9-.\_~:/?#&=,\]+.
+    #   match \[A-Za-z0-9-.\_~:/?#&amp;=,\]+. Supported only for WebSocket
+    #   APIs.
     #   @return [Hash<String,String>]
     #
     class UpdateStageInput < Struct.new(
       :access_log_settings,
+      :auto_deploy,
       :client_certificate_id,
       :default_route_settings,
       :deployment_id,
@@ -6370,6 +7325,7 @@ module Aws::ApiGatewayV2
     #           format: "StringWithLengthBetween1And1024",
     #         },
     #         api_id: "__string", # required
+    #         auto_deploy: false,
     #         client_certificate_id: "Id",
     #         default_route_settings: {
     #           data_trace_enabled: false,
@@ -6402,6 +7358,9 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] api_id
     #   @return [String]
     #
+    # @!attribute [rw] auto_deploy
+    #   @return [Boolean]
+    #
     # @!attribute [rw] client_certificate_id
     #   The identifier.
     #   @return [String]
@@ -6432,6 +7391,7 @@ module Aws::ApiGatewayV2
     class UpdateStageRequest < Struct.new(
       :access_log_settings,
       :api_id,
+      :auto_deploy,
       :client_certificate_id,
       :default_route_settings,
       :deployment_id,
@@ -6445,6 +7405,12 @@ module Aws::ApiGatewayV2
     # @!attribute [rw] access_log_settings
     #   Settings for logging access in a stage.
     #   @return [Types::AccessLogSettings]
+    #
+    # @!attribute [rw] api_gateway_managed
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] auto_deploy
+    #   @return [Boolean]
     #
     # @!attribute [rw] client_certificate_id
     #   The identifier.
@@ -6465,6 +7431,9 @@ module Aws::ApiGatewayV2
     #   A string with a length between \[0-1024\].
     #   @return [String]
     #
+    # @!attribute [rw] last_deployment_status_message
+    #   @return [String]
+    #
     # @!attribute [rw] last_updated_date
     #   @return [Time]
     #
@@ -6481,17 +7450,19 @@ module Aws::ApiGatewayV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tags
-    #   A key value pair of string with key length between\[1-128\] and
-    #   value length between\[1-256\]
+    #   Represents a collection of tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     class UpdateStageResponse < Struct.new(
       :access_log_settings,
+      :api_gateway_managed,
+      :auto_deploy,
       :client_certificate_id,
       :created_date,
       :default_route_settings,
       :deployment_id,
       :description,
+      :last_deployment_status_message,
       :last_updated_date,
       :route_settings,
       :stage_name,

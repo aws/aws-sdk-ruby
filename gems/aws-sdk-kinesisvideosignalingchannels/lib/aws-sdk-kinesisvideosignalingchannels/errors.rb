@@ -5,16 +5,16 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws::ApiGatewayV2
+module Aws::KinesisVideoSignalingChannels
   module Errors
 
     extend Aws::Errors::DynamicErrors
 
-    class AccessDeniedException < ServiceError
+    class ClientLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::ApiGatewayV2::Types::AccessDeniedException] data
+      # @param [Aws::KinesisVideoSignalingChannels::Types::ClientLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -26,11 +26,11 @@ module Aws::ApiGatewayV2
 
     end
 
-    class BadRequestException < ServiceError
+    class InvalidArgumentException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::ApiGatewayV2::Types::BadRequestException] data
+      # @param [Aws::KinesisVideoSignalingChannels::Types::InvalidArgumentException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -42,11 +42,11 @@ module Aws::ApiGatewayV2
 
     end
 
-    class ConflictException < ServiceError
+    class InvalidClientException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::ApiGatewayV2::Types::ConflictException] data
+      # @param [Aws::KinesisVideoSignalingChannels::Types::InvalidClientException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -58,11 +58,11 @@ module Aws::ApiGatewayV2
 
     end
 
-    class NotFoundException < ServiceError
+    class NotAuthorizedException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::ApiGatewayV2::Types::NotFoundException] data
+      # @param [Aws::KinesisVideoSignalingChannels::Types::NotAuthorizedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -72,25 +72,31 @@ module Aws::ApiGatewayV2
         @message || @data[:message]
       end
 
-      # @return [String]
-      def resource_type
-        @data[:resource_type]
-      end
-
     end
 
-    class TooManyRequestsException < ServiceError
+    class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::ApiGatewayV2::Types::TooManyRequestsException] data
+      # @param [Aws::KinesisVideoSignalingChannels::Types::ResourceNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
 
       # @return [String]
-      def limit_type
-        @data[:limit_type]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class SessionExpiredException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KinesisVideoSignalingChannels::Types::SessionExpiredException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
       # @return [String]

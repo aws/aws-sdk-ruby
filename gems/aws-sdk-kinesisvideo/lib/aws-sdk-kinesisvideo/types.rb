@@ -8,6 +8,31 @@
 module Aws::KinesisVideo
   module Types
 
+    # You do not have required permissions to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You have reached the maximum limit of active signaling channels for
+    # this AWS account in this region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/AccountChannelLimitExceededException AWS API Documentation
+    #
+    class AccountChannelLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The number of streams created for the account is too high.
     #
     # @!attribute [rw] message
@@ -17,6 +42,82 @@ module Aws::KinesisVideo
     #
     class AccountStreamLimitExceededException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # A structure that encapsulates a signaling channel's metadata and
+    # properties.
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the signaling channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the signaling channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_type
+    #   The type of the signaling channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_status
+    #   Current status of the signaling channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the signaling channel was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] single_master_configuration
+    #   A structure that contains the configuration for the `SINGLE_MASTER`
+    #   channel type.
+    #   @return [Types::SingleMasterConfiguration]
+    #
+    # @!attribute [rw] version
+    #   The current version of the signaling channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ChannelInfo AWS API Documentation
+    #
+    class ChannelInfo < Struct.new(
+      :channel_name,
+      :channel_arn,
+      :channel_type,
+      :channel_status,
+      :creation_time,
+      :single_master_configuration,
+      :version)
+      include Aws::Structure
+    end
+
+    # An optional input parameter for the `ListSignalingChannels` API. When
+    # this parameter is specified while invoking `ListSignalingChannels`,
+    # the API returns only the channels that satisfy a condition specified
+    # in `ChannelNameCondition`.
+    #
+    # @note When making an API call, you may pass ChannelNameCondition
+    #   data as a hash:
+    #
+    #       {
+    #         comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
+    #         comparison_value: "ChannelName",
+    #       }
+    #
+    # @!attribute [rw] comparison_operator
+    #   A comparison operator. Currently, you can only specify the
+    #   `BEGINS_WITH` operator, which finds signaling channels whose names
+    #   begin with a given prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_value
+    #   A value to compare.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ChannelNameCondition AWS API Documentation
+    #
+    class ChannelNameCondition < Struct.new(
+      :comparison_operator,
+      :comparison_value)
       include Aws::Structure
     end
 
@@ -30,6 +131,64 @@ module Aws::KinesisVideo
     #
     class ClientLimitExceededException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateSignalingChannelInput
+    #   data as a hash:
+    #
+    #       {
+    #         channel_name: "ChannelName", # required
+    #         channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER
+    #         single_master_configuration: {
+    #           message_ttl_seconds: 1,
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] channel_name
+    #   A name for the signaling channel that you are creating. It must be
+    #   unique for each account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_type
+    #   A type of the signaling channel that you are creating. Currently,
+    #   `SINGLE_MASTER` is the only supported channel type.
+    #   @return [String]
+    #
+    # @!attribute [rw] single_master_configuration
+    #   A structure containing the configuration for the `SINGLE_MASTER`
+    #   channel type.
+    #   @return [Types::SingleMasterConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A set of tags (key/value pairs) that you want to associate with this
+    #   channel.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateSignalingChannelInput AWS API Documentation
+    #
+    class CreateSignalingChannelInput < Struct.new(
+      :channel_name,
+      :channel_type,
+      :single_master_configuration,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_arn
+    #   The ARN of the created channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateSignalingChannelOutput AWS API Documentation
+    #
+    class CreateSignalingChannelOutput < Struct.new(
+      :channel_arn)
       include Aws::Structure
     end
 
@@ -68,6 +227,9 @@ module Aws::KinesisVideo
     #   information when processing the stream. For more information about
     #   media types, see [Media Types][1]. If you choose to specify the
     #   `MediaType`, see [Naming Requirements][2] for guidelines.
+    #
+    #   Example valid values include "video/h264" and
+    #   "video/h264,audio/aac".
     #
     #   This parameter is optional; the default value is `null` (or empty in
     #   JSON).
@@ -135,6 +297,36 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteSignalingChannelInput
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ResourceARN", # required
+    #         current_version: "Version",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the signaling channel that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the signaling channel that you want to
+    #   delete. You can obtain the current version by invoking the
+    #   `DescribeSignalingChannel` or `ListSignalingChannels` APIs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteSignalingChannelInput AWS API Documentation
+    #
+    class DeleteSignalingChannelInput < Struct.new(
+      :channel_arn,
+      :current_version)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteSignalingChannelOutput AWS API Documentation
+    #
+    class DeleteSignalingChannelOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteStreamInput
     #   data as a hash:
     #
@@ -170,6 +362,42 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamOutput AWS API Documentation
     #
     class DeleteStreamOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeSignalingChannelInput
+    #   data as a hash:
+    #
+    #       {
+    #         channel_name: "ChannelName",
+    #         channel_arn: "ResourceARN",
+    #       }
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the signaling channel that you want to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the signaling channel that you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeSignalingChannelInput AWS API Documentation
+    #
+    class DescribeSignalingChannelInput < Struct.new(
+      :channel_name,
+      :channel_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_info
+    #   A structure that encapsulates the specified signaling channel's
+    #   metadata and properties.
+    #   @return [Types::ChannelInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeSignalingChannelOutput AWS API Documentation
+    #
+    class DescribeSignalingChannelOutput < Struct.new(
+      :channel_info)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeStreamInput
     #   data as a hash:
@@ -263,6 +491,46 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSignalingChannelEndpointInput
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ResourceARN", # required
+    #         single_master_channel_endpoint_configuration: {
+    #           protocols: ["WSS"], # accepts WSS, HTTPS
+    #           role: "MASTER", # accepts MASTER, VIEWER
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the signalling channel for which you want to get an
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] single_master_channel_endpoint_configuration
+    #   A structure containing the endpoint configuration for the
+    #   `SINGLE_MASTER` channel type.
+    #   @return [Types::SingleMasterChannelEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetSignalingChannelEndpointInput AWS API Documentation
+    #
+    class GetSignalingChannelEndpointInput < Struct.new(
+      :channel_arn,
+      :single_master_channel_endpoint_configuration)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_endpoint_list
+    #   A list of endpoints for the specified signaling channel.
+    #   @return [Array<Types::ResourceEndpointListItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetSignalingChannelEndpointOutput AWS API Documentation
+    #
+    class GetSignalingChannelEndpointOutput < Struct.new(
+      :resource_endpoint_list)
+      include Aws::Structure
+    end
+
     # The value for this input parameter is invalid.
     #
     # @!attribute [rw] message
@@ -296,6 +564,62 @@ module Aws::KinesisVideo
     #
     class InvalidResourceFormatException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSignalingChannelsInput
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         channel_name_condition: {
+    #           comparison_operator: "BEGINS_WITH", # accepts BEGINS_WITH
+    #           comparison_value: "ChannelName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of channels to return in the response. The
+    #   default is 500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If you specify this parameter, when the result of a
+    #   `ListSignalingChannels` operation is truncated, the call returns the
+    #   `NextToken` in the response. To get another batch of channels,
+    #   provide this token in your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name_condition
+    #   Optional: Returns only the channels that satisfy a specific
+    #   condition.
+    #   @return [Types::ChannelNameCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListSignalingChannelsInput AWS API Documentation
+    #
+    class ListSignalingChannelsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :channel_name_condition)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_info_list
+    #   An array of `ChannelInfo` objects.
+    #   @return [Array<Types::ChannelInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, the call returns this element with a
+    #   token. To get the next batch of streams, use this token in your next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListSignalingChannelsOutput AWS API Documentation
+    #
+    class ListSignalingChannelsOutput < Struct.new(
+      :channel_info_list,
+      :next_token)
       include Aws::Structure
     end
 
@@ -353,6 +677,52 @@ module Aws::KinesisVideo
     class ListStreamsOutput < Struct.new(
       :stream_info_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         resource_arn: "ResourceARN", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If you specify this parameter and the result of a
+    #   ListTagsForResource call is truncated, the response includes a token
+    #   that you can use in the next request to fetch the next batch of
+    #   tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the signaling channel for which you want to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :next_token,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If you specify this parameter and the result of a
+    #   ListTagsForResource call is truncated, the response includes a token
+    #   that you can use in the next request to fetch the next set of tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values associated with the specified signaling
+    #   channel.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :next_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -420,6 +790,27 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # An object that describes the endpoint of the signaling channel
+    # returned by the `GetSignalingChannelEndpoint` API.
+    #
+    # @!attribute [rw] protocol
+    #   The protocol of the signaling channel returned by the
+    #   `GetSignalingChannelEndpoint` API.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_endpoint
+    #   The endpoint of the signaling channel returned by the
+    #   `GetSignalingChannelEndpoint` API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ResourceEndpointListItem AWS API Documentation
+    #
+    class ResourceEndpointListItem < Struct.new(
+      :protocol,
+      :resource_endpoint)
+      include Aws::Structure
+    end
+
     # The stream is currently not available for this operation.
     #
     # @!attribute [rw] message
@@ -442,6 +833,64 @@ module Aws::KinesisVideo
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # An object that contains the endpoint configuration for the
+    # `SINGLE_MASTER` channel type.
+    #
+    # @note When making an API call, you may pass SingleMasterChannelEndpointConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         protocols: ["WSS"], # accepts WSS, HTTPS
+    #         role: "MASTER", # accepts MASTER, VIEWER
+    #       }
+    #
+    # @!attribute [rw] protocols
+    #   This property is used to determine the nature of communication over
+    #   this `SINGLE_MASTER` signaling channel. If `WSS` is specified, this
+    #   API returns a websocket endpoint. If `HTTPS` is specified, this API
+    #   returns an `HTTPS` endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] role
+    #   This property is used to determine messaging permissions in this
+    #   `SINGLE_MASTER` signaling channel. If `MASTER` is specified, this
+    #   API returns an endpoint that a client can use to receive offers from
+    #   and send answers to any of the viewers on this signaling channel. If
+    #   `VIEWER` is specified, this API returns an endpoint that a client
+    #   can use only to send offers to another `MASTER` client on this
+    #   signaling channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/SingleMasterChannelEndpointConfiguration AWS API Documentation
+    #
+    class SingleMasterChannelEndpointConfiguration < Struct.new(
+      :protocols,
+      :role)
+      include Aws::Structure
+    end
+
+    # A structure that contains the configuration for the `SINGLE_MASTER`
+    # channel type.
+    #
+    # @note When making an API call, you may pass SingleMasterConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         message_ttl_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] message_ttl_seconds
+    #   The period of time a signaling channel retains underlivered messages
+    #   before they are discarded.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/SingleMasterConfiguration AWS API Documentation
+    #
+    class SingleMasterConfiguration < Struct.new(
+      :message_ttl_seconds)
       include Aws::Structure
     end
 
@@ -531,6 +980,69 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # A key and value pair that is associated with the specified signaling
+    # channel.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key of the tag that is associated with the specified signaling
+    #   channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the tag that is associated with the specified signaling
+    #   channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the signaling channel to which you want to add tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to associate with the specified signaling channel.
+    #   Each tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TagStreamInput
     #   data as a hash:
     #
@@ -581,6 +1093,34 @@ module Aws::KinesisVideo
       :message)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         tag_key_list: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the signaling channel from which you want to remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key_list
+    #   A list of the keys of the tags that you want to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_key_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagStreamInput
     #   data as a hash:
@@ -668,6 +1208,44 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionOutput AWS API Documentation
     #
     class UpdateDataRetentionOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateSignalingChannelInput
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "ResourceARN", # required
+    #         current_version: "Version", # required
+    #         single_master_configuration: {
+    #           message_ttl_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   The ARN of the signaling channel that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the signaling channel that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] single_master_configuration
+    #   The structure containing the configuration for the `SINGLE_MASTER`
+    #   type of the signaling channel that you want to update.
+    #   @return [Types::SingleMasterConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateSignalingChannelInput AWS API Documentation
+    #
+    class UpdateSignalingChannelInput < Struct.new(
+      :channel_arn,
+      :current_version,
+      :single_master_configuration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateSignalingChannelOutput AWS API Documentation
+    #
+    class UpdateSignalingChannelOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateStreamInput
     #   data as a hash:

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.68.0 (2019-12-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisvideosignalingchannels` gem.
+
 3.67.0 (2019-12-04)
 ------------------
 

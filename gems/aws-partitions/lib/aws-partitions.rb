@@ -338,6 +338,7 @@ module Aws
             'KinesisVideo' => 'kinesisvideo',
             'KinesisVideoArchivedMedia' => 'kinesisvideo',
             'KinesisVideoMedia' => 'kinesisvideo',
+            'KinesisVideoSignalingChannels' => 'kinesisvideo',
             'LakeFormation' => 'lakeformation',
             'Lambda' => 'lambda',
             'LambdaPreview' => 'lambda',
