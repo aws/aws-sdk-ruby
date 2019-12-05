@@ -57,7 +57,9 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
         end
         y.yield("#{prefix}.rb", service_module(prefix))
-        y.yield("#{prefix}/customizations.rb", '')
+        unless prefix == 'aws-sdk-sts'
+          y.yield("#{prefix}/customizations.rb", '')
+        end
         y.yield("#{prefix}/types.rb", types_module)
         if has_eventstream
           y.yield("#{prefix}/event_streams.rb", event_streams_module)

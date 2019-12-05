@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add STS Presigner module with a method to generate a presigned EKS token.
+
 3.84.0 (2019-12-04)
 ------------------
 
