@@ -51,7 +51,7 @@ module Aws
         )
 
         url = Aws::Partitions::EndpointProvider.resolve(
-          req.context.config.region, 'sts'
+            req.context.config.region, 'sts', false
         )
         url += "/?#{param_list}"
 
