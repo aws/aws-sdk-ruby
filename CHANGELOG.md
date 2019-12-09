@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.412 (2019-12-09)
+------------------
+
 * Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
 
 * Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
