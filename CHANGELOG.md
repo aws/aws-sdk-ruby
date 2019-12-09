@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::QuickSight - Updated the documentation for Amazon QuickSight.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.411 (2019-12-05)
 ------------------
 
