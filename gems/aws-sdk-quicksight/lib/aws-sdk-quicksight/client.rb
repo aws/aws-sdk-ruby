@@ -297,21 +297,21 @@ module Aws::QuickSight
     end
 
     # Creates a dashboard from a template. To first create a template, see
-    # the CreateTemplate API.
+    # the CreateTemplate API operation.
     #
-    # A dashboard is an entity in QuickSight which identifies Quicksight
-    # reports, created from analyses. QuickSight dashboards are sharable.
+    # A dashboard is an entity in QuickSight that identifies QuickSight
+    # reports, created from analyses. You can share QuickSight dashboards.
     # With the right permissions, you can create scheduled email reports
-    # from them. The `CreateDashboard`, `DescribeDashboard` and
-    # `ListDashboardsByUser` APIs act on the dashboard entity. If you have
-    # the correct permissions, you can create a dashboard from a template
-    # that exists in a different AWS account.
+    # from them. The `CreateDashboard`, `DescribeDashboard`, and
+    # `ListDashboardsByUser` API operations act on the dashboard entity. If
+    # you have the correct permissions, you can create a dashboard from a
+    # template that exists in a different AWS account.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID where you want to create the dashboard.
+    #   The ID of the AWS account where you want to create the dashboard.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to IAM policy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #
     # @option params [required, String] :name
     #   The display name of the dashboard.
@@ -319,19 +319,19 @@ module Aws::QuickSight
     # @option params [Types::Parameters] :parameters
     #   A structure that contains the parameters of the dashboard. These are
     #   parameter overrides for a dashboard. A dashboard can have any type of
-    #   parameters and some parameters might accept multiple values. You could
-    #   use the following structure to override two string parameters that
-    #   accept multiple values:
+    #   parameters, and some parameters might accept multiple values. You can
+    #   use the dashboard permissions structure described following to
+    #   override two string parameters that accept multiple values.
     #
     # @option params [Array<Types::ResourcePermission>] :permissions
     #   A structure that contains the permissions of the dashboard. You can
-    #   use this for granting permissions with principal and action
+    #   use this structure for granting permissions with principal and action
     #   information.
     #
     # @option params [required, Types::DashboardSourceEntity] :source_entity
-    #   Source entity from which the dashboard is created. The souce entity
-    #   accepts the Amazon Resource Name (ARN) of the source template or
-    #   analysis and also references the replacement datasets for the
+    #   The source entity from which the dashboard is created. The source
+    #   entity accepts the Amazon Resource Name (ARN) of the source template
+    #   or analysis and also references the replacement datasets for the
     #   placeholders set when creating the template. The replacement datasets
     #   need to follow the same schema as the datasets for which placeholders
     #   were created when creating the template.
@@ -347,20 +347,23 @@ module Aws::QuickSight
     #   A description for the first version of the dashboard being created.
     #
     # @option params [Types::DashboardPublishOptions] :dashboard_publish_options
-    #   Publishing options when creating dashboard.
+    #   Options for publishing the dashboard when you create it:
     #
-    #   * AvailabilityStatus for AdHocFilteringOption - This can be either
-    #     `ENABLED` or `DISABLED`. When This is set to set to `DISABLED`,
+    #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
     #     QuickSight disables the left filter pane on the published dashboard,
-    #     which can be used for AdHoc filtering. Enabled by default.
+    #     which can be used for ad hoc (one-time) filtering. This option is
+    #     `ENABLED` by default.
     #
-    #   * AvailabilityStatus for ExportToCSVOption - This can be either
-    #     `ENABLED` or `DISABLED`. The visual option to export data to CSV is
-    #     disabled when this is set to `DISABLED`. Enabled by default.
+    #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. The visual option to export data to
+    #     .csv format isn't enabled when this is set to `DISABLED`. This
+    #     option is `ENABLED` by default.
     #
-    #   * VisibilityState for SheetControlsOption - This can be either
-    #     `COLLAPSED` or `EXPANDED`. The sheet controls pane is collapsed by
-    #     default when set to true. Collapsed by default.
+    #   * `VisibilityState` for `SheetControlsOption` - This visibility state
+    #     can be either `COLLAPSED` or `EXPANDED`. The sheet controls pane is
+    #     collapsed by default when set to true. This option is `COLLAPSED` by
+    #     default.
     #
     # @return [Types::CreateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -461,7 +464,7 @@ module Aws::QuickSight
     # Creates a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
     #   An ID for the dataset that you want to create. This ID is unique per
@@ -479,7 +482,7 @@ module Aws::QuickSight
     #   physical tables.
     #
     # @option params [required, String] :import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
     #   Groupings of columns that work together in certain QuickSight
@@ -489,7 +492,8 @@ module Aws::QuickSight
     #   A list of resource permissions on the dataset.
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
-    #   Row-level security configuration on the data you want to create.
+    #   The row-level security configuration for the data that you want to
+    #   create.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Contains a map of the key-value pairs for the resource tag or tags
@@ -936,35 +940,37 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates an assignment with one specified IAM policy Amazon Resource
-    # Name (ARN) and will assigned to specified groups or users of
-    # QuickSight. Users and groups need to be in the same namespace.
+    # Creates an assignment with one specified IAM policy, identified by its
+    # Amazon Resource Name (ARN). This policy will be assigned to specified
+    # groups or users of Amazon QuickSight. The users and groups need to be
+    # in the same namespace.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID where you want to assign QuickSight users or groups
-    #   to an IAM policy.
+    #   The ID of the AWS account where you want to assign an IAM policy to
+    #   QuickSight users or groups.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment. It must be unique within an AWS account.
     #
     # @option params [required, String] :assignment_status
-    #   The status of an assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #
     # @option params [String] :policy_arn
-    #   An IAM policy Amazon Resource Name (ARN) that you want to apply to the
-    #   QuickSight users and groups specified in this assignment.
+    #   The ARN for the IAM policy to apply to the QuickSight users and groups
+    #   specified in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
-    #   QuickSight users and/or groups that you want to assign the policy to.
+    #   The QuickSight users, groups, or both that you want to assign the
+    #   policy to.
     #
     # @option params [required, String] :namespace
     #   The namespace that contains the assignment.
@@ -1068,15 +1074,15 @@ module Aws::QuickSight
     end
 
     # Creates a template from an existing QuickSight analysis or template.
-    # The resulting template can be used to create a dashboard.
+    # You can use the resulting template to create a dashboard.
     #
-    # A template is an entity in QuickSight which encapsulates the metadata
-    # required to create an analysis that can be used to create dashboard.
-    # It adds a layer of abstraction by use placeholders to replace the
-    # dataset associated with the analysis. You can use templates to create
-    # dashboards by replacing dataset placeholders with datasets which
-    # follow the same schema that was used to create the source analysis and
-    # template.
+    # A *template* is an entity in QuickSight that encapsulates the metadata
+    # required to create an analysis and that you can use to create s
+    # dashboard. A template adds a layer of abstraction by using
+    # placeholders to replace the dataset associated with the analysis. You
+    # can use templates to create dashboards by replacing dataset
+    # placeholders with datasets that follow the same schema that was used
+    # to create the source analysis and template.
     #
     # @option params [required, String] :aws_account_id
     #   The ID for the AWS account that the group is in. Currently, you use
@@ -1084,8 +1090,8 @@ module Aws::QuickSight
     #   account.
     #
     # @option params [required, String] :template_id
-    #   An ID for the template you want to create. This is unique per AWS
-    #   region per AWS account.
+    #   An ID for the template that you want to create. This template is
+    #   unique per AWS Region in each AWS account.
     #
     # @option params [String] :name
     #   A display name for the template.
@@ -1095,8 +1101,8 @@ module Aws::QuickSight
     #
     # @option params [required, Types::TemplateSourceEntity] :source_entity
     #   The Amazon Resource Name (ARN) of the source entity from which this
-    #   template is being created. Templates can be currently created from an
-    #   analysis or another template. If the ARN is for an analysis, you must
+    #   template is being created. Currently, you can create a template from
+    #   an analysis or another template. If the ARN is for an analysis,
     #   include its dataset references.
     #
     # @option params [Array<Types::Tag>] :tags
@@ -1105,10 +1111,10 @@ module Aws::QuickSight
     #
     # @option params [String] :version_description
     #   A description of the current template version being created. This API
-    #   created the first version of the template. Every time UpdateTemplate
-    #   is called a new version is created. Each version of the template
-    #   maintains a description of the version in the VersionDescription
-    #   field.
+    #   operation creates the first version of the template. Every time
+    #   `UpdateTemplate` is called, a new version is created. Each version of
+    #   the template maintains a description of the version in the
+    #   `VersionDescription` field.
     #
     # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1175,14 +1181,16 @@ module Aws::QuickSight
     # Creates a template alias for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template you are aliasing.
+    #   The ID of the AWS account that contains the template that you creating
+    #   an alias for.
     #
     # @option params [required, String] :template_id
     #   An ID for the template.
     #
     # @option params [required, String] :alias_name
     #   The name that you want to give to the template alias that you're
-    #   creating. Aliases that start with `$` are reserved by QuickSight.
+    #   creating. Don't start the alias name with the `$` character. Alias
+    #   names that start with `$` are reserved by QuickSight.
     #
     # @option params [required, Integer] :template_version_number
     #   The version number of the template.
@@ -1222,13 +1230,14 @@ module Aws::QuickSight
     # Deletes a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are deleting.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   deleting.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
     #
     # @option params [Integer] :version_number
-    #   The version number of the dashboard. If version number property is
+    #   The version number of the dashboard. If the version number property is
     #   provided, only the specified version of the dashboard is deleted.
     #
     # @return [Types::DeleteDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1427,10 +1436,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Deletes an existing assignment.
+    # Deletes an existing IAM policy assignment.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS account ID where you want to delete an IAM policy assignment.
+    #   The AWS account ID where you want to delete the IAM policy assignment.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment.
@@ -1470,7 +1479,8 @@ module Aws::QuickSight
     # Deletes a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template you are deleting.
+    #   The ID of the AWS account that contains the template that you're
+    #   deleting.
     #
     # @option params [required, String] :template_id
     #   An ID for the template you want to delete.
@@ -1511,19 +1521,21 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Update template alias of given template.
+    # Deletes the item that the specified template alias points to. If you
+    # provide a specific alias, you delete the version of the template that
+    # the alias points to.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template alias you are deleting.
+    #   The ID of the AWS account that contains the item to delete.
     #
     # @option params [required, String] :template_id
-    #   An ID for the template.
+    #   The ID for the template that the specified alias is for.
     #
     # @option params [required, String] :alias_name
-    #   The alias of the template that you want to delete. If you provide a
-    #   specific alias, you delete the version that the alias points to. You
-    #   can specify the latest version of the template by providing the
-    #   keyword `$LATEST` in the `AliasName` parameter.
+    #   The name for the template alias. If you name a specific alias, you
+    #   delete the version that the alias points to. You can specify the
+    #   latest version of the template by providing the keyword `$LATEST` in
+    #   the `AliasName` parameter.
     #
     # @return [Types::DeleteTemplateAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1642,14 +1654,15 @@ module Aws::QuickSight
     # Provides a summary for a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are describing.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
     #
     # @option params [Integer] :version_number
-    #   The version number for the dashboard. If version number isn’t passed
-    #   the latest published dashboard version is described.
+    #   The version number for the dashboard. If a version number isn't
+    #   passed, the latest published dashboard version is described.
     #
     # @option params [String] :alias_name
     #   The alias name.
@@ -1698,14 +1711,14 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes read and write permissions on a dashboard.
+    # Describes read and write permissions for a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are describing
-    #   permissions of.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing permissions for.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to IAM policy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #
     # @return [Types::DescribeDashboardPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1745,7 +1758,7 @@ module Aws::QuickSight
     # Describes a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
@@ -1846,7 +1859,7 @@ module Aws::QuickSight
     # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
     #   The ID for the dataset that you want to create. This ID is unique per
@@ -2068,11 +2081,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes an existing IAMPolicy Assignment by specified assignment
-    # name.
+    # Describes an existing IAM policy assignment, as specified by the
+    # assignment name.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS account ID that contains the assignment you want to describe.
+    #   The ID of the AWS account that contains the assignment that you want
+    #   to describe.
     #
     # @option params [required, String] :assignment_name
     #   The name of the assignment.
@@ -2172,18 +2186,19 @@ module Aws::QuickSight
     # Describes a template's metadata.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template you are describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #
     # @option params [required, String] :template_id
-    #   An ID for the template.
+    #   The ID for the template.
     #
     # @option params [Integer] :version_number
-    #   This is an optional field, when a version number is provided the
-    #   corresponding version is describe, if it's not provided the latest
-    #   version of the template is described.
+    #   (Optional) The number for the version to describe. If a
+    #   `VersionNumber` parameter value isn't provided, the latest version of
+    #   the template is described.
     #
     # @option params [String] :alias_name
-    #   The alias of the template that you want to describe. If you provide a
+    #   The alias of the template that you want to describe. If you name a
     #   specific alias, you describe the version that the alias points to. You
     #   can specify the latest version of the template by providing the
     #   keyword `$LATEST` in the `AliasName` parameter. The keyword
@@ -2239,18 +2254,19 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes the template aliases of a template.
+    # Describes the template alias for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template alias you are describing.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're describing.
     #
     # @option params [required, String] :template_id
-    #   An ID for the template.
+    #   The ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The alias of the template that you want to describe. If you provide a
-    #   specific alias, you describe the version that the alias points to. You
-    #   can specify the latest version of the template by providing the
+    #   The name of the template alias that you want to describe. If you name
+    #   a specific alias, you describe the version that the alias points to.
+    #   You can specify the latest version of the template by providing the
     #   keyword `$LATEST` in the `AliasName` parameter. The keyword
     #   `$PUBLISHED` doesn't apply to templates.
     #
@@ -2288,7 +2304,8 @@ module Aws::QuickSight
     # Describes read and write permissions on a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template you are describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
@@ -2375,12 +2392,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Generates a server-side embeddable URL and authorization code. Before
-    # this can work properly, first you need to configure the dashboards and
-    # user permissions. For more information, see the Amazon QuickSight User
-    # Guide section on [Embedding Amazon QuickSight Dashboards][1] or see
-    # the Amazon QuickSight API Reference section on [Embedding Amazon
-    # QuickSight Dashboards][2] .
+    # Generates a server-side embeddable URL and authorization code. For
+    # this process to work properly, first configure the dashboards and user
+    # permissions. For more information, see [Embedding Amazon QuickSight
+    # Dashboards][1] in the *Amazon QuickSight User Guide* or [Embedding
+    # Amazon QuickSight Dashboards][2] in the *Amazon QuickSight API
+    # Reference*.
     #
     # Currently, you can use `GetDashboardEmbedURL` only from the server,
     # not from the user’s browser.
@@ -2391,25 +2408,26 @@ module Aws::QuickSight
     # [2]: https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are embedding.
+    #   The ID for the AWS account that contains the dashboard that you're
+    #   embedding.
     #
     # @option params [required, String] :dashboard_id
-    #   The ID for the dashboard, also added to IAM policy
+    #   The ID for the dashboard, also added to the IAM policy.
     #
     # @option params [required, String] :identity_type
-    #   The authentication method the user uses to sign in.
+    #   The authentication method that the user uses to sign in.
     #
     # @option params [Integer] :session_lifetime_in_minutes
     #   How many minutes the session is valid. The session lifetime must be
-    #   between 15 and 600 minutes.
+    #   15-600 minutes.
     #
     # @option params [Boolean] :undo_redo_disabled
-    #   Remove the undo/redo button on embedded dashboard. The default is
+    #   Remove the undo/redo button on the embedded dashboard. The default is
     #   FALSE, which enables the undo/redo button.
     #
     # @option params [Boolean] :reset_disabled
-    #   Remove the reset button on embedded dashboard. The default is FALSE,
-    #   which allows the reset button.
+    #   Remove the reset button on the embedded dashboard. The default is
+    #   FALSE, which enables the reset button.
     #
     # @option params [String] :user_arn
     #   The Amazon QuickSight user's Amazon Resource Name (ARN), for use with
@@ -2419,11 +2437,11 @@ module Aws::QuickSight
     #
     #   * Active Directory (AD) users or group members
     #
-    #   * Invited non-federated users
+    #   * Invited nonfederated users
     #
     #   * IAM users and IAM role-based sessions authenticated through
     #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #     Federation
+    #     federation.
     #
     # @return [Types::GetDashboardEmbedUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2458,11 +2476,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the versions of the dashboards in the Quicksight
+    # Lists all the versions of the dashboards in the QuickSight
     # subscription.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are listing.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   listing versions for.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
@@ -2512,10 +2531,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists dashboards in the AWS account.
+    # Lists dashboards in an AWS account.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboards you are listing.
+    #   The ID of the AWS account that contains the dashboards that you're
+    #   listing.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -2562,13 +2582,14 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all of the datasets belonging to this account in an AWS region.
+    # Lists all of the datasets belonging to the current AWS account in an
+    # AWS Region.
     #
     # The permissions resource is
     # `arn:aws:quicksight:region:aws-account-id:dataset/*`.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -2821,16 +2842,16 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists assignments in current QuickSight account.
+    # Lists IAM policy assignments in the current Amazon QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS account ID that contains this IAM policy assignment.
+    #   The ID of the AWS account that contains these IAM policy assignments.
     #
     # @option params [String] :assignment_status
-    #   The status of the assignment.
+    #   The status of the assignments.
     #
     # @option params [required, String] :namespace
-    #   The namespace for this assignment.
+    #   The namespace for the assignments.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -2874,12 +2895,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the assignments and the Amazon Resource Names (ARNs) for the
-    # associated IAM policies assigned to the specified user and the group
-    # or groups that the user belongs to.
+    # Lists all the IAM policy assignments, including the Amazon Resource
+    # Names (ARNs) for the IAM policies assigned to the specified user and
+    # group or groups that the user belongs to.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS account ID that contains the assignment.
+    #   The ID of the AWS account that contains the assignments.
     #
     # @option params [required, String] :user_name
     #   The name of the user.
@@ -3028,7 +3049,8 @@ module Aws::QuickSight
     # Lists all the aliases of a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template aliases you are listing.
+    #   The ID of the AWS account that contains the template aliases that
+    #   you're listing.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
@@ -3075,10 +3097,12 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the versions of the templates in the Quicksight account.
+    # Lists all the versions of the templates in the current Amazon
+    # QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the templates you are listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
@@ -3127,10 +3151,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Lists all the templates in the QuickSight account.
+    # Lists all the templates in the current Amazon QuickSight account.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the templates you are listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #
     # @option params [String] :next_token
     #   The token for the next set of results, or null if there are no more
@@ -3184,7 +3209,7 @@ module Aws::QuickSight
     #   memberships for.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID that the user is in. Currently, you use the ID for
+    #   The AWS account ID that the user is in. Currently, you use the ID for
     #   the AWS account that contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
@@ -3488,10 +3513,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a dashboard in the AWS account.
+    # Updates a dashboard in an AWS account.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
@@ -3501,11 +3527,11 @@ module Aws::QuickSight
     #
     # @option params [required, Types::DashboardSourceEntity] :source_entity
     #   The template or analysis from which the dashboard is created. The
-    #   SouceTemplate entity accepts the Arn of the template and also
-    #   references to replacement datasets for the placeholders set when
-    #   creating the template. The replacement datasets need to follow the
-    #   same schema as the datasets for which placeholders were created when
-    #   creating the template.
+    #   `SouceTemplate` entity accepts the Amazon Resource Name (ARN) of the
+    #   template and also references to replacement datasets for the
+    #   placeholders set when creating the template. The replacement datasets
+    #   need to follow the same schema as the datasets for which placeholders
+    #   were created when creating the template.
     #
     # @option params [Types::Parameters] :parameters
     #   A structure that contains the parameters of the dashboard.
@@ -3514,20 +3540,23 @@ module Aws::QuickSight
     #   A description for the first version of the dashboard being created.
     #
     # @option params [Types::DashboardPublishOptions] :dashboard_publish_options
-    #   Publishing options when creating a dashboard.
+    #   Options for publishing the dashboard when you create it:
     #
-    #   * AvailabilityStatus for AdHocFilteringOption - This can be either
-    #     `ENABLED` or `DISABLED`. When This is set to set to `DISABLED`,
+    #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
     #     QuickSight disables the left filter pane on the published dashboard,
-    #     which can be used for AdHoc filtering. Enabled by default.
+    #     which can be used for ad hoc (one-time) filtering. This option is
+    #     `ENABLED` by default.
     #
-    #   * AvailabilityStatus for ExportToCSVOption - This can be either
-    #     `ENABLED` or `DISABLED`. The visual option to export data to CSV is
-    #     disabled when this is set to `DISABLED`. Enabled by default.
+    #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. The visual option to export data to
+    #     .csv format isn't enabled when this is set to `DISABLED`. This
+    #     option is `ENABLED` by default.
     #
-    #   * VisibilityState for SheetControlsOption - This can be either
-    #     `COLLAPSED` or `EXPANDED`. The sheet controls pane is collapsed by
-    #     default when set to true. Collapsed by default.
+    #   * `VisibilityState` for `SheetControlsOption` - This visibility state
+    #     can be either `COLLAPSED` or `EXPANDED`. The sheet controls pane is
+    #     collapsed by default when set to true. This option is `COLLAPSED` by
+    #     default.
     #
     # @return [Types::UpdateDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3616,7 +3645,8 @@ module Aws::QuickSight
     # Updates read and write permissions on a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard whose
+    #   permissions you're updating.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
@@ -3677,7 +3707,8 @@ module Aws::QuickSight
     # Updates the published version of a dashboard.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #
     # @option params [required, String] :dashboard_id
     #   The ID for the dashboard.
@@ -3719,10 +3750,10 @@ module Aws::QuickSight
     # Updates a dataset.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique per
+    #   The ID for the dataset that you want to update. This ID is unique per
     #   AWS Region for each AWS account.
     #
     # @option params [required, String] :name
@@ -3737,14 +3768,14 @@ module Aws::QuickSight
     #   physical tables.
     #
     # @option params [required, String] :import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #
     # @option params [Array<Types::ColumnGroup>] :column_groups
     #   Groupings of columns that work together in certain QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #
     # @option params [Types::RowLevelPermissionDataSet] :row_level_permission_data_set
-    #   Row-level security configuration on the data you want to create.
+    #   The row-level security configuration for the data you want to create.
     #
     # @return [Types::UpdateDataSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3893,11 +3924,11 @@ module Aws::QuickSight
     # `arn:aws:quicksight:region:aws-account-id:dataset/data-set-id`.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #
     # @option params [required, String] :data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique per
-    #   AWS Region for each AWS account.
+    #   The ID for the dataset whose permissions you want to update. This ID
+    #   is unique per AWS Region for each AWS account.
     #
     # @option params [Array<Types::ResourcePermission>] :grant_permissions
     #   The resource permissions that you want to grant to the dataset.
@@ -4215,37 +4246,39 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates an existing assignment. This operation updates only the
-    # optional parameter or parameters that are specified in the request.
+    # Updates an existing IAM policy assignment. This operation updates only
+    # the optional parameter or parameters that are specified in the
+    # request.
     #
     # @option params [required, String] :aws_account_id
-    #   The AWS account ID that contains the IAM policy assignment.
+    #   The ID of the AWS account that contains the IAM policy assignment.
     #
     # @option params [required, String] :assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment. This name must be unique within an AWS
+    #   account.
     #
     # @option params [required, String] :namespace
     #   The namespace of the assignment.
     #
     # @option params [String] :assignment_status
-    #   The status of an assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #
     # @option params [String] :policy_arn
-    #   An IAM policy Amazon Resource Name (ARN) that will be applied to
-    #   specified QuickSight users and groups in this assignment.
+    #   The ARN for the IAM policy to apply to the QuickSight users and groups
+    #   specified in this assignment.
     #
     # @option params [Hash<String,Array>] :identities
-    #   QuickSight users and/or groups that you want to assign to the
-    #   specified IAM policy.
+    #   The QuickSight users, groups, or both that you want to assign the
+    #   policy to.
     #
     # @return [Types::UpdateIAMPolicyAssignmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4291,24 +4324,26 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a template from an existing QuickSight analysis.
+    # Updates a template from an existing Amazon QuickSight analysis or
+    # another template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template you are updating.
+    #   The ID of the AWS account that contains the template that you're
+    #   updating.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
     #
     # @option params [required, Types::TemplateSourceEntity] :source_entity
     #   The source QuickSight entity from which this template is being
-    #   created. Templates can be currently created from an Analysis or
+    #   updated. You can currently update templates from an Analysis or
     #   another template.
     #
     # @option params [String] :version_description
-    #   A description of the current template version being updated. Every
-    #   time you cal `UpdateTemplate` you create a new version. Each version
-    #   of the template maintains a description of the version in the
-    #   `VersionDescription` field.
+    #   A description of the current template version that is being updated.
+    #   Every time you call `UpdateTemplate`, you create a new version of the
+    #   template. Each version of the template maintains a description of the
+    #   version in the `VersionDescription` field.
     #
     # @option params [String] :name
     #   The name for the template.
@@ -4366,13 +4401,14 @@ module Aws::QuickSight
     # Updates the template alias of a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template aliases you are updating.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're updating.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
     #
     # @option params [required, String] :alias_name
-    #   The alias of the template that you want to update. If you provide a
+    #   The alias of the template that you want to update. If you name a
     #   specific alias, you update the version that the alias points to. You
     #   can specify the latest version of the template by providing the
     #   keyword `$LATEST` in the `AliasName` parameter. The keyword
@@ -4413,10 +4449,10 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates the permissions on a template.
+    # Updates the resource permissions for a template.
     #
     # @option params [required, String] :aws_account_id
-    #   AWS account ID that contains the template.
+    #   The ID of the AWS account that contains the template.
     #
     # @option params [required, String] :template_id
     #   The ID for the template.
@@ -4551,7 +4587,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

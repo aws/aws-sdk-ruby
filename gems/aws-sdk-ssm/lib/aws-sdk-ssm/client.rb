@@ -907,8 +907,8 @@ module Aws::SSM
     #     ],
     #     name: "DocumentName", # required
     #     version_name: "DocumentVersionName",
-    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy
-    #     document_format: "YAML", # accepts YAML, JSON
+    #     document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar
+    #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #     tags: [
     #       {
@@ -938,11 +938,11 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
-    #   resp.document_description.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_description.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_description.target_type #=> String
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
@@ -2507,11 +2507,11 @@ module Aws::SSM
     #   resp.document.parameters[0].default_value #=> String
     #   resp.document.platform_types #=> Array
     #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
+    #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar"
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
-    #   resp.document.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document.target_type #=> String
     #   resp.document.tags #=> Array
     #   resp.document.tags[0].key #=> String
@@ -4219,6 +4219,62 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Gets the state of the AWS Systems Manager Change Calendar at an
+    # optional, specified time. If you specify a time, `GetCalendarState`
+    # returns the state of the calendar at a specific time, and returns the
+    # next time that the Change Calendar state will transition. If you do
+    # not specify a time, `GetCalendarState` assumes the current time.
+    # Change Calendar entries have two possible states: `OPEN` or `CLOSED`.
+    # For more information about Systems Manager Change Calendar, see [AWS
+    # Systems Manager Change Calendar][1] in the *AWS Systems Manager User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html
+    #
+    # @option params [required, Array<String>] :calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   documents that represent the calendar entries for which you want to
+    #   get the state.
+    #
+    # @option params [String] :at_time
+    #   (Optional) The specific time for which you want to get calendar state
+    #   information, in [ISO 8601][1] format. If you do not add `AtTime`, the
+    #   current time is assumed.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601
+    #
+    # @return [Types::GetCalendarStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCalendarStateResponse#state #state} => String
+    #   * {Types::GetCalendarStateResponse#at_time #at_time} => String
+    #   * {Types::GetCalendarStateResponse#next_transition_time #next_transition_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_calendar_state({
+    #     calendar_names: ["CalendarNameOrARN"], # required
+    #     at_time: "ISO8601String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.state #=> String, one of "OPEN", "CLOSED"
+    #   resp.at_time #=> String
+    #   resp.next_transition_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCalendarState AWS API Documentation
+    #
+    # @overload get_calendar_state(params = {})
+    # @param [Hash] params ({})
+    def get_calendar_state(params = {}, options = {})
+      req = build_request(:get_calendar_state, params)
+      req.send_request(options)
+    end
+
     # Returns detailed information about command execution for an invocation
     # or plugin.
     #
@@ -4437,7 +4493,7 @@ module Aws::SSM
     #     name: "DocumentARN", # required
     #     version_name: "DocumentVersionName",
     #     document_version: "DocumentVersion",
-    #     document_format: "YAML", # accepts YAML, JSON
+    #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #   })
     #
     # @example Response structure
@@ -4448,8 +4504,8 @@ module Aws::SSM
     #   resp.status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.status_information #=> String
     #   resp.content #=> String
-    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
-    #   resp.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar"
+    #   resp.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.requires #=> Array
     #   resp.requires[0].name #=> String
     #   resp.requires[0].version #=> String
@@ -6029,7 +6085,7 @@ module Aws::SSM
     #   resp.document_versions[0].version_name #=> String
     #   resp.document_versions[0].created_date #=> Time
     #   resp.document_versions[0].is_default_version #=> Boolean
-    #   resp.document_versions[0].document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_versions[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_versions[0].status #=> String, one of "Creating", "Active", "Updating", "Deleting", "Failed"
     #   resp.document_versions[0].status_information #=> String
     #   resp.next_token #=> String
@@ -6095,9 +6151,9 @@ module Aws::SSM
     #   resp.document_identifiers[0].platform_types #=> Array
     #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
     #   resp.document_identifiers[0].document_version #=> String
-    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
+    #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar"
     #   resp.document_identifiers[0].schema_version #=> String
-    #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_identifiers[0].target_type #=> String
     #   resp.document_identifiers[0].tags #=> Array
     #   resp.document_identifiers[0].tags[0].key #=> String
@@ -8136,7 +8192,7 @@ module Aws::SSM
     #     name: "DocumentName", # required
     #     version_name: "DocumentVersionName",
     #     document_version: "DocumentVersion",
-    #     document_format: "YAML", # accepts YAML, JSON
+    #     document_format: "YAML", # accepts YAML, JSON, TEXT
     #     target_type: "TargetType",
     #   })
     #
@@ -8160,11 +8216,11 @@ module Aws::SSM
     #   resp.document_description.parameters[0].default_value #=> String
     #   resp.document_description.platform_types #=> Array
     #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
-    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy"
+    #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation", "Session", "Package", "ApplicationConfiguration", "ApplicationConfigurationSchema", "DeploymentStrategy", "ChangeCalendar"
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
-    #   resp.document_description.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_description.document_format #=> String, one of "YAML", "JSON", "TEXT"
     #   resp.document_description.target_type #=> String
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
@@ -9140,7 +9196,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

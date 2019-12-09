@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.85.0 (2019-12-09)
+------------------
+
 * Feature - Add STS Presigner module with a method to generate a presigned EKS token.
 
 * Issue - Fix issue for log formatters in clients where http_response_body does not respond to `rewind` when using a block.

@@ -281,6 +281,9 @@ module Aws::Kafka
     # @option params [required, Integer] :number_of_broker_nodes
     #   The number of Kafka broker nodes in the Amazon MSK cluster.
     #
+    # @option params [Types::OpenMonitoringInfo] :open_monitoring
+    #   The settings for open monitoring.
+    #
     # @option params [Hash<String,String>] :tags
     #   Create tags when creating the cluster.
     #
@@ -326,6 +329,16 @@ module Aws::Kafka
     #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
     #     kafka_version: "__stringMin1Max128", # required
     #     number_of_broker_nodes: 1, # required
+    #     open_monitoring: {
+    #       prometheus: { # required
+    #         jmx_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #         node_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #       },
+    #     },
     #     tags: {
     #       "__string" => "__string",
     #     },
@@ -467,6 +480,8 @@ module Aws::Kafka
     #   resp.cluster_info.encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #   resp.cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
     #   resp.cluster_info.tags #=> Hash
     #   resp.cluster_info.tags["__string"] #=> String
@@ -512,12 +527,18 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.configuration_info.arn #=> String
     #   resp.cluster_operation_info.source_cluster_info.configuration_info.revision #=> Integer
     #   resp.cluster_operation_info.source_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
     #   resp.cluster_operation_info.target_cluster_info.configuration_info.arn #=> String
     #   resp.cluster_operation_info.target_cluster_info.configuration_info.revision #=> Integer
     #   resp.cluster_operation_info.target_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -675,12 +696,18 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.configuration_info.arn #=> String
     #   resp.cluster_operation_info_list[0].source_cluster_info.configuration_info.revision #=> Integer
     #   resp.cluster_operation_info_list[0].source_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
     #   resp.cluster_operation_info_list[0].target_cluster_info.configuration_info.arn #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.configuration_info.revision #=> Integer
     #   resp.cluster_operation_info_list[0].target_cluster_info.number_of_broker_nodes #=> Integer
+    #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -738,6 +765,8 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.in_cluster #=> Boolean
     #   resp.cluster_info_list[0].enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
     #   resp.cluster_info_list[0].number_of_broker_nodes #=> Integer
+    #   resp.cluster_info_list[0].open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
+    #   resp.cluster_info_list[0].open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_info_list[0].state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "FAILED"
     #   resp.cluster_info_list[0].tags #=> Hash
     #   resp.cluster_info_list[0].tags["__string"] #=> String
@@ -1097,6 +1126,61 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Updates the monitoring settings for the cluster. You can use this
+    # operation to specify which Apache Kafka metrics you want Amazon MSK to
+    # send to Amazon CloudWatch. You can also specify settings for open
+    # monitoring with Prometheus.
+    #
+    # @option params [required, String] :cluster_arn
+    #
+    # @option params [required, String] :current_version
+    #   The version of cluster to update from. A successful operation will
+    #   then generate a new version.
+    #
+    # @option params [String] :enhanced_monitoring
+    #   Specifies which Apache Kafka metrics Amazon MSK gathers and sends to
+    #   Amazon CloudWatch for this cluster.
+    #
+    # @option params [Types::OpenMonitoringInfo] :open_monitoring
+    #   The settings for open monitoring.
+    #
+    # @return [Types::UpdateMonitoringResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMonitoringResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::UpdateMonitoringResponse#cluster_operation_arn #cluster_operation_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_monitoring({
+    #     cluster_arn: "__string", # required
+    #     current_version: "__string", # required
+    #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #     open_monitoring: {
+    #       prometheus: { # required
+    #         jmx_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #         node_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.cluster_operation_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateMonitoring AWS API Documentation
+    #
+    # @overload update_monitoring(params = {})
+    # @param [Hash] params ({})
+    def update_monitoring(params = {}, options = {})
+      req = build_request(:update_monitoring, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1110,7 +1194,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

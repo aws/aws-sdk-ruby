@@ -410,6 +410,22 @@ module Aws::KMS
 
     end
 
+    class KMSInvalidSignatureException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::KMS::Types::KMSInvalidSignatureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class KMSInvalidStateException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
