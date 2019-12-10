@@ -342,8 +342,8 @@ module Aws
           .to_raise(Errno::ECONNREFUSED)
       end
 
-      it 'defaults to 0' do
-        expect(InstanceProfileCredentials.new(backoff: 0).retries).to be(5)
+      it 'defaults to 1' do
+        expect(InstanceProfileCredentials.new(backoff: 0).retries).to be(1)
       end
 
       it 'keeps trying "retries" times, with exponential backoff' do

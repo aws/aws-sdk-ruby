@@ -41,12 +41,12 @@ module Aws
     METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
     # @param [Hash] options
-    # @option options [Integer] :retries (5) Number of times to retry
+    # @option options [Integer] :retries (1) Number of times to retry
     #   when retrieving credentials.
     # @option options [String] :ip_address ('169.254.169.254')
     # @option options [Integer] :port (80)
-    # @option options [Float] :http_open_timeout (5)
-    # @option options [Float] :http_read_timeout (5)
+    # @option options [Float] :http_open_timeout (1)
+    # @option options [Float] :http_read_timeout (1)
     # @option options [Numeric, Proc] :delay By default, failures are retried
     #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
     #   pass a number of seconds to sleep between failed attempts, or
@@ -58,11 +58,11 @@ module Aws
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
     def initialize(options = {})
-      @retries = options[:retries] || 5
+      @retries = options[:retries] || 1
       @ip_address = options[:ip_address] || '169.254.169.254'
       @port = options[:port] || 80
-      @http_open_timeout = options[:http_open_timeout] || 5
-      @http_read_timeout = options[:http_read_timeout] || 5
+      @http_open_timeout = options[:http_open_timeout] || 1
+      @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
       @token_ttl = options[:token_ttl] || 21_600
