@@ -812,6 +812,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             document_title_field_name: "DataSourceFieldName",
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -999,8 +1000,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the KMS key to use to encrypt data indexed by
-    #   Amazon Kendra.
+    #   The identifier of the AWS KMS customer managed key (CMK) to use to
+    #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
+    #   support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] description
@@ -1062,6 +1064,7 @@ module Aws::Kendra
     #               index_field_name: "IndexFieldName", # required
     #             },
     #           ],
+    #           document_title_field_name: "DataSourceFieldName",
     #         },
     #         database_configuration: {
     #           database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1597,7 +1600,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
-    #   The identifier of the KMS key used to encrypt your data.
+    #   The identifier of the AWS KMS customer master key (CMK) used to
+    #   encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
     #   @return [Types::ServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] status
@@ -2769,7 +2773,7 @@ module Aws::Kendra
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/Glob_%28programming529
+    #   [1]: http://wikipedia.org/wiki/Glob_%28programming%29
     #   @return [Array<String>]
     #
     # @!attribute [rw] documents_metadata_configuration
@@ -2861,8 +2865,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the identifier of the KMS key used to encrypt data indexed by
-    # Amazon Kendra.
+    # Provides the identifier of the AWS KMS customer master key (CMK) used
+    # to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't
+    # support asymmetric CMKs.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -2872,7 +2877,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMS key.
+    #   The identifier of the AWS KMS customer master key (CMK). Amazon
+    #   Kendra doesn't support asymmetric CMKs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServerSideEncryptionConfiguration AWS API Documentation
@@ -2914,6 +2920,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         document_title_field_name: "DataSourceFieldName",
     #       }
     #
     # @!attribute [rw] share_point_version
@@ -2960,6 +2967,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
+    # @!attribute [rw] document_title_field_name
+    #   The Microsoft SharePoint attribute field that contains the title of
+    #   the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SharePointConfiguration AWS API Documentation
     #
     class SharePointConfiguration < Struct.new(
@@ -2968,7 +2980,8 @@ module Aws::Kendra
       :secret_arn,
       :crawl_attachments,
       :vpc_configuration,
-      :field_mappings)
+      :field_mappings,
+      :document_title_field_name)
       include Aws::Structure
     end
 
@@ -3183,6 +3196,7 @@ module Aws::Kendra
     #                 index_field_name: "IndexFieldName", # required
     #               },
     #             ],
+    #             document_title_field_name: "DataSourceFieldName",
     #           },
     #           database_configuration: {
     #             database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL

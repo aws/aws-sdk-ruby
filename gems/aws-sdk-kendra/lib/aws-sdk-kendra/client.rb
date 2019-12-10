@@ -476,6 +476,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         document_title_field_name: "DataSourceFieldName",
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -598,8 +599,9 @@ module Aws::Kendra
     #   bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The identifier of the KMS key to use to encrypt data indexed by Amazon
-    #   Kendra.
+    #   The identifier of the AWS KMS customer managed key (CMK) to use to
+    #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
+    #   asymmetric CMKs.
     #
     # @option params [String] :description
     #   A description for the index.
@@ -739,6 +741,7 @@ module Aws::Kendra
     #   resp.configuration.share_point_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.share_point_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.share_point_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.share_point_configuration.document_title_field_name #=> String
     #   resp.configuration.database_configuration.database_engine_type #=> String, one of "RDS_AURORA_MYSQL", "RDS_AURORA_POSTGRESQL", "RDS_MYSQL", "RDS_POSTGRESQL"
     #   resp.configuration.database_configuration.connection_configuration.database_host #=> String
     #   resp.configuration.database_configuration.connection_configuration.database_port #=> Integer
@@ -1473,6 +1476,7 @@ module Aws::Kendra
     #             index_field_name: "IndexFieldName", # required
     #           },
     #         ],
+    #         document_title_field_name: "DataSourceFieldName",
     #       },
     #       database_configuration: {
     #         database_engine_type: "RDS_AURORA_MYSQL", # required, accepts RDS_AURORA_MYSQL, RDS_AURORA_POSTGRESQL, RDS_MYSQL, RDS_POSTGRESQL
@@ -1590,7 +1594,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
