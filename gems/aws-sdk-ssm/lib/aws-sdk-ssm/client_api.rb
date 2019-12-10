@@ -113,6 +113,9 @@ module Aws::SSM
     BaselineName = Shapes::StringShape.new(name: 'BaselineName')
     BatchErrorMessage = Shapes::StringShape.new(name: 'BatchErrorMessage')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CalendarNameOrARN = Shapes::StringShape.new(name: 'CalendarNameOrARN')
+    CalendarNameOrARNList = Shapes::ListShape.new(name: 'CalendarNameOrARNList')
+    CalendarState = Shapes::StringShape.new(name: 'CalendarState')
     CancelCommandRequest = Shapes::StructureShape.new(name: 'CancelCommandRequest')
     CancelCommandResult = Shapes::StructureShape.new(name: 'CancelCommandResult')
     CancelMaintenanceWindowExecutionRequest = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionRequest')
@@ -352,6 +355,8 @@ module Aws::SSM
     FeatureNotAvailableException = Shapes::StructureShape.new(name: 'FeatureNotAvailableException')
     GetAutomationExecutionRequest = Shapes::StructureShape.new(name: 'GetAutomationExecutionRequest')
     GetAutomationExecutionResult = Shapes::StructureShape.new(name: 'GetAutomationExecutionResult')
+    GetCalendarStateRequest = Shapes::StructureShape.new(name: 'GetCalendarStateRequest')
+    GetCalendarStateResponse = Shapes::StructureShape.new(name: 'GetCalendarStateResponse')
     GetCommandInvocationRequest = Shapes::StructureShape.new(name: 'GetCommandInvocationRequest')
     GetCommandInvocationResult = Shapes::StructureShape.new(name: 'GetCommandInvocationResult')
     GetConnectionStatusRequest = Shapes::StructureShape.new(name: 'GetConnectionStatusRequest')
@@ -399,6 +404,7 @@ module Aws::SSM
     HierarchyLevelLimitExceededException = Shapes::StructureShape.new(name: 'HierarchyLevelLimitExceededException')
     HierarchyTypeMismatchException = Shapes::StructureShape.new(name: 'HierarchyTypeMismatchException')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
+    ISO8601String = Shapes::StringShape.new(name: 'ISO8601String')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
@@ -455,6 +461,7 @@ module Aws::SSM
     InvalidDocumentContent = Shapes::StructureShape.new(name: 'InvalidDocumentContent')
     InvalidDocumentOperation = Shapes::StructureShape.new(name: 'InvalidDocumentOperation')
     InvalidDocumentSchemaVersion = Shapes::StructureShape.new(name: 'InvalidDocumentSchemaVersion')
+    InvalidDocumentType = Shapes::StructureShape.new(name: 'InvalidDocumentType')
     InvalidDocumentVersion = Shapes::StructureShape.new(name: 'InvalidDocumentVersion')
     InvalidFilter = Shapes::StructureShape.new(name: 'InvalidFilter')
     InvalidFilterKey = Shapes::StructureShape.new(name: 'InvalidFilterKey')
@@ -990,6 +997,7 @@ module Aws::SSM
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
+    UnsupportedCalendarException = Shapes::StructureShape.new(name: 'UnsupportedCalendarException')
     UnsupportedFeatureRequiredException = Shapes::StructureShape.new(name: 'UnsupportedFeatureRequiredException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
     UnsupportedInventorySchemaVersionException = Shapes::StructureShape.new(name: 'UnsupportedInventorySchemaVersionException')
@@ -1286,6 +1294,8 @@ module Aws::SSM
 
     AutomationStepNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AutomationStepNotFoundException.struct_class = Types::AutomationStepNotFoundException
+
+    CalendarNameOrARNList.member = Shapes::ShapeRef.new(shape: CalendarNameOrARN)
 
     CancelCommandRequest.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, required: true, location_name: "CommandId"))
     CancelCommandRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "InstanceIds"))
@@ -2097,6 +2107,15 @@ module Aws::SSM
     GetAutomationExecutionResult.add_member(:automation_execution, Shapes::ShapeRef.new(shape: AutomationExecution, location_name: "AutomationExecution"))
     GetAutomationExecutionResult.struct_class = Types::GetAutomationExecutionResult
 
+    GetCalendarStateRequest.add_member(:calendar_names, Shapes::ShapeRef.new(shape: CalendarNameOrARNList, required: true, location_name: "CalendarNames"))
+    GetCalendarStateRequest.add_member(:at_time, Shapes::ShapeRef.new(shape: ISO8601String, location_name: "AtTime"))
+    GetCalendarStateRequest.struct_class = Types::GetCalendarStateRequest
+
+    GetCalendarStateResponse.add_member(:state, Shapes::ShapeRef.new(shape: CalendarState, location_name: "State"))
+    GetCalendarStateResponse.add_member(:at_time, Shapes::ShapeRef.new(shape: ISO8601String, location_name: "AtTime"))
+    GetCalendarStateResponse.add_member(:next_transition_time, Shapes::ShapeRef.new(shape: ISO8601String, location_name: "NextTransitionTime"))
+    GetCalendarStateResponse.struct_class = Types::GetCalendarStateResponse
+
     GetCommandInvocationRequest.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, required: true, location_name: "CommandId"))
     GetCommandInvocationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     GetCommandInvocationRequest.add_member(:plugin_name, Shapes::ShapeRef.new(shape: CommandPluginName, location_name: "PluginName"))
@@ -2532,6 +2551,9 @@ module Aws::SSM
 
     InvalidDocumentSchemaVersion.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidDocumentSchemaVersion.struct_class = Types::InvalidDocumentSchemaVersion
+
+    InvalidDocumentType.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidDocumentType.struct_class = Types::InvalidDocumentType
 
     InvalidDocumentVersion.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidDocumentVersion.struct_class = Types::InvalidDocumentVersion
@@ -3746,6 +3768,9 @@ module Aws::SSM
     TotalSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TotalSizeLimitExceededException.struct_class = Types::TotalSizeLimitExceededException
 
+    UnsupportedCalendarException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedCalendarException.struct_class = Types::UnsupportedCalendarException
+
     UnsupportedFeatureRequiredException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedFeatureRequiredException.struct_class = Types::UnsupportedFeatureRequiredException
 
@@ -4619,6 +4644,18 @@ module Aws::SSM
         o.output = Shapes::ShapeRef.new(shape: GetAutomationExecutionResult)
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_calendar_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCalendarState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCalendarStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCalendarStateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentType)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedCalendarException)
       end)
 
       api.add_operation(:get_command_invocation, Seahorse::Model::Operation.new.tap do |o|

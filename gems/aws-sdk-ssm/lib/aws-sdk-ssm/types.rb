@@ -2631,8 +2631,8 @@ module Aws::SSM
     #         ],
     #         name: "DocumentName", # required
     #         version_name: "DocumentVersionName",
-    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy
-    #         document_format: "YAML", # accepts YAML, JSON
+    #         document_type: "Command", # accepts Command, Policy, Automation, Session, Package, ApplicationConfiguration, ApplicationConfigurationSchema, DeploymentStrategy, ChangeCalendar
+    #         document_format: "YAML", # accepts YAML, JSON, TEXT
     #         target_type: "TargetType",
     #         tags: [
     #           {
@@ -5591,9 +5591,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_installed_pending_reboot_patches
-    #   The number of instances with patches installed that have not been
-    #   rebooted after the patch installation. The status of these instances
-    #   is NON\_COMPLIANT.
+    #   Reserved for future use.
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_installed_rejected_patches
@@ -6484,6 +6482,74 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCalendarStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         calendar_names: ["CalendarNameOrARN"], # required
+    #         at_time: "ISO8601String",
+    #       }
+    #
+    # @!attribute [rw] calendar_names
+    #   The names or Amazon Resource Names (ARNs) of the Systems Manager
+    #   documents that represent the calendar entries for which you want to
+    #   get the state.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] at_time
+    #   (Optional) The specific time for which you want to get calendar
+    #   state information, in [ISO 8601][1] format. If you do not add
+    #   `AtTime`, the current time is assumed.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCalendarStateRequest AWS API Documentation
+    #
+    class GetCalendarStateRequest < Struct.new(
+      :calendar_names,
+      :at_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of the calendar. An `OPEN` calendar indicates that actions
+    #   are allowed to proceed, and a `CLOSED` calendar indicates that
+    #   actions are not allowed to proceed.
+    #   @return [String]
+    #
+    # @!attribute [rw] at_time
+    #   The time, as an [ISO 8601][1] string, that you specified in your
+    #   command. If you did not specify a time, `GetCalendarState` uses the
+    #   current time.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601
+    #   @return [String]
+    #
+    # @!attribute [rw] next_transition_time
+    #   The time, as an [ISO 8601][1] string, that the calendar state will
+    #   change. If the current calendar state is `OPEN`,
+    #   `NextTransitionTime` indicates when the calendar state changes to
+    #   `CLOSED`, and vice-versa.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_8601
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCalendarStateResponse AWS API Documentation
+    #
+    class GetCalendarStateResponse < Struct.new(
+      :state,
+      :at_time,
+      :next_transition_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCommandInvocationRequest
     #   data as a hash:
     #
@@ -6824,7 +6890,7 @@ module Aws::SSM
     #         name: "DocumentARN", # required
     #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
-    #         document_format: "YAML", # accepts YAML, JSON
+    #         document_format: "YAML", # accepts YAML, JSON, TEXT
     #       }
     #
     # @!attribute [rw] name
@@ -8585,8 +8651,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] installed_pending_reboot_count
-    #   The number of patches installed since the last time the instance was
-    #   rebooted.
+    #   Reserved for future use.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_rejected_count
@@ -8643,26 +8708,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] last_no_reboot_install_operation_time
-    #   The time of the last attempt to patch the instance with `NoReboot`
-    #   specified as the reboot option.
+    #   Reserved for future use.
     #   @return [Time]
     #
     # @!attribute [rw] reboot_option
-    #   Indicates the reboot option specified in the patch baseline.
-    #
-    #   <note markdown="1"> Reboot options apply to `Install` operations only. Reboots are not
-    #   attempted for Patch Manager `Scan` operations.
-    #
-    #    </note>
-    #
-    #   * **RebootIfNeeded**\: Patch Manager tries to reboot the instance if
-    #     it installed any patches, or if any patches are detected with a
-    #     status of `InstalledPendingReboot`.
-    #
-    #   * **NoReboot**\: Patch Manager attempts to install missing packages
-    #     without trying to reboot the system. Patches installed with this
-    #     option are assigned a status of `InstalledPendingReboot`. These
-    #     patches might not be in effect until a reboot is performed.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
@@ -8934,6 +8984,19 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentSchemaVersion AWS API Documentation
     #
     class InvalidDocumentSchemaVersion < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The document type is not valid. Valid document types are described in
+    # the `DocumentType` property.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidDocumentType AWS API Documentation
+    #
+    class InvalidDocumentType < Struct.new(
       :message)
       include Aws::Structure
     end
@@ -15635,6 +15698,19 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The calendar entry contained in the specified Systems Manager document
+    # is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UnsupportedCalendarException AWS API Documentation
+    #
+    class UnsupportedCalendarException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Microsoft application patching is only available on EC2 instances and
     # Advanced Instances. To patch Microsoft applications on on-premises
     # servers and VMs, you must enable Advanced Instances. For more
@@ -15991,7 +16067,7 @@ module Aws::SSM
     #         name: "DocumentName", # required
     #         version_name: "DocumentVersionName",
     #         document_version: "DocumentVersion",
-    #         document_format: "YAML", # accepts YAML, JSON
+    #         document_format: "YAML", # accepts YAML, JSON, TEXT
     #         target_type: "TargetType",
     #       }
     #

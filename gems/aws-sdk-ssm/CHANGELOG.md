@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2019-12-09)
+------------------
+
+* Feature - Adds the SSM GetCalendarState API and ChangeCalendar SSM Document type. These features enable the forthcoming Systems Manager Change Calendar feature, which will allow you to schedule events during which actions should (or should not) be performed.
+
 1.65.0 (2019-11-25)
 ------------------
 

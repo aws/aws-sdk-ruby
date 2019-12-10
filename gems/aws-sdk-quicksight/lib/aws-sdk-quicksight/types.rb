@@ -8,17 +8,17 @@
 module Aws::QuickSight
   module Types
 
-    # You don't have access to this. The provided credentials couldn't be
-    # validated. You might not be authorized to carry out the request.
-    # Ensure that your account is authorized to use the Amazon QuickSight
-    # service, that your policies have the correct permissions, and that you
-    # are using the correct access keys.
+    # You don't have access to this item. The provided credentials
+    # couldn't be validated. You might not be authorized to carry out the
+    # request. Make sure that your account is authorized to use the Amazon
+    # QuickSight service, that your policies have the correct permissions,
+    # and that you are using the correct access keys.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The AWS request id for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccessDeniedException AWS API Documentation
@@ -207,10 +207,10 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] column_id
-    #   A unique ID to identify a calculated column. During dataset update,
-    #   if the column ID of a calculated column matches that of an existing
-    #   calculated column, QuickSight preserves the existing calculated
-    #   column.
+    #   A unique ID to identify a calculated column. During a dataset
+    #   update, if the column ID of a calculated column matches that of an
+    #   existing calculated column, Amazon QuickSight preserves the existing
+    #   calculated column.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -303,7 +303,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] format
     #   When casting a column from string to datetime type, you can supply a
-    #   QuickSight supported format string to denote the source data format.
+    #   string in a format supported by Amazon QuickSight to denote the
+    #   source data format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CastColumnTypeOperation AWS API Documentation
@@ -315,9 +316,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Groupings of columns that work together in certain QuickSight
-    # features. This is a variant type structure. No more than one of the
-    # attributes should be non-null for this structure to be valid.
+    # Groupings of columns that work together in certain Amazon QuickSight
+    # features. This is a variant type structure. For this structure to be
+    # valid, only one of the attributes can be non-null.
     #
     # @note When making an API call, you may pass ColumnGroup
     #   data as a hash:
@@ -341,7 +342,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A structure describing the name, datatype, and geographic role of the
+    # A structure describing the name, data type, and geographic role of the
     # columns.
     #
     # @!attribute [rw] name
@@ -362,7 +363,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] column_group_column_schema_list
-    #   A structure containing the list of column group column schemas.
+    #   A structure containing the list of schemas for column group columns.
     #   @return [Array<Types::ColumnGroupColumnSchema>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnGroupSchema AWS API Documentation
@@ -396,9 +397,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A tag for a column in a TagColumnOperation. This is a variant type
-    # structure. No more than one of the attributes should be non-null for
-    # this structure to be valid.
+    # A tag for a column in a `TagColumnOperation` structure. This is a
+    # variant type structure. For this structure to be valid, only one of
+    # the attributes can be non-null.
     #
     # @note When making an API call, you may pass ColumnTag
     #   data as a hash:
@@ -418,8 +419,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A resource is already in an "actionable" state that must complete
-    # before a new update can be applied.
+    # A resource is already in a state that indicates an action is happening
+    # that must complete before a new update can be applied.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -441,7 +442,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The AWS request id for this request.
+    #   The AWS request ID for this request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ConflictException AWS API Documentation
@@ -550,11 +551,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID where you want to create the dashboard.
+    #   The ID of the AWS account where you want to create the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to IAM policy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -564,21 +565,21 @@ module Aws::QuickSight
     # @!attribute [rw] parameters
     #   A structure that contains the parameters of the dashboard. These are
     #   parameter overrides for a dashboard. A dashboard can have any type
-    #   of parameters and some parameters might accept multiple values. You
-    #   could use the following structure to override two string parameters
-    #   that accept multiple values:
+    #   of parameters, and some parameters might accept multiple values. You
+    #   can use the dashboard permissions structure described following to
+    #   override two string parameters that accept multiple values.
     #   @return [Types::Parameters]
     #
     # @!attribute [rw] permissions
     #   A structure that contains the permissions of the dashboard. You can
-    #   use this for granting permissions with principal and action
-    #   information.
+    #   use this structure for granting permissions with principal and
+    #   action information.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] source_entity
-    #   Source entity from which the dashboard is created. The souce entity
-    #   accepts the Amazon Resource Name (ARN) of the source template or
-    #   analysis and also references the replacement datasets for the
+    #   The source entity from which the dashboard is created. The source
+    #   entity accepts the Amazon Resource Name (ARN) of the source template
+    #   or analysis and also references the replacement datasets for the
     #   placeholders set when creating the template. The replacement
     #   datasets need to follow the same schema as the datasets for which
     #   placeholders were created when creating the template.
@@ -597,21 +598,23 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_publish_options
-    #   Publishing options when creating dashboard.
+    #   Options for publishing the dashboard when you create it:
     #
-    #   * AvailabilityStatus for AdHocFilteringOption - This can be either
-    #     `ENABLED` or `DISABLED`. When This is set to set to `DISABLED`,
+    #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can
+    #     be either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
     #     QuickSight disables the left filter pane on the published
-    #     dashboard, which can be used for AdHoc filtering. Enabled by
-    #     default.
+    #     dashboard, which can be used for ad hoc (one-time) filtering. This
+    #     option is `ENABLED` by default.
     #
-    #   * AvailabilityStatus for ExportToCSVOption - This can be either
-    #     `ENABLED` or `DISABLED`. The visual option to export data to CSV
-    #     is disabled when this is set to `DISABLED`. Enabled by default.
+    #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. The visual option to export data
+    #     to .csv format isn't enabled when this is set to `DISABLED`. This
+    #     option is `ENABLED` by default.
     #
-    #   * VisibilityState for SheetControlsOption - This can be either
-    #     `COLLAPSED` or `EXPANDED`. The sheet controls pane is collapsed by
-    #     default when set to true. Collapsed by default.
+    #   * `VisibilityState` for `SheetControlsOption` - This visibility
+    #     state can be either `COLLAPSED` or `EXPANDED`. The sheet controls
+    #     pane is collapsed by default when set to true. This option is
+    #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateDashboardRequest AWS API Documentation
@@ -643,7 +646,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] creation_status
-    #   The creation status of the dashboard create request.
+    #   The status of the dashboard creation request.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -794,7 +797,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -817,7 +820,7 @@ module Aws::QuickSight
     #   @return [Hash<String,Types::LogicalTable>]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #   @return [String]
     #
     # @!attribute [rw] column_groups
@@ -830,7 +833,8 @@ module Aws::QuickSight
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] row_level_permission_data_set
-    #   Row-level security configuration on the data you want to create.
+    #   The row-level security configuration for the data that you want to
+    #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @!attribute [rw] tags
@@ -865,12 +869,12 @@ module Aws::QuickSight
     #
     # @!attribute [rw] ingestion_arn
     #   The ARN for the ingestion, which is triggered as a result of dataset
-    #   creation if the import mode is SPICE
+    #   creation if the import mode is SPICE.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_id
     #   The ID of the ingestion, which is triggered as a result of dataset
-    #   creation if the import mode is SPICE
+    #   creation if the import mode is SPICE.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -1249,8 +1253,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID where you want to assign QuickSight users or
-    #   groups to an IAM policy.
+    #   The ID of the AWS account where you want to assign an IAM policy to
+    #   QuickSight users or groups.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -1258,26 +1262,26 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
-    #   The status of an assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   An IAM policy Amazon Resource Name (ARN) that you want to apply to
-    #   the QuickSight users and groups specified in this assignment.
+    #   The ARN for the IAM policy to apply to the QuickSight users and
+    #   groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   QuickSight users and/or groups that you want to assign the policy
-    #   to.
+    #   The QuickSight users, groups, or both that you want to assign the
+    #   policy to.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] namespace
@@ -1297,33 +1301,35 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. Must be unique within an AWS account.
+    #   The name of the assignment. This name must be unique within the AWS
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
-    #   An ID for the assignment.
+    #   The ID for the assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
-    #   The status of an assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   An IAM policy Amazon Resource Name (ARN) that is applied to the
-    #   QuickSight users and groups specified in this assignment.
+    #   The ARN for the IAM policy that is applied to the QuickSight users
+    #   and groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   QuickSight users and/or groups that are assigned to the IAM policy.
+    #   The QuickSight users, groups, or both that the IAM policy is
+    #   assigned to.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] request_id
@@ -1419,7 +1425,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template you are aliasing.
+    #   The ID of the AWS account that contains the template that you
+    #   creating an alias for.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -1428,7 +1435,8 @@ module Aws::QuickSight
     #
     # @!attribute [rw] alias_name
     #   The name that you want to give to the template alias that you're
-    #   creating. Aliases that start with `$` are reserved by QuickSight.
+    #   creating. Don't start the alias name with the `$` character. Alias
+    #   names that start with `$` are reserved by QuickSight.
     #   @return [String]
     #
     # @!attribute [rw] template_version_number
@@ -1446,7 +1454,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] template_alias
-    #   Information on the template alias.
+    #   Information about the template alias.
     #   @return [Types::TemplateAlias]
     #
     # @!attribute [rw] status
@@ -1509,8 +1517,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   An ID for the template you want to create. This is unique per AWS
-    #   region per AWS account.
+    #   An ID for the template that you want to create. This template is
+    #   unique per AWS Region in each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1523,9 +1531,9 @@ module Aws::QuickSight
     #
     # @!attribute [rw] source_entity
     #   The Amazon Resource Name (ARN) of the source entity from which this
-    #   template is being created. Templates can be currently created from
-    #   an analysis or another template. If the ARN is for an analysis, you
-    #   must include its dataset references.
+    #   template is being created. Currently, you can create a template from
+    #   an analysis or another template. If the ARN is for an analysis,
+    #   include its dataset references.
     #   @return [Types::TemplateSourceEntity]
     #
     # @!attribute [rw] tags
@@ -1535,10 +1543,10 @@ module Aws::QuickSight
     #
     # @!attribute [rw] version_description
     #   A description of the current template version being created. This
-    #   API created the first version of the template. Every time
-    #   UpdateTemplate is called a new version is created. Each version of
-    #   the template maintains a description of the version in the
-    #   VersionDescription field.
+    #   API operation creates the first version of the template. Every time
+    #   `UpdateTemplate` is called, a new version is created. Each version
+    #   of the template maintains a description of the version in the
+    #   `VersionDescription` field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateTemplateRequest AWS API Documentation
@@ -1555,7 +1563,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the template.
+    #   The ARN for the template.
     #   @return [String]
     #
     # @!attribute [rw] version_arn
@@ -1591,7 +1599,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The combination of username and password that are used as credentials.
+    # The combination of user name and password that are used as
+    # credentials.
     #
     # @note When making an API call, you may pass CredentialPair
     #   data as a hash:
@@ -1602,7 +1611,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] username
-    #   Username.
+    #   User name.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -1667,7 +1676,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1679,15 +1688,15 @@ module Aws::QuickSight
     #   @return [Types::DashboardVersion]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dataset was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_published_time
-    #   The last time this was published.
+    #   The last time that this dataset was published.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this dataset was updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Dashboard AWS API Documentation
@@ -1739,11 +1748,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] ad_hoc_filtering_option
-    #   Ad hoc filtering option.
+    #   Ad hoc (one-time) filtering option.
     #   @return [Types::AdHocFilteringOption]
     #
     # @!attribute [rw] export_to_csv_option
-    #   Export to CSV option.
+    #   Export to .csv option.
     #   @return [Types::ExportToCSVOption]
     #
     # @!attribute [rw] sheet_controls_option
@@ -1807,7 +1816,7 @@ module Aws::QuickSight
     #   @return [Array<Types::DataSetReference>]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardSourceTemplate AWS API Documentation
@@ -1821,7 +1830,7 @@ module Aws::QuickSight
     # Dashboard summary.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -1829,15 +1838,15 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A display name for the dataset.
+    #   A display name for the dashboard.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dashboard was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this dashboard was updated.
     #   @return [Time]
     #
     # @!attribute [rw] published_version_number
@@ -1845,7 +1854,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] last_published_time
-    #   The last time this was published.
+    #   The last time that this dashboard was published.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DashboardSummary AWS API Documentation
@@ -1864,7 +1873,7 @@ module Aws::QuickSight
     # Dashboard version.
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dashboard version was created.
     #   @return [Time]
     #
     # @!attribute [rw] errors
@@ -1880,7 +1889,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] source_entity_arn
@@ -1907,11 +1916,11 @@ module Aws::QuickSight
     # Dashboard version summary.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dashboard version was created.
     #   @return [Time]
     #
     # @!attribute [rw] version_number
@@ -1945,7 +1954,7 @@ module Aws::QuickSight
     # Dataset.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -1957,11 +1966,11 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dataset was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this dataset was updated.
     #   @return [Time]
     #
     # @!attribute [rw] physical_table_map
@@ -1980,7 +1989,7 @@ module Aws::QuickSight
     #   @return [Array<Types::OutputColumn>]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #   @return [String]
     #
     # @!attribute [rw] consumed_spice_capacity_in_bytes
@@ -1989,12 +1998,12 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] column_groups
-    #   Groupings of columns that work together in certain QuickSight
+    #   Groupings of columns that work together in certain Amazon QuickSight
     #   features. Currently, only geospatial hierarchy is supported.
     #   @return [Array<Types::ColumnGroup>]
     #
     # @!attribute [rw] row_level_permission_data_set
-    #   Row-level security configuration on the dataset.
+    #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSet AWS API Documentation
@@ -2053,7 +2062,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_arn
-    #   Dataset ARN.
+    #   Dataset Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetReference AWS API Documentation
@@ -2080,7 +2089,7 @@ module Aws::QuickSight
     # Dataset summary.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the dataset.
+    #   The Amazon Resource Name (ARN) of the dataset.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -2092,19 +2101,19 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this dataset was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this dataset was updated.
     #   @return [Time]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #   @return [String]
     #
     # @!attribute [rw] row_level_permission_data_set
-    #   Row-level security configuration on the dataset.
+    #   The row-level security configuration for the dataset.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSummary AWS API Documentation
@@ -2123,7 +2132,7 @@ module Aws::QuickSight
     # The structure of a data source.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the data source.
+    #   The Amazon Resource Name (ARN) of the data source.
     #   @return [String]
     #
     # @!attribute [rw] data_source_id
@@ -2136,8 +2145,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the data source. This indicates which database engine
-    #   the data source connects to.
+    #   The type of the data source. This type indicates which database
+    #   engine the data source connects to.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2145,17 +2154,17 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this data source was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this data source was updated.
     #   @return [Time]
     #
     # @!attribute [rw] data_source_parameters
-    #   The parameters that QuickSight uses to connect to your underlying
-    #   source. This is a variant type structure. At most one of the
-    #   attributes should be non-null for this structure to be valid.
+    #   The parameters that Amazon QuickSight uses to connect to your
+    #   underlying source. This is a variant type structure. For this
+    #   structure to be valid, only one of the attributes can be non-null.
     #   @return [Types::DataSourceParameters]
     #
     # @!attribute [rw] vpc_connection_properties
@@ -2214,7 +2223,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Error information on data source creation or update.
+    # Error information for the data source creation or update.
     #
     # @!attribute [rw] type
     #   Error type.
@@ -2232,9 +2241,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The parameters that QuickSight uses to connect to your underlying
-    # source. This is a variant type structure. At most one of the
-    # attributes should be non-null for this structure to be valid.
+    # The parameters that Amazon QuickSight uses to connect to your
+    # underlying data source. This is a variant type structure. For this
+    # structure to be valid, only one of the attributes can be non-null.
     #
     # @note When making an API call, you may pass DataSourceParameters
     #   data as a hash:
@@ -2327,15 +2336,15 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] amazon_elasticsearch_parameters
-    #   Amazon Elasticsearch parameters.
+    #   Amazon Elasticsearch Service parameters.
     #   @return [Types::AmazonElasticsearchParameters]
     #
     # @!attribute [rw] athena_parameters
-    #   Athena parameters.
+    #   Amazon Athena parameters.
     #   @return [Types::AthenaParameters]
     #
     # @!attribute [rw] aurora_parameters
-    #   Aurora MySQL parameters.
+    #   Amazon Aurora MySQL parameters.
     #   @return [Types::AuroraParameters]
     #
     # @!attribute [rw] aurora_postgre_sql_parameters
@@ -2367,11 +2376,11 @@ module Aws::QuickSight
     #   @return [Types::PrestoParameters]
     #
     # @!attribute [rw] rds_parameters
-    #   RDS parameters.
+    #   Amazon RDS parameters.
     #   @return [Types::RdsParameters]
     #
     # @!attribute [rw] redshift_parameters
-    #   Redshift parameters.
+    #   Amazon Redshift parameters.
     #   @return [Types::RedshiftParameters]
     #
     # @!attribute [rw] s3_parameters
@@ -2489,7 +2498,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are deleting.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -2497,8 +2507,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] version_number
-    #   The version number of the dashboard. If version number property is
-    #   provided, only the specified version of the dashboard is deleted.
+    #   The version number of the dashboard. If the version number property
+    #   is provided, only the specified version of the dashboard is deleted.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteDashboardRequest AWS API Documentation
@@ -2515,7 +2525,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] arn
-    #   The Secure Socket Layer (SSL) properties that apply. of the
+    #   The Secure Socket Layer (SSL) properties that apply for the
     #   resource.
     #   @return [String]
     #
@@ -2754,7 +2764,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID where you want to delete an IAM policy
+    #   The AWS account ID where you want to delete the IAM policy
     #   assignment.
     #   @return [String]
     #
@@ -2806,18 +2816,18 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template alias you are deleting.
+    #   The ID of the AWS account that contains the item to delete.
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   An ID for the template.
+    #   The ID for the template that the specified alias is for.
     #   @return [String]
     #
     # @!attribute [rw] alias_name
-    #   The alias of the template that you want to delete. If you provide a
-    #   specific alias, you delete the version that the alias points to. You
-    #   can specify the latest version of the template by providing the
-    #   keyword `$LATEST` in the `AliasName` parameter.
+    #   The name for the template alias. If you name a specific alias, you
+    #   delete the version that the alias points to. You can specify the
+    #   latest version of the template by providing the keyword `$LATEST` in
+    #   the `AliasName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteTemplateAliasRequest AWS API Documentation
@@ -2834,11 +2844,11 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] template_id
-    #   An ID for the template.
+    #   An ID for the template associated with the deletion.
     #   @return [String]
     #
     # @!attribute [rw] alias_name
-    #   The name of the alias.
+    #   The name for the template alias.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2870,7 +2880,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template you are deleting.
+    #   The ID of the AWS account that contains the template that you're
+    #   deleting.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -3023,12 +3034,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are describing
-    #   permissions of.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing permissions for.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to IAM policy.
+    #   The ID for the dashboard, also added to the IAM policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeDashboardPermissionsRequest AWS API Documentation
@@ -3048,7 +3059,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] permissions
-    #   A structure that contains the permissions of the dashboard.
+    #   A structure that contains the permissions for the dashboard.
     #   @return [Array<Types::ResourcePermission>]
     #
     # @!attribute [rw] status
@@ -3081,7 +3092,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are describing.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -3089,8 +3101,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] version_number
-    #   The version number for the dashboard. If version number isn’t passed
-    #   the latest published dashboard version is described.
+    #   The version number for the dashboard. If a version number isn't
+    #   passed, the latest published dashboard version is described.
     #   @return [Integer]
     #
     # @!attribute [rw] alias_name
@@ -3112,7 +3124,7 @@ module Aws::QuickSight
     #   @return [Types::Dashboard]
     #
     # @!attribute [rw] status
-    #   The http status of this request.
+    #   The HTTP status of this request.
     #   @return [Integer]
     #
     # @!attribute [rw] request_id
@@ -3137,7 +3149,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -3194,7 +3206,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
@@ -3397,8 +3409,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that contains the assignment you want to
-    #   describe.
+    #   The ID of the AWS account that contains the assignment that you want
+    #   to describe.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
@@ -3500,19 +3512,20 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template alias you are describing.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   An ID for the template.
+    #   The ID for the template.
     #   @return [String]
     #
     # @!attribute [rw] alias_name
-    #   The alias of the template that you want to describe. If you provide
-    #   a specific alias, you describe the version that the alias points to.
-    #   You can specify the latest version of the template by providing the
-    #   keyword `$LATEST` in the `AliasName` parameter. The keyword
-    #   `$PUBLISHED` doesn't apply to templates.
+    #   The name of the template alias that you want to describe. If you
+    #   name a specific alias, you describe the version that the alias
+    #   points to. You can specify the latest version of the template by
+    #   providing the keyword `$LATEST` in the `AliasName` parameter. The
+    #   keyword `$PUBLISHED` doesn't apply to templates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeTemplateAliasRequest AWS API Documentation
@@ -3554,7 +3567,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template you are describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -3611,22 +3625,23 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template you are describing.
+    #   The ID of the AWS account that contains the template that you're
+    #   describing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   An ID for the template.
+    #   The ID for the template.
     #   @return [String]
     #
     # @!attribute [rw] version_number
-    #   This is an optional field, when a version number is provided the
-    #   corresponding version is describe, if it's not provided the latest
-    #   version of the template is described.
+    #   (Optional) The number for the version to describe. If a
+    #   `VersionNumber` parameter value isn't provided, the latest version
+    #   of the template is described.
     #   @return [Integer]
     #
     # @!attribute [rw] alias_name
-    #   The alias of the template that you want to describe. If you provide
-    #   a specific alias, you describe the version that the alias points to.
+    #   The alias of the template that you want to describe. If you name a
+    #   specific alias, you describe the version that the alias points to.
     #   You can specify the latest version of the template by providing the
     #   keyword `$LATEST` in the `AliasName` parameter. The keyword
     #   `$PUBLISHED` doesn't apply to templates.
@@ -3643,7 +3658,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] template
-    #   The template structure of the object you want to describe.
+    #   The template structure for the object you want to describe.
     #   @return [Types::Template]
     #
     # @!attribute [rw] status
@@ -3711,9 +3726,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The domain specified is not on the allowlist. All domains for embedded
-    # dashboards must be added to the approved list by an Amazon QuickSight
-    # admin.
+    # The domain specified isn't on the allow list. All domains for
+    # embedded dashboards must be added to the approved list by an Amazon
+    # QuickSight admin.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3730,14 +3745,14 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Error information on a data set SPICE ingestion.
+    # Error information for the SPICE ingestion of a dataset.
     #
     # @!attribute [rw] type
     #   Error type.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Error essage.
+    #   Error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ErrorInfo AWS API Documentation
@@ -3748,7 +3763,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Export to CSV option.
+    # Export to .csv option.
     #
     # @note When making an API call, you may pass ExportToCSVOption
     #   data as a hash:
@@ -3768,7 +3783,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A transform operation that filters rows based on some condition.
+    # A transform operation that filters rows based on a condition.
     #
     # @note When making an API call, you may pass FilterOperation
     #   data as a hash:
@@ -3778,8 +3793,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] condition_expression
-    #   An expression that must evaluate to a boolean value. Rows for which
-    #   the expression is evaluated to true are kept in the dataset.
+    #   An expression that must evaluate to a Boolean value. Rows for which
+    #   the expression evaluates to true are kept in the dataset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterOperation AWS API Documentation
@@ -3835,30 +3850,31 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are embedding.
+    #   The ID for the AWS account that contains the dashboard that you're
+    #   embedding.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
-    #   The ID for the dashboard, also added to IAM policy
+    #   The ID for the dashboard, also added to the IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] identity_type
-    #   The authentication method the user uses to sign in.
+    #   The authentication method that the user uses to sign in.
     #   @return [String]
     #
     # @!attribute [rw] session_lifetime_in_minutes
     #   How many minutes the session is valid. The session lifetime must be
-    #   between 15 and 600 minutes.
+    #   15-600 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] undo_redo_disabled
-    #   Remove the undo/redo button on embedded dashboard. The default is
-    #   FALSE, which enables the undo/redo button.
+    #   Remove the undo/redo button on the embedded dashboard. The default
+    #   is FALSE, which enables the undo/redo button.
     #   @return [Boolean]
     #
     # @!attribute [rw] reset_disabled
-    #   Remove the reset button on embedded dashboard. The default is FALSE,
-    #   which allows the reset button.
+    #   Remove the reset button on the embedded dashboard. The default is
+    #   FALSE, which enables the reset button.
     #   @return [Boolean]
     #
     # @!attribute [rw] user_arn
@@ -3869,11 +3885,11 @@ module Aws::QuickSight
     #
     #   * Active Directory (AD) users or group members
     #
-    #   * Invited non-federated users
+    #   * Invited nonfederated users
     #
     #   * IAM users and IAM role-based sessions authenticated through
     #     Federated Single Sign-On using SAML, OpenID Connect, or IAM
-    #     Federation
+    #     federation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetDashboardEmbedUrlRequest AWS API Documentation
@@ -3890,10 +3906,10 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] embed_url
-    #   URL that you can put into your server-side webpage to embed your
+    #   An URL that you can put into your server-side webpage to embed your
     #   dashboard. This URL is valid for 5 minutes, and the resulting
     #   session is valid for 10 hours. The API provides the URL with an
-    #   auth\_code that enables a single-signon session.
+    #   `auth_code` value that enables a single sign-on session.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3919,7 +3935,7 @@ module Aws::QuickSight
     # QuickSight groups.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) for the group.
+    #   The Amazon Resource Name (ARN) for the group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -3948,7 +3964,7 @@ module Aws::QuickSight
     # be users. Groups can't be members of another group. .
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) for the group member (user).
+    #   The Amazon Resource Name (ARN) for the group member (user).
     #   @return [String]
     #
     # @!attribute [rw] member_name
@@ -3963,10 +3979,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # IAM policy assignment.
+    # An IAM policy assignment.
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] assignment_id
@@ -3978,7 +3994,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   Policy Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) for the IAM policy.
     #   @return [String]
     #
     # @!attribute [rw] identities
@@ -4001,7 +4017,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # IAM policy assignment Summary.
+    # IAM policy assignment summary.
     #
     # @!attribute [rw] assignment_name
     #   Assignment name.
@@ -4019,8 +4035,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The identity type specified is not supported. Supported identity types
-    # include IAM and QUICKSIGHT.
+    # The identity type specified isn't supported. Supported identity types
+    # include `IAM` and `QUICKSIGHT`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4037,10 +4053,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information on the SPICE ingestion for a dataset.
+    # Information about the SPICE ingestion for a dataset.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_id
@@ -4056,23 +4072,23 @@ module Aws::QuickSight
     #   @return [Types::ErrorInfo]
     #
     # @!attribute [rw] row_info
-    #   Information on rows during a data set SPICE ingestion.
+    #   Information about rows for a data set SPICE ingestion.
     #   @return [Types::RowInfo]
     #
     # @!attribute [rw] queue_info
-    #   Information on queued dataset SPICE ingestion.
+    #   Information about a queued dataset SPICE ingestion.
     #   @return [Types::QueueInfo]
     #
     # @!attribute [rw] created_time
-    #   The time this ingestion started.
+    #   The time that this ingestion started.
     #   @return [Time]
     #
     # @!attribute [rw] ingestion_time_in_seconds
-    #   The time this ingestion took, measured in seconds.
+    #   The time that this ingestion took, measured in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] ingestion_size_in_bytes
-    #   Size of the data ingested in bytes.
+    #   The size of the data ingested, in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] request_source
@@ -4100,7 +4116,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Metadata on a column that is used as the input of a transform
+    # Metadata for a column that is used as the input of a transform
     # operation.
     #
     # @note When making an API call, you may pass InputColumn
@@ -4187,7 +4203,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # One or more parameters don't have a valid value.
+    # One or more parameters has a value that isn't valid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -4295,7 +4311,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are listing.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   listing versions for.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -4359,7 +4376,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboards you are listing.
+    #   The ID of the AWS account that contains the dashboards that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4382,7 +4400,8 @@ module Aws::QuickSight
 
     # @!attribute [rw] dashboard_summary_list
     #   A structure that contains all of the dashboards shared with the
-    #   user. Provides basic information about the dashboards.
+    #   user. This structure provides basic information about the
+    #   dashboards.
     #   @return [Array<Types::DashboardSummary>]
     #
     # @!attribute [rw] next_token
@@ -4418,7 +4437,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4670,7 +4689,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that contains the assignment.
+    #   The ID of the AWS account that contains the assignments.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -4702,7 +4721,7 @@ module Aws::QuickSight
     end
 
     # @!attribute [rw] active_assignments
-    #   Active assignments for this user.
+    #   The active assignments for this user.
     #   @return [Array<Types::ActiveIAMPolicyAssignment>]
     #
     # @!attribute [rw] request_id
@@ -4740,15 +4759,16 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that contains this IAM policy assignment.
+    #   The ID of the AWS account that contains these IAM policy
+    #   assignments.
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
-    #   The status of the assignment.
+    #   The status of the assignments.
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace for this assignment.
+    #   The namespace for the assignments.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4914,7 +4934,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template aliases you are listing.
+    #   The ID of the AWS account that contains the template aliases that
+    #   you're listing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -4978,7 +4999,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the templates you are listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -5042,7 +5064,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the templates you are listing.
+    #   The ID of the AWS account that contains the templates that you're
+    #   listing.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -5107,7 +5130,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID that the user is in. Currently, you use the ID
+    #   The AWS account ID that the user is in. Currently, you use the ID
     #   for the AWS account that contains your Amazon QuickSight account.
     #   @return [String]
     #
@@ -5224,10 +5247,11 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A unit that joins and data transformations operate on. A logical table
-    # has a source, which can be either a physical table or result of a
-    # join. When it points to a physical table, a logical table acts as a
-    # mutable copy of that table through transform operations.
+    # A *logical table* is a unit that joins and that data transformations
+    # operate on. A logical table has a source, which can be either a
+    # physical table or result of a join. When a logical table points to a
+    # physical table, the logical table acts as a mutable copy of that
+    # physical table through transform operations.
     #
     # @note When making an API call, you may pass LogicalTable
     #   data as a hash:
@@ -5302,9 +5326,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information on the source of a logical table. This is a variant type
-    # structure. No more than one of the attributes should be non-null for
-    # this structure to be valid.
+    # Information about the source of a logical table. This is a variant
+    # type structure. For this structure to be valid, only one of the
+    # attributes can be non-null.
     #
     # @note When making an API call, you may pass LogicalTableSource
     #   data as a hash:
@@ -5501,10 +5525,10 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A view of a data source. Contains information on the shape of the data
-    # in the underlying source. This is a variant type structure. No more
-    # than one of the attributes can be non-null for this structure to be
-    # valid.
+    # A view of a data source that contains information about the shape of
+    # the data in the underlying source. This is a variant type structure.
+    # For this structure to be valid, only one of the attributes can be
+    # non-null.
     #
     # @note When making an API call, you may pass PhysicalTable
     #   data as a hash:
@@ -5674,7 +5698,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information on queued dataset SPICE ingestion.
+    # Information about a queued dataset SPICE ingestion.
     #
     # @!attribute [rw] waiting_on_ingestion
     #   The ID of the queued ingestion.
@@ -5693,9 +5717,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The user is not found. This error can happen in any operation that
-    # requires finding a user based on a provided user name, such as
-    # `DeleteUser`, `DescribeUser`, and so on.
+    # The user with the provided name isn't found. This error can happen in
+    # any operation that requires finding a user based on a provided user
+    # name, such as `DeleteUser`, `DescribeUser`, and so on.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -5712,7 +5736,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # RDS parameters.
+    # Amazon RDS parameters.
     #
     # @note When making an API call, you may pass RdsParameters
     #   data as a hash:
@@ -5738,8 +5762,9 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Redshift parameters. The `ClusterId` field can be blank if `Host` and
-    # `Port` are both set, and the other way around.
+    # Amazon Redshift parameters. The `ClusterId` field can be blank if
+    # `Host` and `Port` are both set. The `Host` and `Port` fields can be
+    # blank if the `ClusterId` field is set.
     #
     # @note When making an API call, you may pass RedshiftParameters
     #   data as a hash:
@@ -5752,11 +5777,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] host
-    #   Host. This can be blank if the `ClusterId` is provided.
+    #   Host. This field can be blank if `ClusterId` is provided.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Port. This can be blank if the `ClusterId` is provided.
+    #   Port. This field can be blank if the `ClusterId` is provided.
     #   @return [Integer]
     #
     # @!attribute [rw] database
@@ -5764,7 +5789,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] cluster_id
-    #   Cluster ID. This can be blank if the `Host` and `Port` are provided.
+    #   Cluster ID. This field can be blank if the `Host` and `Port` are
+    #   provided.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RedshiftParameters AWS API Documentation
@@ -5923,11 +5949,12 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] schema
-    #   The schema name. Applies to certain relational database engines.
+    #   The schema name. This name applies to certain relational database
+    #   engines.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the relational table.
+    #   The name of the relational table.
     #   @return [String]
     #
     # @!attribute [rw] input_columns
@@ -5955,11 +5982,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] column_name
-    #   Name of the column to be renamed.
+    #   The name of the column to be renamed.
     #   @return [String]
     #
     # @!attribute [rw] new_column_name
-    #   New name for the column.
+    #   The new name for the column.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/RenameColumnOperation AWS API Documentation
@@ -6025,15 +6052,15 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] principal
-    #   The Amazon Resource Name (ARN) of a QuickSight user or group, or an
-    #   IAM ARN. If you are using cross-account resource sharing, this is
-    #   the IAM ARN of an account root. Otherwise, it is the ARN of a
-    #   QuickSight user or group. .
+    #   The Amazon Resource Name (ARN) of an Amazon QuickSight user or
+    #   group, or an IAM ARN. If you are using cross-account resource
+    #   sharing, this is the IAM ARN of an account root. Otherwise, it is
+    #   the ARN of a QuickSight user or group. .
     #   @return [String]
     #
     # @!attribute [rw] actions
-    #   The action to grant or revoke permissions on. For example,
-    #   "quicksight:DescribeDashboard".
+    #   The action to grant or revoke permissions on, for example
+    #   `"quicksight:DescribeDashboard"`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ResourcePermission AWS API Documentation
@@ -6066,7 +6093,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information on rows during a data set SPICE ingestion.
+    # Information about rows for a data set SPICE ingestion.
     #
     # @!attribute [rw] rows_ingested
     #   The number of rows that were ingested.
@@ -6084,7 +6111,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Row-level security configuration on the dataset.
+    # The row-level security configuration for the dataset.
     #
     # @note When making an API call, you may pass RowLevelPermissionDataSet
     #   data as a hash:
@@ -6095,7 +6122,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the permission dataset.
+    #   The Amazon Resource Name (ARN) of the permission dataset.
     #   @return [String]
     #
     # @!attribute [rw] permission_policy
@@ -6157,11 +6184,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] data_source_arn
-    #   Data source ARN.
+    #   The amazon Resource Name (ARN) for the data source.
     #   @return [String]
     #
     # @!attribute [rw] upload_settings
-    #   Information on the S3 source file(s) format.
+    #   Information about the format for the S3 source file or files.
     #   @return [Types::UploadSettings]
     #
     # @!attribute [rw] input_columns
@@ -6197,8 +6224,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The number of minutes specified for the lifetime of a session is not
-    # valid. The session lifetime must be from 15 to 600 minutes.
+    # The number of minutes specified for the lifetime of a session isn't
+    # valid. The session lifetime must be 15-600 minutes.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6336,7 +6363,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] disable_ssl
-    #   A boolean flag to control whether SSL should be disabled.
+    #   A Boolean option to control whether SSL should be disabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SslProperties AWS API Documentation
@@ -6372,8 +6399,8 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # The keys of the key-value pairs for the resource tag or tags assigned
-    # to the resource.
+    # The key or keys of the key-value pairs for the resource tag or tags
+    # assigned to the resource.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -6480,13 +6507,13 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # A template object. A template is an entity in QuickSight which
-    # encapsulates the metadata required to create an analysis that can be
-    # used to create dashboard. It adds a layer of abstraction by replacing
-    # the dataset associated with the analysis with placeholders. Templates
-    # can be used to create dashboards by replacing dataset placeholders
-    # with datasets which follow the same schema that was used to create the
-    # source analysis and template.
+    # A template object. A *template* is an entity in QuickSight that
+    # encapsulates the metadata required to create an analysis and that you
+    # can use to create a dashboard. A template adds a layer of abstraction
+    # by using placeholders to replace the dataset associated with the
+    # analysis. You can use templates to create dashboards by replacing
+    # dataset placeholders with datasets that follow the same schema that
+    # was used to create the source analysis and template.
     #
     # You can share templates across AWS accounts by allowing users in other
     # AWS accounts to create a template or a dashboard from an existing
@@ -6536,7 +6563,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN of the template alias.
+    #   The Amazon Resource Name (ARN) of the template alias.
     #   @return [String]
     #
     # @!attribute [rw] template_version_number
@@ -6587,7 +6614,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @!attribute [rw] data_set_references
@@ -6649,7 +6676,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateSourceTemplate AWS API Documentation
@@ -6666,8 +6693,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] template_id
-    #   The ID of the template. This is unique per AWS Region for each AWS
-    #   account.
+    #   The ID of the template. This ID is unique per AWS Region for each
+    #   AWS account.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6680,11 +6707,11 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] created_time
-    #   The last time this was created.
+    #   The last time that this template was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time this was updated.
+    #   The last time that this template was updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateSummary AWS API Documentation
@@ -6702,7 +6729,7 @@ module Aws::QuickSight
     # A version of a template.
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this template version was created.
     #   @return [Time]
     #
     # @!attribute [rw] errors
@@ -6756,7 +6783,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] created_time
-    #   The time this was created.
+    #   The time that this template version was created.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -6764,7 +6791,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The desription of the template version.
+    #   The description of the template version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TemplateVersionSummary AWS API Documentation
@@ -6828,8 +6855,8 @@ module Aws::QuickSight
     end
 
     # A data transformation on a logical table. This is a variant type
-    # structure. No more than one of the attributes should be non-null for
-    # this structure to be valid.
+    # structure. For this structure to be valid, only one of the attributes
+    # can be non-null.
     #
     # @note When making an API call, you may pass TransformOperation
     #   data as a hash:
@@ -7017,7 +7044,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard whose
+    #   permissions you're updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -7083,7 +7111,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -7188,7 +7217,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the dashboard you are updating.
+    #   The ID of the AWS account that contains the dashboard that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_id
@@ -7201,11 +7231,11 @@ module Aws::QuickSight
     #
     # @!attribute [rw] source_entity
     #   The template or analysis from which the dashboard is created. The
-    #   SouceTemplate entity accepts the Arn of the template and also
-    #   references to replacement datasets for the placeholders set when
-    #   creating the template. The replacement datasets need to follow the
-    #   same schema as the datasets for which placeholders were created when
-    #   creating the template.
+    #   `SouceTemplate` entity accepts the Amazon Resource Name (ARN) of the
+    #   template and also references to replacement datasets for the
+    #   placeholders set when creating the template. The replacement
+    #   datasets need to follow the same schema as the datasets for which
+    #   placeholders were created when creating the template.
     #   @return [Types::DashboardSourceEntity]
     #
     # @!attribute [rw] parameters
@@ -7217,21 +7247,23 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] dashboard_publish_options
-    #   Publishing options when creating a dashboard.
+    #   Options for publishing the dashboard when you create it:
     #
-    #   * AvailabilityStatus for AdHocFilteringOption - This can be either
-    #     `ENABLED` or `DISABLED`. When This is set to set to `DISABLED`,
+    #   * `AvailabilityStatus` for `AdHocFilteringOption` - This status can
+    #     be either `ENABLED` or `DISABLED`. When this is set to `DISABLED`,
     #     QuickSight disables the left filter pane on the published
-    #     dashboard, which can be used for AdHoc filtering. Enabled by
-    #     default.
+    #     dashboard, which can be used for ad hoc (one-time) filtering. This
+    #     option is `ENABLED` by default.
     #
-    #   * AvailabilityStatus for ExportToCSVOption - This can be either
-    #     `ENABLED` or `DISABLED`. The visual option to export data to CSV
-    #     is disabled when this is set to `DISABLED`. Enabled by default.
+    #   * `AvailabilityStatus` for `ExportToCSVOption` - This status can be
+    #     either `ENABLED` or `DISABLED`. The visual option to export data
+    #     to .csv format isn't enabled when this is set to `DISABLED`. This
+    #     option is `ENABLED` by default.
     #
-    #   * VisibilityState for SheetControlsOption - This can be either
-    #     `COLLAPSED` or `EXPANDED`. The sheet controls pane is collapsed by
-    #     default when set to true. Collapsed by default.
+    #   * `VisibilityState` for `SheetControlsOption` - This visibility
+    #     state can be either `COLLAPSED` or `EXPANDED`. The sheet controls
+    #     pane is collapsed by default when set to true. This option is
+    #     `COLLAPSED` by default.
     #   @return [Types::DashboardPublishOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDashboardRequest AWS API Documentation
@@ -7304,12 +7336,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
-    #   per AWS Region for each AWS account.
+    #   The ID for the dataset whose permissions you want to update. This ID
+    #   is unique per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] grant_permissions
@@ -7335,8 +7367,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
-    #   per AWS Region for each AWS account.
+    #   The ID for the dataset whose permissions you want to update. This ID
+    #   is unique per AWS Region for each AWS account.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -7473,11 +7505,11 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS Account ID.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @!attribute [rw] data_set_id
-    #   The ID for the dataset that you want to create. This ID is unique
+    #   The ID for the dataset that you want to update. This ID is unique
     #   per AWS Region for each AWS account.
     #   @return [String]
     #
@@ -7496,7 +7528,7 @@ module Aws::QuickSight
     #   @return [Hash<String,Types::LogicalTable>]
     #
     # @!attribute [rw] import_mode
-    #   Indicates whether or not you want to import the data into SPICE.
+    #   Indicates whether you want to import the data into SPICE.
     #   @return [String]
     #
     # @!attribute [rw] column_groups
@@ -7505,7 +7537,8 @@ module Aws::QuickSight
     #   @return [Array<Types::ColumnGroup>]
     #
     # @!attribute [rw] row_level_permission_data_set
-    #   Row-level security configuration on the data you want to create.
+    #   The row-level security configuration for the data you want to
+    #   create.
     #   @return [Types::RowLevelPermissionDataSet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateDataSetRequest AWS API Documentation
@@ -7533,12 +7566,12 @@ module Aws::QuickSight
     #
     # @!attribute [rw] ingestion_arn
     #   The ARN for the ingestion, which is triggered as a result of dataset
-    #   creation if the import mode is SPICE
+    #   creation if the import mode is SPICE.
     #   @return [String]
     #
     # @!attribute [rw] ingestion_id
     #   The ID of the ingestion, which is triggered as a result of dataset
-    #   creation if the import mode is SPICE
+    #   creation if the import mode is SPICE.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -7897,11 +7930,12 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   The AWS account ID that contains the IAM policy assignment.
+    #   The ID of the AWS account that contains the IAM policy assignment.
     #   @return [String]
     #
     # @!attribute [rw] assignment_name
-    #   The name of the assignment. It must be unique within an AWS account.
+    #   The name of the assignment. This name must be unique within an AWS
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -7909,26 +7943,26 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] assignment_status
-    #   The status of an assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   An IAM policy Amazon Resource Name (ARN) that will be applied to
-    #   specified QuickSight users and groups in this assignment.
+    #   The ARN for the IAM policy to apply to the QuickSight users and
+    #   groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   QuickSight users and/or groups that you want to assign to the
-    #   specified IAM policy.
+    #   The QuickSight users, groups, or both that you want to assign the
+    #   policy to.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateIAMPolicyAssignmentRequest AWS API Documentation
@@ -7952,25 +7986,26 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] policy_arn
-    #   The IAM policy ARN assigned to the QuickSight users and groups
-    #   specified in this request.
+    #   The ARN for the IAM policy applied to the QuickSight users and
+    #   groups specified in this assignment.
     #   @return [String]
     #
     # @!attribute [rw] identities
-    #   QuickSight users and/or groups that are assigned to this IAM policy.
+    #   The QuickSight users, groups, or both that the IAM policy is
+    #   assigned to.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] assignment_status
-    #   The status of the assignment:
+    #   The status of the assignment. Possible values are as follows:
     #
-    #   * ENABLED - Anything specified in this assignment is used while
+    #   * `ENABLED` - Anything specified in this assignment is used when
     #     creating the data source.
     #
-    #   * DISABLED - This assignment isn't used while creating the data
+    #   * `DISABLED` - This assignment isn't used when creating the data
     #     source.
     #
-    #   * DRAFT - Assignment is an unfinished draft and isn't used while
-    #     creating the data source.
+    #   * `DRAFT` - This assignment is an unfinished draft and isn't used
+    #     when creating the data source.
     #   @return [String]
     #
     # @!attribute [rw] request_id
@@ -8005,7 +8040,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template aliases you are updating.
+    #   The ID of the AWS account that contains the template alias that
+    #   you're updating.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -8013,7 +8049,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] alias_name
-    #   The alias of the template that you want to update. If you provide a
+    #   The alias of the template that you want to update. If you name a
     #   specific alias, you update the version that the alias points to. You
     #   can specify the latest version of the template by providing the
     #   keyword `$LATEST` in the `AliasName` parameter. The keyword
@@ -8076,7 +8112,7 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template.
+    #   The ID of the AWS account that contains the template.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -8157,7 +8193,8 @@ module Aws::QuickSight
     #       }
     #
     # @!attribute [rw] aws_account_id
-    #   AWS account ID that contains the template you are updating.
+    #   The ID of the AWS account that contains the template that you're
+    #   updating.
     #   @return [String]
     #
     # @!attribute [rw] template_id
@@ -8166,15 +8203,15 @@ module Aws::QuickSight
     #
     # @!attribute [rw] source_entity
     #   The source QuickSight entity from which this template is being
-    #   created. Templates can be currently created from an Analysis or
+    #   updated. You can currently update templates from an Analysis or
     #   another template.
     #   @return [Types::TemplateSourceEntity]
     #
     # @!attribute [rw] version_description
-    #   A description of the current template version being updated. Every
-    #   time you cal `UpdateTemplate` you create a new version. Each version
-    #   of the template maintains a description of the version in the
-    #   `VersionDescription` field.
+    #   A description of the current template version that is being updated.
+    #   Every time you call `UpdateTemplate`, you create a new version of
+    #   the template. Each version of the template maintains a description
+    #   of the version in the `VersionDescription` field.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -8201,8 +8238,8 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] version_arn
-    #   The Amazon Resource Name (ARN) for the template, including the
-    #   version information of the first version.
+    #   The ARN for the template, including the version information of the
+    #   first version.
     #   @return [String]
     #
     # @!attribute [rw] creation_status
@@ -8303,7 +8340,7 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
-    # Information on source file(s) format.
+    # Information about the format for a source file or files.
     #
     # @note When making an API call, you may pass UploadSettings
     #   data as a hash:
@@ -8325,7 +8362,8 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] contains_header
-    #   Whether or not the file(s) has a header row.
+    #   Whether the file has a header row, or the files each have a header
+    #   row.
     #   @return [Boolean]
     #
     # @!attribute [rw] text_qualifier
@@ -8351,7 +8389,7 @@ module Aws::QuickSight
     # QuickSight subscription can't contain more than 20 million users.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource name (ARN) for the user.
+    #   The Amazon Resource Name (ARN) for the user.
     #   @return [String]
     #
     # @!attribute [rw] user_name
@@ -8386,9 +8424,9 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] active
-    #   Active status of user. When you create an Amazon QuickSight user
-    #   that’s not an IAM user or an AD user, that user is inactive until
-    #   they sign in and provide a password.
+    #   The active status of user. When you create an Amazon QuickSight user
+    #   that’s not an IAM user or an Active Directory user, that user is
+    #   inactive until they sign in and provide a password.
     #   @return [Boolean]
     #
     # @!attribute [rw] principal_id

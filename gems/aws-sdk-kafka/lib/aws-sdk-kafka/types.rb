@@ -256,6 +256,10 @@ module Aws::Kafka
     #   The number of broker nodes in the cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] open_monitoring
+    #   Settings for open monitoring using Prometheus.
+    #   @return [Types::OpenMonitoring]
+    #
     # @!attribute [rw] state
     #   The state of the cluster. The possible states are CREATING, ACTIVE,
     #   and FAILED.
@@ -284,6 +288,7 @@ module Aws::Kafka
       :encryption_info,
       :enhanced_monitoring,
       :number_of_broker_nodes,
+      :open_monitoring,
       :state,
       :tags,
       :zookeeper_connect_string)
@@ -493,6 +498,16 @@ module Aws::Kafka
     #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
     #         kafka_version: "__stringMin1Max128", # required
     #         number_of_broker_nodes: 1, # required
+    #         open_monitoring: {
+    #           prometheus: { # required
+    #             jmx_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #             node_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #           },
+    #         },
     #         tags: {
     #           "__string" => "__string",
     #         },
@@ -532,6 +547,10 @@ module Aws::Kafka
     #   The number of Kafka broker nodes in the Amazon MSK cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] open_monitoring
+    #   The settings for open monitoring.
+    #   @return [Types::OpenMonitoringInfo]
+    #
     # @!attribute [rw] tags
     #   Create tags when creating the cluster.
     #   @return [Hash<String,String>]
@@ -547,6 +566,7 @@ module Aws::Kafka
       :enhanced_monitoring,
       :kafka_version,
       :number_of_broker_nodes,
+      :open_monitoring,
       :tags)
       include Aws::Structure
     end
@@ -1358,12 +1378,23 @@ module Aws::Kafka
     #   The number of broker nodes in the cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] open_monitoring
+    #   Settings for open monitoring using Prometheus.
+    #   @return [Types::OpenMonitoring]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies which Apache Kafka metrics Amazon MSK gathers and sends to
+    #   Amazon CloudWatch for this cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/MutableClusterInfo AWS API Documentation
     #
     class MutableClusterInfo < Struct.new(
       :broker_ebs_volume_info,
       :configuration_info,
-      :number_of_broker_nodes)
+      :number_of_broker_nodes,
+      :open_monitoring,
+      :enhanced_monitoring)
       include Aws::Structure
     end
 
@@ -1726,6 +1757,72 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Request body for UpdateMonitoring.
+    #
+    # @note When making an API call, you may pass UpdateMonitoringRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #         current_version: "__string", # required
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
+    #         open_monitoring: {
+    #           prometheus: { # required
+    #             jmx_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #             node_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version
+    #   The version of cluster to update from. A successful operation will
+    #   then generate a new version.
+    #   @return [String]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies which Apache Kafka metrics Amazon MSK gathers and sends to
+    #   Amazon CloudWatch for this cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_monitoring
+    #   The settings for open monitoring.
+    #   @return [Types::OpenMonitoringInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateMonitoringRequest AWS API Documentation
+    #
+    class UpdateMonitoringRequest < Struct.new(
+      :cluster_arn,
+      :current_version,
+      :enhanced_monitoring,
+      :open_monitoring)
+      include Aws::Structure
+    end
+
+    # Response body for UpdateMonitoring.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_operation_arn
+    #   The Amazon Resource Name (ARN) of the cluster operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/UpdateMonitoringResponse AWS API Documentation
+    #
+    class UpdateMonitoringResponse < Struct.new(
+      :cluster_arn,
+      :cluster_operation_arn)
+      include Aws::Structure
+    end
+
     # Zookeeper node information.
     #
     # @!attribute [rw] attached_eni_id
@@ -1756,6 +1853,160 @@ module Aws::Kafka
       :endpoints,
       :zookeeper_id,
       :zookeeper_version)
+      include Aws::Structure
+    end
+
+    # JMX and Node monitoring for the MSK cluster.
+    #
+    # @!attribute [rw] prometheus
+    #   Prometheus settings.
+    #   @return [Types::Prometheus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/OpenMonitoring AWS API Documentation
+    #
+    class OpenMonitoring < Struct.new(
+      :prometheus)
+      include Aws::Structure
+    end
+
+    # JMX and Node monitoring for the MSK cluster.
+    #
+    # @note When making an API call, you may pass OpenMonitoringInfo
+    #   data as a hash:
+    #
+    #       {
+    #         prometheus: { # required
+    #           jmx_exporter: {
+    #             enabled_in_broker: false, # required
+    #           },
+    #           node_exporter: {
+    #             enabled_in_broker: false, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] prometheus
+    #   Prometheus settings.
+    #   @return [Types::PrometheusInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/OpenMonitoringInfo AWS API Documentation
+    #
+    class OpenMonitoringInfo < Struct.new(
+      :prometheus)
+      include Aws::Structure
+    end
+
+    # Prometheus settings for open monitoring.
+    #
+    # @!attribute [rw] jmx_exporter
+    #   Indicates whether you want to enable or disable the JMX Exporter.
+    #   @return [Types::JmxExporter]
+    #
+    # @!attribute [rw] node_exporter
+    #   Indicates whether you want to enable or disable the Node Exporter.
+    #   @return [Types::NodeExporter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Prometheus AWS API Documentation
+    #
+    class Prometheus < Struct.new(
+      :jmx_exporter,
+      :node_exporter)
+      include Aws::Structure
+    end
+
+    # Prometheus settings.
+    #
+    # @note When making an API call, you may pass PrometheusInfo
+    #   data as a hash:
+    #
+    #       {
+    #         jmx_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #         node_exporter: {
+    #           enabled_in_broker: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] jmx_exporter
+    #   JMX Exporter settings.
+    #   @return [Types::JmxExporterInfo]
+    #
+    # @!attribute [rw] node_exporter
+    #   Node Exporter settings.
+    #   @return [Types::NodeExporterInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/PrometheusInfo AWS API Documentation
+    #
+    class PrometheusInfo < Struct.new(
+      :jmx_exporter,
+      :node_exporter)
+      include Aws::Structure
+    end
+
+    # Indicates whether you want to enable or disable the JMX Exporter.
+    #
+    # @!attribute [rw] enabled_in_broker
+    #   Indicates whether you want to enable or disable the JMX Exporter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/JmxExporter AWS API Documentation
+    #
+    class JmxExporter < Struct.new(
+      :enabled_in_broker)
+      include Aws::Structure
+    end
+
+    # Indicates whether you want to enable or disable the JMX Exporter.
+    #
+    # @note When making an API call, you may pass JmxExporterInfo
+    #   data as a hash:
+    #
+    #       {
+    #         enabled_in_broker: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled_in_broker
+    #   Indicates whether you want to enable or disable the JMX Exporter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/JmxExporterInfo AWS API Documentation
+    #
+    class JmxExporterInfo < Struct.new(
+      :enabled_in_broker)
+      include Aws::Structure
+    end
+
+    # Indicates whether you want to enable or disable the Node Exporter.
+    #
+    # @!attribute [rw] enabled_in_broker
+    #   Indicates whether you want to enable or disable the Node Exporter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NodeExporter AWS API Documentation
+    #
+    class NodeExporter < Struct.new(
+      :enabled_in_broker)
+      include Aws::Structure
+    end
+
+    # Indicates whether you want to enable or disable the Node Exporter.
+    #
+    # @note When making an API call, you may pass NodeExporterInfo
+    #   data as a hash:
+    #
+    #       {
+    #         enabled_in_broker: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled_in_broker
+    #   Indicates whether you want to enable or disable the Node Exporter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/NodeExporterInfo AWS API Documentation
+    #
+    class NodeExporterInfo < Struct.new(
+      :enabled_in_broker)
       include Aws::Structure
     end
 

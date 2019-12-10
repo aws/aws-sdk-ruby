@@ -121,6 +121,7 @@ module Aws::KMS
     InvalidKeyUsageException = Shapes::StructureShape.new(name: 'InvalidKeyUsageException')
     InvalidMarkerException = Shapes::StructureShape.new(name: 'InvalidMarkerException')
     KMSInternalException = Shapes::StructureShape.new(name: 'KMSInternalException')
+    KMSInvalidSignatureException = Shapes::StructureShape.new(name: 'KMSInvalidSignatureException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
     KeyIdType = Shapes::StringShape.new(name: 'KeyIdType')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
@@ -524,6 +525,9 @@ module Aws::KMS
 
     KMSInternalException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     KMSInternalException.struct_class = Types::KMSInternalException
+
+    KMSInvalidSignatureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
+    KMSInvalidSignatureException.struct_class = Types::KMSInvalidSignatureException
 
     KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
@@ -1344,6 +1348,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1427,6 +1432,8 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidSignatureException)
       end)
     end
 

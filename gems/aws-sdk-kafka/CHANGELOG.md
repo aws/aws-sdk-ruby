@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2019-12-09)
+------------------
+
+* Feature - AWS MSK has added support for Open Monitoring with Prometheus.
+
 1.15.0 (2019-10-23)
 ------------------
 

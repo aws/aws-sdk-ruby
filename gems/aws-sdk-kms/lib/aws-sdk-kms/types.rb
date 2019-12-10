@@ -2792,6 +2792,21 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because the signature verification failed.
+    # Signature verification fails when it cannot confirm that signature was
+    # produced by signing the specified message with the specified CMK and
+    # signing algorithm.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KMSInvalidSignatureException AWS API Documentation
+    #
+    class KMSInvalidSignatureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request was rejected because the state of the specified resource
     # is not valid for this request.
     #
@@ -4289,8 +4304,8 @@ module Aws::KMS
     # @!attribute [rw] key_id
     #   Identifies the asymmetric CMK that will be used to verify the
     #   signature. This must be the same CMK that was used to generate the
-    #   signature. If you specify a different CMK, the value of the
-    #   `SignatureValid` field in the response will be `False`.
+    #   signature. If you specify a different CMK, the signature
+    #   verification fails.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -4318,8 +4333,7 @@ module Aws::KMS
     #   provide a hash digest of the message.
     #
     #   If the digest of the message specified here is different from the
-    #   message digest that was signed, the `SignatureValid` value in the
-    #   response will be `False`.
+    #   message digest that was signed, the signature verification fails.
     #   @return [String]
     #
     # @!attribute [rw] message_type
@@ -4334,8 +4348,7 @@ module Aws::KMS
     #
     # @!attribute [rw] signing_algorithm
     #   The signing algorithm that was used to sign the message. If you
-    #   submit a different algorithm, the value of the `SignatureValid`
-    #   field in the response will be `False`.
+    #   submit a different algorithm, the signature verification fails.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -4368,10 +4381,10 @@ module Aws::KMS
     #
     # @!attribute [rw] signature_valid
     #   A Boolean value that indicates whether the signature was verified. A
-    #   value of True indicates that the `Signature` was produced by signing
-    #   the `Message` with the specified KeyID and `SigningAlgorithm.` A
-    #   value of False indicates that the message, the algorithm, or the key
-    #   changed since the message was signed.
+    #   value of `True` indicates that the `Signature` was produced by
+    #   signing the `Message` with the specified `KeyID` and
+    #   `SigningAlgorithm.` If the signature is not verified, the `Verify`
+    #   operation fails with a `KMSInvalidSignatureException` exception.
     #   @return [Boolean]
     #
     # @!attribute [rw] signing_algorithm

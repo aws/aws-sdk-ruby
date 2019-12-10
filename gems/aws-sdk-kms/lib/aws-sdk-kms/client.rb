@@ -3215,19 +3215,18 @@ module Aws::KMS
     # authorization, and logging that are part of every AWS KMS operation.
     # You also reduce of risk of encrypting data that cannot be decrypted.
     # These features are not effective outside of AWS KMS. For details, see
-    # [Special Considerations for Downloading Public
-    # Keys](kms/latest/developerguide/get-public-key.html#get-public-key-considerations).
+    # [Special Considerations for Downloading Public Keys][2].
     #
     # To help you use the public key safely outside of AWS KMS,
     # `GetPublicKey` returns important information about the public key in
     # the response, including:
     #
-    # * [CustomerMasterKeySpec][2]\: The type of key material in the public
+    # * [CustomerMasterKeySpec][3]\: The type of key material in the public
     #   key, such as `RSA_4096` or `ECC_NIST_P521`.
     #
-    # * [KeyUsage][3]\: Whether the key is used for encryption or signing.
+    # * [KeyUsage][4]\: Whether the key is used for encryption or signing.
     #
-    # * [EncryptionAlgorithms][4] or [SigningAlgorithms][5]\: A list of the
+    # * [EncryptionAlgorithms][5] or [SigningAlgorithms][6]\: A list of the
     #   encryption algorithms or the signing algorithms for the key.
     #
     # Although AWS KMS cannot enforce these restrictions on external
@@ -3240,16 +3239,17 @@ module Aws::KMS
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][6] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][7] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-CustomerMasterKeySpec
-    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage
-    # [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms
-    # [5]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/download-public-key.html#download-public-key-considerations
+    # [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-CustomerMasterKeySpec
+    # [4]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeyUsage
+    # [5]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-EncryptionAlgorithms
+    # [6]: https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-SigningAlgorithms
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String] :key_id
     #   Identifies the asymmetric CMK that includes the public key.
@@ -4208,10 +4208,9 @@ module Aws::KMS
 
     # Decrypts ciphertext and then reencrypts it entirely within AWS KMS.
     # You can use this operation to change the customer master key (CMK)
-    # under which data is encrypted, such as when you [manually
-    # rotate](kms/latest/developerguide/rotate-keys.html#rotate-keys-manually)
-    # a CMK or change the CMK that protects a ciphertext. You can also use
-    # it to reencrypt ciphertext under the same CMK, such as to change the
+    # under which data is encrypted, such as when you [manually rotate][1] a
+    # CMK or change the CMK that protects a ciphertext. You can also use it
+    # to reencrypt ciphertext under the same CMK, such as to change the
     # encryption context of a ciphertext.
     #
     # The `ReEncrypt` operation can decrypt ciphertext that was encrypted by
@@ -4219,7 +4218,7 @@ module Aws::KMS
     # GenerateDataKey. It can also decrypt ciphertext that was encrypted by
     # using the public key of an asymmetric CMK outside of AWS KMS. However,
     # it cannot decrypt ciphertext produced by other libraries, such as the
-    # [AWS Encryption SDK][1] or [Amazon S3 client-side encryption][2].
+    # [AWS Encryption SDK][2] or [Amazon S3 client-side encryption][3].
     # These libraries return a ciphertext format that is incompatible with
     # AWS KMS.
     #
@@ -4266,21 +4265,22 @@ module Aws::KMS
     # To permit reencryption from
     #
     # or to a CMK, include the `"kms:ReEncrypt*"` permission in your [key
-    # policy][3]. This permission is automatically included in the key
+    # policy][4]. This permission is automatically included in the key
     # policy when you use the console to create a CMK. But you must include
     # it manually when you create a CMK programmatically or when you use the
     # PutKeyPolicy operation set a key policy.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
-    # Master Key][4] in the *AWS Key Management Service Developer Guide*.
+    # Master Key][5] in the *AWS Key Management Service Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-manually
+    # [2]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
     #
     # @option params [required, String, IO] :ciphertext_blob
     #   Ciphertext of the data to reencrypt.
@@ -5215,38 +5215,35 @@ module Aws::KMS
     end
 
     # Verifies a digital signature that was generated by the Sign operation.
-    # This operation requires an asymmetric CMK with a `KeyUsage` value of
-    # `SIGN_VERIFY`.
     #
     #
     #
     # Verification confirms that an authorized user signed the message with
-    # the specified key and signing algorithm, and the message hasn't
-    # changed since it was signed. A digital signature is generated by using
-    # the private key in an asymmetric CMK. The signature is verified by
-    # using the public key in the same asymmetric CMK. For information about
-    # symmetric and asymmetric CMKs, see [Using Symmetric and Asymmetric
-    # CMKs][1] in the *AWS Key Management Service Developer Guide*.
+    # the specified CMK and signing algorithm, and the message hasn't
+    # changed since it was signed. If the signature is verified, the value
+    # of the `SignatureValid` field in the response is `True`. If the
+    # signature verification fails, the `Verify` operation fails with an
+    # `KMSInvalidSignatureException` exception.
+    #
+    # A digital signature is generated by using the private key in an
+    # asymmetric CMK. The signature is verified by using the public key in
+    # the same asymmetric CMK. For information about symmetric and
+    # asymmetric CMKs, see [Using Symmetric and Asymmetric CMKs][1] in the
+    # *AWS Key Management Service Developer Guide*.
     #
     # To verify a digital signature, you can use the `Verify` operation.
-    # Specify the same asymmetric CMK that was used by the `Sign` operation
-    # to generate the digital signature.
+    # Specify the same asymmetric CMK, message, and signing algorithm that
+    # were used to produce the signature.
     #
     # You can also verify the digital signature by using the public key of
     # the CMK outside of AWS KMS. Use the GetPublicKey operation to download
     # the public key in the asymmetric CMK and then use the public key to
-    # verify the signature outside of AWS KMS.
-    #
-    # The advantage of using the `Verify` operation is that it is performed
-    # within AWS KMS. As a result, it's easy to call, the operation is
-    # performed within the FIPS boundary, it is logged in AWS CloudTrail,
-    # and you can use key policy and IAM policy to determine who is
-    # authorized to use the CMK to verify signatures.
-    #
-    # The result of the `Verify` operation, which is represented by its HTTP
-    # status code, does not indicate whether the signature verification
-    # succeeded or failed. To determine whether the signature was verified,
-    # see the `SignatureValid` field in the response.
+    # verify the signature outside of AWS KMS. The advantage of using the
+    # `Verify` operation is that it is performed within AWS KMS. As a
+    # result, it's easy to call, the operation is performed within the FIPS
+    # boundary, it is logged in AWS CloudTrail, and you can use key policy
+    # and IAM policy to determine who is authorized to use the CMK to verify
+    # signatures.
     #
     # The CMK that you use for this operation must be in a compatible key
     # state. For details, see [How Key State Affects Use of a Customer
@@ -5260,8 +5257,8 @@ module Aws::KMS
     # @option params [required, String] :key_id
     #   Identifies the asymmetric CMK that will be used to verify the
     #   signature. This must be the same CMK that was used to generate the
-    #   signature. If you specify a different CMK, the value of the
-    #   `SignatureValid` field in the response will be `False`.
+    #   signature. If you specify a different CMK, the signature verification
+    #   fails.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -5288,8 +5285,7 @@ module Aws::KMS
     #   provide a hash digest of the message.
     #
     #   If the digest of the message specified here is different from the
-    #   message digest that was signed, the `SignatureValid` value in the
-    #   response will be `False`.
+    #   message digest that was signed, the signature verification fails.
     #
     # @option params [String] :message_type
     #   Tells AWS KMS whether the value of the `Message` parameter is a
@@ -5301,8 +5297,7 @@ module Aws::KMS
     #
     # @option params [required, String] :signing_algorithm
     #   The signing algorithm that was used to sign the message. If you submit
-    #   a different algorithm, the value of the `SignatureValid` field in the
-    #   response will be `False`.
+    #   a different algorithm, the signature verification fails.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5359,7 +5354,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
