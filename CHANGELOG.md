@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kendra - Updated the API, and documentation for AWSKendraFrontendService.
+
 2.11.412 (2019-12-09)
 ------------------
 
