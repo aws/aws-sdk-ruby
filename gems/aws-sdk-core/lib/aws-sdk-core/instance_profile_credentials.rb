@@ -29,24 +29,24 @@ module Aws
       Errno::ENETUNREACH,
       SocketError,
       Timeout::Error,
-      Non200Response,
-    ]
+      Non200Response
+    ].freeze
 
     # Path base for GET request for profile and credentials
     # @api private
-    METADATA_PATH_BASE = '/latest/meta-data/iam/security-credentials/'
+    METADATA_PATH_BASE = '/latest/meta-data/iam/security-credentials/'.freeze
 
     # Path for PUT request for token
     # @api private
-    METADATA_TOKEN_PATH = '/latest/api/token'
+    METADATA_TOKEN_PATH = '/latest/api/token'.freeze
 
     # @param [Hash] options
-    # @option options [Integer] :retries (5) Number of times to retry
+    # @option options [Integer] :retries (1) Number of times to retry
     #   when retrieving credentials.
     # @option options [String] :ip_address ('169.254.169.254')
     # @option options [Integer] :port (80)
-    # @option options [Float] :http_open_timeout (5)
-    # @option options [Float] :http_read_timeout (5)
+    # @option options [Float] :http_open_timeout (1)
+    # @option options [Float] :http_read_timeout (1)
     # @option options [Numeric, Proc] :delay By default, failures are retried
     #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
     #   pass a number of seconds to sleep between failed attempts, or
@@ -57,15 +57,15 @@ module Aws
     # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
-    def initialize options = {}
-      @retries = options[:retries] || 5
+    def initialize(options = {})
+      @retries = options[:retries] || 1
       @ip_address = options[:ip_address] || '169.254.169.254'
       @port = options[:port] || 80
-      @http_open_timeout = options[:http_open_timeout] || 5
-      @http_read_timeout = options[:http_read_timeout] || 5
+      @http_open_timeout = options[:http_open_timeout] || 1
+      @http_read_timeout = options[:http_read_timeout] || 1
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
-      @token_ttl = options[:token_ttl] || 21600
+      @token_ttl = options[:token_ttl] || 21_600
       @token = nil
       super
     end
@@ -80,8 +80,8 @@ module Aws
     def backoff(backoff)
       case backoff
       when Proc then backoff
-      when Numeric then lambda { |_| sleep(backoff) }
-      else lambda { |num_failures| Kernel.sleep(1.2 ** num_failures) }
+      when Numeric then ->(_) { sleep(backoff) }
+      else ->(num_failures) { Kernel.sleep(1.2**num_failures) }
       end
     end
 
@@ -100,7 +100,7 @@ module Aws
           @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
         end
       rescue JSON::ParserError
-        raise Aws::Errors::MetadataParserError.new
+        raise Aws::Errors::MetadataParserError
       end
     end
 
@@ -118,7 +118,9 @@ module Aws
               begin
                 retry_errors(NETWORK_ERRORS, max_retries: @retries) do
                   unless token_set?
-                    token_value, ttl = http_put(conn, METADATA_TOKEN_PATH, @token_ttl)
+                    token_value, ttl = http_put(
+                      conn, METADATA_TOKEN_PATH, @token_ttl
+                    )
                     @token = Token.new(token_value, ttl) if token_value && ttl
                   end
                 end
@@ -128,13 +130,10 @@ module Aws
                 @token = nil
               end
 
-              if token_set?
-                profile_name = http_get(conn, METADATA_PATH_BASE, @token.value).lines.first.strip
-                http_get(conn, METADATA_PATH_BASE + profile_name, @token.value)
-              else
-                profile_name = http_get(conn, METADATA_PATH_BASE).lines.first.strip
-                http_get(conn, METADATA_PATH_BASE + profile_name)
-              end
+              token = @token.value if token_set?
+              metadata = http_get(conn, METADATA_PATH_BASE, token)
+              profile_name = metadata.lines.first.strip
+              http_get(conn, METADATA_PATH_BASE + profile_name, token)
             end
           end
         rescue
@@ -148,8 +147,7 @@ module Aws
     end
 
     def _metadata_disabled?
-      flag = ENV["AWS_EC2_METADATA_DISABLED"]
-      !flag.nil? && flag.downcase == "true"
+      ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
     end
 
     def open_connection
@@ -162,59 +160,54 @@ module Aws
     end
 
     # GET request fetch profile and credentials
-    def http_get(connection, path, token=nil)
-      headers = {"User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}"}
-      headers["x-aws-ec2-metadata-token"] = token if token
+    def http_get(connection, path, token = nil)
+      headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}" }
+      headers['x-aws-ec2-metadata-token'] = token if token
       response = connection.request(Net::HTTP::Get.new(path, headers))
-      if response.code.to_i == 200
-        response.body
-      else
-        raise Non200Response
-      end
+      raise Non200Response unless response.code.to_i == 200
+
+      response.body
     end
 
     # PUT request fetch token with ttl
     def http_put(connection, path, ttl)
       headers = {
-        "User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
-        "x-aws-ec2-metadata-token-ttl-seconds" => ttl.to_s
+        'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}",
+        'x-aws-ec2-metadata-token-ttl-seconds' => ttl.to_s
       }
       response = connection.request(Net::HTTP::Put.new(path, headers))
       case response.code.to_i
       when 200
         [
           response.body,
-          response.header["x-aws-ec2-metadata-token-ttl-seconds"].to_i
+          response.header['x-aws-ec2-metadata-token-ttl-seconds'].to_i
         ]
-      when 401
-        raise TokenExpiredError
       when 400
         raise TokenRetrivalError
+      when 401
+        raise TokenExpiredError
       else
         raise Non200Response
       end
     end
 
-    def retry_errors(error_classes, options = {}, &block)
+    def retry_errors(error_classes, options = {}, &_block)
       max_retries = options[:max_retries]
       retries = 0
       begin
         yield
       rescue *error_classes
-        if retries < max_retries
-          @backoff.call(retries)
-          retries += 1
-          retry
-        else
-          raise
-        end
+        raise unless retries < max_retries
+
+        @backoff.call(retries)
+        retries += 1
+        retry
       end
     end
 
     # @api private
     # Token used to fetch IMDS profile and credentials
     class Token
-
       def initialize(value, ttl)
         @ttl = ttl
         @value = value
@@ -227,8 +220,6 @@ module Aws
       def expired?
         Time.now - @created_time > @ttl
       end
-
     end
-
   end
 end
