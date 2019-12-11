@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.85.1 (2019-12-11)
+------------------
+
 * Issue - Change default timeout to 1 and number of retries to 1 for `InstanceProfileCredentials`.
 
 3.85.0 (2019-12-09)

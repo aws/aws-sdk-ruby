@@ -144,6 +144,7 @@ module Aws::EC2
     #     elastic_inference_accelerators: [
     #       {
     #         type: "String", # required
+    #         count: 1,
     #       },
     #     ],
     #     tag_specifications: [

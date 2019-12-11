@@ -5804,6 +5804,7 @@ module Aws::EC2
     #           elastic_inference_accelerators: [
     #             {
     #               type: "String", # required
+    #               count: 1,
     #             },
     #           ],
     #           security_group_ids: ["String"],
@@ -6008,6 +6009,7 @@ module Aws::EC2
     #           elastic_inference_accelerators: [
     #             {
     #               type: "String", # required
+    #               count: 1,
     #             },
     #           ],
     #           security_group_ids: ["String"],
@@ -22175,17 +22177,25 @@ module Aws::EC2
     #
     #       {
     #         type: "String", # required
+    #         count: 1,
     #       }
     #
     # @!attribute [rw] type
     #   The type of elastic inference accelerator. The possible values are
-    #   `eia1.small`, `eia1.medium`, and `eia1.large`.
+    #   `eia1.medium`, `eia1.large`, and `eia1.xlarge`.
     #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of elastic inference accelerators of given type to be
+    #   attached to the instance. Only positive values allowed. If not
+    #   specified defaults to 1.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticInferenceAccelerator AWS API Documentation
     #
     class ElasticInferenceAccelerator < Struct.new(
-      :type)
+      :type,
+      :count)
       include Aws::Structure
     end
 
@@ -29205,6 +29215,7 @@ module Aws::EC2
     #
     #       {
     #         type: "String", # required
+    #         count: 1,
     #       }
     #
     # @!attribute [rw] type
@@ -29212,10 +29223,17 @@ module Aws::EC2
     #   eia1.medium, eia1.large, and eia1.xlarge.
     #   @return [String]
     #
+    # @!attribute [rw] count
+    #   The number of elastic inference accelerators of given type to be
+    #   attached to the instance. Only positive values allowed. If not
+    #   specified defaults to 1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAccelerator AWS API Documentation
     #
     class LaunchTemplateElasticInferenceAccelerator < Struct.new(
-      :type)
+      :type,
+      :count)
       include Aws::Structure
     end
 
@@ -29226,10 +29244,17 @@ module Aws::EC2
     #   eia1.medium, eia1.large, and eia1.xlarge.
     #   @return [String]
     #
+    # @!attribute [rw] count
+    #   The number of elastic inference accelerators of given type to be
+    #   attached to the instance. Only positive values allowed. If not
+    #   specified defaults to 1.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateElasticInferenceAcceleratorResponse AWS API Documentation
     #
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
-      :type)
+      :type,
+      :count)
       include Aws::Structure
     end
 
@@ -36482,6 +36507,7 @@ module Aws::EC2
     #         elastic_inference_accelerators: [
     #           {
     #             type: "String", # required
+    #             count: 1,
     #           },
     #         ],
     #         security_group_ids: ["String"],
@@ -38891,6 +38917,7 @@ module Aws::EC2
     #         elastic_inference_accelerators: [
     #           {
     #             type: "String", # required
+    #             count: 1,
     #           },
     #         ],
     #         tag_specifications: [

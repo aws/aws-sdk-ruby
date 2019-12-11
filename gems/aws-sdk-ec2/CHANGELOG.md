@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.124.0 (2019-12-11)
+------------------
+
+* Feature - This release allows customers to attach multiple Elastic Inference Accelerators to a single EC2 instance. It adds support for a Count parameter for each Elastic Inference Accelerator type you specify on the RunInstances and LaunchTemplate APIs.
+
 1.123.0 (2019-12-03)
 ------------------
 

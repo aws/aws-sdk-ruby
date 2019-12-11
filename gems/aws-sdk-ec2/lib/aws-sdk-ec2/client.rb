@@ -5214,6 +5214,7 @@ module Aws::EC2
     #       elastic_inference_accelerators: [
     #         {
     #           type: "String", # required
+    #           count: 1,
     #         },
     #       ],
     #       security_group_ids: ["String"],
@@ -5475,6 +5476,7 @@ module Aws::EC2
     #       elastic_inference_accelerators: [
     #         {
     #           type: "String", # required
+    #           count: 1,
     #         },
     #       ],
     #       security_group_ids: ["String"],
@@ -5579,6 +5581,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications[0].type #=> String
     #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators #=> Array
     #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators[0].type #=> String
+    #   resp.launch_template_version.launch_template_data.elastic_inference_accelerators[0].count #=> Integer
     #   resp.launch_template_version.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_version.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_version.launch_template_data.security_groups #=> Array
@@ -16612,6 +16615,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications[0].type #=> String
     #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators #=> Array
     #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators[0].type #=> String
+    #   resp.launch_template_versions[0].launch_template_data.elastic_inference_accelerators[0].count #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_versions[0].launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_versions[0].launch_template_data.security_groups #=> Array
@@ -26075,6 +26079,7 @@ module Aws::EC2
     #   resp.launch_template_data.elastic_gpu_specifications[0].type #=> String
     #   resp.launch_template_data.elastic_inference_accelerators #=> Array
     #   resp.launch_template_data.elastic_inference_accelerators[0].type #=> String
+    #   resp.launch_template_data.elastic_inference_accelerators[0].count #=> Integer
     #   resp.launch_template_data.security_group_ids #=> Array
     #   resp.launch_template_data.security_group_ids[0] #=> String
     #   resp.launch_template_data.security_groups #=> Array
@@ -33932,6 +33937,7 @@ module Aws::EC2
     #     elastic_inference_accelerators: [
     #       {
     #         type: "String", # required
+    #         count: 1,
     #       },
     #     ],
     #     tag_specifications: [
@@ -35420,7 +35426,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.123.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

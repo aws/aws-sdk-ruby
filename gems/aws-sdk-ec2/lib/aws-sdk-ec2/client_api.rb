@@ -803,6 +803,7 @@ module Aws::EC2
     ElasticInferenceAccelerator = Shapes::StructureShape.new(name: 'ElasticInferenceAccelerator')
     ElasticInferenceAcceleratorAssociation = Shapes::StructureShape.new(name: 'ElasticInferenceAcceleratorAssociation')
     ElasticInferenceAcceleratorAssociationList = Shapes::ListShape.new(name: 'ElasticInferenceAcceleratorAssociationList')
+    ElasticInferenceAcceleratorCount = Shapes::IntegerShape.new(name: 'ElasticInferenceAcceleratorCount')
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
@@ -1136,6 +1137,7 @@ module Aws::EC2
     LaunchTemplateEbsBlockDevice = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDevice')
     LaunchTemplateEbsBlockDeviceRequest = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDeviceRequest')
     LaunchTemplateElasticInferenceAccelerator = Shapes::StructureShape.new(name: 'LaunchTemplateElasticInferenceAccelerator')
+    LaunchTemplateElasticInferenceAcceleratorCount = Shapes::IntegerShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorCount')
     LaunchTemplateElasticInferenceAcceleratorList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorList')
     LaunchTemplateElasticInferenceAcceleratorResponse = Shapes::StructureShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponse')
     LaunchTemplateElasticInferenceAcceleratorResponseList = Shapes::ListShape.new(name: 'LaunchTemplateElasticInferenceAcceleratorResponseList')
@@ -5101,6 +5103,7 @@ module Aws::EC2
     ElasticGpus.struct_class = Types::ElasticGpus
 
     ElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    ElasticInferenceAccelerator.add_member(:count, Shapes::ShapeRef.new(shape: ElasticInferenceAcceleratorCount, location_name: "Count"))
     ElasticInferenceAccelerator.struct_class = Types::ElasticInferenceAccelerator
 
     ElasticInferenceAcceleratorAssociation.add_member(:elastic_inference_accelerator_arn, Shapes::ShapeRef.new(shape: String, location_name: "elasticInferenceAcceleratorArn"))
@@ -6409,11 +6412,13 @@ module Aws::EC2
     LaunchTemplateEbsBlockDeviceRequest.struct_class = Types::LaunchTemplateEbsBlockDeviceRequest
 
     LaunchTemplateElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
+    LaunchTemplateElasticInferenceAccelerator.add_member(:count, Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorCount, location_name: "Count"))
     LaunchTemplateElasticInferenceAccelerator.struct_class = Types::LaunchTemplateElasticInferenceAccelerator
 
     LaunchTemplateElasticInferenceAcceleratorList.member = Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAccelerator, location_name: "item")
 
     LaunchTemplateElasticInferenceAcceleratorResponse.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    LaunchTemplateElasticInferenceAcceleratorResponse.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
     LaunchTemplateElasticInferenceAcceleratorResponse.struct_class = Types::LaunchTemplateElasticInferenceAcceleratorResponse
 
     LaunchTemplateElasticInferenceAcceleratorResponseList.member = Shapes::ShapeRef.new(shape: LaunchTemplateElasticInferenceAcceleratorResponse, location_name: "item")
