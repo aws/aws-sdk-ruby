@@ -254,13 +254,15 @@ module Aws::AccessAnalyzer
 
     # @!group API Operations
 
-    # Creates an analyzer with a zone of trust set to your account.
+    # Creates an analyzer for your account.
     #
     # @option params [required, String] :analyzer_name
     #   The name of the analyzer to create.
     #
     # @option params [Array<Types::InlineArchiveRule>] :archive_rules
-    #   Specifies the archive rules to add for the analyzer.
+    #   Specifies the archive rules to add for the analyzer. Archive rules
+    #   automatically archive findings that meet the criteria you define for
+    #   the rule.
     #
     # @option params [String] :client_token
     #   A client token.
@@ -272,8 +274,8 @@ module Aws::AccessAnalyzer
     #   The tags to apply to the analyzer.
     #
     # @option params [required, String] :type
-    #   The zone of trust for the analyzer. You can create only one analyzer
-    #   per account per Region.
+    #   The type of analyzer to create. Only ACCOUNT analyzers are supported.
+    #   You can create only one analyzer per account per Region.
     #
     # @return [Types::CreateAnalyzerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -316,7 +318,9 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Creates an archive rule for the specified analyzer.
+    # Creates an archive rule for the specified analyzer. Archive rules
+    # automatically archive findings that meet the criteria you define when
+    # you create the rule.
     #
     # @option params [required, String] :analyzer_name
     #   The name of the created analyzer.
@@ -395,7 +399,8 @@ module Aws::AccessAnalyzer
     # Deletes the specified archive rule.
     #
     # @option params [required, String] :analyzer_name
-    #   The name of the analyzer that was deleted.
+    #   The name of the analyzer that associated with the archive rule to
+    #   delete.
     #
     # @option params [String] :client_token
     #   A client token.
@@ -425,7 +430,7 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Retrieves information about an analyzed resource.
+    # Retrieves information about a resource that was analyzed.
     #
     # @option params [required, String] :analyzer_arn
     #   The ARN of the analyzer to retrieve information from.
@@ -591,7 +596,8 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Retrieves a list of resources that have been analyzed.
+    # Retrieves a list of resources of the specified type that have been
+    # analyzed by the specified analyzer..
     #
     # @option params [required, String] :analyzer_arn
     #   The ARN of the analyzer to retrieve a list of analyzed resources from.
@@ -644,8 +650,7 @@ module Aws::AccessAnalyzer
     #   A token used for pagination of results returned.
     #
     # @option params [String] :type
-    #   The type of analyzer, which corresponds to the zone of trust selected
-    #   when the analyzer was created.
+    #   The type of analyzer.
     #
     # @return [Types::ListAnalyzersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -831,7 +836,8 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Starts a scan of the policies applied to the specified resource.
+    # Immediately starts a scan of the policies applied to the specified
+    # resource.
     #
     # @option params [required, String] :analyzer_arn
     #   The ARN of the analyzer to use to scan the policies applied to the
@@ -912,7 +918,7 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Updates the specified archive rule.
+    # Updates the criteria and values for the specified archive rule.
     #
     # @option params [required, String] :analyzer_name
     #   The name of the analyzer to update the archive rules for.
@@ -957,7 +963,7 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
-    # Updates findings with the new values provided in the request.
+    # Updates the status for the specified findings.
     #
     # @option params [required, String] :analyzer_arn
     #   The ARN of the analyzer that generated the findings to update.
@@ -1013,7 +1019,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

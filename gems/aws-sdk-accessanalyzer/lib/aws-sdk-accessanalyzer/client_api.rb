@@ -76,7 +76,7 @@ module Aws::AccessAnalyzer
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagsMap = Shapes::MapShape.new(name: 'TagsMap')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
-    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
     Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')

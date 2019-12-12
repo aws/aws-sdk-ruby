@@ -225,7 +225,9 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] archive_rules
-    #   Specifies the archive rules to add for the analyzer.
+    #   Specifies the archive rules to add for the analyzer. Archive rules
+    #   automatically archive findings that meet the criteria you define for
+    #   the rule.
     #   @return [Array<Types::InlineArchiveRule>]
     #
     # @!attribute [rw] client_token
@@ -240,8 +242,8 @@ module Aws::AccessAnalyzer
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The zone of trust for the analyzer. You can create only one analyzer
-    #   per account per Region.
+    #   The type of analyzer to create. Only ACCOUNT analyzers are
+    #   supported. You can create only one analyzer per account per Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateAnalyzerRequest AWS API Documentation
@@ -316,7 +318,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The criteria to use in the filter that defines the rule.
+    # The criteria to use in the filter that defines the archive rule.
     #
     # @note When making an API call, you may pass Criterion
     #   data as a hash:
@@ -399,7 +401,8 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] analyzer_name
-    #   The name of the analyzer that was deleted.
+    #   The name of the analyzer that associated with the archive rule to
+    #   delete.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -706,7 +709,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The resposne to the request.
+    # The response to the request.
     #
     # @!attribute [rw] finding
     #   A `finding` object that contains finding details.
@@ -719,7 +722,8 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # An inline archive rule.
+    # An criterion statement in an archive rule. Each archive rule may have
+    # multiple criteria.
     #
     # @note When making an API call, you may pass InlineArchiveRule
     #   data as a hash:
@@ -737,7 +741,7 @@ module Aws::AccessAnalyzer
     #       }
     #
     # @!attribute [rw] filter
-    #   The criteria for the rule.
+    #   The condition and values for a criterion.
     #   @return [Hash<String,Types::Criterion>]
     #
     # @!attribute [rw] rule_name
@@ -846,8 +850,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of analyzer, which corresponds to the zone of trust
-    #   selected when the analyzer was created.
+    #   The type of analyzer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzersRequest AWS API Documentation
@@ -981,7 +984,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The resposne to the request.
+    # The response to the request.
     #
     # @!attribute [rw] findings
     #   A list of findings retrieved from the analyzer that match the filter
@@ -1077,7 +1080,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The sort criteria.
+    # The criteria used to sort.
     #
     # @note When making an API call, you may pass SortCriteria
     #   data as a hash:
@@ -1207,7 +1210,7 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
-    # The response tot he request.
+    # The response to the request.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UntagResourceResponse AWS API Documentation
     #
