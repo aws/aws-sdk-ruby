@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.416 (2019-12-13)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::SESV2 - Updated the API, and documentation for Amazon Simple Email Service.
