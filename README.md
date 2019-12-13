@@ -316,8 +316,8 @@ to be backwards compatible.
 | AWS IoT Things Graph                                  | IoTThingsGraph                  | 2018-09-06  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
 | AWS Lake Formation                                    | LakeFormation                   | 2017-03-31  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS License Manager                                   | LicenseManager                  | 2018-08-01  |
 | AWS Marketplace Catalog Service                       | MarketplaceCatalog              | 2018-09-17  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
@@ -387,6 +387,7 @@ to be backwards compatible.
 | Amazon Connect Participant Service                    | ConnectParticipant              | 2018-09-07  |
 | Amazon Connect Service                                | Connect                         | 2017-08-08  |
 | Amazon Data Lifecycle Manager                         | DLM                             | 2018-01-12  |
+| Amazon Detective                                      | Detective                       | 2018-10-26  |
 | Amazon DocumentDB with MongoDB compatibility          | DocDB                           | 2014-10-31  |
 | Amazon DynamoDB                                       | DynamoDB                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | DAX                             | 2017-04-19  |
@@ -468,8 +469,8 @@ to be backwards compatible.
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
 | EC2 Image Builder                                     | Imagebuilder                    | 2019-12-02  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 | Managed Streaming for Kafka                           | Kafka                           | 2018-11-14  |
 | Schemas                                               | Schemas                         | 2019-12-02  |

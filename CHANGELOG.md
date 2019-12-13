@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::SESV2 - Updated the API, and documentation for Amazon Simple Email Service.
+
+* Feature - Aws::Detective - Added support for a new service, Amazon Detective.
+
 2.11.415 (2019-12-12)
 ------------------
 

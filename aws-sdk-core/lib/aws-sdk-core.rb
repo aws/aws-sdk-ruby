@@ -83,6 +83,7 @@ module Aws
     DataPipeline
     DataSync
     DatabaseMigrationService
+    Detective
     DeviceFarm
     DirectConnect
     DirectoryService

@@ -238,6 +238,10 @@
     "models": "dms/2016-01-01",
     "endpoint": "dms"
   },
+  "Detective": {
+    "models": "detective/2018-10-26",
+    "endpoint": "api.detective"
+  },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23",
     "endpoint": "devicefarm"
