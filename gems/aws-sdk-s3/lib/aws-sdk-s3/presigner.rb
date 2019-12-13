@@ -15,6 +15,7 @@ module Aws
 
       # @api private
       FIFTEEN_MINUTES = 60 * 15
+      MIN_GUARD = 0
 
       BLACKLISTED_HEADERS = [
         'accept',
@@ -106,6 +107,12 @@ module Aws
             msg = "expires_in value of #{expires_in} exceeds one-week maximum"
             raise ArgumentError, msg
           end
+
+	  if expires_in <= MIN_GUARD 
+            msg = "expires_in value of #{expires_in} less than minimum"
+            raise ArgumentError, msg
+	  end
+
           expires_in
         else
           FIFTEEN_MINUTES
