@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2019-12-13)
+------------------
+
+* Feature - CodeBuild adds support for cross account
+
 1.45.0 (2019-11-25)
 ------------------
 

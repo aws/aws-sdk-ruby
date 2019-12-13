@@ -686,7 +686,9 @@ module Aws::CodeBuild
     # Gets information about one or more build projects.
     #
     # @option params [required, Array<String>] :names
-    #   The names of the build projects.
+    #   The names or ARNs of the build projects. To get information about a
+    #   project shared with your AWS account, its ARN must be specified. You
+    #   cannot specify a shared project using its name.
     #
     # @return [Types::BatchGetProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1463,6 +1465,28 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Deletes a resource policy that is identified by its resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that is associated with the resource policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source
     # credentials.
     #
@@ -1574,6 +1598,34 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def describe_test_cases(params = {}, options = {})
       req = build_request(:describe_test_cases, params)
+      req.send_request(options)
+    end
+
+    # Gets a resource policy that is identified by its resource ARN.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource that is associated with the resource policy.
+    #
+    # @return [Types::GetResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyOutput#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -2020,6 +2072,131 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Gets a list of projects that are shared with other AWS accounts or
+    # users.
+    #
+    # @option params [String] :sort_by
+    #   The criterion to be used to list build projects shared with the
+    #   current AWS account or user. Valid values include:
+    #
+    #   * `ARN`\: List based on the ARN.
+    #
+    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #     project was last changed.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to list shared build projects. Valid values
+    #   include:
+    #
+    #   * `ASCENDING`\: List in ascending order.
+    #
+    #   * `DESCENDING`\: List in descending order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated shared build projects returned per
+    #   response. Use `nextToken` to iterate pages in the list of returned
+    #   `Project` objects. The default value is 100.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @return [Types::ListSharedProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSharedProjectsOutput#next_token #next_token} => String
+    #   * {Types::ListSharedProjectsOutput#projects #projects} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_shared_projects({
+    #     sort_by: "ARN", # accepts ARN, MODIFIED_TIME
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     max_results: 1,
+    #     next_token: "NonEmptyString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.projects #=> Array
+    #   resp.projects[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedProjects AWS API Documentation
+    #
+    # @overload list_shared_projects(params = {})
+    # @param [Hash] params ({})
+    def list_shared_projects(params = {}, options = {})
+      req = build_request(:list_shared_projects, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of report groups that are shared with other AWS accounts
+    # or users.
+    #
+    # @option params [String] :sort_order
+    #   The order in which to list shared report groups. Valid values include:
+    #
+    #   * `ASCENDING`\: List in ascending order.
+    #
+    #   * `DESCENDING`\: List in descending order.
+    #
+    # @option params [String] :sort_by
+    #   The criterion to be used to list report groups shared with the current
+    #   AWS account or user. Valid values include:
+    #
+    #   * `ARN`\: List based on the ARN.
+    #
+    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #     report group was last changed.
+    #
+    # @option params [String] :next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned. To
+    #   get the next batch of items in the list, call this operation again,
+    #   adding the next token to the call. To get all of the items in the
+    #   list, keep calling this operation with each subsequent next token that
+    #   is returned, until no more next tokens are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of paginated shared report groups per response. Use
+    #   `nextToken` to iterate pages in the list of returned `ReportGroup`
+    #   objects. The default value is 100.
+    #
+    # @return [Types::ListSharedReportGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSharedReportGroupsOutput#next_token #next_token} => String
+    #   * {Types::ListSharedReportGroupsOutput#report_groups #report_groups} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_shared_report_groups({
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "ARN", # accepts ARN, MODIFIED_TIME
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.report_groups #=> Array
+    #   resp.report_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedReportGroups AWS API Documentation
+    #
+    # @overload list_shared_report_groups(params = {})
+    # @param [Hash] params ({})
+    def list_shared_report_groups(params = {}, options = {})
+      req = build_request(:list_shared_report_groups, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `SourceCredentialsInfo` objects.
     #
     # @return [Types::ListSourceCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2039,6 +2216,47 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def list_source_credentials(params = {}, options = {})
       req = build_request(:list_source_credentials, params)
+      req.send_request(options)
+    end
+
+    # Stores a resource policy for the ARN of a `Project` or `ReportGroup`
+    # object.
+    #
+    # @option params [required, String] :policy
+    #   A JSON-formatted resource policy. For more information, see [Sharing a
+    #   Project][1] and [Sharing a Report Group][2] in the *AWS CodeBuild User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the `Project` or `ReportGroup` resource you want to
+    #   associate with a resource policy.
+    #
+    # @return [Types::PutResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyOutput#resource_arn #resource_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy: "NonEmptyString", # required
+    #     resource_arn: "NonEmptyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -3049,7 +3267,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

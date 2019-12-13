@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2019-12-13)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Detective`.
+
 1.254.0 (2019-12-12)
 ------------------
 

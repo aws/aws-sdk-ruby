@@ -280,6 +280,7 @@ module Aws
             'DataPipeline' => 'datapipeline',
             'DataSync' => 'datasync',
             'DatabaseMigrationService' => 'dms',
+            'Detective' => 'api.detective',
             'DeviceFarm' => 'devicefarm',
             'DirectConnect' => 'directconnect',
             'DirectoryService' => 'ds',

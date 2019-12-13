@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2019-12-13)
+------------------
+
+* Feature - Added the ability to use your own public-private key pair to configure DKIM authentication for a domain identity.
+
 1.1.0 (2019-11-25)
 ------------------
 

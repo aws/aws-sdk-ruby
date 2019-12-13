@@ -5,16 +5,18 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sdk-core'
+require 'aws-sigv4'
 
-require_relative 'aws-sdk-sts/types'
-require_relative 'aws-sdk-sts/client_api'
-require_relative 'aws-sdk-sts/client'
-require_relative 'aws-sdk-sts/errors'
-require_relative 'aws-sdk-sts/resource'
-require_relative 'aws-sdk-sts/customizations'
+require_relative 'aws-sdk-detective/types'
+require_relative 'aws-sdk-detective/client_api'
+require_relative 'aws-sdk-detective/client'
+require_relative 'aws-sdk-detective/errors'
+require_relative 'aws-sdk-detective/resource'
+require_relative 'aws-sdk-detective/customizations'
 
-# This module provides support for AWS Security Token Service. This module is available in the
-# `aws-sdk-core` gem.
+# This module provides support for Amazon Detective. This module is available in the
+# `aws-sdk-detective` gem.
 #
 # # Client
 #
@@ -26,20 +28,20 @@ require_relative 'aws-sdk-sts/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Security Token Service all
+# Errors returned from Amazon Detective all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::STS::Errors::ServiceError
+#     rescue Aws::Detective::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::STS
+module Aws::Detective
 
-  GEM_VERSION = '3.86.0'
+  GEM_VERSION = '1.0.0'
 
 end

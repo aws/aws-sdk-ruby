@@ -73,6 +73,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-datapipeline', '~> 1')
   spec.add_dependency('aws-sdk-datasync', '~> 1')
   spec.add_dependency('aws-sdk-databasemigrationservice', '~> 1')
+  spec.add_dependency('aws-sdk-detective', '~> 1')
   spec.add_dependency('aws-sdk-devicefarm', '~> 1')
   spec.add_dependency('aws-sdk-directconnect', '~> 1')
   spec.add_dependency('aws-sdk-directoryservice', '~> 1')

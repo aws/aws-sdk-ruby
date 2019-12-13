@@ -168,9 +168,9 @@ module Aws::SESV2
     #
     # @!attribute [rw] charset
     #   The character set for the content. Because of the constraints of the
-    #   SMTP protocol, the Amazon SES API v2 uses 7-bit ASCII by default. If
-    #   the text includes characters outside of the ASCII range, you have to
-    #   specify a character set. For example, you could specify `UTF-8`,
+    #   SMTP protocol, Amazon SES uses 7-bit ASCII by default. If the text
+    #   includes characters outside of the ASCII range, you have to specify
+    #   a character set. For example, you could specify `UTF-8`,
     #   `ISO-8859-1`, or `Shift_JIS`.
     #   @return [String]
     #
@@ -307,8 +307,8 @@ module Aws::SESV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] suppression_options
-    #   An object that contains information about your account's
-    #   suppression preferences.
+    #   An object that contains information about the suppression list
+    #   preferences for your account.
     #   @return [Types::SuppressionOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetRequest AWS API Documentation
@@ -488,6 +488,10 @@ module Aws::SESV2
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         dkim_signing_attributes: {
+    #           domain_signing_selector: "Selector", # required
+    #           domain_signing_private_key: "PrivateKey", # required
+    #         },
     #       }
     #
     # @!attribute [rw] email_identity
@@ -499,18 +503,31 @@ module Aws::SESV2
     #   want to associate with the email identity.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] dkim_signing_attributes
+    #   If your request includes this object, Amazon SES configures the
+    #   identity to use Bring Your Own DKIM (BYODKIM) for DKIM
+    #   authentication purposes, as opposed to the default method, [Easy
+    #   DKIM][1].
+    #
+    #   You can only specify this object if the email identity is a domain,
+    #   as opposed to an address.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   @return [Types::DkimSigningAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentityRequest AWS API Documentation
     #
     class CreateEmailIdentityRequest < Struct.new(
       :email_identity,
-      :tags)
+      :tags,
+      :dkim_signing_attributes)
       include Aws::Structure
     end
 
-    # If the email identity is a domain, this object contains tokens that
-    # you can use to create a set of CNAME records. To sucessfully verify
-    # your domain, you have to add these records to the DNS configuration
-    # for your domain.
+    # If the email identity is a domain, this object contains information
+    # about the DKIM verification status for the domain.
     #
     # If the email identity is an email address, this object is empty.
     #
@@ -530,9 +547,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] dkim_attributes
     #   An object that contains information about the DKIM attributes for
-    #   the identity. This object includes the tokens that you use to create
-    #   the CNAME records that are required to complete the DKIM
-    #   verification process.
+    #   the identity.
     #   @return [Types::DkimAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentityResponse AWS API Documentation
@@ -572,7 +587,7 @@ module Aws::SESV2
     end
 
     # Contains information about a dedicated IP address that is associated
-    # with your Amazon SES API v2 account.
+    # with your Amazon SES account.
     #
     # To learn more about requesting dedicated IP addresses, see [Requesting
     # and Relinquishing Dedicated IP Addresses][1] in the *Amazon SES
@@ -737,7 +752,8 @@ module Aws::SESV2
     #
     class DeleteEmailIdentityResponse < Aws::EmptyStructure; end
 
-    # A request to delete a suppressed email destination.
+    # A request to remove an email address from the suppression list for
+    # your account.
     #
     # @note When making an API call, you may pass DeleteSuppressedDestinationRequest
     #   data as a hash:
@@ -747,7 +763,8 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] email_address
-    #   The suppressed email destination to delete.
+    #   The suppressed email destination to remove from the account
+    #   suppression list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DeleteSuppressedDestinationRequest AWS API Documentation
@@ -878,8 +895,22 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object that contains information about the DKIM configuration for
-    # an email identity.
+    # An object that contains information about the DKIM authentication
+    # status for an email identity.
+    #
+    # Amazon SES determines the authentication status by searching for
+    # specific records in the DNS configuration for the domain. If you used
+    # [Easy DKIM][1] to set up DKIM authentication, Amazon SES tries to find
+    # three unique CNAME records in the DNS configuration for your domain.
+    # If you provided a public key to perform DKIM authentication, Amazon
+    # SES tries to find a TXT record that uses the selector that you
+    # specified. The value of the TXT record must be a public key that's
+    # paired with the private key that you specified in the process of
+    # creating the identity
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @!attribute [rw] signing_enabled
     #   If the value is `true`, then the messages that you send from the
@@ -892,40 +923,97 @@ module Aws::SESV2
     #   DKIM records in the DNS records for the domain. The status can be
     #   one of the following:
     #
-    #   * `PENDING` – Amazon SES hasn't yet detected the DKIM records in
-    #     the DNS configuration for the domain, but will continue to attempt
-    #     to locate them.
+    #   * `PENDING` – The verification process was initiated, but Amazon SES
+    #     hasn't yet detected the DKIM records in the DNS configuration for
+    #     the domain.
     #
-    #   * `SUCCESS` – Amazon SES located the DKIM records in the DNS
-    #     configuration for the domain and determined that they're correct.
-    #     You can now send DKIM-signed email from the identity.
+    #   * `SUCCESS` – The verification process completed successfully.
     #
-    #   * `FAILED` – Amazon SES wasn't able to locate the DKIM records in
-    #     the DNS settings for the domain, and won't continue to search for
-    #     them.
+    #   * `FAILED` – The verification process failed. This typically occurs
+    #     when Amazon SES fails to find the DKIM records in the DNS
+    #     configuration of the domain.
     #
-    #   * `TEMPORARY_FAILURE` – A temporary issue occurred, which prevented
-    #     Amazon SES from determining the DKIM status for the domain.
+    #   * `TEMPORARY_FAILURE` – A temporary issue is preventing Amazon SES
+    #     from determining the DKIM authentication status of the domain.
     #
-    #   * `NOT_STARTED` – Amazon SES hasn't yet started searching for the
-    #     DKIM records in the DKIM records for the domain.
+    #   * `NOT_STARTED` – The DKIM verification process hasn't been
+    #     initiated for the domain.
     #   @return [String]
     #
     # @!attribute [rw] tokens
-    #   A set of unique strings that you use to create a set of CNAME
-    #   records that you add to the DNS configuration for your domain. When
-    #   Amazon SES detects these records in the DNS configuration for your
-    #   domain, the DKIM authentication process is complete. Amazon SES
-    #   usually detects these records within about 72 hours of adding them
-    #   to the DNS configuration for your domain.
+    #   If you used [Easy DKIM][1] to configure DKIM authentication for the
+    #   domain, then this object contains a set of unique strings that you
+    #   use to create a set of CNAME records that you add to the DNS
+    #   configuration for your domain. When Amazon SES detects these records
+    #   in the DNS configuration for your domain, the DKIM authentication
+    #   process is complete.
+    #
+    #   If you configured DKIM authentication for the domain by providing
+    #   your own public-private key pair, then this object contains the
+    #   selector for the public key.
+    #
+    #   Regardless of the DKIM authentication method you use, Amazon SES
+    #   searches for the appropriate records in the DNS configuration of the
+    #   domain for up to 72 hours.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] signing_attributes_origin
+    #   A string that indicates how DKIM was configured for the identity.
+    #   There are two possible values:
+    #
+    #   * `AWS_SES` – Indicates that DKIM was configured for the identity by
+    #     using [Easy DKIM][1].
+    #
+    #   * `EXTERNAL` – Indicates that DKIM was configured for the identity
+    #     by using Bring Your Own DKIM (BYODKIM).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DkimAttributes AWS API Documentation
     #
     class DkimAttributes < Struct.new(
       :signing_enabled,
       :status,
-      :tokens)
+      :tokens,
+      :signing_attributes_origin)
+      include Aws::Structure
+    end
+
+    # An object that contains information about the tokens used for setting
+    # up Bring Your Own DKIM (BYODKIM).
+    #
+    # @note When making an API call, you may pass DkimSigningAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         domain_signing_selector: "Selector", # required
+    #         domain_signing_private_key: "PrivateKey", # required
+    #       }
+    #
+    # @!attribute [rw] domain_signing_selector
+    #   A string that's used to identify a public key in the DNS
+    #   configuration for a domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_signing_private_key
+    #   A private key that's used to generate a DKIM signature.
+    #
+    #   The private key must use 1024-bit RSA encryption, and must be
+    #   encoded using base64 encoding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DkimSigningAttributes AWS API Documentation
+    #
+    class DkimSigningAttributes < Struct.new(
+      :domain_signing_selector,
+      :domain_signing_private_key)
       include Aws::Structure
     end
 
@@ -1422,8 +1510,8 @@ module Aws::SESV2
     #   @return [Boolean]
     #
     # @!attribute [rw] suppression_attributes
-    #   An object that contains information about your account's
-    #   suppression preferences.
+    #   An object that contains information about the email address
+    #   suppression preferences for your account in the current AWS Region.
     #   @return [Types::SuppressionAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetAccountResponse AWS API Documentation
@@ -1564,8 +1652,8 @@ module Aws::SESV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] suppression_options
-    #   An object that contains information about your account's
-    #   suppression preferences.
+    #   An object that contains information about the suppression list
+    #   preferences for your account.
     #   @return [Types::SuppressionOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetResponse AWS API Documentation
@@ -1958,9 +2046,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] dkim_attributes
     #   An object that contains information about the DKIM attributes for
-    #   the identity. This object includes the tokens that you use to create
-    #   the CNAME records that are required to complete the DKIM
-    #   verification process.
+    #   the identity.
     #   @return [Types::DkimAttributes]
     #
     # @!attribute [rw] mail_from_attributes
@@ -1985,7 +2071,8 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # A request to get a suppressed email destination.
+    # A request to retrieve information about an email address that's on
+    # the suppression list for your account.
     #
     # @note When making an API call, you may pass GetSuppressedDestinationRequest
     #   data as a hash:
@@ -1995,7 +2082,7 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] email_address
-    #   Email destination to fetch from the suppression list.
+    #   The email address that's on the account suppression list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetSuppressedDestinationRequest AWS API Documentation
@@ -2005,11 +2092,10 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # Information about the suppressed email destination.
+    # Information about the suppressed email address.
     #
     # @!attribute [rw] suppressed_destination
-    #   An object containing information about the suppressed email
-    #   destination.
+    #   An object containing information about the suppressed email address.
     #   @return [Types::SuppressedDestination]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetSuppressedDestinationResponse AWS API Documentation
@@ -2445,7 +2531,8 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # A request to obtain a list of suppressed email destinations.
+    # A request to obtain a list of email destinations that are on the
+    # suppression list for your account.
     #
     # @note When making an API call, you may pass ListSuppressedDestinationsRequest
     #   data as a hash:
@@ -2459,21 +2546,26 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] reasons
-    #   Filters email destinations suppressed by the given reasons.
+    #   The factors that caused the email address to be added to .
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_date
-    #   Filters email destinations suppressed before the given time.
+    #   Used to filter the list of suppressed email destinations so that it
+    #   only includes addresses that were added to the list after a specific
+    #   date. The date that you specify should be in Unix time format.
     #   @return [Time]
     #
     # @!attribute [rw] end_date
-    #   Filters email destinations suppressed after the given time.
+    #   Used to filter the list of suppressed email destinations so that it
+    #   only includes addresses that were added to the list before a
+    #   specific date. The date that you specify should be in Unix time
+    #   format.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
     #   A token returned from a previous call to
     #   `ListSuppressedDestinations` to indicate the position in the list of
-    #   suppressed email destinations.
+    #   suppressed email addresses.
     #   @return [String]
     #
     # @!attribute [rw] page_size
@@ -2495,7 +2587,7 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # A list of suppressed email destinations.
+    # A list of suppressed email addresses.
     #
     # @!attribute [rw] suppressed_destination_summaries
     #   A list of summaries, each containing a summary for a suppressed
@@ -2503,10 +2595,10 @@ module Aws::SESV2
     #   @return [Array<Types::SuppressedDestinationSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token that indicates that there are additional suppressed
-    #   destinations to list. To view additional suppressed destinations,
-    #   issue another request to `ListSuppressedDestinations`, and pass this
-    #   token in the `NextToken` parameter.
+    #   A token that indicates that there are additional email addresses on
+    #   the suppression list for your account. To view additional suppressed
+    #   addresses, issue another request to `ListSuppressedDestinations`,
+    #   and pass this token in the `NextToken` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListSuppressedDestinationsResponse AWS API Documentation
@@ -2851,14 +2943,17 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid
-    #   reasons are:
+    #   A list that contains the reasons that email addresses will be
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a hard bounce.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutAccountSuppressionAttributesRequest AWS API Documentation
@@ -2993,7 +3088,7 @@ module Aws::SESV2
     #
     class PutConfigurationSetSendingOptionsResponse < Aws::EmptyStructure; end
 
-    # A request to change your account's suppression preferences for an
+    # A request to change the account suppression list preferences for a
     # specific configuration set.
     #
     # @note When making an API call, you may pass PutConfigurationSetSuppressionOptionsRequest
@@ -3005,19 +3100,22 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] configuration_set_name
-    #   The name of the configuration set that you want to enable or disable
-    #   email sending for.
+    #   The name of the configuration set that you want to change the
+    #   suppression list preferences for.
     #   @return [String]
     #
     # @!attribute [rw] suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid
-    #   reasons are:
+    #   A list that contains the reasons that email addresses are
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a hard bounce.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutConfigurationSetSuppressionOptionsRequest AWS API Documentation
@@ -3239,6 +3337,125 @@ module Aws::SESV2
     #
     class PutEmailIdentityDkimAttributesResponse < Aws::EmptyStructure; end
 
+    # A request to change the DKIM attributes for an email identity.
+    #
+    # @note When making an API call, you may pass PutEmailIdentityDkimSigningAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_identity: "Identity", # required
+    #         signing_attributes_origin: "AWS_SES", # required, accepts AWS_SES, EXTERNAL
+    #         signing_attributes: {
+    #           domain_signing_selector: "Selector", # required
+    #           domain_signing_private_key: "PrivateKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity that you want to configure DKIM for.
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_attributes_origin
+    #   The method that you want to use to configure DKIM for the identity.
+    #   There are two possible values:
+    #
+    #   * `AWS_SES` – Configure DKIM for the identity by using [Easy
+    #     DKIM][1].
+    #
+    #   * `EXTERNAL` – Configure DKIM for the identity by using Bring Your
+    #     Own DKIM (BYODKIM).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   @return [String]
+    #
+    # @!attribute [rw] signing_attributes
+    #   An object that contains information about the private key and
+    #   selector that you want to use to configure DKIM for the identity.
+    #   This object is only required if you want to configure Bring Your Own
+    #   DKIM (BYODKIM) for the identity.
+    #   @return [Types::DkimSigningAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityDkimSigningAttributesRequest AWS API Documentation
+    #
+    class PutEmailIdentityDkimSigningAttributesRequest < Struct.new(
+      :email_identity,
+      :signing_attributes_origin,
+      :signing_attributes)
+      include Aws::Structure
+    end
+
+    # If the action is successful, the service sends back an HTTP 200
+    # response.
+    #
+    # The following data is returned in JSON format by the service.
+    #
+    # @!attribute [rw] dkim_status
+    #   The DKIM authentication status of the identity. Amazon SES
+    #   determines the authentication status by searching for specific
+    #   records in the DNS configuration for your domain. If you used [Easy
+    #   DKIM][1] to set up DKIM authentication, Amazon SES tries to find
+    #   three unique CNAME records in the DNS configuration for your domain.
+    #
+    #   If you provided a public key to perform DKIM authentication, Amazon
+    #   SES tries to find a TXT record that uses the selector that you
+    #   specified. The value of the TXT record must be a public key that's
+    #   paired with the private key that you specified in the process of
+    #   creating the identity.
+    #
+    #   The status can be one of the following:
+    #
+    #   * `PENDING` – The verification process was initiated, but Amazon SES
+    #     hasn't yet detected the DKIM records in the DNS configuration for
+    #     the domain.
+    #
+    #   * `SUCCESS` – The verification process completed successfully.
+    #
+    #   * `FAILED` – The verification process failed. This typically occurs
+    #     when Amazon SES fails to find the DKIM records in the DNS
+    #     configuration of the domain.
+    #
+    #   * `TEMPORARY_FAILURE` – A temporary issue is preventing Amazon SES
+    #     from determining the DKIM authentication status of the domain.
+    #
+    #   * `NOT_STARTED` – The DKIM verification process hasn't been
+    #     initiated for the domain.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   @return [String]
+    #
+    # @!attribute [rw] dkim_tokens
+    #   If you used [Easy DKIM][1] to configure DKIM authentication for the
+    #   domain, then this object contains a set of unique strings that you
+    #   use to create a set of CNAME records that you add to the DNS
+    #   configuration for your domain. When Amazon SES detects these records
+    #   in the DNS configuration for your domain, the DKIM authentication
+    #   process is complete.
+    #
+    #   If you configured DKIM authentication for the domain by providing
+    #   your own public-private key pair, then this object contains the
+    #   selector that's associated with your public key.
+    #
+    #   Regardless of the DKIM authentication method you use, Amazon SES
+    #   searches for the appropriate records in the DNS configuration of the
+    #   domain for up to 72 hours.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityDkimSigningAttributesResponse AWS API Documentation
+    #
+    class PutEmailIdentityDkimSigningAttributesResponse < Struct.new(
+      :dkim_status,
+      :dkim_tokens)
+      include Aws::Structure
+    end
+
     # A request to set the attributes that control how bounce and complaint
     # events are processed.
     #
@@ -3343,7 +3560,8 @@ module Aws::SESV2
     #
     class PutEmailIdentityMailFromAttributesResponse < Aws::EmptyStructure; end
 
-    # A request to suppress an email destination.
+    # A request to add an email destination to the suppression list for your
+    # account.
     #
     # @note When making an API call, you may pass PutSuppressedDestinationRequest
     #   data as a hash:
@@ -3354,11 +3572,13 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] email_address
-    #   Email destination to be suppressed.
+    #   The email address that should be added to the suppression list for
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   Reason for which the email destination is suppressed.
+    #   The factors that should cause the email address to be added to the
+    #   suppression list for your account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutSuppressedDestinationRequest AWS API Documentation
@@ -3376,7 +3596,7 @@ module Aws::SESV2
     #
     class PutSuppressedDestinationResponse < Aws::EmptyStructure; end
 
-    # The raw email message.
+    # Represents the raw content of an email message.
     #
     # @note When making an API call, you may pass RawMessage
     #   data as a hash:
@@ -3396,8 +3616,7 @@ module Aws::SESV2
     #
     #   * Each part of a multipart MIME message must be formatted properly.
     #
-    #   * Attachments must be in a file format that the Amazon SES API v2
-    #     supports.
+    #   * Attachments must be in a file format that the Amazon SES supports.
     #
     #   * The entire message must be Base64 encoded.
     #
@@ -3557,11 +3776,10 @@ module Aws::SESV2
     #   A unique identifier for the message that is generated when the
     #   message is accepted.
     #
-    #   <note markdown="1"> It is possible for the Amazon SES API v2 to accept a message without
-    #   sending it. This can happen when the message that you're trying to
-    #   send has an attachment contains a virus, or when you send a
-    #   templated email that contains invalid personalization content, for
-    #   example.
+    #   <note markdown="1"> It's possible for Amazon SES to accept a message without sending
+    #   it. This can happen when the message that you're trying to send has
+    #   an attachment contains a virus, or when you send a templated email
+    #   that contains invalid personalization content, for example.
     #
     #    </note>
     #   @return [String]
@@ -3652,24 +3870,27 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object containing information about the suppressed email
-    # destination.
+    # An object that contains information about an email address that is on
+    # the suppression list for your account.
     #
     # @!attribute [rw] email_address
-    #   The suppressed email destination.
+    #   The email address that is on the suppression list for your account.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason for which the email destination is suppressed.
+    #   The reason that the address was added to the suppression list for
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] last_update_time
-    #   The last time the suppressed destination was updated.
+    #   The date and time when the suppressed destination was last updated,
+    #   shown in Unix time format.
     #   @return [Time]
     #
     # @!attribute [rw] attributes
-    #   `Optional` value with information about the sources of the
-    #   suppression.
+    #   An optional value that can contain additional information about the
+    #   reasons that the address was added to the suppression list for your
+    #   account.
     #   @return [Types::SuppressedDestinationAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestination AWS API Documentation
@@ -3682,16 +3903,17 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object containing additional attributes related to a suppressed
-    # destination.
+    # An object that contains additional attributes that are related an
+    # email address that is on the suppression list for your account.
     #
     # @!attribute [rw] message_id
-    #   A unique identifier of the message that caused the suppression of
-    #   the email destination.
+    #   The unique identifier of the email message that caused the email
+    #   address to be added to the suppression list for your account.
     #   @return [String]
     #
     # @!attribute [rw] feedback_id
-    #   A unique identifier of the suppression cause.
+    #   A unique identifier that's generated when an email address is added
+    #   to the suppression list for your account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestinationAttributes AWS API Documentation
@@ -3702,18 +3924,20 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # A summary for the suppressed email destination.
+    # A summary that describes the suppressed email address.
     #
     # @!attribute [rw] email_address
-    #   The suppressed email destination.
+    #   The email address that's on the suppression list for your account.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   The reason for which the email destination is suppressed.
+    #   The reason that the address was added to the suppression list for
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] last_update_time
-    #   The last time the suppressed destination was updated.
+    #   The date and time when the suppressed destination was last updated,
+    #   shown in Unix time format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressedDestinationSummary AWS API Documentation
@@ -3725,18 +3949,21 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object that contains information about your account's suppression
-    # preferences.
+    # An object that contains information about the email address
+    # suppression preferences for your account in the current AWS Region.
     #
     # @!attribute [rw] suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid
-    #   reasons are:
+    #   A list that contains the reasons that email addresses will be
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a hard bounce.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionAttributes AWS API Documentation
@@ -3746,8 +3973,8 @@ module Aws::SESV2
       include Aws::Structure
     end
 
-    # An object that contains information about your account's suppression
-    # preferences.
+    # An object that contains information about the suppression list
+    # preferences for your account.
     #
     # @note When making an API call, you may pass SuppressionOptions
     #   data as a hash:
@@ -3757,14 +3984,17 @@ module Aws::SESV2
     #       }
     #
     # @!attribute [rw] suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid
-    #   reasons are:
+    #   A list that contains the reasons that email addresses are
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results
+    #     in a hard bounce.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SuppressionOptions AWS API Documentation

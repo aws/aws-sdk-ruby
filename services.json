@@ -193,6 +193,9 @@
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
   },
+  "Detective": {
+    "models": "detective/2018-10-26"
+  },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23"
   },

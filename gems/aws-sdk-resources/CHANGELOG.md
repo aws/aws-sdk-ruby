@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.69.0 (2019-12-13)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-detective` gem.
+
 3.68.0 (2019-12-05)
 ------------------
 

@@ -68,6 +68,8 @@ module Aws::SESV2
     DimensionName = Shapes::StringShape.new(name: 'DimensionName')
     DimensionValueSource = Shapes::StringShape.new(name: 'DimensionValueSource')
     DkimAttributes = Shapes::StructureShape.new(name: 'DkimAttributes')
+    DkimSigningAttributes = Shapes::StructureShape.new(name: 'DkimSigningAttributes')
+    DkimSigningAttributesOrigin = Shapes::StringShape.new(name: 'DkimSigningAttributesOrigin')
     DkimStatus = Shapes::StringShape.new(name: 'DkimStatus')
     DnsToken = Shapes::StringShape.new(name: 'DnsToken')
     DnsTokenList = Shapes::ListShape.new(name: 'DnsTokenList')
@@ -171,6 +173,7 @@ module Aws::SESV2
     PinpointDestination = Shapes::StructureShape.new(name: 'PinpointDestination')
     PlacementStatistics = Shapes::StructureShape.new(name: 'PlacementStatistics')
     PoolName = Shapes::StringShape.new(name: 'PoolName')
+    PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PutAccountDedicatedIpWarmupAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesRequest')
     PutAccountDedicatedIpWarmupAttributesResponse = Shapes::StructureShape.new(name: 'PutAccountDedicatedIpWarmupAttributesResponse')
     PutAccountSendingAttributesRequest = Shapes::StructureShape.new(name: 'PutAccountSendingAttributesRequest')
@@ -195,6 +198,8 @@ module Aws::SESV2
     PutDeliverabilityDashboardOptionResponse = Shapes::StructureShape.new(name: 'PutDeliverabilityDashboardOptionResponse')
     PutEmailIdentityDkimAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesRequest')
     PutEmailIdentityDkimAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimAttributesResponse')
+    PutEmailIdentityDkimSigningAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimSigningAttributesRequest')
+    PutEmailIdentityDkimSigningAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityDkimSigningAttributesResponse')
     PutEmailIdentityFeedbackAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityFeedbackAttributesRequest')
     PutEmailIdentityFeedbackAttributesResponse = Shapes::StructureShape.new(name: 'PutEmailIdentityFeedbackAttributesResponse')
     PutEmailIdentityMailFromAttributesRequest = Shapes::StructureShape.new(name: 'PutEmailIdentityMailFromAttributesRequest')
@@ -207,6 +212,7 @@ module Aws::SESV2
     ReportId = Shapes::StringShape.new(name: 'ReportId')
     ReportName = Shapes::StringShape.new(name: 'ReportName')
     ReputationOptions = Shapes::StructureShape.new(name: 'ReputationOptions')
+    Selector = Shapes::StringShape.new(name: 'Selector')
     SendEmailRequest = Shapes::StructureShape.new(name: 'SendEmailRequest')
     SendEmailResponse = Shapes::StructureShape.new(name: 'SendEmailResponse')
     SendQuota = Shapes::StructureShape.new(name: 'SendQuota')
@@ -314,6 +320,7 @@ module Aws::SESV2
 
     CreateEmailIdentityRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "EmailIdentity"))
     CreateEmailIdentityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateEmailIdentityRequest.add_member(:dkim_signing_attributes, Shapes::ShapeRef.new(shape: DkimSigningAttributes, location_name: "DkimSigningAttributes"))
     CreateEmailIdentityRequest.struct_class = Types::CreateEmailIdentityRequest
 
     CreateEmailIdentityResponse.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
@@ -384,7 +391,12 @@ module Aws::SESV2
     DkimAttributes.add_member(:signing_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SigningEnabled"))
     DkimAttributes.add_member(:status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "Status"))
     DkimAttributes.add_member(:tokens, Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "Tokens"))
+    DkimAttributes.add_member(:signing_attributes_origin, Shapes::ShapeRef.new(shape: DkimSigningAttributesOrigin, location_name: "SigningAttributesOrigin"))
     DkimAttributes.struct_class = Types::DkimAttributes
+
+    DkimSigningAttributes.add_member(:domain_signing_selector, Shapes::ShapeRef.new(shape: Selector, required: true, location_name: "DomainSigningSelector"))
+    DkimSigningAttributes.add_member(:domain_signing_private_key, Shapes::ShapeRef.new(shape: PrivateKey, required: true, location_name: "DomainSigningPrivateKey"))
+    DkimSigningAttributes.struct_class = Types::DkimSigningAttributes
 
     DnsTokenList.member = Shapes::ShapeRef.new(shape: DnsToken)
 
@@ -739,6 +751,15 @@ module Aws::SESV2
 
     PutEmailIdentityDkimAttributesResponse.struct_class = Types::PutEmailIdentityDkimAttributesResponse
 
+    PutEmailIdentityDkimSigningAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
+    PutEmailIdentityDkimSigningAttributesRequest.add_member(:signing_attributes_origin, Shapes::ShapeRef.new(shape: DkimSigningAttributesOrigin, required: true, location_name: "SigningAttributesOrigin"))
+    PutEmailIdentityDkimSigningAttributesRequest.add_member(:signing_attributes, Shapes::ShapeRef.new(shape: DkimSigningAttributes, location_name: "SigningAttributes"))
+    PutEmailIdentityDkimSigningAttributesRequest.struct_class = Types::PutEmailIdentityDkimSigningAttributesRequest
+
+    PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_status, Shapes::ShapeRef.new(shape: DkimStatus, location_name: "DkimStatus"))
+    PutEmailIdentityDkimSigningAttributesResponse.add_member(:dkim_tokens, Shapes::ShapeRef.new(shape: DnsTokenList, location_name: "DkimTokens"))
+    PutEmailIdentityDkimSigningAttributesResponse.struct_class = Types::PutEmailIdentityDkimSigningAttributesResponse
+
     PutEmailIdentityFeedbackAttributesRequest.add_member(:email_identity, Shapes::ShapeRef.new(shape: Identity, required: true, location: "uri", location_name: "EmailIdentity"))
     PutEmailIdentityFeedbackAttributesRequest.add_member(:email_forwarding_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "EmailForwardingEnabled"))
     PutEmailIdentityFeedbackAttributesRequest.struct_class = Types::PutEmailIdentityFeedbackAttributesRequest
@@ -935,6 +956,7 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/identities"
         o.input = Shapes::ShapeRef.new(shape: CreateEmailIdentityRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateEmailIdentityResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
@@ -1372,6 +1394,17 @@ module Aws::SESV2
         o.http_request_uri = "/v2/email/identities/{EmailIdentity}/dkim"
         o.input = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimAttributesRequest)
         o.output = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:put_email_identity_dkim_signing_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEmailIdentityDkimSigningAttributes"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/email/identities/{EmailIdentity}/dkim/signing"
+        o.input = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimSigningAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEmailIdentityDkimSigningAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

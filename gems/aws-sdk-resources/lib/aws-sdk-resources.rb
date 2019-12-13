@@ -63,6 +63,7 @@ module Aws
   autoload :DataPipeline, 'aws-sdk-datapipeline'
   autoload :DataSync, 'aws-sdk-datasync'
   autoload :DatabaseMigrationService, 'aws-sdk-databasemigrationservice'
+  autoload :Detective, 'aws-sdk-detective'
   autoload :DeviceFarm, 'aws-sdk-devicefarm'
   autoload :DirectConnect, 'aws-sdk-directconnect'
   autoload :DirectoryService, 'aws-sdk-directoryservice'

@@ -55,6 +55,8 @@ module Aws::CodeBuild
     DeleteReportGroupOutput = Shapes::StructureShape.new(name: 'DeleteReportGroupOutput')
     DeleteReportInput = Shapes::StructureShape.new(name: 'DeleteReportInput')
     DeleteReportOutput = Shapes::StructureShape.new(name: 'DeleteReportOutput')
+    DeleteResourcePolicyInput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyInput')
+    DeleteResourcePolicyOutput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyOutput')
     DeleteSourceCredentialsInput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsInput')
     DeleteSourceCredentialsOutput = Shapes::StructureShape.new(name: 'DeleteSourceCredentialsOutput')
     DeleteWebhookInput = Shapes::StructureShape.new(name: 'DeleteWebhookInput')
@@ -75,6 +77,8 @@ module Aws::CodeBuild
     ExportedEnvironmentVariables = Shapes::ListShape.new(name: 'ExportedEnvironmentVariables')
     FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
     FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
+    GetResourcePolicyInput = Shapes::StructureShape.new(name: 'GetResourcePolicyInput')
+    GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
     GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
     GitSubmodulesConfig = Shapes::StructureShape.new(name: 'GitSubmodulesConfig')
     ImagePullCredentialsType = Shapes::StringShape.new(name: 'ImagePullCredentialsType')
@@ -100,6 +104,10 @@ module Aws::CodeBuild
     ListReportsForReportGroupOutput = Shapes::StructureShape.new(name: 'ListReportsForReportGroupOutput')
     ListReportsInput = Shapes::StructureShape.new(name: 'ListReportsInput')
     ListReportsOutput = Shapes::StructureShape.new(name: 'ListReportsOutput')
+    ListSharedProjectsInput = Shapes::StructureShape.new(name: 'ListSharedProjectsInput')
+    ListSharedProjectsOutput = Shapes::StructureShape.new(name: 'ListSharedProjectsOutput')
+    ListSharedReportGroupsInput = Shapes::StructureShape.new(name: 'ListSharedReportGroupsInput')
+    ListSharedReportGroupsOutput = Shapes::StructureShape.new(name: 'ListSharedReportGroupsOutput')
     ListSourceCredentialsInput = Shapes::StructureShape.new(name: 'ListSourceCredentialsInput')
     ListSourceCredentialsOutput = Shapes::StructureShape.new(name: 'ListSourceCredentialsOutput')
     LogsConfig = Shapes::StructureShape.new(name: 'LogsConfig')
@@ -113,6 +121,7 @@ module Aws::CodeBuild
     PhaseContexts = Shapes::ListShape.new(name: 'PhaseContexts')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Project = Shapes::StructureShape.new(name: 'Project')
+    ProjectArns = Shapes::ListShape.new(name: 'ProjectArns')
     ProjectArtifacts = Shapes::StructureShape.new(name: 'ProjectArtifacts')
     ProjectArtifactsList = Shapes::ListShape.new(name: 'ProjectArtifactsList')
     ProjectBadge = Shapes::StructureShape.new(name: 'ProjectBadge')
@@ -128,6 +137,8 @@ module Aws::CodeBuild
     ProjectSourceVersion = Shapes::StructureShape.new(name: 'ProjectSourceVersion')
     ProjectSources = Shapes::ListShape.new(name: 'ProjectSources')
     Projects = Shapes::ListShape.new(name: 'Projects')
+    PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
+    PutResourcePolicyOutput = Shapes::StructureShape.new(name: 'PutResourcePolicyOutput')
     RegistryCredential = Shapes::StructureShape.new(name: 'RegistryCredential')
     Report = Shapes::StructureShape.new(name: 'Report')
     ReportArns = Shapes::ListShape.new(name: 'ReportArns')
@@ -151,6 +162,7 @@ module Aws::CodeBuild
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     ServerType = Shapes::StringShape.new(name: 'ServerType')
+    SharedResourceSortByType = Shapes::StringShape.new(name: 'SharedResourceSortByType')
     SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
     SourceAuth = Shapes::StructureShape.new(name: 'SourceAuth')
     SourceAuthType = Shapes::StringShape.new(name: 'SourceAuthType')
@@ -344,6 +356,11 @@ module Aws::CodeBuild
 
     DeleteReportOutput.struct_class = Types::DeleteReportOutput
 
+    DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceArn"))
+    DeleteResourcePolicyInput.struct_class = Types::DeleteResourcePolicyInput
+
+    DeleteResourcePolicyOutput.struct_class = Types::DeleteResourcePolicyOutput
+
     DeleteSourceCredentialsInput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
     DeleteSourceCredentialsInput.struct_class = Types::DeleteSourceCredentialsInput
 
@@ -400,6 +417,12 @@ module Aws::CodeBuild
     FilterGroup.member = Shapes::ShapeRef.new(shape: WebhookFilter)
 
     FilterGroups.member = Shapes::ShapeRef.new(shape: FilterGroup)
+
+    GetResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceArn"))
+    GetResourcePolicyInput.struct_class = Types::GetResourcePolicyInput
+
+    GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetResourcePolicyOutput.struct_class = Types::GetResourcePolicyOutput
 
     GitSubmodulesConfig.add_member(:fetch_submodules, Shapes::ShapeRef.new(shape: WrapperBoolean, required: true, location_name: "fetchSubmodules"))
     GitSubmodulesConfig.struct_class = Types::GitSubmodulesConfig
@@ -483,6 +506,26 @@ module Aws::CodeBuild
     ListReportsOutput.add_member(:reports, Shapes::ShapeRef.new(shape: ReportArns, location_name: "reports"))
     ListReportsOutput.struct_class = Types::ListReportsOutput
 
+    ListSharedProjectsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SharedResourceSortByType, location_name: "sortBy"))
+    ListSharedProjectsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
+    ListSharedProjectsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListSharedProjectsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
+    ListSharedProjectsInput.struct_class = Types::ListSharedProjectsInput
+
+    ListSharedProjectsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSharedProjectsOutput.add_member(:projects, Shapes::ShapeRef.new(shape: ProjectArns, location_name: "projects"))
+    ListSharedProjectsOutput.struct_class = Types::ListSharedProjectsOutput
+
+    ListSharedReportGroupsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
+    ListSharedReportGroupsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SharedResourceSortByType, location_name: "sortBy"))
+    ListSharedReportGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSharedReportGroupsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
+    ListSharedReportGroupsInput.struct_class = Types::ListSharedReportGroupsInput
+
+    ListSharedReportGroupsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListSharedReportGroupsOutput.add_member(:report_groups, Shapes::ShapeRef.new(shape: ReportGroupArns, location_name: "reportGroups"))
+    ListSharedReportGroupsOutput.struct_class = Types::ListSharedReportGroupsOutput
+
     ListSourceCredentialsInput.struct_class = Types::ListSourceCredentialsInput
 
     ListSourceCredentialsOutput.add_member(:source_credentials_infos, Shapes::ShapeRef.new(shape: SourceCredentialsInfos, location_name: "sourceCredentialsInfos"))
@@ -535,6 +578,8 @@ module Aws::CodeBuild
     Project.add_member(:badge, Shapes::ShapeRef.new(shape: ProjectBadge, location_name: "badge"))
     Project.add_member(:logs_config, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfig"))
     Project.struct_class = Types::Project
+
+    ProjectArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     ProjectArtifacts.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactsType, required: true, location_name: "type"))
     ProjectArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -592,6 +637,13 @@ module Aws::CodeBuild
     ProjectSources.member = Shapes::ShapeRef.new(shape: ProjectSource)
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
+
+    PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "resourceArn"))
+    PutResourcePolicyInput.struct_class = Types::PutResourcePolicyInput
+
+    PutResourcePolicyOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "resourceArn"))
+    PutResourcePolicyOutput.struct_class = Types::PutResourcePolicyOutput
 
     RegistryCredential.add_member(:credential, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "credential"))
     RegistryCredential.add_member(:credential_provider, Shapes::ShapeRef.new(shape: CredentialProviderType, required: true, location_name: "credentialProvider"))
@@ -909,6 +961,15 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:delete_source_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSourceCredentials"
         o.http_method = "POST"
@@ -938,6 +999,16 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: DescribeTestCasesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:import_source_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -1025,12 +1096,40 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:list_shared_projects, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSharedProjects"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSharedProjectsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSharedProjectsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_shared_report_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSharedReportGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSharedReportGroupsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSharedReportGroupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
       api.add_operation(:list_source_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSourceCredentials"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListSourceCredentialsInput)
         o.output = Shapes::ShapeRef.new(shape: ListSourceCredentialsOutput)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:start_build, Seahorse::Model::Operation.new.tap do |o|

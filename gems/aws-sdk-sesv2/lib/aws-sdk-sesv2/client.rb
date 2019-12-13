@@ -285,8 +285,8 @@ module Aws::SESV2
     #   want to associate with the configuration set.
     #
     # @option params [Types::SuppressionOptions] :suppression_options
-    #   An object that contains information about your account's suppression
-    #   preferences.
+    #   An object that contains information about the suppression list
+    #   preferences for your account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -432,10 +432,10 @@ module Aws::SESV2
     # by various email providers around the world. When you perform a
     # predictive inbox placement test, you provide a sample message that
     # contains the content that you plan to send to your customers. Amazon
-    # SES API v2 then sends that message to special email addresses spread
-    # across several major email providers. After about 24 hours, the test
-    # is complete, and you can use the `GetDeliverabilityTestReport`
-    # operation to view the results of the test.
+    # SES then sends that message to special email addresses spread across
+    # several major email providers. After about 24 hours, the test is
+    # complete, and you can use the `GetDeliverabilityTestReport` operation
+    # to view the results of the test.
     #
     # @option params [String] :report_name
     #   A unique name that helps you to identify the predictive inbox
@@ -521,12 +521,26 @@ module Aws::SESV2
     # address. Your email address is verified as soon as you follow the link
     # in the verification email.
     #
-    # When you verify a domain, this operation provides a set of DKIM
-    # tokens, which you can convert into CNAME tokens. You add these CNAME
-    # tokens to the DNS configuration for your domain. Your domain is
+    # When you verify a domain without specifying the
+    # `DkimSigningAttributes` object, this operation provides a set of DKIM
+    # tokens. You can convert these tokens into CNAME records, which you
+    # then add to the DNS configuration for your domain. Your domain is
     # verified when Amazon SES detects these records in the DNS
-    # configuration for your domain. For some DNS providers, it can take 72
-    # hours or more to complete the domain verification process.
+    # configuration for your domain. This verification method is known as
+    # [Easy DKIM][1].
+    #
+    # Alternatively, you can perform the verification process by providing
+    # your own public-private key pair. This verification method is known as
+    # Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the
+    # `CreateEmailIdentity` operation has to include the
+    # `DkimSigningAttributes` object. When you specify this object, you
+    # provide a selector (a component of the DNS record name that identifies
+    # the public key that you want to use for DKIM authentication) and a
+    # private key.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @option params [required, String] :email_identity
     #   The email address or domain that you want to verify.
@@ -534,6 +548,18 @@ module Aws::SESV2
     # @option params [Array<Types::Tag>] :tags
     #   An array of objects that define the tags (keys and values) that you
     #   want to associate with the email identity.
+    #
+    # @option params [Types::DkimSigningAttributes] :dkim_signing_attributes
+    #   If your request includes this object, Amazon SES configures the
+    #   identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication
+    #   purposes, as opposed to the default method, [Easy DKIM][1].
+    #
+    #   You can only specify this object if the email identity is a domain, as
+    #   opposed to an address.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
     #
     # @return [Types::CreateEmailIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -551,6 +577,10 @@ module Aws::SESV2
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     dkim_signing_attributes: {
+    #       domain_signing_selector: "Selector", # required
+    #       domain_signing_private_key: "PrivateKey", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -561,6 +591,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
+    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateEmailIdentity AWS API Documentation
     #
@@ -679,11 +710,11 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Used to delete a suppressed email destination from your suppression
-    # list.
+    # Removes an email address from the suppression list for your account.
     #
     # @option params [required, String] :email_address
-    #   The suppressed email destination to delete.
+    #   The suppressed email destination to remove from the account
+    #   suppression list.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -965,11 +996,11 @@ module Aws::SESV2
     # subscription charge, in addition to any other fees that you accrue by
     # using Amazon SES and other AWS services. For more information about
     # the features and cost of a Deliverability dashboard subscription, see
-    # [Amazon Pinpoint Pricing][1].
+    # [Amazon SES Pricing][1].
     #
     #
     #
-    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    # [1]: http://aws.amazon.com/ses/pricing/
     #
     # @return [Types::GetDeliverabilityDashboardOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1199,6 +1230,7 @@ module Aws::SESV2
     #   resp.dkim_attributes.status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
     #   resp.dkim_attributes.tokens #=> Array
     #   resp.dkim_attributes.tokens[0] #=> String
+    #   resp.dkim_attributes.signing_attributes_origin #=> String, one of "AWS_SES", "EXTERNAL"
     #   resp.mail_from_attributes.mail_from_domain #=> String
     #   resp.mail_from_attributes.mail_from_domain_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE"
     #   resp.mail_from_attributes.behavior_on_mx_failure #=> String, one of "USE_DEFAULT_VALUE", "REJECT_MESSAGE"
@@ -1215,11 +1247,11 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Used to fetch a single suppressed email destination from your
-    # suppression list.
+    # Retrieves information about a specific email address that's on the
+    # suppression list for your account.
     #
     # @option params [required, String] :email_address
-    #   Email destination to fetch from the suppression list.
+    #   The email address that's on the account suppression list.
     #
     # @return [Types::GetSuppressedDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1508,21 +1540,25 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Used to fetch a list suppressed email destinations from your
-    # suppression list.
+    # Retrieves a list of email addresses that are on the suppression list
+    # for your account.
     #
     # @option params [Array<String>] :reasons
-    #   Filters email destinations suppressed by the given reasons.
+    #   The factors that caused the email address to be added to .
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_date
-    #   Filters email destinations suppressed before the given time.
+    #   Used to filter the list of suppressed email destinations so that it
+    #   only includes addresses that were added to the list after a specific
+    #   date. The date that you specify should be in Unix time format.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_date
-    #   Filters email destinations suppressed after the given time.
+    #   Used to filter the list of suppressed email destinations so that it
+    #   only includes addresses that were added to the list before a specific
+    #   date. The date that you specify should be in Unix time format.
     #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListSuppressedDestinations`
-    #   to indicate the position in the list of suppressed email destinations.
+    #   to indicate the position in the list of suppressed email addresses.
     #
     # @option params [Integer] :page_size
     #   The number of results to show in a single call to
@@ -1653,17 +1689,20 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Change your account's suppression preferences for your account.
+    # Change the settings for the account-level suppression list.
     #
     # @option params [Array<String>] :suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid reasons
-    #   are:
+    #   A list that contains the reasons that email addresses will be
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results in
+    #     a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression list
+    #     for your account when a message sent to that address results in a
+    #     hard bounce.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1779,22 +1818,25 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Specify your account's suppression preferences for a configuration
+    # Specify the account suppression list preferences for a configuration
     # set.
     #
     # @option params [required, String] :configuration_set_name
-    #   The name of the configuration set that you want to enable or disable
-    #   email sending for.
+    #   The name of the configuration set that you want to change the
+    #   suppression list preferences for.
     #
     # @option params [Array<String>] :suppressed_reasons
-    #   A list of reasons to suppress email addresses. The only valid reasons
-    #   are:
+    #   A list that contains the reasons that email addresses are
+    #   automatically added to the suppression list for your account. This
+    #   list can contain any or all of the following:
     #
-    #   * `COMPLAINT` – Amazon SES will suppress an email address that
-    #     receives a complaint.
+    #   * `COMPLAINT` – Amazon SES adds an email address to the suppression
+    #     list for your account when a message sent to that address results in
+    #     a complaint.
     #
-    #   * `BOUNCE` – Amazon SES will suppress an email address that hard
-    #     bounces.
+    #   * `BOUNCE` – Amazon SES adds an email address to the suppression list
+    #     for your account when a message sent to that address results in a
+    #     hard bounce.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1915,11 +1957,11 @@ module Aws::SESV2
     # subscription charge, in addition to any other fees that you accrue by
     # using Amazon SES and other AWS services. For more information about
     # the features and cost of a Deliverability dashboard subscription, see
-    # [Amazon Pinpoint Pricing][1].
+    # [Amazon SES Pricing][1].
     #
     #
     #
-    # [1]: http://aws.amazon.com/pinpoint/pricing/
+    # [1]: http://aws.amazon.com/ses/pricing/
     #
     # @option params [required, Boolean] :dashboard_enabled
     #   Specifies whether to enable the Deliverability dashboard. To enable
@@ -1983,6 +2025,74 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def put_email_identity_dkim_attributes(params = {}, options = {})
       req = build_request(:put_email_identity_dkim_attributes, params)
+      req.send_request(options)
+    end
+
+    # Used to configure or change the DKIM authentication settings for an
+    # email domain identity. You can use this operation to do any of the
+    # following:
+    #
+    # * Update the signing attributes for an identity that uses Bring Your
+    #   Own DKIM (BYODKIM).
+    #
+    # * Change from using no DKIM authentication to using Easy DKIM.
+    #
+    # * Change from using no DKIM authentication to using BYODKIM.
+    #
+    # * Change from using Easy DKIM to using BYODKIM.
+    #
+    # * Change from using BYODKIM to using Easy DKIM.
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity that you want to configure DKIM for.
+    #
+    # @option params [required, String] :signing_attributes_origin
+    #   The method that you want to use to configure DKIM for the identity.
+    #   There are two possible values:
+    #
+    #   * `AWS_SES` – Configure DKIM for the identity by using [Easy DKIM][1].
+    #
+    #   * `EXTERNAL` – Configure DKIM for the identity by using Bring Your Own
+    #     DKIM (BYODKIM).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+    #
+    # @option params [Types::DkimSigningAttributes] :signing_attributes
+    #   An object that contains information about the private key and selector
+    #   that you want to use to configure DKIM for the identity. This object
+    #   is only required if you want to configure Bring Your Own DKIM
+    #   (BYODKIM) for the identity.
+    #
+    # @return [Types::PutEmailIdentityDkimSigningAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEmailIdentityDkimSigningAttributesResponse#dkim_status #dkim_status} => String
+    #   * {Types::PutEmailIdentityDkimSigningAttributesResponse#dkim_tokens #dkim_tokens} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_email_identity_dkim_signing_attributes({
+    #     email_identity: "Identity", # required
+    #     signing_attributes_origin: "AWS_SES", # required, accepts AWS_SES, EXTERNAL
+    #     signing_attributes: {
+    #       domain_signing_selector: "Selector", # required
+    #       domain_signing_private_key: "PrivateKey", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dkim_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
+    #   resp.dkim_tokens #=> Array
+    #   resp.dkim_tokens[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/PutEmailIdentityDkimSigningAttributes AWS API Documentation
+    #
+    # @overload put_email_identity_dkim_signing_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_email_identity_dkim_signing_attributes(params = {}, options = {})
+      req = build_request(:put_email_identity_dkim_signing_attributes, params)
       req.send_request(options)
     end
 
@@ -2084,13 +2194,15 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Puts (overwrites) an email destination in your suppression list.
+    # Adds an email address to the suppression list for your account.
     #
     # @option params [required, String] :email_address
-    #   Email destination to be suppressed.
+    #   The email address that should be added to the suppression list for
+    #   your account.
     #
     # @option params [required, String] :reason
-    #   Reason for which the email destination is suppressed.
+    #   The factors that should cause the email address to be added to the
+    #   suppression list for your account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2115,7 +2227,7 @@ module Aws::SESV2
     #
     # * **Simple** – A standard email message. When you create this type of
     #   message, you specify the sender, the recipient, and the message
-    #   body, and the Amazon SES API v2 assembles the message for you.
+    #   body, and Amazon SES assembles the message for you.
     #
     # * **Raw** – A raw, MIME-formatted email message. When you send this
     #   type of email, you have to specify all of the message headers, as
@@ -2366,7 +2478,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

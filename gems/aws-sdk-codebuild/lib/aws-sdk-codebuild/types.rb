@@ -84,7 +84,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the build projects.
+    #   The names or ARNs of the build projects. To get information about a
+    #   project shared with your AWS account, its ARN must be specified. You
+    #   cannot specify a shared project using its name.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjectsInput AWS API Documentation
@@ -1095,6 +1097,28 @@ module Aws::CodeBuild
     #
     class DeleteReportOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteResourcePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that is associated with the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteResourcePolicyInput AWS API Documentation
+    #
+    class DeleteResourcePolicyInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteResourcePolicyOutput AWS API Documentation
+    #
+    class DeleteResourcePolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSourceCredentialsInput
     #   data as a hash:
     #
@@ -1346,6 +1370,36 @@ module Aws::CodeBuild
     class ExportedEnvironmentVariable < Struct.new(
       :name,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourcePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource that is associated with the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetResourcePolicyInput AWS API Documentation
+    #
+    class GetResourcePolicyInput < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource policy for the resource identified by the input ARN
+    #   parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/GetResourcePolicyOutput AWS API Documentation
+    #
+    class GetResourcePolicyOutput < Struct.new(
+      :policy)
       include Aws::Structure
     end
 
@@ -1885,6 +1939,162 @@ module Aws::CodeBuild
     class ListReportsOutput < Struct.new(
       :next_token,
       :reports)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSharedProjectsInput
+    #   data as a hash:
+    #
+    #       {
+    #         sort_by: "ARN", # accepts ARN, MODIFIED_TIME
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         max_results: 1,
+    #         next_token: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] sort_by
+    #   The criterion to be used to list build projects shared with the
+    #   current AWS account or user. Valid values include:
+    #
+    #   * `ARN`\: List based on the ARN.
+    #
+    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #     project was last changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to list shared build projects. Valid values
+    #   include:
+    #
+    #   * `ASCENDING`\: List in ascending order.
+    #
+    #   * `DESCENDING`\: List in descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated shared build projects returned per
+    #   response. Use `nextToken` to iterate pages in the list of returned
+    #   `Project` objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedProjectsInput AWS API Documentation
+    #
+    class ListSharedProjectsInput < Struct.new(
+      :sort_by,
+      :sort_order,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] projects
+    #   The list of ARNs for the build projects shared with the current AWS
+    #   account or user.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedProjectsOutput AWS API Documentation
+    #
+    class ListSharedProjectsOutput < Struct.new(
+      :next_token,
+      :projects)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSharedReportGroupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         sort_by: "ARN", # accepts ARN, MODIFIED_TIME
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to list shared report groups. Valid values
+    #   include:
+    #
+    #   * `ASCENDING`\: List in ascending order.
+    #
+    #   * `DESCENDING`\: List in descending order.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The criterion to be used to list report groups shared with the
+    #   current AWS account or user. Valid values include:
+    #
+    #   * `ARN`\: List based on the ARN.
+    #
+    #   * `MODIFIED_TIME`\: List based on when information about the shared
+    #     report group was last changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated shared report groups per response.
+    #   Use `nextToken` to iterate pages in the list of returned
+    #   `ReportGroup` objects. The default value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedReportGroupsInput AWS API Documentation
+    #
+    class ListSharedReportGroupsInput < Struct.new(
+      :sort_order,
+      :sort_by,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, the maximum number of items that can be
+    #   returned is the value specified in `maxResults`. If there more items
+    #   in the list, then a unique string called a *nextToken* is returned.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call. To get all of the items in
+    #   the list, keep calling this operation with each subsequent next
+    #   token that is returned, until no more next tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_groups
+    #   The list of ARNs for the report groups shared with the current AWS
+    #   account or user.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListSharedReportGroupsOutput AWS API Documentation
+    #
+    class ListSharedReportGroupsOutput < Struct.new(
+      :next_token,
+      :report_groups)
       include Aws::Structure
     end
 
@@ -2873,6 +3083,50 @@ module Aws::CodeBuild
     class ProjectSourceVersion < Struct.new(
       :source_identifier,
       :source_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         policy: "NonEmptyString", # required
+    #         resource_arn: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] policy
+    #   A JSON-formatted resource policy. For more information, see [Sharing
+    #   a Project][1] and [Sharing a Report Group][2] in the *AWS CodeBuild
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share
+    #   [2]: https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the `Project` or `ReportGroup` resource you want to
+    #   associate with a resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PutResourcePolicyInput AWS API Documentation
+    #
+    class PutResourcePolicyInput < Struct.new(
+      :policy,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the `Project` or `ReportGroup` resource that is
+    #   associated with a resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PutResourcePolicyOutput AWS API Documentation
+    #
+    class PutResourcePolicyOutput < Struct.new(
+      :resource_arn)
       include Aws::Structure
     end
 
