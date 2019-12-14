@@ -108,7 +108,7 @@ module Aws
           end
 
 	  if expires_in <= 0 
-            msg = "expires_in value of #{expires_in} less than minimum"
+            msg = "expires_in value of #{expires_in} cannot be 0 or less" 
             raise ArgumentError, msg
 	  end
 
