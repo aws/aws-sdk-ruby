@@ -15,7 +15,6 @@ module Aws
 
       # @api private
       FIFTEEN_MINUTES = 60 * 15
-      MIN_GUARD = 0
 
       BLACKLISTED_HEADERS = [
         'accept',
@@ -108,7 +107,7 @@ module Aws
             raise ArgumentError, msg
           end
 
-	  if expires_in <= MIN_GUARD 
+	  if expires_in <= 0 
             msg = "expires_in value of #{expires_in} less than minimum"
             raise ArgumentError, msg
 	  end
