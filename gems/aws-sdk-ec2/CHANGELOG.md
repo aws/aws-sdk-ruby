@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2019-12-16)
+------------------
+
+* Feature - You can now configure your EC2 Fleet to preferentially use EC2 Capacity Reservations for launching On-Demand instances, enabling you to fully utilize the available (and unused) Capacity Reservations before launching On-Demand instances on net new capacity.
+
 1.124.0 (2019-12-11)
 ------------------
 

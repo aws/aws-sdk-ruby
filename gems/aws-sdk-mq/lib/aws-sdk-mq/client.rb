@@ -293,6 +293,9 @@ module Aws::MQ
     #
     # @option params [Array<String>] :security_groups
     #
+    # @option params [String] :storage_type
+    #   The storage type of the broker.
+    #
     # @option params [Array<String>] :subnet_ids
     #
     # @option params [Hash<String,String>] :tags
@@ -333,6 +336,7 @@ module Aws::MQ
     #     },
     #     publicly_accessible: false,
     #     security_groups: ["__string"],
+    #     storage_type: "EBS", # accepts EBS, EFS
     #     subnet_ids: ["__string"],
     #     tags: {
     #       "__string" => "__string",
@@ -569,10 +573,11 @@ module Aws::MQ
     #   * {Types::DescribeBrokerResponse#logs #logs} => Types::LogsSummary
     #   * {Types::DescribeBrokerResponse#maintenance_window_start_time #maintenance_window_start_time} => Types::WeeklyStartTime
     #   * {Types::DescribeBrokerResponse#pending_engine_version #pending_engine_version} => String
-    #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#pending_host_instance_type #pending_host_instance_type} => String
+    #   * {Types::DescribeBrokerResponse#pending_security_groups #pending_security_groups} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#publicly_accessible #publicly_accessible} => Boolean
     #   * {Types::DescribeBrokerResponse#security_groups #security_groups} => Array&lt;String&gt;
+    #   * {Types::DescribeBrokerResponse#storage_type #storage_type} => String
     #   * {Types::DescribeBrokerResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
     #   * {Types::DescribeBrokerResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::DescribeBrokerResponse#users #users} => Array&lt;Types::UserSummary&gt;
@@ -619,12 +624,13 @@ module Aws::MQ
     #   resp.maintenance_window_start_time.time_of_day #=> String
     #   resp.maintenance_window_start_time.time_zone #=> String
     #   resp.pending_engine_version #=> String
+    #   resp.pending_host_instance_type #=> String
     #   resp.pending_security_groups #=> Array
     #   resp.pending_security_groups[0] #=> String
-    #   resp.pending_host_instance_type #=> String
     #   resp.publicly_accessible #=> Boolean
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
+    #   resp.storage_type #=> String, one of "EBS", "EFS"
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
     #   resp.tags #=> Hash
@@ -692,6 +698,8 @@ module Aws::MQ
     #
     # @option params [String] :next_token
     #
+    # @option params [String] :storage_type
+    #
     # @return [Types::DescribeBrokerInstanceOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeBrokerInstanceOptionsResponse#broker_instance_options #broker_instance_options} => Array&lt;Types::BrokerInstanceOption&gt;
@@ -705,6 +713,7 @@ module Aws::MQ
     #     host_instance_type: "__string",
     #     max_results: 1,
     #     next_token: "__string",
+    #     storage_type: "__string",
     #   })
     #
     # @example Response structure
@@ -714,6 +723,9 @@ module Aws::MQ
     #   resp.broker_instance_options[0].availability_zones[0].name #=> String
     #   resp.broker_instance_options[0].engine_type #=> String, one of "ACTIVEMQ"
     #   resp.broker_instance_options[0].host_instance_type #=> String
+    #   resp.broker_instance_options[0].storage_type #=> String, one of "EBS", "EFS"
+    #   resp.broker_instance_options[0].supported_deployment_modes #=> Array
+    #   resp.broker_instance_options[0].supported_deployment_modes[0] #=> String, one of "SINGLE_INSTANCE", "ACTIVE_STANDBY_MULTI_AZ"
     #   resp.broker_instance_options[0].supported_engine_versions #=> Array
     #   resp.broker_instance_options[0].supported_engine_versions[0] #=> String
     #   resp.max_results #=> Integer
@@ -1233,7 +1245,7 @@ module Aws::MQ
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mq'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

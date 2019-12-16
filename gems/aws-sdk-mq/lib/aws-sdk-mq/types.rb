@@ -119,6 +119,14 @@ module Aws::MQ
     #   The type of broker instance.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_deployment_modes
+    #   The list of supported deployment modes.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] supported_engine_versions
     #   The list of supported engine versions.
     #   @return [Array<String>]
@@ -129,6 +137,8 @@ module Aws::MQ
       :availability_zones,
       :engine_type,
       :host_instance_type,
+      :storage_type,
+      :supported_deployment_modes,
       :supported_engine_versions)
       include Aws::Structure
     end
@@ -416,9 +426,13 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups (2 maximum) that define which subnets and IP
@@ -455,6 +469,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -509,6 +524,7 @@ module Aws::MQ
     #         },
     #         publicly_accessible: false,
     #         security_groups: ["__string"],
+    #         storage_type: "EBS", # accepts EBS, EFS
     #         subnet_ids: ["__string"],
     #         tags: {
     #           "__string" => "__string",
@@ -573,6 +589,10 @@ module Aws::MQ
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
     #
+    # @!attribute [rw] storage_type
+    #   The storage type of the broker.
+    #   @return [String]
+    #
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
     #
@@ -598,6 +618,7 @@ module Aws::MQ
       :maintenance_window_start_time,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -987,6 +1008,7 @@ module Aws::MQ
     #         host_instance_type: "__string",
     #         max_results: 1,
     #         next_token: "__string",
+    #         storage_type: "__string",
     #       }
     #
     # @!attribute [rw] engine_type
@@ -1001,13 +1023,17 @@ module Aws::MQ
     # @!attribute [rw] next_token
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerInstanceOptionsRequest AWS API Documentation
     #
     class DescribeBrokerInstanceOptionsRequest < Struct.new(
       :engine_type,
       :host_instance_type,
       :max_results,
-      :next_token)
+      :next_token,
+      :storage_type)
       include Aws::Structure
     end
 
@@ -1109,16 +1135,16 @@ module Aws::MQ
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
     #   @return [String]
     #
-    # @!attribute [rw] pending_security_groups
-    #   The list of pending security groups to authorize connections to
-    #   brokers.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] pending_host_instance_type
     #   The host instance type of the broker to upgrade to. For a list of
     #   supported instance types, see
     #   https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
     #   @return [String]
+    #
+    # @!attribute [rw] pending_security_groups
+    #   The list of pending security groups to authorize connections to
+    #   brokers.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] publicly_accessible
     #   Required. Enables connections from applications outside of the VPC
@@ -1126,9 +1152,13 @@ module Aws::MQ
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The broker's storage type.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   The list of groups (2 maximum) that define which subnets and IP
@@ -1165,10 +1195,11 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
-      :pending_security_groups,
       :pending_host_instance_type,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -1250,17 +1281,21 @@ module Aws::MQ
     # @!attribute [rw] pending_engine_version
     #   @return [String]
     #
-    # @!attribute [rw] pending_security_groups
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] pending_host_instance_type
     #   @return [String]
+    #
+    # @!attribute [rw] pending_security_groups
+    #   @return [Array<String>]
     #
     # @!attribute [rw] publicly_accessible
     #   @return [Boolean]
     #
     # @!attribute [rw] security_groups
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_type
+    #   The storage type of the broker.
+    #   @return [String]
     #
     # @!attribute [rw] subnet_ids
     #   @return [Array<String>]
@@ -1290,10 +1325,11 @@ module Aws::MQ
       :logs,
       :maintenance_window_start_time,
       :pending_engine_version,
-      :pending_security_groups,
       :pending_host_instance_type,
+      :pending_security_groups,
       :publicly_accessible,
       :security_groups,
+      :storage_type,
       :subnet_ids,
       :tags,
       :users)
@@ -2132,7 +2168,7 @@ module Aws::MQ
     #   @return [Types::Logs]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
     #
@@ -2181,7 +2217,7 @@ module Aws::MQ
     #   @return [Types::Logs]
     #
     # @!attribute [rw] security_groups
-    #   The list of security groups (1 minimum, 5 maximum) that authorize
+    #   The list of security groups (1 minimum, 5 maximum) that authorizes
     #   connections to brokers.
     #   @return [Array<String>]
     #

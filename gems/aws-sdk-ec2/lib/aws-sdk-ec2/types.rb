@@ -2899,6 +2899,91 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the strategy for using unused Capacity Reservations for
+    # fulfilling On-Demand capacity.
+    #
+    # <note markdown="1"> This strategy can only be used if the EC2 Fleet is of type `instant`.
+    #
+    #  </note>
+    #
+    # For more information about Capacity Reservations, see [On-Demand
+    # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    #
+    # @!attribute [rw] usage_strategy
+    #   Indicates whether to use unused Capacity Reservations for fulfilling
+    #   On-Demand capacity.
+    #
+    #   If you specify `use-capacity-reservations-first`, the fleet uses
+    #   unused Capacity Reservations to fulfill On-Demand capacity up to the
+    #   target On-Demand capacity. If the number of unused Capacity
+    #   Reservations is less than the On-Demand target capacity, the
+    #   remaining On-Demand target capacity is launched as usual. When
+    #   unused Capacity Reservations are used to fulfil On-Demand capacity,
+    #   the On-Demand allocation strategy (`lowest-price` or `prioritized`)
+    #   is applied to them.
+    #
+    #   If you do not specify a value, the fleet fulfils the On-Demand
+    #   capacity as usual.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationOptions AWS API Documentation
+    #
+    class CapacityReservationOptions < Struct.new(
+      :usage_strategy)
+      include Aws::Structure
+    end
+
+    # Describes the strategy for using unused Capacity Reservations for
+    # fulfilling On-Demand capacity.
+    #
+    # <note markdown="1"> This strategy can only be used if the EC2 Fleet is of type `instant`.
+    #
+    #  </note>
+    #
+    # For more information about Capacity Reservations, see [On-Demand
+    # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    #
+    # @note When making an API call, you may pass CapacityReservationOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #       }
+    #
+    # @!attribute [rw] usage_strategy
+    #   Indicates whether to use unused Capacity Reservations for fulfilling
+    #   On-Demand capacity.
+    #
+    #   If you specify `use-capacity-reservations-first`, the fleet uses
+    #   unused Capacity Reservations to fulfill On-Demand capacity up to the
+    #   target On-Demand capacity. If the number of unused Capacity
+    #   Reservations is less than the On-Demand target capacity, the
+    #   remaining On-Demand target capacity is launched as usual. When
+    #   unused Capacity Reservations are used to fulfil On-Demand capacity,
+    #   the On-Demand allocation strategy (`lowest-price` or `prioritized`)
+    #   is applied to them.
+    #
+    #   If you do not specify a value, the fleet fulfils the On-Demand
+    #   capacity as usual.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationOptionsRequest AWS API Documentation
+    #
+    class CapacityReservationOptionsRequest < Struct.new(
+      :usage_strategy)
+      include Aws::Structure
+    end
+
     # Describes an instance's Capacity Reservation targeting option. You
     # can specify only one parameter at a time. If you specify
     # `CapacityReservationPreference` and `CapacityReservationTarget`, the
@@ -5062,6 +5147,9 @@ module Aws::EC2
     #         },
     #         on_demand_options: {
     #           allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #           capacity_reservation_options: {
+    #             usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #           },
     #           single_instance_type: false,
     #           single_availability_zone: false,
     #           min_target_capacity: 1,
@@ -14406,8 +14494,9 @@ module Aws::EC2
     #     `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN. `image-id` - The ID of the
-    #     image used to launch the instance.
+    #     the instance. Specified as an ARN.
+    #
+    #   * `image-id` - The ID of the image used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #
@@ -21763,7 +21852,7 @@ module Aws::EC2
     # Describes the disk.
     #
     # @!attribute [rw] size_in_gb
-    #   The size of the disk in GiB.
+    #   The size of the disk in GB.
     #   @return [Integer]
     #
     # @!attribute [rw] count
@@ -21901,7 +21990,8 @@ module Aws::EC2
     #
     # @!attribute [rw] volume_type
     #   The volume type. If you set the type to `io1`, you must also specify
-    #   the IOPS that the volume supports.
+    #   the **Iops** parameter. If you set the type to `gp2`, `st1`, `sc1`,
+    #   or `standard`, you must omit the **Iops** parameter.
     #
     #   Default: `gp2`
     #   @return [String]
@@ -28165,7 +28255,7 @@ module Aws::EC2
     # Describes the disks that are available for the instance type.
     #
     # @!attribute [rw] total_size_in_gb
-    #   The total size of the disks, in GiB.
+    #   The total size of the disks, in GB.
     #   @return [Integer]
     #
     # @!attribute [rw] disks
@@ -34066,6 +34156,11 @@ module Aws::EC2
     #   `lowest-price`.
     #   @return [String]
     #
+    # @!attribute [rw] capacity_reservation_options
+    #   The strategy for using unused Capacity Reservations for fulfilling
+    #   On-Demand capacity. Only available for fleets of type `instant`.
+    #   @return [Types::CapacityReservationOptions]
+    #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
     #   On-Demand Instances in the fleet.
@@ -34091,6 +34186,7 @@ module Aws::EC2
     #
     class OnDemandOptions < Struct.new(
       :allocation_strategy,
+      :capacity_reservation_options,
       :single_instance_type,
       :single_availability_zone,
       :min_target_capacity,
@@ -34105,6 +34201,9 @@ module Aws::EC2
     #
     #       {
     #         allocation_strategy: "lowest-price", # accepts lowest-price, prioritized
+    #         capacity_reservation_options: {
+    #           usage_strategy: "use-capacity-reservations-first", # accepts use-capacity-reservations-first
+    #         },
     #         single_instance_type: false,
     #         single_availability_zone: false,
     #         min_target_capacity: 1,
@@ -34120,6 +34219,11 @@ module Aws::EC2
     #   priority first. If you do not specify a value, EC2 Fleet defaults to
     #   `lowest-price`.
     #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_options
+    #   The strategy for using unused Capacity Reservations for fulfilling
+    #   On-Demand capacity. Only available for fleets of type `instant`.
+    #   @return [Types::CapacityReservationOptionsRequest]
     #
     # @!attribute [rw] single_instance_type
     #   Indicates that the fleet uses a single instance type to launch all
@@ -34146,6 +34250,7 @@ module Aws::EC2
     #
     class OnDemandOptionsRequest < Struct.new(
       :allocation_strategy,
+      :capacity_reservation_options,
       :single_instance_type,
       :single_availability_zone,
       :min_target_capacity,

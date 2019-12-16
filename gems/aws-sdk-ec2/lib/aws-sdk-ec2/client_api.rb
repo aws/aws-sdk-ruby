@@ -157,6 +157,8 @@ module Aws::EC2
     CapacityReservationId = Shapes::StringShape.new(name: 'CapacityReservationId')
     CapacityReservationIdSet = Shapes::ListShape.new(name: 'CapacityReservationIdSet')
     CapacityReservationInstancePlatform = Shapes::StringShape.new(name: 'CapacityReservationInstancePlatform')
+    CapacityReservationOptions = Shapes::StructureShape.new(name: 'CapacityReservationOptions')
+    CapacityReservationOptionsRequest = Shapes::StructureShape.new(name: 'CapacityReservationOptionsRequest')
     CapacityReservationPreference = Shapes::StringShape.new(name: 'CapacityReservationPreference')
     CapacityReservationSet = Shapes::ListShape.new(name: 'CapacityReservationSet')
     CapacityReservationSpecification = Shapes::StructureShape.new(name: 'CapacityReservationSpecification')
@@ -859,6 +861,7 @@ module Aws::EC2
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
+    FleetCapacityReservationUsageStrategy = Shapes::StringShape.new(name: 'FleetCapacityReservationUsageStrategy')
     FleetData = Shapes::StructureShape.new(name: 'FleetData')
     FleetEventType = Shapes::StringShape.new(name: 'FleetEventType')
     FleetExcessCapacityTerminationPolicy = Shapes::StringShape.new(name: 'FleetExcessCapacityTerminationPolicy')
@@ -2413,6 +2416,12 @@ module Aws::EC2
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+    CapacityReservationOptions.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: FleetCapacityReservationUsageStrategy, location_name: "usageStrategy"))
+    CapacityReservationOptions.struct_class = Types::CapacityReservationOptions
+
+    CapacityReservationOptionsRequest.add_member(:usage_strategy, Shapes::ShapeRef.new(shape: FleetCapacityReservationUsageStrategy, location_name: "UsageStrategy"))
+    CapacityReservationOptionsRequest.struct_class = Types::CapacityReservationOptionsRequest
 
     CapacityReservationSet.member = Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "item")
 
@@ -7237,6 +7246,7 @@ module Aws::EC2
     OccurrenceDaySet.member = Shapes::ShapeRef.new(shape: Integer, location_name: "item")
 
     OnDemandOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "allocationStrategy"))
+    OnDemandOptions.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: CapacityReservationOptions, location_name: "capacityReservationOptions"))
     OnDemandOptions.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleInstanceType"))
     OnDemandOptions.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "singleAvailabilityZone"))
     OnDemandOptions.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "minTargetCapacity"))
@@ -7244,6 +7254,7 @@ module Aws::EC2
     OnDemandOptions.struct_class = Types::OnDemandOptions
 
     OnDemandOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: FleetOnDemandAllocationStrategy, location_name: "AllocationStrategy"))
+    OnDemandOptionsRequest.add_member(:capacity_reservation_options, Shapes::ShapeRef.new(shape: CapacityReservationOptionsRequest, location_name: "CapacityReservationOptions"))
     OnDemandOptionsRequest.add_member(:single_instance_type, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleInstanceType"))
     OnDemandOptionsRequest.add_member(:single_availability_zone, Shapes::ShapeRef.new(shape: Boolean, location_name: "SingleAvailabilityZone"))
     OnDemandOptionsRequest.add_member(:min_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "MinTargetCapacity"))

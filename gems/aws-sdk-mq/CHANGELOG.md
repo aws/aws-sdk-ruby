@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-12-16)
+------------------
+
+* Feature - Amazon MQ now supports throughput-optimized message brokers, backed by Amazon EBS.
+
 1.23.0 (2019-10-23)
 ------------------
 

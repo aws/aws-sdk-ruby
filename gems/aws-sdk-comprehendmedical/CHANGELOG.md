@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2019-12-16)
+------------------
+
+* Feature - New Ontology linking APIs will provides medication concepts normalization and Diagnoses codes from input text. In this release we will provide two APIs -  RxNorm and ICD10-CM.
+
 1.11.0 (2019-10-23)
 ------------------
 

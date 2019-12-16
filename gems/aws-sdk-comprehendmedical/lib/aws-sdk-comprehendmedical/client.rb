@@ -441,8 +441,7 @@ module Aws::ComprehendMedical
     # operation in all new applications.
     #
     # The `DetectEntitiesV2` operation returns the `Acuity` and `Direction`
-    # entities as attributes instead of types. It does not return the
-    # `Quality` or `Quantity` entities.
+    # entities as attributes instead of types.
     #
     # @option params [required, String] :text
     #   A UTF-8 string containing the clinical content being examined for
@@ -564,6 +563,127 @@ module Aws::ComprehendMedical
     # @param [Hash] params ({})
     def detect_phi(params = {}, options = {})
       req = build_request(:detect_phi, params)
+      req.send_request(options)
+    end
+
+    # InferICD10CM detects medical conditions as entities listed in a
+    # patient record and links those entities to normalized concept
+    # identifiers in the ICD-10-CM knowledge base from the Centers for
+    # Disease Control.
+    #
+    # @option params [required, String] :text
+    #   The input text used for analysis. The input for InferICD10CM is a
+    #   string from 1 to 10000 characters.
+    #
+    # @return [Types::InferICD10CMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InferICD10CMResponse#entities #entities} => Array&lt;Types::ICD10CMEntity&gt;
+    #   * {Types::InferICD10CMResponse#pagination_token #pagination_token} => String
+    #   * {Types::InferICD10CMResponse#model_version #model_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.infer_icd10cm({
+    #     text: "OntologyLinkingBoundedLengthString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].id #=> Integer
+    #   resp.entities[0].text #=> String
+    #   resp.entities[0].category #=> String, one of "MEDICAL_CONDITION"
+    #   resp.entities[0].type #=> String, one of "DX_NAME"
+    #   resp.entities[0].score #=> Float
+    #   resp.entities[0].begin_offset #=> Integer
+    #   resp.entities[0].end_offset #=> Integer
+    #   resp.entities[0].attributes #=> Array
+    #   resp.entities[0].attributes[0].type #=> String, one of "ACUITY", "DIRECTION", "SYSTEM_ORGAN_SITE", "QUALITY", "QUANTITY"
+    #   resp.entities[0].attributes[0].score #=> Float
+    #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].id #=> Integer
+    #   resp.entities[0].attributes[0].begin_offset #=> Integer
+    #   resp.entities[0].attributes[0].end_offset #=> Integer
+    #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].traits #=> Array
+    #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
+    #   resp.entities[0].attributes[0].traits[0].score #=> Float
+    #   resp.entities[0].traits #=> Array
+    #   resp.entities[0].traits[0].name #=> String, one of "NEGATION", "DIAGNOSIS", "SIGN", "SYMPTOM"
+    #   resp.entities[0].traits[0].score #=> Float
+    #   resp.entities[0].icd10cm_concepts #=> Array
+    #   resp.entities[0].icd10cm_concepts[0].description #=> String
+    #   resp.entities[0].icd10cm_concepts[0].code #=> String
+    #   resp.entities[0].icd10cm_concepts[0].score #=> Float
+    #   resp.pagination_token #=> String
+    #   resp.model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferICD10CM AWS API Documentation
+    #
+    # @overload infer_icd10cm(params = {})
+    # @param [Hash] params ({})
+    def infer_icd10cm(params = {}, options = {})
+      req = build_request(:infer_icd10cm, params)
+      req.send_request(options)
+    end
+
+    # InferRxNorm detects medications as entities listed in a patient record
+    # and links to the normalized concept identifiers in the RxNorm database
+    # from the National Library of Medicine.
+    #
+    # @option params [required, String] :text
+    #   The input text used for analysis. The input for InferRxNorm is a
+    #   string from 1 to 10000 characters.
+    #
+    # @return [Types::InferRxNormResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InferRxNormResponse#entities #entities} => Array&lt;Types::RxNormEntity&gt;
+    #   * {Types::InferRxNormResponse#pagination_token #pagination_token} => String
+    #   * {Types::InferRxNormResponse#model_version #model_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.infer_rx_norm({
+    #     text: "OntologyLinkingBoundedLengthString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities #=> Array
+    #   resp.entities[0].id #=> Integer
+    #   resp.entities[0].text #=> String
+    #   resp.entities[0].category #=> String, one of "MEDICATION"
+    #   resp.entities[0].type #=> String, one of "BRAND_NAME", "GENERIC_NAME"
+    #   resp.entities[0].score #=> Float
+    #   resp.entities[0].begin_offset #=> Integer
+    #   resp.entities[0].end_offset #=> Integer
+    #   resp.entities[0].attributes #=> Array
+    #   resp.entities[0].attributes[0].type #=> String, one of "DOSAGE", "DURATION", "FORM", "FREQUENCY", "RATE", "ROUTE_OR_MODE", "STRENGTH"
+    #   resp.entities[0].attributes[0].score #=> Float
+    #   resp.entities[0].attributes[0].relationship_score #=> Float
+    #   resp.entities[0].attributes[0].id #=> Integer
+    #   resp.entities[0].attributes[0].begin_offset #=> Integer
+    #   resp.entities[0].attributes[0].end_offset #=> Integer
+    #   resp.entities[0].attributes[0].text #=> String
+    #   resp.entities[0].attributes[0].traits #=> Array
+    #   resp.entities[0].attributes[0].traits[0].name #=> String, one of "NEGATION"
+    #   resp.entities[0].attributes[0].traits[0].score #=> Float
+    #   resp.entities[0].traits #=> Array
+    #   resp.entities[0].traits[0].name #=> String, one of "NEGATION"
+    #   resp.entities[0].traits[0].score #=> Float
+    #   resp.entities[0].rx_norm_concepts #=> Array
+    #   resp.entities[0].rx_norm_concepts[0].description #=> String
+    #   resp.entities[0].rx_norm_concepts[0].code #=> String
+    #   resp.entities[0].rx_norm_concepts[0].score #=> Float
+    #   resp.pagination_token #=> String
+    #   resp.model_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferRxNorm AWS API Documentation
+    #
+    # @overload infer_rx_norm(params = {})
+    # @param [Hash] params ({})
+    def infer_rx_norm(params = {}, options = {})
+      req = build_request(:infer_rx_norm, params)
       req.send_request(options)
     end
 
@@ -907,7 +1027,7 @@ module Aws::ComprehendMedical
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehendmedical'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

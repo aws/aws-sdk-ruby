@@ -462,7 +462,7 @@ module Aws::ComprehendMedical
     #   @return [String]
     #
     # @!attribute [rw] traits
-    #   Contextual information for the entity
+    #   Contextual information for the entity.
     #   @return [Array<Types::Trait>]
     #
     # @!attribute [rw] attributes
@@ -481,6 +481,281 @@ module Aws::ComprehendMedical
       :type,
       :traits,
       :attributes)
+      include Aws::Structure
+    end
+
+    # The detected attributes that relate to an entity. This includes an
+    # extracted segment of the text that is an attribute of an entity, or
+    # otherwise related to an entity. InferICD10CM detects the following
+    # attributes: `Direction`, `System, Organ or Site`, and `Acuity`.
+    #
+    # @!attribute [rw] type
+    #   The type of attribute. InferICD10CM detects entities of the type
+    #   `DX_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   segment of text is correctly recognized as an attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] relationship_score
+    #   The level of confidence that Amazon Comprehend Medical has that this
+    #   attribute is correctly related to this entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for this attribute. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute ends. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text which contains the detected attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] traits
+    #   The contextual information for the attribute. The traits recognized
+    #   by InferICD10CM are `DIAGNOSIS`, `SIGN`, `SYMPTOM`, and `NEGATION`.
+    #   @return [Array<Types::ICD10CMTrait>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ICD10CMAttribute AWS API Documentation
+    #
+    class ICD10CMAttribute < Struct.new(
+      :type,
+      :score,
+      :relationship_score,
+      :id,
+      :begin_offset,
+      :end_offset,
+      :text,
+      :traits)
+      include Aws::Structure
+    end
+
+    # The ICD-10-CM concepts that the entity could refer to, along with a
+    # score indicating the likelihood of the match.
+    #
+    # @!attribute [rw] description
+    #   The long description of the ICD-10-CM code in the ontology.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The ICD-10-CM code that identifies the concept found in the
+    #   knowledge base from the Centers for Disease Control.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   entity is accurately linked to an ICD-10-CM concept.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ICD10CMConcept AWS API Documentation
+    #
+    class ICD10CMConcept < Struct.new(
+      :description,
+      :code,
+      :score)
+      include Aws::Structure
+    end
+
+    # The collection of medical entities extracted from the input text and
+    # their associated information. For each entity, the response provides
+    # the entity text, the entity category, where the entity text begins and
+    # ends, and the level of confidence that Amazon Comprehend Medical has
+    # in the detection and analysis. Attributes and traits of the entity are
+    # also returned.
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for the entity. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text that is matched to the detected entity.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the entity. InferICD10CM detects entities in the
+    #   `MEDICAL_CONDITION` category.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes the specific type of entity with category of entities.
+    #   InferICD10CM detects entities of the type `DX_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has in the
+    #   accuracy of the detection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity ends. The offset returns the UTF-8 code point in the string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attributes
+    #   The detected attributes that relate to the entity. An extracted
+    #   segment of the text that is an attribute of an entity, or otherwise
+    #   related to an entity, such as the nature of a medical condition.
+    #   @return [Array<Types::ICD10CMAttribute>]
+    #
+    # @!attribute [rw] traits
+    #   Provides Contextual information for the entity. The traits
+    #   recognized by InferICD10CM are `DIAGNOSIS`, `SIGN`, `SYMPTOM`, and
+    #   `NEGATION.`
+    #   @return [Array<Types::ICD10CMTrait>]
+    #
+    # @!attribute [rw] icd10cm_concepts
+    #   The ICD-10-CM concepts that the entity could refer to, along with a
+    #   score indicating the likelihood of the match.
+    #   @return [Array<Types::ICD10CMConcept>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ICD10CMEntity AWS API Documentation
+    #
+    class ICD10CMEntity < Struct.new(
+      :id,
+      :text,
+      :category,
+      :type,
+      :score,
+      :begin_offset,
+      :end_offset,
+      :attributes,
+      :traits,
+      :icd10cm_concepts)
+      include Aws::Structure
+    end
+
+    # Contextual information for the entity. The traits recognized by
+    # InferICD10CM are `DIAGNOSIS`, `SIGN`, `SYMPTOM`, and `NEGATION`.
+    #
+    # @!attribute [rw] name
+    #   Provides a name or contextual description about the trait.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   segment of text is correctly recognized as a trait.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/ICD10CMTrait AWS API Documentation
+    #
+    class ICD10CMTrait < Struct.new(
+      :name,
+      :score)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass InferICD10CMRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "OntologyLinkingBoundedLengthString", # required
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The input text used for analysis. The input for InferICD10CM is a
+    #   string from 1 to 10000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferICD10CMRequest AWS API Documentation
+    #
+    class InferICD10CMRequest < Struct.new(
+      :text)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The medical conditions detected in the text linked to ICD-10-CM
+    #   concepts. If the action is successful, the service sends back an
+    #   HTTP 200 response, as well as the entities detected.
+    #   @return [Array<Types::ICD10CMEntity>]
+    #
+    # @!attribute [rw] pagination_token
+    #   If the result of the previous request to `InferICD10CM` was
+    #   truncated, include the `PaginationToken` to fetch the next page of
+    #   medical condition entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model used to analyze the documents, in the
+    #   format *n*.*n*.*n* You can use this information to track the model
+    #   used for a particular batch of documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferICD10CMResponse AWS API Documentation
+    #
+    class InferICD10CMResponse < Struct.new(
+      :entities,
+      :pagination_token,
+      :model_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass InferRxNormRequest
+    #   data as a hash:
+    #
+    #       {
+    #         text: "OntologyLinkingBoundedLengthString", # required
+    #       }
+    #
+    # @!attribute [rw] text
+    #   The input text used for analysis. The input for InferRxNorm is a
+    #   string from 1 to 10000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferRxNormRequest AWS API Documentation
+    #
+    class InferRxNormRequest < Struct.new(
+      :text)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entities
+    #   The medication entities detected in the text linked to RxNorm
+    #   concepts. If the action is successful, the service sends back an
+    #   HTTP 200 response, as well as the entities detected.
+    #   @return [Array<Types::RxNormEntity>]
+    #
+    # @!attribute [rw] pagination_token
+    #   If the result of the previous request to `InferRxNorm` was
+    #   truncated, include the `PaginationToken` to fetch the next page of
+    #   medication entities.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The version of the model used to analyze the documents, in the
+    #   format *n*.*n*.*n* You can use this information to track the model
+    #   used for a particular batch of documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/InferRxNormResponse AWS API Documentation
+    #
+    class InferRxNormResponse < Struct.new(
+      :entities,
+      :pagination_token,
+      :model_version)
       include Aws::Structure
     end
 
@@ -703,6 +978,189 @@ module Aws::ComprehendMedical
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # The extracted attributes that relate to this entity. The attributes
+    # recognized by InferRxNorm are `DOSAGE`, `DURATION`, `FORM`,
+    # `FREQUENCY`, `RATE`, `ROUTE_OR_MODE`.
+    #
+    # @!attribute [rw] type
+    #   The type of attribute. The types of attributes recognized by
+    #   InferRxNorm are `BRAND_NAME` and `GENERIC_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Comprehend Medical has that the segment
+    #   of text is correctly recognized as an attribute.
+    #   @return [Float]
+    #
+    # @!attribute [rw] relationship_score
+    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   attribute is accurately linked to an entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for this attribute. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   attribute ends. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text which corresponds to the detected
+    #   attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] traits
+    #   Contextual information for the attribute. InferRxNorm recognizes the
+    #   trait `NEGATION` for attributes, i.e. that the patient is not taking
+    #   a specific dose or form of a medication.
+    #   @return [Array<Types::RxNormTrait>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/RxNormAttribute AWS API Documentation
+    #
+    class RxNormAttribute < Struct.new(
+      :type,
+      :score,
+      :relationship_score,
+      :id,
+      :begin_offset,
+      :end_offset,
+      :text,
+      :traits)
+      include Aws::Structure
+    end
+
+    # The RxNorm concept that the entity could refer to, along with a score
+    # indicating the likelihood of the match.
+    #
+    # @!attribute [rw] description
+    #   The description of the RxNorm concept.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   RxNorm concept ID, also known as the RxCUI.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has that the
+    #   entity is accurately linked to the reported RxNorm concept.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/RxNormConcept AWS API Documentation
+    #
+    class RxNormConcept < Struct.new(
+      :description,
+      :code,
+      :score)
+      include Aws::Structure
+    end
+
+    # The collection of medical entities extracted from the input text and
+    # their associated information. For each entity, the response provides
+    # the entity text, the entity category, where the entity text begins and
+    # ends, and the level of confidence that Amazon Comprehend Medical has
+    # in the detection and analysis. Attributes and traits of the entity are
+    # also returned.
+    #
+    # @!attribute [rw] id
+    #   The numeric identifier for the entity. This is a monotonically
+    #   increasing id unique within this response rather than a global
+    #   unique identifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] text
+    #   The segment of input text extracted from which the entity was
+    #   detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the entity. The recognized categories are `GENERIC`
+    #   or `BRAND_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Describes the specific type of entity. For InferRxNorm, the
+    #   recognized entity type is `MEDICATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has in the
+    #   accuracy of the detected entity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] begin_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity begins. The offset returns the UTF-8 code point in the
+    #   string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The 0-based character offset in the input text that shows where the
+    #   entity ends. The offset returns the UTF-8 code point in the string.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] attributes
+    #   The extracted attributes that relate to the entity. The attributes
+    #   recognized by InferRxNorm are `DOSAGE`, `DURATION`, `FORM`,
+    #   `FREQUENCY`, `RATE`, `ROUTE_OR_MODE`, and `STRENGTH`.
+    #   @return [Array<Types::RxNormAttribute>]
+    #
+    # @!attribute [rw] traits
+    #   Contextual information for the entity.
+    #   @return [Array<Types::RxNormTrait>]
+    #
+    # @!attribute [rw] rx_norm_concepts
+    #   The RxNorm concepts that the entity could refer to, along with a
+    #   score indicating the likelihood of the match.
+    #   @return [Array<Types::RxNormConcept>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/RxNormEntity AWS API Documentation
+    #
+    class RxNormEntity < Struct.new(
+      :id,
+      :text,
+      :category,
+      :type,
+      :score,
+      :begin_offset,
+      :end_offset,
+      :attributes,
+      :traits,
+      :rx_norm_concepts)
+      include Aws::Structure
+    end
+
+    # The contextual information for the entity. InferRxNorm recognizes the
+    # trait `NEGATION`, which is any indication that the patient is not
+    # taking a medication.
+    #
+    # @!attribute [rw] name
+    #   Provides a name or contextual description about the trait.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The level of confidence that Amazon Comprehend Medical has in the
+    #   accuracy of the detected trait.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehendmedical-2018-10-30/RxNormTrait AWS API Documentation
+    #
+    class RxNormTrait < Struct.new(
+      :name,
+      :score)
       include Aws::Structure
     end
 

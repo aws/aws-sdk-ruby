@@ -1640,8 +1640,9 @@ module Aws::EC2
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
-    #     the instance. Specified as an ARN. `image-id` - The ID of the image
-    #     used to launch the instance.
+    #     the instance. Specified as an ARN.
+    #
+    #   * `image-id` - The ID of the image used to launch the instance.
     #
     #   * `instance-id` - The ID of the instance.
     #

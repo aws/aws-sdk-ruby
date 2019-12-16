@@ -19,6 +19,7 @@ module Aws::MQ
     BrokerInstanceOption = Shapes::StructureShape.new(name: 'BrokerInstanceOption')
     BrokerInstanceOptionsOutput = Shapes::StructureShape.new(name: 'BrokerInstanceOptionsOutput')
     BrokerState = Shapes::StringShape.new(name: 'BrokerState')
+    BrokerStorageType = Shapes::StringShape.new(name: 'BrokerStorageType')
     BrokerSummary = Shapes::StructureShape.new(name: 'BrokerSummary')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     Configuration = Shapes::StructureShape.new(name: 'Configuration')
@@ -119,6 +120,7 @@ module Aws::MQ
     __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfConfigurationId = Shapes::ListShape.new(name: '__listOfConfigurationId')
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
+    __listOfDeploymentMode = Shapes::ListShape.new(name: '__listOfDeploymentMode')
     __listOfEngineVersion = Shapes::ListShape.new(name: '__listOfEngineVersion')
     __listOfSanitizationWarning = Shapes::ListShape.new(name: '__listOfSanitizationWarning')
     __listOfUser = Shapes::ListShape.new(name: '__listOfUser')
@@ -154,6 +156,8 @@ module Aws::MQ
     BrokerInstanceOption.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOfAvailabilityZone, location_name: "availabilityZones"))
     BrokerInstanceOption.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     BrokerInstanceOption.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "hostInstanceType"))
+    BrokerInstanceOption.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
+    BrokerInstanceOption.add_member(:supported_deployment_modes, Shapes::ShapeRef.new(shape: __listOfDeploymentMode, location_name: "supportedDeploymentModes"))
     BrokerInstanceOption.add_member(:supported_engine_versions, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "supportedEngineVersions"))
     BrokerInstanceOption.struct_class = Types::BrokerInstanceOption
 
@@ -213,6 +217,7 @@ module Aws::MQ
     CreateBrokerInput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerInput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     CreateBrokerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    CreateBrokerInput.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerInput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerInput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateBrokerInput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
@@ -235,6 +240,7 @@ module Aws::MQ
     CreateBrokerRequest.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     CreateBrokerRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     CreateBrokerRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    CreateBrokerRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     CreateBrokerRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     CreateBrokerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateBrokerRequest.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUser, location_name: "users"))
@@ -321,6 +327,7 @@ module Aws::MQ
     DescribeBrokerInstanceOptionsRequest.add_member(:host_instance_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "hostInstanceType"))
     DescribeBrokerInstanceOptionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     DescribeBrokerInstanceOptionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    DescribeBrokerInstanceOptionsRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "storageType"))
     DescribeBrokerInstanceOptionsRequest.struct_class = Types::DescribeBrokerInstanceOptionsRequest
 
     DescribeBrokerInstanceOptionsResponse.add_member(:broker_instance_options, Shapes::ShapeRef.new(shape: __listOfBrokerInstanceOption, location_name: "brokerInstanceOptions"))
@@ -344,10 +351,11 @@ module Aws::MQ
     DescribeBrokerOutput.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerOutput.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     DescribeBrokerOutput.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
-    DescribeBrokerOutput.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerOutput.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
+    DescribeBrokerOutput.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerOutput.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerOutput.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    DescribeBrokerOutput.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     DescribeBrokerOutput.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     DescribeBrokerOutput.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeBrokerOutput.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUserSummary, location_name: "users"))
@@ -372,10 +380,11 @@ module Aws::MQ
     DescribeBrokerResponse.add_member(:logs, Shapes::ShapeRef.new(shape: LogsSummary, location_name: "logs"))
     DescribeBrokerResponse.add_member(:maintenance_window_start_time, Shapes::ShapeRef.new(shape: WeeklyStartTime, location_name: "maintenanceWindowStartTime"))
     DescribeBrokerResponse.add_member(:pending_engine_version, Shapes::ShapeRef.new(shape: __string, location_name: "pendingEngineVersion"))
-    DescribeBrokerResponse.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerResponse.add_member(:pending_host_instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "pendingHostInstanceType"))
+    DescribeBrokerResponse.add_member(:pending_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "pendingSecurityGroups"))
     DescribeBrokerResponse.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: __boolean, location_name: "publiclyAccessible"))
     DescribeBrokerResponse.add_member(:security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "securityGroups"))
+    DescribeBrokerResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: BrokerStorageType, location_name: "storageType"))
     DescribeBrokerResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "subnetIds"))
     DescribeBrokerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeBrokerResponse.add_member(:users, Shapes::ShapeRef.new(shape: __listOfUserSummary, location_name: "users"))
@@ -659,6 +668,8 @@ module Aws::MQ
     __listOfConfigurationId.member = Shapes::ShapeRef.new(shape: ConfigurationId)
 
     __listOfConfigurationRevision.member = Shapes::ShapeRef.new(shape: ConfigurationRevision)
+
+    __listOfDeploymentMode.member = Shapes::ShapeRef.new(shape: DeploymentMode)
 
     __listOfEngineVersion.member = Shapes::ShapeRef.new(shape: EngineVersion)
 
