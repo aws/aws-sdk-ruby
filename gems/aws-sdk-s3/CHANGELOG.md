@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Added validation in the s3 presigner to check for 0 or negative expire in times.
+
 1.59.0 (2019-12-05)
 ------------------
 
@@ -9,8 +11,6 @@ Unreleased Changes
 * Issue - Fixed an issue with Access Point ARNs not resigning correctly.
 
 * Issue - Fixed S3 gemspec to require a minimum core version to support S3 Access Point ARNs. (GitHub PR #2184)
-
-* Issue - Added validation in the s3 presigner to check for 0 or negative expire in times.  
 
 1.58.0 (2019-12-03)
 ------------------
