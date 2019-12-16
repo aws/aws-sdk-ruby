@@ -80,6 +80,7 @@ require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
 require_relative 'aws-sdk-core/client_side_monitoring/publisher'
 
 # arn
+
 require_relative 'aws-sdk-core/arn'
 require_relative 'aws-sdk-core/arn_parser'
 

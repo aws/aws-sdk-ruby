@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Added validation in the s3 presigner to check for 0 or negative expire in times.
+* Issue - Added validation in the s3 presigner to check for 0 or negative expire_in times.
 
 1.59.0 (2019-12-05)
 ------------------
