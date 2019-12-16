@@ -107,8 +107,8 @@ module Aws
                   "expires_in value of #{expires_in} exceeds one-week maximum"
           elsif expires_in <= 0 
             raise ArgumentError,
-                  "expires_in value of #{expires_in} cannot be 0 or less" 
-	  end
+                  "expires_in value of #{expires_in} cannot be 0 or less"
+          end
 
           expires_in
         else
