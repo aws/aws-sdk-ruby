@@ -103,9 +103,13 @@ module Aws
       def expires_in(params)
         if (expires_in = params.delete(:expires_in))
           if expires_in > ONE_WEEK
-            msg = "expires_in value of #{expires_in} exceeds one-week maximum"
-            raise ArgumentError, msg
+            raise ArgumentError,
+                  "expires_in value of #{expires_in} exceeds one-week maximum"
+          elsif expires_in <= 0 
+            raise ArgumentError,
+                  "expires_in value of #{expires_in} cannot be 0 or less"
           end
+
           expires_in
         else
           FIFTEEN_MINUTES

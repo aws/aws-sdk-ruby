@@ -140,6 +140,20 @@ module Aws
           end.to raise_error(ArgumentError)
         end
 
+        it 'raises when expires_in is less than or equal to 0' do
+          bucket = 'examplebucket'
+          key = 'test.txt'
+          pre = Presigner.new(client: client)
+          params = {
+            bucket: bucket,
+            key: key,
+            expires_in: 0
+          }
+          expect do
+            pre.presigned_url(:get_object, params)
+          end.to raise_error(ArgumentError)
+        end
+
         it 'can generate http (non-secure) urls' do
           signer = Presigner.new(client: client)
           url = signer.presigned_url(
