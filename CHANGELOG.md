@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.417 (2019-12-16)
+------------------
+
 * Feature - Aws::ComprehendMedical - Updated the API, and documentation for AWS Comprehend Medical.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
