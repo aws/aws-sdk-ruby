@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2019-12-17)
+------------------
+
+* Feature - Documentation updates for Amazon ECS.
+
 1.54.0 (2019-12-03)
 ------------------
 

@@ -278,6 +278,9 @@ module Aws::MediaLive
     #         {
     #           action_name: "__string", # required
     #           schedule_action_settings: { # required
+    #             hls_id_3_segment_tagging_settings: {
+    #               tag: "__string", # required
+    #             },
     #             hls_timed_metadata_settings: {
     #               id_3: "__string", # required
     #             },
@@ -379,6 +382,7 @@ module Aws::MediaLive
     #
     #   resp.creates.schedule_actions #=> Array
     #   resp.creates.schedule_actions[0].action_name #=> String
+    #   resp.creates.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.creates.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -426,6 +430,7 @@ module Aws::MediaLive
     #   resp.creates.schedule_actions[0].schedule_action_start_settings.follow_mode_schedule_action_start_settings.reference_action_name #=> String
     #   resp.deletes.schedule_actions #=> Array
     #   resp.deletes.schedule_actions[0].action_name #=> String
+    #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.deletes.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -778,7 +783,9 @@ module Aws::MediaLive
     #             hls_group_settings: {
     #               ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #               base_url_content: "__string",
+    #               base_url_content_1: "__string",
     #               base_url_manifest: "__string",
+    #               base_url_manifest_1: "__string",
     #               caption_language_mappings: [
     #                 {
     #                   caption_channel: 1, # required
@@ -826,6 +833,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                 },
     #               },
+    #               hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -981,6 +989,7 @@ module Aws::MediaLive
     #                   name_modifier: "__string",
     #                 },
     #                 hls_output_settings: {
+    #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   hls_settings: { # required
     #                     audio_only_hls_settings: {
     #                       audio_group_id: "__string",
@@ -990,6 +999,10 @@ module Aws::MediaLive
     #                         username: "__string",
     #                       },
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                       segment_type: "AAC", # accepts AAC, FMP4
+    #                     },
+    #                     fmp_4_hls_settings: {
+    #                       audio_rendition_sets: "__string",
     #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
@@ -1124,6 +1137,7 @@ module Aws::MediaLive
     #           codec_settings: {
     #             frame_capture_settings: {
     #               capture_interval: 1, # required
+    #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
     #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -1474,7 +1488,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -1507,6 +1523,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -1625,11 +1642,14 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -1719,6 +1739,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -2352,7 +2373,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -2385,6 +2408,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -2503,11 +2527,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -2597,6 +2624,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -3179,7 +3207,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -3212,6 +3242,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -3330,11 +3361,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -3424,6 +3458,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -3917,6 +3952,7 @@ module Aws::MediaLive
     #   resp.next_token #=> String
     #   resp.schedule_actions #=> Array
     #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].schedule_action_settings.hls_id_3_segment_tagging_settings.tag #=> String
     #   resp.schedule_actions[0].schedule_action_settings.hls_timed_metadata_settings.id_3 #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_attachment_name_reference #=> String
     #   resp.schedule_actions[0].schedule_action_settings.input_switch_settings.input_clipping_settings.input_timecode_source #=> String, one of "ZEROBASED", "EMBEDDED"
@@ -4691,7 +4727,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -4724,6 +4762,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -4842,11 +4881,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -4936,6 +4978,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -5306,7 +5349,9 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -5339,6 +5384,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -5457,11 +5503,14 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -5551,6 +5600,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.encoder_settings.video_descriptions #=> Array
     #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -6021,7 +6071,9 @@ module Aws::MediaLive
     #             hls_group_settings: {
     #               ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #               base_url_content: "__string",
+    #               base_url_content_1: "__string",
     #               base_url_manifest: "__string",
+    #               base_url_manifest_1: "__string",
     #               caption_language_mappings: [
     #                 {
     #                   caption_channel: 1, # required
@@ -6069,6 +6121,7 @@ module Aws::MediaLive
     #                   restart_delay: 1,
     #                 },
     #               },
+    #               hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #               i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #               index_n_segments: 1,
     #               input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -6224,6 +6277,7 @@ module Aws::MediaLive
     #                   name_modifier: "__string",
     #                 },
     #                 hls_output_settings: {
+    #                   h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                   hls_settings: { # required
     #                     audio_only_hls_settings: {
     #                       audio_group_id: "__string",
@@ -6233,6 +6287,10 @@ module Aws::MediaLive
     #                         username: "__string",
     #                       },
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                       segment_type: "AAC", # accepts AAC, FMP4
+    #                     },
+    #                     fmp_4_hls_settings: {
+    #                       audio_rendition_sets: "__string",
     #                     },
     #                     standard_hls_settings: {
     #                       audio_rendition_sets: "__string",
@@ -6367,6 +6425,7 @@ module Aws::MediaLive
     #           codec_settings: {
     #             frame_capture_settings: {
     #               capture_interval: 1, # required
+    #               capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #             },
     #             h264_settings: {
     #               adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -6712,7 +6771,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -6745,6 +6806,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -6863,11 +6925,14 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -6957,6 +7022,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -7290,7 +7356,9 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.ad_markers[0] #=> String, one of "ADOBE", "ELEMENTAL", "ELEMENTAL_SCTE35"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_content_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest #=> String
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.base_url_manifest_1 #=> String
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String
@@ -7323,6 +7391,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.http_transfer_mode #=> String, one of "CHUNKED", "NON_CHUNKED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.num_retries #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_cdn_settings.hls_webdav_settings.restart_delay #=> Integer
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.hls_id_3_segment_tagging #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.i_frame_only_playlists #=> String, one of "DISABLED", "STANDARD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.index_n_segments #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.input_loss_action #=> String, one of "EMIT_OUTPUT", "PAUSE_OUTPUT"
@@ -7441,11 +7510,14 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.extension #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.archive_output_settings.name_modifier #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.frame_capture_output_settings.name_modifier #=> String
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.h265_packaging_type #=> String, one of "HEV1", "HVC1"
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_group_id #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.password_param #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.uri #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_only_image.username #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT", "AUDIO_ONLY_VARIANT_STREAM"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.audio_only_hls_settings.segment_type #=> String, one of "AAC", "FMP4"
+    #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.fmp_4_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.audio_rendition_sets #=> String
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].outputs[0].output_settings.hls_output_settings.hls_settings.standard_hls_settings.m3u_8_settings.audio_pids #=> String
@@ -7535,6 +7607,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.timecode_config.sync_threshold #=> Integer
     #   resp.channel.encoder_settings.video_descriptions #=> Array
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval #=> Integer
+    #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.frame_capture_settings.capture_interval_units #=> String, one of "MILLISECONDS", "SECONDS"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.adaptive_quantization #=> String, one of "HIGH", "HIGHER", "LOW", "MAX", "MEDIUM", "OFF"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.afd_signaling #=> String, one of "AUTO", "FIXED", "NONE"
     #   resp.channel.encoder_settings.video_descriptions[0].codec_settings.h264_settings.bitrate #=> Integer
@@ -7990,7 +8063,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -120,6 +120,7 @@ module Aws::IoT
     AwsIotJobId = Shapes::StringShape.new(name: 'AwsIotJobId')
     AwsIotSqlVersion = Shapes::StringShape.new(name: 'AwsIotSqlVersion')
     AwsJobExecutionsRolloutConfig = Shapes::StructureShape.new(name: 'AwsJobExecutionsRolloutConfig')
+    AwsJobPresignedUrlConfig = Shapes::StructureShape.new(name: 'AwsJobPresignedUrlConfig')
     Behavior = Shapes::StructureShape.new(name: 'Behavior')
     BehaviorCriteria = Shapes::StructureShape.new(name: 'BehaviorCriteria')
     BehaviorMetric = Shapes::StringShape.new(name: 'BehaviorMetric')
@@ -404,6 +405,7 @@ module Aws::IoT
     ExecutionNumber = Shapes::IntegerShape.new(name: 'ExecutionNumber')
     ExpectedVersion = Shapes::IntegerShape.new(name: 'ExpectedVersion')
     ExpiresInSec = Shapes::IntegerShape.new(name: 'ExpiresInSec')
+    ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     ExplicitDeny = Shapes::StructureShape.new(name: 'ExplicitDeny')
     ExponentialRolloutRate = Shapes::StructureShape.new(name: 'ExponentialRolloutRate')
     FailedChecksCount = Shapes::IntegerShape.new(name: 'FailedChecksCount')
@@ -716,6 +718,8 @@ module Aws::IoT
     PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     ProcessingTargetName = Shapes::StringShape.new(name: 'ProcessingTargetName')
     ProcessingTargetNameList = Shapes::ListShape.new(name: 'ProcessingTargetNameList')
+    Protocol = Shapes::StringShape.new(name: 'Protocol')
+    Protocols = Shapes::ListShape.new(name: 'Protocols')
     ProvisioningTemplateListing = Shapes::ListShape.new(name: 'ProvisioningTemplateListing')
     ProvisioningTemplateSummary = Shapes::StructureShape.new(name: 'ProvisioningTemplateSummary')
     ProvisioningTemplateVersionListing = Shapes::ListShape.new(name: 'ProvisioningTemplateVersionListing')
@@ -1299,6 +1303,9 @@ module Aws::IoT
     AwsJobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: MaximumPerMinute, location_name: "maximumPerMinute"))
     AwsJobExecutionsRolloutConfig.struct_class = Types::AwsJobExecutionsRolloutConfig
 
+    AwsJobPresignedUrlConfig.add_member(:expires_in_sec, Shapes::ShapeRef.new(shape: ExpiresInSeconds, location_name: "expiresInSec"))
+    AwsJobPresignedUrlConfig.struct_class = Types::AwsJobPresignedUrlConfig
+
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))
     Behavior.add_member(:metric, Shapes::ShapeRef.new(shape: BehaviorMetric, location_name: "metric"))
     Behavior.add_member(:criteria, Shapes::ShapeRef.new(shape: BehaviorCriteria, location_name: "criteria"))
@@ -1552,8 +1559,10 @@ module Aws::IoT
     CreateOTAUpdateRequest.add_member(:ota_update_id, Shapes::ShapeRef.new(shape: OTAUpdateId, required: true, location: "uri", location_name: "otaUpdateId"))
     CreateOTAUpdateRequest.add_member(:description, Shapes::ShapeRef.new(shape: OTAUpdateDescription, location_name: "description"))
     CreateOTAUpdateRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, required: true, location_name: "targets"))
+    CreateOTAUpdateRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "protocols"))
     CreateOTAUpdateRequest.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     CreateOTAUpdateRequest.add_member(:aws_job_executions_rollout_config, Shapes::ShapeRef.new(shape: AwsJobExecutionsRolloutConfig, location_name: "awsJobExecutionsRolloutConfig"))
+    CreateOTAUpdateRequest.add_member(:aws_job_presigned_url_config, Shapes::ShapeRef.new(shape: AwsJobPresignedUrlConfig, location_name: "awsJobPresignedUrlConfig"))
     CreateOTAUpdateRequest.add_member(:files, Shapes::ShapeRef.new(shape: OTAUpdateFiles, required: true, location_name: "files"))
     CreateOTAUpdateRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateOTAUpdateRequest.add_member(:additional_parameters, Shapes::ShapeRef.new(shape: AdditionalParameterMap, location_name: "additionalParameters"))
@@ -3025,7 +3034,9 @@ module Aws::IoT
     OTAUpdateInfo.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
     OTAUpdateInfo.add_member(:description, Shapes::ShapeRef.new(shape: OTAUpdateDescription, location_name: "description"))
     OTAUpdateInfo.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "targets"))
+    OTAUpdateInfo.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "protocols"))
     OTAUpdateInfo.add_member(:aws_job_executions_rollout_config, Shapes::ShapeRef.new(shape: AwsJobExecutionsRolloutConfig, location_name: "awsJobExecutionsRolloutConfig"))
+    OTAUpdateInfo.add_member(:aws_job_presigned_url_config, Shapes::ShapeRef.new(shape: AwsJobPresignedUrlConfig, location_name: "awsJobPresignedUrlConfig"))
     OTAUpdateInfo.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     OTAUpdateInfo.add_member(:ota_update_files, Shapes::ShapeRef.new(shape: OTAUpdateFiles, location_name: "otaUpdateFiles"))
     OTAUpdateInfo.add_member(:ota_update_status, Shapes::ShapeRef.new(shape: OTAUpdateStatus, location_name: "otaUpdateStatus"))
@@ -3095,6 +3106,8 @@ module Aws::IoT
     Principals.member = Shapes::ShapeRef.new(shape: PrincipalArn)
 
     ProcessingTargetNameList.member = Shapes::ShapeRef.new(shape: ProcessingTargetName)
+
+    Protocols.member = Shapes::ShapeRef.new(shape: Protocol)
 
     ProvisioningTemplateListing.member = Shapes::ShapeRef.new(shape: ProvisioningTemplateSummary)
 

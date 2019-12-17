@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2019-12-17)
+------------------
+
+* Feature - Documentation updates for Amazon EC2
+
 1.125.0 (2019-12-16)
 ------------------
 

@@ -1428,29 +1428,32 @@ module Aws::ECS
     #   multi-level security systems. This field is not valid for containers
     #   in tasks using the Fargate launch type.
     #
-    #   This parameter maps to `SecurityOpt` in the [Create a container][1]
-    #   section of the [Docker Remote API][2] and the `--security-opt`
-    #   option to [docker run][3].
+    #   With Windows containers, this parameter can be used to reference a
+    #   credential spec file when configuring a container for Active
+    #   Directory authentication. For more information, see [Using gMSAs for
+    #   Windows Containers][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #   This parameter maps to `SecurityOpt` in the [Create a container][2]
+    #   section of the [Docker Remote API][3] and the `--security-opt`
+    #   option to [docker run][4].
     #
     #   <note markdown="1"> The Amazon ECS container agent running on a container instance must
     #   register with the `ECS_SELINUX_CAPABLE=true` or
     #   `ECS_APPARMOR_CAPABLE=true` environment variables before containers
     #   placed on that instance can use these security options. For more
-    #   information, see [Amazon ECS Container Agent Configuration][4] in
+    #   information, see [Amazon ECS Container Agent Configuration][5] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
     #    </note>
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers.
-    #
-    #    </note>
     #
     #
-    #
-    #   [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
-    #   [2]: https://docs.docker.com/engine/api/v1.35/
-    #   [3]: https://docs.docker.com/engine/reference/run/
-    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html
+    #   [2]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    #   [3]: https://docs.docker.com/engine/api/v1.35/
+    #   [4]: https://docs.docker.com/engine/reference/run/
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] interactive
@@ -5457,8 +5460,52 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Log configuration options to send to a custom log driver for the
-    # container.
+    # The log configuration specification for the container.
+    #
+    # This parameter maps to `LogConfig` in the [Create a container][1]
+    # section of the [Docker Remote API][2] and the `--log-driver` option to
+    # [ `docker run` ][3]. By default, containers use the same logging
+    # driver that the Docker daemon uses; however the container may use a
+    # different logging driver than the Docker daemon by specifying a log
+    # driver with this parameter in the container definition. To use a
+    # different logging driver for a container, the log system must be
+    # configured properly on the container instance (or on a different log
+    # server for remote logging options). For more information on the
+    # options for different supported log drivers, see [Configure logging
+    # drivers][4] in the Docker documentation.
+    #
+    # The following should be noted when specifying a log configuration for
+    # your containers:
+    #
+    # * Amazon ECS currently supports a subset of the logging drivers
+    #   available to the Docker daemon (shown in the valid values below).
+    #   Additional log drivers may be available in future releases of the
+    #   Amazon ECS container agent.
+    #
+    # * This parameter requires version 1.18 of the Docker Remote API or
+    #   greater on your container instance.
+    #
+    # * For tasks using the EC2 launch type, the Amazon ECS container agent
+    #   running on a container instance must register the logging drivers
+    #   available on that instance with the `ECS_AVAILABLE_LOGGING_DRIVERS`
+    #   environment variable before containers placed on that instance can
+    #   use these log configuration options. For more information, see
+    #   [Amazon ECS Container Agent Configuration][5] in the *Amazon Elastic
+    #   Container Service Developer Guide*.
+    #
+    # * For tasks using the Fargate launch type, because you do not have
+    #   access to the underlying infrastructure your tasks are hosted on,
+    #   any additional software needed will have to be installed outside of
+    #   the task. For example, the Fluentd output aggregators or a remote
+    #   host running Logstash to send Gelf logs to.
+    #
+    #
+    #
+    # [1]: https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate
+    # [2]: https://docs.docker.com/engine/api/v1.35/
+    # [3]: https://docs.docker.com/engine/reference/commandline/run/
+    # [4]: https://docs.docker.com/engine/admin/logging/overview/
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @note When making an API call, you may pass LogConfiguration
     #   data as a hash:
@@ -5477,41 +5524,39 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] log_driver
-    #   The log driver to use for the container. The valid values listed for
-    #   this parameter are log drivers that the Amazon ECS container agent
-    #   can communicate with by default.
+    #   The log driver to use for the container. The valid values listed
+    #   earlier are log drivers that the Amazon ECS container agent can
+    #   communicate with by default.
     #
     #   For tasks using the Fargate launch type, the supported log drivers
-    #   are `awslogs` and `splunk`.
+    #   are `awslogs`, `splunk`, and `awsfirelens`.
     #
     #   For tasks using the EC2 launch type, the supported log drivers are
-    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `logentries`,
-    #   `syslog`, and `splunk`.
+    #   `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`,
+    #   `logentries`,`syslog`, `splunk`, and `awsfirelens`.
     #
     #   For more information about using the `awslogs` log driver, see
     #   [Using the awslogs Log Driver][1] in the *Amazon Elastic Container
     #   Service Developer Guide*.
     #
-    #   <note markdown="1"> If you have a custom driver that is not listed above that you would
-    #   like to work with the Amazon ECS container agent, you can fork the
-    #   Amazon ECS container agent project that is [available on GitHub][2]
+    #   For more information about using the `awsfirelens` log driver, see
+    #   [Custom Log Routing][2] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #   <note markdown="1"> If you have a custom driver that is not listed, you can fork the
+    #   Amazon ECS container agent project that is [available on GitHub][3]
     #   and customize it to work with that driver. We encourage you to
     #   submit pull requests for changes that you would like to have
-    #   included. However, Amazon Web Services does not currently support
-    #   running modified copies of this software.
+    #   included. However, we do not currently provide support for running
+    #   modified copies of this software.
     #
     #    </note>
-    #
-    #   This parameter requires version 1.18 of the Docker Remote API or
-    #   greater on your container instance. To check the Docker Remote API
-    #   version on your container instance, log in to your container
-    #   instance and run the following command: `sudo docker version
-    #   --format '\{\{.Server.APIVersion\}\}'`
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-    #   [2]: https://github.com/aws/amazon-ecs-agent
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html
+    #   [3]: https://github.com/aws/amazon-ecs-agent
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -6204,8 +6249,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] capacity_providers
-    #   The short name or full Amazon Resource Name (ARN) of one or more
-    #   capacity providers to associate with the cluster.
+    #   The name of one or more capacity providers to associate with the
+    #   cluster.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group,
     #   the capacity provider must already be created. New capacity

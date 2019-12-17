@@ -1289,6 +1289,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Configuration information for pre-signed URLs. Valid when `protocols`
+    # contains HTTP.
+    #
+    # @note When making an API call, you may pass AwsJobPresignedUrlConfig
+    #   data as a hash:
+    #
+    #       {
+    #         expires_in_sec: 1,
+    #       }
+    #
+    # @!attribute [rw] expires_in_sec
+    #   How long (in seconds) pre-signed URLs are valid. Valid values are 60
+    #   - 3600, the default value is 1800 seconds. Pre-signed URLs are
+    #   generated when a request for the job document is received.
+    #   @return [Integer]
+    #
+    class AwsJobPresignedUrlConfig < Struct.new(
+      :expires_in_sec)
+      include Aws::Structure
+    end
+
     # A Device Defender security profile behavior.
     #
     # @note When making an API call, you may pass Behavior
@@ -2715,9 +2736,13 @@ module Aws::IoT
     #         ota_update_id: "OTAUpdateId", # required
     #         description: "OTAUpdateDescription",
     #         targets: ["Target"], # required
+    #         protocols: ["MQTT"], # accepts MQTT, HTTP
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         aws_job_executions_rollout_config: {
     #           maximum_per_minute: 1,
+    #         },
+    #         aws_job_presigned_url_config: {
+    #           expires_in_sec: 1,
     #         },
     #         files: [ # required
     #           {
@@ -2791,6 +2816,12 @@ module Aws::IoT
     #   The targeted devices to receive OTA updates.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] protocols
+    #   The protocol used to transfer the OTA update image. Valid values are
+    #   \[HTTP\], \[MQTT\], \[HTTP, MQTT\]. When both HTTP and MQTT are
+    #   specified, the target device can choose the protocol.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] target_selection
     #   Specifies whether the update will continue to run (CONTINUOUS), or
     #   will be complete after all the things specified as targets have
@@ -2804,6 +2835,10 @@ module Aws::IoT
     # @!attribute [rw] aws_job_executions_rollout_config
     #   Configuration for the rollout of OTA updates.
     #   @return [Types::AwsJobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] aws_job_presigned_url_config
+    #   Configuration information for pre-signed URLs.
+    #   @return [Types::AwsJobPresignedUrlConfig]
     #
     # @!attribute [rw] files
     #   The files to be streamed by the OTA update.
@@ -2826,8 +2861,10 @@ module Aws::IoT
       :ota_update_id,
       :description,
       :targets,
+      :protocols,
       :target_selection,
       :aws_job_executions_rollout_config,
+      :aws_job_presigned_url_config,
       :files,
       :role_arn,
       :additional_parameters,
@@ -10517,9 +10554,20 @@ module Aws::IoT
     #   The targets of the OTA update.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] protocols
+    #   The protocol used to transfer the OTA update image. Valid values are
+    #   \[HTTP\], \[MQTT\], \[HTTP, MQTT\]. When both HTTP and MQTT are
+    #   specified, the target device can choose the protocol.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] aws_job_executions_rollout_config
     #   Configuration for the rollout of OTA updates.
     #   @return [Types::AwsJobExecutionsRolloutConfig]
+    #
+    # @!attribute [rw] aws_job_presigned_url_config
+    #   Configuration information for pre-signed URLs. Valid when
+    #   `protocols` contains HTTP.
+    #   @return [Types::AwsJobPresignedUrlConfig]
     #
     # @!attribute [rw] target_selection
     #   Specifies whether the OTA update will continue to run (CONTINUOUS),
@@ -10562,7 +10610,9 @@ module Aws::IoT
       :last_modified_date,
       :description,
       :targets,
+      :protocols,
       :aws_job_executions_rollout_config,
+      :aws_job_presigned_url_config,
       :target_selection,
       :ota_update_files,
       :ota_update_status,
@@ -10850,13 +10900,13 @@ module Aws::IoT
     #
     # @!attribute [rw] asset_id
     #   The ID of the AWS IoT SiteWise asset. You must specify either a
-    #   `propertyAlias` or both an `analiasId` and a `propertyId`. Accepts
+    #   `propertyAlias` or both an `aliasId` and a `propertyId`. Accepts
     #   substitution templates.
     #   @return [String]
     #
     # @!attribute [rw] property_id
     #   The ID of the asset's property. You must specify either a
-    #   `propertyAlias` or both an `analiasId` and a `propertyId`. Accepts
+    #   `propertyAlias` or both an `aliasId` and a `propertyId`. Accepts
     #   substitution templates.
     #   @return [String]
     #
@@ -12990,7 +13040,7 @@ module Aws::IoT
     #   @return [Types::HttpContext]
     #
     # @!attribute [rw] mqtt_context
-    #   Specifies a test MQTT authorization request.&gt;
+    #   Specifies a test MQTT authorization request.
     #   @return [Types::MqttContext]
     #
     # @!attribute [rw] tls_context

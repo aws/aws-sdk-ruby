@@ -4277,7 +4277,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
@@ -11547,8 +11547,10 @@ module Aws::EC2
     # * `default-vpc`\: The ID of the default VPC for your account, or
     #   `none`.
     #
-    # * `max-instances`\: The maximum number of On-Demand Instances that you
-    #   can run.
+    # * `max-instances`\: This attribute is no longer supported. The
+    #   returned value does not reflect your actual vCPU limit for running
+    #   On-Demand Instances. For more information, see [On-Demand Instance
+    #   Limits][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # * `vpc-max-security-groups-per-interface`\: The maximum number of
     #   security groups that you can assign to a network interface.
@@ -11558,6 +11560,10 @@ module Aws::EC2
     #
     # * `vpc-max-elastic-ips`\: The maximum number of Elastic IP addresses
     #   that you can allocate for use with EC2-VPC.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits
     #
     # @option params [Array<String>] :attribute_names
     #   The account attribute names.
@@ -13570,7 +13576,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the specified EC2 Fleets or all your EC2 Fleets.
+    # Describes the specified EC2 Fleets or all of your EC2 Fleets.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -35431,7 +35437,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2908,11 +2908,14 @@ module Aws::EC2
     #
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
+    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html
     #
     # @!attribute [rw] usage_strategy
     #   Indicates whether to use unused Capacity Reservations for fulfilling
@@ -2920,15 +2923,16 @@ module Aws::EC2
     #
     #   If you specify `use-capacity-reservations-first`, the fleet uses
     #   unused Capacity Reservations to fulfill On-Demand capacity up to the
-    #   target On-Demand capacity. If the number of unused Capacity
-    #   Reservations is less than the On-Demand target capacity, the
-    #   remaining On-Demand target capacity is launched as usual. When
-    #   unused Capacity Reservations are used to fulfil On-Demand capacity,
-    #   the On-Demand allocation strategy (`lowest-price` or `prioritized`)
-    #   is applied to them.
+    #   target On-Demand capacity. If multiple instance pools have unused
+    #   Capacity Reservations, the On-Demand allocation strategy
+    #   (`lowest-price` or `prioritized`) is applied. If the number of
+    #   unused Capacity Reservations is less than the On-Demand target
+    #   capacity, the remaining On-Demand target capacity is launched
+    #   according to the On-Demand allocation strategy (`lowest-price` or
+    #   `prioritized`).
     #
     #   If you do not specify a value, the fleet fulfils the On-Demand
-    #   capacity as usual.
+    #   capacity according to the chosen On-Demand allocation strategy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationOptions AWS API Documentation
@@ -2947,11 +2951,14 @@ module Aws::EC2
     #
     # For more information about Capacity Reservations, see [On-Demand
     # Capacity Reservations][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Guide*. For examples of using Capacity Reservations in an EC2 Fleet,
+    # see [EC2 Fleet Example Configurations][2] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html
     #
     # @note When making an API call, you may pass CapacityReservationOptionsRequest
     #   data as a hash:
@@ -2966,15 +2973,16 @@ module Aws::EC2
     #
     #   If you specify `use-capacity-reservations-first`, the fleet uses
     #   unused Capacity Reservations to fulfill On-Demand capacity up to the
-    #   target On-Demand capacity. If the number of unused Capacity
-    #   Reservations is less than the On-Demand target capacity, the
-    #   remaining On-Demand target capacity is launched as usual. When
-    #   unused Capacity Reservations are used to fulfil On-Demand capacity,
-    #   the On-Demand allocation strategy (`lowest-price` or `prioritized`)
-    #   is applied to them.
+    #   target On-Demand capacity. If multiple instance pools have unused
+    #   Capacity Reservations, the On-Demand allocation strategy
+    #   (`lowest-price` or `prioritized`) is applied. If the number of
+    #   unused Capacity Reservations is less than the On-Demand target
+    #   capacity, the remaining On-Demand target capacity is launched
+    #   according to the On-Demand allocation strategy (`lowest-price` or
+    #   `prioritized`).
     #
     #   If you do not specify a value, the fleet fulfils the On-Demand
-    #   capacity as usual.
+    #   capacity according to the chosen On-Demand allocation strategy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationOptionsRequest AWS API Documentation
@@ -5055,8 +5063,8 @@ module Aws::EC2
     #
     # @!attribute [rw] launch_template_and_overrides
     #   The launch templates and overrides that were used for launching the
-    #   instances. Any parameters that you specify in the Overrides override
-    #   the same parameters in the launch template.
+    #   instances. The values that you specify in the Overrides replace the
+    #   values in the launch template.
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
@@ -5076,7 +5084,7 @@ module Aws::EC2
     #
     # @!attribute [rw] error_message
     #   The error message that describes why the instance could not be
-    #   launched. For more information about error messages, see ee [Error
+    #   launched. For more information about error messages, see [Error
     #   Codes][1].
     #
     #
@@ -5098,8 +5106,8 @@ module Aws::EC2
     #
     # @!attribute [rw] launch_template_and_overrides
     #   The launch templates and overrides that were used for launching the
-    #   instances. Any parameters that you specify in the Overrides override
-    #   the same parameters in the launch template.
+    #   instances. The values that you specify in the Overrides replace the
+    #   values in the launch template.
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
@@ -5116,7 +5124,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   The value is `Windows` for Windows instances. Otherwise, the value
+    #   is blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetInstance AWS API Documentation
@@ -5217,7 +5226,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
@@ -12642,8 +12651,8 @@ module Aws::EC2
     #
     # @!attribute [rw] launch_template_and_overrides
     #   The launch templates and overrides that were used for launching the
-    #   instances. Any parameters that you specify in the Overrides override
-    #   the same parameters in the launch template.
+    #   instances. The values that you specify in the Overrides replace the
+    #   values in the launch template.
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
@@ -12663,7 +12672,7 @@ module Aws::EC2
     #
     # @!attribute [rw] error_message
     #   The error message that describes why the instance could not be
-    #   launched. For more information about error messages, see ee [Error
+    #   launched. For more information about error messages, see [Error
     #   Codes][1].
     #
     #
@@ -12857,8 +12866,8 @@ module Aws::EC2
     #
     # @!attribute [rw] launch_template_and_overrides
     #   The launch templates and overrides that were used for launching the
-    #   instances. Any parameters that you specify in the Overrides override
-    #   the same parameters in the launch template.
+    #   instances. The values that you specify in the Overrides replace the
+    #   values in the launch template.
     #   @return [Types::LaunchTemplateAndOverridesResponse]
     #
     # @!attribute [rw] lifecycle
@@ -12875,7 +12884,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   The value is `Windows` for Windows instances. Otherwise, the value
+    #   is blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsInstances AWS API Documentation
@@ -23376,7 +23386,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
     #   Idempotency][1].
     #
@@ -23425,11 +23435,11 @@ module Aws::EC2
     #   the target capacity, or also attempts to `maintain` it. If you
     #   request a certain target capacity, EC2 Fleet only places the
     #   required requests; it does not attempt to replenish instances if
-    #   capacity is diminished, and does not submit requests in alternative
-    #   capacity pools if capacity is unavailable. To maintain a certain
-    #   target capacity, EC2 Fleet places the required requests to meet this
-    #   target capacity. It also automatically replenishes any interrupted
-    #   Spot Instances. Default: `maintain`.
+    #   capacity is diminished, and it does not submit requests in
+    #   alternative capacity pools if capacity is unavailable. To maintain a
+    #   certain target capacity, EC2 Fleet places the required requests to
+    #   meet this target capacity. It also automatically replenishes any
+    #   interrupted Spot Instances. Default: `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -34716,7 +34726,7 @@ module Aws::EC2
     # Describes the placement of an instance.
     #
     # @!attribute [rw] group_name
-    #   The name of the placement group the instance is in.
+    #   The name of the placement group that the instance is in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementResponse AWS API Documentation
@@ -42267,7 +42277,7 @@ module Aws::EC2
     #   is the default allocation strategy.
     #
     #   If the allocation strategy is `diversified`, EC2 Fleet launches
-    #   instances from all the Spot Instance pools that you specify.
+    #   instances from all of the Spot Instance pools that you specify.
     #
     #   If the allocation strategy is `capacity-optimized`, EC2 Fleet
     #   launches instances from Spot Instance pools with optimal capacity
@@ -42345,7 +42355,7 @@ module Aws::EC2
     #   is the default allocation strategy.
     #
     #   If the allocation strategy is `diversified`, EC2 Fleet launches
-    #   instances from all the Spot Instance pools that you specify.
+    #   instances from all of the Spot Instance pools that you specify.
     #
     #   If the allocation strategy is `capacity-optimized`, EC2 Fleet
     #   launches instances from Spot Instance pools with optimal capacity
@@ -43064,13 +43074,13 @@ module Aws::EC2
     # of 0 and add capacity later.
     #
     # You can use the On-Demand Instance `MaxTotalPrice` parameter, the Spot
-    # Instance `MaxTotalPrice`, or both to ensure your fleet cost does not
-    # exceed your budget. If you set a maximum price per hour for the
+    # Instance `MaxTotalPrice`, or both to ensure that your fleet cost does
+    # not exceed your budget. If you set a maximum price per hour for the
     # On-Demand Instances and Spot Instances in your request, EC2 Fleet will
-    # launch instances until it reaches the maximum amount you're willing
-    # to pay. When the maximum amount you're willing to pay is reached, the
-    # fleet stops launching instances even if it hasn’t met the target
-    # capacity. The `MaxTotalPrice` parameters are located in and
+    # launch instances until it reaches the maximum amount that you're
+    # willing to pay. When the maximum amount you're willing to pay is
+    # reached, the fleet stops launching instances even if it hasn’t met the
+    # target capacity. The `MaxTotalPrice` parameters are located in and
     #
     # @!attribute [rw] total_target_capacity
     #   The number of units to request, filled using
@@ -43116,9 +43126,9 @@ module Aws::EC2
     # your fleet cost does not exceed your budget. If you set a maximum
     # price per hour for the On-Demand Instances and Spot Instances in your
     # request, EC2 Fleet will launch instances until it reaches the maximum
-    # amount you're willing to pay. When the maximum amount you're willing
-    # to pay is reached, the fleet stops launching instances even if it
-    # hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # amount that you're willing to pay. When the maximum amount you're
+    # willing to pay is reached, the fleet stops launching instances even if
+    # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
     # located in and .
     #
     # @note When making an API call, you may pass TargetCapacitySpecificationRequest

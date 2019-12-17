@@ -2508,7 +2508,9 @@ module Aws::SSM
     #   The instance ID.
     #
     #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
-    #   association, use the `Targets` parameter. If you use the parameter
+    #   association, use the `Targets` parameter. Requests that include the
+    #   parameter `InstanceID` with SSM documents that use schema version
+    #   2.0 or later will fail. In addition, if you use the parameter
     #   `InstanceId`, you cannot use the parameters `AssociationName`,
     #   `DocumentVersion`, `MaxErrors`, `MaxConcurrency`, `OutputLocation`,
     #   or `ScheduleExpression`. To use these parameters, you must use the
@@ -2684,7 +2686,7 @@ module Aws::SSM
     #
     # @!attribute [rw] document_format
     #   Specify the document format for the request. The document format can
-    #   be either JSON or YAML. JSON is the default format.
+    #   be JSON, YAML, or TEXT. JSON is the default format.
     #   @return [String]
     #
     # @!attribute [rw] target_type
@@ -6318,12 +6320,12 @@ module Aws::SSM
     # Error returned when the ID specified for a resource, such as a
     # maintenance window or Patch baseline, doesn't exist.
     #
-    # For information about resource limits in Systems Manager, see [AWS
-    # Systems Manager Limits][1].
+    # For information about resource quotas in Systems Manager, see [Systems
+    # Manager Service Quotas][1] in the *AWS General Reference*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -11033,8 +11035,13 @@ module Aws::SSM
     #
     #       {
     #         comment: "Comment",
+    #         cloud_watch_output_config: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           cloud_watch_output_enabled: false,
+    #         },
     #         document_hash: "DocumentHash",
     #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         document_version: "DocumentVersion",
     #         notification_config: {
     #           notification_arn: "NotificationArn",
     #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
@@ -11053,6 +11060,10 @@ module Aws::SSM
     #   Information about the commands to run.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_watch_output_config
+    #   Configuration options for sending command output to CloudWatch Logs.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
     # @!attribute [rw] document_hash
     #   The SHA-256 or SHA-1 hash created by the system when the document
     #   was created. SHA-1 hashes have been deprecated.
@@ -11060,6 +11071,20 @@ module Aws::SSM
     #
     # @!attribute [rw] document_hash_type
     #   SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The SSM document version to use in the request. You can specify
+    #   $DEFAULT, $LATEST, or a specific version number. If you run commands
+    #   by using the AWS CLI, then you must escape the first two options by
+    #   using a backslash. If you specify a version number, then you don't
+    #   need to use the backslash. For example:
+    #
+    #   --document-version "\\$DEFAULT"
+    #
+    #   --document-version "\\$LATEST"
+    #
+    #   --document-version "3"
     #   @return [String]
     #
     # @!attribute [rw] notification_config
@@ -11094,8 +11119,10 @@ module Aws::SSM
     #
     class MaintenanceWindowRunCommandParameters < Struct.new(
       :comment,
+      :cloud_watch_output_config,
       :document_hash,
       :document_hash_type,
+      :document_version,
       :notification_config,
       :output_s3_bucket_name,
       :output_s3_key_prefix,
@@ -11316,8 +11343,13 @@ module Aws::SSM
     #       {
     #         run_command: {
     #           comment: "Comment",
+    #           cloud_watch_output_config: {
+    #             cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #             cloud_watch_output_enabled: false,
+    #           },
     #           document_hash: "DocumentHash",
     #           document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #           document_version: "DocumentVersion",
     #           notification_config: {
     #             notification_arn: "NotificationArn",
     #             notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
@@ -11902,8 +11934,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The request caused OpsItems to exceed one or more limits. For
-    # information about OpsItem limits, see [What are the resource limits
+    # The request caused OpsItems to exceed one or more quotas. For
+    # information about OpsItem quotas, see [What are the resource limits
     # for OpsCenter?][1].
     #
     #
@@ -13593,8 +13625,13 @@ module Aws::SSM
     #         task_invocation_parameters: {
     #           run_command: {
     #             comment: "Comment",
+    #             cloud_watch_output_config: {
+    #               cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #               cloud_watch_output_enabled: false,
+    #             },
     #             document_hash: "DocumentHash",
     #             document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #             document_version: "DocumentVersion",
     #             notification_config: {
     #               notification_arn: "NotificationArn",
     #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
@@ -14324,15 +14361,15 @@ module Aws::SSM
     end
 
     # Error returned when the caller has exceeded the default resource
-    # limits. For example, too many maintenance windows or patch baselines
+    # quotas. For example, too many maintenance windows or patch baselines
     # have been created.
     #
-    # For information about resource limits in Systems Manager, see [AWS
-    # Systems Manager Limits][1].
+    # For information about resource quotas in Systems Manager, see [Systems
+    # Manager Service Quotas][1] in the *AWS General Reference*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_ssm
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/ssm.html#limits_ssm
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -14401,15 +14438,15 @@ module Aws::SSM
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
     #   East (Ohio) Region. For a list of supported **region** values, see
-    #   the **Region** column in the [AWS Systems Manager table of regions
-    #   and endpoints][1] in the *AWS General Reference*.
+    #   the **Region** column in [Systems Manager Service Endpoints][1] in
+    #   the *AWS General Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
     #   as `1a2b3c4dEXAMPLE`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResumeSessionResponse AWS API Documentation
@@ -15227,15 +15264,15 @@ module Aws::SSM
     #   **region** represents the Region identifier for an AWS Region
     #   supported by AWS Systems Manager, such as `us-east-2` for the US
     #   East (Ohio) Region. For a list of supported **region** values, see
-    #   the **Region** column in the [AWS Systems Manager table of regions
-    #   and endpoints][1] in the *AWS General Reference*.
+    #   the **Region** column in [Systems Manager Service Endpoints][1] in
+    #   the *AWS General Reference*.
     #
     #   **session-id** represents the ID of a Session Manager session, such
     #   as `1a2b3c4dEXAMPLE`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#ssm_region
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionResponse AWS API Documentation
@@ -16435,8 +16472,13 @@ module Aws::SSM
     #         task_invocation_parameters: {
     #           run_command: {
     #             comment: "Comment",
+    #             cloud_watch_output_config: {
+    #               cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #               cloud_watch_output_enabled: false,
+    #             },
     #             document_hash: "DocumentHash",
     #             document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #             document_version: "DocumentVersion",
     #             notification_config: {
     #               notification_arn: "NotificationArn",
     #               notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed

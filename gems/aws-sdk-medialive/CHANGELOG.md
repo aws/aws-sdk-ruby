@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2019-12-17)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports HLS ID3 segment tagging, HLS redundant manifests for CDNs that support different publishing/viewing endpoints, fragmented MP4 (fMP4), and frame capture intervals specified in milliseconds.
+
 1.39.0 (2019-11-25)
 ------------------
 

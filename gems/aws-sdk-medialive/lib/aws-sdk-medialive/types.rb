@@ -747,6 +747,7 @@ module Aws::MediaLive
     #           username: "__string",
     #         },
     #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #         segment_type: "AAC", # accepts AAC, FMP4
     #       }
     #
     # @!attribute [rw] audio_group_id
@@ -776,12 +777,17 @@ module Aws::MediaLive
     #   an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO
     #   @return [String]
     #
+    # @!attribute [rw] segment_type
+    #   Specifies the segment type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioOnlyHlsSettings AWS API Documentation
     #
     class AudioOnlyHlsSettings < Struct.new(
       :audio_group_id,
       :audio_only_image,
-      :audio_track_type)
+      :audio_track_type,
+      :segment_type)
       include Aws::Structure
     end
 
@@ -1000,6 +1006,9 @@ module Aws::MediaLive
     #           {
     #             action_name: "__string", # required
     #             schedule_action_settings: { # required
+    #               hls_id_3_segment_tagging_settings: {
+    #                 tag: "__string", # required
+    #               },
     #               hls_timed_metadata_settings: {
     #                 id_3: "__string", # required
     #               },
@@ -1164,6 +1173,9 @@ module Aws::MediaLive
     #             {
     #               action_name: "__string", # required
     #               schedule_action_settings: { # required
+    #                 hls_id_3_segment_tagging_settings: {
+    #                   tag: "__string", # required
+    #                 },
     #                 hls_timed_metadata_settings: {
     #                   id_3: "__string", # required
     #                 },
@@ -2493,7 +2505,9 @@ module Aws::MediaLive
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
+    #                   base_url_content_1: "__string",
     #                   base_url_manifest: "__string",
+    #                   base_url_manifest_1: "__string",
     #                   caption_language_mappings: [
     #                     {
     #                       caption_channel: 1, # required
@@ -2541,6 +2555,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -2696,6 +2711,7 @@ module Aws::MediaLive
     #                       name_modifier: "__string",
     #                     },
     #                     hls_output_settings: {
+    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
     #                           audio_group_id: "__string",
@@ -2705,6 +2721,10 @@ module Aws::MediaLive
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                           segment_type: "AAC", # accepts AAC, FMP4
+    #                         },
+    #                         fmp_4_hls_settings: {
+    #                           audio_rendition_sets: "__string",
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
@@ -2839,6 +2859,7 @@ module Aws::MediaLive
     #               codec_settings: {
     #                 frame_capture_settings: {
     #                   capture_interval: 1, # required
+    #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -5234,7 +5255,9 @@ module Aws::MediaLive
     #               hls_group_settings: {
     #                 ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                 base_url_content: "__string",
+    #                 base_url_content_1: "__string",
     #                 base_url_manifest: "__string",
+    #                 base_url_manifest_1: "__string",
     #                 caption_language_mappings: [
     #                   {
     #                     caption_channel: 1, # required
@@ -5282,6 +5305,7 @@ module Aws::MediaLive
     #                     restart_delay: 1,
     #                   },
     #                 },
+    #                 hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                 i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                 index_n_segments: 1,
     #                 input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -5437,6 +5461,7 @@ module Aws::MediaLive
     #                     name_modifier: "__string",
     #                   },
     #                   hls_output_settings: {
+    #                     h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                     hls_settings: { # required
     #                       audio_only_hls_settings: {
     #                         audio_group_id: "__string",
@@ -5446,6 +5471,10 @@ module Aws::MediaLive
     #                           username: "__string",
     #                         },
     #                         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                         segment_type: "AAC", # accepts AAC, FMP4
+    #                       },
+    #                       fmp_4_hls_settings: {
+    #                         audio_rendition_sets: "__string",
     #                       },
     #                       standard_hls_settings: {
     #                         audio_rendition_sets: "__string",
@@ -5580,6 +5609,7 @@ module Aws::MediaLive
     #             codec_settings: {
     #               frame_capture_settings: {
     #                 capture_interval: 1, # required
+    #                 capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #               },
     #               h264_settings: {
     #                 adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -5798,6 +5828,28 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Fmp4 Hls Settings
+    #
+    # @note When making an API call, you may pass Fmp4HlsSettings
+    #   data as a hash:
+    #
+    #       {
+    #         audio_rendition_sets: "__string",
+    #       }
+    #
+    # @!attribute [rw] audio_rendition_sets
+    #   List all the audio groups that are used with the video output
+    #   stream. Input all the audio GROUP-IDs that are associated to the
+    #   video, separate by ','.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Fmp4HlsSettings AWS API Documentation
+    #
+    class Fmp4HlsSettings < Struct.new(
+      :audio_rendition_sets)
+      include Aws::Structure
+    end
+
     # Settings to specify if an action follows another.
     #
     # @note When making an API call, you may pass FollowModeScheduleActionStartSettings
@@ -5893,6 +5945,7 @@ module Aws::MediaLive
     #
     #       {
     #         capture_interval: 1, # required
+    #         capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #       }
     #
     # @!attribute [rw] capture_interval
@@ -5901,10 +5954,15 @@ module Aws::MediaLive
     #   specified by captureIntervalUnits.
     #   @return [Integer]
     #
+    # @!attribute [rw] capture_interval_units
+    #   Unit for the frame capture interval.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FrameCaptureSettings AWS API Documentation
     #
     class FrameCaptureSettings < Struct.new(
-      :capture_interval)
+      :capture_interval,
+      :capture_interval_units)
       include Aws::Structure
     end
 
@@ -6249,7 +6307,11 @@ module Aws::MediaLive
     #   instead of QVBR if you want to maintain a specific average bitrate
     #   over the duration of the channel. CBR: Quality varies, depending on
     #   the video complexity. Recommended only if you distribute your assets
-    #   to devices that cannot handle variable bitrates.
+    #   to devices that cannot handle variable bitrates. Multiplex: This
+    #   rate control mode is only supported (and is required) when the video
+    #   is being delivered to a MediaLive Multiplex in which case the rate
+    #   control configuration is controlled by the properties within the
+    #   Multiplex Program.
     #   @return [String]
     #
     # @!attribute [rw] scan_type
@@ -6835,7 +6897,9 @@ module Aws::MediaLive
     #       {
     #         ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #         base_url_content: "__string",
+    #         base_url_content_1: "__string",
     #         base_url_manifest: "__string",
+    #         base_url_manifest_1: "__string",
     #         caption_language_mappings: [
     #           {
     #             caption_channel: 1, # required
@@ -6883,6 +6947,7 @@ module Aws::MediaLive
     #             restart_delay: 1,
     #           },
     #         },
+    #         hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #         i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #         index_n_segments: 1,
     #         input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -6930,10 +6995,25 @@ module Aws::MediaLive
     #   different URL than the main .m3u8 file.
     #   @return [String]
     #
+    # @!attribute [rw] base_url_content_1
+    #   Optional. One value per output group. This field is required only if
+    #   you are completing Base URL content A, and the downstream system has
+    #   notified you that the media files for pipeline 1 of all outputs are
+    #   in a location different from the media files for pipeline 0.
+    #   @return [String]
+    #
     # @!attribute [rw] base_url_manifest
     #   A partial URI prefix that will be prepended to each output in the
     #   media .m3u8 file. Can be used if base manifest is delivered from a
     #   different URL than the main .m3u8 file.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_url_manifest_1
+    #   Optional. One value per output group. Complete this field only if
+    #   you are completing Base URL manifest A, and the downstream system
+    #   has notified you that the child manifest files for pipeline 1 of all
+    #   outputs are in a location different from the child manifest files
+    #   for pipeline 0.
     #   @return [String]
     #
     # @!attribute [rw] caption_language_mappings
@@ -6989,6 +7069,10 @@ module Aws::MediaLive
     # @!attribute [rw] hls_cdn_settings
     #   Parameters that control interactions with the CDN.
     #   @return [Types::HlsCdnSettings]
+    #
+    # @!attribute [rw] hls_id_3_segment_tagging
+    #   State of HLS ID3 Segment Tagging
+    #   @return [String]
     #
     # @!attribute [rw] i_frame_only_playlists
     #   DISABLED: Do not create an I-frame-only manifest, but do create the
@@ -7157,7 +7241,9 @@ module Aws::MediaLive
     class HlsGroupSettings < Struct.new(
       :ad_markers,
       :base_url_content,
+      :base_url_content_1,
       :base_url_manifest,
+      :base_url_manifest_1,
       :caption_language_mappings,
       :caption_language_setting,
       :client_cache,
@@ -7167,6 +7253,7 @@ module Aws::MediaLive
       :directory_structure,
       :encryption_type,
       :hls_cdn_settings,
+      :hls_id_3_segment_tagging,
       :i_frame_only_playlists,
       :index_n_segments,
       :input_loss_action,
@@ -7192,6 +7279,30 @@ module Aws::MediaLive
       :timed_metadata_id_3_period,
       :timestamp_delta_milliseconds,
       :ts_file_mode)
+      include Aws::Structure
+    end
+
+    # Settings for the action to insert a user-defined ID3 tag in each HLS
+    # segment
+    #
+    # @note When making an API call, you may pass HlsId3SegmentTaggingScheduleActionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         tag: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] tag
+    #   ID3 tag to insert into each segment. Supports special keyword
+    #   identifiers to substitute in segment-related values.\\nSupported
+    #   keyword identifiers:
+    #   https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsId3SegmentTaggingScheduleActionSettings AWS API Documentation
+    #
+    class HlsId3SegmentTaggingScheduleActionSettings < Struct.new(
+      :tag)
       include Aws::Structure
     end
 
@@ -7295,6 +7406,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #         hls_settings: { # required
     #           audio_only_hls_settings: {
     #             audio_group_id: "__string",
@@ -7304,6 +7416,10 @@ module Aws::MediaLive
     #               username: "__string",
     #             },
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #             segment_type: "AAC", # accepts AAC, FMP4
+    #           },
+    #           fmp_4_hls_settings: {
+    #             audio_rendition_sets: "__string",
     #           },
     #           standard_hls_settings: {
     #             audio_rendition_sets: "__string",
@@ -7332,6 +7448,12 @@ module Aws::MediaLive
     #         segment_modifier: "__string",
     #       }
     #
+    # @!attribute [rw] h265_packaging_type
+    #   Only applicable when this output is referencing an H.265 video
+    #   description. Specifies whether MP4 segments should be packaged as
+    #   HEV1 or HVC1.
+    #   @return [String]
+    #
     # @!attribute [rw] hls_settings
     #   Settings regarding the underlying stream. These settings are
     #   different for audio-only outputs.
@@ -7349,6 +7471,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/HlsOutputSettings AWS API Documentation
     #
     class HlsOutputSettings < Struct.new(
+      :h265_packaging_type,
       :hls_settings,
       :name_modifier,
       :segment_modifier)
@@ -7369,6 +7492,10 @@ module Aws::MediaLive
     #             username: "__string",
     #           },
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #           segment_type: "AAC", # accepts AAC, FMP4
+    #         },
+    #         fmp_4_hls_settings: {
+    #           audio_rendition_sets: "__string",
     #         },
     #         standard_hls_settings: {
     #           audio_rendition_sets: "__string",
@@ -7398,6 +7525,10 @@ module Aws::MediaLive
     #   Audio Only Hls Settings
     #   @return [Types::AudioOnlyHlsSettings]
     #
+    # @!attribute [rw] fmp_4_hls_settings
+    #   Fmp4 Hls Settings
+    #   @return [Types::Fmp4HlsSettings]
+    #
     # @!attribute [rw] standard_hls_settings
     #   Standard Hls Settings
     #   @return [Types::StandardHlsSettings]
@@ -7406,6 +7537,7 @@ module Aws::MediaLive
     #
     class HlsSettings < Struct.new(
       :audio_only_hls_settings,
+      :fmp_4_hls_settings,
       :standard_hls_settings)
       include Aws::Structure
     end
@@ -10439,6 +10571,7 @@ module Aws::MediaLive
     #             name_modifier: "__string",
     #           },
     #           hls_output_settings: {
+    #             h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #             hls_settings: { # required
     #               audio_only_hls_settings: {
     #                 audio_group_id: "__string",
@@ -10448,6 +10581,10 @@ module Aws::MediaLive
     #                   username: "__string",
     #                 },
     #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                 segment_type: "AAC", # accepts AAC, FMP4
+    #               },
+    #               fmp_4_hls_settings: {
+    #                 audio_rendition_sets: "__string",
     #               },
     #               standard_hls_settings: {
     #                 audio_rendition_sets: "__string",
@@ -10716,7 +10853,9 @@ module Aws::MediaLive
     #           hls_group_settings: {
     #             ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #             base_url_content: "__string",
+    #             base_url_content_1: "__string",
     #             base_url_manifest: "__string",
+    #             base_url_manifest_1: "__string",
     #             caption_language_mappings: [
     #               {
     #                 caption_channel: 1, # required
@@ -10764,6 +10903,7 @@ module Aws::MediaLive
     #                 restart_delay: 1,
     #               },
     #             },
+    #             hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #             i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #             index_n_segments: 1,
     #             input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -10919,6 +11059,7 @@ module Aws::MediaLive
     #                 name_modifier: "__string",
     #               },
     #               hls_output_settings: {
+    #                 h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                 hls_settings: { # required
     #                   audio_only_hls_settings: {
     #                     audio_group_id: "__string",
@@ -10928,6 +11069,10 @@ module Aws::MediaLive
     #                       username: "__string",
     #                     },
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                     segment_type: "AAC", # accepts AAC, FMP4
+    #                   },
+    #                   fmp_4_hls_settings: {
+    #                     audio_rendition_sets: "__string",
     #                   },
     #                   standard_hls_settings: {
     #                     audio_rendition_sets: "__string",
@@ -11095,7 +11240,9 @@ module Aws::MediaLive
     #         hls_group_settings: {
     #           ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #           base_url_content: "__string",
+    #           base_url_content_1: "__string",
     #           base_url_manifest: "__string",
+    #           base_url_manifest_1: "__string",
     #           caption_language_mappings: [
     #             {
     #               caption_channel: 1, # required
@@ -11143,6 +11290,7 @@ module Aws::MediaLive
     #               restart_delay: 1,
     #             },
     #           },
+    #           hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #           i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #           index_n_segments: 1,
     #           input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -11364,6 +11512,7 @@ module Aws::MediaLive
     #           name_modifier: "__string",
     #         },
     #         hls_output_settings: {
+    #           h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #           hls_settings: { # required
     #             audio_only_hls_settings: {
     #               audio_group_id: "__string",
@@ -11373,6 +11522,10 @@ module Aws::MediaLive
     #                 username: "__string",
     #               },
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #               segment_type: "AAC", # accepts AAC, FMP4
+    #             },
+    #             fmp_4_hls_settings: {
+    #               audio_rendition_sets: "__string",
     #             },
     #             standard_hls_settings: {
     #               audio_rendition_sets: "__string",
@@ -12083,6 +12236,9 @@ module Aws::MediaLive
     #       {
     #         action_name: "__string", # required
     #         schedule_action_settings: { # required
+    #           hls_id_3_segment_tagging_settings: {
+    #             tag: "__string", # required
+    #           },
     #           hls_timed_metadata_settings: {
     #             id_3: "__string", # required
     #           },
@@ -12206,6 +12362,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
+    #         hls_id_3_segment_tagging_settings: {
+    #           tag: "__string", # required
+    #         },
     #         hls_timed_metadata_settings: {
     #           id_3: "__string", # required
     #         },
@@ -12285,6 +12444,10 @@ module Aws::MediaLive
     #         },
     #       }
     #
+    # @!attribute [rw] hls_id_3_segment_tagging_settings
+    #   Action to insert HLS ID3 segment tagging
+    #   @return [Types::HlsId3SegmentTaggingScheduleActionSettings]
+    #
     # @!attribute [rw] hls_timed_metadata_settings
     #   Action to insert HLS metadata
     #   @return [Types::HlsTimedMetadataScheduleActionSettings]
@@ -12320,6 +12483,7 @@ module Aws::MediaLive
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
+      :hls_id_3_segment_tagging_settings,
       :hls_timed_metadata_settings,
       :input_switch_settings,
       :pause_state_settings,
@@ -13774,7 +13938,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] validation_errors
-    #   @return [Array<Types::MultiplexValidationError>]
+    #   @return [Array<Types::ValidationError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UnprocessableEntityException AWS API Documentation
     #
@@ -14167,7 +14331,9 @@ module Aws::MediaLive
     #                 hls_group_settings: {
     #                   ad_markers: ["ADOBE"], # accepts ADOBE, ELEMENTAL, ELEMENTAL_SCTE35
     #                   base_url_content: "__string",
+    #                   base_url_content_1: "__string",
     #                   base_url_manifest: "__string",
+    #                   base_url_manifest_1: "__string",
     #                   caption_language_mappings: [
     #                     {
     #                       caption_channel: 1, # required
@@ -14215,6 +14381,7 @@ module Aws::MediaLive
     #                       restart_delay: 1,
     #                     },
     #                   },
+    #                   hls_id_3_segment_tagging: "DISABLED", # accepts DISABLED, ENABLED
     #                   i_frame_only_playlists: "DISABLED", # accepts DISABLED, STANDARD
     #                   index_n_segments: 1,
     #                   input_loss_action: "EMIT_OUTPUT", # accepts EMIT_OUTPUT, PAUSE_OUTPUT
@@ -14370,6 +14537,7 @@ module Aws::MediaLive
     #                       name_modifier: "__string",
     #                     },
     #                     hls_output_settings: {
+    #                       h265_packaging_type: "HEV1", # accepts HEV1, HVC1
     #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
     #                           audio_group_id: "__string",
@@ -14379,6 +14547,10 @@ module Aws::MediaLive
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
+    #                           segment_type: "AAC", # accepts AAC, FMP4
+    #                         },
+    #                         fmp_4_hls_settings: {
+    #                           audio_rendition_sets: "__string",
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
@@ -14513,6 +14685,7 @@ module Aws::MediaLive
     #               codec_settings: {
     #                 frame_capture_settings: {
     #                   capture_interval: 1, # required
+    #                   capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #                 },
     #                 h264_settings: {
     #                   adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -15166,6 +15339,7 @@ module Aws::MediaLive
     #       {
     #         frame_capture_settings: {
     #           capture_interval: 1, # required
+    #           capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #         },
     #         h264_settings: {
     #           adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF
@@ -15287,6 +15461,7 @@ module Aws::MediaLive
     #         codec_settings: {
     #           frame_capture_settings: {
     #             capture_interval: 1, # required
+    #             capture_interval_units: "MILLISECONDS", # accepts MILLISECONDS, SECONDS
     #           },
     #           h264_settings: {
     #             adaptive_quantization: "HIGH", # accepts HIGH, HIGHER, LOW, MAX, MEDIUM, OFF

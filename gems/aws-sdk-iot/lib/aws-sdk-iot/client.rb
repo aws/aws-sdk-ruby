@@ -1297,6 +1297,11 @@ module Aws::IoT
     # @option params [required, Array<String>] :targets
     #   The targeted devices to receive OTA updates.
     #
+    # @option params [Array<String>] :protocols
+    #   The protocol used to transfer the OTA update image. Valid values are
+    #   \[HTTP\], \[MQTT\], \[HTTP, MQTT\]. When both HTTP and MQTT are
+    #   specified, the target device can choose the protocol.
+    #
     # @option params [String] :target_selection
     #   Specifies whether the update will continue to run (CONTINUOUS), or
     #   will be complete after all the things specified as targets have
@@ -1308,6 +1313,9 @@ module Aws::IoT
     #
     # @option params [Types::AwsJobExecutionsRolloutConfig] :aws_job_executions_rollout_config
     #   Configuration for the rollout of OTA updates.
+    #
+    # @option params [Types::AwsJobPresignedUrlConfig] :aws_job_presigned_url_config
+    #   Configuration information for pre-signed URLs.
     #
     # @option params [required, Array<Types::OTAUpdateFile>] :files
     #   The files to be streamed by the OTA update.
@@ -1335,9 +1343,13 @@ module Aws::IoT
     #     ota_update_id: "OTAUpdateId", # required
     #     description: "OTAUpdateDescription",
     #     targets: ["Target"], # required
+    #     protocols: ["MQTT"], # accepts MQTT, HTTP
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     aws_job_executions_rollout_config: {
     #       maximum_per_minute: 1,
+    #     },
+    #     aws_job_presigned_url_config: {
+    #       expires_in_sec: 1,
     #     },
     #     files: [ # required
     #       {
@@ -4552,7 +4564,10 @@ module Aws::IoT
     #   resp.ota_update_info.description #=> String
     #   resp.ota_update_info.targets #=> Array
     #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.protocols #=> Array
+    #   resp.ota_update_info.protocols[0] #=> String, one of "MQTT", "HTTP"
     #   resp.ota_update_info.aws_job_executions_rollout_config.maximum_per_minute #=> Integer
+    #   resp.ota_update_info.aws_job_presigned_url_config.expires_in_sec #=> Integer
     #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.ota_update_info.ota_update_files #=> Array
     #   resp.ota_update_info.ota_update_files[0].file_name #=> String
@@ -8183,7 +8198,7 @@ module Aws::IoT
     #   Specifies a test HTTP authorization request.
     #
     # @option params [Types::MqttContext] :mqtt_context
-    #   Specifies a test MQTT authorization request.&gt;
+    #   Specifies a test MQTT authorization request.
     #
     # @option params [Types::TlsContext] :tls_context
     #   Specifies a test TLS authorization request.
@@ -9395,7 +9410,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

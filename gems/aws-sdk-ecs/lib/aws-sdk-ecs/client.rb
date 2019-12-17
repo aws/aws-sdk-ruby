@@ -4647,8 +4647,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :capacity_providers
-    #   The short name or full Amazon Resource Name (ARN) of one or more
-    #   capacity providers to associate with the cluster.
+    #   The name of one or more capacity providers to associate with the
+    #   cluster.
     #
     #   If specifying a capacity provider that uses an Auto Scaling group, the
     #   capacity provider must already be created. New capacity providers can
@@ -7701,7 +7701,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

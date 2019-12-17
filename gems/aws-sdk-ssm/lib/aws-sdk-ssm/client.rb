@@ -548,7 +548,9 @@ module Aws::SSM
     #   The instance ID.
     #
     #   <note markdown="1"> `InstanceId` has been deprecated. To specify an instance ID for an
-    #   association, use the `Targets` parameter. If you use the parameter
+    #   association, use the `Targets` parameter. Requests that include the
+    #   parameter `InstanceID` with SSM documents that use schema version 2.0
+    #   or later will fail. In addition, if you use the parameter
     #   `InstanceId`, you cannot use the parameters `AssociationName`,
     #   `DocumentVersion`, `MaxErrors`, `MaxConcurrency`, `OutputLocation`, or
     #   `ScheduleExpression`. To use these parameters, you must use the
@@ -853,7 +855,7 @@ module Aws::SSM
     #
     # @option params [String] :document_format
     #   Specify the document format for the request. The document format can
-    #   be either JSON or YAML. JSON is the default format.
+    #   be JSON, YAML, or TEXT. JSON is the default format.
     #
     # @option params [String] :target_type
     #   Specify a target type to define the kinds of resources the document
@@ -4938,8 +4940,11 @@ module Aws::SSM
     #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values #=> Array
     #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values[0] #=> String
     #   resp.task_invocation_parameters.run_command.comment #=> String
+    #   resp.task_invocation_parameters.run_command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.task_invocation_parameters.run_command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.task_invocation_parameters.run_command.document_hash #=> String
     #   resp.task_invocation_parameters.run_command.document_hash_type #=> String, one of "Sha256", "Sha1"
+    #   resp.task_invocation_parameters.run_command.document_version #=> String
     #   resp.task_invocation_parameters.run_command.notification_config.notification_arn #=> String
     #   resp.task_invocation_parameters.run_command.notification_config.notification_events #=> Array
     #   resp.task_invocation_parameters.run_command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
@@ -7178,8 +7183,13 @@ module Aws::SSM
     #     task_invocation_parameters: {
     #       run_command: {
     #         comment: "Comment",
+    #         cloud_watch_output_config: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           cloud_watch_output_enabled: false,
+    #         },
     #         document_hash: "DocumentHash",
     #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         document_version: "DocumentVersion",
     #         notification_config: {
     #           notification_arn: "NotificationArn",
     #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
@@ -8646,8 +8656,13 @@ module Aws::SSM
     #     task_invocation_parameters: {
     #       run_command: {
     #         comment: "Comment",
+    #         cloud_watch_output_config: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           cloud_watch_output_enabled: false,
+    #         },
     #         document_hash: "DocumentHash",
     #         document_hash_type: "Sha256", # accepts Sha256, Sha1
+    #         document_version: "DocumentVersion",
     #         notification_config: {
     #           notification_arn: "NotificationArn",
     #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
@@ -8704,8 +8719,11 @@ module Aws::SSM
     #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values #=> Array
     #   resp.task_parameters["MaintenanceWindowTaskParameterName"].values[0] #=> String
     #   resp.task_invocation_parameters.run_command.comment #=> String
+    #   resp.task_invocation_parameters.run_command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.task_invocation_parameters.run_command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.task_invocation_parameters.run_command.document_hash #=> String
     #   resp.task_invocation_parameters.run_command.document_hash_type #=> String, one of "Sha256", "Sha1"
+    #   resp.task_invocation_parameters.run_command.document_version #=> String
     #   resp.task_invocation_parameters.run_command.notification_config.notification_arn #=> String
     #   resp.task_invocation_parameters.run_command.notification_config.notification_events #=> Array
     #   resp.task_invocation_parameters.run_command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
@@ -9196,7 +9214,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

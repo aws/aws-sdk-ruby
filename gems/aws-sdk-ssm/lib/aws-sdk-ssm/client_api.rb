@@ -2942,8 +2942,10 @@ module Aws::SSM
     MaintenanceWindowLambdaParameters.struct_class = Types::MaintenanceWindowLambdaParameters
 
     MaintenanceWindowRunCommandParameters.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "Comment"))
+    MaintenanceWindowRunCommandParameters.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     MaintenanceWindowRunCommandParameters.add_member(:document_hash, Shapes::ShapeRef.new(shape: DocumentHash, location_name: "DocumentHash"))
     MaintenanceWindowRunCommandParameters.add_member(:document_hash_type, Shapes::ShapeRef.new(shape: DocumentHashType, location_name: "DocumentHashType"))
+    MaintenanceWindowRunCommandParameters.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     MaintenanceWindowRunCommandParameters.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
     MaintenanceWindowRunCommandParameters.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "OutputS3BucketName"))
     MaintenanceWindowRunCommandParameters.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "OutputS3KeyPrefix"))

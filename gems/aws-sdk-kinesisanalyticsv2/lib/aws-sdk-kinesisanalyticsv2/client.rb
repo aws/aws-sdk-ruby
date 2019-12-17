@@ -786,7 +786,7 @@ module Aws::KinesisAnalyticsV2
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     application_description: "ApplicationDescription",
-    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6
+    #     runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
     #     service_execution_role: "RoleARN", # required
     #     application_configuration: {
     #       sql_application_configuration: {
@@ -949,7 +949,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1391,7 +1391,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -1696,7 +1696,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_summaries[0].application_arn #=> String
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #   resp.application_summaries[0].application_version_id #=> Integer
-    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6"
+    #   resp.application_summaries[0].runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalyticsv2-2018-05-23/ListApplications AWS API Documentation
@@ -2090,7 +2090,7 @@ module Aws::KinesisAnalyticsV2
     #   resp.application_detail.application_arn #=> String
     #   resp.application_detail.application_description #=> String
     #   resp.application_detail.application_name #=> String
-    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6"
+    #   resp.application_detail.runtime_environment #=> String, one of "SQL-1_0", "FLINK-1_6", "FLINK-1_8"
     #   resp.application_detail.service_execution_role #=> String
     #   resp.application_detail.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #   resp.application_detail.application_version_id #=> Integer
@@ -2204,7 +2204,7 @@ module Aws::KinesisAnalyticsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalyticsv2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

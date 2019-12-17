@@ -42,6 +42,7 @@ module Aws::MediaLive
     AudioNormalizationAlgorithm = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithm')
     AudioNormalizationAlgorithmControl = Shapes::StringShape.new(name: 'AudioNormalizationAlgorithmControl')
     AudioNormalizationSettings = Shapes::StructureShape.new(name: 'AudioNormalizationSettings')
+    AudioOnlyHlsSegmentType = Shapes::StringShape.new(name: 'AudioOnlyHlsSegmentType')
     AudioOnlyHlsSettings = Shapes::StructureShape.new(name: 'AudioOnlyHlsSettings')
     AudioOnlyHlsTrackType = Shapes::StringShape.new(name: 'AudioOnlyHlsTrackType')
     AudioPidSelection = Shapes::StructureShape.new(name: 'AudioPidSelection')
@@ -174,10 +175,12 @@ module Aws::MediaLive
     FecOutputSettings = Shapes::StructureShape.new(name: 'FecOutputSettings')
     FixedAfd = Shapes::StringShape.new(name: 'FixedAfd')
     FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
+    Fmp4HlsSettings = Shapes::StructureShape.new(name: 'Fmp4HlsSettings')
     FollowModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FollowModeScheduleActionStartSettings')
     FollowPoint = Shapes::StringShape.new(name: 'FollowPoint')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     FrameCaptureGroupSettings = Shapes::StructureShape.new(name: 'FrameCaptureGroupSettings')
+    FrameCaptureIntervalUnit = Shapes::StringShape.new(name: 'FrameCaptureIntervalUnit')
     FrameCaptureOutputSettings = Shapes::StructureShape.new(name: 'FrameCaptureOutputSettings')
     FrameCaptureSettings = Shapes::StructureShape.new(name: 'FrameCaptureSettings')
     GatewayTimeoutException = Shapes::StructureShape.new(name: 'GatewayTimeoutException')
@@ -234,6 +237,9 @@ module Aws::MediaLive
     HlsDirectoryStructure = Shapes::StringShape.new(name: 'HlsDirectoryStructure')
     HlsEncryptionType = Shapes::StringShape.new(name: 'HlsEncryptionType')
     HlsGroupSettings = Shapes::StructureShape.new(name: 'HlsGroupSettings')
+    HlsH265PackagingType = Shapes::StringShape.new(name: 'HlsH265PackagingType')
+    HlsId3SegmentTaggingScheduleActionSettings = Shapes::StructureShape.new(name: 'HlsId3SegmentTaggingScheduleActionSettings')
+    HlsId3SegmentTaggingState = Shapes::StringShape.new(name: 'HlsId3SegmentTaggingState')
     HlsInputSettings = Shapes::StructureShape.new(name: 'HlsInputSettings')
     HlsIvInManifest = Shapes::StringShape.new(name: 'HlsIvInManifest')
     HlsIvSource = Shapes::StringShape.new(name: 'HlsIvSource')
@@ -711,6 +717,7 @@ module Aws::MediaLive
     AudioOnlyHlsSettings.add_member(:audio_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "audioGroupId"))
     AudioOnlyHlsSettings.add_member(:audio_only_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "audioOnlyImage"))
     AudioOnlyHlsSettings.add_member(:audio_track_type, Shapes::ShapeRef.new(shape: AudioOnlyHlsTrackType, location_name: "audioTrackType"))
+    AudioOnlyHlsSettings.add_member(:segment_type, Shapes::ShapeRef.new(shape: AudioOnlyHlsSegmentType, location_name: "segmentType"))
     AudioOnlyHlsSettings.struct_class = Types::AudioOnlyHlsSettings
 
     AudioPidSelection.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin0Max8191, required: true, location_name: "pid"))
@@ -1288,6 +1295,9 @@ module Aws::MediaLive
     FixedModeScheduleActionStartSettings.add_member(:time, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "time"))
     FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
+    Fmp4HlsSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
+    Fmp4HlsSettings.struct_class = Types::Fmp4HlsSettings
+
     FollowModeScheduleActionStartSettings.add_member(:follow_point, Shapes::ShapeRef.new(shape: FollowPoint, required: true, location_name: "followPoint"))
     FollowModeScheduleActionStartSettings.add_member(:reference_action_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "referenceActionName"))
     FollowModeScheduleActionStartSettings.struct_class = Types::FollowModeScheduleActionStartSettings
@@ -1302,6 +1312,7 @@ module Aws::MediaLive
     FrameCaptureOutputSettings.struct_class = Types::FrameCaptureOutputSettings
 
     FrameCaptureSettings.add_member(:capture_interval, Shapes::ShapeRef.new(shape: __integerMin1Max3600000, required: true, location_name: "captureInterval"))
+    FrameCaptureSettings.add_member(:capture_interval_units, Shapes::ShapeRef.new(shape: FrameCaptureIntervalUnit, location_name: "captureIntervalUnits"))
     FrameCaptureSettings.struct_class = Types::FrameCaptureSettings
 
     GatewayTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1423,7 +1434,9 @@ module Aws::MediaLive
 
     HlsGroupSettings.add_member(:ad_markers, Shapes::ShapeRef.new(shape: __listOfHlsAdMarkers, location_name: "adMarkers"))
     HlsGroupSettings.add_member(:base_url_content, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrlContent"))
+    HlsGroupSettings.add_member(:base_url_content_1, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrlContent1"))
     HlsGroupSettings.add_member(:base_url_manifest, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrlManifest"))
+    HlsGroupSettings.add_member(:base_url_manifest_1, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrlManifest1"))
     HlsGroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfCaptionLanguageMapping, location_name: "captionLanguageMappings"))
     HlsGroupSettings.add_member(:caption_language_setting, Shapes::ShapeRef.new(shape: HlsCaptionLanguageSetting, location_name: "captionLanguageSetting"))
     HlsGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: HlsClientCache, location_name: "clientCache"))
@@ -1433,6 +1446,7 @@ module Aws::MediaLive
     HlsGroupSettings.add_member(:directory_structure, Shapes::ShapeRef.new(shape: HlsDirectoryStructure, location_name: "directoryStructure"))
     HlsGroupSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: HlsEncryptionType, location_name: "encryptionType"))
     HlsGroupSettings.add_member(:hls_cdn_settings, Shapes::ShapeRef.new(shape: HlsCdnSettings, location_name: "hlsCdnSettings"))
+    HlsGroupSettings.add_member(:hls_id_3_segment_tagging, Shapes::ShapeRef.new(shape: HlsId3SegmentTaggingState, location_name: "hlsId3SegmentTagging"))
     HlsGroupSettings.add_member(:i_frame_only_playlists, Shapes::ShapeRef.new(shape: IFrameOnlyPlaylistType, location_name: "iFrameOnlyPlaylists"))
     HlsGroupSettings.add_member(:index_n_segments, Shapes::ShapeRef.new(shape: __integerMin3, location_name: "indexNSegments"))
     HlsGroupSettings.add_member(:input_loss_action, Shapes::ShapeRef.new(shape: InputLossActionForHlsOut, location_name: "inputLossAction"))
@@ -1460,6 +1474,9 @@ module Aws::MediaLive
     HlsGroupSettings.add_member(:ts_file_mode, Shapes::ShapeRef.new(shape: HlsTsFileMode, location_name: "tsFileMode"))
     HlsGroupSettings.struct_class = Types::HlsGroupSettings
 
+    HlsId3SegmentTaggingScheduleActionSettings.add_member(:tag, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "tag"))
+    HlsId3SegmentTaggingScheduleActionSettings.struct_class = Types::HlsId3SegmentTaggingScheduleActionSettings
+
     HlsInputSettings.add_member(:bandwidth, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "bandwidth"))
     HlsInputSettings.add_member(:buffer_segments, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "bufferSegments"))
     HlsInputSettings.add_member(:retries, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "retries"))
@@ -1473,12 +1490,14 @@ module Aws::MediaLive
     HlsMediaStoreSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0Max15, location_name: "restartDelay"))
     HlsMediaStoreSettings.struct_class = Types::HlsMediaStoreSettings
 
+    HlsOutputSettings.add_member(:h265_packaging_type, Shapes::ShapeRef.new(shape: HlsH265PackagingType, location_name: "h265PackagingType"))
     HlsOutputSettings.add_member(:hls_settings, Shapes::ShapeRef.new(shape: HlsSettings, required: true, location_name: "hlsSettings"))
     HlsOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "nameModifier"))
     HlsOutputSettings.add_member(:segment_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "segmentModifier"))
     HlsOutputSettings.struct_class = Types::HlsOutputSettings
 
     HlsSettings.add_member(:audio_only_hls_settings, Shapes::ShapeRef.new(shape: AudioOnlyHlsSettings, location_name: "audioOnlyHlsSettings"))
+    HlsSettings.add_member(:fmp_4_hls_settings, Shapes::ShapeRef.new(shape: Fmp4HlsSettings, location_name: "fmp4HlsSettings"))
     HlsSettings.add_member(:standard_hls_settings, Shapes::ShapeRef.new(shape: StandardHlsSettings, location_name: "standardHlsSettings"))
     HlsSettings.struct_class = Types::HlsSettings
 
@@ -2106,6 +2125,7 @@ module Aws::MediaLive
     ScheduleAction.add_member(:schedule_action_start_settings, Shapes::ShapeRef.new(shape: ScheduleActionStartSettings, required: true, location_name: "scheduleActionStartSettings"))
     ScheduleAction.struct_class = Types::ScheduleAction
 
+    ScheduleActionSettings.add_member(:hls_id_3_segment_tagging_settings, Shapes::ShapeRef.new(shape: HlsId3SegmentTaggingScheduleActionSettings, location_name: "hlsId3SegmentTaggingSettings"))
     ScheduleActionSettings.add_member(:hls_timed_metadata_settings, Shapes::ShapeRef.new(shape: HlsTimedMetadataScheduleActionSettings, location_name: "hlsTimedMetadataSettings"))
     ScheduleActionSettings.add_member(:input_switch_settings, Shapes::ShapeRef.new(shape: InputSwitchScheduleActionSettings, location_name: "inputSwitchSettings"))
     ScheduleActionSettings.add_member(:pause_state_settings, Shapes::ShapeRef.new(shape: PauseStateScheduleActionSettings, location_name: "pauseStateSettings"))
@@ -2322,7 +2342,7 @@ module Aws::MediaLive
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
 
     UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
-    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfMultiplexValidationError, location_name: "validationErrors"))
+    UnprocessableEntityException.add_member(:validation_errors, Shapes::ShapeRef.new(shape: __listOfValidationError, location_name: "validationErrors"))
     UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
 
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))

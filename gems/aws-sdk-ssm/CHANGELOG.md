@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2019-12-17)
+------------------
+
+* Feature - Added support for Cloud Watch Output and Document Version to the Run Command tasks in Maintenance Windows.
+
 1.66.0 (2019-12-09)
 ------------------
 

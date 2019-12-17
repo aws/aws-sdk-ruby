@@ -1674,7 +1674,7 @@ module Aws::KinesisAnalyticsV2
     #       {
     #         application_name: "ApplicationName", # required
     #         application_description: "ApplicationDescription",
-    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6
+    #         runtime_environment: "SQL-1_0", # required, accepts SQL-1_0, FLINK-1_6, FLINK-1_8
     #         service_execution_role: "RoleARN", # required
     #         application_configuration: {
     #           sql_application_configuration: {

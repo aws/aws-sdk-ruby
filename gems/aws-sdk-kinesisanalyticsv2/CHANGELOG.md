@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2019-12-17)
+------------------
+
+* Feature - Kinesis Data Analytics service now supports running Java applications using Flink 1.8.
+
 1.12.0 (2019-11-25)
 ------------------
 

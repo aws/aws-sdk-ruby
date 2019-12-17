@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2019-12-17)
+------------------
+
+* Feature - Added a new Over-the-Air (OTA) Update feature that allows you to use different, or multiple, protocols to transfer an image from the AWS cloud to IoT devices.
+
 1.41.0 (2019-11-25)
 ------------------
 
