@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.418 (2019-12-17)
+------------------
+
 * Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
