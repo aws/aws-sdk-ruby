@@ -1,9 +1,6 @@
 Unreleased Changes
 ------------------
 
-2.11.419 (2019-12-18)
-------------------
-
 * Feature - Support `s3_us_east_1_regional_endpoint` from `SharedConfig`.
 
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
