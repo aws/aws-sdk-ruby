@@ -143,6 +143,21 @@ module Aws
       end
     end
 
+    def s3_us_east_1_regional_endpoint(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          mode = @parsed_credentials.fetch(p, {})["s3_us_east_1_regional_endpoint"]
+        end
+        if @parsed_config
+          mode ||= @parsed_config.fetch(p, {})["s3_us_east_1_regional_endpoint"]
+        end
+        mode
+      else
+        nil
+      end
+    end
+
     def endpoint_discovery(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config

@@ -130,6 +130,26 @@ module Aws
 
       end
 
+      context 's3_us_east_1_regional_endpoint selection' do
+
+        it 'can resolve s3_us_east_1_regional_endpoint from config file' do
+          config = SharedConfig.new(
+            config_path: mock_config_file,
+            config_enabled: true,
+            profile_name: "s3_iad_regional"
+          )
+          expect(config.s3_us_east_1_regional_endpoint).to eq('regional')
+
+          config = SharedConfig.new(
+            config_path: mock_config_file,
+            config_enabled: true,
+            profile_name: "s3_iad_legacy"
+          )
+          expect(config.s3_us_east_1_regional_endpoint).to eq('legacy')
+        end
+
+      end
+
     end
   end
 end

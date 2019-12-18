@@ -348,6 +348,7 @@ module Aws
     autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'
     autoload :S3Http200Errors, 'aws-sdk-core/plugins/s3_http_200_errors'
     autoload :S3HostId, 'aws-sdk-core/plugins/s3_host_id'
+    autoload :S3IADRegionalEndpoint, 'aws-sdk-core/plugins/s3_iad_regional_endpoint'
     autoload :S3LocationConstraint, 'aws-sdk-core/plugins/s3_location_constraint'
     autoload :S3Md5s, 'aws-sdk-core/plugins/s3_md5s'
     autoload :S3Redirects, 'aws-sdk-core/plugins/s3_redirects'

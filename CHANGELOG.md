@@ -1,8 +1,7 @@
 Unreleased Changes
 ------------------
 
-2.11.419 (2019-12-18)
-------------------
+* Feature - Support `s3_us_east_1_regional_endpoint` from `SharedConfig`.
 
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
 
@@ -1444,7 +1443,7 @@ Unreleased Changes
 
 * Feature - Aws::IoTEvents - Added support for a new service, AWS IoT Events.
 
-* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information. 
+* Issue - Improved exception messages in credential providers to exclude detailed parse errors that may contain sensitive information.
 
 2.11.284 (2019-05-29)
 ------------------

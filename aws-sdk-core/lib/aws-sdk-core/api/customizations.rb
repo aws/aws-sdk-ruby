@@ -265,6 +265,7 @@ module Aws
         Aws::Plugins::S3Expect100Continue
         Aws::Plugins::S3HostId
         Aws::Plugins::S3Http200Errors
+        Aws::Plugins::S3IADRegionalEndpoint
         Aws::Plugins::S3GetBucketLocationFix
         Aws::Plugins::S3LocationConstraint
         Aws::Plugins::S3Md5s
