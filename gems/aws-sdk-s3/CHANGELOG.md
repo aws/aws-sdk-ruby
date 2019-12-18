@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2019-12-18)
+------------------
+
+* Feature - Updates Amazon S3 endpoints allowing you to configure your client to opt-in to using S3 with the us-east-1 regional endpoint, instead of global.
+
 1.59.1 (2019-12-17)
 ------------------
 

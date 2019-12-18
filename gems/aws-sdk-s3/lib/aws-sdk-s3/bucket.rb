@@ -289,15 +289,15 @@ module Aws::S3
     #   Required to permanently delete a versioned object if versioning is
     #   configured with MFA delete enabled.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
     #   Governance-type Object Lock in place. You must have sufficient
@@ -477,28 +477,29 @@ module Aws::S3
     # @option options [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK) that was used for the
-    #   object.
+    #   Service (AWS KMS) symmetrical customer managed customer master key
+    #   (CMK) that was used for the object.
     #
     #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the AWS KMS CMK that will be used for the
-    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but do
-    #   not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
-    #   uses the AWS managed CMK in AWS to protect the data.
+    #   header specifies the ID of the symmetric customer managed AWS KMS CMK
+    #   that will be used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
+    #   managed CMK in AWS to protect the data.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")

@@ -13247,6 +13247,9 @@ module Aws::EC2
     #   resp.elastic_gpu_set[0].elastic_gpu_health.status #=> String, one of "OK", "IMPAIRED"
     #   resp.elastic_gpu_set[0].elastic_gpu_state #=> String, one of "ATTACHED"
     #   resp.elastic_gpu_set[0].instance_id #=> String
+    #   resp.elastic_gpu_set[0].tags #=> Array
+    #   resp.elastic_gpu_set[0].tags[0].key #=> String
+    #   resp.elastic_gpu_set[0].tags[0].value #=> String
     #   resp.max_results #=> Integer
     #   resp.next_token #=> String
     #
@@ -35437,7 +35440,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.126.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

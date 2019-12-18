@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-12-18)
+------------------
+
+* Feature - Documentation updates for CloudFront
+
 1.23.0 (2019-10-23)
 ------------------
 

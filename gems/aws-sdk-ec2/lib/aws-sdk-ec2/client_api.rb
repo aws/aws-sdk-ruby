@@ -5109,6 +5109,7 @@ module Aws::EC2
     ElasticGpus.add_member(:elastic_gpu_health, Shapes::ShapeRef.new(shape: ElasticGpuHealth, location_name: "elasticGpuHealth"))
     ElasticGpus.add_member(:elastic_gpu_state, Shapes::ShapeRef.new(shape: ElasticGpuState, location_name: "elasticGpuState"))
     ElasticGpus.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    ElasticGpus.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ElasticGpus.struct_class = Types::ElasticGpus
 
     ElasticInferenceAccelerator.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))

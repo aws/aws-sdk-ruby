@@ -22258,6 +22258,10 @@ module Aws::EC2
     #   attached.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the Elastic Graphics accelerator.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpus AWS API Documentation
     #
     class ElasticGpus < Struct.new(
@@ -22266,7 +22270,8 @@ module Aws::EC2
       :elastic_gpu_type,
       :elastic_gpu_health,
       :elastic_gpu_state,
-      :instance_id)
+      :instance_id,
+      :tags)
       include Aws::Structure
     end
 

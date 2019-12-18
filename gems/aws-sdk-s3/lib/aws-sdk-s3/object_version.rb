@@ -237,15 +237,15 @@ module Aws::S3
     #   Required to permanently delete a versioned object if versioning is
     #   configured with MFA delete enabled.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
@@ -323,15 +323,15 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
@@ -393,15 +393,15 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
@@ -493,15 +493,15 @@ module Aws::S3
       #   Required to permanently delete a versioned object if versioning is
       #   configured with MFA delete enabled.
       # @option options [String] :request_payer
-      #   Confirms that the requester knows that she or he will be charged for
-      #   the request. Bucket owners need not specify this parameter in their
-      #   requests. For information about downloading objects from Requester
-      #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+      #   Confirms that the requester knows that they will be charged for the
+      #   request. Bucket owners need not specify this parameter in their
+      #   requests. For information about downloading objects from requester
+      #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
       #   in the *Amazon S3 Developer Guide*.
       #
       #
       #
-      #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient

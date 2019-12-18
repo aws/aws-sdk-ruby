@@ -85,15 +85,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadRequest AWS API Documentation
@@ -882,7 +882,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -940,15 +941,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest AWS API Documentation
@@ -1100,7 +1101,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1314,7 +1316,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1341,15 +1343,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -1628,7 +1630,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -1790,12 +1793,13 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET
-    #   and PUT requests for an object protected by AWS KMS will fail if not
-    #   made via SSL or using SigV4. For information about configuring using
-    #   any of the officially supported AWS SDKs and AWS CLI, see
-    #   [Specifying the Signature Version in Request Authentication][1] in
-    #   the *Amazon S3 Developer Guide*.
+    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to
+    #   use for object encryption. All GET and PUT requests for an object
+    #   protected by AWS KMS will fail if not made via SSL or using SigV4.
+    #   For information about configuring using any of the officially
+    #   supported AWS SDKs and AWS CLI, see [Specifying the Signature
+    #   Version in Request Authentication][1] in the *Amazon S3 Developer
+    #   Guide*.
     #
     #
     #
@@ -1809,15 +1813,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -2307,15 +2311,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
@@ -2462,15 +2466,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_governance_retention
@@ -2666,7 +2670,14 @@ module Aws::S3
     #
     # @!attribute [rw] kms_key_id
     #   If the encryption type is `aws:kms`, this optional value specifies
-    #   the AWS KMS key ID to use for encryption of job results.
+    #   the ID of the symmetric customer managed AWS KMS CMK to use for
+    #   encryption of job results. Amazon S3 only supports symmetric CMKs.
+    #   For more information, see [Using Symmetric and Asymmetric Keys][1]
+    #   in the *AWS Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @!attribute [rw] kms_context
@@ -2694,9 +2705,16 @@ module Aws::S3
     #       }
     #
     # @!attribute [rw] replica_kms_key_id
-    #   Specifies the AWS KMS Key ID (Key ARN or Alias ARN) for the
-    #   destination bucket. Amazon S3 uses this key to encrypt replica
-    #   objects.
+    #   Specifies the ID (Key ARN or Alias ARN) of the customer managed
+    #   customer master key (CMK) stored in AWS Key Management Service (KMS)
+    #   for the destination bucket. Amazon S3 uses this key to encrypt
+    #   replica objects. Amazon S3 only supports symmetric customer managed
+    #   CMKs. For more information, see [Using Symmetric and Asymmetric
+    #   Keys][1] in the *AWS Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EncryptionConfiguration AWS API Documentation
@@ -4292,15 +4310,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclRequest AWS API Documentation
@@ -4363,15 +4381,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectLegalHoldRequest AWS API Documentation
@@ -4528,7 +4546,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -4727,15 +4746,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] part_number
@@ -4820,15 +4839,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRetentionRequest AWS API Documentation
@@ -4939,15 +4958,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentRequest AWS API Documentation
@@ -5232,7 +5251,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] storage_class
@@ -5433,15 +5453,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] part_number
@@ -7282,15 +7302,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsRequest AWS API Documentation
@@ -9480,15 +9500,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -9567,15 +9587,15 @@ module Aws::S3
     #   @return [Types::ObjectLockLegalHold]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -9641,15 +9661,15 @@ module Aws::S3
     #   @return [Types::ObjectLockConfiguration]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] token
@@ -9710,8 +9730,8 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK) that was used for the
-    #   object.
+    #   Service (AWS KMS) symmetric customer managed customer master key
+    #   (CMK) that was used for the object.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -9975,14 +9995,15 @@ module Aws::S3
     # @!attribute [rw] ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK) that was used for the
-    #   object.
+    #   Service (AWS KMS) symmetrical customer managed customer master key
+    #   (CMK) that was used for the object.
     #
     #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the AWS KMS CMK that will be used for the
-    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but
-    #   do not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon
-    #   S3 uses the AWS managed CMK in AWS to protect the data.
+    #   header specifies the ID of the symmetric customer managed AWS KMS
+    #   CMK that will be used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
+    #   managed CMK in AWS to protect the data.
     #   @return [String]
     #
     # @!attribute [rw] ssekms_encryption_context
@@ -9992,15 +10013,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] tagging
@@ -10118,15 +10139,15 @@ module Aws::S3
     #   @return [Types::ObjectLockRetention]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -11060,15 +11081,15 @@ module Aws::S3
     #   @return [Types::RestoreRequest]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectRequest AWS API Documentation
@@ -11487,7 +11508,8 @@ module Aws::S3
     #
     # @!attribute [rw] key_id
     #   Specifies the ID of the AWS Key Management Service (AWS KMS)
-    #   customer master key (CMK) to use for encrypting inventory reports.
+    #   symmetric customer managed customer master key (CMK) to use for
+    #   encrypting inventory reports.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSEKMS AWS API Documentation
@@ -12281,7 +12303,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) that was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) that was
+    #   used for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -12414,15 +12437,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyRequest AWS API Documentation
@@ -12472,7 +12495,8 @@ module Aws::S3
     #
     # @!attribute [rw] ssekms_key_id
     #   If present, specifies the ID of the AWS Key Management Service (AWS
-    #   KMS) customer master key (CMK) was used for the object.
+    #   KMS) symmetric customer managed customer master key (CMK) was used
+    #   for the object.
     #   @return [String]
     #
     # @!attribute [rw] request_charged
@@ -12564,15 +12588,15 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartRequest AWS API Documentation

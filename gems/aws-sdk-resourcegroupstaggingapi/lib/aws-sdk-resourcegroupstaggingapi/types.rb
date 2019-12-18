@@ -12,11 +12,14 @@ module Aws::ResourceGroupsTaggingAPI
     # effective tag policy, including details on any noncompliant tag keys.
     #
     # @!attribute [rw] noncompliant_keys
-    #   The tag key is noncompliant with the effective tag policy.
+    #   These tag keys on the resource are noncompliant with the effective
+    #   tag policy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] keys_with_noncompliant_values
-    #   The tag value is noncompliant with the effective tag policy.
+    #   These are keys defined in the effective policy that are on the
+    #   resource with either incorrect case treatment or noncompliant
+    #   values.
     #   @return [Array<String>]
     #
     # @!attribute [rw] compliance_status

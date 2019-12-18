@@ -385,15 +385,15 @@ module Aws::S3
     #   Upload ID that identifies the multipart upload.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::AbortMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -533,15 +533,15 @@ module Aws::S3
     #   ID for the initiated multipart upload.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::CompleteMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -781,10 +781,15 @@ module Aws::S3
     #
     #     * `x-amz-server-side-encryption-context`
     #
-    #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms` but don't
-    #     provide `x-amz-server-side- encryption-aws-kms-key-id`, Amazon S3
-    #     uses the AWS managed customer master key (CMK) in AWS KMS to
-    #     protect the data.
+    #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms`, but don't
+    #     provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
+    #     uses the AWS managed CMK in AWS KMS to protect the data. If you
+    #     want to use a customer managed AWS KMS CMK, you must provide the
+    #     `x-amz-server-side-encryption-aws-kms-key-id` of the symmetric
+    #     customer managed CMK. Amazon S3 only supports symmetric CMKs and
+    #     not asymmetric CMKs. For more information, see [Using Symmetric
+    #     and Asymmetric Keys][10] in the *AWS Key Management Service
+    #     Developer Guide*.
     #
     #      </note>
     #
@@ -793,7 +798,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in KMS][10].
+    #     Encryption with CMKs stored in KMS][11].
     #
     #   * To encrypt the target object using server-side encryption with an
     #     encryption key that you provide, use the following headers.
@@ -816,7 +821,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in Amazon KMS][10].
+    #     Encryption with CMKs stored in Amazon KMS][11].
     #
     # Access-Control-List (ACL)-Specific Request Headers
     #
@@ -876,7 +881,7 @@ module Aws::S3
     #
     # * GetObject
     #
-    # For more information, see [Copying Objects][11].
+    # For more information, see [Copying Objects][12].
     #
     #
     #
@@ -885,12 +890,13 @@ module Aws::S3
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html
     # [7]: https://aws.amazon.com/s3/pricing/
     # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [10]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [11]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    # [12]: https://docs.aws.amazon.com/AmazonS3/latest/dev/CopyingObjectsExamples.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object.
@@ -1001,7 +1007,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     #
     # @option params [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
@@ -1023,15 +1029,15 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :tagging
     #   The tag-set for the object destination object this value must be used
@@ -1422,7 +1428,7 @@ module Aws::S3
     #     * x-amz-server-side-encryption-context
     #
     #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms`, but don't
-    #     provide `x-amz-server-side- encryption-aws-kms-key-id`, Amazon S3
+    #     provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
     #     uses the AWS managed CMK in AWS KMS to protect the data.
     #
     #      </note>
@@ -1598,12 +1604,12 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. For information about configuring using any of
-    #   the officially supported AWS SDKs and AWS CLI, see [Specifying the
-    #   Signature Version in Request Authentication][1] in the *Amazon S3
-    #   Developer Guide*.
+    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to use
+    #   for object encryption. All GET and PUT requests for an object
+    #   protected by AWS KMS will fail if not made via SSL or using SigV4. For
+    #   information about configuring using any of the officially supported
+    #   AWS SDKs and AWS CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 Developer Guide*.
     #
     #
     #
@@ -1615,15 +1621,15 @@ module Aws::S3
     #   with the encryption context key-value pairs.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
@@ -2347,15 +2353,15 @@ module Aws::S3
     #   VersionId used to reference a specific version of the object.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
@@ -2435,7 +2441,7 @@ module Aws::S3
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html#MultiFactorAuthenticationDelete
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-tagging.html
     #
     # @option params [required, String] :bucket
     #   The bucket name containing the objects from which to remove the tags.
@@ -2588,15 +2594,15 @@ module Aws::S3
     #   configured with MFA delete enabled.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Boolean] :bypass_governance_retention
     #   Specifies whether you want to delete this object even if it has a
@@ -4446,15 +4452,15 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
@@ -4680,15 +4686,15 @@ module Aws::S3
     #   VersionId used to reference a specific version of the object.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::GetObjectAclOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4811,15 +4817,15 @@ module Aws::S3
     #   retrieve.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::GetObjectLegalHoldOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4917,15 +4923,15 @@ module Aws::S3
     #   retrieve.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::GetObjectRetentionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5110,15 +5116,15 @@ module Aws::S3
     #   The object key for which to get the information.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::GetObjectTorrentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5400,15 +5406,15 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
@@ -6697,15 +6703,15 @@ module Aws::S3
     #   listed.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::ListPartsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7342,8 +7348,8 @@ module Aws::S3
     # subresource to set the default encryption state of an existing bucket.
     #
     # This implementation of the `PUT` operation sets default encryption for
-    # a buckets using server-side encryption with Amazon S3-managed keys
-    # SSE-S3 or AWS KMS customer master keys (CMKs) (SSE-KMS) bucket.
+    # a bucket using server-side encryption with Amazon S3-managed keys
+    # SSE-S3 or AWS KMS customer master keys (CMKs) (SSE-KMS).
     #
     # This operation requires AWS Signature Version 4. For more information,
     # see [ Authenticating Requests (AWS Signature Version
@@ -9037,8 +9043,14 @@ module Aws::S3
     #     * x-amz-server-side-encryption-context
     #
     #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms`, but don't
-    #     provide `x-amz-server-side- encryption-aws-kms-key-id`, Amazon S3
-    #     uses the AWS managed CMK in AWS KMS to protect the data.
+    #     provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
+    #     uses the AWS managed CMK in AWS KMS to protect the data. If you
+    #     want to use a customer managed AWS KMS CMK, you must provide the
+    #     `x-amz-server-side-encryption-aws-kms-key-id` of the symmetric
+    #     customer managed CMK. Amazon S3 only supports symmetric CMKs and
+    #     not asymmetric CMKs. For more information, see [Using Symmetric
+    #     and Asymmetric Keys][5] in the *AWS Key Management Service
+    #     Developer Guide*.
     #
     #      </note>
     #
@@ -9047,7 +9059,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS][5].
+    #     Encryption with CMKs stored in AWS][6].
     #
     #   * Use customer-provided encryption keys – If you want to manage your
     #     own encryption keys, provide all the following headers in the
@@ -9061,7 +9073,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS KMS][5].
+    #     Encryption with CMKs stored in AWS][6].
     #
     # Access-Control-List (ACL)-Specific Request Headers
     #
@@ -9071,7 +9083,7 @@ module Aws::S3
     #   permissions to individual AWS accounts or to predefined groups
     #   defined by Amazon S3. These permissions are then added to the Access
     #   Control List (ACL) on the object. For more information, see [Using
-    #   ACLs][6]. With this operation, you can grant access permissions
+    #   ACLs][7]. With this operation, you can grant access permissions
     #   using one of the following two methods:
     #
     #   * Specify a canned ACL (`x-amz-acl`) — Amazon S3 supports a set of
@@ -9124,7 +9136,7 @@ module Aws::S3
     #
     #        For a list of all the Amazon S3 supported Regions and
     #       endpoints,
-    #       see [Regions and Endpoints][7] in the AWS General Reference
+    #       see [Regions and Endpoints][8] in the AWS General Reference
     #
     #     * `id` – if the value specified is the canonical user ID of an AWS
     #       account
@@ -9159,8 +9171,14 @@ module Aws::S3
     #     * x-amz-server-side-encryption-context
     #
     #     <note markdown="1"> If you specify `x-amz-server-side-encryption:aws:kms`, but don't
-    #     provide `x-amz-server-side- encryption-aws-kms-key-id`, Amazon S3
-    #     uses the default AWS KMS CMK to protect the data.
+    #     provide `x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
+    #     uses the AWS managed CMK in AWS KMS to protect the data. If you
+    #     want to use a customer managed AWS KMS CMK, you must provide the
+    #     `x-amz-server-side-encryption-aws-kms-key-id` of the symmetric
+    #     customer managed CMK. Amazon S3 only supports symmetric CMKs and
+    #     not asymmetric CMKs. For more information, see [Using Symmetric
+    #     and Asymmetric Keys][5] in the *AWS Key Management Service
+    #     Developer Guide*.
     #
     #      </note>
     #
@@ -9169,7 +9187,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS KMS][5].
+    #     Encryption with CMKs stored in AWS KMS][6].
     #
     #   * Use customer-provided encryption keys – If you want to manage your
     #     own encryption keys, provide all the following headers in the
@@ -9188,7 +9206,7 @@ module Aws::S3
     #
     #     For more information about server-side encryption with CMKs stored
     #     in AWS KMS (SSE-KMS), see [Protecting Data Using Server-Side
-    #     Encryption with CMKs stored in AWS KMS][5].
+    #     Encryption with CMKs stored in AWS KMS][6].
     #
     # **Storage Class Options**
     #
@@ -9196,7 +9214,7 @@ module Aws::S3
     # created objects. The Standard storage class provides high durability
     # and high availability. You can specify other storage classes depending
     # on the performance needs. For more information, see [Storage
-    # Classes][8] in the Amazon Simple Storage Service Developer Guide.
+    # Classes][9] in the Amazon Simple Storage Service Developer Guide.
     #
     # **Versioning**
     #
@@ -9222,10 +9240,11 @@ module Aws::S3
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-    # [5]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
-    # [7]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    # [8]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [6]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
+    # [7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html
+    # [8]: https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    # [9]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html
     #
     # @option params [String] :acl
     #   The canned ACL to apply to the object. For more information, see
@@ -9396,14 +9415,15 @@ module Aws::S3
     # @option params [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK) that was used for the
-    #   object.
+    #   Service (AWS KMS) symmetrical customer managed customer master key
+    #   (CMK) that was used for the object.
     #
     #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the AWS KMS CMK that will be used for the
-    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but do
-    #   not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
-    #   uses the AWS managed CMK in AWS to protect the data.
+    #   header specifies the ID of the symmetric customer managed AWS KMS CMK
+    #   that will be used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
+    #   managed CMK in AWS to protect the data.
     #
     # @option params [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
@@ -9411,15 +9431,15 @@ module Aws::S3
     #   with the encryption context key-value pairs.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
@@ -9799,15 +9819,15 @@ module Aws::S3
     #   Key for which the PUT operation was initiated.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :version_id
     #   VersionId used to reference a specific version of the object.
@@ -9918,15 +9938,15 @@ module Aws::S3
     #   to the specified object.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :version_id
     #   The version ID of the object that you want to place a Legal Hold on.
@@ -9992,15 +10012,15 @@ module Aws::S3
     #   bucket.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :token
     #   A token to allow Object Lock to be enabled for an existing bucket.
@@ -10080,15 +10100,15 @@ module Aws::S3
     #   The container element for the Object Retention configuration.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @option params [String] :version_id
     #   The version ID for the object that you want to apply this Object
@@ -10619,15 +10639,15 @@ module Aws::S3
     #   Container for restore job parameters.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::RestoreObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11304,15 +11324,15 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::UploadPartOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11575,15 +11595,15 @@ module Aws::S3
     #   ensure that the encryption key was transmitted without error.
     #
     # @option params [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #
     # @return [Types::UploadPartCopyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11693,7 +11713,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.59.1'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

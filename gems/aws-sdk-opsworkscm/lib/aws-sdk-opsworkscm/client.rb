@@ -367,6 +367,26 @@ module Aws::OpsWorksCM
     # @option params [String] :description
     #   A user-defined description of the backup.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks-CM server backup.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for tag-supported AWS
+    #     OpsWorks-CM resources.
+    #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBackupResponse#backup #backup} => Types::Backup
@@ -376,6 +396,12 @@ module Aws::OpsWorksCM
     #   resp = client.create_backup({
     #     server_name: "ServerName", # required
     #     description: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -458,21 +484,22 @@ module Aws::OpsWorksCM
     #   Valid values are `true` or `false`. The default value is `true`.
     #
     # @option params [String] :custom_domain
-    #   An optional public endpoint of a server, such as
-    #   `https://aws.my-company.com`. To access the server, create a CNAME DNS
-    #   record in your preferred DNS service that points the custom domain to
-    #   the endpoint that is generated when the server is created (the value
-    #   of the CreateServer Endpoint attribute). You cannot access the server
-    #   by using the generated `Endpoint` value if the server is using a
-    #   custom domain. If you specify a custom domain, you must also specify
-    #   values for `CustomCertificate` and `CustomPrivateKey`.
+    #   Supported on servers running Chef Automate 2. An optional public
+    #   endpoint of a server, such as `https://aws.my-company.com`. To access
+    #   the server, create a CNAME DNS record in your preferred DNS service
+    #   that points the custom domain to the endpoint that is generated when
+    #   the server is created (the value of the CreateServer Endpoint
+    #   attribute). You cannot access the server by using the generated
+    #   `Endpoint` value if the server is using a custom domain. If you
+    #   specify a custom domain, you must also specify values for
+    #   `CustomCertificate` and `CustomPrivateKey`.
     #
     # @option params [String] :custom_certificate
-    #   A PEM-formatted HTTPS certificate. The value can be be a single,
-    #   self-signed certificate, or a certificate chain. If you specify a
-    #   custom certificate, you must also specify values for `CustomDomain`
-    #   and `CustomPrivateKey`. The following are requirements for the
-    #   `CustomCertificate` value:
+    #   Supported on servers running Chef Automate 2. A PEM-formatted HTTPS
+    #   certificate. The value can be be a single, self-signed certificate, or
+    #   a certificate chain. If you specify a custom certificate, you must
+    #   also specify values for `CustomDomain` and `CustomPrivateKey`. The
+    #   following are requirements for the `CustomCertificate` value:
     #
     #   * You can provide either a self-signed, custom certificate, or the
     #     full certificate chain.
@@ -491,10 +518,11 @@ module Aws::OpsWorksCM
     #   * The certificate must match the value of `CustomPrivateKey`.
     #
     # @option params [String] :custom_private_key
-    #   A private key in PEM format for connecting to the server by using
-    #   HTTPS. The private key must not be encrypted; it cannot be protected
-    #   by a password or passphrase. If you specify a custom private key, you
-    #   must also specify values for `CustomDomain` and `CustomCertificate`.
+    #   Supported on servers running Chef Automate 2. A private key in PEM
+    #   format for connecting to the server by using HTTPS. The private key
+    #   must not be encrypted; it cannot be protected by a password or
+    #   passphrase. If you specify a custom private key, you must also specify
+    #   values for `CustomDomain` and `CustomCertificate`.
     #
     # @option params [Boolean] :disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -641,6 +669,27 @@ module Aws::OpsWorksCM
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
+    #   server.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #     server.
+    #
     # @option params [String] :backup_id
     #   If you specify this field, AWS OpsWorks CM creates the server by using
     #   the backup represented by BackupId.
@@ -676,6 +725,12 @@ module Aws::OpsWorksCM
     #     security_group_ids: ["String"],
     #     service_role_arn: "ServiceRoleArn", # required
     #     subnet_ids: ["String"],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #     backup_id: "BackupId",
     #   })
     #
@@ -1194,12 +1249,75 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
+    # Returns a list of tags that are applied to the specified AWS OpsWorks
+    # for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or
+    # backups.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate
+    #   or AWS OpsWorks for Puppet Enterprise server for which you want to
+    #   show applied tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [String] :next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get remaining
+    #   results, call `ListTagsForResource` again, and assign the token from
+    #   the previous results as the value of the `nextToken` parameter. If
+    #   there are no more results, the response object's `nextToken`
+    #   parameter value is `null`. Setting a `nextToken` value that was not
+    #   returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #
+    # @option params [Integer] :max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Restores a backup to a server that is in a `CONNECTION_LOST`,
     # `HEALTHY`, `RUNNING`, `UNHEALTHY`, or `TERMINATED` state. When you run
     # RestoreServer, the server's EC2 instance is deleted, and a new EC2
     # instance is configured. RestoreServer maintains the existing server
     # endpoint, so configuration management of the server's client devices
     # (nodes) should continue to work.
+    #
+    # Restoring from a backup is performed by creating a new EC2 instance.
+    # If restoration is successful, and the server is in a `HEALTHY` state,
+    # AWS OpsWorks CM switches traffic over to the new instance. After
+    # restoration is finished, the old EC2 instance is maintained in a
+    # `Running` or `Stopped` state, but is eventually terminated.
     #
     # This operation is asynchronous.
     #
@@ -1316,6 +1434,85 @@ module Aws::OpsWorksCM
     # @param [Hash] params ({})
     def start_maintenance(params = {}, options = {})
       req = build_request(:start_maintenance, params)
+      req.send_request(options)
+    end
+
+    # Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for
+    # Puppet Enterprise server, or to server backups.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of a resource to which you want to
+    #   apply tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A map that contains tag keys and tag values to attach to AWS
+    #   OpsWorks-CM servers or backups.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only Unicode
+    #     letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key and
+    #     value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM
+    #     server or backup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes specified tags from an AWS OpsWorks-CM server or backup.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Number (ARN) of a resource from which you want to
+    #   remove tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of tags that you want to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1489,7 +1686,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

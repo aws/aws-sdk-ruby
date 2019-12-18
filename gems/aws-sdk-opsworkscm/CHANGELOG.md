@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2019-12-18)
+------------------
+
+* Feature - AWS OpsWorks CM now supports tagging, and tag-based access control, of servers and backups.
+
 1.26.0 (2019-10-23)
 ------------------
 

@@ -207,7 +207,8 @@ module Aws::S3
     end
 
     # If present, specifies the ID of the AWS Key Management Service (AWS
-    # KMS) customer master key (CMK) that was used for the object.
+    # KMS) symmetric customer managed customer master key (CMK) that was
+    # used for the object.
     # @return [String]
     def ssekms_key_id
       data[:ssekms_key_id]
@@ -617,7 +618,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
@@ -634,15 +635,15 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object destination object this value must be used
     #   in conjunction with the `TaggingDirective`. The tag-set must be
@@ -681,15 +682,15 @@ module Aws::S3
     # @option options [String] :version_id
     #   VersionId used to reference a specific version of the object.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Boolean] :bypass_governance_retention
     #   Indicates whether S3 Object Lock should bypass Governance-mode
     #   restrictions to process this operation.
@@ -769,15 +770,15 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [Integer] :part_number
     #   Part number of the object being read. This is a positive integer
     #   between 1 and 10,000. Effectively performs a 'ranged' GET request
@@ -875,12 +876,12 @@ module Aws::S3
     #   RFC 1321. Amazon S3 uses this header for a message integrity check to
     #   ensure that the encryption key was transmitted without error.
     # @option options [String] :ssekms_key_id
-    #   Specifies the AWS KMS key ID to use for object encryption. All GET and
-    #   PUT requests for an object protected by AWS KMS will fail if not made
-    #   via SSL or using SigV4. For information about configuring using any of
-    #   the officially supported AWS SDKs and AWS CLI, see [Specifying the
-    #   Signature Version in Request Authentication][1] in the *Amazon S3
-    #   Developer Guide*.
+    #   Specifies the ID of the symmetric customer managed AWS KMS CMK to use
+    #   for object encryption. All GET and PUT requests for an object
+    #   protected by AWS KMS will fail if not made via SSL or using SigV4. For
+    #   information about configuring using any of the officially supported
+    #   AWS SDKs and AWS CLI, see [Specifying the Signature Version in Request
+    #   Authentication][1] in the *Amazon S3 Developer Guide*.
     #
     #
     #
@@ -890,15 +891,15 @@ module Aws::S3
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters.
@@ -1090,28 +1091,29 @@ module Aws::S3
     # @option options [String] :ssekms_key_id
     #   If `x-amz-server-side-encryption` is present and has the value of
     #   `aws:kms`, this header specifies the ID of the AWS Key Management
-    #   Service (AWS KMS) customer master key (CMK) that was used for the
-    #   object.
+    #   Service (AWS KMS) symmetrical customer managed customer master key
+    #   (CMK) that was used for the object.
     #
     #   If the value of `x-amz-server-side-encryption` is `aws:kms`, this
-    #   header specifies the ID of the AWS KMS CMK that will be used for the
-    #   object. If you specify `x-amz-server-side-encryption:aws:kms`, but do
-    #   not provide` x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3
-    #   uses the AWS managed CMK in AWS to protect the data.
+    #   header specifies the ID of the symmetric customer managed AWS KMS CMK
+    #   that will be used for the object. If you specify
+    #   `x-amz-server-side-encryption:aws:kms`, but do not provide`
+    #   x-amz-server-side-encryption-aws-kms-key-id`, Amazon S3 uses the AWS
+    #   managed CMK in AWS to protect the data.
     # @option options [String] :ssekms_encryption_context
     #   Specifies the AWS KMS Encryption Context to use for object encryption.
     #   The value of this header is a base64-encoded UTF-8 string holding JSON
     #   with the encryption context key-value pairs.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @option options [String] :tagging
     #   The tag-set for the object. The tag-set must be encoded as URL Query
     #   parameters. (For example, "Key1=Value1")
@@ -1229,15 +1231,15 @@ module Aws::S3
     # @option options [Types::RestoreRequest] :restore_request
     #   Container for restore job parameters.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. For information about downloading objects from Requester
-    #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
     #   in the *Amazon S3 Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::RestoreObjectOutput]
     def restore_object(options = {})
       options = options.merge(
@@ -1366,15 +1368,15 @@ module Aws::S3
       #   Required to permanently delete a versioned object if versioning is
       #   configured with MFA delete enabled.
       # @option options [String] :request_payer
-      #   Confirms that the requester knows that she or he will be charged for
-      #   the request. Bucket owners need not specify this parameter in their
-      #   requests. For information about downloading objects from Requester
-      #   Pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+      #   Confirms that the requester knows that they will be charged for the
+      #   request. Bucket owners need not specify this parameter in their
+      #   requests. For information about downloading objects from requester
+      #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
       #   in the *Amazon S3 Developer Guide*.
       #
       #
       #
-      #   [1]: https://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       # @option options [Boolean] :bypass_governance_retention
       #   Specifies whether you want to delete this object even if it has a
       #   Governance-type Object Lock in place. You must have sufficient

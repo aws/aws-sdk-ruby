@@ -11,6 +11,7 @@ module Aws::OpsWorksCM
 
     include Seahorse::Model
 
+    AWSOpsWorksCMResourceArn = Shapes::StringShape.new(name: 'AWSOpsWorksCMResourceArn')
     AccountAttribute = Shapes::StructureShape.new(name: 'AccountAttribute')
     AccountAttributes = Shapes::ListShape.new(name: 'AccountAttributes')
     AssociateNodeRequest = Shapes::StructureShape.new(name: 'AssociateNodeRequest')
@@ -59,6 +60,8 @@ module Aws::OpsWorksCM
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     KeyPair = Shapes::StringShape.new(name: 'KeyPair')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaintenanceStatus = Shapes::StringShape.new(name: 'MaintenanceStatus')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -80,8 +83,17 @@ module Aws::OpsWorksCM
     StartMaintenanceResponse = Shapes::StructureShape.new(name: 'StartMaintenanceResponse')
     String = Shapes::StringShape.new(name: 'String')
     Strings = Shapes::ListShape.new(name: 'Strings')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeWindowDefinition = Shapes::StringShape.new(name: 'TimeWindowDefinition')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateServerEngineAttributesRequest = Shapes::StructureShape.new(name: 'UpdateServerEngineAttributesRequest')
     UpdateServerEngineAttributesResponse = Shapes::StructureShape.new(name: 'UpdateServerEngineAttributesResponse')
     UpdateServerRequest = Shapes::StructureShape.new(name: 'UpdateServerRequest')
@@ -133,6 +145,7 @@ module Aws::OpsWorksCM
 
     CreateBackupRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
     CreateBackupRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateBackupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateBackupRequest.struct_class = Types::CreateBackupRequest
 
     CreateBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
@@ -157,6 +170,7 @@ module Aws::OpsWorksCM
     CreateServerRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "SecurityGroupIds"))
     CreateServerRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRoleArn, required: true, location_name: "ServiceRoleArn"))
     CreateServerRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "SubnetIds"))
+    CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateServerRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "BackupId"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
@@ -246,6 +260,15 @@ module Aws::OpsWorksCM
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AWSOpsWorksCMResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
 
@@ -304,6 +327,26 @@ module Aws::OpsWorksCM
     StartMaintenanceResponse.struct_class = Types::StartMaintenanceResponse
 
     Strings.member = Shapes::ShapeRef.new(shape: String)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AWSOpsWorksCMResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AWSOpsWorksCMResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateServerEngineAttributesRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
     UpdateServerEngineAttributesRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "AttributeName"))
@@ -476,6 +519,16 @@ module Aws::OpsWorksCM
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:restore_server, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RestoreServer"
         o.http_method = "POST"
@@ -496,6 +549,28 @@ module Aws::OpsWorksCM
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
       end)
 
       api.add_operation(:update_server, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2019-12-18)
+------------------
+
+* Feature - This release introduces the ability to tag Elastic Graphics accelerators. You can use tags to organize and identify your accelerators for cost allocation.
+
 1.126.0 (2019-12-17)
 ------------------
 

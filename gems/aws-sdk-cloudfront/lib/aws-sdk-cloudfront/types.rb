@@ -100,8 +100,11 @@ module Aws::CloudFront
     #   * **SUSPENDED** indicates that the associated CNAME does not have a
     #     valid ICP recordal number.
     #
-    #   * **PENDING** indicates that at least one CNAME associated with the
-    #     distribution does not have a valid ICP recordal number.
+    #   * **PENDING** indicates that CloudFront can't determine the ICP
+    #     recordal status of the CNAME associated with the distribution
+    #     because there was an error in trying to determine the status. You
+    #     can try again to see if the error is resolved in which case
+    #     CloudFront returns an APPROVED or SUSPENDED status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/AliasICPRecordal AWS API Documentation
@@ -352,8 +355,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
-    #   A complex type that specifies how CloudFront handles query strings
-    #   and cookies.
+    #   A complex type that specifies how CloudFront handles query strings,
+    #   cookies, and HTTP headers.
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] trusted_signers
@@ -2051,8 +2054,7 @@ module Aws::CloudFront
     #     element for the origin that contains your custom error pages.
     #
     #   If you specify a value for `ResponsePagePath`, you must also specify
-    #   a value for `ResponseCode`. If you don't want to specify a value,
-    #   include an empty element, `<ResponsePagePath>`, in the XML document.
+    #   a value for `ResponseCode`.
     #
     #   We recommend that you store custom error pages in an Amazon S3
     #   bucket. If you store custom error pages on an HTTP server and the
@@ -2081,8 +2083,7 @@ module Aws::CloudFront
     #     website so your customers don't know that your website is down.
     #
     #   If you specify a value for `ResponseCode`, you must also specify a
-    #   value for `ResponsePagePath`. If you don't want to specify a value,
-    #   include an empty element, `<ResponseCode>`, in the XML document.
+    #   value for `ResponsePagePath`.
     #   @return [String]
     #
     # @!attribute [rw] error_caching_min_ttl
@@ -2091,9 +2092,6 @@ module Aws::CloudFront
     #   period has elapsed, CloudFront queries your origin to see whether
     #   the problem that caused the error has been resolved and the
     #   requested object is now available.
-    #
-    #   If you don't want to specify a value, include an empty element,
-    #   `<ErrorCachingMinTTL>`, in the XML document.
     #
     #   For more information, see [Customizing Error Responses][1] in the
     #   *Amazon CloudFront Developer Guide*.
@@ -2341,8 +2339,8 @@ module Aws::CloudFront
     #   @return [String]
     #
     # @!attribute [rw] forwarded_values
-    #   A complex type that specifies how CloudFront handles query strings
-    #   and cookies.
+    #   A complex type that specifies how CloudFront handles query strings,
+    #   cookies, and HTTP headers.
     #   @return [Types::ForwardedValues]
     #
     # @!attribute [rw] trusted_signers
@@ -3186,7 +3184,11 @@ module Aws::CloudFront
     #
     # @!attribute [rw] web_acl_id
     #   A unique identifier that specifies the AWS WAF web ACL, if any, to
-    #   associate with this distribution.
+    #   associate with this distribution. To specify a web ACL created using
+    #   the latest version of AWS WAF, use the ACL ARN, for example
+    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    #   To specify a web ACL created using AWS WAF Classic, use the ACL ID,
+    #   for example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
     #
     #   AWS WAF is a web application firewall that lets you monitor the HTTP
     #   and HTTPS requests that are forwarded to CloudFront, and lets you
@@ -3200,7 +3202,7 @@ module Aws::CloudFront
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
     #   @return [String]
     #
     # @!attribute [rw] http_version
@@ -4199,8 +4201,8 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A complex type that specifies how CloudFront handles query strings and
-    # cookies.
+    # A complex type that specifies how CloudFront handles query strings,
+    # cookies, and HTTP headers.
     #
     # @note When making an API call, you may pass ForwardedValues
     #   data as a hash:
@@ -5244,7 +5246,12 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # A web ACL id specified in the response body is not valid.
+    # A web ACL ID specified in the response body is not valid. To specify a
+    # web ACL created using the latest version of AWS WAF, use the ACL ARN,
+    # for example
+    # `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a`.
+    # To specify a web ACL created using AWS WAF Classic, use the ACL ID,
+    # for example `473e64fd-f30b-4765-81a0-62ad96dd167a`.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -8663,8 +8670,8 @@ module Aws::CloudFront
     #   objects.
     #
     # * If you want viewers to use HTTPS, whether you're using an alternate
-    #   domain name such as `example.com` or the CloudFront domain name for
-    #   your distribution, such as `d111111abcdef8.cloudfront.net`.
+    #   domain name, such as `example.com`, or the CloudFront domain name
+    #   for your distribution, such as `d111111abcdef8.cloudfront.net`.
     #
     # * If you're using an alternate domain name, whether AWS Certificate
     #   Manager (ACM) provided the certificate, or you purchased a
@@ -8704,62 +8711,48 @@ module Aws::CloudFront
     #
     # @!attribute [rw] cloud_front_default_certificate
     #   If you're using the CloudFront domain name for your distribution,
-    #   such as `d111111abcdef8.cloudfront.net`, specify the following
-    #   value:
-    #
-    #   * `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-    #     `
-    #
-    #   ^
+    #   such as `d111111abcdef8.cloudfront.net`, specify this value as
+    #   `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] iam_certificate_id
     #   If you want viewers to use HTTPS to request your objects and you're
     #   using an alternate domain name, you must choose the type of
-    #   certificate that you want to use. Specify the following value if you
-    #   purchased your certificate from a third-party certificate authority:
+    #   certificate that you want to use. If you purchased your certificate
+    #   from a third-party certificate authority and uploaded it to the IAM
+    #   certificate store, specify the certificate ID that you want to use
+    #   for this distribution.
     #
-    #   * `<IAMCertificateId>IAM certificate ID<IAMCertificateId>` where `
-    #     IAM certificate ID ` is the ID that IAM returned when you added
-    #     the certificate to the IAM certificate store.
-    #
-    #   ^
-    #
-    #   If you specify `IAMCertificateId`, you must also specify a value for
-    #   `SSLSupportMethod`.
+    #   If you specify a certificate ID, you must also specify an SSL
+    #   support method (`sni-only` or `vip`).
     #   @return [String]
     #
     # @!attribute [rw] acm_certificate_arn
     #   If you want viewers to use HTTPS to request your objects and you're
     #   using an alternate domain name, you must choose the type of
-    #   certificate that you want to use. Specify the following value if ACM
-    #   provided your certificate:
+    #   certificate that you want to use. If ACM provided your certificate,
+    #   specify the Amazon Resource Name (ARN) for the ACM certificate that
+    #   you want to use for this distribution. CloudFront only supports ACM
+    #   certificates in the US East (N. Virginia) Region (us-east-1).
     #
-    #   * `<ACMCertificateArn>ARN for ACM SSL/TLS
-    #     certificate<ACMCertificateArn>` where ` ARN for ACM SSL/TLS
-    #     certificate ` is the ARN for the ACM SSL/TLS certificate that you
-    #     want to use for this distribution.
-    #
-    #   ^
-    #
-    #   If you specify `ACMCertificateArn`, you must also specify a value
-    #   for `SSLSupportMethod`.
+    #   If you specify an ACM certificate ARN, you must also specify an SSL
+    #   support method (`sni-only` or `vip`).
     #   @return [String]
     #
     # @!attribute [rw] ssl_support_method
     #   If you specify a value for [ACMCertificateArn][1] or for
     #   [IAMCertificateId][2], you must also specify how you want CloudFront
     #   to serve HTTPS requests: using a method that works for browsers and
-    #   clients released after 2010 or one that works for all clients.
+    #   clients released after 2010, or one that works for all clients.
     #
     #   * `sni-only`\: CloudFront can respond to HTTPS requests from viewers
     #     that support Server Name Indication (SNI). All modern browsers
     #     support SNI, but there are a few that don't. For a current list
     #     of the browsers that support SNI, see the [Wikipedia entry Server
     #     Name Indication][3]. To learn about options to explore if you have
-    #     users with browsers that don't include SNI support, see [Choosing
-    #     How CloudFront Serves HTTPS Requests][4] in the *Amazon CloudFront
-    #     Developer Guide*.
+    #     viewers with browsers that don't include SNI support, see
+    #     [Choosing How CloudFront Serves HTTPS Requests][4] in the *Amazon
+    #     CloudFront Developer Guide*.
     #
     #   * `vip`\: CloudFront uses dedicated IP addresses for your content
     #     and can respond to HTTPS requests from any viewer. However, there
@@ -8767,8 +8760,8 @@ module Aws::CloudFront
     #     pricing information, see [Custom SSL options for Amazon
     #     CloudFront][5] on the AWS marketing site.
     #
-    #   Don't specify a value for `SSLSupportMethod` if you specified
-    #   `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>`.
+    #   Don't specify a value here if you specified
+    #   `CloudFrontDefaultCertificate` as `true`.
     #
     #   For more information, see [Choosing How CloudFront Serves HTTPS
     #   Requests][4] in the *Amazon CloudFront Developer Guide*.
@@ -8787,30 +8780,31 @@ module Aws::CloudFront
     #   HTTPS connections. A security policy determines two settings:
     #
     #   * The minimum SSL/TLS protocol that CloudFront uses to communicate
-    #     with viewers
+    #     with viewers.
     #
     #   * The cipher that CloudFront uses to encrypt the content that it
-    #     returns to viewers
+    #     returns to viewers.
     #
     #   <note markdown="1"> On the CloudFront console, this setting is called **Security
-    #   policy**.
+    #   Policy**.
     #
     #    </note>
     #
-    #   We recommend that you specify `TLSv1.1_2016` unless your users are
+    #   We recommend that you specify `TLSv1.1_2016` unless your viewers are
     #   using browsers or devices that do not support TLSv1.1 or later.
     #
     #   When both of the following are true, you must specify `TLSv1` or
     #   later for the security policy:
     #
-    #   * You're using a custom certificate: you specified a value for
-    #     `ACMCertificateArn` or for `IAMCertificateId`
+    #   * You're using a custom certificate; that is, you specified a value
+    #     for `ACMCertificateArn` or for `IAMCertificateId`.
     #
-    #   * You're using SNI: you specified `sni-only` for `SSLSupportMethod`
+    #   * You're using SNI; that is, you specified `sni-only` for
+    #     `SSLSupportMethod`.
     #
     #   If you specify `true` for `CloudFrontDefaultCertificate`, CloudFront
     #   automatically sets the security policy to `TLSv1` regardless of the
-    #   value that you specify for `MinimumProtocolVersion`.
+    #   value that you specify here.
     #
     #   For information about the relationship between the security policy
     #   that you choose and the protocols and ciphers that CloudFront uses
