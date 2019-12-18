@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks CM.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
 2.11.418 (2019-12-17)
 ------------------
 
