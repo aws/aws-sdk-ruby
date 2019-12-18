@@ -25,8 +25,9 @@ module Aws
       option(:endpoint) do |cfg|
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
-          EndpointProvider.resolve(cfg.region, endpoint_prefix)
-          sts_regional = cfg.respond_to?(:sts_regional_endpoints) ? cfg.sts_regional_endpoints : nil
+          if cfg.respond_to?(:sts_regional_endpoints)
+            sts_regional = cfg.sts_regional_endpoints
+          end
           EndpointProvider.resolve(cfg.region, endpoint_prefix, sts_regional)
         end
       end

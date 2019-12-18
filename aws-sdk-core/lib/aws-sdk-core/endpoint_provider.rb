@@ -28,7 +28,7 @@ module Aws
       @rules = rules
     end
 
-    def resolve(region, service, sts_regional_endpoints = nil)
+    def resolve(region, service, sts_regional_endpoints)
       "https://" + endpoint_for(region, service, sts_regional_endpoints)
     end
 
@@ -49,7 +49,7 @@ module Aws
 
     private
 
-    def endpoint_for(region, service, sts_regional_endpoints)
+    def endpoint_for(region, service, sts_regional_endpoints = 'legacy')
       partition = get_partition(region)
       endpoint = default_endpoint(partition, service, region)
       service_cfg = partition.fetch("services", {}).fetch(service, {})

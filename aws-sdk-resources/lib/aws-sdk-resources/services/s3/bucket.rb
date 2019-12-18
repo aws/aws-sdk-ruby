@@ -114,6 +114,10 @@ module Aws
           url.path += '/' unless url.path[-1] == '/'
           url.path += Seahorse::Util.uri_escape(name)
         end
+        if (client.config.region == 'us-east-1') &&
+          (client.config.s3_us_east_1_regional_endpoint == 'legacy')
+          url.host = Plugins::S3IADRegionalEndpoint.legacy_host(url.host)
+        end
         url.to_s
       end
 
