@@ -61,6 +61,15 @@ module Aws
             'https://s3.us-east-1.amazonaws.com/')
         end
 
+        it 'is case insensitive' do
+          ENV['AWS_S3_US_EAST_1_REGIONAL_ENDPOINT'] = 'LEGACY'
+          client = Client.new(
+            stub_responses: true,
+            region: 'us-east-1'
+          )
+          expect(client.config.s3_us_east_1_regional_endpoint).to eq('legacy')
+        end
+
         it 'has no effect on non-IAD regions' do
           client = Client.new(
             stub_responses: true,
