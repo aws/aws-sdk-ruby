@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2019-12-19)
+------------------
+
+* Feature - We are updating the supportedRootDevices field to supportedRootDeviceTypes for DescribeInstanceTypes API to ensure that the actual value is returned, correcting a previous error in the model.
+
 1.127.0 (2019-12-18)
 ------------------
 

@@ -15,6 +15,9 @@ module Aws::PersonalizeRuntime
     #         campaign_arn: "Arn", # required
     #         input_list: ["ItemID"], # required
     #         user_id: "UserID", # required
+    #         context: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -25,7 +28,7 @@ module Aws::PersonalizeRuntime
     # @!attribute [rw] input_list
     #   A list of items (itemId's) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the
-    #   reranked list.
+    #   reranked list. The maximum is 500.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_id
@@ -33,17 +36,27 @@ module Aws::PersonalizeRuntime
     #   ranking.
     #   @return [String]
     #
+    # @!attribute [rw] context
+    #   The contextual metadata to use when getting recommendations.
+    #   Contextual metadata includes any interaction information that might
+    #   be relevant when getting a user's recommendations, such as the
+    #   user's current location or device type. For more information, see
+    #   Contextual Metadata.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingRequest AWS API Documentation
     #
     class GetPersonalizedRankingRequest < Struct.new(
       :campaign_arn,
       :input_list,
-      :user_id)
+      :user_id,
+      :context)
       include Aws::Structure
     end
 
     # @!attribute [rw] personalized_ranking
-    #   A list of items in order of most likely interest to the user.
+    #   A list of items in order of most likely interest to the user. The
+    #   maximum is 500.
     #   @return [Array<Types::PredictedItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRankingResponse AWS API Documentation
@@ -61,6 +74,9 @@ module Aws::PersonalizeRuntime
     #         item_id: "ItemID",
     #         user_id: "UserID",
     #         num_results: 1,
+    #         context: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
     #       }
     #
     # @!attribute [rw] campaign_arn
@@ -82,8 +98,16 @@ module Aws::PersonalizeRuntime
     #
     # @!attribute [rw] num_results
     #   The number of results to return. The default is 25. The maximum is
-    #   100.
+    #   500.
     #   @return [Integer]
+    #
+    # @!attribute [rw] context
+    #   The contextual metadata to use when getting recommendations.
+    #   Contextual metadata includes any interaction information that might
+    #   be relevant when getting a user's recommendations, such as the
+    #   user's current location or device type. For more information, see
+    #   Contextual Metadata.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsRequest AWS API Documentation
     #
@@ -91,12 +115,14 @@ module Aws::PersonalizeRuntime
       :campaign_arn,
       :item_id,
       :user_id,
-      :num_results)
+      :num_results,
+      :context)
       include Aws::Structure
     end
 
     # @!attribute [rw] item_list
-    #   A list of recommendations.
+    #   A list of recommendations sorted in ascending order by prediction
+    #   score. There can be a maximum of 500 items in the list.
     #   @return [Array<Types::PredictedItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendationsResponse AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2019-12-19)
+------------------
+
+* Feature - Amazon Lex now supports conversation logs and slot obfuscation.
+
 1.23.0 (2019-11-21)
 ------------------
 

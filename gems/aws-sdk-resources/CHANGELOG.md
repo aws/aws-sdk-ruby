@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.70.0 (2019-12-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-codestarconnections` gem.
+
 3.69.0 (2019-12-13)
 ------------------
 

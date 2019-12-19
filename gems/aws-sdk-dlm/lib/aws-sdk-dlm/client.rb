@@ -325,6 +325,18 @@ module Aws::DLM
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             availability_zones: ["AvailabilityZone"], # required
     #           },
+    #           cross_region_copy_rules: [
+    #             {
+    #               target_region: "TargetRegion", # required
+    #               encrypted: false, # required
+    #               cmk_arn: "CmkArn",
+    #               copy_tags: false,
+    #               retain_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           ],
     #         },
     #       ],
     #       parameters: {
@@ -482,6 +494,13 @@ module Aws::DLM
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones #=> Array
     #   resp.policy.policy_details.schedules[0].fast_restore_rule.availability_zones[0] #=> String
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules #=> Array
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].target_region #=> String
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].encrypted #=> Boolean
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].cmk_arn #=> String
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].copy_tags #=> Boolean
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval #=> Integer
+    #   resp.policy.policy_details.schedules[0].cross_region_copy_rules[0].retain_rule.interval_unit #=> String, one of "DAYS", "WEEKS", "MONTHS", "YEARS"
     #   resp.policy.policy_details.parameters.exclude_boot_volume #=> Boolean
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -648,6 +667,18 @@ module Aws::DLM
     #             interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #             availability_zones: ["AvailabilityZone"], # required
     #           },
+    #           cross_region_copy_rules: [
+    #             {
+    #               target_region: "TargetRegion", # required
+    #               encrypted: false, # required
+    #               cmk_arn: "CmkArn",
+    #               copy_tags: false,
+    #               retain_rule: {
+    #                 interval: 1,
+    #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #               },
+    #             },
+    #           ],
     #         },
     #       ],
     #       parameters: {
@@ -678,7 +709,7 @@ module Aws::DLM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dlm'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

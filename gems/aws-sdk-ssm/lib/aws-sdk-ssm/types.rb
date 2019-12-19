@@ -1023,7 +1023,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
@@ -4062,7 +4062,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -15106,6 +15106,12 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] document_name
@@ -15183,6 +15189,24 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] tags
+    #   Optional metadata that you assign to a resource. You can specify a
+    #   maximum of five tags for an automation. Tags enable you to
+    #   categorize a resource in different ways, such as by purpose, owner,
+    #   or environment. For example, you might want to tag an automation to
+    #   identify an environment or operating system. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=environment,Value=test`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
@@ -15196,7 +15220,8 @@ module Aws::SSM
       :target_maps,
       :max_concurrency,
       :max_errors,
-      :target_locations)
+      :target_locations,
+      :tags)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.258.0 (2019-12-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CodeStarconnections`.
+
 1.257.0 (2019-12-18)
 ------------------
 

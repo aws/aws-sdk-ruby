@@ -423,6 +423,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -1026,6 +1027,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotAliasResponse#last_updated_date #last_updated_date} => Time
     #   * {Types::GetBotAliasResponse#created_date #created_date} => Time
     #   * {Types::GetBotAliasResponse#checksum #checksum} => String
+    #   * {Types::GetBotAliasResponse#conversation_logs #conversation_logs} => Types::ConversationLogsResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -1043,6 +1045,13 @@ module Aws::LexModelBuildingService
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.checksum #=> String
+    #   resp.conversation_logs.log_settings #=> Array
+    #   resp.conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.conversation_logs.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAlias AWS API Documentation
     #
@@ -1100,6 +1109,13 @@ module Aws::LexModelBuildingService
     #   resp.bot_aliases[0].last_updated_date #=> Time
     #   resp.bot_aliases[0].created_date #=> Time
     #   resp.bot_aliases[0].checksum #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings #=> Array
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.bot_aliases[0].conversation_logs.iam_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliases AWS API Documentation
@@ -1842,6 +1858,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -2755,6 +2772,10 @@ module Aws::LexModelBuildingService
     #   match the `$LATEST` version, you get a `PreconditionFailedException`
     #   exception.
     #
+    # @option params [Types::ConversationLogsRequest] :conversation_logs
+    #   Settings that determine how Amazon Lex uses conversation logs for the
+    #   alias.
+    #
     # @return [Types::PutBotAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBotAliasResponse#name #name} => String
@@ -2764,6 +2785,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotAliasResponse#last_updated_date #last_updated_date} => Time
     #   * {Types::PutBotAliasResponse#created_date #created_date} => Time
     #   * {Types::PutBotAliasResponse#checksum #checksum} => String
+    #   * {Types::PutBotAliasResponse#conversation_logs #conversation_logs} => Types::ConversationLogsResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -2773,6 +2795,17 @@ module Aws::LexModelBuildingService
     #     bot_version: "Version", # required
     #     bot_name: "BotName", # required
     #     checksum: "String",
+    #     conversation_logs: {
+    #       log_settings: [ # required
+    #         {
+    #           log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #           destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #           kms_key_arn: "KmsKeyArn",
+    #           resource_arn: "ResourceArn", # required
+    #         },
+    #       ],
+    #       iam_role_arn: "IamRoleArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2784,6 +2817,13 @@ module Aws::LexModelBuildingService
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.checksum #=> String
+    #   resp.conversation_logs.log_settings #=> Array
+    #   resp.conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.conversation_logs.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias AWS API Documentation
     #
@@ -3298,6 +3338,7 @@ module Aws::LexModelBuildingService
     #         priority: 1,
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
+    #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #       },
     #     ],
     #     sample_utterances: ["Utterance"],
@@ -3391,6 +3432,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -3684,7 +3726,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

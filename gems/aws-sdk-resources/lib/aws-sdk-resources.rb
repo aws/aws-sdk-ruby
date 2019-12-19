@@ -46,6 +46,7 @@ module Aws
   autoload :CodePipeline, 'aws-sdk-codepipeline'
   autoload :CodeStar, 'aws-sdk-codestar'
   autoload :CodeStarNotifications, 'aws-sdk-codestarnotifications'
+  autoload :CodeStarconnections, 'aws-sdk-codestarconnections'
   autoload :CognitoIdentity, 'aws-sdk-cognitoidentity'
   autoload :CognitoIdentityProvider, 'aws-sdk-cognitoidentityprovider'
   autoload :CognitoSync, 'aws-sdk-cognitosync'

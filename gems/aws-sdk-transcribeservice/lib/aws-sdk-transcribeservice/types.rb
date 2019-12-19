@@ -268,6 +268,48 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # Provides information about when a transcription job should be
+    # executed.
+    #
+    # @note When making an API call, you may pass JobExecutionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         allow_deferred_execution: false,
+    #         data_access_role_arn: "DataAccessRoleArn",
+    #       }
+    #
+    # @!attribute [rw] allow_deferred_execution
+    #   Indicates whether a job should be queued by Amazon Transcribe when
+    #   the concurrent execution limit is exceeded. When the
+    #   `AllowDeferredExecution` field is true, jobs are queued and will be
+    #   executed when the number of executing jobs falls below the
+    #   concurrent execution limit. If the field is false, Amazon Transcribe
+    #   returns a `LimitExceededException` exception.
+    #
+    #   If you specify the `AllowDeferredExecution` field, you must specify
+    #   the `DataAccessRoleArn` field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of a role that has access to the S3
+    #   bucket that contains the input files. Amazon Transcribe will assume
+    #   this role to read queued media files. If you have specified an
+    #   output S3 bucket for the transcription results, this role should
+    #   have access to the output bucket as well.
+    #
+    #   If you specify the `AllowDeferredExecution` field, you must specify
+    #   the `DataAccessRoleArn` field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/JobExecutionSettings AWS API Documentation
+    #
+    class JobExecutionSettings < Struct.new(
+      :allow_deferred_execution,
+      :data_access_role_arn)
+      include Aws::Structure
+    end
+
     # Either you have sent too many requests or your input file is too long.
     # Wait before you resend your request, or use a smaller file and resend
     # the request.
@@ -286,7 +328,7 @@ module Aws::TranscribeService
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #         status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
     #         job_name_contains: "TranscriptionJobName",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -574,6 +616,10 @@ module Aws::TranscribeService
     #           show_alternatives: false,
     #           max_alternatives: 1,
     #         },
+    #         job_execution_settings: {
+    #           allow_deferred_execution: false,
+    #           data_access_role_arn: "DataAccessRoleArn",
+    #         },
     #       }
     #
     # @!attribute [rw] transcription_job_name
@@ -670,6 +716,13 @@ module Aws::TranscribeService
     #   transcription job.
     #   @return [Types::Settings]
     #
+    # @!attribute [rw] job_execution_settings
+    #   Provides information about how a transcription job is executed. Use
+    #   this field to indicate that the job can be queued for deferred
+    #   execution if the concurrency limit is reached and there are no slots
+    #   available to immediately run the job.
+    #   @return [Types::JobExecutionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
     class StartTranscriptionJobRequest < Struct.new(
@@ -680,7 +733,8 @@ module Aws::TranscribeService
       :media,
       :output_bucket_name,
       :output_encryption_kms_key_id,
-      :settings)
+      :settings,
+      :job_execution_settings)
       include Aws::Structure
     end
 
@@ -746,6 +800,10 @@ module Aws::TranscribeService
     #   An object that describes the output of the transcription job.
     #   @return [Types::Transcript]
     #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows with the job was started processing.
+    #   @return [Time]
+    #
     # @!attribute [rw] creation_time
     #   A timestamp that shows when the job was created.
     #   @return [Time]
@@ -803,6 +861,10 @@ module Aws::TranscribeService
     #   when processing the transcription job.
     #   @return [Types::Settings]
     #
+    # @!attribute [rw] job_execution_settings
+    #   Provides information about how a transcription job is executed.
+    #   @return [Types::JobExecutionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -813,10 +875,12 @@ module Aws::TranscribeService
       :media_format,
       :media,
       :transcript,
+      :start_time,
       :creation_time,
       :completion_time,
       :failure_reason,
-      :settings)
+      :settings,
+      :job_execution_settings)
       include Aws::Structure
     end
 
@@ -828,6 +892,10 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] creation_time
     #   A timestamp that shows when the job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   A timestamp that shows when the job started processing.
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
@@ -866,6 +934,7 @@ module Aws::TranscribeService
     class TranscriptionJobSummary < Struct.new(
       :transcription_job_name,
       :creation_time,
+      :start_time,
       :completion_time,
       :language_code,
       :transcription_job_status,

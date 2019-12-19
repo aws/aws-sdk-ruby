@@ -13,13 +13,19 @@ module Aws::DLM
 
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
+    CmkArn = Shapes::StringShape.new(name: 'CmkArn')
     CopyTags = Shapes::BooleanShape.new(name: 'CopyTags')
+    CopyTagsNullable = Shapes::BooleanShape.new(name: 'CopyTagsNullable')
     Count = Shapes::IntegerShape.new(name: 'Count')
     CreateLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyRequest')
     CreateLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'CreateLifecyclePolicyResponse')
     CreateRule = Shapes::StructureShape.new(name: 'CreateRule')
+    CrossRegionCopyRetainRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRetainRule')
+    CrossRegionCopyRule = Shapes::StructureShape.new(name: 'CrossRegionCopyRule')
+    CrossRegionCopyRules = Shapes::ListShape.new(name: 'CrossRegionCopyRules')
     DeleteLifecyclePolicyRequest = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyRequest')
     DeleteLifecyclePolicyResponse = Shapes::StructureShape.new(name: 'DeleteLifecyclePolicyResponse')
+    Encrypted = Shapes::BooleanShape.new(name: 'Encrypted')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExcludeBootVolume = Shapes::BooleanShape.new(name: 'ExcludeBootVolume')
@@ -70,6 +76,7 @@ module Aws::DLM
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TagsToAddFilterList = Shapes::ListShape.new(name: 'TagsToAddFilterList')
     TagsToAddList = Shapes::ListShape.new(name: 'TagsToAddList')
+    TargetRegion = Shapes::StringShape.new(name: 'TargetRegion')
     TargetTagList = Shapes::ListShape.new(name: 'TargetTagList')
     TargetTagsFilterList = Shapes::ListShape.new(name: 'TargetTagsFilterList')
     Time = Shapes::StringShape.new(name: 'Time')
@@ -97,6 +104,19 @@ module Aws::DLM
     CreateRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: IntervalUnitValues, required: true, location_name: "IntervalUnit"))
     CreateRule.add_member(:times, Shapes::ShapeRef.new(shape: TimesList, location_name: "Times"))
     CreateRule.struct_class = Types::CreateRule
+
+    CrossRegionCopyRetainRule.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, location_name: "Interval"))
+    CrossRegionCopyRetainRule.add_member(:interval_unit, Shapes::ShapeRef.new(shape: RetentionIntervalUnitValues, location_name: "IntervalUnit"))
+    CrossRegionCopyRetainRule.struct_class = Types::CrossRegionCopyRetainRule
+
+    CrossRegionCopyRule.add_member(:target_region, Shapes::ShapeRef.new(shape: TargetRegion, required: true, location_name: "TargetRegion"))
+    CrossRegionCopyRule.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, required: true, location_name: "Encrypted"))
+    CrossRegionCopyRule.add_member(:cmk_arn, Shapes::ShapeRef.new(shape: CmkArn, location_name: "CmkArn"))
+    CrossRegionCopyRule.add_member(:copy_tags, Shapes::ShapeRef.new(shape: CopyTagsNullable, location_name: "CopyTags"))
+    CrossRegionCopyRule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: CrossRegionCopyRetainRule, location_name: "RetainRule"))
+    CrossRegionCopyRule.struct_class = Types::CrossRegionCopyRule
+
+    CrossRegionCopyRules.member = Shapes::ShapeRef.new(shape: CrossRegionCopyRule)
 
     DeleteLifecyclePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location: "uri", location_name: "policyId"))
     DeleteLifecyclePolicyRequest.struct_class = Types::DeleteLifecyclePolicyRequest
@@ -200,6 +220,7 @@ module Aws::DLM
     Schedule.add_member(:create_rule, Shapes::ShapeRef.new(shape: CreateRule, location_name: "CreateRule"))
     Schedule.add_member(:retain_rule, Shapes::ShapeRef.new(shape: RetainRule, location_name: "RetainRule"))
     Schedule.add_member(:fast_restore_rule, Shapes::ShapeRef.new(shape: FastRestoreRule, location_name: "FastRestoreRule"))
+    Schedule.add_member(:cross_region_copy_rules, Shapes::ShapeRef.new(shape: CrossRegionCopyRules, location_name: "CrossRegionCopyRules"))
     Schedule.struct_class = Types::Schedule
 
     ScheduleList.member = Shapes::ShapeRef.new(shape: Schedule)

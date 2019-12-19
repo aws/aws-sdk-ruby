@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2019-12-19)
+------------------
+
+* Feature - Amazon Transcribe supports job queuing for the StartTranscriptionJob API.
+
 1.33.0 (2019-11-21)
 ------------------
 

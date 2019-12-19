@@ -15630,8 +15630,8 @@ module Aws::EC2
     #   resp.instance_types[0].free_tier_eligible #=> Boolean
     #   resp.instance_types[0].supported_usage_classes #=> Array
     #   resp.instance_types[0].supported_usage_classes[0] #=> String, one of "spot", "on-demand"
-    #   resp.instance_types[0].supported_root_devices #=> Array
-    #   resp.instance_types[0].supported_root_devices[0] #=> String, one of "ebs", "instance-store"
+    #   resp.instance_types[0].supported_root_device_types #=> Array
+    #   resp.instance_types[0].supported_root_device_types[0] #=> String, one of "ebs", "instance-store"
     #   resp.instance_types[0].bare_metal #=> Boolean
     #   resp.instance_types[0].hypervisor #=> String, one of "nitro", "xen"
     #   resp.instance_types[0].processor_info.supported_architectures #=> Array
@@ -35440,7 +35440,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

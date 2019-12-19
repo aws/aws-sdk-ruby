@@ -17,12 +17,14 @@ module Aws::GameLift
     Alias = Shapes::StructureShape.new(name: 'Alias')
     AliasId = Shapes::StringShape.new(name: 'AliasId')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
+    AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     ArnStringModel = Shapes::StringShape.new(name: 'ArnStringModel')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
     BackfillMode = Shapes::StringShape.new(name: 'BackfillMode')
     BooleanModel = Shapes::BooleanShape.new(name: 'BooleanModel')
     Build = Shapes::StructureShape.new(name: 'Build')
+    BuildArn = Shapes::StringShape.new(name: 'BuildArn')
     BuildId = Shapes::StringShape.new(name: 'BuildId')
     BuildList = Shapes::ListShape.new(name: 'BuildList')
     BuildStatus = Shapes::StringShape.new(name: 'BuildStatus')
@@ -194,18 +196,25 @@ module Aws::GameLift
     ListFleetsOutput = Shapes::StructureShape.new(name: 'ListFleetsOutput')
     ListScriptsInput = Shapes::StructureShape.new(name: 'ListScriptsInput')
     ListScriptsOutput = Shapes::StructureShape.new(name: 'ListScriptsOutput')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MatchedPlayerSession = Shapes::StructureShape.new(name: 'MatchedPlayerSession')
     MatchedPlayerSessionList = Shapes::ListShape.new(name: 'MatchedPlayerSessionList')
     MatchmakerData = Shapes::StringShape.new(name: 'MatchmakerData')
     MatchmakingAcceptanceTimeoutInteger = Shapes::IntegerShape.new(name: 'MatchmakingAcceptanceTimeoutInteger')
     MatchmakingConfiguration = Shapes::StructureShape.new(name: 'MatchmakingConfiguration')
+    MatchmakingConfigurationArn = Shapes::StringShape.new(name: 'MatchmakingConfigurationArn')
     MatchmakingConfigurationList = Shapes::ListShape.new(name: 'MatchmakingConfigurationList')
+    MatchmakingConfigurationName = Shapes::StringShape.new(name: 'MatchmakingConfigurationName')
+    MatchmakingConfigurationNameList = Shapes::ListShape.new(name: 'MatchmakingConfigurationNameList')
     MatchmakingConfigurationStatus = Shapes::StringShape.new(name: 'MatchmakingConfigurationStatus')
     MatchmakingIdList = Shapes::ListShape.new(name: 'MatchmakingIdList')
     MatchmakingIdStringModel = Shapes::StringShape.new(name: 'MatchmakingIdStringModel')
     MatchmakingRequestTimeoutInteger = Shapes::IntegerShape.new(name: 'MatchmakingRequestTimeoutInteger')
     MatchmakingRuleSet = Shapes::StructureShape.new(name: 'MatchmakingRuleSet')
+    MatchmakingRuleSetArn = Shapes::StringShape.new(name: 'MatchmakingRuleSetArn')
     MatchmakingRuleSetList = Shapes::ListShape.new(name: 'MatchmakingRuleSetList')
+    MatchmakingRuleSetName = Shapes::StringShape.new(name: 'MatchmakingRuleSetName')
     MatchmakingRuleSetNameList = Shapes::ListShape.new(name: 'MatchmakingRuleSetNameList')
     MatchmakingTicket = Shapes::StructureShape.new(name: 'MatchmakingTicket')
     MatchmakingTicketList = Shapes::ListShape.new(name: 'MatchmakingTicketList')
@@ -260,6 +269,7 @@ module Aws::GameLift
     ScalingPolicyList = Shapes::ListShape.new(name: 'ScalingPolicyList')
     ScalingStatusType = Shapes::StringShape.new(name: 'ScalingStatusType')
     Script = Shapes::StructureShape.new(name: 'Script')
+    ScriptArn = Shapes::StringShape.new(name: 'ScriptArn')
     ScriptId = Shapes::StringShape.new(name: 'ScriptId')
     ScriptList = Shapes::ListShape.new(name: 'ScriptList')
     SearchGameSessionsInput = Shapes::StructureShape.new(name: 'SearchGameSessionsInput')
@@ -284,11 +294,21 @@ module Aws::GameLift
     StringDoubleMap = Shapes::MapShape.new(name: 'StringDoubleMap')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringModel = Shapes::StringShape.new(name: 'StringModel')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaggingFailedException = Shapes::StructureShape.new(name: 'TaggingFailedException')
     TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
     TerminalRoutingStrategyException = Shapes::StructureShape.new(name: 'TerminalRoutingStrategyException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnsupportedRegionException = Shapes::StructureShape.new(name: 'UnsupportedRegionException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAliasInput = Shapes::StructureShape.new(name: 'UpdateAliasInput')
     UpdateAliasOutput = Shapes::StructureShape.new(name: 'UpdateAliasOutput')
     UpdateBuildInput = Shapes::StructureShape.new(name: 'UpdateBuildInput')
@@ -349,6 +369,7 @@ module Aws::GameLift
     AwsCredentials.struct_class = Types::AwsCredentials
 
     Build.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
+    Build.add_member(:build_arn, Shapes::ShapeRef.new(shape: BuildArn, location_name: "BuildArn"))
     Build.add_member(:name, Shapes::ShapeRef.new(shape: FreeText, location_name: "Name"))
     Build.add_member(:version, Shapes::ShapeRef.new(shape: FreeText, location_name: "Version"))
     Build.add_member(:status, Shapes::ShapeRef.new(shape: BuildStatus, location_name: "Status"))
@@ -368,6 +389,7 @@ module Aws::GameLift
     CreateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, required: true, location_name: "Name"))
     CreateAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     CreateAliasInput.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, required: true, location_name: "RoutingStrategy"))
+    CreateAliasInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateAliasInput.struct_class = Types::CreateAliasInput
 
     CreateAliasOutput.add_member(:alias, Shapes::ShapeRef.new(shape: Alias, location_name: "Alias"))
@@ -377,6 +399,7 @@ module Aws::GameLift
     CreateBuildInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
     CreateBuildInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
     CreateBuildInput.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+    CreateBuildInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateBuildInput.struct_class = Types::CreateBuildInput
 
     CreateBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "Build"))
@@ -402,6 +425,7 @@ module Aws::GameLift
     CreateFleetInput.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
     CreateFleetInput.add_member(:instance_role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "InstanceRoleArn"))
     CreateFleetInput.add_member(:certificate_configuration, Shapes::ShapeRef.new(shape: CertificateConfiguration, location_name: "CertificateConfiguration"))
+    CreateFleetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
 
     CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
@@ -425,6 +449,7 @@ module Aws::GameLift
     CreateGameSessionQueueInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
     CreateGameSessionQueueInput.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     CreateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
+    CreateGameSessionQueueInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateGameSessionQueueInput.struct_class = Types::CreateGameSessionQueueInput
 
     CreateGameSessionQueueOutput.add_member(:game_session_queue, Shapes::ShapeRef.new(shape: GameSessionQueue, location_name: "GameSessionQueue"))
@@ -436,13 +461,14 @@ module Aws::GameLift
     CreateMatchmakingConfigurationInput.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, required: true, location_name: "RequestTimeoutSeconds"))
     CreateMatchmakingConfigurationInput.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
     CreateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, required: true, location_name: "AcceptanceRequired"))
-    CreateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "RuleSetName"))
+    CreateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingRuleSetName, required: true, location_name: "RuleSetName"))
     CreateMatchmakingConfigurationInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     CreateMatchmakingConfigurationInput.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
     CreateMatchmakingConfigurationInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: CustomEventData, location_name: "CustomEventData"))
     CreateMatchmakingConfigurationInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     CreateMatchmakingConfigurationInput.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
     CreateMatchmakingConfigurationInput.add_member(:backfill_mode, Shapes::ShapeRef.new(shape: BackfillMode, location_name: "BackfillMode"))
+    CreateMatchmakingConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMatchmakingConfigurationInput.struct_class = Types::CreateMatchmakingConfigurationInput
 
     CreateMatchmakingConfigurationOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: MatchmakingConfiguration, location_name: "Configuration"))
@@ -450,6 +476,7 @@ module Aws::GameLift
 
     CreateMatchmakingRuleSetInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
     CreateMatchmakingRuleSetInput.add_member(:rule_set_body, Shapes::ShapeRef.new(shape: RuleSetBody, required: true, location_name: "RuleSetBody"))
+    CreateMatchmakingRuleSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateMatchmakingRuleSetInput.struct_class = Types::CreateMatchmakingRuleSetInput
 
     CreateMatchmakingRuleSetOutput.add_member(:rule_set, Shapes::ShapeRef.new(shape: MatchmakingRuleSet, required: true, location_name: "RuleSet"))
@@ -475,6 +502,7 @@ module Aws::GameLift
     CreateScriptInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
     CreateScriptInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
     CreateScriptInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: ZipBlob, location_name: "ZipFile"))
+    CreateScriptInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateScriptInput.struct_class = Types::CreateScriptInput
 
     CreateScriptOutput.add_member(:script, Shapes::ShapeRef.new(shape: Script, location_name: "Script"))
@@ -508,12 +536,12 @@ module Aws::GameLift
 
     DeleteGameSessionQueueOutput.struct_class = Types::DeleteGameSessionQueueOutput
 
-    DeleteMatchmakingConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
+    DeleteMatchmakingConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingConfigurationName, required: true, location_name: "Name"))
     DeleteMatchmakingConfigurationInput.struct_class = Types::DeleteMatchmakingConfigurationInput
 
     DeleteMatchmakingConfigurationOutput.struct_class = Types::DeleteMatchmakingConfigurationOutput
 
-    DeleteMatchmakingRuleSetInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
+    DeleteMatchmakingRuleSetInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingRuleSetName, required: true, location_name: "Name"))
     DeleteMatchmakingRuleSetInput.struct_class = Types::DeleteMatchmakingRuleSetInput
 
     DeleteMatchmakingRuleSetOutput.struct_class = Types::DeleteMatchmakingRuleSetOutput
@@ -648,8 +676,8 @@ module Aws::GameLift
     DescribeInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeInstancesOutput.struct_class = Types::DescribeInstancesOutput
 
-    DescribeMatchmakingConfigurationsInput.add_member(:names, Shapes::ShapeRef.new(shape: MatchmakingIdList, location_name: "Names"))
-    DescribeMatchmakingConfigurationsInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
+    DescribeMatchmakingConfigurationsInput.add_member(:names, Shapes::ShapeRef.new(shape: MatchmakingConfigurationNameList, location_name: "Names"))
+    DescribeMatchmakingConfigurationsInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingRuleSetName, location_name: "RuleSetName"))
     DescribeMatchmakingConfigurationsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
     DescribeMatchmakingConfigurationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     DescribeMatchmakingConfigurationsInput.struct_class = Types::DescribeMatchmakingConfigurationsInput
@@ -762,7 +790,9 @@ module Aws::GameLift
     FleetAttributes.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     FleetAttributes.add_member(:status, Shapes::ShapeRef.new(shape: FleetStatus, location_name: "Status"))
     FleetAttributes.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, location_name: "BuildId"))
+    FleetAttributes.add_member(:build_arn, Shapes::ShapeRef.new(shape: BuildArn, location_name: "BuildArn"))
     FleetAttributes.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
+    FleetAttributes.add_member(:script_arn, Shapes::ShapeRef.new(shape: ScriptArn, location_name: "ScriptArn"))
     FleetAttributes.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
     FleetAttributes.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
     FleetAttributes.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
@@ -807,6 +837,7 @@ module Aws::GameLift
     GameSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
     GameSession.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     GameSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    GameSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
     GameSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     GameSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     GameSession.add_member(:current_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "CurrentPlayerSessionCount"))
@@ -979,6 +1010,12 @@ module Aws::GameLift
     ListScriptsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     ListScriptsOutput.struct_class = Types::ListScriptsOutput
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MatchedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     MatchedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
     MatchedPlayerSession.struct_class = Types::MatchedPlayerSession
@@ -986,12 +1023,14 @@ module Aws::GameLift
     MatchedPlayerSessionList.member = Shapes::ShapeRef.new(shape: MatchedPlayerSession)
 
     MatchmakingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "Name"))
+    MatchmakingConfiguration.add_member(:configuration_arn, Shapes::ShapeRef.new(shape: MatchmakingConfigurationArn, location_name: "ConfigurationArn"))
     MatchmakingConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     MatchmakingConfiguration.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, location_name: "GameSessionQueueArns"))
     MatchmakingConfiguration.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, location_name: "RequestTimeoutSeconds"))
     MatchmakingConfiguration.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
     MatchmakingConfiguration.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, location_name: "AcceptanceRequired"))
     MatchmakingConfiguration.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
+    MatchmakingConfiguration.add_member(:rule_set_arn, Shapes::ShapeRef.new(shape: MatchmakingRuleSetArn, location_name: "RuleSetArn"))
     MatchmakingConfiguration.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     MatchmakingConfiguration.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
     MatchmakingConfiguration.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: CustomEventData, location_name: "CustomEventData"))
@@ -1003,19 +1042,23 @@ module Aws::GameLift
 
     MatchmakingConfigurationList.member = Shapes::ShapeRef.new(shape: MatchmakingConfiguration)
 
+    MatchmakingConfigurationNameList.member = Shapes::ShapeRef.new(shape: MatchmakingConfigurationName)
+
     MatchmakingIdList.member = Shapes::ShapeRef.new(shape: MatchmakingIdStringModel)
 
     MatchmakingRuleSet.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
+    MatchmakingRuleSet.add_member(:rule_set_arn, Shapes::ShapeRef.new(shape: MatchmakingRuleSetArn, location_name: "RuleSetArn"))
     MatchmakingRuleSet.add_member(:rule_set_body, Shapes::ShapeRef.new(shape: RuleSetBody, required: true, location_name: "RuleSetBody"))
     MatchmakingRuleSet.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     MatchmakingRuleSet.struct_class = Types::MatchmakingRuleSet
 
     MatchmakingRuleSetList.member = Shapes::ShapeRef.new(shape: MatchmakingRuleSet)
 
-    MatchmakingRuleSetNameList.member = Shapes::ShapeRef.new(shape: MatchmakingIdStringModel)
+    MatchmakingRuleSetNameList.member = Shapes::ShapeRef.new(shape: MatchmakingRuleSetName)
 
     MatchmakingTicket.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
     MatchmakingTicket.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "ConfigurationName"))
+    MatchmakingTicket.add_member(:configuration_arn, Shapes::ShapeRef.new(shape: MatchmakingConfigurationArn, location_name: "ConfigurationArn"))
     MatchmakingTicket.add_member(:status, Shapes::ShapeRef.new(shape: MatchmakingConfigurationStatus, location_name: "Status"))
     MatchmakingTicket.add_member(:status_reason, Shapes::ShapeRef.new(shape: StringModel, location_name: "StatusReason"))
     MatchmakingTicket.add_member(:status_message, Shapes::ShapeRef.new(shape: StringModel, location_name: "StatusMessage"))
@@ -1072,6 +1115,7 @@ module Aws::GameLift
     PlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     PlayerSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
     PlayerSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    PlayerSession.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
     PlayerSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     PlayerSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
     PlayerSession.add_member(:status, Shapes::ShapeRef.new(shape: PlayerSessionStatus, location_name: "Status"))
@@ -1111,6 +1155,7 @@ module Aws::GameLift
     ResolveAliasInput.struct_class = Types::ResolveAliasInput
 
     ResolveAliasOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    ResolveAliasOutput.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
     ResolveAliasOutput.struct_class = Types::ResolveAliasOutput
 
     ResourceCreationLimitPolicy.add_member(:new_game_sessions_per_creator, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "NewGameSessionsPerCreator"))
@@ -1149,6 +1194,7 @@ module Aws::GameLift
     ScalingPolicyList.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
 
     Script.add_member(:script_id, Shapes::ShapeRef.new(shape: ScriptId, location_name: "ScriptId"))
+    Script.add_member(:script_arn, Shapes::ShapeRef.new(shape: ScriptArn, location_name: "ScriptArn"))
     Script.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     Script.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
     Script.add_member(:size_on_disk, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "SizeOnDisk"))
@@ -1197,7 +1243,7 @@ module Aws::GameLift
     StartGameSessionPlacementOutput.struct_class = Types::StartGameSessionPlacementOutput
 
     StartMatchBackfillInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
-    StartMatchBackfillInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "ConfigurationName"))
+    StartMatchBackfillInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingConfigurationName, required: true, location_name: "ConfigurationName"))
     StartMatchBackfillInput.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionArn"))
     StartMatchBackfillInput.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, required: true, location_name: "Players"))
     StartMatchBackfillInput.struct_class = Types::StartMatchBackfillInput
@@ -1206,7 +1252,7 @@ module Aws::GameLift
     StartMatchBackfillOutput.struct_class = Types::StartMatchBackfillOutput
 
     StartMatchmakingInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
-    StartMatchmakingInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "ConfigurationName"))
+    StartMatchmakingInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingConfigurationName, required: true, location_name: "ConfigurationName"))
     StartMatchmakingInput.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, required: true, location_name: "Players"))
     StartMatchmakingInput.struct_class = Types::StartMatchmakingInput
 
@@ -1235,6 +1281,23 @@ module Aws::GameLift
 
     StringList.member = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TaggingFailedException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    TaggingFailedException.struct_class = Types::TaggingFailedException
+
     TargetConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
     TargetConfiguration.struct_class = Types::TargetConfiguration
 
@@ -1246,6 +1309,12 @@ module Aws::GameLift
 
     UnsupportedRegionException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     UnsupportedRegionException.struct_class = Types::UnsupportedRegionException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
     UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
@@ -1311,13 +1380,13 @@ module Aws::GameLift
     UpdateGameSessionQueueOutput.add_member(:game_session_queue, Shapes::ShapeRef.new(shape: GameSessionQueue, location_name: "GameSessionQueue"))
     UpdateGameSessionQueueOutput.struct_class = Types::UpdateGameSessionQueueOutput
 
-    UpdateMatchmakingConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "Name"))
+    UpdateMatchmakingConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: MatchmakingConfigurationName, required: true, location_name: "Name"))
     UpdateMatchmakingConfigurationInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     UpdateMatchmakingConfigurationInput.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, location_name: "GameSessionQueueArns"))
     UpdateMatchmakingConfigurationInput.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, location_name: "RequestTimeoutSeconds"))
     UpdateMatchmakingConfigurationInput.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
     UpdateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, location_name: "AcceptanceRequired"))
-    UpdateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
+    UpdateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingRuleSetName, location_name: "RuleSetName"))
     UpdateMatchmakingConfigurationInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     UpdateMatchmakingConfigurationInput.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
     UpdateMatchmakingConfigurationInput.add_member(:custom_event_data, Shapes::ShapeRef.new(shape: CustomEventData, location_name: "CustomEventData"))
@@ -1362,6 +1431,7 @@ module Aws::GameLift
     VpcPeeringAuthorizationList.member = Shapes::ShapeRef.new(shape: VpcPeeringAuthorization)
 
     VpcPeeringConnection.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+    VpcPeeringConnection.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
     VpcPeeringConnection.add_member(:ip_v4_cidr_block, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "IpV4CidrBlock"))
     VpcPeeringConnection.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "VpcPeeringConnectionId"))
     VpcPeeringConnection.add_member(:status, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStatus, location_name: "Status"))
@@ -1416,6 +1486,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:create_build, Seahorse::Model::Operation.new.tap do |o|
@@ -1427,6 +1498,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -1442,6 +1514,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:create_game_session, Seahorse::Model::Operation.new.tap do |o|
@@ -1472,6 +1545,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:create_matchmaking_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1485,6 +1559,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:create_matchmaking_rule_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1496,6 +1571,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:create_player_session, Seahorse::Model::Operation.new.tap do |o|
@@ -1537,6 +1613,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -1573,6 +1650,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -1585,6 +1663,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
@@ -1599,6 +1678,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:delete_game_session_queue, Seahorse::Model::Operation.new.tap do |o|
@@ -1611,6 +1691,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:delete_matchmaking_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1623,6 +1704,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:delete_matchmaking_rule_set, Seahorse::Model::Operation.new.tap do |o|
@@ -1635,6 +1717,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
       end)
 
       api.add_operation(:delete_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1658,6 +1741,7 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
@@ -2016,6 +2100,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutScalingPolicy"
         o.http_method = "POST"
@@ -2148,6 +2244,30 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TaggingFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_alias, Seahorse::Model::Operation.new.tap do |o|

@@ -12,6 +12,9 @@ module Aws::PersonalizeRuntime
     include Seahorse::Model
 
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
+    Context = Shapes::MapShape.new(name: 'Context')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GetPersonalizedRankingRequest = Shapes::StructureShape.new(name: 'GetPersonalizedRankingRequest')
     GetPersonalizedRankingResponse = Shapes::StructureShape.new(name: 'GetPersonalizedRankingResponse')
@@ -26,9 +29,13 @@ module Aws::PersonalizeRuntime
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     UserID = Shapes::StringShape.new(name: 'UserID')
 
+    Context.key = Shapes::ShapeRef.new(shape: AttributeName)
+    Context.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
     GetPersonalizedRankingRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     GetPersonalizedRankingRequest.add_member(:input_list, Shapes::ShapeRef.new(shape: InputList, required: true, location_name: "inputList"))
     GetPersonalizedRankingRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, required: true, location_name: "userId"))
+    GetPersonalizedRankingRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
     GetPersonalizedRankingRequest.struct_class = Types::GetPersonalizedRankingRequest
 
     GetPersonalizedRankingResponse.add_member(:personalized_ranking, Shapes::ShapeRef.new(shape: ItemList, location_name: "personalizedRanking"))
@@ -38,6 +45,7 @@ module Aws::PersonalizeRuntime
     GetRecommendationsRequest.add_member(:item_id, Shapes::ShapeRef.new(shape: ItemID, location_name: "itemId"))
     GetRecommendationsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserID, location_name: "userId"))
     GetRecommendationsRequest.add_member(:num_results, Shapes::ShapeRef.new(shape: NumResults, location_name: "numResults"))
+    GetRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: Context, location_name: "context"))
     GetRecommendationsRequest.struct_class = Types::GetRecommendationsRequest
 
     GetRecommendationsResponse.add_member(:item_list, Shapes::ShapeRef.new(shape: ItemList, location_name: "itemList"))

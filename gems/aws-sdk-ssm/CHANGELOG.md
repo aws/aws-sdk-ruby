@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2019-12-19)
+------------------
+
+* Feature - This release allows customers to add tags to Automation execution, enabling them to sort and filter executions in different ways, such as by resource, purpose, owner, or environment.
+
 1.67.0 (2019-12-17)
 ------------------
 

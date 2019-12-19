@@ -401,12 +401,13 @@ module Aws::TranscribeService
     # @example Response structure
     #
     #   resp.transcription_job.transcription_job_name #=> String
-    #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
+    #   resp.transcription_job.start_time #=> Time
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
     #   resp.transcription_job.failure_reason #=> String
@@ -416,6 +417,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.channel_identification #=> Boolean
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
+    #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
+    #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -495,7 +498,7 @@ module Aws::TranscribeService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_transcription_jobs({
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, FAILED, COMPLETED
     #     job_name_contains: "TranscriptionJobName",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -503,14 +506,15 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.next_token #=> String
     #   resp.transcription_job_summaries #=> Array
     #   resp.transcription_job_summaries[0].transcription_job_name #=> String
     #   resp.transcription_job_summaries[0].creation_time #=> Time
+    #   resp.transcription_job_summaries[0].start_time #=> Time
     #   resp.transcription_job_summaries[0].completion_time #=> Time
     #   resp.transcription_job_summaries[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
-    #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
     #
@@ -562,7 +566,7 @@ module Aws::TranscribeService
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.next_token #=> String
     #   resp.vocabularies #=> Array
     #   resp.vocabularies[0].vocabulary_name #=> String
@@ -663,6 +667,12 @@ module Aws::TranscribeService
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
     #
+    # @option params [Types::JobExecutionSettings] :job_execution_settings
+    #   Provides information about how a transcription job is executed. Use
+    #   this field to indicate that the job can be queued for deferred
+    #   execution if the concurrency limit is reached and there are no slots
+    #   available to immediately run the job.
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -687,17 +697,22 @@ module Aws::TranscribeService
     #       show_alternatives: false,
     #       max_alternatives: 1,
     #     },
+    #     job_execution_settings: {
+    #       allow_deferred_execution: false,
+    #       data_access_role_arn: "DataAccessRoleArn",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.transcription_job.transcription_job_name #=> String
-    #   resp.transcription_job.transcription_job_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.transcription_job.transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
     #   resp.transcription_job.media_sample_rate_hertz #=> Integer
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
+    #   resp.transcription_job.start_time #=> Time
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
     #   resp.transcription_job.failure_reason #=> String
@@ -707,6 +722,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.channel_identification #=> Boolean
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
+    #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
+    #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -799,7 +816,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

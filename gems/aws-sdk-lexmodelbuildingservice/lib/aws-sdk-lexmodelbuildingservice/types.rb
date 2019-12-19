@@ -52,6 +52,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the bot alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   Settings that determine how Amazon Lex uses conversation logs for
+    #   the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotAliasMetadata AWS API Documentation
     #
     class BotAliasMetadata < Struct.new(
@@ -61,7 +66,8 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -278,6 +284,66 @@ module Aws::LexModelBuildingService
     #
     class ConflictException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # Provides the settings needed for conversation logs.
+    #
+    # @note When making an API call, you may pass ConversationLogsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_settings: [ # required
+    #           {
+    #             log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #             destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #             kms_key_arn: "KmsKeyArn",
+    #             resource_arn: "ResourceArn", # required
+    #           },
+    #         ],
+    #         iam_role_arn: "IamRoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] log_settings
+    #   The settings for your conversation logs. You can log the
+    #   conversation text, conversation audio, or both.
+    #   @return [Array<Types::LogSettingsRequest>]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role with permission to
+    #   write to your CloudWatch Logs for text logs and your S3 bucket for
+    #   audio logs. For more information, see [Creating Conversation
+    #   Logs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/conversation-logs.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConversationLogsRequest AWS API Documentation
+    #
+    class ConversationLogsRequest < Struct.new(
+      :log_settings,
+      :iam_role_arn)
+      include Aws::Structure
+    end
+
+    # Contains information about conversation log settings.
+    #
+    # @!attribute [rw] log_settings
+    #   The settings for your conversation logs.
+    #   @return [Array<Types::LogSettingsResponse>]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role used to write your
+    #   logs to CloudWatch Logs or an S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConversationLogsResponse AWS API Documentation
+    #
+    class ConversationLogsResponse < Struct.new(
+      :log_settings,
+      :iam_role_arn)
       include Aws::Structure
     end
 
@@ -1040,6 +1106,11 @@ module Aws::LexModelBuildingService
     #   Checksum of the bot alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   The settings that determine how Amazon Lex uses conversation logs
+    #   for the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliasResponse AWS API Documentation
     #
     class GetBotAliasResponse < Struct.new(
@@ -1049,7 +1120,8 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -2421,6 +2493,88 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # Settings used to configure conversation logs.
+    #
+    # @note When making an API call, you may pass LogSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #         destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #         kms_key_arn: "KmsKeyArn",
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] log_type
+    #   The type of logging to enable. Text logs are delivered to a
+    #   CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   Where the logs will be delivered. Text logs are delivered to a
+    #   CloudWatch Logs log group. Audio logs are delivered to an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS KMS customer managed key
+    #   for encrypting audio logs delivered to an S3 bucket. The key does
+    #   not apply to CloudWatch Logs and is optional for S3 buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   S3 bucket where the logs should be delivered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LogSettingsRequest AWS API Documentation
+    #
+    class LogSettingsRequest < Struct.new(
+      :log_type,
+      :destination,
+      :kms_key_arn,
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # The settings for conversation logs.
+    #
+    # @!attribute [rw] log_type
+    #   The type of logging that is enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination where logs are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the key used to encrypt audio logs
+    #   in an S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Logs log group or
+    #   S3 bucket where the logs are delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_prefix
+    #   The resource prefix of the S3 object or CloudWatch Logs log entry
+    #   where logs are delivered. For both S3 and CloudWatch Logs, the
+    #   prefix is:
+    #
+    #   `aws/lex/bot-name/bot-alias/bot-version`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LogSettingsResponse AWS API Documentation
+    #
+    class LogSettingsResponse < Struct.new(
+      :log_type,
+      :destination,
+      :kms_key_arn,
+      :resource_arn,
+      :resource_prefix)
+      include Aws::Structure
+    end
+
     # The message object that provides the message text and its type.
     #
     # @note When making an API call, you may pass Message
@@ -2538,6 +2692,17 @@ module Aws::LexModelBuildingService
     #         bot_version: "Version", # required
     #         bot_name: "BotName", # required
     #         checksum: "String",
+    #         conversation_logs: {
+    #           log_settings: [ # required
+    #             {
+    #               log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #               destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #               kms_key_arn: "KmsKeyArn",
+    #               resource_arn: "ResourceArn", # required
+    #             },
+    #           ],
+    #           iam_role_arn: "IamRoleArn", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2569,6 +2734,11 @@ module Aws::LexModelBuildingService
     #   `PreconditionFailedException` exception.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   Settings that determine how Amazon Lex uses conversation logs for
+    #   the alias.
+    #   @return [Types::ConversationLogsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasRequest AWS API Documentation
     #
     class PutBotAliasRequest < Struct.new(
@@ -2576,7 +2746,8 @@ module Aws::LexModelBuildingService
       :description,
       :bot_version,
       :bot_name,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -2609,6 +2780,11 @@ module Aws::LexModelBuildingService
     #   The checksum for the current version of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] conversation_logs
+    #   The settings that determine how Amazon Lex uses conversation logs
+    #   for the alias.
+    #   @return [Types::ConversationLogsResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasResponse AWS API Documentation
     #
     class PutBotAliasResponse < Struct.new(
@@ -2618,7 +2794,8 @@ module Aws::LexModelBuildingService
       :bot_name,
       :last_updated_date,
       :created_date,
-      :checksum)
+      :checksum,
+      :conversation_logs)
       include Aws::Structure
     end
 
@@ -3048,6 +3225,7 @@ module Aws::LexModelBuildingService
     #             priority: 1,
     #             sample_utterances: ["Utterance"],
     #             response_card: "ResponseCard",
+    #             obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #           },
     #         ],
     #         sample_utterances: ["Utterance"],
@@ -3627,6 +3805,7 @@ module Aws::LexModelBuildingService
     #         priority: 1,
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
+    #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #       }
     #
     # @!attribute [rw] name
@@ -3677,6 +3856,19 @@ module Aws::LexModelBuildingService
     #   using text to reply.
     #   @return [String]
     #
+    # @!attribute [rw] obfuscation_setting
+    #   Determines whether a slot is obfuscated in conversation logs and
+    #   stored utterances. When you obfuscate a slot, the value is replaced
+    #   by the slot name in curly braces (\\\{\\}). For example, if the slot
+    #   name is "full\_name", obfuscated values are replaced with
+    #   "\\\{full\_name\\}". For more information, see [ Slot Obfuscation
+    #   ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Slot AWS API Documentation
     #
     class Slot < Struct.new(
@@ -3688,7 +3880,8 @@ module Aws::LexModelBuildingService
       :value_elicitation_prompt,
       :priority,
       :sample_utterances,
-      :response_card)
+      :response_card,
+      :obfuscation_setting)
       include Aws::Structure
     end
 

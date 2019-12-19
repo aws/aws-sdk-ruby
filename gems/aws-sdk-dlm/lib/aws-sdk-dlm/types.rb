@@ -56,6 +56,18 @@ module Aws::DLM
     #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 availability_zones: ["AvailabilityZone"], # required
     #               },
+    #               cross_region_copy_rules: [
+    #                 {
+    #                   target_region: "TargetRegion", # required
+    #                   encrypted: false, # required
+    #                   cmk_arn: "CmkArn",
+    #                   copy_tags: false,
+    #                   retain_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           ],
     #           parameters: {
@@ -145,6 +157,86 @@ module Aws::DLM
       :interval,
       :interval_unit,
       :times)
+      include Aws::Structure
+    end
+
+    # Specifies the retention rule for cross-Region snapshot copies.
+    #
+    # @note When making an API call, you may pass CrossRegionCopyRetainRule
+    #   data as a hash:
+    #
+    #       {
+    #         interval: 1,
+    #         interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #       }
+    #
+    # @!attribute [rw] interval
+    #   The amount of time to retain each snapshot. The maximum is 100
+    #   years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] interval_unit
+    #   The unit of time for time-based retention.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyRetainRule AWS API Documentation
+    #
+    class CrossRegionCopyRetainRule < Struct.new(
+      :interval,
+      :interval_unit)
+      include Aws::Structure
+    end
+
+    # Specifies a rule for cross-Region snapshot copies.
+    #
+    # @note When making an API call, you may pass CrossRegionCopyRule
+    #   data as a hash:
+    #
+    #       {
+    #         target_region: "TargetRegion", # required
+    #         encrypted: false, # required
+    #         cmk_arn: "CmkArn",
+    #         copy_tags: false,
+    #         retain_rule: {
+    #           interval: 1,
+    #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_region
+    #   The target Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] encrypted
+    #   To encrypt a copy of an unencrypted snapshot if encryption by
+    #   default is not enabled, enable encryption using this parameter.
+    #   Copies of encrypted snapshots are encrypted, even if this parameter
+    #   is false or if encryption by default is not enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cmk_arn
+    #   The Amazon Resource Name (ARN) of the AWS KMS customer master key
+    #   (CMK) to use for EBS encryption. If this parameter is not specified,
+    #   your AWS managed CMK for EBS is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags
+    #   Copy all user-defined tags from the source snapshot to the copied
+    #   snapshot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retain_rule
+    #   The retention rule.
+    #   @return [Types::CrossRegionCopyRetainRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/CrossRegionCopyRule AWS API Documentation
+    #
+    class CrossRegionCopyRule < Struct.new(
+      :target_region,
+      :encrypted,
+      :cmk_arn,
+      :copy_tags,
+      :retain_rule)
       include Aws::Structure
     end
 
@@ -551,6 +643,18 @@ module Aws::DLM
     #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #               availability_zones: ["AvailabilityZone"], # required
     #             },
+    #             cross_region_copy_rules: [
+    #               {
+    #                 target_region: "TargetRegion", # required
+    #                 encrypted: false, # required
+    #                 cmk_arn: "CmkArn",
+    #                 copy_tags: false,
+    #                 retain_rule: {
+    #                   interval: 1,
+    #                   interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                 },
+    #               },
+    #             ],
     #           },
     #         ],
     #         parameters: {
@@ -688,6 +792,18 @@ module Aws::DLM
     #           interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #           availability_zones: ["AvailabilityZone"], # required
     #         },
+    #         cross_region_copy_rules: [
+    #           {
+    #             target_region: "TargetRegion", # required
+    #             encrypted: false, # required
+    #             cmk_arn: "CmkArn",
+    #             copy_tags: false,
+    #             retain_rule: {
+    #               interval: 1,
+    #               interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -713,7 +829,7 @@ module Aws::DLM
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] create_rule
-    #   The create rule.
+    #   The creation rule.
     #   @return [Types::CreateRule]
     #
     # @!attribute [rw] retain_rule
@@ -721,8 +837,12 @@ module Aws::DLM
     #   @return [Types::RetainRule]
     #
     # @!attribute [rw] fast_restore_rule
-    #   Enable fast snapshot restore.
+    #   The rule for enabling fast snapshot restore.
     #   @return [Types::FastRestoreRule]
+    #
+    # @!attribute [rw] cross_region_copy_rules
+    #   The rule for cross-Region snapshot copies.
+    #   @return [Array<Types::CrossRegionCopyRule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Schedule AWS API Documentation
     #
@@ -733,7 +853,8 @@ module Aws::DLM
       :variable_tags,
       :create_rule,
       :retain_rule,
-      :fast_restore_rule)
+      :fast_restore_rule,
+      :cross_region_copy_rules)
       include Aws::Structure
     end
 
@@ -870,6 +991,18 @@ module Aws::DLM
     #                 interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
     #                 availability_zones: ["AvailabilityZone"], # required
     #               },
+    #               cross_region_copy_rules: [
+    #                 {
+    #                   target_region: "TargetRegion", # required
+    #                   encrypted: false, # required
+    #                   cmk_arn: "CmkArn",
+    #                   copy_tags: false,
+    #                   retain_rule: {
+    #                     interval: 1,
+    #                     interval_unit: "DAYS", # accepts DAYS, WEEKS, MONTHS, YEARS
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           ],
     #           parameters: {

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2019-12-19)
+------------------
+
+* Feature - Add context map to get-recommendations and get-personalized-ranking request objects to provide contextual metadata at inference time
+
 1.5.0 (2019-10-23)
 ------------------
 

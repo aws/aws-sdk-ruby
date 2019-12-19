@@ -6227,7 +6227,7 @@ module Aws::EC2
     InstanceTypeInfo.add_member(:current_generation, Shapes::ShapeRef.new(shape: CurrentGenerationFlag, location_name: "currentGeneration"))
     InstanceTypeInfo.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: FreeTierEligibleFlag, location_name: "freeTierEligible"))
     InstanceTypeInfo.add_member(:supported_usage_classes, Shapes::ShapeRef.new(shape: UsageClassTypeList, location_name: "supportedUsageClasses"))
-    InstanceTypeInfo.add_member(:supported_root_devices, Shapes::ShapeRef.new(shape: RootDeviceTypeList, location_name: "supportedRootDevices"))
+    InstanceTypeInfo.add_member(:supported_root_device_types, Shapes::ShapeRef.new(shape: RootDeviceTypeList, location_name: "supportedRootDeviceTypes"))
     InstanceTypeInfo.add_member(:bare_metal, Shapes::ShapeRef.new(shape: BareMetalFlag, location_name: "bareMetal"))
     InstanceTypeInfo.add_member(:hypervisor, Shapes::ShapeRef.new(shape: InstanceTypeHypervisor, location_name: "hypervisor"))
     InstanceTypeInfo.add_member(:processor_info, Shapes::ShapeRef.new(shape: ProcessorInfo, location_name: "processorInfo"))

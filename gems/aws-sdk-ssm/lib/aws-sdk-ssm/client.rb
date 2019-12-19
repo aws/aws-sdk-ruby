@@ -2253,7 +2253,7 @@ module Aws::SSM
     #   resp = client.describe_automation_executions({
     #     filters: [
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, AutomationType, TagKey
     #         values: ["AutomationExecutionFilterValue"], # required
     #       },
     #     ],
@@ -7727,6 +7727,23 @@ module Aws::SSM
     #
     #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Optional metadata that you assign to a resource. You can specify a
+    #   maximum of five tags for an automation. Tags enable you to categorize
+    #   a resource in different ways, such as by purpose, owner, or
+    #   environment. For example, you might want to tag an automation to
+    #   identify an environment or operating system. In this case, you could
+    #   specify the following key name/value pairs:
+    #
+    #   * `Key=environment,Value=test`
+    #
+    #   * `Key=OS,Value=Windows`
+    #
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   action.
+    #
+    #    </note>
+    #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAutomationExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -7762,6 +7779,12 @@ module Aws::SSM
     #         target_location_max_concurrency: "MaxConcurrency",
     #         target_location_max_errors: "MaxErrors",
     #         execution_role_name: "ExecutionRoleName",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -9214,7 +9237,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

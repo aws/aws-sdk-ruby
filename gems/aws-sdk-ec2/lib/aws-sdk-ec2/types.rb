@@ -28309,8 +28309,8 @@ module Aws::EC2
     #   On-Demand.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] supported_root_devices
-    #   Indicates the supported root devices.
+    # @!attribute [rw] supported_root_device_types
+    #   Indicates the supported root device types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] bare_metal
@@ -28390,7 +28390,7 @@ module Aws::EC2
       :current_generation,
       :free_tier_eligible,
       :supported_usage_classes,
-      :supported_root_devices,
+      :supported_root_device_types,
       :bare_metal,
       :hypervisor,
       :processor_info,

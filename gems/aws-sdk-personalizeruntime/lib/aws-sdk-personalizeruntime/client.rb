@@ -270,11 +270,18 @@ module Aws::PersonalizeRuntime
     # @option params [required, Array<String>] :input_list
     #   A list of items (itemId's) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the reranked
-    #   list.
+    #   list. The maximum is 500.
     #
     # @option params [required, String] :user_id
     #   The user for which you want the campaign to provide a personalized
     #   ranking.
+    #
+    # @option params [Hash<String,String>] :context
+    #   The contextual metadata to use when getting recommendations.
+    #   Contextual metadata includes any interaction information that might be
+    #   relevant when getting a user's recommendations, such as the user's
+    #   current location or device type. For more information, see Contextual
+    #   Metadata.
     #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -286,6 +293,9 @@ module Aws::PersonalizeRuntime
     #     campaign_arn: "Arn", # required
     #     input_list: ["ItemID"], # required
     #     user_id: "UserID", # required
+    #     context: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -331,7 +341,14 @@ module Aws::PersonalizeRuntime
     #
     # @option params [Integer] :num_results
     #   The number of results to return. The default is 25. The maximum is
-    #   100.
+    #   500.
+    #
+    # @option params [Hash<String,String>] :context
+    #   The contextual metadata to use when getting recommendations.
+    #   Contextual metadata includes any interaction information that might be
+    #   relevant when getting a user's recommendations, such as the user's
+    #   current location or device type. For more information, see Contextual
+    #   Metadata.
     #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -344,6 +361,9 @@ module Aws::PersonalizeRuntime
     #     item_id: "ItemID",
     #     user_id: "UserID",
     #     num_results: 1,
+    #     context: {
+    #       "AttributeName" => "AttributeValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -373,7 +393,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

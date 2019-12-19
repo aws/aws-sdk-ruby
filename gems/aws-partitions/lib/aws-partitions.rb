@@ -263,6 +263,7 @@ module Aws
             'CodePipeline' => 'codepipeline',
             'CodeStar' => 'codestar',
             'CodeStarNotifications' => 'codestar-notifications',
+            'CodeStarconnections' => 'codestar-connections',
             'CognitoIdentity' => 'cognito-identity',
             'CognitoIdentityProvider' => 'cognito-idp',
             'CognitoSync' => 'cognito-sync',
