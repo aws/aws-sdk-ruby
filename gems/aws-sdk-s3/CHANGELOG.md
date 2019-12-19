@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow downcased option for S3 us-east-1 regionalization.
+
 1.60.0 (2019-12-18)
 ------------------
 
