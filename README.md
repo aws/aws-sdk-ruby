@@ -277,6 +277,7 @@ to be backwards compatible.
 | AWS CodePipeline                                      | CodePipeline                    | 2015-07-09  |
 | AWS CodeStar                                          | CodeStar                        | 2017-04-19  |
 | AWS CodeStar Notifications                            | CodeStarNotifications           | 2019-10-15  |
+| AWS CodeStar connections                              | CodeStarconnections             | 2019-12-01  |
 | AWS Comprehend Medical                                | ComprehendMedical               | 2018-10-30  |
 | AWS Compute Optimizer                                 | ComputeOptimizer                | 2019-11-01  |
 | AWS Config                                            | ConfigService                   | 2014-11-12  |

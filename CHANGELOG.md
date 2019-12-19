@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::PersonalizeRuntime - Updated the API, and documentation for Amazon Personalize Runtime.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+* Feature - Aws::CodeStarconnections - Added support for a new service, AWS CodeStar connections.
+
 * Feature - Support `s3_us_east_1_regional_endpoint` from `SharedConfig`.
 
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.

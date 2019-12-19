@@ -66,6 +66,7 @@ module Aws
     CodePipeline
     CodeStar
     CodeStarNotifications
+    CodeStarconnections
     CognitoIdentity
     CognitoIdentityProvider
     CognitoSync
