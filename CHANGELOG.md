@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EKS - Updated the API, and documentation for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.419 (2019-12-19)
 ------------------
 
