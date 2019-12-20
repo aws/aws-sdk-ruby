@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.420 (2019-12-20)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
