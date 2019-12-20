@@ -26,11 +26,43 @@ module Aws::DeviceFarm
 
     end
 
+    class CannotDeleteException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DeviceFarm::Types::CannotDeleteException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class IdempotencyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::DeviceFarm::Types::IdempotencyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class InternalServiceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::DeviceFarm::Types::InternalServiceException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

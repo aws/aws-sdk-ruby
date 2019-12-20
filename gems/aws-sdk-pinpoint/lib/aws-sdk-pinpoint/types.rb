@@ -1345,6 +1345,7 @@ module Aws::Pinpoint
     #           },
     #           next_activity: "__string",
     #           template_name: "__string",
+    #           template_version: "__string",
     #         },
     #         holdout: {
     #           next_activity: "__string",
@@ -1492,8 +1493,9 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] multi_condition
     #   The settings for a multivariate split activity. This type of
-    #   activity sends participants down one of as many as five paths in a
-    #   journey, based on conditions that you specify.
+    #   activity sends participants down one of as many as five paths
+    #   (including a default *Else* path) in a journey, based on conditions
+    #   that you specify.
     #   @return [Types::MultiConditionalSplitActivity]
     #
     # @!attribute [rw] random_split
@@ -2526,7 +2528,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date, ISO 8601 format, when the campaign was created.
+    #   The date, in ISO 8601 format, when the campaign was created.
     #   @return [String]
     #
     # @!attribute [rw] default_state
@@ -3040,13 +3042,13 @@ module Aws::Pinpoint
     #   @return [Types::WaitTime]
     #
     # @!attribute [rw] false_activity
-    #   The unique identifier for the activity to perform if the condition
-    #   isn't met.
+    #   The unique identifier for the activity to perform if the conditions
+    #   aren't met.
     #   @return [String]
     #
     # @!attribute [rw] true_activity
-    #   The unique identifier for the activity to perform if the condition
-    #   is met.
+    #   The unique identifier for the activity to perform if the conditions
+    #   are met.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ConditionalSplitActivity AWS API Documentation
@@ -3253,15 +3255,19 @@ module Aws::Pinpoint
     #               template_configuration: {
     #                 email_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 push_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 sms_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 voice_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #               },
     #               treatment_description: "__string",
@@ -3406,15 +3412,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           treatment_description: "__string",
@@ -3704,6 +3714,7 @@ module Aws::Pinpoint
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
+    #                 template_version: "__string",
     #               },
     #               holdout: {
     #                 next_activity: "__string",
@@ -4734,15 +4745,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailTemplateRequest AWS API Documentation
     #
     class DeleteEmailTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -4890,15 +4906,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeletePushTemplateRequest AWS API Documentation
     #
     class DeletePushTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -4981,15 +5002,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsTemplateRequest AWS API Documentation
     #
     class DeleteSmsTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -5072,15 +5098,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteVoiceTemplateRequest AWS API Documentation
     #
     class DeleteVoiceTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -5563,6 +5594,7 @@ module Aws::Pinpoint
     #         },
     #         next_activity: "__string",
     #         template_name: "__string",
+    #         template_version: "__string",
     #       }
     #
     # @!attribute [rw] message_config
@@ -5578,12 +5610,29 @@ module Aws::Pinpoint
     #   The name of the email template to use for the message.
     #   @return [String]
     #
+    # @!attribute [rw] template_version
+    #   The unique identifier for the version of the email template to use
+    #   for the message. If specified, this value must match the identifier
+    #   for an existing template version. To retrieve a list of versions and
+    #   version identifiers for a template, use the <link
+    #   linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #
+    #   If you don't specify a value for this property, Amazon Pinpoint
+    #   uses the *active* version of the template. The *active* version is
+    #   typically the version of a template that's been most recently
+    #   reviewed and approved for use, depending on your workflow. It isn't
+    #   necessarily the latest version of a template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailMessageActivity AWS API Documentation
     #
     class EmailMessageActivity < Struct.new(
       :message_config,
       :next_activity,
-      :template_name)
+      :template_name,
+      :template_version)
       include Aws::Structure
     end
 
@@ -5665,7 +5714,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the message template was created.
+    #   The date, in ISO 8601 format, when the message template was created.
     #   @return [String]
     #
     # @!attribute [rw] default_substitutions
@@ -5682,7 +5731,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the message template was last modified.
+    #   The date, in ISO 8601 format, when the message template was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] subject
@@ -5714,6 +5764,12 @@ module Aws::Pinpoint
     #   messages that are based on the message template.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The unique identifier, as an integer, for the active version of the
+    #   message template, or the version of the template that you specified
+    #   by using the version parameter in your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailTemplateResponse AWS API Documentation
     #
     class EmailTemplateResponse < Struct.new(
@@ -5727,7 +5783,8 @@ module Aws::Pinpoint
       :template_description,
       :template_name,
       :template_type,
-      :text_part)
+      :text_part,
+      :version)
       include Aws::Structure
     end
 
@@ -5969,11 +6026,12 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] make
-    #   The manufacturer of the endpoint device, such as Apple or Samsung.
+    #   The manufacturer of the endpoint device, such as apple or samsung.
     #   @return [String]
     #
     # @!attribute [rw] model
-    #   The model name or number of the endpoint device, such as iPhone.
+    #   The model name or number of the endpoint device, such as iPhone or
+    #   SM-G900F.
     #   @return [String]
     #
     # @!attribute [rw] model_version
@@ -5981,7 +6039,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   The platform of the endpoint device, such as iOS or Android.
+    #   The platform of the endpoint device, such as ios.
     #   @return [String]
     #
     # @!attribute [rw] platform_version
@@ -8190,15 +8248,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplateRequest AWS API Documentation
     #
     class GetEmailTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -8608,7 +8671,8 @@ module Aws::Pinpoint
 
     # @!attribute [rw] journey_execution_metrics_response
     #   Provides the results of a query that retrieved the data for a
-    #   standard execution metric that applies to a journey.
+    #   standard execution metric that applies to a journey, and provides
+    #   information about that query.
     #   @return [Types::JourneyExecutionMetricsResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetJourneyExecutionMetricsResponse AWS API Documentation
@@ -8657,15 +8721,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplateRequest AWS API Documentation
     #
     class GetPushTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -8963,15 +9032,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplateRequest AWS API Documentation
     #
     class GetSmsTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -9056,15 +9130,20 @@ module Aws::Pinpoint
     #
     #       {
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceTemplateRequest AWS API Documentation
     #
     class GetVoiceTemplateRequest < Struct.new(
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -9100,6 +9179,11 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] percentage
     #   The percentage of participants who shouldn't continue the journey.
+    #
+    #   To determine which participants are held out, Amazon Pinpoint
+    #   applies a probability-based algorithm to the percentage that you
+    #   specify. Therefore, the actual percentage of participants who are
+    #   held out may not be equal to the percentage that you specify.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/HoldoutActivity AWS API Documentation
@@ -9595,7 +9679,8 @@ module Aws::Pinpoint
     end
 
     # Provides the results of a query that retrieved the data for a standard
-    # execution metric that applies to a journey.
+    # execution metric that applies to a journey, and provides information
+    # about that query.
     #
     # @!attribute [rw] application_id
     #   The unique identifier for the application that the metric applies
@@ -9672,8 +9757,10 @@ module Aws::Pinpoint
     # settings for a journey.
     #
     # @!attribute [rw] activities
-    #   The configuration and other settings for the activities that
-    #   comprise the journey.
+    #   A map that contains a set of Activity objects, one object for each
+    #   activity in the journey. For each Activity object, the key is the
+    #   unique identifier (string) for an activity and the value is the
+    #   settings for the activity.
     #   @return [Hash<String,Types::Activity>]
     #
     # @!attribute [rw] application_id
@@ -9772,7 +9859,8 @@ module Aws::Pinpoint
     #     specified for it. If a journey's status is CLOSED, you can't add
     #     participants to it, and no existing participants can enter the
     #     journey for the first time. However, any existing participants who
-    #     are currently waiting to start an activity may resume the journey.
+    #     are currently waiting to start an activity may continue the
+    #     journey.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -9964,6 +10052,50 @@ module Aws::Pinpoint
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags_model)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTemplateVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "__string",
+    #         page_size: "__string",
+    #         template_name: "__string", # required
+    #         template_type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplateVersionsRequest AWS API Documentation
+    #
+    class ListTemplateVersionsRequest < Struct.new(
+      :next_token,
+      :page_size,
+      :template_name,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] template_versions_response
+    #   Provides information about all the versions of a specific message
+    #   template.
+    #   @return [Types::TemplateVersionsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplateVersionsResponse AWS API Documentation
+    #
+    class ListTemplateVersionsResponse < Struct.new(
+      :template_versions_response)
       include Aws::Structure
     end
 
@@ -10479,15 +10611,19 @@ module Aws::Pinpoint
     #         template_configuration: {
     #           email_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           push_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           sms_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           voice_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #         },
     #         trace_id: "__string",
@@ -10805,7 +10941,8 @@ module Aws::Pinpoint
 
     # Specifies the settings for a multivariate split activity in a journey.
     # This type of activity sends participants down one of as many as five
-    # paths in a journey, based on conditions that you specify.
+    # paths (including a default *Else* path) in a journey, based on
+    # conditions that you specify.
     #
     # @note When making an API call, you may pass MultiConditionalSplitActivity
     #   data as a hash:
@@ -10920,7 +11057,9 @@ module Aws::Pinpoint
     #   @return [Array<Types::MultiConditionalBranch>]
     #
     # @!attribute [rw] default_activity
-    #   The activity to perform by default for any path in the activity.
+    #   The unique identifier for the activity to perform for participants
+    #   who don't meet any of the conditions specified for other paths in
+    #   the activity.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_wait_time
@@ -11393,7 +11532,7 @@ module Aws::Pinpoint
     #   @return [Types::AndroidPushNotificationTemplate]
     #
     # @!attribute [rw] creation_date
-    #   The date when the message template was created.
+    #   The date, in ISO 8601 format, when the message template was created.
     #   @return [String]
     #
     # @!attribute [rw] default
@@ -11418,7 +11557,8 @@ module Aws::Pinpoint
     #   @return [Types::AndroidPushNotificationTemplate]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the message template was last modified.
+    #   The date, in ISO 8601 format, when the message template was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -11440,6 +11580,12 @@ module Aws::Pinpoint
     #   push notification template, this value is PUSH.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The unique identifier, as an integer, for the active version of the
+    #   message template, or the version of the template that you specified
+    #   by using the version parameter in your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PushNotificationTemplateResponse AWS API Documentation
     #
     class PushNotificationTemplateResponse < Struct.new(
@@ -11455,7 +11601,8 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :template_name,
-      :template_type)
+      :template_type,
+      :version)
       include Aws::Structure
     end
 
@@ -11680,6 +11827,12 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] percentage
     #   The percentage of participants to send down the activity path.
+    #
+    #   To determine which participants are sent down each path, Amazon
+    #   Pinpoint applies a probability-based algorithm to the percentages
+    #   that you specify for the paths. Therefore, the actual percentage of
+    #   participants who are sent down a path may not be equal to the
+    #   percentage that you specify.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/RandomSplitEntry AWS API Documentation
@@ -12093,7 +12246,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the message template was created.
+    #   The date, in ISO 8601 format, when the message template was created.
     #   @return [String]
     #
     # @!attribute [rw] default_substitutions
@@ -12105,7 +12258,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the message template was last modified.
+    #   The date, in ISO 8601 format, when the message template was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -12127,6 +12281,12 @@ module Aws::Pinpoint
     #   an SMS template, this value is SMS.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The unique identifier, as an integer, for the active version of the
+    #   message template, or the version of the template that you specified
+    #   by using the version parameter in your request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SMSTemplateResponse AWS API Documentation
     #
     class SMSTemplateResponse < Struct.new(
@@ -12138,7 +12298,8 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :template_name,
-      :template_type)
+      :template_type,
+      :version)
       include Aws::Structure
     end
 
@@ -13124,15 +13285,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           trace_id: "__string",
@@ -13334,15 +13499,19 @@ module Aws::Pinpoint
     #         template_configuration: {
     #           email_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           push_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           sms_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           voice_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #         },
     #         trace_id: "__string",
@@ -13596,15 +13765,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           trace_id: "__string",
@@ -14004,13 +14177,15 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
-    # Specifies the name of the message template to use for the message.
+    # Specifies the name and version of the message template to use for the
+    # message.
     #
     # @note When making an API call, you may pass Template
     #   data as a hash:
     #
     #       {
     #         name: "__string",
+    #         version: "__string",
     #       }
     #
     # @!attribute [rw] name
@@ -14019,10 +14194,54 @@ module Aws::Pinpoint
     #   template.
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   The unique identifier for the version of the message template to use
+    #   for the message. If specified, this value must match the identifier
+    #   for an existing template version. To retrieve a list of versions and
+    #   version identifiers for a template, use the <link
+    #   linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #
+    #   If you don't specify a value for this property, Amazon Pinpoint
+    #   uses the *active* version of the template. The *active* version is
+    #   typically the version of a template that's been most recently
+    #   reviewed and approved for use, depending on your workflow. It isn't
+    #   necessarily the latest version of a template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/Template AWS API Documentation
     #
     class Template < Struct.new(
-      :name)
+      :name,
+      :version)
+      include Aws::Structure
+    end
+
+    # Specifies which version of a message template to use as the active
+    # version of the template.
+    #
+    # @note When making an API call, you may pass TemplateActiveVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         version: "__string",
+    #       }
+    #
+    # @!attribute [rw] version
+    #   The unique identifier for the version of the message template to use
+    #   as the active version of the template. If specified, this value must
+    #   match the identifier for an existing template version. To retrieve a
+    #   list of versions and version identifiers for a template, use the
+    #   <link linkend="templates-template-name-template-type-versions" />
+    #
+    #   Template Versions</link> resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateActiveVersionRequest AWS API Documentation
+    #
+    class TemplateActiveVersionRequest < Struct.new(
+      :version)
       include Aws::Structure
     end
 
@@ -14035,15 +14254,19 @@ module Aws::Pinpoint
     #       {
     #         email_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         push_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         sms_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         voice_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #       }
     #
@@ -14081,7 +14304,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the message template was created.
+    #   The date, in ISO 8601 format, when the message template was created.
     #   @return [String]
     #
     # @!attribute [rw] default_substitutions
@@ -14093,7 +14316,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the message template was last modified.
+    #   The date, in ISO 8601 format, when the message template was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -14112,6 +14336,12 @@ module Aws::Pinpoint
     #
     # @!attribute [rw] template_type
     #   The type of channel that the message template is designed for.
+    #   Possible values are: EMAIL, PUSH, SMS, and VOICE.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The unique identifier, as an integer, for the active version of the
+    #   message template.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateResponse AWS API Documentation
@@ -14124,7 +14354,93 @@ module Aws::Pinpoint
       :tags,
       :template_description,
       :template_name,
-      :template_type)
+      :template_type,
+      :version)
+      include Aws::Structure
+    end
+
+    # Provides information about a specific version of a message template.
+    #
+    # @!attribute [rw] creation_date
+    #   The date, in ISO 8601 format, when the version of the message
+    #   template was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_substitutions
+    #   A JSON object that specifies the default values that are used for
+    #   message variables in the version of the message template. This
+    #   object is a set of key-value pairs. Each key defines a message
+    #   variable in the template. The corresponding value defines the
+    #   default value for that variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date, in ISO 8601 format, when the version of the message
+    #   template was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_description
+    #   The custom description of the version of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   The type of channel that the message template is designed for.
+    #   Possible values are: EMAIL, PUSH, SMS, and VOICE.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The unique identifier for the version of the message template. This
+    #   value is an integer that Amazon Pinpoint automatically increments
+    #   and assigns to each new version of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateVersionResponse AWS API Documentation
+    #
+    class TemplateVersionResponse < Struct.new(
+      :creation_date,
+      :default_substitutions,
+      :last_modified_date,
+      :template_description,
+      :template_name,
+      :template_type,
+      :version)
+      include Aws::Structure
+    end
+
+    # Provides information about all the versions of a specific message
+    # template.
+    #
+    # @!attribute [rw] item
+    #   An array of responses, one for each version of the message template.
+    #   @return [Array<Types::TemplateVersionResponse>]
+    #
+    # @!attribute [rw] message
+    #   The message that's returned from the API for the request to
+    #   retrieve information about all the versions of the message template.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The string to use in a subsequent request to get the next page of
+    #   results in a paginated response. This value is null if there are no
+    #   additional pages.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the request to retrieve information about
+    #   all the versions of the message template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/TemplateVersionsResponse AWS API Documentation
+    #
+    class TemplateVersionsResponse < Struct.new(
+      :item,
+      :message,
+      :next_token,
+      :request_id)
       include Aws::Structure
     end
 
@@ -14707,15 +15023,19 @@ module Aws::Pinpoint
     #               template_configuration: {
     #                 email_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 push_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 sms_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #                 voice_template: {
     #                   name: "__string",
+    #                   version: "__string",
     #                 },
     #               },
     #               treatment_description: "__string",
@@ -14860,15 +15180,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           treatment_description: "__string",
@@ -14953,6 +15277,7 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         create_new_version: false,
     #         email_template_request: { # required
     #           default_substitutions: "__string",
     #           html_part: "__string",
@@ -14964,7 +15289,11 @@ module Aws::Pinpoint
     #           text_part: "__string",
     #         },
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
+    #
+    # @!attribute [rw] create_new_version
+    #   @return [Boolean]
     #
     # @!attribute [rw] email_template_request
     #   Specifies the content and settings for a message template that can
@@ -14974,11 +15303,16 @@ module Aws::Pinpoint
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailTemplateRequest AWS API Documentation
     #
     class UpdateEmailTemplateRequest < Struct.new(
+      :create_new_version,
       :email_template_request,
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -15309,6 +15643,7 @@ module Aws::Pinpoint
     #                 },
     #                 next_activity: "__string",
     #                 template_name: "__string",
+    #                 template_version: "__string",
     #               },
     #               holdout: {
     #                 next_activity: "__string",
@@ -15541,6 +15876,7 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         create_new_version: false,
     #         push_notification_template_request: { # required
     #           adm: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -15598,7 +15934,11 @@ module Aws::Pinpoint
     #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
+    #
+    # @!attribute [rw] create_new_version
+    #   @return [Boolean]
     #
     # @!attribute [rw] push_notification_template_request
     #   Specifies the content and settings for a message template that can
@@ -15609,11 +15949,16 @@ module Aws::Pinpoint
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdatePushTemplateRequest AWS API Documentation
     #
     class UpdatePushTemplateRequest < Struct.new(
+      :create_new_version,
       :push_notification_template_request,
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -15866,6 +16211,7 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         create_new_version: false,
     #         sms_template_request: { # required
     #           body: "__string",
     #           default_substitutions: "__string",
@@ -15875,7 +16221,11 @@ module Aws::Pinpoint
     #           template_description: "__string",
     #         },
     #         template_name: "__string", # required
+    #         version: "__string",
     #       }
+    #
+    # @!attribute [rw] create_new_version
+    #   @return [Boolean]
     #
     # @!attribute [rw] sms_template_request
     #   Specifies the content and settings for a message template that can
@@ -15885,11 +16235,16 @@ module Aws::Pinpoint
     # @!attribute [rw] template_name
     #   @return [String]
     #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateRequest AWS API Documentation
     #
     class UpdateSmsTemplateRequest < Struct.new(
+      :create_new_version,
       :sms_template_request,
-      :template_name)
+      :template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -15900,6 +16255,48 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsTemplateResponse AWS API Documentation
     #
     class UpdateSmsTemplateResponse < Struct.new(
+      :message_body)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTemplateActiveVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_active_version_request: { # required
+    #           version: "__string",
+    #         },
+    #         template_name: "__string", # required
+    #         template_type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] template_active_version_request
+    #   Specifies which version of a message template to use as the active
+    #   version of the template.
+    #   @return [Types::TemplateActiveVersionRequest]
+    #
+    # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] template_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateTemplateActiveVersionRequest AWS API Documentation
+    #
+    class UpdateTemplateActiveVersionRequest < Struct.new(
+      :template_active_version_request,
+      :template_name,
+      :template_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_body
+    #   Provides information about an API request or response.
+    #   @return [Types::MessageBody]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateTemplateActiveVersionResponse AWS API Documentation
+    #
+    class UpdateTemplateActiveVersionResponse < Struct.new(
       :message_body)
       include Aws::Structure
     end
@@ -15946,7 +16343,9 @@ module Aws::Pinpoint
     #   data as a hash:
     #
     #       {
+    #         create_new_version: false,
     #         template_name: "__string", # required
+    #         version: "__string",
     #         voice_template_request: { # required
     #           body: "__string",
     #           default_substitutions: "__string",
@@ -15959,7 +16358,13 @@ module Aws::Pinpoint
     #         },
     #       }
     #
+    # @!attribute [rw] create_new_version
+    #   @return [Boolean]
+    #
     # @!attribute [rw] template_name
+    #   @return [String]
+    #
+    # @!attribute [rw] version
     #   @return [String]
     #
     # @!attribute [rw] voice_template_request
@@ -15970,7 +16375,9 @@ module Aws::Pinpoint
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateVoiceTemplateRequest AWS API Documentation
     #
     class UpdateVoiceTemplateRequest < Struct.new(
+      :create_new_version,
       :template_name,
+      :version,
       :voice_template_request)
       include Aws::Structure
     end
@@ -16224,7 +16631,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date when the message template was created.
+    #   The date, in ISO 8601 format, when the message template was created.
     #   @return [String]
     #
     # @!attribute [rw] default_substitutions
@@ -16247,7 +16654,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date when the message template was last modified.
+    #   The date, in ISO 8601 format, when the message template was last
+    #   modified.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -16267,6 +16675,12 @@ module Aws::Pinpoint
     # @!attribute [rw] template_type
     #   The type of channel that the message template is designed for. For a
     #   voice template, this value is VOICE.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The unique identifier, as an integer, for the active version of the
+    #   message template, or the version of the template that you specified
+    #   by using the version parameter in your request.
     #   @return [String]
     #
     # @!attribute [rw] voice_id
@@ -16292,6 +16706,7 @@ module Aws::Pinpoint
       :template_description,
       :template_name,
       :template_type,
+      :version,
       :voice_id)
       include Aws::Structure
     end
@@ -16578,15 +16993,19 @@ module Aws::Pinpoint
     #             template_configuration: {
     #               email_template: {
     #                 name: "__string",
+    #                 version: "__string",
     #               },
     #               push_template: {
     #                 name: "__string",
+    #                 version: "__string",
     #               },
     #               sms_template: {
     #                 name: "__string",
+    #                 version: "__string",
     #               },
     #               voice_template: {
     #                 name: "__string",
+    #                 version: "__string",
     #               },
     #             },
     #             treatment_description: "__string",
@@ -16731,15 +17150,19 @@ module Aws::Pinpoint
     #         template_configuration: {
     #           email_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           push_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           sms_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           voice_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #         },
     #         treatment_description: "__string",
@@ -17001,6 +17424,7 @@ module Aws::Pinpoint
     #               },
     #               next_activity: "__string",
     #               template_name: "__string",
+    #               template_version: "__string",
     #             },
     #             holdout: {
     #               next_activity: "__string",
@@ -17156,8 +17580,12 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] activities
-    #   The configuration and other settings for the activities that
-    #   comprise the journey.
+    #   A map that contains a set of Activity objects, one object for each
+    #   activity in the journey. For each Activity object, the key is the
+    #   unique identifier (string) for an activity and the value is the
+    #   settings for the activity. An activity identifier can contain a
+    #   maximum of 128 characters. The characters must be alphanumeric
+    #   characters.
     #   @return [Hash<String,Types::Activity>]
     #
     # @!attribute [rw] creation_date
@@ -17215,7 +17643,9 @@ module Aws::Pinpoint
     #   @return [Types::JourneySchedule]
     #
     # @!attribute [rw] start_activity
-    #   The unique identifier for the first activity in the journey.
+    #   The unique identifier for the first activity in the journey. An
+    #   activity identifier can contain a maximum of 128 characters. The
+    #   characters must be alphanumeric characters.
     #   @return [String]
     #
     # @!attribute [rw] start_condition
@@ -17576,15 +18006,19 @@ module Aws::Pinpoint
     #         template_configuration: {
     #           email_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           push_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           sms_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #           voice_template: {
     #             name: "__string",
+    #             version: "__string",
     #           },
     #         },
     #         treatment_description: "__string",

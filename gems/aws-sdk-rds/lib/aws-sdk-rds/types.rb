@@ -6482,7 +6482,8 @@ module Aws::RDS
     #
     # @!attribute [rw] tracked_cluster_id
     #   The DB cluster identifier when the target represents an Aurora DB
-    #   cluster. This field is blank when the target represents an
+    #   cluster. This field is blank when the target represents an RDS DB
+    #   instance.
     #   @return [String]
     #
     # @!attribute [rw] rds_resource_id
@@ -11796,6 +11797,7 @@ module Aws::RDS
     #         use_default_processor_features: false,
     #         deletion_protection: false,
     #         max_allocated_storage: 1,
+    #         certificate_rotation_restart: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -12435,6 +12437,35 @@ module Aws::RDS
     #   storage of the DB instance.
     #   @return [Integer]
     #
+    # @!attribute [rw] certificate_rotation_restart
+    #   A value that indicates whether the DB instance is restarted when you
+    #   rotate your SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your
+    #   SSL/TLS certificate. The certificate is not updated until the DB
+    #   instance is restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, follow the
+    #   appropriate instructions for your DB engine to rotate your SSL/TLS
+    #   certificate:
+    #
+    #   * For more information about rotating your SSL/TLS certificate for
+    #     RDS DB engines, see [ Rotating Your SSL/TLS Certificate.][1] in
+    #     the *Amazon RDS User Guide.*
+    #
+    #   * For more information about rotating your SSL/TLS certificate for
+    #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
+    #     the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -12478,7 +12509,8 @@ module Aws::RDS
       :processor_features,
       :use_default_processor_features,
       :deletion_protection,
-      :max_allocated_storage)
+      :max_allocated_storage,
+      :certificate_rotation_restart)
       include Aws::Structure
     end
 

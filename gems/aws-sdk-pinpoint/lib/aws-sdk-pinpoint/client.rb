@@ -430,15 +430,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           treatment_description: "__string",
@@ -583,15 +587,19 @@ module Aws::Pinpoint
     #       template_configuration: {
     #         email_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         push_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         sms_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         voice_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #       },
     #       treatment_description: "__string",
@@ -691,9 +699,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -804,9 +816,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.email_template.version #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.version #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -820,8 +836,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a message template that you can use in messages that are sent
-    # through the email channel.
+    # Creates a message template for messages that are sent through the
+    # email channel.
     #
     # @option params [required, Types::EmailTemplateRequest] :email_template_request
     #   Specifies the content and settings for a message template that can be
@@ -1107,6 +1123,7 @@ module Aws::Pinpoint
     #             },
     #             next_activity: "__string",
     #             template_name: "__string",
+    #             template_version: "__string",
     #           },
     #           holdout: {
     #             next_activity: "__string",
@@ -1324,6 +1341,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
     #   resp.journey_response.activities["__string"].email.next_activity #=> String
     #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].email.template_version #=> String
     #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
@@ -1417,8 +1435,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a message template that you can use in messages that are sent
-    # through a push notification channel.
+    # Creates a message template for messages that are sent through a push
+    # notification channel.
     #
     # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
     #   Specifies the content and settings for a message template that can be
@@ -1792,8 +1810,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a message template that you can use in messages that are sent
-    # through the SMS channel.
+    # Creates a message template for messages that are sent through the SMS
+    # channel.
     #
     # @option params [required, Types::SMSTemplateRequest] :sms_template_request
     #   Specifies the content and settings for a message template that can be
@@ -1834,8 +1852,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Creates a message template that you can use in messages that are sent
-    # through the voice channel.
+    # Creates a message template for messages that are sent through the
+    # voice channel.
     #
     # @option params [required, String] :template_name
     #
@@ -2249,9 +2267,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -2362,9 +2384,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.email_template.version #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.version #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -2420,10 +2446,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a message template that was designed for use in messages that
-    # were sent through the email channel.
+    # Deletes a message template for messages that were sent through the
+    # email channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::DeleteEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2433,6 +2461,7 @@ module Aws::Pinpoint
     #
     #   resp = client.delete_email_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -2660,6 +2689,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
     #   resp.journey_response.activities["__string"].email.next_activity #=> String
     #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].email.template_version #=> String
     #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
@@ -2753,10 +2783,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a message template that was designed for use in messages that
-    # were sent through a push notification channel.
+    # Deletes a message template for messages that were sent through a push
+    # notification channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::DeletePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2766,6 +2798,7 @@ module Aws::Pinpoint
     #
     #   resp = client.delete_push_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -2951,10 +2984,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a message template that was designed for use in messages that
-    # were sent through the SMS channel.
+    # Deletes a message template for messages that were sent through the SMS
+    # channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::DeleteSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2964,6 +2999,7 @@ module Aws::Pinpoint
     #
     #   resp = client.delete_sms_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -3080,10 +3116,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Deletes a message template that was designed for use in messages that
-    # were sent through the voice channel.
+    # Deletes a message template for messages that were sent through the
+    # voice channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::DeleteVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3093,6 +3131,7 @@ module Aws::Pinpoint
     #
     #   resp = client.delete_voice_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -3426,7 +3465,8 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves information about all of your applications.
+    # Retrieves information about all the applications that are associated
+    # with your Amazon Pinpoint account.
     #
     # @option params [String] :page_size
     #
@@ -3610,9 +3650,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -3723,9 +3767,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.email_template.version #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.version #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -3962,9 +4010,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -4075,9 +4127,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.email_template.version #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.version #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -4208,9 +4264,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -4321,9 +4381,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.voice_template.version #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -4453,9 +4517,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].additional_treatments[0].size_percent #=> Integer
     #   resp.campaigns_response.item[0].additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaigns_response.item[0].additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].additional_treatments[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].application_id #=> String
@@ -4566,9 +4634,13 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].tags #=> Hash
     #   resp.campaigns_response.item[0].tags["__string"] #=> String
     #   resp.campaigns_response.item[0].template_configuration.email_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.email_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.push_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.push_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.sms_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.sms_template.version #=> String
     #   resp.campaigns_response.item[0].template_configuration.voice_template.name #=> String
+    #   resp.campaigns_response.item[0].template_configuration.voice_template.version #=> String
     #   resp.campaigns_response.item[0].treatment_description #=> String
     #   resp.campaigns_response.item[0].treatment_name #=> String
     #   resp.campaigns_response.item[0].version #=> Integer
@@ -4662,10 +4734,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves the content and settings for a message template that you can
-    # use in messages that are sent through the email channel.
+    # Retrieves the content and settings of a message template for messages
+    # that are sent through the email channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::GetEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4675,6 +4749,7 @@ module Aws::Pinpoint
     #
     #   resp = client.get_email_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -4691,6 +4766,7 @@ module Aws::Pinpoint
     #   resp.email_template_response.template_name #=> String
     #   resp.email_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
     #   resp.email_template_response.text_part #=> String
+    #   resp.email_template_response.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailTemplate AWS API Documentation
     #
@@ -5121,6 +5197,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
     #   resp.journey_response.activities["__string"].email.next_activity #=> String
     #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].email.template_version #=> String
     #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
@@ -5361,10 +5438,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves the content and settings for a message template that you can
-    # use in messages that are sent through a push notification channel.
+    # Retrieves the content and settings of a message template for messages
+    # that are sent through a push notification channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::GetPushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5374,6 +5453,7 @@ module Aws::Pinpoint
     #
     #   resp = client.get_push_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -5426,6 +5506,7 @@ module Aws::Pinpoint
     #   resp.push_notification_template_response.template_description #=> String
     #   resp.push_notification_template_response.template_name #=> String
     #   resp.push_notification_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.push_notification_template_response.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetPushTemplate AWS API Documentation
     #
@@ -5814,7 +5895,7 @@ module Aws::Pinpoint
     end
 
     # Retrieves information about the configuration, dimension, and other
-    # settings for all versions of a specific segment that's associated
+    # settings for all the versions of a specific segment that's associated
     # with an application.
     #
     # @option params [required, String] :application_id
@@ -6126,10 +6207,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves the content and settings for a message template that you can
-    # use in messages that are sent through the SMS channel.
+    # Retrieves the content and settings of a message template for messages
+    # that are sent through the SMS channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::GetSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6139,6 +6222,7 @@ module Aws::Pinpoint
     #
     #   resp = client.get_sms_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -6153,6 +6237,7 @@ module Aws::Pinpoint
     #   resp.sms_template_response.template_description #=> String
     #   resp.sms_template_response.template_name #=> String
     #   resp.sms_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.sms_template_response.version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsTemplate AWS API Documentation
     #
@@ -6264,10 +6349,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Retrieves the content and settings for a message template that you can
-    # use in messages that are sent through the voice channel.
+    # Retrieves the content and settings of a message template for messages
+    # that are sent through the voice channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::GetVoiceTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6277,6 +6364,7 @@ module Aws::Pinpoint
     #
     #   resp = client.get_voice_template({
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -6292,6 +6380,7 @@ module Aws::Pinpoint
     #   resp.voice_template_response.template_description #=> String
     #   resp.voice_template_response.template_name #=> String
     #   resp.voice_template_response.template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.voice_template_response.version #=> String
     #   resp.voice_template_response.voice_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetVoiceTemplate AWS API Documentation
@@ -6387,6 +6476,7 @@ module Aws::Pinpoint
     #   resp.journeys_response.item[0].activities["__string"].email.message_config.from_address #=> String
     #   resp.journeys_response.item[0].activities["__string"].email.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].email.template_name #=> String
+    #   resp.journeys_response.item[0].activities["__string"].email.template_version #=> String
     #   resp.journeys_response.item[0].activities["__string"].holdout.next_activity #=> String
     #   resp.journeys_response.item[0].activities["__string"].holdout.percentage #=> Integer
     #   resp.journeys_response.item[0].activities["__string"].multi_condition.branches #=> Array
@@ -6510,6 +6600,53 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Retrieves information about all the versions of a specific message
+    # template.
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [required, String] :template_type
+    #
+    # @return [Types::ListTemplateVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTemplateVersionsResponse#template_versions_response #template_versions_response} => Types::TemplateVersionsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_template_versions({
+    #     next_token: "__string",
+    #     page_size: "__string",
+    #     template_name: "__string", # required
+    #     template_type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_versions_response.item #=> Array
+    #   resp.template_versions_response.item[0].creation_date #=> String
+    #   resp.template_versions_response.item[0].default_substitutions #=> String
+    #   resp.template_versions_response.item[0].last_modified_date #=> String
+    #   resp.template_versions_response.item[0].template_description #=> String
+    #   resp.template_versions_response.item[0].template_name #=> String
+    #   resp.template_versions_response.item[0].template_type #=> String
+    #   resp.template_versions_response.item[0].version #=> String
+    #   resp.template_versions_response.message #=> String
+    #   resp.template_versions_response.next_token #=> String
+    #   resp.template_versions_response.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplateVersions AWS API Documentation
+    #
+    # @overload list_template_versions(params = {})
+    # @param [Hash] params ({})
+    def list_template_versions(params = {}, options = {})
+      req = build_request(:list_template_versions, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about all the message templates that are
     # associated with your Amazon Pinpoint account.
     #
@@ -6546,6 +6683,7 @@ module Aws::Pinpoint
     #   resp.templates_response.item[0].template_description #=> String
     #   resp.templates_response.item[0].template_name #=> String
     #   resp.templates_response.item[0].template_type #=> String, one of "EMAIL", "SMS", "VOICE", "PUSH"
+    #   resp.templates_response.item[0].version #=> String
     #   resp.templates_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ListTemplates AWS API Documentation
@@ -6991,15 +7129,19 @@ module Aws::Pinpoint
     #       template_configuration: {
     #         email_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         push_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         sms_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         voice_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #       },
     #       trace_id: "__string",
@@ -7211,15 +7353,19 @@ module Aws::Pinpoint
     #       template_configuration: {
     #         email_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         push_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         sms_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         voice_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #       },
     #       trace_id: "__string",
@@ -7821,15 +7967,19 @@ module Aws::Pinpoint
     #           template_configuration: {
     #             email_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             push_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             sms_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #             voice_template: {
     #               name: "__string",
+    #               version: "__string",
     #             },
     #           },
     #           treatment_description: "__string",
@@ -7974,15 +8124,19 @@ module Aws::Pinpoint
     #       template_configuration: {
     #         email_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         push_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         sms_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #         voice_template: {
     #           name: "__string",
+    #           version: "__string",
     #         },
     #       },
     #       treatment_description: "__string",
@@ -8082,9 +8236,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.additional_treatments[0].size_percent #=> Integer
     #   resp.campaign_response.additional_treatments[0].state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED", "DELETED"
     #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.email_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.push_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.sms_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.additional_treatments[0].template_configuration.voice_template.version #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_description #=> String
     #   resp.campaign_response.additional_treatments[0].treatment_name #=> String
     #   resp.campaign_response.application_id #=> String
@@ -8195,9 +8353,13 @@ module Aws::Pinpoint
     #   resp.campaign_response.tags #=> Hash
     #   resp.campaign_response.tags["__string"] #=> String
     #   resp.campaign_response.template_configuration.email_template.name #=> String
+    #   resp.campaign_response.template_configuration.email_template.version #=> String
     #   resp.campaign_response.template_configuration.push_template.name #=> String
+    #   resp.campaign_response.template_configuration.push_template.version #=> String
     #   resp.campaign_response.template_configuration.sms_template.name #=> String
+    #   resp.campaign_response.template_configuration.sms_template.version #=> String
     #   resp.campaign_response.template_configuration.voice_template.name #=> String
+    #   resp.campaign_response.template_configuration.voice_template.version #=> String
     #   resp.campaign_response.treatment_description #=> String
     #   resp.campaign_response.treatment_name #=> String
     #   resp.campaign_response.version #=> Integer
@@ -8264,14 +8426,18 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates an existing message template that you can use in messages that
-    # are sent through the email channel.
+    # Updates an existing message template for messages that are sent
+    # through the email channel.
+    #
+    # @option params [Boolean] :create_new_version
     #
     # @option params [required, Types::EmailTemplateRequest] :email_template_request
     #   Specifies the content and settings for a message template that can be
     #   used in messages that are sent through the email channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::UpdateEmailTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8280,6 +8446,7 @@ module Aws::Pinpoint
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_email_template({
+    #     create_new_version: false,
     #     email_template_request: { # required
     #       default_substitutions: "__string",
     #       html_part: "__string",
@@ -8291,6 +8458,7 @@ module Aws::Pinpoint
     #       text_part: "__string",
     #     },
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -8641,6 +8809,7 @@ module Aws::Pinpoint
     #             },
     #             next_activity: "__string",
     #             template_name: "__string",
+    #             template_version: "__string",
     #           },
     #           holdout: {
     #             next_activity: "__string",
@@ -8858,6 +9027,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
     #   resp.journey_response.activities["__string"].email.next_activity #=> String
     #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].email.template_version #=> String
     #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
@@ -8951,7 +9121,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Cancels an active journey.
+    # Cancels (stops) an active journey.
     #
     # @option params [required, String] :application_id
     #
@@ -9036,6 +9206,7 @@ module Aws::Pinpoint
     #   resp.journey_response.activities["__string"].email.message_config.from_address #=> String
     #   resp.journey_response.activities["__string"].email.next_activity #=> String
     #   resp.journey_response.activities["__string"].email.template_name #=> String
+    #   resp.journey_response.activities["__string"].email.template_version #=> String
     #   resp.journey_response.activities["__string"].holdout.next_activity #=> String
     #   resp.journey_response.activities["__string"].holdout.percentage #=> Integer
     #   resp.journey_response.activities["__string"].multi_condition.branches #=> Array
@@ -9129,14 +9300,18 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates an existing message template that you can use in messages that
-    # are sent through a push notification channel.
+    # Updates an existing message template for messages that are sent
+    # through a push notification channel.
+    #
+    # @option params [Boolean] :create_new_version
     #
     # @option params [required, Types::PushNotificationTemplateRequest] :push_notification_template_request
     #   Specifies the content and settings for a message template that can be
     #   used in messages that are sent through a push notification channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::UpdatePushTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9145,6 +9320,7 @@ module Aws::Pinpoint
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_push_template({
+    #     create_new_version: false,
     #     push_notification_template_request: { # required
     #       adm: {
     #         action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -9202,6 +9378,7 @@ module Aws::Pinpoint
     #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -9556,14 +9733,18 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates an existing message template that you can use in messages that
-    # are sent through the SMS channel.
+    # Updates an existing message template for messages that are sent
+    # through the SMS channel.
+    #
+    # @option params [Boolean] :create_new_version
     #
     # @option params [required, Types::SMSTemplateRequest] :sms_template_request
     #   Specifies the content and settings for a message template that can be
     #   used in text messages that are sent through the SMS channel.
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @return [Types::UpdateSmsTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9572,6 +9753,7 @@ module Aws::Pinpoint
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_sms_template({
+    #     create_new_version: false,
     #     sms_template_request: { # required
     #       body: "__string",
     #       default_substitutions: "__string",
@@ -9581,6 +9763,7 @@ module Aws::Pinpoint
     #       template_description: "__string",
     #     },
     #     template_name: "__string", # required
+    #     version: "__string",
     #   })
     #
     # @example Response structure
@@ -9594,6 +9777,45 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def update_sms_template(params = {}, options = {})
       req = build_request(:update_sms_template, params)
+      req.send_request(options)
+    end
+
+    # Changes the status of a specific version of a message template to
+    # *active*.
+    #
+    # @option params [required, Types::TemplateActiveVersionRequest] :template_active_version_request
+    #   Specifies which version of a message template to use as the active
+    #   version of the template.
+    #
+    # @option params [required, String] :template_name
+    #
+    # @option params [required, String] :template_type
+    #
+    # @return [Types::UpdateTemplateActiveVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTemplateActiveVersionResponse#message_body #message_body} => Types::MessageBody
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_template_active_version({
+    #     template_active_version_request: { # required
+    #       version: "__string",
+    #     },
+    #     template_name: "__string", # required
+    #     template_type: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message_body.message #=> String
+    #   resp.message_body.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateTemplateActiveVersion AWS API Documentation
+    #
+    # @overload update_template_active_version(params = {})
+    # @param [Hash] params ({})
+    def update_template_active_version(params = {}, options = {})
+      req = build_request(:update_template_active_version, params)
       req.send_request(options)
     end
 
@@ -9641,10 +9863,14 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Updates an existing message template that you can use in messages that
-    # are sent through the voice channel.
+    # Updates an existing message template for messages that are sent
+    # through the voice channel.
+    #
+    # @option params [Boolean] :create_new_version
     #
     # @option params [required, String] :template_name
+    #
+    # @option params [String] :version
     #
     # @option params [required, Types::VoiceTemplateRequest] :voice_template_request
     #   Specifies the content and settings for a message template that can be
@@ -9657,7 +9883,9 @@ module Aws::Pinpoint
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_voice_template({
+    #     create_new_version: false,
     #     template_name: "__string", # required
+    #     version: "__string",
     #     voice_template_request: { # required
     #       body: "__string",
     #       default_substitutions: "__string",
@@ -9697,7 +9925,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

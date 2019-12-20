@@ -335,6 +335,76 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Creates a new vocabulary filter that you can use to filter words, such
+    # as profane words, from the output of a transcription job.
+    #
+    # @option params [required, String] :vocabulary_filter_name
+    #   The vocabulary filter name. The name must be unique within the account
+    #   that contains it.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the words in the vocabulary filter. All words in
+    #   the filter must be in the same language. The vocabulary filter can
+    #   only be used with transcription jobs in the specified language.
+    #
+    # @option params [Array<String>] :words
+    #   The words to use in the vocabulary filter. Only use characters from
+    #   the character set defined for custom vocabularies. For a list of
+    #   character sets, see [Character Sets for Custom Vocabularies][1].
+    #
+    #   If you provide a list of words in the `Words` parameter, you can't
+    #   use the `VocabularyFilterFileUri` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #
+    # @option params [String] :vocabulary_filter_file_uri
+    #   The Amazon S3 location of a text file used as input to create the
+    #   vocabulary filter. Only use characters from the character set defined
+    #   for custom vocabularies. For a list of character sets, see [Character
+    #   Sets for Custom Vocabularies][1].
+    #
+    #   The specified file must be less than 50 KB of UTF-8 characters.
+    #
+    #   If you provide the location of a list of words in the
+    #   `VocabularyFilterFileUri` parameter, you can't use the `Words`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #
+    # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
+    #   * {Types::CreateVocabularyFilterResponse#language_code #language_code} => String
+    #   * {Types::CreateVocabularyFilterResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vocabulary_filter({
+    #     vocabulary_filter_name: "VocabularyFilterName", # required
+    #     language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #     words: ["Word"],
+    #     vocabulary_filter_file_uri: "Uri",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_filter_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilter AWS API Documentation
+    #
+    # @overload create_vocabulary_filter(params = {})
+    # @param [Hash] params ({})
+    def create_vocabulary_filter(params = {}, options = {})
+      req = build_request(:create_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
     # Deletes a previously submitted transcription job along with any other
     # generated results such as the transcription, models, and so on.
     #
@@ -380,6 +450,28 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Removes a vocabulary filter.
+    #
+    # @option params [required, String] :vocabulary_filter_name
+    #   The name of the vocabulary filter to remove.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vocabulary_filter({
+    #     vocabulary_filter_name: "VocabularyFilterName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyFilter AWS API Documentation
+    #
+    # @overload delete_vocabulary_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_vocabulary_filter(params = {}, options = {})
+      req = build_request(:delete_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
     # Returns information about a transcription job. To see the status of
     # the job, check the `TranscriptionJobStatus` field. If the status is
     # `COMPLETED`, the job is finished and you can find the results at the
@@ -417,6 +509,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.channel_identification #=> Boolean
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
+    #   resp.transcription_job.settings.vocabulary_filter_name #=> String
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #
@@ -465,6 +559,40 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def get_vocabulary(params = {}, options = {})
       req = build_request(:get_vocabulary, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a vocabulary filter.
+    #
+    # @option params [required, String] :vocabulary_filter_name
+    #   The name of the vocabulary filter for which to return information.
+    #
+    # @return [Types::GetVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
+    #   * {Types::GetVocabularyFilterResponse#language_code #language_code} => String
+    #   * {Types::GetVocabularyFilterResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetVocabularyFilterResponse#download_uri #download_uri} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vocabulary_filter({
+    #     vocabulary_filter_name: "VocabularyFilterName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_filter_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.last_modified_time #=> Time
+    #   resp.download_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilter AWS API Documentation
+    #
+    # @overload get_vocabulary_filter(params = {})
+    # @param [Hash] params ({})
+    def get_vocabulary_filter(params = {}, options = {})
+      req = build_request(:get_vocabulary_filter, params)
       req.send_request(options)
     end
 
@@ -583,6 +711,52 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Gets information about vocabulary filters.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request to `ListVocabularyFilters` was
+    #   truncated, include the `NextToken` to fetch the next set of
+    #   collections.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of filters to return in the response. If there are
+    #   fewer results in the list, this response contains only the actual
+    #   results.
+    #
+    # @option params [String] :name_contains
+    #   Filters the response so that it only contains vocabulary filters whose
+    #   name contains the specified string.
+    #
+    # @return [Types::ListVocabularyFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVocabularyFiltersResponse#next_token #next_token} => String
+    #   * {Types::ListVocabularyFiltersResponse#vocabulary_filters #vocabulary_filters} => Array&lt;Types::VocabularyFilterInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vocabulary_filters({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     name_contains: "VocabularyFilterName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.vocabulary_filters #=> Array
+    #   resp.vocabulary_filters[0].vocabulary_filter_name #=> String
+    #   resp.vocabulary_filters[0].language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.vocabulary_filters[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFilters AWS API Documentation
+    #
+    # @overload list_vocabulary_filters(params = {})
+    # @param [Hash] params ({})
+    def list_vocabulary_filters(params = {}, options = {})
+      req = build_request(:list_vocabulary_filters, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
@@ -696,6 +870,8 @@ module Aws::TranscribeService
     #       channel_identification: false,
     #       show_alternatives: false,
     #       max_alternatives: 1,
+    #       vocabulary_filter_name: "VocabularyFilterName",
+    #       vocabulary_filter_method: "remove", # accepts remove, mask
     #     },
     #     job_execution_settings: {
     #       allow_deferred_execution: false,
@@ -722,6 +898,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.channel_identification #=> Boolean
     #   resp.transcription_job.settings.show_alternatives #=> Boolean
     #   resp.transcription_job.settings.max_alternatives #=> Integer
+    #   resp.transcription_job.settings.vocabulary_filter_name #=> String
+    #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
     #
@@ -803,6 +981,68 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Updates a vocabulary filter with a new list of filtered words.
+    #
+    # @option params [required, String] :vocabulary_filter_name
+    #   The name of the vocabulary filter to update.
+    #
+    # @option params [Array<String>] :words
+    #   The words to use in the vocabulary filter. Only use characters from
+    #   the character set defined for custom vocabularies. For a list of
+    #   character sets, see [Character Sets for Custom Vocabularies][1].
+    #
+    #   If you provide a list of words in the `Words` parameter, you can't
+    #   use the `VocabularyFilterFileUri` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #
+    # @option params [String] :vocabulary_filter_file_uri
+    #   The Amazon S3 location of a text file used as input to create the
+    #   vocabulary filter. Only use characters from the character set defined
+    #   for custom vocabularies. For a list of character sets, see [Character
+    #   Sets for Custom Vocabularies][1].
+    #
+    #   The specified file must be less than 50 KB of UTF-8 characters.
+    #
+    #   If you provide the location of a list of words in the
+    #   `VocabularyFilterFileUri` parameter, you can't use the `Words`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #
+    # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVocabularyFilterResponse#vocabulary_filter_name #vocabulary_filter_name} => String
+    #   * {Types::UpdateVocabularyFilterResponse#language_code #language_code} => String
+    #   * {Types::UpdateVocabularyFilterResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vocabulary_filter({
+    #     vocabulary_filter_name: "VocabularyFilterName", # required
+    #     words: ["Word"],
+    #     vocabulary_filter_file_uri: "Uri",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_filter_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US", "en-AU", "fr-CA", "en-GB", "de-DE", "pt-BR", "fr-FR", "it-IT", "ko-KR", "es-ES", "en-IN", "hi-IN", "ar-SA", "ru-RU", "zh-CN", "nl-NL", "id-ID", "ta-IN", "fa-IR", "en-IE", "en-AB", "en-WL", "pt-PT", "te-IN", "tr-TR", "de-CH", "he-IL", "ms-MY", "ja-JP", "ar-AE"
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilter AWS API Documentation
+    #
+    # @overload update_vocabulary_filter(params = {})
+    # @param [Hash] params ({})
+    def update_vocabulary_filter(params = {}, options = {})
+      req = build_request(:update_vocabulary_filter, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -816,7 +1056,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

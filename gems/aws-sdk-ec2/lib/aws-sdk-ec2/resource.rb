@@ -149,7 +149,7 @@ module Aws::EC2
     #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -789,7 +789,7 @@ module Aws::EC2
     #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -923,7 +923,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, launch-template, natgateway, network-acl, network-interface, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -1147,7 +1147,7 @@ module Aws::EC2
     #
     #   keypairinfo = ec2.import_key_pair({
     #     dry_run: false,
-    #     key_name: "String", # required
+    #     key_name: "KeyPairName", # required
     #     public_key_material: "data", # required
     #   })
     # @param [Hash] options ({})
@@ -1298,6 +1298,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
+    #
+    #   * `network-border-group` - The location from where the IP address is
+    #     advertised.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
@@ -1988,6 +1991,7 @@ module Aws::EC2
     #       },
     #     ],
     #     key_names: ["String"],
+    #     key_pair_ids: ["String"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2001,6 +2005,8 @@ module Aws::EC2
     #   The key pair names.
     #
     #   Default: Describes all your key pairs.
+    # @option options [Array<String>] :key_pair_ids
+    #   The IDs of the key pairs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2371,6 +2377,7 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     group_names: ["String"],
+    #     group_ids: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2393,6 +2400,8 @@ module Aws::EC2
     #
     #   Default: Describes all your placement groups, or only those otherwise
     #   specified.
+    # @option options [Array<String>] :group_ids
+    #   The IDs of the placement groups.
     # @return [PlacementGroup::Collection]
     def placement_groups(options = {})
       batches = Enumerator.new do |y|
@@ -3004,6 +3013,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
+    #
+    #   * `network-border-group` - The location from where the IP address is
+    #     advertised.
     #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.

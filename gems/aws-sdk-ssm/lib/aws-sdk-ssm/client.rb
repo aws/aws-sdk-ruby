@@ -902,7 +902,7 @@ module Aws::SSM
     #     ],
     #     attachments: [
     #       {
-    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
+    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl, AttachmentReference
     #         values: ["AttachmentsSourceValue"],
     #         name: "AttachmentIdentifier",
     #       },
@@ -8217,7 +8217,7 @@ module Aws::SSM
     #     content: "DocumentContent", # required
     #     attachments: [
     #       {
-    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl
+    #         key: "SourceUrl", # accepts SourceUrl, S3FileUrl, AttachmentReference
     #         values: ["AttachmentsSourceValue"],
     #         name: "AttachmentIdentifier",
     #       },
@@ -9237,7 +9237,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

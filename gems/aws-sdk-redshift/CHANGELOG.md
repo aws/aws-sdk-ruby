@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-12-20)
+------------------
+
+* Feature - Documentation updates for Amazon Redshift RA3 node types.
+
 1.34.0 (2019-11-25)
 ------------------
 

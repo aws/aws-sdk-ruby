@@ -2072,6 +2072,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:use_default_processor_features, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDefaultProcessorFeatures"))
     ModifyDBInstanceMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     ModifyDBInstanceMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    ModifyDBInstanceMessage.add_member(:certificate_rotation_restart, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CertificateRotationRestart"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))

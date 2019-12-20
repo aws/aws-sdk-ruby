@@ -280,10 +280,10 @@ module Aws::DeviceFarm
     #
     # @option params [Integer] :max_devices
     #   The number of devices that Device Farm can add to your device pool.
-    #   Device Farm adds devices that are available and that meet the criteria
-    #   that you assign for the `rules` parameter. Depending on how many
-    #   devices meet these constraints, your device pool might contain fewer
-    #   devices than the value for this parameter.
+    #   Device Farm adds devices that are available and meet the criteria that
+    #   you assign for the `rules` parameter. Depending on how many devices
+    #   meet these constraints, your device pool might contain fewer devices
+    #   than the value for this parameter.
     #
     #   By specifying the maximum number of devices, you can control the costs
     #   that you incur by running tests.
@@ -358,19 +358,19 @@ module Aws::DeviceFarm
     #   The description of your instance profile.
     #
     # @option params [Boolean] :package_cleanup
-    #   When set to `true`, Device Farm will remove app packages after a test
-    #   run. The default value is `false` for private devices.
+    #   When set to `true`, Device Farm removes app packages after a test run.
+    #   The default value is `false` for private devices.
     #
     # @option params [Array<String>] :exclude_app_packages_from_cleanup
-    #   An array of strings specifying the list of app packages that should
-    #   not be cleaned up from the device after a test run is over.
+    #   An array of strings that specifies the list of app packages that
+    #   should not be cleaned up from the device after a test run.
     #
-    #   The list of packages is only considered if you set `packageCleanup` to
+    #   The list of packages is considered only if you set `packageCleanup` to
     #   `true`.
     #
     # @option params [Boolean] :reboot_after_use
-    #   When set to `true`, Device Farm will reboot the instance after a test
-    #   run. The default value is `true`.
+    #   When set to `true`, Device Farm reboots the instance after a test run.
+    #   The default value is `true`.
     #
     # @return [Types::CreateInstanceProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -412,14 +412,13 @@ module Aws::DeviceFarm
     #   create a network profile.
     #
     # @option params [required, String] :name
-    #   The name you wish to specify for the new network profile.
+    #   The name for the new network profile.
     #
     # @option params [String] :description
     #   The description of the network profile.
     #
     # @option params [String] :type
-    #   The type of network profile you wish to create. Valid values are
-    #   listed below.
+    #   The type of network profile to create. Valid values are listed here.
     #
     # @option params [Integer] :uplink_bandwidth_bits
     #   The data throughput rate in bits per second, as an integer from 0 to
@@ -498,15 +497,15 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Creates a new project.
+    # Creates a project.
     #
     # @option params [required, String] :name
     #   The project's name.
     #
     # @option params [Integer] :default_job_timeout_minutes
     #   Sets the execution timeout value (in minutes) for a project. All test
-    #   runs in this project will use the specified execution timeout value
-    #   unless overridden when scheduling a run.
+    #   runs in this project use the specified execution timeout value unless
+    #   overridden when scheduling a run.
     #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -560,19 +559,19 @@ module Aws::DeviceFarm
     #   create a remote access session.
     #
     # @option params [required, String] :device_arn
-    #   The Amazon Resource Name (ARN) of the device for which you want to
-    #   create a remote access session.
+    #   The ARN of the device for which you want to create a remote access
+    #   session.
     #
     # @option params [String] :instance_arn
     #   The Amazon Resource Name (ARN) of the device instance for which you
     #   want to create a remote access session.
     #
     # @option params [String] :ssh_public_key
-    #   *Ignored.* The public key of the `ssh` key pair you want to use for
-    #   connecting to remote devices in your remote debugging session. This is
-    #   only required if `remoteDebugEnabled` is set to `true`.
+    #   Ignored. The public key of the `ssh` key pair you want to use for
+    #   connecting to remote devices in your remote debugging session. This
+    #   key is required only if `remoteDebugEnabled` is set to `true`.
     #
-    #   *Remote debugging is [no longer supported][1].*
+    #   Remote debugging is [no longer supported][1].
     #
     #
     #
@@ -582,7 +581,7 @@ module Aws::DeviceFarm
     #   Set to `true` if you want to access devices remotely for debugging in
     #   your remote access session.
     #
-    #   *Remote debugging is [no longer supported][1].*
+    #   Remote debugging is [no longer supported][1].
     #
     #
     #
@@ -597,15 +596,15 @@ module Aws::DeviceFarm
     #   remote access session.
     #
     # @option params [String] :name
-    #   The name of the remote access session that you wish to create.
+    #   The name of the remote access session to create.
     #
     # @option params [String] :client_id
     #   Unique identifier for the client. If you want access to multiple
     #   devices on the same client, you should pass the same `clientId` value
-    #   in each call to `CreateRemoteAccessSession`. This is required only if
-    #   `remoteDebugEnabled` is set to `true`.
+    #   in each call to `CreateRemoteAccessSession`. This identifier is
+    #   required only if `remoteDebugEnabled` is set to `true`.
     #
-    #   *Remote debugging is [no longer supported][1].*
+    #   Remote debugging is [no longer supported][1].
     #
     #
     #
@@ -618,24 +617,24 @@ module Aws::DeviceFarm
     #   The interaction mode of the remote access session. Valid values are:
     #
     #   * INTERACTIVE: You can interact with the iOS device by viewing,
-    #     touching, and rotating the screen. You **cannot** run XCUITest
+    #     touching, and rotating the screen. You cannot run XCUITest
     #     framework-based tests in this mode.
     #
-    #   * NO\_VIDEO: You are connected to the device but cannot interact with
+    #   * NO\_VIDEO: You are connected to the device, but cannot interact with
     #     it or view the screen. This mode has the fastest test execution
-    #     speed. You **can** run XCUITest framework-based tests in this mode.
+    #     speed. You can run XCUITest framework-based tests in this mode.
     #
-    #   * VIDEO\_ONLY: You can view the screen but cannot touch or rotate it.
-    #     You **can** run XCUITest framework-based tests and watch the screen
-    #     in this mode.
+    #   * VIDEO\_ONLY: You can view the screen, but cannot touch or rotate it.
+    #     You can run XCUITest framework-based tests and watch the screen in
+    #     this mode.
     #
     # @option params [Boolean] :skip_app_resign
-    #   When set to `true`, for private devices, Device Farm will not sign
+    #   When set to `true`, for private devices, Device Farm does not sign
     #   your app again. For public devices, Device Farm always signs your apps
-    #   again and this parameter has no effect.
+    #   again.
     #
-    #   For more information about how Device Farm re-signs your app(s), see
-    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #   For more information on how Device Farm modifies your uploads during
+    #   tests, see [Do you modify my app?][1]
     #
     #
     #
@@ -756,107 +755,164 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Creates a Selenium testing project. Projects are used to track
+    # TestGridSession instances.
+    #
+    # @option params [required, String] :name
+    #   Human-readable name of the Selenium testing project.
+    #
+    # @option params [String] :description
+    #   Human-readable description of the project.
+    #
+    # @return [Types::CreateTestGridProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTestGridProjectResult#test_grid_project #test_grid_project} => Types::TestGridProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_test_grid_project({
+    #     name: "ResourceName", # required
+    #     description: "ResourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_project.arn #=> String
+    #   resp.test_grid_project.name #=> String
+    #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateTestGridProject AWS API Documentation
+    #
+    # @overload create_test_grid_project(params = {})
+    # @param [Hash] params ({})
+    def create_test_grid_project(params = {}, options = {})
+      req = build_request(:create_test_grid_project, params)
+      req.send_request(options)
+    end
+
+    # Creates a signed, short-term URL that can be passed to a Selenium
+    # `RemoteWebDriver` constructor.
+    #
+    # @option params [required, String] :project_arn
+    #   ARN (from CreateTestGridProject or ListTestGridProjects) to associate
+    #   with the short-term URL.
+    #
+    # @option params [required, Integer] :expires_in_seconds
+    #   Lifetime, in seconds, of the URL.
+    #
+    # @return [Types::CreateTestGridUrlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTestGridUrlResult#url #url} => String
+    #   * {Types::CreateTestGridUrlResult#expires #expires} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_test_grid_url({
+    #     project_arn: "DeviceFarmArn", # required
+    #     expires_in_seconds: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #   resp.expires #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateTestGridUrl AWS API Documentation
+    #
+    # @overload create_test_grid_url(params = {})
+    # @param [Hash] params ({})
+    def create_test_grid_url(params = {}, options = {})
+      req = build_request(:create_test_grid_url, params)
+      req.send_request(options)
+    end
+
     # Uploads an app or test scripts.
     #
     # @option params [required, String] :project_arn
     #   The ARN of the project for the upload.
     #
     # @option params [required, String] :name
-    #   The upload's file name. The name should not contain the '/'
-    #   character. If uploading an iOS app, the file name needs to end with
-    #   the `.ipa` extension. If uploading an Android app, the file name needs
-    #   to end with the `.apk` extension. For all others, the file name must
-    #   end with the `.zip` file extension.
+    #   The upload's file name. The name should not contain any forward
+    #   slashes (`/`). If you are uploading an iOS app, the file name must end
+    #   with the `.ipa` extension. If you are uploading an Android app, the
+    #   file name must end with the `.apk` extension. For all others, the file
+    #   name must end with the `.zip` file extension.
     #
     # @option params [required, String] :type
     #   The upload's upload type.
     #
     #   Must be one of the following values:
     #
-    #   * ANDROID\_APP: An Android upload.
+    #   * ANDROID\_APP
     #
-    #   * IOS\_APP: An iOS upload.
+    #   * IOS\_APP
     #
-    #   * WEB\_APP: A web application upload.
+    #   * WEB\_APP
     #
-    #   * EXTERNAL\_DATA: An external data upload.
+    #   * EXTERNAL\_DATA
     #
-    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload.
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE
     #
-    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
-    #     package upload.
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE
     #
-    #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package upload.
+    #   * APPIUM\_PYTHON\_TEST\_PACKAGE
     #
-    #   * APPIUM\_NODE\_TEST\_PACKAGE: An Appium Node.js test package upload.
+    #   * APPIUM\_NODE\_TEST\_PACKAGE
     #
-    #   * APPIUM\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload.
+    #   * APPIUM\_RUBY\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
-    #     package upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE
     #
-    #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
+    #   * CALABASH\_TEST\_PACKAGE
     #
-    #   * INSTRUMENTATION\_TEST\_PACKAGE: An instrumentation upload.
+    #   * INSTRUMENTATION\_TEST\_PACKAGE
     #
-    #   * UIAUTOMATION\_TEST\_PACKAGE: A uiautomation test package upload.
+    #   * UIAUTOMATION\_TEST\_PACKAGE
     #
-    #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
+    #   * UIAUTOMATOR\_TEST\_PACKAGE
     #
-    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE
     #
-    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
-    #     upload.
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC
     #
-    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
-    #     upload.
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC
     #
-    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #   * APPIUM\_PYTHON\_TEST\_SPEC
     #
-    #   * APPIUM\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload.
+    #   * APPIUM\_NODE\_TEST\_SPEC
     #
-    #   * APPIUM\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload.
+    #   * APPIUM\_RUBY\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
-    #     spec upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload for a
-    #     web app.
+    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC
     #
-    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #   * INSTRUMENTATION\_TEST\_SPEC
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC
     #
-    #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
-    #   Device Farm throws an `ArgumentException` error.
+    #   If you call `CreateUpload` with `WEB_APP` specified, AWS Device Farm
+    #   throws an `ArgumentException` error.
     #
     # @option params [String] :content_type
-    #   The upload's content type (for example,
-    #   "application/octet-stream").
+    #   The upload's content type (for example, `application/octet-stream`).
     #
     # @return [Types::CreateUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -924,16 +980,16 @@ module Aws::DeviceFarm
     #   manage your configurations more easily.
     #
     # @option params [required, String] :vpce_service_name
-    #   The name of the VPC endpoint service running inside your AWS account
-    #   that you want Device Farm to test.
+    #   The name of the VPC endpoint service running in your AWS account that
+    #   you want Device Farm to test.
     #
     # @option params [required, String] :service_dns_name
     #   The DNS name of the service running in your VPC that you want Device
     #   Farm to test.
     #
     # @option params [String] :vpce_configuration_description
-    #   An optional description, providing more details about your VPC
-    #   endpoint configuration.
+    #   An optional description that provides details about your VPC endpoint
+    #   configuration.
     #
     # @return [Types::CreateVPCEConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -970,7 +1026,7 @@ module Aws::DeviceFarm
     #
     # @option params [required, String] :arn
     #   Represents the Amazon Resource Name (ARN) of the Device Farm device
-    #   pool you wish to delete.
+    #   pool to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1029,8 +1085,7 @@ module Aws::DeviceFarm
     # Deletes a network profile.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the network profile you want to
-    #   delete.
+    #   The ARN of the network profile to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1051,11 +1106,11 @@ module Aws::DeviceFarm
 
     # Deletes an AWS Device Farm project, given the project ARN.
     #
-    # **Note** Deleting this resource does not stop an in-progress run.
+    # Deleting this resource does not stop an in-progress run.
     #
     # @option params [required, String] :arn
     #   Represents the Amazon Resource Name (ARN) of the Device Farm project
-    #   you wish to delete.
+    #   to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1125,10 +1180,10 @@ module Aws::DeviceFarm
 
     # Deletes the run, given the run ARN.
     #
-    # **Note** Deleting this resource does not stop an in-progress run.
+    # Deleting this resource does not stop an in-progress run.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) for the run you wish to delete.
+    #   The Amazon Resource Name (ARN) for the run to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1160,11 +1215,40 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Deletes a Selenium testing project and all content generated under it.
+    #
+    # You cannot undo this operation.
+    #
+    # <note markdown="1"> You cannot delete a project if it has active sessions.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the project to delete, from CreateTestGridProject or
+    #   ListTestGridProjects.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_test_grid_project({
+    #     project_arn: "DeviceFarmArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteTestGridProject AWS API Documentation
+    #
+    # @overload delete_test_grid_project(params = {})
+    # @param [Hash] params ({})
+    def delete_test_grid_project(params = {}, options = {})
+      req = build_request(:delete_test_grid_project, params)
+      req.send_request(options)
+    end
+
     # Deletes an upload given the upload ARN.
     #
     # @option params [required, String] :arn
-    #   Represents the Amazon Resource Name (ARN) of the Device Farm upload
-    #   you wish to delete.
+    #   Represents the Amazon Resource Name (ARN) of the Device Farm upload to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1220,8 +1304,8 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Returns the number of unmetered iOS and/or unmetered Android devices
-    # that have been purchased by the account.
+    # Returns the number of unmetered iOS or unmetered Android devices that
+    # have been purchased by the account.
     #
     # @return [Types::GetAccountSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1368,7 +1452,7 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Returns information about a device instance belonging to a private
+    # Returns information about a device instance that belongs to a private
     # device fleet.
     #
     # @option params [required, String] :arn
@@ -1474,49 +1558,49 @@ module Aws::DeviceFarm
     #
     #   Allowed values include the following:
     #
-    #   * BUILTIN\_FUZZ: The built-in fuzz type.
+    #   * BUILTIN\_FUZZ.
     #
-    #   * BUILTIN\_EXPLORER: For Android, an app explorer that will traverse
-    #     an Android app, interacting with it and capturing screenshots at the
+    #   * BUILTIN\_EXPLORER. For Android, an app explorer that traverses an
+    #     Android app, interacting with it and capturing screenshots at the
     #     same time.
     #
-    #   * APPIUM\_JAVA\_JUNIT: The Appium Java JUnit type.
+    #   * APPIUM\_JAVA\_JUNIT.
     #
-    #   * APPIUM\_JAVA\_TESTNG: The Appium Java TestNG type.
+    #   * APPIUM\_JAVA\_TESTNG.
     #
-    #   * APPIUM\_PYTHON: The Appium Python type.
+    #   * APPIUM\_PYTHON.
     #
-    #   * APPIUM\_NODE: The Appium Node.js type.
+    #   * APPIUM\_NODE.
     #
-    #   * APPIUM\_RUBY: The Appium Ruby type.
+    #   * APPIUM\_RUBY.
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT: The Appium Java JUnit type for web apps.
+    #   * APPIUM\_WEB\_JAVA\_JUNIT.
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG: The Appium Java TestNG type for web apps.
+    #   * APPIUM\_WEB\_JAVA\_TESTNG.
     #
-    #   * APPIUM\_WEB\_PYTHON: The Appium Python type for web apps.
+    #   * APPIUM\_WEB\_PYTHON.
     #
-    #   * APPIUM\_WEB\_NODE: The Appium Node.js type for web apps.
+    #   * APPIUM\_WEB\_NODE.
     #
-    #   * APPIUM\_WEB\_RUBY: The Appium Ruby type for web apps.
+    #   * APPIUM\_WEB\_RUBY.
     #
-    #   * CALABASH: The Calabash type.
+    #   * CALABASH.
     #
-    #   * INSTRUMENTATION: The Instrumentation type.
+    #   * INSTRUMENTATION.
     #
-    #   * UIAUTOMATION: The uiautomation type.
+    #   * UIAUTOMATION.
     #
-    #   * UIAUTOMATOR: The uiautomator type.
+    #   * UIAUTOMATOR.
     #
-    #   * XCTEST: The Xcode test type.
+    #   * XCTEST.
     #
-    #   * XCTEST\_UI: The Xcode UI test type.
+    #   * XCTEST\_UI.
     #
     # @option params [Types::ScheduleRunTest] :test
     #   Information about the uploaded test to be run against the device pool.
     #
     # @option params [Types::ScheduleRunConfiguration] :configuration
-    #   An object containing information about the settings for a run.
+    #   An object that contains information about the settings for a run.
     #
     # @return [Types::GetDevicePoolCompatibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1681,7 +1765,7 @@ module Aws::DeviceFarm
     # Returns information about the specified instance profile.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of your instance profile.
+    #   The Amazon Resource Name (ARN) of an instance profile.
     #
     # @return [Types::GetInstanceProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1816,8 +1900,7 @@ module Aws::DeviceFarm
     # Returns information about a network profile.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the network profile you want to
-    #   return information about.
+    #   The ARN of the network profile to return information about.
     #
     # @return [Types::GetNetworkProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1857,9 +1940,9 @@ module Aws::DeviceFarm
     # by an AWS account. The response indicates how many offerings are
     # currently available and the offerings that will be available in the
     # next period. The API returns a `NotEligible` error if the user is not
-    # permitted to invoke the operation. Please contact
-    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # permitted to invoke the operation. If you must be able to invoke this
+    # operation, contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2355,6 +2438,88 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Retrieves information about a Selenium testing project.
+    #
+    # @option params [required, String] :project_arn
+    #   The ARN of the Selenium testing project, from either
+    #   CreateTestGridProject or ListTestGridProjects.
+    #
+    # @return [Types::GetTestGridProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestGridProjectResult#test_grid_project #test_grid_project} => Types::TestGridProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_grid_project({
+    #     project_arn: "DeviceFarmArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_project.arn #=> String
+    #   resp.test_grid_project.name #=> String
+    #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestGridProject AWS API Documentation
+    #
+    # @overload get_test_grid_project(params = {})
+    # @param [Hash] params ({})
+    def get_test_grid_project(params = {}, options = {})
+      req = build_request(:get_test_grid_project, params)
+      req.send_request(options)
+    end
+
+    # A session is an instance of a browser created through a
+    # `RemoteWebDriver` with the URL from CreateTestGridUrlResult$url. You
+    # can use the following to look up sessions:
+    #
+    # * The session ARN (GetTestGridSessionRequest$sessionArn).
+    #
+    # * The project ARN and a session ID
+    #   (GetTestGridSessionRequest$projectArn and
+    #   GetTestGridSessionRequest$sessionId).
+    #
+    # @option params [String] :project_arn
+    #   The ARN for the project that this session belongs to. See
+    #   CreateTestGridProject and ListTestGridProjects.
+    #
+    # @option params [String] :session_id
+    #   An ID associated with this session.
+    #
+    # @option params [String] :session_arn
+    #   An ARN that uniquely identifies a TestGridSession.
+    #
+    # @return [Types::GetTestGridSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTestGridSessionResult#test_grid_session #test_grid_session} => Types::TestGridSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_test_grid_session({
+    #     project_arn: "DeviceFarmArn",
+    #     session_id: "ResourceId",
+    #     session_arn: "DeviceFarmArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_session.arn #=> String
+    #   resp.test_grid_session.status #=> String, one of "ACTIVE", "CLOSED", "ERRORED"
+    #   resp.test_grid_session.created #=> Time
+    #   resp.test_grid_session.ended #=> Time
+    #   resp.test_grid_session.billing_minutes #=> Float
+    #   resp.test_grid_session.selenium_properties #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestGridSession AWS API Documentation
+    #
+    # @overload get_test_grid_session(params = {})
+    # @param [Hash] params ({})
+    def get_test_grid_session(params = {}, options = {})
+      req = build_request(:get_test_grid_session, params)
+      req.send_request(options)
+    end
+
     # Gets information about an upload.
     #
     # @option params [required, String] :arn
@@ -2450,8 +2615,7 @@ module Aws::DeviceFarm
     #   which you are requesting information.
     #
     # @option params [required, String] :app_arn
-    #   The Amazon Resource Name (ARN) of the app about which you are
-    #   requesting information.
+    #   The ARN of the app about which you are requesting information.
     #
     # @return [Types::InstallToRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2505,18 +2669,18 @@ module Aws::DeviceFarm
     # Gets information about artifacts.
     #
     # @option params [required, String] :arn
-    #   The Run, Job, Suite, or Test ARN.
+    #   The run, job, suite, or test ARN.
     #
     # @option params [required, String] :type
     #   The artifacts' type.
     #
     #   Allowed values include:
     #
-    #   * FILE: The artifacts are files.
+    #   * FILE
     #
-    #   * LOG: The artifacts are logs.
+    #   * LOG
     #
-    #   * SCREENSHOT: The artifacts are screenshots.
+    #   * SCREENSHOT
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2569,8 +2733,8 @@ module Aws::DeviceFarm
     # one or more AWS accounts.
     #
     # @option params [Integer] :max_results
-    #   An integer specifying the maximum number of items you want to return
-    #   in the API response.
+    #   An integer that specifies the maximum number of items you want to
+    #   return in the API response.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2732,40 +2896,37 @@ module Aws::DeviceFarm
     #
     #     Allowed values include:
     #
-    #     * ARN: The Amazon Resource Name (ARN) of the device. For example,
-    #       "arn:aws:devicefarm:us-west-2::device:12345Example".
+    #     * ARN: The Amazon Resource Name (ARN) of the device (for example,
+    #       `arn:aws:devicefarm:us-west-2::device:12345Example`).
     #
-    #     * PLATFORM: The device platform. Valid values are "ANDROID" or
-    #       "IOS".
+    #     * PLATFORM: The device platform. Valid values are ANDROID or IOS.
     #
-    #     * OS\_VERSION: The operating system version. For example,
-    #       "10.3.2".
+    #     * OS\_VERSION: The operating system version (for example, 10.3.2).
     #
-    #     * MODEL: The device model. For example, "iPad 5th Gen".
+    #     * MODEL: The device model (for example, iPad 5th Gen).
     #
     #     * AVAILABILITY: The current availability of the device. Valid values
-    #       are "AVAILABLE", "HIGHLY\_AVAILABLE", "BUSY", or
-    #       "TEMPORARY\_NOT\_AVAILABLE".
+    #       are AVAILABLE, HIGHLY\_AVAILABLE, BUSY, or
+    #       TEMPORARY\_NOT\_AVAILABLE.
     #
-    #     * FORM\_FACTOR: The device form factor. Valid values are "PHONE"
-    #       or "TABLET".
+    #     * FORM\_FACTOR: The device form factor. Valid values are PHONE or
+    #       TABLET.
     #
-    #     * MANUFACTURER: The device manufacturer. For example, "Apple".
+    #     * MANUFACTURER: The device manufacturer (for example, Apple).
     #
     #     * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
-    #       access. Valid values are "TRUE" or "FALSE".
+    #       access. Valid values are TRUE or FALSE.
     #
     #     * REMOTE\_DEBUG\_ENABLED: Whether the device is enabled for remote
-    #       debugging. Valid values are "TRUE" or "FALSE". *This attribute
-    #       will be ignored, as remote debugging is [no longer supported][1].*
+    #       debugging. Valid values are TRUE or FALSE. Because remote
+    #       debugging is [no longer supported][1], this attribute is ignored.
     #
     #     * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
     #       instance.
     #
     #     * INSTANCE\_LABELS: The label of the device instance.
     #
-    #     * FLEET\_TYPE: The fleet type. Valid values are "PUBLIC" or
-    #       "PRIVATE".
+    #     * FLEET\_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.
     #
     #   * Operator: The filter operator.
     #
@@ -2789,9 +2950,9 @@ module Aws::DeviceFarm
     #
     #     * The other operators require an array with a single element.
     #
-    #     * In a request, the AVAILABILITY attribute takes "AVAILABLE",
-    #       "HIGHLY\_AVAILABLE", "BUSY", or "TEMPORARY\_NOT\_AVAILABLE"
-    #       as values.
+    #     * In a request, the AVAILABILITY attribute takes the following
+    #       values: AVAILABLE, HIGHLY\_AVAILABLE, BUSY, or
+    #       TEMPORARY\_NOT\_AVAILABLE.
     #
     #
     #
@@ -2883,8 +3044,8 @@ module Aws::DeviceFarm
     # Returns information about all the instance profiles in an AWS account.
     #
     # @option params [Integer] :max_results
-    #   An integer specifying the maximum number of items you want to return
-    #   in the API response.
+    #   An integer that specifies the maximum number of items you want to
+    #   return in the API response.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3035,8 +3196,8 @@ module Aws::DeviceFarm
     #   list network profiles.
     #
     # @option params [String] :type
-    #   The type of network profile you wish to return information about.
-    #   Valid values are listed below.
+    #   The type of network profile to return information about. Valid values
+    #   are listed here.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3087,7 +3248,7 @@ module Aws::DeviceFarm
     # `NotEligible` error if the caller is not permitted to invoke the
     # operation. Contact
     # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # if you must be able to invoke this operation.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3125,9 +3286,9 @@ module Aws::DeviceFarm
     # renewal transactions for an AWS account. The list is paginated and
     # ordered by a descending timestamp (most recent transactions are
     # first). The API returns a `NotEligible` error if the user is not
-    # permitted to invoke the operation. Please contact
-    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # permitted to invoke the operation. If you must be able to invoke this
+    # operation, contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3270,9 +3431,8 @@ module Aws::DeviceFarm
     # through the API. Each offering record indicates the recurring price
     # per unit and the frequency for that offering. The API returns a
     # `NotEligible` error if the user is not permitted to invoke the
-    # operation. Please contact
-    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # operation. If you must be able to invoke this operation, contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -3840,9 +4000,9 @@ module Aws::DeviceFarm
     # List the tags for an AWS Device Farm resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource(s) for which to list
-    #   tags. You can associate tags with the following Device Farm resources:
-    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   The Amazon Resource Name (ARN) of the resource or resources for which
+    #   to list tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
     #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
     #   `VPCE_CONFIGURATION`.
     #
@@ -3853,7 +4013,7 @@ module Aws::DeviceFarm
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "AmazonResourceName", # required
+    #     resource_arn: "DeviceFarmArn", # required
     #   })
     #
     # @example Response structure
@@ -3868,6 +4028,196 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of all Selenium testing projects in your account.
+    #
+    # @option params [Integer] :max_result
+    #   Return no more than this number of results.
+    #
+    # @option params [String] :next_token
+    #   From a response, used to continue a paginated listing.
+    #
+    # @return [Types::ListTestGridProjectsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestGridProjectsResult#test_grid_projects #test_grid_projects} => Array&lt;Types::TestGridProject&gt;
+    #   * {Types::ListTestGridProjectsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_grid_projects({
+    #     max_result: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_projects #=> Array
+    #   resp.test_grid_projects[0].arn #=> String
+    #   resp.test_grid_projects[0].name #=> String
+    #   resp.test_grid_projects[0].description #=> String
+    #   resp.test_grid_projects[0].created #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestGridProjects AWS API Documentation
+    #
+    # @overload list_test_grid_projects(params = {})
+    # @param [Hash] params ({})
+    def list_test_grid_projects(params = {}, options = {})
+      req = build_request(:list_test_grid_projects, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the actions taken in a TestGridSession.
+    #
+    # @option params [required, String] :session_arn
+    #   The ARN of the session to retrieve.
+    #
+    # @option params [Integer] :max_result
+    #   The maximum number of sessions to return per response.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestGridSessionActionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestGridSessionActionsResult#actions #actions} => Array&lt;Types::TestGridSessionAction&gt;
+    #   * {Types::ListTestGridSessionActionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_grid_session_actions({
+    #     session_arn: "DeviceFarmArn", # required
+    #     max_result: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.actions #=> Array
+    #   resp.actions[0].action #=> String
+    #   resp.actions[0].started #=> Time
+    #   resp.actions[0].duration #=> Integer
+    #   resp.actions[0].status_code #=> String
+    #   resp.actions[0].request_method #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestGridSessionActions AWS API Documentation
+    #
+    # @overload list_test_grid_session_actions(params = {})
+    # @param [Hash] params ({})
+    def list_test_grid_session_actions(params = {}, options = {})
+      req = build_request(:list_test_grid_session_actions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of artifacts created during the session.
+    #
+    # @option params [required, String] :session_arn
+    #   The ARN of a TestGridSession.
+    #
+    # @option params [String] :type
+    #   Limit results to a specified type of artifact.
+    #
+    # @option params [Integer] :max_result
+    #   The maximum number of results to be returned by a request.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestGridSessionArtifactsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestGridSessionArtifactsResult#artifacts #artifacts} => Array&lt;Types::TestGridSessionArtifact&gt;
+    #   * {Types::ListTestGridSessionArtifactsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_grid_session_artifacts({
+    #     session_arn: "DeviceFarmArn", # required
+    #     type: "VIDEO", # accepts VIDEO, LOG
+    #     max_result: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.artifacts #=> Array
+    #   resp.artifacts[0].filename #=> String
+    #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "VIDEO", "SELENIUM_LOG"
+    #   resp.artifacts[0].url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestGridSessionArtifacts AWS API Documentation
+    #
+    # @overload list_test_grid_session_artifacts(params = {})
+    # @param [Hash] params ({})
+    def list_test_grid_session_artifacts(params = {}, options = {})
+      req = build_request(:list_test_grid_session_artifacts, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of sessions for a TestGridProject.
+    #
+    # @option params [required, String] :project_arn
+    #   ARN of a TestGridProject.
+    #
+    # @option params [String] :status
+    #   Return only sessions in this state.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   Return only sessions created after this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   Return only sessions created before this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time_after
+    #   Return only sessions that ended after this time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time_before
+    #   Return only sessions that ended before this time.
+    #
+    # @option params [Integer] :max_result
+    #   Return only this many results at a time.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestGridSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestGridSessionsResult#test_grid_sessions #test_grid_sessions} => Array&lt;Types::TestGridSession&gt;
+    #   * {Types::ListTestGridSessionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_grid_sessions({
+    #     project_arn: "DeviceFarmArn", # required
+    #     status: "ACTIVE", # accepts ACTIVE, CLOSED, ERRORED
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     end_time_after: Time.now,
+    #     end_time_before: Time.now,
+    #     max_result: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_sessions #=> Array
+    #   resp.test_grid_sessions[0].arn #=> String
+    #   resp.test_grid_sessions[0].status #=> String, one of "ACTIVE", "CLOSED", "ERRORED"
+    #   resp.test_grid_sessions[0].created #=> Time
+    #   resp.test_grid_sessions[0].ended #=> Time
+    #   resp.test_grid_sessions[0].billing_minutes #=> Float
+    #   resp.test_grid_sessions[0].selenium_properties #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestGridSessions AWS API Documentation
+    #
+    # @overload list_test_grid_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_test_grid_sessions(params = {}, options = {})
+      req = build_request(:list_test_grid_sessions, params)
       req.send_request(options)
     end
 
@@ -3942,7 +4292,13 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Gets information about unique problems.
+    # Gets information about unique problems, such as exceptions or crashes.
+    #
+    # Unique problems are defined as a single instance of an error across a
+    # run, job, or suite. For example, if a call in your application
+    # consistently raises an exception (`OutOfBoundsException in
+    # MyActivity.java:386`), `ListUniqueProblems` returns a single entry
+    # instead of many individual entries for that exception.
     #
     # @option params [required, String] :arn
     #   The unique problems' ARNs.
@@ -4055,83 +4411,69 @@ module Aws::DeviceFarm
     #
     #   Must be one of the following values:
     #
-    #   * ANDROID\_APP: An Android upload.
+    #   * ANDROID\_APP
     #
-    #   * IOS\_APP: An iOS upload.
+    #   * IOS\_APP
     #
-    #   * WEB\_APP: A web application upload.
+    #   * WEB\_APP
     #
-    #   * EXTERNAL\_DATA: An external data upload.
+    #   * EXTERNAL\_DATA
     #
-    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload.
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_PACKAGE
     #
-    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
-    #     package upload.
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_PACKAGE
     #
-    #   * APPIUM\_PYTHON\_TEST\_PACKAGE: An Appium Python test package upload.
+    #   * APPIUM\_PYTHON\_TEST\_PACKAGE
     #
-    #   * APPIUM\_NODE\_TEST\_PACKAGE: An Appium Node.js test package upload.
+    #   * APPIUM\_NODE\_TEST\_PACKAGE
     #
-    #   * APPIUM\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload.
+    #   * APPIUM\_RUBY\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE: An Appium Java JUnit test
-    #     package upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE: An Appium Java TestNG test
-    #     package upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE: An Appium Python test package
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE: An Appium Node.js test package
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_NODE\_TEST\_PACKAGE
     #
-    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE: An Appium Ruby test package upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_RUBY\_TEST\_PACKAGE
     #
-    #   * CALABASH\_TEST\_PACKAGE: A Calabash test package upload.
+    #   * CALABASH\_TEST\_PACKAGE
     #
-    #   * INSTRUMENTATION\_TEST\_PACKAGE: An instrumentation upload.
+    #   * INSTRUMENTATION\_TEST\_PACKAGE
     #
-    #   * UIAUTOMATION\_TEST\_PACKAGE: A uiautomation test package upload.
+    #   * UIAUTOMATION\_TEST\_PACKAGE
     #
-    #   * UIAUTOMATOR\_TEST\_PACKAGE: A uiautomator test package upload.
+    #   * UIAUTOMATOR\_TEST\_PACKAGE
     #
-    #   * XCTEST\_TEST\_PACKAGE: An Xcode test package upload.
+    #   * XCTEST\_TEST\_PACKAGE
     #
-    #   * XCTEST\_UI\_TEST\_PACKAGE: An Xcode UI test package upload.
+    #   * XCTEST\_UI\_TEST\_PACKAGE
     #
-    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
-    #     upload.
+    #   * APPIUM\_JAVA\_JUNIT\_TEST\_SPEC
     #
-    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test spec
-    #     upload.
+    #   * APPIUM\_JAVA\_TESTNG\_TEST\_SPEC
     #
-    #   * APPIUM\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload.
+    #   * APPIUM\_PYTHON\_TEST\_SPEC
     #
-    #   * APPIUM\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload.
+    #   * APPIUM\_NODE\_TEST\_SPEC
     #
-    #   * APPIUM\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload.
+    #   * APPIUM\_RUBY\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC: An Appium Java JUnit test spec
-    #     upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_JUNIT\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC: An Appium Java TestNG test
-    #     spec upload for a web app.
+    #   * APPIUM\_WEB\_JAVA\_TESTNG\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC: An Appium Python test spec upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_PYTHON\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC: An Appium Node.js test spec upload
-    #     for a web app.
+    #   * APPIUM\_WEB\_NODE\_TEST\_SPEC
     #
-    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC: An Appium Ruby test spec upload for a
-    #     web app.
+    #   * APPIUM\_WEB\_RUBY\_TEST\_SPEC
     #
-    #   * INSTRUMENTATION\_TEST\_SPEC: An instrumentation test spec upload.
+    #   * INSTRUMENTATION\_TEST\_SPEC
     #
-    #   * XCTEST\_UI\_TEST\_SPEC: An Xcode UI test spec upload.
+    #   * XCTEST\_UI\_TEST\_SPEC
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -4195,8 +4537,8 @@ module Aws::DeviceFarm
     # endpoint configurations in the AWS account.
     #
     # @option params [Integer] :max_results
-    #   An integer specifying the maximum number of items you want to return
-    #   in the API response.
+    #   An integer that specifies the maximum number of items you want to
+    #   return in the API response.
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -4237,16 +4579,15 @@ module Aws::DeviceFarm
     # Immediately purchases offerings for an AWS account. Offerings renew
     # with the latest total purchased quantity for an offering, unless the
     # renewal was overridden. The API returns a `NotEligible` error if the
-    # user is not permitted to invoke the operation. Please contact
-    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # user is not permitted to invoke the operation. If you must be able to
+    # invoke this operation, contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
     # @option params [String] :offering_id
     #   The ID of the offering.
     #
     # @option params [Integer] :quantity
-    #   The number of device slots you wish to purchase in an offering
-    #   request.
+    #   The number of device slots to purchase in an offering request.
     #
     # @option params [String] :offering_promotion_id
     #   The ID of the offering promotion to be applied to the purchase.
@@ -4327,9 +4668,8 @@ module Aws::DeviceFarm
     # Explicitly sets the quantity of devices to renew for an offering,
     # starting from the `effectiveDate` of the next period. The API returns
     # a `NotEligible` error if the user is not permitted to invoke the
-    # operation. Please contact
-    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
-    # if you believe that you should be able to invoke this operation.
+    # operation. If you must be able to invoke this operation, contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com).
     #
     # @option params [String] :offering_id
     #   The ID of a request to renew an offering.
@@ -4415,15 +4755,15 @@ module Aws::DeviceFarm
     #   The ARN of the project for the run to be scheduled.
     #
     # @option params [String] :app_arn
-    #   The ARN of the app to schedule a run.
+    #   The ARN of an application package to run tests against, created with
+    #   CreateUpload. See ListUploads.
     #
     # @option params [String] :device_pool_arn
     #   The ARN of the device pool for the run to be scheduled.
     #
     # @option params [Types::DeviceSelectionConfiguration] :device_selection_configuration
     #   The filter criteria used to dynamically select a set of devices for a
-    #   test run, as well as the maximum number of devices to be included in
-    #   the run.
+    #   test run and the maximum number of devices to be included in the run.
     #
     #   Either <b> <code>devicePoolArn</code> </b> or <b>
     #   <code>deviceSelectionConfiguration</code> </b> is required in a
@@ -4602,17 +4942,16 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Initiates a stop request for the current job. AWS Device Farm will
-    # immediately stop the job on the device where tests have not started
-    # executing, and you will not be billed for this device. On the device
-    # where tests have started executing, Setup Suite and Teardown Suite
-    # tests will run to completion before stopping execution on the device.
-    # You will be billed for Setup, Teardown, and any tests that were in
+    # Initiates a stop request for the current job. AWS Device Farm
+    # immediately stops the job on the device where tests have not started.
+    # You are not billed for this device. On the device where tests have
+    # started, setup suite and teardown suite tests run to completion on the
+    # device. You are billed for setup, teardown, and any tests that were in
     # progress or already completed.
     #
     # @option params [required, String] :arn
-    #   Represents the Amazon Resource Name (ARN) of the Device Farm job you
-    #   wish to stop.
+    #   Represents the Amazon Resource Name (ARN) of the Device Farm job to
+    #   stop.
     #
     # @return [Types::StopJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4698,8 +5037,7 @@ module Aws::DeviceFarm
     # Ends a specified remote access session.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the remote access session you wish
-    #   to stop.
+    #   The Amazon Resource Name (ARN) of the remote access session to stop.
     #
     # @return [Types::StopRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4783,16 +5121,15 @@ module Aws::DeviceFarm
     end
 
     # Initiates a stop request for the current test run. AWS Device Farm
-    # will immediately stop the run on devices where tests have not started
-    # executing, and you will not be billed for these devices. On devices
-    # where tests have started executing, Setup Suite and Teardown Suite
-    # tests will run to completion before stopping execution on those
-    # devices. You will be billed for Setup, Teardown, and any tests that
+    # immediately stops the run on devices where tests have not started. You
+    # are not billed for these devices. On devices where tests have started
+    # executing, setup suite and teardown suite tests run to completion on
+    # those devices. You are billed for setup, teardown, and any tests that
     # were in progress or already completed.
     #
     # @option params [required, String] :arn
-    #   Represents the Amazon Resource Name (ARN) of the Device Farm run you
-    #   wish to stop.
+    #   Represents the Amazon Resource Name (ARN) of the Device Farm run to
+    #   stop.
     #
     # @return [Types::StopRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4899,26 +5236,26 @@ module Aws::DeviceFarm
     # Associates the specified tags to a resource with the specified
     # `resourceArn`. If existing tags on a resource are not specified in the
     # request parameters, they are not changed. When a resource is deleted,
-    # the tags associated with that resource are deleted as well.
+    # the tags associated with that resource are also deleted.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource(s) to which to add
-    #   tags. You can associate tags with the following Device Farm resources:
-    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   The Amazon Resource Name (ARN) of the resource or resources to which
+    #   to add tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
     #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
     #   `VPCE_CONFIGURATION`.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
-    #   Tag keys can have a maximum character length of 128 characters, and
-    #   tag values can have a maximum length of 256 characters.
+    #   Tag keys can have a maximum character length of 128 characters. Tag
+    #   values can have a maximum length of 256 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "AmazonResourceName", # required
+    #     resource_arn: "DeviceFarmArn", # required
     #     tags: [ # required
     #       {
     #         key: "TagKey", # required
@@ -4939,9 +5276,9 @@ module Aws::DeviceFarm
     # Deletes the specified tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource(s) from which to delete
-    #   tags. You can associate tags with the following Device Farm resources:
-    #   `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
+    #   The Amazon Resource Name (ARN) of the resource or resources from which
+    #   to delete tags. You can associate tags with the following Device Farm
+    #   resources: `PROJECT`, `RUN`, `NETWORK_PROFILE`, `INSTANCE_PROFILE`,
     #   `DEVICE_INSTANCE`, `SESSION`, `DEVICE_POOL`, `DEVICE`, and
     #   `VPCE_CONFIGURATION`.
     #
@@ -4953,7 +5290,7 @@ module Aws::DeviceFarm
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "AmazonResourceName", # required
+    #     resource_arn: "DeviceFarmArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -4966,14 +5303,14 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Updates information about an existing private device instance.
+    # Updates information about a private device instance.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the device instance.
     #
     # @option params [String] :profile_arn
-    #   The Amazon Resource Name (ARN) of the profile that you want to
-    #   associate with the device instance.
+    #   The ARN of the profile that you want to associate with the device
+    #   instance.
     #
     # @option params [Array<String>] :labels
     #   An array of strings that you want to associate with the device
@@ -5021,19 +5358,19 @@ module Aws::DeviceFarm
     # they can only be updated as a whole (or not at all).
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the Device Farm device pool you wish
-    #   to update.
+    #   The Amazon Resource Name (ARN) of the Device Farm device pool to
+    #   update.
     #
     # @option params [String] :name
-    #   A string representing the name of the device pool you wish to update.
+    #   A string that represents the name of the device pool to update.
     #
     # @option params [String] :description
-    #   A description of the device pool you wish to update.
+    #   A description of the device pool to update.
     #
     # @option params [Array<Types::Rule>] :rules
-    #   Represents the rules you wish to modify for the device pool. Updating
-    #   rules is optional; however, if you choose to update rules for your
-    #   request, the update will replace the existing rules.
+    #   Represents the rules to modify for the device pool. Updating rules is
+    #   optional. If you update rules for your request, the update replaces
+    #   the existing rules.
     #
     # @option params [Integer] :max_devices
     #   The number of devices that Device Farm can add to your device pool.
@@ -5053,8 +5390,8 @@ module Aws::DeviceFarm
     #   If you set this parameter to `true`, the `maxDevices` parameter does
     #   not apply, and Device Farm does not limit the number of devices that
     #   it adds to your device pool. In this case, Device Farm adds all
-    #   available devices that meet the criteria that are specified for the
-    #   `rules` parameter.
+    #   available devices that meet the criteria specified in the `rules`
+    #   parameter.
     #
     #   If you use this parameter in your request, you cannot use the
     #   `maxDevices` parameter in the same request.
@@ -5142,8 +5479,8 @@ module Aws::DeviceFarm
     #   The default value is `false` for private devices.
     #
     # @option params [Array<String>] :exclude_app_packages_from_cleanup
-    #   An array of strings specifying the list of app packages that should
-    #   not be cleaned up from the device after a test run is over.
+    #   An array of strings that specifies the list of app packages that
+    #   should not be cleaned up from the device after a test run is over.
     #
     #   The list of packages is only considered if you set `packageCleanup` to
     #   `true`.
@@ -5186,7 +5523,7 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Updates the network profile with specific settings.
+    # Updates the network profile.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the project for which you want to
@@ -5201,8 +5538,8 @@ module Aws::DeviceFarm
     #   information.
     #
     # @option params [String] :type
-    #   The type of network profile you wish to return information about.
-    #   Valid values are listed below.
+    #   The type of network profile to return information about. Valid values
+    #   are listed here.
     #
     # @option params [Integer] :uplink_bandwidth_bits
     #   The data throughput rate in bits per second, as an integer from 0 to
@@ -5285,15 +5622,14 @@ module Aws::DeviceFarm
     # name.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the project whose name you wish to
-    #   update.
+    #   The Amazon Resource Name (ARN) of the project whose name to update.
     #
     # @option params [String] :name
-    #   A string representing the new name of the project that you are
+    #   A string that represents the new name of the project that you are
     #   updating.
     #
     # @option params [Integer] :default_job_timeout_minutes
-    #   The number of minutes a test run in the project will execute before it
+    #   The number of minutes a test run in the project executes before it
     #   times out.
     #
     # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5343,22 +5679,61 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Update an uploaded test specification (test spec).
+    # Change details of a project.
+    #
+    # @option params [required, String] :project_arn
+    #   ARN of the project to update.
+    #
+    # @option params [String] :name
+    #   Human-readable name for the project.
+    #
+    # @option params [String] :description
+    #   Human-readable description for the project.
+    #
+    # @return [Types::UpdateTestGridProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTestGridProjectResult#test_grid_project #test_grid_project} => Types::TestGridProject
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_test_grid_project({
+    #     project_arn: "DeviceFarmArn", # required
+    #     name: "ResourceName",
+    #     description: "ResourceDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_grid_project.arn #=> String
+    #   resp.test_grid_project.name #=> String
+    #   resp.test_grid_project.description #=> String
+    #   resp.test_grid_project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateTestGridProject AWS API Documentation
+    #
+    # @overload update_test_grid_project(params = {})
+    # @param [Hash] params ({})
+    def update_test_grid_project(params = {}, options = {})
+      req = build_request(:update_test_grid_project, params)
+      req.send_request(options)
+    end
+
+    # Updates an uploaded test spec.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the uploaded test spec.
     #
     # @option params [String] :name
-    #   The upload's test spec file name. The name should not contain the
-    #   '/' character. The test spec file name must end with the `.yaml` or
-    #   `.yml` file extension.
+    #   The upload's test spec file name. The name must not contain any
+    #   forward slashes (/). The test spec file name must end with the `.yaml`
+    #   or `.yml` file extension.
     #
     # @option params [String] :content_type
-    #   The upload's content type (for example, "application/x-yaml").
+    #   The upload's content type (for example, `application/x-yaml`).
     #
     # @option params [Boolean] :edit_content
-    #   Set to true if the YAML file has changed and needs to be updated;
-    #   otherwise, set to false.
+    #   Set to true if the YAML file has changed and must be updated.
+    #   Otherwise, set to false.
     #
     # @return [Types::UpdateUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5395,28 +5770,28 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Updates information about an existing Amazon Virtual Private Cloud
-    # (VPC) endpoint configuration.
+    # Updates information about an Amazon Virtual Private Cloud (VPC)
+    # endpoint configuration.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the VPC endpoint configuration you
     #   want to update.
     #
     # @option params [String] :vpce_configuration_name
-    #   The friendly name you give to your VPC endpoint configuration, to
+    #   The friendly name you give to your VPC endpoint configuration to
     #   manage your configurations more easily.
     #
     # @option params [String] :vpce_service_name
-    #   The name of the VPC endpoint service running inside your AWS account
-    #   that you want Device Farm to test.
+    #   The name of the VPC endpoint service running in your AWS account that
+    #   you want Device Farm to test.
     #
     # @option params [String] :service_dns_name
     #   The DNS (domain) name used to connect to your private service in your
-    #   Amazon VPC. The DNS name must not already be in use on the Internet.
+    #   VPC. The DNS name must not already be in use on the internet.
     #
     # @option params [String] :vpce_configuration_description
-    #   An optional description, providing more details about your VPC
-    #   endpoint configuration.
+    #   An optional description that provides details about your VPC endpoint
+    #   configuration.
     #
     # @return [Types::UpdateVPCEConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5462,7 +5837,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

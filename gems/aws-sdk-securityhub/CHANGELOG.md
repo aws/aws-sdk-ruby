@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2019-12-20)
+------------------
+
+* Feature - Additional resource types are now fully supported in the AWS Security Finding Format (ASFF). These resources include AwsElbv2LoadBalancer, AwsKmsKey, AwsIamRole, AwsSqsQueue, AwsLambdaFunction, AwsSnsTopic, and AwsCloudFrontDistribution. Each of these resource types includes an accompanying resource details object with fields for security finding providers to populate. Updates were made to the AwsIamAccessKey resource details object to include information on principal ID and name. To learn more, visit our documentation on the ASFF.
+
 1.14.0 (2019-10-23)
 ------------------
 

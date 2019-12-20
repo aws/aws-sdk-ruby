@@ -51,6 +51,18 @@ module Aws::EC2
       data[:partition_count]
     end
 
+    # The ID of the placement group.
+    # @return [String]
+    def group_id
+      data[:group_id]
+    end
+
+    # Any tags applied to the placement group.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # @!endgroup
 
     # @return [Client]

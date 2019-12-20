@@ -353,6 +353,7 @@ module Aws::EC2
     DatafeedSubscriptionState = Shapes::StringShape.new(name: 'DatafeedSubscriptionState')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DedicatedHostFlag = Shapes::BooleanShape.new(name: 'DedicatedHostFlag')
+    DedicatedHostId = Shapes::StringShape.new(name: 'DedicatedHostId')
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
@@ -956,7 +957,6 @@ module Aws::EC2
     HistoryRecordSet = Shapes::ListShape.new(name: 'HistoryRecordSet')
     HistoryRecords = Shapes::ListShape.new(name: 'HistoryRecords')
     Host = Shapes::StructureShape.new(name: 'Host')
-    HostId = Shapes::StringShape.new(name: 'HostId')
     HostInstance = Shapes::StructureShape.new(name: 'HostInstance')
     HostInstanceList = Shapes::ListShape.new(name: 'HostInstanceList')
     HostList = Shapes::ListShape.new(name: 'HostList')
@@ -1116,6 +1116,7 @@ module Aws::EC2
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
     KeyNameStringList = Shapes::ListShape.new(name: 'KeyNameStringList')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
+    KeyPairIdStringList = Shapes::ListShape.new(name: 'KeyPairIdStringList')
     KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
@@ -1387,6 +1388,7 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsRequestListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsRequestListValue')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroup = Shapes::StructureShape.new(name: 'PlacementGroup')
+    PlacementGroupIdStringList = Shapes::ListShape.new(name: 'PlacementGroupIdStringList')
     PlacementGroupInfo = Shapes::StructureShape.new(name: 'PlacementGroupInfo')
     PlacementGroupList = Shapes::ListShape.new(name: 'PlacementGroupList')
     PlacementGroupName = Shapes::StringShape.new(name: 'PlacementGroupName')
@@ -3355,7 +3357,7 @@ module Aws::EC2
     DeleteInternetGatewayRequest.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: InternetGatewayId, required: true, location_name: "internetGatewayId"))
     DeleteInternetGatewayRequest.struct_class = Types::DeleteInternetGatewayRequest
 
-    DeleteKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KeyName"))
+    DeleteKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, required: true, location_name: "KeyName"))
     DeleteKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteKeyPairRequest.struct_class = Types::DeleteKeyPairRequest
 
@@ -3833,6 +3835,7 @@ module Aws::EC2
     DescribeExportImageTasksResult.struct_class = Types::DescribeExportImageTasksResult
 
     DescribeExportTasksRequest.add_member(:export_task_ids, Shapes::ShapeRef.new(shape: ExportTaskIdStringList, location_name: "exportTaskId"))
+    DescribeExportTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
 
     DescribeExportTasksResult.add_member(:export_tasks, Shapes::ShapeRef.new(shape: ExportTaskList, location_name: "exportTaskSet"))
@@ -4115,6 +4118,7 @@ module Aws::EC2
 
     DescribeKeyPairsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeKeyPairsRequest.add_member(:key_names, Shapes::ShapeRef.new(shape: KeyNameStringList, location_name: "KeyName"))
+    DescribeKeyPairsRequest.add_member(:key_pair_ids, Shapes::ShapeRef.new(shape: KeyPairIdStringList, location_name: "KeyPairId"))
     DescribeKeyPairsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeKeyPairsRequest.struct_class = Types::DescribeKeyPairsRequest
 
@@ -4282,6 +4286,7 @@ module Aws::EC2
     DescribePlacementGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribePlacementGroupsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribePlacementGroupsRequest.add_member(:group_names, Shapes::ShapeRef.new(shape: PlacementGroupStringList, location_name: "groupName"))
+    DescribePlacementGroupsRequest.add_member(:group_ids, Shapes::ShapeRef.new(shape: PlacementGroupIdStringList, location_name: "GroupId"))
     DescribePlacementGroupsRequest.struct_class = Types::DescribePlacementGroupsRequest
 
     DescribePlacementGroupsResult.add_member(:placement_groups, Shapes::ShapeRef.new(shape: PlacementGroupList, location_name: "placementGroupSet"))
@@ -5264,6 +5269,7 @@ module Aws::EC2
     ExportTask.add_member(:instance_export_details, Shapes::ShapeRef.new(shape: InstanceExportDetails, location_name: "instanceExport"))
     ExportTask.add_member(:state, Shapes::ShapeRef.new(shape: ExportTaskState, location_name: "state"))
     ExportTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ExportTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ExportTask.struct_class = Types::ExportTask
 
     ExportTaskIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "ExportTaskId")
@@ -5860,6 +5866,7 @@ module Aws::EC2
     ImportImageTask.add_member(:snapshot_details, Shapes::ShapeRef.new(shape: SnapshotDetailList, location_name: "snapshotDetailSet"))
     ImportImageTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     ImportImageTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    ImportImageTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ImportImageTask.add_member(:license_specifications, Shapes::ShapeRef.new(shape: ImportImageLicenseSpecificationListResponse, location_name: "licenseSpecifications"))
     ImportImageTask.struct_class = Types::ImportImageTask
 
@@ -5906,7 +5913,7 @@ module Aws::EC2
     ImportInstanceVolumeDetailSet.member = Shapes::ShapeRef.new(shape: ImportInstanceVolumeDetailItem, location_name: "item")
 
     ImportKeyPairRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    ImportKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "keyName"))
+    ImportKeyPairRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: KeyPairName, required: true, location_name: "keyName"))
     ImportKeyPairRequest.add_member(:public_key_material, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "publicKeyMaterial"))
     ImportKeyPairRequest.struct_class = Types::ImportKeyPairRequest
 
@@ -5932,6 +5939,7 @@ module Aws::EC2
     ImportSnapshotTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportSnapshotTask.add_member(:import_task_id, Shapes::ShapeRef.new(shape: String, location_name: "importTaskId"))
     ImportSnapshotTask.add_member(:snapshot_task_detail, Shapes::ShapeRef.new(shape: SnapshotTaskDetail, location_name: "snapshotTaskDetail"))
+    ImportSnapshotTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ImportSnapshotTask.struct_class = Types::ImportSnapshotTask
 
     ImportSnapshotTaskList.member = Shapes::ShapeRef.new(shape: ImportSnapshotTask, location_name: "item")
@@ -6315,10 +6323,15 @@ module Aws::EC2
     KeyPair.add_member(:key_fingerprint, Shapes::ShapeRef.new(shape: String, location_name: "keyFingerprint"))
     KeyPair.add_member(:key_material, Shapes::ShapeRef.new(shape: SensitiveUserData, location_name: "keyMaterial"))
     KeyPair.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "keyName"))
+    KeyPair.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: String, location_name: "keyPairId"))
     KeyPair.struct_class = Types::KeyPair
 
+    KeyPairIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "KeyPairId")
+
+    KeyPairInfo.add_member(:key_pair_id, Shapes::ShapeRef.new(shape: String, location_name: "keyPairId"))
     KeyPairInfo.add_member(:key_fingerprint, Shapes::ShapeRef.new(shape: String, location_name: "keyFingerprint"))
     KeyPairInfo.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "keyName"))
+    KeyPairInfo.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     KeyPairInfo.struct_class = Types::KeyPairInfo
 
     KeyPairList.member = Shapes::ShapeRef.new(shape: KeyPairInfo, location_name: "item")
@@ -6836,7 +6849,7 @@ module Aws::EC2
 
     ModifyInstancePlacementRequest.add_member(:affinity, Shapes::ShapeRef.new(shape: Affinity, location_name: "affinity"))
     ModifyInstancePlacementRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: PlacementGroupName, location_name: "GroupName"))
-    ModifyInstancePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: HostId, location_name: "hostId"))
+    ModifyInstancePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "hostId"))
     ModifyInstancePlacementRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     ModifyInstancePlacementRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: HostTenancy, location_name: "tenancy"))
     ModifyInstancePlacementRequest.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
@@ -7363,7 +7376,11 @@ module Aws::EC2
     PlacementGroup.add_member(:state, Shapes::ShapeRef.new(shape: PlacementGroupState, location_name: "state"))
     PlacementGroup.add_member(:strategy, Shapes::ShapeRef.new(shape: PlacementStrategy, location_name: "strategy"))
     PlacementGroup.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionCount"))
+    PlacementGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
+    PlacementGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     PlacementGroup.struct_class = Types::PlacementGroup
+
+    PlacementGroupIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "GroupId")
 
     PlacementGroupInfo.add_member(:supported_strategies, Shapes::ShapeRef.new(shape: PlacementGroupStrategyList, location_name: "supportedStrategies"))
     PlacementGroupInfo.struct_class = Types::PlacementGroupInfo
@@ -7710,7 +7727,7 @@ module Aws::EC2
 
     RequestHostIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
-    RequestHostIdSet.member = Shapes::ShapeRef.new(shape: HostId, location_name: "item")
+    RequestHostIdSet.member = Shapes::ShapeRef.new(shape: DedicatedHostId, location_name: "item")
 
     RequestInstanceTypeList.member = Shapes::ShapeRef.new(shape: InstanceType)
 

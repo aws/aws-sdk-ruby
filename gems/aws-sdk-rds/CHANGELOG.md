@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2019-12-20)
+------------------
+
+* Feature - This release adds an operation that enables users to specify whether a database is restarted when its SSL/TLS certificate is rotated. Only customers who do not use SSL/TLS should use this operation.
+
 1.73.0 (2019-12-04)
 ------------------
 

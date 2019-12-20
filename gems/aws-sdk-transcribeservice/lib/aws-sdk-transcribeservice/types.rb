@@ -40,6 +40,88 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateVocabularyFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_filter_name: "VocabularyFilterName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US, en-AU, fr-CA, en-GB, de-DE, pt-BR, fr-FR, it-IT, ko-KR, es-ES, en-IN, hi-IN, ar-SA, ru-RU, zh-CN, nl-NL, id-ID, ta-IN, fa-IR, en-IE, en-AB, en-WL, pt-PT, te-IN, tr-TR, de-CH, he-IL, ms-MY, ja-JP, ar-AE
+    #         words: ["Word"],
+    #         vocabulary_filter_file_uri: "Uri",
+    #       }
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The vocabulary filter name. The name must be unique within the
+    #   account that contains it.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the words in the vocabulary filter. All words
+    #   in the filter must be in the same language. The vocabulary filter
+    #   can only be used with transcription jobs in the specified language.
+    #   @return [String]
+    #
+    # @!attribute [rw] words
+    #   The words to use in the vocabulary filter. Only use characters from
+    #   the character set defined for custom vocabularies. For a list of
+    #   character sets, see [Character Sets for Custom Vocabularies][1].
+    #
+    #   If you provide a list of words in the `Words` parameter, you can't
+    #   use the `VocabularyFilterFileUri` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vocabulary_filter_file_uri
+    #   The Amazon S3 location of a text file used as input to create the
+    #   vocabulary filter. Only use characters from the character set
+    #   defined for custom vocabularies. For a list of character sets, see
+    #   [Character Sets for Custom Vocabularies][1].
+    #
+    #   The specified file must be less than 50 KB of UTF-8 characters.
+    #
+    #   If you provide the location of a list of words in the
+    #   `VocabularyFilterFileUri` parameter, you can't use the `Words`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilterRequest AWS API Documentation
+    #
+    class CreateVocabularyFilterRequest < Struct.new(
+      :vocabulary_filter_name,
+      :language_code,
+      :words,
+      :vocabulary_filter_file_uri)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the words in the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary filter was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyFilterResponse AWS API Documentation
+    #
+    class CreateVocabularyFilterResponse < Struct.new(
+      :vocabulary_filter_name,
+      :language_code,
+      :last_modified_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVocabularyRequest
     #   data as a hash:
     #
@@ -150,6 +232,24 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVocabularyFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_filter_name: "VocabularyFilterName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter to remove.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyFilterRequest AWS API Documentation
+    #
+    class DeleteVocabularyFilterRequest < Struct.new(
+      :vocabulary_filter_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteVocabularyRequest
     #   data as a hash:
     #
@@ -194,6 +294,52 @@ module Aws::TranscribeService
     #
     class GetTranscriptionJobResponse < Struct.new(
       :transcription_job)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetVocabularyFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_filter_name: "VocabularyFilterName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter for which to return information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilterRequest AWS API Documentation
+    #
+    class GetVocabularyFilterRequest < Struct.new(
+      :vocabulary_filter_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the words in the vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the contents of the vocabulary filter were
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] download_uri
+    #   The URI of the list of words in the vocabulary filter. You can use
+    #   this URI to get the list of words.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilterResponse AWS API Documentation
+    #
+    class GetVocabularyFilterResponse < Struct.new(
+      :vocabulary_filter_name,
+      :language_code,
+      :last_modified_time,
+      :download_uri)
       include Aws::Structure
     end
 
@@ -464,6 +610,66 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListVocabularyFiltersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         name_contains: "VocabularyFilterName",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request to `ListVocabularyFilters` was
+    #   truncated, include the `NextToken` to fetch the next set of
+    #   collections.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of filters to return in the response. If there
+    #   are fewer results in the list, this response contains only the
+    #   actual results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters the response so that it only contains vocabulary filters
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFiltersRequest AWS API Documentation
+    #
+    class ListVocabularyFiltersRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :name_contains)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `ListVocabularyFilters` operation returns a page of collections
+    #   at a time. The maximum size of the page is set by the `MaxResults`
+    #   parameter. If there are more jobs in the list than the page size,
+    #   Amazon Transcribe returns the `NextPage` token. Include the token in
+    #   the next request to the `ListVocabularyFilters` operation to return
+    #   in the next page of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filters
+    #   The list of vocabulary filters. It will contain at most `MaxResults`
+    #   number of filters. If there are more filters, call the
+    #   `ListVocabularyFilters` operation again with the `NextToken`
+    #   parameter in the request set to the value of the `NextToken` field
+    #   in the response.
+    #   @return [Array<Types::VocabularyFilterInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularyFiltersResponse AWS API Documentation
+    #
+    class ListVocabularyFiltersResponse < Struct.new(
+      :next_token,
+      :vocabulary_filters)
+      include Aws::Structure
+    end
+
     # Describes the input media file in a transcription request.
     #
     # @note When making an API call, you may pass Media
@@ -528,6 +734,8 @@ module Aws::TranscribeService
     #         channel_identification: false,
     #         show_alternatives: false,
     #         max_alternatives: 1,
+    #         vocabulary_filter_name: "VocabularyFilterName",
+    #         vocabulary_filter_method: "remove", # accepts remove, mask
     #       }
     #
     # @!attribute [rw] vocabulary_name
@@ -583,6 +791,19 @@ module Aws::TranscribeService
     #   `ShowAlternatives` field to true.
     #   @return [Integer]
     #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter to use when transcribing the
+    #   audio. The filter that you specify must have the same language code
+    #   as the transcription job.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_filter_method
+    #   Set to `mask` to remove filtered text from the transcript and
+    #   replace it with three asterisks ("***") as placeholder text.
+    #   Set to `remove` to remove filtered text from the transcript without
+    #   using placeholder text.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
     #
     class Settings < Struct.new(
@@ -591,7 +812,9 @@ module Aws::TranscribeService
       :max_speaker_labels,
       :channel_identification,
       :show_alternatives,
-      :max_alternatives)
+      :max_alternatives,
+      :vocabulary_filter_name,
+      :vocabulary_filter_method)
       include Aws::Structure
     end
 
@@ -615,6 +838,8 @@ module Aws::TranscribeService
     #           channel_identification: false,
     #           show_alternatives: false,
     #           max_alternatives: 1,
+    #           vocabulary_filter_name: "VocabularyFilterName",
+    #           vocabulary_filter_method: "remove", # accepts remove, mask
     #         },
     #         job_execution_settings: {
     #           allow_deferred_execution: false,
@@ -943,6 +1168,79 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateVocabularyFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_filter_name: "VocabularyFilterName", # required
+    #         words: ["Word"],
+    #         vocabulary_filter_file_uri: "Uri",
+    #       }
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] words
+    #   The words to use in the vocabulary filter. Only use characters from
+    #   the character set defined for custom vocabularies. For a list of
+    #   character sets, see [Character Sets for Custom Vocabularies][1].
+    #
+    #   If you provide a list of words in the `Words` parameter, you can't
+    #   use the `VocabularyFilterFileUri` parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vocabulary_filter_file_uri
+    #   The Amazon S3 location of a text file used as input to create the
+    #   vocabulary filter. Only use characters from the character set
+    #   defined for custom vocabularies. For a list of character sets, see
+    #   [Character Sets for Custom Vocabularies][1].
+    #
+    #   The specified file must be less than 50 KB of UTF-8 characters.
+    #
+    #   If you provide the location of a list of words in the
+    #   `VocabularyFilterFileUri` parameter, you can't use the `Words`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilterRequest AWS API Documentation
+    #
+    class UpdateVocabularyFilterRequest < Struct.new(
+      :vocabulary_filter_name,
+      :words,
+      :vocabulary_filter_file_uri)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the updated vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the words in the vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary filter was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilterResponse AWS API Documentation
+    #
+    class UpdateVocabularyFilterResponse < Struct.new(
+      :vocabulary_filter_name,
+      :language_code,
+      :last_modified_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateVocabularyRequest
     #   data as a hash:
     #
@@ -1025,6 +1323,30 @@ module Aws::TranscribeService
       :language_code,
       :last_modified_time,
       :vocabulary_state)
+      include Aws::Structure
+    end
+
+    # Provides information about a vocabulary filter.
+    #
+    # @!attribute [rw] vocabulary_filter_name
+    #   The name of the vocabulary filter. The name must be unique in the
+    #   account that holds the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the words in the vocabulary filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyFilterInfo AWS API Documentation
+    #
+    class VocabularyFilterInfo < Struct.new(
+      :vocabulary_filter_name,
+      :language_code,
+      :last_modified_time)
       include Aws::Structure
     end
 

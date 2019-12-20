@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-12-20)
+------------------
+
+* Feature - Amazon EKS now supports restricting access to the API server public endpoint by applying CIDR blocks
+
 1.29.0 (2019-12-03)
 ------------------
 

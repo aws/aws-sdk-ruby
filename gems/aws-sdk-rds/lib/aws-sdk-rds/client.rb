@@ -1260,7 +1260,7 @@ module Aws::RDS
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot
     #
     # @option params [required, String] :source_db_snapshot_identifier
     #   The identifier for the source DB snapshot.
@@ -11994,6 +11994,34 @@ module Aws::RDS
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
     #
+    # @option params [Boolean] :certificate_rotation_restart
+    #   A value that indicates whether the DB instance is restarted when you
+    #   rotate your SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your SSL/TLS
+    #   certificate. The certificate is not updated until the DB instance is
+    #   restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, follow the
+    #   appropriate instructions for your DB engine to rotate your SSL/TLS
+    #   certificate:
+    #
+    #   * For more information about rotating your SSL/TLS certificate for RDS
+    #     DB engines, see [ Rotating Your SSL/TLS Certificate.][1] in the
+    #     *Amazon RDS User Guide.*
+    #
+    #   * For more information about rotating your SSL/TLS certificate for
+    #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
+    #     the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -12072,6 +12100,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     certificate_rotation_restart: false,
     #   })
     #
     # @example Response structure
@@ -17707,7 +17736,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

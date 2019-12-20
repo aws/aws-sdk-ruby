@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2019-12-20)
+------------------
+
+* Feature - This release updates the attachments support to include AttachmentReference source for Automation documents.
+
 1.68.0 (2019-12-19)
 ------------------
 

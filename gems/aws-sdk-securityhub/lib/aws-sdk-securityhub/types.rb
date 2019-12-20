@@ -103,6 +103,211 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about an Availability Zone.
+    #
+    # @note When making an API call, you may pass AvailabilityZone
+    #   data as a hash:
+    #
+    #       {
+    #         zone_name: "NonEmptyString",
+    #         subnet_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] zone_name
+    #   The name of the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet. You can specify one subnet per Availability
+    #   Zone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AvailabilityZone AWS API Documentation
+    #
+    class AvailabilityZone < Struct.new(
+      :zone_name,
+      :subnet_id)
+      include Aws::Structure
+    end
+
+    # A distribution configuration.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "NonEmptyString",
+    #         etag: "NonEmptyString",
+    #         last_modified_time: "NonEmptyString",
+    #         logging: {
+    #           bucket: "NonEmptyString",
+    #           enabled: false,
+    #           include_cookies: false,
+    #           prefix: "NonEmptyString",
+    #         },
+    #         origins: {
+    #           items: [
+    #             {
+    #               domain_name: "NonEmptyString",
+    #               id: "NonEmptyString",
+    #               origin_path: "NonEmptyString",
+    #             },
+    #           ],
+    #         },
+    #         status: "NonEmptyString",
+    #         web_acl_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name corresponding to the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The entity tag is a hash of the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the distribution was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging
+    #   A complex type that controls whether access logs are written for the
+    #   distribution.
+    #   @return [Types::AwsCloudFrontDistributionLogging]
+    #
+    # @!attribute [rw] origins
+    #   A complex type that contains information about origins for this
+    #   distribution.
+    #   @return [Types::AwsCloudFrontDistributionOrigins]
+    #
+    # @!attribute [rw] status
+    #   Indicates the current status of the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] web_acl_id
+    #   A unique identifier that specifies the AWS WAF web ACL, if any, to
+    #   associate with this distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionDetails AWS API Documentation
+    #
+    class AwsCloudFrontDistributionDetails < Struct.new(
+      :domain_name,
+      :etag,
+      :last_modified_time,
+      :logging,
+      :origins,
+      :status,
+      :web_acl_id)
+      include Aws::Structure
+    end
+
+    # A complex type that controls whether access logs are written for the
+    # distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionLogging
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "NonEmptyString",
+    #         enabled: false,
+    #         include_cookies: false,
+    #         prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket to store the access logs in.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   With this field, you can enable or disable the selected
+    #   distribution.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_cookies
+    #   Specifies whether you want CloudFront to include cookies in access
+    #   logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] prefix
+    #   An optional string that you want CloudFront to prefix to the access
+    #   log filenames for this distribution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionLogging AWS API Documentation
+    #
+    class AwsCloudFrontDistributionLogging < Struct.new(
+      :bucket,
+      :enabled,
+      :include_cookies,
+      :prefix)
+      include Aws::Structure
+    end
+
+    # A complex type that describes the Amazon S3 bucket, HTTP server (for
+    # example, a web server), Amazon MediaStore, or other server from which
+    # CloudFront gets your files.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOriginItem
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "NonEmptyString",
+    #         id: "NonEmptyString",
+    #         origin_path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   Amazon S3 origins: The DNS name of the Amazon S3 bucket from which
+    #   you want CloudFront to get objects for this origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the origin or origin group.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_path
+    #   An optional element that causes CloudFront to request your content
+    #   from a directory in your Amazon S3 bucket or your custom origin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOriginItem AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOriginItem < Struct.new(
+      :domain_name,
+      :id,
+      :origin_path)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about origins and origin
+    # groups for this distribution.
+    #
+    # @note When making an API call, you may pass AwsCloudFrontDistributionOrigins
+    #   data as a hash:
+    #
+    #       {
+    #         items: [
+    #           {
+    #             domain_name: "NonEmptyString",
+    #             id: "NonEmptyString",
+    #             origin_path: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains origins or origin groups for this
+    #   distribution.
+    #   @return [Array<Types::AwsCloudFrontDistributionOriginItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCloudFrontDistributionOrigins AWS API Documentation
+    #
+    class AwsCloudFrontDistributionOrigins < Struct.new(
+      :items)
+      include Aws::Structure
+    end
+
     # The details of an Amazon EC2 instance.
     #
     # @note When making an API call, you may pass AwsEc2InstanceDetails
@@ -171,6 +376,92 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about a load balancer.
+    #
+    # @note When making an API call, you may pass AwsElbv2LoadBalancerDetails
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zones: [
+    #           {
+    #             zone_name: "NonEmptyString",
+    #             subnet_id: "NonEmptyString",
+    #           },
+    #         ],
+    #         canonical_hosted_zone_id: "NonEmptyString",
+    #         created_time: "NonEmptyString",
+    #         dns_name: "NonEmptyString",
+    #         ip_address_type: "NonEmptyString",
+    #         scheme: "NonEmptyString",
+    #         security_groups: ["NonEmptyString"],
+    #         state: {
+    #           code: "NonEmptyString",
+    #           reason: "NonEmptyString",
+    #         },
+    #         type: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] availability_zones
+    #   The Availability Zones for the load balancer.
+    #   @return [Array<Types::AvailabilityZone>]
+    #
+    # @!attribute [rw] canonical_hosted_zone_id
+    #   The ID of the Amazon Route 53 hosted zone associated with the load
+    #   balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the load balancer was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The public DNS name of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are ipv4 (for IPv4 addresses) and dualstack (for
+    #   IPv4 and IPv6 addresses).
+    #   @return [String]
+    #
+    # @!attribute [rw] scheme
+    #   The nodes of an Internet-facing load balancer have public IP
+    #   addresses.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   The IDs of the security groups for the load balancer.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The state of the load balancer.
+    #   @return [Types::LoadBalancerState]
+    #
+    # @!attribute [rw] type
+    #   The type of load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC for the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbv2LoadBalancerDetails AWS API Documentation
+    #
+    class AwsElbv2LoadBalancerDetails < Struct.new(
+      :availability_zones,
+      :canonical_hosted_zone_id,
+      :created_time,
+      :dns_name,
+      :ip_address_type,
+      :scheme,
+      :security_groups,
+      :state,
+      :type,
+      :vpc_id)
+      include Aws::Structure
+    end
+
     # IAM access key details related to a finding.
     #
     # @note When making an API call, you may pass AwsIamAccessKeyDetails
@@ -180,10 +471,17 @@ module Aws::SecurityHub
     #         user_name: "NonEmptyString",
     #         status: "Active", # accepts Active, Inactive
     #         created_at: "NonEmptyString",
+    #         principal_id: "NonEmptyString",
+    #         principal_type: "NonEmptyString",
+    #         principal_name: "NonEmptyString",
     #       }
     #
     # @!attribute [rw] user_name
     #   The user associated with the IAM access key related to a finding.
+    #
+    #   The `UserName` parameter has been replaced with the `PrincipalName`
+    #   parameter because access keys can also be assigned to principals
+    #   that are not IAM users.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -194,12 +492,487 @@ module Aws::SecurityHub
     #   The creation date/time of the IAM access key related to a finding.
     #   @return [String]
     #
+    # @!attribute [rw] principal_id
+    #   The ID of the principal associated with an access key.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The type of principal associated with an access key.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_name
+    #   The name of the principal.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeyDetails AWS API Documentation
     #
     class AwsIamAccessKeyDetails < Struct.new(
       :user_name,
       :status,
-      :created_at)
+      :created_at,
+      :principal_id,
+      :principal_type,
+      :principal_name)
+      include Aws::Structure
+    end
+
+    # Contains information about an IAM role, including all of the role's
+    # policies.
+    #
+    # @note When making an API call, you may pass AwsIamRoleDetails
+    #   data as a hash:
+    #
+    #       {
+    #         assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #         create_date: "NonEmptyString",
+    #         role_id: "NonEmptyString",
+    #         role_name: "NonEmptyString",
+    #         max_session_duration: 1,
+    #         path: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] assume_role_policy_document
+    #   The trust policy that grants permission to assume the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time, in ISO 8601 date-time format, when the role was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_id
+    #   The stable and unique string identifying the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_name
+    #   The friendly name that identifies the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The maximum session duration (in seconds) that you want to set for
+    #   the specified role.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The path to the role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamRoleDetails AWS API Documentation
+    #
+    class AwsIamRoleDetails < Struct.new(
+      :assume_role_policy_document,
+      :create_date,
+      :role_id,
+      :role_name,
+      :max_session_duration,
+      :path)
+      include Aws::Structure
+    end
+
+    # Contains metadata about a customer master key (CMK).
+    #
+    # @note When making an API call, you may pass AwsKmsKeyDetails
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "NonEmptyString",
+    #         creation_date: 1.0,
+    #         key_id: "NonEmptyString",
+    #         key_manager: "NonEmptyString",
+    #         key_state: "NonEmptyString",
+    #         origin: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The twelve-digit account ID of the AWS account that owns the CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time when the CMK was created.
+    #   @return [Float]
+    #
+    # @!attribute [rw] key_id
+    #   The globally unique identifier for the CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_manager
+    #   The manager of the CMK. CMKs in your AWS account are either customer
+    #   managed or AWS managed.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_state
+    #   The state of the CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin
+    #   The source of the CMK's key material. When this value is AWS\_KMS,
+    #   AWS KMS created the key material. When this value is EXTERNAL, the
+    #   key material was imported from your existing key management
+    #   infrastructure or the CMK lacks key material. When this value is
+    #   AWS\_CLOUDHSM, the key material was created in the AWS CloudHSM
+    #   cluster associated with a custom key store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsKmsKeyDetails AWS API Documentation
+    #
+    class AwsKmsKeyDetails < Struct.new(
+      :aws_account_id,
+      :creation_date,
+      :key_id,
+      :key_manager,
+      :key_state,
+      :origin)
+      include Aws::Structure
+    end
+
+    # The code for the Lambda function. You can specify either an object in
+    # Amazon S3, or upload a deployment package directly.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionCode
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket: "NonEmptyString",
+    #         s3_key: "NonEmptyString",
+    #         s3_object_version: "NonEmptyString",
+    #         zip_file: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket
+    #   An Amazon S3 bucket in the same AWS Region as your function. The
+    #   bucket can be in a different AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key
+    #   The Amazon S3 key of the deployment package.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_version
+    #   For versioned objects, the version of the deployment package object
+    #   to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] zip_file
+    #   The base64-encoded contents of the deployment package. AWS SDK and
+    #   AWS CLI clients handle the encoding for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionCode AWS API Documentation
+    #
+    class AwsLambdaFunctionCode < Struct.new(
+      :s3_bucket,
+      :s3_key,
+      :s3_object_version,
+      :zip_file)
+      include Aws::Structure
+    end
+
+    # The dead-letter queue for failed asynchronous invocations.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionDeadLetterConfig
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
+    #   topic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDeadLetterConfig AWS API Documentation
+    #
+    class AwsLambdaFunctionDeadLetterConfig < Struct.new(
+      :target_arn)
+      include Aws::Structure
+    end
+
+    # Details about a function's configuration.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionDetails
+    #   data as a hash:
+    #
+    #       {
+    #         code: {
+    #           s3_bucket: "NonEmptyString",
+    #           s3_key: "NonEmptyString",
+    #           s3_object_version: "NonEmptyString",
+    #           zip_file: "NonEmptyString",
+    #         },
+    #         code_sha_256: "NonEmptyString",
+    #         dead_letter_config: {
+    #           target_arn: "NonEmptyString",
+    #         },
+    #         environment: {
+    #           variables: {
+    #             "NonEmptyString" => "NonEmptyString",
+    #           },
+    #           error: {
+    #             error_code: "NonEmptyString",
+    #             message: "NonEmptyString",
+    #           },
+    #         },
+    #         function_name: "NonEmptyString",
+    #         handler: "NonEmptyString",
+    #         kms_key_arn: "NonEmptyString",
+    #         last_modified: "NonEmptyString",
+    #         layers: [
+    #           {
+    #             arn: "NonEmptyString",
+    #             code_size: 1,
+    #           },
+    #         ],
+    #         master_arn: "NonEmptyString",
+    #         memory_size: 1,
+    #         revision_id: "NonEmptyString",
+    #         role: "NonEmptyString",
+    #         runtime: "NonEmptyString",
+    #         timeout: 1,
+    #         tracing_config: {
+    #           mode: "NonEmptyString",
+    #         },
+    #         vpc_config: {
+    #           security_group_ids: ["NonEmptyString"],
+    #           subnet_ids: ["NonEmptyString"],
+    #           vpc_id: "NonEmptyString",
+    #         },
+    #         version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] code
+    #   An `AwsLambdaFunctionCode` object.
+    #   @return [Types::AwsLambdaFunctionCode]
+    #
+    # @!attribute [rw] code_sha_256
+    #   The SHA256 hash of the function's deployment package.
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_config
+    #   The function's dead letter queue.
+    #   @return [Types::AwsLambdaFunctionDeadLetterConfig]
+    #
+    # @!attribute [rw] environment
+    #   The function's environment variables.
+    #   @return [Types::AwsLambdaFunctionEnvironment]
+    #
+    # @!attribute [rw] function_name
+    #   The name of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] handler
+    #   The function that Lambda calls to begin executing your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The KMS key that's used to encrypt the function's environment
+    #   variables. This key is only returned if you've configured a
+    #   customer managed CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified
+    #   The date and time that the function was last updated, in ISO-8601
+    #   format (YYYY-MM-DDThh:mm:ss.sTZD).
+    #   @return [String]
+    #
+    # @!attribute [rw] layers
+    #   The function's layers.
+    #   @return [Array<Types::AwsLambdaFunctionLayer>]
+    #
+    # @!attribute [rw] master_arn
+    #   For Lambda@Edge functions, the ARN of the master function.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_size
+    #   The memory that's allocated to the function.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] revision_id
+    #   The latest updated revision of the function or alias.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The function's execution role.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime
+    #   The runtime environment for the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout
+    #   The amount of time that Lambda allows a function to run before
+    #   stopping it.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tracing_config
+    #   The function's AWS X-Ray tracing configuration.
+    #   @return [Types::AwsLambdaFunctionTracingConfig]
+    #
+    # @!attribute [rw] vpc_config
+    #   The function's networking configuration.
+    #   @return [Types::AwsLambdaFunctionVpcConfig]
+    #
+    # @!attribute [rw] version
+    #   The version of the Lambda function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionDetails AWS API Documentation
+    #
+    class AwsLambdaFunctionDetails < Struct.new(
+      :code,
+      :code_sha_256,
+      :dead_letter_config,
+      :environment,
+      :function_name,
+      :handler,
+      :kms_key_arn,
+      :last_modified,
+      :layers,
+      :master_arn,
+      :memory_size,
+      :revision_id,
+      :role,
+      :runtime,
+      :timeout,
+      :tracing_config,
+      :vpc_config,
+      :version)
+      include Aws::Structure
+    end
+
+    # A function's environment variable settings.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionEnvironment
+    #   data as a hash:
+    #
+    #       {
+    #         variables: {
+    #           "NonEmptyString" => "NonEmptyString",
+    #         },
+    #         error: {
+    #           error_code: "NonEmptyString",
+    #           message: "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] variables
+    #   Environment variable key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] error
+    #   An `AwsLambdaFunctionEnvironmentError` object.
+    #   @return [Types::AwsLambdaFunctionEnvironmentError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionEnvironment AWS API Documentation
+    #
+    class AwsLambdaFunctionEnvironment < Struct.new(
+      :variables,
+      :error)
+      include Aws::Structure
+    end
+
+    # Error messages for environment variables that couldn't be applied.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionEnvironmentError
+    #   data as a hash:
+    #
+    #       {
+    #         error_code: "NonEmptyString",
+    #         message: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionEnvironmentError AWS API Documentation
+    #
+    class AwsLambdaFunctionEnvironmentError < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # An AWS Lambda layer.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionLayer
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "NonEmptyString",
+    #         code_size: 1,
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function layer.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_size
+    #   The size of the layer archive in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionLayer AWS API Documentation
+    #
+    class AwsLambdaFunctionLayer < Struct.new(
+      :arn,
+      :code_size)
+      include Aws::Structure
+    end
+
+    # The function's AWS X-Ray tracing configuration.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionTracingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   The tracing mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionTracingConfig AWS API Documentation
+    #
+    class AwsLambdaFunctionTracingConfig < Struct.new(
+      :mode)
+      include Aws::Structure
+    end
+
+    # The VPC security groups and subnets that are attached to a Lambda
+    # function. For more information, see VPC Settings.
+    #
+    # @note When making an API call, you may pass AwsLambdaFunctionVpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["NonEmptyString"],
+    #         subnet_ids: ["NonEmptyString"],
+    #         vpc_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of VPC security groups IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of VPC subnet IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaFunctionVpcConfig AWS API Documentation
+    #
+    class AwsLambdaFunctionVpcConfig < Struct.new(
+      :security_group_ids,
+      :subnet_ids,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -324,6 +1097,28 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             details: {
+    #               aws_cloud_front_distribution: {
+    #                 domain_name: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 last_modified_time: "NonEmptyString",
+    #                 logging: {
+    #                   bucket: "NonEmptyString",
+    #                   enabled: false,
+    #                   include_cookies: false,
+    #                   prefix: "NonEmptyString",
+    #                 },
+    #                 origins: {
+    #                   items: [
+    #                     {
+    #                       domain_name: "NonEmptyString",
+    #                       id: "NonEmptyString",
+    #                       origin_path: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 status: "NonEmptyString",
+    #                 web_acl_id: "NonEmptyString",
+    #               },
     #               aws_ec2_instance: {
     #                 type: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -335,6 +1130,26 @@ module Aws::SecurityHub
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
     #               },
+    #               aws_elbv_2_load_balancer: {
+    #                 availability_zones: [
+    #                   {
+    #                     zone_name: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 canonical_hosted_zone_id: "NonEmptyString",
+    #                 created_time: "NonEmptyString",
+    #                 dns_name: "NonEmptyString",
+    #                 ip_address_type: "NonEmptyString",
+    #                 scheme: "NonEmptyString",
+    #                 security_groups: ["NonEmptyString"],
+    #                 state: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #               },
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
@@ -343,6 +1158,88 @@ module Aws::SecurityHub
     #                 user_name: "NonEmptyString",
     #                 status: "Active", # accepts Active, Inactive
     #                 created_at: "NonEmptyString",
+    #                 principal_id: "NonEmptyString",
+    #                 principal_type: "NonEmptyString",
+    #                 principal_name: "NonEmptyString",
+    #               },
+    #               aws_iam_role: {
+    #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                 create_date: "NonEmptyString",
+    #                 role_id: "NonEmptyString",
+    #                 role_name: "NonEmptyString",
+    #                 max_session_duration: 1,
+    #                 path: "NonEmptyString",
+    #               },
+    #               aws_kms_key: {
+    #                 aws_account_id: "NonEmptyString",
+    #                 creation_date: 1.0,
+    #                 key_id: "NonEmptyString",
+    #                 key_manager: "NonEmptyString",
+    #                 key_state: "NonEmptyString",
+    #                 origin: "NonEmptyString",
+    #               },
+    #               aws_lambda_function: {
+    #                 code: {
+    #                   s3_bucket: "NonEmptyString",
+    #                   s3_key: "NonEmptyString",
+    #                   s3_object_version: "NonEmptyString",
+    #                   zip_file: "NonEmptyString",
+    #                 },
+    #                 code_sha_256: "NonEmptyString",
+    #                 dead_letter_config: {
+    #                   target_arn: "NonEmptyString",
+    #                 },
+    #                 environment: {
+    #                   variables: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   error: {
+    #                     error_code: "NonEmptyString",
+    #                     message: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 function_name: "NonEmptyString",
+    #                 handler: "NonEmptyString",
+    #                 kms_key_arn: "NonEmptyString",
+    #                 last_modified: "NonEmptyString",
+    #                 layers: [
+    #                   {
+    #                     arn: "NonEmptyString",
+    #                     code_size: 1,
+    #                   },
+    #                 ],
+    #                 master_arn: "NonEmptyString",
+    #                 memory_size: 1,
+    #                 revision_id: "NonEmptyString",
+    #                 role: "NonEmptyString",
+    #                 runtime: "NonEmptyString",
+    #                 timeout: 1,
+    #                 tracing_config: {
+    #                   mode: "NonEmptyString",
+    #                 },
+    #                 vpc_config: {
+    #                   security_group_ids: ["NonEmptyString"],
+    #                   subnet_ids: ["NonEmptyString"],
+    #                   vpc_id: "NonEmptyString",
+    #                 },
+    #                 version: "NonEmptyString",
+    #               },
+    #               aws_sns_topic: {
+    #                 kms_master_key_id: "NonEmptyString",
+    #                 subscription: [
+    #                   {
+    #                     endpoint: "NonEmptyString",
+    #                     protocol: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 topic_name: "NonEmptyString",
+    #                 owner: "NonEmptyString",
+    #               },
+    #               aws_sqs_queue: {
+    #                 kms_data_key_reuse_period_seconds: 1,
+    #                 kms_master_key_id: "NonEmptyString",
+    #                 queue_name: "NonEmptyString",
+    #                 dead_letter_target_arn: "NonEmptyString",
     #               },
     #               container: {
     #                 name: "NonEmptyString",
@@ -1590,6 +2487,120 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A wrapper type for the topic's Amazon Resource Name (ARN).
+    #
+    # @note When making an API call, you may pass AwsSnsTopicDetails
+    #   data as a hash:
+    #
+    #       {
+    #         kms_master_key_id: "NonEmptyString",
+    #         subscription: [
+    #           {
+    #             endpoint: "NonEmptyString",
+    #             protocol: "NonEmptyString",
+    #           },
+    #         ],
+    #         topic_name: "NonEmptyString",
+    #         owner: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The ID of an AWS-managed customer master key (CMK) for Amazon SNS or
+    #   a custom CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription
+    #   Subscription is an embedded property that describes the subscription
+    #   endpoints of an Amazon SNS topic.
+    #   @return [Array<Types::AwsSnsTopicSubscription>]
+    #
+    # @!attribute [rw] topic_name
+    #   The name of the topic.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner
+    #   The subscription's owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSnsTopicDetails AWS API Documentation
+    #
+    class AwsSnsTopicDetails < Struct.new(
+      :kms_master_key_id,
+      :subscription,
+      :topic_name,
+      :owner)
+      include Aws::Structure
+    end
+
+    # A wrapper type for the attributes of an Amazon SNS subscription.
+    #
+    # @note When making an API call, you may pass AwsSnsTopicSubscription
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint: "NonEmptyString",
+    #         protocol: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] endpoint
+    #   The subscription's endpoint (format depends on the protocol).
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The subscription's protocol.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSnsTopicSubscription AWS API Documentation
+    #
+    class AwsSnsTopicSubscription < Struct.new(
+      :endpoint,
+      :protocol)
+      include Aws::Structure
+    end
+
+    # Data about a queue.
+    #
+    # @note When making an API call, you may pass AwsSqsQueueDetails
+    #   data as a hash:
+    #
+    #       {
+    #         kms_data_key_reuse_period_seconds: 1,
+    #         kms_master_key_id: "NonEmptyString",
+    #         queue_name: "NonEmptyString",
+    #         dead_letter_target_arn: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] kms_data_key_reuse_period_seconds
+    #   The length of time, in seconds, for which Amazon SQS can reuse a
+    #   data key to encrypt or decrypt messages before calling AWS KMS
+    #   again.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_master_key_id
+    #   The ID of an AWS-managed customer master key (CMK) for Amazon SQS or
+    #   a custom CMK.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_name
+    #   The name of the new queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] dead_letter_target_arn
+    #   The Amazon Resource Name (ARN) of the dead-letter queue to which
+    #   Amazon SQS moves messages after the value of maxReceiveCount is
+    #   exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSqsQueueDetails AWS API Documentation
+    #
+    class AwsSqsQueueDetails < Struct.new(
+      :kms_data_key_reuse_period_seconds,
+      :kms_master_key_id,
+      :queue_name,
+      :dead_letter_target_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchDisableStandardsRequest
     #   data as a hash:
     #
@@ -1747,6 +2758,28 @@ module Aws::SecurityHub
     #                   "NonEmptyString" => "NonEmptyString",
     #                 },
     #                 details: {
+    #                   aws_cloud_front_distribution: {
+    #                     domain_name: "NonEmptyString",
+    #                     etag: "NonEmptyString",
+    #                     last_modified_time: "NonEmptyString",
+    #                     logging: {
+    #                       bucket: "NonEmptyString",
+    #                       enabled: false,
+    #                       include_cookies: false,
+    #                       prefix: "NonEmptyString",
+    #                     },
+    #                     origins: {
+    #                       items: [
+    #                         {
+    #                           domain_name: "NonEmptyString",
+    #                           id: "NonEmptyString",
+    #                           origin_path: "NonEmptyString",
+    #                         },
+    #                       ],
+    #                     },
+    #                     status: "NonEmptyString",
+    #                     web_acl_id: "NonEmptyString",
+    #                   },
     #                   aws_ec2_instance: {
     #                     type: "NonEmptyString",
     #                     image_id: "NonEmptyString",
@@ -1758,6 +2791,26 @@ module Aws::SecurityHub
     #                     subnet_id: "NonEmptyString",
     #                     launched_at: "NonEmptyString",
     #                   },
+    #                   aws_elbv_2_load_balancer: {
+    #                     availability_zones: [
+    #                       {
+    #                         zone_name: "NonEmptyString",
+    #                         subnet_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     canonical_hosted_zone_id: "NonEmptyString",
+    #                     created_time: "NonEmptyString",
+    #                     dns_name: "NonEmptyString",
+    #                     ip_address_type: "NonEmptyString",
+    #                     scheme: "NonEmptyString",
+    #                     security_groups: ["NonEmptyString"],
+    #                     state: {
+    #                       code: "NonEmptyString",
+    #                       reason: "NonEmptyString",
+    #                     },
+    #                     type: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
+    #                   },
     #                   aws_s3_bucket: {
     #                     owner_id: "NonEmptyString",
     #                     owner_name: "NonEmptyString",
@@ -1766,6 +2819,88 @@ module Aws::SecurityHub
     #                     user_name: "NonEmptyString",
     #                     status: "Active", # accepts Active, Inactive
     #                     created_at: "NonEmptyString",
+    #                     principal_id: "NonEmptyString",
+    #                     principal_type: "NonEmptyString",
+    #                     principal_name: "NonEmptyString",
+    #                   },
+    #                   aws_iam_role: {
+    #                     assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                     create_date: "NonEmptyString",
+    #                     role_id: "NonEmptyString",
+    #                     role_name: "NonEmptyString",
+    #                     max_session_duration: 1,
+    #                     path: "NonEmptyString",
+    #                   },
+    #                   aws_kms_key: {
+    #                     aws_account_id: "NonEmptyString",
+    #                     creation_date: 1.0,
+    #                     key_id: "NonEmptyString",
+    #                     key_manager: "NonEmptyString",
+    #                     key_state: "NonEmptyString",
+    #                     origin: "NonEmptyString",
+    #                   },
+    #                   aws_lambda_function: {
+    #                     code: {
+    #                       s3_bucket: "NonEmptyString",
+    #                       s3_key: "NonEmptyString",
+    #                       s3_object_version: "NonEmptyString",
+    #                       zip_file: "NonEmptyString",
+    #                     },
+    #                     code_sha_256: "NonEmptyString",
+    #                     dead_letter_config: {
+    #                       target_arn: "NonEmptyString",
+    #                     },
+    #                     environment: {
+    #                       variables: {
+    #                         "NonEmptyString" => "NonEmptyString",
+    #                       },
+    #                       error: {
+    #                         error_code: "NonEmptyString",
+    #                         message: "NonEmptyString",
+    #                       },
+    #                     },
+    #                     function_name: "NonEmptyString",
+    #                     handler: "NonEmptyString",
+    #                     kms_key_arn: "NonEmptyString",
+    #                     last_modified: "NonEmptyString",
+    #                     layers: [
+    #                       {
+    #                         arn: "NonEmptyString",
+    #                         code_size: 1,
+    #                       },
+    #                     ],
+    #                     master_arn: "NonEmptyString",
+    #                     memory_size: 1,
+    #                     revision_id: "NonEmptyString",
+    #                     role: "NonEmptyString",
+    #                     runtime: "NonEmptyString",
+    #                     timeout: 1,
+    #                     tracing_config: {
+    #                       mode: "NonEmptyString",
+    #                     },
+    #                     vpc_config: {
+    #                       security_group_ids: ["NonEmptyString"],
+    #                       subnet_ids: ["NonEmptyString"],
+    #                       vpc_id: "NonEmptyString",
+    #                     },
+    #                     version: "NonEmptyString",
+    #                   },
+    #                   aws_sns_topic: {
+    #                     kms_master_key_id: "NonEmptyString",
+    #                     subscription: [
+    #                       {
+    #                         endpoint: "NonEmptyString",
+    #                         protocol: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     topic_name: "NonEmptyString",
+    #                     owner: "NonEmptyString",
+    #                   },
+    #                   aws_sqs_queue: {
+    #                     kms_data_key_reuse_period_seconds: 1,
+    #                     kms_master_key_id: "NonEmptyString",
+    #                     queue_name: "NonEmptyString",
+    #                     dead_letter_target_arn: "NonEmptyString",
     #                   },
     #                   container: {
     #                     name: "NonEmptyString",
@@ -1802,7 +2937,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] findings
     #   A list of findings to import. To successfully import a finding, it
-    #   must follow the [AWS Security Finding Format][1].
+    #   must follow the [AWS Security Finding Format][1]. Maximum of 100
+    #   findings per request.
     #
     #
     #
@@ -1840,6 +2976,21 @@ module Aws::SecurityHub
     # Exclusive to findings that are generated as the result of a check run
     # against a specific rule in a supported standard (for example, CIS AWS
     # Foundations). Contains compliance-related finding details.
+    #
+    # Values include the following:
+    #
+    # * Allowed values are the following:
+    #
+    #   * `PASSED` - Compliance check passed for all evaluated resources.
+    #
+    #   * `WARNING` - Some information is missing or this check is not
+    #     supported given your configuration.
+    #
+    #   * `FAILED` - Compliance check failed for at least one evaluated
+    #     resource.
+    #
+    #   * `NOT_AVAILABLE` - Check could not be performed due to a service
+    #     outage or API error.
     #
     # @note When making an API call, you may pass Compliance
     #   data as a hash:
@@ -4277,6 +5428,35 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Information about the state of the load balancer.
+    #
+    # @note When making an API call, you may pass LoadBalancerState
+    #   data as a hash:
+    #
+    #       {
+    #         code: "NonEmptyString",
+    #         reason: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] code
+    #   The state code. The initial state of the load balancer is
+    #   provisioning. After the load balancer is fully set up and ready to
+    #   route traffic, its state is active. If the load balancer could not
+    #   be set up, its state is failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A description of the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/LoadBalancerState AWS API Documentation
+    #
+    class LoadBalancerState < Struct.new(
+      :code,
+      :reason)
+      include Aws::Structure
+    end
+
     # A list of malware related to a finding.
     #
     # @note When making an API call, you may pass Malware
@@ -4761,6 +5941,28 @@ module Aws::SecurityHub
     #           "NonEmptyString" => "NonEmptyString",
     #         },
     #         details: {
+    #           aws_cloud_front_distribution: {
+    #             domain_name: "NonEmptyString",
+    #             etag: "NonEmptyString",
+    #             last_modified_time: "NonEmptyString",
+    #             logging: {
+    #               bucket: "NonEmptyString",
+    #               enabled: false,
+    #               include_cookies: false,
+    #               prefix: "NonEmptyString",
+    #             },
+    #             origins: {
+    #               items: [
+    #                 {
+    #                   domain_name: "NonEmptyString",
+    #                   id: "NonEmptyString",
+    #                   origin_path: "NonEmptyString",
+    #                 },
+    #               ],
+    #             },
+    #             status: "NonEmptyString",
+    #             web_acl_id: "NonEmptyString",
+    #           },
     #           aws_ec2_instance: {
     #             type: "NonEmptyString",
     #             image_id: "NonEmptyString",
@@ -4772,6 +5974,26 @@ module Aws::SecurityHub
     #             subnet_id: "NonEmptyString",
     #             launched_at: "NonEmptyString",
     #           },
+    #           aws_elbv_2_load_balancer: {
+    #             availability_zones: [
+    #               {
+    #                 zone_name: "NonEmptyString",
+    #                 subnet_id: "NonEmptyString",
+    #               },
+    #             ],
+    #             canonical_hosted_zone_id: "NonEmptyString",
+    #             created_time: "NonEmptyString",
+    #             dns_name: "NonEmptyString",
+    #             ip_address_type: "NonEmptyString",
+    #             scheme: "NonEmptyString",
+    #             security_groups: ["NonEmptyString"],
+    #             state: {
+    #               code: "NonEmptyString",
+    #               reason: "NonEmptyString",
+    #             },
+    #             type: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #           },
     #           aws_s3_bucket: {
     #             owner_id: "NonEmptyString",
     #             owner_name: "NonEmptyString",
@@ -4780,6 +6002,88 @@ module Aws::SecurityHub
     #             user_name: "NonEmptyString",
     #             status: "Active", # accepts Active, Inactive
     #             created_at: "NonEmptyString",
+    #             principal_id: "NonEmptyString",
+    #             principal_type: "NonEmptyString",
+    #             principal_name: "NonEmptyString",
+    #           },
+    #           aws_iam_role: {
+    #             assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #             create_date: "NonEmptyString",
+    #             role_id: "NonEmptyString",
+    #             role_name: "NonEmptyString",
+    #             max_session_duration: 1,
+    #             path: "NonEmptyString",
+    #           },
+    #           aws_kms_key: {
+    #             aws_account_id: "NonEmptyString",
+    #             creation_date: 1.0,
+    #             key_id: "NonEmptyString",
+    #             key_manager: "NonEmptyString",
+    #             key_state: "NonEmptyString",
+    #             origin: "NonEmptyString",
+    #           },
+    #           aws_lambda_function: {
+    #             code: {
+    #               s3_bucket: "NonEmptyString",
+    #               s3_key: "NonEmptyString",
+    #               s3_object_version: "NonEmptyString",
+    #               zip_file: "NonEmptyString",
+    #             },
+    #             code_sha_256: "NonEmptyString",
+    #             dead_letter_config: {
+    #               target_arn: "NonEmptyString",
+    #             },
+    #             environment: {
+    #               variables: {
+    #                 "NonEmptyString" => "NonEmptyString",
+    #               },
+    #               error: {
+    #                 error_code: "NonEmptyString",
+    #                 message: "NonEmptyString",
+    #               },
+    #             },
+    #             function_name: "NonEmptyString",
+    #             handler: "NonEmptyString",
+    #             kms_key_arn: "NonEmptyString",
+    #             last_modified: "NonEmptyString",
+    #             layers: [
+    #               {
+    #                 arn: "NonEmptyString",
+    #                 code_size: 1,
+    #               },
+    #             ],
+    #             master_arn: "NonEmptyString",
+    #             memory_size: 1,
+    #             revision_id: "NonEmptyString",
+    #             role: "NonEmptyString",
+    #             runtime: "NonEmptyString",
+    #             timeout: 1,
+    #             tracing_config: {
+    #               mode: "NonEmptyString",
+    #             },
+    #             vpc_config: {
+    #               security_group_ids: ["NonEmptyString"],
+    #               subnet_ids: ["NonEmptyString"],
+    #               vpc_id: "NonEmptyString",
+    #             },
+    #             version: "NonEmptyString",
+    #           },
+    #           aws_sns_topic: {
+    #             kms_master_key_id: "NonEmptyString",
+    #             subscription: [
+    #               {
+    #                 endpoint: "NonEmptyString",
+    #                 protocol: "NonEmptyString",
+    #               },
+    #             ],
+    #             topic_name: "NonEmptyString",
+    #             owner: "NonEmptyString",
+    #           },
+    #           aws_sqs_queue: {
+    #             kms_data_key_reuse_period_seconds: 1,
+    #             kms_master_key_id: "NonEmptyString",
+    #             queue_name: "NonEmptyString",
+    #             dead_letter_target_arn: "NonEmptyString",
     #           },
     #           container: {
     #             name: "NonEmptyString",
@@ -4854,6 +6158,28 @@ module Aws::SecurityHub
     #   data as a hash:
     #
     #       {
+    #         aws_cloud_front_distribution: {
+    #           domain_name: "NonEmptyString",
+    #           etag: "NonEmptyString",
+    #           last_modified_time: "NonEmptyString",
+    #           logging: {
+    #             bucket: "NonEmptyString",
+    #             enabled: false,
+    #             include_cookies: false,
+    #             prefix: "NonEmptyString",
+    #           },
+    #           origins: {
+    #             items: [
+    #               {
+    #                 domain_name: "NonEmptyString",
+    #                 id: "NonEmptyString",
+    #                 origin_path: "NonEmptyString",
+    #               },
+    #             ],
+    #           },
+    #           status: "NonEmptyString",
+    #           web_acl_id: "NonEmptyString",
+    #         },
     #         aws_ec2_instance: {
     #           type: "NonEmptyString",
     #           image_id: "NonEmptyString",
@@ -4865,6 +6191,26 @@ module Aws::SecurityHub
     #           subnet_id: "NonEmptyString",
     #           launched_at: "NonEmptyString",
     #         },
+    #         aws_elbv_2_load_balancer: {
+    #           availability_zones: [
+    #             {
+    #               zone_name: "NonEmptyString",
+    #               subnet_id: "NonEmptyString",
+    #             },
+    #           ],
+    #           canonical_hosted_zone_id: "NonEmptyString",
+    #           created_time: "NonEmptyString",
+    #           dns_name: "NonEmptyString",
+    #           ip_address_type: "NonEmptyString",
+    #           scheme: "NonEmptyString",
+    #           security_groups: ["NonEmptyString"],
+    #           state: {
+    #             code: "NonEmptyString",
+    #             reason: "NonEmptyString",
+    #           },
+    #           type: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #         },
     #         aws_s3_bucket: {
     #           owner_id: "NonEmptyString",
     #           owner_name: "NonEmptyString",
@@ -4873,6 +6219,88 @@ module Aws::SecurityHub
     #           user_name: "NonEmptyString",
     #           status: "Active", # accepts Active, Inactive
     #           created_at: "NonEmptyString",
+    #           principal_id: "NonEmptyString",
+    #           principal_type: "NonEmptyString",
+    #           principal_name: "NonEmptyString",
+    #         },
+    #         aws_iam_role: {
+    #           assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #           create_date: "NonEmptyString",
+    #           role_id: "NonEmptyString",
+    #           role_name: "NonEmptyString",
+    #           max_session_duration: 1,
+    #           path: "NonEmptyString",
+    #         },
+    #         aws_kms_key: {
+    #           aws_account_id: "NonEmptyString",
+    #           creation_date: 1.0,
+    #           key_id: "NonEmptyString",
+    #           key_manager: "NonEmptyString",
+    #           key_state: "NonEmptyString",
+    #           origin: "NonEmptyString",
+    #         },
+    #         aws_lambda_function: {
+    #           code: {
+    #             s3_bucket: "NonEmptyString",
+    #             s3_key: "NonEmptyString",
+    #             s3_object_version: "NonEmptyString",
+    #             zip_file: "NonEmptyString",
+    #           },
+    #           code_sha_256: "NonEmptyString",
+    #           dead_letter_config: {
+    #             target_arn: "NonEmptyString",
+    #           },
+    #           environment: {
+    #             variables: {
+    #               "NonEmptyString" => "NonEmptyString",
+    #             },
+    #             error: {
+    #               error_code: "NonEmptyString",
+    #               message: "NonEmptyString",
+    #             },
+    #           },
+    #           function_name: "NonEmptyString",
+    #           handler: "NonEmptyString",
+    #           kms_key_arn: "NonEmptyString",
+    #           last_modified: "NonEmptyString",
+    #           layers: [
+    #             {
+    #               arn: "NonEmptyString",
+    #               code_size: 1,
+    #             },
+    #           ],
+    #           master_arn: "NonEmptyString",
+    #           memory_size: 1,
+    #           revision_id: "NonEmptyString",
+    #           role: "NonEmptyString",
+    #           runtime: "NonEmptyString",
+    #           timeout: 1,
+    #           tracing_config: {
+    #             mode: "NonEmptyString",
+    #           },
+    #           vpc_config: {
+    #             security_group_ids: ["NonEmptyString"],
+    #             subnet_ids: ["NonEmptyString"],
+    #             vpc_id: "NonEmptyString",
+    #           },
+    #           version: "NonEmptyString",
+    #         },
+    #         aws_sns_topic: {
+    #           kms_master_key_id: "NonEmptyString",
+    #           subscription: [
+    #             {
+    #               endpoint: "NonEmptyString",
+    #               protocol: "NonEmptyString",
+    #             },
+    #           ],
+    #           topic_name: "NonEmptyString",
+    #           owner: "NonEmptyString",
+    #         },
+    #         aws_sqs_queue: {
+    #           kms_data_key_reuse_period_seconds: 1,
+    #           kms_master_key_id: "NonEmptyString",
+    #           queue_name: "NonEmptyString",
+    #           dead_letter_target_arn: "NonEmptyString",
     #         },
     #         container: {
     #           name: "NonEmptyString",
@@ -4885,9 +6313,17 @@ module Aws::SecurityHub
     #         },
     #       }
     #
+    # @!attribute [rw] aws_cloud_front_distribution
+    #   Details about a CloudFront distribution.
+    #   @return [Types::AwsCloudFrontDistributionDetails]
+    #
     # @!attribute [rw] aws_ec2_instance
     #   Details about an Amazon EC2 instance related to a finding.
     #   @return [Types::AwsEc2InstanceDetails]
+    #
+    # @!attribute [rw] aws_elbv_2_load_balancer
+    #   Details about a load balancer.
+    #   @return [Types::AwsElbv2LoadBalancerDetails]
     #
     # @!attribute [rw] aws_s3_bucket
     #   Details about an Amazon S3 Bucket related to a finding.
@@ -4896,6 +6332,26 @@ module Aws::SecurityHub
     # @!attribute [rw] aws_iam_access_key
     #   Details about an IAM access key related to a finding.
     #   @return [Types::AwsIamAccessKeyDetails]
+    #
+    # @!attribute [rw] aws_iam_role
+    #   Details about an IAM role.
+    #   @return [Types::AwsIamRoleDetails]
+    #
+    # @!attribute [rw] aws_kms_key
+    #   Details about a KMS key.
+    #   @return [Types::AwsKmsKeyDetails]
+    #
+    # @!attribute [rw] aws_lambda_function
+    #   Details about a Lambda function.
+    #   @return [Types::AwsLambdaFunctionDetails]
+    #
+    # @!attribute [rw] aws_sns_topic
+    #   Details about an SNS topic.
+    #   @return [Types::AwsSnsTopicDetails]
+    #
+    # @!attribute [rw] aws_sqs_queue
+    #   Details about an SQS queue.
+    #   @return [Types::AwsSqsQueueDetails]
     #
     # @!attribute [rw] container
     #   Details about a container resource related to a finding.
@@ -4908,9 +6364,16 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
+      :aws_cloud_front_distribution,
       :aws_ec2_instance,
+      :aws_elbv_2_load_balancer,
       :aws_s3_bucket,
       :aws_iam_access_key,
+      :aws_iam_role,
+      :aws_kms_key,
+      :aws_lambda_function,
+      :aws_sns_topic,
+      :aws_sqs_queue,
       :container,
       :other)
       include Aws::Structure

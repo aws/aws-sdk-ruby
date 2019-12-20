@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2019-12-20)
+------------------
+
+* Feature - This release introduces the ability to tag key pairs, placement groups, export tasks, import image tasks, import snapshot tasks and export image tasks. You can use tags to organize and identify your resources for cost allocation.
+
 1.128.0 (2019-12-19)
 ------------------
 

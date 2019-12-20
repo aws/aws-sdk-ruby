@@ -383,7 +383,8 @@ module Aws::SecurityHub
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
-    #   must follow the [AWS Security Finding Format][1].
+    #   must follow the [AWS Security Finding Format][1]. Maximum of 100
+    #   findings per request.
     #
     #
     #
@@ -480,6 +481,28 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             details: {
+    #               aws_cloud_front_distribution: {
+    #                 domain_name: "NonEmptyString",
+    #                 etag: "NonEmptyString",
+    #                 last_modified_time: "NonEmptyString",
+    #                 logging: {
+    #                   bucket: "NonEmptyString",
+    #                   enabled: false,
+    #                   include_cookies: false,
+    #                   prefix: "NonEmptyString",
+    #                 },
+    #                 origins: {
+    #                   items: [
+    #                     {
+    #                       domain_name: "NonEmptyString",
+    #                       id: "NonEmptyString",
+    #                       origin_path: "NonEmptyString",
+    #                     },
+    #                   ],
+    #                 },
+    #                 status: "NonEmptyString",
+    #                 web_acl_id: "NonEmptyString",
+    #               },
     #               aws_ec2_instance: {
     #                 type: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -491,6 +514,26 @@ module Aws::SecurityHub
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
     #               },
+    #               aws_elbv_2_load_balancer: {
+    #                 availability_zones: [
+    #                   {
+    #                     zone_name: "NonEmptyString",
+    #                     subnet_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 canonical_hosted_zone_id: "NonEmptyString",
+    #                 created_time: "NonEmptyString",
+    #                 dns_name: "NonEmptyString",
+    #                 ip_address_type: "NonEmptyString",
+    #                 scheme: "NonEmptyString",
+    #                 security_groups: ["NonEmptyString"],
+    #                 state: {
+    #                   code: "NonEmptyString",
+    #                   reason: "NonEmptyString",
+    #                 },
+    #                 type: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #               },
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
     #                 owner_name: "NonEmptyString",
@@ -499,6 +542,88 @@ module Aws::SecurityHub
     #                 user_name: "NonEmptyString",
     #                 status: "Active", # accepts Active, Inactive
     #                 created_at: "NonEmptyString",
+    #                 principal_id: "NonEmptyString",
+    #                 principal_type: "NonEmptyString",
+    #                 principal_name: "NonEmptyString",
+    #               },
+    #               aws_iam_role: {
+    #                 assume_role_policy_document: "AwsIamRoleAssumeRolePolicyDocument",
+    #                 create_date: "NonEmptyString",
+    #                 role_id: "NonEmptyString",
+    #                 role_name: "NonEmptyString",
+    #                 max_session_duration: 1,
+    #                 path: "NonEmptyString",
+    #               },
+    #               aws_kms_key: {
+    #                 aws_account_id: "NonEmptyString",
+    #                 creation_date: 1.0,
+    #                 key_id: "NonEmptyString",
+    #                 key_manager: "NonEmptyString",
+    #                 key_state: "NonEmptyString",
+    #                 origin: "NonEmptyString",
+    #               },
+    #               aws_lambda_function: {
+    #                 code: {
+    #                   s3_bucket: "NonEmptyString",
+    #                   s3_key: "NonEmptyString",
+    #                   s3_object_version: "NonEmptyString",
+    #                   zip_file: "NonEmptyString",
+    #                 },
+    #                 code_sha_256: "NonEmptyString",
+    #                 dead_letter_config: {
+    #                   target_arn: "NonEmptyString",
+    #                 },
+    #                 environment: {
+    #                   variables: {
+    #                     "NonEmptyString" => "NonEmptyString",
+    #                   },
+    #                   error: {
+    #                     error_code: "NonEmptyString",
+    #                     message: "NonEmptyString",
+    #                   },
+    #                 },
+    #                 function_name: "NonEmptyString",
+    #                 handler: "NonEmptyString",
+    #                 kms_key_arn: "NonEmptyString",
+    #                 last_modified: "NonEmptyString",
+    #                 layers: [
+    #                   {
+    #                     arn: "NonEmptyString",
+    #                     code_size: 1,
+    #                   },
+    #                 ],
+    #                 master_arn: "NonEmptyString",
+    #                 memory_size: 1,
+    #                 revision_id: "NonEmptyString",
+    #                 role: "NonEmptyString",
+    #                 runtime: "NonEmptyString",
+    #                 timeout: 1,
+    #                 tracing_config: {
+    #                   mode: "NonEmptyString",
+    #                 },
+    #                 vpc_config: {
+    #                   security_group_ids: ["NonEmptyString"],
+    #                   subnet_ids: ["NonEmptyString"],
+    #                   vpc_id: "NonEmptyString",
+    #                 },
+    #                 version: "NonEmptyString",
+    #               },
+    #               aws_sns_topic: {
+    #                 kms_master_key_id: "NonEmptyString",
+    #                 subscription: [
+    #                   {
+    #                     endpoint: "NonEmptyString",
+    #                     protocol: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 topic_name: "NonEmptyString",
+    #                 owner: "NonEmptyString",
+    #               },
+    #               aws_sqs_queue: {
+    #                 kms_data_key_reuse_period_seconds: 1,
+    #                 kms_master_key_id: "NonEmptyString",
+    #                 queue_name: "NonEmptyString",
+    #                 dead_letter_target_arn: "NonEmptyString",
     #               },
     #               container: {
     #                 name: "NonEmptyString",
@@ -1619,7 +1744,8 @@ module Aws::SecurityHub
     end
 
     # Enables Security Hub for your account in the current Region or the
-    # Region you specify in the request. When you enable Security Hub, you
+    # Region you specify in the request. Enabling Security Hub also enables
+    # the CIS AWS Foundations standard. When you enable Security Hub, you
     # grant to Security Hub the permissions necessary to gather findings
     # from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.
     # To learn more, see [Setting Up AWS Security Hub][1].
@@ -2345,6 +2471,19 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].region #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.etag #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.last_modified_time #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.logging.bucket #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.logging.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.logging.include_cookies #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.logging.prefix #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items #=> Array
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].id #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.origins.items[0].origin_path #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.status #=> String
+    #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.web_acl_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.type #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.image_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.ip_v4_addresses #=> Array
@@ -2356,11 +2495,80 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_instance.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.subnet_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.launched_at #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones #=> Array
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].zone_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].subnet_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.canonical_hosted_zone_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.created_time #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.dns_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.ip_address_type #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.scheme #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.security_groups[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.code #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.reason #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.type #=> String
+    #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.user_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.status #=> String, one of "Active", "Inactive"
     #   resp.findings[0].resources[0].details.aws_iam_access_key.created_at #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_type #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_access_key.principal_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.assume_role_policy_document #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.create_date #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.role_id #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.role_name #=> String
+    #   resp.findings[0].resources[0].details.aws_iam_role.max_session_duration #=> Integer
+    #   resp.findings[0].resources[0].details.aws_iam_role.path #=> String
+    #   resp.findings[0].resources[0].details.aws_kms_key.aws_account_id #=> String
+    #   resp.findings[0].resources[0].details.aws_kms_key.creation_date #=> Float
+    #   resp.findings[0].resources[0].details.aws_kms_key.key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_kms_key.key_manager #=> String
+    #   resp.findings[0].resources[0].details.aws_kms_key.key_state #=> String
+    #   resp.findings[0].resources[0].details.aws_kms_key.origin #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code.s3_bucket #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code.s3_key #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code.s3_object_version #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code.zip_file #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.code_sha_256 #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.dead_letter_config.target_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.environment.variables #=> Hash
+    #   resp.findings[0].resources[0].details.aws_lambda_function.environment.variables["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.environment.error.error_code #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.environment.error.message #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.function_name #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.handler #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.kms_key_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.last_modified #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.layers #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.layers[0].arn #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.layers[0].code_size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_lambda_function.master_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.memory_size #=> Integer
+    #   resp.findings[0].resources[0].details.aws_lambda_function.revision_id #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.role #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.timeout #=> Integer
+    #   resp.findings[0].resources[0].details.aws_lambda_function.tracing_config.mode #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
+    #   resp.findings[0].resources[0].details.aws_sns_topic.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_sns_topic.subscription #=> Array
+    #   resp.findings[0].resources[0].details.aws_sns_topic.subscription[0].endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_sns_topic.subscription[0].protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_sns_topic.topic_name #=> String
+    #   resp.findings[0].resources[0].details.aws_sns_topic.owner #=> String
+    #   resp.findings[0].resources[0].details.aws_sqs_queue.kms_data_key_reuse_period_seconds #=> Integer
+    #   resp.findings[0].resources[0].details.aws_sqs_queue.kms_master_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_sqs_queue.queue_name #=> String
+    #   resp.findings[0].resources[0].details.aws_sqs_queue.dead_letter_target_arn #=> String
     #   resp.findings[0].resources[0].details.container.name #=> String
     #   resp.findings[0].resources[0].details.container.image_id #=> String
     #   resp.findings[0].resources[0].details.container.image_name #=> String
@@ -4290,7 +4498,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -500,6 +500,7 @@ module Aws::EKS
     VpcConfigRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     VpcConfigRequest.add_member(:endpoint_public_access, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "endpointPublicAccess"))
     VpcConfigRequest.add_member(:endpoint_private_access, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "endpointPrivateAccess"))
+    VpcConfigRequest.add_member(:public_access_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "publicAccessCidrs"))
     VpcConfigRequest.struct_class = Types::VpcConfigRequest
 
     VpcConfigResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "subnetIds"))
@@ -508,6 +509,7 @@ module Aws::EKS
     VpcConfigResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     VpcConfigResponse.add_member(:endpoint_public_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPublicAccess"))
     VpcConfigResponse.add_member(:endpoint_private_access, Shapes::ShapeRef.new(shape: Boolean, location_name: "endpointPrivateAccess"))
+    VpcConfigResponse.add_member(:public_access_cidrs, Shapes::ShapeRef.new(shape: StringList, location_name: "publicAccessCidrs"))
     VpcConfigResponse.struct_class = Types::VpcConfigResponse
 
     labelsKeyList.member = Shapes::ShapeRef.new(shape: String)

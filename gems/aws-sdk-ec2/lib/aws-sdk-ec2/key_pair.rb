@@ -44,6 +44,12 @@ module Aws::EC2
       data[:key_material]
     end
 
+    # The ID of the key pair.
+    # @return [String]
+    def key_pair_id
+      data[:key_pair_id]
+    end
+
     # @!endgroup
 
     # @return [Client]

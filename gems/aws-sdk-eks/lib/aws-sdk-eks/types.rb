@@ -190,6 +190,7 @@ module Aws::EKS
     #           security_group_ids: ["String"],
     #           endpoint_public_access: false,
     #           endpoint_private_access: false,
+    #           public_access_cidrs: ["String"],
     #         },
     #         logging: {
     #           cluster_logging: [
@@ -342,10 +343,10 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of subnets to launch Fargate pods into. At this time,
-    #   Fargate pods are not assigned public IP addresses, so only private
-    #   subnets (with no direct route to an Internet Gateway) are accepted
-    #   for this parameter.
+    #   The IDs of subnets to launch your pods into. At this time, pods
+    #   running on Fargate are not assigned public IP addresses, so only
+    #   private subnets (with no direct route to an Internet Gateway) are
+    #   accepted for this parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selectors
@@ -866,13 +867,16 @@ module Aws::EKS
     # @!attribute [rw] pod_execution_role_arn
     #   The Amazon Resource Name (ARN) of the pod execution role to use for
     #   pods that match the selectors in the Fargate profile. For more
-    #   information, see [Pod Execution
-    #   Role](eks/latest/userguide/pod-execution-role.html) in the *Amazon
-    #   EKS User Guide*.
+    #   information, see [Pod Execution Role][1] in the *Amazon EKS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of subnets to launch Fargate pods into.
+    #   The IDs of subnets to launch pods into.
     #   @return [Array<String>]
     #
     # @!attribute [rw] selectors
@@ -1962,6 +1966,7 @@ module Aws::EKS
     #           security_group_ids: ["String"],
     #           endpoint_public_access: false,
     #           endpoint_private_access: false,
+    #           public_access_cidrs: ["String"],
     #         },
     #         logging: {
     #           cluster_logging: [
@@ -2283,6 +2288,7 @@ module Aws::EKS
     #         security_group_ids: ["String"],
     #         endpoint_public_access: false,
     #         endpoint_private_access: false,
+    #         public_access_cidrs: ["String"],
     #       }
     #
     # @!attribute [rw] subnet_ids
@@ -2301,9 +2307,9 @@ module Aws::EKS
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_public_access
-    #   Set this value to `false` to disable public access for your
+    #   Set this value to `false` to disable public access to your
     #   cluster's Kubernetes API server endpoint. If you disable public
-    #   access, your cluster's Kubernetes API server can receive only
+    #   access, your cluster's Kubernetes API server can only receive
     #   requests from within the cluster VPC. The default value for this
     #   parameter is `true`, which enables public access for your Kubernetes
     #   API server. For more information, see [Amazon EKS Cluster Endpoint
@@ -2320,13 +2326,32 @@ module Aws::EKS
     #   access, Kubernetes API requests from within your cluster's VPC use
     #   the private VPC endpoint. The default value for this parameter is
     #   `false`, which disables private access for your Kubernetes API
-    #   server. For more information, see [Amazon EKS Cluster Endpoint
-    #   Access Control][1] in the <i> <i>Amazon EKS User Guide</i> </i>.
+    #   server. If you disable private access and you have worker nodes or
+    #   AWS Fargate pods in the cluster, then ensure that
+    #   `publicAccessCidrs` includes the necessary CIDR blocks for
+    #   communication with the worker nodes or Fargate pods. For more
+    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   the <i> <i>Amazon EKS User Guide</i> </i>.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] public_access_cidrs
+    #   The CIDR blocks that are allowed access to your cluster's public
+    #   Kubernetes API server endpoint. Communication to the endpoint from
+    #   addresses outside of the CIDR blocks that you specify is denied. The
+    #   default value is `0.0.0.0/0`. If you've disabled private endpoint
+    #   access and you have worker nodes or AWS Fargate pods in the cluster,
+    #   then ensure that you specify the necessary CIDR blocks. For more
+    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigRequest AWS API Documentation
     #
@@ -2334,7 +2359,8 @@ module Aws::EKS
       :subnet_ids,
       :security_group_ids,
       :endpoint_public_access,
-      :endpoint_private_access)
+      :endpoint_private_access,
+      :public_access_cidrs)
       include Aws::Structure
     end
 
@@ -2364,7 +2390,7 @@ module Aws::EKS
     # @!attribute [rw] endpoint_public_access
     #   This parameter indicates whether the Amazon EKS public API server
     #   endpoint is enabled. If the Amazon EKS public API server endpoint is
-    #   disabled, your cluster's Kubernetes API server can receive only
+    #   disabled, your cluster's Kubernetes API server can only receive
     #   requests that originate from within the cluster VPC.
     #   @return [Boolean]
     #
@@ -2373,8 +2399,32 @@ module Aws::EKS
     #   endpoint is enabled. If the Amazon EKS private API server endpoint
     #   is enabled, Kubernetes API requests that originate from within your
     #   cluster's VPC use the private VPC endpoint instead of traversing
-    #   the internet.
+    #   the internet. If this value is disabled and you have worker nodes or
+    #   AWS Fargate pods in the cluster, then ensure that
+    #   `publicAccessCidrs` includes the necessary CIDR blocks for
+    #   communication with the worker nodes or Fargate pods. For more
+    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
     #   @return [Boolean]
+    #
+    # @!attribute [rw] public_access_cidrs
+    #   The CIDR blocks that are allowed access to your cluster's public
+    #   Kubernetes API server endpoint. Communication to the endpoint from
+    #   addresses outside of the listed CIDR blocks is denied. The default
+    #   value is `0.0.0.0/0`. If you've disabled private endpoint access
+    #   and you have worker nodes or AWS Fargate pods in the cluster, then
+    #   ensure that the necessary CIDR blocks are listed. For more
+    #   information, see [Amazon EKS Cluster Endpoint Access Control][1] in
+    #   the <i> <i>Amazon EKS User Guide</i> </i>.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/VpcConfigResponse AWS API Documentation
     #
@@ -2384,7 +2434,8 @@ module Aws::EKS
       :cluster_security_group_id,
       :vpc_id,
       :endpoint_public_access,
-      :endpoint_private_access)
+      :endpoint_private_access,
+      :public_access_cidrs)
       include Aws::Structure
     end
 

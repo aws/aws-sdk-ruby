@@ -1991,6 +1991,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     certificate_rotation_restart: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2532,6 +2533,33 @@ module Aws::RDS
     # @option options [Integer] :max_allocated_storage
     #   The upper limit to which Amazon RDS can automatically scale the
     #   storage of the DB instance.
+    # @option options [Boolean] :certificate_rotation_restart
+    #   A value that indicates whether the DB instance is restarted when you
+    #   rotate your SSL/TLS certificate.
+    #
+    #   By default, the DB instance is restarted when you rotate your SSL/TLS
+    #   certificate. The certificate is not updated until the DB instance is
+    #   restarted.
+    #
+    #   Set this parameter only if you are *not* using SSL/TLS to connect to
+    #   the DB instance.
+    #
+    #   If you are using SSL/TLS to connect to the DB instance, follow the
+    #   appropriate instructions for your DB engine to rotate your SSL/TLS
+    #   certificate:
+    #
+    #   * For more information about rotating your SSL/TLS certificate for RDS
+    #     DB engines, see [ Rotating Your SSL/TLS Certificate.][1] in the
+    #     *Amazon RDS User Guide.*
+    #
+    #   * For more information about rotating your SSL/TLS certificate for
+    #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
+    #     the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

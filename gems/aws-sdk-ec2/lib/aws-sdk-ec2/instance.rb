@@ -1436,6 +1436,9 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
+    #   * `network-border-group` - The location from where the IP address is
+    #     advertised.
+    #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #

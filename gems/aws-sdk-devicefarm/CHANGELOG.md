@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2019-12-20)
+------------------
+
+* Feature - Introduced browser testing support through AWS Device Farm
+
 1.29.0 (2019-10-23)
 ------------------
 

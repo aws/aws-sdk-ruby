@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-12-20)
+------------------
+
+* Feature - AWS Transcribe now supports vocabulary filtering that allows customers to input words to the service that they don't want to see in the output transcript.
+
 1.34.0 (2019-12-19)
 ------------------
 

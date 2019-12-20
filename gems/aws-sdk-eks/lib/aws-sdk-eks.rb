@@ -43,6 +43,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @service
 module Aws::EKS
 
-  GEM_VERSION = '1.29.0'
+  GEM_VERSION = '1.30.0'
 
 end

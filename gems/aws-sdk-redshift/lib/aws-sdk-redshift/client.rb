@@ -835,9 +835,8 @@ module Aws::Redshift
     #   node types, go to [ Working with Clusters][1] in the *Amazon Redshift
     #   Cluster Management Guide*.
     #
-    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `ds2.xlarge` \|
-    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge` \| `dc2.large` \|
-    #   `dc2.8xlarge`
+    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
     #
     #
     #
@@ -5804,7 +5803,7 @@ module Aws::Redshift
     #   resize request.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge`
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
     #
     # @option params [Integer] :number_of_nodes
     #   The new number of nodes of the cluster. If you specify a new number of
@@ -7473,6 +7472,8 @@ module Aws::Redshift
     #
     #   * ds2.8xlarge
     #
+    #   * ra3.16xlarge
+    #
     # * The type of nodes that you add must match the node type for the
     #   cluster.
     #
@@ -8382,7 +8383,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
