@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Detective - Updated the documentation for Amazon Detective.
+
+* Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
+
+* Feature - Aws::Health - Updated the API, and documentation for AWS Health APIs and Notifications.
+
 2.11.420 (2019-12-20)
 ------------------
 
