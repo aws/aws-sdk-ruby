@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.421 (2019-12-23)
+------------------
+
 * Feature - Aws::Detective - Updated the documentation for Amazon Detective.
 
 * Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
