@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2019-12-23)
+------------------
+
+* Feature - This release adds a new family of APIs (create-data-repository-task, describe-data-repository-task, and cancel-data-repository-task) that allow users to perform operations between their file system and its linked data repository.
+
 1.13.0 (2019-11-20)
 ------------------
 

@@ -42,6 +42,6 @@ require_relative 'aws-sdk-detective/customizations'
 # @service
 module Aws::Detective
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

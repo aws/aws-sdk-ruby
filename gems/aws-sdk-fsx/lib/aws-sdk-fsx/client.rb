@@ -264,6 +264,45 @@ module Aws::FSx
 
     # @!group API Operations
 
+    # Cancels an existing Amazon FSx for Lustre data repository task if that
+    # task is in either the `PENDING` or `EXECUTING` state. When you cancel
+    # a task, Amazon FSx does the following.
+    #
+    # * Any files that FSx has already exported are not reverted.
+    #
+    # * FSx continues to export any files that are "in-flight" when the
+    #   cancel operation is received.
+    #
+    # * FSx does not export any files that have not yet been exported.
+    #
+    # @option params [required, String] :task_id
+    #   Specifies the data repository task to cancel.
+    #
+    # @return [Types::CancelDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDataRepositoryTaskResponse#lifecycle #lifecycle} => String
+    #   * {Types::CancelDataRepositoryTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_data_repository_task({
+    #     task_id: "TaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTask AWS API Documentation
+    #
+    # @overload cancel_data_repository_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_data_repository_task(params = {}, options = {})
+      req = build_request(:cancel_data_repository_task, params)
+      req.send_request(options)
+    end
+
     # Creates a backup of an existing Amazon FSx for Windows File Server
     # file system. Creating regular backups for your file system is a best
     # practice that complements the replication that Amazon FSx for Windows
@@ -440,6 +479,111 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Creates an Amazon FSx for Lustre data repository task. You use data
+    # repository tasks to perform bulk operations between your Amazon FSx
+    # file system and its linked data repository. An example of a data
+    # repository task is exporting any data and metadata changes, including
+    # POSIX metadata, to files, directories, and symbolic links (symlinks)
+    # from your FSx file system to its linked data repository. A
+    # `CreateDataRepositoryTask` operation will fail if a data repository is
+    # not linked to the FSx file system. To learn more about data repository
+    # tasks, see [Using Data Repository Tasks][1]. To learn more about
+    # linking a data repository to your file system, see [Step 1: Create
+    # Your Amazon FSx for Lustre File System][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/getting-started-step1.html
+    #
+    # @option params [required, String] :type
+    #   Specifies the type of data repository task to create.
+    #
+    # @option params [Array<String>] :paths
+    #   (Optional) The path or paths on the Amazon FSx file system to use when
+    #   the data repository task is processed. The default path is the file
+    #   system root directory.
+    #
+    # @option params [required, String] :file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #
+    # @option params [required, Types::CompletionReport] :report
+    #   Defines whether or not Amazon FSx provides a CompletionReport once the
+    #   task has completed. A CompletionReport provides a detailed report on
+    #   the files that Amazon FSx processed that meet the criteria specified
+    #   by the `Scope` parameter.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS
+    #   SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateDataRepositoryTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataRepositoryTaskResponse#data_repository_task #data_repository_task} => Types::DataRepositoryTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_repository_task({
+    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY
+    #     paths: ["DataRepositoryTaskPath"],
+    #     file_system_id: "FileSystemId", # required
+    #     report: { # required
+    #       enabled: false, # required
+    #       path: "ArchivePath",
+    #       format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #       scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_repository_task.task_id #=> String
+    #   resp.data_repository_task.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_task.creation_time #=> Time
+    #   resp.data_repository_task.start_time #=> Time
+    #   resp.data_repository_task.end_time #=> Time
+    #   resp.data_repository_task.resource_arn #=> String
+    #   resp.data_repository_task.tags #=> Array
+    #   resp.data_repository_task.tags[0].key #=> String
+    #   resp.data_repository_task.tags[0].value #=> String
+    #   resp.data_repository_task.file_system_id #=> String
+    #   resp.data_repository_task.paths #=> Array
+    #   resp.data_repository_task.paths[0] #=> String
+    #   resp.data_repository_task.failure_details.message #=> String
+    #   resp.data_repository_task.status.total_count #=> Integer
+    #   resp.data_repository_task.status.succeeded_count #=> Integer
+    #   resp.data_repository_task.status.failed_count #=> Integer
+    #   resp.data_repository_task.status.last_updated_time #=> Time
+    #   resp.data_repository_task.report.enabled #=> Boolean
+    #   resp.data_repository_task.report.path #=> String
+    #   resp.data_repository_task.report.format #=> String, one of "REPORT_CSV_20191124"
+    #   resp.data_repository_task.report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTask AWS API Documentation
+    #
+    # @overload create_data_repository_task(params = {})
+    # @param [Hash] params ({})
+    def create_data_repository_task(params = {}, options = {})
+      req = build_request(:create_data_repository_task, params)
+      req.send_request(options)
+    end
+
     # Creates a new, empty Amazon FSx file system.
     #
     # If a file system with the specified client request token exists and
@@ -516,10 +660,11 @@ module Aws::FSx
     #   the `Name` tag appears in the console as the file system name.
     #
     # @option params [String] :kms_key_id
-    #   The ID of your AWS Key Management Service (AWS KMS) key. This ID is
-    #   used to encrypt the data in your file system at rest. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
+    #   the file system's data for an Amazon FSx for Windows File Server file
+    #   system at rest. Amazon FSx for Lustre does not support KMS encryption.
+    #   For more information, see [Encrypt][1] in the *AWS Key Management
+    #   Service API Reference*.
     #
     #
     #
@@ -984,6 +1129,12 @@ module Aws::FSx
     # file system, the DescribeFileSystems returns a `FileSystemNotFound`
     # error.
     #
+    # <note markdown="1"> Deleting an Amazon FSx for Lustre file system will fail with a 400
+    # BadRequest if a data repository task is in a `PENDING` or `EXECUTING`
+    # state.
+    #
+    #  </note>
+    #
     # The data in a deleted file system is also deleted and can't be
     # recovered by any means.
     #
@@ -1226,6 +1377,95 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_backups(params = {}, options = {})
       req = build_request(:describe_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for Lustre data
+    # repository tasks, if one or more `TaskIds` values are provided in the
+    # request, or if filters are used in the request. You can use filters to
+    # narrow the response to include just tasks for specific file systems,
+    # or tasks in a specific lifecycle state. Otherwise, it returns all data
+    # repository tasks owned by your AWS account in the AWS Region of the
+    # endpoint that you're calling.
+    #
+    # When retrieving all tasks, you can paginate the response by using the
+    # optional `MaxResults` parameter to limit the number of tasks returned
+    # in a response. If more tasks remain, Amazon FSx returns a `NextToken`
+    # value in the response. In this case, send a later request with the
+    # `NextToken` request parameter set to the value of `NextToken` from the
+    # last response.
+    #
+    # @option params [Array<String>] :task_ids
+    #   (Optional) IDs of the tasks whose descriptions you want to retrieve
+    #   (String).
+    #
+    # @option params [Array<Types::DataRepositoryTaskFilter>] :filters
+    #   (Optional) You can use filters to narrow the
+    #   `DescribeDataRepositoryTasks` response to include just tasks for
+    #   specific file systems, or tasks in a specific lifecycle state.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeDataRepositoryTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataRepositoryTasksResponse#data_repository_tasks #data_repository_tasks} => Array&lt;Types::DataRepositoryTask&gt;
+    #   * {Types::DescribeDataRepositoryTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_repository_tasks({
+    #     task_ids: ["TaskId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #         values: ["DataRepositoryTaskFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_repository_tasks #=> Array
+    #   resp.data_repository_tasks[0].task_id #=> String
+    #   resp.data_repository_tasks[0].lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
+    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_tasks[0].creation_time #=> Time
+    #   resp.data_repository_tasks[0].start_time #=> Time
+    #   resp.data_repository_tasks[0].end_time #=> Time
+    #   resp.data_repository_tasks[0].resource_arn #=> String
+    #   resp.data_repository_tasks[0].tags #=> Array
+    #   resp.data_repository_tasks[0].tags[0].key #=> String
+    #   resp.data_repository_tasks[0].tags[0].value #=> String
+    #   resp.data_repository_tasks[0].file_system_id #=> String
+    #   resp.data_repository_tasks[0].paths #=> Array
+    #   resp.data_repository_tasks[0].paths[0] #=> String
+    #   resp.data_repository_tasks[0].failure_details.message #=> String
+    #   resp.data_repository_tasks[0].status.total_count #=> Integer
+    #   resp.data_repository_tasks[0].status.succeeded_count #=> Integer
+    #   resp.data_repository_tasks[0].status.failed_count #=> Integer
+    #   resp.data_repository_tasks[0].status.last_updated_time #=> Time
+    #   resp.data_repository_tasks[0].report.enabled #=> Boolean
+    #   resp.data_repository_tasks[0].report.path #=> String
+    #   resp.data_repository_tasks[0].report.format #=> String, one of "REPORT_CSV_20191124"
+    #   resp.data_repository_tasks[0].report.scope #=> String, one of "FAILED_FILES_ONLY"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasks AWS API Documentation
+    #
+    # @overload describe_data_repository_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_data_repository_tasks(params = {}, options = {})
+      req = build_request(:describe_data_repository_tasks, params)
       req.send_request(options)
     end
 
@@ -1713,7 +1953,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -80,7 +80,8 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt this backup's data.
+    #   encrypt this backup of the Amazon FSx for Windows file system's
+    #   data at rest. Amazon FSx for Lustre does not support KMS encryption.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -191,6 +192,119 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # Cancels a data repository task.
+    #
+    # @note When making an API call, you may pass CancelDataRepositoryTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_id: "TaskId", # required
+    #       }
+    #
+    # @!attribute [rw] task_id
+    #   Specifies the data repository task to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTaskRequest AWS API Documentation
+    #
+    class CancelDataRepositoryTaskRequest < Struct.new(
+      :task_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the data repository task, as follows:
+    #
+    #   * `PENDING` - Amazon FSx has not started the task.
+    #
+    #   * `EXECUTING` - Amazon FSx is processing the task.
+    #
+    #   * `FAILED` - Amazon FSx was not able to complete the task. For
+    #     example, there may be files the task failed to process. The
+    #     DataRepositoryTaskFailureDetails property provides more
+    #     information about task failures.
+    #
+    #   * `SUCCEEDED` - FSx completed the task successfully.
+    #
+    #   * `CANCELED` - Amazon FSx canceled the task and it did not complete.
+    #
+    #   * `CANCELING` - FSx is in process of canceling the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_id
+    #   The ID of the task being canceled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CancelDataRepositoryTaskResponse AWS API Documentation
+    #
+    class CancelDataRepositoryTaskResponse < Struct.new(
+      :lifecycle,
+      :task_id)
+      include Aws::Structure
+    end
+
+    # Provides a report detailing the data repository task results of the
+    # files processed that match the criteria specified in the report
+    # `Scope` parameter. FSx delivers the report to the file system's
+    # linked data repository in Amazon S3, using the path specified in the
+    # report `Path` parameter. You can specify whether or not a report gets
+    # generated for a task using the `Enabled` parameter.
+    #
+    # @note When making an API call, you may pass CompletionReport
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         path: "ArchivePath",
+    #         format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #         scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Set `Enabled` to `True` to generate a `CompletionReport` when the
+    #   task completes. If set to `true`, then you need to provide a report
+    #   `Scope`, `Path`, and `Format`. Set `Enabled` to `False` if you do
+    #   not want a `CompletionReport` generated when the task completes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] path
+    #   Required if `Enabled` is set to `true`. Specifies the location of
+    #   the report on the file system's linked S3 data repository. An
+    #   absolute path that defines where the completion report will be
+    #   stored in the destination location. The `Path` you provide must be
+    #   located within the file system’s ExportPath. An example `Path` value
+    #   is "s3://myBucket/myExportPath/optionalPrefix". The report
+    #   provides the following information for each file in the report:
+    #   FilePath, FileStatus, and ErrorCode. To learn more about a file
+    #   system's `ExportPath`, see .
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Required if `Enabled` is set to `true`. Specifies the format of the
+    #   `CompletionReport`. `REPORT_CSV_20191124` is the only format
+    #   currently supported. When `Format` is set to `REPORT_CSV_20191124`,
+    #   the `CompletionReport` is provided in CSV format, and is delivered
+    #   to `\{path\}/task-\{id\}/failures.csv`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Required if `Enabled` is set to `true`. Specifies the scope of the
+    #   `CompletionReport`; `FAILED_FILES_ONLY` is the only scope currently
+    #   supported. When `Scope` is set to `FAILED_FILES_ONLY`, the
+    #   `CompletionReport` only contains information about files that the
+    #   data repository task failed to process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CompletionReport AWS API Documentation
+    #
+    class CompletionReport < Struct.new(
+      :enabled,
+      :path,
+      :format,
+      :scope)
+      include Aws::Structure
+    end
+
     # The request object for the `CreateBackup` operation.
     #
     # @note When making an API call, you may pass CreateBackupRequest
@@ -245,6 +359,86 @@ module Aws::FSx
     #
     class CreateBackupResponse < Struct.new(
       :backup)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateDataRepositoryTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY
+    #         paths: ["DataRepositoryTaskPath"],
+    #         file_system_id: "FileSystemId", # required
+    #         report: { # required
+    #           enabled: false, # required
+    #           path: "ArchivePath",
+    #           format: "REPORT_CSV_20191124", # accepts REPORT_CSV_20191124
+    #           scope: "FAILED_FILES_ONLY", # accepts FAILED_FILES_ONLY
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of data repository task to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   (Optional) The path or paths on the Amazon FSx file system to use
+    #   when the data repository task is processed. The default path is the
+    #   file system root directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] report
+    #   Defines whether or not Amazon FSx provides a CompletionReport once
+    #   the task has completed. A CompletionReport provides a detailed
+    #   report on the files that Amazon FSx processed that meet the criteria
+    #   specified by the `Scope` parameter.
+    #   @return [Types::CompletionReport]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 64 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the AWS Command Line Interface (AWS CLI) or
+    #   an AWS SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTaskRequest AWS API Documentation
+    #
+    class CreateDataRepositoryTaskRequest < Struct.new(
+      :type,
+      :paths,
+      :file_system_id,
+      :report,
+      :client_request_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_repository_task
+    #   The description of the data repository task that you just created.
+    #   @return [Types::DataRepositoryTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryTaskResponse AWS API Documentation
+    #
+    class CreateDataRepositoryTaskResponse < Struct.new(
+      :data_repository_task)
       include Aws::Structure
     end
 
@@ -511,10 +705,11 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of your AWS Key Management Service (AWS KMS) key. This ID is
-    #   used to encrypt the data in your file system at rest. For more
-    #   information, see [Encrypt][1] in the *AWS Key Management Service API
-    #   Reference*.
+    #   The ID of the AWS Key Management Service (AWS KMS) key used to
+    #   encrypt the file system's data for an Amazon FSx for Windows File
+    #   Server file system at rest. Amazon FSx for Lustre does not support
+    #   KMS encryption. For more information, see [Encrypt][1] in the *AWS
+    #   Key Management Service API Reference*.
     #
     #
     #
@@ -707,6 +902,261 @@ module Aws::FSx
       :import_path,
       :export_path,
       :imported_file_chunk_size)
+      include Aws::Structure
+    end
+
+    # A description of the data repository task. You use data repository
+    # tasks to perform bulk transfer operations between your Amazon FSx file
+    # system and its linked data repository.
+    #
+    # @!attribute [rw] task_id
+    #   The system-generated, unique 17-digit ID of the data repository
+    #   task.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle status of the data repository task, as follows:
+    #
+    #   * `PENDING` - Amazon FSx has not started the task.
+    #
+    #   * `EXECUTING` - Amazon FSx is processing the task.
+    #
+    #   * `FAILED` - Amazon FSx was not able to complete the task. For
+    #     example, there may be files the task failed to process. The
+    #     DataRepositoryTaskFailureDetails property provides more
+    #     information about task failures.
+    #
+    #   * `SUCCEEDED` - FSx completed the task successfully.
+    #
+    #   * `CANCELED` - Amazon FSx canceled the task and it did not complete.
+    #
+    #   * `CANCELING` - FSx is in process of canceling the task.
+    #
+    #   <note markdown="1"> You cannot delete an FSx for Lustre file system if there are data
+    #   repository tasks for the file system in the `PENDING` or `EXECUTING`
+    #   states. Please retry when the data repository task is finished (with
+    #   a status of `CANCELED`, `SUCCEEDED`, or `FAILED`). You can use the
+    #   DescribeDataRepositoryTask action to monitor the task status.
+    #   Contact the FSx team if you need to delete your file system
+    #   immediately.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of data repository task; EXPORT\_TO\_REPOSITORY is the only
+    #   type currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the resource was created, in seconds (since
+    #   1970-01-01T00:00:00Z), also known as Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] start_time
+    #   The time that Amazon FSx began processing the task.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that Amazon FSx completed processing the task, populated
+    #   after the task is complete.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify AWS resources. We require an ARN when you need to specify a
+    #   resource unambiguously across all of AWS. For more information, see
+    #   [Amazon Resource Names (ARNs) and AWS Service Namespaces][1] in the
+    #   *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   An array of paths on the Amazon FSx for Lustre file system that
+    #   specify the data for the data repository task to process. For
+    #   example, in an EXPORT\_TO\_REPOSITORY task, the paths specify which
+    #   data to export to the linked data repository.
+    #
+    #   (Default) If `Paths` is not specified, Amazon FSx uses the file
+    #   system root directory.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failure_details
+    #   Failure message describing why the task failed, it is populated only
+    #   when `Lifecycle` is set to `FAILED`.
+    #   @return [Types::DataRepositoryTaskFailureDetails]
+    #
+    # @!attribute [rw] status
+    #   Provides the status of the number of files that the task has
+    #   processed successfully and failed to process.
+    #   @return [Types::DataRepositoryTaskStatus]
+    #
+    # @!attribute [rw] report
+    #   Provides a report detailing the data repository task results of the
+    #   files processed that match the criteria specified in the report
+    #   `Scope` parameter. FSx delivers the report to the file system's
+    #   linked data repository in Amazon S3, using the path specified in the
+    #   report `Path` parameter. You can specify whether or not a report
+    #   gets generated for a task using the `Enabled` parameter.
+    #   @return [Types::CompletionReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTask AWS API Documentation
+    #
+    class DataRepositoryTask < Struct.new(
+      :task_id,
+      :lifecycle,
+      :type,
+      :creation_time,
+      :start_time,
+      :end_time,
+      :resource_arn,
+      :tags,
+      :file_system_id,
+      :paths,
+      :failure_details,
+      :status,
+      :report)
+      include Aws::Structure
+    end
+
+    # The data repository task could not be canceled because the task has
+    # already ended.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskEnded AWS API Documentation
+    #
+    class DataRepositoryTaskEnded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An existing data repository task is currently executing on the file
+    # system. Wait until the existing task has completed, then create the
+    # new task.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskExecuting AWS API Documentation
+    #
+    class DataRepositoryTaskExecuting < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides information about why a data repository task failed. Only
+    # populated when the task `Lifecycle` is set to `FAILED`.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskFailureDetails AWS API Documentation
+    #
+    class DataRepositoryTaskFailureDetails < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # (Optional) An array of filter objects you can use to filter the
+    # response of data repository tasks you will see in the the response.
+    # You can filter the tasks returned in the response by one or more file
+    # system IDs, task lifecycles, and by task type. A filter object
+    # consists of a filter `Name`, and one or more `Values` for the filter.
+    #
+    # @note When making an API call, you may pass DataRepositoryTaskFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #         values: ["DataRepositoryTaskFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the task property to use in filtering the tasks returned in
+    #   the response.
+    #
+    #   * Use `file-system-id` to retrieve data repository tasks for
+    #     specific file systems.
+    #
+    #   * Use `task-lifecycle` to retrieve data repository tasks with one or
+    #     more specific lifecycle states, as follows: CANCELED, EXECUTING,
+    #     FAILED, PENDING, and SUCCEEDED.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   Use Values to include the specific file system IDs and task
+    #   lifecycle states for the filters you are using.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskFilter AWS API Documentation
+    #
+    class DataRepositoryTaskFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The data repository task or tasks you specified could not be found.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskNotFound AWS API Documentation
+    #
+    class DataRepositoryTaskNotFound < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Provides the task status showing a running total of the total number
+    # of files to be processed, the number successfully processed, and the
+    # number of files the task failed to process.
+    #
+    # @!attribute [rw] total_count
+    #   The total number of files that the task will process. While a task
+    #   is executing, the sum of `SucceededCount` plus `FailedCount` may not
+    #   equal `TotalCount`. When the task is complete, `TotalCount` equals
+    #   the sum of `SucceededCount` plus `FailedCount`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] succeeded_count
+    #   A running total of the number of files that the task has
+    #   successfully processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_count
+    #   A running total of the number of files that the task failed to
+    #   process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time at which the task status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DataRepositoryTaskStatus AWS API Documentation
+    #
+    class DataRepositoryTaskStatus < Struct.new(
+      :total_count,
+      :succeeded_count,
+      :failed_count,
+      :last_updated_time)
       include Aws::Structure
     end
 
@@ -957,6 +1407,73 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDataRepositoryTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_ids: ["TaskId"],
+    #         filters: [
+    #           {
+    #             name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #             values: ["DataRepositoryTaskFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] task_ids
+    #   (Optional) IDs of the tasks whose descriptions you want to retrieve
+    #   (String).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   (Optional) You can use filters to narrow the
+    #   `DescribeDataRepositoryTasks` response to include just tasks for
+    #   specific file systems, or tasks in a specific lifecycle state.
+    #   @return [Array<Types::DataRepositoryTaskFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of resources to return in the response. This
+    #   value must be an integer greater than zero.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasksRequest AWS API Documentation
+    #
+    class DescribeDataRepositoryTasksRequest < Struct.new(
+      :task_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] data_repository_tasks
+    #   The collection of data repository task descriptions returned.
+    #   @return [Array<Types::DataRepositoryTask>]
+    #
+    # @!attribute [rw] next_token
+    #   (Optional) Opaque pagination token returned from a previous
+    #   operation (String). If present, this token indicates from what point
+    #   you can continue processing the request, where the previous
+    #   `NextToken` value left off.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryTasksResponse AWS API Documentation
+    #
+    class DescribeDataRepositoryTasksResponse < Struct.new(
+      :data_repository_tasks,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The request object for `DescribeFileSystems` operation.
     #
     # @note When making an API call, you may pass DescribeFileSystemsRequest
@@ -1101,7 +1618,8 @@ module Aws::FSx
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
     #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system.
+    #   Server file system. Amazon FSx for Lustre does not support KMS
+    #   encryption.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1560,7 +2078,7 @@ module Aws::FSx
     #   controllers in the self-managed AD directory. The IP addresses need
     #   to be either in the same VPC CIDR range as the one in which your
     #   Amazon FSx file system is being created, or in the private IP
-    #   version 4 (Iv4) address ranges, as specified in [RFC 1918][1]\:
+    #   version 4 (IPv4) address ranges, as specified in [RFC 1918][1]\:
     #
     #   * 10\.0.0.0 - 10.255.255.255 (10/8 prefix)
     #
@@ -1714,7 +2232,7 @@ module Aws::FSx
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # An error occured.
+    # The requested operation is not supported for this resource or API.
     #
     # @!attribute [rw] message
     #   A detailed error message.

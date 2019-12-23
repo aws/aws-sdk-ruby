@@ -433,7 +433,7 @@ module Aws::Detective
     # Deletes one or more member accounts from the master account behavior
     # graph. This operation can only be called by a Detective master
     # account. That account cannot use `DeleteMembers` to delete their own
-    # account from the Morocco graph. To disable a behavior graph, the
+    # account from the behavior graph. To disable a behavior graph, the
     # master account uses the `DeleteGraph` API method.
     #
     # @option params [required, String] :graph_arn
@@ -749,7 +749,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

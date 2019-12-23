@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2019-12-23)
+------------------
+
+* Feature - With this release, you can now centrally aggregate AWS Health events from all accounts in your AWS organization. Visit AWS Health documentation to learn more about enabling and using this feature: https://docs.aws.amazon.com/health/latest/ug/organizational-view-health.html.
+
 1.20.0 (2019-10-23)
 ------------------
 

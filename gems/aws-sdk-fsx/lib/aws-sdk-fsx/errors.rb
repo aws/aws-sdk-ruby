@@ -105,6 +105,54 @@ module Aws::FSx
 
     end
 
+    class DataRepositoryTaskEnded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::DataRepositoryTaskEnded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class DataRepositoryTaskExecuting < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::DataRepositoryTaskExecuting] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class DataRepositoryTaskNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::DataRepositoryTaskNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class FileSystemNotFound < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
