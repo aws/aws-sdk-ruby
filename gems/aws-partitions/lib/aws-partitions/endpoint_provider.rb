@@ -23,12 +23,6 @@ module Aws
         us-west-2
       ].freeze
 
-      # Can be removed once S3 endpoint is updated
-      S3_IAD_REGIONAL = {
-        'hostname' => 's3.us-east-1.amazonaws.com',
-        'signatureVersions' => %w[s3 s3v4]
-      }.freeze
-
       # Intentionally marked private. The format of the endpoint rules
       # is an implementation detail.
       # @api private
@@ -82,11 +76,6 @@ module Aws
         # Check for global endpoint.
         if sts_legacy || service_cfg['isRegionalized'] == false
           region = service_cfg.fetch('partitionEndpoint', region)
-        end
-
-        # Can be removed once S3 endpoint is updated
-        if (service == 's3') && (region == 'us-east-1')
-          service_cfg['endpoints'][region] = S3_IAD_REGIONAL
         end
 
         # Check for service/region level endpoint.
