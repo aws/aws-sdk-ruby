@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.422 (2020-01-02)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::LexModelBuildingService - Updated the documentation for Amazon Lex Model Building Service.
