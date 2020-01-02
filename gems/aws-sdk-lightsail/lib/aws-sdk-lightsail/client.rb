@@ -595,11 +595,11 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Copies a manual instance or disk snapshot as another manual snapshot,
-    # or copies an automatic instance or disk snapshot as a manual snapshot.
-    # This operation can also be used to copy a manual or automatic snapshot
-    # of an instance or a disk from one AWS Region to another in Amazon
-    # Lightsail.
+    # Copies a manual snapshot of an instance or disk as another manual
+    # snapshot, or copies an automatic snapshot of an instance or disk as a
+    # manual snapshot. This operation can also be used to copy a manual or
+    # automatic snapshot of an instance or a disk from one AWS Region to
+    # another in Amazon Lightsail.
     #
     # When copying a *manual snapshot*, be sure to define the `source
     # region`, `source snapshot name`, and `target snapshot name`
@@ -610,38 +610,36 @@ module Aws::Lightsail
     # the `restore date` or the `use latest restorable auto snapshot`
     # parameters.
     #
-    # <note markdown="1"> Database snapshots cannot be copied at this time.
-    #
-    #  </note>
-    #
     # @option params [String] :source_snapshot_name
-    #   The name of the source instance or disk snapshot to be copied.
+    #   The name of the source manual snapshot to copy.
     #
-    #   <note markdown="1"> Define this parameter only when copying a manual snapshot as another
-    #   manual snapshot.
+    #   Constraint:
     #
-    #    </note>
+    #   * Define this parameter only when copying a manual snapshot as another
+    #     manual snapshot.
+    #
+    #   ^
     #
     # @option params [String] :source_resource_name
-    #   The name of the source resource from which the automatic snapshot was
-    #   created.
+    #   The name of the source instance or disk from which the source
+    #   automatic snapshot was created.
     #
-    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
-    #   manual snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
+    #   Constraint:
     #
-    #    </note>
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
+    #
+    #   ^
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
     #
     # @option params [String] :restore_date
-    #   The date of the automatic snapshot to copy for the new manual
-    #   snapshot.
-    #
-    #   Use the `get auto snapshots` operation to identify the dates of the
-    #   available automatic snapshots.
+    #   The date of the source automatic snapshot to copy. Use the `get auto
+    #   snapshots` operation to identify the dates of the available automatic
+    #   snapshots.
     #
     #   Constraints:
     #
@@ -651,36 +649,34 @@ module Aws::Lightsail
     #     restorable auto snapshot` parameter. The `restore date` and `use
     #     latest restorable auto snapshot` parameters are mutually exclusive.
     #
-    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
-    #   manual snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
-    #
-    #    </note>
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
     #
     # @option params [Boolean] :use_latest_restorable_auto_snapshot
     #   A Boolean value to indicate whether to use the latest available
-    #   automatic snapshot.
+    #   automatic snapshot of the specified source instance or disk.
     #
-    #   This parameter cannot be defined together with the `restore date`
-    #   parameter. The `use latest restorable auto snapshot` and `restore
-    #   date` parameters are mutually exclusive.
+    #   Constraints:
     #
-    #   <note markdown="1"> Define this parameter only when copying an automatic snapshot as a
-    #   manual snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
     #
-    #    </note>
+    #   * Define this parameter only when copying an automatic snapshot as a
+    #     manual snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
-    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots
     #
     # @option params [required, String] :target_snapshot_name
-    #   The name of the new instance or disk snapshot to be created as a copy.
+    #   The name of the new manual snapshot to be created as a copy.
     #
     # @option params [required, String] :source_region
     #   The AWS Region where the source manual or automatic snapshot is
@@ -893,9 +889,13 @@ module Aws::Lightsail
     #   The name of the disk snapshot (e.g., `my-snapshot`) from which to
     #   create the new storage disk.
     #
-    #   This parameter cannot be defined together with the `source disk name`
-    #   parameter. The `disk snapshot name` and `source disk name` parameters
-    #   are mutually exclusive.
+    #   Constraint:
+    #
+    #   * This parameter cannot be defined together with the `source disk
+    #     name` parameter. The `disk snapshot name` and `source disk name`
+    #     parameters are mutually exclusive.
+    #
+    #   ^
     #
     # @option params [required, String] :availability_zone
     #   The Availability Zone where you want to create the disk (e.g.,
@@ -922,24 +922,24 @@ module Aws::Lightsail
     #   The name of the source disk from which the source automatic snapshot
     #   was created.
     #
-    #   This parameter cannot be defined together with the `disk snapshot
-    #   name` parameter. The `source disk name` and `disk snapshot name`
-    #   parameters are mutually exclusive.
+    #   Constraints:
     #
-    #   <note markdown="1"> Define this parameter only when creating a new disk from an automatic
-    #   snapshot. For more information, see the [Lightsail Dev Guide][1].
+    #   * This parameter cannot be defined together with the `disk snapshot
+    #     name` parameter. The `source disk name` and `disk snapshot name`
+    #     parameters are mutually exclusive.
     #
-    #    </note>
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
     #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
     #
     # @option params [String] :restore_date
-    #   The date of the automatic snapshot to use for the new disk.
-    #
-    #   Use the `get auto snapshots` operation to identify the dates of the
-    #   available automatic snapshots.
+    #   The date of the automatic snapshot to use for the new disk. Use the
+    #   `get auto snapshots` operation to identify the dates of the available
+    #   automatic snapshots.
     #
     #   Constraints:
     #
@@ -949,10 +949,9 @@ module Aws::Lightsail
     #     restorable auto snapshot` parameter. The `restore date` and `use
     #     latest restorable auto snapshot` parameters are mutually exclusive.
     #
-    #   <note markdown="1"> Define this parameter only when creating a new disk from an automatic
-    #   snapshot. For more information, see the [Lightsail Dev Guide][1].
-    #
-    #    </note>
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -962,14 +961,15 @@ module Aws::Lightsail
     #   A Boolean value to indicate whether to use the latest available
     #   automatic snapshot.
     #
-    #   This parameter cannot be defined together with the `restore date`
-    #   parameter. The `use latest restorable auto snapshot` and `restore
-    #   date` parameters are mutually exclusive.
+    #   Constraints:
     #
-    #   <note markdown="1"> Define this parameter only when creating a new disk from an automatic
-    #   snapshot. For more information, see the [Lightsail Dev Guide][1].
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
     #
-    #    </note>
+    #   * Define this parameter only when creating a new disk from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -1507,9 +1507,13 @@ module Aws::Lightsail
     #   instances. Use the get instance snapshots operation to return
     #   information about your existing snapshots.
     #
-    #   This parameter cannot be defined together with the `source instance
-    #   name` parameter. The `instance snapshot name` and `source instance
-    #   name` parameters are mutually exclusive.
+    #   Constraint:
+    #
+    #   * This parameter cannot be defined together with the `source instance
+    #     name` parameter. The `instance snapshot name` and `source instance
+    #     name` parameters are mutually exclusive.
+    #
+    #   ^
     #
     # @option params [required, String] :bundle_id
     #   The bundle of specification information for your virtual private
@@ -1548,24 +1552,23 @@ module Aws::Lightsail
     #   The name of the source instance from which the source automatic
     #   snapshot was created.
     #
-    #   This parameter cannot be defined together with the `instance snapshot
-    #   name` parameter. The `source instance name` and `instance snapshot
-    #   name` parameters are mutually exclusive.
+    #   Constraints:
     #
-    #   <note markdown="1"> Define this parameter only when creating a new instance from an
-    #   automatic snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
+    #   * This parameter cannot be defined together with the `instance
+    #     snapshot name` parameter. The `source instance name` and `instance
+    #     snapshot name` parameters are mutually exclusive.
     #
-    #    </note>
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
     #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
     #
     # @option params [String] :restore_date
-    #   The date of the automatic snapshot to use for the new instance.
-    #
-    #   Use the `get auto snapshots` operation to identify the dates of the
+    #   The date of the automatic snapshot to use for the new instance. Use
+    #   the `get auto snapshots` operation to identify the dates of the
     #   available automatic snapshots.
     #
     #   Constraints:
@@ -1576,11 +1579,9 @@ module Aws::Lightsail
     #     restorable auto snapshot` parameter. The `restore date` and `use
     #     latest restorable auto snapshot` parameters are mutually exclusive.
     #
-    #   <note markdown="1"> Define this parameter only when creating a new instance from an
-    #   automatic snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
-    #
-    #    </note>
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -1590,15 +1591,15 @@ module Aws::Lightsail
     #   A Boolean value to indicate whether to use the latest available
     #   automatic snapshot.
     #
-    #   This parameter cannot be defined together with the `restore date`
-    #   parameter. The `use latest restorable auto snapshot` and `restore
-    #   date` parameters are mutually exclusive.
+    #   Constraints:
     #
-    #   <note markdown="1"> Define this parameter only when creating a new instance from an
-    #   automatic snapshot. For more information, see the [Lightsail Dev
-    #   Guide][1].
+    #   * This parameter cannot be defined together with the `restore date`
+    #     parameter. The `use latest restorable auto snapshot` and `restore
+    #     date` parameters are mutually exclusive.
     #
-    #    </note>
+    #   * Define this parameter only when creating a new instance from an
+    #     automatic snapshot. For more information, see the [Lightsail Dev
+    #     Guide][1].
     #
     #
     #
@@ -2341,15 +2342,19 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Deletes an automatic snapshot for an instance or disk.
+    # Deletes an automatic snapshot of an instance or disk. For more
+    # information, see the [Lightsail Dev Guide][1].
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
     #
     # @option params [required, String] :resource_name
-    #   The name of the source resource from which to delete the automatic
-    #   snapshot.
+    #   The name of the source instance or disk from which to delete the
+    #   automatic snapshot.
     #
     # @option params [required, String] :date
     #   The date of the automatic snapshot to delete in `YYYY-MM-DD` format.
-    #
     #   Use the `get auto snapshots` operation to get the available automatic
     #   snapshots for a resource.
     #
@@ -3232,7 +3237,7 @@ module Aws::Lightsail
     #   The add-on type to disable.
     #
     # @option params [required, String] :resource_name
-    #   The name of the source resource from which to disable the add-on.
+    #   The name of the source resource for which to disable the add-on.
     #
     # @return [Types::DisableAddOnResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3447,16 +3452,16 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns the available automatic snapshots for the specified resource
-    # name. For more information, see the [Lightsail Dev Guide][1].
+    # Returns the available automatic snapshots for an instance or disk. For
+    # more information, see the [Lightsail Dev Guide][1].
     #
     #
     #
     # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots
     #
     # @option params [required, String] :resource_name
-    #   The name of the source resource from which to get automatic snapshot
-    #   information.
+    #   The name of the source instance or disk from which to get automatic
+    #   snapshot information.
     #
     # @return [Types::GetAutoSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5205,6 +5210,7 @@ module Aws::Lightsail
     #   resp.relational_database.pending_maintenance_actions[0].action #=> String
     #   resp.relational_database.pending_maintenance_actions[0].description #=> String
     #   resp.relational_database.pending_maintenance_actions[0].current_apply_date #=> Time
+    #   resp.relational_database.ca_certificate_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabase AWS API Documentation
     #
@@ -5791,6 +5797,7 @@ module Aws::Lightsail
     #   resp.relational_databases[0].pending_maintenance_actions[0].action #=> String
     #   resp.relational_databases[0].pending_maintenance_actions[0].description #=> String
     #   resp.relational_databases[0].pending_maintenance_actions[0].current_apply_date #=> Time
+    #   resp.relational_databases[0].ca_certificate_identifier #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabases AWS API Documentation
@@ -6845,6 +6852,10 @@ module Aws::Lightsail
     #
     #   Default: `false`
     #
+    # @option params [String] :ca_certificate_identifier
+    #   Indicates the certificate that needs to be associated with the
+    #   database.
+    #
     # @return [Types::UpdateRelationalDatabaseResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRelationalDatabaseResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -6861,6 +6872,7 @@ module Aws::Lightsail
     #     disable_backup_retention: false,
     #     publicly_accessible: false,
     #     apply_immediately: false,
+    #     ca_certificate_identifier: "string",
     #   })
     #
     # @example Response structure
@@ -6894,7 +6906,7 @@ module Aws::Lightsail
     #
     # Parameter updates don't cause outages; therefore, their application
     # is not subject to the preferred maintenance window. However, there are
-    # two ways in which paramater updates are applied: `dynamic` or
+    # two ways in which parameter updates are applied: `dynamic` or
     # `pending-reboot`. Parameters marked with a `dynamic` apply type are
     # applied immediately. Parameters marked with a `pending-reboot` apply
     # type are applied only after the database is rebooted using the `reboot
@@ -6976,7 +6988,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

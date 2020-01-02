@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-01-02)
+------------------
+
+* Feature - Documentation updates for Amazon Lex.
+
 1.24.0 (2019-12-19)
 ------------------
 

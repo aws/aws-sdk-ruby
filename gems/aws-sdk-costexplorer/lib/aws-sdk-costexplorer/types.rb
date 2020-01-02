@@ -2165,8 +2165,6 @@ module Aws::CostExplorer
     #
     #   * CACHE\_ENGINE
     #
-    #   * DATABASE\_ENGINE
-    #
     #   * DEPLOYMENT\_OPTION
     #
     #   * INSTANCE\_TYPE

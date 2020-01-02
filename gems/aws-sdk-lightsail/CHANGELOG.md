@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2020-01-02)
+------------------
+
+* Feature - This release adds support for Certificate Authority (CA) certificate identifier to managed databases in Amazon Lightsail.
+
 1.26.0 (2019-10-23)
 ------------------
 

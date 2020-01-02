@@ -312,12 +312,14 @@ module Aws::LexModelBuildingService
     # @!attribute [rw] iam_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role with permission to
     #   write to your CloudWatch Logs for text logs and your S3 bucket for
-    #   audio logs. For more information, see [Creating Conversation
-    #   Logs][1].
+    #   audio logs. If audio encryption is enabled, this role also provides
+    #   access permission for the AWS KMS key used for encrypting audio
+    #   logs. For more information, see [Creating an IAM Role and Policy for
+    #   Conversation Logs][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/conversation-logs.html
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/conversation-logs-role-and-policy.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/ConversationLogsRequest AWS API Documentation
@@ -331,7 +333,8 @@ module Aws::LexModelBuildingService
     # Contains information about conversation log settings.
     #
     # @!attribute [rw] log_settings
-    #   The settings for your conversation logs.
+    #   The settings for your conversation logs. You can log text, audio, or
+    #   both.
     #   @return [Array<Types::LogSettingsResponse>]
     #
     # @!attribute [rw] iam_role_arn
@@ -2493,7 +2496,8 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
-    # Settings used to configure conversation logs.
+    # Settings used to configure delivery mode and destination for
+    # conversation logs.
     #
     # @note When making an API call, you may pass LogSettingsRequest
     #   data as a hash:
@@ -2557,11 +2561,10 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] resource_prefix
-    #   The resource prefix of the S3 object or CloudWatch Logs log entry
-    #   where logs are delivered. For both S3 and CloudWatch Logs, the
-    #   prefix is:
-    #
-    #   `aws/lex/bot-name/bot-alias/bot-version`
+    #   The resource prefix is the first part of the S3 object key within
+    #   the S3 bucket that you specified to contain audio logs. For
+    #   CloudWatch Logs it is the prefix of the log stream name within the
+    #   log group that you specified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/LogSettingsResponse AWS API Documentation
@@ -2735,8 +2738,7 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] conversation_logs
-    #   Settings that determine how Amazon Lex uses conversation logs for
-    #   the alias.
+    #   Settings for conversation logs for the alias.
     #   @return [Types::ConversationLogsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAliasRequest AWS API Documentation

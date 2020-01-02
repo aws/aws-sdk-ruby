@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-01-02)
+------------------
+
+* Feature - Adds waiters for ImageScanComplete and LifecyclePolicyPreviewComplete
+
 1.23.0 (2019-11-08)
 ------------------
 

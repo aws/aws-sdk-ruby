@@ -1462,8 +1462,6 @@ module Aws::CostExplorer
     #
     #   * CACHE\_ENGINE
     #
-    #   * DATABASE\_ENGINE
-    #
     #   * DEPLOYMENT\_OPTION
     #
     #   * INSTANCE\_TYPE
@@ -2581,7 +2579,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2773,8 +2773,7 @@ module Aws::LexModelBuildingService
     #   exception.
     #
     # @option params [Types::ConversationLogsRequest] :conversation_logs
-    #   Settings that determine how Amazon Lex uses conversation logs for the
-    #   alias.
+    #   Settings for conversation logs for the alias.
     #
     # @return [Types::PutBotAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3726,7 +3725,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

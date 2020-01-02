@@ -1656,6 +1656,7 @@ module Aws::Lightsail
     RelationalDatabase.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
     RelationalDatabase.add_member(:master_endpoint, Shapes::ShapeRef.new(shape: RelationalDatabaseEndpoint, location_name: "masterEndpoint"))
     RelationalDatabase.add_member(:pending_maintenance_actions, Shapes::ShapeRef.new(shape: PendingMaintenanceActionList, location_name: "pendingMaintenanceActions"))
+    RelationalDatabase.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: string, location_name: "caCertificateIdentifier"))
     RelationalDatabase.struct_class = Types::RelationalDatabase
 
     RelationalDatabaseBlueprint.add_member(:blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "blueprintId"))
@@ -1856,6 +1857,7 @@ module Aws::Lightsail
     UpdateRelationalDatabaseRequest.add_member(:disable_backup_retention, Shapes::ShapeRef.new(shape: boolean, location_name: "disableBackupRetention"))
     UpdateRelationalDatabaseRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
     UpdateRelationalDatabaseRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: boolean, location_name: "applyImmediately"))
+    UpdateRelationalDatabaseRequest.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: string, location_name: "caCertificateIdentifier"))
     UpdateRelationalDatabaseRequest.struct_class = Types::UpdateRelationalDatabaseRequest
 
     UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))

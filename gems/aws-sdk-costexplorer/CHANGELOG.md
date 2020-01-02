@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-01-02)
+------------------
+
+* Feature - Documentation updates for GetReservationUtilization for the Cost Explorer API.
+
 1.34.0 (2019-11-25)
 ------------------
 

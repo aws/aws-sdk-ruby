@@ -2065,14 +2065,129 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                       | params                          | :delay   | :max_attempts |
+    # | --------------------------------- | ------------------------------- | -------- | ------------- |
+    # | image_scan_complete               | {#describe_image_scan_findings} | 5        | 60            |
+    # | lifecycle_policy_preview_complete | {#get_lifecycle_policy_preview} | 5        | 20            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        image_scan_complete: Waiters::ImageScanComplete,
+        lifecycle_policy_preview_complete: Waiters::LifecyclePolicyPreviewComplete
+      }
     end
 
     class << self
