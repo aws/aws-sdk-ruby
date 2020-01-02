@@ -3,4 +3,5 @@ Aws.add_service(:ECR, {
   docs: "#{Aws::API_DIR}/ecr/2015-09-21/docs-2.json",
   examples: "#{Aws::API_DIR}/ecr/2015-09-21/examples-1.json",
   paginators: "#{Aws::API_DIR}/ecr/2015-09-21/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/ecr/2015-09-21/waiters-2.json",
 })

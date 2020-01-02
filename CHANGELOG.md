@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::LexModelBuildingService - Updated the documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::ECR - Updated the waiters for Amazon EC2 Container Registry.
+
 2.11.421 (2019-12-23)
 ------------------
 
