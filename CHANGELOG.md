@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.423 (2020-01-06)
+------------------
+
 * Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
