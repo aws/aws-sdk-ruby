@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2020-01-06)
+------------------
+
+* Feature - This release supports service providers configuring a private DNS name for services other than AWS services and services available in the AWS marketplace. This feature allows consumers to access the service using an existing DNS name without making changes to their applications.
+
 1.129.0 (2019-12-20)
 ------------------
 

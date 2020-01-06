@@ -521,6 +521,7 @@ module Aws::Comprehend
     # @return [Types::ClassifyDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ClassifyDocumentResponse#classes #classes} => Array&lt;Types::DocumentClass&gt;
+    #   * {Types::ClassifyDocumentResponse#labels #labels} => Array&lt;Types::DocumentLabel&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -534,6 +535,9 @@ module Aws::Comprehend
     #   resp.classes #=> Array
     #   resp.classes[0].name #=> String
     #   resp.classes[0].score #=> Float
+    #   resp.labels #=> Array
+    #   resp.labels[0].name #=> String
+    #   resp.labels[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocument AWS API Documentation
     #
@@ -605,6 +609,14 @@ module Aws::Comprehend
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #
+    # @option params [String] :mode
+    #   Indicates the mode in which the classifier will be trained. The
+    #   classifier can be trained in multi-class mode, which identifies one
+    #   and only one class for each document, or multi-label mode, which
+    #   identifies one or more labels for each document. In multi-label mode,
+    #   multiple labels for an individual document are separated by a
+    #   delimiter. The default delimiter between labels is a pipe (\|).
+    #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
@@ -622,6 +634,7 @@ module Aws::Comprehend
     #     ],
     #     input_data_config: { # required
     #       s3_uri: "S3Uri", # required
+    #       label_delimiter: "LabelDelimiter",
     #     },
     #     output_data_config: {
     #       s3_uri: "S3Uri",
@@ -634,6 +647,7 @@ module Aws::Comprehend
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnets: ["SubnetId"], # required
     #     },
+    #     mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
     #   })
     #
     # @example Response structure
@@ -981,6 +995,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.training_start_time #=> Time
     #   resp.document_classifier_properties.training_end_time #=> Time
     #   resp.document_classifier_properties.input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties.input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties.output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties.output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties.classifier_metadata.number_of_labels #=> Integer
@@ -990,12 +1005,17 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.precision #=> Float
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.micro_precision #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.micro_recall #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.micro_f1_score #=> Float
+    #   resp.document_classifier_properties.classifier_metadata.evaluation_metrics.hamming_loss #=> Float
     #   resp.document_classifier_properties.data_access_role_arn #=> String
     #   resp.document_classifier_properties.volume_kms_key_id #=> String
     #   resp.document_classifier_properties.vpc_config.security_group_ids #=> Array
     #   resp.document_classifier_properties.vpc_config.security_group_ids[0] #=> String
     #   resp.document_classifier_properties.vpc_config.subnets #=> Array
     #   resp.document_classifier_properties.vpc_config.subnets[0] #=> String
+    #   resp.document_classifier_properties.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1638,6 +1658,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].training_start_time #=> Time
     #   resp.document_classifier_properties_list[0].training_end_time #=> Time
     #   resp.document_classifier_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.document_classifier_properties_list[0].input_data_config.label_delimiter #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.document_classifier_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].classifier_metadata.number_of_labels #=> Integer
@@ -1647,12 +1668,17 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.precision #=> Float
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.recall #=> Float
     #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.f1_score #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.micro_precision #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.micro_recall #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.micro_f1_score #=> Float
+    #   resp.document_classifier_properties_list[0].classifier_metadata.evaluation_metrics.hamming_loss #=> Float
     #   resp.document_classifier_properties_list[0].data_access_role_arn #=> String
     #   resp.document_classifier_properties_list[0].volume_kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids #=> Array
     #   resp.document_classifier_properties_list[0].vpc_config.security_group_ids[0] #=> String
     #   resp.document_classifier_properties_list[0].vpc_config.subnets #=> Array
     #   resp.document_classifier_properties_list[0].vpc_config.subnets[0] #=> String
+    #   resp.document_classifier_properties_list[0].mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -3058,7 +3084,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

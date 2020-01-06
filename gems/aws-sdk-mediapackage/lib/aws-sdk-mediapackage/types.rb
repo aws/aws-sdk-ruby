@@ -8,6 +8,35 @@
 module Aws::MediaPackage
   module Types
 
+    # CDN Authorization credentials
+    #
+    # @note When making an API call, you may pass Authorization
+    #   data as a hash:
+    #
+    #       {
+    #         cdn_identifier_secret: "__string", # required
+    #         secrets_role_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cdn_identifier_secret
+    #   The Amazon Resource Name (ARN) for the secret in Secrets Manager
+    #   that your Content Distribution Network (CDN) uses for authorization
+    #   to access your endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] secrets_role_arn
+    #   The Amazon Resource Name (ARN) for the IAM role that allows
+    #   MediaPackage to communicate with AWS Secrets Manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/Authorization AWS API Documentation
+    #
+    class Authorization < Struct.new(
+      :cdn_identifier_secret,
+      :secrets_role_arn)
+      include Aws::Structure
+    end
+
     # A Channel resource configuration.
     #
     # @!attribute [rw] arn
@@ -386,6 +415,10 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         authorization: {
+    #           cdn_identifier_secret: "__string", # required
+    #           secrets_role_arn: "__string", # required
+    #         },
     #         channel_id: "__string", # required
     #         cmaf_package: {
     #           encryption: {
@@ -506,6 +539,10 @@ module Aws::MediaPackage
     #         whitelist: ["__string"],
     #       }
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -554,6 +591,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateOriginEndpointRequest AWS API Documentation
     #
     class CreateOriginEndpointRequest < Struct.new(
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,
@@ -572,6 +610,10 @@ module Aws::MediaPackage
 
     # @!attribute [rw] arn
     #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] channel_id
     #   @return [String]
@@ -625,6 +667,7 @@ module Aws::MediaPackage
     #
     class CreateOriginEndpointResponse < Struct.new(
       :arn,
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,
@@ -983,6 +1026,10 @@ module Aws::MediaPackage
     # @!attribute [rw] arn
     #   @return [String]
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -1035,6 +1082,7 @@ module Aws::MediaPackage
     #
     class DescribeOriginEndpointResponse < Struct.new(
       :arn,
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,
@@ -1817,6 +1865,10 @@ module Aws::MediaPackage
     #   The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] channel_id
     #   The ID of the Channel the OriginEndpoint is associated with.
     #   @return [String]
@@ -1887,6 +1939,7 @@ module Aws::MediaPackage
     #
     class OriginEndpoint < Struct.new(
       :arn,
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,
@@ -1905,6 +1958,10 @@ module Aws::MediaPackage
     end
 
     # Configuration parameters for a new OriginEndpoint.
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] channel_id
     #   The ID of the Channel that the OriginEndpoint will be associated
@@ -1974,6 +2031,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/OriginEndpointCreateParameters AWS API Documentation
     #
     class OriginEndpointCreateParameters < Struct.new(
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,
@@ -2010,6 +2068,10 @@ module Aws::MediaPackage
     end
 
     # Configuration parameters for updating an existing OriginEndpoint.
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] cmaf_package
     #   A Common Media Application Format (CMAF) packaging configuration.
@@ -2064,6 +2126,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/OriginEndpointUpdateParameters AWS API Documentation
     #
     class OriginEndpointUpdateParameters < Struct.new(
+      :authorization,
       :cmaf_package,
       :dash_package,
       :description,
@@ -2427,6 +2490,10 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         authorization: {
+    #           cdn_identifier_secret: "__string", # required
+    #           secrets_role_arn: "__string", # required
+    #         },
     #         cmaf_package: {
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
@@ -2543,6 +2610,10 @@ module Aws::MediaPackage
     #         whitelist: ["__string"],
     #       }
     #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
+    #
     # @!attribute [rw] cmaf_package
     #   A Common Media Application Format (CMAF) packaging configuration.
     #   @return [Types::CmafPackageCreateOrUpdateParameters]
@@ -2584,6 +2655,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointRequest AWS API Documentation
     #
     class UpdateOriginEndpointRequest < Struct.new(
+      :authorization,
       :cmaf_package,
       :dash_package,
       :description,
@@ -2600,6 +2672,10 @@ module Aws::MediaPackage
 
     # @!attribute [rw] arn
     #   @return [String]
+    #
+    # @!attribute [rw] authorization
+    #   CDN Authorization credentials
+    #   @return [Types::Authorization]
     #
     # @!attribute [rw] channel_id
     #   @return [String]
@@ -2653,6 +2729,7 @@ module Aws::MediaPackage
     #
     class UpdateOriginEndpointResponse < Struct.new(
       :arn,
+      :authorization,
       :channel_id,
       :cmaf_package,
       :dash_package,

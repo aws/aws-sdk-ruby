@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.29.0 (2020-01-06)
+------------------
+
+* Feature - Amazon Comprehend now supports Multilabel document classification
+
 1.28.0 (2019-11-25)
 ------------------
 

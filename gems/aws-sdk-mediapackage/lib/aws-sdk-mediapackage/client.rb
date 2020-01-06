@@ -368,6 +368,9 @@ module Aws::MediaPackage
 
     # Creates a new OriginEndpoint record.
     #
+    # @option params [Types::Authorization] :authorization
+    #   CDN Authorization credentials
+    #
     # @option params [required, String] :channel_id
     #
     # @option params [Types::CmafPackageCreateOrUpdateParameters] :cmaf_package
@@ -402,6 +405,7 @@ module Aws::MediaPackage
     # @return [Types::CreateOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateOriginEndpointResponse#arn #arn} => String
+    #   * {Types::CreateOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::CreateOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::CreateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::CreateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
@@ -420,6 +424,10 @@ module Aws::MediaPackage
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_origin_endpoint({
+    #     authorization: {
+    #       cdn_identifier_secret: "__string", # required
+    #       secrets_role_arn: "__string", # required
+    #     },
     #     channel_id: "__string", # required
     #     cmaf_package: {
     #       encryption: {
@@ -543,6 +551,8 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
@@ -777,6 +787,7 @@ module Aws::MediaPackage
     # @return [Types::DescribeOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOriginEndpointResponse#arn #arn} => String
+    #   * {Types::DescribeOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::DescribeOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::DescribeOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::DescribeOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
@@ -801,6 +812,8 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
@@ -1018,6 +1031,8 @@ module Aws::MediaPackage
     #   resp.next_token #=> String
     #   resp.origin_endpoints #=> Array
     #   resp.origin_endpoints[0].arn #=> String
+    #   resp.origin_endpoints[0].authorization.cdn_identifier_secret #=> String
+    #   resp.origin_endpoints[0].authorization.secrets_role_arn #=> String
     #   resp.origin_endpoints[0].channel_id #=> String
     #   resp.origin_endpoints[0].cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
@@ -1321,6 +1336,9 @@ module Aws::MediaPackage
 
     # Updates an existing OriginEndpoint.
     #
+    # @option params [Types::Authorization] :authorization
+    #   CDN Authorization credentials
+    #
     # @option params [Types::CmafPackageCreateOrUpdateParameters] :cmaf_package
     #   A Common Media Application Format (CMAF) packaging configuration.
     #
@@ -1350,6 +1368,7 @@ module Aws::MediaPackage
     # @return [Types::UpdateOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOriginEndpointResponse#arn #arn} => String
+    #   * {Types::UpdateOriginEndpointResponse#authorization #authorization} => Types::Authorization
     #   * {Types::UpdateOriginEndpointResponse#channel_id #channel_id} => String
     #   * {Types::UpdateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::UpdateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
@@ -1368,6 +1387,10 @@ module Aws::MediaPackage
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_origin_endpoint({
+    #     authorization: {
+    #       cdn_identifier_secret: "__string", # required
+    #       secrets_role_arn: "__string", # required
+    #     },
     #     cmaf_package: {
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
@@ -1487,6 +1510,8 @@ module Aws::MediaPackage
     # @example Response structure
     #
     #   resp.arn #=> String
+    #   resp.authorization.cdn_identifier_secret #=> String
+    #   resp.authorization.secrets_role_arn #=> String
     #   resp.channel_id #=> String
     #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.cmaf_package.encryption.speke_key_provider.certificate_arn #=> String
@@ -1600,7 +1625,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

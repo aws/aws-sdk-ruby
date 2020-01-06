@@ -776,6 +776,7 @@ module Aws::EC2
     DiskType = Shapes::StringShape.new(name: 'DiskType')
     DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
     DnsEntrySet = Shapes::ListShape.new(name: 'DnsEntrySet')
+    DnsNameState = Shapes::StringShape.new(name: 'DnsNameState')
     DnsServersOptionsModifyStructure = Shapes::StructureShape.new(name: 'DnsServersOptionsModifyStructure')
     DnsSupportValue = Shapes::StringShape.new(name: 'DnsSupportValue')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
@@ -1121,6 +1122,7 @@ module Aws::EC2
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
     KeyPairName = Shapes::StringShape.new(name: 'KeyPairName')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LastError = Shapes::StructureShape.new(name: 'LastError')
     LaunchPermission = Shapes::StructureShape.new(name: 'LaunchPermission')
     LaunchPermissionList = Shapes::ListShape.new(name: 'LaunchPermissionList')
     LaunchPermissionModifications = Shapes::StructureShape.new(name: 'LaunchPermissionModifications')
@@ -1415,6 +1417,7 @@ module Aws::EC2
     PrincipalIdFormat = Shapes::StructureShape.new(name: 'PrincipalIdFormat')
     PrincipalIdFormatList = Shapes::ListShape.new(name: 'PrincipalIdFormatList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PrivateDnsNameConfiguration = Shapes::StructureShape.new(name: 'PrivateDnsNameConfiguration')
     PrivateIpAddressConfigSet = Shapes::ListShape.new(name: 'PrivateIpAddressConfigSet')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
     PrivateIpAddressSpecificationList = Shapes::ListShape.new(name: 'PrivateIpAddressSpecificationList')
@@ -1657,6 +1660,8 @@ module Aws::EC2
     StaleSecurityGroupSet = Shapes::ListShape.new(name: 'StaleSecurityGroupSet')
     StartInstancesRequest = Shapes::StructureShape.new(name: 'StartInstancesRequest')
     StartInstancesResult = Shapes::StructureShape.new(name: 'StartInstancesResult')
+    StartVpcEndpointServicePrivateDnsVerificationRequest = Shapes::StructureShape.new(name: 'StartVpcEndpointServicePrivateDnsVerificationRequest')
+    StartVpcEndpointServicePrivateDnsVerificationResult = Shapes::StructureShape.new(name: 'StartVpcEndpointServicePrivateDnsVerificationResult')
     State = Shapes::StringShape.new(name: 'State')
     StateReason = Shapes::StructureShape.new(name: 'StateReason')
     Status = Shapes::StringShape.new(name: 'Status')
@@ -3210,6 +3215,7 @@ module Aws::EC2
 
     CreateVpcEndpointServiceConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptanceRequired"))
+    CreateVpcEndpointServiceConfigurationRequest.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "PrivateDnsName"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "NetworkLoadBalancerArn"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointServiceConfigurationRequest.struct_class = Types::CreateVpcEndpointServiceConfigurationRequest
@@ -6336,6 +6342,10 @@ module Aws::EC2
 
     KeyPairList.member = Shapes::ShapeRef.new(shape: KeyPairInfo, location_name: "item")
 
+    LastError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    LastError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
+    LastError.struct_class = Types::LastError
+
     LaunchPermission.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "group"))
     LaunchPermission.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "userId"))
     LaunchPermission.struct_class = Types::LaunchPermission
@@ -7009,6 +7019,8 @@ module Aws::EC2
 
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: ServiceId, required: true, location_name: "ServiceId"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "PrivateDnsName"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_private_dns_name, Shapes::ShapeRef.new(shape: Boolean, location_name: "RemovePrivateDnsName"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptanceRequired"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:add_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddNetworkLoadBalancerArn"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveNetworkLoadBalancerArn"))
@@ -7439,6 +7451,12 @@ module Aws::EC2
     PrincipalIdFormat.struct_class = Types::PrincipalIdFormat
 
     PrincipalIdFormatList.member = Shapes::ShapeRef.new(shape: PrincipalIdFormat, location_name: "item")
+
+    PrivateDnsNameConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: DnsNameState, location_name: "state"))
+    PrivateDnsNameConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    PrivateDnsNameConfiguration.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    PrivateDnsNameConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    PrivateDnsNameConfiguration.struct_class = Types::PrivateDnsNameConfiguration
 
     PrivateIpAddressConfigSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesPrivateIpAddressConfig, location_name: "PrivateIpAddressConfigSet")
 
@@ -8334,6 +8352,7 @@ module Aws::EC2
     ServiceConfiguration.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     ServiceConfiguration.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
     ServiceConfiguration.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
+    ServiceConfiguration.add_member(:private_dns_name_configuration, Shapes::ShapeRef.new(shape: PrivateDnsNameConfiguration, location_name: "privateDnsNameConfiguration"))
     ServiceConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ServiceConfiguration.struct_class = Types::ServiceConfiguration
 
@@ -8350,6 +8369,7 @@ module Aws::EC2
     ServiceDetail.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptanceRequired"))
     ServiceDetail.add_member(:manages_vpc_endpoints, Shapes::ShapeRef.new(shape: Boolean, location_name: "managesVpcEndpoints"))
     ServiceDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    ServiceDetail.add_member(:private_dns_name_verification_state, Shapes::ShapeRef.new(shape: DnsNameState, location_name: "privateDnsNameVerificationState"))
     ServiceDetail.struct_class = Types::ServiceDetail
 
     ServiceDetailSet.member = Shapes::ShapeRef.new(shape: ServiceDetail, location_name: "item")
@@ -8603,6 +8623,13 @@ module Aws::EC2
 
     StartInstancesResult.add_member(:starting_instances, Shapes::ShapeRef.new(shape: InstanceStateChangeList, location_name: "instancesSet"))
     StartInstancesResult.struct_class = Types::StartInstancesResult
+
+    StartVpcEndpointServicePrivateDnsVerificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    StartVpcEndpointServicePrivateDnsVerificationRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: ServiceId, required: true, location_name: "ServiceId"))
+    StartVpcEndpointServicePrivateDnsVerificationRequest.struct_class = Types::StartVpcEndpointServicePrivateDnsVerificationRequest
+
+    StartVpcEndpointServicePrivateDnsVerificationResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    StartVpcEndpointServicePrivateDnsVerificationResult.struct_class = Types::StartVpcEndpointServicePrivateDnsVerificationResult
 
     StateReason.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     StateReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -9305,6 +9332,7 @@ module Aws::EC2
     VpcEndpoint.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "creationTimestamp"))
     VpcEndpoint.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     VpcEndpoint.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    VpcEndpoint.add_member(:last_error, Shapes::ShapeRef.new(shape: LastError, location_name: "lastError"))
     VpcEndpoint.struct_class = Types::VpcEndpoint
 
     VpcEndpointConnection.add_member(:service_id, Shapes::ShapeRef.new(shape: String, location_name: "serviceId"))
@@ -12963,6 +12991,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartInstancesRequest)
         o.output = Shapes::ShapeRef.new(shape: StartInstancesResult)
+      end)
+
+      api.add_operation(:start_vpc_endpoint_service_private_dns_verification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartVpcEndpointServicePrivateDnsVerification"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartVpcEndpointServicePrivateDnsVerificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartVpcEndpointServicePrivateDnsVerificationResult)
       end)
 
       api.add_operation(:stop_instances, Seahorse::Model::Operation.new.tap do |o|

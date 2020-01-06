@@ -89,9 +89,11 @@ module Aws::Comprehend
     DocumentClassifierEndpointArn = Shapes::StringShape.new(name: 'DocumentClassifierEndpointArn')
     DocumentClassifierFilter = Shapes::StructureShape.new(name: 'DocumentClassifierFilter')
     DocumentClassifierInputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierInputDataConfig')
+    DocumentClassifierMode = Shapes::StringShape.new(name: 'DocumentClassifierMode')
     DocumentClassifierOutputDataConfig = Shapes::StructureShape.new(name: 'DocumentClassifierOutputDataConfig')
     DocumentClassifierProperties = Shapes::StructureShape.new(name: 'DocumentClassifierProperties')
     DocumentClassifierPropertiesList = Shapes::ListShape.new(name: 'DocumentClassifierPropertiesList')
+    DocumentLabel = Shapes::StructureShape.new(name: 'DocumentLabel')
     DominantLanguage = Shapes::StructureShape.new(name: 'DominantLanguage')
     DominantLanguageDetectionJobFilter = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobFilter')
     DominantLanguageDetectionJobProperties = Shapes::StructureShape.new(name: 'DominantLanguageDetectionJobProperties')
@@ -141,6 +143,7 @@ module Aws::Comprehend
     KeyPhrasesDetectionJobPropertiesList = Shapes::ListShape.new(name: 'KeyPhrasesDetectionJobPropertiesList')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     KmsKeyValidationException = Shapes::StructureShape.new(name: 'KmsKeyValidationException')
+    LabelDelimiter = Shapes::StringShape.new(name: 'LabelDelimiter')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListDocumentClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsRequest')
     ListDocumentClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListDocumentClassificationJobsResponse')
@@ -165,6 +168,7 @@ module Aws::Comprehend
     ListOfDominantLanguages = Shapes::ListShape.new(name: 'ListOfDominantLanguages')
     ListOfEntities = Shapes::ListShape.new(name: 'ListOfEntities')
     ListOfKeyPhrases = Shapes::ListShape.new(name: 'ListOfKeyPhrases')
+    ListOfLabels = Shapes::ListShape.new(name: 'ListOfLabels')
     ListOfSyntaxTokens = Shapes::ListShape.new(name: 'ListOfSyntaxTokens')
     ListSentimentDetectionJobsRequest = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsRequest')
     ListSentimentDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListSentimentDetectionJobsResponse')
@@ -316,6 +320,10 @@ module Aws::Comprehend
     ClassifierEvaluationMetrics.add_member(:precision, Shapes::ShapeRef.new(shape: Double, location_name: "Precision"))
     ClassifierEvaluationMetrics.add_member(:recall, Shapes::ShapeRef.new(shape: Double, location_name: "Recall"))
     ClassifierEvaluationMetrics.add_member(:f1_score, Shapes::ShapeRef.new(shape: Double, location_name: "F1Score"))
+    ClassifierEvaluationMetrics.add_member(:micro_precision, Shapes::ShapeRef.new(shape: Double, location_name: "MicroPrecision"))
+    ClassifierEvaluationMetrics.add_member(:micro_recall, Shapes::ShapeRef.new(shape: Double, location_name: "MicroRecall"))
+    ClassifierEvaluationMetrics.add_member(:micro_f1_score, Shapes::ShapeRef.new(shape: Double, location_name: "MicroF1Score"))
+    ClassifierEvaluationMetrics.add_member(:hamming_loss, Shapes::ShapeRef.new(shape: Double, location_name: "HammingLoss"))
     ClassifierEvaluationMetrics.struct_class = Types::ClassifierEvaluationMetrics
 
     ClassifierMetadata.add_member(:number_of_labels, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfLabels"))
@@ -329,6 +337,7 @@ module Aws::Comprehend
     ClassifyDocumentRequest.struct_class = Types::ClassifyDocumentRequest
 
     ClassifyDocumentResponse.add_member(:classes, Shapes::ShapeRef.new(shape: ListOfClasses, location_name: "Classes"))
+    ClassifyDocumentResponse.add_member(:labels, Shapes::ShapeRef.new(shape: ListOfLabels, location_name: "Labels"))
     ClassifyDocumentResponse.struct_class = Types::ClassifyDocumentResponse
 
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -343,6 +352,7 @@ module Aws::Comprehend
     CreateDocumentClassifierRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     CreateDocumentClassifierRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     CreateDocumentClassifierRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    CreateDocumentClassifierRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
     CreateDocumentClassifierRequest.struct_class = Types::CreateDocumentClassifierRequest
 
     CreateDocumentClassifierResponse.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
@@ -507,6 +517,7 @@ module Aws::Comprehend
     DocumentClassifierFilter.struct_class = Types::DocumentClassifierFilter
 
     DocumentClassifierInputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
+    DocumentClassifierInputDataConfig.add_member(:label_delimiter, Shapes::ShapeRef.new(shape: LabelDelimiter, location_name: "LabelDelimiter"))
     DocumentClassifierInputDataConfig.struct_class = Types::DocumentClassifierInputDataConfig
 
     DocumentClassifierOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "S3Uri"))
@@ -527,9 +538,14 @@ module Aws::Comprehend
     DocumentClassifierProperties.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
     DocumentClassifierProperties.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     DocumentClassifierProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+    DocumentClassifierProperties.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
     DocumentClassifierProperties.struct_class = Types::DocumentClassifierProperties
 
     DocumentClassifierPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
+
+    DocumentLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    DocumentLabel.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    DocumentLabel.struct_class = Types::DocumentLabel
 
     DominantLanguage.add_member(:language_code, Shapes::ShapeRef.new(shape: String, location_name: "LanguageCode"))
     DominantLanguage.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
@@ -796,6 +812,8 @@ module Aws::Comprehend
     ListOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
 
     ListOfKeyPhrases.member = Shapes::ShapeRef.new(shape: KeyPhrase)
+
+    ListOfLabels.member = Shapes::ShapeRef.new(shape: DocumentLabel)
 
     ListOfSyntaxTokens.member = Shapes::ShapeRef.new(shape: SyntaxToken)
 

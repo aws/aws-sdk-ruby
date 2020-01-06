@@ -425,13 +425,50 @@ module Aws::Comprehend
     #   score is 1, and the worst score is 0.
     #   @return [Float]
     #
+    # @!attribute [rw] micro_precision
+    #   A measure of the usefulness of the recognizer results in the test
+    #   data. High precision means that the recognizer returned
+    #   substantially more relevant results than irrelevant ones. Unlike the
+    #   Precision metric which comes from averaging the precision of all
+    #   available labels, this is based on the overall score of all
+    #   precision scores added together.
+    #   @return [Float]
+    #
+    # @!attribute [rw] micro_recall
+    #   A measure of how complete the classifier results are for the test
+    #   data. High recall means that the classifier returned most of the
+    #   relevant results. Specifically, this indicates how many of the
+    #   correct categories in the text that the model can predict. It is a
+    #   percentage of correct categories in the text that can found. Instead
+    #   of averaging the recall scores of all labels (as with Recall), micro
+    #   Recall is based on the overall score of all recall scores added
+    #   together.
+    #   @return [Float]
+    #
+    # @!attribute [rw] micro_f1_score
+    #   A measure of how accurate the classifier results are for the test
+    #   data. It is a combination of the `Micro Precision` and `Micro
+    #   Recall` values. The `Micro F1Score` is the harmonic mean of the two
+    #   scores. The highest score is 1, and the worst score is 0.
+    #   @return [Float]
+    #
+    # @!attribute [rw] hamming_loss
+    #   Indicates the fraction of labels that are incorrectly predicted.
+    #   Also seen as the fraction of wrong labels compared to the total
+    #   number of labels. Scores closer to zero are better.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifierEvaluationMetrics AWS API Documentation
     #
     class ClassifierEvaluationMetrics < Struct.new(
       :accuracy,
       :precision,
       :recall,
-      :f1_score)
+      :f1_score,
+      :micro_precision,
+      :micro_recall,
+      :micro_f1_score,
+      :hamming_loss)
       include Aws::Structure
     end
 
@@ -500,10 +537,20 @@ module Aws::Comprehend
     #   not both at the same time.
     #   @return [Array<Types::DocumentClass>]
     #
+    # @!attribute [rw] labels
+    #   The labels used the document being analyzed. These are used for
+    #   multi-label trained models. Individual labels represent different
+    #   categories that are related in some manner and are not multually
+    #   exclusive. For example, a movie can be just an action movie, or it
+    #   can be an action movie, a science fiction movie, and a comedy, all
+    #   at the same time.
+    #   @return [Array<Types::DocumentLabel>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentResponse AWS API Documentation
     #
     class ClassifyDocumentResponse < Struct.new(
-      :classes)
+      :classes,
+      :labels)
       include Aws::Structure
     end
 
@@ -534,6 +581,7 @@ module Aws::Comprehend
     #         ],
     #         input_data_config: { # required
     #           s3_uri: "S3Uri", # required
+    #           label_delimiter: "LabelDelimiter",
     #         },
     #         output_data_config: {
     #           s3_uri: "S3Uri",
@@ -546,6 +594,7 @@ module Aws::Comprehend
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -613,6 +662,15 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] mode
+    #   Indicates the mode in which the classifier will be trained. The
+    #   classifier can be trained in multi-class mode, which identifies one
+    #   and only one class for each document, or multi-label mode, which
+    #   identifies one or more labels for each document. In multi-label
+    #   mode, multiple labels for an individual document are separated by a
+    #   delimiter. The default delimiter between labels is a pipe (\|).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -624,7 +682,8 @@ module Aws::Comprehend
       :client_request_token,
       :language_code,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :mode)
       include Aws::Structure
     end
 
@@ -1593,6 +1652,7 @@ module Aws::Comprehend
     #
     #       {
     #         s3_uri: "S3Uri", # required
+    #         label_delimiter: "LabelDelimiter",
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -1607,10 +1667,21 @@ module Aws::Comprehend
     #   all of them as input.
     #   @return [String]
     #
+    # @!attribute [rw] label_delimiter
+    #   Indicates the delimiter used to separate each label for training a
+    #   multi-label classifier. The default delimiter between labels is a
+    #   pipe (\|). You can use a different character as a delimiter (if
+    #   it's an allowed character) by specifying it under Delimiter for
+    #   labels. If the training documents use a delimiter other than the
+    #   default or the delimiter you specify, the labels on that line will
+    #   be combined to make a single unique label, such as LABELLABELLABEL.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierInputDataConfig AWS API Documentation
     #
     class DocumentClassifierInputDataConfig < Struct.new(
-      :s3_uri)
+      :s3_uri,
+      :label_delimiter)
       include Aws::Structure
     end
 
@@ -1750,6 +1821,13 @@ module Aws::Comprehend
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
+    # @!attribute [rw] mode
+    #   Indicates the mode in which the specific classifier was trained.
+    #   This also indicates the format of input documents and the format of
+    #   the confusion matrix. Each classifier can only be trained in one
+    #   mode and this cannot be changed once the classifier is trained.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -1766,7 +1844,28 @@ module Aws::Comprehend
       :classifier_metadata,
       :data_access_role_arn,
       :volume_kms_key_id,
-      :vpc_config)
+      :vpc_config,
+      :mode)
+      include Aws::Structure
+    end
+
+    # Specifies one of the label or labels that categorize the document
+    # being analyzed.
+    #
+    # @!attribute [rw] name
+    #   The name of the label.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   The confidence score that Amazon Comprehend has this label correctly
+    #   attributed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentLabel AWS API Documentation
+    #
+    class DocumentLabel < Struct.new(
+      :name,
+      :score)
       include Aws::Structure
     end
 

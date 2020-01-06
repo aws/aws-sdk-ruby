@@ -156,7 +156,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] service_id
-    #   The ID of the endpoint service.
+    #   The ID of the VPC endpoint service.
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_ids
@@ -8411,7 +8411,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -8437,7 +8437,7 @@ module Aws::EC2
     #   @return [Types::ConnectionNotification]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
@@ -8512,7 +8512,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -8522,10 +8522,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] private_dns_enabled
-    #   (Interface endpoint) Indicate whether to associate a private hosted
+    #   (Interface endpoint) Indicates whether to associate a private hosted
     #   zone with the specified VPC. The private hosted zone contains a
     #   record set for the default public DNS name for the service for the
-    #   Region (for example, `kinesis.us-east-1.amazonaws.com`) which
+    #   Region (for example, `kinesis.us-east-1.amazonaws.com`), which
     #   resolves to the private IP addresses of the endpoint network
     #   interfaces in the VPC. This enables you to make requests to the
     #   default public DNS name for the service instead of the public DNS
@@ -8561,7 +8561,7 @@ module Aws::EC2
     #   @return [Types::VpcEndpoint]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
@@ -8579,6 +8579,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         acceptance_required: false,
+    #         private_dns_name: "String",
     #         network_load_balancer_arns: ["String"], # required
     #         client_token: "String",
     #       }
@@ -8591,10 +8592,14 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] acceptance_required
-    #   Indicate whether requests from service consumers to create an
+    #   Indicates whether requests from service consumers to create an
     #   endpoint to your service must be accepted. To accept a request, use
     #   AcceptVpcEndpointConnections.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name to assign to the VPC endpoint service.
+    #   @return [String]
     #
     # @!attribute [rw] network_load_balancer_arns
     #   The Amazon Resource Names (ARNs) of one or more Network Load
@@ -8602,7 +8607,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1].
     #
@@ -8616,6 +8621,7 @@ module Aws::EC2
     class CreateVpcEndpointServiceConfigurationRequest < Struct.new(
       :dry_run,
       :acceptance_required,
+      :private_dns_name,
       :network_load_balancer_arns,
       :client_token)
       include Aws::Structure
@@ -8626,7 +8632,7 @@ module Aws::EC2
     #   @return [Types::ServiceConfiguration]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
     #
@@ -19896,7 +19902,7 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `connection-notification-arn` - The ARN of SNS topic for the
+    #   * `connection-notification-arn` - The ARN of the SNS topic for the
     #     notification.
     #
     #   * `connection-notification-id` - The ID of the notification.
@@ -19991,8 +19997,8 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
     #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned.
+    #   value can be between 5 and 1,000; if `MaxResults` is given a value
+    #   larger than 1,000, only 1,000 results are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -20078,8 +20084,8 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
     #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned.
+    #   value can be between 5 and 1,000; if `MaxResults` is given a value
+    #   larger than 1,000, only 1,000 results are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -20154,8 +20160,8 @@ module Aws::EC2
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results of the initial request can be seen by
     #   sending another request with the returned `NextToken` value. This
-    #   value can be between 5 and 1000; if `MaxResults` is given a value
-    #   larger than 1000, only 1000 results are returned.
+    #   value can be between 5 and 1,000; if `MaxResults` is given a value
+    #   larger than 1,000, only 1,000 results are returned.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -20222,7 +20228,7 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `service-name`\: The name of the service.
+    #   * `service-name` - The name of the service.
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -20240,7 +20246,7 @@ module Aws::EC2
     #   returns a token that you can specify in a subsequent call to get the
     #   next set of results.
     #
-    #   Constraint: If the value is greater than 1000, we return only 1000
+    #   Constraint: If the value is greater than 1,000, we return only 1,000
     #   items.
     #   @return [Integer]
     #
@@ -20316,11 +20322,11 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `service-name`\: The name of the service.
+    #   * `service-name` - The name of the service.
     #
-    #   * `vpc-id`\: The ID of the VPC in which the endpoint resides.
+    #   * `vpc-id` - The ID of the VPC in which the endpoint resides.
     #
-    #   * `vpc-endpoint-id`\: The ID of the endpoint.
+    #   * `vpc-endpoint-id` - The ID of the endpoint.
     #
     #   * `vpc-endpoint-state` - The state of the endpoint
     #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
@@ -20342,7 +20348,7 @@ module Aws::EC2
     #   returns a token that you can specify in a subsequent call to get the
     #   next set of results.
     #
-    #   Constraint: If the value is greater than 1000, we return only 1000
+    #   Constraint: If the value is greater than 1,000, we return only 1,000
     #   items.
     #   @return [Integer]
     #
@@ -28805,6 +28811,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The last error that occurred for a VPC endpoint.
+    #
+    # @!attribute [rw] message
+    #   The error message for the VPC endpoint error.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code for the VPC endpoint error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LastError AWS API Documentation
+    #
+    class LastError < Struct.new(
+      :message,
+      :code)
+      include Aws::Structure
+    end
+
     # Describes a launch permission.
     #
     # @note When making an API call, you may pass LaunchPermission
@@ -32829,7 +32853,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] private_dns_enabled
-    #   (Interface endpoint) Indicate whether a private hosted zone is
+    #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
     #   @return [Boolean]
     #
@@ -32868,6 +32892,8 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         service_id: "ServiceId", # required
+    #         private_dns_name: "String",
+    #         remove_private_dns_name: false,
     #         acceptance_required: false,
     #         add_network_load_balancer_arns: ["String"],
     #         remove_network_load_balancer_arns: ["String"],
@@ -32884,9 +32910,17 @@ module Aws::EC2
     #   The ID of the service.
     #   @return [String]
     #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name to assign to the endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_private_dns_name
+    #   Removes the private DNS name of the endpoint service.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] acceptance_required
-    #   Indicate whether requests to create an endpoint to your service must
-    #   be accepted.
+    #   Indicates whether requests to create an endpoint to your service
+    #   must be accepted.
     #   @return [Boolean]
     #
     # @!attribute [rw] add_network_load_balancer_arns
@@ -32904,6 +32938,8 @@ module Aws::EC2
     class ModifyVpcEndpointServiceConfigurationRequest < Struct.new(
       :dry_run,
       :service_id,
+      :private_dns_name,
+      :remove_private_dns_name,
       :acceptance_required,
       :add_network_load_balancer_arns,
       :remove_network_load_balancer_arns)
@@ -35024,6 +35060,46 @@ module Aws::EC2
     class PrincipalIdFormat < Struct.new(
       :arn,
       :statuses)
+      include Aws::Structure
+    end
+
+    # Information about the private DNS name for the service endpoint. For
+    # more information about these parameters, see [VPC Endpoint Service
+    # Private DNS Name Verification][1] in the *Amazon Virtual Private Cloud
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html
+    #
+    # @!attribute [rw] state
+    #   The verification state of the VPC endpoint service.
+    #
+    #   &gt;Consumers of the endpoint service can use the private name only
+    #   when the state is `verified`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The endpoint service verification type, for example TXT.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value the service provider adds to the private DNS name domain
+    #   record before verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the record subdomain the service provider needs to
+    #   create. The service provider adds the `value` text to the `name`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateDnsNameConfiguration AWS API Documentation
+    #
+    class PrivateDnsNameConfiguration < Struct.new(
+      :state,
+      :type,
+      :value,
+      :name)
       include Aws::Structure
     end
 
@@ -40918,7 +40994,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   In the Availability Zones in which the service is available.
+    #   The Availability Zones in which the service is available.
     #   @return [Array<String>]
     #
     # @!attribute [rw] acceptance_required
@@ -40927,9 +41003,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC endpoints.
-    #   Management of the service VPC endpoints using the VPC endpoint API
-    #   is restricted.
+    #   Indicates whether the service manages its VPC endpoints. Management
+    #   of the service VPC endpoints using the VPC endpoint API is
+    #   restricted.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_load_balancer_arns
@@ -40944,6 +41020,11 @@ module Aws::EC2
     # @!attribute [rw] private_dns_name
     #   The private DNS name for the service.
     #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name_configuration
+    #   Information about the endpoint service private DNS name
+    #   configuration.
+    #   @return [Types::PrivateDnsNameConfiguration]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the service.
@@ -40962,6 +41043,7 @@ module Aws::EC2
       :network_load_balancer_arns,
       :base_endpoint_dns_names,
       :private_dns_name,
+      :private_dns_name_configuration,
       :tags)
       include Aws::Structure
     end
@@ -41006,14 +41088,21 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] manages_vpc_endpoints
-    #   Indicates whether the service manages it's VPC endpoints.
-    #   Management of the service VPC endpoints using the VPC endpoint API
-    #   is restricted.
+    #   Indicates whether the service manages its VPC endpoints. Management
+    #   of the service VPC endpoints using the VPC endpoint API is
+    #   restricted.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
     #   Any tags assigned to the service.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] private_dns_name_verification_state
+    #   The verification state of the VPC endpoint service.
+    #
+    #   Consumers of the endpoint service cannot use the private name when
+    #   the state is not `verified`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
     #
@@ -41028,7 +41117,8 @@ module Aws::EC2
       :vpc_endpoint_policy_supported,
       :acceptance_required,
       :manages_vpc_endpoints,
-      :tags)
+      :tags,
+      :private_dns_name_verification_state)
       include Aws::Structure
     end
 
@@ -42711,6 +42801,45 @@ module Aws::EC2
     #
     class StartInstancesResult < Struct.new(
       :starting_instances)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartVpcEndpointServicePrivateDnsVerificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "ServiceId", # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartVpcEndpointServicePrivateDnsVerificationRequest AWS API Documentation
+    #
+    class StartVpcEndpointServicePrivateDnsVerificationRequest < Struct.new(
+      :dry_run,
+      :service_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartVpcEndpointServicePrivateDnsVerificationResult AWS API Documentation
+    #
+    class StartVpcEndpointServicePrivateDnsVerificationResult < Struct.new(
+      :return_value)
       include Aws::Structure
     end
 
@@ -45882,7 +46011,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] groups
-    #   (Interface endpoint) Information about the security groups
+    #   (Interface endpoint) Information about the security groups that are
     #   associated with the network interface.
     #   @return [Array<Types::SecurityGroupIdentifier>]
     #
@@ -45905,7 +46034,7 @@ module Aws::EC2
     #   @return [Array<Types::DnsEntry>]
     #
     # @!attribute [rw] creation_timestamp
-    #   The date and time the VPC endpoint was created.
+    #   The date and time that the VPC endpoint was created.
     #   @return [Time]
     #
     # @!attribute [rw] tags
@@ -45915,6 +46044,10 @@ module Aws::EC2
     # @!attribute [rw] owner_id
     #   The ID of the AWS account that owns the VPC endpoint.
     #   @return [String]
+    #
+    # @!attribute [rw] last_error
+    #   The last error that occurred for VPC endpoint.
+    #   @return [Types::LastError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
     #
@@ -45934,7 +46067,8 @@ module Aws::EC2
       :dns_entries,
       :creation_timestamp,
       :tags,
-      :owner_id)
+      :owner_id,
+      :last_error)
       include Aws::Structure
     end
 
@@ -45957,7 +46091,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   The date and time the VPC endpoint was created.
+    #   The date and time that the VPC endpoint was created.
     #   @return [Time]
     #
     # @!attribute [rw] dns_entries

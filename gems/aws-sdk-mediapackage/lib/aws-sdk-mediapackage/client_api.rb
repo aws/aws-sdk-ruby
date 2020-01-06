@@ -14,6 +14,7 @@ module Aws::MediaPackage
     AdMarkers = Shapes::StringShape.new(name: 'AdMarkers')
     AdTriggers = Shapes::ListShape.new(name: 'AdTriggers')
     AdsOnDeliveryRestrictions = Shapes::StringShape.new(name: 'AdsOnDeliveryRestrictions')
+    Authorization = Shapes::StructureShape.new(name: 'Authorization')
     Channel = Shapes::StructureShape.new(name: 'Channel')
     ChannelCreateParameters = Shapes::StructureShape.new(name: 'ChannelCreateParameters')
     ChannelList = Shapes::StructureShape.new(name: 'ChannelList')
@@ -111,6 +112,10 @@ module Aws::MediaPackage
 
     AdTriggers.member = Shapes::ShapeRef.new(shape: __AdTriggersElement)
 
+    Authorization.add_member(:cdn_identifier_secret, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "cdnIdentifierSecret"))
+    Authorization.add_member(:secrets_role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "secretsRoleArn"))
+    Authorization.struct_class = Types::Authorization
+
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Channel.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Channel.add_member(:hls_ingest, Shapes::ShapeRef.new(shape: HlsIngest, location_name: "hlsIngest"))
@@ -178,6 +183,7 @@ module Aws::MediaPackage
     CreateHarvestJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     CreateHarvestJobResponse.struct_class = Types::CreateHarvestJobResponse
 
+    CreateOriginEndpointRequest.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     CreateOriginEndpointRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
     CreateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     CreateOriginEndpointRequest.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -194,6 +200,7 @@ module Aws::MediaPackage
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
 
     CreateOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    CreateOriginEndpointResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     CreateOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
     CreateOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     CreateOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -267,6 +274,7 @@ module Aws::MediaPackage
     DescribeOriginEndpointRequest.struct_class = Types::DescribeOriginEndpointRequest
 
     DescribeOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeOriginEndpointResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     DescribeOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
     DescribeOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     DescribeOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -407,6 +415,7 @@ module Aws::MediaPackage
     NotFoundException.struct_class = Types::NotFoundException
 
     OriginEndpoint.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    OriginEndpoint.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     OriginEndpoint.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
     OriginEndpoint.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     OriginEndpoint.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -423,6 +432,7 @@ module Aws::MediaPackage
     OriginEndpoint.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     OriginEndpoint.struct_class = Types::OriginEndpoint
 
+    OriginEndpointCreateParameters.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     OriginEndpointCreateParameters.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
     OriginEndpointCreateParameters.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     OriginEndpointCreateParameters.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
@@ -442,6 +452,7 @@ module Aws::MediaPackage
     OriginEndpointList.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: __listOfOriginEndpoint, location_name: "originEndpoints"))
     OriginEndpointList.struct_class = Types::OriginEndpointList
 
+    OriginEndpointUpdateParameters.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     OriginEndpointUpdateParameters.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     OriginEndpointUpdateParameters.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     OriginEndpointUpdateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -526,6 +537,7 @@ module Aws::MediaPackage
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
+    UpdateOriginEndpointRequest.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     UpdateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     UpdateOriginEndpointRequest.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     UpdateOriginEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -540,6 +552,7 @@ module Aws::MediaPackage
     UpdateOriginEndpointRequest.struct_class = Types::UpdateOriginEndpointRequest
 
     UpdateOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UpdateOriginEndpointResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: Authorization, location_name: "authorization"))
     UpdateOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
     UpdateOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     UpdateOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
