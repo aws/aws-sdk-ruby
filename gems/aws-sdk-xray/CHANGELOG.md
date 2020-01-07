@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-01-07)
+------------------
+
+* Feature - Documentation updates for xray
+
 1.21.0 (2019-10-23)
 ------------------
 

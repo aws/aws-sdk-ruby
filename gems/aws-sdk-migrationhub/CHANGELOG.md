@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-01-07)
+------------------
+
+* Feature - ListApplicationStates API provides a list of all application migration states
+
 1.19.0 (2019-11-20)
 ------------------
 

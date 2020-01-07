@@ -262,7 +262,7 @@ module Aws::XRay
     #   Specify the trace IDs of requests for which to retrieve segments.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::BatchGetTracesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -532,7 +532,7 @@ module Aws::XRay
     # Retrieves all active group details.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -565,7 +565,7 @@ module Aws::XRay
     # Retrieves all sampling rules.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetSamplingRulesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -612,7 +612,7 @@ module Aws::XRay
     # rules.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetSamplingStatisticSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -697,9 +697,13 @@ module Aws::XRay
     # Retrieves a document that describes services that process incoming
     # requests, and downstream services that they call as a result. Root
     # services process incoming requests and make calls to downstream
-    # services. Root services are applications that use the AWS X-Ray SDK.
-    # Downstream services can be other applications, AWS resources, HTTP web
-    # APIs, or SQL databases.
+    # services. Root services are applications that use the [AWS X-Ray
+    # SDK][1]. Downstream services can be other applications, AWS resources,
+    # HTTP web APIs, or SQL databases.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/xray/index.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start of the time frame for which to generate a graph.
@@ -714,7 +718,7 @@ module Aws::XRay
     #   The ARN of a group to generate a graph based on.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetServiceGraphResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -820,7 +824,7 @@ module Aws::XRay
     #   Aggregation period in seconds.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetTimeSeriesServiceStatisticsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -881,7 +885,7 @@ module Aws::XRay
     #   Trace IDs of requests for which to generate a service graph.
     #
     # @option params [String] :next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #
     # @return [Types::GetTraceGraphResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -953,9 +957,9 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Retrieves IDs and metadata for traces available for a specified time
-    # frame using an optional filter. To get the full traces, pass the trace
-    # IDs to `BatchGetTraces`.
+    # Retrieves IDs and annotations for traces available for a specified
+    # time frame using an optional filter. To get the full traces, pass the
+    # trace IDs to `BatchGetTraces`.
     #
     # A filter expression can target traced requests that hit specific
     # service nodes or edges, have errors, or come from a known user. For
@@ -1138,7 +1142,8 @@ module Aws::XRay
     #   * **Alias** - The name of the key. For example, `alias/MyKey`.
     #
     #   * **Key ID** - The KMS key ID of the key. For example,
-    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`. AWS X-Ray does not support
+    #     asymmetric CMKs.
     #
     #   * **ARN** - The full Amazon Resource Name of the key ID or alias. For
     #     example,
@@ -1223,13 +1228,13 @@ module Aws::XRay
       req.send_request(options)
     end
 
-    # Uploads segment documents to AWS X-Ray. The X-Ray SDK generates
+    # Uploads segment documents to AWS X-Ray. The [X-Ray SDK][1] generates
     # segment documents and sends them to the X-Ray daemon, which uploads
     # them in batches. A segment document can be a completed segment, an
     # in-progress segment, or an array of subsegments.
     #
     # Segments must include the following fields. For the full segment
-    # document schema, see [AWS X-Ray Segment Documents][1] in the *AWS
+    # document schema, see [AWS X-Ray Segment Documents][2] in the *AWS
     # X-Ray Developer Guide*.
     #
     # **Required Segment Document Fields**
@@ -1273,7 +1278,8 @@ module Aws::XRay
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
+    # [1]: https://docs.aws.amazon.com/xray/index.html
+    # [2]: https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
     #
     # @option params [required, Array<String>] :trace_segment_documents
     #   A string containing a JSON document defining one or more segments or
@@ -1415,7 +1421,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

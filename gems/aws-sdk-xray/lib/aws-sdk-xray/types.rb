@@ -123,7 +123,7 @@ module Aws::XRay
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesRequest AWS API Documentation
@@ -143,7 +143,7 @@ module Aws::XRay
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesResult AWS API Documentation
@@ -671,7 +671,7 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsRequest AWS API Documentation
@@ -686,7 +686,7 @@ module Aws::XRay
     #   @return [Array<Types::GroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetGroupsResult AWS API Documentation
@@ -705,7 +705,7 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesRequest AWS API Documentation
@@ -720,7 +720,7 @@ module Aws::XRay
     #   @return [Array<Types::SamplingRuleRecord>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingRulesResult AWS API Documentation
@@ -739,7 +739,7 @@ module Aws::XRay
     #       }
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesRequest AWS API Documentation
@@ -755,7 +755,7 @@ module Aws::XRay
     #   @return [Array<Types::SamplingStatisticSummary>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetSamplingStatisticSummariesResult AWS API Documentation
@@ -847,7 +847,7 @@ module Aws::XRay
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphRequest AWS API Documentation
@@ -881,7 +881,7 @@ module Aws::XRay
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphResult AWS API Documentation
@@ -936,7 +936,7 @@ module Aws::XRay
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsRequest AWS API Documentation
@@ -963,7 +963,7 @@ module Aws::XRay
     #   @return [Boolean]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTimeSeriesServiceStatisticsResult AWS API Documentation
@@ -988,7 +988,7 @@ module Aws::XRay
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphRequest AWS API Documentation
@@ -1004,7 +1004,7 @@ module Aws::XRay
     #   @return [Array<Types::Service>]
     #
     # @!attribute [rw] next_token
-    #   Pagination token. Not used.
+    #   Pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphResult AWS API Documentation
@@ -1078,8 +1078,8 @@ module Aws::XRay
     end
 
     # @!attribute [rw] trace_summaries
-    #   Trace IDs and metadata for traces that were found in the specified
-    #   time frame.
+    #   Trace IDs and annotations for traces that were found in the
+    #   specified time frame.
     #   @return [Array<Types::TraceSummary>]
     #
     # @!attribute [rw] approximate_time
@@ -1247,7 +1247,8 @@ module Aws::XRay
     #   * **Alias** - The name of the key. For example, `alias/MyKey`.
     #
     #   * **Key ID** - The KMS key ID of the key. For example,
-    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`. AWS X-Ray does not
+    #     support asymmetric CMKs.
     #
     #   * **ARN** - The full Amazon Resource Name of the key ID or alias.
     #     For example,
@@ -2168,11 +2169,11 @@ module Aws::XRay
     #   @return [Float]
     #
     # @!attribute [rw] has_fault
-    #   One or more of the segment documents has a 500 series error.
+    #   The root segment document has a 500 series error.
     #   @return [Boolean]
     #
     # @!attribute [rw] has_error
-    #   One or more of the segment documents has a 400 series error.
+    #   The root segment document has a 400 series error.
     #   @return [Boolean]
     #
     # @!attribute [rw] has_throttle

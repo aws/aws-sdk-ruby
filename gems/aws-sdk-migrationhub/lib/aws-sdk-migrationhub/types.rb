@@ -20,6 +20,32 @@ module Aws::MigrationHub
       include Aws::Structure
     end
 
+    # The state of an application discovered through Migration Hub import,
+    # the AWS Agentless Discovery Connector, or the AWS Application
+    # Discovery Agent.
+    #
+    # @!attribute [rw] application_id
+    #   The configurationId from the Application Discovery Service that
+    #   uniquely identifies an application.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_status
+    #   The current status of an application.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the application status was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ApplicationState AWS API Documentation
+    #
+    class ApplicationState < Struct.new(
+      :application_id,
+      :application_status,
+      :last_updated_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateCreatedArtifactRequest
     #   data as a hash:
     #
@@ -469,6 +495,57 @@ module Aws::MigrationHub
     #
     class InvalidInputException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListApplicationStatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_ids: ["ApplicationId"],
+    #         next_token: "Token",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] application_ids
+    #   The configurationIds from the Application Discovery Service that
+    #   uniquely identifies your applications.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the
+    #   call again using the returned token in `NextToken`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to be returned per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStatesRequest AWS API Documentation
+    #
+    class ListApplicationStatesRequest < Struct.new(
+      :application_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_state_list
+    #   A list of Applications that exist in Application Discovery Service.
+    #   @return [Array<Types::ApplicationState>]
+    #
+    # @!attribute [rw] next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the
+    #   call again using the returned token in `NextToken`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStatesResult AWS API Documentation
+    #
+    class ListApplicationStatesResult < Struct.new(
+      :application_state_list,
+      :next_token)
       include Aws::Structure
     end
 

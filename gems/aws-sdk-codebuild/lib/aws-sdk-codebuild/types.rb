@@ -1332,7 +1332,8 @@ module Aws::CodeBuild
     #   * `PARAMETER_STORE`\: An environment variable stored in Amazon EC2
     #     Systems Manager Parameter Store.
     #
-    #   * `PLAINTEXT`\: An environment variable in plain text format.
+    #   * `PLAINTEXT`\: An environment variable in plain text format. This
+    #     is the default value.
     #
     #   * `SECRETS_MANAGER`\: An environment variable stored in AWS Secrets
     #     Manager.
@@ -3591,6 +3592,7 @@ module Aws::CodeBuild
     #         privileged_mode_override: false,
     #         timeout_in_minutes_override: 1,
     #         queued_timeout_in_minutes_override: 1,
+    #         encryption_key_override: "NonEmptyString",
     #         idempotency_token: "String",
     #         logs_config_override: {
     #           cloud_watch_logs: {
@@ -3771,6 +3773,21 @@ module Aws::CodeBuild
     #   times out.
     #   @return [Integer]
     #
+    # @!attribute [rw] encryption_key_override
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the build project. The CMK key
+    #   encrypts the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name
+    #   `).
+    #   @return [String]
+    #
     # @!attribute [rw] idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
@@ -3831,6 +3848,7 @@ module Aws::CodeBuild
       :privileged_mode_override,
       :timeout_in_minutes_override,
       :queued_timeout_in_minutes_override,
+      :encryption_key_override,
       :idempotency_token,
       :logs_config_override,
       :registry_credential_override,

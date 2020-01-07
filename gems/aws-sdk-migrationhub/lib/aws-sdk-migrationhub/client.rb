@@ -641,6 +641,52 @@ module Aws::MigrationHub
       req.send_request(options)
     end
 
+    # Lists all the migration statuses for your applications. If you use the
+    # optional `ApplicationIds` parameter, only the migration statuses for
+    # those applications will be returned.
+    #
+    # @option params [Array<String>] :application_ids
+    #   The configurationIds from the Application Discovery Service that
+    #   uniquely identifies your applications.
+    #
+    # @option params [String] :next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the call
+    #   again using the returned token in `NextToken`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to be returned per page.
+    #
+    # @return [Types::ListApplicationStatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationStatesResult#application_state_list #application_state_list} => Array&lt;Types::ApplicationState&gt;
+    #   * {Types::ListApplicationStatesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_states({
+    #     application_ids: ["ApplicationId"],
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_state_list #=> Array
+    #   resp.application_state_list[0].application_id #=> String
+    #   resp.application_state_list[0].application_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_state_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStates AWS API Documentation
+    #
+    # @overload list_application_states(params = {})
+    # @param [Hash] params ({})
+    def list_application_states(params = {}, options = {})
+      req = build_request(:list_application_states, params)
+      req.send_request(options)
+    end
+
     # Lists the created artifacts attached to a given migration task in an
     # update stream. This API has the following traits:
     #
@@ -1041,7 +1087,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

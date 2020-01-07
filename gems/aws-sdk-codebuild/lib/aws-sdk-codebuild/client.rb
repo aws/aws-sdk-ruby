@@ -2395,6 +2395,19 @@ module Aws::CodeBuild
     #   The number of minutes a build is allowed to be queued before it times
     #   out.
     #
+    # @option params [String] :encryption_key_override
+    #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
+    #   that overrides the one specified in the build project. The CMK key
+    #   encrypts the build output artifacts.
+    #
+    #   <note markdown="1"> You can use a cross-account KMS key to encrypt the build output
+    #   artifacts if your service role has permission to that key.
+    #
+    #    </note>
+    #
+    #   You can specify either the Amazon Resource Name (ARN) of the CMK or,
+    #   if available, the CMK's alias (using the format `alias/alias-name `).
+    #
     # @option params [String] :idempotency_token
     #   A unique, case sensitive identifier you provide to ensure the
     #   idempotency of the StartBuild request. The token is included in the
@@ -2514,6 +2527,7 @@ module Aws::CodeBuild
     #     privileged_mode_override: false,
     #     timeout_in_minutes_override: 1,
     #     queued_timeout_in_minutes_override: 1,
+    #     encryption_key_override: "NonEmptyString",
     #     idempotency_token: "String",
     #     logs_config_override: {
     #       cloud_watch_logs: {
@@ -3267,7 +3281,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

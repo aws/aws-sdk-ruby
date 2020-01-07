@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2020-01-07)
+------------------
+
+* Feature - Add encryption key override to StartBuild API in AWS CodeBuild.
+
 1.46.0 (2019-12-13)
 ------------------
 

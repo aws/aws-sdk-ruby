@@ -13,6 +13,9 @@ module Aws::MigrationHub
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ApplicationId = Shapes::StringShape.new(name: 'ApplicationId')
+    ApplicationIds = Shapes::ListShape.new(name: 'ApplicationIds')
+    ApplicationState = Shapes::StructureShape.new(name: 'ApplicationState')
+    ApplicationStateList = Shapes::ListShape.new(name: 'ApplicationStateList')
     ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
     AssociateCreatedArtifactRequest = Shapes::StructureShape.new(name: 'AssociateCreatedArtifactRequest')
     AssociateCreatedArtifactResult = Shapes::StructureShape.new(name: 'AssociateCreatedArtifactResult')
@@ -47,6 +50,8 @@ module Aws::MigrationHub
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     LatestResourceAttributeList = Shapes::ListShape.new(name: 'LatestResourceAttributeList')
+    ListApplicationStatesRequest = Shapes::StructureShape.new(name: 'ListApplicationStatesRequest')
+    ListApplicationStatesResult = Shapes::StructureShape.new(name: 'ListApplicationStatesResult')
     ListCreatedArtifactsRequest = Shapes::StructureShape.new(name: 'ListCreatedArtifactsRequest')
     ListCreatedArtifactsResult = Shapes::StructureShape.new(name: 'ListCreatedArtifactsResult')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
@@ -90,6 +95,15 @@ module Aws::MigrationHub
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ApplicationIds.member = Shapes::ShapeRef.new(shape: ApplicationId)
+
+    ApplicationState.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
+    ApplicationState.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
+    ApplicationState.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "LastUpdatedTime"))
+    ApplicationState.struct_class = Types::ApplicationState
+
+    ApplicationStateList.member = Shapes::ShapeRef.new(shape: ApplicationState)
 
     AssociateCreatedArtifactRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     AssociateCreatedArtifactRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
@@ -181,6 +195,15 @@ module Aws::MigrationHub
     InvalidInputException.struct_class = Types::InvalidInputException
 
     LatestResourceAttributeList.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
+
+    ListApplicationStatesRequest.add_member(:application_ids, Shapes::ShapeRef.new(shape: ApplicationIds, location_name: "ApplicationIds"))
+    ListApplicationStatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationStatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListApplicationStatesRequest.struct_class = Types::ListApplicationStatesRequest
+
+    ListApplicationStatesResult.add_member(:application_state_list, Shapes::ShapeRef.new(shape: ApplicationStateList, location_name: "ApplicationStateList"))
+    ListApplicationStatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationStatesResult.struct_class = Types::ListApplicationStatesResult
 
     ListCreatedArtifactsRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     ListCreatedArtifactsRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
@@ -447,6 +470,25 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+      end)
+
+      api.add_operation(:list_application_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationStatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationStatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_created_artifacts, Seahorse::Model::Operation.new.tap do |o|
