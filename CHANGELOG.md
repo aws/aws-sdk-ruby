@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::XRay - Updated the documentation for AWS X-Ray.
+
 2.11.423 (2020-01-06)
 ------------------
 
