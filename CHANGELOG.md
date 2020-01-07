@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.424 (2020-01-07)
+------------------
+
 * Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
