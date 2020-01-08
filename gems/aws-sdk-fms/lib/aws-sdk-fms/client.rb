@@ -765,6 +765,38 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Retrieves the list of tags for the specified AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to return tags for. The
+    #   Firewall Manager policy is the only AWS resource that supports
+    #   tagging, so this ARN is a policy ARN..
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tag_list #=> Array
+    #   resp.tag_list[0].key #=> String
+    #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Designates the IAM role and Amazon Simple Notification Service (SNS)
     # topic that AWS Firewall Manager uses to record SNS logs.
     #
@@ -822,6 +854,9 @@ module Aws::FMS
     # @option params [required, Types::Policy] :policy
     #   The details of the AWS Firewall Manager policy to be created.
     #
+    # @option params [Array<Types::Tag>] :tag_list
+    #   The tags to add to the AWS resource.
+    #
     # @return [Types::PutPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPolicyResponse#policy #policy} => Types::Policy
@@ -842,8 +877,8 @@ module Aws::FMS
     #       resource_type_list: ["ResourceType"],
     #       resource_tags: [
     #         {
-    #           key: "TagKey", # required
-    #           value: "TagValue",
+    #           key: "ResourceTagKey", # required
+    #           value: "ResourceTagValue",
     #         },
     #       ],
     #       exclude_resource_tags: false, # required
@@ -855,6 +890,12 @@ module Aws::FMS
     #         "ACCOUNT" => ["CustomerPolicyScopeId"],
     #       },
     #     },
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -889,6 +930,67 @@ module Aws::FMS
       req.send_request(options)
     end
 
+    # Adds one or more tags to an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN is
+    #   a policy ARN.
+    #
+    # @option params [required, Array<Types::Tag>] :tag_list
+    #   The tags to add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_list: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN is
+    #   a policy ARN.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -902,7 +1004,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

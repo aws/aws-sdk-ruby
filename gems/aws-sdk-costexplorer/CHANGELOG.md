@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-01-08)
+------------------
+
+* Feature - Documentation updates for CreateCostCategoryDefinition and UpdateCostCategoryDefinition API
+
 1.35.0 (2020-01-02)
 ------------------
 

@@ -20,7 +20,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -67,7 +67,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -105,7 +105,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -175,7 +175,7 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -391,6 +391,13 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] rules
+    #   `CreateCostCategoryDefinition` supports dimensions, Tags, and nested
+    #   expressions. Currently the only dimensions supported is
+    #   `LINKED_ACCOUNT`.
+    #
+    #   Root level `OR` is not supported. We recommend you create a separate
+    #   rule instead.
+    #
     #   Rules are processed in order. If there are multiple rules that match
     #   the line item, then the first rule to match is used to determine
     #   that Cost Category value.
@@ -589,7 +596,7 @@ module Aws::CostExplorer
     end
 
     # @!attribute [rw] cost_category
-    #   <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    #   <i> <b>Cost Category is in public beta for AWS Billing and Cost
     #   Management and is subject to change. Your use of Cost Categories is
     #   subject to the Beta Service Participation terms of the <a
     #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -1048,7 +1055,7 @@ module Aws::CostExplorer
     #   @return [Types::TagValues]
     #
     # @!attribute [rw] cost_categories
-    #   <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    #   <i> <b>Cost Category is in public beta for AWS Billing and Cost
     #   Management and is subject to change. Your use of Cost Categories is
     #   subject to the Beta Service Participation terms of the <a
     #   href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -4473,6 +4480,13 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] rules
+    #   `UpdateCostCategoryDefinition` supports dimensions, Tags, and nested
+    #   expressions. Currently the only dimensions supported is
+    #   `LINKED_ACCOUNT`.
+    #
+    #   Root level `OR` is not supported. We recommend you create a separate
+    #   rule instead.
+    #
     #   Rules are processed in order. If there are multiple rules that match
     #   the line item, then the first rule to match is used to determine
     #   that Cost Category value.

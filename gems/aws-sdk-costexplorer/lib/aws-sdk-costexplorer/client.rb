@@ -264,7 +264,7 @@ module Aws::CostExplorer
 
     # @!group API Operations
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -279,6 +279,13 @@ module Aws::CostExplorer
     #   The rule schema version in this particular Cost Category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
+    #   `CreateCostCategoryDefinition` supports dimensions, Tags, and nested
+    #   expressions. Currently the only dimensions supported is
+    #   `LINKED_ACCOUNT`.
+    #
+    #   Root level `OR` is not supported. We recommend you create a separate
+    #   rule instead.
+    #
     #   Rules are processed in order. If there are multiple rules that match
     #   the line item, then the first rule to match is used to determine that
     #   Cost Category value.
@@ -341,7 +348,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -378,7 +385,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -2432,7 +2439,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -2486,7 +2493,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # <i> <b>Cost Category is in preview release for AWS Billing and Cost
+    # <i> <b>Cost Category is in public beta for AWS Billing and Cost
     # Management and is subject to change. Your use of Cost Categories is
     # subject to the Beta Service Participation terms of the <a
     # href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>
@@ -2504,6 +2511,13 @@ module Aws::CostExplorer
     #   The rule schema version in this particular Cost Category.
     #
     # @option params [required, Array<Types::CostCategoryRule>] :rules
+    #   `UpdateCostCategoryDefinition` supports dimensions, Tags, and nested
+    #   expressions. Currently the only dimensions supported is
+    #   `LINKED_ACCOUNT`.
+    #
+    #   Root level `OR` is not supported. We recommend you create a separate
+    #   rule instead.
+    #
     #   Rules are processed in order. If there are multiple rules that match
     #   the line item, then the first rule to match is used to determine that
     #   Cost Category value.
@@ -2579,7 +2593,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

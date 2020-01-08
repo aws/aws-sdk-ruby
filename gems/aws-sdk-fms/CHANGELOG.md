@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-01-08)
+------------------
+
+* Feature - AWS Firewall Manager now supports tagging, and tag-based access control, of policies.
+
 1.20.0 (2019-10-23)
 ------------------
 

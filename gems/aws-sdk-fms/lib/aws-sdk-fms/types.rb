@@ -640,6 +640,37 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to return tags for.
+    #   The Firewall Manager policy is the only AWS resource that supports
+    #   tagging, so this ARN is a policy ARN..
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tag_list
+    #   The tags associated with the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tag_list)
+      include Aws::Structure
+    end
+
     # An AWS Firewall Manager policy.
     #
     # @note When making an API call, you may pass Policy
@@ -657,8 +688,8 @@ module Aws::FMS
     #         resource_type_list: ["ResourceType"],
     #         resource_tags: [
     #           {
-    #             key: "TagKey", # required
-    #             value: "TagValue",
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue",
     #           },
     #         ],
     #         exclude_resource_tags: false, # required
@@ -968,8 +999,8 @@ module Aws::FMS
     #           resource_type_list: ["ResourceType"],
     #           resource_tags: [
     #             {
-    #               key: "TagKey", # required
-    #               value: "TagValue",
+    #               key: "ResourceTagKey", # required
+    #               value: "ResourceTagValue",
     #             },
     #           ],
     #           exclude_resource_tags: false, # required
@@ -981,16 +1012,27 @@ module Aws::FMS
     #             "ACCOUNT" => ["CustomerPolicyScopeId"],
     #           },
     #         },
+    #         tag_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy
     #   The details of the AWS Firewall Manager policy to be created.
     #   @return [Types::Policy]
     #
+    # @!attribute [rw] tag_list
+    #   The tags to add to the AWS resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PutPolicyRequest AWS API Documentation
     #
     class PutPolicyRequest < Struct.new(
-      :policy)
+      :policy,
+      :tag_list)
       include Aws::Structure
     end
 
@@ -1040,8 +1082,8 @@ module Aws::FMS
     #   data as a hash:
     #
     #       {
-    #         key: "TagKey", # required
-    #         value: "TagValue",
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue",
     #       }
     #
     # @!attribute [rw] key
@@ -1124,6 +1166,106 @@ module Aws::FMS
       :managed_service_data)
       include Aws::Structure
     end
+
+    # A collection of key:value pairs associated with an AWS resource. The
+    # key:value pair can be anything you define. Typically, the tag key
+    # represents a category (such as "environment") and the tag value
+    # represents a specific value within that category (such as "test,"
+    # "development," or "production"). You can add up to 50 tags to each
+    # AWS resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Part of the key:value pair that defines a tag. You can use a tag key
+    #   to describe a category of information, such as "customer." Tag
+    #   keys are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   Part of the key:value pair that defines a tag. You can use a tag
+    #   value to describe a specific value within a category, such as
+    #   "companyA" or "companyB." Tag values are case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_list: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN
+    #   is a policy ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   The tags to add to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. The Firewall Manager
+    #   policy is the only AWS resource that supports tagging, so this ARN
+    #   is a policy ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end
