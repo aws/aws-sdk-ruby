@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.425 (2020-01-08)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
