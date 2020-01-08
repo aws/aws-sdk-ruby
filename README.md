@@ -97,8 +97,6 @@ If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Searc
 
 The GitHub issues are intended for bug reports and feature requests. For help and questions with using `aws-sdk-ruby` please make use of the resources listed in the Getting Help section.
 
-[`FEATURE_REQUEST.md`](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE\_REQUESTS.md) in particular is a good way to signal your interest in a feature or issue. There are limited resources available for handling issues and by keeping the list of open issues lean we can respond in a timely manner.
-
 ## Configuration
 
 You will need to configure credentials and a region, either in configuration files or environment variables, to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.
