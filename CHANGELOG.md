@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::FMS - Updated the API, and documentation for Firewall Management Service.
+
+* Feature - Aws::Translate - Updated the API, and documentation for Amazon Translate.
+
 2.11.424 (2020-01-07)
 ------------------
 
