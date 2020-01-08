@@ -643,7 +643,10 @@
     "models": "ssm/2014-11-06"
   },
   "SSO": {
-    "models": "sso/2019-06-10"
+    "models": "sso/2019-06-10",
+    "addPlugins": [
+      "Aws::SSO::Plugins::ContentType"
+    ]
   },
   "SSOOIDC": {
     "models": "sso-oidc/2019-06-10"
