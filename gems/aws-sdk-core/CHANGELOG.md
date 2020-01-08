@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reuse connections even if `http_wire_trace` is true.
+
 3.86.0 (2019-12-13)
 ------------------
 
