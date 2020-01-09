@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchLogs - Updated the documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
 2.11.425 (2020-01-08)
 ------------------
 
