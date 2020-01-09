@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.87.0 (2020-01-09)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Issue - Reuse connections even if `http_wire_trace` is true.
 
 3.86.0 (2019-12-13)

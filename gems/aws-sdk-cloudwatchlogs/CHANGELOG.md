@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-01-09)
+------------------
+
+* Feature - Documentation updates for logs
+
 1.27.0 (2019-11-15)
 ------------------
 

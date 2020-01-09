@@ -975,6 +975,36 @@ module Aws::STS
     #   * {Types::AssumeRoleWithSAMLResponse#audience #audience} => String
     #   * {Types::AssumeRoleWithSAMLResponse#name_qualifier #name_qualifier} => String
     #
+    #
+    # @example Example: To assume a role using a SAML assertion
+    #
+    #   resp = client.assume_role_with_saml({
+    #     duration_seconds: 3600, 
+    #     principal_arn: "arn:aws:iam::123456789012:saml-provider/SAML-test", 
+    #     role_arn: "arn:aws:iam::123456789012:role/TestSaml", 
+    #     saml_assertion: "VERYLONGENCODEDASSERTIONEXAMPLExzYW1sOkF1ZGllbmNlPmJsYW5rPC9zYW1sOkF1ZGllbmNlPjwvc2FtbDpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDpDb25kaXRpb25zPjxzYW1sOlN1YmplY3Q+PHNhbWw6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOm5hbWVpZC1mb3JtYXQ6dHJhbnNpZW50Ij5TYW1sRXhhbXBsZTwvc2FtbDpOYW1lSUQ+PHNhbWw6U3ViamVjdENvbmZpcm1hdGlvbiBNZXRob2Q9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpjbTpiZWFyZXIiPjxzYW1sOlN1YmplY3RDb25maXJtYXRpb25EYXRhIE5vdE9uT3JBZnRlcj0iMjAxOS0xMS0wMVQyMDoyNTowNS4xNDVaIiBSZWNpcGllbnQ9Imh0dHBzOi8vc2lnbmluLmF3cy5hbWF6b24uY29tL3NhbWwiLz48L3NhbWw6U3ViamVjdENvbmZpcm1hdGlvbj48L3NhbWw6U3ViamVjdD48c2FtbDpBdXRoblN0YXRlbWVudCBBdXRoPD94bWwgdmpSZXNwb25zZT4=", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     assumed_role_user: {
+    #       arn: "arn:aws:sts::123456789012:assumed-role/TestSaml", 
+    #       assumed_role_id: "ARO456EXAMPLE789:TestSaml", 
+    #     }, 
+    #     audience: "https://signin.aws.amazon.com/saml", 
+    #     credentials: {
+    #       access_key_id: "ASIAV3ZUEFP6EXAMPLE", 
+    #       expiration: Time.parse("2019-11-01T20:26:47Z"), 
+    #       secret_access_key: "8P+SQvWIuLnKhh8d++jpw0nNmQRBZvNEXAMPLEKEY", 
+    #       session_token: "IQoJb3JpZ2luX2VjEOz////////////////////wEXAMPLEtMSJHMEUCIDoKK3JH9uGQE1z0sINr5M4jk+Na8KHDcCYRVjJCZEvOAiEA3OvJGtw1EcViOleS2vhs8VdCKFJQWPQrmGdeehM4IC1NtBmUpp2wUE8phUZampKsburEDy0KPkyQDYwT7WZ0wq5VSXDvp75YU9HFvlRd8Tx6q6fE8YQcHNVXAkiY9q6d+xo0rKwT38xVqr7ZD0u0iPPkUL64lIZbqBAz+scqKmlzm8FDrypNC9Yjc8fPOLn9FX9KSYvKTr4rvx3iSIlTJabIQwj2ICCR/oLxBA==", 
+    #     }, 
+    #     issuer: "https://integ.example.com/idp/shibboleth", 
+    #     name_qualifier: "SbdGOnUkh1i4+EXAMPLExL/jEvs=", 
+    #     packed_policy_size: 6, 
+    #     subject: "SamlExample", 
+    #     subject_type: "transient", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.assume_role_with_saml({
@@ -2101,7 +2131,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.86.0'
+      context[:gem_version] = '3.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

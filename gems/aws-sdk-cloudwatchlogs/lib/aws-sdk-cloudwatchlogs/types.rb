@@ -22,12 +22,14 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. This must be a symmetric CMK. For more information, see
+    #   [Amazon Resource Names - AWS Key Management Service (AWS KMS)][1]
+    #   and [Using Symmetric and Asymmetric Keys][2].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
@@ -1377,7 +1379,9 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # The sequence token is not valid.
+    # The sequence token is not valid. You can get the correct sequence
+    # token in the `expectedSequenceToken` field in the
+    # `InvalidSequenceTokenException` message.
     #
     # @!attribute [rw] expected_sequence_token
     #   @return [String]
