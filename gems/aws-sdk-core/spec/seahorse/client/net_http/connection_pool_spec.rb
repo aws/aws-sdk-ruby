@@ -23,6 +23,14 @@ module Seahorse
             expect(pool.send(:http_proxy_parts)).to eq ["proxy.com", 8080, ":@/username", "password:@/"]
           end
         end
+
+        describe ".for" do
+          it "returns the same connection pool" do
+            first_pool = described_class.for(:http_wire_trace => true)
+            second_pool = described_class.for(:http_wire_trace => true)
+            expect(first_pool).to eq second_pool
+          end
+        end
       end
     end
   end

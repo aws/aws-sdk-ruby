@@ -18,6 +18,7 @@ module Seahorse
 
         @pools_mutex = Mutex.new
         @pools = {}
+        @default_logger = Logger.new($stdout)
 
         OPTIONS = {
           http_proxy: nil,
@@ -231,7 +232,7 @@ module Seahorse
           # @return [Hash]
           def pool_options options
             wire_trace = !!options[:http_wire_trace]
-            logger = options[:logger] || Logger.new($stdout) if wire_trace
+            logger = options[:logger] || @default_logger if wire_trace
             verify_peer = options.key?(:ssl_verify_peer) ?
               !!options[:ssl_verify_peer] : true
             {
