@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.427 (2020-01-10)
+------------------
+
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
