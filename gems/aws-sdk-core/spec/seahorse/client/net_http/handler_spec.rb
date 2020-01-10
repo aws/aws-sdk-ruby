@@ -96,6 +96,14 @@ module Seahorse
             expect(handler_pool.http_idle_timeout).to eq(123)
           end
 
+          it 'configures the Net::HTTP#keep_alive_timeout' do
+            config.http_idle_timeout = 123
+            handler_pool.session_for(URI.parse('http://foo.com')) do |http|
+              skip 'not supported' unless http.respond_to?(:keep_alive_timeout)
+              expect(http.keep_alive_timeout).to eq(123)
+            end
+          end
+
           it 'configures the pool#http_wire_trace' do
             config.http_wire_trace = true
             expect(handler_pool.http_wire_trace).to eq(true)

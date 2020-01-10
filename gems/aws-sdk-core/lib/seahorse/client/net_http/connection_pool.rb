@@ -280,6 +280,7 @@ module Seahorse
           http = ExtendedSession.new(Net::HTTP.new(*args.compact))
           http.set_debug_output(logger) if http_wire_trace?
           http.open_timeout = http_open_timeout
+          http.keep_alive_timeout = http_idle_timeout if http.respond_to?(:keep_alive_timeout=)
 
           if endpoint.scheme == 'https'
             http.use_ssl = true
