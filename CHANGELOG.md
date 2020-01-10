@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::Transfer - Updated the API, and documentation for AWS Transfer for SFTP.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
 2.11.426 (2020-01-09)
 ------------------
 
