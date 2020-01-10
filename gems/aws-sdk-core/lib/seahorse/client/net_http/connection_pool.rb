@@ -302,12 +302,12 @@ module Seahorse
         # Removes stale sessions from the pool.  This method *must* be called
         # @note **Must** be called behind a `@pool_mutex` synchronize block.
         def _clean
-          now = Time.now
+          now = Aws::Util.monotonic_milliseconds
           @pool.each_pair do |endpoint,sessions|
             sessions.delete_if do |session|
               if
                 session.last_used.nil? or
-                now - session.last_used > http_idle_timeout
+                now - session.last_used > http_idle_timeout * 1000
               then
                 session.finish
                 true
@@ -326,7 +326,7 @@ module Seahorse
             @http = http
           end
 
-          # @return [Time,nil]
+          # @return [Integer,nil]
           attr_reader :last_used
 
           def __getobj__
@@ -340,7 +340,7 @@ module Seahorse
           # Sends the request and tracks that this session has been used.
           def request(*args, &block)
             @http.request(*args, &block)
-            @last_used = Time.now
+            @last_used = Aws::Util.monotonic_milliseconds
           end
 
           # Attempts to close/finish the session without raising an error.

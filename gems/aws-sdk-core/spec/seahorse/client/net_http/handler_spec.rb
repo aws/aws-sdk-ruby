@@ -31,7 +31,7 @@ module Seahorse
         describe '#session_for' do
 
           it 're-uses session for endpoints that share port, scheme and host' do
-            session = double('http-session', last_used: Time.now).as_null_object
+            session = double('http-session', last_used: Aws::Util.monotonic_milliseconds).as_null_object
             pool = ConnectionPool.for({})
             expect(pool).to receive(:start_session).
               exactly(1).times.
