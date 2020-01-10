@@ -306,6 +306,8 @@ module Aws
       #   multipart uploads. This option is not used if the file is smaller than
       #   `:multipart_threshold`.
       #
+      # @yieldparam [Integer] # of bytes read from disk during upload
+      #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
       #   aborted and this error is raised.  The raised error has a `#errors`
@@ -315,7 +317,7 @@ module Aws
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
       #
-      def upload_file(source, options = {})
+      def upload_file(source, options = {}, &block)
         uploading_options = options.dup
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
@@ -323,7 +325,8 @@ module Aws
         )
         response = uploader.upload(
           source,
-          uploading_options.merge(bucket: bucket_name, key: key)
+          uploading_options.merge(bucket: bucket_name, key: key),
+          &block
         )
         yield response if block_given?
         true

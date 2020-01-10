@@ -52,11 +52,22 @@ module Aws
           expect(part.read(15)).to eq(nil)
         end
 
-        it 'returns "" when #read is called without bytes from part end' do
-          part = FilePart.new(source: path, offset: 0, size: 15)
-          expect(part.read).to eq('The quick brown')
-          expect(part.read).to eq('')
-        end
+        describe 'with block' do
+
+          it 'yields the number of bytes read for a partial read' do
+            bytes_read = 0
+            read_block = lambda{|bytes| bytes_read += bytes}
+            part = FilePart.new(source:path, offset:0, size:15, &read_block)
+            part.read(10)
+            expect(bytes_read).to eq(10)
+          end
+          it 'yields the remaining bytes read when #read called with num bytes past end' do
+            bytes_read = 0
+            read_block = lambda{|bytes| bytes_read += bytes}
+            part = FilePart.new(source:path, offset:0, size:15, &read_block)
+            part.read(100)
+            expect(bytes_read).to eq(15)
+          end
       end
 
       describe '#rewind' do

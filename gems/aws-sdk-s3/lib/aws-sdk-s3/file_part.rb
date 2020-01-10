@@ -14,7 +14,7 @@ module Aws
       #
       # @option options [required, Integer] :size The maximum number of bytes to
       #   read from the `:offset`.
-      def initialize(options = {})
+      def initialize(options = {}, &block)
         @source = options[:source]
         @first_byte = options[:offset]
         @last_byte = @first_byte + options[:size]
@@ -61,7 +61,6 @@ module Aws
       def read_from_file(bytes, output_buffer)
         length = [remaining_bytes, *bytes].min
         data   = @file.read(length, output_buffer)
-
         @position += data ? data.bytesize : 0
 
         data.to_s unless bytes && (data.nil? || data.empty?)

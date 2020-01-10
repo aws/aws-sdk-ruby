@@ -28,9 +28,9 @@ module Aws
       # @option options [required, String] :bucket The bucket to upload to.
       # @option options [required, String] :key The key for the object.
       # @return [void]
-      def upload(source, options = {})
+      def upload(source, options = {}, &block)
         if File.size(source) >= multipart_threshold
-          MultipartFileUploader.new(@options).upload(source, options)
+          MultipartFileUploader.new(@options).upload(source, options, &block)
         else
           put_object(source, options)
         end
