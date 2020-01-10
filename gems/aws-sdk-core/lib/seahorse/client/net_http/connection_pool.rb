@@ -339,8 +339,8 @@ module Seahorse
 
           # Sends the request and tracks that this session has been used.
           def request(*args, &block)
-            @last_used = Time.now
             @http.request(*args, &block)
+            @last_used = Time.now
           end
 
           # Attempts to close/finish the session without raising an error.

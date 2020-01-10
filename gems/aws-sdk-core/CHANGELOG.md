@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix erroneously reaped sessions from `Seahorse::Client::NetHttp::ConnectionPool` due to bad `last_used` time calculation
+
 3.89.0 (2020-01-13)
 ------------------
 

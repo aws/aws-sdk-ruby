@@ -47,6 +47,20 @@ module Seahorse
             expect(sessions).to eq([session, session, session])
           end
 
+          it 're-uses session for slow request that are taking more time than the configured idle timeout' do
+            session = double('http-session').as_null_object
+            session.stub(:request) { sleep 2 }
+            pool = ConnectionPool.for(http_idle_timeout: 1)
+            expect(pool).to receive(:start_session).
+              exactly(1).times.
+              and_return(ConnectionPool::ExtendedSession.new(session))
+            endpoint = URI.parse('http://foo.com')
+            sessions = []
+            pool.session_for(endpoint) { |http| http.request; sessions << http }
+            pool.session_for(endpoint) { |http| http.request; sessions << http }
+            expect(sessions).to eq([session, session])
+          end
+
         end
 
         describe '#pool' do
