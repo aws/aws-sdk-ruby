@@ -132,7 +132,7 @@ module Seahorse
           nil
         end
 
-        # Closes and removes removes all sessions from the pool.
+        # Closes and removes all sessions from the pool.
         # If empty! is called while there are outstanding requests they may
         # get checked back into the pool, leaving the pool in a non-empty
         # state.
@@ -166,16 +166,16 @@ module Seahorse
           #   requests through.  Formatted like 'http://proxy.com:123'.
           #
           # @option options [Float] :http_open_timeout (15) The number of
-          #   seconds to wait when opening a HTTP session before rasing a
+          #   seconds to wait when opening an HTTP session before raising a
           #   `Timeout::Error`.
           #
           # @option options [Integer] :http_read_timeout (60) The default
           #   number of seconds to wait for response data.  This value can
           #   safely be set
-          #   per-request on the session yeidled by {#session_for}.
+          #   per-request on the session yielded by {#session_for}.
           #
           # @option options [Float] :http_idle_timeout (5) The number of
-          #   seconds a connection is allowed to sit idble before it is
+          #   seconds a connection is allowed to sit idle before it is
           #   considered stale.  Stale connections are closed and removed
           #   from the pool before making a request.
           #
@@ -184,7 +184,7 @@ module Seahorse
           #   request body.  This option has no effect unless the request has
           #   "Expect" header set to "100-continue".  Defaults to `nil` which
           #   disables this behaviour.  This value can safely be set per
-          #   request on the session yeidled by {#session_for}.
+          #   request on the session yielded by {#session_for}.
           #
           # @option options [Boolean] :http_wire_trace (false) When `true`,
           #   HTTP debug output will be sent to the `:logger`.
@@ -201,13 +201,13 @@ module Seahorse
           # @option options [String] :ssl_ca_bundle Full path to the SSL
           #   certificate authority bundle file that should be used when
           #   verifying peer certificates.  If you do not pass
-          #   `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+          #   `:ssl_ca_bundle` or `:ssl_ca_directory` the system default
           #   will be used if available.
           #
           # @option options [String] :ssl_ca_directory Full path of the
           #   directory that contains the unbundled SSL certificate
           #   authority files for verifying peer certificates.  If you do
-          #   not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+          #   not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the
           #   system default will be used if available.
           #
           # @return [ConnectionPool]
@@ -218,7 +218,7 @@ module Seahorse
             end
           end
 
-          # @return [Array<ConnectionPool>] Returns a list of of the
+          # @return [Array<ConnectionPool>] Returns a list of the
           #   constructed connection pools.
           def pools
             @pools_mutex.synchronize do
@@ -316,7 +316,7 @@ module Seahorse
           end
         end
 
-        # Helper methods extended onto Net::HTTPSession objects opend by the
+        # Helper methods extended onto Net::HTTPSession objects opened by the
         # connection pool.
         # @api private
         class ExtendedSession < Delegator
