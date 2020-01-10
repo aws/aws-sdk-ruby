@@ -1,0 +1,359 @@
+{
+  "service": {
+    "actions": {
+      "GetSummary": {
+        "request": { "operation": "GetBand" }
+      },
+      "BookConcerts": {
+        "request": { "operation": "BookConcerts" },
+        "resource": {
+          "type": "Concert",
+          "identifiers": [
+            { "target": "Id", "source": "response", "path": "Concerts[].ConcertId" }
+          ],
+          "path": "Concerts[]"
+        }
+      },
+      "CreateBand": {
+        "request": { "operation": "CreateBand" },
+        "resource": {
+          "type": "Band",
+          "identifiers": [
+            { "target": "Name", "source": "requestParameter", "path": "BandName" }
+          ],
+          "path": "Band"
+        }
+      }
+    },
+    "has": {
+      "Band": {
+        "resource": {
+          "type": "Band",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "EmptyResource": {
+        "resource": { "type": "EmptyResource" }
+      }
+    },
+    "hasMany": {
+      "Bands": {
+        "request": { "operation": "ListBands" },
+        "resource": {
+          "type": "Band",
+          "identifiers": [
+            { "target": "Name", "source": "response", "path": "Bands[].BandName" }
+          ],
+          "path": "Bands[]"
+        }
+      },
+      "TopFiveBands": {
+        "request": { "operation": "ListTopBands" },
+        "resource": {
+          "type": "Band",
+          "identifiers": [
+            { "target": "Name", "source": "response", "path": "TopFive.BandNames[]" }
+          ]
+        }
+      },
+      "Tags": {
+        "request": { "operation": "DescribeTags" },
+        "resource": {
+          "type": "Tag",
+          "identifiers": [
+            { "target": "ResourceId", "source": "response", "path": "Tags[].ResourceId" },
+            { "target": "Key", "source": "response", "path": "Tags[].Key" },
+            { "target": "Value", "source": "response", "path": "Tags[].Value" }
+          ],
+          "path": "Tags[]"
+        }
+      }
+    }
+  },
+  "resources": {
+    "Band": {
+      "identifiers": [
+        { "name": "Name", "memberName": "BandName" }
+      ],
+      "shape": "Band",
+      "load": {
+        "request": {
+          "operation": "GetBand",
+          "params": [
+            { "target": "BandName", "source": "identifier", "name": "Name" }
+          ]
+        },
+        "path": "Band"
+      },
+      "actions": {
+        "BookConcerts": {
+          "request": { "operation": "BookConcerts" },
+          "resource": {
+            "type": "Concert",
+            "identifiers": [
+              { "target": "Id", "source": "response", "path": "Concerts[].ConcertId" }
+            ],
+            "path": "Concerts[]"
+          }
+        },
+        "CreateCoverBand": {
+          "request": { 
+            "operation": "CreateBand",
+            "params": [
+              { "target": "CoverBandFor", "source": "identifier", "name": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "Band",
+            "identifiers": [
+              { "target": "Name", "source": "requestParameter", "path": "BandName" }
+            ],
+            "path": "Band"
+          }
+        },
+        "CreateTags": {
+          "request": {
+            "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Name" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "Update": {
+          "request": { 
+            "operation": "UpdateBand",
+            "params": [
+              { "target": "BandName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteBands",
+            "params": [
+              { "target": "Bands[].BandName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteBands",
+            "params": [
+              { "target": "Bands[].BandName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "CreateTags": {
+          "request": {
+            "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[]", "source": "identifier", "name": "Name"}
+            ]
+          }
+        }
+      },
+      "has": {
+        "Fan": {
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "input" }
+            ]
+          }
+        },
+        "BiggestFan": {
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "data", "path": "BiggestFans[0].Name" }
+            ],
+            "path": "BiggestFans[0]"
+          }
+        },
+        "FanClubPresident": {
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "data", "path": "FanClubPresident" }
+            ]
+          }
+        },
+        "FanClubLeaders": {
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "data", "path": "BiggestFans[].Name" }
+            ],
+            "path": "BiggestFans[]"
+          }
+        }
+      },
+      "hasMany": {
+        "Fans": {
+          "request": { 
+            "operation": "ListFans",
+            "params": [
+              { "target":"FavoriteBandName", "source":"identifier", "name":"Name" }
+            ]
+          },
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "response", "path": "Fans[].Name" }
+            ],
+            "path": "Fans[]"
+          }
+        },
+        "BiggestFans": {
+          "request": { 
+            "operation": "ListFans",
+            "params": [
+              { 
+                "target": "Filters[0].Name",
+                "source": "string",
+                "value": "favorite-band-name"
+              },
+              { 
+                "target": "Filters[0].Values[]",
+                "source": "identifier",
+                "name": "Name"
+              },
+              { 
+                "target": "Filters[1].Name",
+                "source": "string",
+                "value": "fandom-level"
+              },
+              { 
+                "target": "Filters[1].Values[0]",
+                "source": "string",
+                "value": "AAA"
+              },
+              { 
+                "target": "Limit",
+                "source": "integer",
+                "value": 5
+              }
+            ]
+          },
+          "resource": {
+            "type": "Fan",
+            "identifiers": [
+              { "target": "FavoriteBandName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "response", "path": "Fans[].Name" }
+            ],
+            "path": "Fans[]"
+          }
+        }
+      },
+      "waiters": {
+        "Exists": {
+          "waiterName": "BandExists",
+          "params": [
+            { "target": "BandName", "source": "identifier", "name": "Name" }
+          ]
+        },
+        "Famous": {
+          "waiterName": "BandIsFamous",
+          "params": [
+            { "target": "BandName", "source": "identifier", "name": "Name" }
+          ],
+          "path": "Band"
+	}
+      }
+    },
+    "Concert": {
+      "identifiers": [
+        { "name": "Id", "memberName": "ConcertId" }
+      ],
+      "shape": "Concert"
+    },
+    "EmptyResource": {},
+    "Fan": {
+      "identifiers": [
+        { "name": "FavoriteBandName", "memberName": "FavoriteBandName" },
+        { "name": "Name", "memberName": "Name" }
+      ],
+      "shape": "Fan",
+      "has": {
+        "FavoriteBand": {
+          "resource": {
+            "type": "Band",
+            "identifiers": [
+              { "target": "BandName", "source": "data", "path": "FavoriteBandName" }
+            ]
+          }
+        }
+      }
+    },
+    "Tag": {
+      "identifiers": [
+        { "name": "ResourceId" },
+        { "name": "Key" },
+        { "name": "Value" }
+      ],
+      "shape": "TagDescription",
+      "load": {
+        "request": {
+          "operation": "GetTags",
+          "params": [
+            { "target": "Filters[0].Name", "source": "string", "value": "key" },
+            { "target": "Filters[0].Values[0]", "source": "identifier", "name": "Key" },
+            { "target": "Filters[1].Name", "source": "string", "value": "value" },
+            { "target": "Filters[1].Values[0]", "source": "identifier", "name": "Value" }
+          ]
+        },
+        "path": "Tags[0]"
+      },
+      "batchActions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[]", "source": "identifier", "name": "ResourceId" },
+              { "target": "Tags[*].Key", "source": "identifier", "name": "Key" },
+              { "target": "Tags[*].Value", "source": "identifier", "name": "Value" }
+            ]
+          }
+        }
+      }
+    },
+    "Ticket": {
+      "identifiers": [
+        { "name": "Number", "memberName": "TicketNumber", "type": "integer" }
+      ],
+      "shape": "Ticket",
+      "load": {
+        "request": {
+          "operation": "GetTicket",
+          "params": [
+            { "target": "TicketNumber", "source": "identifier", "name": "Number" }
+          ]
+        },
+        "path": "Ticket"
+      }
+    },
+    "TicketReservation": {
+      "identifiers": [
+        { "name": "Number", "memberName": "TicketNumber", "type": "integer" }
+      ],
+      "shape": "Ticket"
+    }
+  }
+}

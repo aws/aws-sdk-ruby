@@ -1,4 +1,0 @@
-[
-  "#/resources/ResourceName/identifiers/0/name must be uniq within #/resources/ResourceName/identifiers/*/name",
-  "#/resources/ResourceName/identifiers/1/name must be uniq within #/resources/ResourceName/identifiers/*/name"
-]

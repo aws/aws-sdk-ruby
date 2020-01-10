@@ -1,0 +1,555 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
+require 'aws-sdk-core/plugins/protocols/rest_json.rb'
+
+Aws::Plugins::GlobalConfiguration.add_identifier(:connectparticipant)
+
+module Aws::ConnectParticipant
+  class Client < Seahorse::Client::Base
+
+    include Aws::ClientStubs
+
+    @identifier = :connectparticipant
+
+    set_api(ClientApi::API)
+
+    add_plugin(Seahorse::Client::Plugins::ContentLength)
+    add_plugin(Aws::Plugins::CredentialsConfiguration)
+    add_plugin(Aws::Plugins::Logging)
+    add_plugin(Aws::Plugins::ParamConverter)
+    add_plugin(Aws::Plugins::ParamValidator)
+    add_plugin(Aws::Plugins::UserAgent)
+    add_plugin(Aws::Plugins::HelpfulSocketErrors)
+    add_plugin(Aws::Plugins::RetryErrors)
+    add_plugin(Aws::Plugins::GlobalConfiguration)
+    add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
+    add_plugin(Aws::Plugins::ResponsePaging)
+    add_plugin(Aws::Plugins::StubResponses)
+    add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
+    add_plugin(Aws::Plugins::SignatureV4)
+    add_plugin(Aws::Plugins::Protocols::RestJson)
+
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
+    #
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
+    #
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
+    #
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
+    #
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
+    #
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
+    #
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
+    #
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #
+    #   @option options [String] :access_key_id
+    #
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
+    #
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
+    #
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
+    #
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
+    #
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
+    #
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
+    #
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
+    #
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
+    #
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
+    #
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
+    #
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
+    #
+    def initialize(*args)
+      super
+    end
+
+    # @!group API Operations
+
+    # Creates the participant's connection. Note that ParticipantToken is
+    # used for invoking this API instead of ConnectionToken.
+    #
+    # The participant token is valid for the lifetime of the participant –
+    # until the they are part of a contact.
+    #
+    # The response URL for `WEBSOCKET` Type has a connect expiry timeout of
+    # 100s. Clients must manually connect to the returned websocket URL and
+    # subscribe to the desired topic.
+    #
+    # For chat, you need to publish the following on the established
+    # websocket connection:
+    #
+    # `\{"topic":"aws/subscribe","content":\{"topics":["aws/chat"]\}\}`
+    #
+    # Upon websocket URL expiry, as specified in the response
+    # ConnectionExpiry parameter, clients need to call this API again to
+    # obtain a new websocket URL and perform the same steps as before.
+    #
+    # @option params [required, Array<String>] :type
+    #   Type of connection information required.
+    #
+    # @option params [required, String] :participant_token
+    #   Participant Token as obtained from [StartChatContact][1] API response.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html
+    #
+    # @return [Types::CreateParticipantConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateParticipantConnectionResponse#websocket #websocket} => Types::Websocket
+    #   * {Types::CreateParticipantConnectionResponse#connection_credentials #connection_credentials} => Types::ConnectionCredentials
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_participant_connection({
+    #     type: ["WEBSOCKET"], # required, accepts WEBSOCKET, CONNECTION_CREDENTIALS
+    #     participant_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.websocket.url #=> String
+    #   resp.websocket.connection_expiry #=> String
+    #   resp.connection_credentials.connection_token #=> String
+    #   resp.connection_credentials.expiry #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/CreateParticipantConnection AWS API Documentation
+    #
+    # @overload create_participant_connection(params = {})
+    # @param [Hash] params ({})
+    def create_participant_connection(params = {}, options = {})
+      req = build_request(:create_participant_connection, params)
+      req.send_request(options)
+    end
+
+    # Disconnects a participant. Note that ConnectionToken is used for
+    # invoking this API instead of ParticipantToken.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disconnect_participant({
+    #     client_token: "ClientToken",
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/DisconnectParticipant AWS API Documentation
+    #
+    # @overload disconnect_participant(params = {})
+    # @param [Hash] params ({})
+    def disconnect_participant(params = {}, options = {})
+      req = build_request(:disconnect_participant, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a transcript of the session. Note that ConnectionToken is
+    # used for invoking this API instead of ParticipantToken.
+    #
+    # @option params [String] :contact_id
+    #   The contactId from the current contact chain for which transcript is
+    #   needed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the page. Default: 10.
+    #
+    # @option params [String] :next_token
+    #   The pagination token. Use the value returned previously in the next
+    #   subsequent request to retrieve the next set of results.
+    #
+    # @option params [String] :scan_direction
+    #   The direction from StartPosition from which to retrieve message.
+    #   Default: BACKWARD when no StartPosition is provided, FORWARD with
+    #   StartPosition.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the records. Default: DESCENDING.
+    #
+    # @option params [Types::StartPosition] :start_position
+    #   A filtering option for where to start.
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Types::GetTranscriptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTranscriptResponse#initial_contact_id #initial_contact_id} => String
+    #   * {Types::GetTranscriptResponse#transcript #transcript} => Array&lt;Types::Item&gt;
+    #   * {Types::GetTranscriptResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_transcript({
+    #     contact_id: "ContactId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     scan_direction: "FORWARD", # accepts FORWARD, BACKWARD
+    #     sort_order: "DESCENDING", # accepts DESCENDING, ASCENDING
+    #     start_position: {
+    #       id: "ChatItemId",
+    #       absolute_time: "Instant",
+    #       most_recent: 1,
+    #     },
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.initial_contact_id #=> String
+    #   resp.transcript #=> Array
+    #   resp.transcript[0].absolute_time #=> String
+    #   resp.transcript[0].content #=> String
+    #   resp.transcript[0].content_type #=> String
+    #   resp.transcript[0].id #=> String
+    #   resp.transcript[0].type #=> String, one of "MESSAGE", "EVENT", "CONNECTION_ACK"
+    #   resp.transcript[0].participant_id #=> String
+    #   resp.transcript[0].display_name #=> String
+    #   resp.transcript[0].participant_role #=> String, one of "AGENT", "CUSTOMER", "SYSTEM"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/GetTranscript AWS API Documentation
+    #
+    # @overload get_transcript(params = {})
+    # @param [Hash] params ({})
+    def get_transcript(params = {}, options = {})
+      req = build_request(:get_transcript, params)
+      req.send_request(options)
+    end
+
+    # Sends an event. Note that ConnectionToken is used for invoking this
+    # API instead of ParticipantToken.
+    #
+    # @option params [required, String] :content_type
+    #   The content type of the request. Supported types are:
+    #
+    #   * application/vnd.amazonaws.connect.event.typing
+    #
+    #   * application/vnd.amazonaws.connect.event.connection.acknowledged
+    #
+    # @option params [String] :content
+    #   The content of the event to be sent (for example, message text). This
+    #   is not yet supported.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the participant's
+    #   connection.
+    #
+    # @return [Types::SendEventResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendEventResponse#id #id} => String
+    #   * {Types::SendEventResponse#absolute_time #absolute_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_event({
+    #     content_type: "ChatContentType", # required
+    #     content: "ChatContent",
+    #     client_token: "ClientToken",
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.absolute_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendEvent AWS API Documentation
+    #
+    # @overload send_event(params = {})
+    # @param [Hash] params ({})
+    def send_event(params = {}, options = {})
+      req = build_request(:send_event, params)
+      req.send_request(options)
+    end
+
+    # Sends a message. Note that ConnectionToken is used for invoking this
+    # API instead of ParticipantToken.
+    #
+    # @option params [required, String] :content_type
+    #   The type of the content. Supported types are text/plain.
+    #
+    # @option params [required, String] :content
+    #   The content of the message.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :connection_token
+    #   The authentication token associated with the connection.
+    #
+    # @return [Types::SendMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendMessageResponse#id #id} => String
+    #   * {Types::SendMessageResponse#absolute_time #absolute_time} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_message({
+    #     content_type: "ChatContentType", # required
+    #     content: "ChatContent", # required
+    #     client_token: "ClientToken",
+    #     connection_token: "ParticipantToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.absolute_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/SendMessage AWS API Documentation
+    #
+    # @overload send_message(params = {})
+    # @param [Hash] params ({})
+    def send_message(params = {}, options = {})
+      req = build_request(:send_message, params)
+      req.send_request(options)
+    end
+
+    # @!endgroup
+
+    # @param params ({})
+    # @api private
+    def build_request(operation_name, params = {})
+      handlers = @handlers.for(operation_name)
+      context = Seahorse::Client::RequestContext.new(
+        operation_name: operation_name,
+        operation: config.api.operation(operation_name),
+        client: self,
+        params: params,
+        config: config)
+      context[:gem_name] = 'aws-sdk-connectparticipant'
+      context[:gem_version] = '1.0.0'
+      Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # @api private
+    # @deprecated
+    def waiter_names
+      []
+    end
+
+    class << self
+
+      # @api private
+      attr_reader :identifier
+
+      # @api private
+      def errors_module
+        Errors
+      end
+
+    end
+  end
+end

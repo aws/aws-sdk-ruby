@@ -1,0 +1,47 @@
+{
+  "metadata" : {
+    "apiVersion" : "2016-12-14T20:41:37Z",
+    "endpointPrefix" : "foobar",
+    "signingName" : "execute-api",
+    "serviceFullName" : "SdkTestApi",
+    "protocol" : "api-gateway",
+    "uid" : "foobar-2016-12-14T20:41:37Z",
+    "signatureVersion" : "v4"
+  },
+  "operations" : {},
+  "shapes" : {
+    "__boolean" : {
+      "type" : "boolean"
+    },
+    "__double" : {
+      "type" : "double"
+    },
+    "__integer" : {
+      "type" : "integer"
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "__string" : {
+      "type" : "string"
+    },
+    "__timestampIso8601" : {
+      "type" : "timestamp",
+      "timestampFormat" : "iso8601"
+    },
+    "__timestampUnix" : {
+      "type" : "timestamp",
+      "timestampFormat" : "unixTimestamp"
+    }
+  },
+  "authorizers" : {
+    "MyCustomAuthorizer" : {
+      "name" : "MyCustomAuthorizer",
+      "type" : "provided",
+      "placement" : {
+        "location" : "header",
+        "name" : "Authorization"
+      }
+    }
+  }
+}

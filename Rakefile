@@ -1,40 +1,18 @@
 $REPO_ROOT = File.dirname(__FILE__)
+$GEMS_DIR = "#{$REPO_ROOT}/gems"
+$CORE_LIB = "#{$REPO_ROOT}/gems/aws-sdk-core/lib"
 
-$VERSION = ENV['VERSION'] || File.read(File.join($REPO_ROOT, 'VERSION')).strip
+$:.unshift("#{$REPO_ROOT}/build_tools")
+$:.unshift("#{$REPO_ROOT}/build_tools/aws-sdk-code-generator/lib")
+$:.unshift("#{$GEMS_DIR}/aws-sdk-core/lib")
+$:.unshift("#{$GEMS_DIR}/aws-partitions/lib")
+$:.unshift("#{$GEMS_DIR}/aws-eventstream/lib")
+$:.unshift("#{$GEMS_DIR}/aws-sigv4/lib")
 
-$GEM_NAMES = [
-  'aws-sdk-core',
-  'aws-sdk-resources',
-  'aws-sdk',
-]
+require 'build_tools'
+require 'aws-sdk-code-generator'
+require 'aws-sdk-core'
 
-$GEM_NAMES.each do |gem_name|
-  $LOAD_PATH.unshift(File.join($REPO_ROOT, gem_name, 'lib'))
-end
-
-require 'aws-sdk'
-
-task 'test:coverage:clear' do
-  sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
-end
-
-desc 'Runs unit tests'
-task 'test:unit' => 'test:coverage:clear'
-
-desc 'Runs integration tests'
-task 'test:integration' => 'test:coverage:clear'
-
-desc 'Runs unit and integration tests'
-task 'test' => ['test:unit', 'test:integration']
-
-task :default => :test
-
-Dir.glob('**/*.rake').each do |task_file|
-  load task_file
-end
-
-begin
-  require 'coveralls/rake/task'
-  Coveralls::RakeTask.new
-rescue LoadError
+Dir.glob("#{$REPO_ROOT}/tasks/**/*.rake").each do |task_file|
+  load(task_file)
 end

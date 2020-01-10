@@ -1,46 +1,16 @@
+#toc {
+  z-index: 2;
+}
+
 /* Version 2 warning */
 
-#version-2-warning {
+#version-3-warning {
   margin: 10px 0px;
   padding: 10px;
   font-weight: bold;
   background-color: lightblue;
   border: 2px solid darkblue;
 }
-
-/* AWS API operation tabs */
-
-ul.tabs {
-  list-style-type: none;
-  margin: 15px 0 0 0;
-  padding: 0 0 0 10px;
-  height: 26px;
-  clear: both;
-}
-
-ul.tabs li {
-  float: left;
-  border: 1px solid #c9c3ba;
-  background-color: #eee;
-  line-height: 25px;
-  height: 25px;
-  padding: 0px 5px;
-  margin: 0 0 0 3px;
-}
-ul.tabs li:hover {
-  cursor: pointer;
-  background-color: #ddd;
-}
-ul.tabs li.active {
-  background-color: #fff;
-  border-bottom: 2px solid #fff;
-}
-.tab-contents {
-  border: 1px solid #ccc;
-  padding: 0.5em;
-  width: 100%;
-}
-
 /* formatting for request parameters and response data */
 
 .params, .params .params {

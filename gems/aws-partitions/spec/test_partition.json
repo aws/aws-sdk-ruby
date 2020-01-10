@@ -1,0 +1,49 @@
+{
+  "partitions" : [
+    {
+      "defaults" : {
+        "hostname" : "{service}.{region}.{dnsSuffix}",
+        "protocols" : [ "https" ],
+        "signatureVersions" : [ "v4" ]
+      },
+      "dnsSuffix" : "amazonaws.com",
+      "partition" : "test",
+      "partitionName" : "AWS SDK For Ruby Test Partition",
+      "regionRegex" : "^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$",
+      "regions" : {
+        "us-peccy-1" : {
+          "description" : "US West (Seattle)"
+        }
+      },
+      "services" : {
+        "global-peccy-service" : {
+          "endpoints" : {
+            "peccy-global" : {
+              "credentialScope" : {
+                "region" : "us-peccy-1"
+              },
+              "hostname" : "global-peccy-service.amazonaws.com",
+              "protocols" : [ "http", "https" ]
+            }
+          },
+          "isRegionalized" : false,
+          "partitionEndpoint" : "peccy-global"
+        },
+        "peccy-service" : {
+          "endpoints" : {
+            "us-peccy-1" : { }
+          }
+        },
+        "crazy-peccy-service" : {
+          "defaults" : {
+            "hostname" : "{region}.crazy-peccy-service.amazonaws.com"
+          },
+          "endpoints" : {
+            "us-peccy-1" : { }
+          }
+        }
+      }
+    }
+  ],
+  "version" : 3
+}

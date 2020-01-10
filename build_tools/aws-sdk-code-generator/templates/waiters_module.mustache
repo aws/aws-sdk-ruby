@@ -1,0 +1,46 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+require 'aws-sdk-core/waiters'
+
+module {{module_name}}
+  module Waiters
+    {{#waiters}}
+
+    {{> documentation}}
+    class {{class_name}}
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts ({{max_attempts}})
+      # @option options [Integer] :delay ({{delay}})
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: {{max_attempts}},
+          delay: {{delay}},
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :{{client_method}},
+            {{#acceptors}}
+            {{#lines}}
+            {{{.}}}{{/lines}}
+            {{/acceptors}}
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#{{client_method}})
+      # @return (see Client#{{client_method}})
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+    {{/waiters}}
+  end
+end

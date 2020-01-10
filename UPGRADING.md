@@ -1,5 +1,104 @@
 # Upgrade Notes
 
+## `aws-sdk` - v3.0.0
+
+* An equivalent gem of `aws-sdk` that provides resource oriented interfaces and
+  other higher-level abstractions for many AWS services. Please see the
+  `V3_UPGRADING_GUIDE.md` guide for upgrading details.
+
+## `aws-sdk-core` - v3.0.0
+
+* Service modules have been removed from `aws-sdk-core`. They are now available
+  in service gems. The `aws-sdk-core` gem now only contains shared utilities,
+  such as credential providers, logging, etc. If you had a dependency on
+  `aws-sdk-core` previously to use Amazon S3, replace it instead with `aws-sdk-s3`.
+  If you want to load every AWS service gem, use the `aws-sdk` gem.
+
+* Moved the `aws.rb` REPL from the `aws-sdk-core` gem into the `aws-sdk`
+  gem.
+
+* `Aws.eager_autoload!` is deprecated as all autoload statements have been replaced
+  with require statements. Calling this method will now generate a warning and
+  have no other effect.
+
+* Removed the `Aws.add_service` method. Services are no longer defined
+  at runtime. Each service is now defined in a seperate gem, e.g.
+  `aws-sdk-s3`, `aws-sdk-ec2`, etc.
+
+* Preview Gem `aws-sdk-sfn` is deprecated, use `aws-sdk-states` instead.
+
+* Preview Gem `aws-sdk-lexruntimeservice` is deprecated, use `aws-sdk-lex` instead.
+
+## `aws-sdk-core` - v2.10.0
+
+* This update respects the `AWS_PROFILE` environment variable when using the
+  default credential provider chain. Before, due to a logic bug, the default
+  credential provider chain would use the `'default'` profile, even if the
+  `AWS_PROFILE` environment variable was set. Directly constructing credentials
+  using the `Aws::SharedConfig` or `Aws::SharedCredentials` classes did not
+  have this issue.
+
+  After this change, you could see a change in default behavior when
+  constructing clients if you have the `AWS_PROFILE` environment variable set
+  and use the default credential provider chain to construct your client. If
+  this is the case for you, you should ensure that the `AWS_PROFILE` environment
+  variable is set to the correct value for your use case, or you should
+  construct credential objects directly during client construction. If the
+  `AWS_PROFILE` environment variable is not set in your runtime environment, you
+  are not affected by this change.
+
+## `aws-sdk-core` - v2.5.0
+
+* Due to customer requests, and an analysis of the tradeoffs, we're changing the
+  shared configuration features from an opt-in feature to an opt-out feature.
+  With this version, the changes to default region support and to the default
+  credential provider chain are on by default, and the `AWS_SDK_LOAD_CONFIG`
+  environment variable will not be used for any purpose.
+
+  If you wish to opt-out of the new functionality for backwards compatibility
+  reasons, set the `AWS_SDK_CONFIG_OPT_OUT` environment variable to any value.
+  That will return shared configuration and credential provider chain behavior
+  to the behaviors present before version `2.4.0` of the SDK.
+
+## `aws-sdk-core` - v2.4.0
+
+* We are adding support for the shared configuration file used by the CLI,
+  `~/.aws/config`. This support provides new credential sources for the default
+  credential provider chain, and for default region selection. Since these
+  changes could technically be a breaking change to default (and commonly used)
+  behavior, there is a feature flag around this functionality.
+
+  To use these new features, you must set the `AWS_SDK_LOAD_CONFIG` environment
+  variable. If not set, the existing default behavior will continue.
+
+  Two other upgrading notes are worth keeping in mind for this release:
+
+  * Private interfaces regarding handling of configuration were changed for this
+    feature. Those interfaces were marked `@api private`, signifying that they
+    should not have been used outside the SDK for development. If you were
+    using those classes and functions, you may experience breakage from this
+    change.
+  * The INI Parser for the shared credential file does have a behavior change
+    that could break existing files. The old parser was insensitive to leading
+    whitespace, but maintaining that behavior can cause unexpected results. It
+    should have been whitespace sensitive all along. If you find behavior
+    changes after upgrading, remove leading whitespace from your shared
+    credential files.
+
+## `aws-sdk-core` - v2.3.0
+
+* We have replaced the previous `endpoints.json` document that shipped with
+  the `aws-sdk-core` gem. The old file defined mapping heuristic for
+  constructing regionalized endpoints for services. The new document
+  defines explicit regions and services within partitions.
+
+  The old and new document and interfaces were private implementation
+  details and were not documented. Any usage of the old document
+  or classes would be broken in a 2.3.0 update. Normal SDK usage should
+  be completely unaffected by the update. This upgrading note
+  exists only as a warning to users who were reaching into the
+  internals.
+
 ## `aws-sdk-core` - v2.2.0
 
 * We are moving the `Aws::S3::Client` class to use Signature Version 4 by
@@ -351,3 +450,7 @@ changes before 2.0.0 final.
 
 * The short name for Aws::SimpleDB has been renamed from `sdb` to
   `simpledb`.
+
+# Upgrading from v1?
+
+Please see [MIGRATING.md](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)

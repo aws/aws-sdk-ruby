@@ -1,0 +1,89 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "endpointPrefix": "svc",
+    "protocol": "rest-xml",
+    "signatureVersion": "v4"
+  },
+  "operations": {
+    "Foo": {
+      "name": "Foo",
+      "http": {
+        "method": "GET",
+        "requestUri": "/"
+      },
+      "output": {"shape": "FooOutput"}
+    } 
+  },
+  "shapes": {
+    "FooOutput": {
+      "type": "structure",
+      "members": {
+        "Payload": {
+          "shape": "BarPayload"
+        }
+      },
+      "payload": "Payload"
+    },
+    "BarPayload": {
+      "type": "structure",
+      "members": {
+        "A": {"shape": "AEventShape"},
+        "B": {"shape": "BEventShape"},
+        "C": {"shape": "CEventShape"}
+      },
+      "eventstream": true
+    },
+    "AEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberA": {
+          "shape": "StringShape",
+          "eventheader": true
+        },
+        "MemberB": {
+          "shape": "BlobShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "BEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberC": {
+          "shape": "StringShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "CEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberD": {
+          "shape": "StructShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "StructShape": {
+      "type": "structure",
+      "members": {
+        "StructMemberA": {
+          "shape": "StringShape"
+        },
+        "StructMemberB": {
+          "shape": "StringShape"
+        }
+      }
+    },
+    "StringShape": {
+      "type": "string"
+    },
+    "BlobShape": {
+      "type": "blob"
+    }
+  }
+}

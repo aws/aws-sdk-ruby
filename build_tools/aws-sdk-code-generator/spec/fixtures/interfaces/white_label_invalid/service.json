@@ -1,0 +1,34 @@
+{
+  "metadata" : {
+    "apiVersion" : "2016-12-14T20:41:37Z",
+    "endpointPrefix" : "foobar",
+    "signingName" : "execute-api",
+    "serviceFullName" : "SdkTestApi",
+    "protocol" : "api-gateway",
+    "uid" : "foobar-2016-12-14T20:41:37Z",
+    "signatureVersion" : "v4"
+  },
+  "operations" : {
+    "OperationA": {
+      "name": "OperationA",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/test/opera",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape": "InputFoo"
+      }
+    }
+  },
+  "shapes" : {
+    "InputFoo": {
+      "type": "structure",
+      "members": {
+        "MemberA": {
+          "shape": "ShapeFoo"
+        }
+      }
+    }
+  }
+}

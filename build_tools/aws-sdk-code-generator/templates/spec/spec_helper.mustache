@@ -1,0 +1,13 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+require_relative '../../aws-sdk-core/spec/shared_spec_helper'
+
+$:.unshift(File.expand_path('../../lib', __FILE__))
+{{#gem_dependencies}}
+$:.unshift(File.expand_path('../../../{{dependency}}/lib', __FILE__))
+{{/gem_dependencies}}
+
+require 'rspec'
+require 'webmock/rspec'
+require '{{gem_name}}'

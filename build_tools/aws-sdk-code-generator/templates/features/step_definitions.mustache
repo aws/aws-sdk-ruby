@@ -1,0 +1,8 @@
+Before("@{{var_name}}") do
+  @service = {{module_name}}::Resource.new
+  @client = @service.client
+end
+
+After("@{{var_name}}") do
+  # shared cleanup logic
+end

@@ -1,4 +1,4 @@
---title 'AWS SDK for Ruby V2'
+--title 'AWS SDK for Ruby V3'
 --output-dir api-docs
 --template-path doc-src/templates
 --markup markdown
@@ -6,6 +6,10 @@
 --hide-api private
 --plugin sitemap
 --asset doc-src/images:images
--e doc-src/plugins/apis.rb
--e doc-src/plugins/resources.rb
-aws-sdk-core/lib/**/*.rb aws-sdk-resources/lib/**/*.rb aws-sdk/lib/**/*.rb
+--exclude \/client_api.rb$
+--no-progress
+-e doc-src/plugins/service_tag.rb
+gems/**/lib/*/*/*/*.rb
+gems/**/lib/*/*/*.rb
+gems/**/lib/*/*.rb
+gems/**/lib/*.rb

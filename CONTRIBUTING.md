@@ -4,20 +4,32 @@ We work hard to provide a high-quality and useful SDK, and we greatly value feed
 community. Whether it's a new feature, correction, or additional documentation, we welcome your pull requests.
 Please submit any [issues][] or [pull requests][pull-requests] through GitHub.
 
+## Generated Code
+
+A large percentage of the SDK is generated from JSON definitions of AWS services. Generated source code
+contains a header comment block indicating the file has been generated. Bugs in these files result from
+one of:
+
+* Errors in the code generators. These are defined in [build_tools](https://github.com/aws/aws-sdk-ruby/blob/master/build_tools).
+  We gladly accept contributions to the generators.
+
+* Errors in the service **api** JSON. These are defined in [apis](https://github.com/aws/aws-sdk-ruby/blob/master/apis).
+  We consume service definitions from another source. Corrections must be made upstream. Please feel free
+  to open an issue if you feel there is an error in one of the API JSON definitions.
+
+* Errors in the service **paginators**, **waiters**, or **resource** JSON definitions. These are also found in
+  [apis](https://github.com/aws/aws-sdk-ruby/blob/master/apis). We can take contributions directly to these files
+  as pull requests. If you have a question, please feel free to open an issue.
+
 ## What you should keep in mind
 
 1. The SDK is released under the [Apache license][license]. Any code you submit will be released under that license. For
    substantial contributions, we may ask you to sign a [Contributor License Agreement (CLA)][cla].
 2. We maintain a high percentage of code coverage in our unit tests. If you make changes to the code, please add,
    update, and/or remove unit (and integration) tests as appropriate.
-3. We may choose not to accept pull requests that change service descriptions, such as `aws-sdk-core/apis/S3.api.json`.
-   We generate these files based on our internal knowledge of the AWS services. If there is something incorrect
-   with or missing from a service description, it may be more appropriate to [submit an issue][issues].
-   We *will*, however, consider pull requests affecting service descriptions, if the changes are related to
-   **paginators**, **waiters**, or **resources** configurations.
-4. If your code does not include adequate tests, we may ask you to update your pull requests before we accept them.
+3. If your code does not include adequate tests, we may ask you to update your pull requests before we accept them.
    We also reserve the right to deny any pull requests that do not align with our standards or goals.
-5. If you would like to implement support for a significant feature that is not yet available in the SDK, please talk to
+4. If you would like to implement support for a significant feature that is not yet available in the SDK, please talk to
    us beforehand to avoid any duplication of effort.
 
 ## What we are looking for

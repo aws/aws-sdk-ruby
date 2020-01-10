@@ -1,8 +1,0 @@
-operation: put_object
-params:
-  :bucket: 'bucket-name'
-  :key: 'key'
-  :body: 'abc'
-request:
-  headers:
-    Content-Md5: kAFQmDzST7DWlj99KOF/cg==

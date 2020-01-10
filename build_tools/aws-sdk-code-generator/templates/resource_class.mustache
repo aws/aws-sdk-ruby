@@ -1,0 +1,297 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  class {{class_name}}
+
+    extend Aws::Deprecations
+
+    # @overload def initialize({{#identifiers}}{{name}}, {{/identifiers}}options = {})
+    {{#identifiers}}
+    #   @param [{{type}}] {{name}}
+    {{/identifiers}}
+    #   @option options [Client] :client
+    {{#identifiers?}}
+    # @overload def initialize(options = {})
+    {{#identifiers}}
+    #   @option options [required, {{type}}] :{{name}}
+    {{/identifiers}}
+    #   @option options [Client] :client
+    {{/identifiers?}}
+    def initialize(*args)
+      options = Hash === args.last ? args.pop.dup : {}
+      {{#identifiers}}
+      @{{name}} = extract_{{name}}(args, options)
+      {{/identifiers}}
+      {{#shape}}
+      @data = options.delete(:data)
+      {{/shape}}
+      {{^shape}}
+      @data = Aws::EmptyStructure.new
+      {{/shape}}
+      @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
+    end
+
+    # @!group Read-Only Attributes
+    {{#identifiers}}
+
+    # @return [{{type}}]
+    def {{name}}
+      @{{name}}
+    end
+    {{#alias}}
+    alias :{{alias}} :{{name}}
+    {{/alias}}
+    {{/identifiers}}
+    {{#data_attributes}}
+
+    {{> documentation}}
+    def {{name}}
+      data[:{{name}}]
+    end
+    {{/data_attributes}}
+
+    # @!endgroup
+
+    # @return [Client]
+    def client
+      @client
+    end
+
+    {{#load_method}}
+    {{> method}}
+    {{/load_method}}
+    alias :reload :load
+
+    {{#data_method}}
+    {{> method}}
+    {{/data_method}}
+
+    # @return [Boolean]
+    #   Returns `true` if this resource is loaded.  Accessing attributes or
+    #   {#data} on an unloaded resource will trigger a call to {#load}.
+    def data_loaded?
+      !!@data
+    end
+    {{#exists_waiter}}
+
+    # @param [Hash] options ({})
+    # @return [Boolean]
+    #   Returns `true` if the {{class_name}} exists.
+    def exists?(options = {})
+      begin
+        wait_until_exists(options.merge(max_attempts: 1))
+        true
+      rescue Aws::Waiters::Errors::UnexpectedError => e
+        raise e.error
+      rescue Aws::Waiters::Errors::WaiterFailed
+        false
+      end
+    end
+    {{/exists_waiter}}
+    {{#waiters}}
+
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts ({{max_attempts}})
+    # @option options [Float] :delay ({{delay}})
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    # @return [{{class_name}}]
+    def wait_until_{{name}}(options = {}, &block)
+      options, params = separate_params_and_options(options)
+      waiter = Waiters::{{waiter_class_name}}.new(options)
+      yield_waiter_and_warn(waiter, &block) if block_given?
+      {{#wait_call}}
+      {{#lines}}
+      {{{.}}}{{/lines}}
+      {{/wait_call}}
+      {{class_name}}.new({
+      {{#constructor_args}}
+      {{#lines}}
+      {{{.}}}{{/lines}}
+      {{/constructor_args}}
+      })
+    end
+    {{/waiters}}
+    {{#wait_until}}
+
+    # @deprecated Use [{{module_name}}::Client] #wait_until instead
+    #
+    # Waiter polls an API operation until a resource enters a desired
+    # state.
+    #
+    # @note The waiting operation is performed on a copy. The original resource remains unchanged
+    #
+    # ## Basic Usage
+    #
+    # Waiter will polls until it is successful, it fails by
+    # entering a terminal state, or until a maximum number of attempts
+    # are made.
+    #
+    #     # polls in a loop until condition is true
+    #     resource.wait_until(options) {|resource| condition}
+    #
+    # ## Example
+    #
+    #     instance.wait_until(max_attempts:10, delay:5) {|instance| instance.state.name == 'running' }
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. The waiting condition is set
+    # by passing a block to {#wait_until}:
+    #
+    #     # poll for ~25 seconds
+    #     resource.wait_until(max_attempts:5,delay:5) {|resource|...}
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     # poll for 1 hour, instead of a number of attempts
+    #     proc = Proc.new do |attempts, response|
+    #       throw :failure if Time.now - started_at > 3600
+    #     end
+    #
+    #       # disable max attempts
+    #     instance.wait_until(before_wait:proc, max_attempts:nil) {...}
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is successful, it returns the Resource. When a waiter
+    # fails, it raises an error.
+    #
+    #     begin
+    #       resource.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    #
+    # @yield param [Resource] resource to be used in the waiting condition
+    #
+    # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    #   yet successful.
+    #
+    # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [NotImplementedError] Raised when the resource does not
+    #
+    # @option options [Integer] :max_attempts (10) Maximum number of
+    # attempts
+    # @option options [Integer] :delay (10) Delay between each
+    # attempt in seconds
+    # @option options [Proc] :before_attempt (nil) Callback
+    # invoked before each attempt
+    # @option options [Proc] :before_wait (nil) Callback
+    # invoked before each wait
+    # @return [Resource] if the waiter was successful
+    def wait_until(options = {}, &block)
+      self_copy = self.dup
+      attempts = 0
+      options[:max_attempts] = 10 unless options.key?(:max_attempts)
+      options[:delay] ||= 10
+      options[:poller] = Proc.new do
+        attempts += 1
+        if block.call(self_copy)
+          [:success, self_copy]
+        else
+          self_copy.reload unless attempts == options[:max_attempts]
+          :retry
+        end
+      end
+      Aws::Waiters::Waiter.new(options).wait({})
+    end
+    {{/wait_until}}
+    {{#actions?}}
+
+    # @!group Actions
+    {{#actions}}
+
+    {{> method}}
+    {{/actions}}
+    {{/actions?}}
+    {{#associations?}}
+
+    # @!group Associations
+    {{#associations}}
+
+    {{> method}}
+    {{/associations}}
+    {{/associations?}}
+
+    {{#identifiers_method}}
+    {{> method}}
+    {{/identifiers_method}}
+    deprecated(:identifiers)
+    {{#identifiers?}}
+
+    private
+    {{#identifiers}}
+
+    def extract_{{name}}(args, options)
+      value = args[{{offset}}] || options.delete(:{{name}})
+      case value
+      when {{type}} then value
+      when nil then raise ArgumentError, "missing required option :{{name}}"
+      else
+        msg = "expected :{{name}} to be a {{type}}, got #{value.class}"
+        raise ArgumentError, msg
+      end
+    end
+    {{/identifiers}}
+    {{/identifiers?}}
+    {{#waiters?}}
+
+    def yield_waiter_and_warn(waiter, &block)
+      if !@waiter_block_warned
+        msg = "pass options to configure the waiter; "
+        msg << "yielding the waiter is deprecated"
+        warn(msg)
+        @waiter_block_warned = true
+      end
+      yield(waiter.waiter)
+    end
+
+    def separate_params_and_options(options)
+      opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+      waiter_opts = {}
+      waiter_params = {}
+      options.each_pair do |key, value|
+        if opts.include?(key)
+          waiter_opts[key] = value
+        else
+          waiter_params[key] = value
+        end
+      end
+      waiter_opts[:client] ||= @client
+      [waiter_opts, waiter_params]
+    end
+    {{/waiters?}}
+
+    {{^batch_actions?}}
+    class Collection < Aws::Resources::Collection; end
+    {{/batch_actions?}}
+    {{#batch_actions?}}
+    class Collection < Aws::Resources::Collection
+
+      # @!group Batch Actions
+      {{#batch_actions}}
+
+      {{> method}}
+      {{/batch_actions}}
+
+      # @!endgroup
+
+    end
+    {{/batch_actions?}}
+  end
+end

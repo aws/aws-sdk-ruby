@@ -1,0 +1,46 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+{{#requires}}
+require '{{.}}'
+{{/requires}}
+
+{{#relative_requires}}
+require_relative '{{.}}'
+{{/relative_requires}}
+
+# This module provides support for {{full_name}}. This module is available in the
+# `{{gem_name}}` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+{{#example_operation_name}}
+#
+#     {{example_var_name}} = {{module_name}}::Client.new
+#     resp = {{example_var_name}}.{{example_operation_name}}(params)
+{{/example_operation_name}}
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from {{full_name}} all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue {{module_name}}::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module {{module_name}}
+
+  GEM_VERSION = '{{gem_version}}'
+
+end

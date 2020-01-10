@@ -1,0 +1,98 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  # @api private
+  module ClientApi
+
+    include Seahorse::Model
+
+    {{#shapes}}
+    {{name}} = {{class_name}}.new({{{constructor_args}}})
+    {{/shapes}}
+
+    {{#shape_definitions}}
+    {{#lines}}
+    {{{.}}}{{/lines}}
+
+    {{/shape_definitions}}
+
+    # @api private
+    API = Seahorse::Model::Api.new.tap do |api|
+
+      api.version = "{{api_version}}"
+
+      api.metadata = {
+        {{#metadata}}
+        {{{key}}} => {{{value}}},
+        {{/metadata}}
+      }
+      {{#endpoint_operation}}
+      api.endpoint_operation = :{{endpoint_operation}}
+      {{/endpoint_operation}}
+      {{#operations}}
+
+      api.add_operation(:{{method_name}}, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "{{name}}"
+        o.http_method = "{{http_method}}"
+        o.http_request_uri = "{{{http_request_uri}}}"
+        {{#deprecated}}
+        o.deprecated = true
+        {{/deprecated}}
+        {{#endpoint_operation}}
+        o.endpoint_operation = true
+        {{/endpoint_operation}}
+        {{#endpoint_discovery_available}}
+        o.endpoint_discovery = {
+          {{#endpoint_discovery}}
+          {{{key}}} => {{{value}}},
+          {{/endpoint_discovery}}
+        }
+        {{/endpoint_discovery_available}}
+        {{#authorizer}}
+        o.authorizer = "{{authorizer}}"
+        {{/authorizer}}
+        {{#authtype}}
+        o['authtype'] = "{{.}}"
+        {{/authtype}}
+        {{#endpoint_trait}}
+        o.endpoint_pattern = {
+          {{#endpoint_pattern}}
+          {{{key}}} => {{{value}}},
+          {{/endpoint_pattern}}
+        }
+        {{/endpoint_trait}}
+        {{#require_apikey}}
+        o.require_apikey = {{require_apikey}}
+        {{/require_apikey}}
+        {{#shape_references}}
+        {{#lines}}
+        {{{.}}}{{/lines}}
+        {{/shape_references}}
+        {{#error_shape_names}}
+        o.errors << Shapes::ShapeRef.new(shape: {{.}})
+        {{/error_shape_names}}
+        {{#pager}}
+        {{#lines}}
+        {{{.}}}{{/lines}}
+        {{/pager}}
+        {{#async}}
+        o.async = true
+        {{/async}}
+      end)
+      {{/operations}}
+      {{#apig_authorizer}}
+
+      api.add_authorizer(:{{authorizer_name}}, Seahorse::Model::Authorizer.new.tap do |a|
+        a.name = "{{name}}"{{#type}}
+        a.type = "{{type}}"{{/type}}{{#location}}
+        a.placement = {
+          :location => "{{location}}",
+          :name => "{{location_name}}"
+        }{{/location}}
+      end)
+      {{/apig_authorizer}}
+    end
+
+  end
+end

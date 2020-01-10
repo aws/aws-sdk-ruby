@@ -1,0 +1,66 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "endpointPrefix":"svc",
+    "protocol": "rest-json",
+    "signatureVersion":"v4"
+  },
+  "operations":{
+    "Foo" : {
+      "name" : "Foo",
+      "http" : {
+        "method" : "POST",
+        "requestUri" : "/"
+      },
+      "input" : {
+        "shape" : "FooRequest"
+      }
+    }
+  },
+  "shapes": {
+    "StringType": {
+      "type": "string"
+    },
+    "FooRequest": {
+      "type": "structure",
+      "members": {
+        "fooHash": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-hash"
+        },
+        "fooArray": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-array"
+        },
+        "fooNum": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-num"
+        },
+        "fooStr": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-str"
+        },
+        "fooBool": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-bool"
+        },
+        "fooTime": {
+          "shape": "StringType",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-foo-time"
+        }
+      }
+    }
+  }
+}

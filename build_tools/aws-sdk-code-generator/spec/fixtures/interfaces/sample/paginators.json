@@ -1,0 +1,13 @@
+{
+  "pagination": {
+    "ListBands": {
+      "input_token": "NextToken",
+      "output_token": "NextToken"
+    },
+    "ListFans": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "Limit"
+    }
+  }
+}

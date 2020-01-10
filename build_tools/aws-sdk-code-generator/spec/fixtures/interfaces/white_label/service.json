@@ -1,0 +1,994 @@
+{
+  "metadata" : {
+    "apiVersion" : "2016-12-14T20:41:37Z",
+    "endpointPrefix" : "foobar",
+    "signingName" : "execute-api",
+    "serviceFullName" : "SdkTestApi",
+    "protocol" : "api-gateway",
+    "uid" : "foobar-2016-12-14T20:41:37Z",
+    "signatureVersion" : "v4"
+  },
+  "operations" : {
+    "GetNoauthErrors" : {
+      "name" : "GetNoauthErrors",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/test/noauth/errors",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetNoauthErrorsRequest"
+      },
+      "output" : {
+        "shape" : "GetNoauthErrorsResponse"
+      },
+      "errors" : [ {
+        "shape" : "NotFoundException"
+      }, {
+        "shape" : "InternalServerErrorException"
+      } ],
+      "authtype" : "none",
+      "documentation": "An operation for No Auth"
+    },
+    "GetNoauthScalars" : {
+      "name" : "GetNoauthScalars",
+      "http" : {
+        "method" : "GET",
+        "requestUri" : "/test/noauth/scalars",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "GetNoauthScalarsRequest"
+      },
+      "output" : {
+        "shape" : "GetNoauthScalarsResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutApikey" : {
+      "name" : "PutApikey",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/apikey",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutApikeyRequest"
+      },
+      "output" : {
+        "shape" : "PutApikeyResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none",
+      "requiresApiKey" : true
+    },
+    "PutCustomauthScalars" : {
+      "name" : "PutCustomauthScalars",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/customauth/scalars",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutCustomauthScalarsRequest"
+      },
+      "output" : {
+        "shape" : "PutCustomauthScalarsResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "custom",
+      "authorizer" : "MyCustomAuthorizer"
+    },
+    "PutIamauthScalars" : {
+      "name" : "PutIamauthScalars",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/iamauth/scalars",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutIamauthScalarsRequest"
+      },
+      "output" : {
+        "shape" : "PutIamauthScalarsResponse"
+      },
+      "errors" : [ ]
+    },
+    "PutNoauthAnonLists" : {
+      "name" : "PutNoauthAnonLists",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/anon/lists",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthAnonListsRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthAnonListsResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthAnonMap" : {
+      "name" : "PutNoauthAnonMap",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/anon/map",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthAnonMapRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthAnonMapResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthAnonObject" : {
+      "name" : "PutNoauthAnonObject",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/anon/object",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthAnonObjectRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthAnonObjectResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthContainersComplex" : {
+      "name" : "PutNoauthContainersComplex",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/containers/complex",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthContainersComplexRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthContainersComplexResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthContainersSimple" : {
+      "name" : "PutNoauthContainersSimple",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/containers/simple",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthContainersSimpleRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthContainersSimpleResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthDefs" : {
+      "name" : "PutNoauthDefs",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/defs",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthDefsRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthDefsResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthEnumsSimple" : {
+      "name" : "PutNoauthEnumsSimple",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/enums/simple",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthEnumsSimpleRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthEnumsSimpleResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthRefsCanonList" : {
+      "name" : "PutNoauthRefsCanonList",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/refs/canon/list",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthRefsCanonListRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthRefsCanonListResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthRefsCanonMap" : {
+      "name" : "PutNoauthRefsCanonMap",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/refs/canon/map",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthRefsCanonMapRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthRefsCanonMapResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthRefsCanonPrimitive" : {
+      "name" : "PutNoauthRefsCanonPrimitive",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/refs/canon/primitive",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthRefsCanonPrimitiveRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthRefsCanonPrimitiveResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    },
+    "PutNoauthScalars" : {
+      "name" : "PutNoauthScalars",
+      "http" : {
+        "method" : "PUT",
+        "requestUri" : "/test/noauth/scalars",
+        "responseCode" : 200
+      },
+      "input" : {
+        "shape" : "PutNoauthScalarsRequest"
+      },
+      "output" : {
+        "shape" : "PutNoauthScalarsResponse"
+      },
+      "errors" : [ ],
+      "authtype" : "none"
+    }
+  },
+  "shapes" : {
+    "AnonListsInput" : {
+      "type" : "structure",
+      "members" : {
+        "AnonymousList" : {
+          "shape" : "__listOf__AnonymousListElement",
+          "locationName" : "anonymousList"
+        }
+      }
+    },
+    "AnonMapInput" : {
+      "type" : "structure",
+      "members" : {
+        "AnonMapStringToString" : {
+          "shape" : "__mapOf__string",
+          "locationName" : "anonMapStringToString"
+        }
+      }
+    },
+    "AnonObjectInput" : {
+      "type" : "structure",
+      "members" : {
+        "AnonymousObject" : {
+          "shape" : "AnonymousObject",
+          "locationName" : "anonymousObject"
+        }
+      }
+    },
+    "AnonymousEnum" : {
+      "type" : "string",
+      "enum" : [ "VALUE_ONE", "VALUE_TWO", "VALUE_THREE" ]
+    },
+    "AnonymousObject" : {
+      "type" : "structure",
+      "members" : {
+        "StrProperty" : {
+          "shape" : "__string",
+          "locationName" : "strProperty"
+        }
+      }
+    },
+    "CanonicalEnum" : {
+      "type" : "string",
+      "enum" : [ "ValueOne", "ValueTwo" ]
+    },
+    "Empty" : {
+      "type" : "structure",
+      "members" : { }
+    },
+    "GetNoauthErrorsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ErrorType" : {
+          "shape" : "__string",
+          "location" : "querystring",
+          "locationName" : "errorType",
+          "documentation" : "The Type for the Error"
+        }
+      }
+    },
+    "GetNoauthErrorsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "Empty" : {
+          "shape" : "Empty"
+        }
+      },
+      "required" : [ "Empty" ],
+      "payload" : "Empty"
+    },
+    "GetNoauthScalarsRequest" : {
+      "type" : "structure",
+      "members" : { }
+    },
+    "GetNoauthScalarsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "InternalServerError" : {
+      "type" : "structure",
+      "members" : {
+        "HostId" : {
+          "shape" : "__string",
+          "locationName" : "hostId"
+        }
+      }
+    },
+    "InternalServerErrorException" : {
+      "type" : "structure",
+      "members" : {
+        "HostId" : {
+          "shape" : "__string",
+          "locationName" : "hostId"
+        }
+      },
+      "exception" : true,
+      "error" : {
+        "httpStatusCode" : 500
+      }
+    },
+    "ListOfStrings" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "MapOfStringToString" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__string"
+      }
+    },
+    "NotFoundException" : {
+      "type" : "structure",
+      "members" : {
+        "ResourceName" : {
+          "shape" : "__string",
+          "locationName" : "resourceName"
+        }
+      },
+      "exception" : true,
+      "error" : {
+        "httpStatusCode" : 404
+      }
+    },
+    "PutApikeyRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutApikeyResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutComplexContainersInput" : {
+      "type" : "structure",
+      "members" : {
+        "ListOfStructures" : {
+          "shape" : "__listOfScalarTypes",
+          "locationName" : "listOfStructures"
+        },
+        "MapOfStringToListOfString" : {
+          "shape" : "__mapOf__listOf__string",
+          "locationName" : "mapOfStringToListOfString"
+        },
+        "MapOfStringToListOfStructure" : {
+          "shape" : "__mapOf__listOfScalarTypes",
+          "locationName" : "mapOfStringToListOfStructure"
+        },
+        "MapOfStringToMapOfStringToString" : {
+          "shape" : "__mapOf__mapOf__string",
+          "locationName" : "mapOfStringToMapOfStringToString"
+        },
+        "MapOfStringToStructure" : {
+          "shape" : "__mapOfScalarTypes",
+          "locationName" : "mapOfStringToStructure"
+        }
+      }
+    },
+    "PutContainersInput" : {
+      "type" : "structure",
+      "members" : {
+        "ListOfBooleans" : {
+          "shape" : "__listOf__boolean",
+          "locationName" : "listOfBooleans"
+        },
+        "ListOfDoubles" : {
+          "shape" : "__listOf__double",
+          "locationName" : "listOfDoubles"
+        },
+        "ListOfIntegers" : {
+          "shape" : "__listOf__integer",
+          "locationName" : "listOfIntegers"
+        },
+        "ListOfStrings" : {
+          "shape" : "__listOf__string",
+          "locationName" : "listOfStrings"
+        },
+        "MapOfStringToBoolean" : {
+          "shape" : "__mapOf__boolean",
+          "locationName" : "mapOfStringToBoolean"
+        },
+        "MapOfStringToDouble" : {
+          "shape" : "__mapOf__double",
+          "locationName" : "mapOfStringToDouble"
+        },
+        "MapOfStringToInteger" : {
+          "shape" : "__mapOf__integer",
+          "locationName" : "mapOfStringToInteger"
+        },
+        "MapOfStringToString" : {
+          "shape" : "__mapOf__string",
+          "locationName" : "mapOfStringToString"
+        }
+      }
+    },
+    "PutCustomauthScalarsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutCustomauthScalarsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutDefinitionsInput" : {
+      "type" : "structure",
+      "members" : {
+        "InlineRefMember" : {
+          "shape" : "PutDefinitionsInputInlineRefMember",
+          "locationName" : "inlineRefMember"
+        }
+      }
+    },
+    "PutDefinitionsInputInlineRefMember" : {
+      "type" : "structure",
+      "members" : {
+        "StrProperty" : {
+          "shape" : "__string",
+          "locationName" : "strProperty"
+        }
+      }
+    },
+    "PutIamauthScalarsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutIamauthScalarsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutNoauthAnonListsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AnonListsInput" : {
+          "shape" : "AnonListsInput"
+        }
+      },
+      "required" : [ "AnonListsInput" ],
+      "payload" : "AnonListsInput"
+    },
+    "PutNoauthAnonListsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "AnonListsInput" : {
+          "shape" : "AnonListsInput"
+        }
+      },
+      "required" : [ "AnonListsInput" ],
+      "payload" : "AnonListsInput"
+    },
+    "PutNoauthAnonMapRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AnonMapInput" : {
+          "shape" : "AnonMapInput"
+        }
+      },
+      "required" : [ "AnonMapInput" ],
+      "payload" : "AnonMapInput"
+    },
+    "PutNoauthAnonMapResponse" : {
+      "type" : "structure",
+      "members" : {
+        "AnonMapInput" : {
+          "shape" : "AnonMapInput"
+        }
+      },
+      "required" : [ "AnonMapInput" ],
+      "payload" : "AnonMapInput"
+    },
+    "PutNoauthAnonObjectRequest" : {
+      "type" : "structure",
+      "members" : {
+        "AnonObjectInput" : {
+          "shape" : "AnonObjectInput"
+        }
+      },
+      "required" : [ "AnonObjectInput" ],
+      "payload" : "AnonObjectInput"
+    },
+    "PutNoauthAnonObjectResponse" : {
+      "type" : "structure",
+      "members" : {
+        "AnonObjectInput" : {
+          "shape" : "AnonObjectInput"
+        }
+      },
+      "required" : [ "AnonObjectInput" ],
+      "payload" : "AnonObjectInput"
+    },
+    "PutNoauthContainersComplexRequest" : {
+      "type" : "structure",
+      "members" : {
+        "PutComplexContainersInput" : {
+          "shape" : "PutComplexContainersInput"
+        }
+      },
+      "required" : [ "PutComplexContainersInput" ],
+      "payload" : "PutComplexContainersInput"
+    },
+    "PutNoauthContainersComplexResponse" : {
+      "type" : "structure",
+      "members" : {
+        "PutComplexContainersInput" : {
+          "shape" : "PutComplexContainersInput"
+        }
+      },
+      "required" : [ "PutComplexContainersInput" ],
+      "payload" : "PutComplexContainersInput"
+    },
+    "PutNoauthContainersSimpleRequest" : {
+      "type" : "structure",
+      "members" : {
+        "PutContainersInput" : {
+          "shape" : "PutContainersInput"
+        }
+      },
+      "required" : [ "PutContainersInput" ],
+      "payload" : "PutContainersInput"
+    },
+    "PutNoauthContainersSimpleResponse" : {
+      "type" : "structure",
+      "members" : {
+        "PutContainersInput" : {
+          "shape" : "PutContainersInput"
+        }
+      },
+      "required" : [ "PutContainersInput" ],
+      "payload" : "PutContainersInput"
+    },
+    "PutNoauthDefsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "PutDefinitionsInput" : {
+          "shape" : "PutDefinitionsInput"
+        }
+      },
+      "required" : [ "PutDefinitionsInput" ],
+      "payload" : "PutDefinitionsInput"
+    },
+    "PutNoauthDefsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "PutDefinitionsInput" : {
+          "shape" : "PutDefinitionsInput"
+        }
+      },
+      "required" : [ "PutDefinitionsInput" ],
+      "payload" : "PutDefinitionsInput"
+    },
+    "PutNoauthEnumsSimpleRequest" : {
+      "type" : "structure",
+      "members" : {
+        "PutSimpleEnumsInput" : {
+          "shape" : "PutSimpleEnumsInput"
+        }
+      },
+      "required" : [ "PutSimpleEnumsInput" ],
+      "payload" : "PutSimpleEnumsInput"
+    },
+    "PutNoauthEnumsSimpleResponse" : {
+      "type" : "structure",
+      "members" : {
+        "PutSimpleEnumsInput" : {
+          "shape" : "PutSimpleEnumsInput"
+        }
+      },
+      "required" : [ "PutSimpleEnumsInput" ],
+      "payload" : "PutSimpleEnumsInput"
+    },
+    "PutNoauthRefsCanonListRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ListOfStrings" : {
+          "shape" : "ListOfStrings"
+        }
+      },
+      "required" : [ "ListOfStrings" ],
+      "payload" : "ListOfStrings"
+    },
+    "PutNoauthRefsCanonListResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ListOfStrings" : {
+          "shape" : "ListOfStrings"
+        }
+      },
+      "required" : [ "ListOfStrings" ],
+      "payload" : "ListOfStrings"
+    },
+    "PutNoauthRefsCanonMapRequest" : {
+      "type" : "structure",
+      "members" : {
+        "MapOfStringToString" : {
+          "shape" : "MapOfStringToString"
+        }
+      },
+      "required" : [ "MapOfStringToString" ],
+      "payload" : "MapOfStringToString"
+    },
+    "PutNoauthRefsCanonMapResponse" : {
+      "type" : "structure",
+      "members" : {
+        "MapOfStringToString" : {
+          "shape" : "MapOfStringToString"
+        }
+      },
+      "required" : [ "MapOfStringToString" ],
+      "payload" : "MapOfStringToString"
+    },
+    "PutNoauthRefsCanonPrimitiveRequest" : {
+      "type" : "structure",
+      "members" : {
+        "String" : {
+          "shape" : "String"
+        }
+      },
+      "required" : [ "String" ],
+      "payload" : "String"
+    },
+    "PutNoauthRefsCanonPrimitiveResponse" : {
+      "type" : "structure",
+      "members" : {
+        "String" : {
+          "shape" : "String"
+        }
+      },
+      "required" : [ "String" ],
+      "payload" : "String"
+    },
+    "PutNoauthScalarsRequest" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutNoauthScalarsResponse" : {
+      "type" : "structure",
+      "members" : {
+        "ScalarTypes" : {
+          "shape" : "ScalarTypes"
+        }
+      },
+      "required" : [ "ScalarTypes" ],
+      "payload" : "ScalarTypes"
+    },
+    "PutSimpleEnumsInput" : {
+      "type" : "structure",
+      "members" : {
+        "AnonymousEnum" : {
+          "shape" : "AnonymousEnum",
+          "locationName" : "anonymousEnum"
+        },
+        "CanonicalEnumRef" : {
+          "shape" : "CanonicalEnum",
+          "locationName" : "canonicalEnumRef"
+        },
+        "InlineEnumRef" : {
+          "shape" : "PutSimpleEnumsInputInlineEnumRef",
+          "locationName" : "inlineEnumRef"
+        }
+      }
+    },
+    "PutSimpleEnumsInputInlineEnumRef" : {
+      "type" : "string",
+      "enum" : [ "foo", "bar", "baz" ]
+    },
+    "ResourceNotFound" : {
+      "type" : "structure",
+      "members" : {
+        "ResourceName" : {
+          "shape" : "__string",
+          "locationName" : "resourceName"
+        }
+      }
+    },
+    "ScalarTypes" : {
+      "type" : "structure",
+      "members" : {
+        "BooleanMember" : {
+          "shape" : "__boolean"
+        },
+        "Foo" : {
+          "shape" : "__string",
+          "locationName" : "123foo"
+        },
+        "Foo123" : {
+          "shape" : "__string",
+          "locationName" : "foo123"
+        },
+        "FooBar" : {
+          "shape" : "__string",
+          "locationName" : "foo@)$&@$*&@bar"
+        },
+        "IntegerMember" : {
+          "shape" : "__integer"
+        },
+        "MemberNameWithBangs" : {
+          "shape" : "__string",
+          "locationName" : "member!name!with!bangs"
+        },
+        "MemberNameWithDashes" : {
+          "shape" : "__string",
+          "locationName" : "member-name-with-dashes"
+        },
+        "MemberNameWithUnderscores" : {
+          "shape" : "__string",
+          "locationName" : "member_name_with_underscores"
+        },
+        "NumberMember" : {
+          "shape" : "__double"
+        },
+        "StringMember" : {
+          "shape" : "__string"
+        }
+      }
+    },
+    "String" : {
+      "type" : "string"
+    },
+    "__AnonymousListElement" : {
+      "type" : "structure",
+      "members" : {
+        "StrProperty" : {
+          "shape" : "__string",
+          "locationName" : "strProperty"
+        }
+      }
+    },
+    "__boolean" : {
+      "type" : "boolean"
+    },
+    "__double" : {
+      "type" : "double"
+    },
+    "__integer" : {
+      "type" : "integer"
+    },
+    "__listOfScalarTypes" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ScalarTypes"
+      }
+    },
+    "__listOf__AnonymousListElement" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__AnonymousListElement"
+      }
+    },
+    "__listOf__boolean" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__boolean"
+      }
+    },
+    "__listOf__double" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__double"
+      }
+    },
+    "__listOf__integer" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__integer"
+      }
+    },
+    "__listOf__string" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "__mapOfScalarTypes" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "ScalarTypes"
+      }
+    },
+    "__mapOf__boolean" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__boolean"
+      }
+    },
+    "__mapOf__double" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__double"
+      }
+    },
+    "__mapOf__integer" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__integer"
+      }
+    },
+    "__mapOf__listOfScalarTypes" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__listOfScalarTypes"
+      }
+    },
+    "__mapOf__listOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__listOf__string"
+      }
+    },
+    "__mapOf__mapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__mapOf__string"
+      }
+    },
+    "__mapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__string"
+      }
+    },
+    "__string" : {
+      "type" : "string"
+    },
+    "__timestampIso8601" : {
+      "type" : "timestamp",
+      "timestampFormat" : "iso8601"
+    },
+    "__timestampUnix" : {
+      "type" : "timestamp",
+      "timestampFormat" : "unixTimestamp"
+    }
+  },
+  "authorizers" : {
+    "MyCustomAuthorizer" : {
+      "name" : "MyCustomAuthorizer",
+      "type" : "provided",
+      "placement" : {
+        "location" : "header",
+        "name" : "Authorization"
+      }
+    }
+  }
+}

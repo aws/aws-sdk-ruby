@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "waiters": {
+    "BandExists": {
+      "delay": 5,
+      "operation": "GetBand",
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "state": "success",
+          "matcher": "status",
+          "expected": 200
+        },
+        {
+          "state": "failure",
+          "matcher": "error",
+          "expected": "ResourceNotFound"
+        }
+      ]
+    },
+    "BandIsFamous": {
+      "delay": 5,
+      "operation": "GetBand",
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "state": "success",
+          "matcher": "path",
+          "argument": "Band.Famous",
+          "expected": true
+        }
+      ]
+    }
+  }
+}

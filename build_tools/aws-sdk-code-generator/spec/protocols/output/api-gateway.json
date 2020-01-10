@@ -1,0 +1,587 @@
+[
+  {
+    "description": "Scalar members in payload are unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          },
+          "IntegerMember": {
+            "shape": "__integer"
+          },
+          "NumberMember": {
+            "shape": "__double"
+          },
+          "DateMember": {
+            "shape": "__timestamp"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      },
+      "__integer": {
+        "type": "integer"
+      },
+      "__double": {
+        "type": "double"
+      },
+      "__timestamp": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "StringMember": "foo",
+            "IntegerMember": 123,
+            "NumberMember": 9000.1,
+            "DateMember": 1422172801
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body":  "{\"StringMember\": \"foo\", \"IntegerMember\": 123, \"NumberMember\": 9000.1, \"DateMember\":\"2015-01-25T08:00:01.000Z\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Boolean member with value in payload is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "BooleanMemberA": {
+            "shape": "__boolean"
+          },
+          "BooleanMemberB": {
+            "shape": "__boolean"
+          }
+        }
+      },
+      "__boolean": {
+        "type": "boolean"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "BooleanMemberA": true,
+          "BooleanMemberB": false
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"BooleanMemberA\": true, \"BooleanMemberB\": false}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Nested structure in payload is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "NestedStructure": {
+            "shape": "NestedStructure"
+          }
+        }
+      },
+      "NestedStructure": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "NestedStructure": {
+              "StringMember": "foo"
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"NestedStructure\": {\"StringMember\": \"foo\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "List of strings in payload is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "ListOfStrings": {
+            "shape": "ListOfStrings"
+          }
+        }
+      },
+      "ListOfStrings": {
+        "type": "list",
+        "member": {
+          "shape": "__string"
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "ListOfStrings": [
+              "a",
+              "b",
+              null
+            ]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListOfStrings\": [\"a\", \"b\", null]}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "List of structs in payload is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "ListOfStructs": {
+            "shape": "ListOfStructs"
+          }
+        }
+      },
+      "ListOfStructs": {
+        "type": "list",
+        "member": {
+          "shape": "ScalarTypes"
+        }
+      },
+      "ScalarTypes": {
+        "type": "structure",
+        "members": {
+          "StringMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "ListOfStructs": [
+              {
+                "StringMember": "foo"
+              },
+              null,
+              {}
+            ]
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"ListOfStructs\": [{\"StringMember\": \"foo\"}, null, {}]}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Recursive structure with no recursion used is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "RecursiveMember"
+          }
+        }
+      },
+      "RecursiveMember": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "RecursiveMember": {
+              "NoRecursiveMember": "foo"
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Recursive structure with multiple levels of recursion is unmarshalled correctly",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveStructure": {
+            "shape": "RecursiveStructure"
+          }
+        },
+        "payload": "RecursiveStructure"
+      },
+      "RecursiveStructure": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "AnotherRecursiveMember"
+          }
+        }
+      },
+      "AnotherRecursiveMember": {
+        "type": "structure",
+        "members": {
+          "RecursiveMember": {
+            "shape": "RecursiveMember"
+          }
+        }
+      },
+      "RecursiveMember": {
+        "type": "structure",
+        "members": {
+          "NoRecursiveMember": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {
+            "RecursiveStructure": {
+              "RecursiveMember": {
+                "RecursiveMember": {
+                  "NoRecursiveMember": "foo"
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"RecursiveStructure\": {\"RecursiveMember\": {\"RecursiveMember\": {\"NoRecursiveMember\": \"foo\"}}}}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Operation with no output defined ignores any content in body",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+    },
+    "cases": [
+      {
+        "given": {
+          "name": "OperationName"
+        },
+        "result": {
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "THIS ISN'T JSON!!!"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Unmodeled data is ignored",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "PayloadMember": {
+            "shape": "PayloadMember"
+          }
+        },
+        "payload": "PayloadMember"
+      },
+      "PayloadMember": {
+        "type": "structure",
+        "members": {
+          "NotFoo": {
+            "shape": "__string"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "PayloadMember": {}
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "{\"foo\": \"bar\"}"
+        }
+      }
+    ]
+  },
+  {
+    "description": "No headers present, does not set modeled header member",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderMemberOne": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-one"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": ""
+        }
+      }
+    ]
+  },
+  {
+    "description": "Multiple modeled headers in response, sets appropriate header members",
+    "metadata": {
+      "protocol": "api-gateway"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "HeaderMemberOne": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-one"
+          },
+          "HeaderMemberTwo": {
+            "shape": "__string",
+            "location": "header",
+            "locationName": "x-apig-header-string-two"
+          }
+        }
+      },
+      "__string": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "HeaderMemberOne": "valueOne",
+          "HeaderMemberTwo": "valueTwo"
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {
+            "x-apig-header-string-one": "valueOne",
+            "x-apig-header-string-two": "valueTwo"
+          },
+          "body": ""
+        }
+      }
+    ]
+  }
+]

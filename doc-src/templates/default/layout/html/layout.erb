@@ -16,15 +16,14 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="<%= @nav_url %>"></iframe>
-
       <div id="content">
         <!-- REGION_DISCLAIMER_DO_NOT_REMOVE -->
-        <p id="version-2-warning">You are viewing documentation for version 2 of the AWS SDK for Ruby. <a href="http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html">Version 1 documentation can be found here</a>.</p>
+        <p id="version-3-warning">You are viewing documentation for version 3 of the AWS SDK for Ruby. <a href="http://docs.aws.amazon.com/sdkforruby/api/frames.html">Version 2 documentation can be found here</a>.</p>
         <%= yieldall %>
       </div>
 
       <%= erb(:footer) %>
     </div>
+    <script src="/SdkStatic/sdk-priv.js" async="true"></script>
   </body>
 </html>

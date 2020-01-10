@@ -1,0 +1,30 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  module Errors
+
+    extend Aws::Errors::DynamicErrors
+
+    {{#errors}}
+    class {{name}} < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [{{data_type}}] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      {{#members}}
+      # @return [{{type}}]
+      def {{name}}
+        {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
+      end
+
+      {{/members}}
+    end
+
+    {{/errors}}
+  end
+end

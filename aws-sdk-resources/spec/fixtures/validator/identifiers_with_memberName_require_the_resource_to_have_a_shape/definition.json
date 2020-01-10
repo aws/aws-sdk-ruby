@@ -1,9 +1,0 @@
-{
-  "resources": {
-    "ResourceName": {
-      "identifiers": [
-        { "name": "Id", "memberName": "ResourceId" }
-      ]
-    }
-  }
-}

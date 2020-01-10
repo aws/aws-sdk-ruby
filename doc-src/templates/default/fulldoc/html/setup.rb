@@ -1,7 +1,11 @@
+def javascripts_full_list
+  super + ['js/nolink.js']
+end
+
 def class_list(root = Registry.root, tree = TreeContext.new)
   out = ''
   # non-service classes
-  out << "<li class='#{tree.classes.join(' ')}'>"
+  out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
   out << "<a class='toggle'></a> Non-Service Classes"
   out << "</div><ul>"
@@ -12,9 +16,9 @@ def class_list(root = Registry.root, tree = TreeContext.new)
   out << '</ul></li>'
 
   # service classes
-  out << "<li class='#{tree.classes.join(' ')}'>"
+  out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
-  out << "<a class='toggle'></a> Services"
+  out << "<a class='toggle'></a> Service Gems"
   out << "</div><ul>"
   children = Registry.at('Aws').children.select { |c| c.has_tag?(:service) }
   tree.nest do
@@ -30,7 +34,7 @@ def class_list_children(children, options)
   out = ''
   children.compact.sort_by(&:path).each do |child|
     if child.is_a?(CodeObjects::NamespaceObject)
-      next if child.tag(:service) if skip_services
+      next if child.has_tag?(:service) if skip_services
       name = child.namespace.is_a?(CodeObjects::Proxy) ? child.path : child.name
       grand_children = run_verifier(child.children)
       is_parent = grand_children.any? {|o| o.is_a?(CodeObjects::NamespaceObject) }
@@ -39,6 +43,7 @@ def class_list_children(children, options)
       out << "<a class='toggle'></a> " if is_parent
       out << linkify(child, name)
       out << " &lt; #{child.superclass.name}" if child.is_a?(CodeObjects::ClassObject) && child.superclass
+      out << " (aws-sdk-#{name.downcase})" if child.has_tag?(:service)
       out << "<small class='search_info'>"
       out << child.namespace.title
       out << "</small>"
