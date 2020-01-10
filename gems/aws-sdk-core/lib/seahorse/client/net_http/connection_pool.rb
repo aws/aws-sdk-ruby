@@ -53,14 +53,14 @@ module Seahorse
 
         # Makes an HTTP request, yielding a Net::HTTPResponse object.
         #
-        #   pool.request('http://domain', Net::HTTP::Get.new('/')) do |resp|
+        #   pool.request(URI.parse('http://domain'), Net::HTTP::Get.new('/')) do |resp|
         #     puts resp.code # status code
         #     puts resp.to_h.inspect # dump the headers
         #     puts resp.body
         #   end
         #
-        # @param [String] endpoint The HTTP(S) endpoint to
-        #    connect to (e.g. 'https://domain.com').
+        # @param [URI::HTTP, URI::HTTPS] endpoint The HTTP(S) endpoint
+        #    to connect to (e.g. 'https://domain.com').
         #
         # @param [Net::HTTPRequest] request The request to make.  This can be
         #   any request object from Net::HTTP (e.g. Net::HTTP::Get,
