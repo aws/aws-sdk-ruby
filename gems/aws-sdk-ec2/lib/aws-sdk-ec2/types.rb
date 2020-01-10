@@ -12271,6 +12271,12 @@ module Aws::EC2
     #         egress_only_internet_gateway_ids: ["EgressOnlyInternetGatewayId"],
     #         max_results: 1,
     #         next_token: "String",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -12294,13 +12300,28 @@ module Aws::EC2
     #   The token for the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysRequest AWS API Documentation
     #
     class DescribeEgressOnlyInternetGatewaysRequest < Struct.new(
       :dry_run,
       :egress_only_internet_gateway_ids,
       :max_results,
-      :next_token)
+      :next_token,
+      :filters)
       include Aws::Structure
     end
 
@@ -22180,11 +22201,16 @@ module Aws::EC2
     #   The ID of the egress-only internet gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the egress-only internet gateway.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway AWS API Documentation
     #
     class EgressOnlyInternetGateway < Struct.new(
       :attachments,
-      :egress_only_internet_gateway_id)
+      :egress_only_internet_gateway_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -30425,13 +30451,18 @@ module Aws::EC2
     #   The state of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the local gateway.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGateway AWS API Documentation
     #
     class LocalGateway < Struct.new(
       :local_gateway_id,
       :outpost_arn,
       :owner_id,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -30486,13 +30517,18 @@ module Aws::EC2
     #   The state of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the local gateway route table.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRouteTable AWS API Documentation
     #
     class LocalGatewayRouteTable < Struct.new(
       :local_gateway_route_table_id,
       :local_gateway_id,
       :outpost_arn,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -30519,6 +30555,10 @@ module Aws::EC2
     #   The state of the association.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the association.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRouteTableVirtualInterfaceGroupAssociation AWS API Documentation
     #
     class LocalGatewayRouteTableVirtualInterfaceGroupAssociation < Struct.new(
@@ -30526,7 +30566,8 @@ module Aws::EC2
       :local_gateway_virtual_interface_group_id,
       :local_gateway_id,
       :local_gateway_route_table_id,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -30553,6 +30594,10 @@ module Aws::EC2
     #   The state of the association.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the association.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayRouteTableVpcAssociation AWS API Documentation
     #
     class LocalGatewayRouteTableVpcAssociation < Struct.new(
@@ -30560,7 +30605,8 @@ module Aws::EC2
       :local_gateway_route_table_id,
       :local_gateway_id,
       :vpc_id,
-      :state)
+      :state,
+      :tags)
       include Aws::Structure
     end
 
@@ -30595,6 +30641,10 @@ module Aws::EC2
     #   The peer BGP ASN.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the virtual interface.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayVirtualInterface AWS API Documentation
     #
     class LocalGatewayVirtualInterface < Struct.new(
@@ -30604,7 +30654,8 @@ module Aws::EC2
       :local_address,
       :peer_address,
       :local_bgp_asn,
-      :peer_bgp_asn)
+      :peer_bgp_asn,
+      :tags)
       include Aws::Structure
     end
 
@@ -30622,12 +30673,17 @@ module Aws::EC2
     #   The ID of the local gateway.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags assigned to the virtual interface group.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LocalGatewayVirtualInterfaceGroup AWS API Documentation
     #
     class LocalGatewayVirtualInterfaceGroup < Struct.new(
       :local_gateway_virtual_interface_group_id,
       :local_gateway_virtual_interface_ids,
-      :local_gateway_id)
+      :local_gateway_id,
+      :tags)
       include Aws::Structure
     end
 

@@ -2814,6 +2814,8 @@ module Aws::SageMaker
 
     ListTrialComponentKey256.member = Shapes::ShapeRef.new(shape: TrialComponentKey256)
 
+    ListTrialComponentsRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    ListTrialComponentsRequest.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialName"))
     ListTrialComponentsRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: String256, location_name: "SourceArn"))
     ListTrialComponentsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
     ListTrialComponentsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
@@ -3984,6 +3986,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreatePresignedDomainUrlRequest)
         o.output = Shapes::ShapeRef.new(shape: CreatePresignedDomainUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:create_presigned_notebook_instance_url, Seahorse::Model::Operation.new.tap do |o|
@@ -4850,6 +4853,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTrialComponentsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTrialComponentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -4864,6 +4868,7 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTrialsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTrialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

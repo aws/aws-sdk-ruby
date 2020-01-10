@@ -61,6 +61,10 @@ module Aws::Chime
     #   Supported licenses for the Amazon Chime account.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] signin_delegate_groups
+    #   The sign-in delegate groups associated with the account.
+    #   @return [Array<Types::SigninDelegateGroup>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Account AWS API Documentation
     #
     class Account < Struct.new(
@@ -70,7 +74,8 @@ module Aws::Chime
       :account_type,
       :created_timestamp,
       :default_license,
-      :supported_licenses)
+      :supported_licenses,
+      :signin_delegate_groups)
       include Aws::Structure
     end
 
@@ -112,6 +117,33 @@ module Aws::Chime
     class AccountSettings < Struct.new(
       :disable_remote_control,
       :enable_dial_out)
+      include Aws::Structure
+    end
+
+    # The Alexa for Business metadata associated with an Amazon Chime user,
+    # used to integrate Alexa for Business with a device.
+    #
+    # @note When making an API call, you may pass AlexaForBusinessMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         is_alexa_for_business_enabled: false,
+    #         alexa_for_business_room_arn: "SensitiveString",
+    #       }
+    #
+    # @!attribute [rw] is_alexa_for_business_enabled
+    #   Starts or stops Alexa for Business.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] alexa_for_business_room_arn
+    #   The ARN of the room resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AlexaForBusinessMetadata AWS API Documentation
+    #
+    class AlexaForBusinessMetadata < Struct.new(
+      :is_alexa_for_business_enabled,
+      :alexa_for_business_room_arn)
       include Aws::Structure
     end
 
@@ -240,6 +272,38 @@ module Aws::Chime
       :phone_number_errors)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass AssociateSigninDelegateGroupsWithAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         signin_delegate_groups: [ # required
+    #           {
+    #             group_name: "NonEmptyString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] signin_delegate_groups
+    #   The sign-in delegate groups.
+    #   @return [Array<Types::SigninDelegateGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociateSigninDelegateGroupsWithAccountRequest AWS API Documentation
+    #
+    class AssociateSigninDelegateGroupsWithAccountRequest < Struct.new(
+      :account_id,
+      :signin_delegate_groups)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociateSigninDelegateGroupsWithAccountResponse AWS API Documentation
+    #
+    class AssociateSigninDelegateGroupsWithAccountResponse < Aws::EmptyStructure; end
 
     # An Amazon Chime SDK meeting attendee. Includes a unique `AttendeeId`
     # and `JoinToken`. The `JoinToken` allows a client to authenticate and
@@ -535,6 +599,11 @@ module Aws::Chime
     #           {
     #             user_id: "NonEmptyString", # required
     #             license_type: "Basic", # accepts Basic, Plus, Pro, ProTrial
+    #             user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #             alexa_for_business_metadata: {
+    #               is_alexa_for_business_enabled: false,
+    #               alexa_for_business_room_arn: "SensitiveString",
+    #             },
     #           },
     #         ],
     #       }
@@ -843,7 +912,10 @@ module Aws::Chime
     #
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting. Available values:
-    #   `us-east-1`, `us-west-2`.
+    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`,
+    #   `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @!attribute [rw] notifications_configuration
@@ -996,6 +1068,53 @@ module Aws::Chime
     #
     class CreateRoomResponse < Struct.new(
       :room)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         username: "String",
+    #         email: "EmailAddress",
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The user name.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The user's email address.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_type
+    #   The user type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateUserRequest AWS API Documentation
+    #
+    class CreateUserRequest < Struct.new(
+      :account_id,
+      :username,
+      :email,
+      :user_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user
+    #   The user on the Amazon Chime account.
+    #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateUserResponse AWS API Documentation
+    #
+    class CreateUserResponse < Struct.new(
+      :user)
       include Aws::Structure
     end
 
@@ -1487,6 +1606,34 @@ module Aws::Chime
       :phone_number_errors)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisassociateSigninDelegateGroupsFromAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "NonEmptyString", # required
+    #         group_names: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Chime account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_names
+    #   The sign-in delegate group names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociateSigninDelegateGroupsFromAccountRequest AWS API Documentation
+    #
+    class DisassociateSigninDelegateGroupsFromAccountRequest < Struct.new(
+      :account_id,
+      :group_names)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociateSigninDelegateGroupsFromAccountResponse AWS API Documentation
+    #
+    class DisassociateSigninDelegateGroupsFromAccountResponse < Aws::EmptyStructure; end
 
     # The configuration that allows a bot to receive outgoing events. Can be
     # either an HTTPS endpoint or a Lambda function ARN.
@@ -2155,6 +2302,7 @@ module Aws::Chime
     #       {
     #         account_id: "NonEmptyString", # required
     #         user_email_list: ["EmailAddress"], # required
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
     #       }
     #
     # @!attribute [rw] account_id
@@ -2165,11 +2313,16 @@ module Aws::Chime
     #   The user email addresses to which to send the email invitation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_type
+    #   The user type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/InviteUsersRequest AWS API Documentation
     #
     class InviteUsersRequest < Struct.new(
       :account_id,
-      :user_email_list)
+      :user_email_list,
+      :user_type)
       include Aws::Structure
     end
 
@@ -2584,6 +2737,7 @@ module Aws::Chime
     #       {
     #         account_id: "NonEmptyString", # required
     #         user_email: "EmailAddress",
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
     #         max_results: 1,
     #         next_token: "String",
     #       }
@@ -2594,6 +2748,10 @@ module Aws::Chime
     #
     # @!attribute [rw] user_email
     #   Optional. The user email address used to filter results. Maximum 1.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_type
+    #   The user type.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2610,6 +2768,7 @@ module Aws::Chime
     class ListUsersRequest < Struct.new(
       :account_id,
       :user_email,
+      :user_type,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -2842,7 +3001,10 @@ module Aws::Chime
     #
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting. Available values:
-    #   `us-east-1`, `us-west-2`.
+    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`,
+    #   `ca-central-1`, `eu-central-1`, `eu-north-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/Meeting AWS API Documentation
@@ -3814,6 +3976,27 @@ module Aws::Chime
       include Aws::Structure
     end
 
+    # An Active Directory (AD) group whose members are granted permission to
+    # act as delegates.
+    #
+    # @note When making an API call, you may pass SigninDelegateGroup
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/SigninDelegateGroup AWS API Documentation
+    #
+    class SigninDelegateGroup < Struct.new(
+      :group_name)
+      include Aws::Structure
+    end
+
     # The streaming configuration associated with an Amazon Chime Voice
     # Connector. Specifies whether media streaming is enabled for sending to
     # Amazon Kinesis, and shows the retention period for the Amazon Kinesis
@@ -4315,6 +4498,11 @@ module Aws::Chime
     #         account_id: "NonEmptyString", # required
     #         user_id: "NonEmptyString", # required
     #         license_type: "Basic", # accepts Basic, Plus, Pro, ProTrial
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #         alexa_for_business_metadata: {
+    #           is_alexa_for_business_enabled: false,
+    #           alexa_for_business_room_arn: "SensitiveString",
+    #         },
     #       }
     #
     # @!attribute [rw] account_id
@@ -4330,12 +4518,22 @@ module Aws::Chime
     #   type for the Amazon Chime account that the user belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] user_type
+    #   The user type.
+    #   @return [String]
+    #
+    # @!attribute [rw] alexa_for_business_metadata
+    #   The Alexa for Business metadata.
+    #   @return [Types::AlexaForBusinessMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserRequest AWS API Documentation
     #
     class UpdateUserRequest < Struct.new(
       :account_id,
       :user_id,
-      :license_type)
+      :license_type,
+      :user_type,
+      :alexa_for_business_metadata)
       include Aws::Structure
     end
 
@@ -4348,6 +4546,11 @@ module Aws::Chime
     #       {
     #         user_id: "NonEmptyString", # required
     #         license_type: "Basic", # accepts Basic, Plus, Pro, ProTrial
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #         alexa_for_business_metadata: {
+    #           is_alexa_for_business_enabled: false,
+    #           alexa_for_business_room_arn: "SensitiveString",
+    #         },
     #       }
     #
     # @!attribute [rw] user_id
@@ -4358,11 +4561,21 @@ module Aws::Chime
     #   The user license type.
     #   @return [String]
     #
+    # @!attribute [rw] user_type
+    #   The user type.
+    #   @return [String]
+    #
+    # @!attribute [rw] alexa_for_business_metadata
+    #   The Alexa for Business metadata.
+    #   @return [Types::AlexaForBusinessMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUserRequestItem AWS API Documentation
     #
     class UpdateUserRequestItem < Struct.new(
       :user_id,
-      :license_type)
+      :license_type,
+      :user_type,
+      :alexa_for_business_metadata)
       include Aws::Structure
     end
 
@@ -4527,6 +4740,10 @@ module Aws::Chime
     #   The license type for the user.
     #   @return [String]
     #
+    # @!attribute [rw] user_type
+    #   The user type.
+    #   @return [String]
+    #
     # @!attribute [rw] user_registration_status
     #   The user registration status.
     #   @return [String]
@@ -4544,6 +4761,10 @@ module Aws::Chime
     #   in ISO 8601 format.
     #   @return [Time]
     #
+    # @!attribute [rw] alexa_for_business_metadata
+    #   The Alexa for Business metadata.
+    #   @return [Types::AlexaForBusinessMetadata]
+    #
     # @!attribute [rw] personal_pin
     #   The user's personal meeting PIN.
     #   @return [String]
@@ -4557,10 +4778,12 @@ module Aws::Chime
       :primary_provisioned_number,
       :display_name,
       :license_type,
+      :user_type,
       :user_registration_status,
       :user_invitation_status,
       :registered_on,
       :invited_on,
+      :alexa_for_business_metadata,
       :personal_pin)
       include Aws::Structure
     end

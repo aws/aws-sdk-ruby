@@ -63,6 +63,9 @@ module Aws::RDS
     # * `DBInstances` - The number of DB instances per account. The used
     #   value is the count of the DB instances in the account.
     #
+    #   Amazon RDS DB instances, Amazon Aurora DB instances, Amazon Neptune
+    #   instances, and Amazon DocumentDB instances apply to this quota.
+    #
     # * `DBParameterGroups` - The number of DB parameter groups per account,
     #   excluding default parameter groups. The used value is the count of
     #   nondefault DB parameter groups in the account.
@@ -101,8 +104,9 @@ module Aws::RDS
     #   group in the account. Other DB subnet groups in the account might
     #   have a lower number of subnets.
     #
-    # For more information, see [Limits][1] in the *Amazon RDS User Guide*
-    # and [Limits][2] in the *Amazon Aurora User Guide*.
+    # For more information, see [Quotas for Amazon RDS][1] in the *Amazon
+    # RDS User Guide* and [Quotas for Amazon Aurora][2] in the *Amazon
+    # Aurora User Guide*.
     #
     #
     #
@@ -562,6 +566,15 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] customer_override
+    #   Whether there is an override for the default certificate identifier.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] customer_override_valid_till
+    #   If there is an override for the default certificate identifier, when
+    #   the override expires.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Certificate AWS API Documentation
     #
     class Certificate < Struct.new(
@@ -570,7 +583,9 @@ module Aws::RDS
       :thumbprint,
       :valid_from,
       :valid_till,
-      :certificate_arn)
+      :certificate_arn,
+      :customer_override,
+      :customer_override_valid_till)
       include Aws::Structure
     end
 
@@ -1962,6 +1977,25 @@ module Aws::RDS
     # @!attribute [rw] engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    #   Limitations and requirements apply to some DB engine modes. For more
+    #   information, see the following sections in the *Amazon Aurora User
+    #   Guide*\:
+    #
+    #   * [ Limitations of Aurora Serverless][1]
+    #
+    #   * [ Limitations of Parallel Query][2]
+    #
+    #   * [ Requirements for Aurora Global Databases][3]
+    #
+    #   * [ Limitations of Multi-Master Clusters][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     #   @return [String]
     #
     # @!attribute [rw] scaling_configuration
@@ -11181,6 +11215,47 @@ module Aws::RDS
     class MinimumEngineVersionPerAllowedValue < Struct.new(
       :allowed_value,
       :minimum_engine_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyCertificatesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_identifier: "String",
+    #         remove_customer_override: false,
+    #       }
+    #
+    # @!attribute [rw] certificate_identifier
+    #   The new default certificate identifier to override the current one
+    #   with.
+    #
+    #   To determine the valid values, use the `describe-certificates` AWS
+    #   CLI command or the `DescribeCertificates` API operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_customer_override
+    #   A value that indicates whether to remove the override for the
+    #   default certificate. If the override is removed, the default
+    #   certificate is the system default.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCertificatesMessage AWS API Documentation
+    #
+    class ModifyCertificatesMessage < Struct.new(
+      :certificate_identifier,
+      :remove_customer_override)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   A CA certificate for an AWS account.
+    #   @return [Types::Certificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCertificatesResult AWS API Documentation
+    #
+    class ModifyCertificatesResult < Struct.new(
+      :certificate)
       include Aws::Structure
     end
 

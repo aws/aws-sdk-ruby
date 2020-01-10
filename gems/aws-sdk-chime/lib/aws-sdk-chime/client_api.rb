@@ -17,6 +17,7 @@ module Aws::Chime
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
     AccountType = Shapes::StringShape.new(name: 'AccountType')
+    AlexaForBusinessMetadata = Shapes::StructureShape.new(name: 'AlexaForBusinessMetadata')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociatePhoneNumberWithUserRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumberWithUserRequest')
     AssociatePhoneNumberWithUserResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumberWithUserResponse')
@@ -24,6 +25,8 @@ module Aws::Chime
     AssociatePhoneNumbersWithVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorGroupResponse')
     AssociatePhoneNumbersWithVoiceConnectorRequest = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorRequest')
     AssociatePhoneNumbersWithVoiceConnectorResponse = Shapes::StructureShape.new(name: 'AssociatePhoneNumbersWithVoiceConnectorResponse')
+    AssociateSigninDelegateGroupsWithAccountRequest = Shapes::StructureShape.new(name: 'AssociateSigninDelegateGroupsWithAccountRequest')
+    AssociateSigninDelegateGroupsWithAccountResponse = Shapes::StructureShape.new(name: 'AssociateSigninDelegateGroupsWithAccountResponse')
     Attendee = Shapes::StructureShape.new(name: 'Attendee')
     AttendeeList = Shapes::ListShape.new(name: 'AttendeeList')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
@@ -71,6 +74,8 @@ module Aws::Chime
     CreateRoomMembershipResponse = Shapes::StructureShape.new(name: 'CreateRoomMembershipResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
     CreateRoomResponse = Shapes::StructureShape.new(name: 'CreateRoomResponse')
+    CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
+    CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CreateVoiceConnectorGroupRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupRequest')
     CreateVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'CreateVoiceConnectorGroupResponse')
     CreateVoiceConnectorRequest = Shapes::StructureShape.new(name: 'CreateVoiceConnectorRequest')
@@ -98,6 +103,8 @@ module Aws::Chime
     DisassociatePhoneNumbersFromVoiceConnectorGroupResponse = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorGroupResponse')
     DisassociatePhoneNumbersFromVoiceConnectorRequest = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorRequest')
     DisassociatePhoneNumbersFromVoiceConnectorResponse = Shapes::StructureShape.new(name: 'DisassociatePhoneNumbersFromVoiceConnectorResponse')
+    DisassociateSigninDelegateGroupsFromAccountRequest = Shapes::StructureShape.new(name: 'DisassociateSigninDelegateGroupsFromAccountRequest')
+    DisassociateSigninDelegateGroupsFromAccountResponse = Shapes::StructureShape.new(name: 'DisassociateSigninDelegateGroupsFromAccountResponse')
     E164PhoneNumber = Shapes::StringShape.new(name: 'E164PhoneNumber')
     E164PhoneNumberList = Shapes::ListShape.new(name: 'E164PhoneNumberList')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
@@ -252,6 +259,8 @@ module Aws::Chime
     SensitiveStringList = Shapes::ListShape.new(name: 'SensitiveStringList')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SigninDelegateGroup = Shapes::StructureShape.new(name: 'SigninDelegateGroup')
+    SigninDelegateGroupList = Shapes::ListShape.new(name: 'SigninDelegateGroupList')
     StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -295,6 +304,7 @@ module Aws::Chime
     UserIdList = Shapes::ListShape.new(name: 'UserIdList')
     UserList = Shapes::ListShape.new(name: 'UserList')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
+    UserType = Shapes::StringShape.new(name: 'UserType')
     VoiceConnector = Shapes::StructureShape.new(name: 'VoiceConnector')
     VoiceConnectorAwsRegion = Shapes::StringShape.new(name: 'VoiceConnectorAwsRegion')
     VoiceConnectorGroup = Shapes::StructureShape.new(name: 'VoiceConnectorGroup')
@@ -318,6 +328,7 @@ module Aws::Chime
     Account.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "CreatedTimestamp"))
     Account.add_member(:default_license, Shapes::ShapeRef.new(shape: License, location_name: "DefaultLicense"))
     Account.add_member(:supported_licenses, Shapes::ShapeRef.new(shape: LicenseList, location_name: "SupportedLicenses"))
+    Account.add_member(:signin_delegate_groups, Shapes::ShapeRef.new(shape: SigninDelegateGroupList, location_name: "SigninDelegateGroups"))
     Account.struct_class = Types::Account
 
     AccountList.member = Shapes::ShapeRef.new(shape: Account)
@@ -325,6 +336,10 @@ module Aws::Chime
     AccountSettings.add_member(:disable_remote_control, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableRemoteControl"))
     AccountSettings.add_member(:enable_dial_out, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDialOut"))
     AccountSettings.struct_class = Types::AccountSettings
+
+    AlexaForBusinessMetadata.add_member(:is_alexa_for_business_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsAlexaForBusinessEnabled"))
+    AlexaForBusinessMetadata.add_member(:alexa_for_business_room_arn, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "AlexaForBusinessRoomArn"))
+    AlexaForBusinessMetadata.struct_class = Types::AlexaForBusinessMetadata
 
     AssociatePhoneNumberWithUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "accountId"))
     AssociatePhoneNumberWithUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "userId"))
@@ -348,6 +363,12 @@ module Aws::Chime
 
     AssociatePhoneNumbersWithVoiceConnectorResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     AssociatePhoneNumbersWithVoiceConnectorResponse.struct_class = Types::AssociatePhoneNumbersWithVoiceConnectorResponse
+
+    AssociateSigninDelegateGroupsWithAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    AssociateSigninDelegateGroupsWithAccountRequest.add_member(:signin_delegate_groups, Shapes::ShapeRef.new(shape: SigninDelegateGroupList, required: true, location_name: "SigninDelegateGroups"))
+    AssociateSigninDelegateGroupsWithAccountRequest.struct_class = Types::AssociateSigninDelegateGroupsWithAccountRequest
+
+    AssociateSigninDelegateGroupsWithAccountResponse.struct_class = Types::AssociateSigninDelegateGroupsWithAccountResponse
 
     Attendee.add_member(:external_user_id, Shapes::ShapeRef.new(shape: ExternalUserIdType, location_name: "ExternalUserId"))
     Attendee.add_member(:attendee_id, Shapes::ShapeRef.new(shape: GuidString, location_name: "AttendeeId"))
@@ -497,6 +518,15 @@ module Aws::Chime
     CreateRoomResponse.add_member(:room, Shapes::ShapeRef.new(shape: Room, location_name: "Room"))
     CreateRoomResponse.struct_class = Types::CreateRoomResponse
 
+    CreateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    CreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    CreateUserRequest.add_member(:email, Shapes::ShapeRef.new(shape: EmailAddress, location_name: "Email"))
+    CreateUserRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "UserType"))
+    CreateUserRequest.struct_class = Types::CreateUserRequest
+
+    CreateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
+    CreateUserResponse.struct_class = Types::CreateUserResponse
+
     CreateVoiceConnectorGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: VoiceConnectorGroupName, required: true, location_name: "Name"))
     CreateVoiceConnectorGroupRequest.add_member(:voice_connector_items, Shapes::ShapeRef.new(shape: VoiceConnectorItemList, location_name: "VoiceConnectorItems"))
     CreateVoiceConnectorGroupRequest.struct_class = Types::CreateVoiceConnectorGroupRequest
@@ -584,6 +614,12 @@ module Aws::Chime
 
     DisassociatePhoneNumbersFromVoiceConnectorResponse.add_member(:phone_number_errors, Shapes::ShapeRef.new(shape: PhoneNumberErrorList, location_name: "PhoneNumberErrors"))
     DisassociatePhoneNumbersFromVoiceConnectorResponse.struct_class = Types::DisassociatePhoneNumbersFromVoiceConnectorResponse
+
+    DisassociateSigninDelegateGroupsFromAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
+    DisassociateSigninDelegateGroupsFromAccountRequest.add_member(:group_names, Shapes::ShapeRef.new(shape: NonEmptyStringList, required: true, location_name: "GroupNames"))
+    DisassociateSigninDelegateGroupsFromAccountRequest.struct_class = Types::DisassociateSigninDelegateGroupsFromAccountRequest
+
+    DisassociateSigninDelegateGroupsFromAccountResponse.struct_class = Types::DisassociateSigninDelegateGroupsFromAccountResponse
 
     E164PhoneNumberList.member = Shapes::ShapeRef.new(shape: E164PhoneNumber)
 
@@ -728,6 +764,7 @@ module Aws::Chime
 
     InviteUsersRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     InviteUsersRequest.add_member(:user_email_list, Shapes::ShapeRef.new(shape: UserEmailList, required: true, location_name: "UserEmailList"))
+    InviteUsersRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "UserType"))
     InviteUsersRequest.struct_class = Types::InviteUsersRequest
 
     InviteUsersResponse.add_member(:invites, Shapes::ShapeRef.new(shape: InviteList, location_name: "Invites"))
@@ -813,6 +850,7 @@ module Aws::Chime
 
     ListUsersRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     ListUsersRequest.add_member(:user_email, Shapes::ShapeRef.new(shape: EmailAddress, location: "querystring", location_name: "user-email"))
+    ListUsersRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location: "querystring", location_name: "user-type"))
     ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ProfileServiceMaxResults, location: "querystring", location_name: "max-results"))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
     ListUsersRequest.struct_class = Types::ListUsersRequest
@@ -1070,6 +1108,11 @@ module Aws::Chime
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SigninDelegateGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupName"))
+    SigninDelegateGroup.struct_class = Types::SigninDelegateGroup
+
+    SigninDelegateGroupList.member = Shapes::ShapeRef.new(shape: SigninDelegateGroup)
+
     StreamingConfiguration.add_member(:data_retention_in_hours, Shapes::ShapeRef.new(shape: DataRetentionInHours, required: true, location_name: "DataRetentionInHours"))
     StreamingConfiguration.add_member(:disabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Disabled"))
     StreamingConfiguration.struct_class = Types::StreamingConfiguration
@@ -1167,10 +1210,14 @@ module Aws::Chime
     UpdateUserRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "accountId"))
     UpdateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "userId"))
     UpdateUserRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: License, location_name: "LicenseType"))
+    UpdateUserRequest.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "UserType"))
+    UpdateUserRequest.add_member(:alexa_for_business_metadata, Shapes::ShapeRef.new(shape: AlexaForBusinessMetadata, location_name: "AlexaForBusinessMetadata"))
     UpdateUserRequest.struct_class = Types::UpdateUserRequest
 
     UpdateUserRequestItem.add_member(:user_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "UserId"))
     UpdateUserRequestItem.add_member(:license_type, Shapes::ShapeRef.new(shape: License, location_name: "LicenseType"))
+    UpdateUserRequestItem.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "UserType"))
+    UpdateUserRequestItem.add_member(:alexa_for_business_metadata, Shapes::ShapeRef.new(shape: AlexaForBusinessMetadata, location_name: "AlexaForBusinessMetadata"))
     UpdateUserRequestItem.struct_class = Types::UpdateUserRequestItem
 
     UpdateUserRequestItemList.member = Shapes::ShapeRef.new(shape: UpdateUserRequestItem)
@@ -1205,10 +1252,12 @@ module Aws::Chime
     User.add_member(:primary_provisioned_number, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "PrimaryProvisionedNumber"))
     User.add_member(:display_name, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "DisplayName"))
     User.add_member(:license_type, Shapes::ShapeRef.new(shape: License, location_name: "LicenseType"))
+    User.add_member(:user_type, Shapes::ShapeRef.new(shape: UserType, location_name: "UserType"))
     User.add_member(:user_registration_status, Shapes::ShapeRef.new(shape: RegistrationStatus, location_name: "UserRegistrationStatus"))
     User.add_member(:user_invitation_status, Shapes::ShapeRef.new(shape: InviteStatus, location_name: "UserInvitationStatus"))
     User.add_member(:registered_on, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "RegisteredOn"))
     User.add_member(:invited_on, Shapes::ShapeRef.new(shape: Iso8601Timestamp, location_name: "InvitedOn"))
+    User.add_member(:alexa_for_business_metadata, Shapes::ShapeRef.new(shape: AlexaForBusinessMetadata, location_name: "AlexaForBusinessMetadata"))
     User.add_member(:personal_pin, Shapes::ShapeRef.new(shape: String, location_name: "PersonalPIN"))
     User.struct_class = Types::User
 
@@ -1321,6 +1370,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:associate_signin_delegate_groups_with_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateSigninDelegateGroupsWithAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}?operation=associate-signin-delegate-groups"
+        o.input = Shapes::ShapeRef.new(shape: AssociateSigninDelegateGroupsWithAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateSigninDelegateGroupsWithAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:batch_create_attendee, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchCreateAttendee"
         o.http_method = "POST"
@@ -1347,6 +1411,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1470,6 +1535,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
       end)
 
       api.add_operation(:create_meeting, Seahorse::Model::Operation.new.tap do |o|
@@ -1514,6 +1580,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1530,6 +1597,23 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}/users?operation=create"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1651,6 +1735,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1665,6 +1750,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -1806,6 +1892,21 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:disassociate_signin_delegate_groups_from_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateSigninDelegateGroupsFromAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{accountId}?operation=disassociate-signin-delegate-groups"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateSigninDelegateGroupsFromAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateSigninDelegateGroupsFromAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
       api.add_operation(:get_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccount"
         o.http_method = "GET"
@@ -1863,6 +1964,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
       end)
 
       api.add_operation(:get_events_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1963,6 +2065,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2171,6 +2274,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2249,6 +2353,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o[:pager] = Aws::Pager.new(
@@ -2269,6 +2374,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
         o[:pager] = Aws::Pager.new(
@@ -2473,6 +2579,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
       end)
 
       api.add_operation(:reset_personal_pin, Seahorse::Model::Operation.new.tap do |o|
@@ -2564,6 +2671,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
       end)
 
       api.add_operation(:update_global_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -2619,6 +2727,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
@@ -2633,6 +2742,7 @@ module Aws::Chime
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

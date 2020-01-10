@@ -370,6 +370,37 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Associates the specified sign-in delegate groups with the specified
+    # Amazon Chime account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, Array<Types::SigninDelegateGroup>] :signin_delegate_groups
+    #   The sign-in delegate groups.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_signin_delegate_groups_with_account({
+    #     account_id: "NonEmptyString", # required
+    #     signin_delegate_groups: [ # required
+    #       {
+    #         group_name: "NonEmptyString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/AssociateSigninDelegateGroupsWithAccount AWS API Documentation
+    #
+    # @overload associate_signin_delegate_groups_with_account(params = {})
+    # @param [Hash] params ({})
+    def associate_signin_delegate_groups_with_account(params = {}, options = {})
+      req = build_request(:associate_signin_delegate_groups_with_account, params)
+      req.send_request(options)
+    end
+
     # Creates up to 100 new attendees for an active Amazon Chime SDK
     # meeting. For more information about the Amazon Chime SDK, see [Using
     # the Amazon Chime SDK][1] in the *Amazon Chime Developer Guide*.
@@ -507,7 +538,7 @@ module Aws::Chime
     # [Managing Your Amazon Chime Accounts][1] in the *Amazon Chime
     # Administration Guide*.
     #
-    # Users suspended from a `Team` account are dissasociated from the
+    # Users suspended from a `Team` account are disassociated from the
     # account, but they can continue to use Amazon Chime as free users. To
     # remove the suspension from suspended `Team` account users, invite them
     # to the `Team` account again. You can use the InviteUsers action to do
@@ -674,6 +705,11 @@ module Aws::Chime
     #       {
     #         user_id: "NonEmptyString", # required
     #         license_type: "Basic", # accepts Basic, Plus, Pro, ProTrial
+    #         user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #         alexa_for_business_metadata: {
+    #           is_alexa_for_business_enabled: false,
+    #           alexa_for_business_room_arn: "SensitiveString",
+    #         },
     #       },
     #     ],
     #   })
@@ -727,6 +763,8 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.signin_delegate_groups #=> Array
+    #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAccount AWS API Documentation
     #
@@ -843,7 +881,9 @@ module Aws::Chime
     #
     # @option params [String] :media_region
     #   The Region in which to create the meeting. Available values:
-    #   `us-east-1`, `us-west-2`.
+    #   `ap-northeast-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
+    #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
     #
     # @option params [Types::MeetingNotificationConfiguration] :notifications_configuration
     #   The configuration for resource targets to receive notifications when
@@ -1018,6 +1058,59 @@ module Aws::Chime
     # @param [Hash] params ({})
     def create_room_membership(params = {}, options = {})
       req = build_request(:create_room_membership, params)
+      req.send_request(options)
+    end
+
+    # Creates a user under the specified Amazon Chime account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [String] :username
+    #   The user name.
+    #
+    # @option params [String] :email
+    #   The user's email address.
+    #
+    # @option params [String] :user_type
+    #   The user type.
+    #
+    # @return [Types::CreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUserResponse#user #user} => Types::User
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_user({
+    #     account_id: "NonEmptyString", # required
+    #     username: "String",
+    #     email: "EmailAddress",
+    #     user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.user.user_id #=> String
+    #   resp.user.account_id #=> String
+    #   resp.user.primary_email #=> String
+    #   resp.user.primary_provisioned_number #=> String
+    #   resp.user.display_name #=> String
+    #   resp.user.license_type #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.user.user_type #=> String, one of "PrivateUser", "SharedDevice"
+    #   resp.user.user_registration_status #=> String, one of "Unregistered", "Registered", "Suspended"
+    #   resp.user.user_invitation_status #=> String, one of "Pending", "Accepted", "Failed"
+    #   resp.user.registered_on #=> Time
+    #   resp.user.invited_on #=> Time
+    #   resp.user.alexa_for_business_metadata.is_alexa_for_business_enabled #=> Boolean
+    #   resp.user.alexa_for_business_metadata.alexa_for_business_room_arn #=> String
+    #   resp.user.personal_pin #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateUser AWS API Documentation
+    #
+    # @overload create_user(params = {})
+    # @param [Hash] params ({})
+    def create_user(params = {}, options = {})
+      req = build_request(:create_user, params)
       req.send_request(options)
     end
 
@@ -1574,6 +1667,33 @@ module Aws::Chime
       req.send_request(options)
     end
 
+    # Disassociates the specified sign-in delegate groups from the specified
+    # Amazon Chime account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Chime account ID.
+    #
+    # @option params [required, Array<String>] :group_names
+    #   The sign-in delegate group names.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_signin_delegate_groups_from_account({
+    #     account_id: "NonEmptyString", # required
+    #     group_names: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/DisassociateSigninDelegateGroupsFromAccount AWS API Documentation
+    #
+    # @overload disassociate_signin_delegate_groups_from_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_signin_delegate_groups_from_account(params = {}, options = {})
+      req = build_request(:disassociate_signin_delegate_groups_from_account, params)
+      req.send_request(options)
+    end
+
     # Retrieves details for the specified Amazon Chime account, such as
     # account type and supported licenses.
     #
@@ -1600,6 +1720,8 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.signin_delegate_groups #=> Array
+    #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetAccount AWS API Documentation
     #
@@ -1933,7 +2055,7 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Retrieves room details, such as name.
+    # Retrieves room details, such as the room name.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -2001,10 +2123,13 @@ module Aws::Chime
     #   resp.user.primary_provisioned_number #=> String
     #   resp.user.display_name #=> String
     #   resp.user.license_type #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.user.user_type #=> String, one of "PrivateUser", "SharedDevice"
     #   resp.user.user_registration_status #=> String, one of "Unregistered", "Registered", "Suspended"
     #   resp.user.user_invitation_status #=> String, one of "Pending", "Accepted", "Failed"
     #   resp.user.registered_on #=> Time
     #   resp.user.invited_on #=> Time
+    #   resp.user.alexa_for_business_metadata.is_alexa_for_business_enabled #=> Boolean
+    #   resp.user.alexa_for_business_metadata.alexa_for_business_room_arn #=> String
     #   resp.user.personal_pin #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/GetUser AWS API Documentation
@@ -2294,6 +2419,9 @@ module Aws::Chime
     # @option params [required, Array<String>] :user_email_list
     #   The user email addresses to which to send the email invitation.
     #
+    # @option params [String] :user_type
+    #   The user type.
+    #
     # @return [Types::InviteUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InviteUsersResponse#invites #invites} => Array&lt;Types::Invite&gt;
@@ -2303,6 +2431,7 @@ module Aws::Chime
     #   resp = client.invite_users({
     #     account_id: "NonEmptyString", # required
     #     user_email_list: ["EmailAddress"], # required
+    #     user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
     #   })
     #
     # @example Response structure
@@ -2365,6 +2494,8 @@ module Aws::Chime
     #   resp.accounts[0].default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.accounts[0].supported_licenses #=> Array
     #   resp.accounts[0].supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.accounts[0].signin_delegate_groups #=> Array
+    #   resp.accounts[0].signin_delegate_groups[0].group_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ListAccounts AWS API Documentation
@@ -2635,8 +2766,8 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Lists the membership details for the specified room, such as member
-    # IDs, member email addresses, and member names.
+    # Lists the membership details for the specified room, such as the
+    # members' IDs, email addresses, and names.
     #
     # @option params [required, String] :account_id
     #   The Amazon Chime account ID.
@@ -2747,6 +2878,9 @@ module Aws::Chime
     # @option params [String] :user_email
     #   Optional. The user email address used to filter results. Maximum 1.
     #
+    # @option params [String] :user_type
+    #   The user type.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Defaults to
     #   100.
@@ -2764,6 +2898,7 @@ module Aws::Chime
     #   resp = client.list_users({
     #     account_id: "NonEmptyString", # required
     #     user_email: "EmailAddress",
+    #     user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -2777,10 +2912,13 @@ module Aws::Chime
     #   resp.users[0].primary_provisioned_number #=> String
     #   resp.users[0].display_name #=> String
     #   resp.users[0].license_type #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.users[0].user_type #=> String, one of "PrivateUser", "SharedDevice"
     #   resp.users[0].user_registration_status #=> String, one of "Unregistered", "Registered", "Suspended"
     #   resp.users[0].user_invitation_status #=> String, one of "Pending", "Accepted", "Failed"
     #   resp.users[0].registered_on #=> Time
     #   resp.users[0].invited_on #=> Time
+    #   resp.users[0].alexa_for_business_metadata.is_alexa_for_business_enabled #=> Boolean
+    #   resp.users[0].alexa_for_business_metadata.alexa_for_business_room_arn #=> String
     #   resp.users[0].personal_pin #=> String
     #   resp.next_token #=> String
     #
@@ -3249,10 +3387,13 @@ module Aws::Chime
     #   resp.user.primary_provisioned_number #=> String
     #   resp.user.display_name #=> String
     #   resp.user.license_type #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.user.user_type #=> String, one of "PrivateUser", "SharedDevice"
     #   resp.user.user_registration_status #=> String, one of "Unregistered", "Registered", "Suspended"
     #   resp.user.user_invitation_status #=> String, one of "Pending", "Accepted", "Failed"
     #   resp.user.registered_on #=> Time
     #   resp.user.invited_on #=> Time
+    #   resp.user.alexa_for_business_metadata.is_alexa_for_business_enabled #=> Boolean
+    #   resp.user.alexa_for_business_metadata.alexa_for_business_room_arn #=> String
     #   resp.user.personal_pin #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/ResetPersonalPIN AWS API Documentation
@@ -3395,6 +3536,8 @@ module Aws::Chime
     #   resp.account.default_license #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
     #   resp.account.supported_licenses #=> Array
     #   resp.account.supported_licenses[0] #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.account.signin_delegate_groups #=> Array
+    #   resp.account.signin_delegate_groups[0].group_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateAccount AWS API Documentation
     #
@@ -3649,9 +3792,9 @@ module Aws::Chime
       req.send_request(options)
     end
 
-    # Updates room membership details, such as member role. The member role
-    # designates whether the member is a chat room administrator or a
-    # general chat room member. Member role can only be updated for user
+    # Updates room membership details, such as the member role. The member
+    # role designates whether the member is a chat room administrator or a
+    # general chat room member. The member role can be updated only for user
     # IDs.
     #
     # @option params [required, String] :account_id
@@ -3713,6 +3856,12 @@ module Aws::Chime
     #   The user license type to update. This must be a supported license type
     #   for the Amazon Chime account that the user belongs to.
     #
+    # @option params [String] :user_type
+    #   The user type.
+    #
+    # @option params [Types::AlexaForBusinessMetadata] :alexa_for_business_metadata
+    #   The Alexa for Business metadata.
+    #
     # @return [Types::UpdateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserResponse#user #user} => Types::User
@@ -3723,6 +3872,11 @@ module Aws::Chime
     #     account_id: "NonEmptyString", # required
     #     user_id: "NonEmptyString", # required
     #     license_type: "Basic", # accepts Basic, Plus, Pro, ProTrial
+    #     user_type: "PrivateUser", # accepts PrivateUser, SharedDevice
+    #     alexa_for_business_metadata: {
+    #       is_alexa_for_business_enabled: false,
+    #       alexa_for_business_room_arn: "SensitiveString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3733,10 +3887,13 @@ module Aws::Chime
     #   resp.user.primary_provisioned_number #=> String
     #   resp.user.display_name #=> String
     #   resp.user.license_type #=> String, one of "Basic", "Plus", "Pro", "ProTrial"
+    #   resp.user.user_type #=> String, one of "PrivateUser", "SharedDevice"
     #   resp.user.user_registration_status #=> String, one of "Unregistered", "Registered", "Suspended"
     #   resp.user.user_invitation_status #=> String, one of "Pending", "Accepted", "Failed"
     #   resp.user.registered_on #=> Time
     #   resp.user.invited_on #=> Time
+    #   resp.user.alexa_for_business_metadata.is_alexa_for_business_enabled #=> Boolean
+    #   resp.user.alexa_for_business_metadata.alexa_for_business_room_arn #=> String
     #   resp.user.personal_pin #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/UpdateUser AWS API Documentation
@@ -3889,7 +4046,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

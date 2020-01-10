@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-01-10)
+------------------
+
+* Feature - SageMaker ListTrialComponents API filter by TrialName and ExperimentName.
+
 1.48.0 (2019-12-04)
 ------------------
 

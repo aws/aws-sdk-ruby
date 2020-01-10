@@ -4252,6 +4252,9 @@ module Aws::EC2
     #   resp.egress_only_internet_gateway.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.egress_only_internet_gateway.attachments[0].vpc_id #=> String
     #   resp.egress_only_internet_gateway.egress_only_internet_gateway_id #=> String
+    #   resp.egress_only_internet_gateway.tags #=> Array
+    #   resp.egress_only_internet_gateway.tags[0].key #=> String
+    #   resp.egress_only_internet_gateway.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGateway AWS API Documentation
     #
@@ -5705,6 +5708,9 @@ module Aws::EC2
     #   resp.local_gateway_route_table_vpc_association.local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_association.vpc_id #=> String
     #   resp.local_gateway_route_table_vpc_association.state #=> String
+    #   resp.local_gateway_route_table_vpc_association.tags #=> Array
+    #   resp.local_gateway_route_table_vpc_association.tags[0].key #=> String
+    #   resp.local_gateway_route_table_vpc_association.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLocalGatewayRouteTableVpcAssociation AWS API Documentation
     #
@@ -9937,6 +9943,9 @@ module Aws::EC2
     #   resp.local_gateway_route_table_vpc_association.local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_association.vpc_id #=> String
     #   resp.local_gateway_route_table_vpc_association.state #=> String
+    #   resp.local_gateway_route_table_vpc_association.tags #=> Array
+    #   resp.local_gateway_route_table_vpc_association.tags[0].key #=> String
+    #   resp.local_gateway_route_table_vpc_association.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLocalGatewayRouteTableVpcAssociation AWS API Documentation
     #
@@ -13171,6 +13180,19 @@ module Aws::EC2
     # @option params [String] :next_token
     #   The token for the next page of results.
     #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     # @return [Types::DescribeEgressOnlyInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEgressOnlyInternetGatewaysResult#egress_only_internet_gateways #egress_only_internet_gateways} => Array&lt;Types::EgressOnlyInternetGateway&gt;
@@ -13183,6 +13205,12 @@ module Aws::EC2
     #     egress_only_internet_gateway_ids: ["EgressOnlyInternetGatewayId"],
     #     max_results: 1,
     #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -13192,6 +13220,9 @@ module Aws::EC2
     #   resp.egress_only_internet_gateways[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.egress_only_internet_gateways[0].attachments[0].vpc_id #=> String
     #   resp.egress_only_internet_gateways[0].egress_only_internet_gateway_id #=> String
+    #   resp.egress_only_internet_gateways[0].tags #=> Array
+    #   resp.egress_only_internet_gateways[0].tags[0].key #=> String
+    #   resp.egress_only_internet_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGateways AWS API Documentation
@@ -16872,6 +16903,9 @@ module Aws::EC2
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_id #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].local_gateway_route_table_id #=> String
     #   resp.local_gateway_route_table_virtual_interface_group_associations[0].state #=> String
+    #   resp.local_gateway_route_table_virtual_interface_group_associations[0].tags #=> Array
+    #   resp.local_gateway_route_table_virtual_interface_group_associations[0].tags[0].key #=> String
+    #   resp.local_gateway_route_table_virtual_interface_group_associations[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations AWS API Documentation
@@ -16934,6 +16968,9 @@ module Aws::EC2
     #   resp.local_gateway_route_table_vpc_associations[0].local_gateway_id #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].vpc_id #=> String
     #   resp.local_gateway_route_table_vpc_associations[0].state #=> String
+    #   resp.local_gateway_route_table_vpc_associations[0].tags #=> Array
+    #   resp.local_gateway_route_table_vpc_associations[0].tags[0].key #=> String
+    #   resp.local_gateway_route_table_vpc_associations[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayRouteTableVpcAssociations AWS API Documentation
@@ -16996,6 +17033,9 @@ module Aws::EC2
     #   resp.local_gateway_route_tables[0].local_gateway_id #=> String
     #   resp.local_gateway_route_tables[0].outpost_arn #=> String
     #   resp.local_gateway_route_tables[0].state #=> String
+    #   resp.local_gateway_route_tables[0].tags #=> Array
+    #   resp.local_gateway_route_tables[0].tags[0].key #=> String
+    #   resp.local_gateway_route_tables[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayRouteTables AWS API Documentation
@@ -17056,6 +17096,9 @@ module Aws::EC2
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_virtual_interface_ids #=> Array
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_virtual_interface_ids[0] #=> String
     #   resp.local_gateway_virtual_interface_groups[0].local_gateway_id #=> String
+    #   resp.local_gateway_virtual_interface_groups[0].tags #=> Array
+    #   resp.local_gateway_virtual_interface_groups[0].tags[0].key #=> String
+    #   resp.local_gateway_virtual_interface_groups[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayVirtualInterfaceGroups AWS API Documentation
@@ -17119,6 +17162,9 @@ module Aws::EC2
     #   resp.local_gateway_virtual_interfaces[0].peer_address #=> String
     #   resp.local_gateway_virtual_interfaces[0].local_bgp_asn #=> Integer
     #   resp.local_gateway_virtual_interfaces[0].peer_bgp_asn #=> Integer
+    #   resp.local_gateway_virtual_interfaces[0].tags #=> Array
+    #   resp.local_gateway_virtual_interfaces[0].tags[0].key #=> String
+    #   resp.local_gateway_virtual_interfaces[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGatewayVirtualInterfaces AWS API Documentation
@@ -17180,6 +17226,9 @@ module Aws::EC2
     #   resp.local_gateways[0].outpost_arn #=> String
     #   resp.local_gateways[0].owner_id #=> String
     #   resp.local_gateways[0].state #=> String
+    #   resp.local_gateways[0].tags #=> Array
+    #   resp.local_gateways[0].tags[0].key #=> String
+    #   resp.local_gateways[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLocalGateways AWS API Documentation
@@ -35584,7 +35633,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

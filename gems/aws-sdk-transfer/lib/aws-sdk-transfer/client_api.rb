@@ -11,7 +11,10 @@ module Aws::Transfer
 
     include Seahorse::Model
 
+    AddressAllocationId = Shapes::StringShape.new(name: 'AddressAllocationId')
+    AddressAllocationIds = Shapes::ListShape.new(name: 'AddressAllocationIds')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateServerRequest = Shapes::StructureShape.new(name: 'CreateServerRequest')
     CreateServerResponse = Shapes::StructureShape.new(name: 'CreateServerResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -77,6 +80,8 @@ module Aws::Transfer
     State = Shapes::StringShape.new(name: 'State')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     StopServerRequest = Shapes::StructureShape.new(name: 'StopServerRequest')
+    SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
@@ -96,6 +101,12 @@ module Aws::Transfer
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserPassword = Shapes::StringShape.new(name: 'UserPassword')
     VpcEndpointId = Shapes::StringShape.new(name: 'VpcEndpointId')
+    VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+    AddressAllocationIds.member = Shapes::ShapeRef.new(shape: AddressAllocationId)
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     CreateServerRequest.add_member(:endpoint_details, Shapes::ShapeRef.new(shape: EndpointDetails, location_name: "EndpointDetails"))
     CreateServerRequest.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
@@ -174,7 +185,10 @@ module Aws::Transfer
     DescribedUser.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))
     DescribedUser.struct_class = Types::DescribedUser
 
+    EndpointDetails.add_member(:address_allocation_ids, Shapes::ShapeRef.new(shape: AddressAllocationIds, location_name: "AddressAllocationIds"))
+    EndpointDetails.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
     EndpointDetails.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "VpcEndpointId"))
+    EndpointDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     EndpointDetails.struct_class = Types::EndpointDetails
 
     HomeDirectoryMapEntry.add_member(:entry, Shapes::ShapeRef.new(shape: MapEntry, required: true, location_name: "Entry"))
@@ -280,6 +294,8 @@ module Aws::Transfer
 
     StopServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     StopServerRequest.struct_class = Types::StopServerRequest
+
+    SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -579,6 +595,7 @@ module Aws::Transfer
         o.input = Shapes::ShapeRef.new(shape: UpdateServerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)

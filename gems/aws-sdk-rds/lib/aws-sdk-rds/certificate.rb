@@ -62,6 +62,19 @@ module Aws::RDS
       data[:certificate_arn]
     end
 
+    # Whether there is an override for the default certificate identifier.
+    # @return [Boolean]
+    def customer_override
+      data[:customer_override]
+    end
+
+    # If there is an override for the default certificate identifier, when
+    # the override expires.
+    # @return [Time]
+    def customer_override_valid_till
+      data[:customer_override_valid_till]
+    end
+
     # @!endgroup
 
     # @return [Client]

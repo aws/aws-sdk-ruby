@@ -3811,6 +3811,7 @@ module Aws::EC2
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:egress_only_internet_gateway_ids, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayIdList, location_name: "EgressOnlyInternetGatewayId"))
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysMaxResults, location_name: "MaxResults"))
     DescribeEgressOnlyInternetGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeEgressOnlyInternetGatewaysRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeEgressOnlyInternetGatewaysRequest.struct_class = Types::DescribeEgressOnlyInternetGatewaysRequest
 
     DescribeEgressOnlyInternetGatewaysResult.add_member(:egress_only_internet_gateways, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayList, location_name: "egressOnlyInternetGatewaySet"))
@@ -5081,6 +5082,7 @@ module Aws::EC2
 
     EgressOnlyInternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
     EgressOnlyInternetGateway.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "egressOnlyInternetGatewayId"))
+    EgressOnlyInternetGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     EgressOnlyInternetGateway.struct_class = Types::EgressOnlyInternetGateway
 
     EgressOnlyInternetGatewayIdList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "item")
@@ -6637,6 +6639,7 @@ module Aws::EC2
     LocalGateway.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     LocalGateway.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     LocalGateway.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    LocalGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGateway.struct_class = Types::LocalGateway
 
     LocalGatewayIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -6654,6 +6657,7 @@ module Aws::EC2
     LocalGatewayRouteTable.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
     LocalGatewayRouteTable.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "outpostArn"))
     LocalGatewayRouteTable.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    LocalGatewayRouteTable.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayRouteTable.struct_class = Types::LocalGatewayRouteTable
 
     LocalGatewayRouteTableIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -6665,6 +6669,7 @@ module Aws::EC2
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayRouteTableId"))
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    LocalGatewayRouteTableVirtualInterfaceGroupAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayRouteTableVirtualInterfaceGroupAssociation.struct_class = Types::LocalGatewayRouteTableVirtualInterfaceGroupAssociation
 
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -6676,6 +6681,7 @@ module Aws::EC2
     LocalGatewayRouteTableVpcAssociation.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
     LocalGatewayRouteTableVpcAssociation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     LocalGatewayRouteTableVpcAssociation.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    LocalGatewayRouteTableVpcAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayRouteTableVpcAssociation.struct_class = Types::LocalGatewayRouteTableVpcAssociation
 
     LocalGatewayRouteTableVpcAssociationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -6691,11 +6697,13 @@ module Aws::EC2
     LocalGatewayVirtualInterface.add_member(:peer_address, Shapes::ShapeRef.new(shape: String, location_name: "peerAddress"))
     LocalGatewayVirtualInterface.add_member(:local_bgp_asn, Shapes::ShapeRef.new(shape: Integer, location_name: "localBgpAsn"))
     LocalGatewayVirtualInterface.add_member(:peer_bgp_asn, Shapes::ShapeRef.new(shape: Integer, location_name: "peerBgpAsn"))
+    LocalGatewayVirtualInterface.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayVirtualInterface.struct_class = Types::LocalGatewayVirtualInterface
 
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_virtual_interface_group_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayVirtualInterfaceGroupId"))
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_virtual_interface_ids, Shapes::ShapeRef.new(shape: LocalGatewayVirtualInterfaceIdSet, location_name: "localGatewayVirtualInterfaceIdSet"))
     LocalGatewayVirtualInterfaceGroup.add_member(:local_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "localGatewayId"))
+    LocalGatewayVirtualInterfaceGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     LocalGatewayVirtualInterfaceGroup.struct_class = Types::LocalGatewayVirtualInterfaceGroup
 
     LocalGatewayVirtualInterfaceGroupIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")

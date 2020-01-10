@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2020-01-10)
+------------------
+
+* Feature - This release adds an operation that enables users to override the system-default SSL/TLS certificate for new Amazon RDS DB instances temporarily, or remove the customer override.
+
 1.74.0 (2019-12-20)
 ------------------
 

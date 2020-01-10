@@ -116,6 +116,8 @@ module Aws::WorkSpaces
     ListAvailableManagementCidrRangesResult = Shapes::StructureShape.new(name: 'ListAvailableManagementCidrRangesResult')
     ManagementCidrRangeConstraint = Shapes::StringShape.new(name: 'ManagementCidrRangeConstraint')
     ManagementCidrRangeMaxResults = Shapes::IntegerShape.new(name: 'ManagementCidrRangeMaxResults')
+    MigrateWorkspaceRequest = Shapes::StructureShape.new(name: 'MigrateWorkspaceRequest')
+    MigrateWorkspaceResult = Shapes::StructureShape.new(name: 'MigrateWorkspaceResult')
     ModificationResourceEnum = Shapes::StringShape.new(name: 'ModificationResourceEnum')
     ModificationState = Shapes::StructureShape.new(name: 'ModificationState')
     ModificationStateEnum = Shapes::StringShape.new(name: 'ModificationStateEnum')
@@ -493,6 +495,14 @@ module Aws::WorkSpaces
     ListAvailableManagementCidrRangesResult.add_member(:management_cidr_ranges, Shapes::ShapeRef.new(shape: DedicatedTenancyCidrRangeList, location_name: "ManagementCidrRanges"))
     ListAvailableManagementCidrRangesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListAvailableManagementCidrRangesResult.struct_class = Types::ListAvailableManagementCidrRangesResult
+
+    MigrateWorkspaceRequest.add_member(:source_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "SourceWorkspaceId"))
+    MigrateWorkspaceRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, required: true, location_name: "BundleId"))
+    MigrateWorkspaceRequest.struct_class = Types::MigrateWorkspaceRequest
+
+    MigrateWorkspaceResult.add_member(:source_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "SourceWorkspaceId"))
+    MigrateWorkspaceResult.add_member(:target_workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "TargetWorkspaceId"))
+    MigrateWorkspaceResult.struct_class = Types::MigrateWorkspaceResult
 
     ModificationState.add_member(:resource, Shapes::ShapeRef.new(shape: ModificationResourceEnum, location_name: "Resource"))
     ModificationState.add_member(:state, Shapes::ShapeRef.new(shape: ModificationStateEnum, location_name: "State"))
@@ -1102,6 +1112,20 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: ListAvailableManagementCidrRangesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:migrate_workspace, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "MigrateWorkspace"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: MigrateWorkspaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: MigrateWorkspaceResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:modify_account, Seahorse::Model::Operation.new.tap do |o|

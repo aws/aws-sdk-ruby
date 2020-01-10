@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-01-10)
+------------------
+
+* Feature - Add shared profile support to new and existing users
+
 1.17.0 (2019-11-20)
 ------------------
 

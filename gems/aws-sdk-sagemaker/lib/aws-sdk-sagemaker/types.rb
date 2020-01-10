@@ -142,16 +142,20 @@ module Aws::SageMaker
     #
     #   * You use one of the Amazon SageMaker built-in algorithms
     #
-    #   * You use one of the following prebuilt Amazon SageMaker Docker
-    #     images:
+    #   * You use one of the following [Prebuilt Amazon SageMaker Docker
+    #     Images][1]\:
     #
-    #     * Tensorflow
+    #     * Tensorflow (version &gt;= 1.15)
     #
-    #     * MXNet
+    #     * MXNet (version &gt;= 1.6)
     #
-    #     * PyTorch
+    #     * PyTorch (version &gt;= 1.3)
     #
     #   * You specify at least one MetricDefinition
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/pre-built-containers-frameworks-deep-learning.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification AWS API Documentation
@@ -1642,7 +1646,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] collection_name
-    #   The name of the tensor collection.
+    #   The name of the tensor collection. The name must be unique relative
+    #   to other rule configuration names.
     #   @return [String]
     #
     # @!attribute [rw] collection_parameters
@@ -2405,7 +2410,7 @@ module Aws::SageMaker
     #         input_config: { # required
     #           s3_uri: "S3Uri", # required
     #           data_input_config: "DataInputConfig", # required
-    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, MXNET, ONNX, PYTORCH, XGBOOST
+    #           framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
@@ -2666,6 +2671,29 @@ module Aws::SageMaker
     #   that Amazon SageMaker uses to encrypt data on the storage volume
     #   attached to the ML compute instance that hosts the endpoint.
     #
+    #   The KmsKeyId can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab" `
+    #
+    #   * // Amazon Resource Name (ARN) (ARN) of a KMS Key
+    #
+    #     "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * // KMS Key Alias
+    #
+    #     "alias/ExampleAlias"
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias" `
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For
+    #   more information, refer to the AWS Key Management Service section[
+    #   Using Key Policies in AWS KMS ][1]
+    #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
     #   the instance type. Local storage volumes are encrypted using a
     #   hardware module on the instance. You can't request a `KmsKeyId`
@@ -2677,17 +2705,18 @@ module Aws::SageMaker
     #   `CreateEndpointConfig` fails.
     #
     #    For a list of instance types that support local instance storage,
-    #   see [Instance Store Volumes][1].
+    #   see [Instance Store Volumes][2].
     #
     #    For more information about local instance storage encryption, see
-    #   [SSD Instance Store Volumes][2].
+    #   [SSD Instance Store Volumes][3].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
@@ -3606,11 +3635,6 @@ module Aws::SageMaker
     # @!attribute [rw] enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls
     #   can be made to or from the model container.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
-    #   network isolation.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
@@ -4610,11 +4634,6 @@ module Aws::SageMaker
     #   downloads and uploads customer data and model artifacts through the
     #   specified VPC, but the training container does not have network
     #   access.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
-    #   network isolation.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -5511,7 +5530,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] local_path
-    #   Path to local storage location for rules. Defaults to
+    #   Path to local storage location for output of rules. Defaults to
     #   `/opt/ml/processing/output/rule/`.
     #   @return [String]
     #
@@ -5529,7 +5548,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_gb
-    #   The size, in GB, of the ML storage volume attached to the notebook
+    #   The size, in GB, of the ML storage volume attached to the processing
     #   instance.
     #   @return [Integer]
     #
@@ -7280,11 +7299,6 @@ module Aws::SageMaker
     # @!attribute [rw] enable_network_isolation
     #   If `True`, no inbound or outbound network calls can be made to or
     #   from the model container.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
-    #   network isolation.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelOutput AWS API Documentation
@@ -8086,11 +8100,6 @@ module Aws::SageMaker
     #   downloads and uploads customer data and model artifacts through the
     #   specified VPC, but the training container does not have network
     #   access.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
-    #   network isolation.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -9330,8 +9339,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] resource
-    #   The name of the Amazon SageMaker resource to Search for. The only
-    #   valid `Resource` value is `TrainingJob`.
+    #   The name of the Amazon SageMaker resource to Search for.
     #   @return [String]
     #
     # @!attribute [rw] suggestion_query
@@ -10096,14 +10104,16 @@ module Aws::SageMaker
     # @!attribute [rw] task_availability_lifetime_in_seconds
     #   The length of time that a task remains available for labeling by
     #   human workers. **If you choose the Amazon Mechanical Turk workforce,
-    #   the maximum is 12 hours (43200)**. For private and vendor
-    #   workforces, the maximum is as listed.
+    #   the maximum is 12 hours (43200)**. The default value is 864000
+    #   seconds (1 day). For private and vendor workforces, the maximum is
+    #   as listed.
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrent_task_count
     #   Defines the maximum number of data objects that can be labeled by
     #   human workers at the same time. Also referred to as batch size. Each
-    #   object may have more than one worker at one time.
+    #   object may have more than one worker at one time. The default value
+    #   is 1000 objects.
     #   @return [Integer]
     #
     # @!attribute [rw] annotation_consolidation_config
@@ -10499,11 +10509,6 @@ module Aws::SageMaker
     #   downloads and uploads customer data and model artifacts through the
     #   specified VPC, but the training container does not have network
     #   access.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support
-    #   network isolation.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -10997,7 +11002,7 @@ module Aws::SageMaker
     #       {
     #         s3_uri: "S3Uri", # required
     #         data_input_config: "DataInputConfig", # required
-    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, MXNET, ONNX, PYTORCH, XGBOOST
+    #         framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
     #       }
     #
     # @!attribute [rw] s3_uri
@@ -12459,7 +12464,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of experiments to return in the response.
+    #   The maximum number of experiments to return in the response. The
+    #   default value is 10.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListExperimentsRequest AWS API Documentation
@@ -13980,6 +13986,8 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
+    #         experiment_name: "ExperimentEntityName",
+    #         trial_name: "ExperimentEntityName",
     #         source_arn: "String256",
     #         created_after: Time.now,
     #         created_before: Time.now,
@@ -13988,6 +13996,18 @@ module Aws::SageMaker
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
+    #
+    # @!attribute [rw] experiment_name
+    #   A filter that returns only components that are part of the specified
+    #   experiment. If you specify `ExperimentName`, you can't specify
+    #   `TrialName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] trial_name
+    #   A filter that returns only components that are part of the specified
+    #   trial. If you specify `TrialName`, you can't specify
+    #   `ExperimentName`.
+    #   @return [String]
     #
     # @!attribute [rw] source_arn
     #   A filter that returns only components that have the specified source
@@ -14014,7 +14034,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of components to return in the response.
+    #   The maximum number of components to return in the response. The
+    #   default value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -14026,6 +14047,8 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrialComponentsRequest AWS API Documentation
     #
     class ListTrialComponentsRequest < Struct.new(
+      :experiment_name,
+      :trial_name,
       :source_arn,
       :created_after,
       :created_before,
@@ -14088,7 +14111,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of trials to return in the response.
+    #   The maximum number of trials to return in the response. The default
+    #   value is 10.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -15312,7 +15336,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] nested_property_name
     #   The name of the property to use in the nested filters. The value
-    #   must match a listed property name, such as `InputDataConfig` .
+    #   must match a listed property name, such as `InputDataConfig`.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -16298,8 +16322,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # A type of `SuggestionQuery`. A suggestion query for retrieving
-    # property names that match the specified hint.
+    # Part of the `SuggestionQuery` type. Specifies a hint for retrieving
+    # property names that begin with the specified text.
     #
     # @note When making an API call, you may pass PropertyNameQuery
     #   data as a hash:
@@ -16309,9 +16333,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] property_name_hint
-    #   Text that is part of a property's name. The property names of
-    #   hyperparameter, metric, and tag key names that begin with the
-    #   specified text in the `PropertyNameHint`.
+    #   Text that begins a property's name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PropertyNameQuery AWS API Documentation
@@ -17242,8 +17264,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] resource
-    #   The name of the Amazon SageMaker resource to search for. Currently,
-    #   the only valid `Resource` value is `TrainingJob`.
+    #   The name of the Amazon SageMaker resource to search for.
     #   @return [String]
     #
     # @!attribute [rw] search_expression
@@ -17839,7 +17860,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Limits the property names that are included in the response.
+    # Specified in the GetSearchSuggestions request. Limits the property
+    # names that are included in the response.
     #
     # @note When making an API call, you may pass SuggestionQuery
     #   data as a hash:
@@ -17851,9 +17873,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] property_name_query
-    #   A type of `SuggestionQuery`. Defines a property name hint. Only
-    #   property names that match the specified hint are included in the
-    #   response.
+    #   Defines a property name hint. Only property names that begin with
+    #   the specified hint are included in the response.
     #   @return [Types::PropertyNameQuery]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SuggestionQuery AWS API Documentation
@@ -18921,6 +18942,14 @@ module Aws::SageMaker
     #   * // Amazon Resource Name (ARN) of a KMS Key
     #
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     ` "alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias
+    #
+    #     ` "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation

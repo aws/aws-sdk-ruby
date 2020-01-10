@@ -898,7 +898,7 @@ module Aws::SageMaker
     #     input_config: { # required
     #       s3_uri: "S3Uri", # required
     #       data_input_config: "DataInputConfig", # required
-    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, MXNET, ONNX, PYTORCH, XGBOOST
+    #       framework: "TENSORFLOW", # required, accepts TENSORFLOW, KERAS, MXNET, ONNX, PYTORCH, XGBOOST
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
@@ -1172,6 +1172,29 @@ module Aws::SageMaker
     #   that Amazon SageMaker uses to encrypt data on the storage volume
     #   attached to the ML compute instance that hosts the endpoint.
     #
+    #   The KmsKeyId can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab" `
+    #
+    #   * // Amazon Resource Name (ARN) (ARN) of a KMS Key
+    #
+    #     "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+    #
+    #   * // KMS Key Alias
+    #
+    #     "alias/ExampleAlias"
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias" `
+    #
+    #   The KMS key policy must grant permission to the IAM role that you
+    #   specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For more
+    #   information, refer to the AWS Key Management Service section[ Using
+    #   Key Policies in AWS KMS ][1]
+    #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on the
     #   instance type. Local storage volumes are encrypted using a hardware
     #   module on the instance. You can't request a `KmsKeyId` when using an
@@ -1183,17 +1206,18 @@ module Aws::SageMaker
     #   `CreateEndpointConfig` fails.
     #
     #    For a list of instance types that support local instance storage, see
-    #   [Instance Store Volumes][1].
+    #   [Instance Store Volumes][2].
     #
     #    For more information about local instance storage encryption, see [SSD
-    #   Instance Store Volumes][2].
+    #   Instance Store Volumes][3].
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html
     #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2076,11 +2100,6 @@ module Aws::SageMaker
     # @option params [Boolean] :enable_network_isolation
     #   Isolates the model container. No inbound or outbound network calls can
     #   be made to or from the model container.
-    #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support network
-    #   isolation.
-    #
-    #    </note>
     #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3064,11 +3083,6 @@ module Aws::SageMaker
     #   uploads customer data and model artifacts through the specified VPC,
     #   but the training container does not have network access.
     #
-    #   <note markdown="1"> The Semantic Segmentation built-in algorithm does not support network
-    #   isolation.
-    #
-    #    </note>
-    #
     # @option params [Boolean] :enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
     #   distributed training, choose `True`. Encryption provides greater
@@ -3518,12 +3532,11 @@ module Aws::SageMaker
     # You can add tags to a trial component and then use the Search API to
     # search for the tags.
     #
-    # <note markdown="1"> You can create a trial component through a direct call to the
-    # `CreateTrialComponent` API. However, you can't specify the `Source`
-    # property of the component in the request, therefore, the component
-    # isn't associated with an Amazon SageMaker job. You must use Amazon
-    # SageMaker Studio, the Amazon SageMaker Python SDK, or the AWS SDK for
-    # Python (Boto) to create the component with a valid `Source` property.
+    # <note markdown="1"> `CreateTrialComponent` can only be invoked from within an Amazon
+    # SageMaker managed environment. This includes Amazon SageMaker training
+    # jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks.
+    # A call to `CreateTrialComponent` from outside one of these
+    # environments results in an error.
     #
     #  </note>
     #
@@ -4685,7 +4698,7 @@ module Aws::SageMaker
     #   resp.role_arn #=> String
     #   resp.input_config.s3_uri #=> String
     #   resp.input_config.data_input_config #=> String
-    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
+    #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603"
     #
@@ -6321,8 +6334,7 @@ module Aws::SageMaker
     # `HyperParameters`, `Tags`, and `Metrics`.
     #
     # @option params [required, String] :resource
-    #   The name of the Amazon SageMaker resource to Search for. The only
-    #   valid `Resource` value is `TrainingJob`.
+    #   The name of the Amazon SageMaker resource to Search for.
     #
     # @option params [Types::SuggestionQuery] :suggestion_query
     #   Limits the property names that are included in the response.
@@ -6999,7 +7011,8 @@ module Aws::SageMaker
     #   experiments.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of experiments to return in the response.
+    #   The maximum number of experiments to return in the response. The
+    #   default value is 10.
     #
     # @return [Types::ListExperimentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8312,6 +8325,16 @@ module Aws::SageMaker
     # show only components that were created in a specific time range. You
     # can sort the list by trial component name or creation time.
     #
+    # @option params [String] :experiment_name
+    #   A filter that returns only components that are part of the specified
+    #   experiment. If you specify `ExperimentName`, you can't specify
+    #   `TrialName`.
+    #
+    # @option params [String] :trial_name
+    #   A filter that returns only components that are part of the specified
+    #   trial. If you specify `TrialName`, you can't specify
+    #   `ExperimentName`.
+    #
     # @option params [String] :source_arn
     #   A filter that returns only components that have the specified source
     #   Amazon Resource Name (ARN).
@@ -8332,7 +8355,8 @@ module Aws::SageMaker
     #   The sort order. The default value is `Descending`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of components to return in the response.
+    #   The maximum number of components to return in the response. The
+    #   default value is 10.
     #
     # @option params [String] :next_token
     #   If the previous call to `ListTrialComponents` didn't return the full
@@ -8347,6 +8371,8 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_trial_components({
+    #     experiment_name: "ExperimentEntityName",
+    #     trial_name: "ExperimentEntityName",
     #     source_arn: "String256",
     #     created_after: Time.now,
     #     created_before: Time.now,
@@ -8410,7 +8436,8 @@ module Aws::SageMaker
     #   The sort order. The default value is `Descending`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of trials to return in the response.
+    #   The maximum number of trials to return in the response. The default
+    #   value is 10.
     #
     # @option params [String] :next_token
     #   If the previous call to `ListTrials` didn't return the full set of
@@ -8627,12 +8654,11 @@ module Aws::SageMaker
     # the response. You can sort the search results by any resource property
     # in a ascending or descending order.
     #
-    # You can query against the following value types: numerical, text,
-    # Booleans, and timestamps.
+    # You can query against the following value types: numeric, text,
+    # Boolean, and timestamp.
     #
     # @option params [required, String] :resource
-    #   The name of the Amazon SageMaker resource to search for. Currently,
-    #   the only valid `Resource` value is `TrainingJob`.
+    #   The name of the Amazon SageMaker resource to search for.
     #
     # @option params [Types::SearchExpression] :search_expression
     #   A Boolean conditional statement. Resource objects must satisfy this
@@ -10073,7 +10099,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

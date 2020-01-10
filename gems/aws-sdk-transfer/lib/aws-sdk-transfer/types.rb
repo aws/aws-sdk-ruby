@@ -8,14 +8,31 @@
 module Aws::Transfer
   module Types
 
+    # This exception is thrown when the `UpdatServer` is called for a server
+    # that has VPC as the endpoint type and the server's `VpcEndpointID` is
+    # not in the available state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateServerRequest
     #   data as a hash:
     #
     #       {
     #         endpoint_details: {
+    #           address_allocation_ids: ["AddressAllocationId"],
+    #           subnet_ids: ["SubnetId"],
     #           vpc_endpoint_id: "VpcEndpointId",
+    #           vpc_id: "VpcId",
     #         },
-    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
+    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #         host_key: "HostKey",
     #         identity_provider_details: {
     #           url: "Url",
@@ -32,15 +49,19 @@ module Aws::Transfer
     #       }
     #
     # @!attribute [rw] endpoint_details
-    #   The virtual private cloud (VPC) endpoint settings that you want to
-    #   configure for your SFTP server. This parameter is required when you
-    #   specify a value for the `EndpointType` parameter.
+    #   The virtual private cloud (VPC) endpoint settings that are
+    #   configured for your SFTP server. With a VPC endpoint, you can
+    #   restrict access to your SFTP server to resources only within your
+    #   VPC. To control incoming internet traffic, you will need to invoke
+    #   the `UpdateServer` API and attach an Elastic IP to your server's
+    #   endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
     #   The type of VPC endpoint that you want your SFTP server to connect
-    #   to. If you connect to a VPC endpoint, your SFTP server isn't
-    #   accessible over the public internet.
+    #   to. You can choose to connect to the public internet or a virtual
+    #   private cloud (VPC) endpoint. With a VPC endpoint, you can restrict
+    #   access to your SFTP server and resources only within your VPC.
     #   @return [String]
     #
     # @!attribute [rw] host_key
@@ -166,6 +187,17 @@ module Aws::Transfer
     #   policy to lock your user down to the designated home directory
     #   ("chroot"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
+    #
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in S3, the
+    #   entry will be ignored. As a workaround, you can use the S3 api to
+    #   create 0 byte objects as place holders for your directory. If using
+    #   the CLI, use the s3api call instead of s3 so you can use the
+    #   put-object operation. For example, you use the following: `aws s3api
+    #   put-object --bucket bucketname --key path/to/folder/`. Make sure
+    #   that the end of the key name ends in a / for it to be considered a
+    #   folder.
+    #
+    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -591,24 +623,53 @@ module Aws::Transfer
       include Aws::Structure
     end
 
-    # The configuration settings for the virtual private cloud (VPC)
-    # endpoint for your SFTP server.
+    # The virtual private cloud (VPC) endpoint settings that are configured
+    # for your SFTP server. With a VPC endpoint, you can restrict access to
+    # your SFTP server and resources only within your VPC. To control
+    # incoming internet traffic, invoke the `UpdateServer` API and attach an
+    # Elastic IP to your server's endpoint.
     #
     # @note When making an API call, you may pass EndpointDetails
     #   data as a hash:
     #
     #       {
+    #         address_allocation_ids: ["AddressAllocationId"],
+    #         subnet_ids: ["SubnetId"],
     #         vpc_endpoint_id: "VpcEndpointId",
+    #         vpc_id: "VpcId",
     #       }
+    #
+    # @!attribute [rw] address_allocation_ids
+    #   A list of address allocation IDs that are required to attach an
+    #   Elastic IP address to your SFTP server's endpoint. This is only
+    #   valid in the `UpdateServer` API.
+    #
+    #   <note markdown="1"> This property can only be use when `EndpointType` is set to `VPC`.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of subnet IDs that are required to host your SFTP server
+    #   endpoint in your VPC.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_endpoint_id
     #   The ID of the VPC endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the virtual private cloud in which the SFTP server's
+    #   endpoint will be hosted.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/EndpointDetails AWS API Documentation
     #
     class EndpointDetails < Struct.new(
-      :vpc_endpoint_id)
+      :address_allocation_ids,
+      :subnet_ids,
+      :vpc_endpoint_id,
+      :vpc_id)
       include Aws::Structure
     end
 
@@ -1334,9 +1395,12 @@ module Aws::Transfer
     #
     #       {
     #         endpoint_details: {
+    #           address_allocation_ids: ["AddressAllocationId"],
+    #           subnet_ids: ["SubnetId"],
     #           vpc_endpoint_id: "VpcEndpointId",
+    #           vpc_id: "VpcId",
     #         },
-    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC_ENDPOINT
+    #         endpoint_type: "PUBLIC", # accepts PUBLIC, VPC, VPC_ENDPOINT
     #         host_key: "HostKey",
     #         identity_provider_details: {
     #           url: "Url",
@@ -1348,8 +1412,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] endpoint_details
     #   The virtual private cloud (VPC) endpoint settings that are
-    #   configured for your SFTP server. With a VPC endpoint, your SFTP
-    #   server isn't accessible over the public internet.
+    #   configured for your SFTP server. With a VPC endpoint, you can
+    #   restrict access to your SFTP server to resources only within your
+    #   VPC. To control incoming internet traffic, you will need to
+    #   associate one or more Elastic IP addresses with your server's
+    #   endpoint.
     #   @return [Types::EndpointDetails]
     #
     # @!attribute [rw] endpoint_type
@@ -1465,6 +1532,17 @@ module Aws::Transfer
     #   policy to lock your user down to the designated home directory
     #   ("chroot"). To do this, you can set `Entry` to '/' and set
     #   `Target` to the HomeDirectory parameter value.
+    #
+    #   <note markdown="1"> If the target of a logical directory entry does not exist in S3, the
+    #   entry will be ignored. As a workaround, you can use the S3 api to
+    #   create 0 byte objects as place holders for your directory. If using
+    #   the CLI, use the s3api call instead of s3 so you can use the
+    #   put-object operation. For example, you use the following: `aws s3api
+    #   put-object --bucket bucketname --key path/to/folder/`. Make sure
+    #   that the end of the key name ends in a / for it to be considered a
+    #   folder.
+    #
+    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy

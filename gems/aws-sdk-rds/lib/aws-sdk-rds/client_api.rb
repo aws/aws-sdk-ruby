@@ -364,6 +364,8 @@ module Aws::RDS
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     MinimumEngineVersionPerAllowedValue = Shapes::StructureShape.new(name: 'MinimumEngineVersionPerAllowedValue')
     MinimumEngineVersionPerAllowedValueList = Shapes::ListShape.new(name: 'MinimumEngineVersionPerAllowedValueList')
+    ModifyCertificatesMessage = Shapes::StructureShape.new(name: 'ModifyCertificatesMessage')
+    ModifyCertificatesResult = Shapes::StructureShape.new(name: 'ModifyCertificatesResult')
     ModifyCurrentDBClusterCapacityMessage = Shapes::StructureShape.new(name: 'ModifyCurrentDBClusterCapacityMessage')
     ModifyDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterEndpointMessage')
     ModifyDBClusterMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterMessage')
@@ -622,6 +624,8 @@ module Aws::RDS
     Certificate.add_member(:valid_from, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidFrom"))
     Certificate.add_member(:valid_till, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidTill"))
     Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+    Certificate.add_member(:customer_override, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CustomerOverride"))
+    Certificate.add_member(:customer_override_valid_till, Shapes::ShapeRef.new(shape: TStamp, location_name: "CustomerOverrideValidTill"))
     Certificate.struct_class = Types::Certificate
 
     CertificateList.member = Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate")
@@ -1979,6 +1983,13 @@ module Aws::RDS
     MinimumEngineVersionPerAllowedValue.struct_class = Types::MinimumEngineVersionPerAllowedValue
 
     MinimumEngineVersionPerAllowedValueList.member = Shapes::ShapeRef.new(shape: MinimumEngineVersionPerAllowedValue, location_name: "MinimumEngineVersionPerAllowedValue")
+
+    ModifyCertificatesMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
+    ModifyCertificatesMessage.add_member(:remove_customer_override, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "RemoveCustomerOverride"))
+    ModifyCertificatesMessage.struct_class = Types::ModifyCertificatesMessage
+
+    ModifyCertificatesResult.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+    ModifyCertificatesResult.struct_class = Types::ModifyCertificatesResult
 
     ModifyCurrentDBClusterCapacityMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     ModifyCurrentDBClusterCapacityMessage.add_member(:capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Capacity"))
@@ -3956,6 +3967,15 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+      end)
+
+      api.add_operation(:modify_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyCertificatesMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyCertificatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
       end)
 
       api.add_operation(:modify_current_db_cluster_capacity, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-01-10)
+------------------
+
+* Feature - Added the migrate feature to Amazon WorkSpaces.
+
 1.32.0 (2019-11-26)
 ------------------
 

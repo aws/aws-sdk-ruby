@@ -865,6 +865,25 @@ module Aws::RDS
     # @option options [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
+    #
+    #   Limitations and requirements apply to some DB engine modes. For more
+    #   information, see the following sections in the *Amazon Aurora User
+    #   Guide*\:
+    #
+    #   * [ Limitations of Aurora Serverless][1]
+    #
+    #   * [ Limitations of Parallel Query][2]
+    #
+    #   * [ Requirements for Aurora Global Databases][3]
+    #
+    #   * [ Limitations of Multi-Master Clusters][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
     # @option options [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.

@@ -312,7 +312,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+    #   The tags. Each WorkSpaces resource can have a maximum of 50 tags. If
+    #   you want to add new tags to a set of existing tags, you must submit
+    #   all of the existing tags along with the new ones.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -1272,6 +1274,49 @@ module Aws::WorkSpaces
     class ListAvailableManagementCidrRangesResult < Struct.new(
       :management_cidr_ranges,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MigrateWorkspaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_workspace_id: "WorkspaceId", # required
+    #         bundle_id: "BundleId", # required
+    #       }
+    #
+    # @!attribute [rw] source_workspace_id
+    #   The identifier of the WorkSpace to migrate from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bundle_id
+    #   The identifier of the target bundle type to migrate the WorkSpace
+    #   to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MigrateWorkspaceRequest AWS API Documentation
+    #
+    class MigrateWorkspaceRequest < Struct.new(
+      :source_workspace_id,
+      :bundle_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_workspace_id
+    #   The original identifier of the WorkSpace that is being migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_workspace_id
+    #   The new identifier of the WorkSpace that is being migrated. If the
+    #   migration does not succeed, the target WorkSpace ID will not be
+    #   used, and the WorkSpace will still have the original WorkSpace ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/MigrateWorkspaceResult AWS API Documentation
+    #
+    class MigrateWorkspaceResult < Struct.new(
+      :source_workspace_id,
+      :target_workspace_id)
       include Aws::Structure
     end
 
@@ -2275,7 +2320,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The KMS key used to encrypt data stored on your WorkSpace.
+    #   The symmetric AWS KMS customer master key (CMK) used to encrypt data
+    #   stored on your WorkSpace. Amazon WorkSpaces does not support
+    #   asymmetric CMKs.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled
@@ -2604,7 +2651,7 @@ module Aws::WorkSpaces
     #
     # @!attribute [rw] workspace_access_properties
     #   The devices and operating systems that users can use to access
-    #   Workspaces.
+    #   WorkSpaces.
     #   @return [Types::WorkspaceAccessProperties]
     #
     # @!attribute [rw] tenancy
@@ -2798,7 +2845,9 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
-    #   The KMS key used to encrypt data stored on your WorkSpace.
+    #   The symmetric AWS KMS customer master key (CMK) used to encrypt data
+    #   stored on your WorkSpace. Amazon WorkSpaces does not support
+    #   asymmetric CMKs.
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled

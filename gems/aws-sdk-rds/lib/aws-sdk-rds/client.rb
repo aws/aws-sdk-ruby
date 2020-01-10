@@ -2010,6 +2010,25 @@ module Aws::RDS
     #   The DB engine mode of the DB cluster, either `provisioned`,
     #   `serverless`, `parallelquery`, `global`, or `multimaster`.
     #
+    #   Limitations and requirements apply to some DB engine modes. For more
+    #   information, see the following sections in the *Amazon Aurora User
+    #   Guide*\:
+    #
+    #   * [ Limitations of Aurora Serverless][1]
+    #
+    #   * [ Limitations of Parallel Query][2]
+    #
+    #   * [ Requirements for Aurora Global Databases][3]
+    #
+    #   * [ Limitations of Multi-Master Clusters][4]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations
+    #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   For DB clusters in `serverless` DB engine mode, the scaling properties
     #   of the DB cluster.
@@ -6345,6 +6364,8 @@ module Aws::RDS
     #   resp.certificates[0].valid_from #=> Time
     #   resp.certificates[0].valid_till #=> Time
     #   resp.certificates[0].certificate_arn #=> String
+    #   resp.certificates[0].customer_override #=> Boolean
+    #   resp.certificates[0].customer_override_valid_till #=> Time
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates AWS API Documentation
@@ -7106,7 +7127,8 @@ module Aws::RDS
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
     #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    # <note markdown="1"> This operation can also return information for Amazon Neptune DB
+    # instances and Amazon DocumentDB instances.
     #
     #  </note>
     #
@@ -7536,6 +7558,11 @@ module Aws::RDS
 
     # Returns information about provisioned RDS instances. This API supports
     # pagination.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon Neptune DB
+    # instances and Amazon DocumentDB instances.
+    #
+    #  </note>
     #
     # @option params [String] :db_instance_identifier
     #   The user-supplied instance identifier. If this parameter is specified,
@@ -10612,6 +10639,85 @@ module Aws::RDS
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Override the system-default Secure Sockets Layer/Transport Layer
+    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or
+    # remove the override.
+    #
+    # By using this operation, you can specify an RDS-approved SSL/TLS
+    # certificate for new DB instances that is different from the default
+    # certificate provided by RDS. You can also use this operation to remove
+    # the override, so that new DB instances use the default certificate
+    # provided by RDS.
+    #
+    # You might need to override the default certificate in the following
+    # situations:
+    #
+    # * You already migrated your applications to support the latest
+    #   certificate authority (CA) certificate, but the new CA certificate
+    #   is not yet the RDS default CA certificate for the specified AWS
+    #   Region.
+    #
+    # * RDS has already moved to a new default CA certificate for the
+    #   specified AWS Region, but you are still in the process of supporting
+    #   the new CA certificate. In this case, you temporarily need
+    #   additional time to finish your application changes.
+    #
+    # For more information about rotating your SSL/TLS certificate for RDS
+    # DB engines, see [ Rotating Your SSL/TLS Certificate][1] in the *Amazon
+    # RDS User Guide*.
+    #
+    # For more information about rotating your SSL/TLS certificate for
+    # Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in the
+    # *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html
+    #
+    # @option params [String] :certificate_identifier
+    #   The new default certificate identifier to override the current one
+    #   with.
+    #
+    #   To determine the valid values, use the `describe-certificates` AWS CLI
+    #   command or the `DescribeCertificates` API operation.
+    #
+    # @option params [Boolean] :remove_customer_override
+    #   A value that indicates whether to remove the override for the default
+    #   certificate. If the override is removed, the default certificate is
+    #   the system default.
+    #
+    # @return [Types::ModifyCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyCertificatesResult#certificate #certificate} => Types::Certificate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_certificates({
+    #     certificate_identifier: "String",
+    #     remove_customer_override: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate.certificate_identifier #=> String
+    #   resp.certificate.certificate_type #=> String
+    #   resp.certificate.thumbprint #=> String
+    #   resp.certificate.valid_from #=> Time
+    #   resp.certificate.valid_till #=> Time
+    #   resp.certificate.certificate_arn #=> String
+    #   resp.certificate.customer_override #=> Boolean
+    #   resp.certificate.customer_override_valid_till #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCertificates AWS API Documentation
+    #
+    # @overload modify_certificates(params = {})
+    # @param [Hash] params ({})
+    def modify_certificates(params = {}, options = {})
+      req = build_request(:modify_certificates, params)
       req.send_request(options)
     end
 
@@ -17736,7 +17842,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

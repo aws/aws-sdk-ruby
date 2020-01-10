@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2020-01-10)
+------------------
+
+* Feature - This release introduces the ability to tag egress only internet gateways, local gateways, local gateway route tables, local gateway virtual interfaces, local gateway virtual interface groups, local gateway route table VPC association and local gateway route table virtual interface group association. You can use tags to organize and identify your resources for cost allocation.
+
 1.130.0 (2020-01-06)
 ------------------
 
