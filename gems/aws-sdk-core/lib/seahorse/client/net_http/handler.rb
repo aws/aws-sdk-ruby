@@ -163,11 +163,11 @@ module Seahorse
         # @return [Hash] Returns a vanilla hash of headers to send with the
         #   HTTP request.
         def headers(request)
-          # Net::HTTP adds a content-type (1.8.7+) and accept-encoding (2.0.0+)
-          # to the request if these headers are not set.  Setting a default
-          # empty value defeats this.
+          # Net::HTTP adds default headers for content-type to POSTs (1.8.7+)
+          # and accept-encoding (2.0.0+). Setting a default empty value defeats
+          # this.
           #
-          # Removing these are necessary for most services to no break request
+          # Removing these are necessary for most services to not break request
           # signatures as well as dynamodb crc32 checks (these fail if the
           # response is gzipped).
           headers = { 'content-type' => '', 'accept-encoding' => '' }
