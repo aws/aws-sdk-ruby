@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2020-01-13)
+------------------
+
+* Feature - Cross-region backup is a new AWS Backup feature that allows enterprises to copy backups across multiple AWS services to different regions.
+
 1.10.0 (2019-10-23)
 ------------------
 

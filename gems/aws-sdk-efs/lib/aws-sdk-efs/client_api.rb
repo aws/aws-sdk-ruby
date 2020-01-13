@@ -11,16 +11,34 @@ module Aws::EFS
 
     include Seahorse::Model
 
+    AccessPointAlreadyExists = Shapes::StructureShape.new(name: 'AccessPointAlreadyExists')
+    AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
+    AccessPointDescription = Shapes::StructureShape.new(name: 'AccessPointDescription')
+    AccessPointDescriptions = Shapes::ListShape.new(name: 'AccessPointDescriptions')
+    AccessPointId = Shapes::StringShape.new(name: 'AccessPointId')
+    AccessPointLimitExceeded = Shapes::StructureShape.new(name: 'AccessPointLimitExceeded')
+    AccessPointNotFound = Shapes::StructureShape.new(name: 'AccessPointNotFound')
+    AvailabilityZoneId = Shapes::StringShape.new(name: 'AvailabilityZoneId')
+    AvailabilityZoneName = Shapes::StringShape.new(name: 'AvailabilityZoneName')
     AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
     BadRequest = Shapes::StructureShape.new(name: 'BadRequest')
+    BypassPolicyLockoutSafetyCheck = Shapes::BooleanShape.new(name: 'BypassPolicyLockoutSafetyCheck')
+    ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CreateAccessPointRequest = Shapes::StructureShape.new(name: 'CreateAccessPointRequest')
     CreateFileSystemRequest = Shapes::StructureShape.new(name: 'CreateFileSystemRequest')
     CreateMountTargetRequest = Shapes::StructureShape.new(name: 'CreateMountTargetRequest')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
+    CreationInfo = Shapes::StructureShape.new(name: 'CreationInfo')
     CreationToken = Shapes::StringShape.new(name: 'CreationToken')
+    DeleteAccessPointRequest = Shapes::StructureShape.new(name: 'DeleteAccessPointRequest')
+    DeleteFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFileSystemPolicyRequest')
     DeleteFileSystemRequest = Shapes::StructureShape.new(name: 'DeleteFileSystemRequest')
     DeleteMountTargetRequest = Shapes::StructureShape.new(name: 'DeleteMountTargetRequest')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DependencyTimeout = Shapes::StructureShape.new(name: 'DependencyTimeout')
+    DescribeAccessPointsRequest = Shapes::StructureShape.new(name: 'DescribeAccessPointsRequest')
+    DescribeAccessPointsResponse = Shapes::StructureShape.new(name: 'DescribeAccessPointsResponse')
+    DescribeFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemPolicyRequest')
     DescribeFileSystemsRequest = Shapes::StructureShape.new(name: 'DescribeFileSystemsRequest')
     DescribeFileSystemsResponse = Shapes::StructureShape.new(name: 'DescribeFileSystemsResponse')
     DescribeLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeLifecycleConfigurationRequest')
@@ -41,12 +59,15 @@ module Aws::EFS
     FileSystemLimitExceeded = Shapes::StructureShape.new(name: 'FileSystemLimitExceeded')
     FileSystemNotFound = Shapes::StructureShape.new(name: 'FileSystemNotFound')
     FileSystemNullableSizeValue = Shapes::IntegerShape.new(name: 'FileSystemNullableSizeValue')
+    FileSystemPolicyDescription = Shapes::StructureShape.new(name: 'FileSystemPolicyDescription')
     FileSystemSize = Shapes::StructureShape.new(name: 'FileSystemSize')
     FileSystemSizeValue = Shapes::IntegerShape.new(name: 'FileSystemSizeValue')
+    Gid = Shapes::IntegerShape.new(name: 'Gid')
     IncorrectFileSystemLifeCycleState = Shapes::StructureShape.new(name: 'IncorrectFileSystemLifeCycleState')
     IncorrectMountTargetState = Shapes::StructureShape.new(name: 'IncorrectMountTargetState')
     InsufficientThroughputCapacity = Shapes::StructureShape.new(name: 'InsufficientThroughputCapacity')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressInUse = Shapes::StructureShape.new(name: 'IpAddressInUse')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
@@ -54,8 +75,11 @@ module Aws::EFS
     LifecycleConfigurationDescription = Shapes::StructureShape.new(name: 'LifecycleConfigurationDescription')
     LifecyclePolicies = Shapes::ListShape.new(name: 'LifecyclePolicies')
     LifecyclePolicy = Shapes::StructureShape.new(name: 'LifecyclePolicy')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     ModifyMountTargetSecurityGroupsRequest = Shapes::StructureShape.new(name: 'ModifyMountTargetSecurityGroupsRequest')
     MountTargetConflict = Shapes::StructureShape.new(name: 'MountTargetConflict')
     MountTargetCount = Shapes::IntegerShape.new(name: 'MountTargetCount')
@@ -63,12 +87,24 @@ module Aws::EFS
     MountTargetDescriptions = Shapes::ListShape.new(name: 'MountTargetDescriptions')
     MountTargetId = Shapes::StringShape.new(name: 'MountTargetId')
     MountTargetNotFound = Shapes::StructureShape.new(name: 'MountTargetNotFound')
+    Name = Shapes::StringShape.new(name: 'Name')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaceLimitExceeded = Shapes::StructureShape.new(name: 'NetworkInterfaceLimitExceeded')
     NoFreeAddressesInSubnet = Shapes::StructureShape.new(name: 'NoFreeAddressesInSubnet')
+    OwnerGid = Shapes::IntegerShape.new(name: 'OwnerGid')
+    OwnerUid = Shapes::IntegerShape.new(name: 'OwnerUid')
+    Path = Shapes::StringShape.new(name: 'Path')
     PerformanceMode = Shapes::StringShape.new(name: 'PerformanceMode')
+    Permissions = Shapes::StringShape.new(name: 'Permissions')
+    Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyNotFound = Shapes::StructureShape.new(name: 'PolicyNotFound')
+    PosixUser = Shapes::StructureShape.new(name: 'PosixUser')
     ProvisionedThroughputInMibps = Shapes::FloatShape.new(name: 'ProvisionedThroughputInMibps')
+    PutFileSystemPolicyRequest = Shapes::StructureShape.new(name: 'PutFileSystemPolicyRequest')
     PutLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutLifecycleConfigurationRequest')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    RootDirectory = Shapes::StructureShape.new(name: 'RootDirectory')
+    SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     SecurityGroupLimitExceeded = Shapes::StructureShape.new(name: 'SecurityGroupLimitExceeded')
     SecurityGroupNotFound = Shapes::StructureShape.new(name: 'SecurityGroupNotFound')
@@ -78,21 +114,59 @@ module Aws::EFS
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
     ThroughputLimitExceeded = Shapes::StructureShape.new(name: 'ThroughputLimitExceeded')
     ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Token = Shapes::StringShape.new(name: 'Token')
     TooManyRequests = Shapes::StructureShape.new(name: 'TooManyRequests')
     TransitionToIARules = Shapes::StringShape.new(name: 'TransitionToIARules')
+    Uid = Shapes::IntegerShape.new(name: 'Uid')
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
+
+    AccessPointAlreadyExists.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    AccessPointAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessPointAlreadyExists.add_member(:access_point_id, Shapes::ShapeRef.new(shape: AccessPointId, required: true, location_name: "AccessPointId"))
+    AccessPointAlreadyExists.struct_class = Types::AccessPointAlreadyExists
+
+    AccessPointDescription.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    AccessPointDescription.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    AccessPointDescription.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    AccessPointDescription.add_member(:access_point_id, Shapes::ShapeRef.new(shape: AccessPointId, location_name: "AccessPointId"))
+    AccessPointDescription.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: AccessPointArn, location_name: "AccessPointArn"))
+    AccessPointDescription.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    AccessPointDescription.add_member(:posix_user, Shapes::ShapeRef.new(shape: PosixUser, location_name: "PosixUser"))
+    AccessPointDescription.add_member(:root_directory, Shapes::ShapeRef.new(shape: RootDirectory, location_name: "RootDirectory"))
+    AccessPointDescription.add_member(:owner_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "OwnerId"))
+    AccessPointDescription.add_member(:life_cycle_state, Shapes::ShapeRef.new(shape: LifeCycleState, location_name: "LifeCycleState"))
+    AccessPointDescription.struct_class = Types::AccessPointDescription
+
+    AccessPointDescriptions.member = Shapes::ShapeRef.new(shape: AccessPointDescription)
+
+    AccessPointLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    AccessPointLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessPointLimitExceeded.struct_class = Types::AccessPointLimitExceeded
+
+    AccessPointNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
+    AccessPointNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessPointNotFound.struct_class = Types::AccessPointNotFound
 
     BadRequest.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     BadRequest.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     BadRequest.struct_class = Types::BadRequest
 
-    CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
+    CreateAccessPointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateAccessPointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateAccessPointRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    CreateAccessPointRequest.add_member(:posix_user, Shapes::ShapeRef.new(shape: PosixUser, location_name: "PosixUser"))
+    CreateAccessPointRequest.add_member(:root_directory, Shapes::ShapeRef.new(shape: RootDirectory, location_name: "RootDirectory"))
+    CreateAccessPointRequest.struct_class = Types::CreateAccessPointRequest
+
+    CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken", metadata: {"idempotencyToken"=>true}))
     CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
     CreateFileSystemRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
@@ -111,6 +185,17 @@ module Aws::EFS
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
+    CreationInfo.add_member(:owner_uid, Shapes::ShapeRef.new(shape: OwnerUid, required: true, location_name: "OwnerUid"))
+    CreationInfo.add_member(:owner_gid, Shapes::ShapeRef.new(shape: OwnerGid, required: true, location_name: "OwnerGid"))
+    CreationInfo.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, required: true, location_name: "Permissions"))
+    CreationInfo.struct_class = Types::CreationInfo
+
+    DeleteAccessPointRequest.add_member(:access_point_id, Shapes::ShapeRef.new(shape: AccessPointId, required: true, location: "uri", location_name: "AccessPointId"))
+    DeleteAccessPointRequest.struct_class = Types::DeleteAccessPointRequest
+
+    DeleteFileSystemPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    DeleteFileSystemPolicyRequest.struct_class = Types::DeleteFileSystemPolicyRequest
+
     DeleteFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     DeleteFileSystemRequest.struct_class = Types::DeleteFileSystemRequest
 
@@ -124,6 +209,19 @@ module Aws::EFS
     DependencyTimeout.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     DependencyTimeout.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DependencyTimeout.struct_class = Types::DependencyTimeout
+
+    DescribeAccessPointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    DescribeAccessPointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    DescribeAccessPointsRequest.add_member(:access_point_id, Shapes::ShapeRef.new(shape: AccessPointId, location: "querystring", location_name: "AccessPointId"))
+    DescribeAccessPointsRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location: "querystring", location_name: "FileSystemId"))
+    DescribeAccessPointsRequest.struct_class = Types::DescribeAccessPointsRequest
+
+    DescribeAccessPointsResponse.add_member(:access_points, Shapes::ShapeRef.new(shape: AccessPointDescriptions, location_name: "AccessPoints"))
+    DescribeAccessPointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    DescribeAccessPointsResponse.struct_class = Types::DescribeAccessPointsResponse
+
+    DescribeFileSystemPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    DescribeFileSystemPolicyRequest.struct_class = Types::DescribeFileSystemPolicyRequest
 
     DescribeFileSystemsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "MaxItems"))
     DescribeFileSystemsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "Marker"))
@@ -149,6 +247,7 @@ module Aws::EFS
     DescribeMountTargetsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "Marker"))
     DescribeMountTargetsRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location: "querystring", location_name: "FileSystemId"))
     DescribeMountTargetsRequest.add_member(:mount_target_id, Shapes::ShapeRef.new(shape: MountTargetId, location: "querystring", location_name: "MountTargetId"))
+    DescribeMountTargetsRequest.add_member(:access_point_id, Shapes::ShapeRef.new(shape: AccessPointId, location: "querystring", location_name: "AccessPointId"))
     DescribeMountTargetsRequest.struct_class = Types::DescribeMountTargetsRequest
 
     DescribeMountTargetsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
@@ -201,6 +300,10 @@ module Aws::EFS
     FileSystemNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     FileSystemNotFound.struct_class = Types::FileSystemNotFound
 
+    FileSystemPolicyDescription.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, location_name: "FileSystemId"))
+    FileSystemPolicyDescription.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
+    FileSystemPolicyDescription.struct_class = Types::FileSystemPolicyDescription
+
     FileSystemSize.add_member(:value, Shapes::ShapeRef.new(shape: FileSystemSizeValue, required: true, location_name: "Value"))
     FileSystemSize.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     FileSystemSize.add_member(:value_in_ia, Shapes::ShapeRef.new(shape: FileSystemNullableSizeValue, location_name: "ValueInIA"))
@@ -223,6 +326,10 @@ module Aws::EFS
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerError.struct_class = Types::InternalServerError
 
+    InvalidPolicyException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    InvalidPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidPolicyException.struct_class = Types::InvalidPolicyException
+
     IpAddressInUse.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     IpAddressInUse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     IpAddressInUse.struct_class = Types::IpAddressInUse
@@ -234,6 +341,15 @@ module Aws::EFS
 
     LifecyclePolicy.add_member(:transition_to_ia, Shapes::ShapeRef.new(shape: TransitionToIARules, location_name: "TransitionToIA"))
     LifecyclePolicy.struct_class = Types::LifecyclePolicy
+
+    ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ResourceId"))
+    ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     ModifyMountTargetSecurityGroupsRequest.add_member(:mount_target_id, Shapes::ShapeRef.new(shape: MountTargetId, required: true, location: "uri", location_name: "MountTargetId"))
     ModifyMountTargetSecurityGroupsRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
@@ -250,6 +366,8 @@ module Aws::EFS
     MountTargetDescription.add_member(:life_cycle_state, Shapes::ShapeRef.new(shape: LifeCycleState, required: true, location_name: "LifeCycleState"))
     MountTargetDescription.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
     MountTargetDescription.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
+    MountTargetDescription.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    MountTargetDescription.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZoneName"))
     MountTargetDescription.struct_class = Types::MountTargetDescription
 
     MountTargetDescriptions.member = Shapes::ShapeRef.new(shape: MountTargetDescription)
@@ -266,9 +384,29 @@ module Aws::EFS
     NoFreeAddressesInSubnet.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     NoFreeAddressesInSubnet.struct_class = Types::NoFreeAddressesInSubnet
 
+    PolicyNotFound.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    PolicyNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyNotFound.struct_class = Types::PolicyNotFound
+
+    PosixUser.add_member(:uid, Shapes::ShapeRef.new(shape: Uid, required: true, location_name: "Uid"))
+    PosixUser.add_member(:gid, Shapes::ShapeRef.new(shape: Gid, required: true, location_name: "Gid"))
+    PosixUser.add_member(:secondary_gids, Shapes::ShapeRef.new(shape: SecondaryGids, location_name: "SecondaryGids"))
+    PosixUser.struct_class = Types::PosixUser
+
+    PutFileSystemPolicyRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    PutFileSystemPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutFileSystemPolicyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BypassPolicyLockoutSafetyCheck, location_name: "BypassPolicyLockoutSafetyCheck"))
+    PutFileSystemPolicyRequest.struct_class = Types::PutFileSystemPolicyRequest
+
     PutLifecycleConfigurationRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     PutLifecycleConfigurationRequest.add_member(:lifecycle_policies, Shapes::ShapeRef.new(shape: LifecyclePolicies, required: true, location_name: "LifecyclePolicies"))
     PutLifecycleConfigurationRequest.struct_class = Types::PutLifecycleConfigurationRequest
+
+    RootDirectory.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    RootDirectory.add_member(:creation_info, Shapes::ShapeRef.new(shape: CreationInfo, location_name: "CreationInfo"))
+    RootDirectory.struct_class = Types::RootDirectory
+
+    SecondaryGids.member = Shapes::ShapeRef.new(shape: Gid)
 
     SecurityGroupLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     SecurityGroupLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -290,6 +428,10 @@ module Aws::EFS
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    TagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ResourceId"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
     ThroughputLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
@@ -303,6 +445,10 @@ module Aws::EFS
     UnsupportedAvailabilityZone.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     UnsupportedAvailabilityZone.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnsupportedAvailabilityZone.struct_class = Types::UnsupportedAvailabilityZone
+
+    UntagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "ResourceId"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
     UpdateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
@@ -325,6 +471,19 @@ module Aws::EFS
         "signatureVersion" => "v4",
         "uid" => "elasticfilesystem-2015-02-01",
       }
+
+      api.add_operation(:create_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAccessPoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-02-01/access-points"
+        o.input = Shapes::ShapeRef.new(shape: CreateAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: AccessPointDescription)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointAlreadyExists)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointLimitExceeded)
+      end)
 
       api.add_operation(:create_file_system, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFileSystem"
@@ -364,11 +523,23 @@ module Aws::EFS
         o.name = "CreateTags"
         o.http_method = "POST"
         o.http_request_uri = "/2015-02-01/create-tags/{FileSystemId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+      end)
+
+      api.add_operation(:delete_access_point, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessPoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-02-01/access-points/{AccessPointId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessPointRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
       end)
 
       api.add_operation(:delete_file_system, Seahorse::Model::Operation.new.tap do |o|
@@ -381,6 +552,17 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemInUse)
+      end)
+
+      api.add_operation(:delete_file_system_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFileSystemPolicy"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFileSystemPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
       end)
 
       api.add_operation(:delete_mount_target, Seahorse::Model::Operation.new.tap do |o|
@@ -399,11 +581,41 @@ module Aws::EFS
         o.name = "DeleteTags"
         o.http_method = "POST"
         o.http_request_uri = "/2015-02-01/delete-tags/{FileSystemId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+      end)
+
+      api.add_operation(:describe_access_points, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccessPoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/access-points"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccessPointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccessPointsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_file_system_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFileSystemPolicy"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/policy"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFileSystemPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: FileSystemPolicyDescription)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: PolicyNotFound)
       end)
 
       api.add_operation(:describe_file_systems, Seahorse::Model::Operation.new.tap do |o|
@@ -415,6 +627,12 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
       end)
 
       api.add_operation(:describe_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -450,17 +668,43 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
       end)
 
       api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeTags"
         o.http_method = "GET"
         o.http_request_uri = "/2015-02-01/tags/{FileSystemId}/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequest)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_items",
+          tokens: {
+            "next_marker" => "marker"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-02-01/resource-tags/{ResourceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:modify_mount_target_security_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -477,6 +721,18 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
       end)
 
+      api.add_operation(:put_file_system_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFileSystemPolicy"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}/policy"
+        o.input = Shapes::ShapeRef.new(shape: PutFileSystemPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: FileSystemPolicyDescription)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPolicyException)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
+      end)
+
       api.add_operation(:put_lifecycle_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutLifecycleConfiguration"
         o.http_method = "PUT"
@@ -487,6 +743,30 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-02-01/resource-tags/{ResourceId}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2015-02-01/resource-tags/{ResourceId}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFound)
       end)
 
       api.add_operation(:update_file_system, Seahorse::Model::Operation.new.tap do |o|

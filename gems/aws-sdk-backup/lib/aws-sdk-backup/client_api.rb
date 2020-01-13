@@ -44,6 +44,11 @@ module Aws::Backup
     ConditionKey = Shapes::StringShape.new(name: 'ConditionKey')
     ConditionType = Shapes::StringShape.new(name: 'ConditionType')
     ConditionValue = Shapes::StringShape.new(name: 'ConditionValue')
+    CopyAction = Shapes::StructureShape.new(name: 'CopyAction')
+    CopyActions = Shapes::ListShape.new(name: 'CopyActions')
+    CopyJob = Shapes::StructureShape.new(name: 'CopyJob')
+    CopyJobState = Shapes::StringShape.new(name: 'CopyJobState')
+    CopyJobsList = Shapes::ListShape.new(name: 'CopyJobsList')
     CreateBackupPlanInput = Shapes::StructureShape.new(name: 'CreateBackupPlanInput')
     CreateBackupPlanOutput = Shapes::StructureShape.new(name: 'CreateBackupPlanOutput')
     CreateBackupSelectionInput = Shapes::StructureShape.new(name: 'CreateBackupSelectionInput')
@@ -63,6 +68,8 @@ module Aws::Backup
     DescribeBackupJobOutput = Shapes::StructureShape.new(name: 'DescribeBackupJobOutput')
     DescribeBackupVaultInput = Shapes::StructureShape.new(name: 'DescribeBackupVaultInput')
     DescribeBackupVaultOutput = Shapes::StructureShape.new(name: 'DescribeBackupVaultOutput')
+    DescribeCopyJobInput = Shapes::StructureShape.new(name: 'DescribeCopyJobInput')
+    DescribeCopyJobOutput = Shapes::StructureShape.new(name: 'DescribeCopyJobOutput')
     DescribeProtectedResourceInput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceInput')
     DescribeProtectedResourceOutput = Shapes::StructureShape.new(name: 'DescribeProtectedResourceOutput')
     DescribeRecoveryPointInput = Shapes::StructureShape.new(name: 'DescribeRecoveryPointInput')
@@ -104,6 +111,8 @@ module Aws::Backup
     ListBackupSelectionsOutput = Shapes::StructureShape.new(name: 'ListBackupSelectionsOutput')
     ListBackupVaultsInput = Shapes::StructureShape.new(name: 'ListBackupVaultsInput')
     ListBackupVaultsOutput = Shapes::StructureShape.new(name: 'ListBackupVaultsOutput')
+    ListCopyJobsInput = Shapes::StructureShape.new(name: 'ListCopyJobsInput')
+    ListCopyJobsOutput = Shapes::StructureShape.new(name: 'ListCopyJobsOutput')
     ListOfTags = Shapes::ListShape.new(name: 'ListOfTags')
     ListProtectedResourcesInput = Shapes::StructureShape.new(name: 'ListProtectedResourcesInput')
     ListProtectedResourcesOutput = Shapes::StructureShape.new(name: 'ListProtectedResourcesOutput')
@@ -142,6 +151,8 @@ module Aws::Backup
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartBackupJobInput = Shapes::StructureShape.new(name: 'StartBackupJobInput')
     StartBackupJobOutput = Shapes::StructureShape.new(name: 'StartBackupJobOutput')
+    StartCopyJobInput = Shapes::StructureShape.new(name: 'StartCopyJobInput')
+    StartCopyJobOutput = Shapes::StructureShape.new(name: 'StartCopyJobOutput')
     StartRestoreJobInput = Shapes::StructureShape.new(name: 'StartRestoreJobInput')
     StartRestoreJobOutput = Shapes::StructureShape.new(name: 'StartRestoreJobOutput')
     StopBackupJobInput = Shapes::StructureShape.new(name: 'StopBackupJobInput')
@@ -227,6 +238,7 @@ module Aws::Backup
     BackupRule.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     BackupRule.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
     BackupRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: string, location_name: "RuleId"))
+    BackupRule.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
     BackupRule.struct_class = Types::BackupRule
 
     BackupRuleInput.add_member(:rule_name, Shapes::ShapeRef.new(shape: BackupRuleName, required: true, location_name: "RuleName"))
@@ -236,6 +248,7 @@ module Aws::Backup
     BackupRuleInput.add_member(:completion_window_minutes, Shapes::ShapeRef.new(shape: WindowMinutes, location_name: "CompletionWindowMinutes"))
     BackupRuleInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
     BackupRuleInput.add_member(:recovery_point_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "RecoveryPointTags"))
+    BackupRuleInput.add_member(:copy_actions, Shapes::ShapeRef.new(shape: CopyActions, location_name: "CopyActions"))
     BackupRuleInput.struct_class = Types::BackupRuleInput
 
     BackupRules.member = Shapes::ShapeRef.new(shape: BackupRule)
@@ -278,6 +291,30 @@ module Aws::Backup
     Condition.add_member(:condition_key, Shapes::ShapeRef.new(shape: ConditionKey, required: true, location_name: "ConditionKey"))
     Condition.add_member(:condition_value, Shapes::ShapeRef.new(shape: ConditionValue, required: true, location_name: "ConditionValue"))
     Condition.struct_class = Types::Condition
+
+    CopyAction.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
+    CopyAction.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "DestinationBackupVaultArn"))
+    CopyAction.struct_class = Types::CopyAction
+
+    CopyActions.member = Shapes::ShapeRef.new(shape: CopyAction)
+
+    CopyJob.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, location_name: "CopyJobId"))
+    CopyJob.add_member(:source_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceBackupVaultArn"))
+    CopyJob.add_member(:source_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourceRecoveryPointArn"))
+    CopyJob.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "DestinationBackupVaultArn"))
+    CopyJob.add_member(:destination_recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "DestinationRecoveryPointArn"))
+    CopyJob.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceArn"))
+    CopyJob.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    CopyJob.add_member(:completion_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CompletionDate"))
+    CopyJob.add_member(:state, Shapes::ShapeRef.new(shape: CopyJobState, location_name: "State"))
+    CopyJob.add_member(:status_message, Shapes::ShapeRef.new(shape: string, location_name: "StatusMessage"))
+    CopyJob.add_member(:backup_size_in_bytes, Shapes::ShapeRef.new(shape: Long, location_name: "BackupSizeInBytes"))
+    CopyJob.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "IamRoleArn"))
+    CopyJob.add_member(:created_by, Shapes::ShapeRef.new(shape: RecoveryPointCreator, location_name: "CreatedBy"))
+    CopyJob.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    CopyJob.struct_class = Types::CopyJob
+
+    CopyJobsList.member = Shapes::ShapeRef.new(shape: CopyJob)
 
     CreateBackupPlanInput.add_member(:backup_plan, Shapes::ShapeRef.new(shape: BackupPlanInput, required: true, location_name: "BackupPlan"))
     CreateBackupPlanInput.add_member(:backup_plan_tags, Shapes::ShapeRef.new(shape: Tags, location_name: "BackupPlanTags"))
@@ -375,6 +412,12 @@ module Aws::Backup
     DescribeBackupVaultOutput.add_member(:creator_request_id, Shapes::ShapeRef.new(shape: string, location_name: "CreatorRequestId"))
     DescribeBackupVaultOutput.add_member(:number_of_recovery_points, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfRecoveryPoints"))
     DescribeBackupVaultOutput.struct_class = Types::DescribeBackupVaultOutput
+
+    DescribeCopyJobInput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "copyJobId"))
+    DescribeCopyJobInput.struct_class = Types::DescribeCopyJobInput
+
+    DescribeCopyJobOutput.add_member(:copy_job, Shapes::ShapeRef.new(shape: CopyJob, location_name: "CopyJob"))
+    DescribeCopyJobOutput.struct_class = Types::DescribeCopyJobOutput
 
     DescribeProtectedResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     DescribeProtectedResourceInput.struct_class = Types::DescribeProtectedResourceInput
@@ -574,6 +617,20 @@ module Aws::Backup
     ListBackupVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
     ListBackupVaultsOutput.struct_class = Types::ListBackupVaultsOutput
 
+    ListCopyJobsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
+    ListCopyJobsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCopyJobsInput.add_member(:by_resource_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "resourceArn"))
+    ListCopyJobsInput.add_member(:by_state, Shapes::ShapeRef.new(shape: CopyJobState, location: "querystring", location_name: "state"))
+    ListCopyJobsInput.add_member(:by_created_before, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdBefore"))
+    ListCopyJobsInput.add_member(:by_created_after, Shapes::ShapeRef.new(shape: timestamp, location: "querystring", location_name: "createdAfter"))
+    ListCopyJobsInput.add_member(:by_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location: "querystring", location_name: "resourceType"))
+    ListCopyJobsInput.add_member(:by_destination_vault_arn, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "destinationVaultArn"))
+    ListCopyJobsInput.struct_class = Types::ListCopyJobsInput
+
+    ListCopyJobsOutput.add_member(:copy_jobs, Shapes::ShapeRef.new(shape: CopyJobsList, location_name: "CopyJobs"))
+    ListCopyJobsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "NextToken"))
+    ListCopyJobsOutput.struct_class = Types::ListCopyJobsOutput
+
     ListOfTags.member = Shapes::ShapeRef.new(shape: Condition)
 
     ListProtectedResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location: "querystring", location_name: "nextToken"))
@@ -730,6 +787,18 @@ module Aws::Backup
     StartBackupJobOutput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RecoveryPointArn"))
     StartBackupJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
     StartBackupJobOutput.struct_class = Types::StartBackupJobOutput
+
+    StartCopyJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
+    StartCopyJobInput.add_member(:source_backup_vault_name, Shapes::ShapeRef.new(shape: BackupVaultName, required: true, location_name: "SourceBackupVaultName"))
+    StartCopyJobInput.add_member(:destination_backup_vault_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "DestinationBackupVaultArn"))
+    StartCopyJobInput.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "IamRoleArn"))
+    StartCopyJobInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: string, location_name: "IdempotencyToken"))
+    StartCopyJobInput.add_member(:lifecycle, Shapes::ShapeRef.new(shape: Lifecycle, location_name: "Lifecycle"))
+    StartCopyJobInput.struct_class = Types::StartCopyJobInput
+
+    StartCopyJobOutput.add_member(:copy_job_id, Shapes::ShapeRef.new(shape: string, location_name: "CopyJobId"))
+    StartCopyJobOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationDate"))
+    StartCopyJobOutput.struct_class = Types::StartCopyJobOutput
 
     StartRestoreJobInput.add_member(:recovery_point_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RecoveryPointArn"))
     StartRestoreJobInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, required: true, location_name: "Metadata"))
@@ -934,6 +1003,18 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:describe_copy_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeCopyJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/copy-jobs/{copyJobId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeCopyJobInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeCopyJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:describe_protected_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeProtectedResource"
         o.http_method = "GET"
@@ -1084,6 +1165,7 @@ module Aws::Backup
         o.input = Shapes::ShapeRef.new(shape: ListBackupJobsInput)
         o.output = Shapes::ShapeRef.new(shape: ListBackupJobsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1174,6 +1256,22 @@ module Aws::Backup
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_copy_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCopyJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/copy-jobs/"
+        o.input = Shapes::ShapeRef.new(shape: ListCopyJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCopyJobsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -1301,6 +1399,19 @@ module Aws::Backup
         o.http_request_uri = "/backup-jobs"
         o.input = Shapes::ShapeRef.new(shape: StartBackupJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartBackupJobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:start_copy_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCopyJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/copy-jobs"
+        o.input = Shapes::ShapeRef.new(shape: StartCopyJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartCopyJobOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)

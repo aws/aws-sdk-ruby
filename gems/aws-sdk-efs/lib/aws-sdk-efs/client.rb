@@ -254,6 +254,121 @@ module Aws::EFS
 
     # @!group API Operations
 
+    # Creates an EFS access point. An access point is an
+    # application-specific view into an EFS file system that applies an
+    # operating system user and group, and a file system path, to any file
+    # system request made through the access point. The operating system
+    # user and group override any identity information provided by the NFS
+    # client. The file system path is exposed as the access point's root
+    # directory. Applications using the access point can only access data in
+    # its own directory and below. To learn more, see [Mounting a File
+    # System Using EFS Access Points][1].
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:CreateAccessPoint` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html
+    #
+    # @option params [required, String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Creates tags associated with the access point. Each tag is a key-value
+    #   pair.
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the EFS file system that the access point provides access
+    #   to.
+    #
+    # @option params [Types::PosixUser] :posix_user
+    #   The operating system user and group applied to all file system
+    #   requests made using the access point.
+    #
+    # @option params [Types::RootDirectory] :root_directory
+    #   Specifies the directory on the Amazon EFS file system that the access
+    #   point exposes as the root directory of your file system to NFS clients
+    #   using the access point. The clients using the access point can only
+    #   access the root directory and below. If the `RootDirectory` &gt;
+    #   `Path` specified does not exist, EFS creates it and applies the
+    #   `CreationInfo` settings when a client connects to an access point.
+    #   When specifying a `RootDirectory`, you need to provide the `Path`, and
+    #   the `CreationInfo` is optional.
+    #
+    # @return [Types::AccessPointDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AccessPointDescription#client_token #client_token} => String
+    #   * {Types::AccessPointDescription#name #name} => String
+    #   * {Types::AccessPointDescription#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::AccessPointDescription#access_point_id #access_point_id} => String
+    #   * {Types::AccessPointDescription#access_point_arn #access_point_arn} => String
+    #   * {Types::AccessPointDescription#file_system_id #file_system_id} => String
+    #   * {Types::AccessPointDescription#posix_user #posix_user} => Types::PosixUser
+    #   * {Types::AccessPointDescription#root_directory #root_directory} => Types::RootDirectory
+    #   * {Types::AccessPointDescription#owner_id #owner_id} => String
+    #   * {Types::AccessPointDescription#life_cycle_state #life_cycle_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_access_point({
+    #     client_token: "ClientToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     file_system_id: "FileSystemId", # required
+    #     posix_user: {
+    #       uid: 1, # required
+    #       gid: 1, # required
+    #       secondary_gids: [1],
+    #     },
+    #     root_directory: {
+    #       path: "Path",
+    #       creation_info: {
+    #         owner_uid: 1, # required
+    #         owner_gid: 1, # required
+    #         permissions: "Permissions", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.name #=> String
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.access_point_id #=> String
+    #   resp.access_point_arn #=> String
+    #   resp.file_system_id #=> String
+    #   resp.posix_user.uid #=> Integer
+    #   resp.posix_user.gid #=> Integer
+    #   resp.posix_user.secondary_gids #=> Array
+    #   resp.posix_user.secondary_gids[0] #=> Integer
+    #   resp.root_directory.path #=> String
+    #   resp.root_directory.creation_info.owner_uid #=> Integer
+    #   resp.root_directory.creation_info.owner_gid #=> Integer
+    #   resp.root_directory.creation_info.permissions #=> String
+    #   resp.owner_id #=> String
+    #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateAccessPoint AWS API Documentation
+    #
+    # @overload create_access_point(params = {})
+    # @param [Hash] params ({})
+    def create_access_point(params = {}, options = {})
+      req = build_request(:create_access_point, params)
+      req.send_request(options)
+    end
+
     # Creates a new, empty file system. The operation requires a creation
     # token in the request that Amazon EFS uses to ensure idempotent
     # creation (calling the operation with same creation token has no
@@ -317,6 +432,9 @@ module Aws::EFS
     # @option params [required, String] :creation_token
     #   A string of up to 64 ASCII characters. Amazon EFS uses this to ensure
     #   idempotent creation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @option params [String] :performance_mode
     #   The performance mode of the file system. We recommend `generalPurpose`
@@ -627,6 +745,8 @@ module Aws::EFS
     #   * {Types::MountTargetDescription#life_cycle_state #life_cycle_state} => String
     #   * {Types::MountTargetDescription#ip_address #ip_address} => String
     #   * {Types::MountTargetDescription#network_interface_id #network_interface_id} => String
+    #   * {Types::MountTargetDescription#availability_zone_id #availability_zone_id} => String
+    #   * {Types::MountTargetDescription#availability_zone_name #availability_zone_name} => String
     #
     #
     # @example Example: To create a new mount target
@@ -667,6 +787,8 @@ module Aws::EFS
     #   resp.life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.ip_address #=> String
     #   resp.network_interface_id #=> String
+    #   resp.availability_zone_id #=> String
+    #   resp.availability_zone_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget AWS API Documentation
     #
@@ -733,6 +855,34 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Deletes the specified access point. After deletion is complete, new
+    # clients can no longer connect to the access points. Clients connected
+    # to the access point at the time of deletion will continue to function
+    # until they terminate their connection.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DeleteAccessPoint` action.
+    #
+    # @option params [required, String] :access_point_id
+    #   The ID of the access point that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_point({
+    #     access_point_id: "AccessPointId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteAccessPoint AWS API Documentation
+    #
+    # @overload delete_access_point(params = {})
+    # @param [Hash] params ({})
+    def delete_access_point(params = {}, options = {})
+      req = build_request(:delete_access_point, params)
+      req.send_request(options)
+    end
+
     # Deletes a file system, permanently severing access to its contents.
     # Upon return, the file system no longer exists and you can't access
     # any contents of the deleted file system.
@@ -779,6 +929,39 @@ module Aws::EFS
     # @param [Hash] params ({})
     def delete_file_system(params = {}, options = {})
       req = build_request(:delete_file_system, params)
+      req.send_request(options)
+    end
+
+    # Deletes the `FileSystemPolicy` for the specified file system. The
+    # default `FileSystemPolicy` goes into effect once the existing policy
+    # is deleted. For more information about the default file system policy,
+    # see [Using Resource-based Policies with EFS][1].
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DeleteFileSystemPolicy` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies the EFS file system for which to delete the
+    #   `FileSystemPolicy`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_file_system_policy({
+    #     file_system_id: "FileSystemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemPolicy AWS API Documentation
+    #
+    # @overload delete_file_system_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_file_system_policy(params = {}, options = {})
+      req = build_request(:delete_file_system_policy, params)
       req.send_request(options)
     end
 
@@ -893,6 +1076,113 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Returns the description of a specific Amazon EFS access point if the
+    # `AccessPointId` is provided. If you provide an EFS `FileSystemId`, it
+    # returns descriptions of all access points for that file system. You
+    # can provide either an `AccessPointId` or a `FileSystemId` in the
+    # request, but not both.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DescribeAccessPoints` action.
+    #
+    # @option params [Integer] :max_results
+    #   (Optional) When retrieving all access points for a file system, you
+    #   can optionally specify the `MaxItems` parameter to limit the number of
+    #   objects returned in a response. The default value is 100.
+    #
+    # @option params [String] :next_token
+    #   `NextToken` is present if the response is paginated. You can use
+    #   `NextMarker` in the subsequent request to fetch the next page of
+    #   access point descriptions.
+    #
+    # @option params [String] :access_point_id
+    #   (Optional) Specifies an EFS access point to describe in the response;
+    #   mutually exclusive with `FileSystemId`.
+    #
+    # @option params [String] :file_system_id
+    #   (Optional) If you provide a `FileSystemId`, EFS returns all access
+    #   points for that file system; mutually exclusive with `AccessPointId`.
+    #
+    # @return [Types::DescribeAccessPointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccessPointsResponse#access_points #access_points} => Array&lt;Types::AccessPointDescription&gt;
+    #   * {Types::DescribeAccessPointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_access_points({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     access_point_id: "AccessPointId",
+    #     file_system_id: "FileSystemId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_points #=> Array
+    #   resp.access_points[0].client_token #=> String
+    #   resp.access_points[0].name #=> String
+    #   resp.access_points[0].tags #=> Array
+    #   resp.access_points[0].tags[0].key #=> String
+    #   resp.access_points[0].tags[0].value #=> String
+    #   resp.access_points[0].access_point_id #=> String
+    #   resp.access_points[0].access_point_arn #=> String
+    #   resp.access_points[0].file_system_id #=> String
+    #   resp.access_points[0].posix_user.uid #=> Integer
+    #   resp.access_points[0].posix_user.gid #=> Integer
+    #   resp.access_points[0].posix_user.secondary_gids #=> Array
+    #   resp.access_points[0].posix_user.secondary_gids[0] #=> Integer
+    #   resp.access_points[0].root_directory.path #=> String
+    #   resp.access_points[0].root_directory.creation_info.owner_uid #=> Integer
+    #   resp.access_points[0].root_directory.creation_info.owner_gid #=> Integer
+    #   resp.access_points[0].root_directory.creation_info.permissions #=> String
+    #   resp.access_points[0].owner_id #=> String
+    #   resp.access_points[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeAccessPoints AWS API Documentation
+    #
+    # @overload describe_access_points(params = {})
+    # @param [Hash] params ({})
+    def describe_access_points(params = {}, options = {})
+      req = build_request(:describe_access_points, params)
+      req.send_request(options)
+    end
+
+    # Returns the `FileSystemPolicy` for the specified EFS file system.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DescribeFileSystemPolicy` action.
+    #
+    # @option params [required, String] :file_system_id
+    #   Specifies which EFS file system to retrieve the `FileSystemPolicy`
+    #   for.
+    #
+    # @return [Types::FileSystemPolicyDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FileSystemPolicyDescription#file_system_id #file_system_id} => String
+    #   * {Types::FileSystemPolicyDescription#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_file_system_policy({
+    #     file_system_id: "FileSystemId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_system_id #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemPolicy AWS API Documentation
+    #
+    # @overload describe_file_system_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_file_system_policy(params = {}, options = {})
+      req = build_request(:describe_file_system_policy, params)
+      req.send_request(options)
+    end
+
     # Returns the description of a specific Amazon EFS file system if either
     # the file system `CreationToken` or the `FileSystemId` is provided.
     # Otherwise, it returns descriptions of all file systems owned by the
@@ -922,9 +1212,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) Specifies the maximum number of file systems to return in
-    #   the response (integer). Currently, this number is automatically set to
-    #   10, and other values are ignored. The response is paginated at 10 per
-    #   page if you have more than 10 file systems.
+    #   the response (integer). This number is automatically set to 100. The
+    #   response is paginated at 100 per page if you have more than 100 file
+    #   systems.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1148,8 +1438,8 @@ module Aws::EFS
     # @option params [Integer] :max_items
     #   (Optional) Maximum number of mount targets to return in the response.
     #   Currently, this number is automatically set to 10, and other values
-    #   are ignored. The response is paginated at 10 per page if you have more
-    #   than 10 mount targets.
+    #   are ignored. The response is paginated at 100 per page if you have
+    #   more than 100 mount targets.
     #
     # @option params [String] :marker
     #   (Optional) Opaque pagination token returned from a previous
@@ -1158,13 +1448,20 @@ module Aws::EFS
     #
     # @option params [String] :file_system_id
     #   (Optional) ID of the file system whose mount targets you want to list
-    #   (String). It must be included in your request if `MountTargetId` is
-    #   not included.
+    #   (String). It must be included in your request if an `AccessPointId` or
+    #   `MountTargetId` is not included. Accepts either a file system ID or
+    #   ARN as input.
     #
     # @option params [String] :mount_target_id
     #   (Optional) ID of the mount target that you want to have described
     #   (String). It must be included in your request if `FileSystemId` is not
-    #   included.
+    #   included. Accepts either a mount target ID or ARN as input.
+    #
+    # @option params [String] :access_point_id
+    #   (Optional) The ID of the access point whose mount targets that you
+    #   want to list. It must be included in your request if a `FileSystemId`
+    #   or `MountTargetId` is not included in your request. Accepts either an
+    #   access point ID or ARN as input.
     #
     # @return [Types::DescribeMountTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1203,6 +1500,7 @@ module Aws::EFS
     #     marker: "Marker",
     #     file_system_id: "FileSystemId",
     #     mount_target_id: "MountTargetId",
+    #     access_point_id: "AccessPointId",
     #   })
     #
     # @example Response structure
@@ -1216,6 +1514,8 @@ module Aws::EFS
     #   resp.mount_targets[0].life_cycle_state #=> String, one of "creating", "available", "updating", "deleting", "deleted"
     #   resp.mount_targets[0].ip_address #=> String
     #   resp.mount_targets[0].network_interface_id #=> String
+    #   resp.mount_targets[0].availability_zone_id #=> String
+    #   resp.mount_targets[0].availability_zone_name #=> String
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets AWS API Documentation
@@ -1237,9 +1537,9 @@ module Aws::EFS
     #
     # @option params [Integer] :max_items
     #   (Optional) The maximum number of file system tags to return in the
-    #   response. Currently, this number is automatically set to 10, and other
-    #   values are ignored. The response is paginated at 10 per page if you
-    #   have more than 10 tags.
+    #   response. Currently, this number is automatically set to 100, and
+    #   other values are ignored. The response is paginated at 100 per page if
+    #   you have more than 100 tags.
     #
     # @option params [String] :marker
     #   (Optional) An opaque pagination token returned from a previous
@@ -1299,6 +1599,54 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Lists all tags for a top-level EFS resource. You must provide the ID
+    # of the resource that you want to retrieve the tags for.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:DescribeAccessPoints` action.
+    #
+    # @option params [required, String] :resource_id
+    #   Specifies the EFS resource you want to retrieve tags for. You can
+    #   retrieve tags for EFS file systems and access points using this API
+    #   endpoint.
+    #
+    # @option params [Integer] :max_results
+    #   (Optional) Specifies the maximum number of tag objects to return in
+    #   the response. The default value is 100.
+    #
+    # @option params [String] :next_token
+    #   You can use `NextToken` in a subsequent request to fetch the next page
+    #   of access point descriptions if the response payload was paginated.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_id: "ResourceId", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Modifies the set of security groups in effect for a mount target.
     #
     # When you create a mount target, Amazon EFS also creates a new network
@@ -1350,6 +1698,73 @@ module Aws::EFS
     # @param [Hash] params ({})
     def modify_mount_target_security_groups(params = {}, options = {})
       req = build_request(:modify_mount_target_security_groups, params)
+      req.send_request(options)
+    end
+
+    # Applies an Amazon EFS `FileSystemPolicy` to an Amazon EFS file system.
+    # A file system policy is an IAM resource-based policy and can contain
+    # multiple policy statements. A file system always has exactly one file
+    # system policy, which can be the default policy or an explicit policy
+    # set or updated using this API operation. When an explicit policy is
+    # set, it overrides the default policy. For more information about the
+    # default file system policy, see [Using Resource-based Policies with
+    # EFS][1].
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:PutFileSystemPolicy` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html
+    #
+    # @option params [required, String] :file_system_id
+    #   The ID of the EFS file system that you want to create or update the
+    #   `FileSystemPolicy` for.
+    #
+    # @option params [required, String] :policy
+    #   The `FileSystemPolicy` that you're creating. Accepts a JSON formatted
+    #   policy definition. To find out more about the elements that make up a
+    #   file system policy, see [EFS Resource-based Policies][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies
+    #
+    # @option params [Boolean] :bypass_policy_lockout_safety_check
+    #   (Optional) A flag to indicate whether to bypass the `FileSystemPolicy`
+    #   lockout safety check. The policy lockout safety check determines
+    #   whether the policy in the request will prevent the principal making
+    #   the request will be locked out from making future
+    #   `PutFileSystemPolicy` requests on the file system. Set
+    #   `BypassPolicyLockoutSafetyCheck` to `True` only when you intend to
+    #   prevent the principal that is making the request from making a
+    #   subsequent `PutFileSystemPolicy` request on the file system. The
+    #   default value is False.
+    #
+    # @return [Types::FileSystemPolicyDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FileSystemPolicyDescription#file_system_id #file_system_id} => String
+    #   * {Types::FileSystemPolicyDescription#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_file_system_policy({
+    #     file_system_id: "FileSystemId", # required
+    #     policy: "Policy", # required
+    #     bypass_policy_lockout_safety_check: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_system_id #=> String
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutFileSystemPolicy AWS API Documentation
+    #
+    # @overload put_file_system_policy(params = {})
+    # @param [Hash] params ({})
+    def put_file_system_policy(params = {}, options = {})
+      req = build_request(:put_file_system_policy, params)
       req.send_request(options)
     end
 
@@ -1448,6 +1863,71 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Creates a tag for an EFS resource. You can create tags for EFS file
+    # systems and access points using this API operation.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:TagResource` action.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID specifying the EFS resource that you want to create a tag for.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_id: "ResourceId", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from an EFS resource. You can remove tags from EFS file
+    # systems and access points using this API operation.
+    #
+    # This operation requires permissions for the
+    # `elasticfilesystem:UntagResource` action.
+    #
+    # @option params [required, String] :resource_id
+    #   Specifies the EFS resource that you want to remove tags from.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The keys of the key:value tag pairs that you want to remove from the
+    #   specified EFS resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_id: "ResourceId", # required
+    #     tag_keys: ["TagKey"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the throughput mode or the amount of provisioned throughput of
     # an existing file system.
     #
@@ -1537,7 +2017,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

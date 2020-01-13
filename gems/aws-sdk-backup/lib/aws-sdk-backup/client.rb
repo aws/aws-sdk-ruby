@@ -257,8 +257,8 @@ module Aws::Backup
     # Backup plans are documents that contain information that AWS Backup
     # uses to schedule tasks that create recovery points of resources.
     #
-    # If you call `CreateBackupPlan` with a plan that already exists, the
-    # existing `backupPlanId` is returned.
+    # If you call `CreateBackupPlan` with a plan that already exists, an
+    # `AlreadyExistsException` is returned.
     #
     # @option params [required, Types::BackupPlanInput] :backup_plan
     #   Specifies the body of a backup plan. Includes a `BackupPlanName` and
@@ -301,6 +301,15 @@ module Aws::Backup
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
     #           },
+    #           copy_actions: [
+    #             {
+    #               lifecycle: {
+    #                 move_to_cold_storage_after_days: 1,
+    #                 delete_after_days: 1,
+    #               },
+    #               destination_backup_vault_arn: "ARN", # required
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -338,13 +347,13 @@ module Aws::Backup
     #
     #   `ConditionValue:"finance"`
     #
-    #   `ConditionType:"StringEquals"`
+    #   `ConditionType:"STRINGEQUALS"`
     #
     # * `ConditionKey:"importance"`
     #
     #   `ConditionValue:"critical"`
     #
-    #   `ConditionType:"StringEquals"`
+    #   `ConditionType:"STRINGEQUALS"`
     #
     # Using these patterns would back up all Amazon Elastic Block Store
     # (Amazon EBS) volumes that are tagged as `"department=finance"`,
@@ -364,11 +373,6 @@ module Aws::Backup
     # @option params [required, Types::BackupSelection] :backup_selection
     #   Specifies the body of a request to assign a set of resources to a
     #   backup plan.
-    #
-    #   It includes an array of resources, an optional array of patterns to
-    #   exclude resources, an optional role to provide access to the AWS
-    #   service the resource belongs to, and an optional array of tags used to
-    #   identify a set of resources.
     #
     # @option params [String] :creator_request_id
     #   A unique string that identifies the request and allows failed requests
@@ -751,6 +755,50 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Returns metadata associated with creating a copy of a resource.
+    #
+    # @option params [required, String] :copy_job_id
+    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #
+    # @return [Types::DescribeCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCopyJobOutput#copy_job #copy_job} => Types::CopyJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_copy_job({
+    #     copy_job_id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_job.copy_job_id #=> String
+    #   resp.copy_job.source_backup_vault_arn #=> String
+    #   resp.copy_job.source_recovery_point_arn #=> String
+    #   resp.copy_job.destination_backup_vault_arn #=> String
+    #   resp.copy_job.destination_recovery_point_arn #=> String
+    #   resp.copy_job.resource_arn #=> String
+    #   resp.copy_job.creation_date #=> Time
+    #   resp.copy_job.completion_date #=> Time
+    #   resp.copy_job.state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.copy_job.status_message #=> String
+    #   resp.copy_job.backup_size_in_bytes #=> Integer
+    #   resp.copy_job.iam_role_arn #=> String
+    #   resp.copy_job.created_by.backup_plan_id #=> String
+    #   resp.copy_job.created_by.backup_plan_arn #=> String
+    #   resp.copy_job.created_by.backup_plan_version #=> String
+    #   resp.copy_job.created_by.backup_rule_id #=> String
+    #   resp.copy_job.resource_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJob AWS API Documentation
+    #
+    # @overload describe_copy_job(params = {})
+    # @param [Hash] params ({})
+    def describe_copy_job(params = {}, options = {})
+      req = build_request(:describe_copy_job, params)
+      req.send_request(options)
+    end
+
     # Returns information about a saved resource, including the last time it
     # was backed-up, its Amazon Resource Name (ARN), and the AWS service
     # type of the saved resource.
@@ -981,6 +1029,10 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
+    #   resp.backup_plan.rules[0].copy_actions #=> Array
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #   resp.backup_plan_id #=> String
     #   resp.backup_plan_arn #=> String
     #   resp.version_id #=> String
@@ -1027,6 +1079,10 @@ module Aws::Backup
     #   resp.backup_plan.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan.rules[0].rule_id #=> String
+    #   resp.backup_plan.rules[0].copy_actions #=> Array
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanFromJSON AWS API Documentation
     #
@@ -1066,6 +1122,10 @@ module Aws::Backup
     #   resp.backup_plan_document.rules[0].recovery_point_tags #=> Hash
     #   resp.backup_plan_document.rules[0].recovery_point_tags["TagKey"] #=> String
     #   resp.backup_plan_document.rules[0].rule_id #=> String
+    #   resp.backup_plan_document.rules[0].copy_actions #=> Array
+    #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.move_to_cold_storage_after_days #=> Integer
+    #   resp.backup_plan_document.rules[0].copy_actions[0].lifecycle.delete_after_days #=> Integer
+    #   resp.backup_plan_document.rules[0].copy_actions[0].destination_backup_vault_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupPlanFromTemplate AWS API Documentation
     #
@@ -1188,7 +1248,7 @@ module Aws::Backup
     #   resp.backup_vault_arn #=> String
     #   resp.sns_topic_arn #=> String
     #   resp.backup_vault_events #=> Array
-    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED"
+    #   resp.backup_vault_events[0] #=> String, one of "BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_SUCCESSFUL", "BACKUP_JOB_FAILED", "BACKUP_JOB_EXPIRED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_SUCCESSFUL", "RESTORE_JOB_FAILED", "COPY_JOB_STARTED", "COPY_JOB_SUCCESSFUL", "COPY_JOB_FAILED", "RECOVERY_POINT_MODIFIED", "BACKUP_PLAN_CREATED", "BACKUP_PLAN_MODIFIED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetBackupVaultNotifications AWS API Documentation
     #
@@ -1199,15 +1259,8 @@ module Aws::Backup
       req.send_request(options)
     end
 
-    # Returns two sets of metadata key-value pairs. The first set lists the
-    # metadata that the recovery point was created with. The second set
-    # lists the metadata key-value pairs that are required to restore the
-    # recovery point.
-    #
-    # These sets can be the same, or the restore metadata set can contain
-    # different values if the target service to be restored has changed
-    # since the recovery point was created and now requires additional or
-    # different information in order to be restored.
+    # Returns a set of metadata key-value pairs that were used to create the
+    # backup.
     #
     # @option params [required, String] :backup_vault_name
     #   The name of a logical container where backups are stored. Backup
@@ -1302,15 +1355,15 @@ module Aws::Backup
     # @option params [String] :by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `SGW` for AWS Storage Gateway
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1596,6 +1649,97 @@ module Aws::Backup
     # @param [Hash] params ({})
     def list_backup_vaults(params = {}, options = {})
       req = build_request(:list_backup_vaults, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about your copy jobs.
+    #
+    # @option params [String] :next_token
+    #   The next item following a partial list of returned items. For example,
+    #   if a request is made to return maxResults number of items, NextToken
+    #   allows you to return more items in your list starting at the location
+    #   pointed to by the next token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to be returned.
+    #
+    # @option params [String] :by_resource_arn
+    #   Returns only copy jobs that match the specified resource Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [String] :by_state
+    #   Returns only copy jobs that are in the specified state.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_created_before
+    #   Returns only copy jobs that were created before the specified date.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_created_after
+    #   Returns only copy jobs that were created after the specified date.
+    #
+    # @option params [String] :by_resource_type
+    #   Returns only backup jobs for the specified resources:
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Storage Gateway` for AWS Storage Gateway
+    #
+    # @option params [String] :by_destination_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a source backup
+    #   vault to copy from; for example,
+    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #
+    # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
+    #   * {Types::ListCopyJobsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_copy_jobs({
+    #     next_token: "string",
+    #     max_results: 1,
+    #     by_resource_arn: "ARN",
+    #     by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED
+    #     by_created_before: Time.now,
+    #     by_created_after: Time.now,
+    #     by_resource_type: "ResourceType",
+    #     by_destination_vault_arn: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_jobs #=> Array
+    #   resp.copy_jobs[0].copy_job_id #=> String
+    #   resp.copy_jobs[0].source_backup_vault_arn #=> String
+    #   resp.copy_jobs[0].source_recovery_point_arn #=> String
+    #   resp.copy_jobs[0].destination_backup_vault_arn #=> String
+    #   resp.copy_jobs[0].destination_recovery_point_arn #=> String
+    #   resp.copy_jobs[0].resource_arn #=> String
+    #   resp.copy_jobs[0].creation_date #=> Time
+    #   resp.copy_jobs[0].completion_date #=> Time
+    #   resp.copy_jobs[0].state #=> String, one of "CREATED", "RUNNING", "COMPLETED", "FAILED"
+    #   resp.copy_jobs[0].status_message #=> String
+    #   resp.copy_jobs[0].backup_size_in_bytes #=> Integer
+    #   resp.copy_jobs[0].iam_role_arn #=> String
+    #   resp.copy_jobs[0].created_by.backup_plan_id #=> String
+    #   resp.copy_jobs[0].created_by.backup_plan_arn #=> String
+    #   resp.copy_jobs[0].created_by.backup_plan_version #=> String
+    #   resp.copy_jobs[0].created_by.backup_rule_id #=> String
+    #   resp.copy_jobs[0].resource_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobs AWS API Documentation
+    #
+    # @overload list_copy_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_copy_jobs(params = {}, options = {})
+      req = build_request(:list_copy_jobs, params)
       req.send_request(options)
     end
 
@@ -1929,7 +2073,7 @@ module Aws::Backup
     #   resp = client.put_backup_vault_notifications({
     #     backup_vault_name: "BackupVaultName", # required
     #     sns_topic_arn: "ARN", # required
-    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
+    #     backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/PutBackupVaultNotifications AWS API Documentation
@@ -1959,12 +2103,7 @@ module Aws::Backup
     #
     # @option params [String] :idempotency_token
     #   A customer chosen string that can be used to distinguish between calls
-    #   to `StartBackupJob`. Idempotency tokens time out after one hour.
-    #   Therefore, if you call `StartBackupJob` multiple times with the same
-    #   idempotency token within one hour, AWS Backup recognizes that you are
-    #   requesting only one backup job and initiates only one. If you change
-    #   the idempotency token for each call, AWS Backup recognizes that you
-    #   are requesting to start multiple backups.
+    #   to `StartBackupJob`.
     #
     # @option params [Integer] :start_window_minutes
     #   The amount of time in minutes before beginning a backup.
@@ -2028,6 +2167,75 @@ module Aws::Backup
       req.send_request(options)
     end
 
+    # Starts a job to create a one-time copy of the specified resource.
+    #
+    # @option params [required, String] :recovery_point_arn
+    #   An ARN that uniquely identifies a recovery point to use for the copy
+    #   job; for example,
+    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #
+    # @option params [required, String] :source_backup_vault_name
+    #   The name of a logical source container where backups are stored.
+    #   Backup vaults are identified by names that are unique to the account
+    #   used to create them and the AWS Region where they are created. They
+    #   consist of lowercase letters, numbers, and hyphens. &gt;
+    #
+    # @option params [required, String] :destination_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a destination
+    #   backup vault to copy to; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   Specifies the IAM role ARN used to copy the target recovery point; for
+    #   example, arn:aws:iam::123456789012:role/S3Access.
+    #
+    # @option params [String] :idempotency_token
+    #   A customer chosen string that can be used to distinguish between calls
+    #   to `StartCopyJob`.
+    #
+    # @option params [Types::Lifecycle] :lifecycle
+    #   Contains an array of `Transition` objects specifying how long in days
+    #   before a recovery point transitions to cold storage or is deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the “expire after
+    #   days” setting must be 90 days greater than the “transition to cold
+    #   after days” setting. The “transition to cold after days” setting
+    #   cannot be changed after a backup has been transitioned to cold.
+    #
+    # @return [Types::StartCopyJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCopyJobOutput#copy_job_id #copy_job_id} => String
+    #   * {Types::StartCopyJobOutput#creation_date #creation_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_copy_job({
+    #     recovery_point_arn: "ARN", # required
+    #     source_backup_vault_name: "BackupVaultName", # required
+    #     destination_backup_vault_arn: "ARN", # required
+    #     iam_role_arn: "IAMRoleArn", # required
+    #     idempotency_token: "string",
+    #     lifecycle: {
+    #       move_to_cold_storage_after_days: 1,
+    #       delete_after_days: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.copy_job_id #=> String
+    #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJob AWS API Documentation
+    #
+    # @overload start_copy_job(params = {})
+    # @param [Hash] params ({})
+    def start_copy_job(params = {}, options = {})
+      req = build_request(:start_copy_job, params)
+      req.send_request(options)
+    end
+
     # Recovers the saved resource identified by an Amazon Resource Name
     # (ARN).
     #
@@ -2040,8 +2248,37 @@ module Aws::Backup
     #   `arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45`.
     #
     # @option params [required, Hash<String,String>] :metadata
-    #   A set of metadata key-value pairs. Lists the metadata that the
-    #   recovery point was created with.
+    #   A set of metadata key-value pairs. Contains information, such as a
+    #   resource name, required to restore a recovery point.
+    #
+    #   You can get configuration metadata about a resource at the time it was
+    #   backed-up by calling `GetRecoveryPointRestoreMetadata`. However,
+    #   values in addition to those provided by
+    #   `GetRecoveryPointRestoreMetadata` might be required to restore a
+    #   resource. For example, you might need to provide a new resource name
+    #   if the original already exists.
+    #
+    #   You need to specify specific metadata to restore an Amazon Elastic
+    #   File System (Amazon EFS) instance:
+    #
+    #   * `file-system-id`\: ID of the Amazon EFS file system that is backed
+    #     up by AWS Backup. Returned in `GetRecoveryPointRestoreMetadata`.
+    #
+    #   * `Encrypted`\: A Boolean value that, if true, specifies that the file
+    #     system is encrypted. If `KmsKeyId` is specified, `Encrypted` must be
+    #     set to `true`.
+    #
+    #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
+    #     restored file system.
+    #
+    #   * `PerformanceMode`\: Specifies the throughput mode of the file
+    #     system.
+    #
+    #   * `CreationToken`\: A user-supplied value that ensures the uniqueness
+    #     (idempotency) of the request.
+    #
+    #   * `newFileSystem`\: A Boolean value that, if true, specifies that the
+    #     recovery point is restored to a new Amazon EFS file system.
     #
     # @option params [required, String] :iam_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to
@@ -2050,12 +2287,7 @@ module Aws::Backup
     #
     # @option params [String] :idempotency_token
     #   A customer chosen string that can be used to distinguish between calls
-    #   to `StartRestoreJob`. Idempotency tokens time out after one hour.
-    #   Therefore, if you call `StartRestoreJob` multiple times with the same
-    #   idempotency token within one hour, AWS Backup recognizes that you are
-    #   requesting only one restore job and initiates only one. If you change
-    #   the idempotency token for each call, AWS Backup recognizes that you
-    #   are requesting to start multiple restores.
+    #   to `StartRestoreJob`.
     #
     # @option params [String] :resource_type
     #   Starts a job to restore a recovery point for one of the following
@@ -2063,7 +2295,7 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `SGW` for AWS Storage Gateway
+    #   * `Storage Gateway` for AWS Storage Gateway
     #
     #   * `RDS` for Amazon Relational Database Service
     #
@@ -2220,6 +2452,15 @@ module Aws::Backup
     #           recovery_point_tags: {
     #             "TagKey" => "TagValue",
     #           },
+    #           copy_actions: [
+    #             {
+    #               lifecycle: {
+    #                 move_to_cold_storage_after_days: 1,
+    #                 delete_after_days: 1,
+    #               },
+    #               destination_backup_vault_arn: "ARN", # required
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -2324,7 +2565,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

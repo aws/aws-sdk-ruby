@@ -14432,7 +14432,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of
-    #     threads per cores for the instance type.
+    #     threads per core for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.

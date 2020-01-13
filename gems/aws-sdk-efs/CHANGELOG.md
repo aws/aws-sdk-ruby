@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-01-13)
+------------------
+
+* Feature - This release adds support for managing EFS file system policies and EFS Access Points.
+
 1.23.0 (2019-11-06)
 ------------------
 

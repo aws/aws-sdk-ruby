@@ -211,6 +211,15 @@ module Aws::Backup
     #             recovery_point_tags: {
     #               "TagKey" => "TagValue",
     #             },
+    #             copy_actions: [
+    #               {
+    #                 lifecycle: {
+    #                   move_to_cold_storage_after_days: 1,
+    #                   delete_after_days: 1,
+    #                 },
+    #                 destination_backup_vault_arn: "ARN", # required
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -364,6 +373,11 @@ module Aws::Backup
     #   selection of resources.
     #   @return [String]
     #
+    # @!attribute [rw] copy_actions
+    #   An array of `CopyAction` objects, which contains the details of the
+    #   copy operation.
+    #   @return [Array<Types::CopyAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRule AWS API Documentation
     #
     class BackupRule < Struct.new(
@@ -374,7 +388,8 @@ module Aws::Backup
       :completion_window_minutes,
       :lifecycle,
       :recovery_point_tags,
-      :rule_id)
+      :rule_id,
+      :copy_actions)
       include Aws::Structure
     end
 
@@ -396,6 +411,15 @@ module Aws::Backup
     #         recovery_point_tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         copy_actions: [
+    #           {
+    #             lifecycle: {
+    #               move_to_cold_storage_after_days: 1,
+    #               delete_after_days: 1,
+    #             },
+    #             destination_backup_vault_arn: "ARN", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] rule_name
@@ -440,6 +464,11 @@ module Aws::Backup
     #   the resources that you create. Each tag is a key-value pair.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] copy_actions
+    #   An array of `CopyAction` objects, which contains the details of the
+    #   copy operation.
+    #   @return [Array<Types::CopyAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/BackupRuleInput AWS API Documentation
     #
     class BackupRuleInput < Struct.new(
@@ -449,7 +478,8 @@ module Aws::Backup
       :start_window_minutes,
       :completion_window_minutes,
       :lifecycle,
-      :recovery_point_tags)
+      :recovery_point_tags,
+      :copy_actions)
       include Aws::Structure
     end
 
@@ -482,15 +512,13 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   An array of strings that either contain Amazon Resource Names (ARNs)
-    #   or match patterns such as
-    #   "`arn:aws:ec2:us-east-1:123456789012:volume/*`" of resources to
-    #   assign to a backup plan.
+    #   An array of strings that contain Amazon Resource Names (ARNs) of
+    #   resources to assign to a backup plan.
     #   @return [Array<String>]
     #
     # @!attribute [rw] list_of_tags
     #   An array of conditions used to specify a set of resources to assign
-    #   to a backup plan; for example, `"StringEquals":
+    #   to a backup plan; for example, `"STRINGEQUALS":
     #   \{"ec2:ResourceTag/Department": "accounting"`.
     #   @return [Array<Types::Condition>]
     #
@@ -631,7 +659,7 @@ module Aws::Backup
     end
 
     # Contains an array of triplets made up of a condition type (such as
-    # `StringEquals`), a key, and a value. Conditions are used to filter
+    # `STRINGEQUALS`), a key, and a value. Conditions are used to filter
     # resources in a selection that is assigned to a backup plan.
     #
     # @note When making an API call, you may pass Condition
@@ -644,7 +672,7 @@ module Aws::Backup
     #       }
     #
     # @!attribute [rw] condition_type
-    #   An operation, such as `StringEquals`, that is applied to a key-value
+    #   An operation, such as `STRINGEQUALS`, that is applied to a key-value
     #   pair used to filter resources in a selection.
     #   @return [String]
     #
@@ -669,6 +697,145 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # The details of the copy operation.
+    #
+    # @note When making an API call, you may pass CopyAction
+    #   data as a hash:
+    #
+    #       {
+    #         lifecycle: {
+    #           move_to_cold_storage_after_days: 1,
+    #           delete_after_days: 1,
+    #         },
+    #         destination_backup_vault_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] lifecycle
+    #   Contains an array of `Transition` objects specifying how long in
+    #   days before a recovery point transitions to cold storage or is
+    #   deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the “expire
+    #   after days” setting must be 90 days greater than the “transition to
+    #   cold after days” setting. The “transition to cold after days”
+    #   setting cannot be changed after a backup has been transitioned to
+    #   cold.
+    #   @return [Types::Lifecycle]
+    #
+    # @!attribute [rw] destination_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies the
+    #   destination backup vault for the copied backup. For example,
+    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyAction AWS API Documentation
+    #
+    class CopyAction < Struct.new(
+      :lifecycle,
+      :destination_backup_vault_arn)
+      include Aws::Structure
+    end
+
+    # Contains detailed information about a copy job.
+    #
+    # @!attribute [rw] copy_job_id
+    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a source copy
+    #   vault; for example,
+    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_recovery_point_arn
+    #   An ARN that uniquely identifies a source recovery point; for
+    #   example,
+    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a destination
+    #   copy vault; for example,
+    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_recovery_point_arn
+    #   An ARN that uniquely identifies a destination recovery point; for
+    #   example,
+    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The type of AWS resource to be copied; for example, an Amazon
+    #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
+    #   Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time a copy job is created, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of CreationDate is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completion_date
+    #   The date and time a job to create a copy job is completed, in Unix
+    #   format and Coordinated Universal Time (UTC). The value of
+    #   CompletionDate is accurate to milliseconds. For example, the value
+    #   1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The current state of a resource recovery point.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A detailed message explaining the status of the job that to copy a
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_size_in_bytes
+    #   The size, in bytes, of a copy job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   Specifies the IAM role ARN used to copy the target recovery point;
+    #   for example, arn:aws:iam::123456789012:role/S3Access.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_by
+    #   Contains information about the backup plan and rule that AWS Backup
+    #   used to initiate the recovery point backup.
+    #   @return [Types::RecoveryPointCreator]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of AWS resource to be copied; for example, an Amazon
+    #   Elastic Block Store (Amazon EBS) volume or an Amazon Relational
+    #   Database Service (Amazon RDS) database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/CopyJob AWS API Documentation
+    #
+    class CopyJob < Struct.new(
+      :copy_job_id,
+      :source_backup_vault_arn,
+      :source_recovery_point_arn,
+      :destination_backup_vault_arn,
+      :destination_recovery_point_arn,
+      :resource_arn,
+      :creation_date,
+      :completion_date,
+      :state,
+      :status_message,
+      :backup_size_in_bytes,
+      :iam_role_arn,
+      :created_by,
+      :resource_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateBackupPlanInput
     #   data as a hash:
     #
@@ -689,6 +856,15 @@ module Aws::Backup
     #               recovery_point_tags: {
     #                 "TagKey" => "TagValue",
     #               },
+    #               copy_actions: [
+    #                 {
+    #                   lifecycle: {
+    #                     move_to_cold_storage_after_days: 1,
+    #                     delete_after_days: 1,
+    #                   },
+    #                   destination_backup_vault_arn: "ARN", # required
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -785,11 +961,6 @@ module Aws::Backup
     # @!attribute [rw] backup_selection
     #   Specifies the body of a request to assign a set of resources to a
     #   backup plan.
-    #
-    #   It includes an array of resources, an optional array of patterns to
-    #   exclude resources, an optional role to provide access to the AWS
-    #   service the resource belongs to, and an optional array of tags used
-    #   to identify a set of resources.
     #   @return [Types::BackupSelection]
     #
     # @!attribute [rw] creator_request_id
@@ -1309,6 +1480,35 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCopyJobInput
+    #   data as a hash:
+    #
+    #       {
+    #         copy_job_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] copy_job_id
+    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJobInput AWS API Documentation
+    #
+    class DescribeCopyJobInput < Struct.new(
+      :copy_job_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_job
+    #   Contains detailed information about a copy job.
+    #   @return [Types::CopyJob]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/DescribeCopyJobOutput AWS API Documentation
+    #
+    class DescribeCopyJobOutput < Struct.new(
+      :copy_job)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProtectedResourceInput
     #   data as a hash:
     #
@@ -1819,11 +2019,6 @@ module Aws::Backup
     # @!attribute [rw] backup_selection
     #   Specifies the body of a request to assign a set of resources to a
     #   backup plan.
-    #
-    #   It includes an array of resources, an optional array of patterns to
-    #   exclude resources, an optional role to provide access to the AWS
-    #   service that the resource belongs to, and an optional array of tags
-    #   used to identify a set of resources.
     #   @return [Types::BackupSelection]
     #
     # @!attribute [rw] selection_id
@@ -2001,8 +2196,9 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] restore_metadata
-    #   A set of metadata key-value pairs that lists the metadata key-value
-    #   pairs that are required to restore the recovery point.
+    #   The set of metadata key-value pairs that describes the original
+    #   configuration of the backed-up resource. These values vary depending
+    #   on the service that is being restored.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/GetRecoveryPointRestoreMetadataOutput AWS API Documentation
@@ -2019,7 +2215,7 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `SGW` for AWS Storage Gateway
+    #   * `Storage Gateway` for AWS Storage Gateway
     #
     #   * `RDS` for Amazon Relational Database Service
     #
@@ -2088,6 +2284,12 @@ module Aws::Backup
     # Contains an array of `Transition` objects specifying how long in days
     # before a recovery point transitions to cold storage or is deleted.
     #
+    # Backups transitioned to cold storage must be stored in cold storage
+    # for a minimum of 90 days. Therefore, on the console, the “expire after
+    # days” setting must be 90 days greater than the “transition to cold
+    # after days” setting. The “transition to cold after days” setting
+    # cannot be changed after a backup has been transitioned to cold.
+    #
     # @note When making an API call, you may pass Lifecycle
     #   data as a hash:
     #
@@ -2103,7 +2305,8 @@ module Aws::Backup
     #
     # @!attribute [rw] delete_after_days
     #   Specifies the number of days after creation that a recovery point is
-    #   deleted. Must be greater than `MoveToColdStorageAfterDays`.
+    #   deleted. Must be greater than 90 days plus
+    #   `MoveToColdStorageAfterDays`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/Lifecycle AWS API Documentation
@@ -2192,15 +2395,15 @@ module Aws::Backup
     # @!attribute [rw] by_resource_type
     #   Returns only backup jobs for the specified resources:
     #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `SGW` for AWS Storage Gateway
+    #   * `EFS` for Amazon Elastic File System
     #
     #   * `RDS` for Amazon Relational Database Service
     #
-    #   * `DDB` for Amazon DynamoDB
-    #
-    #   * `EFS` for Amazon Elastic File System
+    #   * `Storage Gateway` for AWS Storage Gateway
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListBackupJobsInput AWS API Documentation
@@ -2489,6 +2692,102 @@ module Aws::Backup
     #
     class ListBackupVaultsOutput < Struct.new(
       :backup_vault_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCopyJobsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "string",
+    #         max_results: 1,
+    #         by_resource_arn: "ARN",
+    #         by_state: "CREATED", # accepts CREATED, RUNNING, COMPLETED, FAILED
+    #         by_created_before: Time.now,
+    #         by_created_after: Time.now,
+    #         by_resource_type: "ResourceType",
+    #         by_destination_vault_arn: "string",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return maxResults number of items,
+    #   NextToken allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] by_resource_arn
+    #   Returns only copy jobs that match the specified resource Amazon
+    #   Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] by_state
+    #   Returns only copy jobs that are in the specified state.
+    #   @return [String]
+    #
+    # @!attribute [rw] by_created_before
+    #   Returns only copy jobs that were created before the specified date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_created_after
+    #   Returns only copy jobs that were created after the specified date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] by_resource_type
+    #   Returns only backup jobs for the specified resources:
+    #
+    #   * `DynamoDB` for Amazon DynamoDB
+    #
+    #   * `EBS` for Amazon Elastic Block Store
+    #
+    #   * `EFS` for Amazon Elastic File System
+    #
+    #   * `RDS` for Amazon Relational Database Service
+    #
+    #   * `Storage Gateway` for AWS Storage Gateway
+    #   @return [String]
+    #
+    # @!attribute [rw] by_destination_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a source
+    #   backup vault to copy from; for example,
+    #   arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsInput AWS API Documentation
+    #
+    class ListCopyJobsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :by_resource_arn,
+      :by_state,
+      :by_created_before,
+      :by_created_after,
+      :by_resource_type,
+      :by_destination_vault_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_jobs
+    #   An array of structures containing metadata about your copy jobs
+    #   returned in JSON format.
+    #   @return [Array<Types::CopyJob>]
+    #
+    # @!attribute [rw] next_token
+    #   The next item following a partial list of returned items. For
+    #   example, if a request is made to return maxResults number of items,
+    #   NextToken allows you to return more items in your list starting at
+    #   the location pointed to by the next token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/ListCopyJobsOutput AWS API Documentation
+    #
+    class ListCopyJobsOutput < Struct.new(
+      :copy_jobs,
       :next_token)
       include Aws::Structure
     end
@@ -2873,7 +3172,7 @@ module Aws::Backup
     #       {
     #         backup_vault_name: "BackupVaultName", # required
     #         sns_topic_arn: "ARN", # required
-    #         backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
+    #         backup_vault_events: ["BACKUP_JOB_STARTED"], # required, accepts BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED, BACKUP_JOB_SUCCESSFUL, BACKUP_JOB_FAILED, BACKUP_JOB_EXPIRED, RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, RESTORE_JOB_SUCCESSFUL, RESTORE_JOB_FAILED, COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED, RECOVERY_POINT_MODIFIED, BACKUP_PLAN_CREATED, BACKUP_PLAN_MODIFIED
     #       }
     #
     # @!attribute [rw] backup_vault_name
@@ -3270,12 +3569,7 @@ module Aws::Backup
     #
     # @!attribute [rw] idempotency_token
     #   A customer chosen string that can be used to distinguish between
-    #   calls to `StartBackupJob`. Idempotency tokens time out after one
-    #   hour. Therefore, if you call `StartBackupJob` multiple times with
-    #   the same idempotency token within one hour, AWS Backup recognizes
-    #   that you are requesting only one backup job and initiates only one.
-    #   If you change the idempotency token for each call, AWS Backup
-    #   recognizes that you are requesting to start multiple backups.
+    #   calls to `StartBackupJob`.
     #   @return [String]
     #
     # @!attribute [rw] start_window_minutes
@@ -3344,6 +3638,94 @@ module Aws::Backup
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartCopyJobInput
+    #   data as a hash:
+    #
+    #       {
+    #         recovery_point_arn: "ARN", # required
+    #         source_backup_vault_name: "BackupVaultName", # required
+    #         destination_backup_vault_arn: "ARN", # required
+    #         iam_role_arn: "IAMRoleArn", # required
+    #         idempotency_token: "string",
+    #         lifecycle: {
+    #           move_to_cold_storage_after_days: 1,
+    #           delete_after_days: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] recovery_point_arn
+    #   An ARN that uniquely identifies a recovery point to use for the copy
+    #   job; for example,
+    #   arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup_vault_name
+    #   The name of a logical source container where backups are stored.
+    #   Backup vaults are identified by names that are unique to the account
+    #   used to create them and the AWS Region where they are created. They
+    #   consist of lowercase letters, numbers, and hyphens. &gt;
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_backup_vault_arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies a destination
+    #   backup vault to copy to; for example,
+    #   `arn:aws:backup:us-east-1:123456789012:vault:aBackupVault`.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   Specifies the IAM role ARN used to copy the target recovery point;
+    #   for example, arn:aws:iam::123456789012:role/S3Access.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A customer chosen string that can be used to distinguish between
+    #   calls to `StartCopyJob`.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   Contains an array of `Transition` objects specifying how long in
+    #   days before a recovery point transitions to cold storage or is
+    #   deleted.
+    #
+    #   Backups transitioned to cold storage must be stored in cold storage
+    #   for a minimum of 90 days. Therefore, on the console, the “expire
+    #   after days” setting must be 90 days greater than the “transition to
+    #   cold after days” setting. The “transition to cold after days”
+    #   setting cannot be changed after a backup has been transitioned to
+    #   cold.
+    #   @return [Types::Lifecycle]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobInput AWS API Documentation
+    #
+    class StartCopyJobInput < Struct.new(
+      :recovery_point_arn,
+      :source_backup_vault_name,
+      :destination_backup_vault_arn,
+      :iam_role_arn,
+      :idempotency_token,
+      :lifecycle)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] copy_job_id
+    #   Uniquely identifies a request to AWS Backup to copy a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date and time that a backup job is started, in Unix format and
+    #   Coordinated Universal Time (UTC). The value of CreationDate is
+    #   accurate to milliseconds. For example, the value 1516925490.087
+    #   represents Friday, January 26, 2018 12:11:30.087 AM. &gt;
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/backup-2018-11-15/StartCopyJobOutput AWS API Documentation
+    #
+    class StartCopyJobOutput < Struct.new(
+      :copy_job_id,
+      :creation_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartRestoreJobInput
     #   data as a hash:
     #
@@ -3363,8 +3745,37 @@ module Aws::Backup
     #   @return [String]
     #
     # @!attribute [rw] metadata
-    #   A set of metadata key-value pairs. Lists the metadata that the
-    #   recovery point was created with.
+    #   A set of metadata key-value pairs. Contains information, such as a
+    #   resource name, required to restore a recovery point.
+    #
+    #   You can get configuration metadata about a resource at the time it
+    #   was backed-up by calling `GetRecoveryPointRestoreMetadata`. However,
+    #   values in addition to those provided by
+    #   `GetRecoveryPointRestoreMetadata` might be required to restore a
+    #   resource. For example, you might need to provide a new resource name
+    #   if the original already exists.
+    #
+    #   You need to specify specific metadata to restore an Amazon Elastic
+    #   File System (Amazon EFS) instance:
+    #
+    #   * `file-system-id`\: ID of the Amazon EFS file system that is backed
+    #     up by AWS Backup. Returned in `GetRecoveryPointRestoreMetadata`.
+    #
+    #   * `Encrypted`\: A Boolean value that, if true, specifies that the
+    #     file system is encrypted. If `KmsKeyId` is specified, `Encrypted`
+    #     must be set to `true`.
+    #
+    #   * `KmsKeyId`\: Specifies the AWS KMS key that is used to encrypt the
+    #     restored file system.
+    #
+    #   * `PerformanceMode`\: Specifies the throughput mode of the file
+    #     system.
+    #
+    #   * `CreationToken`\: A user-supplied value that ensures the
+    #     uniqueness (idempotency) of the request.
+    #
+    #   * `newFileSystem`\: A Boolean value that, if true, specifies that
+    #     the recovery point is restored to a new Amazon EFS file system.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] iam_role_arn
@@ -3375,12 +3786,7 @@ module Aws::Backup
     #
     # @!attribute [rw] idempotency_token
     #   A customer chosen string that can be used to distinguish between
-    #   calls to `StartRestoreJob`. Idempotency tokens time out after one
-    #   hour. Therefore, if you call `StartRestoreJob` multiple times with
-    #   the same idempotency token within one hour, AWS Backup recognizes
-    #   that you are requesting only one restore job and initiates only one.
-    #   If you change the idempotency token for each call, AWS Backup
-    #   recognizes that you are requesting to start multiple restores.
+    #   calls to `StartRestoreJob`.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -3389,7 +3795,7 @@ module Aws::Backup
     #
     #   * `EBS` for Amazon Elastic Block Store
     #
-    #   * `SGW` for AWS Storage Gateway
+    #   * `Storage Gateway` for AWS Storage Gateway
     #
     #   * `RDS` for Amazon Relational Database Service
     #
@@ -3513,6 +3919,15 @@ module Aws::Backup
     #               recovery_point_tags: {
     #                 "TagKey" => "TagValue",
     #               },
+    #               copy_actions: [
+    #                 {
+    #                   lifecycle: {
+    #                     move_to_cold_storage_after_days: 1,
+    #                     delete_after_days: 1,
+    #                   },
+    #                   destination_backup_vault_arn: "ARN", # required
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },

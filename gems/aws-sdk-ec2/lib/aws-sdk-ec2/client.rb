@@ -15666,7 +15666,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of threads
-    #     per cores for the instance type.
+    #     per core for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
@@ -34944,11 +34944,10 @@ module Aws::EC2
     # EC2 charges a one-minute minimum for instance usage, and thereafter
     # charges per second for instance usage.
     #
-    # You can't start, stop, or hibernate Spot Instances, and you can't
-    # stop or hibernate instance store-backed instances. For information
-    # about using hibernation for Spot Instances, see [Hibernating
-    # Interrupted Spot Instances][4] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # You can't hibernate Spot Instances, and you can't stop or hibernate
+    # instance store-backed instances. For information about using
+    # hibernation for Spot Instances, see [Hibernating Interrupted Spot
+    # Instances][4] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # When you stop or hibernate an instance, we shut it down. You can
     # restart your instance at any time. Before stopping or hibernating an
@@ -35633,7 +35632,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

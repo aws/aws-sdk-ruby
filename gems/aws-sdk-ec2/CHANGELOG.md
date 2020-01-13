@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2020-01-13)
+------------------
+
+* Feature - Documentation updates for the StopInstances API. You can now stop and start an Amazon EBS-backed Spot Instance at will, instead of relying on the Stop interruption behavior to stop your Spot Instances when interrupted.
+
 1.131.0 (2020-01-10)
 ------------------
 
