@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Backup - Updated the API, and documentation for AWS Backup.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
 2.11.427 (2020-01-10)
 ------------------
 
