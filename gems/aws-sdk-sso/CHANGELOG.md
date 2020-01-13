@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add non-empty `Content-Type` header to all SSO operations, not just `GetRoleCredentials`.
+
 1.1.0 (2020-01-10)
 ------------------
 
