@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix erroneously reaped sessions from `Seahorse::Client::NetHttp::ConnectionPool` due to bad `last_used` time calculation
+* Issue - Use monotonic clocks when reaping sessions in `Seahorse::Client::NetHttp::ConnectionPool`
+* Issue - Fix "Conn close because of keep_alive_timeout" when reusing  `Seahorse::Client::NetHttp::ConnectionPool` sessions
+
 3.89.0 (2020-01-13)
 ------------------
 
