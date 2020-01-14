@@ -437,7 +437,7 @@ module Aws
       attr_accessor :metrics
       attr_accessor :agent_port
       attr_accessor :agent_host
-      
+
       def initialize
         @metrics = []
       end

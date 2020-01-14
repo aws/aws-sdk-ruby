@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
         'map' => 'MapShape',
         'string' => 'StringShape',
         'structure' => 'StructureShape',
-        'timestamp' => 'TimestampShape',
+        'timestamp' => 'TimestampShape'
       }
 
       SHAPE_KEYS = {
@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
-        'streaming'  => true, # transfer-encoding
+        'streaming' => true, # transfer-encoding
         'requiresLength' => true, # transder-encoding
         # event stream modeling
         'event' => false,
@@ -46,7 +46,7 @@ module AwsSdkCodeGenerator
         'members' => false,
         'member' => false,
         'key' => false,
-        'locationName'  => false,
+        'locationName' => false,
         'value' => false,
         'required' => false,
         'enum' => false,
@@ -58,6 +58,7 @@ module AwsSdkCodeGenerator
         'max' => false,
         'wrapper' => false,
         'xmlOrder' => false,
+        'retryable' => false
       }
 
       METADATA_KEYS = {
@@ -73,13 +74,12 @@ module AwsSdkCodeGenerator
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         'protocolSettings' => {}, # current unused unless for h2 exclude
-
         'serviceId' => true,
         'apiVersion' => true,
         'checksumFormat' => true,
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
-        'uid' => true,
+        'uid' => true
       }
 
       # @option options [required, Service] :service
@@ -298,13 +298,13 @@ module AwsSdkCodeGenerator
           shape['type'] == 'structure'
         else
           shape['type'] == 'structure' &&
-          !shape['error'] &&
-          !shape['exception']
+            !shape['error'] &&
+            !shape['exception']
         end
       end
 
       def error_struct?(shape)
-        shape['type'] == 'structure' && !!!shape['event']
+        shape['type'] == 'structure' && !!!shape['event'] &&
           (shape['error'] || shape['exception']) &&
           shape['members'] && shape['members'].size > 0
       end

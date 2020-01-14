@@ -186,5 +186,47 @@ module Aws
 
     end
 
+    context 'retry_mode' do
+
+      it 'can resolve retry_mode from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_legacy'
+        )
+        expect(config.retry_mode).to eq('legacy')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_standard'
+        )
+        expect(config.retry_mode).to eq('standard')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'retry_mode_adaptive'
+        )
+        expect(config.retry_mode).to eq('adaptive')
+      end
+
+    end
+
+    context 'max_attempts' do
+
+      it 'can resolve max_attempts from config file' do
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'max_attempts'
+        )
+        expect(config.max_attempts).to eq('1')
+
+      end
+
+    end
+
   end
 end
