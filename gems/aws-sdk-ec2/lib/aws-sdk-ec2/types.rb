@@ -5880,6 +5880,7 @@ module Aws::EC2
     #             tenancy: "default", # accepts default, dedicated, host
     #             spread_domain: "String",
     #             host_resource_group_arn: "String",
+    #             partition_number: 1,
     #           },
     #           ram_disk_id: "String",
     #           disable_api_termination: false,
@@ -5939,6 +5940,11 @@ module Aws::EC2
     #           ],
     #           hibernation_options: {
     #             configured: false,
+    #           },
+    #           metadata_options: {
+    #             http_tokens: "optional", # accepts optional, required
+    #             http_put_response_hop_limit: 1,
+    #             http_endpoint: "disabled", # accepts disabled, enabled
     #           },
     #         },
     #         tag_specifications: [
@@ -6085,6 +6091,7 @@ module Aws::EC2
     #             tenancy: "default", # accepts default, dedicated, host
     #             spread_domain: "String",
     #             host_resource_group_arn: "String",
+    #             partition_number: 1,
     #           },
     #           ram_disk_id: "String",
     #           disable_api_termination: false,
@@ -6144,6 +6151,11 @@ module Aws::EC2
     #           ],
     #           hibernation_options: {
     #             configured: false,
+    #           },
+    #           metadata_options: {
+    #             http_tokens: "optional", # accepts optional, required
+    #             http_put_response_hop_limit: 1,
+    #             http_endpoint: "disabled", # accepts disabled, enabled
     #           },
     #         },
     #       }
@@ -14432,7 +14444,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of
-    #     threads per core for the instance type.
+    #     threads per cores for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
@@ -29625,6 +29637,138 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The metadata options for the instance. For more information, see
+    # [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @!attribute [rw] state
+    #   The state of the metadata option changes.
+    #
+    #   `pending` - The metadata options are being updated and the instance
+    #   is not ready to process metadata traffic with the new selection.
+    #
+    #   `applied` - The metadata options have been successfully applied on
+    #   the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credentials always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: 1
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the default state
+    #   is `enabled`.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMetadataOptions AWS API Documentation
+    #
+    class LaunchTemplateInstanceMetadataOptions < Struct.new(
+      :state,
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
+      include Aws::Structure
+    end
+
+    # The metadata options for the instance. For more information, see
+    # [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #
+    # @note When making an API call, you may pass LaunchTemplateInstanceMetadataOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #       }
+    #
+    # @!attribute [rw] http_tokens
+    #   The state of token usage for your instance metadata requests. If the
+    #   parameter is not specified in the request, the default state is
+    #   `optional`.
+    #
+    #   If the state is `optional`, you can choose to retrieve instance
+    #   metadata with or without a signed token header on your request. If
+    #   you retrieve the IAM role credentials without a token, the version
+    #   1.0 role credentials are returned. If you retrieve the IAM role
+    #   credentials using a valid signed token, the version 2.0 role
+    #   credentials are returned.
+    #
+    #   If the state is `required`, you must send a signed token header with
+    #   any instance metadata retrieval requests. In this state, retrieving
+    #   the IAM role credentials always returns the version 2.0 credentials;
+    #   the version 1.0 credentials are not available.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The desired HTTP PUT response hop limit for instance metadata
+    #   requests. The larger the number, the further instance metadata
+    #   requests can travel.
+    #
+    #   Default: 1
+    #
+    #   Possible values: Integers from 1 to 64
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   This parameter enables or disables the HTTP metadata endpoint on
+    #   your instances. If the parameter is not specified, the default state
+    #   is `enabled`.
+    #
+    #   <note markdown="1"> If you specify a value of `disabled`, you will not be able to access
+    #   your instance metadata.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMetadataOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateInstanceMetadataOptionsRequest < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint)
+      include Aws::Structure
+    end
+
     # Describes a network interface.
     #
     # @!attribute [rw] associate_public_ip_address
@@ -29943,6 +30087,11 @@ module Aws::EC2
     #   The ARN of the host resource group in which to launch the instances.
     #   @return [String]
     #
+    # @!attribute [rw] partition_number
+    #   The number of the partition the instance should launch in. Valid
+    #   only if the placement group strategy is set to `partition`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacement AWS API Documentation
     #
     class LaunchTemplatePlacement < Struct.new(
@@ -29952,7 +30101,8 @@ module Aws::EC2
       :host_id,
       :tenancy,
       :spread_domain,
-      :host_resource_group_arn)
+      :host_resource_group_arn,
+      :partition_number)
       include Aws::Structure
     end
 
@@ -29969,6 +30119,7 @@ module Aws::EC2
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
+    #         partition_number: 1,
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -30003,6 +30154,11 @@ module Aws::EC2
     #   parameter or set it to `host`.
     #   @return [String]
     #
+    # @!attribute [rw] partition_number
+    #   The number of the partition the instance should launch in. Valid
+    #   only if the placement group strategy is set to `partition`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacementRequest AWS API Documentation
     #
     class LaunchTemplatePlacementRequest < Struct.new(
@@ -30012,7 +30168,8 @@ module Aws::EC2
       :host_id,
       :tenancy,
       :spread_domain,
-      :host_resource_group_arn)
+      :host_resource_group_arn,
+      :partition_number)
       include Aws::Structure
     end
 
@@ -36830,6 +36987,7 @@ module Aws::EC2
     #           tenancy: "default", # accepts default, dedicated, host
     #           spread_domain: "String",
     #           host_resource_group_arn: "String",
+    #           partition_number: 1,
     #         },
     #         ram_disk_id: "String",
     #         disable_api_termination: false,
@@ -36889,6 +37047,11 @@ module Aws::EC2
     #         ],
     #         hibernation_options: {
     #           configured: false,
+    #         },
+    #         metadata_options: {
+    #           http_tokens: "optional", # accepts optional, required
+    #           http_put_response_hop_limit: 1,
+    #           http_endpoint: "disabled", # accepts disabled, enabled
     #         },
     #       }
     #
@@ -37093,6 +37256,16 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptionsRequest]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::LaunchTemplateInstanceMetadataOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -37120,7 +37293,8 @@ module Aws::EC2
       :cpu_options,
       :capacity_reservation_specification,
       :license_specifications,
-      :hibernation_options)
+      :hibernation_options,
+      :metadata_options)
       include Aws::Structure
     end
 
@@ -38579,6 +38753,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptions]
     #
+    # @!attribute [rw] metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+    #   @return [Types::LaunchTemplateInstanceMetadataOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -38606,7 +38790,8 @@ module Aws::EC2
       :cpu_options,
       :capacity_reservation_specification,
       :license_specifications,
-      :hibernation_options)
+      :hibernation_options,
+      :metadata_options)
       include Aws::Structure
     end
 

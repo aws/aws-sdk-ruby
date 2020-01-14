@@ -5206,6 +5206,7 @@ module Aws::EC2
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
+    #         partition_number: 1,
     #       },
     #       ram_disk_id: "String",
     #       disable_api_termination: false,
@@ -5265,6 +5266,11 @@ module Aws::EC2
     #       ],
     #       hibernation_options: {
     #         configured: false,
+    #       },
+    #       metadata_options: {
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
     #       },
     #     },
     #     tag_specifications: [
@@ -5468,6 +5474,7 @@ module Aws::EC2
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
+    #         partition_number: 1,
     #       },
     #       ram_disk_id: "String",
     #       disable_api_termination: false,
@@ -5528,6 +5535,11 @@ module Aws::EC2
     #       hibernation_options: {
     #         configured: false,
     #       },
+    #       metadata_options: {
+    #         http_tokens: "optional", # accepts optional, required
+    #         http_put_response_hop_limit: 1,
+    #         http_endpoint: "disabled", # accepts disabled, enabled
+    #       },
     #     },
     #   })
     #
@@ -5584,6 +5596,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.launch_template_version.launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_version.launch_template_data.placement.host_resource_group_arn #=> String
+    #   resp.launch_template_version.launch_template_data.placement.partition_number #=> Integer
     #   resp.launch_template_version.launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_version.launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -5616,6 +5629,10 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_version.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_version.launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_version.launch_template_data.metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.launch_template_version.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.launch_template_version.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.launch_template_version.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -15666,7 +15683,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of threads
-    #     per core for the instance type.
+    #     per cores for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
@@ -16701,6 +16718,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.launch_template_versions[0].launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_versions[0].launch_template_data.placement.host_resource_group_arn #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.partition_number #=> Integer
     #   resp.launch_template_versions[0].launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_versions[0].launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -16733,6 +16751,10 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.license_specifications #=> Array
     #   resp.launch_template_versions[0].launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_versions[0].launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -26199,6 +26221,7 @@ module Aws::EC2
     #   resp.launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
     #   resp.launch_template_data.placement.spread_domain #=> String
     #   resp.launch_template_data.placement.host_resource_group_arn #=> String
+    #   resp.launch_template_data.placement.partition_number #=> Integer
     #   resp.launch_template_data.ram_disk_id #=> String
     #   resp.launch_template_data.disable_api_termination #=> Boolean
     #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
@@ -26231,6 +26254,10 @@ module Aws::EC2
     #   resp.launch_template_data.license_specifications #=> Array
     #   resp.launch_template_data.license_specifications[0].license_configuration_arn #=> String
     #   resp.launch_template_data.hibernation_options.configured #=> Boolean
+    #   resp.launch_template_data.metadata_options.state #=> String, one of "pending", "applied"
+    #   resp.launch_template_data.metadata_options.http_tokens #=> String, one of "optional", "required"
+    #   resp.launch_template_data.metadata_options.http_put_response_hop_limit #=> Integer
+    #   resp.launch_template_data.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -34944,10 +34971,11 @@ module Aws::EC2
     # EC2 charges a one-minute minimum for instance usage, and thereafter
     # charges per second for instance usage.
     #
-    # You can't hibernate Spot Instances, and you can't stop or hibernate
-    # instance store-backed instances. For information about using
-    # hibernation for Spot Instances, see [Hibernating Interrupted Spot
-    # Instances][4] in the *Amazon Elastic Compute Cloud User Guide*.
+    # You can't start, stop, or hibernate Spot Instances, and you can't
+    # stop or hibernate instance store-backed instances. For information
+    # about using hibernation for Spot Instances, see [Hibernating
+    # Interrupted Spot Instances][4] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     # When you stop or hibernate an instance, we shut it down. You can
     # restart your instance at any time. Before stopping or hibernating an
@@ -35632,7 +35660,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

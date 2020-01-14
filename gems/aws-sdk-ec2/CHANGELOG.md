@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2020-01-14)
+------------------
+
+* Feature - This release adds support for partition placement groups and instance metadata option in Launch Templates
+
 1.132.0 (2020-01-13)
 ------------------
 

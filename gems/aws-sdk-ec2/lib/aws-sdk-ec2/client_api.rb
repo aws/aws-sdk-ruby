@@ -1150,11 +1150,16 @@ module Aws::EC2
     LaunchTemplateErrorCode = Shapes::StringShape.new(name: 'LaunchTemplateErrorCode')
     LaunchTemplateHibernationOptions = Shapes::StructureShape.new(name: 'LaunchTemplateHibernationOptions')
     LaunchTemplateHibernationOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateHibernationOptionsRequest')
+    LaunchTemplateHttpTokensState = Shapes::StringShape.new(name: 'LaunchTemplateHttpTokensState')
     LaunchTemplateIamInstanceProfileSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateIamInstanceProfileSpecification')
     LaunchTemplateIamInstanceProfileSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateIamInstanceProfileSpecificationRequest')
     LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
     LaunchTemplateInstanceMarketOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMarketOptions')
     LaunchTemplateInstanceMarketOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMarketOptionsRequest')
+    LaunchTemplateInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataEndpointState')
+    LaunchTemplateInstanceMetadataOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMetadataOptions')
+    LaunchTemplateInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMetadataOptionsRequest')
+    LaunchTemplateInstanceMetadataOptionsState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataOptionsState')
     LaunchTemplateInstanceNetworkInterfaceSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecification')
     LaunchTemplateInstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationList')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequest')
@@ -6480,6 +6485,17 @@ module Aws::EC2
     LaunchTemplateInstanceMarketOptionsRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: LaunchTemplateSpotMarketOptionsRequest, location_name: "SpotOptions"))
     LaunchTemplateInstanceMarketOptionsRequest.struct_class = Types::LaunchTemplateInstanceMarketOptionsRequest
 
+    LaunchTemplateInstanceMetadataOptions.add_member(:state, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataOptionsState, location_name: "state"))
+    LaunchTemplateInstanceMetadataOptions.add_member(:http_tokens, Shapes::ShapeRef.new(shape: LaunchTemplateHttpTokensState, location_name: "httpTokens"))
+    LaunchTemplateInstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
+    LaunchTemplateInstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "httpEndpoint"))
+    LaunchTemplateInstanceMetadataOptions.struct_class = Types::LaunchTemplateInstanceMetadataOptions
+
+    LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: LaunchTemplateHttpTokensState, location_name: "HttpTokens"))
+    LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
+    LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
+    LaunchTemplateInstanceMetadataOptionsRequest.struct_class = Types::LaunchTemplateInstanceMetadataOptionsRequest
+
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -6543,6 +6559,7 @@ module Aws::EC2
     LaunchTemplatePlacement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     LaunchTemplatePlacement.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "spreadDomain"))
     LaunchTemplatePlacement.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "hostResourceGroupArn"))
+    LaunchTemplatePlacement.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionNumber"))
     LaunchTemplatePlacement.struct_class = Types::LaunchTemplatePlacement
 
     LaunchTemplatePlacementRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
@@ -6552,6 +6569,7 @@ module Aws::EC2
     LaunchTemplatePlacementRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "Tenancy"))
     LaunchTemplatePlacementRequest.add_member(:spread_domain, Shapes::ShapeRef.new(shape: String, location_name: "SpreadDomain"))
     LaunchTemplatePlacementRequest.add_member(:host_resource_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "HostResourceGroupArn"))
+    LaunchTemplatePlacementRequest.add_member(:partition_number, Shapes::ShapeRef.new(shape: Integer, location_name: "PartitionNumber"))
     LaunchTemplatePlacementRequest.struct_class = Types::LaunchTemplatePlacementRequest
 
     LaunchTemplateSet.member = Shapes::ShapeRef.new(shape: LaunchTemplate, location_name: "item")
@@ -7782,6 +7800,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: LaunchTemplateCapacityReservationSpecificationRequest, location_name: "CapacityReservationSpecification"))
     RequestLaunchTemplateData.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateLicenseSpecificationListRequest, location_name: "LicenseSpecification"))
     RequestLaunchTemplateData.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: LaunchTemplateHibernationOptionsRequest, location_name: "HibernationOptions"))
+    RequestLaunchTemplateData.add_member(:metadata_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataOptionsRequest, location_name: "MetadataOptions"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -8017,6 +8036,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:capacity_reservation_specification, Shapes::ShapeRef.new(shape: LaunchTemplateCapacityReservationSpecificationResponse, location_name: "capacityReservationSpecification"))
     ResponseLaunchTemplateData.add_member(:license_specifications, Shapes::ShapeRef.new(shape: LaunchTemplateLicenseList, location_name: "licenseSet"))
     ResponseLaunchTemplateData.add_member(:hibernation_options, Shapes::ShapeRef.new(shape: LaunchTemplateHibernationOptions, location_name: "hibernationOptions"))
+    ResponseLaunchTemplateData.add_member(:metadata_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataOptions, location_name: "metadataOptions"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
