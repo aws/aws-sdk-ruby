@@ -306,10 +306,7 @@ module Seahorse
           now = Aws::Util.monotonic_milliseconds
           @pool.each_pair do |endpoint,sessions|
             sessions.delete_if do |session|
-              if
-                session.last_used.nil? or
-                now - session.last_used > http_idle_timeout * 1000
-              then
+              if session.last_used.nil? or now - session.last_used > http_idle_timeout * 1000
                 session.finish
                 true
               end
