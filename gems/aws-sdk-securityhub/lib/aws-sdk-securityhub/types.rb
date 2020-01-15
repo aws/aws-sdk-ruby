@@ -4050,6 +4050,57 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeStandardsControlsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         standards_subscription_arn: "NonEmptyString", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] standards_subscription_arn
+    #   The ARN of a resource that represents your subscription to a
+    #   supported standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of compliance standard controls to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsRequest AWS API Documentation
+    #
+    class DescribeStandardsControlsRequest < Struct.new(
+      :standards_subscription_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] controls
+    #   A list of compliance standards controls.
+    #   @return [Array<Types::StandardsControl>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are more compliance standards control remaining in the
+    #   results, then this is the pagination token to use to request the
+    #   next page of compliance standard controls.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsResponse AWS API Documentation
+    #
+    class DescribeStandardsControlsResponse < Struct.new(
+      :controls,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableImportFindingsForProductRequest
     #   data as a hash:
     #
@@ -6467,6 +6518,69 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Details for an individual compliance standard control.
+    #
+    # @!attribute [rw] standards_control_arn
+    #   The ARN of the compliance standard control.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_status
+    #   The current status of the compliance standard control. Indicates
+    #   whether the control is enabled or disabled. Security Hub does not
+    #   check against disabled controls.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled_reason
+    #   The reason provided for the most recent change in status for the
+    #   control.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_status_updated_at
+    #   The date and time that the status of the compliance standard control
+    #   was most recently updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] control_id
+    #   The identifier of the compliance standard control.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the compliance standard control.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The longer description of the compliance standard control. Provides
+    #   information about what the control is checking for.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_url
+    #   A link to remediation information for the control in the Security
+    #   Hub user documentation
+    #   @return [String]
+    #
+    # @!attribute [rw] severity_rating
+    #   The severity of findings generated from this compliance standard
+    #   control.
+    #
+    #   The finding severity is based on an assessment of how easy it would
+    #   be to compromise AWS resources if the compliance issue is detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControl AWS API Documentation
+    #
+    class StandardsControl < Struct.new(
+      :standards_control_arn,
+      :control_status,
+      :disabled_reason,
+      :control_status_updated_at,
+      :control_id,
+      :title,
+      :description,
+      :remediation_url,
+      :severity_rating)
+      include Aws::Structure
+    end
+
     # A resource that represents your subscription to a supported standard.
     #
     # @!attribute [rw] standards_subscription_arn
@@ -7878,6 +7992,41 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateInsightResponse AWS API Documentation
     #
     class UpdateInsightResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateStandardsControlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         standards_control_arn: "NonEmptyString", # required
+    #         control_status: "ENABLED", # accepts ENABLED, DISABLED
+    #         disabled_reason: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] standards_control_arn
+    #   The ARN of the compliance standard control to enable or disable.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_status
+    #   The updated status of the compliance standard control.
+    #   @return [String]
+    #
+    # @!attribute [rw] disabled_reason
+    #   A description of the reason why you are disabling a compliance
+    #   standard control.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateStandardsControlRequest AWS API Documentation
+    #
+    class UpdateStandardsControlRequest < Struct.new(
+      :standards_control_arn,
+      :control_status,
+      :disabled_reason)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateStandardsControlResponse AWS API Documentation
+    #
+    class UpdateStandardsControlResponse < Aws::EmptyStructure; end
 
   end
 end

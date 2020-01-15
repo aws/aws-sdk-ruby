@@ -1099,12 +1099,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] automation_execution_status
-    #   The status of the execution. Valid values include: Running,
-    #   Succeeded, Failed, Timed out, or Cancelled.
+    #   The status of the execution.
     #   @return [String]
     #
     # @!attribute [rw] execution_start_time
-    #   The time the execution started.&gt;
+    #   The time the execution started.
     #   @return [Time]
     #
     # @!attribute [rw] execution_end_time
@@ -2176,22 +2175,30 @@ module Aws::SSM
     #
     # @!attribute [rw] description
     #   A user-defined description of the resource that you want to register
-    #   with Amazon EC2.
+    #   with Systems Manager.
     #
     #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] default_instance_name
     #   The name of the registered, managed instance as it will appear in
-    #   the Amazon EC2 console or when you use the AWS command line tools to
-    #   list EC2 resources.
+    #   the Systems Manager console or when you use the AWS command line
+    #   tools to list Systems Manager resources.
     #
     #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] iam_role
     #   The Amazon Identity and Access Management (IAM) role that you want
-    #   to assign to the managed instance.
+    #   to assign to the managed instance. This IAM role must provide
+    #   AssumeRole permissions for the Systems Manager service principal
+    #   `ssm.amazonaws.com`. For more information, see [Create an IAM
+    #   Service Role for a Hybrid Environment][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] registration_limit
@@ -2705,8 +2712,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_type
-    #   The type of document to create. Valid document types include:
-    #   `Command`, `Policy`, `Automation`, `Session`, and `Package`.
+    #   The type of document to create.
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -5618,7 +5624,9 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_installed_pending_reboot_patches
-    #   Reserved for future use.
+    #   The number of instances with patches installed by Patch Manager that
+    #   have not been rebooted after the patch installation. The status of
+    #   these instances is NON\_COMPLIANT.
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_installed_rejected_patches
@@ -8678,7 +8686,8 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] installed_pending_reboot_count
-    #   Reserved for future use.
+    #   The number of patches installed by Patch Manager since the last time
+    #   the instance was rebooted.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_rejected_count
@@ -8735,11 +8744,26 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] last_no_reboot_install_operation_time
-    #   Reserved for future use.
+    #   The time of the last attempt to patch the instance with `NoReboot`
+    #   specified as the reboot option.
     #   @return [Time]
     #
     # @!attribute [rw] reboot_option
-    #   Reserved for future use.
+    #   Indicates the reboot option specified in the patch baseline.
+    #
+    #   <note markdown="1"> Reboot options apply to `Install` operations only. Reboots are not
+    #   attempted for Patch Manager `Scan` operations.
+    #
+    #    </note>
+    #
+    #   * **RebootIfNeeded**\: Patch Manager tries to reboot the instance if
+    #     it installed any patches, or if any patches are detected with a
+    #     status of `InstalledPendingReboot`.
+    #
+    #   * **NoReboot**\: Patch Manager attempts to install missing packages
+    #     without trying to reboot the system. Patches installed with this
+    #     option are assigned a status of `InstalledPendingReboot`. These
+    #     patches might not be in effect until a reboot is performed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
@@ -9543,8 +9567,7 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
-    #   The type of filter. Valid values include the following:
-    #   "Equal"\|"NotEqual"\|"BeginWith"\|"LessThan"\|"GreaterThan"
+    #   The type of filter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter AWS API Documentation
@@ -15372,8 +15395,7 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] step_status
-    #   The execution status for this step. Valid values include: Pending,
-    #   InProgress, Success, Cancelled, Failed, and TimedOut.
+    #   The execution status for this step.
     #   @return [String]
     #
     # @!attribute [rw] response_code

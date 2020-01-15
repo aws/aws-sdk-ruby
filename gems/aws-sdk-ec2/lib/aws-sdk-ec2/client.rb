@@ -1288,7 +1288,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_dhcp_options({
-    #     dhcp_options_id: "DhcpOptionsId", # required
+    #     dhcp_options_id: "DefaultingDhcpOptionsId", # required
     #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
@@ -1462,7 +1462,7 @@ module Aws::EC2
     #
     #   resp = client.associate_subnet_cidr_block({
     #     ipv_6_cidr_block: "String", # required
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @example Response structure
@@ -2544,7 +2544,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_bundle_task({
-    #     bundle_id: "String", # required
+    #     bundle_id: "BundleId", # required
     #     dry_run: false,
     #   })
     #
@@ -3175,7 +3175,7 @@ module Aws::EC2
     #     client_token: "String",
     #     description: "String",
     #     encrypted: false,
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
     #     name: "String", # required
     #     source_image_id: "String", # required
     #     source_region: "String", # required
@@ -4825,15 +4825,15 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
     #     ],
     #     description: "String",
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     name: "String", # required
     #     no_reboot: false,
     #   })
@@ -7227,7 +7227,7 @@ module Aws::EC2
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     #
@@ -10541,7 +10541,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_subnet({
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #     dry_run: false,
     #   })
     #
@@ -11483,7 +11483,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_image({
-    #     image_id: "String", # required
+    #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
     #
@@ -12459,6 +12459,14 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
+    #   * `description` - The description of the authorization rule.
+    #
+    #   * `destination-cidr` - The CIDR of the network to which the
+    #     authorization rule applies.
+    #
+    #   * `group-id` - The ID of the Active Directory group to which the
+    #     authorization rule grants access.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
     #   page. The remaining results can be seen by sending another request
@@ -12514,6 +12522,11 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `connection-id` - The ID of the connection.
+    #
+    #   * `username` - For Active Directory client authentication, the user
+    #     name of the client who established the client connection.
     #
     # @option params [String] :next_token
     #   The token to retrieve the next page of results.
@@ -12593,6 +12606,10 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
+    #   * `endpoint-id` - The ID of the Client VPN endpoint.
+    #
+    #   * `transport-protocol` - The transport protocol (`tcp` \| `udp`).
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -12667,6 +12684,14 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `destination-cidr` - The CIDR of the route destination.
+    #
+    #   * `origin` - How the route was associated with the Client VPN endpoint
+    #     (`associate` \| `add-route`).
+    #
+    #   * `target-subnet` - The ID of the subnet through which traffic is
+    #     routed.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -12743,6 +12768,13 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `association-id` - The ID of the association.
+    #
+    #   * `target-network-id` - The ID of the subnet specified as the target
+    #     network.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the target network is located.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13410,6 +13442,7 @@ module Aws::EC2
     #   The export task IDs.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   the filters for the export tasks.
     #
     # @return [Types::DescribeExportTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14647,8 +14680,8 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
-    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].no_device #=> String
     #   resp.image_id #=> String
     #   resp.launch_permissions #=> Array
@@ -14885,8 +14918,8 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
-    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].no_device #=> String
     #   resp.images[0].description #=> String
     #   resp.images[0].ena_support #=> Boolean
@@ -15683,7 +15716,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of threads
-    #     per cores for the instance type.
+    #     per core for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
@@ -20594,8 +20627,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].no_device #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.arn #=> String
@@ -20933,8 +20966,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
@@ -24260,7 +24293,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.detach_network_interface({
-    #     attachment_id: "AttachmentId", # required
+    #     attachment_id: "NetworkInterfaceAttachmentId", # required
     #     dry_run: false,
     #     force: false,
     #   })
@@ -24719,7 +24752,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_address({
-    #     association_id: "String",
+    #     association_id: "ElasticIpAssociationId",
     #     public_ip: "String",
     #     dry_run: false,
     #   })
@@ -24908,7 +24941,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_subnet_cidr_block({
-    #     association_id: "String", # required
+    #     association_id: "SubnetCidrAssociationId", # required
     #   })
     #
     # @example Response structure
@@ -26893,7 +26926,7 @@ module Aws::EC2
     #     dry_run: false,
     #     encrypted: false,
     #     hypervisor: "String",
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
     #     license_type: "String",
     #     platform: "String",
     #     role_name: "String",
@@ -28138,7 +28171,7 @@ module Aws::EC2
     #   resp = client.modify_image_attribute({
     #     attribute: "String",
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #     image_id: "String", # required
+    #     image_id: "ImageId", # required
     #     launch_permission: {
     #       add: [
     #         {
@@ -28343,7 +28376,7 @@ module Aws::EC2
     #         device_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
-    #           volume_id: "String",
+    #           volume_id: "VolumeId",
     #         },
     #         no_device: "String",
     #         virtual_name: "String",
@@ -29244,7 +29277,7 @@ module Aws::EC2
     #     map_public_ip_on_launch: {
     #       value: false,
     #     },
-    #     subnet_id: "String", # required
+    #     subnet_id: "SubnetId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
@@ -31284,8 +31317,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -31293,10 +31326,10 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     ena_support: false,
-    #     kernel_id: "String",
+    #     kernel_id: "KernelId",
     #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "String",
+    #     ramdisk_id: "RamdiskId",
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
@@ -31693,7 +31726,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.release_address({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
     #     public_ip: "String",
     #     network_border_group: "String",
     #     dry_run: false,
@@ -32502,8 +32535,8 @@ module Aws::EC2
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                 encrypted: false,
     #                 kms_key_id: "String",
+    #                 encrypted: false,
     #               },
     #               no_device: "String",
     #             },
@@ -32816,8 +32849,8 @@ module Aws::EC2
     #             snapshot_id: "String",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #             encrypted: false,
     #             kms_key_id: "String",
+    #             encrypted: false,
     #           },
     #           no_device: "String",
     #         },
@@ -32900,8 +32933,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
-    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].no_device #=> String
     #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
@@ -33080,7 +33113,7 @@ module Aws::EC2
     #
     #   resp = client.reset_image_attribute({
     #     attribute: "launchPermission", # required, accepts launchPermission
-    #     image_id: "String", # required
+    #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
     #
@@ -34043,8 +34076,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -35660,7 +35693,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.133.0'
+      context[:gem_version] = '1.134.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

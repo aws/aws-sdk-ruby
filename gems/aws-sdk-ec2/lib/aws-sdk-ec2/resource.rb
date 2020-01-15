@@ -63,8 +63,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -830,7 +830,7 @@ module Aws::EC2
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
     #     outpost_arn: "String",
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1185,8 +1185,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -1194,10 +1194,10 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     ena_support: false,
-    #     kernel_id: "String",
+    #     kernel_id: "KernelId",
     #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "String",
+    #     ramdisk_id: "RamdiskId",
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",

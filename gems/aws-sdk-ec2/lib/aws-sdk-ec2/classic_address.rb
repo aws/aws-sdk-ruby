@@ -290,7 +290,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.disassociate({
-    #     association_id: "String",
+    #     association_id: "ElasticIpAssociationId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -311,7 +311,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
     #     network_border_group: "String",
     #     dry_run: false,
     #   })

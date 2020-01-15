@@ -63,6 +63,7 @@ module Aws::SecurityHub
     Compliance = Shapes::StructureShape.new(name: 'Compliance')
     ComplianceStatus = Shapes::StringShape.new(name: 'ComplianceStatus')
     ContainerDetails = Shapes::StructureShape.new(name: 'ContainerDetails')
+    ControlStatus = Shapes::StringShape.new(name: 'ControlStatus')
     CreateActionTargetRequest = Shapes::StructureShape.new(name: 'CreateActionTargetRequest')
     CreateActionTargetResponse = Shapes::StructureShape.new(name: 'CreateActionTargetResponse')
     CreateInsightRequest = Shapes::StructureShape.new(name: 'CreateInsightRequest')
@@ -89,6 +90,8 @@ module Aws::SecurityHub
     DescribeHubResponse = Shapes::StructureShape.new(name: 'DescribeHubResponse')
     DescribeProductsRequest = Shapes::StructureShape.new(name: 'DescribeProductsRequest')
     DescribeProductsResponse = Shapes::StructureShape.new(name: 'DescribeProductsResponse')
+    DescribeStandardsControlsRequest = Shapes::StructureShape.new(name: 'DescribeStandardsControlsRequest')
+    DescribeStandardsControlsResponse = Shapes::StructureShape.new(name: 'DescribeStandardsControlsResponse')
     DisableImportFindingsForProductRequest = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductRequest')
     DisableImportFindingsForProductResponse = Shapes::StructureShape.new(name: 'DisableImportFindingsForProductResponse')
     DisableSecurityHubRequest = Shapes::StructureShape.new(name: 'DisableSecurityHubRequest')
@@ -185,9 +188,12 @@ module Aws::SecurityHub
     ResultList = Shapes::ListShape.new(name: 'ResultList')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Severity = Shapes::StructureShape.new(name: 'Severity')
+    SeverityRating = Shapes::StringShape.new(name: 'SeverityRating')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StandardsControl = Shapes::StructureShape.new(name: 'StandardsControl')
+    StandardsControls = Shapes::ListShape.new(name: 'StandardsControls')
     StandardsInputParameterMap = Shapes::MapShape.new(name: 'StandardsInputParameterMap')
     StandardsStatus = Shapes::StringShape.new(name: 'StandardsStatus')
     StandardsSubscription = Shapes::StructureShape.new(name: 'StandardsSubscription')
@@ -219,6 +225,8 @@ module Aws::SecurityHub
     UpdateFindingsResponse = Shapes::StructureShape.new(name: 'UpdateFindingsResponse')
     UpdateInsightRequest = Shapes::StructureShape.new(name: 'UpdateInsightRequest')
     UpdateInsightResponse = Shapes::StructureShape.new(name: 'UpdateInsightResponse')
+    UpdateStandardsControlRequest = Shapes::StructureShape.new(name: 'UpdateStandardsControlRequest')
+    UpdateStandardsControlResponse = Shapes::StructureShape.new(name: 'UpdateStandardsControlResponse')
     VerificationState = Shapes::StringShape.new(name: 'VerificationState')
     WorkflowState = Shapes::StringShape.new(name: 'WorkflowState')
 
@@ -637,6 +645,15 @@ module Aws::SecurityHub
     DescribeProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeProductsResponse.struct_class = Types::DescribeProductsResponse
 
+    DescribeStandardsControlsRequest.add_member(:standards_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "StandardsSubscriptionArn"))
+    DescribeStandardsControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    DescribeStandardsControlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    DescribeStandardsControlsRequest.struct_class = Types::DescribeStandardsControlsRequest
+
+    DescribeStandardsControlsResponse.add_member(:controls, Shapes::ShapeRef.new(shape: StandardsControls, location_name: "Controls"))
+    DescribeStandardsControlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeStandardsControlsResponse.struct_class = Types::DescribeStandardsControlsResponse
+
     DisableImportFindingsForProductRequest.add_member(:product_subscription_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ProductSubscriptionArn"))
     DisableImportFindingsForProductRequest.struct_class = Types::DisableImportFindingsForProductRequest
 
@@ -962,6 +979,19 @@ module Aws::SecurityHub
     SortCriterion.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     SortCriterion.struct_class = Types::SortCriterion
 
+    StandardsControl.add_member(:standards_control_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "StandardsControlArn"))
+    StandardsControl.add_member(:control_status, Shapes::ShapeRef.new(shape: ControlStatus, location_name: "ControlStatus"))
+    StandardsControl.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DisabledReason"))
+    StandardsControl.add_member(:control_status_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ControlStatusUpdatedAt"))
+    StandardsControl.add_member(:control_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ControlId"))
+    StandardsControl.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Title"))
+    StandardsControl.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    StandardsControl.add_member(:remediation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RemediationUrl"))
+    StandardsControl.add_member(:severity_rating, Shapes::ShapeRef.new(shape: SeverityRating, location_name: "SeverityRating"))
+    StandardsControl.struct_class = Types::StandardsControl
+
+    StandardsControls.member = Shapes::ShapeRef.new(shape: StandardsControl)
+
     StandardsInputParameterMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     StandardsInputParameterMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -1039,6 +1069,13 @@ module Aws::SecurityHub
     UpdateInsightRequest.struct_class = Types::UpdateInsightRequest
 
     UpdateInsightResponse.struct_class = Types::UpdateInsightResponse
+
+    UpdateStandardsControlRequest.add_member(:standards_control_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "StandardsControlArn"))
+    UpdateStandardsControlRequest.add_member(:control_status, Shapes::ShapeRef.new(shape: ControlStatus, location_name: "ControlStatus"))
+    UpdateStandardsControlRequest.add_member(:disabled_reason, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DisabledReason"))
+    UpdateStandardsControlRequest.struct_class = Types::UpdateStandardsControlRequest
+
+    UpdateStandardsControlResponse.struct_class = Types::UpdateStandardsControlResponse
 
 
     # @api private
@@ -1256,6 +1293,18 @@ module Aws::SecurityHub
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_standards_controls, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeStandardsControls"
+        o.http_method = "GET"
+        o.http_request_uri = "/standards/controls/{StandardsSubscriptionArn+}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeStandardsControlsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeStandardsControlsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disable_import_findings_for_product, Seahorse::Model::Operation.new.tap do |o|
@@ -1558,6 +1607,18 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_standards_control, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStandardsControl"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/standards/control/{StandardsControlArn+}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStandardsControlRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStandardsControlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end

@@ -636,8 +636,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -808,7 +808,7 @@ module Aws::EC2
     #         device_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
-    #           volume_id: "String",
+    #           volume_id: "VolumeId",
     #         },
     #         no_device: "String",
     #         virtual_name: "String",

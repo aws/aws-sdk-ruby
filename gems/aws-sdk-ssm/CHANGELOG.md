@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2020-01-15)
+------------------
+
+* Feature - Document updates for Patch Manager 'NoReboot' feature.
+
 1.69.0 (2019-12-20)
 ------------------
 

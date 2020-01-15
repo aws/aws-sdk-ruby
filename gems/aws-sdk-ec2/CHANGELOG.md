@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2020-01-15)
+------------------
+
+* Feature - General Update to EC2 Docs and SDKs
+
 1.133.0 (2020-01-14)
 ------------------
 

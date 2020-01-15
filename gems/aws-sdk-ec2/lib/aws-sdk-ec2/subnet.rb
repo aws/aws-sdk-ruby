@@ -266,8 +266,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },

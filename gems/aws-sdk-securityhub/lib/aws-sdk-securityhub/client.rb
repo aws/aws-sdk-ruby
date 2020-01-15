@@ -1626,6 +1626,60 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns a list of compliance standards controls.
+    #
+    # For each control, the results include information about whether it is
+    # currently enabled, the severity, and a link to remediation
+    # information.
+    #
+    # @option params [required, String] :standards_subscription_arn
+    #   The ARN of a resource that represents your subscription to a supported
+    #   standard.
+    #
+    # @option params [String] :next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of compliance standard controls to return.
+    #
+    # @return [Types::DescribeStandardsControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStandardsControlsResponse#controls #controls} => Array&lt;Types::StandardsControl&gt;
+    #   * {Types::DescribeStandardsControlsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_standards_controls({
+    #     standards_subscription_arn: "NonEmptyString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.controls #=> Array
+    #   resp.controls[0].standards_control_arn #=> String
+    #   resp.controls[0].control_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.controls[0].disabled_reason #=> String
+    #   resp.controls[0].control_status_updated_at #=> Time
+    #   resp.controls[0].control_id #=> String
+    #   resp.controls[0].title #=> String
+    #   resp.controls[0].description #=> String
+    #   resp.controls[0].remediation_url #=> String
+    #   resp.controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControls AWS API Documentation
+    #
+    # @overload describe_standards_controls(params = {})
+    # @param [Hash] params ({})
+    def describe_standards_controls(params = {}, options = {})
+      req = build_request(:describe_standards_controls, params)
+      req.send_request(options)
+    end
+
     # Disables the integration of the specified product with Security Hub.
     # Findings from that product are no longer sent to Security Hub after
     # the integration is disabled.
@@ -4485,6 +4539,38 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Used to control whether an individual compliance standard control is
+    # enabled or disabled.
+    #
+    # @option params [required, String] :standards_control_arn
+    #   The ARN of the compliance standard control to enable or disable.
+    #
+    # @option params [String] :control_status
+    #   The updated status of the compliance standard control.
+    #
+    # @option params [String] :disabled_reason
+    #   A description of the reason why you are disabling a compliance
+    #   standard control.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_standards_control({
+    #     standards_control_arn: "NonEmptyString", # required
+    #     control_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     disabled_reason: "NonEmptyString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateStandardsControl AWS API Documentation
+    #
+    # @overload update_standards_control(params = {})
+    # @param [Hash] params ({})
+    def update_standards_control(params = {}, options = {})
+      req = build_request(:update_standards_control, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4498,7 +4584,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -270,7 +270,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc.associate_dhcp_options({
-    #     dhcp_options_id: "DhcpOptionsId", # required
+    #     dhcp_options_id: "DefaultingDhcpOptionsId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

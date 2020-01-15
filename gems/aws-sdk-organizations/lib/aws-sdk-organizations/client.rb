@@ -426,7 +426,8 @@ module Aws::Organizations
     #   ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -1513,7 +1514,8 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -1976,7 +1978,8 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -2064,7 +2067,8 @@ module Aws::Organizations
     #   get the ID from the ListPolicies or ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -4160,7 +4164,8 @@ module Aws::Organizations
     #   know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -4557,7 +4562,8 @@ module Aws::Organizations
     #   The unique identifier (ID) of the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-" followed
-    #   by from 8 to 128 lowercase letters or digits.
+    #   by from 8 to 128 lowercase or uppercase letters, digits, or the
+    #   underscore character (\_).
     #
     #
     #
@@ -4683,7 +4689,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

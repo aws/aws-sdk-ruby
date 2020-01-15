@@ -410,12 +410,21 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Registers your on-premises server or virtual machine with Amazon EC2
-    # so that you can manage these resources using Run Command. An
-    # on-premises server or virtual machine that has been registered with
-    # EC2 is called a managed instance. For more information about
-    # activations, see [Setting Up AWS Systems Manager for Hybrid
-    # Environments][1].
+    # Generates an activation code and activation ID you can use to register
+    # your on-premises server or virtual machine (VM) with Systems Manager.
+    # Registering these machines with Systems Manager makes it possible to
+    # manage them using Systems Manager capabilities. You use the activation
+    # code and ID when installing SSM Agent on machines in your hybrid
+    # environment. For more information about requirements for managing
+    # on-premises instances and VMs using Systems Manager, see [Setting Up
+    # AWS Systems Manager for Hybrid Environments][1] in the *AWS Systems
+    # Manager User Guide*.
+    #
+    # <note markdown="1"> On-premises servers or VMs that are registered with Systems Manager
+    # and Amazon EC2 instances that you manage with Systems Manager are all
+    # called *managed instances*.
+    #
+    #  </note>
     #
     #
     #
@@ -423,20 +432,28 @@ module Aws::SSM
     #
     # @option params [String] :description
     #   A user-defined description of the resource that you want to register
-    #   with Amazon EC2.
+    #   with Systems Manager.
     #
     #   Do not enter personally identifiable information in this field.
     #
     # @option params [String] :default_instance_name
     #   The name of the registered, managed instance as it will appear in the
-    #   Amazon EC2 console or when you use the AWS command line tools to list
-    #   EC2 resources.
+    #   Systems Manager console or when you use the AWS command line tools to
+    #   list Systems Manager resources.
     #
     #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :iam_role
     #   The Amazon Identity and Access Management (IAM) role that you want to
-    #   assign to the managed instance.
+    #   assign to the managed instance. This IAM role must provide AssumeRole
+    #   permissions for the Systems Manager service principal
+    #   `ssm.amazonaws.com`. For more information, see [Create an IAM Service
+    #   Role for a Hybrid Environment][1] in the *AWS Systems Manager User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html
     #
     # @option params [Integer] :registration_limit
     #   Specify the maximum number of managed instances you want to register.
@@ -850,8 +867,7 @@ module Aws::SSM
     #   changed.
     #
     # @option params [String] :document_type
-    #   The type of document to create. Valid document types include:
-    #   `Command`, `Policy`, `Automation`, `Session`, and `Package`.
+    #   The type of document to create.
     #
     # @option params [String] :document_format
     #   Specify the document format for the request. The document format can
@@ -5665,8 +5681,9 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the associations for the specified Systems Manager document or
-    # instance.
+    # Returns all State Manager associations in the current AWS account and
+    # Region. You can limit the results to a specific State Manager
+    # association document or instance by specifying a filter.
     #
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -6104,7 +6121,9 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes one or more of your Systems Manager documents.
+    # Returns all Systems Manager (SSM) documents in the current AWS account
+    # and Region. You can limit the results of this request by using a
+    # filter.
     #
     # @option params [Array<Types::DocumentFilter>] :document_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -9237,7 +9256,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

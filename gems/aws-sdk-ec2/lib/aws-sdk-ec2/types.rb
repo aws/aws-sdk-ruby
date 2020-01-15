@@ -995,7 +995,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         dhcp_options_id: "DhcpOptionsId", # required
+    #         dhcp_options_id: "DefaultingDhcpOptionsId", # required
     #         vpc_id: "VpcId", # required
     #         dry_run: false,
     #       }
@@ -1124,7 +1124,7 @@ module Aws::EC2
     #
     #       {
     #         ipv_6_cidr_block: "String", # required
-    #         subnet_id: "String", # required
+    #         subnet_id: "SubnetId", # required
     #       }
     #
     # @!attribute [rw] ipv_6_cidr_block
@@ -2137,8 +2137,8 @@ module Aws::EC2
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #           encrypted: false,
     #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       }
@@ -2352,7 +2352,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         bundle_id: "String", # required
+    #         bundle_id: "BundleId", # required
     #         dry_run: false,
     #       }
     #
@@ -4065,7 +4065,7 @@ module Aws::EC2
     #         client_token: "String",
     #         description: "String",
     #         encrypted: false,
-    #         kms_key_id: "String",
+    #         kms_key_id: "KmsKeyId",
     #         name: "String", # required
     #         source_image_id: "String", # required
     #         source_region: "String", # required
@@ -5622,15 +5622,15 @@ module Aws::EC2
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               encrypted: false,
     #               kms_key_id: "String",
+    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
     #         ],
     #         description: "String",
     #         dry_run: false,
-    #         instance_id: "String", # required
+    #         instance_id: "InstanceId", # required
     #         name: "String", # required
     #         no_reboot: false,
     #       }
@@ -7203,7 +7203,7 @@ module Aws::EC2
     #         cidr_block: "String", # required
     #         ipv_6_cidr_block: "String",
     #         outpost_arn: "String",
-    #         vpc_id: "String", # required
+    #         vpc_id: "VpcId", # required
     #         dry_run: false,
     #       }
     #
@@ -10169,7 +10169,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         subnet_id: "String", # required
+    #         subnet_id: "SubnetId", # required
     #         dry_run: false,
     #       }
     #
@@ -10973,7 +10973,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         image_id: "String", # required
+    #         image_id: "ImageId", # required
     #         dry_run: false,
     #       }
     #
@@ -11671,6 +11671,14 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `description` - The description of the authorization rule.
+    #
+    #   * `destination-cidr` - The CIDR of the network to which the
+    #     authorization rule applies.
+    #
+    #   * `group-id` - The ID of the Active Directory group to which the
+    #     authorization rule grants access.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -11729,6 +11737,11 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `connection-id` - The ID of the connection.
+    #
+    #   * `username` - For Active Directory client authentication, the user
+    #     name of the client who established the client connection.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -11808,6 +11821,10 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `endpoint-id` - The ID of the Client VPN endpoint.
+    #
+    #   * `transport-protocol` - The transport protocol (`tcp` \| `udp`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -11867,6 +11884,14 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `destination-cidr` - The CIDR of the route destination.
+    #
+    #   * `origin` - How the route was associated with the Client VPN
+    #     endpoint (`associate` \| `add-route`).
+    #
+    #   * `target-subnet` - The ID of the subnet through which traffic is
+    #     routed.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -11951,6 +11976,14 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
+    #
+    #   * `association-id` - The ID of the association.
+    #
+    #   * `target-network-id` - The ID of the subnet specified as the target
+    #     network.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the target network is
+    #     located.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -12532,6 +12565,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
+    #   the filters for the export tasks.
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksRequest AWS API Documentation
@@ -14444,7 +14478,7 @@ module Aws::EC2
     #     instance type.
     #
     #   * `vcpu-info.default-threads-per-core` - The default number of
-    #     threads per cores for the instance type.
+    #     threads per core for the instance type.
     #
     #   * `vcpu-info.default-vcpus` - The default number of vCPUs for the
     #     instance type.
@@ -20908,7 +20942,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attachment_id: "AttachmentId", # required
+    #         attachment_id: "NetworkInterfaceAttachmentId", # required
     #         dry_run: false,
     #         force: false,
     #       }
@@ -21483,7 +21517,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         association_id: "String",
+    #         association_id: "ElasticIpAssociationId",
     #         public_ip: "String",
     #         dry_run: false,
     #       }
@@ -21623,7 +21657,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         association_id: "String", # required
+    #         association_id: "SubnetCidrAssociationId", # required
     #       }
     #
     # @!attribute [rw] association_id
@@ -22009,8 +22043,8 @@ module Aws::EC2
     #         snapshot_id: "String",
     #         volume_size: 1,
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #         encrypted: false,
     #         kms_key_id: "String",
+    #         encrypted: false,
     #       }
     #
     # @!attribute [rw] delete_on_termination
@@ -22074,6 +22108,21 @@ module Aws::EC2
     #   Default: `gp2`
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer
+    #   managed CMK under which the EBS volume is encrypted.
+    #
+    #   This parameter is only supported on `BlockDeviceMapping` objects
+    #   called by [RunInstances][1], [RequestSpotFleet][2], and
+    #   [RequestSpotInstances][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   @return [String]
+    #
     # @!attribute [rw] encrypted
     #   Indicates whether the encryption state of an EBS volume is changed
     #   while being restored from a backing snapshot. The effect of setting
@@ -22094,21 +22143,6 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     #   @return [Boolean]
     #
-    # @!attribute [rw] kms_key_id
-    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer
-    #   managed CMK under which the EBS volume is encrypted.
-    #
-    #   This parameter is only supported on `BlockDeviceMapping` objects
-    #   called by [RunInstances][1], [RequestSpotFleet][2], and
-    #   [RequestSpotInstances][3].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
-    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
@@ -22117,8 +22151,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_size,
       :volume_type,
-      :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :encrypted)
       include Aws::Structure
     end
 
@@ -22183,7 +22217,7 @@ module Aws::EC2
     #
     #       {
     #         delete_on_termination: false,
-    #         volume_id: "String",
+    #         volume_id: "VolumeId",
     #       }
     #
     # @!attribute [rw] delete_on_termination
@@ -23167,6 +23201,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
+    #   The tags for the export task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTask AWS API Documentation
@@ -26110,7 +26145,7 @@ module Aws::EC2
     #         dry_run: false,
     #         encrypted: false,
     #         hypervisor: "String",
-    #         kms_key_id: "String",
+    #         kms_key_id: "KmsKeyId",
     #         license_type: "String",
     #         platform: "String",
     #         role_name: "String",
@@ -26398,7 +26433,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Any tags applied to the import image task.
+    #   The tags for the import image task.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] license_specifications
@@ -26895,7 +26930,7 @@ module Aws::EC2
     #   @return [Types::SnapshotTaskDetail]
     #
     # @!attribute [rw] tags
-    #   Any tags applied to the import snapshot task.
+    #   The tags for the import snapshot task.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotTask AWS API Documentation
@@ -27434,7 +27469,7 @@ module Aws::EC2
     #         device_name: "String",
     #         ebs: {
     #           delete_on_termination: false,
-    #           volume_id: "String",
+    #           volume_id: "VolumeId",
     #         },
     #         no_device: "String",
     #         virtual_name: "String",
@@ -31468,7 +31503,7 @@ module Aws::EC2
     #       {
     #         attribute: "String",
     #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #         image_id: "String", # required
+    #         image_id: "ImageId", # required
     #         launch_permission: {
     #           add: [
     #             {
@@ -31570,7 +31605,7 @@ module Aws::EC2
     #             device_name: "String",
     #             ebs: {
     #               delete_on_termination: false,
-    #               volume_id: "String",
+    #               volume_id: "VolumeId",
     #             },
     #             no_device: "String",
     #             virtual_name: "String",
@@ -32401,7 +32436,7 @@ module Aws::EC2
     #         map_public_ip_on_launch: {
     #           value: false,
     #         },
-    #         subnet_id: "String", # required
+    #         subnet_id: "SubnetId", # required
     #       }
     #
     # @!attribute [rw] assign_ipv_6_address_on_creation
@@ -35966,8 +36001,8 @@ module Aws::EC2
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               encrypted: false,
     #               kms_key_id: "String",
+    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
@@ -35975,10 +36010,10 @@ module Aws::EC2
     #         description: "String",
     #         dry_run: false,
     #         ena_support: false,
-    #         kernel_id: "String",
+    #         kernel_id: "KernelId",
     #         name: "String", # required
     #         billing_products: ["String"],
-    #         ramdisk_id: "String",
+    #         ramdisk_id: "RamdiskId",
     #         root_device_name: "String",
     #         sriov_net_support: "String",
     #         virtualization_type: "String",
@@ -36369,7 +36404,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         allocation_id: "String",
+    #         allocation_id: "AllocationId",
     #         public_ip: "String",
     #         network_border_group: "String",
     #         dry_run: false,
@@ -37082,13 +37117,6 @@ module Aws::EC2
     #
     # @!attribute [rw] block_device_mappings
     #   The block device mapping.
-    #
-    #   Supplying both a snapshot ID and an encryption value as arguments
-    #   for block-device mapping results in an error. This is because only
-    #   blank volumes can be encrypted on start, and these are not created
-    #   from a snapshot. If a snapshot is the basis for the volume, it
-    #   contains data by definition and its encryption status cannot be
-    #   changed using this action.
     #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
     #
     # @!attribute [rw] network_interfaces
@@ -37332,8 +37360,8 @@ module Aws::EC2
     #                     snapshot_id: "String",
     #                     volume_size: 1,
     #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                     encrypted: false,
     #                     kms_key_id: "String",
+    #                     encrypted: false,
     #                   },
     #                   no_device: "String",
     #                 },
@@ -37507,8 +37535,8 @@ module Aws::EC2
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                 encrypted: false,
     #                 kms_key_id: "String",
+    #                 encrypted: false,
     #               },
     #               no_device: "String",
     #             },
@@ -37728,8 +37756,8 @@ module Aws::EC2
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               encrypted: false,
     #               kms_key_id: "String",
+    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
@@ -38481,7 +38509,7 @@ module Aws::EC2
     #
     #       {
     #         attribute: "launchPermission", # required, accepts launchPermission
-    #         image_id: "String", # required
+    #         image_id: "ImageId", # required
     #         dry_run: false,
     #       }
     #
@@ -39368,8 +39396,8 @@ module Aws::EC2
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               encrypted: false,
     #               kms_key_id: "String",
+    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
@@ -41822,8 +41850,8 @@ module Aws::EC2
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #               encrypted: false,
     #               kms_key_id: "String",
+    #               encrypted: false,
     #             },
     #             no_device: "String",
     #           },
@@ -42108,8 +42136,8 @@ module Aws::EC2
     #                   snapshot_id: "String",
     #                   volume_size: 1,
     #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
-    #                   encrypted: false,
     #                   kms_key_id: "String",
+    #                   encrypted: false,
     #                 },
     #                 no_device: "String",
     #               },

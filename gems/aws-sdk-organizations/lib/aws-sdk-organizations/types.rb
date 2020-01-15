@@ -229,7 +229,8 @@ module Aws::Organizations
     #   ListPolicies operation.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -467,14 +468,20 @@ module Aws::Organizations
     # * OU\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number of
     #   OUs that you can have in an organization.
     #
-    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED. You attempted to exceed the number
+    # * POLICY\_NUMBER\_LIMIT\_EXCEEDED: You attempted to exceed the number
     #   of policies that you can have in an organization.
+    #
+    # * TAG\_POLICY\_VIOLATION: Tags associated with the resource must be
+    #   compliant with the tag policy that’s in effect for the account. For
+    #   more information, see [Tag Policies][4] in the *AWS Organizations
+    #   User Guide.*
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
     # [2]: https://console.aws.amazon.com/support/home#/
     # [3]: http://docs.aws.amazon.com/govcloud-us/latest/UserGuide/govcloud-organizations.html
+    # [4]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1041,7 +1048,8 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -1274,7 +1282,8 @@ module Aws::Organizations
     #   ListPoliciesForTarget operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -1326,7 +1335,8 @@ module Aws::Organizations
     #   operations.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -3038,7 +3048,8 @@ module Aws::Organizations
     #   to know.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #
@@ -4033,7 +4044,8 @@ module Aws::Organizations
     #   The unique identifier (ID) of the policy that you want to update.
     #
     #   The [regex pattern][1] for a policy ID string requires "p-"
-    #   followed by from 8 to 128 lowercase letters or digits.
+    #   followed by from 8 to 128 lowercase or uppercase letters, digits, or
+    #   the underscore character (\_).
     #
     #
     #

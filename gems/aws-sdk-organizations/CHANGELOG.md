@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-01-15)
+------------------
+
+* Feature - Updated description for PolicyID parameter and ConstraintViolationException.
+
 1.35.0 (2019-11-26)
 ------------------
 

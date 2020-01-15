@@ -88,7 +88,6 @@ module Aws::EC2
     AttachVolumeRequest = Shapes::StructureShape.new(name: 'AttachVolumeRequest')
     AttachVpnGatewayRequest = Shapes::StructureShape.new(name: 'AttachVpnGatewayRequest')
     AttachVpnGatewayResult = Shapes::StructureShape.new(name: 'AttachVpnGatewayResult')
-    AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentStatus = Shapes::StringShape.new(name: 'AttachmentStatus')
     AttributeBooleanValue = Shapes::StructureShape.new(name: 'AttributeBooleanValue')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
@@ -119,6 +118,7 @@ module Aws::EC2
     BlockDeviceMappingList = Shapes::ListShape.new(name: 'BlockDeviceMappingList')
     BlockDeviceMappingRequestList = Shapes::ListShape.new(name: 'BlockDeviceMappingRequestList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BundleId = Shapes::StringShape.new(name: 'BundleId')
     BundleIdStringList = Shapes::ListShape.new(name: 'BundleIdStringList')
     BundleInstanceRequest = Shapes::StructureShape.new(name: 'BundleInstanceRequest')
     BundleInstanceResult = Shapes::StructureShape.new(name: 'BundleInstanceResult')
@@ -357,6 +357,7 @@ module Aws::EC2
     DefaultRouteTableAssociationValue = Shapes::StringShape.new(name: 'DefaultRouteTableAssociationValue')
     DefaultRouteTablePropagationValue = Shapes::StringShape.new(name: 'DefaultRouteTablePropagationValue')
     DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
+    DefaultingDhcpOptionsId = Shapes::StringShape.new(name: 'DefaultingDhcpOptionsId')
     DeleteClientVpnEndpointRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointRequest')
     DeleteClientVpnEndpointResult = Shapes::StructureShape.new(name: 'DeleteClientVpnEndpointResult')
     DeleteClientVpnRouteRequest = Shapes::StructureShape.new(name: 'DeleteClientVpnRouteRequest')
@@ -809,6 +810,7 @@ module Aws::EC2
     ElasticInferenceAcceleratorAssociationList = Shapes::ListShape.new(name: 'ElasticInferenceAcceleratorAssociationList')
     ElasticInferenceAcceleratorCount = Shapes::IntegerShape.new(name: 'ElasticInferenceAcceleratorCount')
     ElasticInferenceAccelerators = Shapes::ListShape.new(name: 'ElasticInferenceAccelerators')
+    ElasticIpAssociationId = Shapes::StringShape.new(name: 'ElasticIpAssociationId')
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
@@ -1115,6 +1117,7 @@ module Aws::EC2
     Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
     Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
+    KernelId = Shapes::StringShape.new(name: 'KernelId')
     KeyNameStringList = Shapes::ListShape.new(name: 'KeyNameStringList')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
     KeyPairIdStringList = Shapes::ListShape.new(name: 'KeyPairIdStringList')
@@ -1332,6 +1335,7 @@ module Aws::EC2
     NetworkInterfaceAssociation = Shapes::StructureShape.new(name: 'NetworkInterfaceAssociation')
     NetworkInterfaceAttachment = Shapes::StructureShape.new(name: 'NetworkInterfaceAttachment')
     NetworkInterfaceAttachmentChanges = Shapes::StructureShape.new(name: 'NetworkInterfaceAttachmentChanges')
+    NetworkInterfaceAttachmentId = Shapes::StringShape.new(name: 'NetworkInterfaceAttachmentId')
     NetworkInterfaceAttribute = Shapes::StringShape.new(name: 'NetworkInterfaceAttribute')
     NetworkInterfaceCreationType = Shapes::StringShape.new(name: 'NetworkInterfaceCreationType')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
@@ -1456,6 +1460,7 @@ module Aws::EC2
     PurchaseSet = Shapes::ListShape.new(name: 'PurchaseSet')
     PurchasedScheduledInstanceSet = Shapes::ListShape.new(name: 'PurchasedScheduledInstanceSet')
     RIProductDescription = Shapes::StringShape.new(name: 'RIProductDescription')
+    RamdiskId = Shapes::StringShape.new(name: 'RamdiskId')
     ReasonCodesList = Shapes::ListShape.new(name: 'ReasonCodesList')
     RebootInstancesRequest = Shapes::StructureShape.new(name: 'RebootInstancesRequest')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
@@ -1680,6 +1685,7 @@ module Aws::EC2
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAssociation = Shapes::StructureShape.new(name: 'SubnetAssociation')
     SubnetAssociationList = Shapes::ListShape.new(name: 'SubnetAssociationList')
+    SubnetCidrAssociationId = Shapes::StringShape.new(name: 'SubnetCidrAssociationId')
     SubnetCidrBlockState = Shapes::StructureShape.new(name: 'SubnetCidrBlockState')
     SubnetCidrBlockStateCode = Shapes::StringShape.new(name: 'SubnetCidrBlockStateCode')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -2098,7 +2104,7 @@ module Aws::EC2
     AssociateClientVpnTargetNetworkResult.add_member(:status, Shapes::ShapeRef.new(shape: AssociationStatus, location_name: "status"))
     AssociateClientVpnTargetNetworkResult.struct_class = Types::AssociateClientVpnTargetNetworkResult
 
-    AssociateDhcpOptionsRequest.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: DhcpOptionsId, required: true, location_name: "DhcpOptionsId"))
+    AssociateDhcpOptionsRequest.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: DefaultingDhcpOptionsId, required: true, location_name: "DhcpOptionsId"))
     AssociateDhcpOptionsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     AssociateDhcpOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateDhcpOptionsRequest.struct_class = Types::AssociateDhcpOptionsRequest
@@ -2121,7 +2127,7 @@ module Aws::EC2
     AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
 
     AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
-    AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
+    AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     AssociateSubnetCidrBlockRequest.struct_class = Types::AssociateSubnetCidrBlockRequest
 
     AssociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
@@ -2330,7 +2336,7 @@ module Aws::EC2
 
     ByoipCidrSet.member = Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "item")
 
-    CancelBundleTaskRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "BundleId"))
+    CancelBundleTaskRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, required: true, location_name: "BundleId"))
     CancelBundleTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CancelBundleTaskRequest.struct_class = Types::CancelBundleTaskRequest
 
@@ -2649,7 +2655,7 @@ module Aws::EC2
     CopyImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CopyImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CopyImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
-    CopyImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    CopyImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CopyImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CopyImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceImageId"))
     CopyImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
@@ -2842,7 +2848,7 @@ module Aws::EC2
     CreateImageRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingRequestList, location_name: "blockDeviceMapping"))
     CreateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
+    CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateImageRequest.add_member(:no_reboot, Shapes::ShapeRef.new(shape: Boolean, location_name: "noReboot"))
     CreateImageRequest.struct_class = Types::CreateImageRequest
@@ -3039,7 +3045,7 @@ module Aws::EC2
     CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateSubnetRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "OutpostArn"))
-    CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+    CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "VpcId"))
     CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
@@ -3488,7 +3494,7 @@ module Aws::EC2
     DeleteSpotDatafeedSubscriptionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteSpotDatafeedSubscriptionRequest.struct_class = Types::DeleteSpotDatafeedSubscriptionRequest
 
-    DeleteSubnetRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubnetId"))
+    DeleteSubnetRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     DeleteSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeleteSubnetRequest.struct_class = Types::DeleteSubnetRequest
 
@@ -3623,7 +3629,7 @@ module Aws::EC2
     DeprovisionByoipCidrResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
     DeprovisionByoipCidrResult.struct_class = Types::DeprovisionByoipCidrResult
 
-    DeregisterImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
+    DeregisterImageRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     DeregisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DeregisterImageRequest.struct_class = Types::DeregisterImageRequest
 
@@ -4855,7 +4861,7 @@ module Aws::EC2
     DetachInternetGatewayRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
     DetachInternetGatewayRequest.struct_class = Types::DetachInternetGatewayRequest
 
-    DetachNetworkInterfaceRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "attachmentId"))
+    DetachNetworkInterfaceRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: NetworkInterfaceAttachmentId, required: true, location_name: "attachmentId"))
     DetachNetworkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DetachNetworkInterfaceRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "force"))
     DetachNetworkInterfaceRequest.struct_class = Types::DetachNetworkInterfaceRequest
@@ -4967,7 +4973,7 @@ module Aws::EC2
     DisableVpcClassicLinkResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     DisableVpcClassicLinkResult.struct_class = Types::DisableVpcClassicLinkResult
 
-    DisassociateAddressRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "AssociationId"))
+    DisassociateAddressRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: ElasticIpAssociationId, location_name: "AssociationId"))
     DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     DisassociateAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateAddressRequest.struct_class = Types::DisassociateAddressRequest
@@ -4991,7 +4997,7 @@ module Aws::EC2
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateRouteTableRequest.struct_class = Types::DisassociateRouteTableRequest
 
-    DisassociateSubnetCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
+    DisassociateSubnetCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: SubnetCidrAssociationId, required: true, location_name: "associationId"))
     DisassociateSubnetCidrBlockRequest.struct_class = Types::DisassociateSubnetCidrBlockRequest
 
     DisassociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
@@ -5067,8 +5073,8 @@ module Aws::EC2
     EbsBlockDevice.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     EbsBlockDevice.add_member(:volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "volumeSize"))
     EbsBlockDevice.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
-    EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    EbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     EbsBlockDevice.struct_class = Types::EbsBlockDevice
 
     EbsInfo.add_member(:ebs_optimized_support, Shapes::ShapeRef.new(shape: EbsOptimizedSupport, location_name: "ebsOptimizedSupport"))
@@ -5082,7 +5088,7 @@ module Aws::EC2
     EbsInstanceBlockDevice.struct_class = Types::EbsInstanceBlockDevice
 
     EbsInstanceBlockDeviceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
-    EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "volumeId"))
     EbsInstanceBlockDeviceSpecification.struct_class = Types::EbsInstanceBlockDeviceSpecification
 
     EgressOnlyInternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
@@ -5843,7 +5849,7 @@ module Aws::EC2
     ImportImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ImportImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     ImportImageRequest.add_member(:hypervisor, Shapes::ShapeRef.new(shape: String, location_name: "Hypervisor"))
-    ImportImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ImportImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     ImportImageRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: String, location_name: "LicenseType"))
     ImportImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "Platform"))
     ImportImageRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: String, location_name: "RoleName"))
@@ -6818,7 +6824,7 @@ module Aws::EC2
 
     ModifyImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: String, location_name: "Attribute"))
     ModifyImageAttributeRequest.add_member(:description, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Description"))
-    ModifyImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
+    ModifyImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     ModifyImageAttributeRequest.add_member(:launch_permission, Shapes::ShapeRef.new(shape: LaunchPermissionModifications, location_name: "LaunchPermission"))
     ModifyImageAttributeRequest.add_member(:operation_type, Shapes::ShapeRef.new(shape: OperationType, location_name: "OperationType"))
     ModifyImageAttributeRequest.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeStringList, location_name: "ProductCode"))
@@ -6941,7 +6947,7 @@ module Aws::EC2
 
     ModifySubnetAttributeRequest.add_member(:assign_ipv_6_address_on_creation, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "AssignIpv6AddressOnCreation"))
     ModifySubnetAttributeRequest.add_member(:map_public_ip_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "MapPublicIpOnLaunch"))
-    ModifySubnetAttributeRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
+    ModifySubnetAttributeRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "subnetId"))
     ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
     ModifyTrafficMirrorFilterNetworkServicesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterId, required: true, location_name: "TrafficMirrorFilterId"))
@@ -7627,10 +7633,10 @@ module Aws::EC2
     RegisterImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     RegisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     RegisterImageRequest.add_member(:ena_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSupport"))
-    RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
+    RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: KernelId, location_name: "kernelId"))
     RegisterImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     RegisterImageRequest.add_member(:billing_products, Shapes::ShapeRef.new(shape: BillingProductList, location_name: "BillingProduct"))
-    RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
+    RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: RamdiskId, location_name: "ramdiskId"))
     RegisterImageRequest.add_member(:root_device_name, Shapes::ShapeRef.new(shape: String, location_name: "rootDeviceName"))
     RegisterImageRequest.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
     RegisterImageRequest.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: String, location_name: "virtualizationType"))
@@ -7686,7 +7692,7 @@ module Aws::EC2
     RejectVpcPeeringConnectionResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     RejectVpcPeeringConnectionResult.struct_class = Types::RejectVpcPeeringConnectionResult
 
-    ReleaseAddressRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: String, location_name: "AllocationId"))
+    ReleaseAddressRequest.add_member(:allocation_id, Shapes::ShapeRef.new(shape: AllocationId, location_name: "AllocationId"))
     ReleaseAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     ReleaseAddressRequest.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "NetworkBorderGroup"))
     ReleaseAddressRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -7980,7 +7986,7 @@ module Aws::EC2
     ResetFpgaImageAttributeResult.struct_class = Types::ResetFpgaImageAttributeResult
 
     ResetImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: ResetImageAttributeName, required: true, location_name: "Attribute"))
-    ResetImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
+    ResetImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
     ResetImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ResetImageAttributeRequest.struct_class = Types::ResetImageAttributeRequest
 
