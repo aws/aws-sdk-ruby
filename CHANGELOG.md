@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.431 (2020-01-16)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API for AWS Directory Service.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
