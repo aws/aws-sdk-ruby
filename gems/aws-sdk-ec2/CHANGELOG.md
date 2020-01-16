@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2020-01-16)
+------------------
+
+* Feature - Client VPN now supports Port Configuration for VPN Endpoints, allowing usage of either port 443 or port 1194.
+
 1.134.0 (2020-01-15)
 ------------------
 

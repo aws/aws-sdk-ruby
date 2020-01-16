@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2020-01-16)
+------------------
+
+* Feature - This release adds two new APIs (UpdateWorkforce and DescribeWorkforce) to SageMaker Ground Truth service for workforce IP whitelisting.
+
 1.49.0 (2020-01-10)
 ------------------
 

@@ -3584,6 +3584,10 @@ module Aws::EC2
     #   The transport protocol used by the Client VPN endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] vpn_port
+    #   The port number for the Client VPN endpoint.
+    #   @return [Integer]
+    #
     # @!attribute [rw] associated_target_networks
     #   Information about the associated target networks. A target network
     #   is a subnet in a VPC.
@@ -3621,6 +3625,7 @@ module Aws::EC2
       :split_tunnel,
       :vpn_protocol,
       :transport_protocol,
+      :vpn_port,
       :associated_target_networks,
       :server_certificate_arn,
       :authentication_options,
@@ -4584,6 +4589,7 @@ module Aws::EC2
     #         },
     #         dns_servers: ["String"],
     #         transport_protocol: "tcp", # accepts tcp, udp
+    #         vpn_port: 1,
     #         description: "String",
     #         split_tunnel: false,
     #         dry_run: false,
@@ -4653,6 +4659,15 @@ module Aws::EC2
     #   Default value: `udp`
     #   @return [String]
     #
+    # @!attribute [rw] vpn_port
+    #   The port number to assign to the Client VPN endpoint for TCP and UDP
+    #   traffic.
+    #
+    #   Valid Values: `443` \| `1194`
+    #
+    #   Default Value: `443`
+    #   @return [Integer]
+    #
     # @!attribute [rw] description
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
@@ -4705,6 +4720,7 @@ module Aws::EC2
       :connection_log_options,
       :dns_servers,
       :transport_protocol,
+      :vpn_port,
       :description,
       :split_tunnel,
       :dry_run,
@@ -4741,7 +4757,7 @@ module Aws::EC2
     #       {
     #         client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #         destination_cidr_block: "String", # required
-    #         target_vpc_subnet_id: "String", # required
+    #         target_vpc_subnet_id: "SubnetId", # required
     #         description: "String",
     #         client_token: "String",
     #         dry_run: false,
@@ -9126,7 +9142,7 @@ module Aws::EC2
     #
     #       {
     #         client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #         target_vpc_subnet_id: "String",
+    #         target_vpc_subnet_id: "SubnetId",
     #         destination_cidr_block: "String", # required
     #         dry_run: false,
     #       }
@@ -30985,6 +31001,7 @@ module Aws::EC2
     #           custom_dns_servers: ["String"],
     #           enabled: false,
     #         },
+    #         vpn_port: 1,
     #         description: "String",
     #         split_tunnel: false,
     #         dry_run: false,
@@ -31020,6 +31037,15 @@ module Aws::EC2
     #   connections. A Client VPN endpoint can have up to two DNS servers.
     #   @return [Types::DnsServersOptionsModifyStructure]
     #
+    # @!attribute [rw] vpn_port
+    #   The port number to assign to the Client VPN endpoint for TCP and UDP
+    #   traffic.
+    #
+    #   Valid Values: `443` \| `1194`
+    #
+    #   Default Value: `443`
+    #   @return [Integer]
+    #
     # @!attribute [rw] description
     #   A brief description of the Client VPN endpoint.
     #   @return [String]
@@ -31050,6 +31076,7 @@ module Aws::EC2
       :server_certificate_arn,
       :connection_log_options,
       :dns_servers,
+      :vpn_port,
       :description,
       :split_tunnel,
       :dry_run)

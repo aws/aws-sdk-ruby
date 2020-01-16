@@ -104,6 +104,8 @@ module Aws::SageMaker
     ChannelSpecification = Shapes::StructureShape.new(name: 'ChannelSpecification')
     ChannelSpecifications = Shapes::ListShape.new(name: 'ChannelSpecifications')
     CheckpointConfig = Shapes::StructureShape.new(name: 'CheckpointConfig')
+    Cidr = Shapes::StringShape.new(name: 'Cidr')
+    Cidrs = Shapes::ListShape.new(name: 'Cidrs')
     CodeRepositoryArn = Shapes::StringShape.new(name: 'CodeRepositoryArn')
     CodeRepositoryContains = Shapes::StringShape.new(name: 'CodeRepositoryContains')
     CodeRepositoryNameContains = Shapes::StringShape.new(name: 'CodeRepositoryNameContains')
@@ -288,6 +290,8 @@ module Aws::SageMaker
     DescribeTrialResponse = Shapes::StructureShape.new(name: 'DescribeTrialResponse')
     DescribeUserProfileRequest = Shapes::StructureShape.new(name: 'DescribeUserProfileRequest')
     DescribeUserProfileResponse = Shapes::StructureShape.new(name: 'DescribeUserProfileResponse')
+    DescribeWorkforceRequest = Shapes::StructureShape.new(name: 'DescribeWorkforceRequest')
+    DescribeWorkforceResponse = Shapes::StructureShape.new(name: 'DescribeWorkforceResponse')
     DescribeWorkteamRequest = Shapes::StructureShape.new(name: 'DescribeWorkteamRequest')
     DescribeWorkteamResponse = Shapes::StructureShape.new(name: 'DescribeWorkteamResponse')
     DesiredWeightAndCapacity = Shapes::StructureShape.new(name: 'DesiredWeightAndCapacity')
@@ -748,6 +752,7 @@ module Aws::SageMaker
     SourceAlgorithm = Shapes::StructureShape.new(name: 'SourceAlgorithm')
     SourceAlgorithmList = Shapes::ListShape.new(name: 'SourceAlgorithmList')
     SourceAlgorithmSpecification = Shapes::StructureShape.new(name: 'SourceAlgorithmSpecification')
+    SourceIpConfig = Shapes::StructureShape.new(name: 'SourceIpConfig')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     SplitType = Shapes::StringShape.new(name: 'SplitType')
     StartMonitoringScheduleRequest = Shapes::StructureShape.new(name: 'StartMonitoringScheduleRequest')
@@ -886,6 +891,8 @@ module Aws::SageMaker
     UpdateTrialResponse = Shapes::StructureShape.new(name: 'UpdateTrialResponse')
     UpdateUserProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserProfileRequest')
     UpdateUserProfileResponse = Shapes::StructureShape.new(name: 'UpdateUserProfileResponse')
+    UpdateWorkforceRequest = Shapes::StructureShape.new(name: 'UpdateWorkforceRequest')
+    UpdateWorkforceResponse = Shapes::StructureShape.new(name: 'UpdateWorkforceResponse')
     UpdateWorkteamRequest = Shapes::StructureShape.new(name: 'UpdateWorkteamRequest')
     UpdateWorkteamResponse = Shapes::StructureShape.new(name: 'UpdateWorkteamResponse')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -903,6 +910,9 @@ module Aws::SageMaker
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
     VpcSecurityGroupIds = Shapes::ListShape.new(name: 'VpcSecurityGroupIds')
+    Workforce = Shapes::StructureShape.new(name: 'Workforce')
+    WorkforceArn = Shapes::StringShape.new(name: 'WorkforceArn')
+    WorkforceName = Shapes::StringShape.new(name: 'WorkforceName')
     Workteam = Shapes::StructureShape.new(name: 'Workteam')
     WorkteamArn = Shapes::StringShape.new(name: 'WorkteamArn')
     WorkteamName = Shapes::StringShape.new(name: 'WorkteamName')
@@ -1102,6 +1112,8 @@ module Aws::SageMaker
     CheckpointConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     CheckpointConfig.add_member(:local_path, Shapes::ShapeRef.new(shape: DirectoryPath, location_name: "LocalPath"))
     CheckpointConfig.struct_class = Types::CheckpointConfig
+
+    Cidrs.member = Shapes::ShapeRef.new(shape: Cidr)
 
     CodeRepositorySummary.add_member(:code_repository_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "CodeRepositoryName"))
     CodeRepositorySummary.add_member(:code_repository_arn, Shapes::ShapeRef.new(shape: CodeRepositoryArn, required: true, location_name: "CodeRepositoryArn"))
@@ -2053,6 +2065,12 @@ module Aws::SageMaker
     DescribeUserProfileResponse.add_member(:single_sign_on_user_value, Shapes::ShapeRef.new(shape: String256, location_name: "SingleSignOnUserValue"))
     DescribeUserProfileResponse.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettings, location_name: "UserSettings"))
     DescribeUserProfileResponse.struct_class = Types::DescribeUserProfileResponse
+
+    DescribeWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
+    DescribeWorkforceRequest.struct_class = Types::DescribeWorkforceRequest
+
+    DescribeWorkforceResponse.add_member(:workforce, Shapes::ShapeRef.new(shape: Workforce, required: true, location_name: "Workforce"))
+    DescribeWorkforceResponse.struct_class = Types::DescribeWorkforceResponse
 
     DescribeWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     DescribeWorkteamRequest.struct_class = Types::DescribeWorkteamRequest
@@ -3307,6 +3325,9 @@ module Aws::SageMaker
     SourceAlgorithmSpecification.add_member(:source_algorithms, Shapes::ShapeRef.new(shape: SourceAlgorithmList, required: true, location_name: "SourceAlgorithms"))
     SourceAlgorithmSpecification.struct_class = Types::SourceAlgorithmSpecification
 
+    SourceIpConfig.add_member(:cidrs, Shapes::ShapeRef.new(shape: Cidrs, required: true, location_name: "Cidrs"))
+    SourceIpConfig.struct_class = Types::SourceIpConfig
+
     StartMonitoringScheduleRequest.add_member(:monitoring_schedule_name, Shapes::ShapeRef.new(shape: MonitoringScheduleName, required: true, location_name: "MonitoringScheduleName"))
     StartMonitoringScheduleRequest.struct_class = Types::StartMonitoringScheduleRequest
 
@@ -3724,6 +3745,13 @@ module Aws::SageMaker
     UpdateUserProfileResponse.add_member(:user_profile_arn, Shapes::ShapeRef.new(shape: UserProfileArn, location_name: "UserProfileArn"))
     UpdateUserProfileResponse.struct_class = Types::UpdateUserProfileResponse
 
+    UpdateWorkforceRequest.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
+    UpdateWorkforceRequest.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
+    UpdateWorkforceRequest.struct_class = Types::UpdateWorkforceRequest
+
+    UpdateWorkforceResponse.add_member(:workforce, Shapes::ShapeRef.new(shape: Workforce, required: true, location_name: "Workforce"))
+    UpdateWorkforceResponse.struct_class = Types::UpdateWorkforceResponse
+
     UpdateWorkteamRequest.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     UpdateWorkteamRequest.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, location_name: "MemberDefinitions"))
     UpdateWorkteamRequest.add_member(:description, Shapes::ShapeRef.new(shape: String200, location_name: "Description"))
@@ -3760,6 +3788,12 @@ module Aws::SageMaker
     VpcConfig.struct_class = Types::VpcConfig
 
     VpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    Workforce.add_member(:workforce_name, Shapes::ShapeRef.new(shape: WorkforceName, required: true, location_name: "WorkforceName"))
+    Workforce.add_member(:workforce_arn, Shapes::ShapeRef.new(shape: WorkforceArn, required: true, location_name: "WorkforceArn"))
+    Workforce.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedDate"))
+    Workforce.add_member(:source_ip_config, Shapes::ShapeRef.new(shape: SourceIpConfig, location_name: "SourceIpConfig"))
+    Workforce.struct_class = Types::Workforce
 
     Workteam.add_member(:workteam_name, Shapes::ShapeRef.new(shape: WorkteamName, required: true, location_name: "WorkteamName"))
     Workteam.add_member(:member_definitions, Shapes::ShapeRef.new(shape: MemberDefinitions, required: true, location_name: "MemberDefinitions"))
@@ -4439,6 +4473,14 @@ module Aws::SageMaker
         o.input = Shapes::ShapeRef.new(shape: DescribeUserProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeUserProfileResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_workforce, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeWorkforce"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeWorkforceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeWorkforceResponse)
       end)
 
       api.add_operation(:describe_workteam, Seahorse::Model::Operation.new.tap do |o|
@@ -5129,6 +5171,14 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:update_workforce, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWorkforce"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWorkforceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWorkforceResponse)
       end)
 
       api.add_operation(:update_workteam, Seahorse::Model::Operation.new.tap do |o|

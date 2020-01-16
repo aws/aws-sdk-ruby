@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-01-16)
+------------------
+
+* Feature - To reduce the number of errors our customers are facing, we have modified the requirements of input parameters for two of Directory Service APIs.
+
 1.23.0 (2019-11-26)
 ------------------
 

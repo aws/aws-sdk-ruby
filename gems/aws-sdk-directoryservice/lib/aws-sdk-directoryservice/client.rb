@@ -1717,7 +1717,7 @@ module Aws::DirectoryService
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
     #
-    # @option params [String] :type
+    # @option params [required, String] :type
     #   The type of LDAP security that the customer wants to enable. The
     #   security can be either server or client, but currently only the
     #   default `Client` is supported.
@@ -1728,7 +1728,7 @@ module Aws::DirectoryService
     #
     #   resp = client.disable_ldaps({
     #     directory_id: "DirectoryId", # required
-    #     type: "Client", # accepts Client
+    #     type: "Client", # required, accepts Client
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPS AWS API Documentation
@@ -1810,7 +1810,7 @@ module Aws::DirectoryService
     # @option params [required, String] :directory_id
     #   The identifier of the directory.
     #
-    # @option params [String] :type
+    # @option params [required, String] :type
     #   The type of LDAP security the customer wants to enable. The security
     #   can be either server or client, but currently only the default
     #   `Client` is supported.
@@ -1821,7 +1821,7 @@ module Aws::DirectoryService
     #
     #   resp = client.enable_ldaps({
     #     directory_id: "DirectoryId", # required
-    #     type: "Client", # accepts Client
+    #     type: "Client", # required, accepts Client
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPS AWS API Documentation
@@ -2760,7 +2760,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

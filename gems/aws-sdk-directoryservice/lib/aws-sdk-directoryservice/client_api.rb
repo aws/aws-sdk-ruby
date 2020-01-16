@@ -700,7 +700,7 @@ module Aws::DirectoryService
     DirectoryVpcSettingsDescription.struct_class = Types::DirectoryVpcSettingsDescription
 
     DisableLDAPSRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
-    DisableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
+    DisableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, required: true, location_name: "Type"))
     DisableLDAPSRequest.struct_class = Types::DisableLDAPSRequest
 
     DisableLDAPSResult.struct_class = Types::DisableLDAPSResult
@@ -740,7 +740,7 @@ module Aws::DirectoryService
     DomainControllers.member = Shapes::ShapeRef.new(shape: DomainController)
 
     EnableLDAPSRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
-    EnableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, location_name: "Type"))
+    EnableLDAPSRequest.add_member(:type, Shapes::ShapeRef.new(shape: LDAPSType, required: true, location_name: "Type"))
     EnableLDAPSRequest.struct_class = Types::EnableLDAPSRequest
 
     EnableLDAPSResult.struct_class = Types::EnableLDAPSResult

@@ -3647,6 +3647,14 @@ module Aws::EC2
     #
     #   Default value: `udp`
     #
+    # @option params [Integer] :vpn_port
+    #   The port number to assign to the Client VPN endpoint for TCP and UDP
+    #   traffic.
+    #
+    #   Valid Values: `443` \| `1194`
+    #
+    #   Default Value: `443`
+    #
     # @option params [String] :description
     #   A brief description of the Client VPN endpoint.
     #
@@ -3714,6 +3722,7 @@ module Aws::EC2
     #     },
     #     dns_servers: ["String"],
     #     transport_protocol: "tcp", # accepts tcp, udp
+    #     vpn_port: 1,
     #     description: "String",
     #     split_tunnel: false,
     #     dry_run: false,
@@ -3805,7 +3814,7 @@ module Aws::EC2
     #   resp = client.create_client_vpn_route({
     #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #     destination_cidr_block: "String", # required
-    #     target_vpc_subnet_id: "String", # required
+    #     target_vpc_subnet_id: "SubnetId", # required
     #     description: "String",
     #     client_token: "String",
     #     dry_run: false,
@@ -9388,7 +9397,7 @@ module Aws::EC2
     #
     #   resp = client.delete_client_vpn_route({
     #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
-    #     target_vpc_subnet_id: "String",
+    #     target_vpc_subnet_id: "SubnetId",
     #     destination_cidr_block: "String", # required
     #     dry_run: false,
     #   })
@@ -12652,6 +12661,7 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].split_tunnel #=> Boolean
     #   resp.client_vpn_endpoints[0].vpn_protocol #=> String, one of "openvpn"
     #   resp.client_vpn_endpoints[0].transport_protocol #=> String, one of "tcp", "udp"
+    #   resp.client_vpn_endpoints[0].vpn_port #=> Integer
     #   resp.client_vpn_endpoints[0].associated_target_networks #=> Array
     #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_id #=> String
     #   resp.client_vpn_endpoints[0].associated_target_networks[0].network_type #=> String, one of "vpc"
@@ -27478,6 +27488,14 @@ module Aws::EC2
     #   Information about the DNS servers to be used by Client VPN
     #   connections. A Client VPN endpoint can have up to two DNS servers.
     #
+    # @option params [Integer] :vpn_port
+    #   The port number to assign to the Client VPN endpoint for TCP and UDP
+    #   traffic.
+    #
+    #   Valid Values: `443` \| `1194`
+    #
+    #   Default Value: `443`
+    #
     # @option params [String] :description
     #   A brief description of the Client VPN endpoint.
     #
@@ -27516,6 +27534,7 @@ module Aws::EC2
     #       custom_dns_servers: ["String"],
     #       enabled: false,
     #     },
+    #     vpn_port: 1,
     #     description: "String",
     #     split_tunnel: false,
     #     dry_run: false,
@@ -35693,7 +35712,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

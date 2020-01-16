@@ -291,7 +291,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -404,7 +404,7 @@ module Aws::SageMaker
     #                 s3_output_path: "S3Uri", # required
     #               },
     #               resource_config: { # required
-    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                 instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #                 instance_count: 1, # required
     #                 volume_size_in_gb: 1, # required
     #                 volume_kms_key_id: "KmsKeyId",
@@ -1962,7 +1962,7 @@ module Aws::SageMaker
     #               default_value: "ParameterValue",
     #             },
     #           ],
-    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           supports_distributed_training: false,
     #           metric_definitions: [
     #             {
@@ -2043,7 +2043,7 @@ module Aws::SageMaker
     #                   s3_output_path: "S3Uri", # required
     #                 },
     #                 resource_config: { # required
-    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #                   instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #                   instance_count: 1, # required
     #                   volume_size_in_gb: 1, # required
     #                   volume_kms_key_id: "KmsKeyId",
@@ -2673,21 +2673,15 @@ module Aws::SageMaker
     #
     #   The KmsKeyId can be any of the following formats:
     #
-    #   * // KMS Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #     `"1234abcd-12ab-34cd-56ef-1234567890ab" `
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * // Amazon Resource Name (ARN) (ARN) of a KMS Key
+    #   * Alias name: `alias/ExampleAlias`
     #
-    #     "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-    #
-    #   * // KMS Key Alias
-    #
-    #     "alias/ExampleAlias"
-    #
-    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
-    #
-    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias" `
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
     #
     #   The KMS key policy must grant permission to the IAM role that you
     #   specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For
@@ -3127,7 +3121,7 @@ module Aws::SageMaker
     #             s3_output_path: "S3Uri", # required
     #           },
     #           resource_config: { # required
-    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #             instance_count: 1, # required
     #             volume_size_in_gb: 1, # required
     #             volume_kms_key_id: "KmsKeyId",
@@ -3225,7 +3219,7 @@ module Aws::SageMaker
     #               s3_output_path: "S3Uri", # required
     #             },
     #             resource_config: { # required
-    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #               instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #               instance_count: 1, # required
     #               volume_size_in_gb: 1, # required
     #               volume_kms_key_id: "KmsKeyId",
@@ -4437,7 +4431,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -8612,6 +8606,46 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeWorkforceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workforce_name: "WorkforceName", # required
+    #       }
+    #
+    # @!attribute [rw] workforce_name
+    #   The name of the private workforce whose access you want to restrict.
+    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   is created and cannot be modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkforceRequest AWS API Documentation
+    #
+    class DescribeWorkforceRequest < Struct.new(
+      :workforce_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workforce
+    #   A single private workforce, which is automatically created when you
+    #   create your first private work team. You can create one private work
+    #   force in each AWS Region. By default, any workforce related API
+    #   operation used in a specific region will apply to the workforce
+    #   created in that region. To learn how to create a private workforce,
+    #   see [Create a Private Workforce][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
+    #   @return [Types::Workforce]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeWorkforceResponse AWS API Documentation
+    #
+    class DescribeWorkforceResponse < Struct.new(
+      :workforce)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeWorkteamRequest
     #   data as a hash:
     #
@@ -9430,7 +9464,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines under what conditions SageMaker creates a human loop.
+    # Defines under what conditions SageMaker creates a human loop. Used
+    # within .
     #
     # @note When making an API call, you may pass HumanLoopActivationConditionsConfig
     #   data as a hash:
@@ -10398,7 +10433,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -11034,6 +11069,27 @@ module Aws::SageMaker
     #
     #       * If using the CLI, `\{"data1": [1,28,28,1],
     #         "data2":[1,28,28,1]\}`
+    #
+    #   * `KERAS`\: You must specify the name and shape (NCHW format) of
+    #     expected data inputs using a dictionary format for your trained
+    #     model. Note that while Keras model artifacts should be uploaded in
+    #     NHWC (channel-last) format, `DataInputConfig` should be specified
+    #     in NCHW (channel-first) format. The dictionary formats required
+    #     for the console and CLI are different.
+    #
+    #     * Examples for one input:
+    #
+    #       * If using the console, `\{"input_1":[1,3,224,224]\}`
+    #
+    #       * If using the CLI, `\{"input_1":[1,3,224,224]\}`
+    #
+    #     * Examples for two inputs:
+    #
+    #       * If using the console, `\{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]\} `
+    #
+    #       * If using the CLI, `\{"input_1": [1,3,224,224],
+    #         "input_2":[1,3,224,224]\}`
     #
     #   * `MXNET/ONNX`\: You must specify the name and shape (NCHW format)
     #     of the expected data inputs in order using a dictionary format for
@@ -13999,19 +14055,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] experiment_name
     #   A filter that returns only components that are part of the specified
-    #   experiment. If you specify `ExperimentName`, you can't specify
-    #   `TrialName`.
+    #   experiment. If you specify `ExperimentName`, you can't filter by
+    #   `SourceArn` or `TrialName`.
     #   @return [String]
     #
     # @!attribute [rw] trial_name
     #   A filter that returns only components that are part of the specified
-    #   trial. If you specify `TrialName`, you can't specify
-    #   `ExperimentName`.
+    #   trial. If you specify `TrialName`, you can't filter by
+    #   `ExperimentName` or `SourceArn`.
     #   @return [String]
     #
     # @!attribute [rw] source_arn
     #   A filter that returns only components that have the specified source
-    #   Amazon Resource Name (ARN).
+    #   Amazon Resource Name (ARN). If you specify `SourceArn`, you can't
+    #   filter by `ExperimentName` or `TrialName`.
     #   @return [String]
     #
     # @!attribute [rw] created_after
@@ -16714,7 +16771,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -17486,14 +17543,14 @@ module Aws::SageMaker
     # `AugmentedManifestFile` is shuffled. The shuffling order is determined
     # using the `Seed` value.
     #
-    # For Pipe input mode, shuffling is done at the start of every epoch.
-    # With large datasets, this ensures that the order of the training data
-    # is different for each epoch, and it helps reduce bias and possible
-    # overfitting. In a multi-node training job when `ShuffleConfig` is
-    # combined with `S3DataDistributionType` of `ShardedByS3Key`, the data
-    # is shuffled across nodes so that the content sent to a particular node
-    # on the first epoch might be sent to a different node on the second
-    # epoch.
+    # For Pipe input mode, when `ShuffleConfig` is specified shuffling is
+    # done at the start of every epoch. With large datasets, this ensures
+    # that the order of the training data is different for each epoch, and
+    # it helps reduce bias and possible overfitting. In a multi-node
+    # training job when `ShuffleConfig` is combined with
+    # `S3DataDistributionType` of `ShardedByS3Key`, the data is shuffled
+    # across nodes so that the content sent to a particular node on the
+    # first epoch might be sent to a different node on the second epoch.
     #
     # @note When making an API call, you may pass ShuffleConfig
     #   data as a hash:
@@ -17569,6 +17626,43 @@ module Aws::SageMaker
     #
     class SourceAlgorithmSpecification < Struct.new(
       :source_algorithms)
+      include Aws::Structure
+    end
+
+    # A list of IP address ranges ([CIDRs][1]). Used to create an allow list
+    # of IP addresses for a private workforce. For more information, see .
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #
+    # @note When making an API call, you may pass SourceIpConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cidrs: ["Cidr"], # required
+    #       }
+    #
+    # @!attribute [rw] cidrs
+    #   A list of one to four [Classless Inter-Domain Routing][1] (CIDR)
+    #   values.
+    #
+    #   Maximum: 4 CIDR values
+    #
+    #   <note markdown="1"> The following Length Constraints apply to individual CIDR values in
+    #   the CIDR value list.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceIpConfig AWS API Documentation
+    #
+    class SourceIpConfig < Struct.new(
+      :cidrs)
       include Aws::Structure
     end
 
@@ -18304,7 +18398,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -18484,7 +18578,7 @@ module Aws::SageMaker
     #             default_value: "ParameterValue",
     #           },
     #         ],
-    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         supported_training_instance_types: ["ml.m4.xlarge"], # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         supports_distributed_training: false,
     #         metric_definitions: [
     #           {
@@ -18863,21 +18957,15 @@ module Aws::SageMaker
     #   server-side encryption. The `KmsKeyId` can be any of the following
     #   formats:
     #
-    #   * // KMS Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #   * Alias name: `alias/ExampleAlias`
     #
-    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    #
-    #   * // KMS Key Alias
-    #
-    #     `"alias/ExampleAlias"`
-    #
-    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
-    #
-    #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
     #
     #   If you don't provide a KMS key ID, Amazon SageMaker uses the
     #   default KMS key for Amazon S3 for your role's account. For more
@@ -18935,21 +19023,15 @@ module Aws::SageMaker
     #   compute instance(s) that run the batch transform job. The
     #   `VolumeKmsKeyId` can be any of the following formats:
     #
-    #   * // KMS Key ID
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #   * Alias name: `alias/ExampleAlias`
     #
-    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
-    #
-    #   * // KMS Key Alias
-    #
-    #     ` "alias/ExampleAlias"`
-    #
-    #   * // Amazon Resource Name (ARN) (ARN) of a KMS Key Alias
-    #
-    #     ` "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformResources AWS API Documentation
@@ -20425,6 +20507,61 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateWorkforceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workforce_name: "WorkforceName", # required
+    #         source_ip_config: {
+    #           cidrs: ["Cidr"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] workforce_name
+    #   The name of the private workforce whose access you want to restrict.
+    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   is created and cannot be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ip_config
+    #   A list of one to four worker IP address ranges ([CIDRs][1]) that can
+    #   be used to access tasks assigned to this workforce.
+    #
+    #   Maximum: 4 CIDR values
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Types::SourceIpConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceRequest AWS API Documentation
+    #
+    class UpdateWorkforceRequest < Struct.new(
+      :workforce_name,
+      :source_ip_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workforce
+    #   A single private workforce, which is automatically created when you
+    #   create your first private work team. You can create one private work
+    #   force in each AWS Region. By default, any workforce related API
+    #   operation used in a specific region will apply to the workforce
+    #   created in that region. To learn how to create a private workforce,
+    #   see [Create a Private Workforce][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
+    #   @return [Types::Workforce]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateWorkforceResponse AWS API Documentation
+    #
+    class UpdateWorkforceResponse < Struct.new(
+      :workforce)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateWorkteamRequest
     #   data as a hash:
     #
@@ -20652,6 +20789,55 @@ module Aws::SageMaker
     class VpcConfig < Struct.new(
       :security_group_ids,
       :subnets)
+      include Aws::Structure
+    end
+
+    # A single private workforce, which is automatically created when you
+    # create your first private work team. You can create one private work
+    # force in each AWS Region. By default, any workforce related API
+    # operation used in a specific region will apply to the workforce
+    # created in that region. To learn how to create a private workforce,
+    # see [Create a Private Workforce][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
+    #
+    # @!attribute [rw] workforce_name
+    #   The name of the private workforce whose access you want to restrict.
+    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   is created and cannot be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] workforce_arn
+    #   The Amazon Resource Name (ARN) of the private workforce.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date
+    #   The most recent date that was used to successfully add one or more
+    #   IP address ranges ([CIDRs][1]) to a private workforce's allow list.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_ip_config
+    #   A list of one to four IP address ranges ([CIDRs][1]) to be added to
+    #   the workforce allow list.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
+    #   @return [Types::SourceIpConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/Workforce AWS API Documentation
+    #
+    class Workforce < Struct.new(
+      :workforce_name,
+      :workforce_arn,
+      :last_updated_date,
+      :source_ip_config)
       include Aws::Structure
     end
 

@@ -2214,7 +2214,7 @@ module Aws::DirectoryService
     #
     #       {
     #         directory_id: "DirectoryId", # required
-    #         type: "Client", # accepts Client
+    #         type: "Client", # required, accepts Client
     #       }
     #
     # @!attribute [rw] directory_id
@@ -2398,7 +2398,7 @@ module Aws::DirectoryService
     #
     #       {
     #         directory_id: "DirectoryId", # required
-    #         type: "Client", # accepts Client
+    #         type: "Client", # required, accepts Client
     #       }
     #
     # @!attribute [rw] directory_id
