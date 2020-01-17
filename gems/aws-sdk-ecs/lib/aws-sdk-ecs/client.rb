@@ -1629,10 +1629,16 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Deletes the specified cluster. You must deregister all container
-    # instances from this cluster before you may delete it. You can list the
-    # container instances in a cluster with ListContainerInstances and
-    # deregister them with DeregisterContainerInstance.
+    # Deletes the specified cluster. The cluster will transition to the
+    # `INACTIVE` state. Clusters with an `INACTIVE` status may remain
+    # discoverable in your account for a period of time. However, this
+    # behavior is subject to change in the future, so you should not rely on
+    # `INACTIVE` clusters persisting.
+    #
+    # You must deregister all container instances from this cluster before
+    # you may delete it. You can list the container instances in a cluster
+    # with ListContainerInstances and deregister them with
+    # DeregisterContainerInstance.
     #
     # @option params [required, String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -2269,6 +2275,8 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3117,6 +3125,8 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -5455,6 +5465,10 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         efs_volume_configuration: {
+    #           file_system_id: "String", # required
+    #           root_directory: "String",
+    #         },
     #       },
     #     ],
     #     placement_constraints: [
@@ -5608,6 +5622,8 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].docker_volume_configuration.driver_opts["String"] #=> String
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels #=> Hash
     #   resp.task_definition.volumes[0].docker_volume_configuration.labels["String"] #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.file_system_id #=> String
+    #   resp.task_definition.volumes[0].efs_volume_configuration.root_directory #=> String
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -7701,7 +7717,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -342,19 +342,22 @@ module Aws::Batch
     #   or [Amazon EC2 service limits][1]. If this is not specified, the
     #   default is `BEST_FIT`, which will use only the best fitting instance
     #   type, waiting for additional capacity if it's not available. This
-    #   allocation strategy keeps costs lower but can limit scaling.
-    #   `BEST_FIT_PROGRESSIVE` will select an additional instance type that
-    #   is large enough to meet the requirements of the jobs in the queue,
-    #   with a preference for an instance type with a lower cost.
-    #   `SPOT_CAPACITY_OPTIMIZED` is only available for Spot Instance
-    #   compute resources and will select an additional instance type that
-    #   is large enough to meet the requirements of the jobs in the queue,
-    #   with a preference for an instance type that is less likely to be
-    #   interrupted.
+    #   allocation strategy keeps costs lower but can limit scaling. If you
+    #   are using Spot Fleets with `BEST_FIT` then the Spot Fleet IAM Role
+    #   must be specified. `BEST_FIT_PROGRESSIVE` will select additional
+    #   instance types that are large enough to meet the requirements of the
+    #   jobs in the queue, with a preference for instance types with a lower
+    #   cost per vCPU. `SPOT_CAPACITY_OPTIMIZED` is only available for Spot
+    #   Instance compute resources and will select additional instance types
+    #   that are large enough to meet the requirements of the jobs in the
+    #   queue, with a preference for instance types that are less likely to
+    #   be interrupted. For more information, see [Allocation Strategies][2]
+    #   in the *AWS Batch User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html
     #   @return [String]
     #
     # @!attribute [rw] minv_cpus
@@ -459,8 +462,10 @@ module Aws::Batch
     #
     # @!attribute [rw] spot_iam_fleet_role
     #   The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role
-    #   applied to a `SPOT` compute environment. For more information, see
-    #   [Amazon EC2 Spot Fleet Role][1] in the *AWS Batch User Guide*.
+    #   applied to a `SPOT` compute environment. This role is required if
+    #   the allocation strategy set to `BEST_FIT` or if the allocation
+    #   strategy is not specified. For more information, see [Amazon EC2
+    #   Spot Fleet Role][1] in the *AWS Batch User Guide*.
     #
     #
     #
@@ -1762,7 +1767,7 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] depends_on
-    #   A list of job names or IDs on which this job depends.
+    #   A list of job IDs on which this job depends.
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
@@ -2944,9 +2949,10 @@ module Aws::Batch
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
-    #   The job definition used by this job. This value can be either a
-    #   `name:revision` or the Amazon Resource Name (ARN) for the job
-    #   definition.
+    #   The job definition used by this job. This value can be one of
+    #   `name`, `name:revision`, or the Amazon Resource Name (ARN) for the
+    #   job definition. If `name` is specified without a revision then the
+    #   latest active revision is used.
     #   @return [String]
     #
     # @!attribute [rw] parameters

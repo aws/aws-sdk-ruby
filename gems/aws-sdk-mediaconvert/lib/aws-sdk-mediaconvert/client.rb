@@ -615,6 +615,7 @@ module Aws::MediaConvert
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
     #               additional_manifests: [
@@ -809,7 +810,7 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                     eac_3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -854,6 +855,13 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1,
+    #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
     #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
@@ -947,6 +955,10 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
     #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -1029,6 +1041,7 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
@@ -1498,6 +1511,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -1620,7 +1634,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -1660,6 +1674,11 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -1722,6 +1741,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -1790,6 +1811,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -2304,6 +2326,7 @@ module Aws::MediaConvert
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
     #               additional_manifests: [
@@ -2498,7 +2521,7 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                     eac_3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -2543,6 +2566,13 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1,
+    #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
     #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
@@ -2636,6 +2666,10 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
     #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -2718,6 +2752,7 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
@@ -3161,6 +3196,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -3283,7 +3319,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -3323,6 +3359,11 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -3385,6 +3426,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -3453,6 +3496,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -3751,7 +3795,7 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #             eac_3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -3796,6 +3840,13 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1,
+    #             },
+    #             mp_3_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
     #             },
     #             wav_settings: {
     #               bit_depth: 1,
@@ -3888,6 +3939,10 @@ module Aws::MediaConvert
     #         },
     #       ],
     #       container_settings: {
+    #         cmfc_settings: {
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
     #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -3970,6 +4025,7 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
@@ -4266,7 +4322,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -4306,6 +4362,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -4367,6 +4428,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -4435,6 +4498,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -5051,6 +5115,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -5173,7 +5238,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -5213,6 +5278,11 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -5275,6 +5345,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -5343,6 +5415,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -5744,6 +5817,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -5866,7 +5940,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -5906,6 +5980,11 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -5968,6 +6047,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -6036,6 +6117,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -6316,7 +6398,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -6356,6 +6438,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -6417,6 +6504,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -6485,6 +6574,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -6934,6 +7024,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -7056,7 +7147,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -7096,6 +7187,11 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -7158,6 +7254,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -7226,6 +7324,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -7671,6 +7770,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -7793,7 +7893,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -7833,6 +7933,11 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -7895,6 +8000,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -7963,6 +8070,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -8279,7 +8387,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -8319,6 +8427,11 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -8380,6 +8493,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.presets[0].settings.caption_descriptions[0].language_description #=> String
+    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.presets[0].settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -8448,6 +8563,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.presets[0].settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.presets[0].settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.presets[0].settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -9090,6 +9206,7 @@ module Aws::MediaConvert
     #               stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #             dash_iso_group_settings: {
     #               additional_manifests: [
@@ -9284,7 +9401,7 @@ module Aws::MediaConvert
     #                       channels: 1,
     #                       sample_rate: 1,
     #                     },
-    #                     codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                     codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                     eac_3_atmos_settings: {
     #                       bitrate: 1,
     #                       bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -9329,6 +9446,13 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       channels: 1,
     #                       sample_rate: 1,
+    #                     },
+    #                     mp_3_settings: {
+    #                       bitrate: 1,
+    #                       channels: 1,
+    #                       rate_control_mode: "CBR", # accepts CBR, VBR
+    #                       sample_rate: 1,
+    #                       vbr_quality: 1,
     #                     },
     #                     wav_settings: {
     #                       bit_depth: 1,
@@ -9422,6 +9546,10 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               container_settings: {
+    #                 cmfc_settings: {
+    #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                 },
     #                 container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                 f4v_settings: {
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -9504,6 +9632,7 @@ module Aws::MediaConvert
     #                 },
     #                 mp_4_settings: {
     #                   cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   ctts_version: 1,
     #                   free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   mp_4_major_brand: "__string",
@@ -9944,6 +10073,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.stream_inf_resolution #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_dash_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_hls_manifest #=> String, one of "DISABLED", "ENABLED"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.write_segment_timeline_in_representation #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].manifest_name_modifier #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.dash_iso_group_settings.additional_manifests[0].selected_outputs #=> Array
@@ -10066,7 +10196,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -10106,6 +10236,11 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -10168,6 +10303,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -10236,6 +10373,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -10528,7 +10666,7 @@ module Aws::MediaConvert
     #               channels: 1,
     #               sample_rate: 1,
     #             },
-    #             codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #             codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #             eac_3_atmos_settings: {
     #               bitrate: 1,
     #               bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -10573,6 +10711,13 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               channels: 1,
     #               sample_rate: 1,
+    #             },
+    #             mp_3_settings: {
+    #               bitrate: 1,
+    #               channels: 1,
+    #               rate_control_mode: "CBR", # accepts CBR, VBR
+    #               sample_rate: 1,
+    #               vbr_quality: 1,
     #             },
     #             wav_settings: {
     #               bit_depth: 1,
@@ -10665,6 +10810,10 @@ module Aws::MediaConvert
     #         },
     #       ],
     #       container_settings: {
+    #         cmfc_settings: {
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
     #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -10747,6 +10896,7 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
@@ -11040,7 +11190,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aiff_settings.sample_rate #=> Integer
-    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.codec #=> String, one of "AAC", "MP2", "MP3", "WAV", "AIFF", "AC3", "EAC3", "EAC3_ATMOS", "PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.bitstream_mode #=> String, one of "COMPLETE_MAIN"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.eac_3_atmos_settings.coding_mode #=> String, one of "CODING_MODE_9_1_6"
@@ -11080,6 +11230,11 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.bitrate #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_2_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.bitrate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.channels #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.rate_control_mode #=> String, one of "CBR", "VBR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.mp_3_settings.vbr_quality #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.bit_depth #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
@@ -11141,6 +11296,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.container #=> String, one of "F4V", "ISMV", "M2TS", "M3U8", "CMFC", "MOV", "MP4", "MPD", "MXF", "RAW"
     #   resp.preset.settings.container_settings.f4v_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.m2ts_settings.audio_buffer_model #=> String, one of "DVB", "ATSC"
@@ -11209,6 +11366,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mov_settings.padding_control #=> String, one of "OMNEON", "NONE"
     #   resp.preset.settings.container_settings.mov_settings.reference #=> String, one of "SELF_CONTAINED", "EXTERNAL"
     #   resp.preset.settings.container_settings.mp_4_settings.cslg_atom #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.mp_4_settings.ctts_version #=> Integer
     #   resp.preset.settings.container_settings.mp_4_settings.free_space_box #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mp_4_settings.moov_placement #=> String, one of "PROGRESSIVE_DOWNLOAD", "NORMAL"
     #   resp.preset.settings.container_settings.mp_4_settings.mp_4_major_brand #=> String
@@ -11499,7 +11657,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

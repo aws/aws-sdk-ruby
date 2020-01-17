@@ -519,7 +519,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the settings for a list of snapshots.
+    # Modifies the settings for a set of cluster snapshots.
     #
     # @option params [required, Array<String>] :snapshot_identifier_list
     #   A list of snapshot identifiers you want to modify.
@@ -571,7 +571,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Cancels a resize operation.
+    # Cancels a resize operation for a cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   The unique identifier for the cluster that you want to cancel a resize
@@ -760,7 +760,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a new cluster.
+    # Creates a new cluster with the specified parameters.
     #
     # To create a cluster in Virtual Private Cloud (VPC), you must provide a
     # cluster subnet group name. The cluster subnet group identifies the
@@ -905,7 +905,7 @@ module Aws::Redshift
     #   Default: A random, system-chosen Availability Zone in the region that
     #   is specified by the endpoint.
     #
-    #   Example: `us-east-1d`
+    #   Example: `us-east-2d`
     #
     #   Constraint: The specified Availability Zone must be in the same region
     #   as the current endpoint.
@@ -1648,7 +1648,7 @@ module Aws::Redshift
     #   must specify a source type in order to specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
-    #   cluster-security-group, and cluster-snapshot.
+    #   cluster-security-group, cluster-snapshot, and scheduled-action.
     #
     # @option params [Array<String>] :source_ids
     #   A list of one or more identifiers of Amazon Redshift source objects.
@@ -2033,7 +2033,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Creates a new snapshot schedule.
+    # Creates a snapshot schedule with the rate of every 12 hours.
     #
     # @option params [Array<String>] :schedule_definitions
     #   The definition of the snapshot schedule. The definition is made up of
@@ -2105,7 +2105,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Adds one or more tags to a specified resource.
+    # Adds tags to a cluster.
     #
     # A resource can have up to 50 tags. If you try to create more than 50
     # tags for a resource, you will receive an error and the attempt will
@@ -2116,7 +2116,7 @@ module Aws::Redshift
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) to which you want to add the tag or
-    #   tags. For example, `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
+    #   tags. For example, `arn:aws:redshift:us-east-2:123456789:cluster:t1`.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more name/value pairs to add as tags to the specified resource.
@@ -2149,12 +2149,13 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Deletes a previously provisioned cluster. A successful response from
-    # the web service indicates that the request was received correctly. Use
-    # DescribeClusters to monitor the status of the deletion. The delete
-    # operation cannot be canceled or reverted once submitted. For more
-    # information about managing clusters, go to [Amazon Redshift
-    # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
+    # Deletes a previously provisioned cluster without its final snapshot
+    # being created. A successful response from the web service indicates
+    # that the request was received correctly. Use DescribeClusters to
+    # monitor the status of the deletion. The delete operation cannot be
+    # canceled or reverted once submitted. For more information about
+    # managing clusters, go to [Amazon Redshift Clusters][1] in the *Amazon
+    # Redshift Cluster Management Guide*.
     #
     # If you want to shut down the cluster and retain it for future use, set
     # *SkipFinalClusterSnapshot* to `false` and specify a name for
@@ -2647,13 +2648,13 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Deletes a tag or tags from a resource. You must provide the ARN of the
-    # resource from which you want to delete the tag or tags.
+    # Deletes tags from a resource. You must provide the ARN of the resource
+    # from which you want to delete the tag or tags.
     #
     # @option params [required, String] :resource_name
     #   The Amazon Resource Name (ARN) from which you want to remove the tag
     #   or tags. For example,
-    #   `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
+    #   `arn:aws:redshift:us-east-2:123456789:cluster:t1`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag key that you want to delete.
@@ -3779,8 +3780,8 @@ module Aws::Redshift
     #   The source type, such as cluster or parameter group, to which the
     #   described event categories apply.
     #
-    #   Valid values: cluster, cluster-snapshot, cluster-parameter-group, and
-    #   cluster-security-group.
+    #   Valid values: cluster, cluster-snapshot, cluster-parameter-group,
+    #   cluster-security-group, and scheduled-action.
     #
     # @return [Types::EventCategoriesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4913,8 +4914,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Returns the total amount of snapshot usage and provisioned storage in
-    # megabytes.
+    # Returns account level backups storage size and provisional storage.
     #
     # @return [Types::CustomerStorageMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5034,7 +5034,7 @@ module Aws::Redshift
     # @option params [String] :resource_name
     #   The Amazon Resource Name (ARN) for which you want to describe the tag
     #   or tags. For example,
-    #   `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
+    #   `arn:aws:redshift:us-east-2:123456789:cluster:t1`.
     #
     # @option params [String] :resource_type
     #   The type of resource with which you want to view tags. Valid resource
@@ -5754,19 +5754,20 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the settings for a cluster. For example, you can add another
-    # security or parameter group, update the preferred maintenance window,
-    # or change the master user password. Resetting a cluster password or
-    # modifying the security groups associated with a cluster do not need a
-    # reboot. However, modifying a parameter group requires a reboot for
-    # parameters to take effect. For more information about managing
-    # clusters, go to [Amazon Redshift Clusters][1] in the *Amazon Redshift
-    # Cluster Management Guide*.
+    # Modifies the settings for a cluster.
     #
     # You can also change node type and the number of nodes to scale up or
     # down the cluster. When resizing a cluster, you must specify both the
     # number of nodes and the node type even if one of the parameters does
     # not change.
+    #
+    # You can add another security or parameter group, or change the master
+    # user password. Resetting a cluster password or modifying the security
+    # groups associated with a cluster do not need a reboot. However,
+    # modifying a parameter group requires a reboot for parameters to take
+    # effect. For more information about managing clusters, go to [Amazon
+    # Redshift Clusters][1] in the *Amazon Redshift Cluster Management
+    # Guide*.
     #
     #
     #
@@ -5793,32 +5794,30 @@ module Aws::Redshift
     #   The new node type of the cluster. If you specify a new node type, you
     #   must also specify the number of nodes parameter.
     #
-    #   When you submit your request to resize a cluster, Amazon Redshift sets
-    #   access permissions for the cluster to read-only. After Amazon Redshift
-    #   provisions a new cluster according to your resize requirements, there
-    #   will be a temporary outage while the old cluster is deleted and your
-    #   connection is switched to the new cluster. When the new connection is
-    #   complete, the original access permissions for the cluster are
-    #   restored. You can use DescribeResize to track the progress of the
-    #   resize request.
+    #   For more information about resizing clusters, go to [Resizing Clusters
+    #   in Amazon Redshift][1] in the *Amazon Redshift Cluster Management
+    #   Guide*.
     #
     #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
     #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.16xlarge`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html
     #
     # @option params [Integer] :number_of_nodes
     #   The new number of nodes of the cluster. If you specify a new number of
     #   nodes, you must also specify the node type parameter.
     #
-    #   When you submit your request to resize a cluster, Amazon Redshift sets
-    #   access permissions for the cluster to read-only. After Amazon Redshift
-    #   provisions a new cluster according to your resize requirements, there
-    #   will be a temporary outage while the old cluster is deleted and your
-    #   connection is switched to the new cluster. When the new connection is
-    #   complete, the original access permissions for the cluster are
-    #   restored. You can use DescribeResize to track the progress of the
-    #   resize request.
+    #   For more information about resizing clusters, go to [Resizing Clusters
+    #   in Amazon Redshift][1] in the *Amazon Redshift Cluster Management
+    #   Guide*.
     #
     #   Valid Values: Integer greater than `0`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html
     #
     # @option params [Array<String>] :cluster_security_groups
     #   A list of cluster security groups to be authorized on this cluster.
@@ -6010,12 +6009,14 @@ module Aws::Redshift
     #   this point, the maintenance track name is applied.
     #
     # @option params [Boolean] :encrypted
-    #   Indicates whether the cluster is encrypted. If the cluster is
-    #   encrypted and you provide a value for the `KmsKeyId` parameter, we
-    #   will encrypt the cluster with the provided `KmsKeyId`. If you don't
-    #   provide a `KmsKeyId`, we will encrypt with the default key. In the
-    #   China region we will use legacy encryption if you specify that the
-    #   cluster is encrypted.
+    #   Indicates whether the cluster is encrypted. If the value is encrypted
+    #   (true) and you provide a value for the `KmsKeyId` parameter, we
+    #   encrypt the cluster with the provided `KmsKeyId`. If you don't
+    #   provide a `KmsKeyId`, we encrypt with the default key. In the China
+    #   region we use legacy encryption if you specify that the cluster is
+    #   encrypted.
+    #
+    #   If the value is not encrypted (false), then the cluster is decrypted.
     #
     # @option params [String] :kms_key_id
     #   The AWS Key Management Service (KMS) key ID of the encryption key that
@@ -6428,8 +6429,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modifies the maintenance settings of a cluster. For example, you can
-    # defer a maintenance window. You can also update or cancel a deferment.
+    # Modifies the maintenance settings of a cluster.
     #
     # @option params [required, String] :cluster_identifier
     #   A unique identifier for the cluster.
@@ -6640,6 +6640,9 @@ module Aws::Redshift
 
     # Modifies the settings for a snapshot.
     #
+    # This exanmple modifies the manual retention period setting for a
+    # cluster snapshot.
+    #
     # @option params [required, String] :snapshot_identifier
     #   The identifier of the snapshot whose setting you want to modify.
     #
@@ -6820,7 +6823,7 @@ module Aws::Redshift
     #   must specify a source type in order to specify source IDs.
     #
     #   Valid values: cluster, cluster-parameter-group,
-    #   cluster-security-group, and cluster-snapshot.
+    #   cluster-security-group, cluster-snapshot, and scheduled-action.
     #
     # @option params [Array<String>] :source_ids
     #   A list of one or more identifiers of Amazon Redshift source objects.
@@ -6892,7 +6895,7 @@ module Aws::Redshift
       req.send_request(options)
     end
 
-    # Modify a scheduled action.
+    # Modifies a scheduled action.
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action to modify.
@@ -7677,7 +7680,7 @@ module Aws::Redshift
     #
     #   Default: A random, system-chosen Availability Zone.
     #
-    #   Example: `us-east-1a`
+    #   Example: `us-east-2a`
     #
     # @option params [Boolean] :allow_version_upgrade
     #   If `true`, major version upgrades can be applied during the
@@ -8383,7 +8386,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

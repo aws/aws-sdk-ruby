@@ -86,6 +86,10 @@ module Aws::MediaConvert
     CmafStreamInfResolution = Shapes::StringShape.new(name: 'CmafStreamInfResolution')
     CmafWriteDASHManifest = Shapes::StringShape.new(name: 'CmafWriteDASHManifest')
     CmafWriteHLSManifest = Shapes::StringShape.new(name: 'CmafWriteHLSManifest')
+    CmafWriteSegmentTimelineInRepresentation = Shapes::StringShape.new(name: 'CmafWriteSegmentTimelineInRepresentation')
+    CmfcScte35Esam = Shapes::StringShape.new(name: 'CmfcScte35Esam')
+    CmfcScte35Source = Shapes::StringShape.new(name: 'CmfcScte35Source')
+    CmfcSettings = Shapes::StructureShape.new(name: 'CmfcSettings')
     ColorCorrector = Shapes::StructureShape.new(name: 'ColorCorrector')
     ColorMetadata = Shapes::StringShape.new(name: 'ColorMetadata')
     ColorSpace = Shapes::StringShape.new(name: 'ColorSpace')
@@ -335,6 +339,8 @@ module Aws::MediaConvert
     MovReference = Shapes::StringShape.new(name: 'MovReference')
     MovSettings = Shapes::StructureShape.new(name: 'MovSettings')
     Mp2Settings = Shapes::StructureShape.new(name: 'Mp2Settings')
+    Mp3RateControlMode = Shapes::StringShape.new(name: 'Mp3RateControlMode')
+    Mp3Settings = Shapes::StructureShape.new(name: 'Mp3Settings')
     Mp4CslgAtom = Shapes::StringShape.new(name: 'Mp4CslgAtom')
     Mp4FreeSpaceBox = Shapes::StringShape.new(name: 'Mp4FreeSpaceBox')
     Mp4MoovPlacement = Shapes::StringShape.new(name: 'Mp4MoovPlacement')
@@ -464,6 +470,7 @@ module Aws::MediaConvert
     __doubleMinNegative6Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative6Max3')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __integerMin0Max0 = Shapes::IntegerShape.new(name: '__integerMin0Max0')
+    __integerMin0Max1 = Shapes::IntegerShape.new(name: '__integerMin0Max1')
     __integerMin0Max10 = Shapes::IntegerShape.new(name: '__integerMin0Max10')
     __integerMin0Max100 = Shapes::IntegerShape.new(name: '__integerMin0Max100')
     __integerMin0Max1000 = Shapes::IntegerShape.new(name: '__integerMin0Max1000')
@@ -486,6 +493,7 @@ module Aws::MediaConvert
     __integerMin0Max65535 = Shapes::IntegerShape.new(name: '__integerMin0Max65535')
     __integerMin0Max7 = Shapes::IntegerShape.new(name: '__integerMin0Max7')
     __integerMin0Max8 = Shapes::IntegerShape.new(name: '__integerMin0Max8')
+    __integerMin0Max9 = Shapes::IntegerShape.new(name: '__integerMin0Max9')
     __integerMin0Max96 = Shapes::IntegerShape.new(name: '__integerMin0Max96')
     __integerMin0Max99 = Shapes::IntegerShape.new(name: '__integerMin0Max99')
     __integerMin1000Max1152000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max1152000000')
@@ -494,6 +502,7 @@ module Aws::MediaConvert
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin1000Max300000000 = Shapes::IntegerShape.new(name: '__integerMin1000Max300000000')
     __integerMin10Max48 = Shapes::IntegerShape.new(name: '__integerMin10Max48')
+    __integerMin16000Max320000 = Shapes::IntegerShape.new(name: '__integerMin16000Max320000')
     __integerMin16Max24 = Shapes::IntegerShape.new(name: '__integerMin16Max24')
     __integerMin1Max1 = Shapes::IntegerShape.new(name: '__integerMin1Max1')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
@@ -510,6 +519,7 @@ module Aws::MediaConvert
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
     __integerMin1Max64 = Shapes::IntegerShape.new(name: '__integerMin1Max64')
+    __integerMin22050Max48000 = Shapes::IntegerShape.new(name: '__integerMin22050Max48000')
     __integerMin24Max60000 = Shapes::IntegerShape.new(name: '__integerMin24Max60000')
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
     __integerMin25Max2000 = Shapes::IntegerShape.new(name: '__integerMin25Max2000')
@@ -657,6 +667,7 @@ module Aws::MediaConvert
     AudioCodecSettings.add_member(:eac_3_atmos_settings, Shapes::ShapeRef.new(shape: Eac3AtmosSettings, location_name: "eac3AtmosSettings"))
     AudioCodecSettings.add_member(:eac_3_settings, Shapes::ShapeRef.new(shape: Eac3Settings, location_name: "eac3Settings"))
     AudioCodecSettings.add_member(:mp_2_settings, Shapes::ShapeRef.new(shape: Mp2Settings, location_name: "mp2Settings"))
+    AudioCodecSettings.add_member(:mp_3_settings, Shapes::ShapeRef.new(shape: Mp3Settings, location_name: "mp3Settings"))
     AudioCodecSettings.add_member(:wav_settings, Shapes::ShapeRef.new(shape: WavSettings, location_name: "wavSettings"))
     AudioCodecSettings.struct_class = Types::AudioCodecSettings
 
@@ -795,7 +806,12 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:stream_inf_resolution, Shapes::ShapeRef.new(shape: CmafStreamInfResolution, location_name: "streamInfResolution"))
     CmafGroupSettings.add_member(:write_dash_manifest, Shapes::ShapeRef.new(shape: CmafWriteDASHManifest, location_name: "writeDashManifest"))
     CmafGroupSettings.add_member(:write_hls_manifest, Shapes::ShapeRef.new(shape: CmafWriteHLSManifest, location_name: "writeHlsManifest"))
+    CmafGroupSettings.add_member(:write_segment_timeline_in_representation, Shapes::ShapeRef.new(shape: CmafWriteSegmentTimelineInRepresentation, location_name: "writeSegmentTimelineInRepresentation"))
     CmafGroupSettings.struct_class = Types::CmafGroupSettings
+
+    CmfcSettings.add_member(:scte_35_esam, Shapes::ShapeRef.new(shape: CmfcScte35Esam, location_name: "scte35Esam"))
+    CmfcSettings.add_member(:scte_35_source, Shapes::ShapeRef.new(shape: CmfcScte35Source, location_name: "scte35Source"))
+    CmfcSettings.struct_class = Types::CmfcSettings
 
     ColorCorrector.add_member(:brightness, Shapes::ShapeRef.new(shape: __integerMin1Max100, location_name: "brightness"))
     ColorCorrector.add_member(:color_space_conversion, Shapes::ShapeRef.new(shape: ColorSpaceConversion, location_name: "colorSpaceConversion"))
@@ -808,6 +824,7 @@ module Aws::MediaConvert
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
+    ContainerSettings.add_member(:cmfc_settings, Shapes::ShapeRef.new(shape: CmfcSettings, location_name: "cmfcSettings"))
     ContainerSettings.add_member(:container, Shapes::ShapeRef.new(shape: ContainerType, location_name: "container"))
     ContainerSettings.add_member(:f4v_settings, Shapes::ShapeRef.new(shape: F4vSettings, location_name: "f4vSettings"))
     ContainerSettings.add_member(:m2ts_settings, Shapes::ShapeRef.new(shape: M2tsSettings, location_name: "m2tsSettings"))
@@ -1520,7 +1537,15 @@ module Aws::MediaConvert
     Mp2Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin32000Max48000, location_name: "sampleRate"))
     Mp2Settings.struct_class = Types::Mp2Settings
 
+    Mp3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __integerMin16000Max320000, location_name: "bitrate"))
+    Mp3Settings.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max2, location_name: "channels"))
+    Mp3Settings.add_member(:rate_control_mode, Shapes::ShapeRef.new(shape: Mp3RateControlMode, location_name: "rateControlMode"))
+    Mp3Settings.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin22050Max48000, location_name: "sampleRate"))
+    Mp3Settings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: __integerMin0Max9, location_name: "vbrQuality"))
+    Mp3Settings.struct_class = Types::Mp3Settings
+
     Mp4Settings.add_member(:cslg_atom, Shapes::ShapeRef.new(shape: Mp4CslgAtom, location_name: "cslgAtom"))
+    Mp4Settings.add_member(:ctts_version, Shapes::ShapeRef.new(shape: __integerMin0Max1, location_name: "cttsVersion"))
     Mp4Settings.add_member(:free_space_box, Shapes::ShapeRef.new(shape: Mp4FreeSpaceBox, location_name: "freeSpaceBox"))
     Mp4Settings.add_member(:moov_placement, Shapes::ShapeRef.new(shape: Mp4MoovPlacement, location_name: "moovPlacement"))
     Mp4Settings.add_member(:mp_4_major_brand, Shapes::ShapeRef.new(shape: __string, location_name: "mp4MajorBrand"))

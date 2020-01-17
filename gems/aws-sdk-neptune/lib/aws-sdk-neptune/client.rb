@@ -565,10 +565,6 @@ module Aws::Neptune
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value for
-    #   the `KmsKeyId` parameter, Amazon Neptune encrypts the target DB
-    #   cluster snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
     #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
@@ -581,6 +577,10 @@ module Aws::Neptune
     #   KMS encryption keys are specific to the AWS Region that they are
     #   created in, and you can't use encryption keys from one AWS Region in
     #   another AWS Region.
+    #
+    #   You cannot encrypt an unencrypted DB cluster snapshot when you copy
+    #   it. If you try to copy an unencrypted DB cluster snapshot and specify
+    #   a value for the KmsKeyId parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
     #   Not currently supported.
@@ -741,8 +741,7 @@ module Aws::Neptune
     #   ^
     #
     # @option params [String] :character_set_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified CharacterSet.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :database_name
     #   The name for your database of up to 64 alpha-numeric characters. If
@@ -791,7 +790,8 @@ module Aws::Neptune
     #   Valid Values: `neptune`
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. Currently, setting
+    #   this parameter has no effect.
     #
     #   Example: `1.0.1`
     #
@@ -819,12 +819,7 @@ module Aws::Neptune
     #   Constraints: Must contain from 8 to 41 characters.
     #
     # @option params [String] :option_group_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group.
-    #
-    #   Permanent options can't be removed from an option group. The option
-    #   group can't be removed from a DB cluster once it is associated with a
-    #   DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -921,6 +916,11 @@ module Aws::Neptune
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
     #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -956,6 +956,7 @@ module Aws::Neptune
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -1009,6 +1010,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1334,7 +1336,8 @@ module Aws::Neptune
     #   true.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to use.
+    #   The version number of the database engine to use. Currently, setting
+    #   this parameter has no effect.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -1353,20 +1356,10 @@ module Aws::Neptune
     #   be initially allocated for the DB instance.
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group.
-    #
-    #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
-    #   can't be removed from a DB instance once it is associated with a DB
-    #   instance
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :character_set_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   CharacterSet.
-    #
-    #   Not applicable. The character set is managed by the DB cluster. For
-    #   more information, see CreateDBCluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Boolean] :publicly_accessible
     #   This flag should no longer be used.
@@ -1468,17 +1461,24 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   True to enable Performance Insights for the DB instance, and otherwise
-    #   false.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :performance_insights_kms_key_id
-    #   The AWS KMS key identifier for encryption of Performance Insights
-    #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
-    #   identifier, or the KMS key alias for the KMS encryption key.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB instance has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
+    #   You can enable or disable deletion protection for the DB cluster. For
+    #   more information, see CreateDBCluster. DB instances in a DB cluster
+    #   can be deleted even when deletion protection is enabled for the DB
+    #   cluster.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1534,6 +1534,7 @@ module Aws::Neptune
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -1635,6 +1636,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -2019,6 +2021,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -2297,6 +2300,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -2875,6 +2879,7 @@ module Aws::Neptune
     #   resp.db_clusters[0].cluster_create_time #=> Time
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_clusters[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -3161,6 +3166,7 @@ module Aws::Neptune
     #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instances[0].deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -4088,6 +4094,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -4220,18 +4227,7 @@ module Aws::Neptune
     #   Constraints: Must contain from 8 to 41 characters.
     #
     # @option params [String] :option_group_name
-    #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter doesn't result in
-    #   an outage except in the following case, and the change is applied
-    #   during the next maintenance window unless the `ApplyImmediately`
-    #   parameter is set to `true` for this request. If the parameter change
-    #   results in an option group that enables OEM, this change can cause a
-    #   brief (sub-second) period during which new connections are rejected
-    #   but existing connections are not interrupted.
-    #
-    #   Permanent options can't be removed from an option group. The option
-    #   group can't be removed from a DB cluster once it is associated with a
-    #   DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
@@ -4276,13 +4272,17 @@ module Aws::Neptune
     #   to CloudWatch Logs for a specific DB cluster.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to which you want to
-    #   upgrade. Changing this parameter results in an outage. The change is
-    #   applied during the next maintenance window unless the ApplyImmediately
-    #   parameter is set to true.
+    #   The version number of the database engine. Currently, setting this
+    #   parameter has no effect. To upgrade your database engine to the most
+    #   recent release, use the ApplyPendingMaintenanceAction API.
     #
     #   For a list of valid engine versions, see CreateDBInstance, or call
     #   DescribeDBEngineVersions.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4308,6 +4308,7 @@ module Aws::Neptune
     #       disable_log_types: ["String"],
     #     },
     #     engine_version: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -4361,6 +4362,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -4668,24 +4670,14 @@ module Aws::Neptune
     #   parameter is set to `true` for this request.
     #
     # @option params [String] :engine_version
-    #   The version number of the database engine to upgrade to. Changing this
-    #   parameter results in an outage and the change is applied during the
-    #   next maintenance window unless the `ApplyImmediately` parameter is set
-    #   to `true` for this request.
-    #
-    #   For major version upgrades, if a nondefault DB parameter group is
-    #   currently in use, a new DB parameter group in the DB parameter group
-    #   family for the new engine version must be specified. The new DB
-    #   parameter group can be the default for that DB parameter group family.
+    #   The version number of the database engine to upgrade to. Currently,
+    #   setting this parameter has no effect. To upgrade your database engine
+    #   to the most recent release, use the ApplyPendingMaintenanceAction API.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
     #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
-    #
-    #   Constraints: This parameter must be set to true when specifying a
-    #   value for the EngineVersion parameter that is a different major
-    #   version than the DB instance's current version.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
@@ -4710,19 +4702,7 @@ module Aws::Neptune
     #   Default: Uses existing setting
     #
     # @option params [String] :option_group_name
-    #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter doesn't result in an outage
-    #   except in the following case and the change is applied during the next
-    #   maintenance window unless the `ApplyImmediately` parameter is set to
-    #   `true` for this request. If the parameter change results in an option
-    #   group that enables OEM, this change can cause a brief (sub-second)
-    #   period during which new connections are rejected but existing
-    #   connections are not interrupted.
-    #
-    #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
-    #   can't be removed from a DB instance once it is associated with a DB
-    #   instance
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :new_db_instance_identifier
     #   The new DB instance identifier for the DB instance when renaming a DB
@@ -4821,14 +4801,19 @@ module Aws::Neptune
     #   Default: `false`
     #
     # @option params [Boolean] :enable_performance_insights
-    #   Not supported.
+    #   *(Not supported by Neptune)*
     #
     # @option params [String] :performance_insights_kms_key_id
-    #   Not supported.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB instance has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4876,6 +4861,7 @@ module Aws::Neptune
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -4977,6 +4963,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -5261,6 +5248,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -5406,6 +5394,7 @@ module Aws::Neptune
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -5731,7 +5720,7 @@ module Aws::Neptune
     #   Not supported.
     #
     # @option params [String] :option_group_name
-    #   The name of the option group to use for the restored DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster will belong to.
@@ -5780,6 +5769,11 @@ module Aws::Neptune
     #
     #   ^
     #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -5807,6 +5801,7 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -5860,6 +5855,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -5963,7 +5959,7 @@ module Aws::Neptune
     #   Example: `mySubnetgroup`
     #
     # @option params [String] :option_group_name
-    #   The name of the option group for the new DB cluster.
+    #   *(Not supported by Neptune)*
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of VPC security groups that the new DB cluster belongs to.
@@ -6020,6 +6016,11 @@ module Aws::Neptune
     #
     #   ^
     #
+    # @option params [Boolean] :deletion_protection
+    #   A value that indicates whether the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled. By default, deletion protection is disabled.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -6046,6 +6047,7 @@ module Aws::Neptune
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     db_cluster_parameter_group_name: "String",
+    #     deletion_protection: false,
     #   })
     #
     # @example Response structure
@@ -6099,6 +6101,7 @@ module Aws::Neptune
     #   resp.db_cluster.cluster_create_time #=> Time
     #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -6122,7 +6125,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

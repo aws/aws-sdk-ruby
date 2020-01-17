@@ -316,9 +316,9 @@ module Aws::MediaConvert
     # in this group vary depending on the value that you choose for Audio
     # codec (Codec). For each codec enum that you choose, define the
     # corresponding settings object. The following lists the codec enum,
-    # settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV,
-    # WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3,
-    # Eac3Settings * EAC3\_ATMOS, Eac3AtmosSettings
+    # settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3,
+    # Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3,
+    # Ac3Settings * EAC3, Eac3Settings * EAC3\_ATMOS, Eac3AtmosSettings
     #
     # @note When making an API call, you may pass AudioCodecSettings
     #   data as a hash:
@@ -350,7 +350,7 @@ module Aws::MediaConvert
     #           channels: 1,
     #           sample_rate: 1,
     #         },
-    #         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #         eac_3_atmos_settings: {
     #           bitrate: 1,
     #           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -395,6 +395,13 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           channels: 1,
     #           sample_rate: 1,
+    #         },
+    #         mp_3_settings: {
+    #           bitrate: 1,
+    #           channels: 1,
+    #           rate_control_mode: "CBR", # accepts CBR, VBR
+    #           sample_rate: 1,
+    #           vbr_quality: 1,
     #         },
     #         wav_settings: {
     #           bit_depth: 1,
@@ -444,6 +451,11 @@ module Aws::MediaConvert
     #   (AudioDescriptions)>(CodecSettings) to the value MP2.
     #   @return [Types::Mp2Settings]
     #
+    # @!attribute [rw] mp_3_settings
+    #   Required when you set Codec, under AudioDescriptions>CodecSettings,
+    #   to the value MP3.
+    #   @return [Types::Mp3Settings]
+    #
     # @!attribute [rw] wav_settings
     #   Required when you set (Codec) under
     #   (AudioDescriptions)>(CodecSettings) to the value WAV.
@@ -459,6 +471,7 @@ module Aws::MediaConvert
       :eac_3_atmos_settings,
       :eac_3_settings,
       :mp_2_settings,
+      :mp_3_settings,
       :wav_settings)
       include Aws::Structure
     end
@@ -507,7 +520,7 @@ module Aws::MediaConvert
     #             channels: 1,
     #             sample_rate: 1,
     #           },
-    #           codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #           codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #           eac_3_atmos_settings: {
     #             bitrate: 1,
     #             bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -552,6 +565,13 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             channels: 1,
     #             sample_rate: 1,
+    #           },
+    #           mp_3_settings: {
+    #             bitrate: 1,
+    #             channels: 1,
+    #             rate_control_mode: "CBR", # accepts CBR, VBR
+    #             sample_rate: 1,
+    #             vbr_quality: 1,
     #           },
     #           wav_settings: {
     #             bit_depth: 1,
@@ -621,8 +641,9 @@ module Aws::MediaConvert
     #   for Audio codec (Codec). For each codec enum that you choose, define
     #   the corresponding settings object. The following lists the codec
     #   enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings
-    #   * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings *
-    #   EAC3, Eac3Settings * EAC3\_ATMOS, Eac3AtmosSettings
+    #   * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings *
+    #   AC3, Ac3Settings * EAC3, Eac3Settings * EAC3\_ATMOS,
+    #   Eac3AtmosSettings
     #   @return [Types::AudioCodecSettings]
     #
     # @!attribute [rw] custom_language_code
@@ -1839,6 +1860,7 @@ module Aws::MediaConvert
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #         write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #       }
     #
     # @!attribute [rw] additional_manifests
@@ -1968,6 +1990,17 @@ module Aws::MediaConvert
     #   this output.
     #   @return [String]
     #
+    # @!attribute [rw] write_segment_timeline_in_representation
+    #   When you enable Precise segment duration in DASH manifests
+    #   (writeSegmentTimelineInRepresentation), your DASH manifest shows
+    #   precise segment durations. The segment duration information appears
+    #   inside the SegmentTimeline element, inside SegmentTemplate at the
+    #   Representation level. When this feature isn't enabled, the segment
+    #   durations in your DASH manifest are approximate. The segment
+    #   duration information appears in the duration attribute of the
+    #   SegmentTemplate element.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafGroupSettings AWS API Documentation
     #
     class CmafGroupSettings < Struct.new(
@@ -1988,7 +2021,41 @@ module Aws::MediaConvert
       :segment_length,
       :stream_inf_resolution,
       :write_dash_manifest,
-      :write_hls_manifest)
+      :write_hls_manifest,
+      :write_segment_timeline_in_representation)
+      include Aws::Structure
+    end
+
+    # Settings for MP4 segments in CMAF
+    #
+    # @note When making an API call, you may pass CmfcSettings
+    #   data as a hash:
+    #
+    #       {
+    #         scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #       }
+    #
+    # @!attribute [rw] scte_35_esam
+    #   Use this setting only when you specify SCTE-35 markers from ESAM.
+    #   Choose INSERT to put SCTE-35 markers in this output at the insertion
+    #   points that you specify in an ESAM XML document. Provide the
+    #   document in the setting SCC XML (sccXml).
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_source
+    #   Ignore this setting unless you have SCTE-35 markers in your input
+    #   video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35
+    #   markers that appear in your input to also appear in this output.
+    #   Choose None (NONE) if you don't want those SCTE-35 markers in this
+    #   output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmfcSettings AWS API Documentation
+    #
+    class CmfcSettings < Struct.new(
+      :scte_35_esam,
+      :scte_35_source)
       include Aws::Structure
     end
 
@@ -2089,6 +2156,10 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         cmfc_settings: {
+    #           scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #         },
     #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -2171,6 +2242,7 @@ module Aws::MediaConvert
     #         },
     #         mp_4_settings: {
     #           cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           ctts_version: 1,
     #           free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           mp_4_major_brand: "__string",
@@ -2181,6 +2253,10 @@ module Aws::MediaConvert
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         },
     #       }
+    #
+    # @!attribute [rw] cmfc_settings
+    #   Settings for MP4 segments in CMAF
+    #   @return [Types::CmfcSettings]
     #
     # @!attribute [rw] container
     #   Container for this output. Some containers require a container
@@ -2226,6 +2302,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ContainerSettings AWS API Documentation
     #
     class ContainerSettings < Struct.new(
+      :cmfc_settings,
       :container,
       :f4v_settings,
       :m2ts_settings,
@@ -2481,6 +2558,7 @@ module Aws::MediaConvert
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 dash_iso_group_settings: {
     #                   additional_manifests: [
@@ -2675,7 +2753,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -2720,6 +2798,13 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1,
+    #                         },
+    #                         mp_3_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
     #                         },
     #                         wav_settings: {
     #                           bit_depth: 1,
@@ -2813,6 +2898,10 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
+    #                     cmfc_settings: {
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                     },
     #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -2895,6 +2984,7 @@ module Aws::MediaConvert
     #                     },
     #                     mp_4_settings: {
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
@@ -3537,6 +3627,7 @@ module Aws::MediaConvert
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 dash_iso_group_settings: {
     #                   additional_manifests: [
@@ -3731,7 +3822,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -3776,6 +3867,13 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1,
+    #                         },
+    #                         mp_3_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
     #                         },
     #                         wav_settings: {
     #                           bit_depth: 1,
@@ -3869,6 +3967,10 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
+    #                     cmfc_settings: {
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                     },
     #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -3951,6 +4053,7 @@ module Aws::MediaConvert
     #                     },
     #                     mp_4_settings: {
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
@@ -4372,7 +4475,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -4417,6 +4520,13 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   channels: 1,
     #                   sample_rate: 1,
+    #                 },
+    #                 mp_3_settings: {
+    #                   bitrate: 1,
+    #                   channels: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   sample_rate: 1,
+    #                   vbr_quality: 1,
     #                 },
     #                 wav_settings: {
     #                   bit_depth: 1,
@@ -4509,6 +4619,10 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           container_settings: {
+    #             cmfc_settings: {
+    #               scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #             },
     #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -4591,6 +4705,7 @@ module Aws::MediaConvert
     #             },
     #             mp_4_settings: {
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               mp_4_major_brand: "__string",
@@ -9423,6 +9538,7 @@ module Aws::MediaConvert
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               dash_iso_group_settings: {
     #                 additional_manifests: [
@@ -9617,7 +9733,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -9662,6 +9778,13 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1,
+    #                       },
+    #                       mp_3_settings: {
+    #                         bitrate: 1,
+    #                         channels: 1,
+    #                         rate_control_mode: "CBR", # accepts CBR, VBR
+    #                         sample_rate: 1,
+    #                         vbr_quality: 1,
     #                       },
     #                       wav_settings: {
     #                         bit_depth: 1,
@@ -9755,6 +9878,10 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 container_settings: {
+    #                   cmfc_settings: {
+    #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                   },
     #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -9837,6 +9964,7 @@ module Aws::MediaConvert
     #                   },
     #                   mp_4_settings: {
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     mp_4_major_brand: "__string",
@@ -10507,6 +10635,7 @@ module Aws::MediaConvert
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #               },
     #               dash_iso_group_settings: {
     #                 additional_manifests: [
@@ -10701,7 +10830,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                       codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                       eac_3_atmos_settings: {
     #                         bitrate: 1,
     #                         bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -10746,6 +10875,13 @@ module Aws::MediaConvert
     #                         bitrate: 1,
     #                         channels: 1,
     #                         sample_rate: 1,
+    #                       },
+    #                       mp_3_settings: {
+    #                         bitrate: 1,
+    #                         channels: 1,
+    #                         rate_control_mode: "CBR", # accepts CBR, VBR
+    #                         sample_rate: 1,
+    #                         vbr_quality: 1,
     #                       },
     #                       wav_settings: {
     #                         bit_depth: 1,
@@ -10839,6 +10975,10 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 container_settings: {
+    #                   cmfc_settings: {
+    #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                   },
     #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -10921,6 +11061,7 @@ module Aws::MediaConvert
     #                   },
     #                   mp_4_settings: {
     #                     cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     ctts_version: 1,
     #                     free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     mp_4_major_brand: "__string",
@@ -12353,6 +12494,56 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # Required when you set Codec, under AudioDescriptions>CodecSettings, to
+    # the value MP3.
+    #
+    # @note When making an API call, you may pass Mp3Settings
+    #   data as a hash:
+    #
+    #       {
+    #         bitrate: 1,
+    #         channels: 1,
+    #         rate_control_mode: "CBR", # accepts CBR, VBR
+    #         sample_rate: 1,
+    #         vbr_quality: 1,
+    #       }
+    #
+    # @!attribute [rw] bitrate
+    #   Specify the average bitrate in bits per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] channels
+    #   Specify the number of channels in this output audio track. Choosing
+    #   Mono on the console gives you 1 output channel; choosing Stereo
+    #   gives you 2. In the API, valid values are 1 and 2.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rate_control_mode
+    #   Specify whether the service encodes this MP3 audio output with a
+    #   constant bitrate (CBR) or a variable bitrate (VBR).
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_rate
+    #   Sample rate in hz.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] vbr_quality
+    #   Required when you set Bitrate control mode (rateControlMode) to VBR.
+    #   Specify the audio quality of this MP3 output from 0 (highest
+    #   quality) to 9 (lowest quality).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Mp3Settings AWS API Documentation
+    #
+    class Mp3Settings < Struct.new(
+      :bitrate,
+      :channels,
+      :rate_control_mode,
+      :sample_rate,
+      :vbr_quality)
+      include Aws::Structure
+    end
+
     # Settings for MP4 container. You can create audio-only AAC outputs with
     # this container.
     #
@@ -12361,6 +12552,7 @@ module Aws::MediaConvert
     #
     #       {
     #         cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         ctts_version: 1,
     #         free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         mp_4_major_brand: "__string",
@@ -12373,6 +12565,16 @@ module Aws::MediaConvert
     #   box will be included per 14496-1 amendment 1. This improves
     #   compatibility with Apple players and tools.
     #   @return [String]
+    #
+    # @!attribute [rw] ctts_version
+    #   Ignore this setting unless compliance to the CTTS box version
+    #   specification matters in your workflow. Specify a value of 1 to set
+    #   your CTTS box version to 1 and make your output compliant with the
+    #   specification. When you specify a value of 1, you must also set CSLG
+    #   atom (cslgAtom) to the value INCLUDE. Keep the default value 0 to
+    #   set your CTTS box version to 0. This can provide backward
+    #   compatibility for some players and packagers.
+    #   @return [Integer]
     #
     # @!attribute [rw] free_space_box
     #   Inserts a free-space box immediately after the moov box.
@@ -12393,6 +12595,7 @@ module Aws::MediaConvert
     #
     class Mp4Settings < Struct.new(
       :cslg_atom,
+      :ctts_version,
       :free_space_box,
       :moov_placement,
       :mp_4_major_brand)
@@ -13123,7 +13326,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -13168,6 +13371,13 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 channels: 1,
     #                 sample_rate: 1,
+    #               },
+    #               mp_3_settings: {
+    #                 bitrate: 1,
+    #                 channels: 1,
+    #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 sample_rate: 1,
+    #                 vbr_quality: 1,
     #               },
     #               wav_settings: {
     #                 bit_depth: 1,
@@ -13261,6 +13471,10 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         container_settings: {
+    #           cmfc_settings: {
+    #             scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           },
     #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -13343,6 +13557,7 @@ module Aws::MediaConvert
     #           },
     #           mp_4_settings: {
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             mp_4_major_brand: "__string",
@@ -13779,6 +13994,7 @@ module Aws::MediaConvert
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #             write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #           dash_iso_group_settings: {
     #             additional_manifests: [
@@ -13973,7 +14189,7 @@ module Aws::MediaConvert
     #                     channels: 1,
     #                     sample_rate: 1,
     #                   },
-    #                   codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                   codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                   eac_3_atmos_settings: {
     #                     bitrate: 1,
     #                     bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -14018,6 +14234,13 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     channels: 1,
     #                     sample_rate: 1,
+    #                   },
+    #                   mp_3_settings: {
+    #                     bitrate: 1,
+    #                     channels: 1,
+    #                     rate_control_mode: "CBR", # accepts CBR, VBR
+    #                     sample_rate: 1,
+    #                     vbr_quality: 1,
     #                   },
     #                   wav_settings: {
     #                     bit_depth: 1,
@@ -14111,6 +14334,10 @@ module Aws::MediaConvert
     #               },
     #             ],
     #             container_settings: {
+    #               cmfc_settings: {
+    #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #               },
     #               container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #               f4v_settings: {
     #                 moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -14193,6 +14420,7 @@ module Aws::MediaConvert
     #               },
     #               mp_4_settings: {
     #                 cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 ctts_version: 1,
     #                 free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                 mp_4_major_brand: "__string",
@@ -14565,6 +14793,7 @@ module Aws::MediaConvert
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #           write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #         },
     #         dash_iso_group_settings: {
     #           additional_manifests: [
@@ -14887,7 +15116,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #               codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #               eac_3_atmos_settings: {
     #                 bitrate: 1,
     #                 bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -14932,6 +15161,13 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 channels: 1,
     #                 sample_rate: 1,
+    #               },
+    #               mp_3_settings: {
+    #                 bitrate: 1,
+    #                 channels: 1,
+    #                 rate_control_mode: "CBR", # accepts CBR, VBR
+    #                 sample_rate: 1,
+    #                 vbr_quality: 1,
     #               },
     #               wav_settings: {
     #                 bit_depth: 1,
@@ -15024,6 +15260,10 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         container_settings: {
+    #           cmfc_settings: {
+    #             scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           },
     #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -15106,6 +15346,7 @@ module Aws::MediaConvert
     #           },
     #           mp_4_settings: {
     #             cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             ctts_version: 1,
     #             free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             mp_4_major_brand: "__string",
@@ -16677,6 +16918,7 @@ module Aws::MediaConvert
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_segment_timeline_in_representation: "ENABLED", # accepts ENABLED, DISABLED
     #                 },
     #                 dash_iso_group_settings: {
     #                   additional_manifests: [
@@ -16871,7 +17113,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                         codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                         eac_3_atmos_settings: {
     #                           bitrate: 1,
     #                           bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -16916,6 +17158,13 @@ module Aws::MediaConvert
     #                           bitrate: 1,
     #                           channels: 1,
     #                           sample_rate: 1,
+    #                         },
+    #                         mp_3_settings: {
+    #                           bitrate: 1,
+    #                           channels: 1,
+    #                           rate_control_mode: "CBR", # accepts CBR, VBR
+    #                           sample_rate: 1,
+    #                           vbr_quality: 1,
     #                         },
     #                         wav_settings: {
     #                           bit_depth: 1,
@@ -17009,6 +17258,10 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
+    #                     cmfc_settings: {
+    #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #                     },
     #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -17091,6 +17344,7 @@ module Aws::MediaConvert
     #                     },
     #                     mp_4_settings: {
     #                       cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       ctts_version: 1,
     #                       free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                       mp_4_major_brand: "__string",
@@ -17503,7 +17757,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
+    #                 codec: "AAC", # accepts AAC, MP2, MP3, WAV, AIFF, AC3, EAC3, EAC3_ATMOS, PASSTHROUGH
     #                 eac_3_atmos_settings: {
     #                   bitrate: 1,
     #                   bitstream_mode: "COMPLETE_MAIN", # accepts COMPLETE_MAIN
@@ -17548,6 +17802,13 @@ module Aws::MediaConvert
     #                   bitrate: 1,
     #                   channels: 1,
     #                   sample_rate: 1,
+    #                 },
+    #                 mp_3_settings: {
+    #                   bitrate: 1,
+    #                   channels: 1,
+    #                   rate_control_mode: "CBR", # accepts CBR, VBR
+    #                   sample_rate: 1,
+    #                   vbr_quality: 1,
     #                 },
     #                 wav_settings: {
     #                   bit_depth: 1,
@@ -17640,6 +17901,10 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           container_settings: {
+    #             cmfc_settings: {
+    #               scte_35_esam: "INSERT", # accepts INSERT, NONE
+    #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #             },
     #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
@@ -17722,6 +17987,7 @@ module Aws::MediaConvert
     #             },
     #             mp_4_settings: {
     #               cslg_atom: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               ctts_version: 1,
     #               free_space_box: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               mp_4_major_brand: "__string",
@@ -18092,9 +18358,9 @@ module Aws::MediaConvert
     # in this group vary depending on the value that you choose for Video
     # codec (Codec). For each codec enum that you choose, define the
     # corresponding settings object. The following lists the codec enum,
-    # settings object pairs. * H\_264, H264Settings * H\_265, H265Settings
-    # * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME\_CAPTURE,
-    # FrameCaptureSettings
+    # settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings *
+    # H\_264, H264Settings * H\_265, H265Settings * MPEG2, Mpeg2Settings
+    # * PRORES, ProresSettings
     #
     # @note When making an API call, you may pass VideoCodecSettings
     #   data as a hash:
@@ -18554,9 +18820,9 @@ module Aws::MediaConvert
     #   settings in this group vary depending on the value that you choose
     #   for Video codec (Codec). For each codec enum that you choose, define
     #   the corresponding settings object. The following lists the codec
-    #   enum, settings object pairs. * H\_264, H264Settings * H\_265,
-    #   H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings *
-    #   FRAME\_CAPTURE, FrameCaptureSettings
+    #   enum, settings object pairs. * FRAME\_CAPTURE, FrameCaptureSettings
+    #   * H\_264, H264Settings * H\_265, H265Settings * MPEG2,
+    #   Mpeg2Settings * PRORES, ProresSettings
     #   @return [Types::VideoCodecSettings]
     #
     # @!attribute [rw] color_metadata
@@ -18852,12 +19118,13 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] alpha_behavior
-    #   Ignore this setting unless this input is a QuickTime animation.
-    #   Specify which part of this input MediaConvert uses for your outputs.
-    #   Leave this setting set to DISCARD in order to delete the alpha
-    #   channel and preserve the video. Use REMAP\_TO\_LUMA for this setting
-    #   to delete the video and map the alpha channel to the luma channel of
-    #   your outputs.
+    #   Ignore this setting unless this input is a QuickTime animation with
+    #   an alpha channel. Use this setting to create separate Key and Fill
+    #   outputs. In each output, specify which part of the input
+    #   MediaConvert uses. Leave this setting at the default value DISCARD
+    #   to delete the alpha channel and preserve the video. Set it to
+    #   REMAP\_TO\_LUMA to delete the video and map the alpha channel to the
+    #   luma channel of your outputs.
     #   @return [String]
     #
     # @!attribute [rw] color_space

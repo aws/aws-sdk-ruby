@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2020-01-17)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for MP3 audio only outputs.
+
 1.40.0 (2019-11-25)
 ------------------
 

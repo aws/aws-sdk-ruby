@@ -149,6 +149,9 @@ module Aws::ECS
     #   Scaling group capacity provider. This determines whether the Auto
     #   Scaling group has managed termination protection.
     #
+    #   When using managed termination protection, managed scaling must also
+    #   be used otherwise managed termination protection will not work.
+    #
     #   When managed termination protection is enabled, Amazon ECS prevents
     #   the Amazon EC2 instances in an Auto Scaling group that contain tasks
     #   from being terminated during a scale-in action. The Auto Scaling
@@ -361,10 +364,35 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the cluster. The valid values are `ACTIVE` or
-    #   `INACTIVE`. `ACTIVE` indicates that you can register container
-    #   instances with the cluster and the associated instances can accept
-    #   tasks.
+    #   The status of the cluster. The following are the possible states
+    #   that will be returned.
+    #
+    #   ACTIVE
+    #
+    #   : The cluster is ready to accept tasks and if applicable you can
+    #     register container instances with the cluster.
+    #
+    #   PROVISIONING
+    #
+    #   : The cluster has capacity providers associated with it and the
+    #     resources needed for the capacity provider are being created.
+    #
+    #   DEPROVISIONING
+    #
+    #   : The cluster has capacity providers associated with it and the
+    #     resources needed for the capacity provider are being deleted.
+    #
+    #   FAILED
+    #
+    #   : The cluster has capacity providers associated with it and the
+    #     resources needed for the capacity provider have failed to create.
+    #
+    #   INACTIVE
+    #
+    #   : The cluster has been deleted. Clusters with an `INACTIVE` status
+    #     may remain discoverable in your account for a period of time.
+    #     However, this behavior is subject to change in the future, so you
+    #     should not rely on `INACTIVE` clusters persisting.
     #   @return [String]
     #
     # @!attribute [rw] registered_container_instances_count
@@ -854,17 +882,6 @@ module Aws::ECS
     #   on the [Amazon EC2 Instances][4] detail page by 1,024.
     #
     #    </note>
-    #
-    #   For example, if you run a single-container task on a single-core
-    #   instance type with 512 CPU units specified for that container, and
-    #   that is the only task running on the container instance, that
-    #   container could use the full 1,024 CPU unit share at any given time.
-    #   However, if you launched another copy of the same task on that
-    #   container instance, each task would be guaranteed a minimum of 512
-    #   CPU units when needed, and each container could float to higher CPU
-    #   usage if the other container was not using it, but if both tasks
-    #   were 100% active all of the time, they would be limited to 512 CPU
-    #   units.
     #
     #   Linux containers share unallocated CPU units with other containers
     #   on the container instance with the same ratio as their allocated
@@ -1682,8 +1699,8 @@ module Aws::ECS
     # see [Amazon ECS-optimized Linux AMI][2] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
-    # <note markdown="1"> If you are using tasks that use the Fargate launch type, container
-    # dependency parameters are not supported.
+    # <note markdown="1"> For tasks using the Fargate launch type, this parameter requires that
+    # the task or service uses platform version 1.3.0 or later.
     #
     #  </note>
     #
@@ -4070,6 +4087,45 @@ module Aws::ECS
       :driver,
       :driver_opts,
       :labels)
+      include Aws::Structure
+    end
+
+    # This parameter is specified when you are using an Amazon Elastic File
+    # System (Amazon EFS) file storage. Amazon EFS file systems are only
+    # supported when you are using the EC2 launch type.
+    #
+    # `EFSVolumeConfiguration` remains in preview and is a Beta Service as
+    # defined by and subject to the Beta Service Participation Service Terms
+    # located at [https://aws.amazon.com/service-terms][1] ("Beta Terms").
+    # These Beta Terms apply to your participation in this preview of
+    # `EFSVolumeConfiguration`.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/service-terms
+    #
+    # @note When making an API call, you may pass EFSVolumeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         file_system_id: "String", # required
+    #         root_directory: "String",
+    #       }
+    #
+    # @!attribute [rw] file_system_id
+    #   The Amazon EFS file system ID to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_directory
+    #   The directory within the Amazon EFS file system to mount as the root
+    #   directory inside the host.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/EFSVolumeConfiguration AWS API Documentation
+    #
+    class EFSVolumeConfiguration < Struct.new(
+      :file_system_id,
+      :root_directory)
       include Aws::Structure
     end
 
@@ -6625,6 +6681,10 @@ module Aws::ECS
     #               labels: {
     #                 "String" => "String",
     #               },
+    #             },
+    #             efs_volume_configuration: {
+    #               file_system_id: "String", # required
+    #               root_directory: "String",
     #             },
     #           },
     #         ],
@@ -10035,6 +10095,10 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         efs_volume_configuration: {
+    #           file_system_id: "String", # required
+    #           root_directory: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -10064,15 +10128,32 @@ module Aws::ECS
     #   This parameter is specified when you are using Docker volumes.
     #   Docker volumes are only supported when you are using the EC2 launch
     #   type. Windows containers only support the use of the `local` driver.
-    #   To use bind mounts, specify a `host` instead.
+    #   To use bind mounts, specify the `host` parameter instead.
     #   @return [Types::DockerVolumeConfiguration]
+    #
+    # @!attribute [rw] efs_volume_configuration
+    #   This parameter is specified when you are using an Amazon Elastic
+    #   File System (Amazon EFS) file storage. Amazon EFS file systems are
+    #   only supported when you are using the EC2 launch type.
+    #
+    #   `EFSVolumeConfiguration` remains in preview and is a Beta Service as
+    #   defined by and subject to the Beta Service Participation Service
+    #   Terms located at [https://aws.amazon.com/service-terms][1] ("Beta
+    #   Terms"). These Beta Terms apply to your participation in this
+    #   preview of `EFSVolumeConfiguration`.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/service-terms
+    #   @return [Types::EFSVolumeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation
     #
     class Volume < Struct.new(
       :name,
       :host,
-      :docker_volume_configuration)
+      :docker_volume_configuration,
+      :efs_volume_configuration)
       include Aws::Structure
     end
 

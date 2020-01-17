@@ -42,6 +42,6 @@ require_relative 'aws-sdk-cloudhsmv2/customizations'
 # @service
 module Aws::CloudHSMV2
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

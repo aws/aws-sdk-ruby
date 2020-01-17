@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2020-01-17)
+------------------
+
+* Feature - Documentation updates for redshift
+
 1.35.0 (2019-12-20)
 ------------------
 

@@ -272,6 +272,8 @@ module Aws::CloudHSMV2
     # @option params [required, String] :backup_id
     #   The ID of the backup that will be copied to the destination region.
     #
+    # @option params [Array<Types::Tag>] :tag_list
+    #
     # @return [Types::CopyBackupToRegionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyBackupToRegionResponse#destination_backup #destination_backup} => Types::DestinationBackup
@@ -281,6 +283,12 @@ module Aws::CloudHSMV2
     #   resp = client.copy_backup_to_region({
     #     destination_region: "Region", # required
     #     backup_id: "BackupId", # required
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -319,6 +327,8 @@ module Aws::CloudHSMV2
     #   to restore the cluster from a backup instead of creating a new
     #   cluster. To find the backup ID, use DescribeBackups.
     #
+    # @option params [Array<Types::Tag>] :tag_list
+    #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
@@ -329,6 +339,12 @@ module Aws::CloudHSMV2
     #     subnet_ids: ["SubnetId"], # required
     #     hsm_type: "HsmType", # required
     #     source_backup_id: "BackupId",
+    #     tag_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -359,6 +375,9 @@ module Aws::CloudHSMV2
     #   resp.cluster.certificates.aws_hardware_certificate #=> String
     #   resp.cluster.certificates.manufacturer_hardware_certificate #=> String
     #   resp.cluster.certificates.cluster_certificate #=> String
+    #   resp.cluster.tag_list #=> Array
+    #   resp.cluster.tag_list[0].key #=> String
+    #   resp.cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateCluster AWS API Documentation
     #
@@ -419,8 +438,8 @@ module Aws::CloudHSMV2
     end
 
     # Deletes a specified AWS CloudHSM backup. A backup can be restored up
-    # to 7 days after the DeleteBackup request. For more information on
-    # restoring a backup, see RestoreBackup
+    # to 7 days after the DeleteBackup request is made. For more information
+    # on restoring a backup, see RestoreBackup.
     #
     # @option params [required, String] :backup_id
     #   The ID of the backup to be deleted. To find the ID of a backup, use
@@ -447,6 +466,9 @@ module Aws::CloudHSMV2
     #   resp.backup.source_backup #=> String
     #   resp.backup.source_cluster #=> String
     #   resp.backup.delete_timestamp #=> Time
+    #   resp.backup.tag_list #=> Array
+    #   resp.backup.tag_list[0].key #=> String
+    #   resp.backup.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackup AWS API Documentation
     #
@@ -504,6 +526,9 @@ module Aws::CloudHSMV2
     #   resp.cluster.certificates.aws_hardware_certificate #=> String
     #   resp.cluster.certificates.manufacturer_hardware_certificate #=> String
     #   resp.cluster.certificates.cluster_certificate #=> String
+    #   resp.cluster.tag_list #=> Array
+    #   resp.cluster.tag_list[0].key #=> String
+    #   resp.cluster.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster AWS API Documentation
     #
@@ -595,6 +620,8 @@ module Aws::CloudHSMV2
     #   specified state.
     #
     # @option params [Boolean] :sort_ascending
+    #   Designates whether or not to sort the return backups by ascending
+    #   chronological order of generation.
     #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -624,6 +651,9 @@ module Aws::CloudHSMV2
     #   resp.backups[0].source_backup #=> String
     #   resp.backups[0].source_cluster #=> String
     #   resp.backups[0].delete_timestamp #=> Time
+    #   resp.backups[0].tag_list #=> Array
+    #   resp.backups[0].tag_list[0].key #=> String
+    #   resp.backups[0].tag_list[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups AWS API Documentation
@@ -710,6 +740,9 @@ module Aws::CloudHSMV2
     #   resp.clusters[0].certificates.aws_hardware_certificate #=> String
     #   resp.clusters[0].certificates.manufacturer_hardware_certificate #=> String
     #   resp.clusters[0].certificates.cluster_certificate #=> String
+    #   resp.clusters[0].tag_list #=> Array
+    #   resp.clusters[0].tag_list[0].key #=> String
+    #   resp.clusters[0].tag_list[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters AWS API Documentation
@@ -738,11 +771,10 @@ module Aws::CloudHSMV2
     #
     # @option params [required, String] :trust_anchor
     #   The issuing certificate of the issuing certificate authority (CA) that
-    #   issued (signed) the cluster certificate. This can be a root
-    #   (self-signed) certificate or a certificate chain that begins with the
-    #   certificate that issued the cluster certificate and ends with a root
-    #   certificate. The certificate or certificate chain must be in PEM
-    #   format and can contain a maximum of 5000 characters.
+    #   issued (signed) the cluster certificate. You must use a self-signed
+    #   certificate. The certificate used to sign the HSM CSR must be directly
+    #   available, and thus must be the root certificate. The certificate must
+    #   be in PEM format and can contain a maximum of 5000 characters.
     #
     # @return [Types::InitializeClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -801,7 +833,7 @@ module Aws::CloudHSMV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags({
-    #     resource_id: "ClusterId", # required
+    #     resource_id: "ResourceId", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -823,7 +855,7 @@ module Aws::CloudHSMV2
     end
 
     # Restores a specified AWS CloudHSM backup that is in the
-    # `PENDING_DELETION` state. For more information on deleting a backup,
+    # `PENDING_DELETION` state. For mor information on deleting a backup,
     # see DeleteBackup.
     #
     # @option params [required, String] :backup_id
@@ -851,6 +883,9 @@ module Aws::CloudHSMV2
     #   resp.backup.source_backup #=> String
     #   resp.backup.source_cluster #=> String
     #   resp.backup.delete_timestamp #=> Time
+    #   resp.backup.tag_list #=> Array
+    #   resp.backup.tag_list[0].key #=> String
+    #   resp.backup.tag_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackup AWS API Documentation
     #
@@ -876,7 +911,7 @@ module Aws::CloudHSMV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_id: "ClusterId", # required
+    #     resource_id: "ResourceId", # required
     #     tag_list: [ # required
     #       {
     #         key: "TagKey", # required
@@ -910,7 +945,7 @@ module Aws::CloudHSMV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_id: "ClusterId", # required
+    #     resource_id: "ResourceId", # required
     #     tag_key_list: ["TagKey"], # required
     #   })
     #
@@ -936,7 +971,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

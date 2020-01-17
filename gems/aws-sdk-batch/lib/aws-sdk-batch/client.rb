@@ -734,7 +734,8 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Deregisters an AWS Batch job definition.
+    # Deregisters an AWS Batch job definition. Job definitions will be
+    # permanently deleted after 180 days.
     #
     # @option params [required, String] :job_definition
     #   The name and revision (`name:revision`) or full Amazon Resource Name
@@ -1781,9 +1782,10 @@ module Aws::Batch
     #   child of each dependency to complete before it can begin.
     #
     # @option params [required, String] :job_definition
-    #   The job definition used by this job. This value can be either a
-    #   `name:revision` or the Amazon Resource Name (ARN) for the job
-    #   definition.
+    #   The job definition used by this job. This value can be one of `name`,
+    #   `name:revision`, or the Amazon Resource Name (ARN) for the job
+    #   definition. If `name` is specified without a revision then the latest
+    #   active revision is used.
     #
     # @option params [Hash<String,String>] :parameters
     #   Additional parameters passed to the job that replace parameter
@@ -2141,7 +2143,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

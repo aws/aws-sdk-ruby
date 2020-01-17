@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-01-17)
+------------------
+
+* Feature - This release ensures INACTIVE job definitions are permanently deleted after 180 days.
+
 1.27.0 (2019-10-23)
 ------------------
 

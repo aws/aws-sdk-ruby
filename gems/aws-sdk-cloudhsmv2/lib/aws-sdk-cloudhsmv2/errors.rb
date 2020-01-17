@@ -90,5 +90,21 @@ module Aws::CloudHSMV2
 
     end
 
+    class CloudHsmTagException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudHSMV2::Types::CloudHsmTagException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
   end
 end

@@ -24,6 +24,7 @@ module Aws::CloudHSMV2
     CloudHsmInvalidRequestException = Shapes::StructureShape.new(name: 'CloudHsmInvalidRequestException')
     CloudHsmResourceNotFoundException = Shapes::StructureShape.new(name: 'CloudHsmResourceNotFoundException')
     CloudHsmServiceException = Shapes::StructureShape.new(name: 'CloudHsmServiceException')
+    CloudHsmTagException = Shapes::StructureShape.new(name: 'CloudHsmTagException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
@@ -64,6 +65,7 @@ module Aws::CloudHSMV2
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PreCoPassword = Shapes::StringShape.new(name: 'PreCoPassword')
     Region = Shapes::StringShape.new(name: 'Region')
+    ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     RestoreBackupRequest = Shapes::StructureShape.new(name: 'RestoreBackupRequest')
     RestoreBackupResponse = Shapes::StructureShape.new(name: 'RestoreBackupResponse')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
@@ -94,6 +96,7 @@ module Aws::CloudHSMV2
     Backup.add_member(:source_backup, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackup"))
     Backup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
     Backup.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
+    Backup.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     Backup.struct_class = Types::Backup
 
     Backups.member = Shapes::ShapeRef.new(shape: Backup)
@@ -120,6 +123,9 @@ module Aws::CloudHSMV2
     CloudHsmServiceException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
     CloudHsmServiceException.struct_class = Types::CloudHsmServiceException
 
+    CloudHsmTagException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    CloudHsmTagException.struct_class = Types::CloudHsmTagException
+
     Cluster.add_member(:backup_policy, Shapes::ShapeRef.new(shape: BackupPolicy, location_name: "BackupPolicy"))
     Cluster.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     Cluster.add_member(:create_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTimestamp"))
@@ -133,12 +139,14 @@ module Aws::CloudHSMV2
     Cluster.add_member(:subnet_mapping, Shapes::ShapeRef.new(shape: ExternalSubnetMapping, location_name: "SubnetMapping"))
     Cluster.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     Cluster.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "Certificates"))
+    Cluster.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     Cluster.struct_class = Types::Cluster
 
     Clusters.member = Shapes::ShapeRef.new(shape: Cluster)
 
     CopyBackupToRegionRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "DestinationRegion"))
     CopyBackupToRegionRequest.add_member(:backup_id, Shapes::ShapeRef.new(shape: BackupId, required: true, location_name: "BackupId"))
+    CopyBackupToRegionRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CopyBackupToRegionRequest.struct_class = Types::CopyBackupToRegionRequest
 
     CopyBackupToRegionResponse.add_member(:destination_backup, Shapes::ShapeRef.new(shape: DestinationBackup, location_name: "DestinationBackup"))
@@ -147,6 +155,7 @@ module Aws::CloudHSMV2
     CreateClusterRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateClusterRequest.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, required: true, location_name: "HsmType"))
     CreateClusterRequest.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
+    CreateClusterRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -233,7 +242,7 @@ module Aws::CloudHSMV2
     InitializeClusterResponse.add_member(:state_message, Shapes::ShapeRef.new(shape: StateMessage, location_name: "StateMessage"))
     InitializeClusterResponse.struct_class = Types::InitializeClusterResponse
 
-    ListTagsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ResourceId"))
+    ListTagsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     ListTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize, location_name: "MaxResults"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
@@ -260,13 +269,13 @@ module Aws::CloudHSMV2
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
-    TagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ResourceId"))
+    TagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     TagResourceRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
-    UntagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ResourceId"))
+    UntagResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
     UntagResourceRequest.add_member(:tag_key_list, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeyList"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
@@ -298,11 +307,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CopyBackupToRegionRequest)
         o.output = Shapes::ShapeRef.new(shape: CopyBackupToRegionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
       end)
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -311,11 +321,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateClusterResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
       end)
 
       api.add_operation(:create_hsm, Seahorse::Model::Operation.new.tap do |o|
@@ -337,11 +348,11 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteBackupRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBackupResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
       end)
 
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -350,11 +361,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteClusterResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
       end)
 
       api.add_operation(:delete_hsm, Seahorse::Model::Operation.new.tap do |o|
@@ -376,11 +388,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeBackupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeBackupsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -395,10 +408,11 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClustersResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -413,11 +427,11 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: InitializeClusterRequest)
         o.output = Shapes::ShapeRef.new(shape: InitializeClusterResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
       end)
 
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -426,11 +440,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -445,11 +460,11 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreBackupRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreBackupResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -458,11 +473,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -471,11 +487,12 @@ module Aws::CloudHSMV2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: CloudHsmAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmInvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: CloudHsmTagException)
       end)
     end
 

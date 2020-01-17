@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-01-17)
+------------------
+
+* Feature - This release includes Deletion Protection for Amazon Neptune databases.
+
 1.19.0 (2019-10-23)
 ------------------
 
