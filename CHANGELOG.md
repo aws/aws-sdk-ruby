@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.432 (2020-01-17)
+------------------
+
 * Feature - Aws::Batch - Updated the documentation for AWS Batch.
 
 * Feature - Aws::CloudHSMV2 - Updated the API, and documentation for AWS CloudHSM V2.
