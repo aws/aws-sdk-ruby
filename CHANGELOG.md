@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the documentation for AWS Batch.
+
+* Feature - Aws::CloudHSMV2 - Updated the API, and documentation for AWS CloudHSM V2.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
 2.11.431 (2020-01-16)
 ------------------
 
