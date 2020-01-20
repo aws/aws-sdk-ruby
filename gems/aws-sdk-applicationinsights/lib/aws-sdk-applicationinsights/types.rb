@@ -61,7 +61,11 @@ module Aws::ApplicationInsights
     #
     # @!attribute [rw] remarks
     #   The issues on the user side that block Application Insights from
-    #   successfully monitoring an application.
+    #   successfully monitoring an application. Example remarks include:
+    #
+    #   * “Configuring application, detected 1 Errors, 3 Warnings”
+    #
+    #   * “Configuring application, detected 1 Unconfigured Components”
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ApplicationInfo AWS API Documentation
@@ -84,6 +88,47 @@ module Aws::ApplicationInsights
     #
     class BadRequestException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # The event information.
+    #
+    # @!attribute [rw] monitored_resource_arn
+    #   The resource monitored by Application Insights.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_status
+    #   The status of the configuration update event. Possible values
+    #   include INFO, WARN, and ERROR.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_resource_type
+    #   The resource type that Application Insights attempted to configure,
+    #   for example, CLOUDWATCH\_ALARM.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_time
+    #   The timestamp of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_detail
+    #   The details of the event in plain text.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_resource_name
+    #   The name of the resource Application Insights attempted to
+    #   configure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ConfigurationEvent AWS API Documentation
+    #
+    class ConfigurationEvent < Struct.new(
+      :monitored_resource_arn,
+      :event_status,
+      :event_resource_type,
+      :event_time,
+      :event_detail,
+      :event_resource_name)
       include Aws::Structure
     end
 
@@ -715,6 +760,87 @@ module Aws::ApplicationInsights
     #
     class ListComponentsResponse < Struct.new(
       :application_component_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConfigurationHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_group_name: "ResourceGroupName",
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         event_status: "INFO", # accepts INFO, WARN, ERROR
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] resource_group_name
+    #   Resource group to which the application belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] event_status
+    #   The status of the configuration update event. Possible values
+    #   include INFO, WARN, and ERROR.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results returned by `ListConfigurationHistory`
+    #   in paginated output. When this parameter is used,
+    #   `ListConfigurationHistory` returns only `MaxResults` in a single
+    #   page along with a `NextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListConfigurationHistory` request with the returned `NextToken`
+    #   value. If this parameter is not used, then
+    #   `ListConfigurationHistory` returns all results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `ListConfigurationHistory` request where `MaxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `NextToken` value. This value is `null` when there are no more
+    #   results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListConfigurationHistoryRequest AWS API Documentation
+    #
+    class ListConfigurationHistoryRequest < Struct.new(
+      :resource_group_name,
+      :start_time,
+      :end_time,
+      :event_status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_list
+    #   The list of configuration events and their corresponding details.
+    #   @return [Array<Types::ConfigurationEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in a future
+    #   `ListConfigurationHistory` request. When the results of a
+    #   `ListConfigurationHistory` request exceed `MaxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListConfigurationHistoryResponse AWS API Documentation
+    #
+    class ListConfigurationHistoryResponse < Struct.new(
+      :event_list,
       :next_token)
       include Aws::Structure
     end

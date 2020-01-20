@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2020-01-20)
+------------------
+
+* Feature - This release provides support for a preview of bringing your own IPv6 addresses (BYOIP for IPv6) for use in AWS.
+
 1.135.0 (2020-01-16)
 ------------------
 

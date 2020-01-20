@@ -344,7 +344,9 @@ module Aws::KMS
     # To connect a custom key store, its associated AWS CloudHSM cluster
     # must have at least one active HSM. To get the number of active HSMs in
     # a cluster, use the [DescribeClusters][2] operation. To add HSMs to the
-    # cluster, use the [CreateHsm][3] operation.
+    # cluster, use the [CreateHsm][3] operation. Also, the [ `kmsuser`
+    # crypto user][4] (CU) must not be logged into the cluster. This
+    # prevents AWS KMS from using this account to log in.
     #
     # The connection process can take an extended amount of time to
     # complete; up to 20 minutes. This operation starts the connection
@@ -357,8 +359,7 @@ module Aws::KMS
     # During the connection process, AWS KMS finds the AWS CloudHSM cluster
     # that is associated with the custom key store, creates the connection
     # infrastructure, connects to the cluster, logs into the AWS CloudHSM
-    # client as the [ `kmsuser` crypto user][4] (CU), and rotates its
-    # password.
+    # client as the `kmsuser` CU, and rotates its password.
     #
     # The `ConnectCustomKeyStore` operation might fail for various reasons.
     # To find the reason, use the DescribeCustomKeyStores operation and see
@@ -580,6 +581,9 @@ module Aws::KMS
     #   Enter the password of the [ `kmsuser` crypto user (CU) account][1] in
     #   the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as
     #   this user to manage key material on your behalf.
+    #
+    #   The password must be a string of 7 to 32 characters. Its value is case
+    #   sensitive.
     #
     #   This parameter tells AWS KMS the `kmsuser` account password; it does
     #   not change the password in the AWS CloudHSM cluster.
@@ -831,8 +835,9 @@ module Aws::KMS
     # * **Symmetric CMKs** contain a 256-bit symmetric key that never leaves
     #   AWS KMS unencrypted. To use the CMK, you must call AWS KMS. You can
     #   use a symmetric CMK to encrypt and decrypt small amounts of data,
-    #   but they are typically used to generate [data keys][2] or data key
-    #   pairs. For details, see GenerateDataKey and GenerateDataKeyPair.
+    #   but they are typically used to generate [data keys][2] and [data
+    #   keys pairs][3]. For details, see GenerateDataKey and
+    #   GenerateDataKeyPair.
     #
     # * **Asymmetric CMKs** can contain an RSA key pair or an Elliptic Curve
     #   (ECC) key pair. The private key in an asymmetric CMK never leaves
@@ -843,7 +848,7 @@ module Aws::KMS
     #   be used only to sign and verify messages.
     #
     # For information about symmetric and asymmetric CMKs, see [Using
-    # Symmetric and Asymmetric CMKs][3] in the *AWS Key Management Service
+    # Symmetric and Asymmetric CMKs][4] in the *AWS Key Management Service
     # Developer Guide*.
     #
     # To create different types of CMKs, use the following guidance:
@@ -877,7 +882,7 @@ module Aws::KMS
     #   token, and use the public key to encrypt your key material. Then,
     #   use ImportKeyMaterial with your import token to import the key
     #   material. For step-by-step instructions, see [Importing Key
-    #   Material][4] in the <i> <i>AWS Key Management Service Developer
+    #   Material][5] in the <i> <i>AWS Key Management Service Developer
     #   Guide</i> </i>. You cannot import the key material into an
     #   asymmetric CMK.
     #
@@ -885,7 +890,7 @@ module Aws::KMS
     #
     # Custom Key Stores
     #
-    # : To create a symmetric CMK in a [custom key store][5], use the
+    # : To create a symmetric CMK in a [custom key store][6], use the
     #   `CustomKeyStoreId` parameter to specify the custom key store. You
     #   must also use the `Origin` parameter with a value of `AWS_CLOUDHSM`.
     #   The AWS CloudHSM cluster that is associated with the custom key
@@ -894,16 +899,17 @@ module Aws::KMS
     #
     #   You cannot create an asymmetric CMK in a custom key store. For
     #   information about custom key stores in AWS KMS see [Using Custom Key
-    #   Stores][5] in the <i> <i>AWS Key Management Service Developer
+    #   Stores][6] in the <i> <i>AWS Key Management Service Developer
     #   Guide</i> </i>.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master-keys
     # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-key-pairs
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     #
     # @option params [String] :policy
     #   The key policy to attach to the CMK.
@@ -931,7 +937,7 @@ module Aws::KMS
     #   policy to the CMK. For more information, see [Default Key Policy][3]
     #   in the *AWS Key Management Service Developer Guide*.
     #
-    #   The key policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy size quota is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -961,20 +967,26 @@ module Aws::KMS
     #   * For asymmetric CMKs with ECC key material, specify `SIGN_VERIFY`.
     #
     # @option params [String] :customer_master_key_spec
-    #   Specifies the type of CMK to create. The `CustomerMasterKeySpec`
-    #   determines whether the CMK contains a symmetric key or an asymmetric
-    #   key pair. It also determines the encryption algorithms or signing
-    #   algorithms that the CMK supports. You can't change the
-    #   `CustomerMasterKeySpec` after the CMK is created. To further restrict
-    #   the algorithms that can be used with the CMK, use its key policy or
-    #   IAM policy.
+    #   Specifies the type of CMK to create. The default value,
+    #   `SYMMETRIC_DEFAULT`, creates a CMK with a 256-bit symmetric key for
+    #   encryption and decryption. For help choosing a key spec for your CMK,
+    #   see [How to Choose Your CMK Configuration][1] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
-    #   For help with choosing a key spec for your CMK, see [Selecting a
-    #   Customer Master Key Spec][1] in the *AWS Key Management Service
-    #   Developer Guide*.
+    #   The `CustomerMasterKeySpec` determines whether the CMK contains a
+    #   symmetric key or an asymmetric key pair. It also determines the
+    #   encryption algorithms or signing algorithms that the CMK supports. You
+    #   can't change the `CustomerMasterKeySpec` after the CMK is created. To
+    #   further restrict the algorithms that can be used with the CMK, use a
+    #   condition key in its key policy or IAM policy. For more information,
+    #   see [kms:EncryptionAlgorithm][2] or [kms:Signing Algorithm][3] in the
+    #   *AWS Key Management Service Developer Guide*.
     #
-    #   The default value, `SYMMETRIC_DEFAULT`, creates a CMK with a 256-bit
-    #   symmetric key.
+    #   [AWS services that are integrated with AWS KMS][4] use symmetric CMKs
+    #   to protect your data. These services do not support asymmetric CMKs.
+    #   For help determining whether a CMK is symmetric or asymmetric, see
+    #   [Identifying Symmetric and Asymmetric CMKs][5] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
     #   AWS KMS supports the following key specs for CMKs:
     #
@@ -1008,7 +1020,11 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#cmk-key-spec
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm
+    #   [4]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html
     #
     # @option params [String] :origin
     #   The source of the key material for the CMK. You cannot change the
@@ -1610,7 +1626,7 @@ module Aws::KMS
     #   resp.custom_key_stores[0].cloud_hsm_cluster_id #=> String
     #   resp.custom_key_stores[0].trust_anchor_certificate #=> String
     #   resp.custom_key_stores[0].connection_state #=> String, one of "CONNECTED", "CONNECTING", "FAILED", "DISCONNECTED", "DISCONNECTING"
-    #   resp.custom_key_stores[0].connection_error_code #=> String, one of "INVALID_CREDENTIALS", "CLUSTER_NOT_FOUND", "NETWORK_ERRORS", "INTERNAL_ERROR", "INSUFFICIENT_CLOUDHSM_HSMS", "USER_LOCKED_OUT"
+    #   resp.custom_key_stores[0].connection_error_code #=> String, one of "INVALID_CREDENTIALS", "CLUSTER_NOT_FOUND", "NETWORK_ERRORS", "INTERNAL_ERROR", "INSUFFICIENT_CLOUDHSM_HSMS", "USER_LOCKED_OUT", "USER_NOT_FOUND", "USER_LOGGED_IN"
     #   resp.custom_key_stores[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
@@ -2275,7 +2291,7 @@ module Aws::KMS
     #
     # To generate a data key, specify the symmetric CMK that will be used to
     # encrypt the data key. You cannot use an asymmetric CMK to generate
-    # data keys.
+    # data keys. To get the type of your CMK, use the DescribeKey operation.
     #
     # You must also specify the length of the data key. Use either the
     # `KeySpec` or `NumberOfBytes` parameters (but not both). For 128-bit
@@ -2646,7 +2662,8 @@ module Aws::KMS
     #
     # @option params [required, String] :key_id
     #   Specifies the CMK that encrypts the private key in the data key pair.
-    #   You must specify a symmetric CMK. You cannot use an asymmetric CMK.
+    #   You must specify a symmetric CMK. You cannot use an asymmetric CMK. To
+    #   get the type of your CMK, use the DescribeKey operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -2746,14 +2763,10 @@ module Aws::KMS
     # To generate a data key, you must specify the symmetric customer master
     # key (CMK) that is used to encrypt the data key. You cannot use an
     # asymmetric CMK to generate a data key. To get the type of your CMK,
-    # use the `KeySpec` field in the DescribeKey response. You must also
-    # specify the length of the data key using either the `KeySpec` or
-    # `NumberOfBytes` field (but not both). For common key lengths (128-bit
-    # and 256-bit symmetric keys), use the `KeySpec` parameter.
+    # use the DescribeKey operation.
     #
-    # If the operation succeeds, you will find the plaintext copy of the
-    # data key in the `Plaintext` field of the response, and the encrypted
-    # copy of the data key in the `CiphertextBlob` field.
+    # If the operation succeeds, you will find the encrypted copy of the
+    # data key in the `CiphertextBlob` field.
     #
     # You can use the optional encryption context to add additional security
     # to the encryption operation. If you specify an `EncryptionContext`,
@@ -3471,7 +3484,7 @@ module Aws::KMS
     # field. These are predefined aliases that AWS has created but has not
     # yet associated with a CMK. Aliases that AWS creates in your account,
     # including predefined aliases, do not count against your [AWS KMS
-    # aliases limit][1].
+    # aliases quota][1].
     #
     #
     #
@@ -4147,12 +4160,15 @@ module Aws::KMS
     #     information, see [Changes that I make are not always immediately
     #     visible][2] in the *AWS Identity and Access Management User Guide*.
     #
-    #   The key policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy cannot exceed 32 kilobytes (32768 bytes). For more
+    #   information, see [Resource Quotas][3] in the *AWS Key Management
+    #   Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   A flag to indicate whether to bypass the key policy lockout safety
@@ -5280,17 +5296,22 @@ module Aws::KMS
     #   To get the alias name and alias ARN, use ListAliases.
     #
     # @option params [required, String, IO] :message
-    #   Specifies the message that was signed, or a hash digest of that
-    #   message. Messages can be 0-4096 bytes. To verify a larger message,
-    #   provide a hash digest of the message.
+    #   Specifies the message that was signed. You can submit a raw message of
+    #   up to 4096 bytes, or a hash digest of the message. If you submit a
+    #   digest, use the `MessageType` parameter with a value of `DIGEST`.
     #
-    #   If the digest of the message specified here is different from the
-    #   message digest that was signed, the signature verification fails.
+    #   If the message specified here is different from the message that was
+    #   signed, the signature verification fails. A message and its hash
+    #   digest are considered to be the same message.
     #
     # @option params [String] :message_type
     #   Tells AWS KMS whether the value of the `Message` parameter is a
-    #   message or message digest. To indicate a message, enter `RAW`. To
-    #   indicate a message digest, enter `DIGEST`.
+    #   message or message digest. The default value, RAW, indicates a
+    #   message. To indicate a message digest, enter `DIGEST`.
+    #
+    #   Use the `DIGEST` value only when the value of the `Message` parameter
+    #   is a message digest. If you use the `DIGEST` value with a raw message,
+    #   the security of the verification operation can be compromised.
     #
     # @option params [required, String, IO] :signature
     #   The signature that the `Sign` operation generated.
@@ -5354,7 +5375,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

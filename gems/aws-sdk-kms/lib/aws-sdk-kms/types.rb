@@ -324,6 +324,9 @@ module Aws::KMS
     #   in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster
     #   as this user to manage key material on your behalf.
     #
+    #   The password must be a string of 7 to 32 characters. Its value is
+    #   case sensitive.
+    #
     #   This parameter tells AWS KMS the `kmsuser` account password; it does
     #   not change the password in the AWS CloudHSM cluster.
     #
@@ -555,7 +558,7 @@ module Aws::KMS
     #   policy to the CMK. For more information, see [Default Key Policy][3]
     #   in the *AWS Key Management Service Developer Guide*.
     #
-    #   The key policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy size quota is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -589,20 +592,26 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] customer_master_key_spec
-    #   Specifies the type of CMK to create. The `CustomerMasterKeySpec`
-    #   determines whether the CMK contains a symmetric key or an asymmetric
-    #   key pair. It also determines the encryption algorithms or signing
-    #   algorithms that the CMK supports. You can't change the
-    #   `CustomerMasterKeySpec` after the CMK is created. To further
-    #   restrict the algorithms that can be used with the CMK, use its key
-    #   policy or IAM policy.
+    #   Specifies the type of CMK to create. The default value,
+    #   `SYMMETRIC_DEFAULT`, creates a CMK with a 256-bit symmetric key for
+    #   encryption and decryption. For help choosing a key spec for your
+    #   CMK, see [How to Choose Your CMK Configuration][1] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
-    #   For help with choosing a key spec for your CMK, see [Selecting a
-    #   Customer Master Key Spec][1] in the *AWS Key Management Service
-    #   Developer Guide*.
+    #   The `CustomerMasterKeySpec` determines whether the CMK contains a
+    #   symmetric key or an asymmetric key pair. It also determines the
+    #   encryption algorithms or signing algorithms that the CMK supports.
+    #   You can't change the `CustomerMasterKeySpec` after the CMK is
+    #   created. To further restrict the algorithms that can be used with
+    #   the CMK, use a condition key in its key policy or IAM policy. For
+    #   more information, see [kms:EncryptionAlgorithm][2] or [kms:Signing
+    #   Algorithm][3] in the *AWS Key Management Service Developer Guide*.
     #
-    #   The default value, `SYMMETRIC_DEFAULT`, creates a CMK with a 256-bit
-    #   symmetric key.
+    #   [AWS services that are integrated with AWS KMS][4] use symmetric
+    #   CMKs to protect your data. These services do not support asymmetric
+    #   CMKs. For help determining whether a CMK is symmetric or asymmetric,
+    #   see [Identifying Symmetric and Asymmetric CMKs][5] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
     #   AWS KMS supports the following key specs for CMKs:
     #
@@ -637,7 +646,11 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#cmk-key-spec
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-choose.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-algorithm
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-signing-algorithm
+    #   [4]: http://aws.amazon.com/kms/features/#AWS_Service_Integration
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/find-symm-asymm.html
     #   @return [String]
     #
     # @!attribute [rw] origin
@@ -867,9 +880,10 @@ module Aws::KMS
     #   AWS CloudHSM cluster is active and contains at least one active HSM.
     #
     #   A value of `FAILED` indicates that an attempt to connect was
-    #   unsuccessful. For help resolving a connection failure, see
-    #   [Troubleshooting a Custom Key Store][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   unsuccessful. The `ConnectionErrorCode` field in the response
+    #   indicates the cause of the failure. For help resolving a connection
+    #   failure, see [Troubleshooting a Custom Key Store][1] in the *AWS Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -877,7 +891,12 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] connection_error_code
-    #   Describes the connection error. Valid values are:
+    #   Describes the connection error. This field appears in the response
+    #   only when the `ConnectionState` is `FAILED`. For help resolving
+    #   these errors, see [How to Fix a Connection Failure][1] in *AWS Key
+    #   Management Service Developer Guide*.
+    #
+    #   Valid values are:
     #
     #   * `CLUSTER_NOT_FOUND` - AWS KMS cannot find the AWS CloudHSM cluster
     #     with the specified cluster ID.
@@ -893,7 +912,10 @@ module Aws::KMS
     #     again.
     #
     #   * `INVALID_CREDENTIALS` - AWS KMS does not have the correct password
-    #     for the `kmsuser` crypto user in the AWS CloudHSM cluster.
+    #     for the `kmsuser` crypto user in the AWS CloudHSM cluster. Before
+    #     you can connect your custom key store to its AWS CloudHSM cluster,
+    #     you must change the `kmsuser` account password and update the key
+    #     store password value for the custom key store.
     #
     #   * `NETWORK_ERRORS` - Network errors are preventing AWS KMS from
     #     connecting to the custom key store.
@@ -902,14 +924,28 @@ module Aws::KMS
     #     associated AWS CloudHSM cluster due to too many failed password
     #     attempts. Before you can connect your custom key store to its AWS
     #     CloudHSM cluster, you must change the `kmsuser` account password
-    #     and update the password value for the custom key store.
+    #     and update the key store password value for the custom key store.
     #
-    #   For help with connection failures, see [Troubleshooting Custom Key
-    #   Stores][1] in the *AWS Key Management Service Developer Guide*.
+    #   * `USER_LOGGED_IN` - The `kmsuser` CU account is logged into the the
+    #     associated AWS CloudHSM cluster. This prevents AWS KMS from
+    #     rotating the `kmsuser` account password and logging into the
+    #     cluster. Before you can connect your custom key store to its AWS
+    #     CloudHSM cluster, you must log the `kmsuser` CU out of the
+    #     cluster. If you changed the `kmsuser` password to log into the
+    #     cluster, you must also and update the key store password value for
+    #     the custom key store. For help, see [How to Log Out and
+    #     Reconnect][2] in the *AWS Key Management Service Developer Guide*.
+    #
+    #   * `USER_NOT_FOUND` - AWS KMS cannot find a `kmsuser` CU account in
+    #     the associated AWS CloudHSM cluster. Before you can connect your
+    #     custom key store to its AWS CloudHSM cluster, you must create a
+    #     `kmsuser` CU account in the cluster, and then update the key store
+    #     password value for the custom key store.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1745,7 +1781,7 @@ module Aws::KMS
     # @!attribute [rw] key_id
     #   Specifies the CMK that encrypts the private key in the data key
     #   pair. You must specify a symmetric CMK. You cannot use an asymmetric
-    #   CMK.
+    #   CMK. To get the type of your CMK, use the DescribeKey operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -1809,7 +1845,7 @@ module Aws::KMS
     # @!attribute [rw] key_id
     #   Specifies the CMK that encrypted the private key in the data key
     #   pair. You must specify a symmetric CMK. You cannot use an asymmetric
-    #   CMK.
+    #   CMK. To get the type of your CMK, use the DescribeKey operation.
     #
     #   To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias
     #   name, or alias ARN. When using an alias name, prefix it with
@@ -3016,8 +3052,8 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because a limit was exceeded. For more
-    # information, see [Limits][1] in the *AWS Key Management Service
+    # The request was rejected because a quota was exceeded. For more
+    # information, see [Quotas][1] in the *AWS Key Management Service
     # Developer Guide*.
     #
     #
@@ -3521,12 +3557,15 @@ module Aws::KMS
     #     visible][2] in the *AWS Identity and Access Management User
     #     Guide*.
     #
-    #   The key policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy cannot exceed 32 kilobytes (32768 bytes). For more
+    #   information, see [Resource Quotas][3] in the *AWS Key Management
+    #   Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4328,18 +4367,24 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Specifies the message that was signed, or a hash digest of that
-    #   message. Messages can be 0-4096 bytes. To verify a larger message,
-    #   provide a hash digest of the message.
+    #   Specifies the message that was signed. You can submit a raw message
+    #   of up to 4096 bytes, or a hash digest of the message. If you submit
+    #   a digest, use the `MessageType` parameter with a value of `DIGEST`.
     #
-    #   If the digest of the message specified here is different from the
-    #   message digest that was signed, the signature verification fails.
+    #   If the message specified here is different from the message that was
+    #   signed, the signature verification fails. A message and its hash
+    #   digest are considered to be the same message.
     #   @return [String]
     #
     # @!attribute [rw] message_type
     #   Tells AWS KMS whether the value of the `Message` parameter is a
-    #   message or message digest. To indicate a message, enter `RAW`. To
-    #   indicate a message digest, enter `DIGEST`.
+    #   message or message digest. The default value, RAW, indicates a
+    #   message. To indicate a message digest, enter `DIGEST`.
+    #
+    #   Use the `DIGEST` value only when the value of the `Message`
+    #   parameter is a message digest. If you use the `DIGEST` value with a
+    #   raw message, the security of the verification operation can be
+    #   compromised.
     #   @return [String]
     #
     # @!attribute [rw] signature

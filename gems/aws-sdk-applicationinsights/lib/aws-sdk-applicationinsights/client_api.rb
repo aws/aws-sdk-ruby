@@ -20,6 +20,14 @@ module Aws::ApplicationInsights
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     ComponentConfiguration = Shapes::StringShape.new(name: 'ComponentConfiguration')
     ComponentName = Shapes::StringShape.new(name: 'ComponentName')
+    ConfigurationEvent = Shapes::StructureShape.new(name: 'ConfigurationEvent')
+    ConfigurationEventDetail = Shapes::StringShape.new(name: 'ConfigurationEventDetail')
+    ConfigurationEventList = Shapes::ListShape.new(name: 'ConfigurationEventList')
+    ConfigurationEventMonitoredResourceARN = Shapes::StringShape.new(name: 'ConfigurationEventMonitoredResourceARN')
+    ConfigurationEventResourceName = Shapes::StringShape.new(name: 'ConfigurationEventResourceName')
+    ConfigurationEventResourceType = Shapes::StringShape.new(name: 'ConfigurationEventResourceType')
+    ConfigurationEventStatus = Shapes::StringShape.new(name: 'ConfigurationEventStatus')
+    ConfigurationEventTime = Shapes::TimestampShape.new(name: 'ConfigurationEventTime')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateComponentRequest = Shapes::StructureShape.new(name: 'CreateComponentRequest')
@@ -62,6 +70,8 @@ module Aws::ApplicationInsights
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
     ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
     ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
+    ListConfigurationHistoryRequest = Shapes::StructureShape.new(name: 'ListConfigurationHistoryRequest')
+    ListConfigurationHistoryResponse = Shapes::StructureShape.new(name: 'ListConfigurationHistoryResponse')
     ListLogPatternSetsRequest = Shapes::StructureShape.new(name: 'ListLogPatternSetsRequest')
     ListLogPatternSetsResponse = Shapes::StructureShape.new(name: 'ListLogPatternSetsResponse')
     ListLogPatternsRequest = Shapes::StructureShape.new(name: 'ListLogPatternsRequest')
@@ -152,6 +162,16 @@ module Aws::ApplicationInsights
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMsg, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    ConfigurationEvent.add_member(:monitored_resource_arn, Shapes::ShapeRef.new(shape: ConfigurationEventMonitoredResourceARN, location_name: "MonitoredResourceARN"))
+    ConfigurationEvent.add_member(:event_status, Shapes::ShapeRef.new(shape: ConfigurationEventStatus, location_name: "EventStatus"))
+    ConfigurationEvent.add_member(:event_resource_type, Shapes::ShapeRef.new(shape: ConfigurationEventResourceType, location_name: "EventResourceType"))
+    ConfigurationEvent.add_member(:event_time, Shapes::ShapeRef.new(shape: ConfigurationEventTime, location_name: "EventTime"))
+    ConfigurationEvent.add_member(:event_detail, Shapes::ShapeRef.new(shape: ConfigurationEventDetail, location_name: "EventDetail"))
+    ConfigurationEvent.add_member(:event_resource_name, Shapes::ShapeRef.new(shape: ConfigurationEventResourceName, location_name: "EventResourceName"))
+    ConfigurationEvent.struct_class = Types::ConfigurationEvent
+
+    ConfigurationEventList.member = Shapes::ShapeRef.new(shape: ConfigurationEvent)
 
     CreateApplicationRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     CreateApplicationRequest.add_member(:ops_center_enabled, Shapes::ShapeRef.new(shape: OpsCenterEnabled, location_name: "OpsCenterEnabled"))
@@ -278,6 +298,18 @@ module Aws::ApplicationInsights
     ListComponentsResponse.add_member(:application_component_list, Shapes::ShapeRef.new(shape: ApplicationComponentList, location_name: "ApplicationComponentList"))
     ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListComponentsResponse.struct_class = Types::ListComponentsResponse
+
+    ListConfigurationHistoryRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, location_name: "ResourceGroupName"))
+    ListConfigurationHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: StartTime, location_name: "StartTime"))
+    ListConfigurationHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: EndTime, location_name: "EndTime"))
+    ListConfigurationHistoryRequest.add_member(:event_status, Shapes::ShapeRef.new(shape: ConfigurationEventStatus, location_name: "EventStatus"))
+    ListConfigurationHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEntities, location_name: "MaxResults"))
+    ListConfigurationHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListConfigurationHistoryRequest.struct_class = Types::ListConfigurationHistoryRequest
+
+    ListConfigurationHistoryResponse.add_member(:event_list, Shapes::ShapeRef.new(shape: ConfigurationEventList, location_name: "EventList"))
+    ListConfigurationHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListConfigurationHistoryResponse.struct_class = Types::ListConfigurationHistoryResponse
 
     ListLogPatternSetsRequest.add_member(:resource_group_name, Shapes::ShapeRef.new(shape: ResourceGroupName, required: true, location_name: "ResourceGroupName"))
     ListLogPatternSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEntities, location_name: "MaxResults"))
@@ -640,6 +672,23 @@ module Aws::ApplicationInsights
         o.output = Shapes::ShapeRef.new(shape: ListComponentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_configuration_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfigurationHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListConfigurationHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListConfigurationHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

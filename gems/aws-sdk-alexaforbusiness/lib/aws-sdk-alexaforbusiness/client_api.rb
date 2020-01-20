@@ -73,6 +73,7 @@ module Aws::AlexaForBusiness
     ConferenceProviderType = Shapes::StringShape.new(name: 'ConferenceProviderType')
     ConferenceProvidersList = Shapes::ListShape.new(name: 'ConferenceProvidersList')
     ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
+    ConnectionStatusUpdatedTime = Shapes::TimestampShape.new(name: 'ConnectionStatusUpdatedTime')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
@@ -138,6 +139,7 @@ module Aws::AlexaForBusiness
     DeveloperName = Shapes::StringShape.new(name: 'DeveloperName')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceData = Shapes::StructureShape.new(name: 'DeviceData')
+    DeviceDataCreatedTime = Shapes::TimestampShape.new(name: 'DeviceDataCreatedTime')
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
     DeviceEvent = Shapes::StructureShape.new(name: 'DeviceEvent')
     DeviceEventList = Shapes::ListShape.new(name: 'DeviceEventList')
@@ -825,6 +827,7 @@ module Aws::AlexaForBusiness
     DeviceData.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     DeviceData.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))
     DeviceData.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
+    DeviceData.add_member(:created_time, Shapes::ShapeRef.new(shape: DeviceDataCreatedTime, location_name: "CreatedTime"))
     DeviceData.struct_class = Types::DeviceData
 
     DeviceDataList.member = Shapes::ShapeRef.new(shape: DeviceData)
@@ -852,6 +855,7 @@ module Aws::AlexaForBusiness
 
     DeviceStatusInfo.add_member(:device_status_details, Shapes::ShapeRef.new(shape: DeviceStatusDetails, location_name: "DeviceStatusDetails"))
     DeviceStatusInfo.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "ConnectionStatus"))
+    DeviceStatusInfo.add_member(:connection_status_updated_time, Shapes::ShapeRef.new(shape: ConnectionStatusUpdatedTime, location_name: "ConnectionStatusUpdatedTime"))
     DeviceStatusInfo.struct_class = Types::DeviceStatusInfo
 
     DisassociateContactFromAddressBookRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))

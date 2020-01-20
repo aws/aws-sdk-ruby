@@ -2018,6 +2018,10 @@ module Aws::AlexaForBusiness
     #   Detailed information about a device's status.
     #   @return [Types::DeviceStatusInfo]
     #
+    # @!attribute [rw] created_time
+    #   The time (in epoch) when the device data was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceData AWS API Documentation
     #
     class DeviceData < Struct.new(
@@ -2032,7 +2036,8 @@ module Aws::AlexaForBusiness
       :network_profile_name,
       :room_arn,
       :room_name,
-      :device_status_info)
+      :device_status_info,
+      :created_time)
       include Aws::Structure
     end
 
@@ -2124,11 +2129,16 @@ module Aws::AlexaForBusiness
     #   device.
     #   @return [String]
     #
+    # @!attribute [rw] connection_status_updated_time
+    #   The time (in epoch) when the device connection status changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo AWS API Documentation
     #
     class DeviceStatusInfo < Struct.new(
       :device_status_details,
-      :connection_status)
+      :connection_status,
+      :connection_status_updated_time)
       include Aws::Structure
     end
 

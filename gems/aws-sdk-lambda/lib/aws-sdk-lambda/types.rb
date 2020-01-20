@@ -1399,6 +1399,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] last_update_status
     #   The status of the last update that was performed on the function.
+    #   This is first set to `Successful` after function creation completes.
     #   @return [String]
     #
     # @!attribute [rw] last_update_status_reason
@@ -2209,12 +2210,6 @@ module Aws::Lambda
     #   If present, indicates that an error occurred during function
     #   execution. Details about the error are included in the response
     #   payload.
-    #
-    #   * `Handled` - The runtime caught an error thrown by the function and
-    #     formatted it into a JSON document.
-    #
-    #   * `Unhandled` - The runtime didn't handle the error. For example,
-    #     the function ran out of memory or timed out.
     #   @return [String]
     #
     # @!attribute [rw] log_result
@@ -2739,8 +2734,10 @@ module Aws::Lambda
     #
     # @!attribute [rw] master_region
     #   For Lambda@Edge functions, the AWS Region of the master function.
-    #   For example, `us-east-2` or `ALL`. If specified, you must set
-    #   `FunctionVersion` to `ALL`.
+    #   For example, `us-east-1` filters the list of functions to only
+    #   include Lambda@Edge functions replicated from a master function in
+    #   US East (N. Virginia). If specified, you must set `FunctionVersion`
+    #   to `ALL`.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -3814,7 +3811,8 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The function's AWS X-Ray tracing configuration.
+    # The function's AWS X-Ray tracing configuration. To sample and record
+    # incoming requests, set `Mode` to `Active`.
     #
     # @note When making an API call, you may pass TracingConfig
     #   data as a hash:

@@ -370,9 +370,9 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr
-    #   The IPv4 address range, in CIDR notation. This must be the exact
-    #   range that you provisioned. You can't advertise only a portion of
-    #   the provisioned range.
+    #   The address range, in CIDR notation. This must be the exact range
+    #   that you provisioned. You can't advertise only a portion of the
+    #   provisioned range.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -1263,6 +1263,8 @@ module Aws::EC2
     #         amazon_provided_ipv_6_cidr_block: false,
     #         cidr_block: "String",
     #         vpc_id: "VpcId", # required
+    #         ipv_6_pool: "String",
+    #         ipv_6_cidr_block: "String",
     #         ipv_6_cidr_block_network_border_group: "String",
     #       }
     #
@@ -1278,6 +1280,19 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   An IPv6 CIDR block from the IPv6 address pool. You must also specify
+    #   `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this
+    #   parameter.
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block_network_border_group
@@ -1297,6 +1312,8 @@ module Aws::EC2
       :amazon_provided_ipv_6_cidr_block,
       :cidr_block,
       :vpc_id,
+      :ipv_6_pool,
+      :ipv_6_cidr_block,
       :ipv_6_cidr_block_network_border_group)
       include Aws::Structure
     end
@@ -2320,7 +2337,7 @@ module Aws::EC2
     # your AWS resources through bring your own IP addresses (BYOIP).
     #
     # @!attribute [rw] cidr
-    #   The public IPv4 address range, in CIDR notation.
+    #   The address range, in CIDR notation.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -8741,6 +8758,8 @@ module Aws::EC2
     #       {
     #         cidr_block: "String", # required
     #         amazon_provided_ipv_6_cidr_block: false,
+    #         ipv_6_pool: "String",
+    #         ipv_6_cidr_block: "String",
     #         dry_run: false,
     #         instance_tenancy: "default", # accepts default, dedicated, host
     #         ipv_6_cidr_block_network_border_group: "String",
@@ -8756,6 +8775,19 @@ module Aws::EC2
     #   for the VPC. You cannot specify the range of IP addresses, or the
     #   size of the CIDR block.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_cidr_block
+    #   The IPv6 CIDR block from the IPv6 address pool. You must also
+    #   specify `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this
+    #   parameter.
+    #   @return [String]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8791,6 +8823,8 @@ module Aws::EC2
     class CreateVpcRequest < Struct.new(
       :cidr_block,
       :amazon_provided_ipv_6_cidr_block,
+      :ipv_6_pool,
+      :ipv_6_cidr_block,
       :dry_run,
       :instance_tenancy,
       :ipv_6_cidr_block_network_border_group)
@@ -10952,9 +10986,8 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr
-    #   The public IPv4 address range, in CIDR notation. The prefix must be
-    #   the same prefix that you specified when you provisioned the address
-    #   range.
+    #   The address range, in CIDR notation. The prefix must be the same
+    #   prefix that you specified when you provisioned the address range.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -14982,6 +15015,85 @@ module Aws::EC2
     #
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeIpv6PoolsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pool_ids: ["String"],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] pool_ids
+    #   The IDs of the IPv6 address pools.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpv6PoolsRequest AWS API Documentation
+    #
+    class DescribeIpv6PoolsRequest < Struct.new(
+      :pool_ids,
+      :next_token,
+      :max_results,
+      :dry_run,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipv_6_pools
+    #   Information about the IPv6 address pools.
+    #   @return [Array<Types::Ipv6Pool>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpv6PoolsResult AWS API Documentation
+    #
+    class DescribeIpv6PoolsResult < Struct.new(
+      :ipv_6_pools,
       :next_token)
       include Aws::Structure
     end
@@ -20618,6 +20730,9 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the VPC.
     #
+    #   * `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6
+    #     address pool from which the IPv6 CIDR block is allocated.
+    #
     #   * `ipv6-cidr-block-association.association-id` - The association ID
     #     for an IPv6 CIDR block associated with the VPC.
     #
@@ -24191,6 +24306,64 @@ module Aws::EC2
     class FpgaInfo < Struct.new(
       :fpgas,
       :total_fpga_memory_in_mi_b)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAssociatedIpv6PoolCidrsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         pool_id: "String", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the IPv6 address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedIpv6PoolCidrsRequest AWS API Documentation
+    #
+    class GetAssociatedIpv6PoolCidrsRequest < Struct.new(
+      :pool_id,
+      :next_token,
+      :max_results,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipv_6_cidr_associations
+    #   Information about the IPv6 CIDR block associations.
+    #   @return [Array<Types::Ipv6CidrAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedIpv6PoolCidrsResult AWS API Documentation
+    #
+    class GetAssociatedIpv6PoolCidrsResult < Struct.new(
+      :ipv_6_cidr_associations,
+      :next_token)
       include Aws::Structure
     end
 
@@ -28796,6 +28969,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an IPv6 CIDR block association.
+    #
+    # @!attribute [rw] ipv_6_cidr
+    #   The IPv6 CIDR block.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource
+    #   The resource that's associated with the IPv6 CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6CidrAssociation AWS API Documentation
+    #
+    class Ipv6CidrAssociation < Struct.new(
+      :ipv_6_cidr,
+      :associated_resource)
+      include Aws::Structure
+    end
+
     # Describes an IPv6 CIDR block.
     #
     # @!attribute [rw] ipv_6_cidr_block
@@ -28806,6 +28997,34 @@ module Aws::EC2
     #
     class Ipv6CidrBlock < Struct.new(
       :ipv_6_cidr_block)
+      include Aws::Structure
+    end
+
+    # Describes an IPv6 address pool.
+    #
+    # @!attribute [rw] pool_id
+    #   The ID of the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the address pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] pool_cidr_blocks
+    #   The CIDR blocks for the address pool.
+    #   @return [Array<Types::PoolCidrBlock>]
+    #
+    # @!attribute [rw] tags
+    #   Any tags for the address pool.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6Pool AWS API Documentation
+    #
+    class Ipv6Pool < Struct.new(
+      :pool_id,
+      :description,
+      :pool_cidr_blocks,
+      :tags)
       include Aws::Structure
     end
 
@@ -35147,6 +35366,19 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a CIDR block for an address pool.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PoolCidrBlock AWS API Documentation
+    #
+    class PoolCidrBlock < Struct.new(
+      :cidr)
+      include Aws::Structure
+    end
+
     # Describes a range of ports.
     #
     # @note When making an API call, you may pass PortRange
@@ -35463,13 +35695,15 @@ module Aws::EC2
     #           message: "String", # required
     #           signature: "String", # required
     #         },
+    #         publicly_advertisable: false,
     #         description: "String",
     #         dry_run: false,
     #       }
     #
     # @!attribute [rw] cidr
-    #   The public IPv4 address range, in CIDR notation. The most specific
-    #   prefix that you can specify is /24. The address range cannot overlap
+    #   The public IPv4 or IPv6 address range, in CIDR notation. The most
+    #   specific IPv4 prefix that you can specify is /24. The most specific
+    #   IPv6 prefix you can specify is /56. The address range cannot overlap
     #   with another address range that you've brought to this or another
     #   Region.
     #   @return [String]
@@ -35478,6 +35712,13 @@ module Aws::EC2
     #   A signed document that proves that you are authorized to bring the
     #   specified IP address range to Amazon using BYOIP.
     #   @return [Types::CidrAuthorizationContext]
+    #
+    # @!attribute [rw] publicly_advertisable
+    #   (IPv6 only) Indicate whether the address range will be publicly
+    #   advertised to the internet.
+    #
+    #   Default: true
+    #   @return [Boolean]
     #
     # @!attribute [rw] description
     #   A description for the address range and the address pool.
@@ -35495,13 +35736,14 @@ module Aws::EC2
     class ProvisionByoipCidrRequest < Struct.new(
       :cidr,
       :cidr_authorization_context,
+      :publicly_advertisable,
       :description,
       :dry_run)
       include Aws::Structure
     end
 
     # @!attribute [rw] byoip_cidr
-    #   Information about the address pool.
+    #   Information about the address range.
     #   @return [Types::ByoipCidr]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrResult AWS API Documentation
@@ -35580,10 +35822,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an address pool.
+    # Describes an IPv4 address pool.
     #
     # @!attribute [rw] pool_id
-    #   The ID of the IPv4 address pool.
+    #   The ID of the address pool.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -46426,6 +46668,11 @@ module Aws::EC2
     #   Information about the state of the CIDR block.
     #   @return [Types::VpcCidrBlockState]
     #
+    # @!attribute [rw] ipv_6_pool
+    #   The ID of the IPv6 address pool from which the IPv6 CIDR block is
+    #   allocated.
+    #   @return [String]
+    #
     # @!attribute [rw] network_border_group
     #   The name of the location from which we advertise the IPV6 CIDR
     #   block.
@@ -46437,6 +46684,7 @@ module Aws::EC2
       :association_id,
       :ipv_6_cidr_block,
       :ipv_6_cidr_block_state,
+      :ipv_6_pool,
       :network_border_group)
       include Aws::Structure
     end
@@ -47040,7 +47288,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] cidr
-    #   The public IPv4 address range, in CIDR notation.
+    #   The address range, in CIDR notation.
     #   @return [String]
     #
     # @!attribute [rw] dry_run

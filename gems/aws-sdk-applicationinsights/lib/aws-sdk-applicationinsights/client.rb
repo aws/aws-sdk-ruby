@@ -870,6 +870,84 @@ module Aws::ApplicationInsights
       req.send_request(options)
     end
 
+    # Lists the INFO, WARN, and ERROR events for periodic configuration
+    # updates performed by Application Insights. Examples of events
+    # represented are:
+    #
+    # * INFO: creating a new alarm or updating an alarm threshold.
+    #
+    # * WARN: alarm not created due to insufficient data points used to
+    #   predict thresholds.
+    #
+    # * ERROR: alarm not created due to permission errors or exceeding
+    #   quotas.
+    #
+    # @option params [String] :resource_group_name
+    #   Resource group to which the application belongs.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time of the event.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time of the event.
+    #
+    # @option params [String] :event_status
+    #   The status of the configuration update event. Possible values include
+    #   INFO, WARN, and ERROR.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by `ListConfigurationHistory`
+    #   in paginated output. When this parameter is used,
+    #   `ListConfigurationHistory` returns only `MaxResults` in a single page
+    #   along with a `NextToken` response element. The remaining results of
+    #   the initial request can be seen by sending another
+    #   `ListConfigurationHistory` request with the returned `NextToken`
+    #   value. If this parameter is not used, then `ListConfigurationHistory`
+    #   returns all results.
+    #
+    # @option params [String] :next_token
+    #   The `NextToken` value returned from a previous paginated
+    #   `ListConfigurationHistory` request where `MaxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `NextToken`
+    #   value. This value is `null` when there are no more results to return.
+    #
+    # @return [Types::ListConfigurationHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConfigurationHistoryResponse#event_list #event_list} => Array&lt;Types::ConfigurationEvent&gt;
+    #   * {Types::ListConfigurationHistoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_configuration_history({
+    #     resource_group_name: "ResourceGroupName",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     event_status: "INFO", # accepts INFO, WARN, ERROR
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_list #=> Array
+    #   resp.event_list[0].monitored_resource_arn #=> String
+    #   resp.event_list[0].event_status #=> String, one of "INFO", "WARN", "ERROR"
+    #   resp.event_list[0].event_resource_type #=> String, one of "CLOUDWATCH_ALARM", "CLOUDFORMATION", "SSM_ASSOCIATION"
+    #   resp.event_list[0].event_time #=> Time
+    #   resp.event_list[0].event_detail #=> String
+    #   resp.event_list[0].event_resource_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListConfigurationHistory AWS API Documentation
+    #
+    # @overload list_configuration_history(params = {})
+    # @param [Hash] params ({})
+    def list_configuration_history(params = {}, options = {})
+      req = build_request(:list_configuration_history, params)
+      req.send_request(options)
+    end
+
     # Lists the log pattern sets in the specific application.
     #
     # @option params [required, String] :resource_group_name
@@ -1337,7 +1415,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

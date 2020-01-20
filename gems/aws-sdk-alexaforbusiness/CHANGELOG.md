@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-01-20)
+------------------
+
+* Feature - Add support for CreatedTime and ConnectionStatusUpdatedTime in response of SearchDevices API.
+
 1.32.0 (2019-11-25)
 ------------------
 

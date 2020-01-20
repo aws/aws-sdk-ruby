@@ -519,8 +519,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Advertises an IPv4 address range that is provisioned for use with your
-    # AWS resources through bring your own IP addresses (BYOIP).
+    # Advertises an IPv4 or IPv6 address range that is provisioned for use
+    # with your AWS resources through bring your own IP addresses (BYOIP).
     #
     # You can perform this operation at most once every 10 seconds, even if
     # you specify different address ranges each time.
@@ -537,8 +537,8 @@ module Aws::EC2
     # To stop advertising the BYOIP CIDR, use WithdrawByoipCidr.
     #
     # @option params [required, String] :cidr
-    #   The IPv4 address range, in CIDR notation. This must be the exact range
-    #   that you provisioned. You can't advertise only a portion of the
+    #   The address range, in CIDR notation. This must be the exact range that
+    #   you provisioned. You can't advertise only a portion of the
     #   provisioned range.
     #
     # @option params [Boolean] :dry_run
@@ -1588,16 +1588,19 @@ module Aws::EC2
     end
 
     # Associates a CIDR block with your VPC. You can associate a secondary
-    # IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR
-    # block. The IPv6 CIDR block size is fixed at /56.
+    # IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR
+    # block from an IPv6 address pool that you provisioned through bring
+    # your own IP addresses ([BYOIP][1]). The IPv6 CIDR block size is fixed
+    # at /56.
     #
     # For more information about associating CIDR blocks with your VPC and
-    # applicable restrictions, see [VPC and Subnet Sizing][1] in the *Amazon
+    # applicable restrictions, see [VPC and Subnet Sizing][2] in the *Amazon
     # Virtual Private Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing
     #
     # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
@@ -1609,6 +1612,16 @@ module Aws::EC2
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
+    #
+    # @option params [String] :ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    #
+    # @option params [String] :ipv_6_cidr_block
+    #   An IPv6 CIDR block from the IPv6 address pool. You must also specify
+    #   `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
     #
     # @option params [String] :ipv_6_cidr_block_network_border_group
     #   The name of the location from which we advertise the IPV6 CIDR block.
@@ -1631,6 +1644,8 @@ module Aws::EC2
     #     amazon_provided_ipv_6_cidr_block: false,
     #     cidr_block: "String",
     #     vpc_id: "VpcId", # required
+    #     ipv_6_pool: "String",
+    #     ipv_6_cidr_block: "String",
     #     ipv_6_cidr_block_network_border_group: "String",
     #   })
     #
@@ -1640,6 +1655,7 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
@@ -4063,6 +4079,7 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
@@ -8509,26 +8526,27 @@ module Aws::EC2
     # how large to make your VPC, see [Your VPC and Subnets][1] in the
     # *Amazon Virtual Private Cloud User Guide*.
     #
-    # You can optionally request an Amazon-provided IPv6 CIDR block for the
-    # VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated
-    # from Amazon's pool of IPv6 addresses. You cannot choose the IPv6
-    # range for your VPC.
+    # You can optionally request an IPv6 CIDR block for the VPC. You can
+    # request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6
+    # addresses, or an IPv6 CIDR block from an IPv6 address pool that you
+    # provisioned through bring your own IP addresses ([BYOIP][2]).
     #
     # By default, each instance you launch in the VPC has the default DHCP
     # options, which include only a default DNS server that we provide
-    # (AmazonProvidedDNS). For more information, see [DHCP Options Sets][2]
+    # (AmazonProvidedDNS). For more information, see [DHCP Options Sets][3]
     # in the *Amazon Virtual Private Cloud User Guide*.
     #
     # You can specify the instance tenancy value for the VPC when you create
     # it. You can't change this value for the VPC after you create it. For
-    # more information, see [Dedicated Instances][3] in the *Amazon Elastic
+    # more information, see [Dedicated Instances][4] in the *Amazon Elastic
     # Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
-    # [2]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
     #
     # @option params [required, String] :cidr_block
     #   The IPv4 network range for the VPC, in CIDR notation. For example,
@@ -8538,6 +8556,16 @@ module Aws::EC2
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
     #   of the CIDR block.
+    #
+    # @option params [String] :ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    #
+    # @option params [String] :ipv_6_cidr_block
+    #   The IPv6 CIDR block from the IPv6 address pool. You must also specify
+    #   `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -8594,6 +8622,8 @@ module Aws::EC2
     #   resp = client.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
+    #     ipv_6_pool: "String",
+    #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
     #     ipv_6_cidr_block_network_border_group: "String",
@@ -8612,6 +8642,7 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
@@ -11430,9 +11461,8 @@ module Aws::EC2
     # allocated from its address range.
     #
     # @option params [required, String] :cidr
-    #   The public IPv4 address range, in CIDR notation. The prefix must be
-    #   the same prefix that you specified when you provisioned the address
-    #   range.
+    #   The address range, in CIDR notation. The prefix must be the same
+    #   prefix that you specified when you provisioned the address range.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12236,7 +12266,7 @@ module Aws::EC2
     # ProvisionByoipCidr.
     #
     # To describe the address pools that were created when you provisioned
-    # the address ranges, use DescribePublicIpv4Pools.
+    # the address ranges, use DescribePublicIpv4Pools or DescribeIpv6Pools.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -16475,6 +16505,79 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_internet_gateways(params = {}, options = {})
       req = build_request(:describe_internet_gateways, params)
+      req.send_request(options)
+    end
+
+    # Describes your IPv6 address pools.
+    #
+    # @option params [Array<String>] :pool_ids
+    #   The IDs of the IPv6 address pools.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    # @return [Types::DescribeIpv6PoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIpv6PoolsResult#ipv_6_pools #ipv_6_pools} => Array&lt;Types::Ipv6Pool&gt;
+    #   * {Types::DescribeIpv6PoolsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ipv_6_pools({
+    #     pool_ids: ["String"],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ipv_6_pools #=> Array
+    #   resp.ipv_6_pools[0].pool_id #=> String
+    #   resp.ipv_6_pools[0].description #=> String
+    #   resp.ipv_6_pools[0].pool_cidr_blocks #=> Array
+    #   resp.ipv_6_pools[0].pool_cidr_blocks[0].cidr #=> String
+    #   resp.ipv_6_pools[0].tags #=> Array
+    #   resp.ipv_6_pools[0].tags[0].key #=> String
+    #   resp.ipv_6_pools[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpv6Pools AWS API Documentation
+    #
+    # @overload describe_ipv_6_pools(params = {})
+    # @param [Hash] params ({})
+    def describe_ipv_6_pools(params = {}, options = {})
+      req = build_request(:describe_ipv_6_pools, params)
       req.send_request(options)
     end
 
@@ -23804,6 +23907,9 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the VPC.
     #
+    #   * `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
+    #     pool from which the IPv6 CIDR block is allocated.
+    #
     #   * `ipv6-cidr-block-association.association-id` - The association ID
     #     for an IPv6 CIDR block associated with the VPC.
     #
@@ -23912,6 +24018,7 @@ module Aws::EC2
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+    #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].network_border_group #=> String
     #   resp.vpcs[0].cidr_block_association_set #=> Array
     #   resp.vpcs[0].cidr_block_association_set[0].association_id #=> String
@@ -25095,6 +25202,7 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
@@ -25679,6 +25787,56 @@ module Aws::EC2
     # @param [Hash] params ({})
     def export_transit_gateway_routes(params = {}, options = {})
       req = build_request(:export_transit_gateway_routes, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the IPv6 CIDR block associations for a
+    # specified IPv6 address pool.
+    #
+    # @option params [required, String] :pool_id
+    #   The ID of the IPv6 address pool.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetAssociatedIpv6PoolCidrsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssociatedIpv6PoolCidrsResult#ipv_6_cidr_associations #ipv_6_cidr_associations} => Array&lt;Types::Ipv6CidrAssociation&gt;
+    #   * {Types::GetAssociatedIpv6PoolCidrsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_associated_ipv_6_pool_cidrs({
+    #     pool_id: "String", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ipv_6_cidr_associations #=> Array
+    #   resp.ipv_6_cidr_associations[0].ipv_6_cidr #=> String
+    #   resp.ipv_6_cidr_associations[0].associated_resource #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAssociatedIpv6PoolCidrs AWS API Documentation
+    #
+    # @overload get_associated_ipv_6_pool_cidrs(params = {})
+    # @param [Hash] params ({})
+    def get_associated_ipv_6_pool_cidrs(params = {}, options = {})
+      req = build_request(:get_associated_ipv_6_pool_cidrs, params)
       req.send_request(options)
     end
 
@@ -30784,10 +30942,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Provisions an address range for use with your AWS resources through
-    # bring your own IP addresses (BYOIP) and creates a corresponding
-    # address pool. After the address range is provisioned, it is ready to
-    # be advertised using AdvertiseByoipCidr.
+    # Provisions an IPv4 or IPv6 address range for use with your AWS
+    # resources through bring your own IP addresses (BYOIP) and creates a
+    # corresponding address pool. After the address range is provisioned, it
+    # is ready to be advertised using AdvertiseByoipCidr.
     #
     # AWS verifies that you own the address range and are authorized to
     # advertise it. You must ensure that the address range is registered to
@@ -30800,7 +30958,7 @@ module Aws::EC2
     # call returns immediately, but the address range is not ready to use
     # until its status changes from `pending-provision` to `provisioned`. To
     # monitor the status of an address range, use DescribeByoipCidrs. To
-    # allocate an Elastic IP address from your address pool, use
+    # allocate an Elastic IP address from your IPv4 address pool, use
     # AllocateAddress with either the specific address from the address pool
     # or the ID of the address pool.
     #
@@ -30809,14 +30967,21 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
     #
     # @option params [required, String] :cidr
-    #   The public IPv4 address range, in CIDR notation. The most specific
-    #   prefix that you can specify is /24. The address range cannot overlap
+    #   The public IPv4 or IPv6 address range, in CIDR notation. The most
+    #   specific IPv4 prefix that you can specify is /24. The most specific
+    #   IPv6 prefix you can specify is /56. The address range cannot overlap
     #   with another address range that you've brought to this or another
     #   Region.
     #
     # @option params [Types::CidrAuthorizationContext] :cidr_authorization_context
     #   A signed document that proves that you are authorized to bring the
     #   specified IP address range to Amazon using BYOIP.
+    #
+    # @option params [Boolean] :publicly_advertisable
+    #   (IPv6 only) Indicate whether the address range will be publicly
+    #   advertised to the internet.
+    #
+    #   Default: true
     #
     # @option params [String] :description
     #   A description for the address range and the address pool.
@@ -30839,6 +31004,7 @@ module Aws::EC2
     #       message: "String", # required
     #       signature: "String", # required
     #     },
+    #     publicly_advertisable: false,
     #     description: "String",
     #     dry_run: false,
     #   })
@@ -35654,8 +35820,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Stops advertising an IPv4 address range that is provisioned as an
-    # address pool.
+    # Stops advertising an address range that is provisioned as an address
+    # pool.
     #
     # You can perform this operation at most once every 10 seconds, even if
     # you specify different address ranges each time.
@@ -35664,7 +35830,7 @@ module Aws::EC2
     # stops routing to AWS because of BGP propagation delays.
     #
     # @option params [required, String] :cidr
-    #   The public IPv4 address range, in CIDR notation.
+    #   The address range, in CIDR notation.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -35712,7 +35878,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -68,6 +68,11 @@ module Aws::CloudWatch
     #   for training the model, and the time zone to use for the metric.
     #   @return [Types::AnomalyDetectorConfiguration]
     #
+    # @!attribute [rw] state_value
+    #   The current status of the anomaly detector's training. The possible
+    #   values are `TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetector AWS API Documentation
     #
     class AnomalyDetector < Struct.new(
@@ -75,7 +80,8 @@ module Aws::CloudWatch
       :metric_name,
       :dimensions,
       :stat,
-      :configuration)
+      :configuration,
+      :state_value)
       include Aws::Structure
     end
 

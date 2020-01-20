@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2020-01-20)
+------------------
+
+* Feature - This release adds support for a list API to retrieve the configuration events logged during periodic updates to an application by Amazon CloudWatch Application Insights.
+
 1.5.0 (2019-11-25)
 ------------------
 

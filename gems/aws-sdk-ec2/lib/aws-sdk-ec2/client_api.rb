@@ -565,6 +565,8 @@ module Aws::EC2
     DescribeInternetGatewaysMaxResults = Shapes::IntegerShape.new(name: 'DescribeInternetGatewaysMaxResults')
     DescribeInternetGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeInternetGatewaysRequest')
     DescribeInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeInternetGatewaysResult')
+    DescribeIpv6PoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpv6PoolsRequest')
+    DescribeIpv6PoolsResult = Shapes::StructureShape.new(name: 'DescribeIpv6PoolsResult')
     DescribeKeyPairsRequest = Shapes::StructureShape.new(name: 'DescribeKeyPairsRequest')
     DescribeKeyPairsResult = Shapes::StructureShape.new(name: 'DescribeKeyPairsResult')
     DescribeLaunchTemplateVersionsRequest = Shapes::StructureShape.new(name: 'DescribeLaunchTemplateVersionsRequest')
@@ -907,6 +909,8 @@ module Aws::EC2
     FpgaInfo = Shapes::StructureShape.new(name: 'FpgaInfo')
     FreeTierEligibleFlag = Shapes::BooleanShape.new(name: 'FreeTierEligibleFlag')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
+    GetAssociatedIpv6PoolCidrsRequest = Shapes::StructureShape.new(name: 'GetAssociatedIpv6PoolCidrsRequest')
+    GetAssociatedIpv6PoolCidrsResult = Shapes::StructureShape.new(name: 'GetAssociatedIpv6PoolCidrsResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -1111,9 +1115,14 @@ module Aws::EC2
     IpRanges = Shapes::ListShape.new(name: 'IpRanges')
     Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
     Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
+    Ipv6CidrAssociation = Shapes::StructureShape.new(name: 'Ipv6CidrAssociation')
+    Ipv6CidrAssociationSet = Shapes::ListShape.new(name: 'Ipv6CidrAssociationSet')
     Ipv6CidrBlock = Shapes::StructureShape.new(name: 'Ipv6CidrBlock')
     Ipv6CidrBlockSet = Shapes::ListShape.new(name: 'Ipv6CidrBlockSet')
     Ipv6Flag = Shapes::BooleanShape.new(name: 'Ipv6Flag')
+    Ipv6Pool = Shapes::StructureShape.new(name: 'Ipv6Pool')
+    Ipv6PoolMaxResults = Shapes::IntegerShape.new(name: 'Ipv6PoolMaxResults')
+    Ipv6PoolSet = Shapes::ListShape.new(name: 'Ipv6PoolSet')
     Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
     Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
     Ipv6SupportValue = Shapes::StringShape.new(name: 'Ipv6SupportValue')
@@ -1410,6 +1419,8 @@ module Aws::EC2
     PlacementResponse = Shapes::StructureShape.new(name: 'PlacementResponse')
     PlacementStrategy = Shapes::StringShape.new(name: 'PlacementStrategy')
     PlatformValues = Shapes::StringShape.new(name: 'PlatformValues')
+    PoolCidrBlock = Shapes::StructureShape.new(name: 'PoolCidrBlock')
+    PoolCidrBlocksSet = Shapes::ListShape.new(name: 'PoolCidrBlocksSet')
     PoolMaxResults = Shapes::IntegerShape.new(name: 'PoolMaxResults')
     PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PrefixList = Shapes::StructureShape.new(name: 'PrefixList')
@@ -2154,6 +2165,8 @@ module Aws::EC2
     AssociateVpcCidrBlockRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
     AssociateVpcCidrBlockRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "CidrBlock"))
     AssociateVpcCidrBlockRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, required: true, location_name: "vpcId"))
+    AssociateVpcCidrBlockRequest.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Pool"))
+    AssociateVpcCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     AssociateVpcCidrBlockRequest.add_member(:ipv_6_cidr_block_network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlockNetworkBorderGroup"))
     AssociateVpcCidrBlockRequest.struct_class = Types::AssociateVpcCidrBlockRequest
 
@@ -3249,6 +3262,8 @@ module Aws::EC2
 
     CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
     CreateVpcRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
+    CreateVpcRequest.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6Pool"))
+    CreateVpcRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
     CreateVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVpcRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
     CreateVpcRequest.add_member(:ipv_6_cidr_block_network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlockNetworkBorderGroup"))
@@ -4135,6 +4150,17 @@ module Aws::EC2
     DescribeInternetGatewaysResult.add_member(:internet_gateways, Shapes::ShapeRef.new(shape: InternetGatewayList, location_name: "internetGatewaySet"))
     DescribeInternetGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeInternetGatewaysResult.struct_class = Types::DescribeInternetGatewaysResult
+
+    DescribeIpv6PoolsRequest.add_member(:pool_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "PoolId"))
+    DescribeIpv6PoolsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpv6PoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Ipv6PoolMaxResults, location_name: "MaxResults"))
+    DescribeIpv6PoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpv6PoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpv6PoolsRequest.struct_class = Types::DescribeIpv6PoolsRequest
+
+    DescribeIpv6PoolsResult.add_member(:ipv_6_pools, Shapes::ShapeRef.new(shape: Ipv6PoolSet, location_name: "ipv6PoolSet"))
+    DescribeIpv6PoolsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpv6PoolsResult.struct_class = Types::DescribeIpv6PoolsResult
 
     DescribeKeyPairsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeKeyPairsRequest.add_member(:key_names, Shapes::ShapeRef.new(shape: KeyNameStringList, location_name: "KeyName"))
@@ -5471,6 +5497,16 @@ module Aws::EC2
     FpgaInfo.add_member(:total_fpga_memory_in_mi_b, Shapes::ShapeRef.new(shape: totalFpgaMemory, location_name: "totalFpgaMemoryInMiB"))
     FpgaInfo.struct_class = Types::FpgaInfo
 
+    GetAssociatedIpv6PoolCidrsRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PoolId"))
+    GetAssociatedIpv6PoolCidrsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAssociatedIpv6PoolCidrsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Ipv6PoolMaxResults, location_name: "MaxResults"))
+    GetAssociatedIpv6PoolCidrsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetAssociatedIpv6PoolCidrsRequest.struct_class = Types::GetAssociatedIpv6PoolCidrsRequest
+
+    GetAssociatedIpv6PoolCidrsResult.add_member(:ipv_6_cidr_associations, Shapes::ShapeRef.new(shape: Ipv6CidrAssociationSet, location_name: "ipv6CidrAssociationSet"))
+    GetAssociatedIpv6PoolCidrsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetAssociatedIpv6PoolCidrsResult.struct_class = Types::GetAssociatedIpv6PoolCidrsResult
+
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetCapacityReservationUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequestMaxResults, location_name: "MaxResults"))
@@ -6328,10 +6364,24 @@ module Aws::EC2
 
     Ipv6AddressList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
+    Ipv6CidrAssociation.add_member(:ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Cidr"))
+    Ipv6CidrAssociation.add_member(:associated_resource, Shapes::ShapeRef.new(shape: String, location_name: "associatedResource"))
+    Ipv6CidrAssociation.struct_class = Types::Ipv6CidrAssociation
+
+    Ipv6CidrAssociationSet.member = Shapes::ShapeRef.new(shape: Ipv6CidrAssociation, location_name: "item")
+
     Ipv6CidrBlock.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
     Ipv6CidrBlock.struct_class = Types::Ipv6CidrBlock
 
     Ipv6CidrBlockSet.member = Shapes::ShapeRef.new(shape: Ipv6CidrBlock, location_name: "item")
+
+    Ipv6Pool.add_member(:pool_id, Shapes::ShapeRef.new(shape: String, location_name: "poolId"))
+    Ipv6Pool.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    Ipv6Pool.add_member(:pool_cidr_blocks, Shapes::ShapeRef.new(shape: PoolCidrBlocksSet, location_name: "poolCidrBlockSet"))
+    Ipv6Pool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    Ipv6Pool.struct_class = Types::Ipv6Pool
+
+    Ipv6PoolSet.member = Shapes::ShapeRef.new(shape: Ipv6Pool, location_name: "item")
 
     Ipv6Range.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
     Ipv6Range.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -7441,6 +7491,11 @@ module Aws::EC2
     PlacementResponse.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     PlacementResponse.struct_class = Types::PlacementResponse
 
+    PoolCidrBlock.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "poolCidrBlock"))
+    PoolCidrBlock.struct_class = Types::PoolCidrBlock
+
+    PoolCidrBlocksSet.member = Shapes::ShapeRef.new(shape: PoolCidrBlock, location_name: "item")
+
     PortRange.add_member(:from, Shapes::ShapeRef.new(shape: Integer, location_name: "from"))
     PortRange.add_member(:to, Shapes::ShapeRef.new(shape: Integer, location_name: "to"))
     PortRange.struct_class = Types::PortRange
@@ -7524,6 +7579,7 @@ module Aws::EC2
 
     ProvisionByoipCidrRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     ProvisionByoipCidrRequest.add_member(:cidr_authorization_context, Shapes::ShapeRef.new(shape: CidrAuthorizationContext, location_name: "CidrAuthorizationContext"))
+    ProvisionByoipCidrRequest.add_member(:publicly_advertisable, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAdvertisable"))
     ProvisionByoipCidrRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ProvisionByoipCidrRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ProvisionByoipCidrRequest.struct_class = Types::ProvisionByoipCidrRequest
@@ -9390,6 +9446,7 @@ module Aws::EC2
     VpcIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
     VpcIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
     VpcIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: VpcCidrBlockState, location_name: "ipv6CidrBlockState"))
+    VpcIpv6CidrBlockAssociation.add_member(:ipv_6_pool, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Pool"))
     VpcIpv6CidrBlockAssociation.add_member(:network_border_group, Shapes::ShapeRef.new(shape: String, location_name: "networkBorderGroup"))
     VpcIpv6CidrBlockAssociation.struct_class = Types::VpcIpv6CidrBlockAssociation
 
@@ -11191,6 +11248,20 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_ipv_6_pools, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpv6Pools"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpv6PoolsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpv6PoolsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_key_pairs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeKeyPairs"
         o.http_method = "POST"
@@ -12202,6 +12273,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportTransitGatewayRoutesRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportTransitGatewayRoutesResult)
+      end)
+
+      api.add_operation(:get_associated_ipv_6_pool_cidrs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAssociatedIpv6PoolCidrs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAssociatedIpv6PoolCidrsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAssociatedIpv6PoolCidrsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|

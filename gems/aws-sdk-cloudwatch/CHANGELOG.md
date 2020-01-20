@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-01-20)
+------------------
+
+* Feature - Updating DescribeAnomalyDetectors API to return AnomalyDetector Status value in response.
+
 1.31.0 (2019-11-25)
 ------------------
 

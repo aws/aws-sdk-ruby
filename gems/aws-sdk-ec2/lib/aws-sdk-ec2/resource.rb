@@ -1037,6 +1037,8 @@ module Aws::EC2
     #   vpc = ec2.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
+    #     ipv_6_pool: "String",
+    #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
     #     ipv_6_cidr_block_network_border_group: "String",
@@ -1049,6 +1051,14 @@ module Aws::EC2
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
     #   of the CIDR block.
+    # @option options [String] :ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    # @option options [String] :ipv_6_cidr_block
+    #   The IPv6 CIDR block from the IPv6 address pool. You must also specify
+    #   `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -3192,6 +3202,9 @@ module Aws::EC2
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the VPC.
+    #
+    #   * `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
+    #     pool from which the IPv6 CIDR block is allocated.
     #
     #   * `ipv6-cidr-block-association.association-id` - The association ID
     #     for an IPv6 CIDR block associated with the VPC.
