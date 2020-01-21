@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoTEvents - Updated the documentation for AWS IoT Events.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the documentation for AWS Marketplace Commerce Analytics.
+
 2.11.433 (2020-01-20)
 ------------------
 
