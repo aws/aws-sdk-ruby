@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.434 (2020-01-21)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::ApplicationDiscoveryService - Updated the documentation for AWS Application Discovery Service.
