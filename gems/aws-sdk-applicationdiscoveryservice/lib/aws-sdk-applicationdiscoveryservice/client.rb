@@ -538,13 +538,14 @@ module Aws::ApplicationDiscoveryService
     # number of network cards, etc.
     #
     #  For a complete list of outputs for each asset type, see [Using the
-    # DescribeConfigurations Action][1].
+    # DescribeConfigurations Action][1] in the *AWS Application Discovery
+    # Service User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations
     #
     # @option params [required, Array<String>] :configuration_ids
     #   One or more configuration IDs.
@@ -952,7 +953,7 @@ module Aws::ApplicationDiscoveryService
     end
 
     # Retrieves a list of configuration items as specified by the value
-    # passed to the required paramater `configurationType`. Optional
+    # passed to the required parameter `configurationType`. Optional
     # filtering may be applied to refine search results.
     #
     # @option params [required, String] :configuration_type
@@ -965,11 +966,12 @@ module Aws::ApplicationDiscoveryService
     #   `\{"key": "serverType", "value": "webServer"\}`
     #
     #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Querying Discovered Configuration Items][1].
+    #   with this action, see [Using the ListConfigurations Action][1] in the
+    #   *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #
     # @option params [Integer] :max_results
     #   The total number of items to return. The maximum value is 100.
@@ -984,11 +986,12 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<Types::OrderByElement>] :order_by
     #   Certain filter criteria return output that can be sorted in ascending
     #   or descending order. For a list of output characteristics for each
-    #   filter, see [Using the ListConfigurations Action][1].
+    #   filter, see [Using the ListConfigurations Action][1] in the *AWS
+    #   Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #
     # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1218,12 +1221,12 @@ module Aws::ApplicationDiscoveryService
     end
 
     # Starts an import task, which allows you to import details of your
-    # on-premises environment directly into AWS without having to use the
-    # Application Discovery Service (ADS) tools such as the Discovery
-    # Connector or Discovery Agent. This gives you the option to perform
-    # migration assessment and planning directly from your imported data,
-    # including the ability to group your devices as applications and track
-    # their migration status.
+    # on-premises environment directly into AWS Migration Hub without having
+    # to use the Application Discovery Service (ADS) tools such as the
+    # Discovery Connector or Discovery Agent. This gives you the option to
+    # perform migration assessment and planning directly from your imported
+    # data, including the ability to group your devices as applications and
+    # track their migration status.
     #
     # To start an import request, do this:
     #
@@ -1417,7 +1420,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

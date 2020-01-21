@@ -76,23 +76,23 @@ module Aws::IoTEvents
     #   @return [Types::ResetTimerAction]
     #
     # @!attribute [rw] lambda
-    #   Calls an AWS Lambda function, passing in information about the
-    #   detector model instance and the event which triggered the action.
+    #   Calls a Lambda function, passing in information about the detector
+    #   model instance and the event that triggered the action.
     #   @return [Types::LambdaAction]
     #
     # @!attribute [rw] iot_events
     #   Sends an IoT Events input, passing in information about the detector
-    #   model instance and the event which triggered the action.
+    #   model instance and the event that triggered the action.
     #   @return [Types::IotEventsAction]
     #
     # @!attribute [rw] sqs
     #   Sends information about the detector model instance and the event
-    #   which triggered the action to an Amazon SQS queue.
+    #   that triggered the action to an Amazon SQS queue.
     #   @return [Types::SqsAction]
     #
     # @!attribute [rw] firehose
     #   Sends information about the detector model instance and the event
-    #   which triggered the action to a Kinesis Data Firehose delivery
+    #   that triggered the action to a Kinesis Data Firehose delivery
     #   stream.
     #   @return [Types::FirehoseAction]
     #
@@ -380,8 +380,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system to
-    #   create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system in order
+    #   to create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
     #   This parameter uses a JSON-path expression to specify the
     #   attribute-value pair in the message payload of each input that is
@@ -398,10 +398,8 @@ module Aws::IoTEvents
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #   @return [String]
     #
     class CreateDetectorModelRequest < Struct.new(
@@ -661,8 +659,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system to
-    #   create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system in order
+    #   to create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
     #   This parameter uses a JSON-path expression to specify the
     #   attribute-value pair in the message payload of each input that is
@@ -670,10 +668,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #   @return [String]
     #
     class DetectorModelConfiguration < Struct.new(
@@ -955,10 +951,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #   @return [String]
     #
     class DetectorModelVersionSummary < Struct.new(
@@ -1044,8 +1038,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Sends information about the detector model instance and the event
-    # which triggered the action to a Kinesis Data Firehose delivery stream.
+    # Sends information about the detector model instance and the event that
+    # triggered the action to a Kinesis Data Firehose delivery stream.
     #
     # @note When making an API call, you may pass FirehoseAction
     #   data as a hash:
@@ -1210,8 +1204,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Sends an IoT Events input, passing in information about the detector
-    # model instance and the event which triggered the action.
+    # Sends an AWS IoT Events input, passing in information about the
+    # detector model instance and the event that triggered the action.
     #
     # @note When making an API call, you may pass IotEventsAction
     #   data as a hash:
@@ -1248,8 +1242,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Calls an AWS Lambda function, passing in information about the
-    # detector model instance and the event which triggered the action.
+    # Calls a Lambda function, passing in information about the detector
+    # model instance and the event that triggered the action.
     #
     # @note When making an API call, you may pass LambdaAction
     #   data as a hash:
@@ -1259,7 +1253,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] function_arn
-    #   The ARN of the AWS Lambda function which is executed.
+    #   The ARN of the Lambda function that is executed.
     #   @return [String]
     #
     class LambdaAction < Struct.new(
@@ -1868,8 +1862,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Sends information about the detector model instance and the event
-    # which triggered the action to an Amazon SQS queue.
+    # Sends information about the detector model instance and the event that
+    # triggered the action to an Amazon SQS queue.
     #
     # @note When making an API call, you may pass SqsAction
     #   data as a hash:
@@ -1880,7 +1874,7 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] queue_url
-    #   The URL of the Amazon SQS queue where the data is written.
+    #   The URL of the SQS queue where the data is written.
     #   @return [String]
     #
     # @!attribute [rw] use_base_64
@@ -2506,10 +2500,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #   @return [String]
     #
     class UpdateDetectorModelRequest < Struct.new(

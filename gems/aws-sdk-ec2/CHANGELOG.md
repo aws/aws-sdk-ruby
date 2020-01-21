@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2020-01-21)
+------------------
+
+* Feature - Add an enum value to the result of DescribeByoipCidrs to support CIDRs that are not publicly advertisable.
+
 1.136.0 (2020-01-20)
 ------------------
 

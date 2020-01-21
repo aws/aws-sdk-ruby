@@ -10,9 +10,8 @@ module Aws::CodePipeline
 
     # Represents an AWS session credentials object. These credentials are
     # temporary credentials that are issued by AWS Secure Token Service
-    # (STS). They can be used to access input and output artifacts in the
-    # Amazon S3 bucket used to store artifact for the pipeline in AWS
-    # CodePipeline.
+    # (STS). They can be used to access input and output artifacts in the S3
+    # bucket used to store artifact for the pipeline in AWS CodePipeline.
     #
     # @!attribute [rw] access_key_id
     #   The access key for the session.
@@ -886,7 +885,7 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] s3_location
-    #   The Amazon S3 bucket that contains the artifact.
+    #   The S3 bucket that contains the artifact.
     #   @return [Types::S3ArtifactLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactLocation AWS API Documentation
@@ -944,7 +943,7 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The Amazon S3 bucket where artifacts for the pipeline are stored.
+    # The S3 bucket where artifacts for the pipeline are stored.
     #
     # <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
     # pipeline, but you cannot use both. If you create a cross-region action
@@ -969,12 +968,11 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The Amazon S3 bucket used for storing the artifacts for a pipeline.
-    #   You can specify the name of an S3 bucket but not a folder in the
-    #   bucket. A folder to contain the pipeline artifacts is created for
-    #   you based on the name of the pipeline. You can use any Amazon S3
-    #   bucket in the same AWS Region as the pipeline to store your pipeline
-    #   artifacts.
+    #   The S3 bucket used for storing the artifacts for a pipeline. You can
+    #   specify the name of an S3 bucket but not a folder in the bucket. A
+    #   folder to contain the pipeline artifacts is created for you based on
+    #   the name of the pipeline. You can use any S3 bucket in the same AWS
+    #   Region as the pipeline to store your pipeline artifacts.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -1450,6 +1448,22 @@ module Aws::CodePipeline
       :stage_name,
       :transition_type,
       :reason)
+      include Aws::Structure
+    end
+
+    # The pipeline execution is already in a `Stopping` state. If you
+    # already chose to stop and wait, you cannot make that request again.
+    # You can choose to stop and abandon now, but be aware that this option
+    # can lead to failed tasks or out of sequence tasks. If you already
+    # chose to stop and abandon, you cannot make that request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DuplicatedStopRequestException AWS API Documentation
+    #
+    class DuplicatedStopRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1976,7 +1990,7 @@ module Aws::CodePipeline
     #   Represents an AWS session credentials object. These credentials are
     #   temporary credentials that are issued by AWS Secure Token Service
     #   (STS). They can be used to access input and output artifacts in the
-    #   Amazon S3 bucket used to store artifacts for the pipeline in AWS
+    #   S3 bucket used to store artifacts for the pipeline in AWS
     #   CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #
@@ -2558,8 +2572,8 @@ module Aws::CodePipeline
     #   @return [String]
     #
     # @!attribute [rw] artifact_store
-    #   Represents information about the Amazon S3 bucket where artifacts
-    #   are stored for the pipeline.
+    #   Represents information about the S3 bucket where artifacts are
+    #   stored for the pipeline.
     #
     #   <note markdown="1"> You must include either `artifactStore` or `artifactStores` in your
     #   pipeline, but you cannot use both. If you create a cross-region
@@ -2605,11 +2619,12 @@ module Aws::CodePipeline
     # Represents information about an execution of a pipeline.
     #
     # @!attribute [rw] pipeline_name
-    #   The name of the pipeline that was executed.
+    #   The name of the pipeline with the specified pipeline execution.
     #   @return [String]
     #
     # @!attribute [rw] pipeline_version
-    #   The version number of the pipeline that was executed.
+    #   The version number of the pipeline with the specified pipeline
+    #   execution.
     #   @return [Integer]
     #
     # @!attribute [rw] pipeline_execution_id
@@ -2621,13 +2636,27 @@ module Aws::CodePipeline
     #
     #   * InProgress: The pipeline execution is currently running.
     #
+    #   * Stopped: The pipeline execution was manually stopped. For more
+    #     information, see [Stopped Executions][1].
+    #
+    #   * Stopping: The pipeline execution received a request to be manually
+    #     stopped. Depending on the selected stop mode, the execution is
+    #     either completing or abandoning in-progress actions. For more
+    #     information, see [Stopped Executions][1].
+    #
     #   * Succeeded: The pipeline execution was completed successfully.
     #
     #   * Superseded: While this pipeline execution was waiting for the next
     #     stage to be completed, a newer pipeline execution advanced and
-    #     continued through the pipeline instead.
+    #     continued through the pipeline instead. For more information, see
+    #     [Superseded Executions][2].
     #
     #   * Failed: The pipeline execution was not completed successfully.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
     # @!attribute [rw] artifact_revisions
@@ -2646,6 +2675,19 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Unable to stop the pipeline execution. The execution might already be
+    # in a `Stopped` state, or it might no longer be in progress.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionNotStoppableException AWS API Documentation
+    #
+    class PipelineExecutionNotStoppableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Summary information about a pipeline execution.
     #
     # @!attribute [rw] pipeline_execution_id
@@ -2657,13 +2699,27 @@ module Aws::CodePipeline
     #
     #   * InProgress: The pipeline execution is currently running.
     #
+    #   * Stopped: The pipeline execution was manually stopped. For more
+    #     information, see [Stopped Executions][1].
+    #
+    #   * Stopping: The pipeline execution received a request to be manually
+    #     stopped. Depending on the selected stop mode, the execution is
+    #     either completing or abandoning in-progress actions. For more
+    #     information, see [Stopped Executions][1].
+    #
     #   * Succeeded: The pipeline execution was completed successfully.
     #
     #   * Superseded: While this pipeline execution was waiting for the next
     #     stage to be completed, a newer pipeline execution advanced and
-    #     continued through the pipeline instead.
+    #     continued through the pipeline instead. For more information, see
+    #     [Superseded Executions][2].
     #
     #   * Failed: The pipeline execution was not completed successfully.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-executions-stopped
+    #   [2]: https://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#concepts-superseded
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2686,6 +2742,10 @@ module Aws::CodePipeline
     #   automated change detection or a `StartPipelineExecution` API call.
     #   @return [Types::ExecutionTrigger]
     #
+    # @!attribute [rw] stop_trigger
+    #   The interaction that stopped a pipeline execution.
+    #   @return [Types::StopExecutionTrigger]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
@@ -2694,7 +2754,8 @@ module Aws::CodePipeline
       :start_time,
       :last_update_time,
       :source_revisions,
-      :trigger)
+      :trigger,
+      :stop_trigger)
       include Aws::Structure
     end
 
@@ -3312,15 +3373,15 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
-    # The location of the Amazon S3 bucket that contains a revision.
+    # The location of the S3 bucket that contains a revision.
     #
     # @!attribute [rw] bucket_name
-    #   The name of the Amazon S3 bucket.
+    #   The name of the S3 bucket.
     #   @return [String]
     #
     # @!attribute [rw] object_key
-    #   The key of the object in the Amazon S3 bucket, which uniquely
-    #   identifies the object in the bucket.
+    #   The key of the object in the S3 bucket, which uniquely identifies
+    #   the object in the bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3ArtifactLocation AWS API Documentation
@@ -3556,6 +3617,75 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The interaction that stopped a pipeline execution.
+    #
+    # @!attribute [rw] reason
+    #   The user-specified reason the pipeline was stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopExecutionTrigger AWS API Documentation
+    #
+    class StopExecutionTrigger < Struct.new(
+      :reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopPipelineExecutionInput
+    #   data as a hash:
+    #
+    #       {
+    #         pipeline_name: "PipelineName", # required
+    #         pipeline_execution_id: "PipelineExecutionId", # required
+    #         abandon: false,
+    #         reason: "StopPipelineExecutionReason",
+    #       }
+    #
+    # @!attribute [rw] pipeline_name
+    #   The name of the pipeline to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_execution_id
+    #   The ID of the pipeline execution to be stopped in the current stage.
+    #   Use the `GetPipelineState` action to retrieve the current
+    #   pipelineExecutionId.
+    #   @return [String]
+    #
+    # @!attribute [rw] abandon
+    #   Use this option to stop the pipeline execution by abandoning, rather
+    #   than finishing, in-progress actions.
+    #
+    #   <note markdown="1"> This option can lead to failed or out-of-sequence tasks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] reason
+    #   Use this option to enter comments, such as the reason the pipeline
+    #   was stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecutionInput AWS API Documentation
+    #
+    class StopPipelineExecutionInput < Struct.new(
+      :pipeline_name,
+      :pipeline_execution_id,
+      :abandon,
+      :reason)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pipeline_execution_id
+    #   The unique system-generated ID of the pipeline execution that was
+    #   stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecutionOutput AWS API Documentation
+    #
+    class StopPipelineExecutionOutput < Struct.new(
+      :pipeline_execution_id)
+      include Aws::Structure
+    end
+
     # A tag is a key-value pair that is used to manage the resource.
     #
     # @note When making an API call, you may pass Tag
@@ -3674,7 +3804,7 @@ module Aws::CodePipeline
     #   Represents an AWS session credentials object. These credentials are
     #   temporary credentials that are issued by AWS Secure Token Service
     #   (STS). They can be used to access input and output artifacts in the
-    #   Amazon S3 bucket used to store artifact for the pipeline in AWS
+    #   S3 bucket used to store artifact for the pipeline in AWS
     #   CodePipeline.
     #   @return [Types::AWSSessionCredentials]
     #

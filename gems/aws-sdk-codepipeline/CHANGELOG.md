@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2020-01-21)
+------------------
+
+* Feature - AWS CodePipeline enables an ability to stop pipeline executions.
+
 1.27.0 (2019-11-12)
 ------------------
 

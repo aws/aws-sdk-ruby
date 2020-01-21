@@ -806,10 +806,10 @@ module Aws::CodePipeline
     # Returns information about a job. Used for custom actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. This API also returns any secret values
-    # defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID for the job.
@@ -969,7 +969,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.pipeline_name #=> String
     #   resp.pipeline_execution.pipeline_version #=> Integer
     #   resp.pipeline_execution.pipeline_execution_id #=> String
-    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution.artifact_revisions #=> Array
     #   resp.pipeline_execution.artifact_revisions[0].name #=> String
     #   resp.pipeline_execution.artifact_revisions[0].revision_id #=> String
@@ -1028,7 +1028,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].current_revision.revision_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.revision_change_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.created #=> Time
-    #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Succeeded", "Failed"
+    #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.stage_states[0].action_states[0].latest_execution.summary #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.last_status_change #=> Time
     #   resp.stage_states[0].action_states[0].latest_execution.token #=> String
@@ -1041,7 +1041,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].entity_url #=> String
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Succeeded"
+    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1058,10 +1058,10 @@ module Aws::CodePipeline
     # partner actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. This API also returns any secret values
-    # defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID used for identifying the job.
@@ -1177,7 +1177,7 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].action_name #=> String
     #   resp.action_execution_details[0].start_time #=> Time
     #   resp.action_execution_details[0].last_update_time #=> Time
-    #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Succeeded", "Failed"
+    #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
     #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
     #   resp.action_execution_details[0].input.action_type_id.provider #=> String
@@ -1305,7 +1305,7 @@ module Aws::CodePipeline
     #
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
-    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -1315,6 +1315,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
     #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision"
     #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
+    #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1466,10 +1467,10 @@ module Aws::CodePipeline
     # the owner field, the `PollForJobs` action returns an error.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. This API also returns any secret values
-    # defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -1553,9 +1554,9 @@ module Aws::CodePipeline
     # act on. Used for partner actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -2069,6 +2070,59 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Stops the specified pipeline execution. You choose to either stop the
+    # pipeline execution by completing in-progress actions without starting
+    # subsequent actions, or by abandoning in-progress actions. While
+    # completing or abandoning in-progress actions, the pipeline execution
+    # is in a `Stopping` state. After all in-progress actions are completed
+    # or abandoned, the pipeline execution is in a `Stopped` state.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline to stop.
+    #
+    # @option params [required, String] :pipeline_execution_id
+    #   The ID of the pipeline execution to be stopped in the current stage.
+    #   Use the `GetPipelineState` action to retrieve the current
+    #   pipelineExecutionId.
+    #
+    # @option params [Boolean] :abandon
+    #   Use this option to stop the pipeline execution by abandoning, rather
+    #   than finishing, in-progress actions.
+    #
+    #   <note markdown="1"> This option can lead to failed or out-of-sequence tasks.
+    #
+    #    </note>
+    #
+    # @option params [String] :reason
+    #   Use this option to enter comments, such as the reason the pipeline was
+    #   stopped.
+    #
+    # @return [Types::StopPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopPipelineExecutionOutput#pipeline_execution_id #pipeline_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_pipeline_execution({
+    #     pipeline_name: "PipelineName", # required
+    #     pipeline_execution_id: "PipelineExecutionId", # required
+    #     abandon: false,
+    #     reason: "StopPipelineExecutionReason",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecution AWS API Documentation
+    #
+    # @overload stop_pipeline_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_pipeline_execution(params = {}, options = {})
+      req = build_request(:stop_pipeline_execution, params)
+      req.send_request(options)
+    end
+
     # Adds to or modifies the tags of the given resource. Tags are metadata
     # that can be used to manage a resource.
     #
@@ -2265,7 +2319,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

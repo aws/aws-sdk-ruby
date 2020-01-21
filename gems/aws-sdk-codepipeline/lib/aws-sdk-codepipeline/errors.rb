@@ -26,6 +26,22 @@ module Aws::CodePipeline
 
     end
 
+    class DuplicatedStopRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::DuplicatedStopRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class InvalidArnException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -63,6 +79,22 @@ module Aws::CodePipeline
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodePipeline::Types::OutputVariablesSizeExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class PipelineExecutionNotStoppableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodePipeline::Types::PipelineExecutionNotStoppableException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

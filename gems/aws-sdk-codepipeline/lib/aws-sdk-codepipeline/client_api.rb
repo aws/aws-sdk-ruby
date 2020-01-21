@@ -97,6 +97,7 @@ module Aws::CodePipeline
     Description = Shapes::StringShape.new(name: 'Description')
     DisableStageTransitionInput = Shapes::StructureShape.new(name: 'DisableStageTransitionInput')
     DisabledReason = Shapes::StringShape.new(name: 'DisabledReason')
+    DuplicatedStopRequestException = Shapes::StructureShape.new(name: 'DuplicatedStopRequestException')
     EnableStageTransitionInput = Shapes::StructureShape.new(name: 'EnableStageTransitionInput')
     Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
@@ -184,6 +185,7 @@ module Aws::CodePipeline
     PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
     PipelineExecutionId = Shapes::StringShape.new(name: 'PipelineExecutionId')
     PipelineExecutionNotFoundException = Shapes::StructureShape.new(name: 'PipelineExecutionNotFoundException')
+    PipelineExecutionNotStoppableException = Shapes::StructureShape.new(name: 'PipelineExecutionNotStoppableException')
     PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
@@ -247,6 +249,10 @@ module Aws::CodePipeline
     StageTransitionType = Shapes::StringShape.new(name: 'StageTransitionType')
     StartPipelineExecutionInput = Shapes::StructureShape.new(name: 'StartPipelineExecutionInput')
     StartPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StartPipelineExecutionOutput')
+    StopExecutionTrigger = Shapes::StructureShape.new(name: 'StopExecutionTrigger')
+    StopPipelineExecutionInput = Shapes::StructureShape.new(name: 'StopPipelineExecutionInput')
+    StopPipelineExecutionOutput = Shapes::StructureShape.new(name: 'StopPipelineExecutionOutput')
+    StopPipelineExecutionReason = Shapes::StringShape.new(name: 'StopPipelineExecutionReason')
     String = Shapes::StringShape.new(name: 'String')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -526,6 +532,9 @@ module Aws::CodePipeline
     DisableStageTransitionInput.add_member(:reason, Shapes::ShapeRef.new(shape: DisabledReason, required: true, location_name: "reason"))
     DisableStageTransitionInput.struct_class = Types::DisableStageTransitionInput
 
+    DuplicatedStopRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    DuplicatedStopRequestException.struct_class = Types::DuplicatedStopRequestException
+
     EnableStageTransitionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     EnableStageTransitionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
     EnableStageTransitionInput.add_member(:transition_type, Shapes::ShapeRef.new(shape: StageTransitionType, required: true, location_name: "transitionType"))
@@ -718,12 +727,16 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
+    PipelineExecutionNotStoppableException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+    PipelineExecutionNotStoppableException.struct_class = Types::PipelineExecutionNotStoppableException
+
     PipelineExecutionSummary.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     PipelineExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
     PipelineExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     PipelineExecutionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     PipelineExecutionSummary.add_member(:source_revisions, Shapes::ShapeRef.new(shape: SourceRevisionList, location_name: "sourceRevisions"))
     PipelineExecutionSummary.add_member(:trigger, Shapes::ShapeRef.new(shape: ExecutionTrigger, location_name: "trigger"))
+    PipelineExecutionSummary.add_member(:stop_trigger, Shapes::ShapeRef.new(shape: StopExecutionTrigger, location_name: "stopTrigger"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
@@ -874,6 +887,18 @@ module Aws::CodePipeline
 
     StartPipelineExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
     StartPipelineExecutionOutput.struct_class = Types::StartPipelineExecutionOutput
+
+    StopExecutionTrigger.add_member(:reason, Shapes::ShapeRef.new(shape: StopPipelineExecutionReason, location_name: "reason"))
+    StopExecutionTrigger.struct_class = Types::StopExecutionTrigger
+
+    StopPipelineExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+    StopPipelineExecutionInput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
+    StopPipelineExecutionInput.add_member(:abandon, Shapes::ShapeRef.new(shape: Boolean, location_name: "abandon"))
+    StopPipelineExecutionInput.add_member(:reason, Shapes::ShapeRef.new(shape: StopPipelineExecutionReason, location_name: "reason"))
+    StopPipelineExecutionInput.struct_class = Types::StopPipelineExecutionInput
+
+    StopPipelineExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+    StopPipelineExecutionOutput.struct_class = Types::StopPipelineExecutionOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "value"))
@@ -1379,6 +1404,18 @@ module Aws::CodePipeline
         o.output = Shapes::ShapeRef.new(shape: StartPipelineExecutionOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+      end)
+
+      api.add_operation(:stop_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopPipelineExecution"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopPipelineExecutionInput)
+        o.output = Shapes::ShapeRef.new(shape: StopPipelineExecutionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineExecutionNotStoppableException)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicatedStopRequestException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

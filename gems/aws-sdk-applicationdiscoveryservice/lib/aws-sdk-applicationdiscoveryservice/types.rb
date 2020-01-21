@@ -1052,11 +1052,12 @@ module Aws::ApplicationDiscoveryService
     # A filter that can use conditional operators.
     #
     # For more information about filters, see [Querying Discovered
-    # Configuration Items][1].
+    # Configuration Items][1] in the *AWS Application Discovery Service User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -1335,11 +1336,12 @@ module Aws::ApplicationDiscoveryService
     #   `\{"key": "serverType", "value": "webServer"\}`
     #
     #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Querying Discovered Configuration Items][1].
+    #   with this action, see [Using the ListConfigurations Action][1] in
+    #   the *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -1357,11 +1359,12 @@ module Aws::ApplicationDiscoveryService
     # @!attribute [rw] order_by
     #   Certain filter criteria return output that can be sorted in
     #   ascending or descending order. For a list of output characteristics
-    #   for each filter, see [Using the ListConfigurations Action][1].
+    #   for each filter, see [Using the ListConfigurations Action][1] in the
+    #   *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::OrderByElement>]
     #
     class ListConfigurationsRequest < Struct.new(

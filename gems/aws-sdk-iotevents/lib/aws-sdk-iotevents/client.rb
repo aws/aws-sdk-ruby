@@ -266,12 +266,12 @@ module Aws::IoTEvents
     #   A brief description of the detector model.
     #
     # @option params [String] :key
-    #   The input attribute key used to identify a device or system to create
-    #   a detector (an instance of the detector model) and then to route each
-    #   input received to the appropriate detector (instance). This parameter
-    #   uses a JSON-path expression to specify the attribute-value pair in the
-    #   message payload of each input that is used to identify the device
-    #   associated with the input.
+    #   The input attribute key used to identify a device or system in order
+    #   to create a detector (an instance of the detector model) and then to
+    #   route each input received to the appropriate detector (instance). This
+    #   parameter uses a JSON-path expression to specify the attribute-value
+    #   pair in the message payload of each input that is used to identify the
+    #   device associated with the input.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that grants permission to AWS IoT Events to
@@ -281,10 +281,8 @@ module Aws::IoTEvents
     #   Metadata that can be used to manage the detector model.
     #
     # @option params [String] :evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #
     # @return [Types::CreateDetectorModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1037,10 +1035,8 @@ module Aws::IoTEvents
     #   perform its operations.
     #
     # @option params [String] :evaluation_method
-    #   When set to `SERIAL`, variables are updated and event conditions
-    #   evaluated in the order that the events are defined. When set to
-    #   `BATCH`, variables are updated and events performed only after all
-    #   event conditions are evaluated.
+    #   Information about the order in which events are evaluated and how
+    #   actions are executed.
     #
     # @return [Types::UpdateDetectorModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1324,7 +1320,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

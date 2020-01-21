@@ -563,7 +563,7 @@ module Aws::EC2
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.description #=> String
     #   resp.byoip_cidr.status_message #=> String
-    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidr AWS API Documentation
     #
@@ -11486,7 +11486,7 @@ module Aws::EC2
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.description #=> String
     #   resp.byoip_cidr.status_message #=> String
-    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionByoipCidr AWS API Documentation
     #
@@ -12301,7 +12301,7 @@ module Aws::EC2
     #   resp.byoip_cidrs[0].cidr #=> String
     #   resp.byoip_cidrs[0].description #=> String
     #   resp.byoip_cidrs[0].status_message #=> String
-    #   resp.byoip_cidrs[0].state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.byoip_cidrs[0].state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeByoipCidrs AWS API Documentation
@@ -31014,7 +31014,7 @@ module Aws::EC2
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.description #=> String
     #   resp.byoip_cidr.status_message #=> String
-    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidr AWS API Documentation
     #
@@ -35854,7 +35854,7 @@ module Aws::EC2
     #   resp.byoip_cidr.cidr #=> String
     #   resp.byoip_cidr.description #=> String
     #   resp.byoip_cidr.status_message #=> String
-    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned"
+    #   resp.byoip_cidr.state #=> String, one of "advertised", "deprovisioned", "failed-deprovision", "failed-provision", "pending-deprovision", "pending-provision", "provisioned", "provisioned-not-publicly-advertisable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/WithdrawByoipCidr AWS API Documentation
     #
@@ -35878,7 +35878,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

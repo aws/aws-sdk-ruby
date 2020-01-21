@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-01-21)
+------------------
+
+* Feature - Remove 4 deprecated data sets, change some data sets available dates to 2017-09-15
+
 1.18.0 (2019-10-23)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-01-21)
+------------------
+
+* Feature - Documentation updates for the AWS Application Discovery Service.
+
 1.23.0 (2019-11-20)
 ------------------
 
