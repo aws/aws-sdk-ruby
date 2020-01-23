@@ -759,6 +759,65 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Cancels an export task in progress that is exporting a snapshot to
+    # Amazon S3. Any data that has already been written to the S3 bucket
+    # isn't removed.
+    #
+    # @option params [required, String] :export_task_identifier
+    #   The identifier of the snapshot export task to cancel.
+    #
+    # @return [Types::ExportTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTask#export_task_identifier #export_task_identifier} => String
+    #   * {Types::ExportTask#source_arn #source_arn} => String
+    #   * {Types::ExportTask#export_only #export_only} => Array&lt;String&gt;
+    #   * {Types::ExportTask#snapshot_time #snapshot_time} => Time
+    #   * {Types::ExportTask#task_start_time #task_start_time} => Time
+    #   * {Types::ExportTask#task_end_time #task_end_time} => Time
+    #   * {Types::ExportTask#s3_bucket #s3_bucket} => String
+    #   * {Types::ExportTask#s3_prefix #s3_prefix} => String
+    #   * {Types::ExportTask#iam_role_arn #iam_role_arn} => String
+    #   * {Types::ExportTask#kms_key_id #kms_key_id} => String
+    #   * {Types::ExportTask#status #status} => String
+    #   * {Types::ExportTask#percent_progress #percent_progress} => Integer
+    #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
+    #   * {Types::ExportTask#failure_cause #failure_cause} => String
+    #   * {Types::ExportTask#warning_message #warning_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_export_task({
+    #     export_task_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_task_identifier #=> String
+    #   resp.source_arn #=> String
+    #   resp.export_only #=> Array
+    #   resp.export_only[0] #=> String
+    #   resp.snapshot_time #=> Time
+    #   resp.task_start_time #=> Time
+    #   resp.task_end_time #=> Time
+    #   resp.s3_bucket #=> String
+    #   resp.s3_prefix #=> String
+    #   resp.iam_role_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.status #=> String
+    #   resp.percent_progress #=> Integer
+    #   resp.total_extracted_data_in_gb #=> Integer
+    #   resp.failure_cause #=> String
+    #   resp.warning_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelExportTask AWS API Documentation
+    #
+    # @overload cancel_export_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_export_task(params = {}, options = {})
+      req = build_request(:cancel_export_task, params)
+      req.send_request(options)
+    end
+
     # Copies the specified DB cluster parameter group.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
@@ -900,7 +959,7 @@ module Aws::RDS
     #     action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB
-    #     cluster snapshot will be created in.
+    #     cluster snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied.
@@ -994,9 +1053,9 @@ module Aws::RDS
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
-    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-    #   KMS key alias for the KMS encryption key.
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
@@ -1038,7 +1097,7 @@ module Aws::RDS
     #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
+    #     snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied. This
@@ -1732,9 +1791,9 @@ module Aws::RDS
     #   the specified CharacterSet.
     #
     # @option params [String] :database_name
-    #   The name for your database of up to 64 alpha-numeric characters. If
-    #   you do not provide a name, Amazon RDS will not create a database in
-    #   the DB cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. If you
+    #   do not provide a name, Amazon RDS doesn't create a database in the DB
+    #   cluster you are creating.
     #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier. This parameter is stored as a lowercase
@@ -3123,7 +3182,7 @@ module Aws::RDS
     #   option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
+    #   TDE, can't be removed from an option group. Also, that option group
     #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     #
@@ -4713,7 +4772,7 @@ module Aws::RDS
     end
 
     # Creates an RDS event notification subscription. This action requires a
-    # topic ARN (Amazon Resource Name) created by either the RDS console,
+    # topic Amazon Resource Name (ARN) created by either the RDS console,
     # the SNS console, or the SNS API. To obtain an ARN with SNS, you must
     # create a topic in Amazon SNS and subscribe to the topic. The ARN is
     # displayed in the SNS console.
@@ -4729,8 +4788,8 @@ module Aws::RDS
     # db-instance and SourceIdentifier = myDBInstance1, you are notified of
     # all the db-instance events for the specified source. If you specify a
     # SourceType but do not specify a SourceIdentifier, you receive notice
-    # of the events for that source type for all your RDS sources. If you do
-    # not specify either the SourceType nor the SourceIdentifier, you are
+    # of the events for that source type for all your RDS sources. If you
+    # don't specify either the SourceType or the SourceIdentifier, you are
     # notified of events generated from all RDS sources belonging to your
     # customer account.
     #
@@ -4773,7 +4832,7 @@ module Aws::RDS
     #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain only
-    #   ASCII letters, digits, and hyphens; it can't end with a hyphen or
+    #   ASCII letters, digits, and hyphens. It can't end with a hyphen or
     #   contain two consecutive hyphens.
     #
     #   Constraints:
@@ -5480,9 +5539,9 @@ module Aws::RDS
     # action `DescribeDBInstance` is used to monitor the status of this
     # operation. The action can't be canceled or reverted once submitted.
     #
-    # Note that when a DB instance is in a failure state and has a status of
-    # `failed`, `incompatible-restore`, or `incompatible-network`, you can
-    # only delete it when you skip creation of the final snapshot with the
+    # When a DB instance is in a failure state and has a status of `failed`,
+    # `incompatible-restore`, or `incompatible-network`, you can only delete
+    # it when you skip creation of the final snapshot with the
     # `SkipFinalSnapshot` parameter.
     #
     # If the specified DB instance is part of an Amazon Aurora DB cluster,
@@ -5517,7 +5576,7 @@ module Aws::RDS
     #   created before the DB instance is deleted. By default, skip isn't
     #   specified, and the DB snapshot is created.
     #
-    #   Note that when a DB instance is in a failure state and has a status of
+    #   When a DB instance is in a failure state and has a status of
     #   'failed', 'incompatible-restore', or 'incompatible-network', it
     #   can only be deleted when skip is specified.
     #
@@ -9192,6 +9251,98 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Returns information about a snapshot export to Amazon S3. This API
+    # operation supports pagination.
+    #
+    # @option params [String] :export_task_identifier
+    #   The identifier of the snapshot export task to be described.
+    #
+    # @option params [String] :source_arn
+    #   The Amazon Resource Name (ARN) of the snapshot exported to Amazon S3.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Filters specify one or more snapshot exports to describe. The filters
+    #   are specified as name-value pairs that define what to include in the
+    #   output.
+    #
+    #   Supported filters include the following:
+    #
+    #   * `export-task-identifier` - An identifier for the snapshot export
+    #     task.
+    #
+    #   * `s3-bucket` - The Amazon S3 bucket the snapshot is exported to.
+    #
+    #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot
+    #     exported to Amazon S3
+    #
+    #   * `status` - The status of the export task.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeExportTasks` request. If you specify this parameter, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by the `MaxRecords` parameter.
+    #
+    # @option params [String] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified value, a pagination token called a
+    #   marker is included in the response. You can use the marker in a later
+    #   `DescribeExportTasks` request to retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @return [Types::ExportTasksMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTasksMessage#marker #marker} => String
+    #   * {Types::ExportTasksMessage#export_tasks #export_tasks} => Array&lt;Types::ExportTask&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export_tasks({
+    #     export_task_identifier: "String",
+    #     source_arn: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     marker: "String",
+    #     max_records: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.export_tasks #=> Array
+    #   resp.export_tasks[0].export_task_identifier #=> String
+    #   resp.export_tasks[0].source_arn #=> String
+    #   resp.export_tasks[0].export_only #=> Array
+    #   resp.export_tasks[0].export_only[0] #=> String
+    #   resp.export_tasks[0].snapshot_time #=> Time
+    #   resp.export_tasks[0].task_start_time #=> Time
+    #   resp.export_tasks[0].task_end_time #=> Time
+    #   resp.export_tasks[0].s3_bucket #=> String
+    #   resp.export_tasks[0].s3_prefix #=> String
+    #   resp.export_tasks[0].iam_role_arn #=> String
+    #   resp.export_tasks[0].kms_key_id #=> String
+    #   resp.export_tasks[0].status #=> String
+    #   resp.export_tasks[0].percent_progress #=> Integer
+    #   resp.export_tasks[0].total_extracted_data_in_gb #=> Integer
+    #   resp.export_tasks[0].failure_cause #=> String
+    #   resp.export_tasks[0].warning_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasks AWS API Documentation
+    #
+    # @overload describe_export_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_export_tasks(params = {}, options = {})
+      req = build_request(:describe_export_tasks, params)
+      req.send_request(options)
+    end
+
     # Returns information about Aurora global database clusters. This API
     # supports pagination.
     #
@@ -10643,8 +10794,8 @@ module Aws::RDS
     end
 
     # Override the system-default Secure Sockets Layer/Transport Layer
-    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or
-    # remove the override.
+    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances
+    # temporarily, or remove the override.
     #
     # By using this operation, you can specify an RDS-approved SSL/TLS
     # certificate for new DB instances that is different from the default
@@ -12373,7 +12524,7 @@ module Aws::RDS
     # @option params [required, Array<Types::Parameter>] :parameters
     #   An array of parameter names, values, and the apply method for the
     #   parameter update. At least one parameter name, value, and apply method
-    #   must be supplied; subsequent arguments are optional. A maximum of 20
+    #   must be supplied; later arguments are optional. A maximum of 20
     #   parameters can be modified in a single request.
     #
     #   Valid Values (for the application method): `immediate |
@@ -12886,9 +13037,9 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Modifies an existing RDS event notification subscription. Note that
-    # you can't modify the source identifiers using this call; to change
-    # source identifiers for a subscription, use the
+    # Modifies an existing RDS event notification subscription. You can't
+    # modify the source identifiers using this call. To change source
+    # identifiers for a subscription, use the
     # `AddSourceIdentifierToSubscription` and
     # `RemoveSourceIdentifierFromSubscription` calls.
     #
@@ -17507,6 +17658,110 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Starts an export of a snapshot to Amazon S3. The provided IAM role
+    # must have access to the S3 bucket.
+    #
+    # @option params [required, String] :export_task_identifier
+    #   A unique identifier for the snapshot export task. This ID isn't an
+    #   identifier for the Amazon S3 bucket where the snapshot is to be
+    #   exported to.
+    #
+    # @option params [required, String] :source_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to export to Amazon S3.
+    #
+    # @option params [required, String] :s3_bucket_name
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #
+    # @option params [required, String] :iam_role_arn
+    #   The name of the IAM role to use for writing to the Amazon S3 bucket
+    #   when exporting a snapshot.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The ID of the AWS KMS key to use to encrypt the snapshot exported to
+    #   Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
+    #   key identifier, or the KMS key alias for the KMS encryption key. The
+    #   IAM role used for the snapshot export must have encryption and
+    #   decryption permissions to use this KMS key.
+    #
+    # @option params [String] :s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #
+    # @option params [Array<String>] :export_only
+    #   The data to be exported from the snapshot. If this parameter is not
+    #   provided, all the snapshot data is exported. Valid values are the
+    #   following:
+    #
+    #   * `database` - Export all the data of the snapshot.
+    #
+    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #
+    #   * `database.schema [schema-name]` - Export a database schema of the
+    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
+    #     MariaDB, or Aurora MySQL.
+    #
+    #   * `database.schema.table [table-name]` - Export a table of the
+    #     database schema. This value isn't valid for RDS for MySQL, RDS for
+    #     MariaDB, or Aurora MySQL.
+    #
+    # @return [Types::ExportTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportTask#export_task_identifier #export_task_identifier} => String
+    #   * {Types::ExportTask#source_arn #source_arn} => String
+    #   * {Types::ExportTask#export_only #export_only} => Array&lt;String&gt;
+    #   * {Types::ExportTask#snapshot_time #snapshot_time} => Time
+    #   * {Types::ExportTask#task_start_time #task_start_time} => Time
+    #   * {Types::ExportTask#task_end_time #task_end_time} => Time
+    #   * {Types::ExportTask#s3_bucket #s3_bucket} => String
+    #   * {Types::ExportTask#s3_prefix #s3_prefix} => String
+    #   * {Types::ExportTask#iam_role_arn #iam_role_arn} => String
+    #   * {Types::ExportTask#kms_key_id #kms_key_id} => String
+    #   * {Types::ExportTask#status #status} => String
+    #   * {Types::ExportTask#percent_progress #percent_progress} => Integer
+    #   * {Types::ExportTask#total_extracted_data_in_gb #total_extracted_data_in_gb} => Integer
+    #   * {Types::ExportTask#failure_cause #failure_cause} => String
+    #   * {Types::ExportTask#warning_message #warning_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_export_task({
+    #     export_task_identifier: "String", # required
+    #     source_arn: "String", # required
+    #     s3_bucket_name: "String", # required
+    #     iam_role_arn: "String", # required
+    #     kms_key_id: "String", # required
+    #     s3_prefix: "String",
+    #     export_only: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_task_identifier #=> String
+    #   resp.source_arn #=> String
+    #   resp.export_only #=> Array
+    #   resp.export_only[0] #=> String
+    #   resp.snapshot_time #=> Time
+    #   resp.task_start_time #=> Time
+    #   resp.task_end_time #=> Time
+    #   resp.s3_bucket #=> String
+    #   resp.s3_prefix #=> String
+    #   resp.iam_role_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.status #=> String
+    #   resp.percent_progress #=> Integer
+    #   resp.total_extracted_data_in_gb #=> Integer
+    #   resp.failure_cause #=> String
+    #   resp.warning_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTask AWS API Documentation
+    #
+    # @overload start_export_task(params = {})
+    # @param [Hash] params ({})
+    def start_export_task(params = {}, options = {})
+      req = build_request(:start_export_task, params)
+      req.send_request(options)
+    end
+
     # Stops a database activity stream that was started using the AWS
     # console, the `start-activity-stream` AWS CLI command, or the
     # `StartActivityStream` action.
@@ -17842,7 +18097,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

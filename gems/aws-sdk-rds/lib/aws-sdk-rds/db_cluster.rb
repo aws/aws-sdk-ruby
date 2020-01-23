@@ -622,9 +622,9 @@ module Aws::RDS
     #   A value that indicates that the DB cluster should be associated with
     #   the specified CharacterSet.
     # @option options [String] :database_name
-    #   The name for your database of up to 64 alpha-numeric characters. If
-    #   you do not provide a name, Amazon RDS will not create a database in
-    #   the DB cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. If you
+    #   do not provide a name, Amazon RDS doesn't create a database in the DB
+    #   cluster you are creating.
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
     #   cluster. If you do not specify a value, then the default DB cluster

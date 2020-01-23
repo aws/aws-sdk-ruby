@@ -647,12 +647,12 @@ module Aws::IAM
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
-    #   ASCII character from the space (\\u0020) through the end of the ASCII
-    #   character range (\\u00FF). You can also include the tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D) characters. Any of
-    #   these characters are valid in a password. However, many tools, such as
-    #   the AWS Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   ASCII character from the space (`\u0020`) through the end of the ASCII
+    #   character range (`\u00FF`). You can also include the tab (`\u0009`),
+    #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
+    #   of these characters are valid in a password. However, many tools, such
+    #   as the AWS Management Console, might restrict the ability to type
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -834,8 +834,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -932,8 +932,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -1035,12 +1035,12 @@ module Aws::IAM
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
-    #   ASCII character from the space (\\u0020) through the end of the ASCII
-    #   character range (\\u00FF). You can also include the tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D) characters. Any of
-    #   these characters are valid in a password. However, many tools, such as
-    #   the AWS Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   ASCII character from the space (`\u0020`) through the end of the ASCII
+    #   character range (`\u00FF`). You can also include the tab (`\u0009`),
+    #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
+    #   of these characters are valid in a password. However, many tools, such
+    #   as the AWS Management Console, might restrict the ability to type
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -1113,7 +1113,8 @@ module Aws::IAM
     #   application or applications that are allowed to authenticate using
     #   the OIDC provider
     #
-    # * A list of thumbprints of the server certificate(s) that the IdP uses
+    # * A list of thumbprints of one or more server certificates that the
+    #   IdP uses
     #
     # You get all of this information from the OIDC IdP that you want to use
     # to access AWS.
@@ -1260,8 +1261,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -1282,13 +1283,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -1381,13 +1382,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -1456,8 +1457,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -1486,13 +1487,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #   Upon success, the response includes the same trust policy in JSON
     #   format.
@@ -1874,8 +1875,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -2001,8 +2002,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -4147,13 +4148,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -4229,13 +4230,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -5978,8 +5979,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -6074,8 +6075,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -6170,8 +6171,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -6266,8 +6267,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -6451,7 +6452,7 @@ module Aws::IAM
     #   [regex pattern][1]) a string of characters consisting of either a
     #   forward slash (/) by itself or a string that must begin and end with
     #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -6663,7 +6664,7 @@ module Aws::IAM
     #   (through its [regex pattern][1]) a string of characters consisting of
     #   either a forward slash (/) by itself or a string that must begin and
     #   end with forward slashes. In addition, it can contain any ASCII
-    #   character from the ! (\\u0021) through the DEL character (\\u007F),
+    #   character from the ! (`\u0021`) through the DEL character (`\u007F`),
     #   including most punctuation characters, digits, and upper and
     #   lowercased letters.
     #
@@ -6964,8 +6965,8 @@ module Aws::IAM
     #   policies. This parameter allows (through its [regex pattern][1]) a
     #   string of characters consisting of either a forward slash (/) by
     #   itself or a string that must begin and end with forward slashes. In
-    #   addition, it can contain any ASCII character from the ! (\\u0021)
-    #   through the DEL character (\\u007F), including most punctuation
+    #   addition, it can contain any ASCII character from the ! (`\u0021`)
+    #   through the DEL character (`\u007F`), including most punctuation
     #   characters, digits, and upper and lowercased letters.
     #
     #
@@ -7457,7 +7458,7 @@ module Aws::IAM
     #   [regex pattern][1]) a string of characters consisting of either a
     #   forward slash (/) by itself or a string that must begin and end with
     #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -7662,7 +7663,7 @@ module Aws::IAM
     #   (through its [regex pattern][1]) a string of characters consisting of
     #   either a forward slash (/) by itself or a string that must begin and
     #   end with forward slashes. In addition, it can contain any ASCII
-    #   character from the ! (\\u0021) through the DEL character (\\u007F),
+    #   character from the ! (`\u0021`) through the DEL character (`\u007F`),
     #   including most punctuation characters, digits, and upper and
     #   lowercased letters.
     #
@@ -8068,7 +8069,7 @@ module Aws::IAM
     #   [regex pattern][1]) a string of characters consisting of either a
     #   forward slash (/) by itself or a string that must begin and end with
     #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -8317,13 +8318,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -8472,13 +8473,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -8617,13 +8618,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -9081,14 +9082,14 @@ module Aws::IAM
     # authorization to determine if the simulated policies allow or deny the
     # operations.
     #
-    # If you want to simulate existing policies attached to an IAM user,
-    # group, or role, use SimulatePrincipalPolicy instead.
+    # If you want to simulate existing policies that are attached to an IAM
+    # user, group, or role, use SimulatePrincipalPolicy instead.
     #
-    # Context keys are variables maintained by AWS and its services that
-    # provide details about the context of an API query request. You can use
-    # the `Condition` element of an IAM policy to evaluate context keys. To
-    # get the list of context keys that the policies require for correct
-    # simulation, use GetContextKeysForCustomPolicy.
+    # Context keys are variables that are maintained by AWS and its services
+    # and which provide details about the context of an API query request.
+    # You can use the `Condition` element of an IAM policy to evaluate
+    # context keys. To get the list of context keys that the policies
+    # require for correct simulation, use GetContextKeysForCustomPolicy.
     #
     # If the output is long, you can use `MaxItems` and `Marker` parameters
     # to paginate the results.
@@ -9108,19 +9109,45 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html
     #   [3]: http://wikipedia.org/wiki/regex
+    #
+    # @option params [Array<String>] :permissions_boundary_policy_input_list
+    #   The IAM permissions boundary policy to simulate. The permissions
+    #   boundary sets the maximum permissions that an IAM entity can have. You
+    #   can input only one permissions boundary when you pass a policy to this
+    #   operation. For more information about permissions boundaries, see
+    #   [Permissions Boundaries for IAM Entities][1] in the *IAM User Guide*.
+    #   The policy input is specified as a string that contains the complete,
+    #   valid JSON text of a permissions boundary policy.
+    #
+    #   The [regex pattern][2] used to validate this parameter is a string of
+    #   characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (`\u0020`) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`)
+    #
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, Array<String>] :action_names
     #   A list of names of API operations to evaluate in the simulation. Each
@@ -9162,13 +9189,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -9279,6 +9306,7 @@ module Aws::IAM
     #
     #   resp = client.simulate_custom_policy({
     #     policy_input_list: ["policyDocumentType"], # required
+    #     permissions_boundary_policy_input_list: ["policyDocumentType"],
     #     action_names: ["ActionNameType"], # required
     #     resource_arns: ["ResourceNameType"],
     #     resource_policy: "policyDocumentType",
@@ -9312,6 +9340,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].missing_context_values #=> Array
     #   resp.evaluation_results[0].missing_context_values[0] #=> String
     #   resp.evaluation_results[0].organizations_decision_detail.allowed_by_organizations #=> Boolean
+    #   resp.evaluation_results[0].permissions_boundary_decision_detail.allowed_by_permissions_boundary #=> Boolean
     #   resp.evaluation_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
     #   resp.evaluation_results[0].resource_specific_results #=> Array
@@ -9328,6 +9357,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].resource_specific_results[0].missing_context_values[0] #=> String
     #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
+    #   resp.evaluation_results[0].resource_specific_results[0].permissions_boundary_decision_detail.allowed_by_permissions_boundary #=> Boolean
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -9397,17 +9427,47 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    #
+    # @option params [Array<String>] :permissions_boundary_policy_input_list
+    #   The IAM permissions boundary policy to simulate. The permissions
+    #   boundary sets the maximum permissions that the entity can have. You
+    #   can input only one permissions boundary when you pass a policy to this
+    #   operation. An IAM entity can only have one permissions boundary in
+    #   effect at a time. For example, if a permissions boundary is attached
+    #   to an entity and you pass in a different permissions boundary policy
+    #   using this parameter, then the new permission boundary policy is used
+    #   for the simulation. For more information about permissions boundaries,
+    #   see [Permissions Boundaries for IAM Entities][1] in the *IAM User
+    #   Guide*. The policy input is specified as a string containing the
+    #   complete, valid JSON text of a permissions boundary policy.
+    #
+    #   The [regex pattern][2] used to validate this parameter is a string of
+    #   characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (`\u0020`) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through `\u00FF`)
+    #
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    #   [2]: http://wikipedia.org/wiki/regex
     #
     # @option params [required, Array<String>] :action_names
     #   A list of names of API operations to evaluate in the simulation. Each
@@ -9444,13 +9504,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -9572,6 +9632,7 @@ module Aws::IAM
     #   resp = client.simulate_principal_policy({
     #     policy_source_arn: "arnType", # required
     #     policy_input_list: ["policyDocumentType"],
+    #     permissions_boundary_policy_input_list: ["policyDocumentType"],
     #     action_names: ["ActionNameType"], # required
     #     resource_arns: ["ResourceNameType"],
     #     resource_policy: "policyDocumentType",
@@ -9605,6 +9666,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].missing_context_values #=> Array
     #   resp.evaluation_results[0].missing_context_values[0] #=> String
     #   resp.evaluation_results[0].organizations_decision_detail.allowed_by_organizations #=> Boolean
+    #   resp.evaluation_results[0].permissions_boundary_decision_detail.allowed_by_permissions_boundary #=> Boolean
     #   resp.evaluation_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
     #   resp.evaluation_results[0].resource_specific_results #=> Array
@@ -9621,6 +9683,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].resource_specific_results[0].missing_context_values[0] #=> String
     #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
+    #   resp.evaluation_results[0].resource_specific_results[0].permissions_boundary_decision_detail.allowed_by_permissions_boundary #=> Boolean
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -10184,13 +10247,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -10265,8 +10328,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -10339,13 +10402,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #   However, the format can be further restricted by the account
     #   administrator by setting a password policy on the AWS account. For
@@ -10705,8 +10768,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -10908,8 +10971,8 @@ module Aws::IAM
     #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -10988,13 +11051,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -11076,8 +11139,8 @@ module Aws::IAM
     #   slash (/). This parameter allows (through its [regex pattern][2]) a
     #   string of characters consisting of either a forward slash (/) by
     #   itself or a string that must begin and end with forward slashes. In
-    #   addition, it can contain any ASCII character from the ! (\\u0021)
-    #   through the DEL character (\\u007F), including most punctuation
+    #   addition, it can contain any ASCII character from the ! (`\u0021`)
+    #   through the DEL character (`\u007F`), including most punctuation
     #   characters, digits, and upper and lowercased letters.
     #
     #   <note markdown="1"> If you are uploading a server certificate specifically for use with
@@ -11112,13 +11175,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -11131,13 +11194,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -11151,13 +11214,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -11263,13 +11326,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -11337,7 +11400,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

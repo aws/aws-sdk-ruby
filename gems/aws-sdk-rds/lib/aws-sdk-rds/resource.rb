@@ -91,9 +91,9 @@ module Aws::RDS
     #   A value that indicates that the DB cluster should be associated with
     #   the specified CharacterSet.
     # @option options [String] :database_name
-    #   The name for your database of up to 64 alpha-numeric characters. If
-    #   you do not provide a name, Amazon RDS will not create a database in
-    #   the DB cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. If you
+    #   do not provide a name, Amazon RDS doesn't create a database in the DB
+    #   cluster you are creating.
     # @option options [required, String] :db_cluster_identifier
     #   The DB cluster identifier. This parameter is stored as a lowercase
     #   string.
@@ -1082,7 +1082,7 @@ module Aws::RDS
     #   option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
+    #   TDE, can't be removed from an option group. Also, that option group
     #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     # @option options [String] :character_set_name
@@ -1525,7 +1525,7 @@ module Aws::RDS
     #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain only
-    #   ASCII letters, digits, and hyphens; it can't end with a hyphen or
+    #   ASCII letters, digits, and hyphens. It can't end with a hyphen or
     #   contain two consecutive hyphens.
     #
     #   Constraints:

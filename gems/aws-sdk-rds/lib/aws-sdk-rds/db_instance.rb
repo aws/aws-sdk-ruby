@@ -1218,7 +1218,7 @@ module Aws::RDS
     #   option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced Security
-    #   TDE, can't be removed from an option group, and that option group
+    #   TDE, can't be removed from an option group. Also, that option group
     #   can't be removed from a DB instance once it is associated with a DB
     #   instance
     # @option options [String] :character_set_name
@@ -1896,7 +1896,7 @@ module Aws::RDS
     #   created before the DB instance is deleted. By default, skip isn't
     #   specified, and the DB snapshot is created.
     #
-    #   Note that when a DB instance is in a failure state and has a status of
+    #   When a DB instance is in a failure state and has a status of
     #   'failed', 'incompatible-restore', or 'incompatible-network', it
     #   can only be deleted when skip is specified.
     #

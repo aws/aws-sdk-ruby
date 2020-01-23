@@ -349,9 +349,9 @@ module Aws::RDS
     #
     #   Example: `my-cluster-snapshot2`
     # @option options [String] :kms_key_id
-    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
-    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-    #   KMS key alias for the KMS encryption key.
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
@@ -392,7 +392,7 @@ module Aws::RDS
     #     Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
-    #     snapshot will be created in.
+    #     snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied. This

@@ -540,6 +540,24 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelExportTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         export_task_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] export_task_identifier
+    #   The identifier of the snapshot export task to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelExportTaskMessage AWS API Documentation
+    #
+    class CancelExportTaskMessage < Struct.new(
+      :export_task_identifier)
+      include Aws::Structure
+    end
+
     # A CA certificate for an AWS account.
     #
     # @!attribute [rw] certificate_identifier
@@ -967,9 +985,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS
-    #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
-    #   KMS key alias for the KMS encryption key.
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
     #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a
@@ -1012,7 +1030,7 @@ module Aws::RDS
     #     AWS Region, and the action contained in the pre-signed URL.
     #
     #   * `DestinationRegion` - The name of the AWS Region that the DB
-    #     cluster snapshot will be created in.
+    #     cluster snapshot is to be created in.
     #
     #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
     #     identifier for the encrypted DB cluster snapshot to be copied.
@@ -1677,8 +1695,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name for your database of up to 64 alpha-numeric characters. If
-    #   you do not provide a name, Amazon RDS will not create a database in
+    #   The name for your database of up to 64 alphanumeric characters. If
+    #   you do not provide a name, Amazon RDS doesn't create a database in
     #   the DB cluster you are creating.
     #   @return [String]
     #
@@ -2907,7 +2925,7 @@ module Aws::RDS
     #   specified option group.
     #
     #   Permanent options, such as the TDE option for Oracle Advanced
-    #   Security TDE, can't be removed from an option group, and that
+    #   Security TDE, can't be removed from an option group. Also, that
     #   option group can't be removed from a DB instance once it is
     #   associated with a DB instance
     #   @return [String]
@@ -4226,7 +4244,7 @@ module Aws::RDS
     #   The list of identifiers of the event sources for which events are
     #   returned. If not specified, then all sources are included in the
     #   response. An identifier must begin with a letter and must contain
-    #   only ASCII letters, digits, and hyphens; it can't end with a hyphen
+    #   only ASCII letters, digits, and hyphens. It can't end with a hyphen
     #   or contain two consecutive hyphens.
     #
     #   Constraints:
@@ -4903,7 +4921,7 @@ module Aws::RDS
     # `DescribeDBClusterBacktracks` action.
     #
     # @!attribute [rw] marker
-    #   A pagination token that can be used in a subsequent
+    #   A pagination token that can be used in a later
     #   `DescribeDBClusterBacktracks` request.
     #   @return [String]
     #
@@ -5095,8 +5113,8 @@ module Aws::RDS
     # `DescribeDBClusters` action.
     #
     # @!attribute [rw] marker
-    #   A pagination token that can be used in a subsequent
-    #   DescribeDBClusters request.
+    #   A pagination token that can be used in a later DescribeDBClusters
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] db_clusters
@@ -7271,10 +7289,9 @@ module Aws::RDS
     #   created before the DB instance is deleted. By default, skip isn't
     #   specified, and the DB snapshot is created.
     #
-    #   Note that when a DB instance is in a failure state and has a status
-    #   of 'failed', 'incompatible-restore', or
-    #   'incompatible-network', it can only be deleted when skip is
-    #   specified.
+    #   When a DB instance is in a failure state and has a status of
+    #   'failed', 'incompatible-restore', or 'incompatible-network',
+    #   it can only be deleted when skip is specified.
     #
     #   Specify skip when deleting a Read Replica.
     #
@@ -8675,8 +8692,8 @@ module Aws::RDS
     #   @return [Array<Types::DescribeDBLogFilesDetails>]
     #
     # @!attribute [rw] marker
-    #   A pagination token that can be used in a subsequent
-    #   DescribeDBLogFiles request.
+    #   A pagination token that can be used in a later DescribeDBLogFiles
+    #   request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesResponse AWS API Documentation
@@ -9659,6 +9676,79 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeExportTasksMessage
+    #   data as a hash:
+    #
+    #       {
+    #         export_task_identifier: "String",
+    #         source_arn: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         marker: "String",
+    #         max_records: "String",
+    #       }
+    #
+    # @!attribute [rw] export_task_identifier
+    #   The identifier of the snapshot export task to be described.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the snapshot exported to Amazon
+    #   S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters specify one or more snapshot exports to describe. The
+    #   filters are specified as name-value pairs that define what to
+    #   include in the output.
+    #
+    #   Supported filters include the following:
+    #
+    #   * `export-task-identifier` - An identifier for the snapshot export
+    #     task.
+    #
+    #   * `s3-bucket` - The Amazon S3 bucket the snapshot is exported to.
+    #
+    #   * `source-arn` - The Amazon Resource Name (ARN) of the snapshot
+    #     exported to Amazon S3
+    #
+    #   * `status` - The status of the export task.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeExportTasks` request. If you specify this parameter, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by the `MaxRecords` parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified value, a pagination token called a
+    #   marker is included in the response. You can use the marker in a
+    #   later `DescribeExportTasks` request to retrieve the remaining
+    #   results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeExportTasksMessage AWS API Documentation
+    #
+    class DescribeExportTasksMessage < Struct.new(
+      :export_task_identifier,
+      :source_arn,
+      :filters,
+      :marker,
+      :max_records)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGlobalClustersMessage
     #   data as a hash:
     #
@@ -10408,7 +10498,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] marker
-    #   A pagination token that can be used in a subsequent
+    #   A pagination token that can be used in a later
     #   DownloadDBLogFilePortion request.
     #   @return [String]
     #
@@ -10775,6 +10865,131 @@ module Aws::RDS
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      include Aws::Structure
+    end
+
+    # Contains the details of a snapshot export to Amazon S3.
+    #
+    # This data type is used as a response element in the
+    # `DescribeExportTasks` action.
+    #
+    # @!attribute [rw] export_task_identifier
+    #   A unique identifier for the snapshot export task. This ID isn't an
+    #   identifier for the Amazon S3 bucket where the snapshot is exported
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the snapshot exported to Amazon
+    #   S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_only
+    #   The data exported from the snapshot. Valid values are the following:
+    #
+    #   * `database` - Export all the data of the snapshot.
+    #
+    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #
+    #   * `database.schema [schema-name]` - Export a database schema of the
+    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
+    #     MariaDB, or Aurora MySQL.
+    #
+    #   * `database.schema.table [table-name]` - Export a table of the
+    #     database schema. This value isn't valid for RDS for MySQL, RDS
+    #     for MariaDB, or Aurora MySQL.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_time
+    #   The time that the snapshot was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_start_time
+    #   The time that the snapshot export task started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] task_end_time
+    #   The time that the snapshot export task completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The Amazon S3 bucket that the snapshot is exported to.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix that is the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The name of the IAM role that is used to write to Amazon S3 when
+    #   exporting a snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS KMS key that is used to encrypt the snapshot when
+    #   it's exported to Amazon S3. The KMS key ID is the Amazon Resource
+    #   Name (ARN), the KMS key identifier, or the KMS key alias for the KMS
+    #   encryption key. The IAM role used for the snapshot export must have
+    #   encryption and decryption permissions to use this KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The progress status of the export task.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent_progress
+    #   The progress of the snapshot export task as a percentage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_extracted_data_in_gb
+    #   The total amount of data exported, in gigabytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_cause
+    #   The reason the export failed, if it failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning_message
+    #   A warning about the snapshot export task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTask AWS API Documentation
+    #
+    class ExportTask < Struct.new(
+      :export_task_identifier,
+      :source_arn,
+      :export_only,
+      :snapshot_time,
+      :task_start_time,
+      :task_end_time,
+      :s3_bucket,
+      :s3_prefix,
+      :iam_role_arn,
+      :kms_key_id,
+      :status,
+      :percent_progress,
+      :total_extracted_data_in_gb,
+      :failure_cause,
+      :warning_message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later `DescribeExportTasks`
+    #   request. A marker is used for pagination to identify the location to
+    #   begin output for the next response of `DescribeExportTasks`.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_tasks
+    #   Information about an export of a snapshot to Amazon S3.
+    #   @return [Array<Types::ExportTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTasksMessage AWS API Documentation
+    #
+    class ExportTasksMessage < Struct.new(
+      :marker,
+      :export_tasks)
       include Aws::Structure
     end
 
@@ -12639,8 +12854,8 @@ module Aws::RDS
     # @!attribute [rw] parameters
     #   An array of parameter names, values, and the apply method for the
     #   parameter update. At least one parameter name, value, and apply
-    #   method must be supplied; subsequent arguments are optional. A
-    #   maximum of 20 parameters can be modified in a single request.
+    #   method must be supplied; later arguments are optional. A maximum of
+    #   20 parameters can be modified in a single request.
     #
     #   Valid Values (for the application method): `immediate |
     #   pending-reboot`
@@ -17762,6 +17977,83 @@ module Aws::RDS
     #
     class StartDBInstanceResult < Struct.new(
       :db_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartExportTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         export_task_identifier: "String", # required
+    #         source_arn: "String", # required
+    #         s3_bucket_name: "String", # required
+    #         iam_role_arn: "String", # required
+    #         kms_key_id: "String", # required
+    #         s3_prefix: "String",
+    #         export_only: ["String"],
+    #       }
+    #
+    # @!attribute [rw] export_task_identifier
+    #   A unique identifier for the snapshot export task. This ID isn't an
+    #   identifier for the Amazon S3 bucket where the snapshot is to be
+    #   exported to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the snapshot to export to Amazon
+    #   S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the Amazon S3 bucket to export the snapshot to.
+    #   @return [String]
+    #
+    # @!attribute [rw] iam_role_arn
+    #   The name of the IAM role to use for writing to the Amazon S3 bucket
+    #   when exporting a snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the AWS KMS key to use to encrypt the snapshot exported to
+    #   Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS
+    #   key identifier, or the KMS key alias for the KMS encryption key. The
+    #   IAM role used for the snapshot export must have encryption and
+    #   decryption permissions to use this KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 bucket prefix to use as the file name and path of the
+    #   exported snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] export_only
+    #   The data to be exported from the snapshot. If this parameter is not
+    #   provided, all the snapshot data is exported. Valid values are the
+    #   following:
+    #
+    #   * `database` - Export all the data of the snapshot.
+    #
+    #   * `database.table [table-name]` - Export a table of the snapshot.
+    #
+    #   * `database.schema [schema-name]` - Export a database schema of the
+    #     snapshot. This value isn't valid for RDS for MySQL, RDS for
+    #     MariaDB, or Aurora MySQL.
+    #
+    #   * `database.schema.table [table-name]` - Export a table of the
+    #     database schema. This value isn't valid for RDS for MySQL, RDS
+    #     for MariaDB, or Aurora MySQL.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartExportTaskMessage AWS API Documentation
+    #
+    class StartExportTaskMessage < Struct.new(
+      :export_task_identifier,
+      :source_arn,
+      :s3_bucket_name,
+      :iam_role_arn,
+      :kms_key_id,
+      :s3_prefix,
+      :export_only)
       include Aws::Structure
     end
 

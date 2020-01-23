@@ -40,6 +40,7 @@ module Aws::RDS
     BackupPolicyNotFoundFault = Shapes::StructureShape.new(name: 'BackupPolicyNotFoundFault')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
+    CancelExportTaskMessage = Shapes::StructureShape.new(name: 'CancelExportTaskMessage')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
     CertificateMessage = Shapes::StructureShape.new(name: 'CertificateMessage')
@@ -268,6 +269,7 @@ module Aws::RDS
     DescribeEventCategoriesMessage = Shapes::StructureShape.new(name: 'DescribeEventCategoriesMessage')
     DescribeEventSubscriptionsMessage = Shapes::StructureShape.new(name: 'DescribeEventSubscriptionsMessage')
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
+    DescribeExportTasksMessage = Shapes::StructureShape.new(name: 'DescribeExportTasksMessage')
     DescribeGlobalClustersMessage = Shapes::StructureShape.new(name: 'DescribeGlobalClustersMessage')
     DescribeInstallationMediaMessage = Shapes::StructureShape.new(name: 'DescribeInstallationMediaMessage')
     DescribeOptionGroupOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOptionGroupOptionsMessage')
@@ -305,6 +307,11 @@ module Aws::RDS
     EventSubscriptionsList = Shapes::ListShape.new(name: 'EventSubscriptionsList')
     EventSubscriptionsMessage = Shapes::StructureShape.new(name: 'EventSubscriptionsMessage')
     EventsMessage = Shapes::StructureShape.new(name: 'EventsMessage')
+    ExportTask = Shapes::StructureShape.new(name: 'ExportTask')
+    ExportTaskAlreadyExistsFault = Shapes::StructureShape.new(name: 'ExportTaskAlreadyExistsFault')
+    ExportTaskNotFoundFault = Shapes::StructureShape.new(name: 'ExportTaskNotFoundFault')
+    ExportTasksList = Shapes::ListShape.new(name: 'ExportTasksList')
+    ExportTasksMessage = Shapes::StructureShape.new(name: 'ExportTasksMessage')
     FailoverDBClusterMessage = Shapes::StructureShape.new(name: 'FailoverDBClusterMessage')
     FailoverDBClusterResult = Shapes::StructureShape.new(name: 'FailoverDBClusterResult')
     FeatureNameList = Shapes::ListShape.new(name: 'FeatureNameList')
@@ -322,6 +329,8 @@ module Aws::RDS
     IAMAuthMode = Shapes::StringShape.new(name: 'IAMAuthMode')
     IPRange = Shapes::StructureShape.new(name: 'IPRange')
     IPRangeList = Shapes::ListShape.new(name: 'IPRangeList')
+    IamRoleMissingPermissionsFault = Shapes::StructureShape.new(name: 'IamRoleMissingPermissionsFault')
+    IamRoleNotFoundFault = Shapes::StructureShape.new(name: 'IamRoleNotFoundFault')
     ImportInstallationMediaMessage = Shapes::StructureShape.new(name: 'ImportInstallationMediaMessage')
     InstallationMedia = Shapes::StructureShape.new(name: 'InstallationMedia')
     InstallationMediaAlreadyExistsFault = Shapes::StructureShape.new(name: 'InstallationMediaAlreadyExistsFault')
@@ -349,6 +358,9 @@ module Aws::RDS
     InvalidDBSubnetGroupStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetGroupStateFault')
     InvalidDBSubnetStateFault = Shapes::StructureShape.new(name: 'InvalidDBSubnetStateFault')
     InvalidEventSubscriptionStateFault = Shapes::StructureShape.new(name: 'InvalidEventSubscriptionStateFault')
+    InvalidExportOnlyFault = Shapes::StructureShape.new(name: 'InvalidExportOnlyFault')
+    InvalidExportSourceStateFault = Shapes::StructureShape.new(name: 'InvalidExportSourceStateFault')
+    InvalidExportTaskStateFault = Shapes::StructureShape.new(name: 'InvalidExportTaskStateFault')
     InvalidGlobalClusterStateFault = Shapes::StructureShape.new(name: 'InvalidGlobalClusterStateFault')
     InvalidOptionGroupStateFault = Shapes::StructureShape.new(name: 'InvalidOptionGroupStateFault')
     InvalidRestoreFault = Shapes::StructureShape.new(name: 'InvalidRestoreFault')
@@ -505,6 +517,7 @@ module Aws::RDS
     StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
     StartDBInstanceMessage = Shapes::StructureShape.new(name: 'StartDBInstanceMessage')
     StartDBInstanceResult = Shapes::StructureShape.new(name: 'StartDBInstanceResult')
+    StartExportTaskMessage = Shapes::StructureShape.new(name: 'StartExportTaskMessage')
     StopActivityStreamRequest = Shapes::StructureShape.new(name: 'StopActivityStreamRequest')
     StopActivityStreamResponse = Shapes::StructureShape.new(name: 'StopActivityStreamResponse')
     StopDBClusterMessage = Shapes::StructureShape.new(name: 'StopDBClusterMessage')
@@ -617,6 +630,9 @@ module Aws::RDS
     BacktrackDBClusterMessage.add_member(:force, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Force"))
     BacktrackDBClusterMessage.add_member(:use_earliest_time_on_point_in_time_unavailable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseEarliestTimeOnPointInTimeUnavailable"))
     BacktrackDBClusterMessage.struct_class = Types::BacktrackDBClusterMessage
+
+    CancelExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
+    CancelExportTaskMessage.struct_class = Types::CancelExportTaskMessage
 
     Certificate.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     Certificate.add_member(:certificate_type, Shapes::ShapeRef.new(shape: String, location_name: "CertificateType"))
@@ -1729,6 +1745,13 @@ module Aws::RDS
     DescribeEventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeEventsMessage.struct_class = Types::DescribeEventsMessage
 
+    DescribeExportTasksMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ExportTaskIdentifier"))
+    DescribeExportTasksMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
+    DescribeExportTasksMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    DescribeExportTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeExportTasksMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: String, location_name: "MaxRecords"))
+    DescribeExportTasksMessage.struct_class = Types::DescribeExportTasksMessage
+
     DescribeGlobalClustersMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
     DescribeGlobalClustersMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeGlobalClustersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -1895,6 +1918,29 @@ module Aws::RDS
     EventsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     EventsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventList, location_name: "Events"))
     EventsMessage.struct_class = Types::EventsMessage
+
+    ExportTask.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ExportTaskIdentifier"))
+    ExportTask.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceArn"))
+    ExportTask.add_member(:export_only, Shapes::ShapeRef.new(shape: StringList, location_name: "ExportOnly"))
+    ExportTask.add_member(:snapshot_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotTime"))
+    ExportTask.add_member(:task_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "TaskStartTime"))
+    ExportTask.add_member(:task_end_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "TaskEndTime"))
+    ExportTask.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: String, location_name: "S3Bucket"))
+    ExportTask.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3Prefix"))
+    ExportTask.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
+    ExportTask.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    ExportTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+    ExportTask.add_member(:percent_progress, Shapes::ShapeRef.new(shape: Integer, location_name: "PercentProgress"))
+    ExportTask.add_member(:total_extracted_data_in_gb, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalExtractedDataInGB"))
+    ExportTask.add_member(:failure_cause, Shapes::ShapeRef.new(shape: String, location_name: "FailureCause"))
+    ExportTask.add_member(:warning_message, Shapes::ShapeRef.new(shape: String, location_name: "WarningMessage"))
+    ExportTask.struct_class = Types::ExportTask
+
+    ExportTasksList.member = Shapes::ShapeRef.new(shape: ExportTask, location_name: "ExportTask")
+
+    ExportTasksMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    ExportTasksMessage.add_member(:export_tasks, Shapes::ShapeRef.new(shape: ExportTasksList, location_name: "ExportTasks"))
+    ExportTasksMessage.struct_class = Types::ExportTasksMessage
 
     FailoverDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     FailoverDBClusterMessage.add_member(:target_db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "TargetDBInstanceIdentifier"))
@@ -2773,6 +2819,15 @@ module Aws::RDS
     StartDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     StartDBInstanceResult.struct_class = Types::StartDBInstanceResult
 
+    StartExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
+    StartExportTaskMessage.add_member(:source_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceArn"))
+    StartExportTaskMessage.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
+    StartExportTaskMessage.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
+    StartExportTaskMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "KmsKeyId"))
+    StartExportTaskMessage.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3Prefix"))
+    StartExportTaskMessage.add_member(:export_only, Shapes::ShapeRef.new(shape: StringList, location_name: "ExportOnly"))
+    StartExportTaskMessage.struct_class = Types::StartExportTaskMessage
+
     StopActivityStreamRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceArn"))
     StopActivityStreamRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ApplyImmediately"))
     StopActivityStreamRequest.struct_class = Types::StopActivityStreamRequest
@@ -2976,6 +3031,16 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: DBClusterBacktrack)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+      end)
+
+      api.add_operation(:cancel_export_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelExportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelExportTaskMessage)
+        o.output = Shapes::ShapeRef.new(shape: ExportTask)
+        o.errors << Shapes::ShapeRef.new(shape: ExportTaskNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExportTaskStateFault)
       end)
 
       api.add_operation(:copy_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -3790,6 +3855,21 @@ module Aws::RDS
         )
       end)
 
+      api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExportTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExportTasksMessage)
+        o.output = Shapes::ShapeRef.new(shape: ExportTasksMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ExportTaskNotFoundFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_global_clusters, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeGlobalClusters"
         o.http_method = "POST"
@@ -4507,6 +4587,23 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:start_export_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartExportTaskMessage)
+        o.output = Shapes::ShapeRef.new(shape: ExportTask)
+        o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ExportTaskAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3BucketFault)
+        o.errors << Shapes::ShapeRef.new(shape: IamRoleNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: IamRoleMissingPermissionsFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExportOnlyFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExportSourceStateFault)
       end)
 
       api.add_operation(:stop_activity_stream, Seahorse::Model::Operation.new.tap do |o|

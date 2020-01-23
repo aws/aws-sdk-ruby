@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-01-23)
+------------------
+
+* Feature - This release enables the Identity and Access Management policy simulator to simulate permissions boundary policies.
+
 1.32.0 (2019-11-19)
 ------------------
 

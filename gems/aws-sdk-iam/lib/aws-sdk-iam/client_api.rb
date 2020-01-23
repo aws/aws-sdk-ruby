@@ -246,6 +246,7 @@ module Aws::IAM
     PasswordPolicy = Shapes::StructureShape.new(name: 'PasswordPolicy')
     PasswordPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordPolicyViolationException')
     PermissionsBoundaryAttachmentType = Shapes::StringShape.new(name: 'PermissionsBoundaryAttachmentType')
+    PermissionsBoundaryDecisionDetail = Shapes::StructureShape.new(name: 'PermissionsBoundaryDecisionDetail')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyDetail = Shapes::StructureShape.new(name: 'PolicyDetail')
     PolicyEvaluationDecisionType = Shapes::StringShape.new(name: 'PolicyEvaluationDecisionType')
@@ -813,6 +814,7 @@ module Aws::IAM
     EvaluationResult.add_member(:matched_statements, Shapes::ShapeRef.new(shape: StatementListType, location_name: "MatchedStatements"))
     EvaluationResult.add_member(:missing_context_values, Shapes::ShapeRef.new(shape: ContextKeyNamesResultListType, location_name: "MissingContextValues"))
     EvaluationResult.add_member(:organizations_decision_detail, Shapes::ShapeRef.new(shape: OrganizationsDecisionDetail, location_name: "OrganizationsDecisionDetail"))
+    EvaluationResult.add_member(:permissions_boundary_decision_detail, Shapes::ShapeRef.new(shape: PermissionsBoundaryDecisionDetail, location_name: "PermissionsBoundaryDecisionDetail"))
     EvaluationResult.add_member(:eval_decision_details, Shapes::ShapeRef.new(shape: EvalDecisionDetailsType, location_name: "EvalDecisionDetails"))
     EvaluationResult.add_member(:resource_specific_results, Shapes::ShapeRef.new(shape: ResourceSpecificResultListType, location_name: "ResourceSpecificResults"))
     EvaluationResult.struct_class = Types::EvaluationResult
@@ -1420,6 +1422,9 @@ module Aws::IAM
     PasswordPolicyViolationException.add_member(:message, Shapes::ShapeRef.new(shape: passwordPolicyViolationMessage, location_name: "message"))
     PasswordPolicyViolationException.struct_class = Types::PasswordPolicyViolationException
 
+    PermissionsBoundaryDecisionDetail.add_member(:allowed_by_permissions_boundary, Shapes::ShapeRef.new(shape: booleanType, location_name: "AllowedByPermissionsBoundary"))
+    PermissionsBoundaryDecisionDetail.struct_class = Types::PermissionsBoundaryDecisionDetail
+
     Policy.add_member(:policy_name, Shapes::ShapeRef.new(shape: policyNameType, location_name: "PolicyName"))
     Policy.add_member(:policy_id, Shapes::ShapeRef.new(shape: idType, location_name: "PolicyId"))
     Policy.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, location_name: "Arn"))
@@ -1530,6 +1535,7 @@ module Aws::IAM
     ResourceSpecificResult.add_member(:matched_statements, Shapes::ShapeRef.new(shape: StatementListType, location_name: "MatchedStatements"))
     ResourceSpecificResult.add_member(:missing_context_values, Shapes::ShapeRef.new(shape: ContextKeyNamesResultListType, location_name: "MissingContextValues"))
     ResourceSpecificResult.add_member(:eval_decision_details, Shapes::ShapeRef.new(shape: EvalDecisionDetailsType, location_name: "EvalDecisionDetails"))
+    ResourceSpecificResult.add_member(:permissions_boundary_decision_detail, Shapes::ShapeRef.new(shape: PermissionsBoundaryDecisionDetail, location_name: "PermissionsBoundaryDecisionDetail"))
     ResourceSpecificResult.struct_class = Types::ResourceSpecificResult
 
     ResourceSpecificResultListType.member = Shapes::ShapeRef.new(shape: ResourceSpecificResult)
@@ -1662,6 +1668,7 @@ module Aws::IAM
     SigningCertificate.struct_class = Types::SigningCertificate
 
     SimulateCustomPolicyRequest.add_member(:policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, required: true, location_name: "PolicyInputList"))
+    SimulateCustomPolicyRequest.add_member(:permissions_boundary_policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PermissionsBoundaryPolicyInputList"))
     SimulateCustomPolicyRequest.add_member(:action_names, Shapes::ShapeRef.new(shape: ActionNameListType, required: true, location_name: "ActionNames"))
     SimulateCustomPolicyRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceNameListType, location_name: "ResourceArns"))
     SimulateCustomPolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "ResourcePolicy"))
@@ -1680,6 +1687,7 @@ module Aws::IAM
 
     SimulatePrincipalPolicyRequest.add_member(:policy_source_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicySourceArn"))
     SimulatePrincipalPolicyRequest.add_member(:policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PolicyInputList"))
+    SimulatePrincipalPolicyRequest.add_member(:permissions_boundary_policy_input_list, Shapes::ShapeRef.new(shape: SimulationPolicyListType, location_name: "PermissionsBoundaryPolicyInputList"))
     SimulatePrincipalPolicyRequest.add_member(:action_names, Shapes::ShapeRef.new(shape: ActionNameListType, required: true, location_name: "ActionNames"))
     SimulatePrincipalPolicyRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceNameListType, location_name: "ResourceArns"))
     SimulatePrincipalPolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "ResourcePolicy"))
