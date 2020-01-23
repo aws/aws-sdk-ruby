@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.434 (2020-01-21)
 ------------------
 
