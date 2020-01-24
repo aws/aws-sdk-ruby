@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.436 (2020-01-24)
+------------------
+
 * Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
