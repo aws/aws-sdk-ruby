@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2020-01-24)
+------------------
+
+* Feature - This release provides support for tagging Amazon ECS task sets for services using external deployment controllers.
+
 1.56.0 (2020-01-17)
 ------------------
 

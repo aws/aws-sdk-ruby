@@ -173,7 +173,7 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "Subdirectory",
+    #         subdirectory: "EfsSubdirectory",
     #         efs_filesystem_arn: "EfsFilesystemArn", # required
     #         ec2_config: { # required
     #           subnet_arn: "Ec2SubnetArn", # required
@@ -259,13 +259,94 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLocationFsxWindowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subdirectory: "FsxWindowsSubdirectory",
+    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         user: "SmbUser", # required
+    #         domain: "SmbDomain",
+    #         password: "SmbPassword", # required
+    #       }
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory in the location’s path. This subdirectory in the
+    #   Amazon FSx for Windows file system is used to read data from the
+    #   Amazon FSx for Windows source location or write data to the FSx for
+    #   Windows destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) for the FSx for Windows file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are to
+    #   use to configure the FSx for Windows file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @!attribute [rw] user
+    #   The user who has the permissions to access files and folders in the
+    #   FSx for Windows file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The name of the Windows domain that the FSx for Windows server
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user who has the permissions to access files and
+    #   folders in the FSx for Windows file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsRequest AWS API Documentation
+    #
+    class CreateLocationFsxWindowsRequest < Struct.new(
+      :subdirectory,
+      :fsx_filesystem_arn,
+      :security_group_arns,
+      :tags,
+      :user,
+      :domain,
+      :password)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Windows file system
+    #   location that is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsResponse AWS API Documentation
+    #
+    class CreateLocationFsxWindowsResponse < Struct.new(
+      :location_arn)
+      include Aws::Structure
+    end
+
     # CreateLocationNfsRequest
     #
     # @note When making an API call, you may pass CreateLocationNfsRequest
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "NonEmptySubdirectory", # required
+    #         subdirectory: "NfsSubdirectory", # required
     #         server_hostname: "ServerHostname", # required
     #         on_prem_config: { # required
     #           agent_arns: ["AgentArn"], # required
@@ -365,7 +446,7 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "Subdirectory",
+    #         subdirectory: "S3Subdirectory",
     #         s3_bucket_arn: "S3BucketArn", # required
     #         s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #         s3_config: { # required
@@ -447,7 +528,7 @@ module Aws::DataSync
     #   data as a hash:
     #
     #       {
-    #         subdirectory: "NonEmptySubdirectory", # required
+    #         subdirectory: "SmbSubdirectory", # required
     #         server_hostname: "ServerHostname", # required
     #         user: "SmbUser", # required
     #         domain: "SmbDomain",
@@ -578,6 +659,7 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #         },
     #         excludes: [
     #           {
@@ -874,6 +956,65 @@ module Aws::DataSync
       :location_uri,
       :ec2_config,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLocationFsxWindowsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Windows location to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsRequest AWS API Documentation
+    #
+    class DescribeLocationFsxWindowsRequest < Struct.new(
+      :location_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The Amazon resource Name (ARN) of the FSx for Windows location that
+    #   was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The URL of the FSx for Windows location that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are
+    #   configured for the for the FSx for Windows file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the FSx for Windows location was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] user
+    #   The user who has the permissions to access files and folders in the
+    #   FSx for Windows file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The name of the Windows domain that the FSx for Windows server
+    #   belongs to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindowsResponse AWS API Documentation
+    #
+    class DescribeLocationFsxWindowsResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :security_group_arns,
+      :creation_time,
+      :user,
+      :domain)
       include Aws::Structure
     end
 
@@ -1791,6 +1932,7 @@ module Aws::DataSync
     #         posix_permissions: "NONE", # accepts NONE, PRESERVE
     #         bytes_per_second: 1,
     #         task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #         log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       }
     #
     # @!attribute [rw] verify_mode
@@ -1952,6 +2094,14 @@ module Aws::DataSync
     #   queue-task-execution.
     #   @return [String]
     #
+    # @!attribute [rw] log_level
+    #   A value that determines the type of logs DataSync will deliver to
+    #   your AWS CloudWatch Logs file. If set to `OFF`, no logs will be
+    #   delivered. `BASIC` will deliver a few logs per transfer operation
+    #   and `TRANSFER` will deliver a verbose log that contains logs for
+    #   every file that is transferred.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
@@ -1965,7 +2115,8 @@ module Aws::DataSync
       :preserve_devices,
       :posix_permissions,
       :bytes_per_second,
-      :task_queueing)
+      :task_queueing,
+      :log_level)
       include Aws::Structure
     end
 
@@ -2078,6 +2229,7 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #         },
     #         includes: [
     #           {
@@ -2413,6 +2565,7 @@ module Aws::DataSync
     #           posix_permissions: "NONE", # accepts NONE, PRESERVE
     #           bytes_per_second: 1,
     #           task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #         },
     #         excludes: [
     #           {

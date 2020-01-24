@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-01-24)
+------------------
+
+* Feature - Documentation updates for WorkSpaces
+
 1.33.0 (2020-01-10)
 ------------------
 

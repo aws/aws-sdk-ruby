@@ -2805,6 +2805,12 @@ module Aws::ECS
     #           unit: "PERCENT", # accepts PERCENT
     #         },
     #         client_token: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] service
@@ -2909,6 +2915,38 @@ module Aws::ECS
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the task set to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. When a service is deleted, the tags are
+    #   deleted as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSetRequest AWS API Documentation
     #
     class CreateTaskSetRequest < Struct.new(
@@ -2923,7 +2961,8 @@ module Aws::ECS
       :capacity_provider_strategy,
       :platform_version,
       :scale,
-      :client_token)
+      :client_token,
+      :tags)
       include Aws::Structure
     end
 
@@ -3824,6 +3863,7 @@ module Aws::ECS
     #         cluster: "String", # required
     #         service: "String", # required
     #         task_sets: ["String"],
+    #         include: ["TAGS"], # accepts TAGS
     #       }
     #
     # @!attribute [rw] cluster
@@ -3840,12 +3880,19 @@ module Aws::ECS
     #   The ID or full Amazon Resource Name (ARN) of task sets to describe.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include
+    #   Specifies whether to see the resource tags for the task set. If
+    #   `TAGS` is specified, the tags are included in the response. If this
+    #   field is omitted, tags are not included in the response.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskSetsRequest AWS API Documentation
     #
     class DescribeTaskSetsRequest < Struct.new(
       :cluster,
       :service,
-      :task_sets)
+      :task_sets,
+      :include)
       include Aws::Structure
     end
 
@@ -8926,8 +8973,11 @@ module Aws::ECS
     #   @return [Array<Types::ContainerDefinition>]
     #
     # @!attribute [rw] family
-    #   The name of a family that this task definition is registered to. A
-    #   family groups multiple versions of a task definition. Amazon ECS
+    #   The name of a family that this task definition is registered to. Up
+    #   to 255 letters (uppercase and lowercase), numbers, hyphens, and
+    #   underscores are allowed.
+    #
+    #   A family groups multiple versions of a task definition. Amazon ECS
     #   gives the first task definition that you registered to a family a
     #   revision number of 1. Amazon ECS gives sequential revision numbers
     #   to each task definition that you add.
@@ -9515,6 +9565,37 @@ module Aws::ECS
     #   retrieved.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the task set to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key
+    #     can have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination
+    #     of such as a prefix for either keys or values as it is reserved
+    #     for AWS use. You cannot edit or delete tag keys or values with
+    #     this prefix. Tags with this prefix do not count against your tags
+    #     per resource limit.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSet AWS API Documentation
     #
     class TaskSet < Struct.new(
@@ -9539,7 +9620,8 @@ module Aws::ECS
       :service_registries,
       :scale,
       :stability_status,
-      :stability_status_at)
+      :stability_status_at,
+      :tags)
       include Aws::Structure
     end
 

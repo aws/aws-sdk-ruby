@@ -1333,11 +1333,11 @@ module Aws::OpsWorksCM
     #   The name of the server that you want to restore.
     #
     # @option params [String] :instance_type
-    #   The type of the instance to create. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `m5.large`.
-    #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you do
-    #   not specify this parameter, RestoreServer uses the instance type from
-    #   the specified backup.
+    #   The type of instance to restore. Valid values must be specified in the
+    #   following format: `^([cm][34]|t2).*` For example, `m5.large`. Valid
+    #   values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you do not
+    #   specify this parameter, RestoreServer uses the instance type from the
+    #   specified backup.
     #
     # @option params [String] :key_pair
     #   The name of the key pair to set on the new EC2 instance. This can be
@@ -1380,6 +1380,20 @@ module Aws::OpsWorksCM
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
     #   Engine attributes that are specific to the server on which you want to
     #   run maintenance.
+    #
+    #   **Attributes accepted in a StartMaintenance request for Chef**
+    #
+    #   * `CHEF_MAJOR_UPGRADE`\: If a Chef Automate server is eligible for
+    #     upgrade to Chef Automate 2, add this engine attribute to a
+    #     `StartMaintenance` request and set the value to `true` to upgrade
+    #     the server to Chef Automate 2. For more information, see [Upgrade an
+    #     AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
     #
     # @return [Types::StartMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1686,7 +1700,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

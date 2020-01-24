@@ -1243,6 +1243,9 @@ module Aws::ECS
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.service.task_sets[0].stability_status_at #=> Time
+    #   resp.service.task_sets[0].tags #=> Array
+    #   resp.service.task_sets[0].tags[0].key #=> String
+    #   resp.service.task_sets[0].tags[0].value #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -1397,6 +1400,37 @@ module Aws::ECS
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the task set to help you categorize and
+    #   organize them. Each tag consists of a key and an optional value, both
+    #   of which you define. When a service is deleted, the tags are deleted
+    #   as well.
+    #
+    #   The following basic restrictions apply to tags:
+    #
+    #   * Maximum number of tags per resource - 50
+    #
+    #   * For each resource, each tag key must be unique, and each tag key can
+    #     have only one value.
+    #
+    #   * Maximum key length - 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length - 256 Unicode characters in UTF-8
+    #
+    #   * If your tagging schema is used across multiple services and
+    #     resources, remember that other services may have restrictions on
+    #     allowed characters. Generally allowed characters are: letters,
+    #     numbers, and spaces representable in UTF-8, and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Tag keys and values are case-sensitive.
+    #
+    #   * Do not use `aws:`, `AWS:`, or any upper or lowercase combination of
+    #     such as a prefix for either keys or values as it is reserved for AWS
+    #     use. You cannot edit or delete tag keys or values with this prefix.
+    #     Tags with this prefix do not count against your tags per resource
+    #     limit.
+    #
     # @return [Types::CreateTaskSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTaskSetResponse#task_set #task_set} => Types::TaskSet
@@ -1445,6 +1479,12 @@ module Aws::ECS
     #       unit: "PERCENT", # accepts PERCENT
     #     },
     #     client_token: "String",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1487,6 +1527,9 @@ module Aws::ECS
     #   resp.task_set.scale.unit #=> String, one of "PERCENT"
     #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.task_set.stability_status_at #=> Time
+    #   resp.task_set.tags #=> Array
+    #   resp.task_set.tags[0].key #=> String
+    #   resp.task_set.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSet AWS API Documentation
     #
@@ -1847,6 +1890,9 @@ module Aws::ECS
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.service.task_sets[0].stability_status_at #=> Time
+    #   resp.service.task_sets[0].tags #=> Array
+    #   resp.service.task_sets[0].tags[0].key #=> String
+    #   resp.service.task_sets[0].tags[0].value #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -1981,6 +2027,9 @@ module Aws::ECS
     #   resp.task_set.scale.unit #=> String, one of "PERCENT"
     #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.task_set.stability_status_at #=> Time
+    #   resp.task_set.tags #=> Array
+    #   resp.task_set.tags[0].key #=> String
+    #   resp.task_set.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet AWS API Documentation
     #
@@ -2854,6 +2903,9 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.services[0].task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.services[0].task_sets[0].stability_status_at #=> Time
+    #   resp.services[0].task_sets[0].tags #=> Array
+    #   resp.services[0].task_sets[0].tags[0].key #=> String
+    #   resp.services[0].task_sets[0].tags[0].value #=> String
     #   resp.services[0].deployments #=> Array
     #   resp.services[0].deployments[0].id #=> String
     #   resp.services[0].deployments[0].status #=> String
@@ -3185,6 +3237,11 @@ module Aws::ECS
     # @option params [Array<String>] :task_sets
     #   The ID or full Amazon Resource Name (ARN) of task sets to describe.
     #
+    # @option params [Array<String>] :include
+    #   Specifies whether to see the resource tags for the task set. If `TAGS`
+    #   is specified, the tags are included in the response. If this field is
+    #   omitted, tags are not included in the response.
+    #
     # @return [Types::DescribeTaskSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeTaskSetsResponse#task_sets #task_sets} => Array&lt;Types::TaskSet&gt;
@@ -3196,6 +3253,7 @@ module Aws::ECS
     #     cluster: "String", # required
     #     service: "String", # required
     #     task_sets: ["String"],
+    #     include: ["TAGS"], # accepts TAGS
     #   })
     #
     # @example Response structure
@@ -3239,6 +3297,9 @@ module Aws::ECS
     #   resp.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.task_sets[0].stability_status_at #=> Time
+    #   resp.task_sets[0].tags #=> Array
+    #   resp.task_sets[0].tags[0].key #=> String
+    #   resp.task_sets[0].tags[0].value #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -7472,6 +7533,9 @@ module Aws::ECS
     #   resp.service.task_sets[0].scale.unit #=> String, one of "PERCENT"
     #   resp.service.task_sets[0].stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.service.task_sets[0].stability_status_at #=> Time
+    #   resp.service.task_sets[0].tags #=> Array
+    #   resp.service.task_sets[0].tags[0].key #=> String
+    #   resp.service.task_sets[0].tags[0].value #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -7603,6 +7667,9 @@ module Aws::ECS
     #   resp.task_set.scale.unit #=> String, one of "PERCENT"
     #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.task_set.stability_status_at #=> Time
+    #   resp.task_set.tags #=> Array
+    #   resp.task_set.tags[0].key #=> String
+    #   resp.task_set.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet AWS API Documentation
     #
@@ -7694,6 +7761,9 @@ module Aws::ECS
     #   resp.task_set.scale.unit #=> String, one of "PERCENT"
     #   resp.task_set.stability_status #=> String, one of "STEADY_STATE", "STABILIZING"
     #   resp.task_set.stability_status_at #=> Time
+    #   resp.task_set.tags #=> Array
+    #   resp.task_set.tags[0].key #=> String
+    #   resp.task_set.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet AWS API Documentation
     #
@@ -7717,7 +7787,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

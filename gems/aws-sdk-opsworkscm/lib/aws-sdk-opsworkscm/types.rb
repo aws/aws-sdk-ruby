@@ -890,6 +890,13 @@ module Aws::OpsWorksCM
     # @!attribute [rw] servers
     #   Contains the response to a `DescribeServers` request.
     #
+    #   *For Chef Automate servers:* If
+    #   `DescribeServersResponse$Servers$EngineAttributes` includes
+    #   CHEF\_MAJOR\_UPGRADE\_AVAILABLE, you can upgrade the Chef Automate
+    #   server to Chef Automate 2. To be eligible for upgrade, a server
+    #   running Chef Automate 1 must have had at least one successful
+    #   maintenance run after November 1, 2019.
+    #
     #   *For Puppet Server:*
     #   `DescribeServersResponse$Servers$EngineAttributes` contains
     #   PUPPET\_API\_CA\_CERT. This is the PEM-encoded CA certificate that
@@ -1218,8 +1225,8 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The type of the instance to create. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `m5.large`.
+    #   The type of instance to restore. Valid values must be specified in
+    #   the following format: `^([cm][34]|t2).*` For example, `m5.large`.
     #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you
     #   do not specify this parameter, RestoreServer uses the instance type
     #   from the specified backup.
@@ -1468,6 +1475,20 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_attributes
     #   Engine attributes that are specific to the server on which you want
     #   to run maintenance.
+    #
+    #   **Attributes accepted in a StartMaintenance request for Chef**
+    #
+    #   * `CHEF_MAJOR_UPGRADE`\: If a Chef Automate server is eligible for
+    #     upgrade to Chef Automate 2, add this engine attribute to a
+    #     `StartMaintenance` request and set the value to `true` to upgrade
+    #     the server to Chef Automate 2. For more information, see [Upgrade
+    #     an AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceRequest AWS API Documentation

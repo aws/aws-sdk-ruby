@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-01-24)
+------------------
+
+* Feature - Adding new error codes for Nodegroups in EKS
+
 1.30.0 (2019-12-20)
 ------------------
 

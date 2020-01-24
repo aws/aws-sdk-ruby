@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-01-24)
+------------------
+
+* Feature - AWS DataSync now supports FSx for Windows File Server Locations
+
 1.16.0 (2019-11-20)
 ------------------
 

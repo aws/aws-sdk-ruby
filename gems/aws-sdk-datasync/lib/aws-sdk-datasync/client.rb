@@ -457,7 +457,7 @@ module Aws::DataSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_location_efs({
-    #     subdirectory: "Subdirectory",
+    #     subdirectory: "EfsSubdirectory",
     #     efs_filesystem_arn: "EfsFilesystemArn", # required
     #     ec2_config: { # required
     #       subnet_arn: "Ec2SubnetArn", # required
@@ -481,6 +481,73 @@ module Aws::DataSync
     # @param [Hash] params ({})
     def create_location_efs(params = {}, options = {})
       req = build_request(:create_location_efs, params)
+      req.send_request(options)
+    end
+
+    # Creates an endpoint for an Amazon FSx for Windows file system.
+    #
+    # @option params [String] :subdirectory
+    #   A subdirectory in the location’s path. This subdirectory in the Amazon
+    #   FSx for Windows file system is used to read data from the Amazon FSx
+    #   for Windows source location or write data to the FSx for Windows
+    #   destination.
+    #
+    # @option params [required, String] :fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) for the FSx for Windows file system.
+    #
+    # @option params [required, Array<String>] :security_group_arns
+    #   The Amazon Resource Names (ARNs) of the security groups that are to
+    #   use to configure the FSx for Windows file system.
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #
+    # @option params [required, String] :user
+    #   The user who has the permissions to access files and folders in the
+    #   FSx for Windows file system.
+    #
+    # @option params [String] :domain
+    #   The name of the Windows domain that the FSx for Windows server belongs
+    #   to.
+    #
+    # @option params [required, String] :password
+    #   The password of the user who has the permissions to access files and
+    #   folders in the FSx for Windows file system.
+    #
+    # @return [Types::CreateLocationFsxWindowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationFsxWindowsResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_fsx_windows({
+    #     subdirectory: "FsxWindowsSubdirectory",
+    #     fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #     security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     user: "SmbUser", # required
+    #     domain: "SmbDomain",
+    #     password: "SmbPassword", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindows AWS API Documentation
+    #
+    # @overload create_location_fsx_windows(params = {})
+    # @param [Hash] params ({})
+    def create_location_fsx_windows(params = {}, options = {})
+      req = build_request(:create_location_fsx_windows, params)
       req.send_request(options)
     end
 
@@ -541,7 +608,7 @@ module Aws::DataSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_location_nfs({
-    #     subdirectory: "NonEmptySubdirectory", # required
+    #     subdirectory: "NfsSubdirectory", # required
     #     server_hostname: "ServerHostname", # required
     #     on_prem_config: { # required
     #       agent_arns: ["AgentArn"], # required
@@ -622,7 +689,7 @@ module Aws::DataSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_location_s3({
-    #     subdirectory: "Subdirectory",
+    #     subdirectory: "S3Subdirectory",
     #     s3_bucket_arn: "S3BucketArn", # required
     #     s3_storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE
     #     s3_config: { # required
@@ -714,7 +781,7 @@ module Aws::DataSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_location_smb({
-    #     subdirectory: "NonEmptySubdirectory", # required
+    #     subdirectory: "SmbSubdirectory", # required
     #     server_hostname: "ServerHostname", # required
     #     user: "SmbUser", # required
     #     domain: "SmbDomain",
@@ -832,6 +899,7 @@ module Aws::DataSync
     #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #     },
     #     excludes: [
     #       {
@@ -1020,6 +1088,47 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Returns metadata, such as the path information about an Amazon FSx for
+    # Windows location.
+    #
+    # @option params [required, String] :location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for Windows location to
+    #   describe.
+    #
+    # @return [Types::DescribeLocationFsxWindowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationFsxWindowsResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationFsxWindowsResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationFsxWindowsResponse#security_group_arns #security_group_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationFsxWindowsResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLocationFsxWindowsResponse#user #user} => String
+    #   * {Types::DescribeLocationFsxWindowsResponse#domain #domain} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_fsx_windows({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.security_group_arns #=> Array
+    #   resp.security_group_arns[0] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.user #=> String
+    #   resp.domain #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxWindows AWS API Documentation
+    #
+    # @overload describe_location_fsx_windows(params = {})
+    # @param [Hash] params ({})
+    def describe_location_fsx_windows(params = {}, options = {})
+      req = build_request(:describe_location_fsx_windows, params)
+      req.send_request(options)
+    end
+
     # Returns metadata, such as the path information, about a NFS location.
     #
     # @option params [required, String] :location_arn
@@ -1190,6 +1299,7 @@ module Aws::DataSync
     #   resp.options.posix_permissions #=> String, one of "NONE", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1248,6 +1358,7 @@ module Aws::DataSync
     #   resp.options.posix_permissions #=> String, one of "NONE", "PRESERVE"
     #   resp.options.bytes_per_second #=> Integer
     #   resp.options.task_queueing #=> String, one of "ENABLED", "DISABLED"
+    #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -1542,6 +1653,7 @@ module Aws::DataSync
     #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #     },
     #     includes: [
     #       {
@@ -1703,6 +1815,7 @@ module Aws::DataSync
     #       posix_permissions: "NONE", # accepts NONE, PRESERVE
     #       bytes_per_second: 1,
     #       task_queueing: "ENABLED", # accepts ENABLED, DISABLED
+    #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #     },
     #     excludes: [
     #       {
@@ -1739,7 +1852,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

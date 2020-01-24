@@ -284,6 +284,8 @@ module Aws::ECS
     TaskFieldList = Shapes::ListShape.new(name: 'TaskFieldList')
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
     TaskSet = Shapes::StructureShape.new(name: 'TaskSet')
+    TaskSetField = Shapes::StringShape.new(name: 'TaskSetField')
+    TaskSetFieldList = Shapes::ListShape.new(name: 'TaskSetFieldList')
     TaskSetNotFoundException = Shapes::StructureShape.new(name: 'TaskSetNotFoundException')
     TaskSets = Shapes::ListShape.new(name: 'TaskSets')
     TaskStopCode = Shapes::StringShape.new(name: 'TaskStopCode')
@@ -569,6 +571,7 @@ module Aws::ECS
     CreateTaskSetRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     CreateTaskSetRequest.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
     CreateTaskSetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateTaskSetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateTaskSetRequest.struct_class = Types::CreateTaskSetRequest
 
     CreateTaskSetResponse.add_member(:task_set, Shapes::ShapeRef.new(shape: TaskSet, location_name: "taskSet"))
@@ -696,6 +699,7 @@ module Aws::ECS
     DescribeTaskSetsRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     DescribeTaskSetsRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
     DescribeTaskSetsRequest.add_member(:task_sets, Shapes::ShapeRef.new(shape: StringList, location_name: "taskSets"))
+    DescribeTaskSetsRequest.add_member(:include, Shapes::ShapeRef.new(shape: TaskSetFieldList, location_name: "include"))
     DescribeTaskSetsRequest.struct_class = Types::DescribeTaskSetsRequest
 
     DescribeTaskSetsResponse.add_member(:task_sets, Shapes::ShapeRef.new(shape: TaskSets, location_name: "taskSets"))
@@ -1340,7 +1344,10 @@ module Aws::ECS
     TaskSet.add_member(:scale, Shapes::ShapeRef.new(shape: Scale, location_name: "scale"))
     TaskSet.add_member(:stability_status, Shapes::ShapeRef.new(shape: StabilityStatus, location_name: "stabilityStatus"))
     TaskSet.add_member(:stability_status_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stabilityStatusAt"))
+    TaskSet.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     TaskSet.struct_class = Types::TaskSet
+
+    TaskSetFieldList.member = Shapes::ShapeRef.new(shape: TaskSetField)
 
     TaskSets.member = Shapes::ShapeRef.new(shape: TaskSet)
 

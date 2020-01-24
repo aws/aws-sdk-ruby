@@ -1633,7 +1633,7 @@ module Aws::WorkSpaces
     # Rebuilds the specified WorkSpace.
     #
     # You cannot rebuild a WorkSpace unless its state is `AVAILABLE`,
-    # `ERROR`, or `UNHEALTHY`.
+    # `ERROR`, `UNHEALTHY`, or `STOPPED`.
     #
     # Rebuilding a WorkSpace is a potentially destructive action that can
     # result in the loss of data. For more information, see [Rebuild a
@@ -1760,7 +1760,7 @@ module Aws::WorkSpaces
     # Restores the specified WorkSpace to its last known healthy state.
     #
     # You cannot restore a WorkSpace unless its state is ` AVAILABLE`,
-    # `ERROR`, or `UNHEALTHY`.
+    # `ERROR`, `UNHEALTHY`, or `STOPPED`.
     #
     # Restoring a WorkSpace is a potentially destructive action that can
     # result in the loss of data. For more information, see [Restore a
@@ -1984,7 +1984,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
