@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DataSync - Updated the API, and documentation for AWS DataSync.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::EKS - Updated the API for Amazon Elastic Kubernetes Service.
+
+* Feature - Aws::OpsWorksCM - Updated the documentation for AWS OpsWorks CM.
+
+* Feature - Aws::WorkSpaces - Updated the documentation for Amazon WorkSpaces.
+
 2.11.435 (2020-01-23)
 ------------------
 
