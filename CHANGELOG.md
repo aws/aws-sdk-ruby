@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - JSON - Removed the dependency on the json gem because it is a default gem since ruby 1.9.
+
 1.67.0 (2017-04-03)
 ------------------
 
