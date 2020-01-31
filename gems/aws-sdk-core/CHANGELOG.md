@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Perform a case-insensitive comparison when filtering sensitive parameters from logs
+
 3.90.0 (2020-02-12)
 ------------------
 
