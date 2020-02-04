@@ -5400,6 +5400,7 @@ module Aws::EC2
     #         log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
     #         log_destination: "String",
     #         log_format: "String",
+    #         max_aggregation_interval: 1,
     #       }
     #
     # @!attribute [rw] dry_run
@@ -5506,6 +5507,22 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #   @return [String]
     #
+    # @!attribute [rw] max_aggregation_interval
+    #   The maximum interval of time during which a flow of packets is
+    #   captured and aggregated into a flow log record. You can specify 60
+    #   seconds (1 minute) or 600 seconds (10 minutes).
+    #
+    #   For network interfaces attached to [Nitro-based instances][1], the
+    #   aggregation interval is always 60 seconds, regardless of the value
+    #   that you specify.
+    #
+    #   Default: 600
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
     #
     class CreateFlowLogsRequest < Struct.new(
@@ -5518,7 +5535,8 @@ module Aws::EC2
       :traffic_type,
       :log_destination_type,
       :log_destination,
-      :log_format)
+      :log_format,
+      :max_aggregation_interval)
       include Aws::Structure
     end
 
@@ -24088,6 +24106,19 @@ module Aws::EC2
     #   The format of the flow log record.
     #   @return [String]
     #
+    # @!attribute [rw] max_aggregation_interval
+    #   The maximum interval of time, in seconds, during which a flow of
+    #   packets is captured and aggregated into a flow log record.
+    #
+    #   For network interfaces attached to [Nitro-based instances][1], the
+    #   aggregation interval is always 60 seconds (1 minute), regardless of
+    #   the specified value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
     #
     class FlowLog < Struct.new(
@@ -24102,7 +24133,8 @@ module Aws::EC2
       :traffic_type,
       :log_destination_type,
       :log_destination,
-      :log_format)
+      :log_format,
+      :max_aggregation_interval)
       include Aws::Structure
     end
 

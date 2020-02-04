@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2020-02-04)
+------------------
+
+* Feature - This feature ensures that an instance is patched up to the available patches on a particular date. It can be enabled by selecting the 'ApproveUntilDate' option as the auto-approval rule while creating the patch baseline. ApproveUntilDate - The cutoff date for auto approval of released patches. Any patches released on or before this date will be installed automatically.
+
 1.70.0 (2020-01-15)
 ------------------
 

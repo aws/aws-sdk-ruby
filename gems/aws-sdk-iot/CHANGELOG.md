@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2020-02-04)
+------------------
+
+* Feature - Updated ThrottlingException documentation to report that the error code is 400, and not 429, to reflect actual system behaviour.
+
 1.42.0 (2019-12-17)
 ------------------
 

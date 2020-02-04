@@ -1379,7 +1379,8 @@ module Aws::SSM
     #             ],
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #           approve_after_days: 1, # required
+    #           approve_after_days: 1,
+    #           approve_until_date: "PatchStringDate",
     #           enable_non_security: false,
     #         },
     #       ],
@@ -1429,15 +1430,14 @@ module Aws::SSM
     # [Configuring Resource Data Sync for Inventory][1] in the *AWS Systems
     # Manager User Guide*.
     #
-    # You can configure Systems Manager Explorer to use the
-    # `SyncToDestination` type to synchronize operational work items
-    # (OpsItems) and operational data (OpsData) from multiple AWS Regions to
-    # a single Amazon S3 bucket. You can also configure Explorer to use the
-    # `SyncFromSource` type. This type synchronizes OpsItems and OpsData
-    # from multiple AWS accounts and Regions by using AWS Organizations. For
-    # more information, see [Setting Up Explorer to Display Data from
-    # Multiple Accounts and Regions][2] in the *AWS Systems Manager User
-    # Guide*.
+    # You can configure Systems Manager Explorer to use the `SyncFromSource`
+    # type to synchronize operational work items (OpsItems) and operational
+    # data (OpsData) from multiple AWS Regions to a single Amazon S3 bucket.
+    # This type can synchronize OpsItems and OpsData from multiple AWS
+    # accounts and Regions or `EntireOrganization` by using AWS
+    # Organizations. For more information, see [Setting Up Explorer to
+    # Display Data from Multiple Accounts and Regions][2] in the *AWS
+    # Systems Manager User Guide*.
     #
     # A resource data sync is an asynchronous operation that returns
     # immediately. After a successful initial sync is completed, the system
@@ -5432,6 +5432,7 @@ module Aws::SSM
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approval_rules.patch_rules[0].approve_until_date #=> String
     #   resp.approval_rules.patch_rules[0].enable_non_security #=> Boolean
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
@@ -6657,8 +6658,9 @@ module Aws::SSM
     # @option params [required, String] :name
     #   The fully qualified name of the parameter that you want to add to the
     #   system. The fully qualified name includes the complete hierarchy of
-    #   the parameter path and name. For example:
-    #   `/Dev/DBServer/MySQL/db-string13`
+    #   the parameter path and name. For parameters in a hierarchy, you must
+    #   include a leading forward slash character (/) when you create or
+    #   reference a parameter. For example: `/Dev/DBServer/MySQL/db-string13`
     #
     #   Naming Constraints:
     #
@@ -6683,10 +6685,9 @@ module Aws::SSM
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
-    #   maximum length for the fully qualified parameter name is 1011
-    #   characters, including the full length of the parameter ARN. For
-    #   example, the following fully qualified parameter name is 65
-    #   characters, not 20 characters:
+    #   maximum length for a parameter name, including the full length of the
+    #   parameter ARN, is 1011 characters. For example, the length of the
+    #   following parameter name is 65 characters, not 20 characters:
     #
     #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
     #
@@ -9087,7 +9088,8 @@ module Aws::SSM
     #             ],
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #           approve_after_days: 1, # required
+    #           approve_after_days: 1,
+    #           approve_until_date: "PatchStringDate",
     #           enable_non_security: false,
     #         },
     #       ],
@@ -9124,6 +9126,7 @@ module Aws::SSM
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approval_rules.patch_rules[0].approve_until_date #=> String
     #   resp.approval_rules.patch_rules[0].enable_non_security #=> Boolean
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
@@ -9256,7 +9259,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

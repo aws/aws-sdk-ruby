@@ -861,6 +861,40 @@ module Aws::Kafka
       req.send_request(options)
     end
 
+    # Returns a list of Kafka versions.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListKafkaVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKafkaVersionsResponse#kafka_versions #kafka_versions} => Array&lt;Types::KafkaVersion&gt;
+    #   * {Types::ListKafkaVersionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_kafka_versions({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.kafka_versions #=> Array
+    #   resp.kafka_versions[0].version #=> String
+    #   resp.kafka_versions[0].status #=> String, one of "ACTIVE", "DEPRECATED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListKafkaVersions AWS API Documentation
+    #
+    # @overload list_kafka_versions(params = {})
+    # @param [Hash] params ({})
+    def list_kafka_versions(params = {}, options = {})
+      req = build_request(:list_kafka_versions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the broker nodes in the cluster.
     #
     # @option params [required, String] :cluster_arn
@@ -1194,7 +1228,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

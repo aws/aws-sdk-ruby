@@ -2770,7 +2770,7 @@ module Aws::StorageGateway
     #   resp.tags[0].value #=> String
     #   resp.vpc_endpoint #=> String
     #   resp.cloud_watch_log_group_arn #=> String
-    #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "OTHER"
+    #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -5851,7 +5851,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

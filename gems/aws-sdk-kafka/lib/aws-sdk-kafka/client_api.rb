@@ -53,6 +53,8 @@ module Aws::Kafka
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     JmxExporter = Shapes::StructureShape.new(name: 'JmxExporter')
     JmxExporterInfo = Shapes::StructureShape.new(name: 'JmxExporterInfo')
+    KafkaVersion = Shapes::StructureShape.new(name: 'KafkaVersion')
+    KafkaVersionStatus = Shapes::StringShape.new(name: 'KafkaVersionStatus')
     ListClusterOperationsRequest = Shapes::StructureShape.new(name: 'ListClusterOperationsRequest')
     ListClusterOperationsResponse = Shapes::StructureShape.new(name: 'ListClusterOperationsResponse')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
@@ -61,6 +63,8 @@ module Aws::Kafka
     ListConfigurationRevisionsResponse = Shapes::StructureShape.new(name: 'ListConfigurationRevisionsResponse')
     ListConfigurationsRequest = Shapes::StructureShape.new(name: 'ListConfigurationsRequest')
     ListConfigurationsResponse = Shapes::StructureShape.new(name: 'ListConfigurationsResponse')
+    ListKafkaVersionsRequest = Shapes::StructureShape.new(name: 'ListKafkaVersionsRequest')
+    ListKafkaVersionsResponse = Shapes::StructureShape.new(name: 'ListKafkaVersionsResponse')
     ListNodesRequest = Shapes::StructureShape.new(name: 'ListNodesRequest')
     ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -77,6 +81,7 @@ module Aws::Kafka
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     Tls = Shapes::StructureShape.new(name: 'Tls')
@@ -103,6 +108,7 @@ module Aws::Kafka
     __listOfClusterOperationInfo = Shapes::ListShape.new(name: '__listOfClusterOperationInfo')
     __listOfConfiguration = Shapes::ListShape.new(name: '__listOfConfiguration')
     __listOfConfigurationRevision = Shapes::ListShape.new(name: '__listOfConfigurationRevision')
+    __listOfKafkaVersion = Shapes::ListShape.new(name: '__listOfKafkaVersion')
     __listOfNodeInfo = Shapes::ListShape.new(name: '__listOfNodeInfo')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
@@ -308,6 +314,10 @@ module Aws::Kafka
     JmxExporterInfo.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
     JmxExporterInfo.struct_class = Types::JmxExporterInfo
 
+    KafkaVersion.add_member(:version, Shapes::ShapeRef.new(shape: __string, location_name: "version"))
+    KafkaVersion.add_member(:status, Shapes::ShapeRef.new(shape: KafkaVersionStatus, location_name: "status"))
+    KafkaVersion.struct_class = Types::KafkaVersion
+
     ListClusterOperationsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     ListClusterOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListClusterOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -342,6 +352,14 @@ module Aws::Kafka
     ListConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: __listOfConfiguration, location_name: "configurations"))
     ListConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListConfigurationsResponse.struct_class = Types::ListConfigurationsResponse
+
+    ListKafkaVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListKafkaVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListKafkaVersionsRequest.struct_class = Types::ListKafkaVersionsRequest
+
+    ListKafkaVersionsResponse.add_member(:kafka_versions, Shapes::ShapeRef.new(shape: __listOfKafkaVersion, location_name: "kafkaVersions"))
+    ListKafkaVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListKafkaVersionsResponse.struct_class = Types::ListKafkaVersionsResponse
 
     ListNodesRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "clusterArn"))
     ListNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -400,6 +418,10 @@ module Aws::Kafka
     ServiceUnavailableException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    StateInfo.add_member(:code, Shapes::ShapeRef.new(shape: __string, location_name: "code"))
+    StateInfo.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    StateInfo.struct_class = Types::StateInfo
 
     StorageInfo.add_member(:ebs_storage_info, Shapes::ShapeRef.new(shape: EBSStorageInfo, location_name: "ebsStorageInfo"))
     StorageInfo.struct_class = Types::StorageInfo
@@ -476,6 +498,8 @@ module Aws::Kafka
     __listOfConfiguration.member = Shapes::ShapeRef.new(shape: Configuration)
 
     __listOfConfigurationRevision.member = Shapes::ShapeRef.new(shape: ConfigurationRevision)
+
+    __listOfKafkaVersion.member = Shapes::ShapeRef.new(shape: KafkaVersion)
 
     __listOfNodeInfo.member = Shapes::ShapeRef.new(shape: NodeInfo)
 
@@ -675,6 +699,24 @@ module Aws::Kafka
         o.input = Shapes::ShapeRef.new(shape: ListConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_kafka_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListKafkaVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/kafka-versions"
+        o.input = Shapes::ShapeRef.new(shape: ListKafkaVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListKafkaVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

@@ -3092,7 +3092,8 @@ module Aws::SSM
     #                 ],
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #               approve_after_days: 1, # required
+    #               approve_after_days: 1,
+    #               approve_until_date: "PatchStringDate",
     #               enable_non_security: false,
     #             },
     #           ],
@@ -12856,7 +12857,8 @@ module Aws::SSM
     #           ],
     #         },
     #         compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #         approve_after_days: 1, # required
+    #         approve_after_days: 1,
+    #         approve_until_date: "PatchStringDate",
     #         enable_non_security: false,
     #       }
     #
@@ -12877,6 +12879,11 @@ module Aws::SSM
     #   days after they are released.
     #   @return [Integer]
     #
+    # @!attribute [rw] approve_until_date
+    #   The cutoff date for auto approval of released patches. Any patches
+    #   released on or before this date will be installed automatically
+    #   @return [String]
+    #
     # @!attribute [rw] enable_non_security
     #   For instances identified by the approval rule filters, enables a
     #   patch baseline to apply non-security updates available in the
@@ -12890,6 +12897,7 @@ module Aws::SSM
       :patch_filter_group,
       :compliance_level,
       :approve_after_days,
+      :approve_until_date,
       :enable_non_security)
       include Aws::Structure
     end
@@ -12911,7 +12919,8 @@ module Aws::SSM
     #               ],
     #             },
     #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #             approve_after_days: 1, # required
+    #             approve_after_days: 1,
+    #             approve_until_date: "PatchStringDate",
     #             enable_non_security: false,
     #           },
     #         ],
@@ -13202,7 +13211,9 @@ module Aws::SSM
     # @!attribute [rw] name
     #   The fully qualified name of the parameter that you want to add to
     #   the system. The fully qualified name includes the complete hierarchy
-    #   of the parameter path and name. For example:
+    #   of the parameter path and name. For parameters in a hierarchy, you
+    #   must include a leading forward slash character (/) when you create
+    #   or reference a parameter. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
     #   Naming Constraints:
@@ -13228,10 +13239,9 @@ module Aws::SSM
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
-    #   maximum length for the fully qualified parameter name is 1011
-    #   characters, including the full length of the parameter ARN. For
-    #   example, the following fully qualified parameter name is 65
-    #   characters, not 20 characters:
+    #   maximum length for a parameter name, including the full length of
+    #   the parameter ARN, is 1011 characters. For example, the length of
+    #   the following parameter name is 65 characters, not 20 characters:
     #
     #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
     #
@@ -14309,8 +14319,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] aws_organizations_source
-    #   The field name in `SyncSource` for the
-    #   `ResourceDataSyncAwsOrganizationsSource` type.
+    #   Information about the AwsOrganizationsSource resource data sync
+    #   source. A sync source of this type can synchronize data from AWS
+    #   Organizations.
     #   @return [Types::ResourceDataSyncAwsOrganizationsSource]
     #
     # @!attribute [rw] source_regions
@@ -17005,7 +17016,8 @@ module Aws::SSM
     #                 ],
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
-    #               approve_after_days: 1, # required
+    #               approve_after_days: 1,
+    #               approve_until_date: "PatchStringDate",
     #               enable_non_security: false,
     #             },
     #           ],

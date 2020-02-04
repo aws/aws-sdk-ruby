@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2020-02-04)
+------------------
+
+* Feature - This release enables AWS MSK customers to list Apache Kafka versions that are supported on AWS MSK clusters. Also includes changes to expose additional details of a cluster's state in DescribeCluster and ListClusters APIs.
+
 1.16.0 (2019-12-09)
 ------------------
 

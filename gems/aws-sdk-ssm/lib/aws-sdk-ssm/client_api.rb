@@ -818,6 +818,7 @@ module Aws::SSM
     PatchSourceProduct = Shapes::StringShape.new(name: 'PatchSourceProduct')
     PatchSourceProductList = Shapes::ListShape.new(name: 'PatchSourceProductList')
     PatchStatus = Shapes::StructureShape.new(name: 'PatchStatus')
+    PatchStringDate = Shapes::StringShape.new(name: 'PatchStringDate')
     PatchTitle = Shapes::StringShape.new(name: 'PatchTitle')
     PatchUnreportedNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchUnreportedNotApplicableCount')
     PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
@@ -3323,7 +3324,8 @@ module Aws::SSM
 
     PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
     PatchRule.add_member(:compliance_level, Shapes::ShapeRef.new(shape: PatchComplianceLevel, location_name: "ComplianceLevel"))
-    PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, required: true, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
+    PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
+    PatchRule.add_member(:approve_until_date, Shapes::ShapeRef.new(shape: PatchStringDate, location_name: "ApproveUntilDate", metadata: {"box"=>true}))
     PatchRule.add_member(:enable_non_security, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableNonSecurity", metadata: {"box"=>true}))
     PatchRule.struct_class = Types::PatchRule
 

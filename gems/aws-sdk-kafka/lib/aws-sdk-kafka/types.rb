@@ -1098,6 +1098,24 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # Information about a Kafka version.
+    #
+    # @!attribute [rw] version
+    #   The Kafka version.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a Kafka version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/KafkaVersion AWS API Documentation
+    #
+    class KafkaVersion < Struct.new(
+      :version,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClusterOperationsRequest
     #   data as a hash:
     #
@@ -1284,6 +1302,46 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListKafkaVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListKafkaVersionsRequest AWS API Documentation
+    #
+    class ListKafkaVersionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Response for ListKafkaVersions.
+    #
+    # @!attribute [rw] kafka_versions
+    #   An array of Kafka version objects.
+    #   @return [Array<Types::KafkaVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   Paginated results marker.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListKafkaVersionsResponse AWS API Documentation
+    #
+    class ListKafkaVersionsResponse < Struct.new(
+      :kafka_versions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNodesRequest
     #   data as a hash:
     #
@@ -1464,6 +1522,26 @@ module Aws::Kafka
     #
     class ServiceUnavailableException < Struct.new(
       :invalid_parameter,
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about the state of the Amazon MSK cluster.
+    #
+    # @!attribute [rw] code
+    #   If the cluster is in an unusable state, this field contains the code
+    #   that describes the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   If the cluster is in an unusable state, this field contains a
+    #   message that describes the issue.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/StateInfo AWS API Documentation
+    #
+    class StateInfo < Struct.new(
+      :code,
       :message)
       include Aws::Structure
     end

@@ -4624,6 +4624,21 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records
     #
+    # @option params [Integer] :max_aggregation_interval
+    #   The maximum interval of time during which a flow of packets is
+    #   captured and aggregated into a flow log record. You can specify 60
+    #   seconds (1 minute) or 600 seconds (10 minutes).
+    #
+    #   For network interfaces attached to [Nitro-based instances][1], the
+    #   aggregation interval is always 60 seconds, regardless of the value
+    #   that you specify.
+    #
+    #   Default: 600
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #
     # @return [Types::CreateFlowLogsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFlowLogsResult#client_token #client_token} => String
@@ -4643,6 +4658,7 @@ module Aws::EC2
     #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
     #     log_destination: "String",
     #     log_format: "String",
+    #     max_aggregation_interval: 1,
     #   })
     #
     # @example Response structure
@@ -13965,6 +13981,7 @@ module Aws::EC2
     #   resp.flow_logs[0].log_destination_type #=> String, one of "cloud-watch-logs", "s3"
     #   resp.flow_logs[0].log_destination #=> String
     #   resp.flow_logs[0].log_format #=> String
+    #   resp.flow_logs[0].max_aggregation_interval #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs AWS API Documentation
@@ -35878,7 +35895,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

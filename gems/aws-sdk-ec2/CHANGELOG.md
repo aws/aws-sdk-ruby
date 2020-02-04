@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2020-02-04)
+------------------
+
+* Feature - Amazon VPC Flow Logs adds support for 1-minute aggregation intervals.
+
 1.137.0 (2020-01-21)
 ------------------
 

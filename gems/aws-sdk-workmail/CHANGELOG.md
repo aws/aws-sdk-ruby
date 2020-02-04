@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-02-04)
+------------------
+
+* Feature - This release adds support for tagging Amazon WorkMail organizations.
+
 1.19.0 (2019-10-23)
 ------------------
 

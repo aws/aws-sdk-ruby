@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2020-02-04)
+------------------
+
+* Feature - Adding KVM as a support hypervisor
+
 1.34.0 (2019-11-20)
 ------------------
 
