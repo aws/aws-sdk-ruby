@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API for AWS IoT.
+
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::StorageGateway - Updated the API for AWS Storage Gateway.
+
+* Feature - Aws::WorkMail - Updated the API, and documentation for Amazon WorkMail.
+
 2.11.436 (2020-01-24)
 ------------------
 
