@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.437 (2020-02-04)
+------------------
+
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
