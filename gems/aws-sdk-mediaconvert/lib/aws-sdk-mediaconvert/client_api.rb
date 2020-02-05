@@ -463,6 +463,7 @@ module Aws::MediaConvert
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
+    __doubleMin0Max1 = Shapes::FloatShape.new(name: '__doubleMin0Max1')
     __doubleMin0Max2147483647 = Shapes::FloatShape.new(name: '__doubleMin0Max2147483647')
     __doubleMinNegative59Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative59Max0')
     __doubleMinNegative60Max3 = Shapes::FloatShape.new(name: '__doubleMinNegative60Max3')
@@ -585,10 +586,10 @@ module Aws::MediaConvert
     __stringMin0 = Shapes::StringShape.new(name: '__stringMin0')
     __stringMin1 = Shapes::StringShape.new(name: '__stringMin1')
     __stringMin11Max11Pattern01D20305D205D = Shapes::StringShape.new(name: '__stringMin11Max11Pattern01D20305D205D')
-    __stringMin14Max1285PatternHttpHttpsS3Mov09Png = Shapes::StringShape.new(name: '__stringMin14Max1285PatternHttpHttpsS3Mov09Png')
-    __stringMin14PatternHttpHttpsS3BmpBMPPngPNG = Shapes::StringShape.new(name: '__stringMin14PatternHttpHttpsS3BmpBMPPngPNG')
-    __stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA')
-    __stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI')
+    __stringMin14Max1285PatternS3Mov09PngHttpsMov09Png = Shapes::StringShape.new(name: '__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png')
+    __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG')
+    __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = Shapes::StringShape.new(name: '__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA')
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI = Shapes::StringShape.new(name: '__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI')
     __stringMin16Max24PatternAZaZ0922AZaZ0916 = Shapes::StringShape.new(name: '__stringMin16Max24PatternAZaZ0922AZaZ0916')
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin24Max512PatternAZaZ0902 = Shapes::StringShape.new(name: '__stringMin24Max512PatternAZaZ0902')
@@ -608,12 +609,12 @@ module Aws::MediaConvert
     __stringPatternArnAwsUsGovAcm = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovAcm')
     __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = Shapes::StringShape.new(name: '__stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912')
     __stringPatternDD = Shapes::StringShape.new(name: '__stringPatternDD')
-    __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = Shapes::StringShape.new(name: '__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE')
-    __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = Shapes::StringShape.new(name: '__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL')
     __stringPatternHttps = Shapes::StringShape.new(name: '__stringPatternHttps')
     __stringPatternIdentityAZaZ26AZaZ09163 = Shapes::StringShape.new(name: '__stringPatternIdentityAZaZ26AZaZ09163')
     __stringPatternS3 = Shapes::StringShape.new(name: '__stringPatternS3')
     __stringPatternS3ASSETMAPXml = Shapes::StringShape.new(name: '__stringPatternS3ASSETMAPXml')
+    __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = Shapes::StringShape.new(name: '__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE')
+    __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = Shapes::StringShape.new(name: '__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL')
     __stringPatternSNManifestConfirmConditionNotificationNS = Shapes::StringShape.new(name: '__stringPatternSNManifestConfirmConditionNotificationNS')
     __stringPatternSNSignalProcessingNotificationNS = Shapes::StringShape.new(name: '__stringPatternSNSignalProcessingNotificationNS')
     __stringPatternW = Shapes::StringShape.new(name: '__stringPatternW')
@@ -693,7 +694,7 @@ module Aws::MediaConvert
 
     AudioSelector.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     AudioSelector.add_member(:default_selection, Shapes::ShapeRef.new(shape: AudioDefaultSelection, location_name: "defaultSelection"))
-    AudioSelector.add_member(:external_audio_file_input, Shapes::ShapeRef.new(shape: __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE, location_name: "externalAudioFileInput"))
+    AudioSelector.add_member(:external_audio_file_input, Shapes::ShapeRef.new(shape: __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE, location_name: "externalAudioFileInput"))
     AudioSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     AudioSelector.add_member(:offset, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "offset"))
     AudioSelector.add_member(:pids, Shapes::ShapeRef.new(shape: __listOf__integerMin1Max2147483647, location_name: "pids"))
@@ -706,7 +707,7 @@ module Aws::MediaConvert
     AudioSelectorGroup.add_member(:audio_selector_names, Shapes::ShapeRef.new(shape: __listOf__stringMin1, location_name: "audioSelectorNames"))
     AudioSelectorGroup.struct_class = Types::AudioSelectorGroup
 
-    AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: __stringMin14PatternHttpHttpsS3BmpBMPPngPNG, location_name: "availBlankingImage"))
+    AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG, location_name: "availBlankingImage"))
     AvailBlanking.struct_class = Types::AvailBlanking
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -1066,7 +1067,7 @@ module Aws::MediaConvert
     FileGroupSettings.struct_class = Types::FileGroupSettings
 
     FileSourceSettings.add_member(:convert_608_to_708, Shapes::ShapeRef.new(shape: FileSourceConvert608To708, location_name: "convert608To708"))
-    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
+    FileSourceSettings.add_member(:source_file, Shapes::ShapeRef.new(shape: __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI, location_name: "sourceFile"))
     FileSourceSettings.add_member(:time_delta, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "timeDelta"))
     FileSourceSettings.struct_class = Types::FileSourceSettings
 
@@ -1105,6 +1106,7 @@ module Aws::MediaConvert
 
     H264QvbrSettings.add_member(:max_average_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1152000000, location_name: "maxAverageBitrate"))
     H264QvbrSettings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
+    H264QvbrSettings.add_member(:qvbr_quality_level_fine_tune, Shapes::ShapeRef.new(shape: __doubleMin0Max1, location_name: "qvbrQualityLevelFineTune"))
     H264QvbrSettings.struct_class = Types::H264QvbrSettings
 
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -1150,6 +1152,7 @@ module Aws::MediaConvert
 
     H265QvbrSettings.add_member(:max_average_bitrate, Shapes::ShapeRef.new(shape: __integerMin1000Max1466400000, location_name: "maxAverageBitrate"))
     H265QvbrSettings.add_member(:qvbr_quality_level, Shapes::ShapeRef.new(shape: __integerMin1Max10, location_name: "qvbrQualityLevel"))
+    H265QvbrSettings.add_member(:qvbr_quality_level_fine_tune, Shapes::ShapeRef.new(shape: __doubleMin0Max1, location_name: "qvbrQualityLevelFineTune"))
     H265QvbrSettings.struct_class = Types::H265QvbrSettings
 
     H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -1278,7 +1281,7 @@ module Aws::MediaConvert
     Input.add_member(:deblock_filter, Shapes::ShapeRef.new(shape: InputDeblockFilter, location_name: "deblockFilter"))
     Input.add_member(:decryption_settings, Shapes::ShapeRef.new(shape: InputDecryptionSettings, location_name: "decryptionSettings"))
     Input.add_member(:denoise_filter, Shapes::ShapeRef.new(shape: InputDenoiseFilter, location_name: "denoiseFilter"))
-    Input.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL, location_name: "fileInput"))
+    Input.add_member(:file_input, Shapes::ShapeRef.new(shape: __stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL, location_name: "fileInput"))
     Input.add_member(:filter_enable, Shapes::ShapeRef.new(shape: InputFilterEnable, location_name: "filterEnable"))
     Input.add_member(:filter_strength, Shapes::ShapeRef.new(shape: __integerMinNegative5Max5, location_name: "filterStrength"))
     Input.add_member(:image_inserter, Shapes::ShapeRef.new(shape: ImageInserter, location_name: "imageInserter"))
@@ -1324,7 +1327,7 @@ module Aws::MediaConvert
     InsertableImage.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "fadeIn"))
     InsertableImage.add_member(:fade_out, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "fadeOut"))
     InsertableImage.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "height"))
-    InsertableImage.add_member(:image_inserter_input, Shapes::ShapeRef.new(shape: __stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA, location_name: "imageInserterInput"))
+    InsertableImage.add_member(:image_inserter_input, Shapes::ShapeRef.new(shape: __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA, location_name: "imageInserterInput"))
     InsertableImage.add_member(:image_x, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "imageX"))
     InsertableImage.add_member(:image_y, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "imageY"))
     InsertableImage.add_member(:layer, Shapes::ShapeRef.new(shape: __integerMin0Max99, location_name: "layer"))
@@ -1510,7 +1513,7 @@ module Aws::MediaConvert
     M3u8Settings.struct_class = Types::M3u8Settings
 
     MotionImageInserter.add_member(:framerate, Shapes::ShapeRef.new(shape: MotionImageInsertionFramerate, location_name: "framerate"))
-    MotionImageInserter.add_member(:input, Shapes::ShapeRef.new(shape: __stringMin14Max1285PatternHttpHttpsS3Mov09Png, location_name: "input"))
+    MotionImageInserter.add_member(:input, Shapes::ShapeRef.new(shape: __stringMin14Max1285PatternS3Mov09PngHttpsMov09Png, location_name: "input"))
     MotionImageInserter.add_member(:insertion_mode, Shapes::ShapeRef.new(shape: MotionImageInsertionMode, location_name: "insertionMode"))
     MotionImageInserter.add_member(:offset, Shapes::ShapeRef.new(shape: MotionImageInsertionOffset, location_name: "offset"))
     MotionImageInserter.add_member(:playback, Shapes::ShapeRef.new(shape: MotionImagePlayback, location_name: "playback"))

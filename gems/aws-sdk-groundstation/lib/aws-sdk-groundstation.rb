@@ -42,6 +42,6 @@ require_relative 'aws-sdk-groundstation/customizations'
 # @service
 module Aws::GroundStation
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

@@ -70,6 +70,7 @@ module Aws::GroundStation
     GetSatelliteRequest = Shapes::StructureShape.new(name: 'GetSatelliteRequest')
     GetSatelliteResponse = Shapes::StructureShape.new(name: 'GetSatelliteResponse')
     GroundStationData = Shapes::StructureShape.new(name: 'GroundStationData')
+    GroundStationIdList = Shapes::ListShape.new(name: 'GroundStationIdList')
     GroundStationList = Shapes::ListShape.new(name: 'GroundStationList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
@@ -94,6 +95,7 @@ module Aws::GroundStation
     MissionProfileListItem = Shapes::StructureShape.new(name: 'MissionProfileListItem')
     Polarization = Shapes::StringShape.new(name: 'Polarization')
     ReserveContactRequest = Shapes::StructureShape.new(name: 'ReserveContactRequest')
+    ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     SafeName = Shapes::StringShape.new(name: 'SafeName')
@@ -167,6 +169,7 @@ module Aws::GroundStation
     ContactData.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     ContactData.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
     ContactData.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
+    ContactData.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     ContactData.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     ContactData.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ContactData.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -205,6 +208,7 @@ module Aws::GroundStation
     DataflowEndpoint.struct_class = Types::DataflowEndpoint
 
     DataflowEndpointConfig.add_member(:dataflow_endpoint_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "dataflowEndpointName"))
+    DataflowEndpointConfig.add_member(:dataflow_endpoint_region, Shapes::ShapeRef.new(shape: String, location_name: "dataflowEndpointRegion"))
     DataflowEndpointConfig.struct_class = Types::DataflowEndpointConfig
 
     DataflowEndpointGroupIdResponse.add_member(:dataflow_endpoint_group_id, Shapes::ShapeRef.new(shape: String, location_name: "dataflowEndpointGroupId"))
@@ -248,6 +252,7 @@ module Aws::GroundStation
     DescribeContactResponse.add_member(:mission_profile_arn, Shapes::ShapeRef.new(shape: MissionProfileArn, location_name: "missionProfileArn"))
     DescribeContactResponse.add_member(:post_pass_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "postPassEndTime"))
     DescribeContactResponse.add_member(:pre_pass_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "prePassStartTime"))
+    DescribeContactResponse.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     DescribeContactResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     DescribeContactResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     DescribeContactResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -325,18 +330,18 @@ module Aws::GroundStation
     GetSatelliteRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "satelliteId"))
     GetSatelliteRequest.struct_class = Types::GetSatelliteRequest
 
-    GetSatelliteResponse.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "dateCreated"))
-    GetSatelliteResponse.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
+    GetSatelliteResponse.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
     GetSatelliteResponse.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
     GetSatelliteResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     GetSatelliteResponse.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
-    GetSatelliteResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     GetSatelliteResponse.struct_class = Types::GetSatelliteResponse
 
     GroundStationData.add_member(:ground_station_id, Shapes::ShapeRef.new(shape: String, location_name: "groundStationId"))
     GroundStationData.add_member(:ground_station_name, Shapes::ShapeRef.new(shape: String, location_name: "groundStationName"))
     GroundStationData.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
     GroundStationData.struct_class = Types::GroundStationData
+
+    GroundStationIdList.member = Shapes::ShapeRef.new(shape: String)
 
     GroundStationList.member = Shapes::ShapeRef.new(shape: GroundStationData)
 
@@ -376,6 +381,7 @@ module Aws::GroundStation
 
     ListGroundStationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
     ListGroundStationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListGroundStationsRequest.add_member(:satellite_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "satelliteId"))
     ListGroundStationsRequest.struct_class = Types::ListGroundStationsRequest
 
     ListGroundStationsResponse.add_member(:ground_station_list, Shapes::ShapeRef.new(shape: GroundStationList, location_name: "groundStationList"))
@@ -423,11 +429,16 @@ module Aws::GroundStation
     ReserveContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ReserveContactRequest.struct_class = Types::ReserveContactRequest
 
+    ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ResourceLimitExceededException.add_member(:parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "parameterName"))
+    ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SatelliteList.member = Shapes::ShapeRef.new(shape: SatelliteListItem)
 
+    SatelliteListItem.add_member(:ground_stations, Shapes::ShapeRef.new(shape: GroundStationIdList, location_name: "groundStations"))
     SatelliteListItem.add_member(:norad_satellite_id, Shapes::ShapeRef.new(shape: noradSatelliteID, location_name: "noradSatelliteID"))
     SatelliteListItem.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     SatelliteListItem.add_member(:satellite_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "satelliteId"))
@@ -456,7 +467,7 @@ module Aws::GroundStation
     TagKeys.member = Shapes::ShapeRef.new(shape: String)
 
     TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
-    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
@@ -520,8 +531,8 @@ module Aws::GroundStation
         o.http_request_uri = "/contact/{contactId}"
         o.input = Shapes::ShapeRef.new(shape: CancelContactRequest)
         o.output = Shapes::ShapeRef.new(shape: ContactIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -531,8 +542,9 @@ module Aws::GroundStation
         o.http_request_uri = "/config"
         o.input = Shapes::ShapeRef.new(shape: CreateConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfigIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -542,8 +554,8 @@ module Aws::GroundStation
         o.http_request_uri = "/dataflowEndpointGroup"
         o.input = Shapes::ShapeRef.new(shape: CreateDataflowEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DataflowEndpointGroupIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -553,8 +565,8 @@ module Aws::GroundStation
         o.http_request_uri = "/missionprofile"
         o.input = Shapes::ShapeRef.new(shape: CreateMissionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: MissionProfileIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -564,8 +576,8 @@ module Aws::GroundStation
         o.http_request_uri = "/config/{configType}/{configId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: ConfigIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -575,8 +587,8 @@ module Aws::GroundStation
         o.http_request_uri = "/dataflowEndpointGroup/{dataflowEndpointGroupId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDataflowEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DataflowEndpointGroupIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -586,8 +598,8 @@ module Aws::GroundStation
         o.http_request_uri = "/missionprofile/{missionProfileId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteMissionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: MissionProfileIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -597,8 +609,8 @@ module Aws::GroundStation
         o.http_request_uri = "/contact/{contactId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeContactRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeContactResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -608,8 +620,8 @@ module Aws::GroundStation
         o.http_request_uri = "/config/{configType}/{configId}"
         o.input = Shapes::ShapeRef.new(shape: GetConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: GetConfigResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -619,8 +631,19 @@ module Aws::GroundStation
         o.http_request_uri = "/dataflowEndpointGroup/{dataflowEndpointGroupId}"
         o.input = Shapes::ShapeRef.new(shape: GetDataflowEndpointGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDataflowEndpointGroupResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_minute_usage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMinuteUsage"
+        o.http_method = "POST"
+        o.http_request_uri = "/minute-usage"
+        o.input = Shapes::ShapeRef.new(shape: GetMinuteUsageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMinuteUsageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -630,8 +653,19 @@ module Aws::GroundStation
         o.http_request_uri = "/missionprofile/{missionProfileId}"
         o.input = Shapes::ShapeRef.new(shape: GetMissionProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMissionProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_satellite, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSatellite"
+        o.http_method = "GET"
+        o.http_request_uri = "/satellite/{satelliteId}"
+        o.input = Shapes::ShapeRef.new(shape: GetSatelliteRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSatelliteResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -641,8 +675,8 @@ module Aws::GroundStation
         o.http_request_uri = "/config"
         o.input = Shapes::ShapeRef.new(shape: ListConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConfigsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -658,8 +692,8 @@ module Aws::GroundStation
         o.http_request_uri = "/contacts"
         o.input = Shapes::ShapeRef.new(shape: ListContactsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListContactsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -675,8 +709,25 @@ module Aws::GroundStation
         o.http_request_uri = "/dataflowEndpointGroup"
         o.input = Shapes::ShapeRef.new(shape: ListDataflowEndpointGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataflowEndpointGroupsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ground_stations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListGroundStations"
+        o.http_method = "GET"
+        o.http_request_uri = "/groundstation"
+        o.input = Shapes::ShapeRef.new(shape: ListGroundStationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListGroundStationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -692,80 +743,8 @@ module Aws::GroundStation
         o.http_request_uri = "/missionprofile"
         o.input = Shapes::ShapeRef.new(shape: ListMissionProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListMissionProfilesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_results",
-          tokens: {
-            "next_token" => "next_token"
-          }
-        )
-      end)
-
-      api.add_operation(:reserve_contact, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ReserveContact"
-        o.http_method = "POST"
-        o.http_request_uri = "/contact"
-        o.input = Shapes::ShapeRef.new(shape: ReserveContactRequest)
-        o.output = Shapes::ShapeRef.new(shape: ContactIdResponse)
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:update_config, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateConfig"
-        o.http_method = "PUT"
-        o.http_request_uri = "/config/{configType}/{configId}"
-        o.input = Shapes::ShapeRef.new(shape: UpdateConfigRequest)
-        o.output = Shapes::ShapeRef.new(shape: ConfigIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:update_mission_profile, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "UpdateMissionProfile"
-        o.http_method = "PUT"
-        o.http_request_uri = "/missionprofile/{missionProfileId}"
-        o.input = Shapes::ShapeRef.new(shape: UpdateMissionProfileRequest)
-        o.output = Shapes::ShapeRef.new(shape: MissionProfileIdResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:get_minute_usage, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetMinuteUsage"
-        o.http_method = "POST"
-        o.http_request_uri = "/minute-usage"
-        o.input = Shapes::ShapeRef.new(shape: GetMinuteUsageRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetMinuteUsageResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:get_satellite, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "GetSatellite"
-        o.http_method = "GET"
-        o.http_request_uri = "/satellite/{satelliteId}"
-        o.input = Shapes::ShapeRef.new(shape: GetSatelliteRequest)
-        o.output = Shapes::ShapeRef.new(shape: GetSatelliteResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-      end)
-
-      api.add_operation(:list_ground_stations, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ListGroundStations"
-        o.http_method = "GET"
-        o.http_request_uri = "/groundstation"
-        o.input = Shapes::ShapeRef.new(shape: ListGroundStationsRequest)
-        o.output = Shapes::ShapeRef.new(shape: ListGroundStationsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -781,8 +760,8 @@ module Aws::GroundStation
         o.http_request_uri = "/satellite"
         o.input = Shapes::ShapeRef.new(shape: ListSatellitesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSatellitesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -798,8 +777,19 @@ module Aws::GroundStation
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:reserve_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReserveContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact"
+        o.input = Shapes::ShapeRef.new(shape: ReserveContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: ContactIdResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -809,8 +799,8 @@ module Aws::GroundStation
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -820,8 +810,30 @@ module Aws::GroundStation
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/config/{configType}/{configId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: ConfigIdResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_mission_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateMissionProfile"
+        o.http_method = "PUT"
+        o.http_request_uri = "/missionprofile/{missionProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateMissionProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: MissionProfileIdResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end

@@ -8528,6 +8528,17 @@ module Aws::EC2
     #         security_group_ids: ["String"],
     #         client_token: "String",
     #         private_dns_enabled: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -8601,6 +8612,10 @@ module Aws::EC2
     #   Default: `true`
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to associate with the endpoint.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
     #
     class CreateVpcEndpointRequest < Struct.new(
@@ -8613,7 +8628,8 @@ module Aws::EC2
       :subnet_ids,
       :security_group_ids,
       :client_token,
-      :private_dns_enabled)
+      :private_dns_enabled,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -8645,6 +8661,17 @@ module Aws::EC2
     #         private_dns_name: "String",
     #         network_load_balancer_arns: ["String"], # required
     #         client_token: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -8679,6 +8706,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to associate with the service.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfigurationRequest AWS API Documentation
     #
     class CreateVpcEndpointServiceConfigurationRequest < Struct.new(
@@ -8686,7 +8717,8 @@ module Aws::EC2
       :acceptance_required,
       :private_dns_name,
       :network_load_balancer_arns,
-      :client_token)
+      :client_token,
+      :tag_specifications)
       include Aws::Structure
     end
 

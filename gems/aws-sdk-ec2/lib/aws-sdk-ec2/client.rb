@@ -8763,6 +8763,9 @@ module Aws::EC2
     #
     #   Default: `true`
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to associate with the endpoint.
+    #
     # @return [Types::CreateVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcEndpointResult#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
@@ -8781,6 +8784,17 @@ module Aws::EC2
     #     security_group_ids: ["String"],
     #     client_token: "String",
     #     private_dns_enabled: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8947,6 +8961,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to associate with the service.
+    #
     # @return [Types::CreateVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcEndpointServiceConfigurationResult#service_configuration #service_configuration} => Types::ServiceConfiguration
@@ -8960,6 +8977,17 @@ module Aws::EC2
     #     private_dns_name: "String",
     #     network_load_balancer_arns: ["String"], # required
     #     client_token: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -35895,7 +35923,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

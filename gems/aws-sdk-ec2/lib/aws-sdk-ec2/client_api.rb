@@ -3234,6 +3234,7 @@ module Aws::EC2
     CreateVpcEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SecurityGroupId"))
     CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
+    CreateVpcEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
     CreateVpcEndpointResult.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "vpcEndpoint"))
@@ -3245,6 +3246,7 @@ module Aws::EC2
     CreateVpcEndpointServiceConfigurationRequest.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "PrivateDnsName"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "NetworkLoadBalancerArn"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateVpcEndpointServiceConfigurationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcEndpointServiceConfigurationRequest.struct_class = Types::CreateVpcEndpointServiceConfigurationRequest
 
     CreateVpcEndpointServiceConfigurationResult.add_member(:service_configuration, Shapes::ShapeRef.new(shape: ServiceConfiguration, location_name: "serviceConfiguration"))

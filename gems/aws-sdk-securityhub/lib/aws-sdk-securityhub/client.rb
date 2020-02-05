@@ -255,9 +255,11 @@ module Aws::SecurityHub
     # @!group API Operations
 
     # Accepts the invitation to be a member account and be monitored by the
-    # Security Hub master account that the invitation was sent from. When
-    # the member account accepts the invitation, permission is granted to
-    # the master account to view findings generated in the member account.
+    # Security Hub master account that the invitation was sent from.
+    #
+    # When the member account accepts the invitation, permission is granted
+    # to the master account to view findings generated in the member
+    # account.
     #
     # @option params [required, String] :master_id
     #   The account ID of the Security Hub master account that sent the
@@ -285,8 +287,10 @@ module Aws::SecurityHub
     end
 
     # Disables the standards specified by the provided
-    # `StandardsSubscriptionArns`. For more information, see [Standards
-    # Supported in AWS Security Hub][1].
+    # `StandardsSubscriptionArns`.
+    #
+    # For more information, see [Standards Supported in AWS Security
+    # Hub][1].
     #
     #
     #
@@ -323,9 +327,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the standards specified by the provided `standardsArn`. In
-    # this release, only CIS AWS Foundations standards are supported. For
-    # more information, see [Standards Supported in AWS Security Hub][1].
+    # Enables the standards specified by the provided `standardsArn`.
+    #
+    # In this release, only CIS AWS Foundations standards are supported.
+    #
+    # For more information, see [Standards Supported in AWS Security
+    # Hub][1].
     #
     #
     #
@@ -377,9 +384,10 @@ module Aws::SecurityHub
 
     # Imports security findings generated from an integrated third-party
     # product into Security Hub. This action is requested by the integrated
-    # product to import its findings into Security Hub. The maximum allowed
-    # size for a finding is 240 Kb. An error is returned for any finding
-    # larger than 240 Kb.
+    # product to import its findings into Security Hub.
+    #
+    # The maximum allowed size for a finding is 240 Kb. An error is returned
+    # for any finding larger than 240 Kb.
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -481,6 +489,31 @@ module Aws::SecurityHub
     #               "NonEmptyString" => "NonEmptyString",
     #             },
     #             details: {
+    #               aws_code_build_project: {
+    #                 encryption_key: "NonEmptyString",
+    #                 environment: {
+    #                   certificate: "NonEmptyString",
+    #                   image_pull_credentials_type: "NonEmptyString",
+    #                   registry_credential: {
+    #                     credential: "NonEmptyString",
+    #                     credential_provider: "NonEmptyString",
+    #                   },
+    #                   type: "NonEmptyString",
+    #                 },
+    #                 name: "NonEmptyString",
+    #                 source: {
+    #                   type: "NonEmptyString",
+    #                   location: "NonEmptyString",
+    #                   git_clone_depth: 1,
+    #                   insecure_ssl: false,
+    #                 },
+    #                 service_role: "NonEmptyString",
+    #                 vpc_config: {
+    #                   vpc_id: "NonEmptyString",
+    #                   subnets: ["NonEmptyString"],
+    #                   security_group_ids: ["NonEmptyString"],
+    #                 },
+    #               },
     #               aws_cloud_front_distribution: {
     #                 domain_name: "NonEmptyString",
     #                 etag: "NonEmptyString",
@@ -514,6 +547,95 @@ module Aws::SecurityHub
     #                 subnet_id: "NonEmptyString",
     #                 launched_at: "NonEmptyString",
     #               },
+    #               aws_ec2_network_interface: {
+    #                 attachment: {
+    #                   attach_time: "NonEmptyString",
+    #                   attachment_id: "NonEmptyString",
+    #                   delete_on_termination: false,
+    #                   device_index: 1,
+    #                   instance_id: "NonEmptyString",
+    #                   instance_owner_id: "NonEmptyString",
+    #                   status: "NonEmptyString",
+    #                 },
+    #                 network_interface_id: "NonEmptyString",
+    #                 security_groups: [
+    #                   {
+    #                     group_name: "NonEmptyString",
+    #                     group_id: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 source_dest_check: false,
+    #               },
+    #               aws_ec2_security_group: {
+    #                 group_name: "NonEmptyString",
+    #                 group_id: "NonEmptyString",
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
+    #                 ip_permissions: [
+    #                   {
+    #                     ip_protocol: "NonEmptyString",
+    #                     from_port: 1,
+    #                     to_port: 1,
+    #                     user_id_group_pairs: [
+    #                       {
+    #                         group_id: "NonEmptyString",
+    #                         group_name: "NonEmptyString",
+    #                         peering_status: "NonEmptyString",
+    #                         user_id: "NonEmptyString",
+    #                         vpc_id: "NonEmptyString",
+    #                         vpc_peering_connection_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ip_ranges: [
+    #                       {
+    #                         cidr_ip: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ipv_6_ranges: [
+    #                       {
+    #                         cidr_ipv_6: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     prefix_list_ids: [
+    #                       {
+    #                         prefix_list_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #                 ip_permissions_egress: [
+    #                   {
+    #                     ip_protocol: "NonEmptyString",
+    #                     from_port: 1,
+    #                     to_port: 1,
+    #                     user_id_group_pairs: [
+    #                       {
+    #                         group_id: "NonEmptyString",
+    #                         group_name: "NonEmptyString",
+    #                         peering_status: "NonEmptyString",
+    #                         user_id: "NonEmptyString",
+    #                         vpc_id: "NonEmptyString",
+    #                         vpc_peering_connection_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ip_ranges: [
+    #                       {
+    #                         cidr_ip: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ipv_6_ranges: [
+    #                       {
+    #                         cidr_ipv_6: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     prefix_list_ids: [
+    #                       {
+    #                         prefix_list_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
     #               aws_elbv_2_load_balancer: {
     #                 availability_zones: [
     #                   {
@@ -533,6 +655,33 @@ module Aws::SecurityHub
     #                 },
     #                 type: "NonEmptyString",
     #                 vpc_id: "NonEmptyString",
+    #               },
+    #               aws_elasticsearch_domain: {
+    #                 access_policies: "NonEmptyString",
+    #                 domain_endpoint_options: {
+    #                   enforce_https: false,
+    #                   tls_security_policy: "NonEmptyString",
+    #                 },
+    #                 domain_id: "NonEmptyString",
+    #                 domain_name: "NonEmptyString",
+    #                 endpoint: "NonEmptyString",
+    #                 endpoints: {
+    #                   "NonEmptyString" => "NonEmptyString",
+    #                 },
+    #                 elasticsearch_version: "NonEmptyString",
+    #                 encryption_at_rest_options: {
+    #                   enabled: false,
+    #                   kms_key_id: "NonEmptyString",
+    #                 },
+    #                 node_to_node_encryption_options: {
+    #                   enabled: false,
+    #                 },
+    #                 vpc_options: {
+    #                   availability_zones: ["NonEmptyString"],
+    #                   security_group_ids: ["NonEmptyString"],
+    #                   subnet_ids: ["NonEmptyString"],
+    #                   vpc_id: "NonEmptyString",
+    #                 },
     #               },
     #               aws_s3_bucket: {
     #                 owner_id: "NonEmptyString",
@@ -608,6 +757,47 @@ module Aws::SecurityHub
     #                 },
     #                 version: "NonEmptyString",
     #               },
+    #               aws_lambda_layer_version: {
+    #                 version: 1,
+    #                 compatible_runtimes: ["NonEmptyString"],
+    #                 created_date: "NonEmptyString",
+    #               },
+    #               aws_rds_db_instance: {
+    #                 associated_roles: [
+    #                   {
+    #                     role_arn: "NonEmptyString",
+    #                     feature_name: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ca_certificate_identifier: "NonEmptyString",
+    #                 db_cluster_identifier: "NonEmptyString",
+    #                 db_instance_identifier: "NonEmptyString",
+    #                 db_instance_class: "NonEmptyString",
+    #                 db_instance_port: 1,
+    #                 dbi_resource_id: "NonEmptyString",
+    #                 db_name: "NonEmptyString",
+    #                 deletion_protection: false,
+    #                 endpoint: {
+    #                   address: "NonEmptyString",
+    #                   port: 1,
+    #                   hosted_zone_id: "NonEmptyString",
+    #                 },
+    #                 engine: "NonEmptyString",
+    #                 engine_version: "NonEmptyString",
+    #                 iam_database_authentication_enabled: false,
+    #                 instance_create_time: "NonEmptyString",
+    #                 kms_key_id: "NonEmptyString",
+    #                 publicly_accessible: false,
+    #                 storage_encrypted: false,
+    #                 tde_credential_arn: "NonEmptyString",
+    #                 vpc_security_groups: [
+    #                   {
+    #                     vpc_security_group_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #               },
     #               aws_sns_topic: {
     #                 kms_master_key_id: "NonEmptyString",
     #                 subscription: [
@@ -625,6 +815,29 @@ module Aws::SecurityHub
     #                 queue_name: "NonEmptyString",
     #                 dead_letter_target_arn: "NonEmptyString",
     #               },
+    #               aws_waf_web_acl: {
+    #                 name: "NonEmptyString",
+    #                 default_action: "NonEmptyString",
+    #                 rules: [
+    #                   {
+    #                     action: {
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     excluded_rules: [
+    #                       {
+    #                         rule_id: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     override_action: {
+    #                       type: "NonEmptyString",
+    #                     },
+    #                     priority: 1,
+    #                     rule_id: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 web_acl_id: "NonEmptyString",
+    #               },
     #               container: {
     #                 name: "NonEmptyString",
     #                 image_id: "NonEmptyString",
@@ -639,6 +852,7 @@ module Aws::SecurityHub
     #         ],
     #         compliance: {
     #           status: "PASSED", # accepts PASSED, WARNING, FAILED, NOT_AVAILABLE
+    #           related_requirements: ["NonEmptyString"],
     #         },
     #         verification_state: "UNKNOWN", # accepts UNKNOWN, TRUE_POSITIVE, FALSE_POSITIVE, BENIGN_POSITIVE
     #         workflow_state: "NEW", # accepts NEW, ASSIGNED, IN_PROGRESS, DEFERRED, RESOLVED
@@ -676,9 +890,10 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Creates a custom action target in Security Hub. You can use custom
-    # actions on findings and insights in Security Hub to trigger target
-    # actions in Amazon CloudWatch Events.
+    # Creates a custom action target in Security Hub.
+    #
+    # You can use custom actions on findings and insights in Security Hub to
+    # trigger target actions in Amazon CloudWatch Events.
     #
     # @option params [required, String] :name
     #   The name of the custom action target.
@@ -716,16 +931,18 @@ module Aws::SecurityHub
 
     # Creates a custom insight in Security Hub. An insight is a
     # consolidation of findings that relate to a security issue that
-    # requires attention or remediation. Use the `GroupByAttribute` to group
-    # the related findings in the insight.
+    # requires attention or remediation.
+    #
+    # To group the related findings in the insight, use the
+    # `GroupByAttribute`.
     #
     # @option params [required, String] :name
     #   The name of the custom insight to create.
     #
     # @option params [required, Types::AwsSecurityFindingFilters] :filters
     #   One or more attributes used to filter the findings included in the
-    #   insight. Only findings that match the criteria defined in the filters
-    #   are included in the insight.
+    #   insight. The insight only includes findings that match the criteria
+    #   defined in the filters.
     #
     # @option params [required, String] :group_by_attribute
     #   The attribute used as the aggregator to group related findings for the
@@ -1307,26 +1524,27 @@ module Aws::SecurityHub
     # Creates a member association in Security Hub between the specified
     # accounts and the account used to make the request, which is the master
     # account. To successfully create a member, you must use this action
-    # from an account that already has Security Hub enabled. You can use the
-    # EnableSecurityHub to enable Security Hub.
+    # from an account that already has Security Hub enabled. To enable
+    # Security Hub, you can use the EnableSecurityHub operation.
     #
     # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you need to use the InviteMembers action, which invites
-    # the accounts to enable Security Hub and become member accounts in
-    # Security Hub. If the invitation is accepted by the account owner, the
-    # account becomes a member account in Security Hub, and a permission
-    # policy is added that permits the master account to view the findings
-    # generated in the member account. When Security Hub is enabled in the
-    # invited account, findings start being sent to both the member and
-    # master accounts.
+    # Security Hub, you must use the InviteMembers operation to invite the
+    # accounts to enable Security Hub and become member accounts in Security
+    # Hub.
     #
-    # You can remove the association between the master and member accounts
-    # by using the DisassociateFromMasterAccount or DisassociateMembers
-    # operation.
+    # If the account owner accepts the invitation, the account becomes a
+    # member account in Security Hub, and a permission policy is added that
+    # permits the master account to view the findings generated in the
+    # member account. When Security Hub is enabled in the invited account,
+    # findings start to be sent to both the member and master accounts.
+    #
+    # To remove the association between the master and member accounts, use
+    # the DisassociateFromMasterAccount or DisassociateMembers operation.
     #
     # @option params [Array<Types::AccountDetails>] :account_details
-    #   A list of account ID and email address pairs of the accounts to
-    #   associate with the Security Hub master account.
+    #   The list of accounts to associate with the Security Hub master
+    #   account. For each account, the list includes the account ID and the
+    #   email address.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1361,8 +1579,8 @@ module Aws::SecurityHub
     # Declines invitations to become a member account.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs that specify the accounts that invitations to
-    #   Security Hub are declined from.
+    #   The list of account IDs for the accounts from which to decline the
+    #   invitations to Security Hub.
     #
     # @return [Types::DeclineInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1389,9 +1607,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Deletes a custom action target from Security Hub. Deleting a custom
-    # action target doesn't affect any findings or insights that were
-    # already sent to Amazon CloudWatch Events using the custom action.
+    # Deletes a custom action target from Security Hub.
+    #
+    # Deleting a custom action target does not affect any findings or
+    # insights that were already sent to Amazon CloudWatch Events using the
+    # custom action.
     #
     # @option params [required, String] :action_target_arn
     #   The ARN of the custom action target to delete.
@@ -1451,7 +1671,7 @@ module Aws::SecurityHub
     # account.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of the account IDs that sent the invitations to delete.
+    #   The list of the account IDs that sent the invitations to delete.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1481,7 +1701,7 @@ module Aws::SecurityHub
     # Deletes the specified member accounts from Security Hub.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of account IDs of the member accounts to delete.
+    #   The list of account IDs for the member accounts to delete.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1582,8 +1802,9 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns information about the products available that you can
-    # subscribe to and integrate with Security Hub to consolidate findings.
+    # Returns information about the available products that you can
+    # subscribe to and integrate with Security Hub in order to consolidate
+    # findings.
     #
     # @option params [String] :next_token
     #   The token that is required for pagination.
@@ -1681,8 +1902,8 @@ module Aws::SecurityHub
     end
 
     # Disables the integration of the specified product with Security Hub.
-    # Findings from that product are no longer sent to Security Hub after
-    # the integration is disabled.
+    # After the integration is disabled, findings from that product are no
+    # longer sent to Security Hub.
     #
     # @option params [required, String] :product_subscription_arn
     #   The ARN of the integrated product to disable the integration for.
@@ -1706,16 +1927,18 @@ module Aws::SecurityHub
 
     # Disables Security Hub in your account only in the current Region. To
     # disable Security Hub in all Regions, you must submit one request per
-    # Region where you have enabled Security Hub. When you disable Security
-    # Hub for a master account, it doesn't disable Security Hub for any
-    # associated member accounts.
+    # Region where you have enabled Security Hub.
+    #
+    # When you disable Security Hub for a master account, it doesn't
+    # disable Security Hub for any associated member accounts.
     #
     # When you disable Security Hub, your existing findings and insights and
     # any Security Hub configuration settings are deleted after 90 days and
-    # can't be recovered. Any standards that were enabled are disabled, and
-    # your master and member account associations are removed. If you want
-    # to save your existing findings, you must export them before you
-    # disable Security Hub.
+    # cannot be recovered. Any standards that were enabled are disabled, and
+    # your master and member account associations are removed.
+    #
+    # If you want to save your existing findings, you must export them
+    # before you disable Security Hub.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1767,9 +1990,11 @@ module Aws::SecurityHub
     end
 
     # Enables the integration of a partner product with Security Hub.
-    # Integrated products send findings to Security Hub. When you enable a
-    # product integration, a permission policy that grants permission for
-    # the product to send findings to Security Hub is applied.
+    # Integrated products send findings to Security Hub.
+    #
+    # When you enable a product integration, a permission policy that grants
+    # permission for the product to send findings to Security Hub is
+    # applied.
     #
     # @option params [required, String] :product_arn
     #   The ARN of the product to enable the integration for.
@@ -1798,10 +2023,14 @@ module Aws::SecurityHub
     end
 
     # Enables Security Hub for your account in the current Region or the
-    # Region you specify in the request. Enabling Security Hub also enables
-    # the CIS AWS Foundations standard. When you enable Security Hub, you
-    # grant to Security Hub the permissions necessary to gather findings
-    # from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie.
+    # Region you specify in the request.
+    #
+    # Enabling Security Hub also enables the CIS AWS Foundations standard.
+    #
+    # When you enable Security Hub, you grant to Security Hub the
+    # permissions necessary to gather findings from AWS Config, Amazon
+    # GuardDuty, Amazon Inspector, and Amazon Macie.
+    #
     # To learn more, see [Setting Up AWS Security Hub][1].
     #
     #
@@ -1833,14 +2062,16 @@ module Aws::SecurityHub
     # Returns a list of the standards that are currently enabled.
     #
     # @option params [Array<String>] :standards_subscription_arns
-    #   A list of the standards subscription ARNs for the standards to
+    #   The list of the standards subscription ARNs for the standards to
     #   retrieve.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `GetEnabledStandards`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, fill `nextToken` in the request with the value
-    #   of `nextToken` from the previous response to continue listing data.
+    #   operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   `nextToken` in the request to the value of `nextToken` from the
+    #   previous response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -1880,17 +2111,19 @@ module Aws::SecurityHub
     # Returns a list of findings that match the specified criteria.
     #
     # @option params [Types::AwsSecurityFindingFilters] :filters
-    #   The findings attributes used to define a condition to filter the
-    #   findings returned.
+    #   The finding attributes used to define a condition to filter the
+    #   returned findings.
     #
     # @option params [Array<Types::SortCriterion>] :sort_criteria
-    #   Findings attributes used to sort the list of findings returned.
+    #   The finding attributes used to sort the list of returned findings.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `GetFindings` operation,
-    #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, fill `nextToken` in the request with the value of
-    #   `nextToken` from the previous response to continue listing data.
+    #   set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   `nextToken` in the request to the value of `nextToken` from the
+    #   previous response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of findings to return.
@@ -2525,6 +2758,23 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].region #=> String
     #   resp.findings[0].resources[0].tags #=> Hash
     #   resp.findings[0].resources[0].tags["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.encryption_key #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.certificate #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.image_pull_credentials_type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.registry_credential.credential #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.registry_credential.credential_provider #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.environment.type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.source.type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.source.location #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.source.git_clone_depth #=> Integer
+    #   resp.findings[0].resources[0].details.aws_code_build_project.source.insecure_ssl #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.service_role #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets #=> Array
+    #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids[0] #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.domain_name #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.etag #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.last_modified_time #=> String
@@ -2549,6 +2799,56 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_ec2_instance.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.subnet_id #=> String
     #   resp.findings[0].resources[0].details.aws_ec2_instance.launched_at #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attach_time #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.attachment_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.delete_on_termination #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.device_index #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.instance_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.instance_owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.attachment.status #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.network_interface_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.security_groups[0].group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_network_interface.source_dest_check #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].ip_protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].from_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].to_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].ip_ranges #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].ipv_6_ranges #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].prefix_list_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ip_protocol #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].from_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].to_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].user_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ip_ranges #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ip_ranges[0].cidr_ip #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ipv_6_ranges #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].prefix_list_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_ec2_security_group.ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].zone_name #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.availability_zones[0].subnet_id #=> String
@@ -2563,6 +2863,25 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.state.reason #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.type #=> String
     #   resp.findings[0].resources[0].details.aws_elbv_2_load_balancer.vpc_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.access_policies #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.enforce_https #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_endpoint_options.tls_security_policy #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.domain_name #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.endpoint #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.endpoints #=> Hash
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.endpoints["NonEmptyString"] #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.elasticsearch_version #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.encryption_at_rest_options.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.node_to_node_encryption_options.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones #=> Array
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.availability_zones[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.security_group_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.subnet_ids #=> Array
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.subnet_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_elasticsearch_domain.vpc_options.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_id #=> String
     #   resp.findings[0].resources[0].details.aws_s3_bucket.owner_name #=> String
     #   resp.findings[0].resources[0].details.aws_iam_access_key.user_name #=> String
@@ -2613,6 +2932,36 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.subnet_ids[0] #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.vpc_config.vpc_id #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_layer_version.version #=> Integer
+    #   resp.findings[0].resources[0].details.aws_lambda_layer_version.compatible_runtimes #=> Array
+    #   resp.findings[0].resources[0].details.aws_lambda_layer_version.compatible_runtimes[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_lambda_layer_version.created_date #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.associated_roles #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.associated_roles[0].role_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.associated_roles[0].feature_name #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.associated_roles[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.ca_certificate_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.db_cluster_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.db_instance_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.db_instance_class #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.db_instance_port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.dbi_resource_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.db_name #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.deletion_protection #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.endpoint.address #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.endpoint.port #=> Integer
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.endpoint.hosted_zone_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.engine #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.engine_version #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.iam_database_authentication_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.instance_create_time #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.kms_key_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.publicly_accessible #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.storage_encrypted #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.tde_credential_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.vpc_security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_instance.vpc_security_groups[0].status #=> String
     #   resp.findings[0].resources[0].details.aws_sns_topic.kms_master_key_id #=> String
     #   resp.findings[0].resources[0].details.aws_sns_topic.subscription #=> Array
     #   resp.findings[0].resources[0].details.aws_sns_topic.subscription[0].endpoint #=> String
@@ -2623,6 +2972,17 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_sqs_queue.kms_master_key_id #=> String
     #   resp.findings[0].resources[0].details.aws_sqs_queue.queue_name #=> String
     #   resp.findings[0].resources[0].details.aws_sqs_queue.dead_letter_target_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.name #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.default_action #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].action.type #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].excluded_rules #=> Array
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].excluded_rules[0].rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].override_action.type #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].priority #=> Integer
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].rule_id #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.rules[0].type #=> String
+    #   resp.findings[0].resources[0].details.aws_waf_web_acl.web_acl_id #=> String
     #   resp.findings[0].resources[0].details.container.name #=> String
     #   resp.findings[0].resources[0].details.container.image_id #=> String
     #   resp.findings[0].resources[0].details.container.image_name #=> String
@@ -2630,6 +2990,8 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.other #=> Hash
     #   resp.findings[0].resources[0].details.other["NonEmptyString"] #=> String
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
+    #   resp.findings[0].compliance.related_requirements #=> Array
+    #   resp.findings[0].compliance.related_requirements[0] #=> String
     #   resp.findings[0].verification_state #=> String, one of "UNKNOWN", "TRUE_POSITIVE", "FALSE_POSITIVE", "BENIGN_POSITIVE"
     #   resp.findings[0].workflow_state #=> String, one of "NEW", "ASSIGNED", "IN_PROGRESS", "DEFERRED", "RESOLVED"
     #   resp.findings[0].record_state #=> String, one of "ACTIVE", "ARCHIVED"
@@ -2650,11 +3012,11 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists the results of the Security Hub insight that the insight ARN
-    # specifies.
+    # Lists the results of the Security Hub insight specified by the insight
+    # ARN.
     #
     # @option params [required, String] :insight_arn
-    #   The ARN of the insight whose results you want to see.
+    #   The ARN of the insight for which to return results.
     #
     # @return [Types::GetInsightResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2683,19 +3045,19 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists and describes insights that insight ARNs specify.
+    # Lists and describes insights for the specified insight ARNs.
     #
     # @option params [Array<String>] :insight_arns
-    #   The ARNs of the insights that you want to describe.
+    #   The ARNs of the insights to describe.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `GetInsights` operation,
     #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, fill `nextToken` in the request with the value of
-    #   `nextToken` from the previous response to continue listing data.
+    #   operation, to continue listing data, set `nextToken` in the request to
+    #   the value of `nextToken` from the previous response.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of items to return in the response.
     #
     # @return [Types::GetInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3024,7 +3386,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Provides the details for the Security Hub master account to the
+    # Provides the details for the Security Hub master account for the
     # current member account.
     #
     # @return [Types::GetMasterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3047,12 +3409,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns the details on the Security Hub member accounts that the
-    # account IDs specify.
+    # Returns the details for the Security Hub member accounts for the
+    # specified account IDs.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs for the Security Hub member accounts that you
-    #   want to return the details for.
+    #   The list of account IDs for the Security Hub member accounts to return
+    #   the details for.
     #
     # @return [Types::GetMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3088,16 +3450,18 @@ module Aws::SecurityHub
     end
 
     # Invites other AWS accounts to become member accounts for the Security
-    # Hub master account that the invitation is sent from. Before you can
-    # use this action to invite a member, you must first create the member
-    # account in Security Hub by using the CreateMembers action. When the
-    # account owner accepts the invitation to become a member account and
-    # enables Security Hub, the master account can view the findings
-    # generated from member account.
+    # Hub master account that the invitation is sent from.
+    #
+    # Before you can use this action to invite a member, you must first use
+    # the CreateMembers action to create the member account in Security Hub.
+    #
+    # When the account owner accepts the invitation to become a member
+    # account and enables Security Hub, the master account can view the
+    # findings generated from the member account.
     #
     # @option params [Array<String>] :account_ids
-    #   A list of IDs of the AWS accounts that you want to invite to Security
-    #   Hub as members.
+    #   The list of account IDs of the AWS accounts to invite to Security Hub
+    #   as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3124,18 +3488,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Lists all findings-generating solutions (products) whose findings you
-    # have subscribed to receive in Security Hub.
+    # Lists all findings-generating solutions (products) that you are
+    # subscribed to receive findings from in Security Hub.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the
     #   `ListEnabledProductsForImport` operation, set the value of this
-    #   parameter to `NULL`. For subsequent calls to the operation, fill
-    #   `nextToken` in the request with the value of `NextToken` from the
-    #   previous response to continue listing data.
+    #   parameter to `NULL`. For subsequent calls to the operation, to
+    #   continue listing data, set `nextToken` in the request to the value of
+    #   `NextToken` from the previous response.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of items to return in the response.
     #
     # @return [Types::ListEnabledProductsForImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3168,13 +3532,13 @@ module Aws::SecurityHub
     # current AWS account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
     #   Paginates results. On your first call to the `ListInvitations`
     #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, fill `nextToken` in the request with the value
-    #   of `NextToken` from the previous response to continue listing data.
+    #   calls to the operation, to continue listing data, set `nextToken` in
+    #   the request to the value of `NextToken` from the previous response.
     #
     # @return [Types::ListInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3210,21 +3574,25 @@ module Aws::SecurityHub
     # master account.
     #
     # @option params [Boolean] :only_associated
-    #   Specifies which member accounts the response includes based on their
-    #   relationship status with the master account. The default value is
-    #   `TRUE`. If `onlyAssociated` is set to `TRUE`, the response includes
-    #   member accounts whose relationship status with the master is set to
-    #   `ENABLED` or `DISABLED`. If `onlyAssociated` is set to `FALSE`, the
-    #   response includes all existing member accounts.
+    #   Specifies which member accounts to include in the response based on
+    #   their relationship status with the master account. The default value
+    #   is `TRUE`.
+    #
+    #   If `onlyAssociated` is set to `TRUE`, the response includes member
+    #   accounts whose relationship status with the master is set to `ENABLED`
+    #   or `DISABLED`.
+    #
+    #   If `onlyAssociated` is set to `FALSE`, the response includes all
+    #   existing member accounts.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items that you want in the response.
+    #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. Set the value of this parameter to `NULL` on your
-    #   first call to the `ListMembers` operation. For subsequent calls to the
-    #   operation, fill `nextToken` in the request with the value of
-    #   `nextToken` from the previous response to continue listing data.
+    #   Paginates results. On your first call to the `ListMembers` operation,
+    #   set the value of this parameter to `NULL`. For subsequent calls to the
+    #   operation, to continue listing data, set `nextToken` in the request to
+    #   the value of `nextToken` from the previous response.
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3957,7 +4325,8 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Updates the Security Hub insight that the insight ARN specifies.
+    # Updates the Security Hub insight identified by the specified insight
+    # ARN.
     #
     # @option params [required, String] :insight_arn
     #   The ARN of the insight that you want to update.
@@ -4584,7 +4953,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2020-02-05)
+------------------
+
+* Feature - This release provides support for tagging when you create a VPC endpoint, or VPC endpoint service.
+
 1.138.0 (2020-02-04)
 ------------------
 
