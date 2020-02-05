@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DLM - Updated the API, and documentation for Amazon Data Lifecycle Manager.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ForecastQueryService - Updated the API, and documentation for Amazon Forecast Query Service.
+
+* Feature - Aws::GroundStation - Updated the API, and documentation for AWS Ground Station.
+
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Updated the documentation for AWS Resource Groups Tagging API.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
 2.11.437 (2020-02-04)
 ------------------
 
