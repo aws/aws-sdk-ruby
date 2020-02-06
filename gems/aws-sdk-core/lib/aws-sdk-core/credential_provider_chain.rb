@@ -20,6 +20,7 @@ module Aws
     def providers
       [
         [:static_credentials, {}],
+        [:static_profile_credentials, {}],
         [:env_credentials, {}],
         [:assume_role_web_identity_credentials, {}],
         [:assume_role_credentials, {}],
@@ -39,8 +40,12 @@ module Aws
           options[:config].access_key_id,
           options[:config].secret_access_key,
           options[:config].session_token)
-      else
-        nil
+      end
+    end
+
+    def static_profile_credentials(options)
+      if options[:config] && options[:config].profile
+        SharedCredentials.new(profile_name: options[:config].profile)
       end
     end
 
