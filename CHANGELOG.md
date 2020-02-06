@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.439 (2020-02-06)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
