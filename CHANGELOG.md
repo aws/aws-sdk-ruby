@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::EBS - Updated the documentation for Amazon Elastic Block Store.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECR - Updated the documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
 2.11.438 (2020-02-05)
 ------------------
 
