@@ -14990,6 +14990,8 @@ module Aws::EC2
     #   resp.images[0].kernel_id #=> String
     #   resp.images[0].owner_id #=> String
     #   resp.images[0].platform #=> String, one of "Windows"
+    #   resp.images[0].platform_details #=> String
+    #   resp.images[0].usage_operation #=> String
     #   resp.images[0].product_codes #=> Array
     #   resp.images[0].product_codes[0].product_code_id #=> String
     #   resp.images[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
@@ -31430,15 +31432,16 @@ module Aws::EC2
     # (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing
     # product code associated with an AMI to verify the subscription status
     # for package updates. To create a new AMI for operating systems that
-    # require a billing product code, do the following:
+    # require a billing product code, instead of instead of registering the
+    # AMI, do the following to preserve the billing product code
+    # association:
     #
     # 1.  Launch an instance from an existing AMI with that billing product
     #     code.
     #
     # 2.  Customize the instance.
     #
-    # 3.  Create a new AMI from the instance using CreateImage to preserve
-    #     the billing product code association.
+    # 3.  Create an AMI from the instance using CreateImage.
     #
     # If you purchase a Reserved Instance to apply to an On-Demand Instance
     # that was launched from an AMI with a billing product code, make sure
@@ -35923,7 +35926,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.139.0'
+      context[:gem_version] = '1.140.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

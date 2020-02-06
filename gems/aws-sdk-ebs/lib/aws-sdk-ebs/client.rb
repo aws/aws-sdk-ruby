@@ -262,14 +262,14 @@ module Aws::EBS
     # @option params [required, Integer] :block_index
     #   The block index of the block from which to get data.
     #
-    #   Obtain the `block index` by running the `list changed blocks` or `list
-    #   snapshot blocks` operations.
+    #   Obtain the `BlockIndex` by running the `ListChangedBlocks` or
+    #   `ListSnapshotBlocks` operations.
     #
     # @option params [required, String] :block_token
     #   The block token of the block from which to get data.
     #
-    #   Obtain the `block token` by running the `list changed blocks` or `list
-    #   snapshot blocks` operations.
+    #   Obtain the `BlockToken` by running the `ListChangedBlocks` or
+    #   `ListSnapshotBlocks` operations.
     #
     # @return [Types::GetSnapshotBlockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -309,8 +309,14 @@ module Aws::EBS
     # @option params [String] :first_snapshot_id
     #   The ID of the first snapshot to use for the comparison.
     #
+    #   The `FirstSnapshotID` parameter must be specified with a
+    #   `SecondSnapshotId` parameter; otherwise, an error occurs.
+    #
     # @option params [required, String] :second_snapshot_id
     #   The ID of the second snapshot to use for the comparison.
+    #
+    #   The `SecondSnapshotId` parameter must be specified with a
+    #   `FirstSnapshotID` parameter; otherwise, an error occurs.
     #
     # @option params [String] :next_token
     #   The token to request the next page of results.
@@ -429,7 +435,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
