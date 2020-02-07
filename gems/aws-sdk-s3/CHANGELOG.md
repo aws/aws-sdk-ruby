@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Allow EncryptedClient to be used as a Resource client.
+
 1.60.1 (2019-12-19)
 ------------------
 

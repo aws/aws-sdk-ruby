@@ -181,7 +181,7 @@ module Aws
 
         extend Deprecations
         extend Forwardable
-        def_delegators :@client, :delete_object, :head_object
+        def_delegators :@client, :delete_object, :head_object, :config
 
         # Creates a new encryption client. You must provide one of the following
         # options:
