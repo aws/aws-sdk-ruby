@@ -24,6 +24,11 @@ module Aws
         let(:client) { Encryption::Client.new(options) }
 
         describe 'configuration' do
+          it 'can be used with a Resource client' do
+            resource = S3::Resource.new(client: client)
+            expect(resource.client.config).to eq(api_client.config)
+          end
+
           it 'constructs a default s3 client when one is not given' do
             api_client = double('client')
             expect(S3::Client).to receive(:new).and_return(api_client)
