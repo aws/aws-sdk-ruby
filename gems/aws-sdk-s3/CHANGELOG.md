@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.60.2 (2020-02-07)
+------------------
+
 * Issue - Allow `Aws::S3::Encrypted::Client` to be used with a Resource client.
 
 1.60.1 (2019-12-19)

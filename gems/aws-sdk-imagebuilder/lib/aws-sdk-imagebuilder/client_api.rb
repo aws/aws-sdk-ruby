@@ -15,6 +15,7 @@ module Aws::Imagebuilder
     Ami = Shapes::StructureShape.new(name: 'Ami')
     AmiDistributionConfiguration = Shapes::StructureShape.new(name: 'AmiDistributionConfiguration')
     AmiList = Shapes::ListShape.new(name: 'AmiList')
+    AmiNameString = Shapes::StringShape.new(name: 'AmiNameString')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     CallRateLimitExceededException = Shapes::StructureShape.new(name: 'CallRateLimitExceededException')
@@ -33,6 +34,7 @@ module Aws::Imagebuilder
     ComponentType = Shapes::StringShape.new(name: 'ComponentType')
     ComponentVersion = Shapes::StructureShape.new(name: 'ComponentVersion')
     ComponentVersionArn = Shapes::StringShape.new(name: 'ComponentVersionArn')
+    ComponentVersionArnOrBuildVersionArn = Shapes::StringShape.new(name: 'ComponentVersionArnOrBuildVersionArn')
     ComponentVersionList = Shapes::ListShape.new(name: 'ComponentVersionList')
     CreateComponentRequest = Shapes::StructureShape.new(name: 'CreateComponentRequest')
     CreateComponentResponse = Shapes::StructureShape.new(name: 'CreateComponentResponse')
@@ -70,6 +72,7 @@ module Aws::Imagebuilder
     EbsIopsInteger = Shapes::IntegerShape.new(name: 'EbsIopsInteger')
     EbsVolumeSizeInteger = Shapes::IntegerShape.new(name: 'EbsVolumeSizeInteger')
     EbsVolumeType = Shapes::StringShape.new(name: 'EbsVolumeType')
+    EmptyString = Shapes::StringShape.new(name: 'EmptyString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
@@ -178,6 +181,7 @@ module Aws::Imagebuilder
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
+    SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
     StartImagePipelineExecutionRequest = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionRequest')
     StartImagePipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartImagePipelineExecutionResponse')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -207,7 +211,7 @@ module Aws::Imagebuilder
     Ami.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "state"))
     Ami.struct_class = Types::Ami
 
-    AmiDistributionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    AmiDistributionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: AmiNameString, location_name: "name"))
     AmiDistributionConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     AmiDistributionConfiguration.add_member(:ami_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "amiTags"))
     AmiDistributionConfiguration.add_member(:launch_permission, Shapes::ShapeRef.new(shape: LaunchPermissionConfiguration, location_name: "launchPermission"))
@@ -221,7 +225,7 @@ module Aws::Imagebuilder
     CallRateLimitExceededException.struct_class = Types::CallRateLimitExceededException
 
     CancelImageCreationRequest.add_member(:image_build_version_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageBuildVersionArn"))
-    CancelImageCreationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken"))
+    CancelImageCreationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CancelImageCreationRequest.struct_class = Types::CancelImageCreationRequest
 
     CancelImageCreationResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -247,7 +251,7 @@ module Aws::Imagebuilder
     Component.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Component.struct_class = Types::Component
 
-    ComponentConfiguration.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location_name: "componentArn"))
+    ComponentConfiguration.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentVersionArnOrBuildVersionArn, required: true, location_name: "componentArn"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
 
     ComponentConfigurationList.member = Shapes::ShapeRef.new(shape: ComponentConfiguration)
@@ -361,7 +365,7 @@ module Aws::Imagebuilder
     CreateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     CreateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     CreateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
-    CreateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "snsTopicArn"))
+    CreateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     CreateInfrastructureConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateInfrastructureConfigurationRequest.struct_class = Types::CreateInfrastructureConfigurationRequest
@@ -664,7 +668,7 @@ module Aws::Imagebuilder
     InstanceBlockDeviceMapping.add_member(:device_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "deviceName"))
     InstanceBlockDeviceMapping.add_member(:ebs, Shapes::ShapeRef.new(shape: EbsInstanceBlockDeviceSpecification, location_name: "ebs"))
     InstanceBlockDeviceMapping.add_member(:virtual_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "virtualName"))
-    InstanceBlockDeviceMapping.add_member(:no_device, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "noDevice"))
+    InstanceBlockDeviceMapping.add_member(:no_device, Shapes::ShapeRef.new(shape: EmptyString, location_name: "noDevice"))
     InstanceBlockDeviceMapping.struct_class = Types::InstanceBlockDeviceMapping
 
     InstanceBlockDeviceMappings.member = Shapes::ShapeRef.new(shape: InstanceBlockDeviceMapping)
@@ -735,7 +739,7 @@ module Aws::Imagebuilder
     ListImageBuildVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
     ListImageBuildVersionsResponse.struct_class = Types::ListImageBuildVersionsResponse
 
-    ListImagePipelineImagesRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, location_name: "imagePipelineArn"))
+    ListImagePipelineImagesRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     ListImagePipelineImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
     ListImagePipelineImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: RestrictedInteger, location_name: "maxResults", metadata: {"box"=>true}))
     ListImagePipelineImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "nextToken"))
@@ -882,7 +886,7 @@ module Aws::Imagebuilder
 
     UpdateDistributionConfigurationRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, required: true, location_name: "distributionConfigurationArn"))
     UpdateDistributionConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
-    UpdateDistributionConfigurationRequest.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, location_name: "distributions"))
+    UpdateDistributionConfigurationRequest.add_member(:distributions, Shapes::ShapeRef.new(shape: DistributionList, required: true, location_name: "distributions"))
     UpdateDistributionConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateDistributionConfigurationRequest.struct_class = Types::UpdateDistributionConfigurationRequest
 
@@ -893,8 +897,8 @@ module Aws::Imagebuilder
 
     UpdateImagePipelineRequest.add_member(:image_pipeline_arn, Shapes::ShapeRef.new(shape: ImagePipelineArn, required: true, location_name: "imagePipelineArn"))
     UpdateImagePipelineRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
-    UpdateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, location_name: "imageRecipeArn"))
-    UpdateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, location_name: "infrastructureConfigurationArn"))
+    UpdateImagePipelineRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
+    UpdateImagePipelineRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:distribution_configuration_arn, Shapes::ShapeRef.new(shape: DistributionConfigurationArn, location_name: "distributionConfigurationArn"))
     UpdateImagePipelineRequest.add_member(:image_tests_configuration, Shapes::ShapeRef.new(shape: ImageTestsConfiguration, location_name: "imageTestsConfiguration"))
     UpdateImagePipelineRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: Schedule, location_name: "schedule"))
@@ -910,13 +914,13 @@ module Aws::Imagebuilder
     UpdateInfrastructureConfigurationRequest.add_member(:infrastructure_configuration_arn, Shapes::ShapeRef.new(shape: InfrastructureConfigurationArn, required: true, location_name: "infrastructureConfigurationArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     UpdateInfrastructureConfigurationRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeList, location_name: "instanceTypes"))
-    UpdateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "instanceProfileName"))
+    UpdateInfrastructureConfigurationRequest.add_member(:instance_profile_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "instanceProfileName"))
     UpdateInfrastructureConfigurationRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
     UpdateInfrastructureConfigurationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
     UpdateInfrastructureConfigurationRequest.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
     UpdateInfrastructureConfigurationRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyPair"))
     UpdateInfrastructureConfigurationRequest.add_member(:terminate_instance_on_failure, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "terminateInstanceOnFailure"))
-    UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "snsTopicArn"))
+    UpdateInfrastructureConfigurationRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, location_name: "snsTopicArn"))
     UpdateInfrastructureConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     UpdateInfrastructureConfigurationRequest.struct_class = Types::UpdateInfrastructureConfigurationRequest
 

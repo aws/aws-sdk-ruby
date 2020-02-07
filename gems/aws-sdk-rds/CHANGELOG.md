@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2020-02-07)
+------------------
+
+* Feature - Documentation updates for RDS: when restoring a DB cluster from a snapshot, must create DB instances
+
 1.76.0 (2020-01-23)
 ------------------
 

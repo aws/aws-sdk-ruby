@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-02-07)
+------------------
+
+* Feature - This release adds support for simulation job batches
+
 1.18.0 (2019-11-04)
 ------------------
 
