@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.440 (2020-02-07)
+------------------
+
 * Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
 
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
