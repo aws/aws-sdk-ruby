@@ -347,27 +347,26 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Copies the specified DB cluster parameter group.
+    # Copies the specified cluster parameter group.
     #
     # @option params [required, String] :source_db_cluster_parameter_group_identifier
-    #   The identifier or Amazon Resource Name (ARN) for the source DB cluster
+    #   The identifier or Amazon Resource Name (ARN) for the source cluster
     #   parameter group.
     #
     #   Constraints:
     #
-    #   * Must specify a valid DB cluster parameter group.
+    #   * Must specify a valid cluster parameter group.
     #
-    #   * If the source DB cluster parameter group is in the same AWS Region
-    #     as the copy, specify a valid DB parameter group identifier; for
-    #     example, `my-db-cluster-param-group`, or a valid ARN.
+    #   * If the source cluster parameter group is in the same AWS Region as
+    #     the copy, specify a valid parameter group identifier; for example,
+    #     `my-db-cluster-param-group`, or a valid ARN.
     #
-    #   * If the source DB parameter group is in a different AWS Region than
-    #     the copy, specify a valid DB cluster parameter group ARN; for
-    #     example,
+    #   * If the source parameter group is in a different AWS Region than the
+    #     copy, specify a valid cluster parameter group ARN; for example,
     #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
     #
     # @option params [required, String] :target_db_cluster_parameter_group_identifier
-    #   The identifier for the copied DB cluster parameter group.
+    #   The identifier for the copied cluster parameter group.
     #
     #   Constraints:
     #
@@ -382,7 +381,7 @@ module Aws::DocDB
     #   Example: `my-cluster-param-group1`
     #
     # @option params [required, String] :target_db_cluster_parameter_group_description
-    #   A description for the copied DB cluster parameter group.
+    #   A description for the copied cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags that are to be assigned to the parameter group.
@@ -421,22 +420,22 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Copies a snapshot of a DB cluster.
+    # Copies a snapshot of a cluster.
     #
-    # To copy a DB cluster snapshot from a shared manual DB cluster
-    # snapshot, `SourceDBClusterSnapshotIdentifier` must be the Amazon
-    # Resource Name (ARN) of the shared DB cluster snapshot.
+    # To copy a cluster snapshot from a shared manual cluster snapshot,
+    # `SourceDBClusterSnapshotIdentifier` must be the Amazon Resource Name
+    # (ARN) of the shared cluster snapshot.
     #
     # To cancel the copy operation after it is in progress, delete the
-    # target DB cluster snapshot identified by
+    # target cluster snapshot identified by
     # `TargetDBClusterSnapshotIdentifier` while that DB cluster snapshot is
     # in the *copying* status.
     #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot to copy. This parameter is
-    #   not case sensitive.
+    #   The identifier of the cluster snapshot to copy. This parameter is not
+    #   case sensitive.
     #
-    #   You can't copy an encrypted, shared DB cluster snapshot from one AWS
+    #   You can't copy an encrypted, shared cluster snapshot from one AWS
     #   Region to another.
     #
     #   Constraints:
@@ -444,16 +443,16 @@ module Aws::DocDB
     #   * Must specify a valid system snapshot in the "available" state.
     #
     #   * If the source snapshot is in the same AWS Region as the copy,
-    #     specify a valid DB snapshot identifier.
+    #     specify a valid snapshot identifier.
     #
     #   * If the source snapshot is in a different AWS Region than the copy,
-    #     specify a valid DB cluster snapshot ARN.
+    #     specify a valid cluster snapshot ARN.
     #
     #   Example: `my-cluster-snapshot1`
     #
     # @option params [required, String] :target_db_cluster_snapshot_identifier
-    #   The identifier of the new DB cluster snapshot to create from the
-    #   source DB cluster snapshot. This parameter is not case sensitive.
+    #   The identifier of the new cluster snapshot to create from the source
+    #   cluster snapshot. This parameter is not case sensitive.
     #
     #   Constraints:
     #
@@ -466,35 +465,35 @@ module Aws::DocDB
     #   Example: `my-cluster-snapshot2`
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The AWS KMS
-    #   key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or
-    #   the AWS KMS key alias for the AWS KMS encryption key.
+    #   The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS key
+    #   ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the
+    #   AWS KMS key alias for the AWS KMS encryption key.
     #
-    #   If you copy an encrypted DB cluster snapshot from your AWS account,
-    #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
-    #   AWS KMS encryption key. If you don't specify a value for `KmsKeyId`,
-    #   then the copy of the DB cluster snapshot is encrypted with the same
-    #   AWS KMS key as the source DB cluster snapshot.
+    #   If you copy an encrypted cluster snapshot from your AWS account, you
+    #   can specify a value for `KmsKeyId` to encrypt the copy with a new AWS
+    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
+    #   the copy of the cluster snapshot is encrypted with the same AWS KMS
+    #   key as the source cluster snapshot.
     #
-    #   If you copy an encrypted DB cluster snapshot that is shared from
-    #   another AWS account, then you must specify a value for `KmsKeyId`.
+    #   If you copy an encrypted cluster snapshot that is shared from another
+    #   AWS account, then you must specify a value for `KmsKeyId`.
     #
-    #   To copy an encrypted DB cluster snapshot to another AWS Region, set
+    #   To copy an encrypted cluster snapshot to another AWS Region, set
     #   `KmsKeyId` to the AWS KMS key ID that you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination Region. AWS KMS
+    #   copy of the cluster snapshot in the destination Region. AWS KMS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one Region in another
     #   Region.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value for
+    #   If you copy an unencrypted cluster snapshot and specify a value for
     #   the `KmsKeyId` parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
-    #   source DB cluster snapshot to copy. You must use the `PreSignedUrl`
-    #   parameter when copying an encrypted DB cluster snapshot from another
-    #   AWS Region.
+    #   source cluster snapshot to copy. You must use the `PreSignedUrl`
+    #   parameter when copying an encrypted cluster snapshot from another AWS
+    #   Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CopyDBSClusterSnapshot` API action that can be executed in the source
@@ -503,7 +502,7 @@ module Aws::DocDB
     #   values:
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
+    #     encrypt the copy of the cluster snapshot in the destination AWS
     #     Region. This is the same identifier for both the
     #     `CopyDBClusterSnapshot` action that is called in the destination AWS
     #     Region, and the action contained in the presigned URL.
@@ -511,22 +510,22 @@ module Aws::DocDB
     #   * `DestinationRegion` - The name of the AWS Region that the DB cluster
     #     snapshot will be created in.
     #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied. This
+    #   * `SourceDBClusterSnapshotIdentifier` - The cluster snapshot
+    #     identifier for the encrypted cluster snapshot to be copied. This
     #     identifier must be in the Amazon Resource Name (ARN) format for the
-    #     source AWS Region. For example, if you are copying an encrypted DB
+    #     source AWS Region. For example, if you are copying an encrypted
     #     cluster snapshot from the us-west-2 AWS Region, then your
     #     `SourceDBClusterSnapshotIdentifier` looks like the following
     #     example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115`.
     #
     # @option params [Boolean] :copy_tags
-    #   Set to `true` to copy all tags from the source DB cluster snapshot to
-    #   the target DB cluster snapshot, and otherwise `false`. The default is
+    #   Set to `true` to copy all tags from the source cluster snapshot to the
+    #   target cluster snapshot, and otherwise `false`. The default is
     #   `false`.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB cluster snapshot.
+    #   The tags to be assigned to the cluster snapshot.
     #
     # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -578,11 +577,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a new Amazon DocumentDB DB cluster.
+    # Creates a new Amazon DocumentDB cluster.
     #
     # @option params [Array<String>] :availability_zones
-    #   A list of Amazon EC2 Availability Zones that instances in the DB
-    #   cluster can be created in.
+    #   A list of Amazon EC2 Availability Zones that instances in the cluster
+    #   can be created in.
     #
     # @option params [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained. You must
@@ -597,7 +596,7 @@ module Aws::DocDB
     #   ^
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The DB cluster identifier. This parameter is stored as a lowercase
+    #   The cluster identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -611,14 +610,14 @@ module Aws::DocDB
     #   Example: `my-cluster`
     #
     # @option params [String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to associate with this DB
+    #   The name of the cluster parameter group to associate with this
     #   cluster.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with this DB cluster.
+    #   A list of EC2 VPC security groups to associate with this cluster.
     #
     # @option params [String] :db_subnet_group_name
-    #   A DB subnet group to associate with this DB cluster.
+    #   A subnet group to associate with this cluster.
     #
     #   Constraints: Must match the name of an existing `DBSubnetGroup`. Must
     #   not be default.
@@ -626,7 +625,7 @@ module Aws::DocDB
     #   Example: `mySubnetgroup`
     #
     # @option params [required, String] :engine
-    #   The name of the database engine to be used for this DB cluster.
+    #   The name of the database engine to be used for this cluster.
     #
     #   Valid values: `docdb`
     #
@@ -634,11 +633,11 @@ module Aws::DocDB
     #   The version number of the database engine to use.
     #
     # @option params [Integer] :port
-    #   The port number on which the instances in the DB cluster accept
+    #   The port number on which the instances in the cluster accept
     #   connections.
     #
     # @option params [required, String] :master_username
-    #   The name of the master user for the DB cluster.
+    #   The name of the master user for the cluster.
     #
     #   Constraints:
     #
@@ -688,19 +687,19 @@ module Aws::DocDB
     #   Constraints: Minimum 30-minute window.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB cluster.
+    #   The tags to be assigned to the cluster.
     #
     # @option params [Boolean] :storage_encrypted
-    #   Specifies whether the DB cluster is encrypted.
+    #   Specifies whether the cluster is encrypted.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted cluster.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are creating a DB cluster using the
-    #   same AWS account that owns the AWS KMS encryption key that is used to
-    #   encrypt the new DB cluster, you can use the AWS KMS key alias instead
-    #   of the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are creating a cluster using the same
+    #   AWS account that owns the AWS KMS encryption key that is used to
+    #   encrypt the new cluster, you can use the AWS KMS key alias instead of
+    #   the ARN for the AWS KMS encryption key.
     #
     #   If an encryption key is not specified in `KmsKeyId`\:
     #
@@ -717,8 +716,8 @@ module Aws::DocDB
     #   AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a replica of an encrypted DB cluster in another AWS
-    #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
+    #   If you create a replica of an encrypted cluster in another AWS Region,
+    #   you must set `KmsKeyId` to a KMS key ID that is valid in the
     #   destination AWS Region. This key is used to encrypt the replica in
     #   that AWS Region.
     #
@@ -815,32 +814,30 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a new DB cluster parameter group.
+    # Creates a new cluster parameter group.
     #
-    # Parameters in a DB cluster parameter group apply to all of the
-    # instances in a DB cluster.
+    # Parameters in a cluster parameter group apply to all of the instances
+    # in a DB cluster.
     #
-    # A DB cluster parameter group is initially created with the default
-    # parameters for the database engine used by instances in the DB
-    # cluster. To provide custom values for any of the parameters, you must
-    # modify the group after you create it. After you create a DB cluster
-    # parameter group, you must associate it with your DB cluster. For the
-    # new DB cluster parameter group and associated settings to take effect,
-    # you must then reboot the DB instances in the DB cluster without
-    # failover.
+    # A cluster parameter group is initially created with the default
+    # parameters for the database engine used by instances in the cluster.
+    # To provide custom values for any of the parameters, you must modify
+    # the group after you create it. After you create a DB cluster parameter
+    # group, you must associate it with your cluster. For the new DB cluster
+    # parameter group and associated settings to take effect, you must then
+    # reboot the instances in the cluster without failover.
     #
-    # After you create a DB cluster parameter group, you should wait at
-    # least 5 minutes before creating your first DB cluster that uses that
-    # DB cluster parameter group as the default parameter group. This allows
-    # Amazon DocumentDB to fully complete the create action before the DB
-    # cluster parameter group is used as the default for a new DB cluster.
-    # This step is especially important for parameters that are critical
-    # when creating the default database for a DB cluster, such as the
-    # character set for the default database defined by the
-    # `character_set_database` parameter.
+    # After you create a cluster parameter group, you should wait at least 5
+    # minutes before creating your first cluster that uses that cluster
+    # parameter group as the default parameter group. This allows Amazon
+    # DocumentDB to fully complete the create action before the cluster
+    # parameter group is used as the default for a new cluster. This step is
+    # especially important for parameters that are critical when creating
+    # the default database for a cluster, such as the character set for the
+    # default database defined by the `character_set_database` parameter.
     #
     # @option params [required, String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group.
+    #   The name of the cluster parameter group.
     #
     #   Constraints:
     #
@@ -853,13 +850,13 @@ module Aws::DocDB
     #    </note>
     #
     # @option params [required, String] :db_parameter_group_family
-    #   The DB cluster parameter group family name.
+    #   The cluster parameter group family name.
     #
     # @option params [required, String] :description
-    #   The description for the DB cluster parameter group.
+    #   The description for the cluster parameter group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB cluster parameter group.
+    #   The tags to be assigned to the cluster parameter group.
     #
     # @return [Types::CreateDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -895,11 +892,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a snapshot of a DB cluster.
+    # Creates a snapshot of a cluster.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot. This parameter is stored as
-    #   a lowercase string.
+    #   The identifier of the cluster snapshot. This parameter is stored as a
+    #   lowercase string.
     #
     #   Constraints:
     #
@@ -912,8 +909,8 @@ module Aws::DocDB
     #   Example: `my-cluster-snapshot1`
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The identifier of the DB cluster to create a snapshot for. This
-    #   parameter is not case sensitive.
+    #   The identifier of the cluster to create a snapshot for. This parameter
+    #   is not case sensitive.
     #
     #   Constraints:
     #
@@ -924,7 +921,7 @@ module Aws::DocDB
     #   Example: `my-cluster`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB cluster snapshot.
+    #   The tags to be assigned to the cluster snapshot.
     #
     # @return [Types::CreateDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -973,10 +970,10 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a new DB instance.
+    # Creates a new instance.
     #
     # @option params [required, String] :db_instance_identifier
-    #   The DB instance identifier. This parameter is stored as a lowercase
+    #   The instance identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -990,7 +987,7 @@ module Aws::DocDB
     #   Example: `mydbinstance`
     #
     # @option params [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance; for example,
+    #   The compute and memory capacity of the instance; for example,
     #   `db.r5.large`.
     #
     # @option params [required, String] :engine
@@ -999,7 +996,7 @@ module Aws::DocDB
     #   Valid value: `docdb`
     #
     # @option params [String] :availability_zone
-    #   The Amazon EC2 Availability Zone that the DB instance is created in.
+    #   The Amazon EC2 Availability Zone that the instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   AWS Region.
@@ -1026,16 +1023,16 @@ module Aws::DocDB
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
-    #   DB instance during the maintenance window.
+    #   instance during the maintenance window.
     #
     #   Default: `true`
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB instance. You can assign up to 10
-    #   tags to an instance.
+    #   The tags to be assigned to the instance. You can assign up to 10 tags
+    #   to an instance.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The identifier of the DB cluster that the instance will belong to.
+    #   The identifier of the cluster that the instance will belong to.
     #
     # @option params [Integer] :promotion_tier
     #   A value that specifies the order in which an Amazon DocumentDB replica
@@ -1140,11 +1137,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a new DB subnet group. DB subnet groups must contain at least
-    # one subnet in at least two Availability Zones in the AWS Region.
+    # Creates a new subnet group. subnet groups must contain at least one
+    # subnet in at least two Availability Zones in the AWS Region.
     #
     # @option params [required, String] :db_subnet_group_name
-    #   The name for the DB subnet group. This value is stored as a lowercase
+    #   The name for the subnet group. This value is stored as a lowercase
     #   string.
     #
     #   Constraints: Must contain no more than 255 letters, numbers, periods,
@@ -1153,13 +1150,13 @@ module Aws::DocDB
     #   Example: `mySubnetgroup`
     #
     # @option params [required, String] :db_subnet_group_description
-    #   The description for the DB subnet group.
+    #   The description for the subnet group.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The Amazon EC2 subnet IDs for the DB subnet group.
+    #   The Amazon EC2 subnet IDs for the subnet group.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the DB subnet group.
+    #   The tags to be assigned to the subnet group.
     #
     # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1200,14 +1197,14 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Deletes a previously provisioned DB cluster. When you delete a DB
-    # cluster, all automated backups for that DB cluster are deleted and
-    # can't be recovered. Manual DB cluster snapshots of the specified DB
-    # cluster are not deleted.
+    # Deletes a previously provisioned cluster. When you delete a cluster,
+    # all automated backups for that cluster are deleted and can't be
+    # recovered. Manual DB cluster snapshots of the specified cluster are
+    # not deleted.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The DB cluster identifier for the DB cluster to be deleted. This
-    #   parameter isn't case sensitive.
+    #   The cluster identifier for the cluster to be deleted. This parameter
+    #   isn't case sensitive.
     #
     #   Constraints:
     #
@@ -1216,10 +1213,10 @@ module Aws::DocDB
     #   ^
     #
     # @option params [Boolean] :skip_final_snapshot
-    #   Determines whether a final DB cluster snapshot is created before the
-    #   DB cluster is deleted. If `true` is specified, no DB cluster snapshot
-    #   is created. If `false` is specified, a DB cluster snapshot is created
-    #   before the DB cluster is deleted.
+    #   Determines whether a final cluster snapshot is created before the
+    #   cluster is deleted. If `true` is specified, no cluster snapshot is
+    #   created. If `false` is specified, a cluster snapshot is created before
+    #   the DB cluster is deleted.
     #
     #   <note markdown="1"> If `SkipFinalSnapshot` is `false`, you must specify a
     #   `FinalDBSnapshotIdentifier` parameter.
@@ -1229,8 +1226,8 @@ module Aws::DocDB
     #   Default: `false`
     #
     # @option params [String] :final_db_snapshot_identifier
-    #   The DB cluster snapshot identifier of the new DB cluster snapshot
-    #   created when `SkipFinalSnapshot` is set to `false`.
+    #   The cluster snapshot identifier of the new cluster snapshot created
+    #   when `SkipFinalSnapshot` is set to `false`.
     #
     #   <note markdown="1"> Specifying this parameter and also setting the `SkipFinalShapshot`
     #   parameter to `true` results in an error.
@@ -1308,20 +1305,19 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Deletes a specified DB cluster parameter group. The DB cluster
-    # parameter group to be deleted can't be associated with any DB
-    # clusters.
+    # Deletes a specified cluster parameter group. The cluster parameter
+    # group to be deleted can't be associated with any clusters.
     #
     # @option params [required, String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group.
+    #   The name of the cluster parameter group.
     #
     #   Constraints:
     #
-    #   * Must be the name of an existing DB cluster parameter group.
+    #   * Must be the name of an existing cluster parameter group.
     #
-    #   * You can't delete a default DB cluster parameter group.
+    #   * You can't delete a default cluster parameter group.
     #
-    #   * Cannot be associated with any DB clusters.
+    #   * Cannot be associated with any clusters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1340,19 +1336,18 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Deletes a DB cluster snapshot. If the snapshot is being copied, the
-    # copy operation is terminated.
+    # Deletes a cluster snapshot. If the snapshot is being copied, the copy
+    # operation is terminated.
     #
-    # <note markdown="1"> The DB cluster snapshot must be in the `available` state to be
-    # deleted.
+    # <note markdown="1"> The cluster snapshot must be in the `available` state to be deleted.
     #
     #  </note>
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot to delete.
+    #   The identifier of the cluster snapshot to delete.
     #
-    #   Constraints: Must be the name of an existing DB cluster snapshot in
-    #   the `available` state.
+    #   Constraints: Must be the name of an existing cluster snapshot in the
+    #   `available` state.
     #
     # @return [Types::DeleteDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1394,15 +1389,15 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Deletes a previously provisioned DB instance.
+    # Deletes a previously provisioned instance.
     #
     # @option params [required, String] :db_instance_identifier
-    #   The DB instance identifier for the DB instance to be deleted. This
-    #   parameter isn't case sensitive.
+    #   The instance identifier for the instance to be deleted. This parameter
+    #   isn't case sensitive.
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DB instance.
+    #   * Must match the name of an existing instance.
     #
     #   ^
     #
@@ -1487,7 +1482,7 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Deletes a DB subnet group.
+    # Deletes a subnet group.
     #
     # <note markdown="1"> The specified database subnet group must not be associated with any DB
     # instances.
@@ -1526,7 +1521,11 @@ module Aws::DocDB
     end
 
     # Returns a list of certificate authority (CA) certificates provided by
-    # Amazon RDS for this AWS account.
+    # Amazon DocumentDB for this AWS account. For certain management
+    # features such as cluster and instance lifecycle management, Amazon
+    # DocumentDB leverages operational technology that is shared with Amazon
+    # RDS and Amazon Neptune. Use the `filterName=engine,Values=docdb`
+    # filter parameter to return only Amazon DocumentDB clusters.
     #
     # @option params [String] :certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
@@ -1604,12 +1603,11 @@ module Aws::DocDB
 
     # Returns a list of `DBClusterParameterGroup` descriptions. If a
     # `DBClusterParameterGroupName` parameter is specified, the list
-    # contains only the description of the specified DB cluster parameter
+    # contains only the description of the specified cluster parameter
     # group.
     #
     # @option params [String] :db_cluster_parameter_group_name
-    #   The name of a specific DB cluster parameter group to return details
-    #   for.
+    #   The name of a specific cluster parameter group to return details for.
     #
     #   Constraints:
     #
@@ -1673,11 +1671,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns the detailed parameter list for a particular DB cluster
-    # parameter group.
+    # Returns the detailed parameter list for a particular cluster parameter
+    # group.
     #
     # @option params [required, String] :db_cluster_parameter_group_name
-    #   The name of a specific DB cluster parameter group to return parameter
+    #   The name of a specific cluster parameter group to return parameter
     #   details for.
     #
     #   Constraints:
@@ -1753,18 +1751,18 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns a list of DB cluster snapshot attribute names and values for a
+    # Returns a list of cluster snapshot attribute names and values for a
     # manual DB cluster snapshot.
     #
     # When you share snapshots with other AWS accounts,
     # `DescribeDBClusterSnapshotAttributes` returns the `restore` attribute
     # and a list of IDs for the AWS accounts that are authorized to copy or
-    # restore the manual DB cluster snapshot. If `all` is included in the
-    # list of values for the `restore` attribute, then the manual DB cluster
+    # restore the manual cluster snapshot. If `all` is included in the list
+    # of values for the `restore` attribute, then the manual cluster
     # snapshot is public and can be copied or restored by all AWS accounts.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
-    #   The identifier for the DB cluster snapshot to describe the attributes
+    #   The identifier for the cluster snapshot to describe the attributes
     #   for.
     #
     # @return [Types::DescribeDBClusterSnapshotAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1794,14 +1792,13 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns information about DB cluster snapshots. This API operation
+    # Returns information about cluster snapshots. This API operation
     # supports pagination.
     #
     # @option params [String] :db_cluster_identifier
-    #   The ID of the DB cluster to retrieve the list of DB cluster snapshots
-    #   for. This parameter can't be used with the
-    #   `DBClusterSnapshotIdentifier` parameter. This parameter is not case
-    #   sensitive.
+    #   The ID of the cluster to retrieve the list of cluster snapshots for.
+    #   This parameter can't be used with the `DBClusterSnapshotIdentifier`
+    #   parameter. This parameter is not case sensitive.
     #
     #   Constraints:
     #
@@ -1810,7 +1807,7 @@ module Aws::DocDB
     #   ^
     #
     # @option params [String] :db_cluster_snapshot_identifier
-    #   A specific DB cluster snapshot identifier to describe. This parameter
+    #   A specific cluster snapshot identifier to describe. This parameter
     #   can't be used with the `DBClusterIdentifier` parameter. This value is
     #   stored as a lowercase string.
     #
@@ -1823,26 +1820,26 @@ module Aws::DocDB
     #     parameter must also be specified.
     #
     # @option params [String] :snapshot_type
-    #   The type of DB cluster snapshots to be returned. You can specify one
-    #   of the following values:
+    #   The type of cluster snapshots to be returned. You can specify one of
+    #   the following values:
     #
-    #   * `automated` - Return all DB cluster snapshots that Amazon DocumentDB
+    #   * `automated` - Return all cluster snapshots that Amazon DocumentDB
     #     has automatically created for your AWS account.
     #
-    #   * `manual` - Return all DB cluster snapshots that you have manually
+    #   * `manual` - Return all cluster snapshots that you have manually
     #     created for your AWS account.
     #
-    #   * `shared` - Return all manual DB cluster snapshots that have been
-    #     shared to your AWS account.
+    #   * `shared` - Return all manual cluster snapshots that have been shared
+    #     to your AWS account.
     #
-    #   * `public` - Return all DB cluster snapshots that have been marked as
+    #   * `public` - Return all cluster snapshots that have been marked as
     #     public.
     #
     #   If you don't specify a `SnapshotType` value, then both automated and
-    #   manual DB cluster snapshots are returned. You can include shared DB
-    #   cluster snapshots with these results by setting the `IncludeShared`
-    #   parameter to `true`. You can include public DB cluster snapshots with
-    #   these results by setting the `IncludePublic` parameter to `true`.
+    #   manual cluster snapshots are returned. You can include shared cluster
+    #   snapshots with these results by setting the `IncludeShared` parameter
+    #   to `true`. You can include public cluster snapshots with these results
+    #   by setting the `IncludePublic` parameter to `true`.
     #
     #   The `IncludeShared` and `IncludePublic` parameters don't apply for
     #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
@@ -1869,14 +1866,14 @@ module Aws::DocDB
     #   marker, up to the value specified by `MaxRecords`.
     #
     # @option params [Boolean] :include_shared
-    #   Set to `true` to include shared manual DB cluster snapshots from other
+    #   Set to `true` to include shared manual cluster snapshots from other
     #   AWS accounts that this AWS account has been given permission to copy
     #   or restore, and otherwise `false`. The default is `false`.
     #
     # @option params [Boolean] :include_public
-    #   Set to `true` to include manual DB cluster snapshots that are public
-    #   and can be copied or restored by any AWS account, and otherwise
-    #   `false`. The default is `false`.
+    #   Set to `true` to include manual cluster snapshots that are public and
+    #   can be copied or restored by any AWS account, and otherwise `false`.
+    #   The default is `false`.
     #
     # @return [Types::DBClusterSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1933,13 +1930,13 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns information about provisioned Amazon DocumentDB DB clusters.
-    # This API operation supports pagination.
+    # Returns information about provisioned Amazon DocumentDB clusters. This
+    # API operation supports pagination.
     #
     # @option params [String] :db_cluster_identifier
-    #   The user-provided DB cluster identifier. If this parameter is
-    #   specified, information from only the specific DB cluster is returned.
-    #   This parameter isn't case sensitive.
+    #   The user-provided cluster identifier. If this parameter is specified,
+    #   information from only the specific cluster is returned. This parameter
+    #   isn't case sensitive.
     #
     #   Constraints:
     #
@@ -1948,13 +1945,13 @@ module Aws::DocDB
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more DB clusters to describe.
+    #   A filter that specifies one or more clusters to describe.
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list only includes
-    #     information about the DB clusters identified by these ARNs.
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list only includes information
+    #     about the clusters identified by these ARNs.
     #
     #   ^
     #
@@ -2045,7 +2042,7 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns a list of the available DB engines.
+    # Returns a list of the available engines.
     #
     # @option params [String] :engine
     #   The database engine to return.
@@ -2056,8 +2053,7 @@ module Aws::DocDB
     #   Example: `5.1.49`
     #
     # @option params [String] :db_parameter_group_family
-    #   The name of a specific DB parameter group family to return details
-    #   for.
+    #   The name of a specific parameter group family to return details for.
     #
     #   Constraints:
     #
@@ -2154,7 +2150,7 @@ module Aws::DocDB
     #
     # @option params [String] :db_instance_identifier
     #   The user-provided instance identifier. If this parameter is specified,
-    #   information from only the specific DB instance is returned. This
+    #   information from only the specific instance is returned. This
     #   parameter isn't case sensitive.
     #
     #   Constraints:
@@ -2164,18 +2160,18 @@ module Aws::DocDB
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more DB instances to describe.
+    #   A filter that specifies one or more instances to describe.
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list includes only the
-    #     information about the DB instances that are associated with the DB
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list includes only the
+    #     information about the instances that are associated with the
     #     clusters that are identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list includes only the information about the DB
-    #     instances that are identified by these ARNs.
+    #   * `db-instance-id` - Accepts instance identifiers and instance ARNs.
+    #     The results list includes only the information about the instances
+    #     that are identified by these ARNs.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -2289,7 +2285,7 @@ module Aws::DocDB
     # descriptions of the specified `DBSubnetGroup`.
     #
     # @option params [String] :db_subnet_group_name
-    #   The name of the DB subnet group to return details for.
+    #   The name of the subnet group to return details for.
     #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter is not currently supported.
@@ -2355,7 +2351,7 @@ module Aws::DocDB
     # cluster database engine.
     #
     # @option params [required, String] :db_parameter_group_family
-    #   The name of the DB cluster parameter group family to return the engine
+    #   The name of the cluster parameter group family to return the engine
     #   parameter information for.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -2463,11 +2459,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns events related to DB instances, DB security groups, DB
-    # snapshots, and DB parameter groups for the past 14 days. You can
-    # obtain events specific to a particular DB instance, DB security group,
-    # DB snapshot, or DB parameter group by providing the name as a
-    # parameter. By default, the events of the past hour are returned.
+    # Returns events related to instances, security groups, snapshots, and
+    # DB parameter groups for the past 14 days. You can obtain events
+    # specific to a particular DB instance, security group, snapshot, or
+    # parameter group by providing the name as a parameter. By default, the
+    # events of the past hour are returned.
     #
     # @option params [String] :source_identifier
     #   The identifier of the event source for which events are returned. If
@@ -2580,20 +2576,18 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns a list of orderable DB instance options for the specified
-    # engine.
+    # Returns a list of orderable instance options for the specified engine.
     #
     # @option params [required, String] :engine
-    #   The name of the engine to retrieve DB instance options for.
+    #   The name of the engine to retrieve instance options for.
     #
     # @option params [String] :engine_version
     #   The engine version filter value. Specify this parameter to show only
     #   the available offerings that match the specified engine version.
     #
     # @option params [String] :db_instance_class
-    #   The DB instance class filter value. Specify this parameter to show
-    #   only the available offerings that match the specified DB instance
-    #   class.
+    #   The instance class filter value. Specify this parameter to show only
+    #   the available offerings that match the specified instance class.
     #
     # @option params [String] :license_model
     #   The license model filter value. Specify this parameter to show only
@@ -2665,7 +2659,7 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Returns a list of resources (for example, DB instances) that have at
+    # Returns a list of resources (for example, instances) that have at
     # least one pending maintenance action.
     #
     # @option params [String] :resource_identifier
@@ -2677,13 +2671,13 @@ module Aws::DocDB
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list includes only pending
-    #     maintenance actions for the DB clusters identified by these ARNs.
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list includes only pending
+    #     maintenance actions for the clusters identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list includes only pending maintenance actions for
-    #     the DB instances identified by these ARNs.
+    #   * `db-instance-id` - Accepts instance identifiers and instance ARNs.
+    #     The results list includes only pending maintenance actions for the
+    #     DB instances identified by these ARNs.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous request. If this
@@ -2741,10 +2735,10 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Forces a failover for a DB cluster.
+    # Forces a failover for a cluster.
     #
-    # A failover for a DB cluster promotes one of the Amazon DocumentDB
-    # replicas (read-only instances) in the DB cluster to be the primary
+    # A failover for a cluster promotes one of the Amazon DocumentDB
+    # replicas (read-only instances) in the cluster to be the primary
     # instance (the cluster writer).
     #
     # If the primary instance fails, Amazon DocumentDB automatically fails
@@ -2753,7 +2747,7 @@ module Aws::DocDB
     # testing.
     #
     # @option params [String] :db_cluster_identifier
-    #   A DB cluster identifier to force a failover for. This parameter is not
+    #   A cluster identifier to force a failover for. This parameter is not
     #   case sensitive.
     #
     #   Constraints:
@@ -2766,7 +2760,7 @@ module Aws::DocDB
     #   The name of the instance to promote to the primary instance.
     #
     #   You must specify the instance identifier for an Amazon DocumentDB
-    #   replica in the DB cluster. For example, `mydbcluster-replica1`.
+    #   replica in the cluster. For example, `mydbcluster-replica1`.
     #
     # @return [Types::FailoverDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2870,12 +2864,12 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Modifies a setting for an Amazon DocumentDB DB cluster. You can change
+    # Modifies a setting for an Amazon DocumentDB cluster. You can change
     # one or more database configuration parameters by specifying these
     # parameters and the new values in the request.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The DB cluster identifier for the cluster that is being modified. This
+    #   The cluster identifier for the cluster that is being modified. This
     #   parameter is not case sensitive.
     #
     #   Constraints:
@@ -2885,8 +2879,8 @@ module Aws::DocDB
     #   ^
     #
     # @option params [String] :new_db_cluster_identifier
-    #   The new DB cluster identifier for the DB cluster when renaming a DB
-    #   cluster. This value is stored as a lowercase string.
+    #   The new cluster identifier for the cluster when renaming a cluster.
+    #   This value is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -2901,9 +2895,9 @@ module Aws::DocDB
     # @option params [Boolean] :apply_immediately
     #   A value that specifies whether the changes in this request and any
     #   pending changes are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
-    #   cluster. If this parameter is set to `false`, changes to the DB
-    #   cluster are applied during the next maintenance window.
+    #   regardless of the `PreferredMaintenanceWindow` setting for the
+    #   cluster. If this parameter is set to `false`, changes to the cluster
+    #   are applied during the next maintenance window.
     #
     #   The `ApplyImmediately` parameter affects only the
     #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
@@ -2928,18 +2922,18 @@ module Aws::DocDB
     #   ^
     #
     # @option params [String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to use for the DB cluster.
+    #   The name of the cluster parameter group to use for the cluster.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of virtual private cloud (VPC) security groups that the DB
-    #   cluster will belong to.
+    #   A list of virtual private cloud (VPC) security groups that the cluster
+    #   will belong to.
     #
     # @option params [Integer] :port
-    #   The port number on which the DB cluster accepts connections.
+    #   The port number on which the cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The same port as the original cluster.
     #
     # @option params [String] :master_user_password
     #   The password for the master database user. This password can contain
@@ -2982,9 +2976,9 @@ module Aws::DocDB
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to Amazon CloudWatch Logs for a specific DB instance or DB cluster.
-    #   The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
-    #   are exported (or not exported) to CloudWatch Logs.
+    #   to Amazon CloudWatch Logs for a specific instance or cluster. The
+    #   `EnableLogTypes` and `DisableLogTypes` arrays determine which logs are
+    #   exported (or not exported) to CloudWatch Logs.
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
@@ -3074,10 +3068,10 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Modifies the parameters of a DB cluster parameter group. To modify
-    # more than one parameter, submit a list of the following:
-    # `ParameterName`, `ParameterValue`, and `ApplyMethod`. A maximum of 20
-    # parameters can be modified in a single request.
+    # Modifies the parameters of a cluster parameter group. To modify more
+    # than one parameter, submit a list of the following: `ParameterName`,
+    # `ParameterValue`, and `ApplyMethod`. A maximum of 20 parameters can be
+    # modified in a single request.
     #
     # <note markdown="1"> Changes to dynamic parameters are applied immediately. Changes to
     # static parameters require a reboot or maintenance window before the
@@ -3085,21 +3079,20 @@ module Aws::DocDB
     #
     #  </note>
     #
-    # After you create a DB cluster parameter group, you should wait at
-    # least 5 minutes before creating your first DB cluster that uses that
-    # DB cluster parameter group as the default parameter group. This allows
-    # Amazon DocumentDB to fully complete the create action before the
-    # parameter group is used as the default for a new DB cluster. This step
-    # is especially important for parameters that are critical when creating
-    # the default database for a DB cluster, such as the character set for
-    # the default database defined by the `character_set_database`
-    # parameter.
+    # After you create a cluster parameter group, you should wait at least 5
+    # minutes before creating your first cluster that uses that cluster
+    # parameter group as the default parameter group. This allows Amazon
+    # DocumentDB to fully complete the create action before the parameter
+    # group is used as the default for a new cluster. This step is
+    # especially important for parameters that are critical when creating
+    # the default database for a cluster, such as the character set for the
+    # default database defined by the `character_set_database` parameter.
     #
     # @option params [required, String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to modify.
+    #   The name of the cluster parameter group to modify.
     #
     # @option params [required, Array<Types::Parameter>] :parameters
-    #   A list of parameters in the DB cluster parameter group to modify.
+    #   A list of parameters in the cluster parameter group to modify.
     #
     # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3141,49 +3134,48 @@ module Aws::DocDB
     # Adds an attribute and values to, or removes an attribute and values
     # from, a manual DB cluster snapshot.
     #
-    # To share a manual DB cluster snapshot with other AWS accounts, specify
+    # To share a manual cluster snapshot with other AWS accounts, specify
     # `restore` as the `AttributeName`, and use the `ValuesToAdd` parameter
     # to add a list of IDs of the AWS accounts that are authorized to
-    # restore the manual DB cluster snapshot. Use the value `all` to make
-    # the manual DB cluster snapshot public, which means that it can be
-    # copied or restored by all AWS accounts. Do not add the `all` value for
-    # any manual DB cluster snapshots that contain private information that
-    # you don't want available to all AWS accounts. If a manual DB cluster
+    # restore the manual cluster snapshot. Use the value `all` to make the
+    # manual cluster snapshot public, which means that it can be copied or
+    # restored by all AWS accounts. Do not add the `all` value for any
+    # manual DB cluster snapshots that contain private information that you
+    # don't want available to all AWS accounts. If a manual cluster
     # snapshot is encrypted, it can be shared, but only by specifying a list
     # of authorized AWS account IDs for the `ValuesToAdd` parameter. You
     # can't use `all` as a value for that parameter in this case.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
-    #   The identifier for the DB cluster snapshot to modify the attributes
-    #   for.
+    #   The identifier for the cluster snapshot to modify the attributes for.
     #
     # @option params [required, String] :attribute_name
-    #   The name of the DB cluster snapshot attribute to modify.
+    #   The name of the cluster snapshot attribute to modify.
     #
     #   To manage authorization for other AWS accounts to copy or restore a
-    #   manual DB cluster snapshot, set this value to `restore`.
+    #   manual cluster snapshot, set this value to `restore`.
     #
     # @option params [Array<String>] :values_to_add
-    #   A list of DB cluster snapshot attributes to add to the attribute
+    #   A list of cluster snapshot attributes to add to the attribute
     #   specified by `AttributeName`.
     #
-    #   To authorize other AWS accounts to copy or restore a manual DB cluster
+    #   To authorize other AWS accounts to copy or restore a manual cluster
     #   snapshot, set this list to include one or more AWS account IDs. To
-    #   make the manual DB cluster snapshot restorable by any AWS account, set
-    #   it to `all`. Do not add the `all` value for any manual DB cluster
-    #   snapshots that contain private information that you don't want to be
-    #   available to all AWS accounts.
+    #   make the manual cluster snapshot restorable by any AWS account, set it
+    #   to `all`. Do not add the `all` value for any manual cluster snapshots
+    #   that contain private information that you don't want to be available
+    #   to all AWS accounts.
     #
     # @option params [Array<String>] :values_to_remove
-    #   A list of DB cluster snapshot attributes to remove from the attribute
+    #   A list of cluster snapshot attributes to remove from the attribute
     #   specified by `AttributeName`.
     #
     #   To remove authorization for other AWS accounts to copy or restore a
-    #   manual DB cluster snapshot, set this list to include one or more AWS
+    #   manual cluster snapshot, set this list to include one or more AWS
     #   account identifiers. To remove authorization for any AWS account to
-    #   copy or restore the DB cluster snapshot, set it to `all` . If you
-    #   specify `all`, an AWS account whose account ID is explicitly added to
-    #   the `restore` attribute can still copy or restore a manual DB cluster
+    #   copy or restore the cluster snapshot, set it to `all` . If you specify
+    #   `all`, an AWS account whose account ID is explicitly added to the
+    #   `restore` attribute can still copy or restore a manual cluster
     #   snapshot.
     #
     # @return [Types::ModifyDBClusterSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3216,13 +3208,12 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Modifies settings for a DB instance. You can change one or more
-    # database configuration parameters by specifying these parameters and
-    # the new values in the request.
+    # Modifies settings for an instance. You can change one or more database
+    # configuration parameters by specifying these parameters and the new
+    # values in the request.
     #
     # @option params [required, String] :db_instance_identifier
-    #   The DB instance identifier. This value is stored as a lowercase
-    #   string.
+    #   The instance identifier. This value is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -3231,23 +3222,23 @@ module Aws::DocDB
     #   ^
     #
     # @option params [String] :db_instance_class
-    #   The new compute and memory capacity of the DB instance; for example,
-    #   `db.r5.large`. Not all DB instance classes are available in all AWS
+    #   The new compute and memory capacity of the instance; for example,
+    #   `db.r5.large`. Not all instance classes are available in all AWS
     #   Regions.
     #
-    #   If you modify the DB instance class, an outage occurs during the
-    #   change. The change is applied during the next maintenance window,
-    #   unless `ApplyImmediately` is specified as `true` for this request.
+    #   If you modify the instance class, an outage occurs during the change.
+    #   The change is applied during the next maintenance window, unless
+    #   `ApplyImmediately` is specified as `true` for this request.
     #
     #   Default: Uses existing setting.
     #
     # @option params [Boolean] :apply_immediately
     #   Specifies whether the modifications in this request and any pending
     #   modifications are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
+    #   regardless of the `PreferredMaintenanceWindow` setting for the
     #   instance.
     #
-    #   If this parameter is set to `false`, changes to the DB instance are
+    #   If this parameter is set to `false`, changes to the instance are
     #   applied during the next maintenance window. Some parameter changes can
     #   cause an outage and are applied on the next reboot.
     #
@@ -3260,9 +3251,9 @@ module Aws::DocDB
     #   the change is asynchronously applied as soon as possible. If there are
     #   pending actions that cause a reboot, and the maintenance window is
     #   changed to include the current time, changing this parameter causes a
-    #   reboot of the DB instance. If you are moving this window to the
-    #   current time, there must be at least 30 minutes between the current
-    #   time and end of the window to ensure that pending changes are applied.
+    #   reboot of the instance. If you are moving this window to the current
+    #   time, there must be at least 30 minutes between the current time and
+    #   end of the window to ensure that pending changes are applied.
     #
     #   Default: Uses existing setting.
     #
@@ -3274,7 +3265,7 @@ module Aws::DocDB
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
-    #   DB instance during the maintenance window. Changing this parameter
+    #   instance during the maintenance window. Changing this parameter
     #   doesn't result in an outage except in the following case, and the
     #   change is asynchronously applied as soon as possible. An outage
     #   results if this parameter is set to `true` during the maintenance
@@ -3282,11 +3273,11 @@ module Aws::DocDB
     #   has enabled automatic patching for that engine version.
     #
     # @option params [String] :new_db_instance_identifier
-    #   The new DB instance identifier for the DB instance when renaming a DB
-    #   instance. When you change the DB instance identifier, an instance
-    #   reboot occurs immediately if you set `Apply Immediately` to `true`. It
-    #   occurs during the next maintenance window if you set `Apply
-    #   Immediately` to `false`. This value is stored as a lowercase string.
+    #   The new instance identifier for the instance when renaming an
+    #   instance. When you change the instance identifier, an instance reboot
+    #   occurs immediately if you set `Apply Immediately` to `true`. It occurs
+    #   during the next maintenance window if you set `Apply Immediately` to
+    #   `false`. This value is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -3399,11 +3390,11 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Modifies an existing DB subnet group. DB subnet groups must contain at
-    # least one subnet in at least two Availability Zones in the AWS Region.
+    # Modifies an existing subnet group. subnet groups must contain at least
+    # one subnet in at least two Availability Zones in the AWS Region.
     #
     # @option params [required, String] :db_subnet_group_name
-    #   The name for the DB subnet group. This value is stored as a lowercase
+    #   The name for the subnet group. This value is stored as a lowercase
     #   string. You can't modify the default subnet group.
     #
     #   Constraints: Must match the name of an existing `DBSubnetGroup`. Must
@@ -3412,10 +3403,10 @@ module Aws::DocDB
     #   Example: `mySubnetgroup`
     #
     # @option params [String] :db_subnet_group_description
-    #   The description for the DB subnet group.
+    #   The description for the subnet group.
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The Amazon EC2 subnet IDs for the DB subnet group.
+    #   The Amazon EC2 subnet IDs for the subnet group.
     #
     # @return [Types::ModifyDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3450,17 +3441,17 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # You might need to reboot your DB instance, usually for maintenance
+    # You might need to reboot your instance, usually for maintenance
     # reasons. For example, if you make certain changes, or if you change
-    # the DB cluster parameter group that is associated with the DB
-    # instance, you must reboot the instance for the changes to take effect.
+    # the cluster parameter group that is associated with the instance, you
+    # must reboot the instance for the changes to take effect.
     #
-    # Rebooting a DB instance restarts the database engine service.
-    # Rebooting a DB instance results in a momentary outage, during which
-    # the DB instance status is set to *rebooting*.
+    # Rebooting an instance restarts the database engine service. Rebooting
+    # an instance results in a momentary outage, during which the instance
+    # status is set to *rebooting*.
     #
     # @option params [required, String] :db_instance_identifier
-    #   The DB instance identifier. This parameter is stored as a lowercase
+    #   The instance identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -3584,9 +3575,9 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Modifies the parameters of a DB cluster parameter group to the default
+    # Modifies the parameters of a cluster parameter group to the default
     # value. To reset specific parameters, submit a list of the following:
-    # `ParameterName` and `ApplyMethod`. To reset the entire DB cluster
+    # `ParameterName` and `ApplyMethod`. To reset the entire cluster
     # parameter group, specify the `DBClusterParameterGroupName` and
     # `ResetAllParameters` parameters.
     #
@@ -3595,17 +3586,17 @@ module Aws::DocDB
     # effect on the next DB instance reboot.
     #
     # @option params [required, String] :db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to reset.
+    #   The name of the cluster parameter group to reset.
     #
     # @option params [Boolean] :reset_all_parameters
-    #   A value that is set to `true` to reset all parameters in the DB
-    #   cluster parameter group to their default values, and `false`
-    #   otherwise. You can't use this parameter if there is a list of
-    #   parameter names specified for the `Parameters` parameter.
+    #   A value that is set to `true` to reset all parameters in the cluster
+    #   parameter group to their default values, and `false` otherwise. You
+    #   can't use this parameter if there is a list of parameter names
+    #   specified for the `Parameters` parameter.
     #
     # @option params [Array<Types::Parameter>] :parameters
-    #   A list of parameter names in the DB cluster parameter group to reset
-    #   to the default values. You can't use this parameter if the
+    #   A list of parameter names in the cluster parameter group to reset to
+    #   the default values. You can't use this parameter if the
     #   `ResetAllParameters` parameter is set to `true`.
     #
     # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3646,24 +3637,24 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
+    # Creates a new cluster from a snapshot or cluster snapshot.
     #
-    # If a DB snapshot is specified, the target DB cluster is created from
-    # the source DB snapshot with a default configuration and default
-    # security group.
+    # If a snapshot is specified, the target cluster is created from the
+    # source DB snapshot with a default configuration and default security
+    # group.
     #
-    # If a DB cluster snapshot is specified, the target DB cluster is
-    # created from the source DB cluster restore point with the same
-    # configuration as the original source DB cluster, except that the new
-    # DB cluster is created with the default security group.
+    # If a cluster snapshot is specified, the target cluster is created from
+    # the source cluster restore point with the same configuration as the
+    # original source DB cluster, except that the new cluster is created
+    # with the default security group.
     #
     # @option params [Array<String>] :availability_zones
     #   Provides the list of Amazon EC2 Availability Zones that instances in
     #   the restored DB cluster can be created in.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The name of the DB cluster to create from the DB snapshot or DB
-    #   cluster snapshot. This parameter isn't case sensitive.
+    #   The name of the cluster to create from the snapshot or cluster
+    #   snapshot. This parameter isn't case sensitive.
     #
     #   Constraints:
     #
@@ -3676,12 +3667,11 @@ module Aws::DocDB
     #   Example: `my-snapshot-id`
     #
     # @option params [required, String] :snapshot_identifier
-    #   The identifier for the DB snapshot or DB cluster snapshot to restore
-    #   from.
+    #   The identifier for the snapshot or cluster snapshot to restore from.
     #
     #   You can use either the name or the Amazon Resource Name (ARN) to
-    #   specify a DB cluster snapshot. However, you can use only the ARN to
-    #   specify a DB snapshot.
+    #   specify a cluster snapshot. However, you can use only the ARN to
+    #   specify a snapshot.
     #
     #   Constraints:
     #
@@ -3690,24 +3680,24 @@ module Aws::DocDB
     #   ^
     #
     # @option params [required, String] :engine
-    #   The database engine to use for the new DB cluster.
+    #   The database engine to use for the new cluster.
     #
     #   Default: The same as source.
     #
     #   Constraint: Must be compatible with the engine of the source.
     #
     # @option params [String] :engine_version
-    #   The version of the database engine to use for the new DB cluster.
+    #   The version of the database engine to use for the new cluster.
     #
     # @option params [Integer] :port
-    #   The port number on which the new DB cluster accepts connections.
+    #   The port number on which the new cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The same port as the original cluster.
     #
     # @option params [String] :db_subnet_group_name
-    #   The name of the DB subnet group to use for the new DB cluster.
+    #   The name of the subnet group to use for the new cluster.
     #
     #   Constraints: If provided, must match the name of an existing
     #   `DBSubnetGroup`.
@@ -3715,33 +3705,31 @@ module Aws::DocDB
     #   Example: `mySubnetgroup`
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of virtual private cloud (VPC) security groups that the new DB
+    #   A list of virtual private cloud (VPC) security groups that the new
     #   cluster will belong to.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the restored DB cluster.
+    #   The tags to be assigned to the restored cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from a DB snapshot or DB cluster snapshot.
+    #   The AWS KMS key identifier to use when restoring an encrypted cluster
+    #   from a DB snapshot or cluster snapshot.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a DB cluster with the
-    #   same AWS account that owns the AWS KMS encryption key used to encrypt
-    #   the new DB cluster, then you can use the AWS KMS key alias instead of
-    #   the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are restoring a cluster with the same
+    #   AWS account that owns the AWS KMS encryption key used to encrypt the
+    #   new cluster, then you can use the AWS KMS key alias instead of the ARN
+    #   for the AWS KMS encryption key.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
-    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier` is
-    #     encrypted, then the restored DB cluster is encrypted using the AWS
-    #     KMS key that was used to encrypt the DB snapshot or the DB cluster
-    #     snapshot.
+    #   * If the snapshot or cluster snapshot in `SnapshotIdentifier` is
+    #     encrypted, then the restored cluster is encrypted using the AWS KMS
+    #     key that was used to encrypt the snapshot or the cluster snapshot.
     #
-    #   * If the DB snapshot or the DB cluster snapshot in
-    #     `SnapshotIdentifier` is not encrypted, then the restored DB cluster
-    #     is not encrypted.
+    #   * If the snapshot or the cluster snapshot in `SnapshotIdentifier` is
+    #     not encrypted, then the restored DB cluster is not encrypted.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   A list of log types that must be enabled for exporting to Amazon
@@ -3830,15 +3818,15 @@ module Aws::DocDB
       req.send_request(options)
     end
 
-    # Restores a DB cluster to an arbitrary point in time. Users can restore
-    # to any point in time before `LatestRestorableTime` for up to
-    # `BackupRetentionPeriod` days. The target DB cluster is created from
-    # the source DB cluster with the same configuration as the original DB
-    # cluster, except that the new DB cluster is created with the default DB
-    # security group.
+    # Restores a cluster to an arbitrary point in time. Users can restore to
+    # any point in time before `LatestRestorableTime` for up to
+    # `BackupRetentionPeriod` days. The target cluster is created from the
+    # source cluster with the same configuration as the original cluster,
+    # except that the new cluster is created with the default security
+    # group.
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The name of the new DB cluster to be created.
+    #   The name of the new cluster to be created.
     #
     #   Constraints:
     #
@@ -3849,7 +3837,7 @@ module Aws::DocDB
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
     # @option params [required, String] :source_db_cluster_identifier
-    #   The identifier of the source DB cluster from which to restore.
+    #   The identifier of the source cluster from which to restore.
     #
     #   Constraints:
     #
@@ -3858,13 +3846,13 @@ module Aws::DocDB
     #   ^
     #
     # @option params [Time,DateTime,Date,Integer,String] :restore_to_time
-    #   The date and time to restore the DB cluster to.
+    #   The date and time to restore the cluster to.
     #
     #   Valid values: A time in Universal Coordinated Time (UTC) format.
     #
     #   Constraints:
     #
-    #   * Must be before the latest restorable time for the DB instance.
+    #   * Must be before the latest restorable time for the instance.
     #
     #   * Must be specified if the `UseLatestRestorableTime` parameter is not
     #     provided.
@@ -3878,7 +3866,7 @@ module Aws::DocDB
     #   Example: `2015-03-07T23:45:00Z`
     #
     # @option params [Boolean] :use_latest_restorable_time
-    #   A value that is set to `true` to restore the DB cluster to the latest
+    #   A value that is set to `true` to restore the cluster to the latest
     #   restorable backup time, and `false` otherwise.
     #
     #   Default: `false`
@@ -3887,14 +3875,14 @@ module Aws::DocDB
     #   provided.
     #
     # @option params [Integer] :port
-    #   The port number on which the new DB cluster accepts connections.
+    #   The port number on which the new cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
     #   Default: The default port for the engine.
     #
     # @option params [String] :db_subnet_group_name
-    #   The DB subnet group name to use for the new DB cluster.
+    #   The subnet group name to use for the new cluster.
     #
     #   Constraints: If provided, must match the name of an existing
     #   `DBSubnetGroup`.
@@ -3902,37 +3890,36 @@ module Aws::DocDB
     #   Example: `mySubnetgroup`
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of VPC security groups that the new DB cluster belongs to.
+    #   A list of VPC security groups that the new cluster belongs to.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to be assigned to the restored DB cluster.
+    #   The tags to be assigned to the restored cluster.
     #
     # @option params [String] :kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from an encrypted DB cluster.
+    #   The AWS KMS key identifier to use when restoring an encrypted cluster
+    #   from an encrypted cluster.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a DB cluster with the
-    #   same AWS account that owns the AWS KMS encryption key used to encrypt
-    #   the new DB cluster, then you can use the AWS KMS key alias instead of
-    #   the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are restoring a cluster with the same
+    #   AWS account that owns the AWS KMS encryption key used to encrypt the
+    #   new cluster, then you can use the AWS KMS key alias instead of the ARN
+    #   for the AWS KMS encryption key.
     #
-    #   You can restore to a new DB cluster and encrypt the new DB cluster
-    #   with an AWS KMS key that is different from the AWS KMS key used to
-    #   encrypt the source DB cluster. The new DB cluster is encrypted with
-    #   the AWS KMS key identified by the `KmsKeyId` parameter.
+    #   You can restore to a new cluster and encrypt the new cluster with an
+    #   AWS KMS key that is different from the AWS KMS key used to encrypt the
+    #   source cluster. The new DB cluster is encrypted with the AWS KMS key
+    #   identified by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
-    #   * If the DB cluster is encrypted, then the restored DB cluster is
-    #     encrypted using the AWS KMS key that was used to encrypt the source
-    #     DB cluster.
+    #   * If the cluster is encrypted, then the restored cluster is encrypted
+    #     using the AWS KMS key that was used to encrypt the source cluster.
     #
-    #   * If the DB cluster is not encrypted, then the restored DB cluster is
-    #     not encrypted.
+    #   * If the cluster is not encrypted, then the restored cluster is not
+    #     encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is not encrypted,
+    #   If `DBClusterIdentifier` refers to a cluster that is not encrypted,
     #   then the restore request is rejected.
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
@@ -4180,7 +4167,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
