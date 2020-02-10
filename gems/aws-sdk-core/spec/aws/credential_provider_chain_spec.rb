@@ -106,12 +106,10 @@ module Aws
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
-      env['AWS_ACCESS_KEY_ID'] = 'akid4'
-      env['AWS_SECRET_KEY'] = 'secret4'
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid4')
-      expect(credentials.secret_access_key).to eq('secret4')
-      expect(credentials.session_token).to be(nil)
+      expected_creds = random_creds.merge(session_token: nil)
+      env['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      env['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
+      validate_credentials(expected_creds)
     end
 
 
