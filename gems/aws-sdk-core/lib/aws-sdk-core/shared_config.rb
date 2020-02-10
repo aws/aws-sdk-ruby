@@ -139,65 +139,22 @@ module Aws
     end
 
     def region(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          region = @parsed_credentials.fetch(p, {})["region"]
-        end
-        if @parsed_config
-          region ||= @parsed_config.fetch(p, {})["region"]
-        end
-        region
-      else
-        nil
-      end
+      get_config_value('region', opts)
     end
 
     def sts_regional_endpoints(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          mode = @parsed_credentials.fetch(p, {})["sts_regional_endpoints"]
-        end
-        if @parsed_config
-          mode ||= @parsed_config.fetch(p, {})["sts_regional_endpoints"]
-        end
-        mode
-      else
-        nil
-      end
+      get_config_value('sts_regional_endpoints', opts)
     end
 
     def s3_us_east_1_regional_endpoint(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          mode = @parsed_credentials.fetch(p, {})["s3_us_east_1_regional_endpoint"]
-        end
-        if @parsed_config
-          mode ||= @parsed_config.fetch(p, {})["s3_us_east_1_regional_endpoint"]
-        end
-        mode
-      else
-        nil
-      end
+      get_config_value('s3_us_east_1_regional_endpoint', opts)
     end
 
     def s3_use_arn_region(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["s3_use_arn_region"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["s3_use_arn_region"]
-        end
-        value
-      else
-        nil
-      end
+      get_config_value('s3_use_arn_region', opts)
     end
 
+    # TODO: Why do you not load from credentials?
     def endpoint_discovery(opts = {})
       p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
@@ -211,66 +168,32 @@ module Aws
     end
 
     def csm_enabled(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_enabled"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_enabled"]
-        end
-        value
-      else
-        nil
-      end
+      get_config_value('csm_enabled', opts)
     end
 
     def csm_client_id(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_client_id"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_client_id"]
-        end
-        value
-      else
-        nil
-      end
+      get_config_value('csm_client_id', opts)
     end
 
     def csm_port(opts = {})
+      get_config_value('csm_port', opts)
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_port"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_port"]
-        end
-        value
-      else
-        nil
-      end
     end
 
     def csm_host(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled
-        if @parsed_credentials
-          value = @parsed_credentials.fetch(p, {})["csm_host"]
-        end
-        if @parsed_config
-          value ||= @parsed_config.fetch(p, {})["csm_host"]
-        end
-        value
-      else
-        nil
-      end
+      get_config_value('csm_host', opts)
     end
 
     private
+
+    def get_config_value(key, opts)
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
+        value ||= @parsed_config.fetch(p, {})[key] if @parsed_config
+        value
+      end
+    end
 
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
@@ -341,13 +264,9 @@ module Aws
       if (creds = credentials(profile: profile))
         creds # static credentials
       elsif (provider = assume_role_web_identity_credentials_from_config(profile))
-        if provider.credentials.set?
-          provider.credentials
-        end
+        provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
-        if provider.credentials.set?
-          provider.credentials
-        end
+        provider.credentials if provider.credentials.set?
       end
     end
 
