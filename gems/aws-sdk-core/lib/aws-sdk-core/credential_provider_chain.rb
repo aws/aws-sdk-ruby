@@ -39,7 +39,8 @@ module Aws
         Credentials.new(
           options[:config].access_key_id,
           options[:config].secret_access_key,
-          options[:config].session_token)
+          options[:config].session_token
+        )
       end
     end
 
@@ -81,8 +82,6 @@ module Aws
       profile_name = determine_profile_name(options)
       if config.config_enabled? && process_provider = config.credentials_process(profile_name)
         ProcessCredentials.new(process_provider)
-      else
-        nil
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -91,8 +90,6 @@ module Aws
     def assume_role_credentials(options)
       if Aws.shared_config.config_enabled?
         assume_role_with_profile(options)
-      else
-        nil
       end
     end
 
@@ -107,8 +104,6 @@ module Aws
       elsif Aws.shared_config.config_enabled?
         profile = options[:config].profile if options[:config]
         Aws.shared_config.assume_role_web_identity_credentials_from_config(profile)
-      else
-        nil
       end
     end
 

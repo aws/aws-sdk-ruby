@@ -2,9 +2,6 @@ require_relative '../spec_helper'
 require 'securerandom'
 
 module Aws
-
-
-
   describe CredentialProviderChain do
 
     def random_creds
@@ -15,12 +12,12 @@ module Aws
     def with_shared_credentials(profile_name=SecureRandom.hex, credentials_file=nil)
       path = File.join('HOME', '.aws', 'credentials')
       creds = random_creds
-      credentials_file ||= <<~CREDS.strip
-        [#{profile_name}]
-        aws_access_key_id = #{creds[:access_key_id]}
-        aws_secret_access_key = #{creds[:secret_access_key]}
-        aws_session_token = #{creds[:session_token]}
-  CREDS
+      credentials_file ||= <<-CREDS
+[#{profile_name}]
+aws_access_key_id = #{creds[:access_key_id]}
+aws_secret_access_key = #{creds[:secret_access_key]}
+aws_session_token = #{creds[:session_token]}
+CREDS
       allow(File).to receive(:exist?).with(path).and_return(true)
       allow(File).to receive(:readable?).with(path).and_return(true)
       allow(Dir).to receive(:home).and_return('HOME')
@@ -171,7 +168,7 @@ module Aws
         validate_credentials(expected_creds)
       end
 
-      it 'hyrdates credentials from config over ENV' do
+      it 'hydrates credentials from config over ENV' do
         env_creds = with_env_credentials
         expected_creds = with_config_credentials
         validate_credentials(expected_creds)
