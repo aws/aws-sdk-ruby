@@ -154,17 +154,8 @@ module Aws
       get_config_value('s3_use_arn_region', opts)
     end
 
-    # TODO: Why do you not load from credentials?
     def endpoint_discovery(opts = {})
-      p = opts[:profile] || @profile_name
-      if @config_enabled && @parsed_config
-        @parsed_config.fetch(p, {})["endpoint_discovery_enabled"]
-      end
-    end
-
-    def credentials_process(profile)
-      validate_profile_exists(profile)
-      @parsed_config[profile]['credential_process']
+      get_config_value('endpoint_discovery_enabled', opts)
     end
 
     def csm_enabled(opts = {})
@@ -177,7 +168,6 @@ module Aws
 
     def csm_port(opts = {})
       get_config_value('csm_port', opts)
-      p = opts[:profile] || @profile_name
     end
 
     def csm_host(opts = {})
@@ -186,13 +176,16 @@ module Aws
 
     private
 
+    # Get a config value from from shared credential/config files.
+    # Only loads a value when config_enabled is true
+    # Return a value from credentials preferentially over config
     def get_config_value(key, opts)
       p = opts[:profile] || @profile_name
-      if @config_enabled
-        value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
-        value ||= @parsed_config.fetch(p, {})[key] if @parsed_config
-        value
-      end
+      return unless @config_enabled
+
+      value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
+      value ||= @parsed_config.fetch(p, {})[key] if @parsed_config
+      value
     end
 
     def credentials_present?
@@ -288,23 +281,20 @@ module Aws
     end
 
     def assume_role_process_credentials_from_config(profile)
-      credential_process = credentials_process(profile)
+      validate_profile_exists(profile)
+      credential_process = @parsed_config[profile]['credential_process']
       ProcessCredentials.new(credential_process) if credential_process
     end
 
     def credentials_from_shared(profile, opts)
       if @parsed_credentials && prof_config = @parsed_credentials[profile]
         credentials_from_profile(prof_config)
-      else
-        nil
       end
     end
 
     def credentials_from_config(profile, opts)
       if @parsed_config && prof_config = @parsed_config[profile]
         credentials_from_profile(prof_config)
-      else
-        nil
       end
     end
 
@@ -314,15 +304,7 @@ module Aws
         prof_config['aws_secret_access_key'],
         prof_config['aws_session_token']
       )
-      if credentials_complete(creds)
-        creds
-      else
-        nil
-      end
-    end
-
-    def credentials_complete(creds)
-      creds.set?
+      creds if creds.set?
     end
 
     def load_credentials_file
