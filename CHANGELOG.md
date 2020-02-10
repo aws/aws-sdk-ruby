@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.441 (2020-02-10)
+------------------
+
 * Feature - Aws::DocDB - Updated the documentation for Amazon DocumentDB with MongoDB compatibility.
 
 * Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
