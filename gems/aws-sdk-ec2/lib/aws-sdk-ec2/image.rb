@@ -85,27 +85,29 @@ module Aws::EC2
     end
 
     # The platform details associated with the billing code of the AMI. For
-    # more information, see [AMI Billing Information][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # more information, see [Obtaining Billing Information][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
     # @return [String]
     def platform_details
       data[:platform_details]
     end
 
-    # The operation of the Amazon EC2 instance and the billing code
+    # The operation of the Amazon EC2 instance and the billing code that is
     # associated with the AMI. `usageOperation` corresponds to the
-    # [lineitem/Operation][1] column on your AWS Cost and Usage Report. For
-    # more information, see [AMI Billing Information][2] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # [lineitem/Operation][1] column on your AWS Cost and Usage Report and
+    # in the [AWS Price List API][2]. For the list of `UsageOperation`
+    # codes, see [Platform Details and Usage Operation Billing Codes][3] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info
     # @return [String]
     def usage_operation
       data[:usage_operation]

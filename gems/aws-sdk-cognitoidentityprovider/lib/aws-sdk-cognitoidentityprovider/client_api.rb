@@ -91,6 +91,7 @@ module Aws::CognitoIdentityProvider
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFlowType = Shapes::StringShape.new(name: 'AuthFlowType')
     AuthParametersType = Shapes::MapShape.new(name: 'AuthParametersType')
+    AuthParametersValueType = Shapes::StringShape.new(name: 'AuthParametersValueType')
     AuthenticationResultType = Shapes::StructureShape.new(name: 'AuthenticationResultType')
     BlockedIPRangeListType = Shapes::ListShape.new(name: 'BlockedIPRangeListType')
     BooleanType = Shapes::BooleanShape.new(name: 'BooleanType')
@@ -445,6 +446,7 @@ module Aws::CognitoIdentityProvider
     UserType = Shapes::StructureShape.new(name: 'UserType')
     UsernameAttributeType = Shapes::StringShape.new(name: 'UsernameAttributeType')
     UsernameAttributesListType = Shapes::ListShape.new(name: 'UsernameAttributesListType')
+    UsernameConfigurationType = Shapes::StructureShape.new(name: 'UsernameConfigurationType')
     UsernameExistsException = Shapes::StructureShape.new(name: 'UsernameExistsException')
     UsernameType = Shapes::StringShape.new(name: 'UsernameType')
     UsersListType = Shapes::ListShape.new(name: 'UsersListType')
@@ -456,6 +458,7 @@ module Aws::CognitoIdentityProvider
     VerifySoftwareTokenResponseType = Shapes::StringShape.new(name: 'VerifySoftwareTokenResponseType')
     VerifyUserAttributeRequest = Shapes::StructureShape.new(name: 'VerifyUserAttributeRequest')
     VerifyUserAttributeResponse = Shapes::StructureShape.new(name: 'VerifyUserAttributeResponse')
+    WrappedBooleanType = Shapes::BooleanShape.new(name: 'WrappedBooleanType')
 
     AccountRecoverySettingType.add_member(:recovery_mechanisms, Shapes::ShapeRef.new(shape: RecoveryMechanismsType, location_name: "RecoveryMechanisms"))
     AccountRecoverySettingType.struct_class = Types::AccountRecoverySettingType
@@ -746,7 +749,7 @@ module Aws::CognitoIdentityProvider
     AuthEventsType.member = Shapes::ShapeRef.new(shape: AuthEventType)
 
     AuthParametersType.key = Shapes::ShapeRef.new(shape: StringType)
-    AuthParametersType.value = Shapes::ShapeRef.new(shape: StringType)
+    AuthParametersType.value = Shapes::ShapeRef.new(shape: AuthParametersValueType)
 
     AuthenticationResultType.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
     AuthenticationResultType.add_member(:expires_in, Shapes::ShapeRef.new(shape: IntegerType, location_name: "ExpiresIn"))
@@ -933,6 +936,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     CreateUserPoolRequest.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaAttributesListType, location_name: "Schema"))
     CreateUserPoolRequest.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    CreateUserPoolRequest.add_member(:username_configuration, Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
     CreateUserPoolRequest.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     CreateUserPoolRequest.struct_class = Types::CreateUserPoolRequest
 
@@ -1866,6 +1870,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:custom_domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "CustomDomain"))
     UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UserPoolType.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UserPoolType.add_member(:username_configuration, Shapes::ShapeRef.new(shape: UsernameConfigurationType, location_name: "UsernameConfiguration"))
     UserPoolType.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
     UserPoolType.add_member(:account_recovery_setting, Shapes::ShapeRef.new(shape: AccountRecoverySettingType, location_name: "AccountRecoverySetting"))
     UserPoolType.struct_class = Types::UserPoolType
@@ -1880,6 +1885,9 @@ module Aws::CognitoIdentityProvider
     UserType.struct_class = Types::UserType
 
     UsernameAttributesListType.member = Shapes::ShapeRef.new(shape: UsernameAttributeType)
+
+    UsernameConfigurationType.add_member(:case_sensitive, Shapes::ShapeRef.new(shape: WrappedBooleanType, required: true, location_name: "CaseSensitive"))
+    UsernameConfigurationType.struct_class = Types::UsernameConfigurationType
 
     UsernameExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     UsernameExistsException.struct_class = Types::UsernameExistsException

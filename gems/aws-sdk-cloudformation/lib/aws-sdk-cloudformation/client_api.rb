@@ -22,6 +22,8 @@ module Aws::CloudFormation
     AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AutoDeployment = Shapes::StructureShape.new(name: 'AutoDeployment')
+    AutoDeploymentNullable = Shapes::BooleanShape.new(name: 'AutoDeploymentNullable')
     BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     BoxedMaxResults = Shapes::IntegerShape.new(name: 'BoxedMaxResults')
     CFNRegistryException = Shapes::StructureShape.new(name: 'CFNRegistryException')
@@ -66,6 +68,7 @@ module Aws::CloudFormation
     DeleteStackSetInput = Shapes::StructureShape.new(name: 'DeleteStackSetInput')
     DeleteStackSetOutput = Shapes::StructureShape.new(name: 'DeleteStackSetOutput')
     DeletionTime = Shapes::TimestampShape.new(name: 'DeletionTime')
+    DeploymentTargets = Shapes::StructureShape.new(name: 'DeploymentTargets')
     DeprecatedStatus = Shapes::StringShape.new(name: 'DeprecatedStatus')
     DeregisterTypeInput = Shapes::StructureShape.new(name: 'DeregisterTypeInput')
     DeregisterTypeOutput = Shapes::StructureShape.new(name: 'DeregisterTypeOutput')
@@ -186,6 +189,8 @@ module Aws::CloudFormation
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationStatusCheckFailedException = Shapes::StructureShape.new(name: 'OperationStatusCheckFailedException')
     OptionalSecureUrl = Shapes::StringShape.new(name: 'OptionalSecureUrl')
+    OrganizationalUnitId = Shapes::StringShape.new(name: 'OrganizationalUnitId')
+    OrganizationalUnitIdList = Shapes::ListShape.new(name: 'OrganizationalUnitIdList')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputKey = Shapes::StringShape.new(name: 'OutputKey')
     OutputValue = Shapes::StringShape.new(name: 'OutputValue')
@@ -198,6 +203,7 @@ module Aws::CloudFormation
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     Parameters = Shapes::ListShape.new(name: 'Parameters')
+    PermissionModels = Shapes::StringShape.new(name: 'PermissionModels')
     PhysicalResourceId = Shapes::StringShape.new(name: 'PhysicalResourceId')
     PhysicalResourceIdContext = Shapes::ListShape.new(name: 'PhysicalResourceIdContext')
     PhysicalResourceIdContextKeyValuePair = Shapes::StructureShape.new(name: 'PhysicalResourceIdContextKeyValuePair')
@@ -249,6 +255,7 @@ module Aws::CloudFormation
     RetainResources = Shapes::ListShape.new(name: 'RetainResources')
     RetainStacks = Shapes::BooleanShape.new(name: 'RetainStacks')
     RetainStacksNullable = Shapes::BooleanShape.new(name: 'RetainStacksNullable')
+    RetainStacksOnAccountRemovalNullable = Shapes::BooleanShape.new(name: 'RetainStacksOnAccountRemovalNullable')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RollbackConfiguration = Shapes::StructureShape.new(name: 'RollbackConfiguration')
@@ -382,6 +389,10 @@ module Aws::CloudFormation
 
     AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
 
+    AutoDeployment.add_member(:enabled, Shapes::ShapeRef.new(shape: AutoDeploymentNullable, location_name: "Enabled"))
+    AutoDeployment.add_member(:retain_stacks_on_account_removal, Shapes::ShapeRef.new(shape: RetainStacksOnAccountRemovalNullable, location_name: "RetainStacksOnAccountRemoval"))
+    AutoDeployment.struct_class = Types::AutoDeployment
+
     CFNRegistryException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     CFNRegistryException.struct_class = Types::CFNRegistryException
 
@@ -460,7 +471,8 @@ module Aws::CloudFormation
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
-    CreateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
+    CreateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    CreateStackInstancesInput.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     CreateStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
     CreateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     CreateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
@@ -482,6 +494,8 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackSetInput.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
     CreateStackSetInput.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
+    CreateStackSetInput.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
+    CreateStackSetInput.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
     CreateStackSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateStackSetInput.struct_class = Types::CreateStackSetInput
 
@@ -501,7 +515,8 @@ module Aws::CloudFormation
     DeleteStackInput.struct_class = Types::DeleteStackInput
 
     DeleteStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
-    DeleteStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
+    DeleteStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    DeleteStackInstancesInput.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     DeleteStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
     DeleteStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     DeleteStackInstancesInput.add_member(:retain_stacks, Shapes::ShapeRef.new(shape: RetainStacks, required: true, location_name: "RetainStacks"))
@@ -515,6 +530,10 @@ module Aws::CloudFormation
     DeleteStackSetInput.struct_class = Types::DeleteStackSetInput
 
     DeleteStackSetOutput.struct_class = Types::DeleteStackSetOutput
+
+    DeploymentTargets.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    DeploymentTargets.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
+    DeploymentTargets.struct_class = Types::DeploymentTargets
 
     DeregisterTypeInput.add_member(:arn, Shapes::ShapeRef.new(shape: PrivateTypeArn, location_name: "Arn"))
     DeregisterTypeInput.add_member(:type, Shapes::ShapeRef.new(shape: RegistryType, location_name: "Type"))
@@ -859,6 +878,8 @@ module Aws::CloudFormation
 
     NotificationARNs.member = Shapes::ShapeRef.new(shape: NotificationARN)
 
+    OrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
+
     Output.add_member(:output_key, Shapes::ShapeRef.new(shape: OutputKey, location_name: "OutputKey"))
     Output.add_member(:output_value, Shapes::ShapeRef.new(shape: OutputValue, location_name: "OutputValue"))
     Output.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -1060,6 +1081,7 @@ module Aws::CloudFormation
     StackInstance.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     StackInstance.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstance.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    StackInstance.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstance.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstance.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstance.struct_class = Types::StackInstance
@@ -1072,6 +1094,7 @@ module Aws::CloudFormation
     StackInstanceSummary.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     StackInstanceSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstanceSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
+    StackInstanceSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackInstanceSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackInstanceSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstanceSummary.struct_class = Types::StackInstanceSummary
@@ -1150,6 +1173,9 @@ module Aws::CloudFormation
     StackSet.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
     StackSet.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     StackSet.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
+    StackSet.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
+    StackSet.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
+    StackSet.add_member(:organizational_unit_ids, Shapes::ShapeRef.new(shape: OrganizationalUnitIdList, location_name: "OrganizationalUnitIds"))
     StackSet.struct_class = Types::StackSet
 
     StackSetDriftDetectionDetails.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackSetDriftStatus, location_name: "DriftStatus"))
@@ -1172,6 +1198,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     StackSetOperation.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    StackSetOperation.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
@@ -1189,6 +1216,7 @@ module Aws::CloudFormation
     StackSetOperationResultSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetOperationResultStatus, location_name: "Status"))
     StackSetOperationResultSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
     StackSetOperationResultSummary.add_member(:account_gate_result, Shapes::ShapeRef.new(shape: AccountGateResult, location_name: "AccountGateResult"))
+    StackSetOperationResultSummary.add_member(:organizational_unit_id, Shapes::ShapeRef.new(shape: OrganizationalUnitId, location_name: "OrganizationalUnitId"))
     StackSetOperationResultSummary.struct_class = Types::StackSetOperationResultSummary
 
     StackSetOperationSummaries.member = Shapes::ShapeRef.new(shape: StackSetOperationSummary)
@@ -1206,6 +1234,8 @@ module Aws::CloudFormation
     StackSetSummary.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     StackSetSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     StackSetSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetStatus, location_name: "Status"))
+    StackSetSummary.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
+    StackSetSummary.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
     StackSetSummary.add_member(:drift_status, Shapes::ShapeRef.new(shape: StackDriftStatus, location_name: "DriftStatus"))
     StackSetSummary.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackSetSummary.struct_class = Types::StackSetSummary
@@ -1292,7 +1322,8 @@ module Aws::CloudFormation
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
     UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
-    UpdateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
+    UpdateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    UpdateStackInstancesInput.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     UpdateStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
     UpdateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     UpdateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
@@ -1316,6 +1347,9 @@ module Aws::CloudFormation
     UpdateStackSetInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     UpdateStackSetInput.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
     UpdateStackSetInput.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
+    UpdateStackSetInput.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
+    UpdateStackSetInput.add_member(:permission_model, Shapes::ShapeRef.new(shape: PermissionModels, location_name: "PermissionModel"))
+    UpdateStackSetInput.add_member(:auto_deployment, Shapes::ShapeRef.new(shape: AutoDeployment, location_name: "AutoDeployment"))
     UpdateStackSetInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
     UpdateStackSetInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
     UpdateStackSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))

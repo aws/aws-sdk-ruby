@@ -1026,16 +1026,26 @@ module Aws::CloudFormation
 
     # Creates stack instances for the specified accounts, within the
     # specified regions. A stack instance refers to a stack in a specific
-    # account and region. `Accounts` and `Regions` are required
-    # parameters—you must specify at least one account and one region.
+    # account and region. You must specify at least one value for either
+    # `Accounts` or `DeploymentTargets`, and you must specify at least one
+    # value for `Regions`.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you want to create stack
     #   instances from.
     #
-    # @option params [required, Array<String>] :accounts
-    #   The names of one or more AWS accounts that you want to create stack
-    #   instances in the specified region(s) for.
+    # @option params [Array<String>] :accounts
+    #   \[Self-managed permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified region(s)
+    #   for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #
+    # @option params [Types::DeploymentTargets] :deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which to create stack instances in the specified Regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
     #   The names of one or more regions where you want to create stack
@@ -1110,7 +1120,11 @@ module Aws::CloudFormation
     #
     #   resp = client.create_stack_instances({
     #     stack_set_name: "StackSetName", # required
-    #     accounts: ["Account"], # required
+    #     accounts: ["Account"],
+    #     deployment_targets: {
+    #       accounts: ["Account"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #     },
     #     regions: ["Region"], # required
     #     parameter_overrides: [
     #       {
@@ -1298,6 +1312,32 @@ module Aws::CloudFormation
     #   to control which stack resources users and groups can include in their
     #   stack sets.
     #
+    # @option params [String] :permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. By default, `SELF-MANAGED` is specified.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For more
+    #     information, see [Grant Self-Managed Stack Set Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically creates
+    #     the IAM roles required to deploy to accounts managed by AWS
+    #     Organizations. For more information, see [Grant Service-Managed
+    #     Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #
+    # @option params [Types::AutoDeployment] :auto_deployment
+    #   Describes whether StackSets automatically deploys to AWS Organizations
+    #   accounts that are added to the target organization or organizational
+    #   unit (OU). Specify only if `PermissionModel` is `SERVICE_MANAGED`.
+    #
+    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets` or
+    #   `Regions`.
+    #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1339,6 +1379,11 @@ module Aws::CloudFormation
     #     ],
     #     administration_role_arn: "RoleARN",
     #     execution_role_name: "ExecutionRoleName",
+    #     permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #     auto_deployment: {
+    #       enabled: false,
+    #       retain_stacks_on_account_removal: false,
+    #     },
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -1462,9 +1507,17 @@ module Aws::CloudFormation
     #   The name or unique ID of the stack set that you want to delete stack
     #   instances for.
     #
-    # @option params [required, Array<String>] :accounts
-    #   The names of the AWS accounts that you want to delete stack instances
-    #   for.
+    # @option params [Array<String>] :accounts
+    #   \[Self-managed permissions\] The names of the AWS accounts that you
+    #   want to delete stack instances for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #
+    # @option params [Types::DeploymentTargets] :deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts from
+    #   which to delete stack instances.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
     #   The regions where you want to delete stack set instances.
@@ -1510,7 +1563,11 @@ module Aws::CloudFormation
     #
     #   resp = client.delete_stack_instances({
     #     stack_set_name: "StackSetName", # required
-    #     accounts: ["Account"], # required
+    #     accounts: ["Account"],
+    #     deployment_targets: {
+    #       accounts: ["Account"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #     },
     #     regions: ["Region"], # required
     #     operation_preferences: {
     #       region_order: ["Region"],
@@ -1577,17 +1634,19 @@ module Aws::CloudFormation
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :type
     #   The kind of type.
     #
     #   Currently the only valid value is `RESOURCE`.
     #
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
+    #
     # @option params [String] :type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :version_id
     #   The ID of a specific version of the type. The version ID is the value
@@ -1925,6 +1984,7 @@ module Aws::CloudFormation
     #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.stack_instance.status_reason #=> String
+    #   resp.stack_instance.organizational_unit_id #=> String
     #   resp.stack_instance.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.stack_instance.last_drift_check_timestamp #=> Time
     #
@@ -2228,6 +2288,11 @@ module Aws::CloudFormation
     #   resp.stack_set.stack_set_drift_detection_details.in_sync_stack_instances_count #=> Integer
     #   resp.stack_set.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
     #   resp.stack_set.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
+    #   resp.stack_set.auto_deployment.enabled #=> Boolean
+    #   resp.stack_set.auto_deployment.retain_stacks_on_account_removal #=> Boolean
+    #   resp.stack_set.permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
+    #   resp.stack_set.organizational_unit_ids #=> Array
+    #   resp.stack_set.organizational_unit_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -2263,7 +2328,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.operation_id #=> String
     #   resp.stack_set_operation.stack_set_id #=> String
     #   resp.stack_set_operation.action #=> String, one of "CREATE", "UPDATE", "DELETE", "DETECT_DRIFT"
-    #   resp.stack_set_operation.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.stack_set_operation.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED", "QUEUED"
     #   resp.stack_set_operation.operation_preferences.region_order #=> Array
     #   resp.stack_set_operation.operation_preferences.region_order[0] #=> String
     #   resp.stack_set_operation.operation_preferences.failure_tolerance_count #=> Integer
@@ -2275,6 +2340,10 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.execution_role_name #=> String
     #   resp.stack_set_operation.creation_timestamp #=> Time
     #   resp.stack_set_operation.end_timestamp #=> Time
+    #   resp.stack_set_operation.deployment_targets.accounts #=> Array
+    #   resp.stack_set_operation.deployment_targets.accounts[0] #=> String
+    #   resp.stack_set_operation.deployment_targets.organizational_unit_ids #=> Array
+    #   resp.stack_set_operation.deployment_targets.organizational_unit_ids[0] #=> String
     #   resp.stack_set_operation.stack_set_drift_detection_details.drift_status #=> String, one of "DRIFTED", "IN_SYNC", "NOT_CHECKED"
     #   resp.stack_set_operation.stack_set_drift_detection_details.drift_detection_status #=> String, one of "COMPLETED", "FAILED", "PARTIAL_SUCCESS", "IN_PROGRESS", "STOPPED"
     #   resp.stack_set_operation.stack_set_drift_detection_details.last_drift_check_timestamp #=> Time
@@ -2391,15 +2460,17 @@ module Aws::CloudFormation
     #
     #   Currently the only valid value is `RESOURCE`.
     #
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
+    #
     # @option params [String] :type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :version_id
     #   The ID of a specific version of the type. The version ID is the value
@@ -3246,6 +3317,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_id #=> String
     #   resp.summaries[0].status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.summaries[0].status_reason #=> String
+    #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3361,6 +3433,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].status_reason #=> String
     #   resp.summaries[0].account_gate_result.status #=> String, one of "SUCCEEDED", "FAILED", "SKIPPED"
     #   resp.summaries[0].account_gate_result.status_reason #=> String
+    #   resp.summaries[0].organizational_unit_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResults AWS API Documentation
@@ -3411,7 +3484,7 @@ module Aws::CloudFormation
     #   resp.summaries #=> Array
     #   resp.summaries[0].operation_id #=> String
     #   resp.summaries[0].action #=> String, one of "CREATE", "UPDATE", "DELETE", "DETECT_DRIFT"
-    #   resp.summaries[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED"
+    #   resp.summaries[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED", "QUEUED"
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3466,6 +3539,9 @@ module Aws::CloudFormation
     #   resp.summaries[0].stack_set_id #=> String
     #   resp.summaries[0].description #=> String
     #   resp.summaries[0].status #=> String, one of "ACTIVE", "DELETED"
+    #   resp.summaries[0].auto_deployment.enabled #=> Boolean
+    #   resp.summaries[0].auto_deployment.retain_stacks_on_account_removal #=> Boolean
+    #   resp.summaries[0].permission_model #=> String, one of "SERVICE_MANAGED", "SELF_MANAGED"
     #   resp.summaries[0].drift_status #=> String, one of "DRIFTED", "IN_SYNC", "UNKNOWN", "NOT_CHECKED"
     #   resp.summaries[0].last_drift_check_timestamp #=> Time
     #   resp.next_token #=> String
@@ -3534,25 +3610,29 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Returns a list of registration tokens for the specified type.
+    # Returns a list of registration tokens for the specified type(s).
     #
     # @option params [String] :type
     #   The kind of type.
     #
     #   Currently the only valid value is `RESOURCE`.
     #
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
+    #
     # @option params [String] :type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :type_arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :registration_status_filter
     #   The current status of the type registration request.
+    #
+    #   The default is `IN_PROGRESS`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -3606,16 +3686,18 @@ module Aws::CloudFormation
     #
     #   Currently the only valid value is `RESOURCE`.
     #
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
+    #
     # @option params [String] :type_name
     #   The name of the type for which you want version summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :arn
     #   The Amazon Resource Name (ARN) of the type for which you want version
     #   summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -3643,6 +3725,8 @@ module Aws::CloudFormation
     #
     #   * `DEPRECATED`\: The type version has been deregistered and can no
     #     longer be used in CloudFormation operations.
+    #
+    #   The default is `LIVE`.
     #
     # @return [Types::ListTypeVersionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3695,6 +3779,8 @@ module Aws::CloudFormation
     #
     #   * `PUBLIC`\: The type is publically visible and usable within any
     #     Amazon account.
+    #
+    #   The default is `PRIVATE`.
     #
     # @option params [String] :provisioning_type
     #   The provisioning behavior of the type. AWS CloudFormation determines
@@ -3866,13 +3952,16 @@ module Aws::CloudFormation
     # * Making the resource type available for use in your account
     #
     # For more information on how to develop types and ready them for
-    # registeration, see [Creating Resource
-    # Providers](cloudformation-cli/latest/userguide/resource-types.html) in
-    # the *CloudFormation CLI User Guide*.
+    # registeration, see [Creating Resource Providers][1] in the
+    # *CloudFormation CLI User Guide*.
     #
     # Once you have initiated a registration request using ` RegisterType `,
     # you can use ` DescribeTypeRegistration ` to monitor the progress of
     # the registration request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html
     #
     # @option params [String] :type
     #   The kind of type.
@@ -3911,9 +4000,18 @@ module Aws::CloudFormation
     #   you want to register, see [submit][1] in the *CloudFormation CLI User
     #   Guide*.
     #
+    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
+    #   be able to access the S3 bucket which contains the schema handler
+    #   package for that resource provider. For more information, see [IAM
+    #   Permissions for Registering a Resource Provider][2] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
     #
     # @option params [Types::LoggingConfig] :logging_config
     #   Specifies logging configuration information for a type.
@@ -4013,15 +4111,17 @@ module Aws::CloudFormation
     #   The Amazon Resource Name (ARN) of the type for which you want version
     #   summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :type
     #   The kind of type.
     #
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
+    #
     # @option params [String] :type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or `Arn`.
     #
     # @option params [String] :version_id
     #   The ID of a specific version of the type. The version ID is the value
@@ -4475,11 +4575,23 @@ module Aws::CloudFormation
     #   The name or unique ID of the stack set associated with the stack
     #   instances.
     #
-    # @option params [required, Array<String>] :accounts
-    #   The names of one or more AWS accounts for which you want to update
-    #   parameter values for stack instances. The overridden parameter values
-    #   will be applied to all stack instances in the specified accounts and
-    #   regions.
+    # @option params [Array<String>] :accounts
+    #   \[Self-managed permissions\] The names of one or more AWS accounts for
+    #   which you want to update parameter values for stack instances. The
+    #   overridden parameter values will be applied to all stack instances in
+    #   the specified accounts and regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #
+    # @option params [Types::DeploymentTargets] :deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which you want to update parameter values for stack instances. If your
+    #   update targets OUs, the overridden parameter values only apply to the
+    #   accounts that are currently in the target OUs and their child OUs.
+    #   Accounts added to the target OUs and their child OUs in the future
+    #   won't use the overridden values.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #
     # @option params [required, Array<String>] :regions
     #   The names of one or more regions in which you want to update parameter
@@ -4558,7 +4670,11 @@ module Aws::CloudFormation
     #
     #   resp = client.update_stack_instances({
     #     stack_set_name: "StackSetNameOrId", # required
-    #     accounts: ["Account"], # required
+    #     accounts: ["Account"],
+    #     deployment_targets: {
+    #       accounts: ["Account"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #     },
     #     regions: ["Region"], # required
     #     parameter_overrides: [
     #       {
@@ -4785,6 +4901,49 @@ module Aws::CloudFormation
     #   previously associated with the stack set, so long as you have
     #   permissions to perform operations on the stack set.
     #
+    # @option params [Types::DeploymentTargets] :deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts in
+    #   which to update associated stack instances.
+    #
+    #   To update all the stack instances associated with this stack set, do
+    #   not specify `DeploymentTargets` or `Regions`.
+    #
+    #   If the stack set update includes changes to the template (that is, if
+    #   `TemplateBody` or `TemplateURL` is specified), or the `Parameters`,
+    #   AWS CloudFormation marks all stack instances with a status of
+    #   `OUTDATED` prior to updating the stack instances in the specified
+    #   accounts and Regions. If the stack set update does not include changes
+    #   to the template or parameters, AWS CloudFormation updates the stack
+    #   instances in the specified accounts and Regions, while leaving all
+    #   other stack instances with their existing stack instance status.
+    #
+    # @option params [String] :permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. You cannot modify `PermissionModel` if there are stack
+    #   instances associated with your stack set.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For more
+    #     information, see [Grant Self-Managed Stack Set Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically creates
+    #     the IAM roles required to deploy to accounts managed by AWS
+    #     Organizations. For more information, see [Grant Service-Managed
+    #     Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #
+    # @option params [Types::AutoDeployment] :auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added to
+    #   a target organization or organizational unit (OU).
+    #
+    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets` or
+    #   `Regions`.
+    #
     # @option params [String] :operation_id
     #   The unique ID for this stack set operation.
     #
@@ -4804,9 +4963,9 @@ module Aws::CloudFormation
     #   not need to pass this option.**
     #
     # @option params [Array<String>] :accounts
-    #   The accounts in which to update associated stack instances. If you
-    #   specify accounts, you must also specify the regions in which to update
-    #   stack set instances.
+    #   \[Self-managed permissions\] The accounts in which to update
+    #   associated stack instances. If you specify accounts, you must also
+    #   specify the regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set, do
     #   not specify the `Accounts` or `Regions` properties.
@@ -4875,6 +5034,15 @@ module Aws::CloudFormation
     #     },
     #     administration_role_arn: "RoleARN",
     #     execution_role_name: "ExecutionRoleName",
+    #     deployment_targets: {
+    #       accounts: ["Account"],
+    #       organizational_unit_ids: ["OrganizationalUnitId"],
+    #     },
+    #     permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #     auto_deployment: {
+    #       enabled: false,
+    #       retain_stacks_on_account_removal: false,
+    #     },
     #     operation_id: "ClientRequestToken",
     #     accounts: ["Account"],
     #     regions: ["Region"],
@@ -5019,7 +5187,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
