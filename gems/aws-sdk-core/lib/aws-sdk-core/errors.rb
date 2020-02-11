@@ -222,8 +222,8 @@ This is typically the result of an invalid `:region` option or a
 poorly formatted `:endpoint` option.
 
 * Avoid configuring the `:endpoint` option directly. Endpoints are constructed
-  from the `:region`. The `:endpoint` option is reserved for connecting to
-  non-standard test endpoints.
+  from the `:region`. The `:endpoint` option is reserved for certain services
+  or for connecting to non-standard test endpoints.
 
 * Not every service is available in every region.
 
