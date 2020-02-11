@@ -7,10 +7,8 @@ module AwsSdkCodeGenerator
       @api = options[:api]
       @module_name = options[:module_name]
       @errors = @api['shapes'].inject([]) do |es, (name, shape)|
-        # only generate error shape with non empty members
-        # excluding event shapes marked as error
-        if non_empty_error_struct?(shape)
-          members = shape['members'].keys.map {|k| Underscore.underscore(k) }
+        # only generate error shapes which require customizations
+        if error_needs_definition?(shape)
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
               name: Underscore.underscore(k),
@@ -22,22 +20,35 @@ module AwsSdkCodeGenerator
           es << Error.new(
             name: name,
             members: members,
-            data_type: "#{@module_name}::Types::#{name}"
+            data_type: "#{@module_name}::Types::#{name}",
+            retryable: !!shape['retryable'],
+            throttling: shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
           )
         end
         es
       end
     end
 
-    def non_empty_error_struct?(shape)
-      shape['type'] == 'structure' && !!!shape['event'] &&
-        (shape['error'] || shape['exception']) &&
-        shape['members'] && shape['members'].size > 0
-    end
-
     def each(&block)
       @errors.each(&block)
     end
+
+    private
+
+    def error_needs_definition?(shape)
+      error_struct?(shape) && needs_definition?(shape)
+    end
+
+    def error_struct?(shape)
+      shape['type'] == 'structure' && !!!shape['event'] &&
+          (shape['error'] || shape['exception'])
+    end
+
+    def needs_definition?(shape)
+      (shape['members'] && shape['members'].size > 0) ||
+          (shape['retryable'])
+    end
+
 
     class Error
 
@@ -45,6 +56,8 @@ module AwsSdkCodeGenerator
         @name = options.fetch(:name)
         @data_type = options[:data_type]
         @members = options[:members]
+        @retryable = options[:retryable]
+        @throttling = options[:throttling]
       end
 
       # @return [String]
@@ -55,6 +68,12 @@ module AwsSdkCodeGenerator
 
       # @return [Array<Hash>]
       attr_reader :members
+
+      # @return [Boolean]
+      attr_reader :retryable
+
+      # @return [Boolean]
+      attr_reader :throttling
 
     end
 

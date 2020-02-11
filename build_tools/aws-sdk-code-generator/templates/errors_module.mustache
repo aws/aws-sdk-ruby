@@ -21,8 +21,19 @@ module {{module_name}}
       def {{name}}
         {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
       end
-
       {{/members}}
+
+      {{#retryable}}
+      def retryable?
+        true
+      end
+      {{/retryable}}
+
+      {{#throttling}}
+      def throttling?
+        true
+      end
+      {{/throttling}}
     end
 
     {{/errors}}

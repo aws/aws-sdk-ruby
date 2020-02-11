@@ -193,7 +193,8 @@ SDK operation invocation before giving up. Used in `standard` and
         def throttling_error?
           !!(THROTTLING_ERRORS.include?(@name) ||
             @name.match(/throttl/i) ||
-            @http_status_code == 429)
+            @http_status_code == 429) ||
+            modeled_throttling?
         end
 
         def checksum?
@@ -229,13 +230,22 @@ SDK operation invocation before giving up. Used in `standard` and
           end
         end
 
+        def modeled_retryable?
+          @error.is_a?(Errors::ServiceError) && @error.retryable?
+        end
+
+        def modeled_throttling?
+          @error.is_a?(Errors::ServiceError) && @error.throttling?
+        end
+
         def retryable?(context)
           (expired_credentials? && refreshable_credentials?(context)) ||
             throttling_error? ||
             checksum? ||
             networking? ||
             server? ||
-            endpoint_discovery?(context)
+            endpoint_discovery?(context) ||
+            modeled_retryable?
         end
 
         private

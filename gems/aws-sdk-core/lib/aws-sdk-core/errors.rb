@@ -36,6 +36,16 @@ module Aws
         attr_accessor :code
 
       end
+
+      # @return [Boolean] True if this error is a modeled, retryable exception
+      def retryable?
+        false
+      end
+
+      # @return [Boolean] True if this error is a modeled, throttling exception
+      def throttling?
+        false
+      end
     end
 
     # Raised when InstanceProfileCredentialsProvider or
