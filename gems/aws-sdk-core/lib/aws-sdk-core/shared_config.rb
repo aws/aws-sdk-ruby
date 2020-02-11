@@ -12,6 +12,19 @@ module Aws
     # @return [String]
     attr_reader :profile_name
 
+
+    def self.config_reader(*attrs)
+      attrs.each do |attr|
+        #iterate through each attr and implement getters and setters
+        puts "Define method: #{attr}"
+        define_method(attr) { |opts = {}| get_config_value("#{attr}", opts) }
+      end
+    end
+
+    config_reader :region, :sts_regional_endpoints, :s3_us_east_1_regional_endpoint,
+                  :s3_use_arn_region, :csm_enabled, :csm_client_id,
+                  :csm_port, :csm_host
+
     # Constructs a new SharedConfig provider object. This will load the shared
     # credentials file, and optionally the shared configuration file, as ini
     # files which support profiles.
@@ -138,40 +151,8 @@ module Aws
       end
     end
 
-    def region(opts = {})
-      get_config_value('region', opts)
-    end
-
-    def sts_regional_endpoints(opts = {})
-      get_config_value('sts_regional_endpoints', opts)
-    end
-
-    def s3_us_east_1_regional_endpoint(opts = {})
-      get_config_value('s3_us_east_1_regional_endpoint', opts)
-    end
-
-    def s3_use_arn_region(opts = {})
-      get_config_value('s3_use_arn_region', opts)
-    end
-
-    def endpoint_discovery(opts = {})
+    def endpoint_discovery(opts={})
       get_config_value('endpoint_discovery_enabled', opts)
-    end
-
-    def csm_enabled(opts = {})
-      get_config_value('csm_enabled', opts)
-    end
-
-    def csm_client_id(opts = {})
-      get_config_value('csm_client_id', opts)
-    end
-
-    def csm_port(opts = {})
-      get_config_value('csm_port', opts)
-    end
-
-    def csm_host(opts = {})
-      get_config_value('csm_host', opts)
     end
 
     private
