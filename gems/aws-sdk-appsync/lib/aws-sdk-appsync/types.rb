@@ -62,6 +62,8 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The `ApiCache` object.
+    #
     # @!attribute [rw] ttl
     #   TTL in seconds for cache entries.
     #
@@ -737,6 +739,7 @@ module Aws::AppSync
     #             },
     #           },
     #         ],
+    #         xray_enabled: false,
     #       }
     #
     # @!attribute [rw] name
@@ -769,6 +772,11 @@ module Aws::AppSync
     #   API.
     #   @return [Array<Types::AdditionalAuthenticationProvider>]
     #
+    # @!attribute [rw] xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
@@ -778,7 +786,8 @@ module Aws::AppSync
       :user_pool_config,
       :open_id_connect_config,
       :tags,
-      :additional_authentication_providers)
+      :additional_authentication_providers,
+      :xray_enabled)
       include Aws::Structure
     end
 
@@ -1427,6 +1436,7 @@ module Aws::AppSync
     # Represents the output of a `GetApiCache` operation.
     #
     # @!attribute [rw] api_cache
+    #   The `ApiCache` object.
     #   @return [Types::ApiCache]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCacheResponse AWS API Documentation
@@ -1757,6 +1767,11 @@ module Aws::AppSync
     #   API.
     #   @return [Array<Types::AdditionalAuthenticationProvider>]
     #
+    # @!attribute [rw] xray_enabled
+    #   A flag representing whether X-Ray tracing is enabled for this
+    #   `GraphqlApi`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GraphqlApi AWS API Documentation
     #
     class GraphqlApi < Struct.new(
@@ -1769,7 +1784,8 @@ module Aws::AppSync
       :arn,
       :uris,
       :tags,
-      :additional_authentication_providers)
+      :additional_authentication_providers,
+      :xray_enabled)
       include Aws::Structure
     end
 
@@ -1821,6 +1837,9 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The `LambdaConflictHandlerConfig` object when configuring LAMBDA as
+    # the Conflict Handler.
+    #
     # @note When making an API call, you may pass LambdaConflictHandlerConfig
     #   data as a hash:
     #
@@ -3081,6 +3100,7 @@ module Aws::AppSync
     #             },
     #           },
     #         ],
+    #         xray_enabled: false,
     #       }
     #
     # @!attribute [rw] api_id
@@ -3114,6 +3134,11 @@ module Aws::AppSync
     #   API.
     #   @return [Array<Types::AdditionalAuthenticationProvider>]
     #
+    # @!attribute [rw] xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
@@ -3123,7 +3148,8 @@ module Aws::AppSync
       :authentication_type,
       :user_pool_config,
       :open_id_connect_config,
-      :additional_authentication_providers)
+      :additional_authentication_providers,
+      :xray_enabled)
       include Aws::Structure
     end
 

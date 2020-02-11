@@ -689,6 +689,15 @@ module Aws::LexModelBuildingService
     #   slot. For more information, see PutSlotType.
     #   @return [String]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used a the parent of the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersionResponse AWS API Documentation
     #
     class CreateSlotTypeVersionResponse < Struct.new(
@@ -699,7 +708,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -2230,6 +2241,15 @@ module Aws::LexModelBuildingService
     #   slot. For more information, see PutSlotType.
     #   @return [String]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as a parent for the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeResponse AWS API Documentation
     #
     class GetSlotTypeResponse < Struct.new(
@@ -2240,7 +2260,9 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -3588,6 +3610,14 @@ module Aws::LexModelBuildingService
     #         checksum: "String",
     #         value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
     #         create_version: false,
+    #         parent_slot_type_signature: "CustomOrBuiltinSlotTypeName",
+    #         slot_type_configurations: [
+    #           {
+    #             regex_configuration: {
+    #               pattern: "RegexPattern", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3661,6 +3691,20 @@ module Aws::LexModelBuildingService
     #   `false`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type. When you
+    #   define a parent slot type, the new slot type has all of the same
+    #   configuration as the parent.
+    #
+    #   Only `AMAZON.AlphaNumeric` is supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type. The configuration is added to the settings for the parent slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest AWS API Documentation
     #
     class PutSlotTypeRequest < Struct.new(
@@ -3669,7 +3713,9 @@ module Aws::LexModelBuildingService
       :enumeration_values,
       :checksum,
       :value_selection_strategy,
-      :create_version)
+      :create_version,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -3715,6 +3761,15 @@ module Aws::LexModelBuildingService
     #   `createVersion` field is set to false in the response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_type_configurations
+    #   Configuration information that extends the parent built-in slot
+    #   type.
+    #   @return [Array<Types::SlotTypeConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse AWS API Documentation
     #
     class PutSlotTypeResponse < Struct.new(
@@ -3726,7 +3781,9 @@ module Aws::LexModelBuildingService
       :version,
       :checksum,
       :value_selection_strategy,
-      :create_version)
+      :create_version,
+      :parent_slot_type_signature,
+      :slot_type_configurations)
       include Aws::Structure
     end
 
@@ -3887,6 +3944,28 @@ module Aws::LexModelBuildingService
       include Aws::Structure
     end
 
+    # Provides configuration information for a slot type.
+    #
+    # @note When making an API call, you may pass SlotTypeConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         regex_configuration: {
+    #           pattern: "RegexPattern", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] regex_configuration
+    #   A regular expression used to validate the value of a slot.
+    #   @return [Types::SlotTypeRegexConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeConfiguration AWS API Documentation
+    #
+    class SlotTypeConfiguration < Struct.new(
+      :regex_configuration)
+      include Aws::Structure
+    end
+
     # Provides information about a slot type..
     #
     # @!attribute [rw] name
@@ -3918,6 +3997,44 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version)
+      include Aws::Structure
+    end
+
+    # Provides a regular expression used to validate the value of a slot.
+    #
+    # @note When making an API call, you may pass SlotTypeRegexConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         pattern: "RegexPattern", # required
+    #       }
+    #
+    # @!attribute [rw] pattern
+    #   A regular expression used to validate the value of a slot.
+    #
+    #   Use a standard regular expression. Amazon Lex supports the following
+    #   characters in the regular expression:
+    #
+    #   * A-Z, a-z
+    #
+    #   * 0-9
+    #
+    #   * Unicode characters ("\\ u&lt;Unicode&gt;")
+    #
+    #   Represent Unicode characters with four digits, for example
+    #   "\\u0041" or "\\u005A".
+    #
+    #   The following regular expression operators are not supported:
+    #
+    #   * Infinite repeaters: *, +, or \\\{x,\\} with no upper bound.
+    #
+    #   * Wild card (.)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/SlotTypeRegexConfiguration AWS API Documentation
+    #
+    class SlotTypeRegexConfiguration < Struct.new(
+      :pattern)
       include Aws::Structure
     end
 

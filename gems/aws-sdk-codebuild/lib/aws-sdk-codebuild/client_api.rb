@@ -75,6 +75,7 @@ module Aws::CodeBuild
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     ExportedEnvironmentVariable = Shapes::StructureShape.new(name: 'ExportedEnvironmentVariable')
     ExportedEnvironmentVariables = Shapes::ListShape.new(name: 'ExportedEnvironmentVariables')
+    FileSystemType = Shapes::StringShape.new(name: 'FileSystemType')
     FilterGroup = Shapes::ListShape.new(name: 'FilterGroup')
     FilterGroups = Shapes::ListShape.new(name: 'FilterGroups')
     GetResourcePolicyInput = Shapes::StructureShape.new(name: 'GetResourcePolicyInput')
@@ -129,6 +130,8 @@ module Aws::CodeBuild
     ProjectCacheModes = Shapes::ListShape.new(name: 'ProjectCacheModes')
     ProjectDescription = Shapes::StringShape.new(name: 'ProjectDescription')
     ProjectEnvironment = Shapes::StructureShape.new(name: 'ProjectEnvironment')
+    ProjectFileSystemLocation = Shapes::StructureShape.new(name: 'ProjectFileSystemLocation')
+    ProjectFileSystemLocations = Shapes::ListShape.new(name: 'ProjectFileSystemLocations')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectNames = Shapes::ListShape.new(name: 'ProjectNames')
     ProjectSecondarySourceVersions = Shapes::ListShape.new(name: 'ProjectSecondarySourceVersions')
@@ -263,6 +266,7 @@ module Aws::CodeBuild
     Build.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     Build.add_member(:exported_environment_variables, Shapes::ShapeRef.new(shape: ExportedEnvironmentVariables, location_name: "exportedEnvironmentVariables"))
     Build.add_member(:report_arns, Shapes::ShapeRef.new(shape: BuildReportArns, location_name: "reportArns"))
+    Build.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -320,6 +324,7 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     CreateProjectInput.add_member(:badge_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "badgeEnabled"))
     CreateProjectInput.add_member(:logs_config, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfig"))
+    CreateProjectInput.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     CreateProjectInput.struct_class = Types::CreateProjectInput
 
     CreateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -577,6 +582,7 @@ module Aws::CodeBuild
     Project.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     Project.add_member(:badge, Shapes::ShapeRef.new(shape: ProjectBadge, location_name: "badge"))
     Project.add_member(:logs_config, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfig"))
+    Project.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     Project.struct_class = Types::Project
 
     ProjectArns.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -614,6 +620,15 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:registry_credential, Shapes::ShapeRef.new(shape: RegistryCredential, location_name: "registryCredential"))
     ProjectEnvironment.add_member(:image_pull_credentials_type, Shapes::ShapeRef.new(shape: ImagePullCredentialsType, location_name: "imagePullCredentialsType"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
+
+    ProjectFileSystemLocation.add_member(:type, Shapes::ShapeRef.new(shape: FileSystemType, location_name: "type"))
+    ProjectFileSystemLocation.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    ProjectFileSystemLocation.add_member(:mount_point, Shapes::ShapeRef.new(shape: String, location_name: "mountPoint"))
+    ProjectFileSystemLocation.add_member(:identifier, Shapes::ShapeRef.new(shape: String, location_name: "identifier"))
+    ProjectFileSystemLocation.add_member(:mount_options, Shapes::ShapeRef.new(shape: String, location_name: "mountOptions"))
+    ProjectFileSystemLocation.struct_class = Types::ProjectFileSystemLocation
+
+    ProjectFileSystemLocations.member = Shapes::ShapeRef.new(shape: ProjectFileSystemLocation)
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -799,6 +814,7 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
     UpdateProjectInput.add_member(:badge_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "badgeEnabled"))
     UpdateProjectInput.add_member(:logs_config, Shapes::ShapeRef.new(shape: LogsConfig, location_name: "logsConfig"))
+    UpdateProjectInput.add_member(:file_system_locations, Shapes::ShapeRef.new(shape: ProjectFileSystemLocations, location_name: "fileSystemLocations"))
     UpdateProjectInput.struct_class = Types::UpdateProjectInput
 
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))

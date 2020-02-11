@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2020-02-06)
+------------------
+
+* Feature - Amazon Lex now supports AMAZON.AlphaNumeric with regular expressions.
+
 1.25.0 (2020-01-02)
 ------------------
 

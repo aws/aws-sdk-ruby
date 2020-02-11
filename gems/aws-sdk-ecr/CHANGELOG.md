@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-02-06)
+------------------
+
+* Feature - This release contains updated text for the GetAuthorizationToken API.
+
 1.24.0 (2020-01-02)
 ------------------
 

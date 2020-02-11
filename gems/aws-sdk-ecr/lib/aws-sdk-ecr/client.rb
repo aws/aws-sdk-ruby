@@ -264,8 +264,14 @@ module Aws::ECR
 
     # @!group API Operations
 
-    # Check the availability of multiple image layers in a specified
-    # registry and repository.
+    # Checks the availability of one or more image layers in a repository.
+    #
+    # When an image is pushed to a repository, each image layer is checked
+    # to verify if it has been uploaded before. If it is, then the image
+    # layer is skipped.
+    #
+    # When an image is pulled from a repository, each image layer is checked
+    # once to verify it is available to be pulled.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -319,8 +325,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes a list of specified images within a specified repository.
-    # Images are specified with either `imageTag` or `imageDigest`.
+    # Deletes a list of specified images within a repository. Images are
+    # specified with either an `imageTag` or `imageDigest`.
     #
     # You can remove a tag from an image by specifying the image's tag in
     # your request. When you remove the last tag from an image, the image is
@@ -407,9 +413,11 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Gets detailed information for specified images within a specified
-    # repository. Images are specified with either `imageTag` or
-    # `imageDigest`.
+    # Gets detailed information for an image. Images are specified with
+    # either an `imageTag` or `imageDigest`.
+    #
+    # When an image is pulled, the BatchGetImage API is called once to
+    # retrieve the image manifest.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -510,6 +518,9 @@ module Aws::ECR
     # provide a `sha256` digest of the image layer for data validation
     # purposes.
     #
+    # When an image is pushed, the CompleteLayerUpload API is called once
+    # per each new image layer to verify that the upload has completed.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -563,10 +574,9 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates an Amazon Elastic Container Registry (Amazon ECR) repository,
-    # where users can push and pull Docker images. For more information, see
-    # [Amazon ECR Repositories][1] in the *Amazon Elastic Container Registry
-    # User Guide*.
+    # Creates a repository. For more information, see [Amazon ECR
+    # Repositories][1] in the *Amazon Elastic Container Registry User
+    # Guide*.
     #
     #
     #
@@ -655,7 +665,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes the specified lifecycle policy.
+    # Deletes the lifecycle policy associated with the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -695,8 +705,9 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes an existing image repository. If a repository contains images,
-    # you must use the `force` option to delete it.
+    # Deletes a repository. If the repository contains images, you must
+    # either delete all images in the repository or use the `force` option
+    # to delete the repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -760,7 +771,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes the repository policy from a specified repository.
+    # Deletes the repository policy associated with the specified
+    # repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -815,7 +827,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Describes the image scan findings for the specified image.
+    # Returns the scan findings for the specified image.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -899,8 +911,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Returns metadata about the images in a repository, including image
-    # size, image tags, and creation date.
+    # Returns metadata about the images in a repository.
     #
     # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
@@ -1092,20 +1103,26 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves a token that is valid for a specified registry for 12 hours.
-    # This command allows you to use the `docker` CLI to push and pull
-    # images with Amazon ECR. If you do not specify a registry, the default
-    # registry is assumed.
+    # Retrieves an authorization token. An authorization token represents
+    # your IAM authentication credentials and can be used to access any
+    # Amazon ECR registry that your IAM principal has access to. The
+    # authorization token is valid for 12 hours.
     #
-    # The `authorizationToken` returned for each registry specified is a
-    # base64 encoded string that can be decoded and used in a `docker login`
-    # command to authenticate to a registry. The AWS CLI offers an `aws ecr
-    # get-login` command that simplifies the login process.
+    # The `authorizationToken` returned is a base64 encoded string that can
+    # be decoded and used in a `docker login` command to authenticate to a
+    # registry. The AWS CLI offers an `get-login-password` command that
+    # simplifies the login process. For more information, see [Registry
+    # Authentication][1] in the *Amazon Elastic Container Registry User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth
     #
     # @option params [Array<String>] :registry_ids
     #   A list of AWS account IDs that are associated with the registries for
-    #   which to get authorization tokens. If you do not specify a registry,
-    #   the default registry is assumed.
+    #   which to get AuthorizationData objects. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @return [Types::GetAuthorizationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1156,6 +1173,9 @@ module Aws::ECR
     # image layer. You can only get URLs for image layers that are
     # referenced in an image.
     #
+    # When an image is pulled, the GetDownloadUrlForLayer API is called once
+    # per image layer.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -1201,7 +1221,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the specified lifecycle policy.
+    # Retrieves the lifecycle policy for the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1241,8 +1261,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the results of the specified lifecycle policy preview
-    # request.
+    # Retrieves the results of the lifecycle policy preview request for the
+    # specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1334,7 +1354,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the repository policy for a specified repository.
+    # Retrieves the repository policy for the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1388,7 +1408,12 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Notify Amazon ECR that you intend to upload an image layer.
+    # Notifies Amazon ECR that you intend to upload an image layer.
+    #
+    # When an image is pushed, the InitiateLayerUpload API is called once
+    # per image layer that has not already been uploaded. Whether an image
+    # layer has been uploaded before is determined by the
+    # BatchCheckLayerAvailability API action.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -1430,14 +1455,14 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Lists all the image IDs for a given repository.
+    # Lists all the image IDs for the specified repository.
     #
-    # You can filter images based on whether or not they are tagged by
-    # setting the `tagStatus` parameter to `TAGGED` or `UNTAGGED`. For
-    # example, you can filter your results to return only `UNTAGGED` images
-    # and then pipe that result to a BatchDeleteImage operation to delete
-    # them. Or, you can filter your results to return only `TAGGED` images
-    # to list all of the tags in your repository.
+    # You can filter images based on whether or not they are tagged by using
+    # the `tagStatus` filter and specifying either `TAGGED`, `UNTAGGED` or
+    # `ANY`. For example, you can filter your results to return only
+    # `UNTAGGED` images and then pipe that result to a BatchDeleteImage
+    # operation to delete them. Or, you can filter your results to return
+    # only `TAGGED` images to list all of the tags in your repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1561,6 +1586,10 @@ module Aws::ECR
     # Creates or updates the image manifest and tags associated with an
     # image.
     #
+    # When an image is pushed and all new image layers have been uploaded,
+    # the PutImage API is called once to create or update the image manifest
+    # and tags associated with the image.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -1612,7 +1641,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Updates the image scanning configuration for a repository.
+    # Updates the image scanning configuration for the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1660,11 +1689,9 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Updates the image tag mutability settings for a repository. When a
-    # repository is configured with tag immutability, all image tags within
-    # the repository will be prevented them from being overwritten. For more
-    # information, see [Image Tag Mutability][1] in the *Amazon Elastic
-    # Container Registry User Guide*.
+    # Updates the image tag mutability settings for the specified
+    # repository. For more information, see [Image Tag Mutability][1] in the
+    # *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
@@ -1714,8 +1741,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates or updates a lifecycle policy. For information about lifecycle
-    # policy syntax, see [Lifecycle Policy Template][1].
+    # Creates or updates the lifecycle policy for the specified repository.
+    # For more information, see [Lifecycle Policy Template][1].
     #
     #
     #
@@ -1761,7 +1788,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Applies a repository policy on a specified repository to control
+    # Applies a repository policy to the specified repository to control
     # access permissions. For more information, see [Amazon ECR Repository
     # Policies][1] in the *Amazon Elastic Container Registry User Guide*.
     #
@@ -1878,8 +1905,9 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Starts a preview of the specified lifecycle policy. This allows you to
-    # see the results before creating the lifecycle policy.
+    # Starts a preview of a lifecycle policy for the specified repository.
+    # This allows you to see the results before associating the lifecycle
+    # policy with the repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1991,6 +2019,11 @@ module Aws::ECR
 
     # Uploads an image layer part to Amazon ECR.
     #
+    # When an image is pushed, each new image layer is uploaded in parts.
+    # The maximum size of each image layer part can be 20971520 bytes (or
+    # about 20MB). The UploadLayerPart API is called once per each new image
+    # layer part.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -2065,7 +2098,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

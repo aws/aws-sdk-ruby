@@ -380,6 +380,13 @@ module Aws::CodeBuild
     #   An array of the ARNs associated with this build's reports.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild
+    #   build project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type`
+    #   of a file system created using Amazon Elastic File System.
+    #   @return [Array<Types::ProjectFileSystemLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -411,7 +418,8 @@ module Aws::CodeBuild
       :network_interface,
       :encryption_key,
       :exported_environment_variables,
-      :report_arns)
+      :report_arns,
+      :file_system_locations)
       include Aws::Structure
     end
 
@@ -446,8 +454,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] override_artifact_name
-    #   If this flag is set, a name specified in the build spec file
-    #   overrides the artifact name. The name specified in a build spec file
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
     #   is calculated at build time and uses the Shell Command Language. For
     #   example, you can append a date and time to your artifact name so
     #   that it is always unique.
@@ -750,6 +758,15 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         file_system_locations: [
+    #           {
+    #             type: "EFS", # accepts EFS
+    #             location: "String",
+    #             mount_point: "String",
+    #             identifier: "String",
+    #             mount_options: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -881,6 +898,13 @@ module Aws::CodeBuild
     #   both.
     #   @return [Types::LogsConfig]
     #
+    # @!attribute [rw] file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild
+    #   build project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type`
+    #   of a file system created using Amazon Elastic File System.
+    #   @return [Array<Types::ProjectFileSystemLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -901,7 +925,8 @@ module Aws::CodeBuild
       :tags,
       :vpc_config,
       :badge_enabled,
-      :logs_config)
+      :logs_config,
+      :file_system_locations)
       include Aws::Structure
     end
 
@@ -1320,10 +1345,12 @@ module Aws::CodeBuild
     # @!attribute [rw] value
     #   The value of the environment variable.
     #
-    #   We strongly discourage the use of environment variables to store
-    #   sensitive values, especially AWS secret key IDs and secret access
-    #   keys. Environment variables can be displayed in plain text using the
-    #   AWS CodeBuild console and the AWS Command Line Interface (AWS CLI).
+    #   We strongly discourage the use of `PLAINTEXT` environment variables
+    #   to store sensitive values, especially AWS secret key IDs and secret
+    #   access keys. `PLAINTEXT` environment variables can be displayed in
+    #   plain text using the AWS CodeBuild console and the AWS Command Line
+    #   Interface (AWS CLI). For sensitive values, we recommend you use an
+    #   environment variable of type `PARAMETER_STORE` or `SECRETS_MANAGER`.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2399,6 +2426,13 @@ module Aws::CodeBuild
     #   logs in Amazon CloudWatch Logs, an S3 bucket, or both.
     #   @return [Types::LogsConfig]
     #
+    # @!attribute [rw] file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild
+    #   build project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type`
+    #   of a file system created using Amazon Elastic File System.
+    #   @return [Array<Types::ProjectFileSystemLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -2423,7 +2457,8 @@ module Aws::CodeBuild
       :webhook,
       :vpc_config,
       :badge,
-      :logs_config)
+      :logs_config,
+      :file_system_locations)
       include Aws::Structure
     end
 
@@ -2569,8 +2604,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] override_artifact_name
-    #   If this flag is set, a name specified in the build spec file
-    #   overrides the artifact name. The name specified in a build spec file
+    #   If this flag is set, a name specified in the buildspec file
+    #   overrides the artifact name. The name specified in a buildspec file
     #   is calculated at build time and uses the Shell Command Language. For
     #   example, you can append a date and time to your artifact name so
     #   that it is always unique.
@@ -2877,6 +2912,80 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about a file system created by Amazon Elastic File System
+    # (EFS). For more information, see [What Is Amazon Elastic File
+    # System?][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
+    #
+    # @note When making an API call, you may pass ProjectFileSystemLocation
+    #   data as a hash:
+    #
+    #       {
+    #         type: "EFS", # accepts EFS
+    #         location: "String",
+    #         mount_point: "String",
+    #         identifier: "String",
+    #         mount_options: "String",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of the file system. The one supported type is `EFS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   A string that specifies the location of the file system created by
+    #   Amazon EFS. Its format is `efs-dns-name:/directory-path`. You can
+    #   find the DNS name of file system when you view it in the AWS EFS
+    #   console. The directory path is a path to a directory in the file
+    #   system that CodeBuild mounts. For example, if the DNS name of a file
+    #   system is `fs-abcd1234.efs.us-west-2.amazonaws.com`, and its mount
+    #   directory is `my-efs-mount-directory`, then the `location` is
+    #   `fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory`.
+    #
+    #   The directory path in the format `efs-dns-name:/directory-path` is
+    #   optional. If you do not specify a directory path, the location is
+    #   only the DNS name and CodeBuild mounts the entire file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_point
+    #   The location in the container where you mount the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The name used to access a file system created by Amazon EFS.
+    #   CodeBuild creates an environment variable by appending the
+    #   `identifier` in all capital letters to `CODEBUILD_`. For example, if
+    #   you specify `my-efs` for `identifier`, a new environment variable is
+    #   create named `CODEBUILD_MY-EFS`.
+    #
+    #   The `identifier` is used to mount your file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_options
+    #   The mount options for a file system created by AWS EFS. The default
+    #   mount options used by CodeBuild are
+    #   `nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2`.
+    #   For more information, see [Recommended NFS Mount Options][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectFileSystemLocation AWS API Documentation
+    #
+    class ProjectFileSystemLocation < Struct.new(
+      :type,
+      :location,
+      :mount_point,
+      :identifier,
+      :mount_options)
+      include Aws::Structure
+    end
+
     # Information about the build input source code for the build project.
     #
     # @note When making an API call, you may pass ProjectSource
@@ -2932,8 +3041,8 @@ module Aws::CodeBuild
     #     source action instead of this value.
     #
     #   * For source code in an AWS CodeCommit repository, the HTTPS clone
-    #     URL to the repository that contains the source code and the build
-    #     spec (for example,
+    #     URL to the repository that contains the source code and the
+    #     buildspec file (for example,
     #     `https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name
     #     `).
     #
@@ -2947,8 +3056,8 @@ module Aws::CodeBuild
     #       example, ` bucket-name/path/to/source-code/folder/`).
     #
     #   * For source code in a GitHub repository, the HTTPS clone URL to the
-    #     repository that contains the source and the build spec. You must
-    #     connect your AWS account to your GitHub account. Use the AWS
+    #     repository that contains the source and the buildspec file. You
+    #     must connect your AWS account to your GitHub account. Use the AWS
     #     CodeBuild console to start creating a build project. When you use
     #     the console to connect (or reconnect) with GitHub, on the GitHub
     #     **Authorize application** page, for **Organization access**,
@@ -2961,16 +3070,16 @@ module Aws::CodeBuild
     #     `type` value to `OAUTH`.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
-    #     the repository that contains the source and the build spec. You
-    #     must connect your AWS account to your Bitbucket account. Use the
-    #     AWS CodeBuild console to start creating a build project. When you
-    #     use the console to connect (or reconnect) with Bitbucket, on the
-    #     Bitbucket **Confirm access to your account** page, choose **Grant
-    #     access**. (After you have connected to your Bitbucket account, you
-    #     do not need to finish creating the build project. You can leave
-    #     the AWS CodeBuild console.) To instruct AWS CodeBuild to use this
-    #     connection, in the `source` object, set the `auth` object's
-    #     `type` value to `OAUTH`.
+    #     the repository that contains the source and the buildspec file.
+    #     You must connect your AWS account to your Bitbucket account. Use
+    #     the AWS CodeBuild console to start creating a build project. When
+    #     you use the console to connect (or reconnect) with Bitbucket, on
+    #     the Bitbucket **Confirm access to your account** page, choose
+    #     **Grant access**. (After you have connected to your Bitbucket
+    #     account, you do not need to finish creating the build project. You
+    #     can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to
+    #     use this connection, in the `source` object, set the `auth`
+    #     object's `type` value to `OAUTH`.
     #   @return [String]
     #
     # @!attribute [rw] git_clone_depth
@@ -2983,11 +3092,22 @@ module Aws::CodeBuild
     #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec
-    #   The build spec declaration to use for the builds in this build
+    #   The buildspec file declaration to use for the builds in this build
     #   project.
     #
-    #   If this value is not specified, a build spec must be included along
-    #   with the source code to be built.
+    #   If this value is set, it can be either an inline buildspec
+    #   definition, the path to an alternate buildspec file relative to the
+    #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
+    #   the path to an S3 bucket. The bucket must be in the same AWS Region
+    #   as the build project. Specify the buildspec file using its ARN (for
+    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
+    #   value is not provided or is set to an empty string, the source code
+    #   must contain a buildspec file in its root directory. For more
+    #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
     #   @return [String]
     #
     # @!attribute [rw] auth
@@ -3158,7 +3278,7 @@ module Aws::CodeBuild
     #   AWS Secrets Manager.
     #
     #   <note markdown="1"> The `credential` can use the name of the credentials only if they
-    #   exist in your current region.
+    #   exist in your current AWS Region.
     #
     #    </note>
     #   @return [String]
@@ -3704,8 +3824,22 @@ module Aws::CodeBuild
     #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
-    #   A build spec declaration that overrides, for this build only, the
-    #   latest one already defined in the build project.
+    #   A buildspec file declaration that overrides, for this build only,
+    #   the latest one already defined in the build project.
+    #
+    #   If this value is set, it can be either an inline buildspec
+    #   definition, the path to an alternate buildspec file relative to the
+    #   value of the built-in `CODEBUILD_SRC_DIR` environment variable, or
+    #   the path to an S3 bucket. The bucket must be in the same AWS Region
+    #   as the build project. Specify the buildspec file using its ARN (for
+    #   example, `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this
+    #   value is not provided or is set to an empty string, the source code
+    #   must contain a buildspec file in its root directory. For more
+    #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
     #   @return [String]
     #
     # @!attribute [rw] insecure_ssl_override
@@ -4152,6 +4286,15 @@ module Aws::CodeBuild
     #             encryption_disabled: false,
     #           },
     #         },
+    #         file_system_locations: [
+    #           {
+    #             type: "EFS", # accepts EFS
+    #             location: "String",
+    #             mount_point: "String",
+    #             identifier: "String",
+    #             mount_options: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -4288,6 +4431,13 @@ module Aws::CodeBuild
     #   logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both.
     #   @return [Types::LogsConfig]
     #
+    # @!attribute [rw] file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild
+    #   build project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type`
+    #   of a file system created using Amazon Elastic File System.
+    #   @return [Array<Types::ProjectFileSystemLocation>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -4308,7 +4458,8 @@ module Aws::CodeBuild
       :tags,
       :vpc_config,
       :badge_enabled,
-      :logs_config)
+      :logs_config,
+      :file_system_locations)
       include Aws::Structure
     end
 

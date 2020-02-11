@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.140.0 (2020-02-06)
+------------------
+
+* Feature - This release adds platform details and billing info to the DescribeImages API.
+
 1.139.0 (2020-02-05)
 ------------------
 

@@ -34,15 +34,15 @@ module Aws::EBS
     #   @return [Integer]
     #
     # @!attribute [rw] first_block_token
-    #   The block token for the block index of the `first snapshot ID`
-    #   specified in the `list changed blocks` operation. This value is
-    #   absent if the first snapshot does not have the changed block that is
-    #   on the second snapshot.
+    #   The block token for the block index of the `FirstSnapshotId`
+    #   specified in the `ListChangedBlocks` operation. This value is absent
+    #   if the first snapshot does not have the changed block that is on the
+    #   second snapshot.
     #   @return [String]
     #
     # @!attribute [rw] second_block_token
-    #   The block token for the block index of the `second snapshot ID`
-    #   specified in the `list changed blocks` operation.
+    #   The block token for the block index of the `SecondSnapshotId`
+    #   specified in the `ListChangedBlocks` operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ChangedBlock AWS API Documentation
@@ -70,15 +70,15 @@ module Aws::EBS
     # @!attribute [rw] block_index
     #   The block index of the block from which to get data.
     #
-    #   Obtain the `block index` by running the `list changed blocks` or
-    #   `list snapshot blocks` operations.
+    #   Obtain the `BlockIndex` by running the `ListChangedBlocks` or
+    #   `ListSnapshotBlocks` operations.
     #   @return [Integer]
     #
     # @!attribute [rw] block_token
     #   The block token of the block from which to get data.
     #
-    #   Obtain the `block token` by running the `list changed blocks` or
-    #   `list snapshot blocks` operations.
+    #   Obtain the `BlockToken` by running the `ListChangedBlocks` or
+    #   `ListSnapshotBlocks` operations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/GetSnapshotBlockRequest AWS API Documentation
@@ -99,7 +99,7 @@ module Aws::EBS
     #   @return [IO]
     #
     # @!attribute [rw] checksum
-    #   The checksum generated for the block.
+    #   The checksum generated for the block, which is Base64 encoded.
     #   @return [String]
     #
     # @!attribute [rw] checksum_algorithm
@@ -130,10 +130,16 @@ module Aws::EBS
     #
     # @!attribute [rw] first_snapshot_id
     #   The ID of the first snapshot to use for the comparison.
+    #
+    #   The `FirstSnapshotID` parameter must be specified with a
+    #   `SecondSnapshotId` parameter; otherwise, an error occurs.
     #   @return [String]
     #
     # @!attribute [rw] second_snapshot_id
     #   The ID of the second snapshot to use for the comparison.
+    #
+    #   The `SecondSnapshotId` parameter must be specified with a
+    #   `FirstSnapshotID` parameter; otherwise, an error occurs.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -167,7 +173,7 @@ module Aws::EBS
     #   @return [Array<Types::ChangedBlock>]
     #
     # @!attribute [rw] expiry_time
-    #   The time when the `block token` expires.
+    #   The time when the `BlockToken` expires.
     #   @return [Time]
     #
     # @!attribute [rw] volume_size
@@ -238,7 +244,7 @@ module Aws::EBS
     #   @return [Array<Types::Block>]
     #
     # @!attribute [rw] expiry_time
-    #   The time when the `block token` expires.
+    #   The time when the `BlockToken` expires.
     #   @return [Time]
     #
     # @!attribute [rw] volume_size

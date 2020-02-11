@@ -84,6 +84,33 @@ module Aws::EC2
       data[:platform]
     end
 
+    # The platform details associated with the billing code of the AMI. For
+    # more information, see [AMI Billing Information][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    # @return [String]
+    def platform_details
+      data[:platform_details]
+    end
+
+    # The operation of the Amazon EC2 instance and the billing code
+    # associated with the AMI. `usageOperation` corresponds to the
+    # [lineitem/Operation][1] column on your AWS Cost and Usage Report. For
+    # more information, see [AMI Billing Information][2] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    # @return [String]
+    def usage_operation
+      data[:usage_operation]
+    end
+
     # Any product codes associated with the AMI.
     # @return [Array<Types::ProductCode>]
     def product_codes

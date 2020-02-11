@@ -254,15 +254,18 @@ module Aws::Imagebuilder
 
     # @!group API Operations
 
-    # CancelImageCreation cancels the creation of Image. This operation may
+    # CancelImageCreation cancels the creation of Image. This operation can
     # only be used on images in a non-terminal state.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose creation you wish to
+    #   The Amazon Resource Name (ARN) of the image whose creation you want to
     #   cancel.
     #
     # @option params [required, String] :client_token
     #   The idempotency token used to make this request idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CancelImageCreationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -292,43 +295,47 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Creates a new component that can be used to build, validate, test and
+    # Creates a new component that can be used to build, validate, test, and
     # assess your image.
     #
     # @option params [required, String] :name
     #   The name of the component.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the component. This version to follow the
-    #   semantic version syntax. i.e. major.minor.patch. This could be
-    #   versioned like software 2.0.1 or date like 2019.12.01.
+    #   The semantic version of the component. This version follows the
+    #   semantic version syntax. For example, major.minor.patch. This could be
+    #   versioned like software (2.0.1) or like a date (2019.12.01).
     #
     # @option params [String] :description
-    #   CThe description of the component. Describes the contents of the
+    #   The description of the component. Describes the contents of the
     #   component.
     #
     # @option params [String] :change_description
-    #   CThe change description of the component. Describes what change has
-    #   been made in this version. In other words what makes this version
-    #   different from other versions of this component.
+    #   The change description of the component. Describes what change has
+    #   been made in this version, or what makes this version different from
+    #   other versions of this component.
     #
     # @option params [required, String] :platform
-    #   CThe platform of the component.
+    #   The platform of the component.
     #
     # @option params [String] :data
-    #   CThe data of the component.
+    #   The data of the component. Used to specify the data inline. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   CThe uri of the component.
+    #   The uri of the component. Must be an S3 URL and the requester must
+    #   have permission to access the S3 bucket. If you use S3, you can
+    #   specify component content up to your service quota. Either `data` or
+    #   `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
     #
     # @option params [Hash<String,String>] :tags
-    #   CThe tags of the component.
+    #   The tags of the component.
     #
     # @option params [required, String] :client_token
-    #   CThe idempotency token of the component.
+    #   The idempotency token of the component.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -407,7 +414,7 @@ module Aws::Imagebuilder
     #       {
     #         region: "NonEmptyString", # required
     #         ami_distribution_configuration: {
-    #           name: "NonEmptyString",
+    #           name: "AmiNameString",
     #           description: "NonEmptyString",
     #           ami_tags: {
     #             "TagKey" => "TagValue",
@@ -447,7 +454,7 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
-    #   images are configured, tested and assessed.
+    #   images are configured, tested, and assessed.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
@@ -591,8 +598,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Creates a new image recipe. Image Recipes defines how images are
-    # configured, tested and assessed.
+    # Creates a new image recipe. Image recipes define how images are
+    # configured, tested, and assessed.
     #
     # @option params [required, String] :name
     #   The name of the image recipe.
@@ -635,7 +642,7 @@ module Aws::Imagebuilder
     #     semantic_version: "VersionNumber", # required
     #     components: [ # required
     #       {
-    #         component_arn: "ComponentBuildVersionArn", # required
+    #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #       },
     #     ],
     #     parent_image: "NonEmptyString", # required
@@ -652,7 +659,7 @@ module Aws::Imagebuilder
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
-    #         no_device: "NonEmptyString",
+    #         no_device: "EmptyString",
     #       },
     #     ],
     #     tags: {
@@ -687,8 +694,8 @@ module Aws::Imagebuilder
     #   The description of the infrastructure configuration.
     #
     # @option params [Array<String>] :instance_types
-    #   The instance types of the infrastructure configuration. You may
-    #   specify one or more instance types to use for this build, the service
+    #   The instance types of the infrastructure configuration. You can
+    #   specify one or more instance types to use for this build. The service
     #   will pick one of these instance types based on availability.
     #
     # @option params [required, String] :instance_profile_name
@@ -700,20 +707,21 @@ module Aws::Imagebuilder
     #   customize your EC2 AMI.
     #
     # @option params [String] :subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI in.
+    #   The subnet ID in which to place the instance used to customize your
+    #   EC2 AMI.
     #
     # @option params [Types::Logging] :logging
     #   The logging configuration of the infrastructure configuration.
     #
     # @option params [String] :key_pair
     #   The key pair of the infrastructure configuration. This can be used to
-    #   log onto and debug the instance used to create your image.
+    #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
     #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you wish for Image Builder to retain
-    #   the instance used to configure your AMI in the event that the build or
-    #   test phase of your workflow failed.
+    #   configuration. Set to false if you want Image Builder to retain the
+    #   instance used to configure your AMI if the build or test phase of your
+    #   workflow fails.
     #
     # @option params [String] :sns_topic_arn
     #   The SNS topic on which to send image build events.
@@ -750,7 +758,7 @@ module Aws::Imagebuilder
     #     },
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
-    #     sns_topic_arn: "NonEmptyString",
+    #     sns_topic_arn: "SnsTopicArn",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -958,8 +966,8 @@ module Aws::Imagebuilder
     # Gets a component object.
     #
     # @option params [required, String] :component_build_version_arn
-    #   The Amazon Resource Name (ARN) of the component that you wish to
-    #   retrieve.
+    #   The Amazon Resource Name (ARN) of the component that you want to
+    #   retrieve. Regex requires "/\\d+$" suffix.
     #
     # @return [Types::GetComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1002,7 +1010,7 @@ module Aws::Imagebuilder
     # Gets a component policy.
     #
     # @option params [required, String] :component_arn
-    #   The Amazon Resource Name (ARN) of the component whose policy you wish
+    #   The Amazon Resource Name (ARN) of the component whose policy you want
     #   to retrieve.
     #
     # @return [Types::GetComponentPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1034,7 +1042,7 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   you wish to retrieve.
+    #   you want to retrieve.
     #
     # @return [Types::GetDistributionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1083,7 +1091,7 @@ module Aws::Imagebuilder
     # Gets an image.
     #
     # @option params [required, String] :image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that you wish to retrieve.
+    #   The Amazon Resource Name (ARN) of the image that you want to retrieve.
     #
     # @return [Types::GetImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1193,7 +1201,7 @@ module Aws::Imagebuilder
     # Gets an image pipeline.
     #
     # @option params [required, String] :image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish to
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want to
     #   retrieve.
     #
     # @return [Types::GetImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1241,7 +1249,7 @@ module Aws::Imagebuilder
     # Gets an image policy.
     #
     # @option params [required, String] :image_arn
-    #   The Amazon Resource Name (ARN) of the image whose policy you wish to
+    #   The Amazon Resource Name (ARN) of the image whose policy you want to
     #   retrieve.
     #
     # @return [Types::GetImagePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1272,7 +1280,7 @@ module Aws::Imagebuilder
     # Gets an image recipe.
     #
     # @option params [required, String] :image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that you wish to
+    #   The Amazon Resource Name (ARN) of the image recipe that you want to
     #   retrieve.
     #
     # @return [Types::GetImageRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1326,7 +1334,7 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe whose policy you
-    #   wish to retrieve.
+    #   want to retrieve.
     #
     # @return [Types::GetImageRecipePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1353,11 +1361,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets a infrastructure configuration.
+    # Gets an infrastructure configuration.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that you wish to retrieve.
+    #   that you want to retrieve.
     #
     # @return [Types::GetInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1407,9 +1415,9 @@ module Aws::Imagebuilder
     #   The name of the component.
     #
     # @option params [required, String] :semantic_version
-    #   The semantic version of the component. This version to follow the
-    #   semantic version syntax. i.e. major.minor.patch. This could be
-    #   versioned like software 2.0.1 or date like 2019.12.01.
+    #   The semantic version of the component. This version follows the
+    #   semantic version syntax. For example, major.minor.patch. This could be
+    #   versioned like software (2.0.1) or like a date (2019.12.01).
     #
     # @option params [String] :description
     #   The description of the component. Describes the contents of the
@@ -1417,24 +1425,28 @@ module Aws::Imagebuilder
     #
     # @option params [String] :change_description
     #   The change description of the component. Describes what change has
-    #   been made in this version. In other words what makes this version
-    #   different from other versions of this component.
+    #   been made in this version, or what makes this version different from
+    #   other versions of this component.
     #
     # @option params [required, String] :type
     #   The type of the component denotes whether the component is used to
     #   build the image or only to test it.
     #
     # @option params [required, String] :format
-    #   The format of the resource that you wish to import as a component.
+    #   The format of the resource that you want to import as a component.
     #
     # @option params [required, String] :platform
     #   The platform of the component.
     #
     # @option params [String] :data
-    #   The data of the component.
+    #   The data of the component. Used to specify the data inline. Either
+    #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component.
+    #   The uri of the component. Must be an S3 URL and the requester must
+    #   have permission to access the S3 bucket. If you use S3, you can
+    #   specify component content up to your service quota. Either `data` or
+    #   `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -1492,7 +1504,8 @@ module Aws::Imagebuilder
     # semantic version.
     #
     # @option params [required, String] :component_version_arn
-    #   The component version arn whose versions you wish to list.
+    #   The component version Amazon Resource Name (ARN) whose versions you
+    #   want to list.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1545,13 +1558,14 @@ module Aws::Imagebuilder
     # semantic version.
     #
     # @option params [String] :owner
-    #   The owner defines whose components you wish to list. By default this
-    #   request will only show components owned by your account. You may use
-    #   this field to specify if you wish to view components owned by
-    #   yourself, Amazon, or those components that have been shared with you
-    #   by other customers.
+    #   The owner defines which components you want to list. By default, this
+    #   request will only show components owned by your account. You can use
+    #   this field to specify if you want to view components owned by
+    #   yourself, by Amazon, or those components that have been shared with
+    #   you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1606,6 +1620,7 @@ module Aws::Imagebuilder
     # Returns a list of distribution configurations.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1659,9 +1674,10 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :image_version_arn
     #   The Amazon Resource Name (ARN) of the image whose build versions you
-    #   wish to retrieve.
+    #   want to retrieve.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1724,11 +1740,12 @@ module Aws::Imagebuilder
 
     # Returns a list of images created by the specified pipeline.
     #
-    # @option params [String] :image_pipeline_arn
+    # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline whose images you
-    #   wish to view.
+    #   want to view.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1746,7 +1763,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_image_pipeline_images({
-    #     image_pipeline_arn: "ImagePipelineArn",
+    #     image_pipeline_arn: "ImagePipelineArn", # required
     #     filters: [
     #       {
     #         name: "FilterName",
@@ -1792,6 +1809,7 @@ module Aws::Imagebuilder
     # Returns a list of image pipelines.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1855,13 +1873,14 @@ module Aws::Imagebuilder
     # Returns a list of image recipes.
     #
     # @option params [String] :owner
-    #   The owner defines whose image recipes you wish to list. By default
+    #   The owner defines which image recipes you want to list. By default,
     #   this request will only show image recipes owned by your account. You
-    #   may use this field to specify if you wish to view image recipes owned
-    #   by yourself, Amazon, or those image recipes that have been shared with
-    #   you by other customers.
+    #   can use this field to specify if you want to view image recipes owned
+    #   by yourself, by Amazon, or those image recipes that have been shared
+    #   with you by other customers.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1917,12 +1936,14 @@ module Aws::Imagebuilder
     # version.
     #
     # @option params [String] :owner
-    #   The owner defines whose images you wish to list. By default this
-    #   request will only show images owned by your account. You may use this
-    #   field to specify if you wish to view images owned by yourself, Amazon,
-    #   or those images that have been shared with you by other customers.
+    #   The owner defines which images you want to list. By default, this
+    #   request will only show images owned by your account. You can use this
+    #   field to specify if you want to view images owned by yourself, by
+    #   Amazon, or those images that have been shared with you by other
+    #   customers.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -1975,6 +1996,7 @@ module Aws::Imagebuilder
     # Returns a list of infrastructure configurations.
     #
     # @option params [Array<Types::Filter>] :filters
+    #   The filters.
     #
     # @option params [Integer] :max_results
     #   The maximum items to return in a request.
@@ -2027,7 +2049,7 @@ module Aws::Imagebuilder
     # Returns the list of tags for the specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags you wish to
+    #   The Amazon Resource Name (ARN) of the resource whose tags you want to
     #   retrieve.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2162,7 +2184,7 @@ module Aws::Imagebuilder
     # Manually triggers a pipeline to create an image.
     #
     # @option params [required, String] :image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish to
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want to
     #   manually invoke.
     #
     # @option params [required, String] :client_token
@@ -2202,7 +2224,7 @@ module Aws::Imagebuilder
     # Adds a tag to a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that you wish to tag.
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #
     # @option params [required, Hash<String,String>] :tags
     #   The tags to apply to the resource.
@@ -2230,7 +2252,7 @@ module Aws::Imagebuilder
     # Removes a tag from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that you wish to untag.
+    #   The Amazon Resource Name (ARN) of the resource that you want to untag.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys to remove from the resource.
@@ -2258,12 +2280,12 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   you wish to update.
+    #   you want to update.
     #
     # @option params [String] :description
     #   The description of the distribution configuration.
     #
-    # @option params [Array<Types::Distribution>] :distributions
+    # @option params [required, Array<Types::Distribution>] :distributions
     #   The distributions of the distribution configuration.
     #
     # @option params [required, String] :client_token
@@ -2283,11 +2305,11 @@ module Aws::Imagebuilder
     #   resp = client.update_distribution_configuration({
     #     distribution_configuration_arn: "DistributionConfigurationArn", # required
     #     description: "NonEmptyString",
-    #     distributions: [
+    #     distributions: [ # required
     #       {
     #         region: "NonEmptyString", # required
     #         ami_distribution_configuration: {
-    #           name: "NonEmptyString",
+    #           name: "AmiNameString",
     #           description: "NonEmptyString",
     #           ami_tags: {
     #             "TagKey" => "TagValue",
@@ -2322,17 +2344,17 @@ module Aws::Imagebuilder
     # the creation and distribution of images.
     #
     # @option params [required, String] :image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish to
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want to
     #   update.
     #
     # @option params [String] :description
     #   The description of the image pipeline.
     #
-    # @option params [String] :image_recipe_arn
+    # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that will be used
     #   to configure images updated by this image pipeline.
     #
-    # @option params [String] :infrastructure_configuration_arn
+    # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
     #   that will be used to build images updated by this image pipeline.
     #
@@ -2367,8 +2389,8 @@ module Aws::Imagebuilder
     #   resp = client.update_image_pipeline({
     #     image_pipeline_arn: "ImagePipelineArn", # required
     #     description: "NonEmptyString",
-    #     image_recipe_arn: "ImageRecipeArn",
-    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn",
+    #     image_recipe_arn: "ImageRecipeArn", # required
+    #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     distribution_configuration_arn: "DistributionConfigurationArn",
     #     image_tests_configuration: {
     #       image_tests_enabled: false,
@@ -2403,17 +2425,17 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that you wish to update.
+    #   that you want to update.
     #
     # @option params [String] :description
     #   The description of the infrastructure configuration.
     #
     # @option params [Array<String>] :instance_types
-    #   The instance types of the infrastructure configuration. You may
-    #   specify one or more instance types to use for this build, the service
+    #   The instance types of the infrastructure configuration. You can
+    #   specify one or more instance types to use for this build. The service
     #   will pick one of these instance types based on availability.
     #
-    # @option params [String] :instance_profile_name
+    # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
     #   your EC2 AMI.
     #
@@ -2429,13 +2451,13 @@ module Aws::Imagebuilder
     #
     # @option params [String] :key_pair
     #   The key pair of the infrastructure configuration. This can be used to
-    #   log onto and debug the instance used to create your image.
+    #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
     #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you wish for Image Builder to retain
-    #   the instance used to configure your AMI in the event that the build or
-    #   test phase of your workflow failed.
+    #   configuration. Set to false if you want Image Builder to retain the
+    #   instance used to configure your AMI if the build or test phase of your
+    #   workflow fails.
     #
     # @option params [String] :sns_topic_arn
     #   The SNS topic on which to send image build events.
@@ -2458,7 +2480,7 @@ module Aws::Imagebuilder
     #     infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #     description: "NonEmptyString",
     #     instance_types: ["InstanceType"],
-    #     instance_profile_name: "NonEmptyString",
+    #     instance_profile_name: "NonEmptyString", # required
     #     security_group_ids: ["NonEmptyString"],
     #     subnet_id: "NonEmptyString",
     #     logging: {
@@ -2469,7 +2491,7 @@ module Aws::Imagebuilder
     #     },
     #     key_pair: "NonEmptyString",
     #     terminate_instance_on_failure: false,
-    #     sns_topic_arn: "NonEmptyString",
+    #     sns_topic_arn: "SnsTopicArn",
     #     client_token: "ClientToken", # required
     #   })
     #
@@ -2501,7 +2523,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

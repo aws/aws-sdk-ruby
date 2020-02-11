@@ -671,6 +671,12 @@ module Aws::CodeBuild
     #   resp.builds[0].exported_environment_variables[0].value #=> String
     #   resp.builds[0].report_arns #=> Array
     #   resp.builds[0].report_arns[0] #=> String
+    #   resp.builds[0].file_system_locations #=> Array
+    #   resp.builds[0].file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.builds[0].file_system_locations[0].location #=> String
+    #   resp.builds[0].file_system_locations[0].mount_point #=> String
+    #   resp.builds[0].file_system_locations[0].identifier #=> String
+    #   resp.builds[0].file_system_locations[0].mount_options #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -799,6 +805,12 @@ module Aws::CodeBuild
     #   resp.projects[0].logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.projects[0].logs_config.s3_logs.location #=> String
     #   resp.projects[0].logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.projects[0].file_system_locations #=> Array
+    #   resp.projects[0].file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.projects[0].file_system_locations[0].location #=> String
+    #   resp.projects[0].file_system_locations[0].mount_point #=> String
+    #   resp.projects[0].file_system_locations[0].identifier #=> String
+    #   resp.projects[0].file_system_locations[0].mount_options #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -1013,6 +1025,12 @@ module Aws::CodeBuild
     #   Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or
     #   both.
     #
+    # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild build
+    #   project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type` of
+    #   a file system created using Amazon Elastic File System.
+    #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectOutput#project #project} => Types::Project
@@ -1139,6 +1157,15 @@ module Aws::CodeBuild
     #         encryption_disabled: false,
     #       },
     #     },
+    #     file_system_locations: [
+    #       {
+    #         type: "EFS", # accepts EFS
+    #         location: "String",
+    #         mount_point: "String",
+    #         identifier: "String",
+    #         mount_options: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1238,6 +1265,12 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.file_system_locations #=> Array
+    #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.project.file_system_locations[0].location #=> String
+    #   resp.project.file_system_locations[0].mount_point #=> String
+    #   resp.project.file_system_locations[0].identifier #=> String
+    #   resp.project.file_system_locations[0].mount_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -2338,8 +2371,22 @@ module Aws::CodeBuild
     #   an AWS CodeBuild build project.
     #
     # @option params [String] :buildspec_override
-    #   A build spec declaration that overrides, for this build only, the
+    #   A buildspec file declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
+    #
+    #   If this value is set, it can be either an inline buildspec definition,
+    #   the path to an alternate buildspec file relative to the value of the
+    #   built-in `CODEBUILD_SRC_DIR` environment variable, or the path to an
+    #   S3 bucket. The bucket must be in the same AWS Region as the build
+    #   project. Specify the buildspec file using its ARN (for example,
+    #   `arn:aws:s3:::my-codebuild-sample2/buildspec.yml`). If this value is
+    #   not provided or is set to an empty string, the source code must
+    #   contain a buildspec file in its root directory. For more information,
+    #   see [Buildspec File Name and Storage Location][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage
     #
     # @option params [Boolean] :insecure_ssl_override
     #   Enable this flag to override the insecure SSL setting that is
@@ -2652,6 +2699,12 @@ module Aws::CodeBuild
     #   resp.build.exported_environment_variables[0].value #=> String
     #   resp.build.report_arns #=> Array
     #   resp.build.report_arns[0] #=> String
+    #   resp.build.file_system_locations #=> Array
+    #   resp.build.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build.file_system_locations[0].location #=> String
+    #   resp.build.file_system_locations[0].mount_point #=> String
+    #   resp.build.file_system_locations[0].identifier #=> String
+    #   resp.build.file_system_locations[0].mount_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -2781,6 +2834,12 @@ module Aws::CodeBuild
     #   resp.build.exported_environment_variables[0].value #=> String
     #   resp.build.report_arns #=> Array
     #   resp.build.report_arns[0] #=> String
+    #   resp.build.file_system_locations #=> Array
+    #   resp.build.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.build.file_system_locations[0].location #=> String
+    #   resp.build.file_system_locations[0].mount_point #=> String
+    #   resp.build.file_system_locations[0].identifier #=> String
+    #   resp.build.file_system_locations[0].mount_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -2904,6 +2963,12 @@ module Aws::CodeBuild
     # @option params [Types::LogsConfig] :logs_config
     #   Information about logs for the build project. A project can create
     #   logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both.
+    #
+    # @option params [Array<Types::ProjectFileSystemLocation>] :file_system_locations
+    #   An array of `ProjectFileSystemLocation` objects for a CodeBuild build
+    #   project. A `ProjectFileSystemLocation` object specifies the
+    #   `identifier`, `location`, `mountOptions`, `mountPoint`, and `type` of
+    #   a file system created using Amazon Elastic File System.
     #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3031,6 +3096,15 @@ module Aws::CodeBuild
     #         encryption_disabled: false,
     #       },
     #     },
+    #     file_system_locations: [
+    #       {
+    #         type: "EFS", # accepts EFS
+    #         location: "String",
+    #         mount_point: "String",
+    #         identifier: "String",
+    #         mount_options: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3130,6 +3204,12 @@ module Aws::CodeBuild
     #   resp.project.logs_config.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.project.logs_config.s3_logs.location #=> String
     #   resp.project.logs_config.s3_logs.encryption_disabled #=> Boolean
+    #   resp.project.file_system_locations #=> Array
+    #   resp.project.file_system_locations[0].type #=> String, one of "EFS"
+    #   resp.project.file_system_locations[0].location #=> String
+    #   resp.project.file_system_locations[0].mount_point #=> String
+    #   resp.project.file_system_locations[0].identifier #=> String
+    #   resp.project.file_system_locations[0].mount_options #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -3281,7 +3361,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

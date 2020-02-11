@@ -14852,23 +14852,23 @@ module Aws::RDS
     end
 
     # Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
+    # This action only applies to Aurora DB clusters.
     #
-    # If a DB snapshot is specified, the target DB cluster is created from
-    # the source DB snapshot with a default configuration and default
-    # security group.
+    # The target DB cluster is created from the source snapshot with a
+    # default configuration. If you don't specify a security group, the new
+    # DB cluster is associated with the default security group.
     #
-    # If a DB cluster snapshot is specified, the target DB cluster is
-    # created from the source DB cluster restore point with the same
-    # configuration as the original source DB cluster. If you don't specify
-    # a security group, the new DB cluster is associated with the default
-    # security group.
+    # <note markdown="1"> This action only restores the DB cluster, not the DB instances for
+    # that DB cluster. You must invoke the `CreateDBInstance` action to
+    # create DB instances for the restored DB cluster, specifying the
+    # identifier of the restored DB cluster in `DBClusterIdentifier`. You
+    # can create DB instances only after the `RestoreDBClusterFromSnapshot`
+    # action has completed and the DB cluster is available.
+    #
+    #  </note>
     #
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
-    #
-    # <note markdown="1"> This action only applies to Aurora DB clusters.
-    #
-    #  </note>
     #
     #
     #
@@ -18097,7 +18097,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

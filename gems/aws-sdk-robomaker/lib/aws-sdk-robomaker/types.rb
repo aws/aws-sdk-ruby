@@ -43,6 +43,44 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about the batch policy.
+    #
+    # @note When making an API call, you may pass BatchPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         timeout_in_seconds: 1,
+    #         max_concurrency: 1,
+    #       }
+    #
+    # @!attribute [rw] timeout_in_seconds
+    #   The amount of time, in seconds, to wait for the batch to complete.
+    #
+    #   If a batch times out, and there are pending requests that were
+    #   failing due to an internal failure (like `InternalServiceError`),
+    #   they will be moved to the failed list and the batch status will be
+    #   `Failed`. If the pending requests were failing for any other reason,
+    #   the failed pending requests will be moved to the failed list and the
+    #   batch status will be `TimedOut`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The number of active simulation jobs create as part of the batch
+    #   that can be in an active state at the same time.
+    #
+    #   Active states include: `Pending`,`Preparing`, `Running`,
+    #   `Restarting`, `RunningFailed` and `Terminating`. All other states
+    #   are terminal states.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/BatchPolicy AWS API Documentation
+    #
+    class BatchPolicy < Struct.new(
+      :timeout_in_seconds,
+      :max_concurrency)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelDeploymentJobRequest
     #   data as a hash:
     #
@@ -64,6 +102,28 @@ module Aws::RoboMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelDeploymentJobResponse AWS API Documentation
     #
     class CancelDeploymentJobResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass CancelSimulationJobBatchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         batch: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] batch
+    #   The id of the batch to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelSimulationJobBatchRequest AWS API Documentation
+    #
+    class CancelSimulationJobBatchRequest < Struct.new(
+      :batch)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelSimulationJobBatchResponse AWS API Documentation
+    #
+    class CancelSimulationJobBatchResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CancelSimulationJobRequest
     #   data as a hash:
@@ -369,7 +429,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::SourceConfig>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribuition) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] tags
@@ -404,7 +465,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -477,7 +539,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -621,7 +684,8 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite of the simulation application.
+    #   The robot software suite (ROS distribution) used by the simulation
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -666,7 +730,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -749,7 +813,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -906,7 +970,9 @@ module Aws::RoboMaker
     #   @return [Array<Types::SimulationApplicationConfig>]
     #
     # @!attribute [rw] data_sources
-    #   The data sources for the simulation job.
+    #   Specify data sources to mount read-only files from S3 into your
+    #   simulation. These files are available under
+    #   `/opt/robomaker/datasources/data_source_name`.
     #
     #   <note markdown="1"> There is a limit of 100 files and a combined size of 25GB for all
     #   `DataSourceConfig` objects.
@@ -1659,7 +1725,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] revision_id
@@ -1809,7 +1876,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -1841,6 +1908,146 @@ module Aws::RoboMaker
       :rendering_engine,
       :revision_id,
       :last_updated_at,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSimulationJobBatchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         batch: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] batch
+    #   The id of the batch to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobBatchRequest AWS API Documentation
+    #
+    class DescribeSimulationJobBatchRequest < Struct.new(
+      :batch)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the batch.
+    #
+    #   Pending
+    #
+    #   : The simulation job batch request is pending.
+    #
+    #   InProgress
+    #
+    #   : The simulation job batch is in progress.
+    #
+    #   Failed
+    #
+    #   : The simulation job batch failed. One or more simulation job
+    #     requests could not be completed due to an internal failure (like
+    #     `InternalServiceError`). See `failureCode` and `failureReason` for
+    #     more information.
+    #
+    #   Completed
+    #
+    #   : The simulation batch job completed. A batch is complete when (1)
+    #     there are no pending simulation job requests in the batch and none
+    #     of the failed simulation job requests are due to
+    #     `InternalServiceError` and (2) when all created simulation jobs
+    #     have reached a terminal state (for example, `Completed` or
+    #     `Failed`).
+    #
+    #   Canceled
+    #
+    #   : The simulation batch job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The simulation batch job is being cancelled.
+    #
+    #   Completing
+    #
+    #   : The simulation batch job is completing.
+    #
+    #   TimingOut
+    #
+    #   : The simulation job batch is timing out.
+    #
+    #     If a batch timing out, and there are pending requests that were
+    #     failing due to an internal failure (like `InternalServiceError`),
+    #     the batch status will be `Failed`. If there are no such failing
+    #     request, the batch status will be `TimedOut`.
+    #
+    #   TimedOut
+    #
+    #   : The simulation batch job timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_policy
+    #   The batch policy.
+    #   @return [Types::BatchPolicy]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code of the simulation job batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the simulation job batch failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_requests
+    #   A list of failed create simulation job requests. The request failed
+    #   to be created into a simulation job. Failed requests do not have a
+    #   simulation job ID.
+    #   @return [Array<Types::FailedCreateSimulationJobRequest>]
+    #
+    # @!attribute [rw] pending_requests
+    #   A list of pending simulation job requests. These requests have not
+    #   yet been created into simulation jobs.
+    #   @return [Array<Types::SimulationJobRequest>]
+    #
+    # @!attribute [rw] created_requests
+    #   A list of created simulation job summaries.
+    #   @return [Array<Types::SimulationJobSummary>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation job batch.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobBatchResponse AWS API Documentation
+    #
+    class DescribeSimulationJobBatchResponse < Struct.new(
+      :arn,
+      :status,
+      :last_updated_at,
+      :created_at,
+      :client_request_token,
+      :batch_policy,
+      :failure_code,
+      :failure_reason,
+      :failed_requests,
+      :pending_requests,
+      :created_requests,
       :tags)
       include Aws::Structure
     end
@@ -2041,6 +2248,35 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about a failed create simulation job request.
+    #
+    # @!attribute [rw] request
+    #   The simulation job request.
+    #   @return [Types::SimulationJobRequest]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason of the simulation job request.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/FailedCreateSimulationJobRequest AWS API Documentation
+    #
+    class FailedCreateSimulationJobRequest < Struct.new(
+      :request,
+      :failure_reason,
+      :failure_code,
+      :failed_at)
+      include Aws::Structure
+    end
+
     # Information about a filter.
     #
     # @note When making an API call, you may pass Filter
@@ -2238,24 +2474,16 @@ module Aws::RoboMaker
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
     #   value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListDeploymentJobs` in paginated output. When this parameter is
-    #   used, `ListDeploymentJobs` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListDeploymentJobs` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListDeploymentJobs` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   When this parameter is used, `ListDeploymentJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListDeploymentJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 200. If
+    #   this parameter is not used, then `ListDeploymentJobs` returns up to
+    #   200 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListDeploymentJobsRequest AWS API Documentation
@@ -2315,14 +2543,13 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListFleets` in paginated output. When this parameter is used,
-    #   `ListFleets` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListFleets`
-    #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 100. If this parameter is not used, then `ListFleets`
-    #   returns up to 100 results and a `nextToken` value if applicable.
+    #   When this parameter is used, `ListFleets` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListFleets` request with the returned `nextToken` value.
+    #   This value can be between 1 and 200. If this parameter is not used,
+    #   then `ListFleets` returns up to 200 results and a `nextToken` value
+    #   if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -2387,24 +2614,16 @@ module Aws::RoboMaker
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
     #   value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListRobotApplications` in paginated output. When this parameter is
-    #   used, `ListRobotApplications` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListRobotApplications` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListRobotApplications` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   When this parameter is used, `ListRobotApplications` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListRobotApplications` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListRobotApplications` returns up
+    #   to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -2465,23 +2684,16 @@ module Aws::RoboMaker
     #   `ListRobots` request where `maxResults` was used and the results
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListRobots` in paginated output. When this parameter is used,
-    #   `ListRobots` only returns `maxResults` results in a single page
-    #   along with a `nextToken` response element. The remaining results of
-    #   the initial request can be seen by sending another `ListRobots`
-    #   request with the returned `nextToken` value. This value can be
-    #   between 1 and 100. If this parameter is not used, then `ListRobots`
-    #   returns up to 100 results and a `nextToken` value if applicable.
+    #   When this parameter is used, `ListRobots` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListRobots` request with the returned `nextToken` value.
+    #   This value can be between 1 and 200. If this parameter is not used,
+    #   then `ListRobots` returns up to 200 results and a `nextToken` value
+    #   if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -2547,24 +2759,17 @@ module Aws::RoboMaker
     #   the results exceeded the value of that parameter. Pagination
     #   continues from the end of the previous results that returned the
     #   `nextToken` value.
-    #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
-    #   used to retrieve the next items in a list and not for other
-    #   programmatic purposes.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListSimulationApplications` in paginated output. When this
-    #   parameter is used, `ListSimulationApplications` only returns
-    #   `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can
-    #   be seen by sending another `ListSimulationApplications` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
-    #   If this parameter is not used, then `ListSimulationApplications`
-    #   returns up to 100 results and a `nextToken` value if applicable.
+    #   When this parameter is used, `ListSimulationApplications` only
+    #   returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListSimulationApplications`
+    #   request with the returned `nextToken` value. This value can be
+    #   between 1 and 100. If this parameter is not used, then
+    #   `ListSimulationApplications` returns up to 100 results and a
+    #   `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -2606,6 +2811,69 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListSimulationJobBatchesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "Name",
+    #             values: ["Name"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListSimulationJobBatches` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   When this parameter is used, `ListSimulationJobBatches` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListSimulationJobBatches` request with
+    #   the returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Optional filters to limit results.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobBatchesRequest AWS API Documentation
+    #
+    class ListSimulationJobBatchesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] simulation_job_batch_summaries
+    #   A list of simulation job batch summaries.
+    #   @return [Array<Types::SimulationJobBatchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListSimulationJobBatches` request. When the results of a
+    #   `ListSimulationJobBatches` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobBatchesResponse AWS API Documentation
+    #
+    class ListSimulationJobBatchesResponse < Struct.new(
+      :simulation_job_batch_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSimulationJobsRequest
     #   data as a hash:
     #
@@ -2635,15 +2903,13 @@ module Aws::RoboMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListSimulationJobs` in paginated output. When this parameter is
-    #   used, `ListSimulationJobs` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListSimulationJobs` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListSimulationJobs` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   When this parameter is used, `ListSimulationJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `ListSimulationJobs` request with the
+    #   returned `nextToken` value. This value can be between 1 and 1000. If
+    #   this parameter is not used, then `ListSimulationJobs` returns up to
+    #   1000 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -3135,7 +3401,7 @@ module Aws::RoboMaker
     #   @return [Time]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about a robot software suite.
+    #   Information about a robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotApplicationSummary AWS API Documentation
@@ -3194,7 +3460,7 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
-    # Information about a robot software suite.
+    # Information about a robot software suite (ROS distribution).
     #
     # @note When making an API call, you may pass RobotSoftwareSuite
     #   data as a hash:
@@ -3205,11 +3471,11 @@ module Aws::RoboMaker
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the robot software suite.
+    #   The name of the robot software suite (ROS distribution).
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the robot software suite.
+    #   The version of the robot software suite (ROS distribution).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/RobotSoftwareSuite AWS API Documentation
@@ -3349,7 +3615,7 @@ module Aws::RoboMaker
     #   @return [Time]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about a robot software suite.
+    #   Information about a robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] simulation_software_suite
@@ -3490,6 +3756,263 @@ module Aws::RoboMaker
       include Aws::Structure
     end
 
+    # Information about a simulation job batch.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the simulation job batch.
+    #
+    #   Pending
+    #
+    #   : The simulation job batch request is pending.
+    #
+    #   InProgress
+    #
+    #   : The simulation job batch is in progress.
+    #
+    #   Failed
+    #
+    #   : The simulation job batch failed. One or more simulation job
+    #     requests could not be completed due to an internal failure (like
+    #     `InternalServiceError`). See `failureCode` and `failureReason` for
+    #     more information.
+    #
+    #   Completed
+    #
+    #   : The simulation batch job completed. A batch is complete when (1)
+    #     there are no pending simulation job requests in the batch and none
+    #     of the failed simulation job requests are due to
+    #     `InternalServiceError` and (2) when all created simulation jobs
+    #     have reached a terminal state (for example, `Completed` or
+    #     `Failed`).
+    #
+    #   Canceled
+    #
+    #   : The simulation batch job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The simulation batch job is being cancelled.
+    #
+    #   Completing
+    #
+    #   : The simulation batch job is completing.
+    #
+    #   TimingOut
+    #
+    #   : The simulation job batch is timing out.
+    #
+    #     If a batch timing out, and there are pending requests that were
+    #     failing due to an internal failure (like `InternalServiceError`),
+    #     the batch status will be `Failed`. If there are no such failing
+    #     request, the batch status will be `TimedOut`.
+    #
+    #   TimedOut
+    #
+    #   : The simulation batch job timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_request_count
+    #   The number of failed simulation job requests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_request_count
+    #   The number of pending simulation job requests.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_request_count
+    #   The number of created simulation job requests.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobBatchSummary AWS API Documentation
+    #
+    class SimulationJobBatchSummary < Struct.new(
+      :arn,
+      :last_updated_at,
+      :created_at,
+      :status,
+      :failed_request_count,
+      :pending_request_count,
+      :created_request_count)
+      include Aws::Structure
+    end
+
+    # Information about a simulation job request.
+    #
+    # @note When making an API call, you may pass SimulationJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         output_location: {
+    #           s3_bucket: "S3Bucket",
+    #           s3_prefix: "S3Key",
+    #         },
+    #         logging_config: {
+    #           record_all_ros_topics: false, # required
+    #         },
+    #         max_job_duration_in_seconds: 1, # required
+    #         iam_role: "IamRole",
+    #         failure_behavior: "Fail", # accepts Fail, Continue
+    #         use_default_applications: false,
+    #         robot_applications: [
+    #           {
+    #             application: "Arn", # required
+    #             application_version: "Version",
+    #             launch_config: { # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
+    #               environment_variables: {
+    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         simulation_applications: [
+    #           {
+    #             application: "Arn", # required
+    #             application_version: "Version",
+    #             launch_config: { # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
+    #               environment_variables: {
+    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         data_sources: [
+    #           {
+    #             name: "Name", # required
+    #             s3_bucket: "S3Bucket", # required
+    #             s3_keys: ["S3Key"], # required
+    #           },
+    #         ],
+    #         vpc_config: {
+    #           subnets: ["NonEmptyString"], # required
+    #           security_groups: ["NonEmptyString"],
+    #           assign_public_ip: false,
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] output_location
+    #   The output location.
+    #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] logging_config
+    #   The logging configuration.
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] max_job_duration_in_seconds
+    #   The maximum simulation job duration in seconds. The value must be 8
+    #   days (691,200 seconds) or less.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iam_role
+    #   The IAM role name that allows the simulation instance to call the
+    #   AWS APIs that are specified in its associated policies on your
+    #   behalf. This is how credentials are passed in to your simulation
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_behavior
+    #   The failure behavior the simulation job.
+    #
+    #   Continue
+    #
+    #   : Restart the simulation job in the same host instance.
+    #
+    #   Fail
+    #
+    #   : Stop the simulation job and terminate the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_default_applications
+    #   Boolean indicating whether to use default simulation tool
+    #   applications.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] robot_applications
+    #   The robot applications to use in the simulation job.
+    #   @return [Array<Types::RobotApplicationConfig>]
+    #
+    # @!attribute [rw] simulation_applications
+    #   The simulation applications to use in the simulation job.
+    #   @return [Array<Types::SimulationApplicationConfig>]
+    #
+    # @!attribute [rw] data_sources
+    #   Specify data sources to mount read-only files from S3 into your
+    #   simulation. These files are available under
+    #   `/opt/robomaker/datasources/data_source_name`.
+    #
+    #   <note markdown="1"> There is a limit of 100 files and a combined size of 25GB for all
+    #   `DataSourceConfig` objects.
+    #
+    #    </note>
+    #   @return [Array<Types::DataSourceConfig>]
+    #
+    # @!attribute [rw] vpc_config
+    #   If your simulation job accesses resources in a VPC, you provide this
+    #   parameter identifying the list of security group IDs and subnet IDs.
+    #   These must belong to the same VPC. You must provide at least one
+    #   security group and two subnet IDs.
+    #   @return [Types::VPCConfig]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   simulation job request.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/SimulationJobRequest AWS API Documentation
+    #
+    class SimulationJobRequest < Struct.new(
+      :output_location,
+      :logging_config,
+      :max_job_duration_in_seconds,
+      :iam_role,
+      :failure_behavior,
+      :use_default_applications,
+      :robot_applications,
+      :simulation_applications,
+      :data_sources,
+      :vpc_config,
+      :tags)
+      include Aws::Structure
+    end
+
     # Summary information for a simulation job.
     #
     # @!attribute [rw] arn
@@ -3617,6 +4140,238 @@ module Aws::RoboMaker
       :s3_bucket,
       :s3_key,
       :architecture)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartSimulationJobBatchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_request_token: "ClientRequestToken",
+    #         batch_policy: {
+    #           timeout_in_seconds: 1,
+    #           max_concurrency: 1,
+    #         },
+    #         create_simulation_job_requests: [ # required
+    #           {
+    #             output_location: {
+    #               s3_bucket: "S3Bucket",
+    #               s3_prefix: "S3Key",
+    #             },
+    #             logging_config: {
+    #               record_all_ros_topics: false, # required
+    #             },
+    #             max_job_duration_in_seconds: 1, # required
+    #             iam_role: "IamRole",
+    #             failure_behavior: "Fail", # accepts Fail, Continue
+    #             use_default_applications: false,
+    #             robot_applications: [
+    #               {
+    #                 application: "Arn", # required
+    #                 application_version: "Version",
+    #                 launch_config: { # required
+    #                   package_name: "Command", # required
+    #                   launch_file: "Command", # required
+    #                   environment_variables: {
+    #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #                   },
+    #                   port_forwarding_config: {
+    #                     port_mappings: [
+    #                       {
+    #                         job_port: 1, # required
+    #                         application_port: 1, # required
+    #                         enable_on_public_ip: false,
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             simulation_applications: [
+    #               {
+    #                 application: "Arn", # required
+    #                 application_version: "Version",
+    #                 launch_config: { # required
+    #                   package_name: "Command", # required
+    #                   launch_file: "Command", # required
+    #                   environment_variables: {
+    #                     "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #                   },
+    #                   port_forwarding_config: {
+    #                     port_mappings: [
+    #                       {
+    #                         job_port: 1, # required
+    #                         application_port: 1, # required
+    #                         enable_on_public_ip: false,
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #             data_sources: [
+    #               {
+    #                 name: "Name", # required
+    #                 s3_bucket: "S3Bucket", # required
+    #                 s3_keys: ["S3Key"], # required
+    #               },
+    #             ],
+    #             vpc_config: {
+    #               subnets: ["NonEmptyString"], # required
+    #               security_groups: ["NonEmptyString"],
+    #               assign_public_ip: false,
+    #             },
+    #             tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #           },
+    #         ],
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_policy
+    #   The batch policy.
+    #   @return [Types::BatchPolicy]
+    #
+    # @!attribute [rw] create_simulation_job_requests
+    #   A list of simulation job requests to create in the batch.
+    #   @return [Array<Types::SimulationJobRequest>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   deployment job batch.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/StartSimulationJobBatchRequest AWS API Documentation
+    #
+    class StartSimulationJobBatchRequest < Struct.new(
+      :client_request_token,
+      :batch_policy,
+      :create_simulation_job_requests,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (arn) of the batch.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the simulation job batch.
+    #
+    #   Pending
+    #
+    #   : The simulation job batch request is pending.
+    #
+    #   InProgress
+    #
+    #   : The simulation job batch is in progress.
+    #
+    #   Failed
+    #
+    #   : The simulation job batch failed. One or more simulation job
+    #     requests could not be completed due to an internal failure (like
+    #     `InternalServiceError`). See `failureCode` and `failureReason` for
+    #     more information.
+    #
+    #   Completed
+    #
+    #   : The simulation batch job completed. A batch is complete when (1)
+    #     there are no pending simulation job requests in the batch and none
+    #     of the failed simulation job requests are due to
+    #     `InternalServiceError` and (2) when all created simulation jobs
+    #     have reached a terminal state (for example, `Completed` or
+    #     `Failed`).
+    #
+    #   Canceled
+    #
+    #   : The simulation batch job was cancelled.
+    #
+    #   Canceling
+    #
+    #   : The simulation batch job is being cancelled.
+    #
+    #   Completing
+    #
+    #   : The simulation batch job is completing.
+    #
+    #   TimingOut
+    #
+    #   : The simulation job batch is timing out.
+    #
+    #     If a batch timing out, and there are pending requests that were
+    #     failing due to an internal failure (like `InternalServiceError`),
+    #     the batch status will be `Failed`. If there are no such failing
+    #     request, the batch status will be `TimedOut`.
+    #
+    #   TimedOut
+    #
+    #   : The simulation batch job timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time, in milliseconds since the epoch, when the simulation job
+    #   batch was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] batch_policy
+    #   The batch policy.
+    #   @return [Types::BatchPolicy]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code if the simulation job batch failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason the simulation job batch failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_requests
+    #   A list of failed simulation job requests. The request failed to be
+    #   created into a simulation job. Failed requests do not have a
+    #   simulation job ID.
+    #   @return [Array<Types::FailedCreateSimulationJobRequest>]
+    #
+    # @!attribute [rw] pending_requests
+    #   A list of pending simulation job requests. These requests have not
+    #   yet been created into simulation jobs.
+    #   @return [Array<Types::SimulationJobRequest>]
+    #
+    # @!attribute [rw] created_requests
+    #   A list of created simulation job request summaries.
+    #   @return [Array<Types::SimulationJobSummary>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   deployment job batch.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/StartSimulationJobBatchResponse AWS API Documentation
+    #
+    class StartSimulationJobBatchResponse < Struct.new(
+      :arn,
+      :status,
+      :created_at,
+      :client_request_token,
+      :batch_policy,
+      :failure_code,
+      :failure_reason,
+      :failed_requests,
+      :pending_requests,
+      :created_requests,
+      :tags)
       include Aws::Structure
     end
 
@@ -3859,7 +4614,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::SourceConfig>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] current_revision_id
@@ -3893,7 +4649,8 @@ module Aws::RoboMaker
     #   @return [Array<Types::Source>]
     #
     # @!attribute [rw] robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] last_updated_at
@@ -3958,7 +4715,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine
@@ -4003,7 +4760,7 @@ module Aws::RoboMaker
     #   @return [Types::SimulationSoftwareSuite]
     #
     # @!attribute [rw] robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #   @return [Types::RobotSoftwareSuite]
     #
     # @!attribute [rw] rendering_engine

@@ -1626,7 +1626,7 @@ module Aws::KMS
     #   resp.custom_key_stores[0].cloud_hsm_cluster_id #=> String
     #   resp.custom_key_stores[0].trust_anchor_certificate #=> String
     #   resp.custom_key_stores[0].connection_state #=> String, one of "CONNECTED", "CONNECTING", "FAILED", "DISCONNECTED", "DISCONNECTING"
-    #   resp.custom_key_stores[0].connection_error_code #=> String, one of "INVALID_CREDENTIALS", "CLUSTER_NOT_FOUND", "NETWORK_ERRORS", "INTERNAL_ERROR", "INSUFFICIENT_CLOUDHSM_HSMS", "USER_LOCKED_OUT", "USER_NOT_FOUND", "USER_LOGGED_IN"
+    #   resp.custom_key_stores[0].connection_error_code #=> String, one of "INVALID_CREDENTIALS", "CLUSTER_NOT_FOUND", "NETWORK_ERRORS", "INTERNAL_ERROR", "INSUFFICIENT_CLOUDHSM_HSMS", "USER_LOCKED_OUT", "USER_NOT_FOUND", "USER_LOGGED_IN", "SUBNET_NOT_FOUND"
     #   resp.custom_key_stores[0].creation_date #=> Time
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
@@ -4791,8 +4791,8 @@ module Aws::KMS
     #
     # @option params [String] :message_type
     #   Tells AWS KMS whether the value of the `Message` parameter is a
-    #   message or message digest. To indicate a message, enter `RAW`. To
-    #   indicate a message digest, enter `DIGEST`.
+    #   message or message digest. The default value, RAW, indicates a
+    #   message. To indicate a message digest, enter `DIGEST`.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5375,7 +5375,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.29.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -279,7 +279,7 @@ module Aws::RoboMaker
     #   resp.jobs[0].last_started_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.jobs[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.jobs[0].failure_reason #=> String
     #   resp.jobs[0].client_request_token #=> String
     #   resp.jobs[0].output_location.s3_bucket #=> String
@@ -380,6 +380,30 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def cancel_simulation_job(params = {}, options = {})
       req = build_request(:cancel_simulation_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels a simulation job batch. When you cancel a simulation job
+    # batch, you are also cancelling all of the active simulation jobs
+    # created as part of the batch.
+    #
+    # @option params [required, String] :batch
+    #   The id of the batch to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_simulation_job_batch({
+    #     batch: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/CancelSimulationJobBatch AWS API Documentation
+    #
+    # @overload cancel_simulation_job_batch(params = {})
+    # @param [Hash] params ({})
+    def cancel_simulation_job_batch(params = {}, options = {})
+      req = build_request(:cancel_simulation_job_batch, params)
       req.send_request(options)
     end
 
@@ -608,7 +632,8 @@ module Aws::RoboMaker
     #   The sources of the robot application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribuition) used by the robot
+    #   application.
     #
     # @option params [Hash<String,String>] :tags
     #   A map that contains tag keys and tag values that are attached to the
@@ -734,7 +759,8 @@ module Aws::RoboMaker
     #   The simulation software suite used by the simulation application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
-    #   The robot software suite of the simulation application.
+    #   The robot software suite (ROS distribution) used by the simulation
+    #   application.
     #
     # @option params [Types::RenderingEngine] :rendering_engine
     #   The rendering engine for the simulation application.
@@ -919,7 +945,9 @@ module Aws::RoboMaker
     #   The simulation application to use in the simulation job.
     #
     # @option params [Array<Types::DataSourceConfig>] :data_sources
-    #   The data sources for the simulation job.
+    #   Specify data sources to mount read-only files from S3 into your
+    #   simulation. These files are available under
+    #   `/opt/robomaker/datasources/data_source_name`.
     #
     #   <note markdown="1"> There is a limit of 100 files and a combined size of 25GB for all
     #   `DataSourceConfig` objects.
@@ -1038,7 +1066,7 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
     #   resp.output_location.s3_prefix #=> String
@@ -1543,7 +1571,7 @@ module Aws::RoboMaker
     #   resp.last_started_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_behavior #=> String, one of "Fail", "Continue"
-    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
     #   resp.failure_reason #=> String
     #   resp.client_request_token #=> String
     #   resp.output_location.s3_bucket #=> String
@@ -1601,12 +1629,155 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
+    # Describes a simulation job batch.
+    #
+    # @option params [required, String] :batch
+    #   The id of the batch to describe.
+    #
+    # @return [Types::DescribeSimulationJobBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSimulationJobBatchResponse#arn #arn} => String
+    #   * {Types::DescribeSimulationJobBatchResponse#status #status} => String
+    #   * {Types::DescribeSimulationJobBatchResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::DescribeSimulationJobBatchResponse#created_at #created_at} => Time
+    #   * {Types::DescribeSimulationJobBatchResponse#client_request_token #client_request_token} => String
+    #   * {Types::DescribeSimulationJobBatchResponse#batch_policy #batch_policy} => Types::BatchPolicy
+    #   * {Types::DescribeSimulationJobBatchResponse#failure_code #failure_code} => String
+    #   * {Types::DescribeSimulationJobBatchResponse#failure_reason #failure_reason} => String
+    #   * {Types::DescribeSimulationJobBatchResponse#failed_requests #failed_requests} => Array&lt;Types::FailedCreateSimulationJobRequest&gt;
+    #   * {Types::DescribeSimulationJobBatchResponse#pending_requests #pending_requests} => Array&lt;Types::SimulationJobRequest&gt;
+    #   * {Types::DescribeSimulationJobBatchResponse#created_requests #created_requests} => Array&lt;Types::SimulationJobSummary&gt;
+    #   * {Types::DescribeSimulationJobBatchResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_simulation_job_batch({
+    #     batch: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Completed", "Canceled", "Canceling", "Completing", "TimingOut", "TimedOut"
+    #   resp.last_updated_at #=> Time
+    #   resp.created_at #=> Time
+    #   resp.client_request_token #=> String
+    #   resp.batch_policy.timeout_in_seconds #=> Integer
+    #   resp.batch_policy.max_concurrency #=> Integer
+    #   resp.failure_code #=> String, one of "InternalServiceError"
+    #   resp.failure_reason #=> String
+    #   resp.failed_requests #=> Array
+    #   resp.failed_requests[0].request.output_location.s3_bucket #=> String
+    #   resp.failed_requests[0].request.output_location.s3_prefix #=> String
+    #   resp.failed_requests[0].request.logging_config.record_all_ros_topics #=> Boolean
+    #   resp.failed_requests[0].request.max_job_duration_in_seconds #=> Integer
+    #   resp.failed_requests[0].request.iam_role #=> String
+    #   resp.failed_requests[0].request.failure_behavior #=> String, one of "Fail", "Continue"
+    #   resp.failed_requests[0].request.use_default_applications #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].application #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].application_version #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.package_name #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.launch_file #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.package_name #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.launch_file #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.data_sources #=> Array
+    #   resp.failed_requests[0].request.data_sources[0].name #=> String
+    #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
+    #   resp.failed_requests[0].request.data_sources[0].s3_keys #=> Array
+    #   resp.failed_requests[0].request.data_sources[0].s3_keys[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.subnets #=> Array
+    #   resp.failed_requests[0].request.vpc_config.subnets[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
+    #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.tags #=> Hash
+    #   resp.failed_requests[0].request.tags["TagKey"] #=> String
+    #   resp.failed_requests[0].failure_reason #=> String
+    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failed_requests[0].failed_at #=> Time
+    #   resp.pending_requests #=> Array
+    #   resp.pending_requests[0].output_location.s3_bucket #=> String
+    #   resp.pending_requests[0].output_location.s3_prefix #=> String
+    #   resp.pending_requests[0].logging_config.record_all_ros_topics #=> Boolean
+    #   resp.pending_requests[0].max_job_duration_in_seconds #=> Integer
+    #   resp.pending_requests[0].iam_role #=> String
+    #   resp.pending_requests[0].failure_behavior #=> String, one of "Fail", "Continue"
+    #   resp.pending_requests[0].use_default_applications #=> Boolean
+    #   resp.pending_requests[0].robot_applications #=> Array
+    #   resp.pending_requests[0].robot_applications[0].application #=> String
+    #   resp.pending_requests[0].robot_applications[0].application_version #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.package_name #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.launch_file #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.pending_requests[0].robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].simulation_applications #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].application #=> String
+    #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.package_name #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.launch_file #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].data_sources #=> Array
+    #   resp.pending_requests[0].data_sources[0].name #=> String
+    #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
+    #   resp.pending_requests[0].data_sources[0].s3_keys #=> Array
+    #   resp.pending_requests[0].data_sources[0].s3_keys[0] #=> String
+    #   resp.pending_requests[0].vpc_config.subnets #=> Array
+    #   resp.pending_requests[0].vpc_config.subnets[0] #=> String
+    #   resp.pending_requests[0].vpc_config.security_groups #=> Array
+    #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
+    #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].tags #=> Hash
+    #   resp.pending_requests[0].tags["TagKey"] #=> String
+    #   resp.created_requests #=> Array
+    #   resp.created_requests[0].arn #=> String
+    #   resp.created_requests[0].last_updated_at #=> Time
+    #   resp.created_requests[0].name #=> String
+    #   resp.created_requests[0].status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
+    #   resp.created_requests[0].simulation_application_names #=> Array
+    #   resp.created_requests[0].simulation_application_names[0] #=> String
+    #   resp.created_requests[0].robot_application_names #=> Array
+    #   resp.created_requests[0].robot_application_names[0] #=> String
+    #   resp.created_requests[0].data_source_names #=> Array
+    #   resp.created_requests[0].data_source_names[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/DescribeSimulationJobBatch AWS API Documentation
+    #
+    # @overload describe_simulation_job_batch(params = {})
+    # @param [Hash] params ({})
+    def describe_simulation_job_batch(params = {}, options = {})
+      req = build_request(:describe_simulation_job_batch, params)
+      req.send_request(options)
+    end
+
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
-    #
-    # <note markdown="1">
-    #
-    #  </note>
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -1624,22 +1795,14 @@ module Aws::RoboMaker
     #   from the end of the previous results that returned the `nextToken`
     #   value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
-    #
-    #    </note>
-    #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListDeploymentJobs` in paginated output. When this parameter is used,
-    #   `ListDeploymentJobs` only returns `maxResults` results in a single
-    #   page along with a `nextToken` response element. The remaining results
-    #   of the initial request can be seen by sending another
-    #   `ListDeploymentJobs` request with the returned `nextToken` value. This
-    #   value can be between 1 and 100. If this parameter is not used, then
-    #   `ListDeploymentJobs` returns up to 100 results and a `nextToken` value
-    #   if applicable.
+    #   When this parameter is used, `ListDeploymentJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListDeploymentJobs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 200. If this
+    #   parameter is not used, then `ListDeploymentJobs` returns up to 200
+    #   results and a `nextToken` value if applicable.
     #
     # @return [Types::ListDeploymentJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1710,14 +1873,13 @@ module Aws::RoboMaker
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by `ListFleets`
-    #   in paginated output. When this parameter is used, `ListFleets` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListFleets` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListFleets` returns up to 100 results and
-    #   a `nextToken` value if applicable.
+    #   When this parameter is used, `ListFleets` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListFleets` request with the returned `nextToken` value. This
+    #   value can be between 1 and 200. If this parameter is not used, then
+    #   `ListFleets` returns up to 200 results and a `nextToken` value if
+    #   applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -1776,22 +1938,14 @@ module Aws::RoboMaker
     #   from the end of the previous results that returned the `nextToken`
     #   value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
-    #
-    #    </note>
-    #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListRobotApplications` in paginated output. When this parameter is
-    #   used, `ListRobotApplications` only returns `maxResults` results in a
-    #   single page along with a `nextToken` response element. The remaining
-    #   results of the initial request can be seen by sending another
-    #   `ListRobotApplications` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
-    #   then `ListRobotApplications` returns up to 100 results and a
-    #   `nextToken` value if applicable.
+    #   When this parameter is used, `ListRobotApplications` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListRobotApplications` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListRobotApplications` returns up to
+    #   100 results and a `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -1847,21 +2001,14 @@ module Aws::RoboMaker
     #   of that parameter. Pagination continues from the end of the previous
     #   results that returned the `nextToken` value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
-    #
-    #    </note>
-    #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by `ListRobots`
-    #   in paginated output. When this parameter is used, `ListRobots` only
-    #   returns `maxResults` results in a single page along with a `nextToken`
-    #   response element. The remaining results of the initial request can be
-    #   seen by sending another `ListRobots` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListRobots` returns up to 100 results and
-    #   a `nextToken` value if applicable.
+    #   When this parameter is used, `ListRobots` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListRobots` request with the returned `nextToken` value. This
+    #   value can be between 1 and 200. If this parameter is not used, then
+    #   `ListRobots` returns up to 200 results and a `nextToken` value if
+    #   applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -1926,22 +2073,14 @@ module Aws::RoboMaker
     #   from the end of the previous results that returned the `nextToken`
     #   value.
     #
-    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
-    #   to retrieve the next items in a list and not for other programmatic
-    #   purposes.
-    #
-    #    </note>
-    #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListSimulationApplications` in paginated output. When this parameter
-    #   is used, `ListSimulationApplications` only returns `maxResults`
-    #   results in a single page along with a `nextToken` response element.
-    #   The remaining results of the initial request can be seen by sending
-    #   another `ListSimulationApplications` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
-    #   parameter is not used, then `ListSimulationApplications` returns up to
-    #   100 results and a `nextToken` value if applicable.
+    #   When this parameter is used, `ListSimulationApplications` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListSimulationApplications` request with the
+    #   returned `nextToken` value. This value can be between 1 and 100. If
+    #   this parameter is not used, then `ListSimulationApplications` returns
+    #   up to 100 results and a `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional list of filters to limit results.
@@ -1990,6 +2129,65 @@ module Aws::RoboMaker
       req.send_request(options)
     end
 
+    # Returns a list simulation job batches. You can optionally provide
+    # filters to retrieve specific simulation batch jobs.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListSimulationJobBatches` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    # @option params [Integer] :max_results
+    #   When this parameter is used, `ListSimulationJobBatches` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListSimulationJobBatches` request with the
+    #   returned `nextToken` value.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Optional filters to limit results.
+    #
+    # @return [Types::ListSimulationJobBatchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSimulationJobBatchesResponse#simulation_job_batch_summaries #simulation_job_batch_summaries} => Array&lt;Types::SimulationJobBatchSummary&gt;
+    #   * {Types::ListSimulationJobBatchesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_simulation_job_batches({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "Name",
+    #         values: ["Name"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.simulation_job_batch_summaries #=> Array
+    #   resp.simulation_job_batch_summaries[0].arn #=> String
+    #   resp.simulation_job_batch_summaries[0].last_updated_at #=> Time
+    #   resp.simulation_job_batch_summaries[0].created_at #=> Time
+    #   resp.simulation_job_batch_summaries[0].status #=> String, one of "Pending", "InProgress", "Failed", "Completed", "Canceled", "Canceling", "Completing", "TimingOut", "TimedOut"
+    #   resp.simulation_job_batch_summaries[0].failed_request_count #=> Integer
+    #   resp.simulation_job_batch_summaries[0].pending_request_count #=> Integer
+    #   resp.simulation_job_batch_summaries[0].created_request_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListSimulationJobBatches AWS API Documentation
+    #
+    # @overload list_simulation_job_batches(params = {})
+    # @param [Hash] params ({})
+    def list_simulation_job_batches(params = {}, options = {})
+      req = build_request(:list_simulation_job_batches, params)
+      req.send_request(options)
+    end
+
     # Returns a list of simulation jobs. You can optionally provide filters
     # to retrieve specific simulation jobs.
     #
@@ -2007,15 +2205,13 @@ module Aws::RoboMaker
     #    </note>
     #
     # @option params [Integer] :max_results
-    #   The maximum number of deployment job results returned by
-    #   `ListSimulationJobs` in paginated output. When this parameter is used,
-    #   `ListSimulationJobs` only returns `maxResults` results in a single
-    #   page along with a `nextToken` response element. The remaining results
-    #   of the initial request can be seen by sending another
-    #   `ListSimulationJobs` request with the returned `nextToken` value. This
-    #   value can be between 1 and 100. If this parameter is not used, then
-    #   `ListSimulationJobs` returns up to 100 results and a `nextToken` value
-    #   if applicable.
+    #   When this parameter is used, `ListSimulationJobs` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListSimulationJobs` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then `ListSimulationJobs` returns up to 1000
+    #   results and a `nextToken` value if applicable.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
@@ -2150,6 +2346,244 @@ module Aws::RoboMaker
     # @param [Hash] params ({})
     def restart_simulation_job(params = {}, options = {})
       req = build_request(:restart_simulation_job, params)
+      req.send_request(options)
+    end
+
+    # Starts a new simulation job batch. The batch is defined using one or
+    # more `SimulationJobRequest` objects.
+    #
+    # @option params [String] :client_request_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    # @option params [Types::BatchPolicy] :batch_policy
+    #   The batch policy.
+    #
+    # @option params [required, Array<Types::SimulationJobRequest>] :create_simulation_job_requests
+    #   A list of simulation job requests to create in the batch.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map that contains tag keys and tag values that are attached to the
+    #   deployment job batch.
+    #
+    # @return [Types::StartSimulationJobBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSimulationJobBatchResponse#arn #arn} => String
+    #   * {Types::StartSimulationJobBatchResponse#status #status} => String
+    #   * {Types::StartSimulationJobBatchResponse#created_at #created_at} => Time
+    #   * {Types::StartSimulationJobBatchResponse#client_request_token #client_request_token} => String
+    #   * {Types::StartSimulationJobBatchResponse#batch_policy #batch_policy} => Types::BatchPolicy
+    #   * {Types::StartSimulationJobBatchResponse#failure_code #failure_code} => String
+    #   * {Types::StartSimulationJobBatchResponse#failure_reason #failure_reason} => String
+    #   * {Types::StartSimulationJobBatchResponse#failed_requests #failed_requests} => Array&lt;Types::FailedCreateSimulationJobRequest&gt;
+    #   * {Types::StartSimulationJobBatchResponse#pending_requests #pending_requests} => Array&lt;Types::SimulationJobRequest&gt;
+    #   * {Types::StartSimulationJobBatchResponse#created_requests #created_requests} => Array&lt;Types::SimulationJobSummary&gt;
+    #   * {Types::StartSimulationJobBatchResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_simulation_job_batch({
+    #     client_request_token: "ClientRequestToken",
+    #     batch_policy: {
+    #       timeout_in_seconds: 1,
+    #       max_concurrency: 1,
+    #     },
+    #     create_simulation_job_requests: [ # required
+    #       {
+    #         output_location: {
+    #           s3_bucket: "S3Bucket",
+    #           s3_prefix: "S3Key",
+    #         },
+    #         logging_config: {
+    #           record_all_ros_topics: false, # required
+    #         },
+    #         max_job_duration_in_seconds: 1, # required
+    #         iam_role: "IamRole",
+    #         failure_behavior: "Fail", # accepts Fail, Continue
+    #         use_default_applications: false,
+    #         robot_applications: [
+    #           {
+    #             application: "Arn", # required
+    #             application_version: "Version",
+    #             launch_config: { # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
+    #               environment_variables: {
+    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         simulation_applications: [
+    #           {
+    #             application: "Arn", # required
+    #             application_version: "Version",
+    #             launch_config: { # required
+    #               package_name: "Command", # required
+    #               launch_file: "Command", # required
+    #               environment_variables: {
+    #                 "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #               },
+    #               port_forwarding_config: {
+    #                 port_mappings: [
+    #                   {
+    #                     job_port: 1, # required
+    #                     application_port: 1, # required
+    #                     enable_on_public_ip: false,
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         data_sources: [
+    #           {
+    #             name: "Name", # required
+    #             s3_bucket: "S3Bucket", # required
+    #             s3_keys: ["S3Key"], # required
+    #           },
+    #         ],
+    #         vpc_config: {
+    #           subnets: ["NonEmptyString"], # required
+    #           security_groups: ["NonEmptyString"],
+    #           assign_public_ip: false,
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       },
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "Pending", "InProgress", "Failed", "Completed", "Canceled", "Canceling", "Completing", "TimingOut", "TimedOut"
+    #   resp.created_at #=> Time
+    #   resp.client_request_token #=> String
+    #   resp.batch_policy.timeout_in_seconds #=> Integer
+    #   resp.batch_policy.max_concurrency #=> Integer
+    #   resp.failure_code #=> String, one of "InternalServiceError"
+    #   resp.failure_reason #=> String
+    #   resp.failed_requests #=> Array
+    #   resp.failed_requests[0].request.output_location.s3_bucket #=> String
+    #   resp.failed_requests[0].request.output_location.s3_prefix #=> String
+    #   resp.failed_requests[0].request.logging_config.record_all_ros_topics #=> Boolean
+    #   resp.failed_requests[0].request.max_job_duration_in_seconds #=> Integer
+    #   resp.failed_requests[0].request.iam_role #=> String
+    #   resp.failed_requests[0].request.failure_behavior #=> String, one of "Fail", "Continue"
+    #   resp.failed_requests[0].request.use_default_applications #=> Boolean
+    #   resp.failed_requests[0].request.robot_applications #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].application #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].application_version #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.package_name #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.launch_file #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.failed_requests[0].request.robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.simulation_applications #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].application #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].application_version #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.package_name #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.launch_file #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.failed_requests[0].request.simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.data_sources #=> Array
+    #   resp.failed_requests[0].request.data_sources[0].name #=> String
+    #   resp.failed_requests[0].request.data_sources[0].s3_bucket #=> String
+    #   resp.failed_requests[0].request.data_sources[0].s3_keys #=> Array
+    #   resp.failed_requests[0].request.data_sources[0].s3_keys[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.subnets #=> Array
+    #   resp.failed_requests[0].request.vpc_config.subnets[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.security_groups #=> Array
+    #   resp.failed_requests[0].request.vpc_config.security_groups[0] #=> String
+    #   resp.failed_requests[0].request.vpc_config.assign_public_ip #=> Boolean
+    #   resp.failed_requests[0].request.tags #=> Hash
+    #   resp.failed_requests[0].request.tags["TagKey"] #=> String
+    #   resp.failed_requests[0].failure_reason #=> String
+    #   resp.failed_requests[0].failure_code #=> String, one of "InternalServiceError", "RobotApplicationCrash", "SimulationApplicationCrash", "BadPermissionsRobotApplication", "BadPermissionsSimulationApplication", "BadPermissionsS3Object", "BadPermissionsS3Output", "BadPermissionsCloudwatchLogs", "SubnetIpLimitExceeded", "ENILimitExceeded", "BadPermissionsUserCredentials", "InvalidBundleRobotApplication", "InvalidBundleSimulationApplication", "InvalidS3Resource", "LimitExceeded", "MismatchedEtag", "RobotApplicationVersionMismatchedEtag", "SimulationApplicationVersionMismatchedEtag", "ResourceNotFound", "RequestThrottled", "BatchTimedOut", "BatchCanceled", "InvalidInput", "WrongRegionS3Bucket", "WrongRegionS3Output", "WrongRegionRobotApplication", "WrongRegionSimulationApplication"
+    #   resp.failed_requests[0].failed_at #=> Time
+    #   resp.pending_requests #=> Array
+    #   resp.pending_requests[0].output_location.s3_bucket #=> String
+    #   resp.pending_requests[0].output_location.s3_prefix #=> String
+    #   resp.pending_requests[0].logging_config.record_all_ros_topics #=> Boolean
+    #   resp.pending_requests[0].max_job_duration_in_seconds #=> Integer
+    #   resp.pending_requests[0].iam_role #=> String
+    #   resp.pending_requests[0].failure_behavior #=> String, one of "Fail", "Continue"
+    #   resp.pending_requests[0].use_default_applications #=> Boolean
+    #   resp.pending_requests[0].robot_applications #=> Array
+    #   resp.pending_requests[0].robot_applications[0].application #=> String
+    #   resp.pending_requests[0].robot_applications[0].application_version #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.package_name #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.launch_file #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.pending_requests[0].robot_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.pending_requests[0].robot_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].simulation_applications #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].application #=> String
+    #   resp.pending_requests[0].simulation_applications[0].application_version #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.package_name #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.launch_file #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.environment_variables #=> Hash
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.environment_variables["EnvironmentVariableKey"] #=> String
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings #=> Array
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].job_port #=> Integer
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].application_port #=> Integer
+    #   resp.pending_requests[0].simulation_applications[0].launch_config.port_forwarding_config.port_mappings[0].enable_on_public_ip #=> Boolean
+    #   resp.pending_requests[0].data_sources #=> Array
+    #   resp.pending_requests[0].data_sources[0].name #=> String
+    #   resp.pending_requests[0].data_sources[0].s3_bucket #=> String
+    #   resp.pending_requests[0].data_sources[0].s3_keys #=> Array
+    #   resp.pending_requests[0].data_sources[0].s3_keys[0] #=> String
+    #   resp.pending_requests[0].vpc_config.subnets #=> Array
+    #   resp.pending_requests[0].vpc_config.subnets[0] #=> String
+    #   resp.pending_requests[0].vpc_config.security_groups #=> Array
+    #   resp.pending_requests[0].vpc_config.security_groups[0] #=> String
+    #   resp.pending_requests[0].vpc_config.assign_public_ip #=> Boolean
+    #   resp.pending_requests[0].tags #=> Hash
+    #   resp.pending_requests[0].tags["TagKey"] #=> String
+    #   resp.created_requests #=> Array
+    #   resp.created_requests[0].arn #=> String
+    #   resp.created_requests[0].last_updated_at #=> Time
+    #   resp.created_requests[0].name #=> String
+    #   resp.created_requests[0].status #=> String, one of "Pending", "Preparing", "Running", "Restarting", "Completed", "Failed", "RunningFailed", "Terminating", "Terminated", "Canceled"
+    #   resp.created_requests[0].simulation_application_names #=> Array
+    #   resp.created_requests[0].simulation_application_names[0] #=> String
+    #   resp.created_requests[0].robot_application_names #=> Array
+    #   resp.created_requests[0].robot_application_names[0] #=> String
+    #   resp.created_requests[0].data_source_names #=> Array
+    #   resp.created_requests[0].data_source_names[0] #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/StartSimulationJobBatch AWS API Documentation
+    #
+    # @overload start_simulation_job_batch(params = {})
+    # @param [Hash] params ({})
+    def start_simulation_job_batch(params = {}, options = {})
+      req = build_request(:start_simulation_job_batch, params)
       req.send_request(options)
     end
 
@@ -2302,7 +2736,8 @@ module Aws::RoboMaker
     #   The sources of the robot application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
-    #   The robot software suite used by the robot application.
+    #   The robot software suite (ROS distribution) used by the robot
+    #   application.
     #
     # @option params [String] :current_revision_id
     #   The revision id for the robot application.
@@ -2371,7 +2806,7 @@ module Aws::RoboMaker
     #   The simulation software suite used by the simulation application.
     #
     # @option params [required, Types::RobotSoftwareSuite] :robot_software_suite
-    #   Information about the robot software suite.
+    #   Information about the robot software suite (ROS distribution).
     #
     # @option params [Types::RenderingEngine] :rendering_engine
     #   The rendering engine for the simulation application.
@@ -2458,7 +2893,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

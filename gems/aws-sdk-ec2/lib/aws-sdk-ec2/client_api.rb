@@ -5824,6 +5824,8 @@ module Aws::EC2
     Image.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
     Image.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "imageOwnerId"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformValues, location_name: "platform"))
+    Image.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
+    Image.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
     Image.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
     Image.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "imageState"))
