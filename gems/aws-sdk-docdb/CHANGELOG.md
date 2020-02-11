@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2020-02-10)
+------------------
+
+* Feature - Added clarifying information that Amazon DocumentDB shares operational technology with Amazon RDS and Amazon Neptune.
+
 1.12.0 (2019-10-23)
 ------------------
 
