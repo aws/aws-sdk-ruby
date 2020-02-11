@@ -46,16 +46,23 @@ module Aws
         expect(client.config.credentials.access_key_id).to eq('ACCESS_DIRECT')
       end
 
-      it 'prefers ENV credentials over assume role and shared config' do
+      it 'prefers assume role credentials when profile explicitly set over ENV credentials' do
         stub_const(
           'ENV',
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
+        assume_role_stub(
+            'arn:aws:iam:123456789012:role/foo',
+            'ACCESS_KEY_1', # from 'fooprofile'
+            'AR_AKID',
+            'AR_SECRET',
+            'AR_TOKEN'
+        )
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'assumerole_sc', region: 'us-east-1'
         )
-        expect(client.config.credentials.access_key_id).to eq('AKID_ENV_STUB')
+        expect(client.config.credentials.credentials.access_key_id).to eq('AR_AKID')
       end
 
       it 'prefers assume role web identity over assume role' do
@@ -390,18 +397,32 @@ module Aws
         ).to eq('ACCESS_DIRECT')
       end
 
-      it 'prefers ENV credentials over shared config' do
+      it 'prefers ENV credentials over shared config when profile not set' do
         stub_const(
           'ENV',
           'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'fooprofile', region: 'us-east-1'
+          region: 'us-east-1'
         )
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AKID_ENV_STUB')
+      end
+
+      it 'prefers config from profile over ENV credentials when profile is set on client' do
+        stub_const(
+            'ENV',
+            'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+            'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: 'fooprofile', region: 'us-east-1'
+        )
+        expect(
+            client.config.credentials.credentials.access_key_id
+        ).to eq('ACCESS_KEY_1')
       end
 
       it 'will not load credentials from shared config' do

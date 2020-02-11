@@ -18,20 +18,36 @@ module Aws
     private
 
     def providers
-      [
-        [:static_credentials, {}],
-        [:static_profile_credentials, {}],
-        [:env_credentials, {}],
-        [:assume_role_web_identity_credentials, {}],
-        [:assume_role_credentials, {}],
-        [:shared_credentials, {}],
+
+      providers = [[:static_credentials, {}]]
+
+      # When profile is explicitly included in the config
+      # Prioritize loading credentials from the profile before
+      # credentials from the ENV
+      if @config && @config.profile
+        providers.push(
+          [:assume_role_web_identity_credentials, {}],
+          [:assume_role_credentials, {}],
+          [:shared_credentials, {}],
+          [:env_credentials, {}]
+        )
+      else
+        providers.push(
+            [:env_credentials, {}],
+            [:assume_role_web_identity_credentials, {}],
+            [:assume_role_credentials, {}],
+            [:shared_credentials, {}]
+        )
+      end
+      providers.push(
         [:process_credentials, {}],
         [:instance_profile_credentials, {
           retries: @config ? @config.instance_profile_credentials_retries : 0,
           http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
           http_read_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
-        }],
-      ]
+        }]
+      )
+      providers
     end
 
     def static_credentials(options)
@@ -41,12 +57,6 @@ module Aws
           options[:config].secret_access_key,
           options[:config].session_token
         )
-      end
-    end
-
-    def static_profile_credentials(options)
-      if options[:config] && options[:config].profile
-        SharedCredentials.new(profile_name: options[:config].profile)
       end
     end
 
