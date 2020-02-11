@@ -8584,10 +8584,11 @@ module Aws::EC2
     SpotFleetMonitoring.struct_class = Types::SpotFleetMonitoring
 
     SpotFleetRequestConfig.add_member(:activity_status, Shapes::ShapeRef.new(shape: ActivityStatus, location_name: "activityStatus"))
-    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
+    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, location_name: "spotFleetRequestConfig"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, location_name: "spotFleetRequestState"))
+    SpotFleetRequestConfig.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     SpotFleetRequestConfig.struct_class = Types::SpotFleetRequestConfig
 
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
@@ -8612,6 +8613,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotFleetRequestConfigData.add_member(:load_balancers_config, Shapes::ShapeRef.new(shape: LoadBalancersConfig, location_name: "loadBalancersConfig"))
     SpotFleetRequestConfigData.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
+    SpotFleetRequestConfigData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")

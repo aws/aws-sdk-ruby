@@ -8,12 +8,10 @@ module Aws
 
       # @api private
       class Handler < Seahorse::Client::Handler
-
         def call(context)
           if streaming?(context.operation.input)
-            begin
-              context.http_request.body.size
-            rescue
+            # If it's an IO object and not a File / String / String IO
+            unless context.http_request.body.respond_to?(:size)
               if requires_length?(context.operation.input)
                 # if size of the IO is not available but required
                 raise Aws::Errors::MissingContentLength.new
