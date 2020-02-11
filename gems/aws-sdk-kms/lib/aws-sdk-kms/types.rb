@@ -920,6 +920,15 @@ module Aws::KMS
     #   * `NETWORK_ERRORS` - Network errors are preventing AWS KMS from
     #     connecting to the custom key store.
     #
+    #   * `SUBNET_NOT_FOUND` - A subnet in the AWS CloudHSM cluster
+    #     configuration was deleted. If AWS KMS cannot find all of the
+    #     subnets that were configured for the cluster when the custom key
+    #     store was created, attempts to connect fail. To fix this error,
+    #     create a cluster from a backup and associate it with your custom
+    #     key store. This process includes selecting a VPC and subnets. For
+    #     details, see [How to Fix a Connection Failure][1] in the *AWS Key
+    #     Management Service Developer Guide*.
+    #
     #   * `USER_LOCKED_OUT` - The `kmsuser` CU account is locked out of the
     #     associated AWS CloudHSM cluster due to too many failed password
     #     attempts. Before you can connect your custom key store to its AWS
@@ -2382,14 +2391,16 @@ module Aws::KMS
     # @!attribute [rw] public_key
     #   The exported public key.
     #
-    #   This value is returned as a binary [Distinguished Encoding Rules][1]
-    #   (DER)-encoded object. To decode it, use an ASN.1 parsing tool, such
-    #   as [OpenSSL asn1parse][2].
+    #   The value is a DER-encoded X.509 public key, also known as
+    #   `SubjectPublicKeyInfo` (SPKI), as defined in [RFC 5280][1]. When you
+    #   use the HTTP API or the AWS CLI, the value is Base64-encoded.
+    #   Otherwise, it is not Base64-encoded.
     #
     #
     #
-    #   [1]: https://www.itu.int/ITU-T/studygroups/com17/languages/X.690-0207.pdf
-    #   [2]: https://www.openssl.org/docs/man1.0.2/man1/asn1parse.html
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc5280
     #   @return [String]
     #
     # @!attribute [rw] customer_master_key_spec
@@ -3988,8 +3999,8 @@ module Aws::KMS
     #
     # @!attribute [rw] message_type
     #   Tells AWS KMS whether the value of the `Message` parameter is a
-    #   message or message digest. To indicate a message, enter `RAW`. To
-    #   indicate a message digest, enter `DIGEST`.
+    #   message or message digest. The default value, RAW, indicates a
+    #   message. To indicate a message digest, enter `DIGEST`.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -4028,6 +4039,23 @@ module Aws::KMS
     #
     # @!attribute [rw] signature
     #   The cryptographic signature that was generated for the message.
+    #
+    #   * When used with the supported RSA signing algorithms, the encoding
+    #     of this value is defined by [PKCS #1 in RFC 8017][1].
+    #
+    #   * When used with the `ECDSA_SHA_256`, `ECDSA_SHA_384`, or
+    #     `ECDSA_SHA_512` signing algorithms, this value is a DER-encoded
+    #     object as defined by ANS X9.62–2005 and [RFC 3279 Section
+    #     2.2.3][2]. This is the most commonly used signature format and is
+    #     appropriate for most uses.
+    #
+    #   When you use the HTTP API or the AWS CLI, the value is
+    #   Base64-encoded. Otherwise, it is not Base64-encoded.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc8017
+    #   [2]: https://tools.ietf.org/html/rfc3279#section-2.2.3
     #   @return [String]
     #
     # @!attribute [rw] signing_algorithm

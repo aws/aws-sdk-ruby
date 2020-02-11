@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2020-02-11)
+------------------
+
+* Feature - Amazon EC2 Now Supports Tagging Spot Fleet.
+
+1.140.0 (2020-02-06)
+------------------
+
+* Feature - This release adds platform details and billing info to the DescribeImages API.
+
+1.139.0 (2020-02-05)
+------------------
+
+* Feature - This release provides support for tagging when you create a VPC endpoint, or VPC endpoint service.
+
 1.138.0 (2020-02-04)
 ------------------
 

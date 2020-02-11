@@ -11,7 +11,7 @@ module Aws::Imagebuilder
     # Details of an EC2 AMI.
     #
     # @!attribute [rw] region
-    #   The region of the EC2 AMI.
+    #   The AWS Region of the EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -27,7 +27,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   Image state shows the images status and the reason for that status.
+    #   Image state shows the image status and the reason for that status.
     #   @return [Types::ImageState]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Ami AWS API Documentation
@@ -41,13 +41,13 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Define and configure the outputs AMIs of the pipeline.
+    # Define and configure the output AMIs of the pipeline.
     #
     # @note When making an API call, you may pass AmiDistributionConfiguration
     #   data as a hash:
     #
     #       {
-    #         name: "NonEmptyString",
+    #         name: "AmiNameString",
     #         description: "NonEmptyString",
     #         ami_tags: {
     #           "TagKey" => "TagValue",
@@ -67,7 +67,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] ami_tags
-    #   The tags to apply to AMIs distributed to this region.
+    #   The tags to apply to AMIs distributed to this Region.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] launch_permission
@@ -107,12 +107,15 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image whose creation you wish
+    #   The Amazon Resource Name (ARN) of the image whose creation you want
     #   to cancel.
     #   @return [String]
     #
     # @!attribute [rw] client_token
     #   The idempotency token used to make this request idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CancelImageCreationRequest AWS API Documentation
@@ -240,7 +243,7 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         component_arn: "ComponentBuildVersionArn", # required
+    #         component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #       }
     #
     # @!attribute [rw] component_arn
@@ -254,7 +257,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A high level summary of a component.
+    # A high-level summary of a component.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
@@ -313,7 +316,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A high level overview of a component semantic version.
+    # A high-level overview of a component semantic version.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the component.
@@ -385,32 +388,37 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the component. This version to follow the
-    #   semantic version syntax. i.e. major.minor.patch. This could be
-    #   versioned like software 2.0.1 or date like 2019.12.01.
+    #   The semantic version of the component. This version follows the
+    #   semantic version syntax. For example, major.minor.patch. This could
+    #   be versioned like software (2.0.1) or like a date (2019.12.01).
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   CThe description of the component. Describes the contents of the
+    #   The description of the component. Describes the contents of the
     #   component.
     #   @return [String]
     #
     # @!attribute [rw] change_description
-    #   CThe change description of the component. Describes what change has
-    #   been made in this version. In other words what makes this version
-    #   different from other versions of this component.
+    #   The change description of the component. Describes what change has
+    #   been made in this version, or what makes this version different from
+    #   other versions of this component.
     #   @return [String]
     #
     # @!attribute [rw] platform
-    #   CThe platform of the component.
+    #   The platform of the component.
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   CThe data of the component.
+    #   The data of the component. Used to specify the data inline. Either
+    #   `data` or `uri` can be used to specify the data within the
+    #   component.
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   CThe uri of the component.
+    #   The uri of the component. Must be an S3 URL and the requester must
+    #   have permission to access the S3 bucket. If you use S3, you can
+    #   specify component content up to your service quota. Either `data` or
+    #   `uri` can be used to specify the data within the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -418,11 +426,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   CThe tags of the component.
+    #   The tags of the component.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   CThe idempotency token of the component.
+    #   The idempotency token of the component.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -445,15 +453,15 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] request_id
-    #   CThe request ID that uniquely identifies this request.
+    #   The request ID that uniquely identifies this request.
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   CThe idempotency token used to make this request idempotent.
+    #   The idempotency token used to make this request idempotent.
     #   @return [String]
     #
     # @!attribute [rw] component_build_version_arn
-    #   CThe Amazon Resource Name (ARN) of the component that was created by
+    #   The Amazon Resource Name (ARN) of the component that was created by
     #   this request.
     #   @return [String]
     #
@@ -476,7 +484,7 @@ module Aws::Imagebuilder
     #           {
     #             region: "NonEmptyString", # required
     #             ami_distribution_configuration: {
-    #               name: "NonEmptyString",
+    #               name: "AmiNameString",
     #               description: "NonEmptyString",
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
@@ -669,7 +677,7 @@ module Aws::Imagebuilder
     #         semantic_version: "VersionNumber", # required
     #         components: [ # required
     #           {
-    #             component_arn: "ComponentBuildVersionArn", # required
+    #             component_arn: "ComponentVersionArnOrBuildVersionArn", # required
     #           },
     #         ],
     #         parent_image: "NonEmptyString", # required
@@ -686,7 +694,7 @@ module Aws::Imagebuilder
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #             },
     #             virtual_name: "NonEmptyString",
-    #             no_device: "NonEmptyString",
+    #             no_device: "EmptyString",
     #           },
     #         ],
     #         tags: {
@@ -785,7 +793,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
-    #   images are configured, tested and assessed.
+    #   images are configured, tested, and assessed.
     #   @return [String]
     #
     # @!attribute [rw] distribution_configuration_arn
@@ -866,7 +874,7 @@ module Aws::Imagebuilder
     #         },
     #         key_pair: "NonEmptyString",
     #         terminate_instance_on_failure: false,
-    #         sns_topic_arn: "NonEmptyString",
+    #         sns_topic_arn: "SnsTopicArn",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -882,8 +890,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] instance_types
-    #   The instance types of the infrastructure configuration. You may
-    #   specify one or more instance types to use for this build, the
+    #   The instance types of the infrastructure configuration. You can
+    #   specify one or more instance types to use for this build. The
     #   service will pick one of these instance types based on availability.
     #   @return [Array<String>]
     #
@@ -898,8 +906,8 @@ module Aws::Imagebuilder
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID to place the instance used to customize your EC2 AMI
-    #   in.
+    #   The subnet ID in which to place the instance used to customize your
+    #   EC2 AMI.
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -908,14 +916,14 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] key_pair
     #   The key pair of the infrastructure configuration. This can be used
-    #   to log onto and debug the instance used to create your image.
+    #   to log on to and debug the instance used to create your image.
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
     #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you wish for Image Builder to retain
-    #   the instance used to configure your AMI in the event that the build
-    #   or test phase of your workflow failed.
+    #   configuration. Set to false if you want Image Builder to retain the
+    #   instance used to configure your AMI if the build or test phase of
+    #   your workflow fails.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
@@ -1184,13 +1192,15 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Defines the settings for a specific Region.
+    #
     # @note When making an API call, you may pass Distribution
     #   data as a hash:
     #
     #       {
     #         region: "NonEmptyString", # required
     #         ami_distribution_configuration: {
-    #           name: "NonEmptyString",
+    #           name: "AmiNameString",
     #           description: "NonEmptyString",
     #           ami_tags: {
     #             "TagKey" => "TagValue",
@@ -1204,12 +1214,17 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] region
+    #   The target Region.
     #   @return [String]
     #
     # @!attribute [rw] ami_distribution_configuration
+    #   The specific AMI settings (for example, launch permissions, AMI
+    #   tags).
     #   @return [Types::AmiDistributionConfiguration]
     #
     # @!attribute [rw] license_configuration_arns
+    #   The License Manager Configuration to associate with the AMI in the
+    #   specified Region.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Distribution AWS API Documentation
@@ -1269,7 +1284,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # A high level overview a distribution configuration.
+    # A high-level overview of a distribution configuration.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the distribution configuration.
@@ -1307,7 +1322,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # EBS specific block device mapping specifications.
+    # Amazon EBS-specific block device mapping specifications.
     #
     # @note When making an API call, you may pass EbsInstanceBlockDeviceSpecification
     #   data as a hash:
@@ -1363,6 +1378,11 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # A filter name and value pair that is used to return a more specific
+    # list of results from a list operation. Filters can be used to match a
+    # set of resources by specific criteria, such as tags, attributes, or
+    # IDs.
+    #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
@@ -1372,9 +1392,11 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Filter AWS API Documentation
@@ -1406,7 +1428,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] component_arn
     #   The Amazon Resource Name (ARN) of the component whose policy you
-    #   wish to retrieve.
+    #   want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponentPolicyRequest AWS API Documentation
@@ -1440,8 +1462,8 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] component_build_version_arn
-    #   The Amazon Resource Name (ARN) of the component that you wish to
-    #   retrieve.
+    #   The Amazon Resource Name (ARN) of the component that you want to
+    #   retrieve. Regex requires "/\\d+$" suffix.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetComponentRequest AWS API Documentation
@@ -1476,7 +1498,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
-    #   that you wish to retrieve.
+    #   that you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetDistributionConfigurationRequest AWS API Documentation
@@ -1510,7 +1532,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to retrieve.
     #   @return [String]
     #
@@ -1545,7 +1567,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_arn
-    #   The Amazon Resource Name (ARN) of the image whose policy you wish to
+    #   The Amazon Resource Name (ARN) of the image whose policy you want to
     #   retrieve.
     #   @return [String]
     #
@@ -1581,7 +1603,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe whose policy you
-    #   wish to retrieve.
+    #   want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetImageRecipePolicyRequest AWS API Documentation
@@ -1615,7 +1637,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that you wish to
+    #   The Amazon Resource Name (ARN) of the image recipe that you want to
     #   retrieve.
     #   @return [String]
     #
@@ -1650,7 +1672,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_build_version_arn
-    #   The Amazon Resource Name (ARN) of the image that you wish to
+    #   The Amazon Resource Name (ARN) of the image that you want to
     #   retrieve.
     #   @return [String]
     #
@@ -1688,7 +1710,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that you wish to retrieve.
+    #   that you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetInfrastructureConfigurationRequest AWS API Documentation
@@ -1716,7 +1738,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # You have specified an client token for an operation using parameter
+    # You have specified a client token for an operation using parameter
     # values that differ from a previous request that used the same client
     # token.
     #
@@ -1833,7 +1855,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] infrastructure_configuration_arn
-    #   The Amazon Resource Name (ARN) of the infrastruction configuration
+    #   The Amazon Resource Name (ARN) of the infrastructure configuration
     #   associated with this image pipeline.
     #   @return [String]
     #
@@ -2002,7 +2024,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Image state shows the images status and the reason for that status.
+    # Image state shows the image status and the reason for that status.
     #
     # @!attribute [rw] status
     #   The status of the image.
@@ -2088,7 +2110,7 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_minutes
-    #   The maximum time in minutes that tests are permitted to run for.
+    #   The maximum time in minutes that tests are permitted to run.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageTestsConfiguration AWS API Documentation
@@ -2102,7 +2124,7 @@ module Aws::Imagebuilder
     # An image semantic version.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the image semantic verion.
+    #   The Amazon Resource Name (ARN) of the image semantic version.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2162,9 +2184,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the component. This version to follow the
-    #   semantic version syntax. i.e. major.minor.patch. This could be
-    #   versioned like software 2.0.1 or date like 2019.12.01.
+    #   The semantic version of the component. This version follows the
+    #   semantic version syntax. For example, major.minor.patch. This could
+    #   be versioned like software (2.0.1) or like a date (2019.12.01).
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2174,8 +2196,8 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] change_description
     #   The change description of the component. Describes what change has
-    #   been made in this version. In other words what makes this version
-    #   different from other versions of this component.
+    #   been made in this version, or what makes this version different from
+    #   other versions of this component.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2184,7 +2206,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the resource that you wish to import as a component.
+    #   The format of the resource that you want to import as a component.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -2192,11 +2214,16 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   The data of the component.
+    #   The data of the component. Used to specify the data inline. Either
+    #   `data` or `uri` can be used to specify the data within the
+    #   component.
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component.
+    #   The uri of the component. Must be an S3 URL and the requester must
+    #   have permission to access the S3 bucket. If you use S3, you can
+    #   specify component content up to your service quota. Either `data` or
+    #   `uri` can be used to specify the data within the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -2256,48 +2283,48 @@ module Aws::Imagebuilder
     # Details of the infrastructure configuration.
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the infrastruction configuration.
+    #   The Amazon Resource Name (ARN) of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the infrastruction configuration.
+    #   The name of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the infrastruction configuration.
+    #   The description of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] instance_types
-    #   The instance types of the infrastruction configuration.
+    #   The instance types of the infrastructure configuration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_profile_name
-    #   The instance profile of the infrastruction configuration.
+    #   The instance profile of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The security group IDs of the infrastruction configuration.
+    #   The security group IDs of the infrastructure configuration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_id
-    #   The subnet ID of the infrastruction configuration.
+    #   The subnet ID of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] logging
-    #   The logging configuration of the infrastruction configuration.
+    #   The logging configuration of the infrastructure configuration.
     #   @return [Types::Logging]
     #
     # @!attribute [rw] key_pair
-    #   The EC2 key pair of the infrastruction configuration.
+    #   The EC2 key pair of the infrastructure configuration.
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
     #   The terminate instance on failure configuration of the
-    #   infrastruction configuration.
+    #   infrastructure configuration.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS Topic Amazon Resource Name (ARN) of the infrastruction
+    #   The SNS topic Amazon Resource Name (ARN) of the infrastructure
     #   configuration.
     #   @return [String]
     #
@@ -2310,7 +2337,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags of the infrastruction configuration.
+    #   The tags of the infrastructure configuration.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfiguration AWS API Documentation
@@ -2389,7 +2416,7 @@ module Aws::Imagebuilder
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #         },
     #         virtual_name: "NonEmptyString",
-    #         no_device: "NonEmptyString",
+    #         no_device: "EmptyString",
     #       }
     #
     # @!attribute [rw] device_name
@@ -2397,7 +2424,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] ebs
-    #   Use to manage EBS specific configuration for this mapping.
+    #   Use to manage Amazon EBS-specific configuration for this mapping.
     #   @return [Types::EbsInstanceBlockDeviceSpecification]
     #
     # @!attribute [rw] virtual_name
@@ -2494,6 +2521,15 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Describes the configuration for a launch permission. The launch
+    # permission modification request is sent to the [EC2
+    # ModifyImageAttribute][1] API on behalf of the user for each Region
+    # they have selected to distribute the AMI.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html
+    #
     # @note When making an API call, you may pass LaunchPermissionConfiguration
     #   data as a hash:
     #
@@ -2503,9 +2539,11 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] user_ids
+    #   The AWS account ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] user_groups
+    #   The name of the group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/LaunchPermissionConfiguration AWS API Documentation
@@ -2526,7 +2564,8 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] component_version_arn
-    #   The component version arn whose versions you wish to list.
+    #   The component version Amazon Resource Name (ARN) whose versions you
+    #   want to list.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2556,10 +2595,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentBuildVersionsResponse AWS API Documentation
@@ -2587,14 +2626,15 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] owner
-    #   The owner defines whose components you wish to list. By default this
-    #   request will only show components owned by your account. You may use
-    #   this field to specify if you wish to view components owned by
-    #   yourself, Amazon, or those components that have been shared with you
-    #   by other customers.
+    #   The owner defines which components you want to list. By default,
+    #   this request will only show components owned by your account. You
+    #   can use this field to specify if you want to view components owned
+    #   by yourself, by Amazon, or those components that have been shared
+    #   with you by other customers.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2625,10 +2665,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ComponentVersion>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentsResponse AWS API Documentation
@@ -2655,6 +2695,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2684,10 +2725,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::DistributionConfigurationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListDistributionConfigurationsResponse AWS API Documentation
@@ -2716,10 +2757,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_version_arn
     #   The Amazon Resource Name (ARN) of the image whose build versions you
-    #   wish to retrieve.
+    #   want to retrieve.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2750,10 +2792,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersionsResponse AWS API Documentation
@@ -2769,7 +2811,7 @@ module Aws::Imagebuilder
     #   data as a hash:
     #
     #       {
-    #         image_pipeline_arn: "ImagePipelineArn",
+    #         image_pipeline_arn: "ImagePipelineArn", # required
     #         filters: [
     #           {
     #             name: "FilterName",
@@ -2782,10 +2824,11 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline whose images
-    #   you wish to view.
+    #   you want to view.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2816,10 +2859,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImagesResponse AWS API Documentation
@@ -2846,6 +2889,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2875,10 +2919,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImagePipeline>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelinesResponse AWS API Documentation
@@ -2906,14 +2950,15 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] owner
-    #   The owner defines whose image recipes you wish to list. By default
+    #   The owner defines which image recipes you want to list. By default,
     #   this request will only show image recipes owned by your account. You
-    #   may use this field to specify if you wish to view image recipes
-    #   owned by yourself, Amazon, or those image recipes that have been
+    #   can use this field to specify if you want to view image recipes
+    #   owned by yourself, by Amazon, or those image recipes that have been
     #   shared with you by other customers.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -2944,10 +2989,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageRecipeSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageRecipesResponse AWS API Documentation
@@ -2975,14 +3020,15 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] owner
-    #   The owner defines whose images you wish to list. By default this
-    #   request will only show images owned by your account. You may use
-    #   this field to specify if you wish to view images owned by yourself,
-    #   Amazon, or those images that have been shared with you by other
+    #   The owner defines which images you want to list. By default, this
+    #   request will only show images owned by your account. You can use
+    #   this field to specify if you want to view images owned by yourself,
+    #   by Amazon, or those images that have been shared with you by other
     #   customers.
     #   @return [String]
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -3013,10 +3059,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageVersion>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagesResponse AWS API Documentation
@@ -3043,6 +3089,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] filters
+    #   The filters.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -3072,10 +3119,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::InfrastructureConfigurationSummary>]
     #
     # @!attribute [rw] next_token
-    #   The next token used for paginated responses. When this is not empty
-    #   then there are additional elements that the service that not include
-    #   in this request. Use this token with the next request to retrieve
-    #   additional object.
+    #   The next token used for paginated responses. When this is not empty,
+    #   there are additional elements that the service has not included in
+    #   this request. Use this token with the next request to retrieve
+    #   additional objects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListInfrastructureConfigurationsResponse AWS API Documentation
@@ -3095,7 +3142,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource whose tags you wish
+    #   The Amazon Resource Name (ARN) of the resource whose tags you want
     #   to retrieve.
     #   @return [String]
     #
@@ -3117,8 +3164,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # Logging configuration defines where Image Builder uploads your logs
-    # to.
+    # Logging configuration defines where Image Builder uploads your logs.
     #
     # @note When making an API call, you may pass Logging
     #   data as a hash:
@@ -3131,7 +3177,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] s3_logs
-    #   The S3 logging configuration.
+    #   The Amazon S3 logging configuration.
     #   @return [Types::S3Logs]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Logging AWS API Documentation
@@ -3293,8 +3339,7 @@ module Aws::Imagebuilder
     end
 
     # You have attempted to mutate or delete a resource with a dependency
-    # that is prohibitting this action. See the error message for more
-    # details.
+    # that prohibits this action. See the error message for more details.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3307,7 +3352,7 @@ module Aws::Imagebuilder
     end
 
     # The resource that you are trying to operate on is currently in use.
-    # Review the message details, and retry later.
+    # Review the message details and retry later.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -3332,7 +3377,7 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
-    # S3 Logging configuration.
+    # Amazon S3 logging configuration.
     #
     # @note When making an API call, you may pass S3Logs
     #   data as a hash:
@@ -3343,11 +3388,11 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] s3_bucket_name
-    #   The S3 bucket in which to store the logs.
+    #   The Amazon S3 bucket in which to store the logs.
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
-    #   The S3 path in which to store the logs.
+    #   The Amazon S3 path in which to store the logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/S3Logs AWS API Documentation
@@ -3370,13 +3415,17 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] schedule_expression
-    #   The expression determines how often a pipeline starts the creation
-    #   of new images.
+    #   The expression determines how often EC2 Image Builder evaluates your
+    #   `pipelineExecutionStartCondition`.
     #   @return [String]
     #
     # @!attribute [rw] pipeline_execution_start_condition
     #   The condition configures when the pipeline should trigger a new
-    #   image build.
+    #   image build. When the `pipelineExecutionStartCondition` is set to
+    #   `EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE`, EC2 Image
+    #   Builder will build a new image only when there are known changes
+    #   pending. When it is set to `EXPRESSION_MATCH_ONLY`, it will build a
+    #   new image every time the CRON expression matches the current time.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Schedule AWS API Documentation
@@ -3421,7 +3470,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to manually invoke.
     #   @return [String]
     #
@@ -3473,7 +3522,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that you wish to tag.
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3501,7 +3550,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that you wish to
+    #   The Amazon Resource Name (ARN) of the resource that you want to
     #   untag.
     #   @return [String]
     #
@@ -3527,11 +3576,11 @@ module Aws::Imagebuilder
     #       {
     #         distribution_configuration_arn: "DistributionConfigurationArn", # required
     #         description: "NonEmptyString",
-    #         distributions: [
+    #         distributions: [ # required
     #           {
     #             region: "NonEmptyString", # required
     #             ami_distribution_configuration: {
-    #               name: "NonEmptyString",
+    #               name: "AmiNameString",
     #               description: "NonEmptyString",
     #               ami_tags: {
     #                 "TagKey" => "TagValue",
@@ -3549,7 +3598,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
-    #   that you wish to update.
+    #   that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3605,8 +3654,8 @@ module Aws::Imagebuilder
     #       {
     #         image_pipeline_arn: "ImagePipelineArn", # required
     #         description: "NonEmptyString",
-    #         image_recipe_arn: "ImageRecipeArn",
-    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn",
+    #         image_recipe_arn: "ImageRecipeArn", # required
+    #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         distribution_configuration_arn: "DistributionConfigurationArn",
     #         image_tests_configuration: {
     #           image_tests_enabled: false,
@@ -3621,7 +3670,7 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_pipeline_arn
-    #   The Amazon Resource Name (ARN) of the image pipeline that you wish
+    #   The Amazon Resource Name (ARN) of the image pipeline that you want
     #   to update.
     #   @return [String]
     #
@@ -3708,7 +3757,7 @@ module Aws::Imagebuilder
     #         infrastructure_configuration_arn: "InfrastructureConfigurationArn", # required
     #         description: "NonEmptyString",
     #         instance_types: ["InstanceType"],
-    #         instance_profile_name: "NonEmptyString",
+    #         instance_profile_name: "NonEmptyString", # required
     #         security_group_ids: ["NonEmptyString"],
     #         subnet_id: "NonEmptyString",
     #         logging: {
@@ -3719,13 +3768,13 @@ module Aws::Imagebuilder
     #         },
     #         key_pair: "NonEmptyString",
     #         terminate_instance_on_failure: false,
-    #         sns_topic_arn: "NonEmptyString",
+    #         sns_topic_arn: "SnsTopicArn",
     #         client_token: "ClientToken", # required
     #       }
     #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that you wish to update.
+    #   that you want to update.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3733,8 +3782,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] instance_types
-    #   The instance types of the infrastructure configuration. You may
-    #   specify one or more instance types to use for this build, the
+    #   The instance types of the infrastructure configuration. You can
+    #   specify one or more instance types to use for this build. The
     #   service will pick one of these instance types based on availability.
     #   @return [Array<String>]
     #
@@ -3759,14 +3808,14 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] key_pair
     #   The key pair of the infrastructure configuration. This can be used
-    #   to log onto and debug the instance used to create your image.
+    #   to log on to and debug the instance used to create your image.
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
     #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you wish for Image Builder to retain
-    #   the instance used to configure your AMI in the event that the build
-    #   or test phase of your workflow failed.
+    #   configuration. Set to false if you want Image Builder to retain the
+    #   instance used to configure your AMI if the build or test phase of
+    #   your workflow fails.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn

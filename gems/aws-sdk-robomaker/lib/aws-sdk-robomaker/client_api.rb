@@ -16,10 +16,14 @@ module Aws::RoboMaker
     Arns = Shapes::ListShape.new(name: 'Arns')
     BatchDescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobRequest')
     BatchDescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'BatchDescribeSimulationJobResponse')
+    BatchPolicy = Shapes::StructureShape.new(name: 'BatchPolicy')
+    BatchTimeoutInSeconds = Shapes::IntegerShape.new(name: 'BatchTimeoutInSeconds')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     CancelDeploymentJobRequest = Shapes::StructureShape.new(name: 'CancelDeploymentJobRequest')
     CancelDeploymentJobResponse = Shapes::StructureShape.new(name: 'CancelDeploymentJobResponse')
+    CancelSimulationJobBatchRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobBatchRequest')
+    CancelSimulationJobBatchResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobBatchResponse')
     CancelSimulationJobRequest = Shapes::StructureShape.new(name: 'CancelSimulationJobRequest')
     CancelSimulationJobResponse = Shapes::StructureShape.new(name: 'CancelSimulationJobResponse')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
@@ -40,6 +44,7 @@ module Aws::RoboMaker
     CreateSimulationApplicationVersionRequest = Shapes::StructureShape.new(name: 'CreateSimulationApplicationVersionRequest')
     CreateSimulationApplicationVersionResponse = Shapes::StructureShape.new(name: 'CreateSimulationApplicationVersionResponse')
     CreateSimulationJobRequest = Shapes::StructureShape.new(name: 'CreateSimulationJobRequest')
+    CreateSimulationJobRequests = Shapes::ListShape.new(name: 'CreateSimulationJobRequests')
     CreateSimulationJobResponse = Shapes::StructureShape.new(name: 'CreateSimulationJobResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
@@ -77,11 +82,16 @@ module Aws::RoboMaker
     DescribeRobotResponse = Shapes::StructureShape.new(name: 'DescribeRobotResponse')
     DescribeSimulationApplicationRequest = Shapes::StructureShape.new(name: 'DescribeSimulationApplicationRequest')
     DescribeSimulationApplicationResponse = Shapes::StructureShape.new(name: 'DescribeSimulationApplicationResponse')
+    DescribeSimulationJobBatchRequest = Shapes::StructureShape.new(name: 'DescribeSimulationJobBatchRequest')
+    DescribeSimulationJobBatchResponse = Shapes::StructureShape.new(name: 'DescribeSimulationJobBatchResponse')
     DescribeSimulationJobRequest = Shapes::StructureShape.new(name: 'DescribeSimulationJobRequest')
     DescribeSimulationJobResponse = Shapes::StructureShape.new(name: 'DescribeSimulationJobResponse')
     EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
     EnvironmentVariableMap = Shapes::MapShape.new(name: 'EnvironmentVariableMap')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    FailedAt = Shapes::TimestampShape.new(name: 'FailedAt')
+    FailedCreateSimulationJobRequest = Shapes::StructureShape.new(name: 'FailedCreateSimulationJobRequest')
+    FailedCreateSimulationJobRequests = Shapes::ListShape.new(name: 'FailedCreateSimulationJobRequests')
     FailureBehavior = Shapes::StringShape.new(name: 'FailureBehavior')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
@@ -93,6 +103,7 @@ module Aws::RoboMaker
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     Id = Shapes::StringShape.new(name: 'Id')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     JobDuration = Shapes::IntegerShape.new(name: 'JobDuration')
@@ -110,11 +121,14 @@ module Aws::RoboMaker
     ListRobotsResponse = Shapes::StructureShape.new(name: 'ListRobotsResponse')
     ListSimulationApplicationsRequest = Shapes::StructureShape.new(name: 'ListSimulationApplicationsRequest')
     ListSimulationApplicationsResponse = Shapes::StructureShape.new(name: 'ListSimulationApplicationsResponse')
+    ListSimulationJobBatchesRequest = Shapes::StructureShape.new(name: 'ListSimulationJobBatchesRequest')
+    ListSimulationJobBatchesResponse = Shapes::StructureShape.new(name: 'ListSimulationJobBatchesResponse')
     ListSimulationJobsRequest = Shapes::StructureShape.new(name: 'ListSimulationJobsRequest')
     ListSimulationJobsResponse = Shapes::StructureShape.new(name: 'ListSimulationJobsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
+    MaxConcurrency = Shapes::IntegerShape.new(name: 'MaxConcurrency')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Name = Shapes::StringShape.new(name: 'Name')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
@@ -169,7 +183,12 @@ module Aws::RoboMaker
     SimulationApplicationSummaries = Shapes::ListShape.new(name: 'SimulationApplicationSummaries')
     SimulationApplicationSummary = Shapes::StructureShape.new(name: 'SimulationApplicationSummary')
     SimulationJob = Shapes::StructureShape.new(name: 'SimulationJob')
+    SimulationJobBatchErrorCode = Shapes::StringShape.new(name: 'SimulationJobBatchErrorCode')
+    SimulationJobBatchStatus = Shapes::StringShape.new(name: 'SimulationJobBatchStatus')
+    SimulationJobBatchSummaries = Shapes::ListShape.new(name: 'SimulationJobBatchSummaries')
+    SimulationJobBatchSummary = Shapes::StructureShape.new(name: 'SimulationJobBatchSummary')
     SimulationJobErrorCode = Shapes::StringShape.new(name: 'SimulationJobErrorCode')
+    SimulationJobRequest = Shapes::StructureShape.new(name: 'SimulationJobRequest')
     SimulationJobStatus = Shapes::StringShape.new(name: 'SimulationJobStatus')
     SimulationJobSummaries = Shapes::ListShape.new(name: 'SimulationJobSummaries')
     SimulationJobSummary = Shapes::StructureShape.new(name: 'SimulationJobSummary')
@@ -182,6 +201,8 @@ module Aws::RoboMaker
     SourceConfig = Shapes::StructureShape.new(name: 'SourceConfig')
     SourceConfigs = Shapes::ListShape.new(name: 'SourceConfigs')
     Sources = Shapes::ListShape.new(name: 'Sources')
+    StartSimulationJobBatchRequest = Shapes::StructureShape.new(name: 'StartSimulationJobBatchRequest')
+    StartSimulationJobBatchResponse = Shapes::StructureShape.new(name: 'StartSimulationJobBatchResponse')
     Subnets = Shapes::ListShape.new(name: 'Subnets')
     SyncDeploymentJobRequest = Shapes::StructureShape.new(name: 'SyncDeploymentJobRequest')
     SyncDeploymentJobResponse = Shapes::StructureShape.new(name: 'SyncDeploymentJobResponse')
@@ -213,10 +234,19 @@ module Aws::RoboMaker
     BatchDescribeSimulationJobResponse.add_member(:unprocessed_jobs, Shapes::ShapeRef.new(shape: Arns, location_name: "unprocessedJobs"))
     BatchDescribeSimulationJobResponse.struct_class = Types::BatchDescribeSimulationJobResponse
 
+    BatchPolicy.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: BatchTimeoutInSeconds, location_name: "timeoutInSeconds"))
+    BatchPolicy.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "maxConcurrency"))
+    BatchPolicy.struct_class = Types::BatchPolicy
+
     CancelDeploymentJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
     CancelDeploymentJobRequest.struct_class = Types::CancelDeploymentJobRequest
 
     CancelDeploymentJobResponse.struct_class = Types::CancelDeploymentJobResponse
+
+    CancelSimulationJobBatchRequest.add_member(:batch, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "batch"))
+    CancelSimulationJobBatchRequest.struct_class = Types::CancelSimulationJobBatchRequest
+
+    CancelSimulationJobBatchResponse.struct_class = Types::CancelSimulationJobBatchResponse
 
     CancelSimulationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
     CancelSimulationJobRequest.struct_class = Types::CancelSimulationJobRequest
@@ -344,6 +374,8 @@ module Aws::RoboMaker
     CreateSimulationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSimulationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfig, location_name: "vpcConfig"))
     CreateSimulationJobRequest.struct_class = Types::CreateSimulationJobRequest
+
+    CreateSimulationJobRequests.member = Shapes::ShapeRef.new(shape: SimulationJobRequest)
 
     CreateSimulationJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
     CreateSimulationJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobStatus, location_name: "status"))
@@ -515,6 +547,23 @@ module Aws::RoboMaker
     DescribeSimulationApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     DescribeSimulationApplicationResponse.struct_class = Types::DescribeSimulationApplicationResponse
 
+    DescribeSimulationJobBatchRequest.add_member(:batch, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "batch"))
+    DescribeSimulationJobBatchRequest.struct_class = Types::DescribeSimulationJobBatchRequest
+
+    DescribeSimulationJobBatchResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    DescribeSimulationJobBatchResponse.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobBatchStatus, location_name: "status"))
+    DescribeSimulationJobBatchResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    DescribeSimulationJobBatchResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    DescribeSimulationJobBatchResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    DescribeSimulationJobBatchResponse.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
+    DescribeSimulationJobBatchResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobBatchErrorCode, location_name: "failureCode"))
+    DescribeSimulationJobBatchResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
+    DescribeSimulationJobBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedCreateSimulationJobRequests, location_name: "failedRequests"))
+    DescribeSimulationJobBatchResponse.add_member(:pending_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, location_name: "pendingRequests"))
+    DescribeSimulationJobBatchResponse.add_member(:created_requests, Shapes::ShapeRef.new(shape: SimulationJobSummaries, location_name: "createdRequests"))
+    DescribeSimulationJobBatchResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    DescribeSimulationJobBatchResponse.struct_class = Types::DescribeSimulationJobBatchResponse
+
     DescribeSimulationJobRequest.add_member(:job, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "job"))
     DescribeSimulationJobRequest.struct_class = Types::DescribeSimulationJobRequest
 
@@ -542,6 +591,14 @@ module Aws::RoboMaker
 
     EnvironmentVariableMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
     EnvironmentVariableMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
+
+    FailedCreateSimulationJobRequest.add_member(:request, Shapes::ShapeRef.new(shape: SimulationJobRequest, location_name: "request"))
+    FailedCreateSimulationJobRequest.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
+    FailedCreateSimulationJobRequest.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobErrorCode, location_name: "failureCode"))
+    FailedCreateSimulationJobRequest.add_member(:failed_at, Shapes::ShapeRef.new(shape: FailedAt, location_name: "failedAt"))
+    FailedCreateSimulationJobRequest.struct_class = Types::FailedCreateSimulationJobRequest
+
+    FailedCreateSimulationJobRequests.member = Shapes::ShapeRef.new(shape: FailedCreateSimulationJobRequest)
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
@@ -625,6 +682,15 @@ module Aws::RoboMaker
     ListSimulationApplicationsResponse.add_member(:simulation_application_summaries, Shapes::ShapeRef.new(shape: SimulationApplicationSummaries, location_name: "simulationApplicationSummaries"))
     ListSimulationApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListSimulationApplicationsResponse.struct_class = Types::ListSimulationApplicationsResponse
+
+    ListSimulationJobBatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSimulationJobBatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListSimulationJobBatchesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
+    ListSimulationJobBatchesRequest.struct_class = Types::ListSimulationJobBatchesRequest
+
+    ListSimulationJobBatchesResponse.add_member(:simulation_job_batch_summaries, Shapes::ShapeRef.new(shape: SimulationJobBatchSummaries, location_name: "simulationJobBatchSummaries"))
+    ListSimulationJobBatchesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListSimulationJobBatchesResponse.struct_class = Types::ListSimulationJobBatchesResponse
 
     ListSimulationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListSimulationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -797,6 +863,30 @@ module Aws::RoboMaker
     SimulationJob.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     SimulationJob.struct_class = Types::SimulationJob
 
+    SimulationJobBatchSummaries.member = Shapes::ShapeRef.new(shape: SimulationJobBatchSummary)
+
+    SimulationJobBatchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    SimulationJobBatchSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: LastUpdatedAt, location_name: "lastUpdatedAt"))
+    SimulationJobBatchSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    SimulationJobBatchSummary.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobBatchStatus, location_name: "status"))
+    SimulationJobBatchSummary.add_member(:failed_request_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failedRequestCount"))
+    SimulationJobBatchSummary.add_member(:pending_request_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingRequestCount"))
+    SimulationJobBatchSummary.add_member(:created_request_count, Shapes::ShapeRef.new(shape: Integer, location_name: "createdRequestCount"))
+    SimulationJobBatchSummary.struct_class = Types::SimulationJobBatchSummary
+
+    SimulationJobRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    SimulationJobRequest.add_member(:logging_config, Shapes::ShapeRef.new(shape: LoggingConfig, location_name: "loggingConfig"))
+    SimulationJobRequest.add_member(:max_job_duration_in_seconds, Shapes::ShapeRef.new(shape: JobDuration, required: true, location_name: "maxJobDurationInSeconds"))
+    SimulationJobRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "iamRole"))
+    SimulationJobRequest.add_member(:failure_behavior, Shapes::ShapeRef.new(shape: FailureBehavior, location_name: "failureBehavior"))
+    SimulationJobRequest.add_member(:use_default_applications, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "useDefaultApplications"))
+    SimulationJobRequest.add_member(:robot_applications, Shapes::ShapeRef.new(shape: RobotApplicationConfigs, location_name: "robotApplications"))
+    SimulationJobRequest.add_member(:simulation_applications, Shapes::ShapeRef.new(shape: SimulationApplicationConfigs, location_name: "simulationApplications"))
+    SimulationJobRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSourceConfigs, location_name: "dataSources"))
+    SimulationJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VPCConfig, location_name: "vpcConfig"))
+    SimulationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    SimulationJobRequest.struct_class = Types::SimulationJobRequest
+
     SimulationJobSummaries.member = Shapes::ShapeRef.new(shape: SimulationJobSummary)
 
     SimulationJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
@@ -828,6 +918,25 @@ module Aws::RoboMaker
     SourceConfigs.member = Shapes::ShapeRef.new(shape: SourceConfig)
 
     Sources.member = Shapes::ShapeRef.new(shape: Source)
+
+    StartSimulationJobBatchRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    StartSimulationJobBatchRequest.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
+    StartSimulationJobBatchRequest.add_member(:create_simulation_job_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, required: true, location_name: "createSimulationJobRequests"))
+    StartSimulationJobBatchRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartSimulationJobBatchRequest.struct_class = Types::StartSimulationJobBatchRequest
+
+    StartSimulationJobBatchResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "arn"))
+    StartSimulationJobBatchResponse.add_member(:status, Shapes::ShapeRef.new(shape: SimulationJobBatchStatus, location_name: "status"))
+    StartSimulationJobBatchResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StartSimulationJobBatchResponse.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    StartSimulationJobBatchResponse.add_member(:batch_policy, Shapes::ShapeRef.new(shape: BatchPolicy, location_name: "batchPolicy"))
+    StartSimulationJobBatchResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: SimulationJobBatchErrorCode, location_name: "failureCode"))
+    StartSimulationJobBatchResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: GenericString, location_name: "failureReason"))
+    StartSimulationJobBatchResponse.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedCreateSimulationJobRequests, location_name: "failedRequests"))
+    StartSimulationJobBatchResponse.add_member(:pending_requests, Shapes::ShapeRef.new(shape: CreateSimulationJobRequests, location_name: "pendingRequests"))
+    StartSimulationJobBatchResponse.add_member(:created_requests, Shapes::ShapeRef.new(shape: SimulationJobSummaries, location_name: "createdRequests"))
+    StartSimulationJobBatchResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartSimulationJobBatchResponse.struct_class = Types::StartSimulationJobBatchResponse
 
     Subnets.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -959,6 +1068,18 @@ module Aws::RoboMaker
         o.http_request_uri = "/cancelSimulationJob"
         o.input = Shapes::ShapeRef.new(shape: CancelSimulationJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelSimulationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_simulation_job_batch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelSimulationJobBatch"
+        o.http_method = "POST"
+        o.http_request_uri = "/cancelSimulationJobBatch"
+        o.input = Shapes::ShapeRef.new(shape: CancelSimulationJobBatchRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelSimulationJobBatchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -1202,6 +1323,17 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:describe_simulation_job_batch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSimulationJobBatch"
+        o.http_method = "POST"
+        o.http_request_uri = "/describeSimulationJobBatch"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSimulationJobBatchRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSimulationJobBatchResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:list_deployment_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDeploymentJobs"
         o.http_method = "POST"
@@ -1290,6 +1422,22 @@ module Aws::RoboMaker
         )
       end)
 
+      api.add_operation(:list_simulation_job_batches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSimulationJobBatches"
+        o.http_method = "POST"
+        o.http_request_uri = "/listSimulationJobBatches"
+        o.input = Shapes::ShapeRef.new(shape: ListSimulationJobBatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSimulationJobBatchesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_simulation_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSimulationJobs"
         o.http_method = "POST"
@@ -1342,6 +1490,19 @@ module Aws::RoboMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_simulation_job_batch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSimulationJobBatch"
+        o.http_method = "POST"
+        o.http_request_uri = "/startSimulationJobBatch"
+        o.input = Shapes::ShapeRef.new(shape: StartSimulationJobBatchRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSimulationJobBatchResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

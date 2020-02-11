@@ -152,6 +152,7 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest = Shapes::StructureShape.new(name: 'PutSlotTypeRequest')
     PutSlotTypeResponse = Shapes::StructureShape.new(name: 'PutSlotTypeResponse')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
+    RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourcePrefix = Shapes::StringShape.new(name: 'ResourcePrefix')
@@ -163,9 +164,12 @@ module Aws::LexModelBuildingService
     SlotConstraint = Shapes::StringShape.new(name: 'SlotConstraint')
     SlotList = Shapes::ListShape.new(name: 'SlotList')
     SlotName = Shapes::StringShape.new(name: 'SlotName')
+    SlotTypeConfiguration = Shapes::StructureShape.new(name: 'SlotTypeConfiguration')
+    SlotTypeConfigurations = Shapes::ListShape.new(name: 'SlotTypeConfigurations')
     SlotTypeMetadata = Shapes::StructureShape.new(name: 'SlotTypeMetadata')
     SlotTypeMetadataList = Shapes::ListShape.new(name: 'SlotTypeMetadataList')
     SlotTypeName = Shapes::StringShape.new(name: 'SlotTypeName')
+    SlotTypeRegexConfiguration = Shapes::StructureShape.new(name: 'SlotTypeRegexConfiguration')
     SlotUtteranceList = Shapes::ListShape.new(name: 'SlotUtteranceList')
     SlotValueSelectionStrategy = Shapes::StringShape.new(name: 'SlotValueSelectionStrategy')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
@@ -315,6 +319,8 @@ module Aws::LexModelBuildingService
     CreateSlotTypeVersionResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     CreateSlotTypeVersionResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     CreateSlotTypeVersionResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    CreateSlotTypeVersionResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    CreateSlotTypeVersionResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     CreateSlotTypeVersionResponse.struct_class = Types::CreateSlotTypeVersionResponse
 
     DeleteBotAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: AliasName, required: true, location: "uri", location_name: "name"))
@@ -562,6 +568,8 @@ module Aws::LexModelBuildingService
     GetSlotTypeResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     GetSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     GetSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    GetSlotTypeResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    GetSlotTypeResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     GetSlotTypeResponse.struct_class = Types::GetSlotTypeResponse
 
     GetSlotTypeVersionsRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -747,6 +755,8 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeRequest.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutSlotTypeRequest.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeRequest.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeRequest.struct_class = Types::PutSlotTypeRequest
 
     PutSlotTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
@@ -758,6 +768,8 @@ module Aws::LexModelBuildingService
     PutSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
     PutSlotTypeResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
+    PutSlotTypeResponse.add_member(:parent_slot_type_signature, Shapes::ShapeRef.new(shape: CustomOrBuiltinSlotTypeName, location_name: "parentSlotTypeSignature"))
+    PutSlotTypeResponse.add_member(:slot_type_configurations, Shapes::ShapeRef.new(shape: SlotTypeConfigurations, location_name: "slotTypeConfigurations"))
     PutSlotTypeResponse.struct_class = Types::PutSlotTypeResponse
 
     ResourceInUseException.add_member(:reference_type, Shapes::ShapeRef.new(shape: ReferenceType, location_name: "referenceType"))
@@ -782,6 +794,11 @@ module Aws::LexModelBuildingService
 
     SlotList.member = Shapes::ShapeRef.new(shape: Slot)
 
+    SlotTypeConfiguration.add_member(:regex_configuration, Shapes::ShapeRef.new(shape: SlotTypeRegexConfiguration, location_name: "regexConfiguration"))
+    SlotTypeConfiguration.struct_class = Types::SlotTypeConfiguration
+
+    SlotTypeConfigurations.member = Shapes::ShapeRef.new(shape: SlotTypeConfiguration)
+
     SlotTypeMetadata.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
     SlotTypeMetadata.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     SlotTypeMetadata.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
@@ -790,6 +807,9 @@ module Aws::LexModelBuildingService
     SlotTypeMetadata.struct_class = Types::SlotTypeMetadata
 
     SlotTypeMetadataList.member = Shapes::ShapeRef.new(shape: SlotTypeMetadata)
+
+    SlotTypeRegexConfiguration.add_member(:pattern, Shapes::ShapeRef.new(shape: RegexPattern, required: true, location_name: "pattern"))
+    SlotTypeRegexConfiguration.struct_class = Types::SlotTypeRegexConfiguration
 
     SlotUtteranceList.member = Shapes::ShapeRef.new(shape: Utterance)
 

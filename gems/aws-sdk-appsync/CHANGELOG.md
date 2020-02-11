@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-02-06)
+------------------
+
+* Feature - AWS AppSync now supports X-Ray
+
 1.22.0 (2019-11-21)
 ------------------
 

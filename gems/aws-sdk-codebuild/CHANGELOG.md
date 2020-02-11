@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-02-06)
+------------------
+
+* Feature - AWS CodeBuild adds support for Amazon Elastic File Systems
+
 1.47.0 (2020-01-07)
 ------------------
 

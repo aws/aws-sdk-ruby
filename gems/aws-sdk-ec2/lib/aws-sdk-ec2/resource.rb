@@ -990,7 +990,8 @@ module Aws::EC2
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost.
     # @option options [Integer] :size
-    #   The size of the volume, in GiBs.
+    #   The size of the volume, in GiBs. You must specify either a snapshot ID
+    #   or a volume size.
     #
     #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
     #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
@@ -999,16 +1000,9 @@ module Aws::EC2
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
-    #
-    #   <note markdown="1"> At least one of Size or SnapshotId is required.
-    #
-    #    </note>
     # @option options [String] :snapshot_id
-    #   The snapshot from which to create the volume.
-    #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
-    #
-    #    </note>
+    #   The snapshot from which to create the volume. You must specify either
+    #   a snapshot ID or a volume size.
     # @option options [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
@@ -2938,6 +2932,10 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `fast-restored` - Indicates whether the volume was created from a
+    #     snapshot that is enabled for fast snapshot restore (`true` \|
+    #     `false`).
     #
     #   * `size` - The size of the volume, in GiB.
     #

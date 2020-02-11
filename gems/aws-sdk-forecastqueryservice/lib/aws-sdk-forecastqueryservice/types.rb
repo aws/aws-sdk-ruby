@@ -32,10 +32,8 @@ module Aws::ForecastQueryService
     # @!attribute [rw] predictions
     #   The forecast.
     #
-    #   The *string* of the string to array map is one of the following
+    #   The *string* of the string-to-array map is one of the following
     #   values:
-    #
-    #   * mean
     #
     #   * p10
     #
@@ -51,7 +49,7 @@ module Aws::ForecastQueryService
       include Aws::Structure
     end
 
-    # The value that you provided was invalid or too long.
+    # The value is invalid or is too long.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -106,37 +104,29 @@ module Aws::ForecastQueryService
     #
     # @!attribute [rw] start_date
     #   The start date for the forecast. Specify the date using this format:
-    #   yyyy-MM-dd'T'HH:mm:ss'Z' (ISO 8601 format) For example,
-    #   "1970-01-01T00:00:00Z."
+    #   yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example,
+    #   2015-01-01T08:00:00.
     #   @return [String]
     #
     # @!attribute [rw] end_date
     #   The end date for the forecast. Specify the date using this format:
-    #   yyyy-MM-dd'T'HH:mm:ss'Z' (ISO 8601 format). For example,
-    #   "1970-01-01T00:00:00Z."
+    #   yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example,
+    #   2015-01-01T20:00:00.
     #   @return [String]
     #
     # @!attribute [rw] filters
     #   The filtering criteria to apply when retrieving the forecast. For
-    #   example:
+    #   example, to get the forecast for `client_21` in the electricity
+    #   usage dataset, specify the following:
     #
-    #   * To get a forecast for a specific item specify the following:
+    #   `\{"item_id" : "client_21"\}`
     #
-    #     `\{"item_id" : "client_1"\}`
-    #   ^
+    #   To get the full forecast, use the [CreateForecastExportJob][1]
+    #   operation.
     #
-    #   * To get a forecast for a specific item sold in a specific location,
-    #     specify the following:
     #
-    #     `\{"item_id" : "client_1", "location" : "ny"\}`
-    #   ^
     #
-    #   * To get a forecast for all blue items sold in a specific location,
-    #     specify the following:
-    #
-    #     `\{ "location" : "ny", "color":"blue"\}`
-    #
-    #   To get the full forecast, use the operation.
+    #   [1]: https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token

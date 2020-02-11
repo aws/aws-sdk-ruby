@@ -583,6 +583,10 @@ module Aws::AppSync
     #   A list of additional authentication providers for the `GraphqlApi`
     #   API.
     #
+    # @option params [Boolean] :xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -628,6 +632,7 @@ module Aws::AppSync
     #         },
     #       },
     #     ],
+    #     xray_enabled: false,
     #   })
     #
     # @example Response structure
@@ -660,6 +665,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1195,6 +1201,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -1578,6 +1585,7 @@ module Aws::AppSync
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_apis[0].xray_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -2194,6 +2202,10 @@ module Aws::AppSync
     #   A list of additional authentication providers for the `GraphqlApi`
     #   API.
     #
+    # @option params [Boolean] :xray_enabled
+    #   A flag indicating whether to enable X-Ray tracing for the
+    #   `GraphqlApi`.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -2237,6 +2249,7 @@ module Aws::AppSync
     #         },
     #       },
     #     ],
+    #     xray_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2269,6 +2282,7 @@ module Aws::AppSync
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.aws_region #=> String
     #   resp.graphql_api.additional_authentication_providers[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.xray_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -2434,7 +2448,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

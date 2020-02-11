@@ -282,6 +282,7 @@ module Aws::AppSync
     CreateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     CreateGraphqlApiRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    CreateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
 
     CreateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))
@@ -472,6 +473,7 @@ module Aws::AppSync
     GraphqlApi.add_member(:uris, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "uris"))
     GraphqlApi.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GraphqlApi.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    GraphqlApi.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     GraphqlApi.struct_class = Types::GraphqlApi
 
     GraphqlApis.member = Shapes::ShapeRef.new(shape: GraphqlApi)
@@ -702,6 +704,7 @@ module Aws::AppSync
     UpdateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     UpdateGraphqlApiRequest.add_member(:open_id_connect_config, Shapes::ShapeRef.new(shape: OpenIDConnectConfig, location_name: "openIDConnectConfig"))
     UpdateGraphqlApiRequest.add_member(:additional_authentication_providers, Shapes::ShapeRef.new(shape: AdditionalAuthenticationProviders, location_name: "additionalAuthenticationProviders"))
+    UpdateGraphqlApiRequest.add_member(:xray_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "xrayEnabled"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
 
     UpdateGraphqlApiResponse.add_member(:graphql_api, Shapes::ShapeRef.new(shape: GraphqlApi, location_name: "graphqlApi"))

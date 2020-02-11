@@ -3234,6 +3234,7 @@ module Aws::EC2
     CreateVpcEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SecurityGroupId"))
     CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
+    CreateVpcEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcEndpointRequest.struct_class = Types::CreateVpcEndpointRequest
 
     CreateVpcEndpointResult.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "vpcEndpoint"))
@@ -3245,6 +3246,7 @@ module Aws::EC2
     CreateVpcEndpointServiceConfigurationRequest.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "PrivateDnsName"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "NetworkLoadBalancerArn"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateVpcEndpointServiceConfigurationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcEndpointServiceConfigurationRequest.struct_class = Types::CreateVpcEndpointServiceConfigurationRequest
 
     CreateVpcEndpointServiceConfigurationResult.add_member(:service_configuration, Shapes::ShapeRef.new(shape: ServiceConfiguration, location_name: "serviceConfiguration"))
@@ -5822,6 +5824,8 @@ module Aws::EC2
     Image.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
     Image.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "imageOwnerId"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformValues, location_name: "platform"))
+    Image.add_member(:platform_details, Shapes::ShapeRef.new(shape: String, location_name: "platformDetails"))
+    Image.add_member(:usage_operation, Shapes::ShapeRef.new(shape: String, location_name: "usageOperation"))
     Image.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
     Image.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "imageState"))
@@ -8580,10 +8584,11 @@ module Aws::EC2
     SpotFleetMonitoring.struct_class = Types::SpotFleetMonitoring
 
     SpotFleetRequestConfig.add_member(:activity_status, Shapes::ShapeRef.new(shape: ActivityStatus, location_name: "activityStatus"))
-    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
+    SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "createTime"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, location_name: "spotFleetRequestConfig"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotFleetRequestId"))
     SpotFleetRequestConfig.add_member(:spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, location_name: "spotFleetRequestState"))
+    SpotFleetRequestConfig.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     SpotFleetRequestConfig.struct_class = Types::SpotFleetRequestConfig
 
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
@@ -8608,6 +8613,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
     SpotFleetRequestConfigData.add_member(:load_balancers_config, Shapes::ShapeRef.new(shape: LoadBalancersConfig, location_name: "loadBalancersConfig"))
     SpotFleetRequestConfigData.add_member(:instance_pools_to_use_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instancePoolsToUseCount"))
+    SpotFleetRequestConfigData.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")

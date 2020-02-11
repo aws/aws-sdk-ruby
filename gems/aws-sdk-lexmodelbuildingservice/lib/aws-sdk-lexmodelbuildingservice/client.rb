@@ -514,6 +514,8 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateSlotTypeVersionResponse#version #version} => String
     #   * {Types::CreateSlotTypeVersionResponse#checksum #checksum} => String
     #   * {Types::CreateSlotTypeVersionResponse#value_selection_strategy #value_selection_strategy} => String
+    #   * {Types::CreateSlotTypeVersionResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::CreateSlotTypeVersionResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -535,6 +537,9 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion AWS API Documentation
     #
@@ -2069,6 +2074,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetSlotTypeResponse#version #version} => String
     #   * {Types::GetSlotTypeResponse#checksum #checksum} => String
     #   * {Types::GetSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
+    #   * {Types::GetSlotTypeResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::GetSlotTypeResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     #
     # @example Example: To get information about a slot type
@@ -2118,6 +2125,9 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType AWS API Documentation
     #
@@ -2593,7 +2603,7 @@ module Aws::LexModelBuildingService
     #       max_attempts: 1, 
     #       messages: [
     #         {
-    #           content: "I'm sorry, I didn't hear that. Can you repeate what you just said?", 
+    #           content: "I'm sorry, I didn't hear that. Can you repeat what you just said?", 
     #           content_type: "PlainText", 
     #         }, 
     #         {
@@ -3561,6 +3571,17 @@ module Aws::LexModelBuildingService
     #   This is the same as calling the `CreateSlotTypeVersion` operation. If
     #   you do not specify `createVersion`, the default is `false`.
     #
+    # @option params [String] :parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type. When you
+    #   define a parent slot type, the new slot type has all of the same
+    #   configuration as the parent.
+    #
+    #   Only `AMAZON.AlphaNumeric` is supported.
+    #
+    # @option params [Array<Types::SlotTypeConfiguration>] :slot_type_configurations
+    #   Configuration information that extends the parent built-in slot type.
+    #   The configuration is added to the settings for the parent slot type.
+    #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSlotTypeResponse#name #name} => String
@@ -3572,6 +3593,8 @@ module Aws::LexModelBuildingService
     #   * {Types::PutSlotTypeResponse#checksum #checksum} => String
     #   * {Types::PutSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
     #   * {Types::PutSlotTypeResponse#create_version #create_version} => Boolean
+    #   * {Types::PutSlotTypeResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::PutSlotTypeResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     #
     # @example Example: To Create a Slot Type
@@ -3623,6 +3646,14 @@ module Aws::LexModelBuildingService
     #     checksum: "String",
     #     value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
     #     create_version: false,
+    #     parent_slot_type_signature: "CustomOrBuiltinSlotTypeName",
+    #     slot_type_configurations: [
+    #       {
+    #         regex_configuration: {
+    #           pattern: "RegexPattern", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3639,6 +3670,9 @@ module Aws::LexModelBuildingService
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
     #   resp.create_version #=> Boolean
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType AWS API Documentation
     #
@@ -3725,7 +3759,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

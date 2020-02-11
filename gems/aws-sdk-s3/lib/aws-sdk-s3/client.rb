@@ -11713,7 +11713,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.60.1'
+      context[:gem_version] = '1.60.2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

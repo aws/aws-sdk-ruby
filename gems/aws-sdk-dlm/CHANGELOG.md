@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2020-02-05)
+------------------
+
+* Feature - Updated the maximum number of tags that can be added to a snapshot using DLM to 45.
+
 1.23.0 (2019-12-19)
 ------------------
 

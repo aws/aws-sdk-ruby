@@ -7688,7 +7688,11 @@
           "locationName":"SecurityGroupId"
         },
         "ClientToken":{"shape":"String"},
-        "PrivateDnsEnabled":{"shape":"Boolean"}
+        "PrivateDnsEnabled":{"shape":"Boolean"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
       }
     },
     "CreateVpcEndpointResult":{
@@ -7715,7 +7719,11 @@
           "shape":"ValueStringList",
           "locationName":"NetworkLoadBalancerArn"
         },
-        "ClientToken":{"shape":"String"}
+        "ClientToken":{"shape":"String"},
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
+        }
       }
     },
     "CreateVpcEndpointServiceConfigurationResult":{
@@ -15847,6 +15855,14 @@
         "Platform":{
           "shape":"PlatformValues",
           "locationName":"platform"
+        },
+        "PlatformDetails":{
+          "shape":"String",
+          "locationName":"platformDetails"
+        },
+        "UsageOperation":{
+          "shape":"String",
+          "locationName":"usageOperation"
         },
         "ProductCodes":{
           "shape":"ProductCodeList",
@@ -25339,7 +25355,7 @@
           "locationName":"activityStatus"
         },
         "CreateTime":{
-          "shape":"DateTime",
+          "shape":"MillisecondDateTime",
           "locationName":"createTime"
         },
         "SpotFleetRequestConfig":{
@@ -25353,6 +25369,10 @@
         "SpotFleetRequestState":{
           "shape":"BatchState",
           "locationName":"spotFleetRequestState"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -25450,6 +25470,10 @@
         "InstancePoolsToUseCount":{
           "shape":"Integer",
           "locationName":"instancePoolsToUseCount"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
