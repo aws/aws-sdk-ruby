@@ -15,15 +15,12 @@ module Aws
 
     def self.config_reader(*attrs)
       attrs.each do |attr|
-        #iterate through each attr and implement getters and setters
-        puts "Define method: #{attr}"
         define_method(attr) { |opts = {}| get_config_value("#{attr}", opts) }
       end
     end
 
     config_reader :region, :sts_regional_endpoints, :s3_us_east_1_regional_endpoint,
-                  :s3_use_arn_region, :csm_enabled, :csm_client_id,
-                  :csm_port, :csm_host
+                  :s3_use_arn_region, :csm_enabled, :csm_client_id, :csm_port, :csm_host
 
     # Constructs a new SharedConfig provider object. This will load the shared
     # credentials file, and optionally the shared configuration file, as ini
@@ -155,6 +152,10 @@ module Aws
       get_config_value('endpoint_discovery_enabled', opts)
     end
 
+    def credentials_process(profile)
+      get_config_value('credential_process', profile: profile)
+    end
+
     private
 
     # Get a config value from from shared credential/config files.
@@ -162,10 +163,9 @@ module Aws
     # Return a value from credentials preferentially over config
     def get_config_value(key, opts)
       p = opts[:profile] || @profile_name
-      return unless @config_enabled
 
       value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
-      value ||= @parsed_config.fetch(p, {})[key] if @parsed_config
+      value ||= @parsed_config.fetch(p, {})[key] if @config_enabled && @parsed_config
       value
     end
 

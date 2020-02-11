@@ -77,11 +77,20 @@ module Aws
     end
 
     context 'region selection' do
-      it 'does not resolve region if :config_enabled not set' do
+      it 'does not resolve region from config if :config_enabled not set' do
         config = SharedConfig.new(
           config_path: mock_config_file,
           credentials_path: mock_credential_file,
-          profile_name: "credentials_first"
+          profile_name: "config_first"
+        )
+        expect(config.region).to be_nil
+      end
+
+      it 'does resolve region from credentials if :config_enabled not set' do
+        config = SharedConfig.new(
+            config_path: mock_config_file,
+            credentials_path: mock_credential_file,
+            profile_name: "config_first"
         )
         expect(config.region).to be_nil
       end
