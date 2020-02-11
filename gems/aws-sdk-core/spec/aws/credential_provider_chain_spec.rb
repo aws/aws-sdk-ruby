@@ -3,13 +3,12 @@ require 'securerandom'
 
 module Aws
   describe CredentialProviderChain do
-
     def random_creds
       { access_key_id: SecureRandom.hex,
-          secret_access_key: SecureRandom.hex, session_token: SecureRandom.hex }
+        secret_access_key: SecureRandom.hex, session_token: SecureRandom.hex }
     end
 
-    def with_shared_credentials(profile_name=SecureRandom.hex, credentials_file=nil)
+    def with_shared_credentials(profile_name = SecureRandom.hex, credentials_file = nil)
       path = File.join('HOME', '.aws', 'credentials')
       creds = random_creds
       credentials_file ||= <<-CREDS
@@ -49,18 +48,17 @@ CREDS
       expect(creds.session_token).to eq(expected_creds[:session_token])
     end
 
-    let(:env) {{}}
+    let(:env) { {} }
 
-    let(:config) {
+    let(:config) do
       double('config',
-        access_key_id: nil,
-        secret_access_key: nil,
-        session_token: nil,
-        profile: nil,
-        instance_profile_credentials_timeout: 1,
-        instance_profile_credentials_retries: 0,
-      )
-    }
+             access_key_id: nil,
+             secret_access_key: nil,
+             session_token: nil,
+             profile: nil,
+             instance_profile_credentials_timeout: 1,
+             instance_profile_credentials_retries: 0)
+    end
 
     let(:chain) { CredentialProviderChain.new(config) }
 
@@ -109,7 +107,6 @@ CREDS
       validate_credentials(expected_creds)
     end
 
-
     it 'hydrates credentials from the instance profile service' do
       mock_instance_creds = double('InstanceProfileCredentials')
       expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
@@ -131,11 +128,9 @@ CREDS
       it 'defaults to nil' do
         expect(credentials).to be(nil)
       end
-
     end
 
     describe 'with shared credentials' do
-
       it 'returns no credentials when the shared file is empty' do
         with_shared_credentials(credentials_file: ' ')
         expect(chain.resolve).to be(nil)
@@ -180,10 +175,6 @@ CREDS
         env_creds = with_env_credentials
         validate_credentials(expected_creds)
       end
-
     end
-
   end
-
-
 end

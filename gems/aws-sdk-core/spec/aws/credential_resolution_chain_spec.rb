@@ -53,11 +53,11 @@ module Aws
           'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
         assume_role_stub(
-            'arn:aws:iam:123456789012:role/foo',
-            'ACCESS_KEY_1', # from 'fooprofile'
-            'AR_AKID',
-            'AR_SECRET',
-            'AR_TOKEN'
+          'arn:aws:iam:123456789012:role/foo',
+          'ACCESS_KEY_1', # from 'fooprofile'
+          'AR_AKID',
+          'AR_SECRET',
+          'AR_TOKEN'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'assumerole_sc', region: 'us-east-1'
@@ -141,15 +141,15 @@ module Aws
 
       it 'prefers process credentials from direct profile over env' do
         stub_const(
-            'ENV',
-            'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
-            'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'creds_from_process', region: 'us-east-1'
+          profile: 'creds_from_process', region: 'us-east-1'
         )
         expect(
-            client.config.credentials.credentials.access_key_id
+          client.config.credentials.credentials.access_key_id
         ).to eq('AK_PROC1')
       end
 
@@ -397,9 +397,11 @@ module Aws
       end
 
       it 'prefers direct credentials above other sources' do
-        stub_const('ENV',
-                   'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
-                   'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB')
+        stub_const(
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+        )
         client = ApiHelper.sample_rest_xml::Client.new(
           access_key_id: 'ACCESS_DIRECT',
           secret_access_key: 'SECRET_DIRECT',
@@ -427,15 +429,15 @@ module Aws
 
       it 'prefers config from profile over ENV credentials when profile is set on client' do
         stub_const(
-            'ENV',
-            'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
-            'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
+          'ENV',
+          'AWS_ACCESS_KEY_ID' => 'AKID_ENV_STUB',
+          'AWS_SECRET_ACCESS_KEY' => 'SECRET_ENV_STUB'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
           profile: 'fooprofile', region: 'us-east-1'
         )
         expect(
-            client.config.credentials.credentials.access_key_id
+          client.config.credentials.credentials.access_key_id
         ).to eq('ACCESS_KEY_1')
       end
 

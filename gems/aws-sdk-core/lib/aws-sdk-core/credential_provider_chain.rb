@@ -1,7 +1,6 @@
 module Aws
   # @api private
   class CredentialProviderChain
-
     def initialize(config = nil)
       @config = config
     end
@@ -19,26 +18,26 @@ module Aws
 
     def providers
       [
-          [:static_credentials, {}],
-          [:static_profile_assume_role_web_identity_credentials, {}],
-          [:static_profile_assume_role_credentials, {}],
-          [:static_profile_credentials, {}],
-          [:static_profile_process_credentials, {}],
-          [:env_credentials, {}],
-          [:assume_role_web_identity_credentials, {}],
-          [:assume_role_credentials, {}],
-          [:shared_credentials, {}],
-          [:process_credentials, {}],
-          [:instance_profile_credentials, {}]
+        [:static_credentials, {}],
+        [:static_profile_assume_role_web_identity_credentials, {}],
+        [:static_profile_assume_role_credentials, {}],
+        [:static_profile_credentials, {}],
+        [:static_profile_process_credentials, {}],
+        [:env_credentials, {}],
+        [:assume_role_web_identity_credentials, {}],
+        [:assume_role_credentials, {}],
+        [:shared_credentials, {}],
+        [:process_credentials, {}],
+        [:instance_profile_credentials, {}]
       ]
     end
 
     def static_credentials(options)
       if options[:config]
         Credentials.new(
-            options[:config].access_key_id,
-            options[:config].secret_access_key,
-            options[:config].session_token
+          options[:config].access_key_id,
+          options[:config].secret_access_key,
+          options[:config].session_token
         )
       end
     end
@@ -65,25 +64,23 @@ module Aws
 
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        process_provider = Aws.shared_config.credentials_process( options[:config].profile)
+        process_provider = Aws.shared_config.credentials_process(options[:config].profile)
         ProcessCredentials.new(process_provider) if process_provider
       end
     rescue Errors::NoSuchProfileError
       nil
     end
 
-    def env_credentials(options)
-      key =    %w(AWS_ACCESS_KEY_ID     AMAZON_ACCESS_KEY_ID     AWS_ACCESS_KEY)
+    def env_credentials(_options)
+      key =    %w(AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY)
       secret = %w(AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY)
-      token =  %w(AWS_SESSION_TOKEN     AMAZON_SESSION_TOKEN)
+      token =  %w(AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN)
       Credentials.new(envar(key), envar(secret), envar(token))
     end
 
     def envar(keys)
       keys.each do |key|
-        if ENV.key?(key)
-          return ENV[key]
-        end
+        return ENV[key] if ENV.key?(key)
       end
       nil
     end
@@ -115,12 +112,11 @@ module Aws
     end
 
     def assume_role_web_identity_credentials(options)
-      if (role_arn = ENV['AWS_ROLE_ARN']) &&
-          (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
+      if (role_arn = ENV['AWS_ROLE_ARN']) && (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
         AssumeRoleWebIdentityCredentials.new(
-            role_arn: role_arn,
-            web_identity_token_file: token_file,
-            role_session_name: ENV['AWS_ROLE_SESSION_NAME']
+          role_arn: role_arn,
+          web_identity_token_file: token_file,
+          role_session_name: ENV['AWS_ROLE_SESSION_NAME']
         )
       elsif Aws.shared_config.config_enabled?
         profile = options[:config].profile if options[:config]
@@ -129,7 +125,7 @@ module Aws
     end
 
     def instance_profile_credentials(options)
-      if ENV["AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"]
+      if ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI']
         ECSCredentials.new(options)
       else
         InstanceProfileCredentials.new(options)
@@ -139,11 +135,10 @@ module Aws
     def assume_role_with_profile(options, profile_name)
       region = (options[:config] && options[:config].region)
       Aws.shared_config.assume_role_credentials_from_config(
-          profile: profile_name,
-          region: region,
-          chain_config: @config
+        profile: profile_name,
+        region: region,
+        chain_config: @config
       )
     end
-
   end
 end
