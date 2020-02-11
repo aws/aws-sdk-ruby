@@ -18,11 +18,16 @@ module Aws
     private
 
     def providers
+      if @config && @config.profile
+        static_profile_provider_chain
+      else
+        standard_provider_chain
+      end
+    end
+
+    def standard_provider_chain
       [
           [:static_credentials, {}],
-          [:static_profile_assume_role_web_identity_credentials, {}],
-          [:static_profile_assume_role_credentials, {}],
-          [:static_profile_credentials, {}],
           [:env_credentials, {}],
           [:assume_role_web_identity_credentials, {}],
           [:assume_role_credentials, {}],
@@ -32,7 +37,26 @@ module Aws
               retries: @config ? @config.instance_profile_credentials_retries : 0,
               http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
               http_read_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
-          }],
+          }]
+      ]
+    end
+
+    # When profile is explicitly included in the config
+    # Prioritize loading credentials from the profile before
+    # credentials from the ENV
+    def static_profile_provider_chain
+      [
+          [:static_credentials, {}],
+          [:assume_role_web_identity_credentials, {}],
+          [:assume_role_credentials, {}],
+          [:shared_credentials, {}],
+          [:process_credentials, {}],
+          [:env_credentials, {}],
+          [:instance_profile_credentials, {
+              retries: @config ? @config.instance_profile_credentials_retries : 0,
+              http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
+              http_read_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
+          }]
       ]
     end
 
@@ -44,26 +68,6 @@ module Aws
           options[:config].session_token
         )
       end
-    end
-
-    def static_profile_assume_role_web_identity_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        Aws.shared_config.assume_role_web_identity_credentials_from_config(options[:config].profile)
-      end
-    end
-
-    def static_profile_assume_role_credentials(options)
-      if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        assume_role_with_profile(options, options[:config].profile)
-      end
-    end
-
-    def static_profile_credentials(options)
-      if options[:config] && options[:config].profile
-        SharedCredentials.new(profile_name: options[:config].profile)
-      end
-    rescue Errors::NoSuchProfileError
-      nil
     end
 
     def env_credentials(options)
