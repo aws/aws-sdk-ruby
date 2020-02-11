@@ -37,12 +37,12 @@ module Aws
 
       end
 
-      # @return [Boolean] True if this error is a modeled, retryable exception
+      # @return [Boolean] (false) Error is a retryable exception.
       def retryable?
         false
       end
 
-      # @return [Boolean] True if this error is a modeled, throttling exception
+      # @return [Boolean] (false) Error is a retryable throttling exception.
       def throttling?
         false
       end
