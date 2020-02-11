@@ -180,11 +180,11 @@ module Aws::DocDB
     end
 
     # The configuration setting for the log types to be enabled for export
-    # to Amazon CloudWatch Logs for a specific DB instance or DB cluster.
+    # to Amazon CloudWatch Logs for a specific instance or cluster.
     #
     # The `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
     # are exported (or not exported) to CloudWatch Logs. The values within
-    # these arrays depend on the DB engine that is being used.
+    # these arrays depend on the engine that is being used.
     #
     # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
     #   data as a hash:
@@ -228,25 +228,25 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] source_db_cluster_parameter_group_identifier
-    #   The identifier or Amazon Resource Name (ARN) for the source DB
-    #   cluster parameter group.
+    #   The identifier or Amazon Resource Name (ARN) for the source cluster
+    #   parameter group.
     #
     #   Constraints:
     #
-    #   * Must specify a valid DB cluster parameter group.
+    #   * Must specify a valid cluster parameter group.
     #
-    #   * If the source DB cluster parameter group is in the same AWS Region
-    #     as the copy, specify a valid DB parameter group identifier; for
-    #     example, `my-db-cluster-param-group`, or a valid ARN.
+    #   * If the source cluster parameter group is in the same AWS Region as
+    #     the copy, specify a valid parameter group identifier; for example,
+    #     `my-db-cluster-param-group`, or a valid ARN.
     #
-    #   * If the source DB parameter group is in a different AWS Region than
-    #     the copy, specify a valid DB cluster parameter group ARN; for
+    #   * If the source parameter group is in a different AWS Region than
+    #     the copy, specify a valid cluster parameter group ARN; for
     #     example,
     #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_parameter_group_identifier
-    #   The identifier for the copied DB cluster parameter group.
+    #   The identifier for the copied cluster parameter group.
     #
     #   Constraints:
     #
@@ -262,7 +262,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_parameter_group_description
-    #   A description for the copied DB cluster parameter group.
+    #   A description for the copied cluster parameter group.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -280,7 +280,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster_parameter_group
-    #   Detailed information about a DB cluster parameter group.
+    #   Detailed information about a cluster parameter group.
     #   @return [Types::DBClusterParameterGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterParameterGroupResult AWS API Documentation
@@ -310,28 +310,28 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot to copy. This parameter is
+    #   The identifier of the cluster snapshot to copy. This parameter is
     #   not case sensitive.
     #
-    #   You can't copy an encrypted, shared DB cluster snapshot from one
-    #   AWS Region to another.
+    #   You can't copy an encrypted, shared cluster snapshot from one AWS
+    #   Region to another.
     #
     #   Constraints:
     #
     #   * Must specify a valid system snapshot in the "available" state.
     #
     #   * If the source snapshot is in the same AWS Region as the copy,
-    #     specify a valid DB snapshot identifier.
+    #     specify a valid snapshot identifier.
     #
     #   * If the source snapshot is in a different AWS Region than the copy,
-    #     specify a valid DB cluster snapshot ARN.
+    #     specify a valid cluster snapshot ARN.
     #
     #   Example: `my-cluster-snapshot1`
     #   @return [String]
     #
     # @!attribute [rw] target_db_cluster_snapshot_identifier
-    #   The identifier of the new DB cluster snapshot to create from the
-    #   source DB cluster snapshot. This parameter is not case sensitive.
+    #   The identifier of the new cluster snapshot to create from the source
+    #   cluster snapshot. This parameter is not case sensitive.
     #
     #   Constraints:
     #
@@ -345,36 +345,36 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The AWS KMS
+    #   The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS
     #   key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or
     #   the AWS KMS key alias for the AWS KMS encryption key.
     #
-    #   If you copy an encrypted DB cluster snapshot from your AWS account,
-    #   you can specify a value for `KmsKeyId` to encrypt the copy with a
-    #   new AWS KMS encryption key. If you don't specify a value for
-    #   `KmsKeyId`, then the copy of the DB cluster snapshot is encrypted
-    #   with the same AWS KMS key as the source DB cluster snapshot.
+    #   If you copy an encrypted cluster snapshot from your AWS account, you
+    #   can specify a value for `KmsKeyId` to encrypt the copy with a new
+    #   AWS KMS encryption key. If you don't specify a value for
+    #   `KmsKeyId`, then the copy of the cluster snapshot is encrypted with
+    #   the same AWS KMS key as the source cluster snapshot.
     #
-    #   If you copy an encrypted DB cluster snapshot that is shared from
+    #   If you copy an encrypted cluster snapshot that is shared from
     #   another AWS account, then you must specify a value for `KmsKeyId`.
     #
-    #   To copy an encrypted DB cluster snapshot to another AWS Region, set
+    #   To copy an encrypted cluster snapshot to another AWS Region, set
     #   `KmsKeyId` to the AWS KMS key ID that you want to use to encrypt the
-    #   copy of the DB cluster snapshot in the destination Region. AWS KMS
+    #   copy of the cluster snapshot in the destination Region. AWS KMS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one Region in another
     #   Region.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value
-    #   for the `KmsKeyId` parameter, an error is returned.
+    #   If you copy an unencrypted cluster snapshot and specify a value for
+    #   the `KmsKeyId` parameter, an error is returned.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains
-    #   the source DB cluster snapshot to copy. You must use the
-    #   `PreSignedUrl` parameter when copying an encrypted DB cluster
-    #   snapshot from another AWS Region.
+    #   the source cluster snapshot to copy. You must use the `PreSignedUrl`
+    #   parameter when copying an encrypted cluster snapshot from another
+    #   AWS Region.
     #
     #   The presigned URL must be a valid request for the
     #   `CopyDBSClusterSnapshot` API action that can be executed in the
@@ -383,7 +383,7 @@ module Aws::DocDB
     #   parameter values:
     #
     #   * `KmsKeyId` - The AWS KMS key identifier for the key to use to
-    #     encrypt the copy of the DB cluster snapshot in the destination AWS
+    #     encrypt the copy of the cluster snapshot in the destination AWS
     #     Region. This is the same identifier for both the
     #     `CopyDBClusterSnapshot` action that is called in the destination
     #     AWS Region, and the action contained in the presigned URL.
@@ -391,24 +391,24 @@ module Aws::DocDB
     #   * `DestinationRegion` - The name of the AWS Region that the DB
     #     cluster snapshot will be created in.
     #
-    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
-    #     identifier for the encrypted DB cluster snapshot to be copied.
-    #     This identifier must be in the Amazon Resource Name (ARN) format
-    #     for the source AWS Region. For example, if you are copying an
-    #     encrypted DB cluster snapshot from the us-west-2 AWS Region, then
+    #   * `SourceDBClusterSnapshotIdentifier` - The cluster snapshot
+    #     identifier for the encrypted cluster snapshot to be copied. This
+    #     identifier must be in the Amazon Resource Name (ARN) format for
+    #     the source AWS Region. For example, if you are copying an
+    #     encrypted cluster snapshot from the us-west-2 AWS Region, then
     #     your `SourceDBClusterSnapshotIdentifier` looks like the following
     #     example:
     #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115`.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags
-    #   Set to `true` to copy all tags from the source DB cluster snapshot
-    #   to the target DB cluster snapshot, and otherwise `false`. The
-    #   default is `false`.
+    #   Set to `true` to copy all tags from the source cluster snapshot to
+    #   the target cluster snapshot, and otherwise `false`. The default is
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB cluster snapshot.
+    #   The tags to be assigned to the cluster snapshot.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshotMessage AWS API Documentation
@@ -424,7 +424,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster_snapshot
-    #   Detailed information about a DB cluster snapshot.
+    #   Detailed information about a cluster snapshot.
     #   @return [Types::DBClusterSnapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CopyDBClusterSnapshotResult AWS API Documentation
@@ -466,7 +466,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] availability_zones
-    #   A list of Amazon EC2 Availability Zones that instances in the DB
+    #   A list of Amazon EC2 Availability Zones that instances in the
     #   cluster can be created in.
     #   @return [Array<String>]
     #
@@ -484,7 +484,7 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The DB cluster identifier. This parameter is stored as a lowercase
+    #   The cluster identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -499,16 +499,16 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to associate with this DB
+    #   The name of the cluster parameter group to associate with this
     #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with this DB cluster.
+    #   A list of EC2 VPC security groups to associate with this cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   A DB subnet group to associate with this DB cluster.
+    #   A subnet group to associate with this cluster.
     #
     #   Constraints: Must match the name of an existing `DBSubnetGroup`.
     #   Must not be default.
@@ -517,7 +517,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The name of the database engine to be used for this DB cluster.
+    #   The name of the database engine to be used for this cluster.
     #
     #   Valid values: `docdb`
     #   @return [String]
@@ -527,12 +527,12 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number on which the instances in the DB cluster accept
+    #   The port number on which the instances in the cluster accept
     #   connections.
     #   @return [Integer]
     #
     # @!attribute [rw] master_username
-    #   The name of the master user for the DB cluster.
+    #   The name of the master user for the cluster.
     #
     #   Constraints:
     #
@@ -586,21 +586,21 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB cluster.
+    #   The tags to be assigned to the cluster.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] storage_encrypted
-    #   Specifies whether the DB cluster is encrypted.
+    #   Specifies whether the cluster is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key identifier for an encrypted DB cluster.
+    #   The AWS KMS key identifier for an encrypted cluster.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are creating a DB cluster using the
-    #   same AWS account that owns the AWS KMS encryption key that is used
-    #   to encrypt the new DB cluster, you can use the AWS KMS key alias
-    #   instead of the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are creating a cluster using the same
+    #   AWS account that owns the AWS KMS encryption key that is used to
+    #   encrypt the new cluster, you can use the AWS KMS key alias instead
+    #   of the ARN for the AWS KMS encryption key.
     #
     #   If an encryption key is not specified in `KmsKeyId`\:
     #
@@ -617,7 +617,7 @@ module Aws::DocDB
     #   Your AWS account has a different default encryption key for each AWS
     #   Region.
     #
-    #   If you create a replica of an encrypted DB cluster in another AWS
+    #   If you create a replica of an encrypted cluster in another AWS
     #   Region, you must set `KmsKeyId` to a KMS key ID that is valid in the
     #   destination AWS Region. This key is used to encrypt the replica in
     #   that AWS Region.
@@ -678,7 +678,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group.
+    #   The name of the cluster parameter group.
     #
     #   Constraints:
     #
@@ -692,15 +692,15 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   The DB cluster parameter group family name.
+    #   The cluster parameter group family name.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for the DB cluster parameter group.
+    #   The description for the cluster parameter group.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB cluster parameter group.
+    #   The tags to be assigned to the cluster parameter group.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterParameterGroupMessage AWS API Documentation
@@ -714,7 +714,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster_parameter_group
-    #   Detailed information about a DB cluster parameter group.
+    #   Detailed information about a cluster parameter group.
     #   @return [Types::DBClusterParameterGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterParameterGroupResult AWS API Documentation
@@ -725,7 +725,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterResult AWS API Documentation
@@ -752,8 +752,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot. This parameter is stored
-    #   as a lowercase string.
+    #   The identifier of the cluster snapshot. This parameter is stored as
+    #   a lowercase string.
     #
     #   Constraints:
     #
@@ -767,7 +767,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The identifier of the DB cluster to create a snapshot for. This
+    #   The identifier of the cluster to create a snapshot for. This
     #   parameter is not case sensitive.
     #
     #   Constraints:
@@ -780,7 +780,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB cluster snapshot.
+    #   The tags to be assigned to the cluster snapshot.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshotMessage AWS API Documentation
@@ -793,7 +793,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster_snapshot
-    #   Detailed information about a DB cluster snapshot.
+    #   Detailed information about a cluster snapshot.
     #   @return [Types::DBClusterSnapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBClusterSnapshotResult AWS API Documentation
@@ -826,7 +826,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier. This parameter is stored as a lowercase
+    #   The instance identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -841,7 +841,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The compute and memory capacity of the DB instance; for example,
+    #   The compute and memory capacity of the instance; for example,
     #   `db.r5.large`.
     #   @return [String]
     #
@@ -852,7 +852,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
-    #   The Amazon EC2 Availability Zone that the DB instance is created in.
+    #   The Amazon EC2 Availability Zone that the instance is created in.
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's AWS Region.
@@ -881,18 +881,18 @@ module Aws::DocDB
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to
-    #   the DB instance during the maintenance window.
+    #   the instance during the maintenance window.
     #
     #   Default: `true`
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB instance. You can assign up to 10
+    #   The tags to be assigned to the instance. You can assign up to 10
     #   tags to an instance.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The identifier of the DB cluster that the instance will belong to.
+    #   The identifier of the cluster that the instance will belong to.
     #   @return [String]
     #
     # @!attribute [rw] promotion_tier
@@ -921,7 +921,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_instance
-    #   Detailed information about a DB instance.
+    #   Detailed information about an instance.
     #   @return [Types::DBInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstanceResult AWS API Documentation
@@ -949,8 +949,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The name for the DB subnet group. This value is stored as a
-    #   lowercase string.
+    #   The name for the subnet group. This value is stored as a lowercase
+    #   string.
     #
     #   Constraints: Must contain no more than 255 letters, numbers,
     #   periods, underscores, spaces, or hyphens. Must not be default.
@@ -959,15 +959,15 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
-    #   The description for the DB subnet group.
+    #   The description for the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The Amazon EC2 subnet IDs for the DB subnet group.
+    #   The Amazon EC2 subnet IDs for the subnet group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the DB subnet group.
+    #   The tags to be assigned to the subnet group.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroupMessage AWS API Documentation
@@ -981,7 +981,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_subnet_group
-    #   Detailed information about a DB subnet group.
+    #   Detailed information about a subnet group.
     #   @return [Types::DBSubnetGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBSubnetGroupResult AWS API Documentation
@@ -991,36 +991,35 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB cluster.
+    # Detailed information about a cluster.
     #
     # @!attribute [rw] availability_zones
     #   Provides the list of Amazon EC2 Availability Zones that instances in
-    #   the DB cluster can be created in.
+    #   the cluster can be created in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_retention_period
-    #   Specifies the number of days for which automatic DB snapshots are
+    #   Specifies the number of days for which automatic snapshots are
     #   retained.
     #   @return [Integer]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   Contains a user-supplied DB cluster identifier. This identifier is
-    #   the unique key that identifies a DB cluster.
+    #   Contains a user-supplied cluster identifier. This identifier is the
+    #   unique key that identifies a cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_parameter_group
-    #   Specifies the name of the DB cluster parameter group for the DB
-    #   cluster.
+    #   Specifies the name of the cluster parameter group for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group
     #   Specifies information on the subnet group that is associated with
-    #   the DB cluster, including the name, description, and subnets in the
+    #   the cluster, including the name, description, and subnets in the
     #   subnet group.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Specifies the current state of this DB cluster.
+    #   Specifies the current state of this cluster.
     #   @return [String]
     #
     # @!attribute [rw] percent_progress
@@ -1033,18 +1032,18 @@ module Aws::DocDB
     #   @return [Time]
     #
     # @!attribute [rw] endpoint
-    #   Specifies the connection endpoint for the primary instance of the DB
+    #   Specifies the connection endpoint for the primary instance of the
     #   cluster.
     #   @return [String]
     #
     # @!attribute [rw] reader_endpoint
-    #   The reader endpoint for the DB cluster. The reader endpoint for a DB
+    #   The reader endpoint for the cluster. The reader endpoint for a
     #   cluster load balances connections across the Amazon DocumentDB
-    #   replicas that are available in a DB cluster. As clients request new
+    #   replicas that are available in a cluster. As clients request new
     #   connections to the reader endpoint, Amazon DocumentDB distributes
     #   the connection requests among the Amazon DocumentDB replicas in the
-    #   DB cluster. This functionality can help balance your read workload
-    #   across multiple Amazon DocumentDB replicas in your DB cluster.
+    #   cluster. This functionality can help balance your read workload
+    #   across multiple Amazon DocumentDB replicas in your cluster.
     #
     #   If a failover occurs, and the Amazon DocumentDB replica that you are
     #   connected to is promoted to be the primary instance, your connection
@@ -1054,12 +1053,12 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] multi_az
-    #   Specifies whether the DB cluster has instances in multiple
-    #   Availability Zones.
+    #   Specifies whether the cluster has instances in multiple Availability
+    #   Zones.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine
-    #   Provides the name of the database engine to be used for this DB
+    #   Provides the name of the database engine to be used for this
     #   cluster.
     #   @return [String]
     #
@@ -1077,7 +1076,7 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] master_username
-    #   Contains the master user name for the DB cluster.
+    #   Contains the master user name for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
@@ -1092,12 +1091,12 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_members
-    #   Provides the list of instances that make up the DB cluster.
+    #   Provides the list of instances that make up the cluster.
     #   @return [Array<Types::DBClusterMember>]
     #
     # @!attribute [rw] vpc_security_groups
     #   Provides a list of virtual private cloud (VPC) security groups that
-    #   the DB cluster belongs to.
+    #   the cluster belongs to.
     #   @return [Array<Types::VpcSecurityGroupMembership>]
     #
     # @!attribute [rw] hosted_zone_id
@@ -1106,38 +1105,38 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] storage_encrypted
-    #   Specifies whether the DB cluster is encrypted.
+    #   Specifies whether the cluster is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
     #   If `StorageEncrypted` is `true`, the AWS KMS key identifier for the
-    #   encrypted DB cluster.
+    #   encrypted cluster.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_resource_id
-    #   The AWS Region-unique, immutable identifier for the DB cluster. This
+    #   The AWS Region-unique, immutable identifier for the cluster. This
     #   identifier is found in AWS CloudTrail log entries whenever the AWS
-    #   KMS key for the DB cluster is accessed.
+    #   KMS key for the cluster is accessed.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_arn
-    #   The Amazon Resource Name (ARN) for the DB cluster.
+    #   The Amazon Resource Name (ARN) for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] associated_roles
     #   Provides a list of the AWS Identity and Access Management (IAM)
-    #   roles that are associated with the DB cluster. IAM roles that are
-    #   associated with a DB cluster grant permission for the DB cluster to
-    #   access other AWS services on your behalf.
+    #   roles that are associated with the cluster. IAM roles that are
+    #   associated with a cluster grant permission for the cluster to access
+    #   other AWS services on your behalf.
     #   @return [Array<Types::DBClusterRole>]
     #
     # @!attribute [rw] cluster_create_time
-    #   Specifies the time when the DB cluster was created, in Universal
+    #   Specifies the time when the cluster was created, in Universal
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
     # @!attribute [rw] enabled_cloudwatch_logs_exports
-    #   A list of log types that this DB cluster is configured to export to
+    #   A list of log types that this cluster is configured to export to
     #   Amazon CloudWatch Logs.
     #   @return [Array<String>]
     #
@@ -1184,20 +1183,20 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Contains information about an instance that is part of a DB cluster.
+    # Contains information about an instance that is part of a cluster.
     #
     # @!attribute [rw] db_instance_identifier
-    #   Specifies the instance identifier for this member of the DB cluster.
+    #   Specifies the instance identifier for this member of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] is_cluster_writer
     #   A value that is `true` if the cluster member is the primary instance
-    #   for the DB cluster and `false` otherwise.
+    #   for the cluster and `false` otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] db_cluster_parameter_group_status
-    #   Specifies the status of the DB cluster parameter group for this
-    #   member of the DB cluster.
+    #   Specifies the status of the cluster parameter group for this member
+    #   of the DB cluster.
     #   @return [String]
     #
     # @!attribute [rw] promotion_tier
@@ -1225,7 +1224,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_clusters
-    #   A list of DB clusters.
+    #   A list of clusters.
     #   @return [Array<Types::DBCluster>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterMessage AWS API Documentation
@@ -1236,24 +1235,24 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB cluster parameter group.
+    # Detailed information about a cluster parameter group.
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   Provides the name of the DB cluster parameter group.
+    #   Provides the name of the cluster parameter group.
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   Provides the name of the DB parameter group family that this DB
-    #   cluster parameter group is compatible with.
+    #   Provides the name of the parameter group family that this cluster
+    #   parameter group is compatible with.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Provides the customer-specified description for this DB cluster
+    #   Provides the customer-specified description for this cluster
     #   parameter group.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_parameter_group_arn
-    #   The Amazon Resource Name (ARN) for the DB cluster parameter group.
+    #   The Amazon Resource Name (ARN) for the cluster parameter group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroup AWS API Documentation
@@ -1269,7 +1268,7 @@ module Aws::DocDB
     # Represents the output of DBClusterParameterGroup.
     #
     # @!attribute [rw] parameters
-    #   Provides a list of parameters for the DB cluster parameter group.
+    #   Provides a list of parameters for the cluster parameter group.
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] marker
@@ -1286,10 +1285,10 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Contains the name of a DB cluster parameter group.
+    # Contains the name of a cluster parameter group.
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of a DB cluster parameter group.
+    #   The name of a cluster parameter group.
     #
     #   Constraints:
     #
@@ -1320,7 +1319,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_parameter_groups
-    #   A list of DB cluster parameter groups.
+    #   A list of cluster parameter groups.
     #   @return [Array<Types::DBClusterParameterGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroupsMessage AWS API Documentation
@@ -1332,7 +1331,7 @@ module Aws::DocDB
     end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
-    # associated with a DB cluster.
+    # associated with a cluster.
     #
     # @!attribute [rw] role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that is associated
@@ -1340,17 +1339,17 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Describes the state of association between the IAM role and the DB
+    #   Describes the state of association between the IAM role and the
     #   cluster. The `Status` property returns one of the following values:
     #
-    #   * `ACTIVE` - The IAM role ARN is associated with the DB cluster and
-    #     can be used to access other AWS services on your behalf.
+    #   * `ACTIVE` - The IAM role ARN is associated with the cluster and can
+    #     be used to access other AWS services on your behalf.
     #
     #   * `PENDING` - The IAM role ARN is being associated with the DB
     #     cluster.
     #
-    #   * `INVALID` - The IAM role ARN is associated with the DB cluster,
-    #     but the DB cluster cannot assume the IAM role to access other AWS
+    #   * `INVALID` - The IAM role ARN is associated with the cluster, but
+    #     the cluster cannot assume the IAM role to access other AWS
     #     services on your behalf.
     #   @return [String]
     #
@@ -1362,20 +1361,20 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB cluster snapshot.
+    # Detailed information about a cluster snapshot.
     #
     # @!attribute [rw] availability_zones
     #   Provides the list of Amazon EC2 Availability Zones that instances in
-    #   the DB cluster snapshot can be restored in.
+    #   the cluster snapshot can be restored in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   Specifies the identifier for the DB cluster snapshot.
+    #   Specifies the identifier for the cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   Specifies the DB cluster identifier of the DB cluster that this DB
-    #   cluster snapshot was created from.
+    #   Specifies the cluster identifier of the cluster that this cluster
+    #   snapshot was created from.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_create_time
@@ -1387,35 +1386,35 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Specifies the status of this DB cluster snapshot.
+    #   Specifies the status of this cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Specifies the port that the DB cluster was listening on at the time
-    #   of the snapshot.
+    #   Specifies the port that the cluster was listening on at the time of
+    #   the snapshot.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_id
     #   Provides the virtual private cloud (VPC) ID that is associated with
-    #   the DB cluster snapshot.
+    #   the cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] cluster_create_time
-    #   Specifies the time when the DB cluster was created, in Universal
+    #   Specifies the time when the cluster was created, in Universal
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
     # @!attribute [rw] master_username
-    #   Provides the master user name for the DB cluster snapshot.
+    #   Provides the master user name for the cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   Provides the version of the database engine for this DB cluster
+    #   Provides the version of the database engine for this cluster
     #   snapshot.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
-    #   Provides the type of the DB cluster snapshot.
+    #   Provides the type of the cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] percent_progress
@@ -1424,22 +1423,21 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] storage_encrypted
-    #   Specifies whether the DB cluster snapshot is encrypted.
+    #   Specifies whether the cluster snapshot is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
     #   If `StorageEncrypted` is `true`, the AWS KMS key identifier for the
-    #   encrypted DB cluster snapshot.
+    #   encrypted cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshot_arn
-    #   The Amazon Resource Name (ARN) for the DB cluster snapshot.
+    #   The Amazon Resource Name (ARN) for the cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_snapshot_arn
-    #   If the DB cluster snapshot was copied from a source DB cluster
-    #   snapshot, the ARN for the source DB cluster snapshot; otherwise, a
-    #   null value.
+    #   If the cluster snapshot was copied from a source cluster snapshot,
+    #   the ARN for the source cluster snapshot; otherwise, a null value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshot AWS API Documentation
@@ -1465,27 +1463,25 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Contains the name and values of a manual DB cluster snapshot
-    # attribute.
+    # Contains the name and values of a manual cluster snapshot attribute.
     #
-    # Manual DB cluster snapshot attributes are used to authorize other AWS
-    # accounts to restore a manual DB cluster snapshot.
+    # Manual cluster snapshot attributes are used to authorize other AWS
+    # accounts to restore a manual cluster snapshot.
     #
     # @!attribute [rw] attribute_name
-    #   The name of the manual DB cluster snapshot attribute.
+    #   The name of the manual cluster snapshot attribute.
     #
     #   The attribute named `restore` refers to the list of AWS accounts
-    #   that have permission to copy or restore the manual DB cluster
-    #   snapshot.
+    #   that have permission to copy or restore the manual cluster snapshot.
     #   @return [String]
     #
     # @!attribute [rw] attribute_values
-    #   The values for the manual DB cluster snapshot attribute.
+    #   The values for the manual cluster snapshot attribute.
     #
     #   If the `AttributeName` field is set to `restore`, then this element
     #   returns a list of IDs of the AWS accounts that are authorized to
-    #   copy or restore the manual DB cluster snapshot. If a value of `all`
-    #   is in the list, then the manual DB cluster snapshot is public and
+    #   copy or restore the manual cluster snapshot. If a value of `all` is
+    #   in the list, then the manual cluster snapshot is public and
     #   available for any AWS account to copy or restore.
     #   @return [Array<String>]
     #
@@ -1498,15 +1494,14 @@ module Aws::DocDB
     end
 
     # Detailed information about the attributes that are associated with a
-    # DB cluster snapshot.
+    # cluster snapshot.
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot that the attributes apply
-    #   to.
+    #   The identifier of the cluster snapshot that the attributes apply to.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshot_attributes
-    #   The list of attributes and values for the DB cluster snapshot.
+    #   The list of attributes and values for the cluster snapshot.
     #   @return [Array<Types::DBClusterSnapshotAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotAttributesResult AWS API Documentation
@@ -1526,7 +1521,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshots
-    #   Provides a list of DB cluster snapshots.
+    #   Provides a list of cluster snapshots.
     #   @return [Array<Types::DBClusterSnapshot>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotMessage AWS API Documentation
@@ -1537,7 +1532,7 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB engine version.
+    # Detailed information about an engine version.
     #
     # @!attribute [rw] engine
     #   The name of the database engine.
@@ -1548,7 +1543,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   The name of the DB parameter group family for the database engine.
+    #   The name of the parameter group family for the database engine.
     #   @return [String]
     #
     # @!attribute [rw] db_engine_description
@@ -1597,7 +1592,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_engine_versions
-    #   Detailed information about one or more DB engine versions.
+    #   Detailed information about one or more engine versions.
     #   @return [Array<Types::DBEngineVersion>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBEngineVersionMessage AWS API Documentation
@@ -1608,20 +1603,20 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB instance.
+    # Detailed information about an instance.
     #
     # @!attribute [rw] db_instance_identifier
     #   Contains a user-provided database identifier. This identifier is the
-    #   unique key that identifies a DB instance.
+    #   unique key that identifies an instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   Contains the name of the compute and memory capacity class of the DB
+    #   Contains the name of the compute and memory capacity class of the
     #   instance.
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   Provides the name of the database engine to be used for this DB
+    #   Provides the name of the database engine to be used for this
     #   instance.
     #   @return [String]
     #
@@ -1634,7 +1629,7 @@ module Aws::DocDB
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] instance_create_time
-    #   Provides the date and time that the DB instance was created.
+    #   Provides the date and time that the instance was created.
     #   @return [Time]
     #
     # @!attribute [rw] preferred_backup_window
@@ -1644,23 +1639,23 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] backup_retention_period
-    #   Specifies the number of days for which automatic DB snapshots are
+    #   Specifies the number of days for which automatic snapshots are
     #   retained.
     #   @return [Integer]
     #
     # @!attribute [rw] vpc_security_groups
-    #   Provides a list of VPC security group elements that the DB instance
+    #   Provides a list of VPC security group elements that the instance
     #   belongs to.
     #   @return [Array<Types::VpcSecurityGroupMembership>]
     #
     # @!attribute [rw] availability_zone
-    #   Specifies the name of the Availability Zone that the DB instance is
+    #   Specifies the name of the Availability Zone that the instance is
     #   located in.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group
     #   Specifies information on the subnet group that is associated with
-    #   the DB instance, including the name, description, and subnets in the
+    #   the instance, including the name, description, and subnets in the
     #   subnet group.
     #   @return [Types::DBSubnetGroup]
     #
@@ -1670,8 +1665,8 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] pending_modified_values
-    #   Specifies that changes to the DB instance are pending. This element
-    #   is included only when changes are pending. Specific changes are
+    #   Specifies that changes to the instance are pending. This element is
+    #   included only when changes are pending. Specific changes are
     #   identified by subelements.
     #   @return [Types::PendingModifiedValues]
     #
@@ -1699,23 +1694,23 @@ module Aws::DocDB
     #   @return [Array<Types::DBInstanceStatusInfo>]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   Contains the name of the DB cluster that the DB instance is a member
-    #   of if the DB instance is a member of a DB cluster.
+    #   Contains the name of the cluster that the instance is a member of if
+    #   the instance is a member of a cluster.
     #   @return [String]
     #
     # @!attribute [rw] storage_encrypted
-    #   Specifies whether or not the DB instance is encrypted.
+    #   Specifies whether or not the instance is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
     #   If `StorageEncrypted` is `true`, the AWS KMS key identifier for the
-    #   encrypted DB instance.
+    #   encrypted instance.
     #   @return [String]
     #
     # @!attribute [rw] dbi_resource_id
-    #   The AWS Region-unique, immutable identifier for the DB instance.
-    #   This identifier is found in AWS CloudTrail log entries whenever the
-    #   AWS KMS key for the DB instance is accessed.
+    #   The AWS Region-unique, immutable identifier for the instance. This
+    #   identifier is found in AWS CloudTrail log entries whenever the AWS
+    #   KMS key for the instance is accessed.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -1729,11 +1724,11 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_arn
-    #   The Amazon Resource Name (ARN) for the DB instance.
+    #   The Amazon Resource Name (ARN) for the instance.
     #   @return [String]
     #
     # @!attribute [rw] enabled_cloudwatch_logs_exports
-    #   A list of log types that this DB instance is configured to export to
+    #   A list of log types that this instance is configured to export to
     #   Amazon CloudWatch Logs.
     #   @return [Array<String>]
     #
@@ -1778,7 +1773,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_instances
-    #   Detailed information about one or more DB instances.
+    #   Detailed information about one or more instances.
     #   @return [Array<Types::DBInstance>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstanceMessage AWS API Documentation
@@ -1789,7 +1784,7 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Provides a list of status information for a DB instance.
+    # Provides a list of status information for an instance.
     #
     # @!attribute [rw] status_type
     #   This value is currently "`read replication`."
@@ -1801,7 +1796,7 @@ module Aws::DocDB
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   Status of the DB instance. For a `StatusType` of read replica, the
+    #   Status of the instance. For a `StatusType` of read replica, the
     #   values can be `replicating`, error, `stopped`, or `terminated`.
     #   @return [String]
     #
@@ -1820,26 +1815,26 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Detailed information about a DB subnet group.
+    # Detailed information about a subnet group.
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The name of the DB subnet group.
+    #   The name of the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
-    #   Provides the description of the DB subnet group.
+    #   Provides the description of the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   Provides the virtual private cloud (VPC) ID of the DB subnet group.
+    #   Provides the virtual private cloud (VPC) ID of the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] subnet_group_status
-    #   Provides the status of the DB subnet group.
+    #   Provides the status of the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   Detailed information about one or more subnets within a DB subnet
+    #   Detailed information about one or more subnets within a subnet
     #   group.
     #   @return [Array<Types::Subnet>]
     #
@@ -1868,7 +1863,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_groups
-    #   Detailed information about one or more DB subnet groups.
+    #   Detailed information about one or more subnet groups.
     #   @return [Array<Types::DBSubnetGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupMessage AWS API Documentation
@@ -1891,8 +1886,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The DB cluster identifier for the DB cluster to be deleted. This
-    #   parameter isn't case sensitive.
+    #   The cluster identifier for the cluster to be deleted. This parameter
+    #   isn't case sensitive.
     #
     #   Constraints:
     #
@@ -1902,10 +1897,10 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] skip_final_snapshot
-    #   Determines whether a final DB cluster snapshot is created before the
-    #   DB cluster is deleted. If `true` is specified, no DB cluster
-    #   snapshot is created. If `false` is specified, a DB cluster snapshot
-    #   is created before the DB cluster is deleted.
+    #   Determines whether a final cluster snapshot is created before the
+    #   cluster is deleted. If `true` is specified, no cluster snapshot is
+    #   created. If `false` is specified, a cluster snapshot is created
+    #   before the DB cluster is deleted.
     #
     #   <note markdown="1"> If `SkipFinalSnapshot` is `false`, you must specify a
     #   `FinalDBSnapshotIdentifier` parameter.
@@ -1916,8 +1911,8 @@ module Aws::DocDB
     #   @return [Boolean]
     #
     # @!attribute [rw] final_db_snapshot_identifier
-    #   The DB cluster snapshot identifier of the new DB cluster snapshot
-    #   created when `SkipFinalSnapshot` is set to `false`.
+    #   The cluster snapshot identifier of the new cluster snapshot created
+    #   when `SkipFinalSnapshot` is set to `false`.
     #
     #   <note markdown="1"> Specifying this parameter and also setting the `SkipFinalShapshot`
     #   parameter to `true` results in an error.
@@ -1952,15 +1947,15 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group.
+    #   The name of the cluster parameter group.
     #
     #   Constraints:
     #
-    #   * Must be the name of an existing DB cluster parameter group.
+    #   * Must be the name of an existing cluster parameter group.
     #
-    #   * You can't delete a default DB cluster parameter group.
+    #   * You can't delete a default cluster parameter group.
     #
-    #   * Cannot be associated with any DB clusters.
+    #   * Cannot be associated with any clusters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterParameterGroupMessage AWS API Documentation
@@ -1971,7 +1966,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterResult AWS API Documentation
@@ -1991,10 +1986,10 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier of the DB cluster snapshot to delete.
+    #   The identifier of the cluster snapshot to delete.
     #
-    #   Constraints: Must be the name of an existing DB cluster snapshot in
-    #   the `available` state.
+    #   Constraints: Must be the name of an existing cluster snapshot in the
+    #   `available` state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterSnapshotMessage AWS API Documentation
@@ -2005,7 +2000,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster_snapshot
-    #   Detailed information about a DB cluster snapshot.
+    #   Detailed information about a cluster snapshot.
     #   @return [Types::DBClusterSnapshot]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBClusterSnapshotResult AWS API Documentation
@@ -2025,12 +2020,12 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier for the DB instance to be deleted. This
+    #   The instance identifier for the instance to be deleted. This
     #   parameter isn't case sensitive.
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing DB instance.
+    #   * Must match the name of an existing instance.
     #
     #   ^
     #   @return [String]
@@ -2043,7 +2038,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_instance
-    #   Detailed information about a DB instance.
+    #   Detailed information about an instance.
     #   @return [Types::DBInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DeleteDBInstanceResult AWS API Documentation
@@ -2166,7 +2161,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of a specific DB cluster parameter group to return details
+    #   The name of a specific cluster parameter group to return details
     #   for.
     #
     #   Constraints:
@@ -2227,8 +2222,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of a specific DB cluster parameter group to return
-    #   parameter details for.
+    #   The name of a specific cluster parameter group to return parameter
+    #   details for.
     #
     #   Constraints:
     #
@@ -2285,8 +2280,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier for the DB cluster snapshot to describe the
-    #   attributes for.
+    #   The identifier for the cluster snapshot to describe the attributes
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshotAttributesMessage AWS API Documentation
@@ -2298,7 +2293,7 @@ module Aws::DocDB
 
     # @!attribute [rw] db_cluster_snapshot_attributes_result
     #   Detailed information about the attributes that are associated with a
-    #   DB cluster snapshot.
+    #   cluster snapshot.
     #   @return [Types::DBClusterSnapshotAttributesResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeDBClusterSnapshotAttributesResult AWS API Documentation
@@ -2330,10 +2325,9 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The ID of the DB cluster to retrieve the list of DB cluster
-    #   snapshots for. This parameter can't be used with the
-    #   `DBClusterSnapshotIdentifier` parameter. This parameter is not case
-    #   sensitive.
+    #   The ID of the cluster to retrieve the list of cluster snapshots for.
+    #   This parameter can't be used with the `DBClusterSnapshotIdentifier`
+    #   parameter. This parameter is not case sensitive.
     #
     #   Constraints:
     #
@@ -2343,9 +2337,9 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   A specific DB cluster snapshot identifier to describe. This
-    #   parameter can't be used with the `DBClusterIdentifier` parameter.
-    #   This value is stored as a lowercase string.
+    #   A specific cluster snapshot identifier to describe. This parameter
+    #   can't be used with the `DBClusterIdentifier` parameter. This value
+    #   is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -2357,27 +2351,26 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] snapshot_type
-    #   The type of DB cluster snapshots to be returned. You can specify one
-    #   of the following values:
+    #   The type of cluster snapshots to be returned. You can specify one of
+    #   the following values:
     #
-    #   * `automated` - Return all DB cluster snapshots that Amazon
-    #     DocumentDB has automatically created for your AWS account.
+    #   * `automated` - Return all cluster snapshots that Amazon DocumentDB
+    #     has automatically created for your AWS account.
     #
-    #   * `manual` - Return all DB cluster snapshots that you have manually
+    #   * `manual` - Return all cluster snapshots that you have manually
     #     created for your AWS account.
     #
-    #   * `shared` - Return all manual DB cluster snapshots that have been
+    #   * `shared` - Return all manual cluster snapshots that have been
     #     shared to your AWS account.
     #
-    #   * `public` - Return all DB cluster snapshots that have been marked
-    #     as public.
+    #   * `public` - Return all cluster snapshots that have been marked as
+    #     public.
     #
     #   If you don't specify a `SnapshotType` value, then both automated
-    #   and manual DB cluster snapshots are returned. You can include shared
-    #   DB cluster snapshots with these results by setting the
-    #   `IncludeShared` parameter to `true`. You can include public DB
-    #   cluster snapshots with these results by setting the `IncludePublic`
-    #   parameter to `true`.
+    #   and manual cluster snapshots are returned. You can include shared
+    #   cluster snapshots with these results by setting the `IncludeShared`
+    #   parameter to `true`. You can include public cluster snapshots with
+    #   these results by setting the `IncludePublic` parameter to `true`.
     #
     #   The `IncludeShared` and `IncludePublic` parameters don't apply for
     #   `SnapshotType` values of `manual` or `automated`. The
@@ -2408,13 +2401,13 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] include_shared
-    #   Set to `true` to include shared manual DB cluster snapshots from
-    #   other AWS accounts that this AWS account has been given permission
-    #   to copy or restore, and otherwise `false`. The default is `false`.
+    #   Set to `true` to include shared manual cluster snapshots from other
+    #   AWS accounts that this AWS account has been given permission to copy
+    #   or restore, and otherwise `false`. The default is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_public
-    #   Set to `true` to include manual DB cluster snapshots that are public
+    #   Set to `true` to include manual cluster snapshots that are public
     #   and can be copied or restored by any AWS account, and otherwise
     #   `false`. The default is `false`.
     #   @return [Boolean]
@@ -2451,9 +2444,9 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The user-provided DB cluster identifier. If this parameter is
-    #   specified, information from only the specific DB cluster is
-    #   returned. This parameter isn't case sensitive.
+    #   The user-provided cluster identifier. If this parameter is
+    #   specified, information from only the specific cluster is returned.
+    #   This parameter isn't case sensitive.
     #
     #   Constraints:
     #
@@ -2463,13 +2456,13 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A filter that specifies one or more DB clusters to describe.
+    #   A filter that specifies one or more clusters to describe.
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list only includes
-    #     information about the DB clusters identified by these ARNs.
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list only includes information
+    #     about the clusters identified by these ARNs.
     #
     #   ^
     #   @return [Array<Types::Filter>]
@@ -2534,8 +2527,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_parameter_group_family
-    #   The name of a specific DB parameter group family to return details
-    #   for.
+    #   The name of a specific parameter group family to return details for.
     #
     #   Constraints:
     #
@@ -2616,8 +2608,8 @@ module Aws::DocDB
     #
     # @!attribute [rw] db_instance_identifier
     #   The user-provided instance identifier. If this parameter is
-    #   specified, information from only the specific DB instance is
-    #   returned. This parameter isn't case sensitive.
+    #   specified, information from only the specific instance is returned.
+    #   This parameter isn't case sensitive.
     #
     #   Constraints:
     #
@@ -2628,18 +2620,18 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   A filter that specifies one or more DB instances to describe.
+    #   A filter that specifies one or more instances to describe.
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list includes only the
-    #     information about the DB instances that are associated with the DB
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list includes only the
+    #     information about the instances that are associated with the
     #     clusters that are identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list includes only the information about the DB
-    #     instances that are identified by these ARNs.
+    #   * `db-instance-id` - Accepts instance identifiers and instance ARNs.
+    #     The results list includes only the information about the instances
+    #     that are identified by these ARNs.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -2687,7 +2679,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The name of the DB subnet group to return details for.
+    #   The name of the subnet group to return details for.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -2739,8 +2731,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_parameter_group_family
-    #   The name of the DB cluster parameter group family to return the
-    #   engine parameter information for.
+    #   The name of the cluster parameter group family to return the engine
+    #   parameter information for.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -2954,7 +2946,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] engine
-    #   The name of the engine to retrieve DB instance options for.
+    #   The name of the engine to retrieve instance options for.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -2963,9 +2955,8 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The DB instance class filter value. Specify this parameter to show
-    #   only the available offerings that match the specified DB instance
-    #   class.
+    #   The instance class filter value. Specify this parameter to show only
+    #   the available offerings that match the specified instance class.
     #   @return [String]
     #
     # @!attribute [rw] license_model
@@ -3040,14 +3031,13 @@ module Aws::DocDB
     #
     #   Supported filters:
     #
-    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list includes only
-    #     pending maintenance actions for the DB clusters identified by
-    #     these ARNs.
+    #   * `db-cluster-id` - Accepts cluster identifiers and cluster Amazon
+    #     Resource Names (ARNs). The results list includes only pending
+    #     maintenance actions for the clusters identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list includes only pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #   * `db-instance-id` - Accepts instance identifiers and instance ARNs.
+    #     The results list includes only pending maintenance actions for the
+    #     DB instances identified by these ARNs.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] marker
@@ -3077,12 +3067,12 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # Network information for accessing a DB cluster or DB instance. Client
+    # Network information for accessing a cluster or instance. Client
     # programs must specify a valid endpoint to access these Amazon
     # DocumentDB resources.
     #
     # @!attribute [rw] address
-    #   Specifies the DNS address of the DB instance.
+    #   Specifies the DNS address of the instance.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -3107,8 +3097,8 @@ module Aws::DocDB
     # `DescribeEngineDefaultClusterParameters` operation.
     #
     # @!attribute [rw] db_parameter_group_family
-    #   The name of the DB cluster parameter group family to return the
-    #   engine parameter information for.
+    #   The name of the cluster parameter group family to return the engine
+    #   parameter information for.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -3118,7 +3108,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters of a particular DB cluster parameter group family.
+    #   The parameters of a particular cluster parameter group family.
     #   @return [Array<Types::Parameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/EngineDefaults AWS API Documentation
@@ -3230,8 +3220,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   A DB cluster identifier to force a failover for. This parameter is
-    #   not case sensitive.
+    #   A cluster identifier to force a failover for. This parameter is not
+    #   case sensitive.
     #
     #   Constraints:
     #
@@ -3244,7 +3234,7 @@ module Aws::DocDB
     #   The name of the instance to promote to the primary instance.
     #
     #   You must specify the instance identifier for an Amazon DocumentDB
-    #   replica in the DB cluster. For example, `mydbcluster-replica1`.
+    #   replica in the cluster. For example, `mydbcluster-replica1`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBClusterMessage AWS API Documentation
@@ -3256,7 +3246,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/FailoverDBClusterResult AWS API Documentation
@@ -3353,8 +3343,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The DB cluster identifier for the cluster that is being modified.
-    #   This parameter is not case sensitive.
+    #   The cluster identifier for the cluster that is being modified. This
+    #   parameter is not case sensitive.
     #
     #   Constraints:
     #
@@ -3364,8 +3354,8 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] new_db_cluster_identifier
-    #   The new DB cluster identifier for the DB cluster when renaming a DB
-    #   cluster. This value is stored as a lowercase string.
+    #   The new cluster identifier for the cluster when renaming a cluster.
+    #   This value is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -3381,9 +3371,9 @@ module Aws::DocDB
     # @!attribute [rw] apply_immediately
     #   A value that specifies whether the changes in this request and any
     #   pending changes are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
-    #   cluster. If this parameter is set to `false`, changes to the DB
-    #   cluster are applied during the next maintenance window.
+    #   regardless of the `PreferredMaintenanceWindow` setting for the
+    #   cluster. If this parameter is set to `false`, changes to the cluster
+    #   are applied during the next maintenance window.
     #
     #   The `ApplyImmediately` parameter affects only the
     #   `NewDBClusterIdentifier` and `MasterUserPassword` values. If you set
@@ -3410,21 +3400,20 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to use for the DB
-    #   cluster.
+    #   The name of the cluster parameter group to use for the cluster.
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A list of virtual private cloud (VPC) security groups that the DB
+    #   A list of virtual private cloud (VPC) security groups that the
     #   cluster will belong to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] port
-    #   The port number on which the DB cluster accepts connections.
+    #   The port number on which the cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The same port as the original cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
@@ -3471,9 +3460,9 @@ module Aws::DocDB
     #
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to Amazon CloudWatch Logs for a specific DB instance or DB cluster.
-    #   The `EnableLogTypes` and `DisableLogTypes` arrays determine which
-    #   logs are exported (or not exported) to CloudWatch Logs.
+    #   to Amazon CloudWatch Logs for a specific instance or cluster. The
+    #   `EnableLogTypes` and `DisableLogTypes` arrays determine which logs
+    #   are exported (or not exported) to CloudWatch Logs.
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
     # @!attribute [rw] engine_version
@@ -3534,11 +3523,11 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to modify.
+    #   The name of the cluster parameter group to modify.
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   A list of parameters in the DB cluster parameter group to modify.
+    #   A list of parameters in the cluster parameter group to modify.
     #   @return [Array<Types::Parameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterParameterGroupMessage AWS API Documentation
@@ -3550,7 +3539,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterResult AWS API Documentation
@@ -3573,39 +3562,39 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier for the DB cluster snapshot to modify the attributes
+    #   The identifier for the cluster snapshot to modify the attributes
     #   for.
     #   @return [String]
     #
     # @!attribute [rw] attribute_name
-    #   The name of the DB cluster snapshot attribute to modify.
+    #   The name of the cluster snapshot attribute to modify.
     #
     #   To manage authorization for other AWS accounts to copy or restore a
-    #   manual DB cluster snapshot, set this value to `restore`.
+    #   manual cluster snapshot, set this value to `restore`.
     #   @return [String]
     #
     # @!attribute [rw] values_to_add
-    #   A list of DB cluster snapshot attributes to add to the attribute
+    #   A list of cluster snapshot attributes to add to the attribute
     #   specified by `AttributeName`.
     #
-    #   To authorize other AWS accounts to copy or restore a manual DB
-    #   cluster snapshot, set this list to include one or more AWS account
-    #   IDs. To make the manual DB cluster snapshot restorable by any AWS
-    #   account, set it to `all`. Do not add the `all` value for any manual
-    #   DB cluster snapshots that contain private information that you
-    #   don't want to be available to all AWS accounts.
+    #   To authorize other AWS accounts to copy or restore a manual cluster
+    #   snapshot, set this list to include one or more AWS account IDs. To
+    #   make the manual cluster snapshot restorable by any AWS account, set
+    #   it to `all`. Do not add the `all` value for any manual cluster
+    #   snapshots that contain private information that you don't want to
+    #   be available to all AWS accounts.
     #   @return [Array<String>]
     #
     # @!attribute [rw] values_to_remove
-    #   A list of DB cluster snapshot attributes to remove from the
-    #   attribute specified by `AttributeName`.
+    #   A list of cluster snapshot attributes to remove from the attribute
+    #   specified by `AttributeName`.
     #
     #   To remove authorization for other AWS accounts to copy or restore a
-    #   manual DB cluster snapshot, set this list to include one or more AWS
+    #   manual cluster snapshot, set this list to include one or more AWS
     #   account identifiers. To remove authorization for any AWS account to
-    #   copy or restore the DB cluster snapshot, set it to `all` . If you
+    #   copy or restore the cluster snapshot, set it to `all` . If you
     #   specify `all`, an AWS account whose account ID is explicitly added
-    #   to the `restore` attribute can still copy or restore a manual DB
+    #   to the `restore` attribute can still copy or restore a manual
     #   cluster snapshot.
     #   @return [Array<String>]
     #
@@ -3621,7 +3610,7 @@ module Aws::DocDB
 
     # @!attribute [rw] db_cluster_snapshot_attributes_result
     #   Detailed information about the attributes that are associated with a
-    #   DB cluster snapshot.
+    #   cluster snapshot.
     #   @return [Types::DBClusterSnapshotAttributesResult]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterSnapshotAttributeResult AWS API Documentation
@@ -3648,8 +3637,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier. This value is stored as a lowercase
-    #   string.
+    #   The instance identifier. This value is stored as a lowercase string.
     #
     #   Constraints:
     #
@@ -3659,11 +3647,11 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The new compute and memory capacity of the DB instance; for example,
-    #   `db.r5.large`. Not all DB instance classes are available in all AWS
+    #   The new compute and memory capacity of the instance; for example,
+    #   `db.r5.large`. Not all instance classes are available in all AWS
     #   Regions.
     #
-    #   If you modify the DB instance class, an outage occurs during the
+    #   If you modify the instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
     #   unless `ApplyImmediately` is specified as `true` for this request.
     #
@@ -3673,10 +3661,10 @@ module Aws::DocDB
     # @!attribute [rw] apply_immediately
     #   Specifies whether the modifications in this request and any pending
     #   modifications are asynchronously applied as soon as possible,
-    #   regardless of the `PreferredMaintenanceWindow` setting for the DB
+    #   regardless of the `PreferredMaintenanceWindow` setting for the
     #   instance.
     #
-    #   If this parameter is set to `false`, changes to the DB instance are
+    #   If this parameter is set to `false`, changes to the instance are
     #   applied during the next maintenance window. Some parameter changes
     #   can cause an outage and are applied on the next reboot.
     #
@@ -3690,7 +3678,7 @@ module Aws::DocDB
     #   the change is asynchronously applied as soon as possible. If there
     #   are pending actions that cause a reboot, and the maintenance window
     #   is changed to include the current time, changing this parameter
-    #   causes a reboot of the DB instance. If you are moving this window to
+    #   causes a reboot of the instance. If you are moving this window to
     #   the current time, there must be at least 30 minutes between the
     #   current time and end of the window to ensure that pending changes
     #   are applied.
@@ -3706,18 +3694,17 @@ module Aws::DocDB
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to
-    #   the DB instance during the maintenance window. Changing this
-    #   parameter doesn't result in an outage except in the following case,
-    #   and the change is asynchronously applied as soon as possible. An
-    #   outage results if this parameter is set to `true` during the
-    #   maintenance window, and a newer minor version is available, and
-    #   Amazon DocumentDB has enabled automatic patching for that engine
-    #   version.
+    #   the instance during the maintenance window. Changing this parameter
+    #   doesn't result in an outage except in the following case, and the
+    #   change is asynchronously applied as soon as possible. An outage
+    #   results if this parameter is set to `true` during the maintenance
+    #   window, and a newer minor version is available, and Amazon
+    #   DocumentDB has enabled automatic patching for that engine version.
     #   @return [Boolean]
     #
     # @!attribute [rw] new_db_instance_identifier
-    #   The new DB instance identifier for the DB instance when renaming a
-    #   DB instance. When you change the DB instance identifier, an instance
+    #   The new instance identifier for the instance when renaming an
+    #   instance. When you change the instance identifier, an instance
     #   reboot occurs immediately if you set `Apply Immediately` to `true`.
     #   It occurs during the next maintenance window if you set `Apply
     #   Immediately` to `false`. This value is stored as a lowercase string.
@@ -3763,7 +3750,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_instance
-    #   Detailed information about a DB instance.
+    #   Detailed information about an instance.
     #   @return [Types::DBInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceResult AWS API Documentation
@@ -3785,8 +3772,8 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The name for the DB subnet group. This value is stored as a
-    #   lowercase string. You can't modify the default subnet group.
+    #   The name for the subnet group. This value is stored as a lowercase
+    #   string. You can't modify the default subnet group.
     #
     #   Constraints: Must match the name of an existing `DBSubnetGroup`.
     #   Must not be default.
@@ -3795,11 +3782,11 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
-    #   The description for the DB subnet group.
+    #   The description for the subnet group.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   The Amazon EC2 subnet IDs for the DB subnet group.
+    #   The Amazon EC2 subnet IDs for the subnet group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBSubnetGroupMessage AWS API Documentation
@@ -3812,7 +3799,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_subnet_group
-    #   Detailed information about a DB subnet group.
+    #   Detailed information about a subnet group.
     #   @return [Types::DBSubnetGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBSubnetGroupResult AWS API Documentation
@@ -3822,30 +3809,30 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # The options that are available for a DB instance.
+    # The options that are available for an instance.
     #
     # @!attribute [rw] engine
-    #   The engine type of a DB instance.
+    #   The engine type of an instance.
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The engine version of a DB instance.
+    #   The engine version of an instance.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The DB instance class for a DB instance.
+    #   The instance class for an instance.
     #   @return [String]
     #
     # @!attribute [rw] license_model
-    #   The license model for a DB instance.
+    #   The license model for an instance.
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   A list of Availability Zones for a DB instance.
+    #   A list of Availability Zones for an instance.
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @!attribute [rw] vpc
-    #   Indicates whether a DB instance is in a virtual private cloud (VPC).
+    #   Indicates whether an instance is in a virtual private cloud (VPC).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/OrderableDBInstanceOption AWS API Documentation
@@ -3863,8 +3850,7 @@ module Aws::DocDB
     # Represents the output of DescribeOrderableDBInstanceOptions.
     #
     # @!attribute [rw] orderable_db_instance_options
-    #   The options that are available for a particular orderable DB
-    #   instance.
+    #   The options that are available for a particular orderable instance.
     #   @return [Array<Types::OrderableDBInstanceOption>]
     #
     # @!attribute [rw] marker
@@ -4047,26 +4033,26 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # One or more modified settings for a DB instance. These modified
-    # settings have been requested, but haven't been applied yet.
+    # One or more modified settings for an instance. These modified settings
+    # have been requested, but haven't been applied yet.
     #
     # @!attribute [rw] db_instance_class
-    #   Contains the new `DBInstanceClass` for the DB instance that will be
+    #   Contains the new `DBInstanceClass` for the instance that will be
     #   applied or is currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Contains the new `AllocatedStorage` size for the DB instance that
-    #   will be applied or is currently being applied.
+    #   Contains the new `AllocatedStorage` size for then instance that will
+    #   be applied or is currently being applied.
     #   @return [Integer]
     #
     # @!attribute [rw] master_user_password
     #   Contains the pending or currently in-progress change of the master
-    #   credentials for the DB instance.
+    #   credentials for the instance.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   Specifies the pending port for the DB instance.
+    #   Specifies the pending port for the instance.
     #   @return [Integer]
     #
     # @!attribute [rw] backup_retention_period
@@ -4075,7 +4061,7 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Indicates that the Single-AZ DB instance is to change to a Multi-AZ
+    #   Indicates that the Single-AZ instance is to change to a Multi-AZ
     #   deployment.
     #   @return [Boolean]
     #
@@ -4084,24 +4070,24 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] license_model
-    #   The license model for the DB instance.
+    #   The license model for the instance.
     #
     #   Valid values: `license-included`, `bring-your-own-license`,
     #   `general-public-license`
     #   @return [String]
     #
     # @!attribute [rw] iops
-    #   Specifies the new Provisioned IOPS value for the DB instance that
-    #   will be applied or is currently being applied.
+    #   Specifies the new Provisioned IOPS value for the instance that will
+    #   be applied or is currently being applied.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_identifier
-    #   Contains the new `DBInstanceIdentifier` for the DB instance that
-    #   will be applied or is currently being applied.
+    #   Contains the new `DBInstanceIdentifier` for the instance that will
+    #   be applied or is currently being applied.
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   Specifies the storage type to be associated with the DB instance.
+    #   Specifies the storage type to be associated with the instance.
     #   @return [String]
     #
     # @!attribute [rw] ca_certificate_identifier
@@ -4110,7 +4096,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The new DB subnet group for the DB instance.
+    #   The new subnet group for the instance.
     #   @return [String]
     #
     # @!attribute [rw] pending_cloudwatch_logs_exports
@@ -4149,7 +4135,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_instance_identifier
-    #   The DB instance identifier. This parameter is stored as a lowercase
+    #   The instance identifier. This parameter is stored as a lowercase
     #   string.
     #
     #   Constraints:
@@ -4175,7 +4161,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_instance
-    #   Detailed information about a DB instance.
+    #   Detailed information about an instance.
     #   @return [Types::DBInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RebootDBInstanceResult AWS API Documentation
@@ -4237,19 +4223,19 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_parameter_group_name
-    #   The name of the DB cluster parameter group to reset.
+    #   The name of the cluster parameter group to reset.
     #   @return [String]
     #
     # @!attribute [rw] reset_all_parameters
-    #   A value that is set to `true` to reset all parameters in the DB
-    #   cluster parameter group to their default values, and `false`
-    #   otherwise. You can't use this parameter if there is a list of
-    #   parameter names specified for the `Parameters` parameter.
+    #   A value that is set to `true` to reset all parameters in the cluster
+    #   parameter group to their default values, and `false` otherwise. You
+    #   can't use this parameter if there is a list of parameter names
+    #   specified for the `Parameters` parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] parameters
-    #   A list of parameter names in the DB cluster parameter group to reset
-    #   to the default values. You can't use this parameter if the
+    #   A list of parameter names in the cluster parameter group to reset to
+    #   the default values. You can't use this parameter if the
     #   `ResetAllParameters` parameter is set to `true`.
     #   @return [Array<Types::Parameter>]
     #
@@ -4313,8 +4299,8 @@ module Aws::DocDB
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The name of the DB cluster to create from the DB snapshot or DB
-    #   cluster snapshot. This parameter isn't case sensitive.
+    #   The name of the cluster to create from the snapshot or cluster
+    #   snapshot. This parameter isn't case sensitive.
     #
     #   Constraints:
     #
@@ -4328,12 +4314,11 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] snapshot_identifier
-    #   The identifier for the DB snapshot or DB cluster snapshot to restore
-    #   from.
+    #   The identifier for the snapshot or cluster snapshot to restore from.
     #
     #   You can use either the name or the Amazon Resource Name (ARN) to
-    #   specify a DB cluster snapshot. However, you can use only the ARN to
-    #   specify a DB snapshot.
+    #   specify a cluster snapshot. However, you can use only the ARN to
+    #   specify a snapshot.
     #
     #   Constraints:
     #
@@ -4343,7 +4328,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] engine
-    #   The database engine to use for the new DB cluster.
+    #   The database engine to use for the new cluster.
     #
     #   Default: The same as source.
     #
@@ -4351,19 +4336,19 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The version of the database engine to use for the new DB cluster.
+    #   The version of the database engine to use for the new cluster.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port number on which the new DB cluster accepts connections.
+    #   The port number on which the new cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The same port as the original cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The name of the DB subnet group to use for the new DB cluster.
+    #   The name of the subnet group to use for the new cluster.
     #
     #   Constraints: If provided, must match the name of an existing
     #   `DBSubnetGroup`.
@@ -4373,34 +4358,33 @@ module Aws::DocDB
     #
     # @!attribute [rw] vpc_security_group_ids
     #   A list of virtual private cloud (VPC) security groups that the new
-    #   DB cluster will belong to.
+    #   cluster will belong to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the restored DB cluster.
+    #   The tags to be assigned to the restored cluster.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from a DB snapshot or DB cluster snapshot.
+    #   The AWS KMS key identifier to use when restoring an encrypted
+    #   cluster from a DB snapshot or cluster snapshot.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a DB cluster with the
-    #   same AWS account that owns the AWS KMS encryption key used to
-    #   encrypt the new DB cluster, then you can use the AWS KMS key alias
-    #   instead of the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are restoring a cluster with the same
+    #   AWS account that owns the AWS KMS encryption key used to encrypt the
+    #   new cluster, then you can use the AWS KMS key alias instead of the
+    #   ARN for the AWS KMS encryption key.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
-    #   * If the DB snapshot or DB cluster snapshot in `SnapshotIdentifier`
-    #     is encrypted, then the restored DB cluster is encrypted using the
-    #     AWS KMS key that was used to encrypt the DB snapshot or the DB
-    #     cluster snapshot.
+    #   * If the snapshot or cluster snapshot in `SnapshotIdentifier` is
+    #     encrypted, then the restored cluster is encrypted using the AWS
+    #     KMS key that was used to encrypt the snapshot or the cluster
+    #     snapshot.
     #
-    #   * If the DB snapshot or the DB cluster snapshot in
-    #     `SnapshotIdentifier` is not encrypted, then the restored DB
-    #     cluster is not encrypted.
+    #   * If the snapshot or the cluster snapshot in `SnapshotIdentifier` is
+    #     not encrypted, then the restored DB cluster is not encrypted.
     #   @return [String]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -4435,7 +4419,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotResult AWS API Documentation
@@ -4470,7 +4454,7 @@ module Aws::DocDB
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
-    #   The name of the new DB cluster to be created.
+    #   The name of the new cluster to be created.
     #
     #   Constraints:
     #
@@ -4482,7 +4466,7 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] source_db_cluster_identifier
-    #   The identifier of the source DB cluster from which to restore.
+    #   The identifier of the source cluster from which to restore.
     #
     #   Constraints:
     #
@@ -4492,13 +4476,13 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] restore_to_time
-    #   The date and time to restore the DB cluster to.
+    #   The date and time to restore the cluster to.
     #
     #   Valid values: A time in Universal Coordinated Time (UTC) format.
     #
     #   Constraints:
     #
-    #   * Must be before the latest restorable time for the DB instance.
+    #   * Must be before the latest restorable time for the instance.
     #
     #   * Must be specified if the `UseLatestRestorableTime` parameter is
     #     not provided.
@@ -4513,8 +4497,8 @@ module Aws::DocDB
     #   @return [Time]
     #
     # @!attribute [rw] use_latest_restorable_time
-    #   A value that is set to `true` to restore the DB cluster to the
-    #   latest restorable backup time, and `false` otherwise.
+    #   A value that is set to `true` to restore the cluster to the latest
+    #   restorable backup time, and `false` otherwise.
     #
     #   Default: `false`
     #
@@ -4523,7 +4507,7 @@ module Aws::DocDB
     #   @return [Boolean]
     #
     # @!attribute [rw] port
-    #   The port number on which the new DB cluster accepts connections.
+    #   The port number on which the new cluster accepts connections.
     #
     #   Constraints: Must be a value from `1150` to `65535`.
     #
@@ -4531,7 +4515,7 @@ module Aws::DocDB
     #   @return [Integer]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The DB subnet group name to use for the new DB cluster.
+    #   The subnet group name to use for the new cluster.
     #
     #   Constraints: If provided, must match the name of an existing
     #   `DBSubnetGroup`.
@@ -4540,40 +4524,40 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
-    #   A list of VPC security groups that the new DB cluster belongs to.
+    #   A list of VPC security groups that the new cluster belongs to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the restored DB cluster.
+    #   The tags to be assigned to the restored cluster.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The AWS KMS key identifier to use when restoring an encrypted DB
-    #   cluster from an encrypted DB cluster.
+    #   The AWS KMS key identifier to use when restoring an encrypted
+    #   cluster from an encrypted cluster.
     #
     #   The AWS KMS key identifier is the Amazon Resource Name (ARN) for the
-    #   AWS KMS encryption key. If you are restoring a DB cluster with the
-    #   same AWS account that owns the AWS KMS encryption key used to
-    #   encrypt the new DB cluster, then you can use the AWS KMS key alias
-    #   instead of the ARN for the AWS KMS encryption key.
+    #   AWS KMS encryption key. If you are restoring a cluster with the same
+    #   AWS account that owns the AWS KMS encryption key used to encrypt the
+    #   new cluster, then you can use the AWS KMS key alias instead of the
+    #   ARN for the AWS KMS encryption key.
     #
-    #   You can restore to a new DB cluster and encrypt the new DB cluster
-    #   with an AWS KMS key that is different from the AWS KMS key used to
-    #   encrypt the source DB cluster. The new DB cluster is encrypted with
-    #   the AWS KMS key identified by the `KmsKeyId` parameter.
+    #   You can restore to a new cluster and encrypt the new cluster with an
+    #   AWS KMS key that is different from the AWS KMS key used to encrypt
+    #   the source cluster. The new DB cluster is encrypted with the AWS KMS
+    #   key identified by the `KmsKeyId` parameter.
     #
     #   If you do not specify a value for the `KmsKeyId` parameter, then the
     #   following occurs:
     #
-    #   * If the DB cluster is encrypted, then the restored DB cluster is
+    #   * If the cluster is encrypted, then the restored cluster is
     #     encrypted using the AWS KMS key that was used to encrypt the
-    #     source DB cluster.
+    #     source cluster.
     #
-    #   * If the DB cluster is not encrypted, then the restored DB cluster
-    #     is not encrypted.
+    #   * If the cluster is not encrypted, then the restored cluster is not
+    #     encrypted.
     #
-    #   If `DBClusterIdentifier` refers to a DB cluster that is not
-    #   encrypted, then the restore request is rejected.
+    #   If `DBClusterIdentifier` refers to a cluster that is not encrypted,
+    #   then the restore request is rejected.
     #   @return [String]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
@@ -4607,7 +4591,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
@@ -4637,7 +4621,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StartDBClusterResult AWS API Documentation
@@ -4667,7 +4651,7 @@ module Aws::DocDB
     end
 
     # @!attribute [rw] db_cluster
-    #   Detailed information about a DB cluster.
+    #   Detailed information about a cluster.
     #   @return [Types::DBCluster]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StopDBClusterResult AWS API Documentation
@@ -4750,7 +4734,7 @@ module Aws::DocDB
       include Aws::Structure
     end
 
-    # The version of the database engine that a DB instance can be upgraded
+    # The version of the database engine that an instance can be upgraded
     # to.
     #
     # @!attribute [rw] engine
@@ -4762,8 +4746,8 @@ module Aws::DocDB
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The version of the database engine that a DB instance can be
-    #   upgraded to.
+    #   The version of the database engine that an instance can be upgraded
+    #   to.
     #   @return [String]
     #
     # @!attribute [rw] auto_upgrade

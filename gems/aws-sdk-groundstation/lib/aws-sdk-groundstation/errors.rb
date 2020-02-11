@@ -10,6 +10,27 @@ module Aws::GroundStation
 
     extend Aws::Errors::DynamicErrors
 
+    class DependencyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GroundStation::Types::DependencyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def parameter_name
+        @data[:parameter_name]
+      end
+
+    end
+
     class InvalidParameterException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -31,11 +52,11 @@ module Aws::GroundStation
 
     end
 
-    class DependencyException < ServiceError
+    class ResourceLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::GroundStation::Types::DependencyException] data
+      # @param [Aws::GroundStation::Types::ResourceLimitExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

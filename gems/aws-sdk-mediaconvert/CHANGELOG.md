@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-02-05)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for fine-tuned QVBR quality level.
+
 1.41.0 (2020-01-17)
 ------------------
 

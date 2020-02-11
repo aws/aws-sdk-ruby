@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2020-02-05)
+------------------
+
+* Feature - Adds dataflowEndpointRegion property to DataflowEndpointConfig. The dateCreated, lastUpdated, and tags properties on GetSatellite have been deprecated.
+
 1.4.0 (2019-10-23)
 ------------------
 

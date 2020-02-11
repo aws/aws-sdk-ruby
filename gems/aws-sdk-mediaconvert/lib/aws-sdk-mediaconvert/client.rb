@@ -389,7 +389,7 @@ module Aws::MediaConvert
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -411,7 +411,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -452,7 +452,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -479,7 +479,7 @@ module Aws::MediaConvert
     #             kms_key_region: "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
     #           },
     #           denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #           file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
+    #           file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
     #           filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #           filter_strength: 1,
     #           image_inserter: {
@@ -489,7 +489,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -545,7 +545,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -1107,6 +1107,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
@@ -1150,6 +1151,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
@@ -1273,7 +1275,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -1863,6 +1865,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -1902,6 +1905,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -2108,7 +2112,7 @@ module Aws::MediaConvert
     #     settings: { # required
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -2130,7 +2134,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -2171,7 +2175,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -2201,7 +2205,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -2256,7 +2260,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -2818,6 +2822,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
@@ -2861,6 +2866,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
@@ -2984,7 +2990,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -3548,6 +3554,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -3587,6 +3594,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -4078,6 +4086,7 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
@@ -4121,6 +4130,7 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
@@ -4244,7 +4254,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -4541,6 +4551,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -4580,6 +4591,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -5467,6 +5479,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -5506,6 +5519,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -6169,6 +6183,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -6208,6 +6223,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -6617,6 +6633,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -6656,6 +6673,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -7376,6 +7394,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -7415,6 +7434,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -8122,6 +8142,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -8161,6 +8182,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -8606,6 +8628,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -8645,6 +8668,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.presets[0].settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -8988,7 +9012,7 @@ module Aws::MediaConvert
     #     settings: {
     #       ad_avail_offset: 1,
     #       avail_blanking: {
-    #         avail_blanking_image: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNG",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG",
     #       },
     #       esam: {
     #         manifest_confirm_condition_notification: {
@@ -9010,7 +9034,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternHttpHttpsS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+    #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               offset: 1,
     #               pids: [1],
@@ -9051,7 +9075,7 @@ module Aws::MediaConvert
     #                 },
     #                 file_source_settings: {
     #                   convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                   source_file: "__stringMin14PatternHttpHttpsS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+    #                   source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
     #                   time_delta: 1,
     #                 },
     #                 source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCTE20, SCC, TTML, STL, SRT, SMI, TELETEXT, NULL_SOURCE, IMSC
@@ -9081,7 +9105,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -9136,7 +9160,7 @@ module Aws::MediaConvert
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
     #         },
-    #         input: "__stringMin14Max1285PatternHttpHttpsS3Mov09Png",
+    #         input: "__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
     #         insertion_mode: "MOV", # accepts MOV, PNG
     #         offset: {
     #           image_x: 1,
@@ -9698,6 +9722,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
@@ -9741,6 +9766,7 @@ module Aws::MediaConvert
     #                     qvbr_settings: {
     #                       max_average_bitrate: 1,
     #                       qvbr_quality_level: 1,
+    #                       qvbr_quality_level_fine_tune: 1.0,
     #                     },
     #                     rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #                     sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
@@ -9864,7 +9890,7 @@ module Aws::MediaConvert
     #                         fade_in: 1,
     #                         fade_out: 1,
     #                         height: 1,
-    #                         image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                         image_x: 1,
     #                         image_y: 1,
     #                         layer: 1,
@@ -10425,6 +10451,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -10464,6 +10491,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -10949,6 +10977,7 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             repeat_pps: "DISABLED", # accepts DISABLED, ENABLED
@@ -10992,6 +11021,7 @@ module Aws::MediaConvert
     #             qvbr_settings: {
     #               max_average_bitrate: 1,
     #               qvbr_quality_level: 1,
+    #               qvbr_quality_level_fine_tune: 1.0,
     #             },
     #             rate_control_mode: "VBR", # accepts VBR, CBR, QVBR
     #             sample_adaptive_offset_filter_mode: "DEFAULT", # accepts DEFAULT, ADAPTIVE, OFF
@@ -11115,7 +11145,7 @@ module Aws::MediaConvert
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__stringMin14PatternHttpHttpsS3BmpBMPPngPNGTgaTGA",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA",
     #                 image_x: 1,
     #                 image_y: 1,
     #                 layer: 1,
@@ -11409,6 +11439,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h264_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h264_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h264_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.repeat_pps #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.video_description.codec_settings.h264_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -11448,6 +11479,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.h265_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.max_average_bitrate #=> Integer
     #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.h265_settings.qvbr_settings.qvbr_quality_level_fine_tune #=> Float
     #   resp.preset.settings.video_description.codec_settings.h265_settings.rate_control_mode #=> String, one of "VBR", "CBR", "QVBR"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.sample_adaptive_offset_filter_mode #=> String, one of "DEFAULT", "ADAPTIVE", "OFF"
     #   resp.preset.settings.video_description.codec_settings.h265_settings.scene_change_detect #=> String, one of "DISABLED", "ENABLED", "TRANSITION_DETECTION"
@@ -11657,7 +11689,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

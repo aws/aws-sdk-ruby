@@ -352,6 +352,7 @@ module Aws::GroundStation
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
+    #         dataflow_endpoint_region: "String",
     #       },
     #       tracking_config: {
     #         autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
@@ -443,7 +444,7 @@ module Aws::GroundStation
     # Creates a mission profile.
     #
     # `dataflowEdges` is a list of lists of strings. Each lower level list
-    # of strings has two elements: a *from ARN* and a *to ARN*.
+    # of strings has two elements: a *from* ARN and a *to* ARN.
     #
     # @option params [Integer] :contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
@@ -454,8 +455,8 @@ module Aws::GroundStation
     #   CloudWatch event indicating an upcoming pass.
     #
     # @option params [required, Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a from
-    #   `Config` and a to `Config`.
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
+    #   `Config` and a *to* `Config`.
     #
     # @option params [required, Integer] :minimum_viable_contact_duration_seconds
     #   Smallest amount of time in seconds that you’d like to see for an
@@ -543,7 +544,7 @@ module Aws::GroundStation
     # Deletes a dataflow endpoint group.
     #
     # @option params [required, String] :dataflow_endpoint_group_id
-    #   ID of a dataflow endpoint group.
+    #   UUID of a dataflow endpoint group.
     #
     # @return [Types::DataflowEndpointGroupIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -612,6 +613,7 @@ module Aws::GroundStation
     #   * {Types::DescribeContactResponse#mission_profile_arn #mission_profile_arn} => String
     #   * {Types::DescribeContactResponse#post_pass_end_time #post_pass_end_time} => Time
     #   * {Types::DescribeContactResponse#pre_pass_start_time #pre_pass_start_time} => Time
+    #   * {Types::DescribeContactResponse#region #region} => String
     #   * {Types::DescribeContactResponse#satellite_arn #satellite_arn} => String
     #   * {Types::DescribeContactResponse#start_time #start_time} => Time
     #   * {Types::DescribeContactResponse#tags #tags} => Hash&lt;String,String&gt;
@@ -625,7 +627,7 @@ module Aws::GroundStation
     # @example Response structure
     #
     #   resp.contact_id #=> String
-    #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
+    #   resp.contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
     #   resp.end_time #=> Time
     #   resp.error_message #=> String
     #   resp.ground_station #=> String
@@ -634,6 +636,7 @@ module Aws::GroundStation
     #   resp.mission_profile_arn #=> String
     #   resp.post_pass_end_time #=> Time
     #   resp.pre_pass_start_time #=> Time
+    #   resp.region #=> String
     #   resp.satellite_arn #=> String
     #   resp.start_time #=> Time
     #   resp.tags #=> Hash
@@ -695,6 +698,7 @@ module Aws::GroundStation
     #   resp.config_data.antenna_uplink_config.target_eirp.units #=> String, one of "dBW"
     #   resp.config_data.antenna_uplink_config.target_eirp.value #=> Float
     #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_name #=> String
+    #   resp.config_data.dataflow_endpoint_config.dataflow_endpoint_region #=> String
     #   resp.config_data.tracking_config.autotrack #=> String, one of "PREFERRED", "REMOVED", "REQUIRED"
     #   resp.config_data.uplink_echo_config.antenna_uplink_config_arn #=> String
     #   resp.config_data.uplink_echo_config.enabled #=> Boolean
@@ -757,6 +761,46 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Returns the number of minutes used by account.
+    #
+    # @option params [required, Integer] :month
+    #   The month being requested, with a value of 1-12.
+    #
+    # @option params [required, Integer] :year
+    #   The year being requested, in the format of YYYY.
+    #
+    # @return [Types::GetMinuteUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMinuteUsageResponse#estimated_minutes_remaining #estimated_minutes_remaining} => Integer
+    #   * {Types::GetMinuteUsageResponse#is_reserved_minutes_customer #is_reserved_minutes_customer} => Boolean
+    #   * {Types::GetMinuteUsageResponse#total_reserved_minute_allocation #total_reserved_minute_allocation} => Integer
+    #   * {Types::GetMinuteUsageResponse#total_scheduled_minutes #total_scheduled_minutes} => Integer
+    #   * {Types::GetMinuteUsageResponse#upcoming_minutes_scheduled #upcoming_minutes_scheduled} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_minute_usage({
+    #     month: 1, # required
+    #     year: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.estimated_minutes_remaining #=> Integer
+    #   resp.is_reserved_minutes_customer #=> Boolean
+    #   resp.total_reserved_minute_allocation #=> Integer
+    #   resp.total_scheduled_minutes #=> Integer
+    #   resp.upcoming_minutes_scheduled #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsage AWS API Documentation
+    #
+    # @overload get_minute_usage(params = {})
+    # @param [Hash] params ({})
+    def get_minute_usage(params = {}, options = {})
+      req = build_request(:get_minute_usage, params)
+      req.send_request(options)
+    end
+
     # Returns a mission profile.
     #
     # @option params [required, String] :mission_profile_id
@@ -806,6 +850,41 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Returns a satellite.
+    #
+    # @option params [required, String] :satellite_id
+    #   UUID of a satellite.
+    #
+    # @return [Types::GetSatelliteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSatelliteResponse#ground_stations #ground_stations} => Array&lt;String&gt;
+    #   * {Types::GetSatelliteResponse#norad_satellite_id #norad_satellite_id} => Integer
+    #   * {Types::GetSatelliteResponse#satellite_arn #satellite_arn} => String
+    #   * {Types::GetSatelliteResponse#satellite_id #satellite_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_satellite({
+    #     satellite_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ground_stations #=> Array
+    #   resp.ground_stations[0] #=> String
+    #   resp.norad_satellite_id #=> Integer
+    #   resp.satellite_arn #=> String
+    #   resp.satellite_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetSatellite AWS API Documentation
+    #
+    # @overload get_satellite(params = {})
+    # @param [Hash] params ({})
+    def get_satellite(params = {}, options = {})
+      req = build_request(:get_satellite, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `Config` objects.
     #
     # @option params [Integer] :max_results
@@ -848,7 +927,7 @@ module Aws::GroundStation
     # Returns a list of contacts.
     #
     # If `statusList` contains AVAILABLE, the request must include
-    # `groundstation`, `missionprofileArn`, and `satelliteArn`.
+    # `groundStation`, `missionprofileArn`, and `satelliteArn`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
     #   End time of a contact.
@@ -890,14 +969,14 @@ module Aws::GroundStation
     #     next_token: "String",
     #     satellite_arn: "satelliteArn",
     #     start_time: Time.now, # required
-    #     status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, CANCELLED, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
+    #     status_list: ["AVAILABLE"], # required, accepts AVAILABLE, AWS_CANCELLED, CANCELLED, CANCELLING, COMPLETED, FAILED, FAILED_TO_SCHEDULE, PASS, POSTPASS, PREPASS, SCHEDULED, SCHEDULING
     #   })
     #
     # @example Response structure
     #
     #   resp.contact_list #=> Array
     #   resp.contact_list[0].contact_id #=> String
-    #   resp.contact_list[0].contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
+    #   resp.contact_list[0].contact_status #=> String, one of "AVAILABLE", "AWS_CANCELLED", "CANCELLED", "CANCELLING", "COMPLETED", "FAILED", "FAILED_TO_SCHEDULE", "PASS", "POSTPASS", "PREPASS", "SCHEDULED", "SCHEDULING"
     #   resp.contact_list[0].end_time #=> Time
     #   resp.contact_list[0].error_message #=> String
     #   resp.contact_list[0].ground_station #=> String
@@ -906,6 +985,7 @@ module Aws::GroundStation
     #   resp.contact_list[0].mission_profile_arn #=> String
     #   resp.contact_list[0].post_pass_end_time #=> Time
     #   resp.contact_list[0].pre_pass_start_time #=> Time
+    #   resp.contact_list[0].region #=> String
     #   resp.contact_list[0].satellite_arn #=> String
     #   resp.contact_list[0].start_time #=> Time
     #   resp.contact_list[0].tags #=> Hash
@@ -959,6 +1039,48 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Returns a list of ground stations.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of ground stations returned.
+    #
+    # @option params [String] :next_token
+    #   Next token that can be supplied in the next call to get the next page
+    #   of ground stations.
+    #
+    # @option params [String] :satellite_id
+    #   Satellite ID to retrieve on-boarded ground stations.
+    #
+    # @return [Types::ListGroundStationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroundStationsResponse#ground_station_list #ground_station_list} => Array&lt;Types::GroundStationData&gt;
+    #   * {Types::ListGroundStationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ground_stations({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     satellite_id: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ground_station_list #=> Array
+    #   resp.ground_station_list[0].ground_station_id #=> String
+    #   resp.ground_station_list[0].ground_station_name #=> String
+    #   resp.ground_station_list[0].region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations AWS API Documentation
+    #
+    # @overload list_ground_stations(params = {})
+    # @param [Hash] params ({})
+    def list_ground_stations(params = {}, options = {})
+      req = build_request(:list_ground_stations, params)
+      req.send_request(options)
+    end
+
     # Returns a list of mission profiles.
     #
     # @option params [Integer] :max_results
@@ -995,6 +1117,75 @@ module Aws::GroundStation
     # @param [Hash] params ({})
     def list_mission_profiles(params = {}, options = {})
       req = build_request(:list_mission_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of satellites.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of satellites returned.
+    #
+    # @option params [String] :next_token
+    #   Next token that can be supplied in the next call to get the next page
+    #   of satellites.
+    #
+    # @return [Types::ListSatellitesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSatellitesResponse#next_token #next_token} => String
+    #   * {Types::ListSatellitesResponse#satellites #satellites} => Array&lt;Types::SatelliteListItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_satellites({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.satellites #=> Array
+    #   resp.satellites[0].ground_stations #=> Array
+    #   resp.satellites[0].ground_stations[0] #=> String
+    #   resp.satellites[0].norad_satellite_id #=> Integer
+    #   resp.satellites[0].satellite_arn #=> String
+    #   resp.satellites[0].satellite_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites AWS API Documentation
+    #
+    # @overload list_satellites(params = {})
+    # @param [Hash] params ({})
+    def list_satellites(params = {}, options = {})
+      req = build_request(:list_satellites, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of tags for a specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
       req.send_request(options)
     end
 
@@ -1048,13 +1239,67 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
+    # Assigns a tag to a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a resource tag.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   Tags assigned to a resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deassigns a resource tag.
+    #
+    # @option params [required, String] :resource_arn
+    #   ARN of a resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   Keys of a resource tag.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["String"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates the `Config` used when scheduling contacts.
     #
     # Updating a `Config` will not update the execution parameters for
     # existing future contacts scheduled with this `Config`.
     #
     # @option params [required, Types::ConfigTypeData] :config_data
-    #   Parameters for a `Config`.
+    #   Parameters of a `Config`.
     #
     # @option params [required, String] :config_id
     #   UUID of a `Config`.
@@ -1122,6 +1367,7 @@ module Aws::GroundStation
     #       },
     #       dataflow_endpoint_config: {
     #         dataflow_endpoint_name: "String", # required
+    #         dataflow_endpoint_region: "String",
     #       },
     #       tracking_config: {
     #         autotrack: "PREFERRED", # required, accepts PREFERRED, REMOVED, REQUIRED
@@ -1165,8 +1411,8 @@ module Aws::GroundStation
     #   CloudWatch event indicating the pass has finished.
     #
     # @option params [Array<Array>] :dataflow_edges
-    #   A list of lists of ARNs. Each list of ARNs is an edge, with a from
-    #   `Config` and a to `Config`.
+    #   A list of lists of ARNs. Each list of ARNs is an edge, with a *from*
+    #   `Config` and a *to* `Config`.
     #
     # @option params [Integer] :minimum_viable_contact_duration_seconds
     #   Smallest amount of time in seconds that you’d like to see for an
@@ -1174,7 +1420,7 @@ module Aws::GroundStation
     #   contacts shorter than this duration.
     #
     # @option params [required, String] :mission_profile_id
-    #   ID of a mission profile.
+    #   UUID of a mission profile.
     #
     # @option params [String] :name
     #   Name of a mission profile.
@@ -1213,244 +1459,6 @@ module Aws::GroundStation
       req.send_request(options)
     end
 
-    # Returns the number of minutes used by account.
-    #
-    # @option params [required, Integer] :month
-    #   The month being requested, with a value of 1-12.
-    #
-    # @option params [required, Integer] :year
-    #   The year being requested, in the format of YYYY.
-    #
-    # @return [Types::GetMinuteUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetMinuteUsageResponse#estimated_minutes_remaining #estimated_minutes_remaining} => Integer
-    #   * {Types::GetMinuteUsageResponse#is_reserved_minutes_customer #is_reserved_minutes_customer} => Boolean
-    #   * {Types::GetMinuteUsageResponse#total_reserved_minute_allocation #total_reserved_minute_allocation} => Integer
-    #   * {Types::GetMinuteUsageResponse#total_scheduled_minutes #total_scheduled_minutes} => Integer
-    #   * {Types::GetMinuteUsageResponse#upcoming_minutes_scheduled #upcoming_minutes_scheduled} => Integer
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_minute_usage({
-    #     month: 1, # required
-    #     year: 1, # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.estimated_minutes_remaining #=> Integer
-    #   resp.is_reserved_minutes_customer #=> Boolean
-    #   resp.total_reserved_minute_allocation #=> Integer
-    #   resp.total_scheduled_minutes #=> Integer
-    #   resp.upcoming_minutes_scheduled #=> Integer
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetMinuteUsage AWS API Documentation
-    #
-    # @overload get_minute_usage(params = {})
-    # @param [Hash] params ({})
-    def get_minute_usage(params = {}, options = {})
-      req = build_request(:get_minute_usage, params)
-      req.send_request(options)
-    end
-
-    # Returns a satellite.
-    #
-    # @option params [required, String] :satellite_id
-    #   UUID of a satellite.
-    #
-    # @return [Types::GetSatelliteResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::GetSatelliteResponse#date_created #date_created} => Time
-    #   * {Types::GetSatelliteResponse#last_updated #last_updated} => Time
-    #   * {Types::GetSatelliteResponse#norad_satellite_id #norad_satellite_id} => Integer
-    #   * {Types::GetSatelliteResponse#satellite_arn #satellite_arn} => String
-    #   * {Types::GetSatelliteResponse#satellite_id #satellite_id} => String
-    #   * {Types::GetSatelliteResponse#tags #tags} => Hash&lt;String,String&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_satellite({
-    #     satellite_id: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.date_created #=> Time
-    #   resp.last_updated #=> Time
-    #   resp.norad_satellite_id #=> Integer
-    #   resp.satellite_arn #=> String
-    #   resp.satellite_id #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["String"] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/GetSatellite AWS API Documentation
-    #
-    # @overload get_satellite(params = {})
-    # @param [Hash] params ({})
-    def get_satellite(params = {}, options = {})
-      req = build_request(:get_satellite, params)
-      req.send_request(options)
-    end
-
-    # Returns a list of ground stations.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of ground stations returned.
-    #
-    # @option params [String] :next_token
-    #   Next token that can be supplied in the next call to get the next page
-    #   of ground stations.
-    #
-    # @return [Types::ListGroundStationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListGroundStationsResponse#ground_station_list #ground_station_list} => Array&lt;Types::GroundStationData&gt;
-    #   * {Types::ListGroundStationsResponse#next_token #next_token} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_ground_stations({
-    #     max_results: 1,
-    #     next_token: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.ground_station_list #=> Array
-    #   resp.ground_station_list[0].ground_station_id #=> String
-    #   resp.ground_station_list[0].ground_station_name #=> String
-    #   resp.ground_station_list[0].region #=> String
-    #   resp.next_token #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListGroundStations AWS API Documentation
-    #
-    # @overload list_ground_stations(params = {})
-    # @param [Hash] params ({})
-    def list_ground_stations(params = {}, options = {})
-      req = build_request(:list_ground_stations, params)
-      req.send_request(options)
-    end
-
-    # Returns a list of satellites.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of satellites returned.
-    #
-    # @option params [String] :next_token
-    #   Next token that can be supplied in the next call to get the next page
-    #   of satellites.
-    #
-    # @return [Types::ListSatellitesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListSatellitesResponse#next_token #next_token} => String
-    #   * {Types::ListSatellitesResponse#satellites #satellites} => Array&lt;Types::SatelliteListItem&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_satellites({
-    #     max_results: 1,
-    #     next_token: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.next_token #=> String
-    #   resp.satellites #=> Array
-    #   resp.satellites[0].norad_satellite_id #=> Integer
-    #   resp.satellites[0].satellite_arn #=> String
-    #   resp.satellites[0].satellite_id #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListSatellites AWS API Documentation
-    #
-    # @overload list_satellites(params = {})
-    # @param [Hash] params ({})
-    def list_satellites(params = {}, options = {})
-      req = build_request(:list_satellites, params)
-      req.send_request(options)
-    end
-
-    # Returns a list of tags or a specified resource.
-    #
-    # @option params [required, String] :resource_arn
-    #   ARN of a resource.
-    #
-    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_tags_for_resource({
-    #     resource_arn: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.tags #=> Hash
-    #   resp.tags["String"] #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ListTagsForResource AWS API Documentation
-    #
-    # @overload list_tags_for_resource(params = {})
-    # @param [Hash] params ({})
-    def list_tags_for_resource(params = {}, options = {})
-      req = build_request(:list_tags_for_resource, params)
-      req.send_request(options)
-    end
-
-    # Assigns a tag to a resource.
-    #
-    # @option params [required, String] :resource_arn
-    #   ARN of a resource tag.
-    #
-    # @option params [Hash<String,String>] :tags
-    #   Tags assigned to a resource.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.tag_resource({
-    #     resource_arn: "String", # required
-    #     tags: {
-    #       "String" => "String",
-    #     },
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/TagResource AWS API Documentation
-    #
-    # @overload tag_resource(params = {})
-    # @param [Hash] params ({})
-    def tag_resource(params = {}, options = {})
-      req = build_request(:tag_resource, params)
-      req.send_request(options)
-    end
-
-    # Deassigns a resource tag.
-    #
-    # @option params [required, String] :resource_arn
-    #   ARN of a resource.
-    #
-    # @option params [required, Array<String>] :tag_keys
-    #   Keys of a resource tag.
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.untag_resource({
-    #     resource_arn: "String", # required
-    #     tag_keys: ["String"], # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/UntagResource AWS API Documentation
-    #
-    # @overload untag_resource(params = {})
-    # @param [Hash] params ({})
-    def untag_resource(params = {}, options = {})
-      req = build_request(:untag_resource, params)
-      req.send_request(options)
-    end
-
     # @!endgroup
 
     # @param params ({})
@@ -1464,7 +1472,7 @@ module Aws::GroundStation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

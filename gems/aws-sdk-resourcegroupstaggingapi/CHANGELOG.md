@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-02-05)
+------------------
+
+* Feature - Documentation-only update that adds services to the list of supported services.
+
 1.21.0 (2019-12-18)
 ------------------
 

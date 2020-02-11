@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.
+
 3.89.1 (2020-01-14)
 ------------------
 

@@ -572,9 +572,9 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Optional parameters that can be added to the policy. The set of valid
-    # parameters depends on the combination of `policyType` and
-    # `resourceType` values.
+    # Specifies optional parameters to add to a policy. The set of valid
+    # parameters depends on the combination of policy type and resource
+    # type.
     #
     # @note When making an API call, you may pass Parameters
     #   data as a hash:
@@ -584,10 +584,13 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] exclude_boot_volume
-    #   When executing an EBS Snapshot Management – Instance policy, execute
-    #   all CreateSnapshots calls with the `excludeBootVolume` set to the
-    #   supplied field. Defaults to false. Only valid for EBS Snapshot
-    #   Management – Instance policies.
+    #   \[EBS Snapshot Management – Instance policies only\] Indicates
+    #   whether to exclude the root volume from snapshots created using
+    #   [CreateSnapshots][1]. The default is false.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSnapshots.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/Parameters AWS API Documentation
@@ -663,9 +666,8 @@ module Aws::DLM
     #       }
     #
     # @!attribute [rw] policy_type
-    #   This field determines the valid target resource types and actions a
-    #   policy can manage. This field defaults to EBS\_SNAPSHOT\_MANAGEMENT
-    #   if not present.
+    #   The valid target resource types and actions a policy can manage. The
+    #   default is EBS\_SNAPSHOT\_MANAGEMENT.
     #   @return [String]
     #
     # @!attribute [rw] resource_types
@@ -681,7 +683,7 @@ module Aws::DLM
     #   @return [Array<Types::Schedule>]
     #
     # @!attribute [rw] parameters
-    #   A set of optional parameters that can be provided by the policy.
+    #   A set of optional parameters for the policy.
     #   @return [Types::Parameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dlm-2018-01-12/PolicyDetails AWS API Documentation
@@ -756,7 +758,7 @@ module Aws::DLM
       include Aws::Structure
     end
 
-    # Specifies a schedule.
+    # Specifies a backup schedule.
     #
     # @note When making an API call, you may pass Schedule
     #   data as a hash:

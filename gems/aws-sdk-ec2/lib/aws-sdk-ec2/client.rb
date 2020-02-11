@@ -4629,9 +4629,9 @@ module Aws::EC2
     #   captured and aggregated into a flow log record. You can specify 60
     #   seconds (1 minute) or 600 seconds (10 minutes).
     #
-    #   For network interfaces attached to [Nitro-based instances][1], the
-    #   aggregation interval is always 60 seconds, regardless of the value
-    #   that you specify.
+    #   When a network interface is attached to a [Nitro-based instance][1],
+    #   the aggregation interval is always 60 seconds or less, regardless of
+    #   the value that you specify.
     #
     #   Default: 600
     #
@@ -8371,7 +8371,8 @@ module Aws::EC2
     #   The Amazon Resource Name (ARN) of the Outpost.
     #
     # @option params [Integer] :size
-    #   The size of the volume, in GiBs.
+    #   The size of the volume, in GiBs. You must specify either a snapshot ID
+    #   or a volume size.
     #
     #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
     #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
@@ -8381,16 +8382,9 @@ module Aws::EC2
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     #
-    #   <note markdown="1"> At least one of Size or SnapshotId is required.
-    #
-    #    </note>
-    #
     # @option params [String] :snapshot_id
-    #   The snapshot from which to create the volume.
-    #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
-    #
-    #    </note>
+    #   The snapshot from which to create the volume. You must specify either
+    #   a snapshot ID or a volume size.
     #
     # @option params [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
@@ -8763,6 +8757,9 @@ module Aws::EC2
     #
     #   Default: `true`
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to associate with the endpoint.
+    #
     # @return [Types::CreateVpcEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcEndpointResult#vpc_endpoint #vpc_endpoint} => Types::VpcEndpoint
@@ -8781,6 +8778,17 @@ module Aws::EC2
     #     security_group_ids: ["String"],
     #     client_token: "String",
     #     private_dns_enabled: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8947,6 +8955,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to associate with the service.
+    #
     # @return [Types::CreateVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateVpcEndpointServiceConfigurationResult#service_configuration #service_configuration} => Types::ServiceConfiguration
@@ -8960,6 +8971,17 @@ module Aws::EC2
     #     private_dns_name: "String",
     #     network_load_balancer_arns: ["String"], # required
     #     client_token: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -14962,6 +14984,8 @@ module Aws::EC2
     #   resp.images[0].kernel_id #=> String
     #   resp.images[0].owner_id #=> String
     #   resp.images[0].platform #=> String, one of "Windows"
+    #   resp.images[0].platform_details #=> String
+    #   resp.images[0].usage_operation #=> String
     #   resp.images[0].product_codes #=> Array
     #   resp.images[0].product_codes[0].product_code_id #=> String
     #   resp.images[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
@@ -20153,7 +20177,7 @@ module Aws::EC2
     # * *implicit*\: An AWS account has implicit create volume permissions
     #   for all snapshots it owns.
     #
-    # The list of snapshots returned can be modified by specifying snapshot
+    # The list of snapshots returned can be filtered by specifying snapshot
     # IDs, snapshot owners, or AWS accounts with create volume permissions.
     # If no options are specified, Amazon EC2 returns all snapshots for
     # which you have create volume permissions.
@@ -20181,6 +20205,9 @@ module Aws::EC2
     # results is returned along with a `NextToken` value that can be passed
     # to a subsequent `DescribeSnapshots` request to retrieve the remaining
     # results.
+    #
+    # To get the state of fast snapshot restores for a snapshot, use
+    # DescribeFastSnapshotRestores.
     #
     # For more information about EBS snapshots, see [Amazon EBS
     # Snapshots][1] in the *Amazon Elastic Compute Cloud User Guide*.
@@ -20826,8 +20853,16 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups[0].arn #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_pools_to_use_count #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].resource_type #=> String, one of "client-vpn-endpoint", "customer-gateway", "dedicated-host", "dhcp-options", "elastic-ip", "fleet", "fpga-image", "host-reservation", "image", "instance", "internet-gateway", "key-pair", "launch-template", "natgateway", "network-acl", "network-interface", "placement-group", "reserved-instances", "route-table", "security-group", "snapshot", "spot-fleet-request", "spot-instances-request", "subnet", "traffic-mirror-filter", "traffic-mirror-session", "traffic-mirror-target", "transit-gateway", "transit-gateway-attachment", "transit-gateway-multicast-domain", "transit-gateway-route-table", "volume", "vpc", "vpc-peering-connection", "vpn-connection", "vpn-gateway"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags[0].key #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.tag_specifications[0].tags[0].value #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
+    #   resp.spot_fleet_request_configs[0].tags #=> Array
+    #   resp.spot_fleet_request_configs[0].tags[0].key #=> String
+    #   resp.spot_fleet_request_configs[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequests AWS API Documentation
     #
@@ -22782,6 +22817,10 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `fast-restored` - Indicates whether the volume was created from a
+    #     snapshot that is enabled for fast snapshot restore (`true` \|
+    #     `false`).
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -25296,6 +25335,13 @@ module Aws::EC2
     # the `enabled` state. To get the current state of fast snapshot
     # restores, use DescribeFastSnapshotRestores. To disable fast snapshot
     # restores, use DisableFastSnapshotRestores.
+    #
+    # For more information, see [Amazon EBS Fast Snapshot Restore][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-fast-snapshot-restore.html
     #
     # @option params [required, Array<String>] :availability_zones
     #   One or more Availability Zones. For example, `us-east-2a`.
@@ -31402,22 +31448,24 @@ module Aws::EC2
     # (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing
     # product code associated with an AMI to verify the subscription status
     # for package updates. To create a new AMI for operating systems that
-    # require a billing product code, do the following:
+    # require a billing product code, instead of registering the AMI, do the
+    # following to preserve the billing product code association:
     #
     # 1.  Launch an instance from an existing AMI with that billing product
     #     code.
     #
     # 2.  Customize the instance.
     #
-    # 3.  Create a new AMI from the instance using CreateImage to preserve
-    #     the billing product code association.
+    # 3.  Create an AMI from the instance using CreateImage.
     #
     # If you purchase a Reserved Instance to apply to an On-Demand Instance
     # that was launched from an AMI with a billing product code, make sure
     # that the Reserved Instance has the matching billing product code. If
     # you purchase a Reserved Instance without the matching billing product
     # code, the Reserved Instance will not be applied to the On-Demand
-    # Instance.
+    # Instance. For information about how to obtain the platform details and
+    # billing information of an AMI, see [Obtaining Billing Information][3]
+    # in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # If needed, you can deregister an AMI at any time. Any modifications
     # you make to an AMI backed by an instance store volume invalidates its
@@ -31428,6 +31476,7 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
     #
     # @option params [String] :image_location
     #   The full path to your AMI manifest in Amazon S3 storage. The specified
@@ -32531,9 +32580,9 @@ module Aws::EC2
     # are in different Spot pools, you can improve the availability of your
     # fleet.
     #
-    # You can specify tags for the Spot Instances. You cannot tag other
-    # resource types in a Spot Fleet request because only the `instance`
-    # resource type is supported.
+    # You can specify tags for the Spot Fleet and Spot Instances. You cannot
+    # tag other resource types in a Spot Fleet request because only the
+    # `spot-fleet-request` and `instance` resource types are supported.
     #
     # For more information, see [Spot Fleet Requests][1] in the *Amazon EC2
     # User Guide for Linux Instances*.
@@ -32851,6 +32900,17 @@ module Aws::EC2
     #         },
     #       },
     #       instance_pools_to_use_count: 1,
+    #       tag_specifications: [
+    #         {
+    #           resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #           tags: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -35206,11 +35266,10 @@ module Aws::EC2
     # EC2 charges a one-minute minimum for instance usage, and thereafter
     # charges per second for instance usage.
     #
-    # You can't start, stop, or hibernate Spot Instances, and you can't
-    # stop or hibernate instance store-backed instances. For information
-    # about using hibernation for Spot Instances, see [Hibernating
-    # Interrupted Spot Instances][4] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # You can't hibernate Spot Instances, and you can't stop or hibernate
+    # instance store-backed instances. For information about using
+    # hibernation for Spot Instances, see [Hibernating Interrupted Spot
+    # Instances][4] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # When you stop or hibernate an instance, we shut it down. You can
     # restart your instance at any time. Before stopping or hibernating an
@@ -35895,7 +35954,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

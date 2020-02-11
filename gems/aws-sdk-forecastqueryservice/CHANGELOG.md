@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-02-05)
+------------------
+
+* Feature - Documentation updates for Amazon Forecast.
+
 1.1.0 (2019-10-23)
 ------------------
 
