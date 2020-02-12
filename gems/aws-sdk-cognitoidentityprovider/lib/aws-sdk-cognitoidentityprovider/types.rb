@@ -943,7 +943,7 @@ module Aws::CognitoIdentityProvider
     #         client_id: "ClientIdType", # required
     #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #         auth_parameters: {
-    #           "StringType" => "StringType",
+    #           "StringType" => "AuthParametersValueType",
     #         },
     #         client_metadata: {
     #           "StringType" => "StringType",
@@ -2940,8 +2940,60 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] provider_details
-    #   The identity provider details, such as `MetadataURL` and
-    #   `MetadataFile`.
+    #   The identity provider details. The following list describes the
+    #   provider detail keys for each identity provider type.
+    #
+    #   * For Google, Facebook and Login with Amazon:
+    #
+    #     * client\_id
+    #
+    #     * client\_secret
+    #
+    #     * authorize\_scopes
+    #
+    #   * For Sign in with Apple:
+    #
+    #     * client\_id
+    #
+    #     * team\_id
+    #
+    #     * key\_id
+    #
+    #     * private\_key
+    #
+    #     * authorize\_scopes
+    #
+    #   * For OIDC providers:
+    #
+    #     * client\_id
+    #
+    #     * client\_secret
+    #
+    #     * attributes\_request\_method
+    #
+    #     * oidc\_issuer
+    #
+    #     * authorize\_scopes
+    #
+    #     * authorize\_url *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * token\_url *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * attributes\_url *if not available from discovery URL specified
+    #       by oidc\_issuer key*
+    #
+    #     * jwks\_uri *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * authorize\_scopes
+    #
+    #   * For SAML providers:
+    #
+    #     * MetadataFile OR MetadataURL
+    #
+    #     * IDPSignOut *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -3233,23 +3285,29 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
+    #   The allowed OAuth flows.
+    #
     #   Set to `code` to initiate a code grant flow, which provides an
     #   authorization code as the response. This code can be exchanged for
     #   access tokens with the token endpoint.
     #
-    #   Set to `token` to specify that the client should get the access
+    #   Set to `implicit` to specify that the client should get the access
     #   token (and, optionally, ID token, based on scopes) directly.
+    #
+    #   Set to `client_credentials` to specify that the client should get
+    #   the access token (and, optionally, ID token, based on scopes) from
+    #   the token endpoint using a combination of client and client\_secret.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_scopes
-    #   A list of allowed `OAuth` scopes. Currently supported values are
-    #   `"phone"`, `"email"`, `"openid"`, and `"Cognito"`. In addition to
-    #   these values, custom scopes created in Resource Servers are also
-    #   supported.
+    #   The allowed OAuth scopes. Possible values provided by OAuth are:
+    #   `phone`, `email`, `openid`, and `profile`. Possible values provided
+    #   by AWS are: `aws.cognito.signin.user.admin`. Custom scopes created
+    #   in Resource Servers are also supported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_flows_user_pool_client
-    #   Set to `True` if the client is allowed to follow the OAuth protocol
+    #   Set to true if the client is allowed to follow the OAuth protocol
     #   when interacting with Cognito user pools.
     #   @return [Boolean]
     #
@@ -3294,7 +3352,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * ResendConfirmationCode
     #
-    #   <note markdown="1"> After January 1st 2020, the value of `PreventUserExistenceErrors`
+    #   <note markdown="1"> After February 15th 2020, the value of `PreventUserExistenceErrors`
     #   will default to `ENABLED` for newly created user pool clients if no
     #   value is provided.
     #
@@ -3484,6 +3542,9 @@ module Aws::CognitoIdentityProvider
     #         user_pool_add_ons: {
     #           advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
     #         },
+    #         username_configuration: {
+    #           case_sensitive: false, # required
+    #         },
     #         account_recovery_setting: {
     #           recovery_mechanisms: [
     #             {
@@ -3597,6 +3658,14 @@ module Aws::CognitoIdentityProvider
     #   `AdvancedSecurityMode` to the value "AUDIT".
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] username_configuration
+    #   You can choose to set case sensitivity on the username input for the
+    #   selected sign-in option. For example, when this is set to `False`,
+    #   users will be able to sign in using either "username" or
+    #   "Username". This configuration is immutable once it has been set.
+    #   For more information, see .
+    #   @return [Types::UsernameConfigurationType]
+    #
     # @!attribute [rw] account_recovery_setting
     #   Use this setting to define which verified available method a user
     #   can use to recover their password when they call `ForgotPassword`.
@@ -3637,6 +3706,7 @@ module Aws::CognitoIdentityProvider
       :admin_create_user_config,
       :schema,
       :user_pool_add_ons,
+      :username_configuration,
       :account_recovery_setting)
       include Aws::Structure
     end
@@ -5193,8 +5263,60 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] provider_details
-    #   The identity provider details, such as `MetadataURL` and
-    #   `MetadataFile`.
+    #   The identity provider details. The following list describes the
+    #   provider detail keys for each identity provider type.
+    #
+    #   * For Google, Facebook and Login with Amazon:
+    #
+    #     * client\_id
+    #
+    #     * client\_secret
+    #
+    #     * authorize\_scopes
+    #
+    #   * For Sign in with Apple:
+    #
+    #     * client\_id
+    #
+    #     * team\_id
+    #
+    #     * key\_id
+    #
+    #     * private\_key
+    #
+    #     * authorize\_scopes
+    #
+    #   * For OIDC providers:
+    #
+    #     * client\_id
+    #
+    #     * client\_secret
+    #
+    #     * attributes\_request\_method
+    #
+    #     * oidc\_issuer
+    #
+    #     * authorize\_scopes
+    #
+    #     * authorize\_url *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * token\_url *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * attributes\_url *if not available from discovery URL specified
+    #       by oidc\_issuer key*
+    #
+    #     * jwks\_uri *if not available from discovery URL specified by
+    #       oidc\_issuer key*
+    #
+    #     * authorize\_scopes
+    #
+    #   * For SAML providers:
+    #
+    #     * MetadataFile OR MetadataURL
+    #
+    #     * IDPSignOut *optional*
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -5236,7 +5358,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH, ADMIN_USER_PASSWORD_AUTH
     #         auth_parameters: {
-    #           "StringType" => "StringType",
+    #           "StringType" => "AuthParametersValueType",
     #         },
     #         client_metadata: {
     #           "StringType" => "StringType",
@@ -7144,7 +7266,21 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] developer_only_attribute
-    #   Specifies whether the attribute type is developer only.
+    #   <note markdown="1"> We recommend that you use [WriteAttributes][1] in the user pool
+    #   client to control how attributes can be mutated for new use cases
+    #   instead of using `DeveloperOnlyAttribute`.
+    #
+    #    </note>
+    #
+    #   Specifies whether the attribute type is developer only. This
+    #   attribute can only be modified by an administrator. Users will not
+    #   be able to modify this attribute using their access token. For
+    #   example, `DeveloperOnlyAttribute` can be modified using the API but
+    #   cannot be updated using the API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes
     #   @return [Boolean]
     #
     # @!attribute [rw] mutable
@@ -8558,20 +8694,29 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
+    #   The allowed OAuth flows.
+    #
     #   Set to `code` to initiate a code grant flow, which provides an
     #   authorization code as the response. This code can be exchanged for
     #   access tokens with the token endpoint.
+    #
+    #   Set to `implicit` to specify that the client should get the access
+    #   token (and, optionally, ID token, based on scopes) directly.
+    #
+    #   Set to `client_credentials` to specify that the client should get
+    #   the access token (and, optionally, ID token, based on scopes) from
+    #   the token endpoint using a combination of client and client\_secret.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_scopes
-    #   A list of allowed `OAuth` scopes. Currently supported values are
-    #   `"phone"`, `"email"`, `"openid"`, and `"Cognito"`. In addition to
-    #   these values, custom scopes created in Resource Servers are also
-    #   supported.
+    #   The allowed OAuth scopes. Possible values provided by OAuth are:
+    #   `phone`, `email`, `openid`, and `profile`. Possible values provided
+    #   by AWS are: `aws.cognito.signin.user.admin`. Custom scopes created
+    #   in Resource Servers are also supported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_flows_user_pool_client
-    #   Set to TRUE if the client is allowed to follow the OAuth protocol
+    #   Set to true if the client is allowed to follow the OAuth protocol
     #   when interacting with Cognito user pools.
     #   @return [Boolean]
     #
@@ -8616,7 +8761,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * ResendConfirmationCode
     #
-    #   <note markdown="1"> After January 1st 2020, the value of `PreventUserExistenceErrors`
+    #   <note markdown="1"> After February 15th 2020, the value of `PreventUserExistenceErrors`
     #   will default to `ENABLED` for newly created user pool clients if no
     #   value is provided.
     #
@@ -9273,23 +9418,29 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
+    #   The allowed OAuth flows.
+    #
     #   Set to `code` to initiate a code grant flow, which provides an
     #   authorization code as the response. This code can be exchanged for
     #   access tokens with the token endpoint.
     #
-    #   Set to `token` to specify that the client should get the access
+    #   Set to `implicit` to specify that the client should get the access
     #   token (and, optionally, ID token, based on scopes) directly.
+    #
+    #   Set to `client_credentials` to specify that the client should get
+    #   the access token (and, optionally, ID token, based on scopes) from
+    #   the token endpoint using a combination of client and client\_secret.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_scopes
-    #   A list of allowed `OAuth` scopes. Currently supported values are
-    #   `"phone"`, `"email"`, `"openid"`, and `"Cognito"`. In addition to
-    #   these values, custom scopes created in Resource Servers are also
-    #   supported.
+    #   The allowed OAuth scopes. Possible values provided by OAuth are:
+    #   `phone`, `email`, `openid`, and `profile`. Possible values provided
+    #   by AWS are: `aws.cognito.signin.user.admin`. Custom scopes created
+    #   in Resource Servers are also supported.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_o_auth_flows_user_pool_client
-    #   Set to TRUE if the client is allowed to follow the OAuth protocol
+    #   Set to true if the client is allowed to follow the OAuth protocol
     #   when interacting with Cognito user pools.
     #   @return [Boolean]
     #
@@ -9334,7 +9485,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * ResendConfirmationCode
     #
-    #   <note markdown="1"> After January 1st 2020, the value of `PreventUserExistenceErrors`
+    #   <note markdown="1"> After February 15th 2020, the value of `PreventUserExistenceErrors`
     #   will default to `ENABLED` for newly created user pool clients if no
     #   value is provided.
     #
@@ -9584,6 +9735,14 @@ module Aws::CognitoIdentityProvider
     #   The user pool add-ons.
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] username_configuration
+    #   You can choose to enable case sensitivity on the username input for
+    #   the selected sign-in option. For example, when this is set to
+    #   `False`, users will be able to sign in using either "username" or
+    #   "Username". This configuration is immutable once it has been set.
+    #   For more information, see .
+    #   @return [Types::UsernameConfigurationType]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the user pool.
     #   @return [String]
@@ -9630,6 +9789,7 @@ module Aws::CognitoIdentityProvider
       :custom_domain,
       :admin_create_user_config,
       :user_pool_add_ons,
+      :username_configuration,
       :arn,
       :account_recovery_setting)
       include Aws::Structure
@@ -9693,6 +9853,41 @@ module Aws::CognitoIdentityProvider
       :enabled,
       :user_status,
       :mfa_options)
+      include Aws::Structure
+    end
+
+    # The username configuration type.
+    #
+    # @note When making an API call, you may pass UsernameConfigurationType
+    #   data as a hash:
+    #
+    #       {
+    #         case_sensitive: false, # required
+    #       }
+    #
+    # @!attribute [rw] case_sensitive
+    #   Specifies whether username case sensitivity will be applied for all
+    #   users in the user pool through Cognito APIs.
+    #
+    #   Valid values include:
+    #
+    #   * <b> <code>True</code> </b>\: Enables case sensitivity for all
+    #     username input. When this option is set to `True`, users must sign
+    #     in using the exact capitalization of their given username. For
+    #     example, “UserName”. This is the default value.
+    #
+    #   * <b> <code>False</code> </b>\: Enables case insensitivity for all
+    #     username input. For example, when this option is set to `False`,
+    #     users will be able to sign in using either "username" or
+    #     "Username". This option also enables both `preferred_username`
+    #     and `email` alias to be case insensitive, in addition to the
+    #     `username` attribute.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UsernameConfigurationType AWS API Documentation
+    #
+    class UsernameConfigurationType < Struct.new(
+      :case_sensitive)
       include Aws::Structure
     end
 

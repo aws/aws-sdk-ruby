@@ -109,6 +109,40 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # \[`Service-managed` permissions\] Describes whether StackSets
+    # automatically deploys to AWS Organizations accounts that are added to
+    # a target organization or organizational unit (OU).
+    #
+    # @note When making an API call, you may pass AutoDeployment
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         retain_stacks_on_account_removal: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   If set to `true`, StackSets automatically deploys additional stack
+    #   instances to AWS Organizations accounts that are added to a target
+    #   organization or organizational unit (OU) in the specified Regions.
+    #   If an account is removed from a target organization or OU, StackSets
+    #   deletes stack instances from the account in the specified Regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retain_stacks_on_account_removal
+    #   If set to `true`, stack resources are retained when an account is
+    #   removed from a target organization or OU. If set to `false`, stack
+    #   resources are deleted. Specify only if `Enabled` is set to `True`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AutoDeployment AWS API Documentation
+    #
+    class AutoDeployment < Struct.new(
+      :enabled,
+      :retain_stacks_on_account_removal)
+      include Aws::Structure
+    end
+
     # An error occurred during a CloudFormation registry operation.
     #
     # @!attribute [rw] message
@@ -1006,7 +1040,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
     #           {
@@ -1032,9 +1070,19 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of one or more AWS accounts that you want to create stack
-    #   instances in the specified region(s) for.
+    #   \[Self-managed permissions\] The names of one or more AWS accounts
+    #   that you want to create stack instances in the specified region(s)
+    #   for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which to create stack instances in the specified Regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
     #   The names of one or more regions where you want to create stack
@@ -1110,6 +1158,7 @@ module Aws::CloudFormation
     class CreateStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :parameter_overrides,
       :operation_preferences,
@@ -1166,6 +1215,11 @@ module Aws::CloudFormation
     #         ],
     #         administration_role_arn: "RoleARN",
     #         execution_role_name: "ExecutionRoleName",
+    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #         auto_deployment: {
+    #           enabled: false,
+    #           retain_stacks_on_account_removal: false,
+    #         },
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -1333,6 +1387,36 @@ module Aws::CloudFormation
     #   their stack sets.
     #   @return [String]
     #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. By default, `SELF-MANAGED` is specified.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_deployment
+    #   Describes whether StackSets automatically deploys to AWS
+    #   Organizations accounts that are added to the target organization or
+    #   organizational unit (OU). Specify only if `PermissionModel` is
+    #   `SERVICE_MANAGED`.
+    #
+    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets`
+    #   or `Regions`.
+    #   @return [Types::AutoDeployment]
+    #
     # @!attribute [rw] client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1359,6 +1443,8 @@ module Aws::CloudFormation
       :tags,
       :administration_role_arn,
       :execution_role_name,
+      :permission_model,
+      :auto_deployment,
       :client_request_token)
       include Aws::Structure
     end
@@ -1483,7 +1569,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetName", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         operation_preferences: {
     #           region_order: ["Region"],
@@ -1502,9 +1592,18 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of the AWS accounts that you want to delete stack
-    #   instances for.
+    #   \[Self-managed permissions\] The names of the AWS accounts that you
+    #   want to delete stack instances for.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts
+    #   from which to delete stack instances.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
     #   The regions where you want to delete stack set instances.
@@ -1551,6 +1650,7 @@ module Aws::CloudFormation
     class DeleteStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :operation_preferences,
       :retain_stacks,
@@ -1592,6 +1692,39 @@ module Aws::CloudFormation
     #
     class DeleteStackSetOutput < Aws::EmptyStructure; end
 
+    # \[`Service-managed` permissions\] The AWS Organizations accounts to
+    # which StackSets deploys.
+    #
+    # For update operations, you can specify either `Accounts` or
+    # `OrganizationalUnitIds`. For create and delete operations, specify
+    # `OrganizationalUnitIds`.
+    #
+    # @note When making an API call, you may pass DeploymentTargets
+    #   data as a hash:
+    #
+    #       {
+    #         accounts: ["Account"],
+    #         organizational_unit_ids: ["OrganizationalUnitId"],
+    #       }
+    #
+    # @!attribute [rw] accounts
+    #   The names of one or more AWS accounts for which you want to deploy
+    #   stack set updates.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   The organization root ID or organizational unit (OUs) IDs to which
+    #   StackSets deploys.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeploymentTargets AWS API Documentation
+    #
+    class DeploymentTargets < Struct.new(
+      :accounts,
+      :organizational_unit_ids)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeregisterTypeInput
     #   data as a hash:
     #
@@ -1605,19 +1738,24 @@ module Aws::CloudFormation
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The kind of type.
     #
     #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -2368,18 +2506,23 @@ module Aws::CloudFormation
     #   The kind of type.
     #
     #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -3658,22 +3801,29 @@ module Aws::CloudFormation
     #   The kind of type.
     #
     #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_arn
     #   The Amazon Resource Name (ARN) of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] registration_status_filter
     #   The current status of the type registration request.
+    #
+    #   The default is `IN_PROGRESS`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3743,19 +3893,24 @@ module Aws::CloudFormation
     #   The kind of the type.
     #
     #   Currently the only valid value is `RESOURCE`.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_name
     #   The name of the type for which you want version summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the type for which you want
     #   version summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3786,6 +3941,8 @@ module Aws::CloudFormation
     #
     #   * `DEPRECATED`\: The type version has been deregistered and can no
     #     longer be used in CloudFormation operations.
+    #
+    #   The default is `LIVE`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListTypeVersionsInput AWS API Documentation
@@ -3844,6 +4001,8 @@ module Aws::CloudFormation
     #
     #   * `PUBLIC`\: The type is publically visible and usable within any
     #     Amazon account.
+    #
+    #   The default is `PRIVATE`.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_type
@@ -4295,9 +4454,18 @@ module Aws::CloudFormation
     #   you want to register, see [submit][1] in the *CloudFormation CLI
     #   User Guide*.
     #
+    #   <note markdown="1"> As part of registering a resource provider type, CloudFormation must
+    #   be able to access the S3 bucket which contains the schema handler
+    #   package for that resource provider. For more information, see [IAM
+    #   Permissions for Registering a Resource Provider][2] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-register-permissions
     #   @return [String]
     #
     # @!attribute [rw] logging_config
@@ -4778,17 +4946,22 @@ module Aws::CloudFormation
     #   The Amazon Resource Name (ARN) of the type for which you want
     #   version summary information.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The kind of type.
+    #
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] type_name
     #   The name of the type.
     #
-    #   Conditional: You must specify `TypeName` or `Arn`.
+    #   Conditional: You must specify either `TypeName` and `Type`, or
+    #   `Arn`.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -5199,8 +5372,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The name of the AWS account that the stack instance is associated
-    #   with.
+    #   \[Self-managed permissions\] The name of the AWS account that the
+    #   stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -5241,6 +5414,12 @@ module Aws::CloudFormation
     #   this stack instance.
     #   @return [String]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   \[`Service-managed` permissions\] The organization root ID or
+    #   organizational unit (OU) ID that the stack instance is associated
+    #   with.
+    #   @return [String]
+    #
     # @!attribute [rw] drift_status
     #   Status of the stack instance's actual configuration compared to the
     #   expected template and parameter configuration of the stack set to
@@ -5276,6 +5455,7 @@ module Aws::CloudFormation
       :parameter_overrides,
       :status,
       :status_reason,
+      :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)
       include Aws::Structure
@@ -5295,8 +5475,8 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   The name of the AWS account that the stack instance is associated
-    #   with.
+    #   \[Self-managed permissions\] The name of the AWS account that the
+    #   stack instance is associated with.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -5330,6 +5510,12 @@ module Aws::CloudFormation
     # @!attribute [rw] status_reason
     #   The explanation for the specific status code assigned to this stack
     #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   \[`Service-managed` permissions\] The organization root ID or
+    #   organizational unit (OU) ID that the stack instance is associated
+    #   with.
     #   @return [String]
     #
     # @!attribute [rw] drift_status
@@ -5366,6 +5552,7 @@ module Aws::CloudFormation
       :stack_id,
       :status,
       :status_reason,
+      :organizational_unit_id,
       :drift_status,
       :last_drift_check_timestamp)
       include Aws::Structure
@@ -5862,6 +6049,38 @@ module Aws::CloudFormation
     #   operations currently in progress is not included.
     #   @return [Types::StackSetDriftDetectionDetails]
     #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organization or organizational unit (OU).
+    #   @return [Types::AutoDeployment]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_ids
+    #   \[`Service-managed` permissions\] The organization root ID or
+    #   organizational unit (OUs) IDs to which stacks in your stack set have
+    #   been deployed.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -5876,7 +6095,10 @@ module Aws::CloudFormation
       :stack_set_arn,
       :administration_role_arn,
       :execution_role_name,
-      :stack_set_drift_detection_details)
+      :stack_set_drift_detection_details,
+      :auto_deployment,
+      :permission_model,
+      :organizational_unit_ids)
       include Aws::Structure
     end
 
@@ -6022,6 +6244,12 @@ module Aws::CloudFormation
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
     #     remaining regions.
     #
+    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
+    #     deployments that require a sequence of operations. The operation
+    #     is queued to be performed. For more information, see the [stack
+    #     set operation status codes][1] in the AWS CloudFormation User
+    #     Guide.
+    #
     #   * `RUNNING`\: The operation is currently being performed.
     #
     #   * `STOPPED`\: The user has cancelled the operation.
@@ -6032,6 +6260,10 @@ module Aws::CloudFormation
     #   * `SUCCEEDED`\: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
     #   @return [String]
     #
     # @!attribute [rw] operation_preferences
@@ -6084,6 +6316,11 @@ module Aws::CloudFormation
     #   account or region.
     #   @return [Time]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts
+    #   affected by the stack operation.
+    #   @return [Types::DeploymentTargets]
+    #
     # @!attribute [rw] stack_set_drift_detection_details
     #   Detailed information about the drift status of the stack set. This
     #   includes information about drift operations currently being
@@ -6113,6 +6350,7 @@ module Aws::CloudFormation
       :execution_role_name,
       :creation_timestamp,
       :end_timestamp,
+      :deployment_targets,
       :stack_set_drift_detection_details)
       include Aws::Structure
     end
@@ -6216,7 +6454,8 @@ module Aws::CloudFormation
     # results for a given account in a given region.
     #
     # @!attribute [rw] account
-    #   The name of the AWS account for this operation result.
+    #   \[Self-managed permissions\] The name of the AWS account for this
+    #   operation result.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -6259,6 +6498,11 @@ module Aws::CloudFormation
     #   account
     #   @return [Types::AccountGateResult]
     #
+    # @!attribute [rw] organizational_unit_id
+    #   \[`Service-managed` permissions\] The organization root ID or
+    #   organizational unit (OU) ID for this operation result.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationResultSummary AWS API Documentation
     #
     class StackSetOperationResultSummary < Struct.new(
@@ -6266,7 +6510,8 @@ module Aws::CloudFormation
       :region,
       :status,
       :status_reason,
-      :account_gate_result)
+      :account_gate_result,
+      :organizational_unit_id)
       include Aws::Structure
     end
 
@@ -6297,6 +6542,12 @@ module Aws::CloudFormation
     #     to `FAILED`, and AWS CloudFormation cancels the operation in any
     #     remaining regions.
     #
+    #   * `QUEUED`\: \[Service-managed permissions\] For automatic
+    #     deployments that require a sequence of operations. The operation
+    #     is queued to be performed. For more information, see the [stack
+    #     set operation status codes][1] in the AWS CloudFormation User
+    #     Guide.
+    #
     #   * `RUNNING`\: The operation is currently being performed.
     #
     #   * `STOPPED`\: The user has cancelled the operation.
@@ -6307,6 +6558,10 @@ module Aws::CloudFormation
     #   * `SUCCEEDED`\: The operation completed creating or updating all the
     #     specified stacks without exceeding the failure tolerance for the
     #     operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
@@ -6356,6 +6611,32 @@ module Aws::CloudFormation
     #   The status of the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organizational unit (OU).
+    #   @return [Types::AutoDeployment]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
     # @!attribute [rw] drift_status
     #   Status of the stack set's actual configuration compared to its
     #   expected template and parameter configuration. A stack set is
@@ -6391,6 +6672,8 @@ module Aws::CloudFormation
       :stack_set_id,
       :description,
       :status,
+      :auto_deployment,
+      :permission_model,
       :drift_status,
       :last_drift_check_timestamp)
       include Aws::Structure
@@ -6995,7 +7278,11 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_set_name: "StackSetNameOrId", # required
-    #         accounts: ["Account"], # required
+    #         accounts: ["Account"],
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
     #         regions: ["Region"], # required
     #         parameter_overrides: [
     #           {
@@ -7021,11 +7308,24 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The names of one or more AWS accounts for which you want to update
-    #   parameter values for stack instances. The overridden parameter
-    #   values will be applied to all stack instances in the specified
-    #   accounts and regions.
+    #   \[Self-managed permissions\] The names of one or more AWS accounts
+    #   for which you want to update parameter values for stack instances.
+    #   The overridden parameter values will be applied to all stack
+    #   instances in the specified accounts and regions.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts for
+    #   which you want to update parameter values for stack instances. If
+    #   your update targets OUs, the overridden parameter values only apply
+    #   to the accounts that are currently in the target OUs and their child
+    #   OUs. Accounts added to the target OUs and their child OUs in the
+    #   future won't use the overridden values.
+    #
+    #   You can specify `Accounts` or `DeploymentTargets`, but not both.
+    #   @return [Types::DeploymentTargets]
     #
     # @!attribute [rw] regions
     #   The names of one or more regions in which you want to update
@@ -7106,6 +7406,7 @@ module Aws::CloudFormation
     class UpdateStackInstancesInput < Struct.new(
       :stack_set_name,
       :accounts,
+      :deployment_targets,
       :regions,
       :parameter_overrides,
       :operation_preferences,
@@ -7170,6 +7471,15 @@ module Aws::CloudFormation
     #         },
     #         administration_role_arn: "RoleARN",
     #         execution_role_name: "ExecutionRoleName",
+    #         deployment_targets: {
+    #           accounts: ["Account"],
+    #           organizational_unit_ids: ["OrganizationalUnitId"],
+    #         },
+    #         permission_model: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SELF_MANAGED
+    #         auto_deployment: {
+    #           enabled: false,
+    #           retain_stacks_on_account_removal: false,
+    #         },
     #         operation_id: "ClientRequestToken",
     #         accounts: ["Account"],
     #         regions: ["Region"],
@@ -7379,6 +7689,54 @@ module Aws::CloudFormation
     #   permissions to perform operations on the stack set.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_targets
+    #   \[`Service-managed` permissions\] The AWS Organizations accounts in
+    #   which to update associated stack instances.
+    #
+    #   To update all the stack instances associated with this stack set, do
+    #   not specify `DeploymentTargets` or `Regions`.
+    #
+    #   If the stack set update includes changes to the template (that is,
+    #   if `TemplateBody` or `TemplateURL` is specified), or the
+    #   `Parameters`, AWS CloudFormation marks all stack instances with a
+    #   status of `OUTDATED` prior to updating the stack instances in the
+    #   specified accounts and Regions. If the stack set update does not
+    #   include changes to the template or parameters, AWS CloudFormation
+    #   updates the stack instances in the specified accounts and Regions,
+    #   while leaving all other stack instances with their existing stack
+    #   instance status.
+    #   @return [Types::DeploymentTargets]
+    #
+    # @!attribute [rw] permission_model
+    #   Describes how the IAM roles required for stack set operations are
+    #   created. You cannot modify `PermissionModel` if there are stack
+    #   instances associated with your stack set.
+    #
+    #   * With `self-managed` permissions, you must create the administrator
+    #     and execution roles required to deploy to target accounts. For
+    #     more information, see [Grant Self-Managed Stack Set
+    #     Permissions][1].
+    #
+    #   * With `service-managed` permissions, StackSets automatically
+    #     creates the IAM roles required to deploy to accounts managed by
+    #     AWS Organizations. For more information, see [Grant
+    #     Service-Managed Stack Set Permissions][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-self-managed.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_deployment
+    #   \[`Service-managed` permissions\] Describes whether StackSets
+    #   automatically deploys to AWS Organizations accounts that are added
+    #   to a target organization or organizational unit (OU).
+    #
+    #   If you specify `AutoDeployment`, do not specify `DeploymentTargets`
+    #   or `Regions`.
+    #   @return [Types::AutoDeployment]
+    #
     # @!attribute [rw] operation_id
     #   The unique ID for this stack set operation.
     #
@@ -7399,9 +7757,9 @@ module Aws::CloudFormation
     #   @return [String]
     #
     # @!attribute [rw] accounts
-    #   The accounts in which to update associated stack instances. If you
-    #   specify accounts, you must also specify the regions in which to
-    #   update stack set instances.
+    #   \[Self-managed permissions\] The accounts in which to update
+    #   associated stack instances. If you specify accounts, you must also
+    #   specify the regions in which to update stack set instances.
     #
     #   To update *all* the stack instances associated with this stack set,
     #   do not specify the `Accounts` or `Regions` properties.
@@ -7450,6 +7808,9 @@ module Aws::CloudFormation
       :operation_preferences,
       :administration_role_arn,
       :execution_role_name,
+      :deployment_targets,
+      :permission_model,
+      :auto_deployment,
       :operation_id,
       :accounts,
       :regions)

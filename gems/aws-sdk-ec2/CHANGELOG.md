@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2020-02-11)
+------------------
+
+* Feature - Amazon EC2 Now Supports Tagging Spot Fleet.
+
 1.140.0 (2020-02-06)
 ------------------
 

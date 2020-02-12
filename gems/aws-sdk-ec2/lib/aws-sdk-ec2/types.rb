@@ -5512,9 +5512,9 @@ module Aws::EC2
     #   captured and aggregated into a flow log record. You can specify 60
     #   seconds (1 minute) or 600 seconds (10 minutes).
     #
-    #   For network interfaces attached to [Nitro-based instances][1], the
-    #   aggregation interval is always 60 seconds, regardless of the value
-    #   that you specify.
+    #   When a network interface is attached to a [Nitro-based instance][1],
+    #   the aggregation interval is always 60 seconds or less, regardless of
+    #   the value that you specify.
     #
     #   Default: 600
     #
@@ -8379,7 +8379,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The size of the volume, in GiBs.
+    #   The size of the volume, in GiBs. You must specify either a snapshot
+    #   ID or a volume size.
     #
     #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
     #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
@@ -8388,18 +8389,11 @@ module Aws::EC2
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
-    #
-    #   <note markdown="1"> At least one of Size or SnapshotId is required.
-    #
-    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
-    #   The snapshot from which to create the volume.
-    #
-    #   <note markdown="1"> At least one of Size or SnapshotId are required.
-    #
-    #    </note>
+    #   The snapshot from which to create the volume. You must specify
+    #   either a snapshot ID or a volume size.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -19857,6 +19851,10 @@ module Aws::EC2
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
     #
+    #   * `fast-restored` - Indicates whether the volume was created from a
+    #     snapshot that is enabled for fast snapshot restore (`true` \|
+    #     `false`).
+    #
     #   * `size` - The size of the volume, in GiB.
     #
     #   * `snapshot-id` - The snapshot from which the volume was created.
@@ -22318,6 +22316,8 @@ module Aws::EC2
     #   Amazon EBS encryption. For more information, see [Supported Instance
     #   Types][2].
     #
+    #   This parameter is not returned by .
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
@@ -23967,7 +23967,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The ID of the subnet in which to launch the instances.
+    #   The IDs of the subnets in which to launch the instances. Separate
+    #   multiple subnet IDs using commas (for example,
+    #   `subnet-1234abcdeexample1, subnet-0987cdef6example2`). A request of
+    #   type `instant` can have only one subnet ID.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -24142,9 +24145,11 @@ module Aws::EC2
     #   The maximum interval of time, in seconds, during which a flow of
     #   packets is captured and aggregated into a flow log record.
     #
-    #   For network interfaces attached to [Nitro-based instances][1], the
-    #   aggregation interval is always 60 seconds (1 minute), regardless of
-    #   the specified value.
+    #   When a network interface is attached to a [Nitro-based instance][1],
+    #   the aggregation interval is always 60 seconds (1 minute) or less,
+    #   regardless of the specified value.
+    #
+    #   Valid Values: `60` \| `600`
     #
     #
     #
@@ -26085,25 +26090,27 @@ module Aws::EC2
     #
     # @!attribute [rw] platform_details
     #   The platform details associated with the billing code of the AMI.
-    #   For more information, see [AMI Billing Information][1] in the
+    #   For more information, see [Obtaining Billing Information][1] in the
     #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
     #   @return [String]
     #
     # @!attribute [rw] usage_operation
-    #   The operation of the Amazon EC2 instance and the billing code
-    #   associated with the AMI. `usageOperation` corresponds to the
-    #   [lineitem/Operation][1] column on your AWS Cost and Usage Report.
-    #   For more information, see [AMI Billing Information][2] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   The operation of the Amazon EC2 instance and the billing code that
+    #   is associated with the AMI. `usageOperation` corresponds to the
+    #   [lineitem/Operation][1] column on your AWS Cost and Usage Report and
+    #   in the [AWS Price List API][2]. For the list of `UsageOperation`
+    #   codes, see [Platform Details and Usage Operation Billing Codes][3]
+    #   in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info.html
+    #   [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info
     #   @return [String]
     #
     # @!attribute [rw] product_codes
@@ -28353,6 +28360,9 @@ module Aws::EC2
     #
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface.
+    #
+    #   If you are creating a Spot Fleet, omit this parameter because you
+    #   can’t specify a network interface ID in a launch specification.
     #   @return [String]
     #
     # @!attribute [rw] private_ip_address
@@ -35338,11 +35348,15 @@ module Aws::EC2
     #
     #   If not specified, an Availability Zone will be automatically chosen
     #   for you based on the load balancing criteria for the Region.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @!attribute [rw] affinity
     #   The affinity setting for the instance on the Dedicated Host. This
     #   parameter is not supported for the ImportInstance command.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -35352,11 +35366,15 @@ module Aws::EC2
     # @!attribute [rw] partition_number
     #   The number of the partition the instance is in. Valid only if the
     #   placement group strategy is set to `partition`.
+    #
+    #   This parameter is not supported by .
     #   @return [Integer]
     #
     # @!attribute [rw] host_id
     #   The ID of the Dedicated Host on which the instance resides. This
     #   parameter is not supported for the ImportInstance command.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @!attribute [rw] tenancy
@@ -35364,16 +35382,22 @@ module Aws::EC2
     #   An instance with a tenancy of `dedicated` runs on single-tenant
     #   hardware. The `host` tenancy is not supported for the ImportInstance
     #   command.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @!attribute [rw] spread_domain
     #   Reserved for future use.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @!attribute [rw] host_resource_group_arn
     #   The ARN of the host resource group in which to launch the instances.
     #   If you specify a host resource group ARN, omit the **Tenancy**
     #   parameter or set it to `host`.
+    #
+    #   This parameter is not supported by .
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
@@ -37832,6 +37856,17 @@ module Aws::EC2
     #             },
     #           },
     #           instance_pools_to_use_count: 1,
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #               tags: [
+    #                 {
+    #                   key: "String",
+    #                   value: "String",
+    #                 },
+    #               ],
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -42451,6 +42486,10 @@ module Aws::EC2
     #   The state of the Spot Fleet request.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for a Spot Fleet resource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfig AWS API Documentation
     #
     class SpotFleetRequestConfig < Struct.new(
@@ -42458,7 +42497,8 @@ module Aws::EC2
       :create_time,
       :spot_fleet_request_config,
       :spot_fleet_request_id,
-      :spot_fleet_request_state)
+      :spot_fleet_request_state,
+      :tags)
       include Aws::Structure
     end
 
@@ -42608,6 +42648,17 @@ module Aws::EC2
     #           },
     #         },
     #         instance_pools_to_use_count: 1,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] allocation_strategy
@@ -42796,6 +42847,19 @@ module Aws::EC2
     #   pools that you specify.
     #   @return [Integer]
     #
+    # @!attribute [rw] tag_specifications
+    #   The key-value pair for tagging the Spot Fleet request on creation.
+    #   The value for `ResourceType` must be `spot-fleet-request`, otherwise
+    #   the Spot Fleet request fails. To tag instances at launch, specify
+    #   the tags in the [launch template][1]. For information about tagging
+    #   after launch, see [Tagging Your Resources][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
     #
     class SpotFleetRequestConfigData < Struct.new(
@@ -42820,7 +42884,8 @@ module Aws::EC2
       :replace_unhealthy_instances,
       :instance_interruption_behavior,
       :load_balancers_config,
-      :instance_pools_to_use_count)
+      :instance_pools_to_use_count,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -42840,8 +42905,8 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource. Currently, the only resource type that is
-    #   supported is `instance`.
+    #   The type of resource. Currently, the only resource types that are
+    #   supported are `spot-fleet-request` and `instance`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -45403,7 +45468,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_support
-    #   Indicates whether IPv6 support is enabled.
+    #   Indicates whether IPv6 support is disabled.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayVpcAttachmentOptions AWS API Documentation
@@ -47160,7 +47225,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The tunnel options for a VPN connection.
+    # The tunnel options for a single VPN tunnel.
     #
     # @note When making an API call, you may pass VpnTunnelOptionsSpecification
     #   data as a hash:
