@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2020-02-12)
+------------------
+
+* Feature - This release adds support for tagging public IPv4 pools.
+
 1.141.0 (2020-02-11)
 ------------------
 

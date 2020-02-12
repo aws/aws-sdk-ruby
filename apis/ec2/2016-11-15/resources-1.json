@@ -122,6 +122,9 @@
       "CreateTags": {
         "request": { "operation": "CreateTags" }
       },
+      "DeleteTags": {
+        "request": { "operation": "DeleteTags" }
+      },
       "CreateVolume": {
         "request": { "operation": "CreateVolume" },
         "resource": {
@@ -593,6 +596,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteDhcpOptions",
@@ -624,6 +643,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]
@@ -739,6 +774,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]
@@ -888,6 +939,14 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[]", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[]", "source": "identifier", "name": "Id" }
             ]
@@ -1108,6 +1167,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteInternetGateway",
@@ -1215,6 +1290,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteNetworkAcl",
@@ -1293,6 +1384,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteNatGateway",
@@ -1358,6 +1465,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]
@@ -1635,6 +1758,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteRouteTable",
@@ -1775,6 +1914,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteSecurityGroup",
@@ -1830,6 +1985,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]
@@ -1947,6 +2118,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]
@@ -2140,6 +2327,22 @@
             ]
           }
         },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteVolume",
@@ -2312,6 +2515,22 @@
         "CreateTags": {
           "request": {
             "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "DeleteTags": {
+          "request": {
+            "operation": "DeleteTags",
             "params": [
               { "target": "Resources[0]", "source": "identifier", "name": "Id" }
             ]

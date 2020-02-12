@@ -4075,7 +4075,7 @@ module Aws::Chime
     #
     # @!attribute [rw] cps_limit
     #   The limit on calls per second. Max value based on account service
-    #   limit. Default value of 1.
+    #   quota. Default value of 1.
     #   @return [Integer]
     #
     # @!attribute [rw] default_phone_number

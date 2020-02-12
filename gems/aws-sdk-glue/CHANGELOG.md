@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2020-02-12)
+------------------
+
+* Feature - Adding ability to add arguments that cannot be overridden to AWS Glue jobs
+
 1.47.0 (2019-11-21)
 ------------------
 

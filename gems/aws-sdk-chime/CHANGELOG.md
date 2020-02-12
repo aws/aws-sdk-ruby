@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2020-02-12)
+------------------
+
+* Feature - Documentation updates for Amazon Chime
+
 1.18.0 (2020-01-10)
 ------------------
 

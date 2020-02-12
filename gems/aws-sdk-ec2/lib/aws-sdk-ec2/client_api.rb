@@ -4365,6 +4365,7 @@ module Aws::EC2
     DescribePublicIpv4PoolsRequest.add_member(:pool_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "PoolId"))
     DescribePublicIpv4PoolsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribePublicIpv4PoolsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PoolMaxResults, location_name: "MaxResults"))
+    DescribePublicIpv4PoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribePublicIpv4PoolsRequest.struct_class = Types::DescribePublicIpv4PoolsRequest
 
     DescribePublicIpv4PoolsResult.add_member(:public_ipv_4_pools, Shapes::ShapeRef.new(shape: PublicIpv4PoolSet, location_name: "publicIpv4PoolSet"))
@@ -7607,6 +7608,7 @@ module Aws::EC2
     PublicIpv4Pool.add_member(:pool_address_ranges, Shapes::ShapeRef.new(shape: PublicIpv4PoolRangeSet, location_name: "poolAddressRangeSet"))
     PublicIpv4Pool.add_member(:total_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAddressCount"))
     PublicIpv4Pool.add_member(:total_available_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalAvailableAddressCount"))
+    PublicIpv4Pool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     PublicIpv4Pool.struct_class = Types::PublicIpv4Pool
 
     PublicIpv4PoolRange.add_member(:first_address, Shapes::ShapeRef.new(shape: String, location_name: "firstAddress"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.90.0 (2020-02-12)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
 * Issue - Parse all values from shared credentials file when using Aws.shared_config
 * Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present
 * Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.

@@ -16645,6 +16645,12 @@ module Aws::EC2
     #         pool_ids: ["String"],
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pool_ids
@@ -16661,12 +16667,27 @@ module Aws::EC2
     #   `nextToken` value.
     #   @return [Integer]
     #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
+    #     to the resource. Use the tag key in the filter name and the tag
+    #     value as the filter value. For example, to find all resources that
+    #     have a tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #   @return [Array<Types::Filter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4PoolsRequest AWS API Documentation
     #
     class DescribePublicIpv4PoolsRequest < Struct.new(
       :pool_ids,
       :next_token,
-      :max_results)
+      :max_results,
+      :filters)
       include Aws::Structure
     end
 
@@ -35957,6 +35978,10 @@ module Aws::EC2
     #   The total number of available addresses.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   Any tags for the address pool.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PublicIpv4Pool AWS API Documentation
     #
     class PublicIpv4Pool < Struct.new(
@@ -35964,7 +35989,8 @@ module Aws::EC2
       :description,
       :pool_address_ranges,
       :total_address_count,
-      :total_available_address_count)
+      :total_available_address_count,
+      :tags)
       include Aws::Structure
     end
 
