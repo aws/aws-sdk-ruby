@@ -3,6 +3,8 @@ language: ruby
 before_install:
   - gem install bundler -v '< 2'
 
+dist: trusty
+
 rvm:
   - 1.9.3
   - 2.0.0
