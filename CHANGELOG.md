@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.443 (2020-02-12)
+------------------
+
 * Feature - Aws::Chime - Updated the documentation for Amazon Chime.
 
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
