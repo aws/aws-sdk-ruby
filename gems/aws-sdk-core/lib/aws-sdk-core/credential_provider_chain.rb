@@ -64,7 +64,7 @@ module Aws
 
     def static_profile_process_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        process_provider = Aws.shared_config.credentials_process(options[:config].profile)
+        process_provider = Aws.shared_config.credential_process(profile: options[:config].profile)
         ProcessCredentials.new(process_provider) if process_provider
       end
     rescue Errors::NoSuchProfileError
@@ -72,9 +72,9 @@ module Aws
     end
 
     def env_credentials(_options)
-      key =    %w(AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY)
-      secret = %w(AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY)
-      token =  %w(AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN)
+      key =    %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY]
+      secret = %w[AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY]
+      token =  %w[AWS_SESSION_TOKEN AMAZON_SESSION_TOKEN]
       Credentials.new(envar(key), envar(secret), envar(token))
     end
 
@@ -98,7 +98,8 @@ module Aws
 
     def process_credentials(options)
       profile_name = determine_profile_name(options)
-      if Aws.shared_config.config_enabled? && process_provider = Aws.shared_config.credentials_process(profile_name)
+      if Aws.shared_config.config_enabled? &&
+         (process_provider = Aws.shared_config.credential_process(profile: profile_name))
         ProcessCredentials.new(process_provider)
       end
     rescue Errors::NoSuchProfileError

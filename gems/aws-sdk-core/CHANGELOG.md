@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 
+* Issue - Parse all values from shared credentials file when using Aws.shared_config
 * Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present
 * Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.
 
