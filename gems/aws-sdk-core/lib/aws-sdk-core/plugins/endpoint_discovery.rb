@@ -151,7 +151,7 @@ the background every 60 secs (default). Defaults to `false`.
 
       def self.resolve_endpoint_discovery(cfg)
         env = ENV['AWS_ENABLE_ENDPOINT_DISCOVERY']
-        shared_cfg = Aws.shared_config.endpoint_discovery(profile: cfg.profile)
+        shared_cfg = Aws.shared_config.endpoint_discovery_enabled(profile: cfg.profile)
         Aws::Util.str_2_bool(env) || Aws::Util.str_2_bool(shared_cfg)
       end
 
