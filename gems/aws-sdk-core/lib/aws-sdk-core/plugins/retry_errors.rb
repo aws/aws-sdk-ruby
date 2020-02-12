@@ -5,6 +5,29 @@ module Aws
     # @api private
     class RetryErrors < Seahorse::Client::Plugin
 
+      EQUAL_JITTER = lambda { |delay| (delay / 2) + Kernel.rand(0..(delay/2))}
+      FULL_JITTER = lambda { |delay| Kernel.rand(0..delay) }
+      NO_JITTER = lambda { |delay| delay }
+
+      JITTERS = {
+        none: NO_JITTER,
+        equal: EQUAL_JITTER,
+        full: FULL_JITTER
+      }
+
+      JITTERS.default_proc = lambda { |h,k|
+        raise KeyError, "#{k} is not a named jitter function. Must be one of #{h.keys}"
+      }
+
+      DEFAULT_BACKOFF = lambda do |c|
+        delay = 2 ** c.retries * c.config.retry_base_delay
+        delay = [delay, c.config.retry_max_delay].min if (c.config.retry_max_delay || 0) > 0
+        jitter = c.config.retry_jitter
+        jitter = JITTERS[jitter] if Symbol === jitter
+        delay = jitter.call(delay) if jitter
+        Kernel.sleep(delay)
+      end
+
       option(:retry_limit,
         default: 3,
         doc_type: Integer,
@@ -16,7 +39,30 @@ checksum errors, networking errors, timeout errors and auth
 errors from expired credentials.
         DOCS
 
-      option(:retry_backoff, lambda { |c| Kernel.sleep(2 ** c.retries * 0.3) })
+      option(:retry_max_delay,
+        default: 0,
+        doc_type: Integer,
+        docstring: <<-DOCS)
+The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+        DOCS
+
+      option(:retry_base_delay,
+        default: 0.3,
+        doc_type: Float,
+        docstring: <<-DOCS)
+The base delay in seconds used by the default backoff function.
+        DOCS
+
+      option(:retry_jitter,
+        default: :none,
+        doc_type: Symbol,
+        docstring: <<-DOCS)
+A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+
+@see https://www.awsarchitectureblog.com/2015/03/backoff.html
+        DOCS
+
+      option(:retry_backoff, DEFAULT_BACKOFF)
 
       # @api private
       class ErrorInspector
@@ -26,17 +72,22 @@ errors from expired credentials.
           'UnrecognizedClientException', # json services
           'InvalidAccessKeyId',          # s3
           'AuthFailure',                 # ec2
+          'InvalidIdentityToken',        # sts
+          'ExpiredToken',                # route53
         ])
 
         THROTTLING_ERRORS = Set.new([
           'Throttling',                             # query services
           'ThrottlingException',                    # json services
           'RequestThrottled',                       # sqs
+          'RequestThrottledException',
           'ProvisionedThroughputExceededException', # dynamodb
+          'TransactionInProgressException',         # dynamodb
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis
           'TooManyRequestsException',               # batch
+          'PriorRequestNotComplete',                # route53
         ])
 
         CHECKSUM_ERRORS = Set.new([
@@ -44,7 +95,8 @@ errors from expired credentials.
         ])
 
         NETWORKING_ERRORS = Set.new([
-          'RequestTimeout', # s3
+          'RequestTimeout',         # s3
+          'IDPCommunicationError',  # sts
         ])
 
         def initialize(error, http_status_code)
@@ -58,7 +110,7 @@ errors from expired credentials.
         end
 
         def throttling_error?
-          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i))
+          !!(THROTTLING_ERRORS.include?(@name) || @name.match(/throttl/i) || @http_status_code == 429)
         end
 
         def checksum?
@@ -67,6 +119,7 @@ errors from expired credentials.
 
         def networking?
           @error.is_a?(Seahorse::Client::NetworkingError) ||
+          @error.is_a?(Errors::NoSuchEndpointError) ||
           NETWORKING_ERRORS.include?(@name)
         end
 
@@ -74,7 +127,39 @@ errors from expired credentials.
           (500..599).include?(@http_status_code)
         end
 
+        def endpoint_discovery?(context)
+          return false unless context.operation.endpoint_discovery
+
+          if @http_status_code == 421 ||
+            extract_name(@error) == 'InvalidEndpointException'
+            @error = Errors::EndpointDiscoveryError.new
+          end
+
+          # When endpoint discovery error occurs
+          # evict the endpoint from cache
+          if @error.is_a?(Errors::EndpointDiscoveryError)
+            key = context.config.endpoint_cache.extract_key(context)
+            context.config.endpoint_cache.delete(key)
+            true
+          else
+            false
+          end
+        end
+
+        def retryable?(context)
+          (expired_credentials? and refreshable_credentials?(context)) or
+            throttling_error? or
+            checksum? or
+            networking? or
+            server? or
+            endpoint_discovery?(context)
+        end
+
         private
+
+        def refreshable_credentials?(context)
+          context.config.credentials.respond_to?(:refresh!)
+        end
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)
@@ -128,21 +213,9 @@ errors from expired credentials.
         end
 
         def should_retry?(context, error)
-          retryable?(context, error) and
+          error.retryable?(context) and
           context.retries < retry_limit(context) and
           response_truncatable?(context)
-        end
-
-        def retryable?(context, error)
-          (error.expired_credentials? and refreshable_credentials?(context)) or
-          error.throttling_error? or
-          error.checksum? or
-          error.networking? or
-          error.server?
-        end
-
-        def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
         end
 
         def retry_limit(context)

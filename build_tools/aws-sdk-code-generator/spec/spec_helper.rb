@@ -138,7 +138,7 @@ module SpecHelper
 
     def model_path(model, models_dir)
       path = "#{models_dir}/#{model}.json"
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
   end
 end

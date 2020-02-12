@@ -24,6 +24,7 @@ module Aws::Glacier
       @vault_name = extract_vault_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -45,7 +46,7 @@ module Aws::Glacier
       data[:sns_topic]
     end
 
-    # A list of one or more events for which Amazon Glacier will send a
+    # A list of one or more events for which Amazon S3 Glacier will send a
     # notification to the specified Amazon SNS topic.
     # @return [Array<String>]
     def events

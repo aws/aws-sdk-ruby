@@ -42,6 +42,6 @@ require_relative 'aws-sdk-efs/customizations'
 # @service
 module Aws::EFS
 
-  GEM_VERSION = '1.0.1'
+  GEM_VERSION = '1.24.0'
 
 end

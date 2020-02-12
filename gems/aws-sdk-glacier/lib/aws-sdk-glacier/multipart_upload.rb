@@ -27,6 +27,7 @@ module Aws::Glacier
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -230,8 +231,8 @@ module Aws::Glacier
     #   The SHA256 tree hash of the entire archive. It is the tree hash of
     #   SHA256 tree hash of the individual parts. If the value you specify in
     #   the request does not match the SHA256 tree hash of the final assembled
-    #   archive as computed by Amazon Glacier, Amazon Glacier returns an error
-    #   and the request fails.
+    #   archive as computed by Amazon S3 Glacier (Glacier), Glacier returns an
+    #   error and the request fails.
     # @return [Types::ArchiveCreationOutput]
     def complete(options = {})
       options = options.merge(
@@ -257,7 +258,7 @@ module Aws::Glacier
     #   marker if you are continuing the pagination of results started in a
     #   previous List Parts request.
     # @option options [Integer] :limit
-    #   The maximum number of parts to be returned. The default limit is 1000.
+    #   The maximum number of parts to be returned. The default limit is 50.
     #   The number of parts returned might be fewer than the specified limit,
     #   but the number of returned parts never exceeds the limit.
     # @return [Types::ListPartsOutput]
@@ -283,7 +284,7 @@ module Aws::Glacier
     #   The SHA256 tree hash of the data being uploaded.
     # @option options [String] :range
     #   Identifies the range of bytes in the assembled archive that will be
-    #   uploaded in this part. Amazon Glacier uses this information to
+    #   uploaded in this part. Amazon S3 Glacier uses this information to
     #   assemble the archive in the proper sequence. The format of this header
     #   follows RFC 2616. An example header is Content-Range:bytes
     #   0-4194303/*.

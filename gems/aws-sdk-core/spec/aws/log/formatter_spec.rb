@@ -32,7 +32,6 @@ module Aws
             },
             config: {
               nested: true,
-              file: File.open(__FILE__),
               path: Pathname.new(__FILE__),
               complex: double('obj', inspect: '"inspected"')
             },
@@ -41,7 +40,7 @@ module Aws
           formatted = format('{:request_params}', max_string_size: 20)
           size = File.size(__FILE__)
           expect(formatted).to eq(<<-FORMATTED.strip)
-{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,file:#<File:#{__FILE__} (#{size} bytes)>,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
+{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
           FORMATTED
         end
 
@@ -112,6 +111,8 @@ module Aws
           response.context.http_response.body = '-' * 1024 * 1024
           formatted = format(':http_response_body', max_string_size: 5)
           expect(formatted).to eq("#<String \"-----\" ... (1048576 bytes)>")
+          response.context.http_response.body = Seahorse::Client::BlockIO.new
+          expect(format(':http_response_body')).to eq('')
         end
 
         it 'provides a :error_class replacement' do

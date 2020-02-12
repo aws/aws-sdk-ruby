@@ -12,6 +12,7 @@ require_relative 'aws-sdk-medialive/types'
 require_relative 'aws-sdk-medialive/client_api'
 require_relative 'aws-sdk-medialive/client'
 require_relative 'aws-sdk-medialive/errors'
+require_relative 'aws-sdk-medialive/waiters'
 require_relative 'aws-sdk-medialive/resource'
 require_relative 'aws-sdk-medialive/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-medialive/customizations'
 # @service
 module Aws::MediaLive
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.40.0'
 
 end

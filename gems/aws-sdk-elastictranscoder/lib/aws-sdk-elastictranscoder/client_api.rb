@@ -636,10 +636,13 @@ module Aws::ElasticTranscoder
       api.version = "2012-09-25"
 
       api.metadata = {
+        "apiVersion" => "2012-09-25",
         "endpointPrefix" => "elastictranscoder",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon Elastic Transcoder",
+        "serviceId" => "Elastic Transcoder",
         "signatureVersion" => "v4",
+        "uid" => "elastictranscoder-2012-09-25",
       }
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|

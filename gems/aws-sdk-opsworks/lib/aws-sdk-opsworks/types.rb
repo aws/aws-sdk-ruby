@@ -90,16 +90,15 @@ module Aws::OpsWorks
     #   <note markdown="1"> There is no specific limit on the number of environment variables.
     #   However, the size of the associated data structure - which includes
     #   the variable names, values, and protected flag values - cannot
-    #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
-    #   not all use cases, but if you do exceed it, you will cause an
-    #   exception (API) with an "Environment: is too large (maximum is
-    #   10KB)" message.
+    #   exceed 20 KB. This limit should accommodate most if not all use
+    #   cases, but if you do exceed it, you will cause an exception (API)
+    #   with an "Environment: is too large (maximum is 20 KB)" message.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/App AWS API Documentation
@@ -208,8 +207,8 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] layer_id
-    #   The ID of the layer that the Elastic Load Balancing instance is to
-    #   be attached to.
+    #   The ID of the layer to which the Elastic Load Balancing instance is
+    #   to be attached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerRequest AWS API Documentation
@@ -293,7 +292,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AutoScalingThresholds AWS API Documentation
@@ -314,7 +313,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
     #
     # @note When making an API call, you may pass BlockDeviceMapping
     #   data as a hash:
@@ -350,7 +349,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html
     #   @return [String]
     #
     # @!attribute [rw] ebs
@@ -451,7 +450,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -479,14 +478,14 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information on how to use AWS OpsWorks Stacks with a VPC,
-    #   see [Running a Stack in a VPC][1]. For more information on default
-    #   VPC and EC2 Classic, see [Supported Platforms][2].
+    #   For more information about how to use AWS OpsWorks Stacks with a
+    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   default VPC and EC2 Classic, see [Supported Platforms][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -513,7 +512,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_instance_profile_arn
@@ -523,7 +522,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_os
@@ -531,9 +530,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
-    #     `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -548,11 +547,11 @@ module Aws::OpsWorks
     #     with SQL Server Web`.
     #
     #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
-    #     when you create instances. For more information on how to use
+    #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
     #   The default option is the parent stack's operating system. For more
-    #   information on the supported operating systems, see [AWS OpsWorks
+    #   information about supported operating systems, see [AWS OpsWorks
     #   Stacks Operating Systems][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the cloned
@@ -563,8 +562,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #   @return [String]
     #
     # @!attribute [rw] hostname_theme
@@ -582,7 +581,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -609,7 +608,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] default_subnet_id
@@ -629,12 +628,12 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1]
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_manager
@@ -651,7 +650,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Types::ChefConfiguration]
     #
     # @!attribute [rw] use_custom_cookbooks
@@ -686,18 +685,18 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook
-    #   from a repository. For more information, see [Creating Apps][1] or
-    #   [Custom Recipes and Cookbooks][2].
+    #   from a repository. For more information, see [Adding Apps][1] or
+    #   [Cookbooks and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #   @return [Types::Source]
     #
     # @!attribute [rw] default_ssh_key_name
@@ -711,9 +710,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #   @return [String]
     #
     # @!attribute [rw] clone_permissions
@@ -732,7 +731,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] agent_version
@@ -846,7 +845,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
     #
     # @note When making an API call, you may pass CloudWatchLogsLogStream
     #   data as a hash:
@@ -879,7 +878,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AgentReference.html
     #   @return [String]
     #
     # @!attribute [rw] time_zone
@@ -1155,19 +1154,18 @@ module Aws::OpsWorks
     #   There is no specific limit on the number of environment variables.
     #   However, the size of the associated data structure - which includes
     #   the variables' names, values, and protected flag values - cannot
-    #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
-    #   not all use cases. Exceeding it will cause an exception with the
-    #   message, "Environment: is too large (maximum is 10KB)."
+    #   exceed 20 KB. This limit should accommodate most if not all use
+    #   cases. Exceeding it will cause an exception with the message,
+    #   "Environment: is too large (maximum is 20KB)."
     #
-    #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
-    #   specified one or more environment variables, you cannot modify the
-    #   stack's Chef version.
+    #   <note markdown="1"> If you have specified one or more environment variables, you cannot
+    #   modify the stack's Chef version.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppRequest AWS API Documentation
@@ -1246,18 +1244,20 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] custom_json
-    #   A string that contains user-defined, custom JSON. It is used to
-    #   override the corresponding default stack configuration JSON values.
-    #   The string should be in the following format:
+    #   A string that contains user-defined, custom JSON. You can use this
+    #   parameter to override some corresponding default stack configuration
+    #   JSON values. The string should be in the following format:
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1] and [Overriding
+    #   Attributes With Custom JSON][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentRequest AWS API Documentation
@@ -1343,7 +1343,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_type
@@ -1360,9 +1360,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
-    #     `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1379,21 +1379,21 @@ module Aws::OpsWorks
     #
     #   * A custom AMI: `Custom`.
     #
-    #   For more information on the supported operating systems, see [AWS
+    #   For more information about the supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the CreateInstance
     #   action's AmiId parameter to specify the custom AMI that you want to
     #   use. Block device mappings are not supported if the value is
-    #   `Custom`. For more information on the supported operating systems,
-    #   see [Operating Systems][1]For more information on how to use custom
-    #   AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs][2].
+    #   `Custom`. For more information about supported operating systems,
+    #   see [Operating Systems][1]For more information about how to use
+    #   custom AMIs with AWS OpsWorks Stacks, see [Using Custom AMIs][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #   @return [String]
     #
     # @!attribute [rw] ami_id
@@ -1407,7 +1407,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #   @return [String]
     #
     # @!attribute [rw] ssh_key_name
@@ -1420,7 +1420,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] virtualization_type
@@ -1442,7 +1442,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] root_device_type
@@ -1451,7 +1451,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -1462,7 +1462,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] install_updates_on_boot
@@ -1516,7 +1516,7 @@ module Aws::OpsWorks
     #
     #
     #   [1]: http://aws.amazon.com/ec2/dedicated-hosts/
-    #   [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
+    #   [2]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
     #   [3]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
     #   @return [String]
     #
@@ -1648,7 +1648,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -1670,7 +1670,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] custom_json
@@ -1681,7 +1681,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #   @return [String]
     #
     # @!attribute [rw] custom_security_group_ids
@@ -1708,8 +1708,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_assign_public_ips
@@ -1719,7 +1719,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_recipes
@@ -1833,12 +1833,33 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] region
-    #   The stack's AWS region, such as "ap-south-1". For more
-    #   information about Amazon regions, see [Regions and Endpoints][1].
+    #   The stack's AWS region, such as `ap-south-1`. For more information
+    #   about Amazon regions, see [Regions and Endpoints][1].
+    #
+    #   <note markdown="1"> In the AWS CLI, this API maps to the `--stack-region` parameter. If
+    #   the `--stack-region` parameter and the AWS CLI common parameter
+    #   `--region` are set to the same value, the stack uses a *regional*
+    #   endpoint. If the `--stack-region` parameter is not set, but the AWS
+    #   CLI `--region` parameter is, this also results in a stack with a
+    #   *regional* endpoint. However, if the `--region` parameter is set to
+    #   `us-east-1`, and the `--stack-region` parameter is set to one of the
+    #   following, then the stack uses a legacy or *classic* region:
+    #   `us-west-1, us-west-2, sa-east-1, eu-central-1, eu-west-1,
+    #   ap-northeast-1, ap-southeast-1, ap-southeast-2`. In this case, the
+    #   actual API endpoint of the stack is in `us-east-1`. Only the
+    #   preceding regions are supported as classic regions in the
+    #   `us-east-1` API endpoint. Because it is a best practice to choose
+    #   the regional endpoint that is closest to where you manage AWS, we
+    #   recommend that you use regional endpoints for new stacks. The AWS
+    #   CLI common `--region` parameter always specifies a regional API
+    #   endpoint; it cannot be used to specify a classic AWS OpsWorks Stacks
+    #   region.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -1867,14 +1888,14 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information on how to use AWS OpsWorks Stacks with a VPC,
-    #   see [Running a Stack in a VPC][1]. For more information on default
-    #   VPC and EC2-Classic, see [Supported Platforms][2].
+    #   For more information about how to use AWS OpsWorks Stacks with a
+    #   VPC, see [Running a Stack in a VPC][1]. For more information about
+    #   default VPC and EC2-Classic, see [Supported Platforms][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -1891,7 +1912,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_instance_profile_arn
@@ -1901,7 +1922,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_os
@@ -1910,9 +1931,9 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
-    #     `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1932,13 +1953,13 @@ module Aws::OpsWorks
     #     Custom AMIs][1].
     #
     #   The default option is the current Amazon Linux version. For more
-    #   information on the supported operating systems, see [AWS OpsWorks
+    #   information about supported operating systems, see [AWS OpsWorks
     #   Stacks Operating Systems][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #   @return [String]
     #
     # @!attribute [rw] hostname_theme
@@ -1956,7 +1977,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -1983,7 +2004,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] default_subnet_id
@@ -2004,19 +2025,19 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_manager
     #   The configuration manager. When you create a stack we recommend that
     #   you use the configuration manager to specify the Chef version: 12,
     #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
-    #   default value for Linux stacks is currently 11.4.
+    #   default value for Linux stacks is currently 12.
     #   @return [Types::StackConfigurationManager]
     #
     # @!attribute [rw] chef_configuration
@@ -2026,7 +2047,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Types::ChefConfiguration]
     #
     # @!attribute [rw] use_custom_cookbooks
@@ -2060,18 +2081,18 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook
-    #   from a repository. For more information, see [Creating Apps][1] or
-    #   [Custom Recipes and Cookbooks][2].
+    #   from a repository. For more information, see [Adding Apps][1] or
+    #   [Cookbooks and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #   @return [Types::Source]
     #
     # @!attribute [rw] default_ssh_key_name
@@ -2085,9 +2106,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #   @return [String]
     #
     # @!attribute [rw] default_root_device_type
@@ -2098,7 +2119,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] agent_version
@@ -2199,7 +2220,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfileRequest AWS API Documentation
@@ -2421,7 +2442,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
     # @!attribute [rw] instance_ids
@@ -2543,7 +2564,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] ecs_cluster_arn
-    #   The cluster's ARN.
+    #   The cluster's Amazon Resource Number (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterRequest AWS API Documentation
@@ -3101,6 +3122,8 @@ module Aws::OpsWorks
     # The response to a `DescribeOperatingSystems` request.
     #
     # @!attribute [rw] operating_systems
+    #   Contains information in response to a `DescribeOperatingSystems`
+    #   request.
     #   @return [Array<Types::OperatingSystem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeOperatingSystemsResponse AWS API Documentation
@@ -3124,7 +3147,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -3221,8 +3244,9 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] stack_id
-    #   The stack ID that the instances are registered with. The operation
-    #   returns descriptions of all registered Amazon RDS instances.
+    #   The ID of the stack with which the instances are registered. The
+    #   operation returns descriptions of all registered Amazon RDS
+    #   instances.
     #   @return [String]
     #
     # @!attribute [rw] rds_db_instance_arns
@@ -3308,7 +3332,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] stack_id
-    #   The stack ID
+    #   The stack ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersRequest AWS API Documentation
@@ -3569,7 +3593,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
     #
     # @note When making an API call, you may pass EbsBlockDevice
     #   data as a hash:
@@ -3592,7 +3616,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_size
@@ -3601,7 +3625,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EbsBlockDevice.html
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
@@ -3680,7 +3704,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -3885,7 +3909,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #   @return [String]
     #
     # @!attribute [rw] architecture
@@ -3893,6 +3917,7 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The instance's Amazon Resource Number (ARN).
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_type
@@ -3905,7 +3930,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] block_device_mappings
@@ -3938,7 +3963,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
     #   @return [String]
     #
     # @!attribute [rw] hostname
@@ -3974,7 +3999,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -4032,7 +4057,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] root_device_volume_id
@@ -4159,7 +4184,7 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html
+    # [1]: https://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html
     #
     # @note When making an API call, you may pass InstanceIdentity
     #   data as a hash:
@@ -4245,6 +4270,7 @@ module Aws::OpsWorks
     #   @return [Integer]
     #
     # @!attribute [rw] stop_failed
+    #   The number of instances with `stop_failed` status.
     #   @return [Integer]
     #
     # @!attribute [rw] stopped
@@ -4296,6 +4322,7 @@ module Aws::OpsWorks
     # Describes a layer.
     #
     # @!attribute [rw] arn
+    #   The Amazon Resource Number (ARN) of a layer.
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -4340,7 +4367,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] custom_json
@@ -4376,8 +4403,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_assign_public_ips
@@ -4387,24 +4414,24 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] default_recipes
     #   AWS OpsWorks Stacks supports five lifecycle events: **setup**,
     #   **configuration**, **deploy**, **undeploy**, and **shutdown**. For
     #   each layer, AWS OpsWorks Stacks runs a set of standard recipes for
-    #   each event. In addition, you can provide custom recipes for any or
-    #   all layers and events. AWS OpsWorks Stacks runs custom event recipes
+    #   each event. You can also provide custom recipes for any or all
+    #   layers and events. AWS OpsWorks Stacks runs custom event recipes
     #   after the standard recipes. `LayerCustomRecipes` specifies the
     #   custom recipes for a particular layer to be run in response to each
     #   of the five events.
     #
     #   To specify a recipe, use the cookbook's directory name in the
     #   repository followed by two colons and the recipe name, which is the
-    #   recipe's file name without the .rb extension. For example:
-    #   phpapp2::dbsetup specifies the dbsetup.rb recipe in the
-    #   repository's phpapp2 folder.
+    #   recipe's file name without the `.rb` extension. For example:
+    #   `phpapp2::dbsetup` specifies the `dbsetup.rb` recipe in the
+    #   repository's `phpapp2` folder.
     #   @return [Types::Recipes]
     #
     # @!attribute [rw] custom_recipes
@@ -4582,12 +4609,12 @@ module Aws::OpsWorks
     # Describes supported operating systems in AWS OpsWorks Stacks.
     #
     # @!attribute [rw] name
-    #   The name of the operating system, such as `Amazon Linux 2017.09`.
+    #   The name of the operating system, such as `Amazon Linux 2018.03`.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The ID of a supported operating system, such as `Amazon Linux
-    #   2017.09`.
+    #   2018.03`.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4661,7 +4688,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] allow_ssh
@@ -4690,7 +4717,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Permission AWS API Documentation
@@ -4748,7 +4775,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -5163,6 +5190,19 @@ module Aws::OpsWorks
       include Aws::Structure
     end
 
+    # Indicates that a resource was not found.
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Describes a user's SSH information.
     #
     # @!attribute [rw] iam_user_arn
@@ -5328,12 +5368,12 @@ module Aws::OpsWorks
     #
     #   * `iam_only`
     #
-    #   For more information on the permissions associated with these
+    #   For more information about the permissions associated with these
     #   levels, see [Managing User Permissions][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermissionRequest AWS API Documentation
@@ -5414,7 +5454,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
+    #   [1]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ShutdownEventConfiguration AWS API Documentation
@@ -5431,8 +5471,8 @@ module Aws::OpsWorks
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    # [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    # [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #
     # @note When making an API call, you may pass Source
     #   data as a hash:
@@ -5477,14 +5517,14 @@ module Aws::OpsWorks
     #     the password.
     #
     #   For more information on how to safely handle IAM credentials, see
-    #   [http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html][1].
+    #   [https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html][1].
     #
     #   In responses, AWS OpsWorks Stacks returns `*****FILTERED*****`
     #   instead of the actual value.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html
     #   @return [String]
     #
     # @!attribute [rw] ssh_key
@@ -5566,7 +5606,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -5588,7 +5628,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_os
@@ -5605,7 +5645,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] default_subnet_id
@@ -5627,7 +5667,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_manager
@@ -5641,7 +5681,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Types::ChefConfiguration]
     #
     # @!attribute [rw] use_custom_cookbooks
@@ -5655,13 +5695,13 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook
-    #   from a repository. For more information, see [Creating Apps][1] or
-    #   [Custom Recipes and Cookbooks][2].
+    #   from a repository. For more information, see [Adding Apps][1] or
+    #   [Cookbooks and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #   @return [Types::Source]
     #
     # @!attribute [rw] default_ssh_key_name
@@ -5681,7 +5721,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] agent_version
@@ -5833,6 +5873,13 @@ module Aws::OpsWorks
     #   @return [String]
     #
     # @!attribute [rw] force
+    #   Specifies whether to force an instance to stop. If the instance's
+    #   root device type is `ebs`, or EBS-backed, adding the `Force`
+    #   parameter to the `StopInstances` API call disassociates the AWS
+    #   OpsWorks Stacks instance from EC2, and forces deletion of *only* the
+    #   OpsWorks Stacks instance. You must also delete the
+    #   formerly-associated instance in EC2 after troubleshooting and
+    #   replacing the AWS OpsWorks Stacks instance with a new one.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest AWS API Documentation
@@ -6106,19 +6153,18 @@ module Aws::OpsWorks
     #   There is no specific limit on the number of environment variables.
     #   However, the size of the associated data structure - which includes
     #   the variables' names, values, and protected flag values - cannot
-    #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
-    #   not all use cases. Exceeding it will cause an exception with the
-    #   message, "Environment: is too large (maximum is 10KB)."
+    #   exceed 20 KB. This limit should accommodate most if not all use
+    #   cases. Exceeding it will cause an exception with the message,
+    #   "Environment: is too large (maximum is 20 KB)."
     #
-    #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
-    #   specified one or more environment variables, you cannot modify the
-    #   stack's Chef version.
+    #   <note markdown="1"> If you have specified one or more environment variables, you cannot
+    #   modify the stack's Chef version.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateAppRequest AWS API Documentation
@@ -6147,7 +6193,7 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] elastic_ip
-    #   The address.
+    #   The IP address for which you want to update the name.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6199,7 +6245,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] auto_scaling_type
@@ -6216,9 +6262,9 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
-    #     `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -6233,15 +6279,15 @@ module Aws::OpsWorks
     #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
     #     Web`.
     #
-    #   For more information on the supported operating systems, see [AWS
+    #   For more information about supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][1].
     #
     #   The default option is the current Amazon Linux version. If you set
     #   this parameter to `Custom`, you must use the AmiId parameter to
-    #   specify the custom AMI that you want to use. For more information on
-    #   the supported operating systems, see [Operating Systems][1]. For
-    #   more information on how to use custom AMIs with OpsWorks, see [Using
-    #   Custom AMIs][2].
+    #   specify the custom AMI that you want to use. For more information
+    #   about supported operating systems, see [Operating Systems][1]. For
+    #   more information about how to use custom AMIs with OpsWorks, see
+    #   [Using Custom AMIs][2].
     #
     #   <note markdown="1"> You can specify a different Linux operating system for the updated
     #   stack, but you cannot change from Linux to Windows or Windows to
@@ -6251,8 +6297,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
     #   @return [String]
     #
     # @!attribute [rw] ami_id
@@ -6275,7 +6321,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     #   @return [String]
     #
     # @!attribute [rw] install_updates_on_boot
@@ -6418,7 +6464,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -6438,7 +6484,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] custom_json
@@ -6448,7 +6494,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
     #   @return [String]
     #
     # @!attribute [rw] custom_security_group_ids
@@ -6475,8 +6521,8 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_assign_public_ips
@@ -6486,7 +6532,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
     #   @return [Boolean]
     #
     # @!attribute [rw] custom_recipes
@@ -6650,7 +6696,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   @return [String]
     #
     # @!attribute [rw] default_os
@@ -6658,9 +6704,9 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
-    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
-    #     `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
+    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
+    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -6676,17 +6722,17 @@ module Aws::OpsWorks
     #     Web`.
     #
     #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
-    #     when you create instances. For more information on how to use
+    #     when you create instances. For more information about how to use
     #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
     #
     #   The default option is the stack's current operating system. For
-    #   more information on the supported operating systems, see [AWS
+    #   more information about supported operating systems, see [AWS
     #   OpsWorks Stacks Operating Systems][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
     #   @return [String]
     #
     # @!attribute [rw] hostname_theme
@@ -6704,7 +6750,7 @@ module Aws::OpsWorks
     #
     #   * `Fruits`
     #
-    #   * `Greek_Deities`
+    #   * `Greek_Deities_and_Titans`
     #
     #   * `Legendary_creatures_from_Japan`
     #
@@ -6731,7 +6777,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] default_subnet_id
@@ -6752,19 +6798,19 @@ module Aws::OpsWorks
     #
     #   `"\{"key1": "value1", "key2": "value2",...\}"`
     #
-    #   For more information on custom JSON, see [Use Custom JSON to Modify
-    #   the Stack Configuration Attributes][1].
+    #   For more information about custom JSON, see [Use Custom JSON to
+    #   Modify the Stack Configuration Attributes][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
     # @!attribute [rw] configuration_manager
     #   The configuration manager. When you update a stack, we recommend
     #   that you use the configuration manager to specify the Chef version:
     #   12, 11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
-    #   default value for Linux stacks is currently 11.4.
+    #   default value for Linux stacks is currently 12.
     #   @return [Types::StackConfigurationManager]
     #
     # @!attribute [rw] chef_configuration
@@ -6774,7 +6820,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Types::ChefConfiguration]
     #
     # @!attribute [rw] use_custom_cookbooks
@@ -6783,13 +6829,13 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] custom_cookbooks_source
     #   Contains the information required to retrieve an app or cookbook
-    #   from a repository. For more information, see [Creating Apps][1] or
-    #   [Custom Recipes and Cookbooks][2].
+    #   from a repository. For more information, see [Adding Apps][1] or
+    #   [Cookbooks and Recipes][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     #   @return [Types::Source]
     #
     # @!attribute [rw] default_ssh_key_name
@@ -6803,9 +6849,9 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
-    #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
-    #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
+    #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
+    #   [3]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
     #   @return [String]
     #
     # @!attribute [rw] default_root_device_type
@@ -6816,7 +6862,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     #   @return [String]
     #
     # @!attribute [rw] use_opsworks_security_groups
@@ -6846,7 +6892,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
     #   @return [Boolean]
     #
     # @!attribute [rw] agent_version
@@ -6931,7 +6977,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfileRequest AWS API Documentation
@@ -6999,7 +7045,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UserProfile AWS API Documentation
@@ -7010,6 +7056,19 @@ module Aws::OpsWorks
       :ssh_username,
       :ssh_public_key,
       :allow_self_management)
+      include Aws::Structure
+    end
+
+    # Indicates that a request was not valid.
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -7040,7 +7099,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeVolumes.html
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -7061,7 +7120,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -7070,11 +7129,32 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
     # @!attribute [rw] volume_type
-    #   The volume type, standard or PIOPS.
+    #   The volume type. For more information, see [ Amazon EBS Volume
+    #   Types][1].
+    #
+    #   * `standard` - Magnetic. Magnetic volumes must have a minimum size
+    #     of 1 GiB and a maximum size of 1024 GiB.
+    #
+    #   * `io1` - Provisioned IOPS (SSD). PIOPS volumes must have a minimum
+    #     size of 4 GiB and a maximum size of 16384 GiB.
+    #
+    #   * `gp2` - General Purpose (SSD). General purpose volumes must have a
+    #     minimum size of 1 GiB and a maximum size of 16384 GiB.
+    #
+    #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
+    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     maximum size of 16384 GiB.
+    #
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #     GiB and a maximum size of 16384 GiB.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -7082,6 +7162,12 @@ module Aws::OpsWorks
     #   @return [Integer]
     #
     # @!attribute [rw] encrypted
+    #   Specifies whether an Amazon EBS volume is encrypted. For more
+    #   information, see [Amazon EBS Encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Volume AWS API Documentation
@@ -7143,19 +7229,25 @@ module Aws::OpsWorks
     #   The volume type. For more information, see [ Amazon EBS Volume
     #   Types][1].
     #
-    #   * `standard` - Magnetic
+    #   * `standard` - Magnetic. Magnetic volumes must have a minimum size
+    #     of 1 GiB and a maximum size of 1024 GiB.
     #
-    #   * `io1` - Provisioned IOPS (SSD)
+    #   * `io1` - Provisioned IOPS (SSD). PIOPS volumes must have a minimum
+    #     size of 4 GiB and a maximum size of 16384 GiB.
     #
-    #   * `gp2` - General Purpose (SSD)
+    #   * `gp2` - General Purpose (SSD). General purpose volumes must have a
+    #     minimum size of 1 GiB and a maximum size of 16384 GiB.
     #
-    #   * `st1` - Throughput Optimized hard disk drive (HDD)
+    #   * `st1` - Throughput Optimized hard disk drive (HDD). Throughput
+    #     optimized HDD volumes must have a minimum size of 500 GiB and a
+    #     maximum size of 16384 GiB.
     #
-    #   * `sc1` - Cold HDD
+    #   * `sc1` - Cold HDD. Cold HDD volumes must have a minimum size of 500
+    #     GiB and a maximum size of 16384 GiB.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -7168,7 +7260,7 @@ module Aws::OpsWorks
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/VolumeConfiguration AWS API Documentation

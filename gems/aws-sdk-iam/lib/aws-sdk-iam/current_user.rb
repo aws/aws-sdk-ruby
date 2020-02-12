@@ -16,16 +16,17 @@ module Aws::IAM
       options = Hash === args.last ? args.pop.dup : {}
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
 
     # The path to the user. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -38,12 +39,12 @@ module Aws::IAM
     end
 
     # The stable and unique string identifying the user. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def user_id
       data[:user_id]
@@ -51,11 +52,11 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) that identifies the user. For more
     # information about ARNs and how to use ARNs in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -75,30 +76,56 @@ module Aws::IAM
     # The date and time, in [ISO 8601 date-time format][1], when the user's
     # password was last used to sign in to an AWS website. For a list of AWS
     # websites that capture a user's last sign-in time, see the [Credential
-    # Reports][2] topic in the *Using IAM* guide. If a password is used more
+    # Reports][2] topic in the *IAM User Guide*. If a password is used more
     # than once in a five-minute span, only the first use is returned in
-    # this field. If the field is null (no value) then it indicates that
+    # this field. If the field is null (no value), then it indicates that
     # they never signed in with a password. This can be because:
     #
     # * The user never had a password.
     #
     # * A password exists but has not been used since IAM started tracking
-    #   this information on October 20th, 2014.
+    #   this information on October 20, 2014.
     #
-    # A null does not mean that the user *never* had a password. Also, if
-    # the user does not currently have a password, but had one in the past,
-    # then this field contains the date and time the most recent password
-    # was used.
+    # A null value does not mean that the user *never* had a password. Also,
+    # if the user does not currently have a password but had one in the
+    # past, then this field contains the date and time the most recent
+    # password was used.
     #
     # This value is returned only in the GetUser and ListUsers operations.
     #
     #
     #
     # [1]: http://www.iso.org/iso/iso8601
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     # @return [Time]
     def password_last_used
       data[:password_last_used]
+    end
+
+    # The ARN of the policy used to set the permissions boundary for the
+    # user.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Types::AttachedPermissionsBoundary]
+    def permissions_boundary
+      data[:permissions_boundary]
+    end
+
+    # A list of tags that are associated with the specified user. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -242,7 +269,7 @@ module Aws::IAM
     # @option options [String] :user_name
     #   The name of the user.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -279,7 +306,7 @@ module Aws::IAM
     # @option options [String] :user_name
     #   The name of the user whose MFA devices you want to list.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -317,7 +344,7 @@ module Aws::IAM
     #   The name of the IAM user whose signing certificates you want to
     #   examine.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-

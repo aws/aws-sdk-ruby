@@ -88,9 +88,14 @@ module Aws::DAX
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     RebootNodeRequest = Shapes::StructureShape.new(name: 'RebootNodeRequest')
     RebootNodeResponse = Shapes::StructureShape.new(name: 'RebootNodeResponse')
+    SSEDescription = Shapes::StructureShape.new(name: 'SSEDescription')
+    SSEEnabled = Shapes::BooleanShape.new(name: 'SSEEnabled')
+    SSESpecification = Shapes::StructureShape.new(name: 'SSESpecification')
+    SSEStatus = Shapes::StringShape.new(name: 'SSEStatus')
     SecurityGroupIdentifierList = Shapes::ListShape.new(name: 'SecurityGroupIdentifierList')
     SecurityGroupMembership = Shapes::StructureShape.new(name: 'SecurityGroupMembership')
     SecurityGroupMembershipList = Shapes::ListShape.new(name: 'SecurityGroupMembershipList')
+    ServiceLinkedRoleNotFoundFault = Shapes::StructureShape.new(name: 'ServiceLinkedRoleNotFoundFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
@@ -139,6 +144,7 @@ module Aws::DAX
     Cluster.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupMembershipList, location_name: "SecurityGroups"))
     Cluster.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamRoleArn"))
     Cluster.add_member(:parameter_group, Shapes::ShapeRef.new(shape: ParameterGroupStatus, location_name: "ParameterGroup"))
+    Cluster.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     Cluster.struct_class = Types::Cluster
 
     ClusterList.member = Shapes::ShapeRef.new(shape: Cluster)
@@ -157,6 +163,7 @@ module Aws::DAX
     CreateClusterRequest.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IamRoleArn"))
     CreateClusterRequest.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateClusterRequest.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -282,6 +289,12 @@ module Aws::DAX
     IncreaseReplicationFactorResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     IncreaseReplicationFactorResponse.struct_class = Types::IncreaseReplicationFactorResponse
 
+    InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
+    InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
     ListTagsRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
@@ -353,6 +366,12 @@ module Aws::DAX
 
     RebootNodeResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     RebootNodeResponse.struct_class = Types::RebootNodeResponse
+
+    SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
+    SSEDescription.struct_class = Types::SSEDescription
+
+    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))
+    SSESpecification.struct_class = Types::SSESpecification
 
     SecurityGroupIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -434,12 +453,16 @@ module Aws::DAX
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "dax",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon DAX",
         "serviceFullName" => "Amazon DynamoDB Accelerator (DAX)",
+        "serviceId" => "DAX",
         "signatureVersion" => "v4",
         "targetPrefix" => "AmazonDAXV3",
+        "uid" => "dax-2017-04-19",
       }
 
       api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -459,6 +482,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -472,6 +496,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -486,6 +511,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: SubnetGroupQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
       end)
 
       api.add_operation(:decrease_replication_factor, Seahorse::Model::Operation.new.tap do |o|
@@ -497,6 +523,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -509,6 +536,7 @@ module Aws::DAX
         o.output = Shapes::ShapeRef.new(shape: DeleteClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -521,6 +549,7 @@ module Aws::DAX
         o.output = Shapes::ShapeRef.new(shape: DeleteParameterGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -533,6 +562,7 @@ module Aws::DAX
         o.output = Shapes::ShapeRef.new(shape: DeleteSubnetGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: SubnetGroupInUseFault)
         o.errors << Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
       end)
 
       api.add_operation(:describe_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -542,6 +572,7 @@ module Aws::DAX
         o.input = Shapes::ShapeRef.new(shape: DescribeClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClustersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -552,6 +583,7 @@ module Aws::DAX
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeDefaultParametersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDefaultParametersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -562,6 +594,7 @@ module Aws::DAX
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -573,6 +606,7 @@ module Aws::DAX
         o.input = Shapes::ShapeRef.new(shape: DescribeParameterGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeParameterGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -584,6 +618,7 @@ module Aws::DAX
         o.input = Shapes::ShapeRef.new(shape: DescribeParametersRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeParametersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -595,6 +630,7 @@ module Aws::DAX
         o.input = Shapes::ShapeRef.new(shape: DescribeSubnetGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSubnetGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: SubnetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
       end)
 
       api.add_operation(:increase_replication_factor, Seahorse::Model::Operation.new.tap do |o|
@@ -609,6 +645,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForClusterExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeQuotaForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -622,6 +659,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -635,6 +673,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: NodeNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -649,6 +688,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -663,6 +703,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: InvalidARNFault)
         o.errors << Shapes::ShapeRef.new(shape: TagNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -677,6 +718,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -689,6 +731,7 @@ module Aws::DAX
         o.output = Shapes::ShapeRef.new(shape: UpdateParameterGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterGroupStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ParameterGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
@@ -703,6 +746,7 @@ module Aws::DAX
         o.errors << Shapes::ShapeRef.new(shape: SubnetQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: SubnetInUse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleNotFoundFault)
       end)
     end
 

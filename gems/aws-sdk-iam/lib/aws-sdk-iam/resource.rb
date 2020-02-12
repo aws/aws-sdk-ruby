@@ -36,12 +36,12 @@ module Aws::IAM
     #
     #   The [regex pattern][1] that is used to validate this parameter is a
     #   string of characters. That string can include almost any printable
-    #   ASCII character from the space (\\u0020) through the end of the ASCII
-    #   character range (\\u00FF). You can also include the tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D) characters. Any of
-    #   these characters are valid in a password. However, many tools, such as
-    #   the AWS Management Console, might restrict the ability to type certain
-    #   characters because they have special meaning within that tool.
+    #   ASCII character from the space (`\u0020`) through the end of the ASCII
+    #   character range (`\u00FF`). You can also include the tab (`\u0009`),
+    #   line feed (`\u000A`), and carriage return (`\u000D`) characters. Any
+    #   of these characters are valid in a password. However, many tools, such
+    #   as the AWS Management Console, might restrict the ability to type
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -61,7 +61,7 @@ module Aws::IAM
     # @option options [required, String] :account_alias
     #   The account alias to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of lowercase letters, digits, and dashes. You
     #   cannot start or finish with a dash, nor can you have two dashes in a
     #   row.
@@ -98,7 +98,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do not
@@ -136,7 +136,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     # @option options [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
     #
@@ -179,31 +179,24 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :group_name
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-. The group name must be unique within the account. Group
-    #   names are not distinguished by case. For example, you cannot create
-    #   groups named both "ADMINS" and "admins".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [Group]
     def create_group(options = {})
       resp = @client.create_group(options)
@@ -224,7 +217,7 @@ module Aws::IAM
     # @option options [required, String] :instance_profile_name
     #   The name of the instance profile to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -239,16 +232,16 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @return [InstanceProfile]
     def create_instance_profile(options = {})
@@ -272,14 +265,9 @@ module Aws::IAM
     # @option options [required, String] :policy_name
     #   The friendly name of the policy.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @option options [String] :path
     #   The path for the policy.
     #
@@ -289,32 +277,37 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :policy_document
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -345,6 +338,13 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     permissions_boundary: "arnType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -354,46 +354,47 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :role_name
     #   The name of the role to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @option options [required, String] :assume_role_policy_document
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
+    #
+    #   In IAM, you must provide a JSON policy that has been converted to a
+    #   string. However, for AWS CloudFormation templates formatted in YAML,
+    #   you can provide the policy in JSON or YAML format. AWS CloudFormation
+    #   always converts a YAML policy to JSON format before submitting it to
+    #   IAM.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
+    #
+    #   Upon success, the response includes the same trust policy in JSON
+    #   format.
     #
     #
     #
@@ -419,7 +420,25 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the role.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created role. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per role, then the entire request fails and the role is not
+    #   created.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [Role]
     def create_role(options = {})
       resp = @client.create_role(options)
@@ -450,11 +469,11 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
     # @option options [required, String] :name
     #   The name of the provider to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -486,12 +505,12 @@ module Aws::IAM
     #   see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/). This parameter allows (per its [regex pattern][2]) a string
-    #   of characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
-    #   and upper and lowercased letters.
+    #   slash (/). This parameter allows (through its [regex pattern][2]) a
+    #   string of characters consisting of either a forward slash (/) by
+    #   itself or a string that must begin and end with forward slashes. In
+    #   addition, it can contain any ASCII character from the ! (`\u0021`)
+    #   through the DEL character (`\u007F`), including most punctuation
+    #   characters, digits, and upper and lowercased letters.
     #
     #   <note markdown="1"> If you are uploading a server certificate specifically for use with
     #   Amazon CloudFront distributions, you must specify a path using the
@@ -502,13 +521,13 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :server_certificate_name
     #   The name for the server certificate. Do not include the path in this
     #   value. The name of the certificate cannot contain any spaces.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -523,13 +542,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -541,13 +560,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -560,13 +579,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -590,7 +609,7 @@ module Aws::IAM
     # @option options [String] :user_name
     #   The name of the user the signing certificate is for.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -605,13 +624,13 @@ module Aws::IAM
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -631,6 +650,13 @@ module Aws::IAM
     #   user = iam.create_user({
     #     path: "pathType",
     #     user_name: "userNameType", # required
+    #     permissions_boundary: "arnType",
+    #     tags: [
+    #       {
+    #         key: "tagKeyType", # required
+    #         value: "tagValueType", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -640,29 +666,41 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :user_name
     #   The name of the user to create.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-. User names are not distinguished by case. For example, you
-    #   cannot create users named both "TESTUSER" and "testuser".
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of tags that you want to attach to the newly created user. Each
+    #   tag consists of a key name and an associated value. For more
+    #   information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    #   User Guide*.
+    #
+    #   <note markdown="1"> If any one of the tags is invalid or if you exceed the allowed number
+    #   of tags per user, then the entire request fails and the user is not
+    #   created.
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
     # @return [User]
     def create_user(options = {})
       resp = @client.create_user(options)
@@ -687,22 +725,22 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @option options [required, String] :virtual_mfa_device_name
     #   The name of the virtual MFA device. Use with path to uniquely identify
     #   a virtual MFA device.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -758,11 +796,11 @@ module Aws::IAM
     #   with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all groups. This parameter allows (per its [regex
-    #   pattern][1]) a string of characters consisting of either a forward
-    #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes. In addition, it can contain any ASCII character from the !
-    #   (\\u0021) through the DEL character (\\u007F), including most
+    #   slash (/), listing all groups. This parameter allows (through its
+    #   [regex pattern][1]) a string of characters consisting of either a
+    #   forward slash (/) by itself or a string that must begin and end with
+    #   forward slashes. In addition, it can contain any ASCII character from
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -808,12 +846,13 @@ module Aws::IAM
     #   path starts with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all instance profiles. This parameter allows (per
-    #   its [regex pattern][1]) a string of characters consisting of either a
-    #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all instance profiles. This parameter allows
+    #   (through its [regex pattern][1]) a string of characters consisting of
+    #   either a forward slash (/) by itself or a string that must begin and
+    #   end with forward slashes. In addition, it can contain any ASCII
+    #   character from the ! (`\u0021`) through the DEL character (`\u007F`),
+    #   including most punctuation characters, digits, and upper and
+    #   lowercased letters.
     #
     #
     #
@@ -843,6 +882,7 @@ module Aws::IAM
     #     scope: "All", # accepts All, AWS, Local
     #     only_attached: false,
     #     path_prefix: "policyPathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :scope
@@ -864,16 +904,26 @@ module Aws::IAM
     # @option options [String] :path_prefix
     #   The path prefix for filtering the results. This parameter is optional.
     #   If it is not included, it defaults to a slash (/), listing all
-    #   policies. This parameter allows (per its [regex pattern][1]) a string
-    #   of characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
-    #   and upper and lowercased letters.
+    #   policies. This parameter allows (through its [regex pattern][1]) a
+    #   string of characters consisting of either a forward slash (/) by
+    #   itself or a string that must begin and end with forward slashes. In
+    #   addition, it can contain any ASCII character from the ! (`\u0021`)
+    #   through the DEL character (`\u007F`), including most punctuation
+    #   characters, digits, and upper and lowercased letters.
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Policy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
@@ -923,11 +973,11 @@ module Aws::IAM
     #   with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all roles. This parameter allows (per its [regex
-    #   pattern][1]) a string of characters consisting of either a forward
-    #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes. In addition, it can contain any ASCII character from the !
-    #   (\\u0021) through the DEL character (\\u007F), including most
+    #   slash (/), listing all roles. This parameter allows (through its
+    #   [regex pattern][1]) a string of characters consisting of either a
+    #   forward slash (/) by itself or a string that must begin and end with
+    #   forward slashes. In addition, it can contain any ASCII character from
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -1002,12 +1052,13 @@ module Aws::IAM
     #   path starts with `/company/servercerts`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all server certificates. This parameter allows (per
-    #   its [regex pattern][1]) a string of characters consisting of either a
-    #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all server certificates. This parameter allows
+    #   (through its [regex pattern][1]) a string of characters consisting of
+    #   either a forward slash (/) by itself or a string that must begin and
+    #   end with forward slashes. In addition, it can contain any ASCII
+    #   character from the ! (`\u0021`) through the DEL character (`\u007F`),
+    #   including most punctuation characters, digits, and upper and
+    #   lowercased letters.
     #
     #
     #
@@ -1051,11 +1102,11 @@ module Aws::IAM
     #   path starts with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all user names. This parameter allows (per its
+    #   slash (/), listing all user names. This parameter allows (through its
     #   [regex pattern][1]) a string of characters consisting of either a
     #   forward slash (/) by itself or a string that must begin and end with
     #   forward slashes. In addition, it can contain any ASCII character from
-    #   the ! (\\u0021) through the DEL character (\\u007F), including most
+    #   the ! (`\u0021`) through the DEL character (`\u007F`), including most
     #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
@@ -1097,8 +1148,8 @@ module Aws::IAM
     # @param [Hash] options ({})
     # @option options [String] :assignment_status
     #   The status (`Unassigned` or `Assigned`) of the devices to list. If you
-    #   do not specify an `AssignmentStatus`, the operation defaults to `Any`
-    #   which lists both assigned and unassigned virtual MFA devices.
+    #   do not specify an `AssignmentStatus`, the operation defaults to `Any`,
+    #   which lists both assigned and unassigned virtual MFA devices.,
     # @return [VirtualMfaDevice::Collection]
     def virtual_mfa_devices(options = {})
       batches = Enumerator.new do |y|

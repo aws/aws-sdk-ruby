@@ -27,16 +27,20 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'streaming'  => true, # transfer-encoding
+        'requiresLength' => true, # transder-encoding
         # event stream modeling
         'event' => false,
         'eventstream' => false,
         'eventheader' => false,
         'eventpayload' => false,
         # ignore
+        'synthetic' => false,
         'box' => false,
         'fault' => false,
         'error' => false,
         'deprecated' => false,
+        'deprecatedMessage' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,
@@ -45,7 +49,6 @@ module AwsSdkCodeGenerator
         'locationName'  => false,
         'value' => false,
         'required' => false,
-        'streaming'  => false,
         'enum' => false,
         'exception' => false,
         'payload' => false,
@@ -58,7 +61,7 @@ module AwsSdkCodeGenerator
       }
 
       METADATA_KEYS = {
-        # keep
+        # keep all
         'endpointPrefix' => true,
         'signatureVersion' => true,
         'signingName' => true,
@@ -69,14 +72,14 @@ module AwsSdkCodeGenerator
         'errorPrefix' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'protocolSettings' => {}, # current unused unless for h2 exclude
 
-        # ignore
-        'apiVersion' => false,
-        'checksumFormat' => false,
-        'globalEndpoint' => false,
-        'serviceAbbreviation' => false,
-        'uid' => false,
-        'serviceId' => false,
+        'serviceId' => true,
+        'apiVersion' => true,
+        'checksumFormat' => true,
+        'globalEndpoint' => true,
+        'serviceAbbreviation' => true,
+        'uid' => true,
       }
 
       # @option options [required, Service] :service
@@ -135,6 +138,15 @@ module AwsSdkCodeGenerator
               lines << "#{shape_name}[:payload_member] = #{shape_name}.member(:#{underscore(payload)})"
             end
             groups << lines.join("\n")
+          elsif error_struct?(shape)
+            required = Set.new(shape['required'] || [])
+            unless shape['members'].nil?
+              shape['members'].each do |member_name, member_ref|
+                lines << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+              end
+            end
+            lines << "#{shape_name}.struct_class = Types::#{shape_name}"
+            groups << lines.join("\n")
           elsif shape['type'] == 'list'
             lines << "#{shape_name}.member = #{shape_ref(shape['member'])}"
             groups << lines.join("\n")
@@ -167,7 +179,7 @@ module AwsSdkCodeGenerator
       def operations
         @service.api['operations'].map do |operation_name, operation|
           Operation.new.tap do |o|
-            o.name = operation_name
+            o.name = operation['name'] || operation_name
             o.method_name = underscore(operation_name)
             o.http_method = operation['http']['method']
             o.http_request_uri = operation['http']['requestUri']
@@ -180,10 +192,31 @@ module AwsSdkCodeGenerator
             end
             o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
+            o.endpoint_operation = true if operation['endpointoperation']
+            if operation.key?('endpointdiscovery')
+              # "endpointdiscovery" trait per operation
+              # contains hash values of configuration,
+              # current acked field: "required"
+              o.endpoint_discovery_available = true
+              o.endpoint_discovery = operation['endpointdiscovery'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            # endpoint trait cannot be co-exist with endpoint discovery
+            elsif operation.key?('endpoint')
+              # endpoint trait per operation, cannot be enabled with endpoint discovery
+              o.endpoint_trait = true
+              o.endpoint_pattern = operation['endpoint'].inject([]) do |a, (k, v)|
+                a << { key: k.inspect, value: v.inspect }
+                a
+              end
+            end
             o.authorizer = operation['authorizer'] if operation.key?('authorizer')
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.require_apikey = operation['requiresApiKey'] if operation.key?('requiresApiKey')
             o.pager = pager(operation_name)
+            o.async = @service.protocol_settings['h2'] == 'eventstream' &&
+              AwsSdkCodeGenerator::Helper.operation_eventstreaming?(operation, @service.api)
           end
         end
       end
@@ -201,6 +234,13 @@ module AwsSdkCodeGenerator
             end
           end
         end
+      end
+
+      def endpoint_operation
+        @service.api['operations'].each do |name, ref|
+          return underscore(name) if ref['endpointoperation']
+        end
+        nil
       end
 
       private
@@ -232,6 +272,20 @@ module AwsSdkCodeGenerator
       end
 
       def shape_enum
+        unless @service.protocol_settings.empty?
+          if @service.protocol_settings['h2'] == 'eventstream'
+            # some event shapes shared with error shapes
+            # might missing event trait
+            @service.api['shapes'].each do |_, shape|
+              if shape['eventstream']
+                # add event trait to all members if not exists
+                shape['members'].each do |name, ref|
+                  @service.api['shapes'][ref['shape']]['event'] = true
+                end
+              end
+            end
+          end
+        end
         Enumerator.new do |y|
           @service.api.fetch('shapes', {}).keys.sort.each do |shape_name|
             y.yield(shape_name, @service.api['shapes'].fetch(shape_name))
@@ -240,16 +294,26 @@ module AwsSdkCodeGenerator
       end
 
       def non_error_struct?(shape)
-        shape['type'] == 'structure' &&
-        !shape['error'] &&
-        !shape['exception']
+        if !!shape['event']
+          shape['type'] == 'structure'
+        else
+          shape['type'] == 'structure' &&
+          !shape['error'] &&
+          !shape['exception']
+        end
+      end
+
+      def error_struct?(shape)
+        shape['type'] == 'structure' && !!!shape['event']
+          (shape['error'] || shape['exception']) &&
+          shape['members'] && shape['members'].size > 0
       end
 
       def structure_shape_enum
         Enumerator.new do |y|
           shape_enum.each do |shape_name, shape|
-            # skip error types
-            if non_error_struct?(shape)
+            # non error types && non empty error struct
+            if non_error_struct?(shape) || error_struct?(shape)
               y.yield(shape_name, shape)
             end
           end
@@ -270,7 +334,7 @@ module AwsSdkCodeGenerator
         line += shape_ref_eventheader(ref)
         line += shape_ref_location(ref)
         line += shape_ref_location_name(member_name, ref)
-        line += shape_ref_metadata(ref)
+        line += shape_ref_metadata(ref, member_name)
         line += ")"
         line
       end
@@ -339,9 +403,12 @@ module AwsSdkCodeGenerator
         location_name ? ", location_name: #{location_name.inspect}" : ""
       end
 
-      def shape_ref_metadata(member_ref)
+      def shape_ref_metadata(member_ref, member_name)
         metadata = member_ref.inject({}) do |hash, (key, value)|
           hash[key] = value unless SKIP_TRAITS.include?(key)
+          if key == 'hostLabel'
+            hash['hostLabelName'] = member_name
+          end
           hash
         end
         if metadata.empty?
@@ -449,8 +516,23 @@ module AwsSdkCodeGenerator
         # @return [Boolean]
         attr_accessor :deprecated
 
+        # @return [Boolean]
+        attr_accessor :endpoint_discovery_available
+
+        # @return [Boolean]
+        attr_accessor :endpoint_operation
+
+        # @return [Array]
+        attr_accessor :endpoint_discovery
+
         # @return [String,nil]
         attr_accessor :authtype
+
+        # @return [Boolean]
+        attr_accessor :endpoint_trait
+
+        # @return [Array]
+        attr_accessor :endpoint_pattern
 
         # APIG only
         # @return [Boolean]
@@ -462,6 +544,9 @@ module AwsSdkCodeGenerator
 
         # @return [Pager, nil]
         attr_accessor :pager
+
+        # @return [Boolean]
+        attr_accessor :async
 
       end
 

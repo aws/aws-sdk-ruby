@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,9 +31,14 @@ module Aws::S3
       @bucket_name
     end
 
-    # Container for logging information. Presence of this element indicates
-    # that logging is enabled. Parameters TargetBucket and TargetPrefix are
-    # required in this case.
+    # Describes where logs are stored and the prefix that Amazon S3 assigns
+    # to all log object keys for a bucket. For more information, see [PUT
+    # Bucket logging][1] in the *Amazon Simple Storage Service API
+    # Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html
     # @return [Types::LoggingEnabled]
     def logging_enabled
       data[:logging_enabled]
@@ -195,7 +201,9 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::BucketLoggingStatus] :bucket_logging_status
+    #   Container for logging status information.
     # @option options [String] :content_md5
+    #   The MD5 hash of the `PutBucketLogging` request body.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

@@ -1,4 +1,5 @@
 require_relative '../changelog'
+require_relative '../custom_service'
 
 require 'tempfile'
 require 'rspec'

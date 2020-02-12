@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,111 +48,215 @@ module Aws::Inspector
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -220,8 +329,10 @@ module Aws::Inspector
     end
 
     # Creates a new assessment target using the ARN of the resource group
-    # that is generated by CreateResourceGroup. If the [service-linked
-    # role][1] isn’t already registered, also creates and registers a
+    # that is generated by CreateResourceGroup. If resourceGroupArn is not
+    # specified, all EC2 instances in the current AWS account and region are
+    # included in the assessment target. If the [service-linked role][1]
+    # isn’t already registered, this action also creates and registers a
     # service-linked role to grant Amazon Inspector access to AWS Services
     # needed to perform security assessments. You can create up to 50
     # assessment targets per AWS account. You can run up to 500 concurrent
@@ -231,14 +342,16 @@ module Aws::Inspector
     #
     #
     # [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html
-    # [2]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
+    # [2]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
     #
     # @option params [required, String] :assessment_target_name
     #   The user-defined name that identifies the assessment target that you
     #   want to create. The name must be unique within the AWS account.
     #
-    # @option params [required, String] :resource_group_arn
+    # @option params [String] :resource_group_arn
     #   The ARN that specifies the resource group that is used to create the
+    #   assessment target. If resourceGroupArn is not specified, all EC2
+    #   instances in the current AWS account and region are included in the
     #   assessment target.
     #
     # @return [Types::CreateAssessmentTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -265,7 +378,7 @@ module Aws::Inspector
     #
     #   resp = client.create_assessment_target({
     #     assessment_target_name: "AssessmentTargetName", # required
-    #     resource_group_arn: "Arn", # required
+    #     resource_group_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -283,9 +396,9 @@ module Aws::Inspector
 
     # Creates an assessment template for the assessment target that is
     # specified by the ARN of the assessment target. If the [service-linked
-    # role][1] isn’t already registered, also creates and registers a
-    # service-linked role to grant Amazon Inspector access to AWS Services
-    # needed to perform security assessments.
+    # role][1] isn’t already registered, this action also creates and
+    # registers a service-linked role to grant Amazon Inspector access to
+    # AWS Services needed to perform security assessments.
     #
     #
     #
@@ -302,8 +415,7 @@ module Aws::Inspector
     #   correspond to a particular assessment target must be unique.
     #
     # @option params [required, Integer] :duration_in_seconds
-    #   The duration of the assessment run in seconds. The default value is
-    #   3600 seconds (one hour).
+    #   The duration of the assessment run in seconds.
     #
     # @option params [required, Array<String>] :rules_package_arns
     #   The ARNs that specify the rules packages that you want to attach to
@@ -369,6 +481,38 @@ module Aws::Inspector
     # @param [Hash] params ({})
     def create_assessment_template(params = {}, options = {})
       req = build_request(:create_assessment_template, params)
+      req.send_request(options)
+    end
+
+    # Starts the generation of an exclusions preview for the specified
+    # assessment template. The exclusions preview lists the potential
+    # exclusions (ExclusionPreview) that Inspector can detect before it runs
+    # the assessment.
+    #
+    # @option params [required, String] :assessment_template_arn
+    #   The ARN that specifies the assessment template for which you want to
+    #   create an exclusions preview.
+    #
+    # @return [Types::CreateExclusionsPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExclusionsPreviewResponse#preview_token #preview_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_exclusions_preview({
+    #     assessment_template_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.preview_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateExclusionsPreview AWS API Documentation
+    #
+    # @overload create_exclusions_preview(params = {})
+    # @param [Hash] params ({})
+    def create_exclusions_preview(params = {}, options = {})
+      req = build_request(:create_exclusions_preview, params)
       req.send_request(options)
     end
 
@@ -850,6 +994,54 @@ module Aws::Inspector
       req.send_request(options)
     end
 
+    # Describes the exclusions that are specified by the exclusions' ARNs.
+    #
+    # @option params [required, Array<String>] :exclusion_arns
+    #   The list of ARNs that specify the exclusions that you want to
+    #   describe.
+    #
+    # @option params [String] :locale
+    #   The locale into which you want to translate the exclusion's title,
+    #   description, and recommendation.
+    #
+    # @return [Types::DescribeExclusionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExclusionsResponse#exclusions #exclusions} => Hash&lt;String,Types::Exclusion&gt;
+    #   * {Types::DescribeExclusionsResponse#failed_items #failed_items} => Hash&lt;String,Types::FailedItemDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_exclusions({
+    #     exclusion_arns: ["Arn"], # required
+    #     locale: "EN_US", # accepts EN_US
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exclusions #=> Hash
+    #   resp.exclusions["Arn"].arn #=> String
+    #   resp.exclusions["Arn"].title #=> String
+    #   resp.exclusions["Arn"].description #=> String
+    #   resp.exclusions["Arn"].recommendation #=> String
+    #   resp.exclusions["Arn"].scopes #=> Array
+    #   resp.exclusions["Arn"].scopes[0].key #=> String, one of "INSTANCE_ID", "RULES_PACKAGE_ARN"
+    #   resp.exclusions["Arn"].scopes[0].value #=> String
+    #   resp.exclusions["Arn"].attributes #=> Array
+    #   resp.exclusions["Arn"].attributes[0].key #=> String
+    #   resp.exclusions["Arn"].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.failed_items #=> Hash
+    #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.failed_items["Arn"].retryable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeExclusions AWS API Documentation
+    #
+    # @overload describe_exclusions(params = {})
+    # @param [Hash] params ({})
+    def describe_exclusions(params = {}, options = {})
+      req = build_request(:describe_exclusions, params)
+      req.send_request(options)
+    end
+
     # Describes the findings that are specified by the ARNs of the findings.
     #
     # @option params [required, Array<String>] :finding_arns
@@ -936,6 +1128,25 @@ module Aws::Inspector
     #   resp.findings[0].asset_attributes.hostname #=> String
     #   resp.findings[0].asset_attributes.ipv4_addresses #=> Array
     #   resp.findings[0].asset_attributes.ipv4_addresses[0] #=> String
+    #   resp.findings[0].asset_attributes.tags #=> Array
+    #   resp.findings[0].asset_attributes.tags[0].key #=> String
+    #   resp.findings[0].asset_attributes.tags[0].value #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].network_interface_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].subnet_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].vpc_id #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_address #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].public_dns_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].public_ip #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].ipv6_addresses #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].ipv6_addresses[0] #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups #=> Array
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups[0].group_name #=> String
+    #   resp.findings[0].asset_attributes.network_interfaces[0].security_groups[0].group_id #=> String
     #   resp.findings[0].id #=> String
     #   resp.findings[0].title #=> String
     #   resp.findings[0].description #=> String
@@ -1119,7 +1330,7 @@ module Aws::Inspector
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
     #
     # @return [Types::GetAssessmentReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1145,6 +1356,73 @@ module Aws::Inspector
     # @param [Hash] params ({})
     def get_assessment_report(params = {}, options = {})
       req = build_request(:get_assessment_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the exclusions preview (a list of ExclusionPreview objects)
+    # specified by the preview token. You can obtain the preview token by
+    # running the CreateExclusionsPreview API.
+    #
+    # @option params [required, String] :assessment_template_arn
+    #   The ARN that specifies the assessment template for which the
+    #   exclusions preview was requested.
+    #
+    # @option params [required, String] :preview_token
+    #   The unique identifier associated of the exclusions preview.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the
+    #   GetExclusionsPreviewRequest action. Subsequent calls to the action
+    #   fill nextToken in the request with the value of nextToken from the
+    #   previous response to continue listing data.
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 100. The maximum value is
+    #   500.
+    #
+    # @option params [String] :locale
+    #   The locale into which you want to translate the exclusion's title,
+    #   description, and recommendation.
+    #
+    # @return [Types::GetExclusionsPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExclusionsPreviewResponse#preview_status #preview_status} => String
+    #   * {Types::GetExclusionsPreviewResponse#exclusion_previews #exclusion_previews} => Array&lt;Types::ExclusionPreview&gt;
+    #   * {Types::GetExclusionsPreviewResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_exclusions_preview({
+    #     assessment_template_arn: "Arn", # required
+    #     preview_token: "UUID", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     locale: "EN_US", # accepts EN_US
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.preview_status #=> String, one of "WORK_IN_PROGRESS", "COMPLETED"
+    #   resp.exclusion_previews #=> Array
+    #   resp.exclusion_previews[0].title #=> String
+    #   resp.exclusion_previews[0].description #=> String
+    #   resp.exclusion_previews[0].recommendation #=> String
+    #   resp.exclusion_previews[0].scopes #=> Array
+    #   resp.exclusion_previews[0].scopes[0].key #=> String, one of "INSTANCE_ID", "RULES_PACKAGE_ARN"
+    #   resp.exclusion_previews[0].scopes[0].value #=> String
+    #   resp.exclusion_previews[0].attributes #=> Array
+    #   resp.exclusion_previews[0].attributes[0].key #=> String
+    #   resp.exclusion_previews[0].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreview AWS API Documentation
+    #
+    # @overload get_exclusions_preview(params = {})
+    # @param [Hash] params ({})
+    def get_exclusions_preview(params = {}, options = {})
+      req = build_request(:get_exclusions_preview, params)
       req.send_request(options)
     end
 
@@ -1683,7 +1961,7 @@ module Aws::Inspector
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
+    # [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
     #
     # @option params [Types::AssessmentTargetFilter] :filter
     #   You can use this parameter to specify a subset of data to be included
@@ -1913,6 +2191,52 @@ module Aws::Inspector
     # @param [Hash] params ({})
     def list_event_subscriptions(params = {}, options = {})
       req = build_request(:list_event_subscriptions, params)
+      req.send_request(options)
+    end
+
+    # List exclusions that are generated by the assessment run.
+    #
+    # @option params [required, String] :assessment_run_arn
+    #   The ARN of the assessment run that generated the exclusions that you
+    #   want to list.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the ListExclusionsRequest
+    #   action. Subsequent calls to the action fill nextToken in the request
+    #   with the value of nextToken from the previous response to continue
+    #   listing data.
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 100. The maximum value is
+    #   500.
+    #
+    # @return [Types::ListExclusionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExclusionsResponse#exclusion_arns #exclusion_arns} => Array&lt;String&gt;
+    #   * {Types::ListExclusionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exclusions({
+    #     assessment_run_arn: "Arn", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exclusion_arns #=> Array
+    #   resp.exclusion_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListExclusions AWS API Documentation
+    #
+    # @overload list_exclusions(params = {})
+    # @param [Hash] params ({})
+    def list_exclusions(params = {}, options = {})
+      req = build_request(:list_exclusions, params)
       req.send_request(options)
     end
 
@@ -2524,13 +2848,16 @@ module Aws::Inspector
     # Updates the assessment target that is specified by the ARN of the
     # assessment target.
     #
+    # If resourceGroupArn is not specified, all EC2 instances in the current
+    # AWS account and region are included in the assessment target.
+    #
     # @option params [required, String] :assessment_target_arn
     #   The ARN of the assessment target that you want to update.
     #
     # @option params [required, String] :assessment_target_name
     #   The name of the assessment target that you want to update.
     #
-    # @option params [required, String] :resource_group_arn
+    # @option params [String] :resource_group_arn
     #   The ARN of the resource group that is used to specify the new resource
     #   group to associate with the assessment target.
     #
@@ -2552,7 +2879,7 @@ module Aws::Inspector
     #   resp = client.update_assessment_target({
     #     assessment_target_arn: "Arn", # required
     #     assessment_target_name: "AssessmentTargetName", # required
-    #     resource_group_arn: "Arn", # required
+    #     resource_group_arn: "Arn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTarget AWS API Documentation
@@ -2577,7 +2904,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

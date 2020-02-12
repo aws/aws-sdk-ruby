@@ -21,6 +21,7 @@ module Aws::SNS
       @arn = extract_arn(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,19 +33,23 @@ module Aws::SNS
 
     # Attributes include the following:
     #
-    # * `CustomUserData` -- arbitrary user data to associate with the
+    # * `CustomUserData` – arbitrary user data to associate with the
     #   endpoint. Amazon SNS does not use this data. The data must be in
     #   UTF-8 format and less than 2KB.
     #
-    # * `Enabled` -- flag that enables/disables delivery to the endpoint.
+    # * `Enabled` – flag that enables/disables delivery to the endpoint.
     #   Amazon SNS will set this to false when a notification service
     #   indicates to Amazon SNS that the endpoint is invalid. Users can set
     #   it back to true, typically after updating Token.
     #
-    # * `Token` -- device token, also referred to as a registration id, for
+    # * `Token` – device token, also referred to as a registration id, for
     #   an app and mobile device. This is returned from the notification
     #   service when an app and mobile device are registered with the
     #   notification service.
+    #
+    #   <note markdown="1"> The device token for the iOS platform is returned in lowercase.
+    #
+    #    </note>
     # @return [Hash<String,String>]
     def attributes
       data[:attributes]
@@ -127,17 +132,33 @@ module Aws::SNS
     #   If you don't specify a value for the `PhoneNumber` parameter, you
     #   must specify a value for the `TargetArn` or `TopicArn` parameters.
     # @option options [required, String] :message
-    #   The message you want to send to the topic.
+    #   The message you want to send.
     #
-    #   If you want to send the same message to all transport protocols,
-    #   include the text of the message as a String value.
+    #   If you are publishing to a topic and you want to send the same message
+    #   to all transport protocols, include the text of the message as a
+    #   String value. If you want to send different messages for each
+    #   transport protocol, set the value of the `MessageStructure` parameter
+    #   to `json` and use a JSON object for the `Message` parameter.
     #
-    #   If you want to send different messages for each transport protocol,
-    #   set the value of the `MessageStructure` parameter to `json` and use a
-    #   JSON object for the `Message` parameter.
     #
-    #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
-    #   size (262144 bytes, not 262144 characters).
+    #
+    #   Constraints:
+    #
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings
+    #     and at most 256 KB in size (262,144 bytes, not 262,144 characters).
+    #
+    #   * For SMS, each message can contain up to 140 characters. This
+    #     character limit depends on the encoding schema. For example, an SMS
+    #     message can contain 160 GSM characters, 140 ASCII characters, or 70
+    #     UCS-2 characters.
+    #
+    #     If you publish a message that exceeds this size limit, Amazon SNS
+    #     sends the message as multiple messages, each fitting within the size
+    #     limit. Messages aren't truncated mid-word but are cut off at
+    #     whole-word boundaries.
+    #
+    #     The total size limit for a single SMS `Publish` action is 1,600
+    #     characters.
     #
     #   JSON-specific constraints:
     #
@@ -188,16 +209,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages for
-    #   Each Protocol][1] in the *Amazon Simple Notification Service Getting
-    #   Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     # @option options [Hash<String,Types::MessageAttributeValue>] :message_attributes
     #   Message attributes for Publish action.
     # @return [Types::PublishResponse]
@@ -219,16 +231,16 @@ module Aws::SNS
     #   A map of the endpoint attributes. Attributes in this map include the
     #   following:
     #
-    #   * `CustomUserData` -- arbitrary user data to associate with the
+    #   * `CustomUserData` – arbitrary user data to associate with the
     #     endpoint. Amazon SNS does not use this data. The data must be in
     #     UTF-8 format and less than 2KB.
     #
-    #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
+    #   * `Enabled` – flag that enables/disables delivery to the endpoint.
     #     Amazon SNS will set this to false when a notification service
     #     indicates to Amazon SNS that the endpoint is invalid. Users can set
     #     it back to true, typically after updating Token.
     #
-    #   * `Token` -- device token, also referred to as a registration id, for
+    #   * `Token` – device token, also referred to as a registration id, for
     #     an app and mobile device. This is returned from the notification
     #     service when an app and mobile device are registered with the
     #     notification service.

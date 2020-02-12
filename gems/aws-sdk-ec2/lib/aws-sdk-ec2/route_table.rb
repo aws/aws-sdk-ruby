@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -47,6 +48,12 @@ module Aws::EC2
     # @return [String]
     def vpc_id
       data[:vpc_id]
+    end
+
+    # The ID of the AWS account that owns the route table.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
     end
 
     # @!endgroup
@@ -185,7 +192,8 @@ module Aws::EC2
     #
     #   routetableassociation = route_table.associate_with_subnet({
     #     dry_run: false,
-    #     subnet_id: "String", # required
+    #     subnet_id: "String",
+    #     gateway_id: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -193,8 +201,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :subnet_id
+    # @option options [String] :subnet_id
     #   The ID of the subnet.
+    # @option options [String] :gateway_id
+    #   The ID of the internet gateway or virtual private gateway.
     # @return [RouteTableAssociation]
     def associate_with_subnet(options = {})
       options = options.merge(route_table_id: @id)
@@ -211,12 +221,14 @@ module Aws::EC2
     #     destination_cidr_block: "String",
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteTableGatewayId",
+    #     instance_id: "InstanceId",
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_cidr_block
@@ -231,9 +243,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     # @option options [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway attached to
+    #   The ID of an internet gateway or virtual private gateway attached to
     #   your VPC.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC. The operation fails if you
@@ -241,6 +253,10 @@ module Aws::EC2
     #   attached.
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    # @option options [String] :transit_gateway_id
+    #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id
@@ -274,9 +290,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []

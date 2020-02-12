@@ -42,6 +42,6 @@ require_relative 'aws-sdk-route53domains/customizations'
 # @service
 module Aws::Route53Domains
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.18.0'
 
 end

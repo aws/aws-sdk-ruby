@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,101 +48,205 @@ module Aws::ResourceGroups
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -151,7 +260,7 @@ module Aws::ResourceGroups
     # @option params [required, String] :name
     #   The name of the group, which is the identifier of the group in other
     #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 127 characters,
+    #   created. A resource group name can have a maximum of 128 characters,
     #   including letters, numbers, hyphens, dots, and underscores. The name
     #   cannot start with `AWS` or `aws`; these are reserved. A resource group
     #   name must be unique within your account.
@@ -167,8 +276,8 @@ module Aws::ResourceGroups
     #
     # @option params [Hash<String,String>] :tags
     #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 127
-    #   characters, and tag values can have a maximum length of 255
+    #   key-value pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::CreateGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -183,7 +292,7 @@ module Aws::ResourceGroups
     #     name: "GroupName", # required
     #     description: "GroupDescription",
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #     tags: {
@@ -196,7 +305,7 @@ module Aws::ResourceGroups
     #   resp.group.group_arn #=> String
     #   resp.group.name #=> String
     #   resp.group.description #=> String
-    #   resp.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.resource_query.query #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -291,7 +400,7 @@ module Aws::ResourceGroups
     # @example Response structure
     #
     #   resp.group_query.group_name #=> String
-    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.group_query.resource_query.query #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQuery AWS API Documentation
@@ -303,11 +412,11 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Returns a list of tags that are associated with a resource, specified
-    # by an ARN.
+    # Returns a list of tags that are associated with a resource group,
+    # specified by an ARN.
     #
     # @option params [required, String] :arn
-    #   The ARN of the resource for which you want a list of tags. The
+    #   The ARN of the resource group for which you want a list of tags. The
     #   resource must exist within the account you are using.
     #
     # @return [Types::GetTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -342,6 +451,16 @@ module Aws::ResourceGroups
     # @option params [required, String] :group_name
     #   The name of the resource group.
     #
+    # @option params [Array<Types::ResourceFilter>] :filters
+    #   Filters, formatted as ResourceFilter objects, that you want to apply
+    #   to a ListGroupResources operation.
+    #
+    #   * `resource-type` - Filter resources by their type. Specify up to five
+    #     resource types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum number of group member ARNs that are returned in a single
     #   call by ListGroupResources, in paginated output. By default, this
@@ -356,11 +475,18 @@ module Aws::ResourceGroups
     #
     #   * {Types::ListGroupResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::ListGroupResourcesOutput#next_token #next_token} => String
+    #   * {Types::ListGroupResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_group_resources({
     #     group_name: "GroupName", # required
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["ResourceFilterValue"], # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -371,6 +497,9 @@ module Aws::ResourceGroups
     #   resp.resource_identifiers[0].resource_arn #=> String
     #   resp.resource_identifiers[0].resource_type #=> String
     #   resp.next_token #=> String
+    #   resp.query_errors #=> Array
+    #   resp.query_errors[0].error_code #=> String, one of "CLOUDFORMATION_STACK_INACTIVE", "CLOUDFORMATION_STACK_NOT_EXISTING"
+    #   resp.query_errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResources AWS API Documentation
     #
@@ -383,6 +512,16 @@ module Aws::ResourceGroups
 
     # Returns a list of existing resource groups in your account.
     #
+    # @option params [Array<Types::GroupFilter>] :filters
+    #   Filters, formatted as GroupFilter objects, that you want to apply to a
+    #   ListGroups operation.
+    #
+    #   * `resource-type` - Filter groups by resource type. Specify up to five
+    #     resource types in the format AWS::ServiceCode::ResourceType. For
+    #     example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #
     # @option params [Integer] :max_results
     #   The maximum number of resource group results that are returned by
     #   ListGroups in paginated output. By default, this number is 50.
@@ -394,18 +533,28 @@ module Aws::ResourceGroups
     #
     # @return [Types::ListGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::ListGroupsOutput#group_identifiers #group_identifiers} => Array&lt;Types::GroupIdentifier&gt;
     #   * {Types::ListGroupsOutput#groups #groups} => Array&lt;Types::Group&gt;
     #   * {Types::ListGroupsOutput#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_groups({
+    #     filters: [
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["GroupFilterValue"], # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.group_identifiers #=> Array
+    #   resp.group_identifiers[0].group_name #=> String
+    #   resp.group_identifiers[0].group_arn #=> String
     #   resp.groups #=> Array
     #   resp.groups[0].group_arn #=> String
     #   resp.groups[0].name #=> String
@@ -442,12 +591,13 @@ module Aws::ResourceGroups
     #
     #   * {Types::SearchResourcesOutput#resource_identifiers #resource_identifiers} => Array&lt;Types::ResourceIdentifier&gt;
     #   * {Types::SearchResourcesOutput#next_token #next_token} => String
+    #   * {Types::SearchResourcesOutput#query_errors #query_errors} => Array&lt;Types::QueryError&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_resources({
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #     max_results: 1,
@@ -460,6 +610,9 @@ module Aws::ResourceGroups
     #   resp.resource_identifiers[0].resource_arn #=> String
     #   resp.resource_identifiers[0].resource_type #=> String
     #   resp.next_token #=> String
+    #   resp.query_errors #=> Array
+    #   resp.query_errors[0].error_code #=> String, one of "CLOUDFORMATION_STACK_INACTIVE", "CLOUDFORMATION_STACK_NOT_EXISTING"
+    #   resp.query_errors[0].message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResources AWS API Documentation
     #
@@ -470,8 +623,8 @@ module Aws::ResourceGroups
       req.send_request(options)
     end
 
-    # Adds specified tags to a resource with the specified ARN. Existing
-    # tags on a resource are not changed if they are not specified in the
+    # Adds tags to a resource group with the specified ARN. Existing tags on
+    # a resource group are not changed if they are not specified in the
     # request parameters.
     #
     # @option params [required, String] :arn
@@ -480,7 +633,7 @@ module Aws::ResourceGroups
     # @option params [required, Hash<String,String>] :tags
     #   The tags to add to the specified resource. A tag is a string-to-string
     #   map of key-value pairs. Tag keys can have a maximum character length
-    #   of 127 characters, and tag values can have a maximum length of 255
+    #   of 128 characters, and tag values can have a maximum length of 256
     #   characters.
     #
     # @return [Types::TagOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -603,7 +756,7 @@ module Aws::ResourceGroups
     #   resp = client.update_group_query({
     #     group_name: "GroupName", # required
     #     resource_query: { # required
-    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #       type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #       query: "Query", # required
     #     },
     #   })
@@ -611,7 +764,7 @@ module Aws::ResourceGroups
     # @example Response structure
     #
     #   resp.group_query.group_name #=> String
-    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0"
+    #   resp.group_query.resource_query.type #=> String, one of "TAG_FILTERS_1_0", "CLOUDFORMATION_STACK_1_0"
     #   resp.group_query.resource_query.query #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQuery AWS API Documentation
@@ -636,7 +789,7 @@ module Aws::ResourceGroups
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroups'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

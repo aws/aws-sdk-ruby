@@ -21,6 +21,7 @@ module Aws::IAM
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,23 +33,23 @@ module Aws::IAM
     alias :role_name :name
 
     # The path to the role. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
     end
 
     # The stable and unique string identifying the role. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def role_id
       data[:role_id]
@@ -60,7 +61,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -90,12 +91,54 @@ module Aws::IAM
     end
 
     # The maximum session duration (in seconds) for the specified role.
-    # Anyone who uses the AWS CLI or API to assume the role can specify the
+    # Anyone who uses the AWS CLI, or API to assume the role can specify the
     # duration using the optional `DurationSeconds` API parameter or
     # `duration-seconds` CLI parameter.
     # @return [Integer]
     def max_session_duration
       data[:max_session_duration]
+    end
+
+    # The ARN of the policy used to set the permissions boundary for the
+    # role.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Types::AttachedPermissionsBoundary]
+    def permissions_boundary
+      data[:permissions_boundary]
+    end
+
+    # A list of tags that are attached to the specified role. For more
+    # information about tagging, see [Tagging IAM Identities][1] in the *IAM
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
+    # Contains information about the last time that an IAM role was used.
+    # This includes the date and time and the Region in which the role was
+    # last used. Activity is only reported for the trailing 400 days. This
+    # period can be shorter if your Region began supporting these features
+    # within the last year. The role might have been used more than 400 days
+    # ago. For more information, see [Regions Where Data Is Tracked][1] in
+    # the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period
+    # @return [Types::RoleLastUsed]
+    def role_last_used
+      data[:role_last_used]
     end
 
     # @!endgroup
@@ -244,7 +287,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(role_name: @name)
@@ -277,7 +320,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(role_name: @name)
@@ -306,11 +349,11 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #

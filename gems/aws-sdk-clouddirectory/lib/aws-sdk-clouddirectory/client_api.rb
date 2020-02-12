@@ -58,6 +58,8 @@ module Aws::CloudDirectory
     BatchDetachPolicyResponse = Shapes::StructureShape.new(name: 'BatchDetachPolicyResponse')
     BatchDetachTypedLink = Shapes::StructureShape.new(name: 'BatchDetachTypedLink')
     BatchDetachTypedLinkResponse = Shapes::StructureShape.new(name: 'BatchDetachTypedLinkResponse')
+    BatchGetLinkAttributes = Shapes::StructureShape.new(name: 'BatchGetLinkAttributes')
+    BatchGetLinkAttributesResponse = Shapes::StructureShape.new(name: 'BatchGetLinkAttributesResponse')
     BatchGetObjectAttributes = Shapes::StructureShape.new(name: 'BatchGetObjectAttributes')
     BatchGetObjectAttributesResponse = Shapes::StructureShape.new(name: 'BatchGetObjectAttributesResponse')
     BatchGetObjectInformation = Shapes::StructureShape.new(name: 'BatchGetObjectInformation')
@@ -74,6 +76,8 @@ module Aws::CloudDirectory
     BatchListObjectChildrenResponse = Shapes::StructureShape.new(name: 'BatchListObjectChildrenResponse')
     BatchListObjectParentPaths = Shapes::StructureShape.new(name: 'BatchListObjectParentPaths')
     BatchListObjectParentPathsResponse = Shapes::StructureShape.new(name: 'BatchListObjectParentPathsResponse')
+    BatchListObjectParents = Shapes::StructureShape.new(name: 'BatchListObjectParents')
+    BatchListObjectParentsResponse = Shapes::StructureShape.new(name: 'BatchListObjectParentsResponse')
     BatchListObjectPolicies = Shapes::StructureShape.new(name: 'BatchListObjectPolicies')
     BatchListObjectPoliciesResponse = Shapes::StructureShape.new(name: 'BatchListObjectPoliciesResponse')
     BatchListOutgoingTypedLinks = Shapes::StructureShape.new(name: 'BatchListOutgoingTypedLinks')
@@ -95,6 +99,8 @@ module Aws::CloudDirectory
     BatchReferenceName = Shapes::StringShape.new(name: 'BatchReferenceName')
     BatchRemoveFacetFromObject = Shapes::StructureShape.new(name: 'BatchRemoveFacetFromObject')
     BatchRemoveFacetFromObjectResponse = Shapes::StructureShape.new(name: 'BatchRemoveFacetFromObjectResponse')
+    BatchUpdateLinkAttributes = Shapes::StructureShape.new(name: 'BatchUpdateLinkAttributes')
+    BatchUpdateLinkAttributesResponse = Shapes::StructureShape.new(name: 'BatchUpdateLinkAttributesResponse')
     BatchUpdateObjectAttributes = Shapes::StructureShape.new(name: 'BatchUpdateObjectAttributes')
     BatchUpdateObjectAttributesResponse = Shapes::StructureShape.new(name: 'BatchUpdateObjectAttributesResponse')
     BatchWriteException = Shapes::StructureShape.new(name: 'BatchWriteException')
@@ -168,6 +174,7 @@ module Aws::CloudDirectory
     FacetName = Shapes::StringShape.new(name: 'FacetName')
     FacetNameList = Shapes::ListShape.new(name: 'FacetNameList')
     FacetNotFoundException = Shapes::StructureShape.new(name: 'FacetNotFoundException')
+    FacetStyle = Shapes::StringShape.new(name: 'FacetStyle')
     FacetValidationException = Shapes::StructureShape.new(name: 'FacetValidationException')
     GetAppliedSchemaVersionRequest = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionRequest')
     GetAppliedSchemaVersionResponse = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionResponse')
@@ -175,6 +182,8 @@ module Aws::CloudDirectory
     GetDirectoryResponse = Shapes::StructureShape.new(name: 'GetDirectoryResponse')
     GetFacetRequest = Shapes::StructureShape.new(name: 'GetFacetRequest')
     GetFacetResponse = Shapes::StructureShape.new(name: 'GetFacetResponse')
+    GetLinkAttributesRequest = Shapes::StructureShape.new(name: 'GetLinkAttributesRequest')
+    GetLinkAttributesResponse = Shapes::StructureShape.new(name: 'GetLinkAttributesResponse')
     GetObjectAttributesRequest = Shapes::StructureShape.new(name: 'GetObjectAttributesRequest')
     GetObjectAttributesResponse = Shapes::StructureShape.new(name: 'GetObjectAttributesResponse')
     GetObjectInformationRequest = Shapes::StructureShape.new(name: 'GetObjectInformationRequest')
@@ -196,6 +205,9 @@ module Aws::CloudDirectory
     InvalidSchemaDocException = Shapes::StructureShape.new(name: 'InvalidSchemaDocException')
     InvalidTaggingRequestException = Shapes::StructureShape.new(name: 'InvalidTaggingRequestException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    LinkAttributeAction = Shapes::StructureShape.new(name: 'LinkAttributeAction')
+    LinkAttributeUpdate = Shapes::StructureShape.new(name: 'LinkAttributeUpdate')
+    LinkAttributeUpdateList = Shapes::ListShape.new(name: 'LinkAttributeUpdateList')
     LinkName = Shapes::StringShape.new(name: 'LinkName')
     LinkNameAlreadyInUseException = Shapes::StructureShape.new(name: 'LinkNameAlreadyInUseException')
     LinkNameToObjectIdentifierMap = Shapes::MapShape.new(name: 'LinkNameToObjectIdentifierMap')
@@ -215,6 +227,8 @@ module Aws::CloudDirectory
     ListIncomingTypedLinksResponse = Shapes::StructureShape.new(name: 'ListIncomingTypedLinksResponse')
     ListIndexRequest = Shapes::StructureShape.new(name: 'ListIndexRequest')
     ListIndexResponse = Shapes::StructureShape.new(name: 'ListIndexResponse')
+    ListManagedSchemaArnsRequest = Shapes::StructureShape.new(name: 'ListManagedSchemaArnsRequest')
+    ListManagedSchemaArnsResponse = Shapes::StructureShape.new(name: 'ListManagedSchemaArnsResponse')
     ListObjectAttributesRequest = Shapes::StructureShape.new(name: 'ListObjectAttributesRequest')
     ListObjectAttributesResponse = Shapes::StructureShape.new(name: 'ListObjectAttributesResponse')
     ListObjectChildrenRequest = Shapes::StructureShape.new(name: 'ListObjectChildrenRequest')
@@ -252,6 +266,8 @@ module Aws::CloudDirectory
     ObjectAttributeUpdate = Shapes::StructureShape.new(name: 'ObjectAttributeUpdate')
     ObjectAttributeUpdateList = Shapes::ListShape.new(name: 'ObjectAttributeUpdateList')
     ObjectIdentifier = Shapes::StringShape.new(name: 'ObjectIdentifier')
+    ObjectIdentifierAndLinkNameList = Shapes::ListShape.new(name: 'ObjectIdentifierAndLinkNameList')
+    ObjectIdentifierAndLinkNameTuple = Shapes::StructureShape.new(name: 'ObjectIdentifierAndLinkNameTuple')
     ObjectIdentifierList = Shapes::ListShape.new(name: 'ObjectIdentifierList')
     ObjectIdentifierToLinkNameMap = Shapes::MapShape.new(name: 'ObjectIdentifierToLinkNameMap')
     ObjectNotDetachedException = Shapes::StructureShape.new(name: 'ObjectNotDetachedException')
@@ -319,6 +335,8 @@ module Aws::CloudDirectory
     UpdateActionType = Shapes::StringShape.new(name: 'UpdateActionType')
     UpdateFacetRequest = Shapes::StructureShape.new(name: 'UpdateFacetRequest')
     UpdateFacetResponse = Shapes::StructureShape.new(name: 'UpdateFacetResponse')
+    UpdateLinkAttributesRequest = Shapes::StructureShape.new(name: 'UpdateLinkAttributesRequest')
+    UpdateLinkAttributesResponse = Shapes::StructureShape.new(name: 'UpdateLinkAttributesResponse')
     UpdateObjectAttributesRequest = Shapes::StructureShape.new(name: 'UpdateObjectAttributesRequest')
     UpdateObjectAttributesResponse = Shapes::StructureShape.new(name: 'UpdateObjectAttributesResponse')
     UpdateSchemaRequest = Shapes::StructureShape.new(name: 'UpdateSchemaRequest')
@@ -331,6 +349,9 @@ module Aws::CloudDirectory
     UpgradePublishedSchemaResponse = Shapes::StructureShape.new(name: 'UpgradePublishedSchemaResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AddFacetToObjectRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     AddFacetToObjectRequest.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacet, required: true, location_name: "SchemaFacet"))
@@ -493,6 +514,13 @@ module Aws::CloudDirectory
 
     BatchDetachTypedLinkResponse.struct_class = Types::BatchDetachTypedLinkResponse
 
+    BatchGetLinkAttributes.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
+    BatchGetLinkAttributes.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, required: true, location_name: "AttributeNames"))
+    BatchGetLinkAttributes.struct_class = Types::BatchGetLinkAttributes
+
+    BatchGetLinkAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, location_name: "Attributes"))
+    BatchGetLinkAttributesResponse.struct_class = Types::BatchGetLinkAttributesResponse
+
     BatchGetObjectAttributes.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchGetObjectAttributes.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacet, required: true, location_name: "SchemaFacet"))
     BatchGetObjectAttributes.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, required: true, location_name: "AttributeNames"))
@@ -566,6 +594,15 @@ module Aws::CloudDirectory
     BatchListObjectParentPathsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectParentPathsResponse.struct_class = Types::BatchListObjectParentPathsResponse
 
+    BatchListObjectParents.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    BatchListObjectParents.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParents.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListObjectParents.struct_class = Types::BatchListObjectParents
+
+    BatchListObjectParentsResponse.add_member(:parent_links, Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameList, location_name: "ParentLinks"))
+    BatchListObjectParentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    BatchListObjectParentsResponse.struct_class = Types::BatchListObjectParentsResponse
+
     BatchListObjectPolicies.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchListObjectPolicies.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectPolicies.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
@@ -614,12 +651,14 @@ module Aws::CloudDirectory
     BatchReadOperation.add_member(:list_object_parent_paths, Shapes::ShapeRef.new(shape: BatchListObjectParentPaths, location_name: "ListObjectParentPaths"))
     BatchReadOperation.add_member(:get_object_information, Shapes::ShapeRef.new(shape: BatchGetObjectInformation, location_name: "GetObjectInformation"))
     BatchReadOperation.add_member(:get_object_attributes, Shapes::ShapeRef.new(shape: BatchGetObjectAttributes, location_name: "GetObjectAttributes"))
+    BatchReadOperation.add_member(:list_object_parents, Shapes::ShapeRef.new(shape: BatchListObjectParents, location_name: "ListObjectParents"))
     BatchReadOperation.add_member(:list_object_policies, Shapes::ShapeRef.new(shape: BatchListObjectPolicies, location_name: "ListObjectPolicies"))
     BatchReadOperation.add_member(:list_policy_attachments, Shapes::ShapeRef.new(shape: BatchListPolicyAttachments, location_name: "ListPolicyAttachments"))
     BatchReadOperation.add_member(:lookup_policy, Shapes::ShapeRef.new(shape: BatchLookupPolicy, location_name: "LookupPolicy"))
     BatchReadOperation.add_member(:list_index, Shapes::ShapeRef.new(shape: BatchListIndex, location_name: "ListIndex"))
     BatchReadOperation.add_member(:list_outgoing_typed_links, Shapes::ShapeRef.new(shape: BatchListOutgoingTypedLinks, location_name: "ListOutgoingTypedLinks"))
     BatchReadOperation.add_member(:list_incoming_typed_links, Shapes::ShapeRef.new(shape: BatchListIncomingTypedLinks, location_name: "ListIncomingTypedLinks"))
+    BatchReadOperation.add_member(:get_link_attributes, Shapes::ShapeRef.new(shape: BatchGetLinkAttributes, location_name: "GetLinkAttributes"))
     BatchReadOperation.struct_class = Types::BatchReadOperation
 
     BatchReadOperationList.member = Shapes::ShapeRef.new(shape: BatchReadOperation)
@@ -650,6 +689,8 @@ module Aws::CloudDirectory
     BatchReadSuccessfulResponse.add_member(:list_index, Shapes::ShapeRef.new(shape: BatchListIndexResponse, location_name: "ListIndex"))
     BatchReadSuccessfulResponse.add_member(:list_outgoing_typed_links, Shapes::ShapeRef.new(shape: BatchListOutgoingTypedLinksResponse, location_name: "ListOutgoingTypedLinks"))
     BatchReadSuccessfulResponse.add_member(:list_incoming_typed_links, Shapes::ShapeRef.new(shape: BatchListIncomingTypedLinksResponse, location_name: "ListIncomingTypedLinks"))
+    BatchReadSuccessfulResponse.add_member(:get_link_attributes, Shapes::ShapeRef.new(shape: BatchGetLinkAttributesResponse, location_name: "GetLinkAttributes"))
+    BatchReadSuccessfulResponse.add_member(:list_object_parents, Shapes::ShapeRef.new(shape: BatchListObjectParentsResponse, location_name: "ListObjectParents"))
     BatchReadSuccessfulResponse.struct_class = Types::BatchReadSuccessfulResponse
 
     BatchRemoveFacetFromObject.add_member(:schema_facet, Shapes::ShapeRef.new(shape: SchemaFacet, required: true, location_name: "SchemaFacet"))
@@ -658,12 +699,23 @@ module Aws::CloudDirectory
 
     BatchRemoveFacetFromObjectResponse.struct_class = Types::BatchRemoveFacetFromObjectResponse
 
+    BatchUpdateLinkAttributes.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
+    BatchUpdateLinkAttributes.add_member(:attribute_updates, Shapes::ShapeRef.new(shape: LinkAttributeUpdateList, required: true, location_name: "AttributeUpdates"))
+    BatchUpdateLinkAttributes.struct_class = Types::BatchUpdateLinkAttributes
+
+    BatchUpdateLinkAttributesResponse.struct_class = Types::BatchUpdateLinkAttributesResponse
+
     BatchUpdateObjectAttributes.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchUpdateObjectAttributes.add_member(:attribute_updates, Shapes::ShapeRef.new(shape: ObjectAttributeUpdateList, required: true, location_name: "AttributeUpdates"))
     BatchUpdateObjectAttributes.struct_class = Types::BatchUpdateObjectAttributes
 
     BatchUpdateObjectAttributesResponse.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
     BatchUpdateObjectAttributesResponse.struct_class = Types::BatchUpdateObjectAttributesResponse
+
+    BatchWriteException.add_member(:index, Shapes::ShapeRef.new(shape: BatchOperationIndex, location_name: "Index"))
+    BatchWriteException.add_member(:type, Shapes::ShapeRef.new(shape: BatchWriteExceptionType, location_name: "Type"))
+    BatchWriteException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    BatchWriteException.struct_class = Types::BatchWriteException
 
     BatchWriteOperation.add_member(:create_object, Shapes::ShapeRef.new(shape: BatchCreateObject, location_name: "CreateObject"))
     BatchWriteOperation.add_member(:attach_object, Shapes::ShapeRef.new(shape: BatchAttachObject, location_name: "AttachObject"))
@@ -679,6 +731,7 @@ module Aws::CloudDirectory
     BatchWriteOperation.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndex, location_name: "DetachFromIndex"))
     BatchWriteOperation.add_member(:attach_typed_link, Shapes::ShapeRef.new(shape: BatchAttachTypedLink, location_name: "AttachTypedLink"))
     BatchWriteOperation.add_member(:detach_typed_link, Shapes::ShapeRef.new(shape: BatchDetachTypedLink, location_name: "DetachTypedLink"))
+    BatchWriteOperation.add_member(:update_link_attributes, Shapes::ShapeRef.new(shape: BatchUpdateLinkAttributes, location_name: "UpdateLinkAttributes"))
     BatchWriteOperation.struct_class = Types::BatchWriteOperation
 
     BatchWriteOperationList.member = Shapes::ShapeRef.new(shape: BatchWriteOperation)
@@ -697,6 +750,7 @@ module Aws::CloudDirectory
     BatchWriteOperationResponse.add_member(:detach_from_index, Shapes::ShapeRef.new(shape: BatchDetachFromIndexResponse, location_name: "DetachFromIndex"))
     BatchWriteOperationResponse.add_member(:attach_typed_link, Shapes::ShapeRef.new(shape: BatchAttachTypedLinkResponse, location_name: "AttachTypedLink"))
     BatchWriteOperationResponse.add_member(:detach_typed_link, Shapes::ShapeRef.new(shape: BatchDetachTypedLinkResponse, location_name: "DetachTypedLink"))
+    BatchWriteOperationResponse.add_member(:update_link_attributes, Shapes::ShapeRef.new(shape: BatchUpdateLinkAttributesResponse, location_name: "UpdateLinkAttributes"))
     BatchWriteOperationResponse.struct_class = Types::BatchWriteOperationResponse
 
     BatchWriteOperationResponseList.member = Shapes::ShapeRef.new(shape: BatchWriteOperationResponse)
@@ -707,6 +761,9 @@ module Aws::CloudDirectory
 
     BatchWriteResponse.add_member(:responses, Shapes::ShapeRef.new(shape: BatchWriteOperationResponseList, location_name: "Responses"))
     BatchWriteResponse.struct_class = Types::BatchWriteResponse
+
+    CannotListParentOfRootException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    CannotListParentOfRootException.struct_class = Types::CannotListParentOfRootException
 
     CreateDirectoryRequest.add_member(:name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "Name"))
     CreateDirectoryRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
@@ -721,7 +778,8 @@ module Aws::CloudDirectory
     CreateFacetRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     CreateFacetRequest.add_member(:name, Shapes::ShapeRef.new(shape: FacetName, required: true, location_name: "Name"))
     CreateFacetRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: FacetAttributeList, location_name: "Attributes"))
-    CreateFacetRequest.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, required: true, location_name: "ObjectType"))
+    CreateFacetRequest.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, location_name: "ObjectType"))
+    CreateFacetRequest.add_member(:facet_style, Shapes::ShapeRef.new(shape: FacetStyle, location_name: "FacetStyle"))
     CreateFacetRequest.struct_class = Types::CreateFacetRequest
 
     CreateFacetResponse.struct_class = Types::CreateFacetResponse
@@ -821,7 +879,19 @@ module Aws::CloudDirectory
     Directory.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
     Directory.struct_class = Types::Directory
 
+    DirectoryAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryAlreadyExistsException.struct_class = Types::DirectoryAlreadyExistsException
+
+    DirectoryDeletedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryDeletedException.struct_class = Types::DirectoryDeletedException
+
     DirectoryList.member = Shapes::ShapeRef.new(shape: Directory)
+
+    DirectoryNotDisabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryNotDisabledException.struct_class = Types::DirectoryNotDisabledException
+
+    DirectoryNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    DirectoryNotEnabledException.struct_class = Types::DirectoryNotEnabledException
 
     DisableDirectoryRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     DisableDirectoryRequest.struct_class = Types::DisableDirectoryRequest
@@ -837,7 +907,11 @@ module Aws::CloudDirectory
 
     Facet.add_member(:name, Shapes::ShapeRef.new(shape: FacetName, location_name: "Name"))
     Facet.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, location_name: "ObjectType"))
+    Facet.add_member(:facet_style, Shapes::ShapeRef.new(shape: FacetStyle, location_name: "FacetStyle"))
     Facet.struct_class = Types::Facet
+
+    FacetAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    FacetAlreadyExistsException.struct_class = Types::FacetAlreadyExistsException
 
     FacetAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "Name"))
     FacetAttribute.add_member(:attribute_definition, Shapes::ShapeRef.new(shape: FacetAttributeDefinition, location_name: "AttributeDefinition"))
@@ -863,7 +937,16 @@ module Aws::CloudDirectory
 
     FacetAttributeUpdateList.member = Shapes::ShapeRef.new(shape: FacetAttributeUpdate)
 
+    FacetInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    FacetInUseException.struct_class = Types::FacetInUseException
+
     FacetNameList.member = Shapes::ShapeRef.new(shape: FacetName)
+
+    FacetNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    FacetNotFoundException.struct_class = Types::FacetNotFoundException
+
+    FacetValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    FacetValidationException.struct_class = Types::FacetValidationException
 
     GetAppliedSchemaVersionRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SchemaArn"))
     GetAppliedSchemaVersionRequest.struct_class = Types::GetAppliedSchemaVersionRequest
@@ -883,6 +966,15 @@ module Aws::CloudDirectory
 
     GetFacetResponse.add_member(:facet, Shapes::ShapeRef.new(shape: Facet, location_name: "Facet"))
     GetFacetResponse.struct_class = Types::GetFacetResponse
+
+    GetLinkAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
+    GetLinkAttributesRequest.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
+    GetLinkAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, required: true, location_name: "AttributeNames"))
+    GetLinkAttributesRequest.add_member(:consistency_level, Shapes::ShapeRef.new(shape: ConsistencyLevel, location_name: "ConsistencyLevel"))
+    GetLinkAttributesRequest.struct_class = Types::GetLinkAttributesRequest
+
+    GetLinkAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, location_name: "Attributes"))
+    GetLinkAttributesResponse.struct_class = Types::GetLinkAttributesResponse
 
     GetObjectAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     GetObjectAttributesRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
@@ -917,11 +1009,57 @@ module Aws::CloudDirectory
     GetTypedLinkFacetInformationResponse.add_member(:identity_attribute_order, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "IdentityAttributeOrder"))
     GetTypedLinkFacetInformationResponse.struct_class = Types::GetTypedLinkFacetInformationResponse
 
+    IncompatibleSchemaException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    IncompatibleSchemaException.struct_class = Types::IncompatibleSchemaException
+
     IndexAttachment.add_member(:indexed_attributes, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, location_name: "IndexedAttributes"))
     IndexAttachment.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
     IndexAttachment.struct_class = Types::IndexAttachment
 
     IndexAttachmentList.member = Shapes::ShapeRef.new(shape: IndexAttachment)
+
+    IndexedAttributeMissingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    IndexedAttributeMissingException.struct_class = Types::IndexedAttributeMissingException
+
+    InternalServiceException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InternalServiceException.struct_class = Types::InternalServiceException
+
+    InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidArnException.struct_class = Types::InvalidArnException
+
+    InvalidAttachmentException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidAttachmentException.struct_class = Types::InvalidAttachmentException
+
+    InvalidFacetUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidFacetUpdateException.struct_class = Types::InvalidFacetUpdateException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidRuleException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidRuleException.struct_class = Types::InvalidRuleException
+
+    InvalidSchemaDocException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidSchemaDocException.struct_class = Types::InvalidSchemaDocException
+
+    InvalidTaggingRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    InvalidTaggingRequestException.struct_class = Types::InvalidTaggingRequestException
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
+    LinkAttributeAction.add_member(:attribute_action_type, Shapes::ShapeRef.new(shape: UpdateActionType, location_name: "AttributeActionType"))
+    LinkAttributeAction.add_member(:attribute_update_value, Shapes::ShapeRef.new(shape: TypedAttributeValue, location_name: "AttributeUpdateValue"))
+    LinkAttributeAction.struct_class = Types::LinkAttributeAction
+
+    LinkAttributeUpdate.add_member(:attribute_key, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "AttributeKey"))
+    LinkAttributeUpdate.add_member(:attribute_action, Shapes::ShapeRef.new(shape: LinkAttributeAction, location_name: "AttributeAction"))
+    LinkAttributeUpdate.struct_class = Types::LinkAttributeUpdate
+
+    LinkAttributeUpdateList.member = Shapes::ShapeRef.new(shape: LinkAttributeUpdate)
+
+    LinkNameAlreadyInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    LinkNameAlreadyInUseException.struct_class = Types::LinkNameAlreadyInUseException
 
     LinkNameToObjectIdentifierMap.key = Shapes::ShapeRef.new(shape: LinkName)
     LinkNameToObjectIdentifierMap.value = Shapes::ShapeRef.new(shape: ObjectIdentifier)
@@ -1008,6 +1146,15 @@ module Aws::CloudDirectory
     ListIndexResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndexResponse.struct_class = Types::ListIndexResponse
 
+    ListManagedSchemaArnsRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SchemaArn"))
+    ListManagedSchemaArnsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedSchemaArnsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    ListManagedSchemaArnsRequest.struct_class = Types::ListManagedSchemaArnsRequest
+
+    ListManagedSchemaArnsResponse.add_member(:schema_arns, Shapes::ShapeRef.new(shape: Arns, location_name: "SchemaArns"))
+    ListManagedSchemaArnsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedSchemaArnsResponse.struct_class = Types::ListManagedSchemaArnsResponse
+
     ListObjectAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     ListObjectAttributesRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     ListObjectAttributesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1046,10 +1193,12 @@ module Aws::CloudDirectory
     ListObjectParentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListObjectParentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
     ListObjectParentsRequest.add_member(:consistency_level, Shapes::ShapeRef.new(shape: ConsistencyLevel, location: "header", location_name: "x-amz-consistency-level"))
+    ListObjectParentsRequest.add_member(:include_all_links_to_each_parent, Shapes::ShapeRef.new(shape: Bool, location_name: "IncludeAllLinksToEachParent"))
     ListObjectParentsRequest.struct_class = Types::ListObjectParentsRequest
 
     ListObjectParentsResponse.add_member(:parents, Shapes::ShapeRef.new(shape: ObjectIdentifierToLinkNameMap, location_name: "Parents"))
     ListObjectParentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObjectParentsResponse.add_member(:parent_links, Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameList, location_name: "ParentLinks"))
     ListObjectParentsResponse.struct_class = Types::ListObjectParentsResponse
 
     ListObjectPoliciesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
@@ -1134,6 +1283,18 @@ module Aws::CloudDirectory
     LookupPolicyResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     LookupPolicyResponse.struct_class = Types::LookupPolicyResponse
 
+    NotIndexException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NotIndexException.struct_class = Types::NotIndexException
+
+    NotNodeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NotNodeException.struct_class = Types::NotNodeException
+
+    NotPolicyException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    NotPolicyException.struct_class = Types::NotPolicyException
+
+    ObjectAlreadyDetachedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ObjectAlreadyDetachedException.struct_class = Types::ObjectAlreadyDetachedException
+
     ObjectAttributeAction.add_member(:object_attribute_action_type, Shapes::ShapeRef.new(shape: UpdateActionType, location_name: "ObjectAttributeActionType"))
     ObjectAttributeAction.add_member(:object_attribute_update_value, Shapes::ShapeRef.new(shape: TypedAttributeValue, location_name: "ObjectAttributeUpdateValue"))
     ObjectAttributeAction.struct_class = Types::ObjectAttributeAction
@@ -1150,10 +1311,19 @@ module Aws::CloudDirectory
 
     ObjectAttributeUpdateList.member = Shapes::ShapeRef.new(shape: ObjectAttributeUpdate)
 
+    ObjectIdentifierAndLinkNameList.member = Shapes::ShapeRef.new(shape: ObjectIdentifierAndLinkNameTuple)
+
+    ObjectIdentifierAndLinkNameTuple.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
+    ObjectIdentifierAndLinkNameTuple.add_member(:link_name, Shapes::ShapeRef.new(shape: LinkName, location_name: "LinkName"))
+    ObjectIdentifierAndLinkNameTuple.struct_class = Types::ObjectIdentifierAndLinkNameTuple
+
     ObjectIdentifierList.member = Shapes::ShapeRef.new(shape: ObjectIdentifier)
 
     ObjectIdentifierToLinkNameMap.key = Shapes::ShapeRef.new(shape: ObjectIdentifier)
     ObjectIdentifierToLinkNameMap.value = Shapes::ShapeRef.new(shape: LinkName)
+
+    ObjectNotDetachedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ObjectNotDetachedException.struct_class = Types::ObjectNotDetachedException
 
     ObjectReference.add_member(:selector, Shapes::ShapeRef.new(shape: SelectorObjectReference, location_name: "Selector"))
     ObjectReference.struct_class = Types::ObjectReference
@@ -1200,6 +1370,12 @@ module Aws::CloudDirectory
 
     RemoveFacetFromObjectResponse.struct_class = Types::RemoveFacetFromObjectResponse
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RetryableConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    RetryableConflictException.struct_class = Types::RetryableConflictException
+
     Rule.add_member(:type, Shapes::ShapeRef.new(shape: RuleType, location_name: "Type"))
     Rule.add_member(:parameters, Shapes::ShapeRef.new(shape: RuleParameterMap, location_name: "Parameters"))
     Rule.struct_class = Types::Rule
@@ -1210,11 +1386,20 @@ module Aws::CloudDirectory
     RuleParameterMap.key = Shapes::ShapeRef.new(shape: RuleParameterKey)
     RuleParameterMap.value = Shapes::ShapeRef.new(shape: RuleParameterValue)
 
+    SchemaAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    SchemaAlreadyExistsException.struct_class = Types::SchemaAlreadyExistsException
+
+    SchemaAlreadyPublishedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    SchemaAlreadyPublishedException.struct_class = Types::SchemaAlreadyPublishedException
+
     SchemaFacet.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SchemaArn"))
     SchemaFacet.add_member(:facet_name, Shapes::ShapeRef.new(shape: FacetName, location_name: "FacetName"))
     SchemaFacet.struct_class = Types::SchemaFacet
 
     SchemaFacetList.member = Shapes::ShapeRef.new(shape: SchemaFacet)
+
+    StillContainsLinksException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    StillContainsLinksException.struct_class = Types::StillContainsLinksException
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
@@ -1284,6 +1469,9 @@ module Aws::CloudDirectory
 
     TypedLinkSpecifierList.member = Shapes::ShapeRef.new(shape: TypedLinkSpecifier)
 
+    UnsupportedIndexTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    UnsupportedIndexTypeException.struct_class = Types::UnsupportedIndexTypeException
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -1297,6 +1485,13 @@ module Aws::CloudDirectory
     UpdateFacetRequest.struct_class = Types::UpdateFacetRequest
 
     UpdateFacetResponse.struct_class = Types::UpdateFacetResponse
+
+    UpdateLinkAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
+    UpdateLinkAttributesRequest.add_member(:typed_link_specifier, Shapes::ShapeRef.new(shape: TypedLinkSpecifier, required: true, location_name: "TypedLinkSpecifier"))
+    UpdateLinkAttributesRequest.add_member(:attribute_updates, Shapes::ShapeRef.new(shape: LinkAttributeUpdateList, required: true, location_name: "AttributeUpdates"))
+    UpdateLinkAttributesRequest.struct_class = Types::UpdateLinkAttributesRequest
+
+    UpdateLinkAttributesResponse.struct_class = Types::UpdateLinkAttributesResponse
 
     UpdateObjectAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     UpdateObjectAttributesRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
@@ -1339,18 +1534,24 @@ module Aws::CloudDirectory
     UpgradePublishedSchemaResponse.add_member(:upgraded_schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UpgradedSchemaArn"))
     UpgradePublishedSchemaResponse.struct_class = Types::UpgradePublishedSchemaResponse
 
+    ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ValidationException.struct_class = Types::ValidationException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
 
-      api.version = "2016-05-10"
+      api.version = "2017-01-11"
 
       api.metadata = {
+        "apiVersion" => "2017-01-11",
         "endpointPrefix" => "clouddirectory",
         "protocol" => "rest-json",
         "serviceFullName" => "Amazon CloudDirectory",
+        "serviceId" => "CloudDirectory",
         "signatureVersion" => "v4",
         "signingName" => "clouddirectory",
+        "uid" => "clouddirectory-2017-01-11",
       }
 
       api.add_operation(:add_facet_to_object, Seahorse::Model::Operation.new.tap do |o|
@@ -1382,6 +1583,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: SchemaAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
       end)
@@ -1828,6 +2030,23 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: FacetNotFoundException)
       end)
 
+      api.add_operation(:get_link_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLinkAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/typedlink/attributes/get"
+        o.input = Shapes::ShapeRef.new(shape: GetLinkAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLinkAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
+      end)
+
       api.add_operation(:get_object_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetObjectAttributes"
         o.http_method = "POST"
@@ -2061,6 +2280,26 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: NotIndexException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_managed_schema_arns, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListManagedSchemaArns"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/schema/managed"
+        o.input = Shapes::ShapeRef.new(shape: ListManagedSchemaArnsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListManagedSchemaArnsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2435,9 +2674,27 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFacetUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: FacetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuleException)
+      end)
+
+      api.add_operation(:update_link_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLinkAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/typedlink/attributes/update"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLinkAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLinkAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
       end)
 
       api.add_operation(:update_object_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -2454,6 +2711,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LinkNameAlreadyInUseException)
         o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
       end)
 
@@ -2505,6 +2763,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
+        o.errors << Shapes::ShapeRef.new(shape: SchemaAlreadyExistsException)
       end)
 
       api.add_operation(:upgrade_published_schema, Seahorse::Model::Operation.new.tap do |o|

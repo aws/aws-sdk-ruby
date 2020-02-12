@@ -104,6 +104,10 @@ module Aws::CloudHSM
 
     ClientList.member = Shapes::ShapeRef.new(shape: ClientArn)
 
+    CloudHsmServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CloudHsmServiceException.add_member(:retryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "retryable"))
+    CloudHsmServiceException.struct_class = Types::CloudHsmServiceException
+
     CreateHapgRequest.add_member(:label, Shapes::ShapeRef.new(shape: Label, required: true, location_name: "Label"))
     CreateHapgRequest.struct_class = Types::CreateHapgRequest
 
@@ -298,12 +302,16 @@ module Aws::CloudHSM
       api.version = "2014-05-30"
 
       api.metadata = {
+        "apiVersion" => "2014-05-30",
         "endpointPrefix" => "cloudhsm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CloudHSM",
         "serviceFullName" => "Amazon CloudHSM",
+        "serviceId" => "CloudHSM",
         "signatureVersion" => "v4",
         "targetPrefix" => "CloudHsmFrontendService",
+        "uid" => "cloudhsm-2014-05-30",
       }
 
       api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|

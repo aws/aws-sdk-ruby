@@ -21,6 +21,7 @@ module Aws::EC2
       @public_ip = extract_public_ip(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -79,6 +80,30 @@ module Aws::EC2
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
+    end
+
+    # The ID of an address pool.
+    # @return [String]
+    def public_ipv_4_pool
+      data[:public_ipv_4_pool]
+    end
+
+    # The name of the location from which the IP address is advertised.
+    # @return [String]
+    def network_border_group
+      data[:network_border_group]
+    end
+
+    # The customer-owned IP address.
+    # @return [String]
+    def customer_owned_ip
+      data[:customer_owned_ip]
+    end
+
+    # The ID of the customer-owned address pool.
+    # @return [String]
+    def customer_owned_ipv_4_pool
+      data[:customer_owned_ipv_4_pool]
     end
 
     # @!endgroup
@@ -216,11 +241,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.associate({
-    #     allocation_id: "String",
-    #     instance_id: "String",
+    #     allocation_id: "AllocationId",
+    #     instance_id: "InstanceId",
     #     allow_reassociation: false,
     #     dry_run: false,
-    #     network_interface_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
     #     private_ip_address: "String",
     #   })
     # @param [Hash] options ({})
@@ -247,6 +272,9 @@ module Aws::EC2
     # @option options [String] :network_interface_id
     #   \[EC2-VPC\] The ID of the network interface. If the instance has more
     #   than one network interface, you must specify a network interface ID.
+    #
+    #   For EC2-VPC, you can specify either the instance ID or the network
+    #   interface ID, but not both.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary or secondary private IP address to associate
     #   with the Elastic IP address. If no private IP address is specified,
@@ -262,7 +290,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.disassociate({
-    #     association_id: "String",
+    #     association_id: "ElasticIpAssociationId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -283,12 +311,30 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   classic_address.release({
-    #     allocation_id: "String",
+    #     allocation_id: "AllocationId",
+    #     network_border_group: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :allocation_id
     #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
+    # @option options [String] :network_border_group
+    #   The location that the IP address is released from.
+    #
+    #   If you provide an incorrect network border group, you will receive an
+    #   `InvalidAddress.NotFound` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #   <note markdown="1"> You cannot use a network border group with EC2 Classic. If you attempt
+    #   this operation on EC2 classic, you will receive an
+    #   `InvalidParameterCombination` error. For more information, see [Error
+    #   Codes][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

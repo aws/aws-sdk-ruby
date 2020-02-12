@@ -22,6 +22,7 @@ require_relative 'aws-sdk-ec2/internet_gateway'
 require_relative 'aws-sdk-ec2/key_pair'
 require_relative 'aws-sdk-ec2/key_pair_info'
 require_relative 'aws-sdk-ec2/network_acl'
+require_relative 'aws-sdk-ec2/nat_gateway'
 require_relative 'aws-sdk-ec2/network_interface'
 require_relative 'aws-sdk-ec2/network_interface_association'
 require_relative 'aws-sdk-ec2/placement_group'
@@ -65,6 +66,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @service
 module Aws::EC2
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.141.0'
 
 end

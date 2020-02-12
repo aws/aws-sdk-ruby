@@ -815,6 +815,49 @@ module Aws::EC2
 
     end
 
+    class SecurityGroupExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (6)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 6,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_security_groups,
+            acceptors: [
+              {
+                "expected" => true,
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "length(security_groups[].group_id) > `0`"
+              },
+              {
+                "expected" => "InvalidGroupNotFound",
+                "matcher" => "error",
+                "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_security_groups)
+      # @return (see Client#describe_security_groups)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
     class SnapshotCompleted
 
       # @param [Hash] options

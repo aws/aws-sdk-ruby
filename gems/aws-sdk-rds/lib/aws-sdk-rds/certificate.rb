@@ -21,6 +21,7 @@ module Aws::RDS
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -59,6 +60,19 @@ module Aws::RDS
     # @return [String]
     def certificate_arn
       data[:certificate_arn]
+    end
+
+    # Whether there is an override for the default certificate identifier.
+    # @return [Boolean]
+    def customer_override
+      data[:customer_override]
+    end
+
+    # If there is an override for the default certificate identifier, when
+    # the override expires.
+    # @return [Time]
+    def customer_override_valid_till
+      data[:customer_override_valid_till]
     end
 
     # @!endgroup

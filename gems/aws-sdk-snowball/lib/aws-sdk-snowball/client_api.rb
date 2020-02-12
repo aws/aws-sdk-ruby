@@ -14,6 +14,7 @@ module Aws::Snowball
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressId = Shapes::StringShape.new(name: 'AddressId')
     AddressList = Shapes::ListShape.new(name: 'AddressList')
+    AmiId = Shapes::StringShape.new(name: 'AmiId')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelClusterRequest = Shapes::StructureShape.new(name: 'CancelClusterRequest')
     CancelClusterResult = Shapes::StructureShape.new(name: 'CancelClusterResult')
@@ -25,6 +26,8 @@ module Aws::Snowball
     ClusterListEntryList = Shapes::ListShape.new(name: 'ClusterListEntryList')
     ClusterMetadata = Shapes::StructureShape.new(name: 'ClusterMetadata')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
+    CompatibleImage = Shapes::StructureShape.new(name: 'CompatibleImage')
+    CompatibleImageList = Shapes::ListShape.new(name: 'CompatibleImageList')
     CreateAddressRequest = Shapes::StructureShape.new(name: 'CreateAddressRequest')
     CreateAddressResult = Shapes::StructureShape.new(name: 'CreateAddressResult')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
@@ -40,6 +43,9 @@ module Aws::Snowball
     DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
     DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
     DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
+    Ec2AmiResource = Shapes::StructureShape.new(name: 'Ec2AmiResource')
+    Ec2AmiResourceList = Shapes::ListShape.new(name: 'Ec2AmiResourceList')
+    Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
     EventTriggerDefinition = Shapes::StructureShape.new(name: 'EventTriggerDefinition')
     EventTriggerDefinitionList = Shapes::ListShape.new(name: 'EventTriggerDefinitionList')
     GetJobManifestRequest = Shapes::StructureShape.new(name: 'GetJobManifestRequest')
@@ -48,6 +54,8 @@ module Aws::Snowball
     GetJobUnlockCodeResult = Shapes::StructureShape.new(name: 'GetJobUnlockCodeResult')
     GetSnowballUsageRequest = Shapes::StructureShape.new(name: 'GetSnowballUsageRequest')
     GetSnowballUsageResult = Shapes::StructureShape.new(name: 'GetSnowballUsageResult')
+    GetSoftwareUpdatesRequest = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesRequest')
+    GetSoftwareUpdatesResult = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesResult')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
     InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
@@ -73,6 +81,8 @@ module Aws::Snowball
     ListClusterJobsResult = Shapes::StructureShape.new(name: 'ListClusterJobsResult')
     ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
     ListClustersResult = Shapes::StructureShape.new(name: 'ListClustersResult')
+    ListCompatibleImagesRequest = Shapes::StructureShape.new(name: 'ListCompatibleImagesRequest')
+    ListCompatibleImagesResult = Shapes::StructureShape.new(name: 'ListCompatibleImagesResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
     ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
@@ -124,6 +134,9 @@ module Aws::Snowball
 
     CancelJobResult.struct_class = Types::CancelJobResult
 
+    ClusterLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    ClusterLimitExceededException.struct_class = Types::ClusterLimitExceededException
+
     ClusterListEntry.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
     ClusterListEntry.add_member(:cluster_state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "ClusterState"))
     ClusterListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
@@ -146,6 +159,12 @@ module Aws::Snowball
     ClusterMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     ClusterMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     ClusterMetadata.struct_class = Types::ClusterMetadata
+
+    CompatibleImage.add_member(:ami_id, Shapes::ShapeRef.new(shape: String, location_name: "AmiId"))
+    CompatibleImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CompatibleImage.struct_class = Types::CompatibleImage
+
+    CompatibleImageList.member = Shapes::ShapeRef.new(shape: CompatibleImage)
 
     CreateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
     CreateAddressRequest.struct_class = Types::CreateAddressRequest
@@ -218,6 +237,15 @@ module Aws::Snowball
     DescribeJobResult.add_member(:sub_job_metadata, Shapes::ShapeRef.new(shape: JobMetadataList, location_name: "SubJobMetadata"))
     DescribeJobResult.struct_class = Types::DescribeJobResult
 
+    Ec2AmiResource.add_member(:ami_id, Shapes::ShapeRef.new(shape: AmiId, required: true, location_name: "AmiId"))
+    Ec2AmiResource.add_member(:snowball_ami_id, Shapes::ShapeRef.new(shape: String, location_name: "SnowballAmiId"))
+    Ec2AmiResource.struct_class = Types::Ec2AmiResource
+
+    Ec2AmiResourceList.member = Shapes::ShapeRef.new(shape: Ec2AmiResource)
+
+    Ec2RequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    Ec2RequestFailedException.struct_class = Types::Ec2RequestFailedException
+
     EventTriggerDefinition.add_member(:event_resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "EventResourceARN"))
     EventTriggerDefinition.struct_class = Types::EventTriggerDefinition
 
@@ -240,6 +268,28 @@ module Aws::Snowball
     GetSnowballUsageResult.add_member(:snowball_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballLimit"))
     GetSnowballUsageResult.add_member(:snowballs_in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "SnowballsInUse"))
     GetSnowballUsageResult.struct_class = Types::GetSnowballUsageResult
+
+    GetSoftwareUpdatesRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    GetSoftwareUpdatesRequest.struct_class = Types::GetSoftwareUpdatesRequest
+
+    GetSoftwareUpdatesResult.add_member(:updates_uri, Shapes::ShapeRef.new(shape: String, location_name: "UpdatesURI"))
+    GetSoftwareUpdatesResult.struct_class = Types::GetSoftwareUpdatesResult
+
+    InvalidAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidAddressException.struct_class = Types::InvalidAddressException
+
+    InvalidInputCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidInputCombinationException.struct_class = Types::InvalidInputCombinationException
+
+    InvalidJobStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidJobStateException.struct_class = Types::InvalidJobStateException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidResourceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InvalidResourceException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    InvalidResourceException.struct_class = Types::InvalidResourceException
 
     JobListEntry.add_member(:job_id, Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
     JobListEntry.add_member(:job_state, Shapes::ShapeRef.new(shape: JobState, location_name: "JobState"))
@@ -280,9 +330,13 @@ module Aws::Snowball
 
     JobResource.add_member(:s3_resources, Shapes::ShapeRef.new(shape: S3ResourceList, location_name: "S3Resources"))
     JobResource.add_member(:lambda_resources, Shapes::ShapeRef.new(shape: LambdaResourceList, location_name: "LambdaResources"))
+    JobResource.add_member(:ec2_ami_resources, Shapes::ShapeRef.new(shape: Ec2AmiResourceList, location_name: "Ec2AmiResources"))
     JobResource.struct_class = Types::JobResource
 
     JobStateList.member = Shapes::ShapeRef.new(shape: JobState)
+
+    KMSRequestFailedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    KMSRequestFailedException.struct_class = Types::KMSRequestFailedException
 
     KeyRange.add_member(:begin_marker, Shapes::ShapeRef.new(shape: String, location_name: "BeginMarker"))
     KeyRange.add_member(:end_marker, Shapes::ShapeRef.new(shape: String, location_name: "EndMarker"))
@@ -311,6 +365,14 @@ module Aws::Snowball
     ListClustersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListClustersResult.struct_class = Types::ListClustersResult
 
+    ListCompatibleImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
+    ListCompatibleImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListCompatibleImagesRequest.struct_class = Types::ListCompatibleImagesRequest
+
+    ListCompatibleImagesResult.add_member(:compatible_images, Shapes::ShapeRef.new(shape: CompatibleImageList, location_name: "CompatibleImages"))
+    ListCompatibleImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListCompatibleImagesResult.struct_class = Types::ListCompatibleImagesResult
+
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListJobsRequest.struct_class = Types::ListJobsRequest
@@ -338,6 +400,9 @@ module Aws::Snowball
     ShippingDetails.add_member(:inbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "InboundShipment"))
     ShippingDetails.add_member(:outbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "OutboundShipment"))
     ShippingDetails.struct_class = Types::ShippingDetails
+
+    UnsupportedAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UnsupportedAddressException.struct_class = Types::UnsupportedAddressException
 
     UpdateClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     UpdateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -371,12 +436,16 @@ module Aws::Snowball
       api.version = "2016-06-30"
 
       api.metadata = {
+        "apiVersion" => "2016-06-30",
         "endpointPrefix" => "snowball",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Amazon Snowball",
         "serviceFullName" => "Amazon Import/Export Snowball",
+        "serviceId" => "Snowball",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSIESnowballJobManagementService",
+        "uid" => "snowball-2016-06-30",
       }
 
       api.add_operation(:cancel_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -420,6 +489,7 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
 
       api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
@@ -432,6 +502,7 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
 
       api.add_operation(:describe_address, Seahorse::Model::Operation.new.tap do |o|
@@ -505,6 +576,16 @@ module Aws::Snowball
         o.output = Shapes::ShapeRef.new(shape: GetSnowballUsageResult)
       end)
 
+      api.add_operation(:get_software_updates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareUpdates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareUpdatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareUpdatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+      end)
+
       api.add_operation(:list_cluster_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListClusterJobs"
         o.http_method = "POST"
@@ -522,6 +603,16 @@ module Aws::Snowball
         o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClustersResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:list_compatible_images, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCompatibleImages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCompatibleImagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCompatibleImagesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -549,6 +640,7 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
         o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
 
       api.add_operation(:update_job, Seahorse::Model::Operation.new.tap do |o|
@@ -562,6 +654,7 @@ module Aws::Snowball
         o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: Ec2RequestFailedException)
       end)
     end
 

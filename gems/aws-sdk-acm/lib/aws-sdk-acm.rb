@@ -12,6 +12,7 @@ require_relative 'aws-sdk-acm/types'
 require_relative 'aws-sdk-acm/client_api'
 require_relative 'aws-sdk-acm/client'
 require_relative 'aws-sdk-acm/errors'
+require_relative 'aws-sdk-acm/waiters'
 require_relative 'aws-sdk-acm/resource'
 require_relative 'aws-sdk-acm/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-acm/customizations'
 # @service
 module Aws::ACM
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.27.0'
 
 end

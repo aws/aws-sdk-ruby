@@ -21,6 +21,7 @@ module Aws::AutoScaling
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -43,42 +44,42 @@ module Aws::AutoScaling
       data[:scheduled_action_arn]
     end
 
-    # This parameter is deprecated.
+    # This parameter is no longer used.
     # @return [Time]
     def time
       data[:time]
     end
 
-    # The date and time that the action is scheduled to begin. This date and
-    # time can be up to one month in the future.
-    #
-    # When `StartTime` and `EndTime` are specified with `Recurrence`, they
-    # form the boundaries of when the recurring action will start and stop.
+    # The date and time in UTC for this action to start. For example,
+    # `"2019-06-01T00:00:00Z"`.
     # @return [Time]
     def start_time
       data[:start_time]
     end
 
-    # The date and time that the action is scheduled to end. This date and
-    # time can be up to one month in the future.
+    # The date and time in UTC for the recurring schedule to end. For
+    # example, `"2019-06-01T00:00:00Z"`.
     # @return [Time]
     def end_time
       data[:end_time]
     end
 
-    # The recurring schedule for the action.
+    # The recurring schedule for the action, in Unix cron syntax format.
+    #
+    # When `StartTime` and `EndTime` are specified with `Recurrence`, they
+    # form the boundaries of when the recurring action starts and stops.
     # @return [String]
     def recurrence
       data[:recurrence]
     end
 
-    # The minimum size of the group.
+    # The minimum number of instances in the Auto Scaling group.
     # @return [Integer]
     def min_size
       data[:min_size]
     end
 
-    # The maximum size of the group.
+    # The maximum number of instances in the Auto Scaling group.
     # @return [Integer]
     def max_size
       data[:max_size]

@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -76,10 +77,40 @@ module Aws::EC2
       data[:owner_id]
     end
 
-    # The value is `Windows` for Windows AMIs; otherwise blank.
+    # This value is set to `windows` for Windows AMIs; otherwise, it is
+    # blank.
     # @return [String]
     def platform
       data[:platform]
+    end
+
+    # The platform details associated with the billing code of the AMI. For
+    # more information, see [Obtaining Billing Information][1] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html
+    # @return [String]
+    def platform_details
+      data[:platform_details]
+    end
+
+    # The operation of the Amazon EC2 instance and the billing code that is
+    # associated with the AMI. `usageOperation` corresponds to the
+    # [lineitem/Operation][1] column on your AWS Cost and Usage Report and
+    # in the [AWS Price List API][2]. For the list of `UsageOperation`
+    # codes, see [Platform Details and Usage Operation Billing Codes][3] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation
+    # [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info
+    # @return [String]
+    def usage_operation
+      data[:usage_operation]
     end
 
     # Any product codes associated with the AMI.
@@ -232,10 +263,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Image]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::ImageExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       resp = waiter.wait(params.merge(image_ids: [@id]))
       Image.new({
         id: @id,
@@ -359,9 +390,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -460,13 +491,13 @@ module Aws::EC2
     #   The operation type. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [Array<String>] :product_codes
-    #   One or more DevPay product codes. After you add a product code to an
-    #   AMI, it can't be removed.
+    #   The DevPay product codes. After you add a product code to an AMI, it
+    #   can't be removed.
     # @option options [Array<String>] :user_groups
-    #   One or more user groups. This parameter can be used only when the
-    #   `Attribute` parameter is `launchPermission`.
+    #   The user groups. This parameter can be used only when the `Attribute`
+    #   parameter is `launchPermission`.
     # @option options [Array<String>] :user_ids
-    #   One or more AWS account IDs. This parameter can be used only when the
+    #   The AWS account IDs. This parameter can be used only when the
     #   `Attribute` parameter is `launchPermission`.
     # @option options [String] :value
     #   The value of the attribute being modified. This parameter can be used

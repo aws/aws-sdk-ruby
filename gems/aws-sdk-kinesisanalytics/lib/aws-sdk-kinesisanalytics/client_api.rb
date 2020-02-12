@@ -87,6 +87,7 @@ module Aws::KinesisAnalytics
     InvalidApplicationConfigurationException = Shapes::StructureShape.new(name: 'InvalidApplicationConfigurationException')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     JSONMappingParameters = Shapes::StructureShape.new(name: 'JSONMappingParameters')
+    KinesisAnalyticsARN = Shapes::StringShape.new(name: 'KinesisAnalyticsARN')
     KinesisFirehoseInput = Shapes::StructureShape.new(name: 'KinesisFirehoseInput')
     KinesisFirehoseInputDescription = Shapes::StructureShape.new(name: 'KinesisFirehoseInputDescription')
     KinesisFirehoseInputUpdate = Shapes::StructureShape.new(name: 'KinesisFirehoseInputUpdate')
@@ -106,6 +107,8 @@ module Aws::KinesisAnalytics
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LogStreamARN = Shapes::StringShape.new(name: 'LogStreamARN')
     MappingParameters = Shapes::StructureShape.new(name: 'MappingParameters')
     Output = Shapes::StructureShape.new(name: 'Output')
@@ -152,8 +155,19 @@ module Aws::KinesisAnalytics
     StartApplicationResponse = Shapes::StructureShape.new(name: 'StartApplicationResponse')
     StopApplicationRequest = Shapes::StructureShape.new(name: 'StopApplicationRequest')
     StopApplicationResponse = Shapes::StructureShape.new(name: 'StopApplicationResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UnableToDetectSchemaException = Shapes::StructureShape.new(name: 'UnableToDetectSchemaException')
+    UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
 
@@ -245,12 +259,19 @@ module Aws::KinesisAnalytics
 
     CloudWatchLoggingOptions.member = Shapes::ShapeRef.new(shape: CloudWatchLoggingOption)
 
+    CodeValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    CodeValidationException.struct_class = Types::CodeValidationException
+
+    ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationRequest.add_member(:application_description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "ApplicationDescription"))
     CreateApplicationRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: Inputs, location_name: "Inputs"))
     CreateApplicationRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: Outputs, location_name: "Outputs"))
     CreateApplicationRequest.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     CreateApplicationRequest.add_member(:application_code, Shapes::ShapeRef.new(shape: ApplicationCode, location_name: "ApplicationCode"))
+    CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_summary, Shapes::ShapeRef.new(shape: ApplicationSummary, required: true, location_name: "ApplicationSummary"))
@@ -296,7 +317,7 @@ module Aws::KinesisAnalytics
     DescribeApplicationResponse.add_member(:application_detail, Shapes::ShapeRef.new(shape: ApplicationDetail, required: true, location_name: "ApplicationDetail"))
     DescribeApplicationResponse.struct_class = Types::DescribeApplicationResponse
 
-    DestinationSchema.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, location_name: "RecordFormatType"))
+    DestinationSchema.add_member(:record_format_type, Shapes::ShapeRef.new(shape: RecordFormatType, required: true, location_name: "RecordFormatType"))
     DestinationSchema.struct_class = Types::DestinationSchema
 
     DiscoverInputSchemaRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
@@ -389,6 +410,12 @@ module Aws::KinesisAnalytics
 
     Inputs.member = Shapes::ShapeRef.new(shape: Input)
 
+    InvalidApplicationConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidApplicationConfigurationException.struct_class = Types::InvalidApplicationConfigurationException
+
+    InvalidArgumentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArgumentException.struct_class = Types::InvalidArgumentException
+
     JSONMappingParameters.add_member(:record_row_path, Shapes::ShapeRef.new(shape: RecordRowPath, required: true, location_name: "RecordRowPath"))
     JSONMappingParameters.struct_class = Types::JSONMappingParameters
 
@@ -452,6 +479,9 @@ module Aws::KinesisAnalytics
     LambdaOutputUpdate.add_member(:role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARNUpdate"))
     LambdaOutputUpdate.struct_class = Types::LambdaOutputUpdate
 
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListApplicationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListApplicationsInputLimit, location_name: "Limit"))
     ListApplicationsRequest.add_member(:exclusive_start_application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ExclusiveStartApplicationName"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
@@ -459,6 +489,12 @@ module Aws::KinesisAnalytics
     ListApplicationsResponse.add_member(:application_summaries, Shapes::ShapeRef.new(shape: ApplicationSummaries, required: true, location_name: "ApplicationSummaries"))
     ListApplicationsResponse.add_member(:has_more_applications, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreApplications"))
     ListApplicationsResponse.struct_class = Types::ListApplicationsResponse
+
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     MappingParameters.add_member(:json_mapping_parameters, Shapes::ShapeRef.new(shape: JSONMappingParameters, location_name: "JSONMappingParameters"))
     MappingParameters.add_member(:csv_mapping_parameters, Shapes::ShapeRef.new(shape: CSVMappingParameters, location_name: "CSVMappingParameters"))
@@ -533,6 +569,15 @@ module Aws::KinesisAnalytics
 
     ReferenceDataSourceUpdates.member = Shapes::ShapeRef.new(shape: ReferenceDataSourceUpdate)
 
+    ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceProvisionedThroughputExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceProvisionedThroughputExceededException.struct_class = Types::ResourceProvisionedThroughputExceededException
+
     S3Configuration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     S3Configuration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
     S3Configuration.add_member(:file_key, Shapes::ShapeRef.new(shape: FileKey, required: true, location_name: "FileKey"))
@@ -553,6 +598,9 @@ module Aws::KinesisAnalytics
     S3ReferenceDataSourceUpdate.add_member(:reference_role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "ReferenceRoleARNUpdate"))
     S3ReferenceDataSourceUpdate.struct_class = Types::S3ReferenceDataSourceUpdate
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SourceSchema.add_member(:record_format, Shapes::ShapeRef.new(shape: RecordFormat, required: true, location_name: "RecordFormat"))
     SourceSchema.add_member(:record_encoding, Shapes::ShapeRef.new(shape: RecordEncoding, location_name: "RecordEncoding"))
     SourceSchema.add_member(:record_columns, Shapes::ShapeRef.new(shape: RecordColumns, required: true, location_name: "RecordColumns"))
@@ -569,6 +617,37 @@ module Aws::KinesisAnalytics
 
     StopApplicationResponse.struct_class = Types::StopApplicationResponse
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
+    UnableToDetectSchemaException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnableToDetectSchemaException.add_member(:raw_input_records, Shapes::ShapeRef.new(shape: RawInputRecords, location_name: "RawInputRecords"))
+    UnableToDetectSchemaException.add_member(:processed_input_records, Shapes::ShapeRef.new(shape: ProcessedInputRecords, location_name: "ProcessedInputRecords"))
+    UnableToDetectSchemaException.struct_class = Types::UnableToDetectSchemaException
+
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: KinesisAnalyticsARN, required: true, location_name: "ResourceARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
     UpdateApplicationRequest.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     UpdateApplicationRequest.add_member(:current_application_version_id, Shapes::ShapeRef.new(shape: ApplicationVersionId, required: true, location_name: "CurrentApplicationVersionId"))
     UpdateApplicationRequest.add_member(:application_update, Shapes::ShapeRef.new(shape: ApplicationUpdate, required: true, location_name: "ApplicationUpdate"))
@@ -583,13 +662,16 @@ module Aws::KinesisAnalytics
       api.version = "2015-08-14"
 
       api.metadata = {
+        "apiVersion" => "2015-08-14",
         "endpointPrefix" => "kinesisanalytics",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "Kinesis Analytics",
         "serviceFullName" => "Amazon Kinesis Analytics",
+        "serviceId" => "Kinesis Analytics",
         "signatureVersion" => "v4",
         "targetPrefix" => "KinesisAnalytics_20150814",
-        "timestampFormat" => "unixTimestamp",
+        "uid" => "kinesisanalytics-2015-08-14",
       }
 
       api.add_operation(:add_application_cloud_watch_logging_option, Seahorse::Model::Operation.new.tap do |o|
@@ -602,6 +684,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:add_application_input, Seahorse::Model::Operation.new.tap do |o|
@@ -615,6 +698,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: CodeValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:add_application_input_processing_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -627,6 +711,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:add_application_output, Seahorse::Model::Operation.new.tap do |o|
@@ -639,6 +724,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:add_application_reference_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -651,6 +737,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -663,6 +750,8 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -674,6 +763,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:delete_application_cloud_watch_logging_option, Seahorse::Model::Operation.new.tap do |o|
@@ -686,6 +776,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:delete_application_input_processing_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -698,6 +789,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:delete_application_output, Seahorse::Model::Operation.new.tap do |o|
@@ -710,6 +802,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:delete_application_reference_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -722,6 +815,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:describe_application, Seahorse::Model::Operation.new.tap do |o|
@@ -731,6 +825,7 @@ module Aws::KinesisAnalytics
         o.input = Shapes::ShapeRef.new(shape: DescribeApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:discover_input_schema, Seahorse::Model::Operation.new.tap do |o|
@@ -753,6 +848,17 @@ module Aws::KinesisAnalytics
         o.output = Shapes::ShapeRef.new(shape: ListApplicationsResponse)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:start_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartApplication"
         o.http_method = "POST"
@@ -763,6 +869,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:stop_application, Seahorse::Model::Operation.new.tap do |o|
@@ -773,6 +880,33 @@ module Aws::KinesisAnalytics
         o.output = Shapes::ShapeRef.new(shape: StopApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
@@ -786,6 +920,7 @@ module Aws::KinesisAnalytics
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
     end
 

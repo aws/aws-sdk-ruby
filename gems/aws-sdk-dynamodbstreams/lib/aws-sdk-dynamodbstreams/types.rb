@@ -124,6 +124,21 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
+    # The shard iterator has expired and can no longer be used to retrieve
+    # stream records. A shard iterator expires 15 minutes after it is
+    # retrieved using the `GetShardIterator` action.
+    #
+    # @!attribute [rw] message
+    #   The provided iterator exceeds the maximum age allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ExpiredIteratorException AWS API Documentation
+    #
+    class ExpiredIteratorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input of a `GetRecords` operation.
     #
     # @note When making an API call, you may pass GetRecordsInput
@@ -265,6 +280,20 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
+    # An error occurred on the server side.
+    #
+    # @!attribute [rw] message
+    #   The server encountered an internal error trying to fulfill the
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents *a single element* of a key schema. A key schema specifies
     # the attributes that make up the primary key of a table, or the key
     # attributes of an index.
@@ -301,6 +330,28 @@ module Aws::DynamoDBStreams
     class KeySchemaElement < Struct.new(
       :attribute_name,
       :key_type)
+      include Aws::Structure
+    end
+
+    # Your request rate is too high. The AWS SDKs for DynamoDB automatically
+    # retry requests that receive this exception. Your request is eventually
+    # successful, unless your retry queue is too large to finish. Reduce the
+    # frequency of requests and use exponential backoff. For more
+    # information, go to [Error Retries and Exponential Backoff][1] in the
+    # *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#APIRetries
+    #
+    # @!attribute [rw] message
+    #   Too many operations for a given subscriber.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -435,6 +486,19 @@ module Aws::DynamoDBStreams
       :aws_region,
       :dynamodb,
       :user_identity)
+      include Aws::Structure
+    end
+
+    # The operation tried to access a nonexistent stream.
+    #
+    # @!attribute [rw] message
+    #   The resource which is being requested does not exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -671,6 +735,33 @@ module Aws::DynamoDBStreams
       :sequence_number,
       :size_bytes,
       :stream_view_type)
+      include Aws::Structure
+    end
+
+    # The operation attempted to read past the oldest stream record in a
+    # shard.
+    #
+    # In DynamoDB Streams, there is a 24 hour limit on data retention.
+    # Stream records whose age exceeds this limit are subject to removal
+    # (trimming) from the stream. You might receive a
+    # TrimmedDataAccessException if:
+    #
+    # * You request a shard iterator with a sequence number older than the
+    #   trim point (24 hours).
+    #
+    # * You obtain a shard iterator, but before you use the iterator in a
+    #   `GetRecords` request, a stream record in the shard exceeds the 24
+    #   hour period and is trimmed. This causes the iterator to access a
+    #   record that no longer exists.
+    #
+    # @!attribute [rw] message
+    #   "The data you are trying to access has been trimmed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/TrimmedDataAccessException AWS API Documentation
+    #
+    class TrimmedDataAccessException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

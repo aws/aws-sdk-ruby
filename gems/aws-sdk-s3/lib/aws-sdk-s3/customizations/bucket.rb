@@ -3,6 +3,20 @@ require 'uri'
 module Aws
   module S3
     class Bucket
+      # Save the old initialize method so that we can call 'super'.
+      old_initialize = instance_method(:initialize)
+      # Define a new initialize method that extracts out a bucket ARN.
+      define_method(:initialize) do |*args|
+        old_initialize.bind(self).call(*args)
+        bucket_name, region, arn = Plugins::BucketARN.resolve_arn!(
+          name,
+          client.config.region,
+          client.config.s3_use_arn_region
+        )
+        @name = bucket_name
+        @client.config.region = region
+        @arn = arn
+      end
 
       # Deletes all objects and versioned objects from this bucket
       #
@@ -31,10 +45,10 @@ module Aws
       #   each attempt.
       #
       # @return [void]
-      def delete! options = { }
+      def delete!(options = {})
         options = {
           initial_wait: 1.3,
-          max_attempts: 3,
+          max_attempts: 3
         }.merge(options)
 
         attempts = 0
@@ -43,26 +57,36 @@ module Aws
           delete
         rescue Errors::BucketNotEmpty
           attempts += 1
-          if attempts >= options[:max_attempts]
-            raise
-          else
-            Kernel.sleep(options[:initial_wait] ** attempts)
-            retry
-          end
+          raise if attempts >= options[:max_attempts]
+
+          Kernel.sleep(options[:initial_wait]**attempts)
+          retry
         end
       end
 
       # Returns a public URL for this bucket.
       #
-      #     bucket = s3.bucket('bucket-name')
-      #     bucket.url
-      #     #=> "https://bucket-name.s3.amazonaws.com"
+      # @example
+      #
+      #   bucket = s3.bucket('bucket-name')
+      #   bucket.url
+      #   #=> "https://bucket-name.s3.amazonaws.com"
+      #
+      # It will also work when provided an Access Point ARN.
+      #
+      # @example
+      #
+      #   bucket = s3.bucket(
+      #     'arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint'
+      #   )
+      #   bucket.url
+      #   #=> "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com"
       #
       # You can pass `virtual_host: true` to use the bucket name as the
       # host name.
       #
-      #     bucket = s3.bucket('my.bucket.com', virtual_host: true)
-      #     bucket.url
+      #     bucket = s3.bucket('my.bucket.com')
+      #     bucket.url(virtual_host: true)
       #     #=> "http://my.bucket.com"
       #
       # @option options [Boolean] :virtual_host (false) When `true`,
@@ -73,6 +97,8 @@ module Aws
       def url(options = {})
         if options[:virtual_host]
           "http://#{name}"
+        elsif @arn
+          Plugins::BucketARN.resolve_url!(URI.parse(s3_bucket_url), @arn).to_s
         else
           s3_bucket_url
         end
@@ -93,7 +119,7 @@ module Aws
           client.config.credentials,
           client.config.region,
           name,
-          {url: url}.merge(options)
+          { url: url }.merge(options)
         )
       end
 
@@ -101,6 +127,7 @@ module Aws
       def load
         @data = client.list_buckets.buckets.find { |b| b.name == name }
         raise "unable to load bucket #{name}" if @data.nil?
+
         self
       end
 
@@ -114,12 +141,16 @@ module Aws
           url.path += '/' unless url.path[-1] == '/'
           url.path += Seahorse::Util.uri_escape(name)
         end
+        if (client.config.region == 'us-east-1') &&
+           (client.config.s3_us_east_1_regional_endpoint == 'legacy')
+          url.host = Plugins::IADRegionalEndpoint.legacy_host(url.host)
+        end
         url.to_s
       end
 
       def bucket_as_hostname?(https)
         Plugins::BucketDns.dns_compatible?(name, https) &&
-        !client.config.force_path_style
+          !client.config.force_path_style
       end
 
     end

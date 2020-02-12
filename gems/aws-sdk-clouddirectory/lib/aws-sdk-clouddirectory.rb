@@ -42,6 +42,6 @@ require_relative 'aws-sdk-clouddirectory/customizations'
 # @service
 module Aws::CloudDirectory
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.21.0'
 
 end

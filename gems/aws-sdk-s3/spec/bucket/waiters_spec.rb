@@ -4,8 +4,7 @@ module Aws
   module S3
     describe Bucket do
       describe 'waiters' do
-
-        let(:client) { S3::Client.new(stub_responses:true) }
+        let(:client) { S3::Client.new(stub_responses: true) }
 
         let(:bucket) { Bucket.new('bucket-name', client: client) }
 
@@ -13,15 +12,16 @@ module Aws
           client.handle(step: :send) do |context|
             context.http_response.signal_headers(200, {})
             context.http_response.signal_done
-            Seahorse::Client::Response.new(context:context)
+            Seahorse::Client::Response.new(context: context)
           end
           yielded = nil
-          expect {
+          message = 'pass options to configure the waiter; '\
+                    "yielding the waiter is deprecated\n"
+          expect do
             bucket.wait_until_exists { |w| yielded = w }
-          }.to output("pass options to configure the waiter; yielding the waiter is deprecated\n").to_stderr
+          end.to output(message).to_stderr
           expect(yielded).to be_kind_of(Aws::Waiters::Waiter)
         end
-
       end
     end
   end

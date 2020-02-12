@@ -1,20 +1,64 @@
 require_relative '../spec_helper'
+require 'securerandom'
 
 module Aws
   describe CredentialProviderChain do
+    def random_creds
+      { access_key_id: SecureRandom.hex,
+        secret_access_key: SecureRandom.hex, session_token: SecureRandom.hex }
+    end
 
-    let(:env) {{}}
+    def with_shared_credentials(profile_name = SecureRandom.hex, credentials_file = nil)
+      path = File.join('HOME', '.aws', 'credentials')
+      creds = random_creds
+      credentials_file ||= <<-CREDS
+[#{profile_name}]
+aws_access_key_id = #{creds[:access_key_id]}
+aws_secret_access_key = #{creds[:secret_access_key]}
+aws_session_token = #{creds[:session_token]}
+CREDS
+      allow(File).to receive(:exist?).with(path).and_return(true)
+      allow(File).to receive(:readable?).with(path).and_return(true)
+      allow(Dir).to receive(:home).and_return('HOME')
+      allow(File).to receive(:read).with(path).and_return(credentials_file)
+      creds.merge(profile_name: profile_name)
+    end
 
-    let(:config) {
+    def with_env_credentials
+      creds = random_creds
+      env['AWS_ACCESS_KEY_ID'] = creds[:access_key_id]
+      env['AWS_SECRET_ACCESS_KEY'] = creds[:secret_access_key]
+      env['AWS_SESSION_TOKEN'] = creds[:session_token]
+      creds
+    end
+
+    def with_config_credentials
+      creds = random_creds
+      allow(config).to receive(:access_key_id).and_return(creds[:access_key_id])
+      allow(config).to receive(:secret_access_key).and_return(creds[:secret_access_key])
+      allow(config).to receive(:session_token).and_return(creds[:session_token])
+      creds
+    end
+
+    def validate_credentials(expected_creds)
+      expect(credentials.set?).to be(true)
+      creds = credentials.credentials
+      expect(creds.access_key_id).to eq(expected_creds[:access_key_id])
+      expect(creds.secret_access_key).to eq(expected_creds[:secret_access_key])
+      expect(creds.session_token).to eq(expected_creds[:session_token])
+    end
+
+    let(:env) { {} }
+
+    let(:config) do
       double('config',
-        access_key_id: nil,
-        secret_access_key: nil,
-        session_token: nil,
-        profile: nil,
-        instance_profile_credentials_timeout: 1,
-        instance_profile_credentials_retries: 0,
-      )
-    }
+             access_key_id: nil,
+             secret_access_key: nil,
+             session_token: nil,
+             profile: nil,
+             instance_profile_credentials_timeout: 1,
+             instance_profile_credentials_retries: 0)
+    end
 
     let(:chain) { CredentialProviderChain.new(config) }
 
@@ -29,111 +73,53 @@ module Aws
     end
 
     it 'hydrates credentials from config options' do
-      allow(config).to receive(:access_key_id).and_return('akid')
-      allow(config).to receive(:secret_access_key).and_return('secret')
-      allow(config).to receive(:session_token).and_return('session')
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid')
-      expect(credentials.secret_access_key).to eq('secret')
-      expect(credentials.session_token).to eq('session')
+      expected_creds = with_config_credentials
+      validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV with prefix AWS_' do
-      env['AWS_ACCESS_KEY_ID'] = 'akid'
-      env['AWS_SECRET_ACCESS_KEY'] = 'secret'
-      env['AWS_SESSION_TOKEN'] = 'token'
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid')
-      expect(credentials.secret_access_key).to eq('secret')
-      expect(credentials.session_token).to eq('token')
+      expected_creds = random_creds
+      env['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      env['AWS_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
+      env['AWS_SESSION_TOKEN'] = expected_creds[:session_token]
+      validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV with prefix AMAZON_' do
-      env['AMAZON_ACCESS_KEY_ID'] = 'akid2'
-      env['AMAZON_SECRET_ACCESS_KEY'] = 'secret2'
-      env['AMAZON_SESSION_TOKEN'] = 'token2'
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid2')
-      expect(credentials.secret_access_key).to eq('secret2')
-      expect(credentials.session_token).to eq('token2')
+      expected_creds = random_creds
+      env['AMAZON_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      env['AMAZON_SECRET_ACCESS_KEY'] = expected_creds[:secret_access_key]
+      env['AMAZON_SESSION_TOKEN'] = expected_creds[:session_token]
+      validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY & AWS_SECRET_KEY' do
-      env['AWS_ACCESS_KEY'] = 'akid3'
-      env['AWS_SECRET_KEY'] = 'secret3'
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid3')
-      expect(credentials.secret_access_key).to eq('secret3')
-      expect(credentials.session_token).to be(nil)
+      expected_creds = random_creds.merge(session_token: nil)
+      env['AWS_ACCESS_KEY'] = expected_creds[:access_key_id]
+      env['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
+      validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
-      env['AWS_ACCESS_KEY_ID'] = 'akid4'
-      env['AWS_SECRET_KEY'] = 'secret4'
-      expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('akid4')
-      expect(credentials.secret_access_key).to eq('secret4')
-      expect(credentials.session_token).to be(nil)
-    end
-
-    it 'hydrates credentials from the shared credentials file' do
-      mock_path = File.join(
-        File.dirname(__FILE__), '..', 'fixtures', 'credentials',
-        'mock_shared_credentials')
-      path = File.join('HOME', '.aws', 'credentials')
-      allow(Dir).to receive(:home).and_return('HOME')
-      allow(File).to receive(:exist?).with(path).and_return(true)
-      allow(File).to receive(:readable?).with(path).and_return(true)
-      expect(File).to receive(:read).with(path).and_return(File.read(mock_path))
-      expect(credentials).to be_kind_of(SharedCredentials)
-      expect(credentials.set?).to be(true)
-      expect(credentials.credentials.access_key_id).to eq('ACCESS_KEY_0')
-      expect(credentials.credentials.secret_access_key).to eq('SECRET_KEY_0')
-      expect(credentials.credentials.session_token).to eq('TOKEN_0')
-    end
-
-    it 'hydrates profile from ENV with AWS_PROFILE when available' do
-      mock_path = File.join(
-        File.dirname(__FILE__), '..', 'fixtures', 'credentials',
-        'mock_shared_credentials')
-      path = File.join('HOME', '.aws', 'credentials')
-      allow(Dir).to receive(:home).and_return('HOME')
-      allow(File).to receive(:exist?).with(path).and_return(true)
-      allow(File).to receive(:readable?).with(path).and_return(true)
-      allow(File).to receive(:read).with(path).and_return(File.read(mock_path))
-
-      env['AWS_PROFILE'] = 'fooprofile'
-      creds = CredentialProviderChain.new.resolve
-      expect(creds.profile_name).to eq('fooprofile')
-      expect(credentials.set?).to be(true)
-      expect(credentials.credentials.access_key_id).to eq('ACCESS_KEY_1')
-      expect(credentials.credentials.secret_access_key).to eq('SECRET_KEY_1')
-      expect(credentials.credentials.session_token).to eq('TOKEN_1')
+      expected_creds = random_creds.merge(session_token: nil)
+      env['AWS_ACCESS_KEY_ID'] = expected_creds[:access_key_id]
+      env['AWS_SECRET_KEY'] = expected_creds[:secret_access_key]
+      validate_credentials(expected_creds)
     end
 
     it 'hydrates credentials from the instance profile service' do
-      path = '/latest/meta-data/iam/security-credentials/'
-      resp = <<-JSON.strip
-        {
-          "Code" : "Success",
-          "LastUpdated" : "2013-11-22T20:03:48Z",
-          "Type" : "AWS-HMAC",
-          "AccessKeyId" : "akid",
-          "SecretAccessKey" : "secret",
-          "Token" : "token",
-          "Expiration" : "#{Time.now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-        }
-      JSON
-      stub_request(:get, "http://169.254.169.254#{path}").
-        to_return(:status => 200, :body => "profile-name\n")
-      stub_request(:get, "http://169.254.169.254#{path}profile-name").
-        to_return(:status => 200, :body => resp)
-      expect(credentials).to be_kind_of(InstanceProfileCredentials)
-      expect(credentials.set?).to be(true)
-      creds = credentials.credentials
-      expect(creds.access_key_id).to eq('akid')
-      expect(creds.secret_access_key).to eq('secret')
-      expect(creds.session_token).to eq('token')
+      mock_instance_creds = double('InstanceProfileCredentials')
+      expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+      expect(mock_instance_creds).to receive(:set?).and_return(true)
+      expect(credentials).to be(mock_instance_creds)
+    end
+
+    it 'hydrates credentials from ECS when AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set' do
+      ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = 'test_uri'
+      mock_ecs_creds = double('ECSCredentials')
+      expect(ECSCredentials).to receive(:new).and_return(mock_ecs_creds)
+      expect(mock_ecs_creds).to receive(:set?).and_return(true)
+      expect(credentials).to be(mock_ecs_creds)
     end
 
     describe 'with config set to nil' do
@@ -142,35 +128,53 @@ module Aws
       it 'defaults to nil' do
         expect(credentials).to be(nil)
       end
-
     end
+
     describe 'with shared credentials' do
-
-      let(:path) { File.join('HOME', '.aws', 'credentials') }
-
-      before(:each) do
-        allow(File).to receive(:exist?).with(path).and_return(true)
-        allow(File).to receive(:readable?).with(path).and_return(true)
-        allow(Dir).to receive(:home).and_return('HOME')
-      end
-
       it 'returns no credentials when the shared file is empty' do
-        expect(File).to receive(:read).with(path).and_return('')
+        with_shared_credentials(credentials_file: ' ')
         expect(chain.resolve).to be(nil)
       end
 
       it 'returns no credentials when the shared file profile is missing' do
-        no_default = <<-CREDS.strip
-[fooprofile]
-aws_access_key_id = ACCESS_KEY_1
-aws_secret_access_key = SECRET_KEY_1
-aws_session_token = TOKEN_1
-        CREDS
-        expect(File).to receive(:read).with(path).and_return(no_default)
-        expect(chain.resolve).to be(nil)
+        with_shared_credentials
+        expect(credentials).to be(nil)
       end
 
+      it 'returns credentials from proper profile when AWS_DEFAULT_PROFILE is used' do
+        expected_creds = with_shared_credentials('test')
+        ENV['AWS_DEFAULT_PROFILE'] = expected_creds[:profile_name]
+        validate_credentials(expected_creds)
+      end
+
+      it 'returns credentials from proper profile when config is set' do
+        expected_creds = with_shared_credentials('test')
+        allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
+        ENV['AWS_DEFAULT_PROFILE'] = 'BAD_PROFILE'
+        validate_credentials(expected_creds)
+      end
     end
 
+    describe 'with multiple sources of credentials' do
+      it 'hydrates credentials from ENV over shared' do
+        shared_creds = with_shared_credentials
+        ENV['AWS_DEFAULT_PROFILE'] = shared_creds[:profile_name]
+        expected_creds = with_env_credentials
+        validate_credentials(expected_creds)
+      end
+
+      it 'hydrates credentials from config over ENV' do
+        env_creds = with_env_credentials
+        expected_creds = with_config_credentials
+        validate_credentials(expected_creds)
+      end
+
+      it 'hydrates credentials from profile when config set over ENV' do
+        expected_creds = with_shared_credentials
+        allow(config).to receive(:profile).and_return(expected_creds[:profile_name])
+        env_creds = with_env_credentials
+        validate_credentials(expected_creds)
+      end
+    end
   end
 end

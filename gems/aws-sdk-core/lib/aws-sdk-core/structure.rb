@@ -29,8 +29,7 @@ module Aws
     def to_h(obj = self)
       case obj
       when Struct
-        obj.members.each.with_object({}) do |member, hash|
-          value = obj[member]
+        obj.each_pair.with_object({}) do |(member, value), hash|
           hash[member] = to_hash(value) unless value.nil?
         end
       when Hash
@@ -44,6 +43,11 @@ module Aws
       end
     end
     alias to_hash to_h
+
+    # Wraps the default #to_s logic with filtering of sensitive parameters.
+    def to_s(obj = self)
+      Aws::Log::ParamFilter.new.filter(obj).to_s
+    end
 
     class << self
 

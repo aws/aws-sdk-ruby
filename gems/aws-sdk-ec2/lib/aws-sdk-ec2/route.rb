@@ -24,6 +24,7 @@ module Aws::EC2
       @destination_cidr_block = extract_destination_cidr_block(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -50,7 +51,7 @@ module Aws::EC2
       data[:destination_prefix_list_id]
     end
 
-    # The ID of the egress-only Internet gateway.
+    # The ID of the egress-only internet gateway.
     # @return [String]
     def egress_only_internet_gateway_id
       data[:egress_only_internet_gateway_id]
@@ -78,6 +79,18 @@ module Aws::EC2
     # @return [String]
     def nat_gateway_id
       data[:nat_gateway_id]
+    end
+
+    # The ID of a transit gateway.
+    # @return [String]
+    def transit_gateway_id
+      data[:transit_gateway_id]
+    end
+
+    # The ID of the local gateway.
+    # @return [String]
+    def local_gateway_id
+      data[:local_gateway_id]
     end
 
     # The ID of the network interface.
@@ -109,7 +122,7 @@ module Aws::EC2
       data[:state]
     end
 
-    # The ID of the VPC peering connection.
+    # The ID of a VPC peering connection.
     # @return [String]
     def vpc_peering_connection_id
       data[:vpc_peering_connection_id]
@@ -272,30 +285,41 @@ module Aws::EC2
     #   route.replace({
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
-    #     egress_only_internet_gateway_id: "String",
-    #     gateway_id: "String",
-    #     instance_id: "String",
-    #     nat_gateway_id: "String",
-    #     network_interface_id: "String",
-    #     vpc_peering_connection_id: "String",
+    #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
+    #     gateway_id: "RouteTableGatewayId",
+    #     instance_id: "InstanceId",
+    #     local_target: false,
+    #     nat_gateway_id: "NatGatewayId",
+    #     transit_gateway_id: "TransitGatewayId",
+    #     local_gateway_id: "String",
+    #     network_interface_id: "NetworkInterfaceId",
+    #     vpc_peering_connection_id: "VpcPeeringConnectionId",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :destination_ipv_6_cidr_block
     #   The IPv6 CIDR address block used for the destination match. The value
-    #   you provide must match the CIDR of an existing route in the table.
+    #   that you provide must match the CIDR of an existing route in the
+    #   table.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :egress_only_internet_gateway_id
-    #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
+    #   \[IPv6 traffic only\] The ID of an egress-only internet gateway.
     # @option options [String] :gateway_id
-    #   The ID of an Internet gateway or virtual private gateway.
+    #   The ID of an internet gateway or virtual private gateway.
     # @option options [String] :instance_id
     #   The ID of a NAT instance in your VPC.
+    # @option options [Boolean] :local_target
+    #   Specifies whether to reset the local route to its default target
+    #   (`local`).
     # @option options [String] :nat_gateway_id
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
+    # @option options [String] :transit_gateway_id
+    #   The ID of a transit gateway.
+    # @option options [String] :local_gateway_id
+    #   The ID of the local gateway.
     # @option options [String] :network_interface_id
     #   The ID of a network interface.
     # @option options [String] :vpc_peering_connection_id

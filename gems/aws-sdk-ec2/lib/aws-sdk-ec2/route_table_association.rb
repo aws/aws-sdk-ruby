@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -48,6 +49,18 @@ module Aws::EC2
     # @return [String]
     def subnet_id
       data[:subnet_id]
+    end
+
+    # The ID of the internet gateway or virtual private gateway.
+    # @return [String]
+    def gateway_id
+      data[:gateway_id]
+    end
+
+    # The state of the association.
+    # @return [Types::RouteTableAssociationState]
+    def association_state
+      data[:association_state]
     end
 
     # @!endgroup
@@ -199,7 +212,7 @@ module Aws::EC2
     #
     #   routetableassociation = route_table_association.replace_subnet({
     #     dry_run: false,
-    #     route_table_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run

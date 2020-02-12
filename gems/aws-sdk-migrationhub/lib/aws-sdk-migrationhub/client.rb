@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,111 +48,215 @@ module Aws::MigrationHub
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -174,7 +283,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Types::CreatedArtifact] :created_artifact
     #   An ARN of the AWS resource related to the migration (e.g., AMI, EC2
@@ -208,13 +318,14 @@ module Aws::MigrationHub
     end
 
     # Associates a discovered resource ID from Application Discovery Service
-    # (ADS) with a migration task.
+    # with a migration task.
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @option params [required, Types::DiscoveredResource] :discovered_resource
     #   Object representing a Resource.
@@ -254,7 +365,8 @@ module Aws::MigrationHub
     # is scoped to the AWS account.
     #
     # @option params [required, String] :progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -293,7 +405,7 @@ module Aws::MigrationHub
     #   `ListProgressUpdateStreams` call.
     #
     # * `CreateProgressUpdateStream`, `ImportMigrationTask`,
-    #   `NotifyMigrationTaskState`, and all Associate\[*\] APIs realted to
+    #   `NotifyMigrationTaskState`, and all Associate\[*\] APIs related to
     #   the tasks belonging to the stream will throw
     #   "InvalidInputException" if the stream of the same name is in the
     #   process of being deleted.
@@ -304,7 +416,8 @@ module Aws::MigrationHub
     #   (without any resources associated with the old stream).
     #
     # @option params [required, String] :progress_update_stream_name
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. *Do not store personal data in
+    #   this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -331,8 +444,8 @@ module Aws::MigrationHub
     # Gets the migration status of an application.
     #
     # @option params [required, String] :application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #
     # @return [Types::DescribeApplicationStateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -366,7 +479,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @return [Types::DescribeMigrationTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -421,7 +535,8 @@ module Aws::MigrationHub
     #
     # @option params [required, String] :migration_task_name
     #   Unique identifier that references the migration task to be
-    #   disassociated with the artifact.
+    #   disassociated with the artifact. *Do not store personal data in this
+    #   field.*
     #
     # @option params [required, String] :created_artifact_name
     #   An ARN of the AWS resource related to the migration (e.g., AMI, EC2
@@ -451,17 +566,19 @@ module Aws::MigrationHub
       req.send_request(options)
     end
 
-    # Disassociate an Application Discovery Service (ADS) discovered
-    # resource from a migration task.
+    # Disassociate an Application Discovery Service discovered resource from
+    # a migration task.
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The identifier given to the MigrationTask.
+    #   The identifier given to the MigrationTask. *Do not store personal data
+    #   in this field.*
     #
     # @option params [required, String] :configuration_id
-    #   ConfigurationId of the ADS resource to be disassociated.
+    #   ConfigurationId of the Application Discovery Service resource to be
+    #   disassociated.
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -495,10 +612,11 @@ module Aws::MigrationHub
     # Migration Hub.
     #
     # @option params [required, String] :progress_update_stream
-    #   The name of the ProgressUpdateStream.
+    #   The name of the ProgressUpdateStream. &gt;
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -523,6 +641,52 @@ module Aws::MigrationHub
       req.send_request(options)
     end
 
+    # Lists all the migration statuses for your applications. If you use the
+    # optional `ApplicationIds` parameter, only the migration statuses for
+    # those applications will be returned.
+    #
+    # @option params [Array<String>] :application_ids
+    #   The configurationIds from the Application Discovery Service that
+    #   uniquely identifies your applications.
+    #
+    # @option params [String] :next_token
+    #   If a `NextToken` was returned by a previous call, there are more
+    #   results available. To retrieve the next page of results, make the call
+    #   again using the returned token in `NextToken`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to be returned per page.
+    #
+    # @return [Types::ListApplicationStatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationStatesResult#application_state_list #application_state_list} => Array&lt;Types::ApplicationState&gt;
+    #   * {Types::ListApplicationStatesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_states({
+    #     application_ids: ["ApplicationId"],
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_state_list #=> Array
+    #   resp.application_state_list[0].application_id #=> String
+    #   resp.application_state_list[0].application_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED"
+    #   resp.application_state_list[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListApplicationStates AWS API Documentation
+    #
+    # @overload list_application_states(params = {})
+    # @param [Hash] params ({})
+    def list_application_states(params = {}, options = {})
+      req = build_request(:list_application_states, params)
+      req.send_request(options)
+    end
+
     # Lists the created artifacts attached to a given migration task in an
     # update stream. This API has the following traits:
     #
@@ -538,7 +702,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [String] :next_token
     #   If a `NextToken` was returned by a previous call, there are more
@@ -584,7 +749,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   The name of the MigrationTask.
+    #   The name of the MigrationTask. *Do not store personal data in this
+    #   field.*
     #
     # @option params [String] :next_token
     #   If a `NextToken` was returned by a previous call, there are more
@@ -723,11 +889,14 @@ module Aws::MigrationHub
     # IN_PROGRESS | COMPLETED`.
     #
     # @option params [required, String] :application_id
-    #   The configurationId in ADS that uniquely identifies the grouped
-    #   application.
+    #   The configurationId in Application Discovery Service that uniquely
+    #   identifies the grouped application.
     #
     # @option params [required, String] :status
     #   Status of the application - Not Started, In-Progress, Complete.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :update_date_time
+    #   The timestamp when the application state changed.
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -740,6 +909,7 @@ module Aws::MigrationHub
     #   resp = client.notify_application_state({
     #     application_id: "ApplicationId", # required
     #     status: "NOT_STARTED", # required, accepts NOT_STARTED, IN_PROGRESS, COMPLETED
+    #     update_date_time: Time.now,
     #     dry_run: false,
     #   })
     #
@@ -768,7 +938,8 @@ module Aws::MigrationHub
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Types::Task] :task
     #   Information about the task's progress and status.
@@ -813,19 +984,19 @@ module Aws::MigrationHub
     end
 
     # Provides identifying details of the resource being migrated so that it
-    # can be associated in the Application Discovery Service (ADS)'s
-    # repository. This association occurs asynchronously after
-    # `PutResourceAttributes` returns.
+    # can be associated in the Application Discovery Service repository.
+    # This association occurs asynchronously after `PutResourceAttributes`
+    # returns.
     #
     # * Keep in mind that subsequent calls to PutResourceAttributes will
     #   override previously stored attributes. For example, if it is first
     #   called with a MAC address, but later, it is desired to *add* an IP
     #   address, it will then be required to call it with *both* the IP and
-    #   MAC addresses to prevent overiding the MAC address.
+    #   MAC addresses to prevent overriding the MAC address.
     #
-    # * Note the instructions regarding the special use case of the
-    #   `ResourceAttributeList` parameter when specifying any "VM" related
-    #   value.
+    # * Note the instructions regarding the special use case of the [
+    #   `ResourceAttributeList` ][1] parameter when specifying any "VM"
+    #   related value.
     #
     # <note markdown="1"> Because this is an asynchronous call, it will always return 200,
     # whether an association occurs or not. To confirm if an association was
@@ -833,31 +1004,46 @@ module Aws::MigrationHub
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList
+    #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
     #
     # @option params [required, String] :migration_task_name
-    #   Unique identifier that references the migration task.
+    #   Unique identifier that references the migration task. *Do not store
+    #   personal data in this field.*
     #
     # @option params [required, Array<Types::ResourceAttribute>] :resource_attribute_list
     #   Information about the resource that is being migrated. This data will
     #   be used to map the task to a resource in the Application Discovery
-    #   Service (ADS)'s repository.
+    #   Service repository.
     #
-    #   <note markdown="1"> In the `ResourceAttribute` object array, the `Type` field is reserved
-    #   for the following values: `IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS |
-    #   FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH
-    #   | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER`, and the identifying value can
-    #   be a string up to 256 characters.
+    #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
+    #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
+    #   MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE |
+    #   VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER` where the
+    #   identifying value can be a string up to 256 characters.
     #
     #    </note>
     #
-    #   If any "VM" related value is used for a `ResourceAttribute` object,
-    #   it is required that `VM_MANAGER_ID`, as a minimum, is always used. If
-    #   it is not used, the server will not be associated in the Application
-    #   Discovery Service (ADS)'s repository using any of the other "VM"
-    #   related values, and you will experience data loss. See the Example
-    #   section below for a use case of specifying "VM" related values.
+    #   * If any "VM" related value is set for a `ResourceAttribute` object,
+    #     it is required that `VM_MANAGER_ID`, as a minimum, is always set. If
+    #     `VM_MANAGER_ID` is not set, then all "VM" fields will be discarded
+    #     and "VM" fields will not be used for matching the migration task
+    #     to a server in Application Discovery Service repository. See the
+    #     [Example][1] section below for a use case of specifying "VM"
+    #     related values.
+    #
+    #   * If a server you are trying to match has multiple IP or MAC
+    #     addresses, you should provide as many as you know in separate
+    #     type/value pairs passed to the `ResourceAttributeList` parameter to
+    #     maximize the chances of matching.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -901,7 +1087,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

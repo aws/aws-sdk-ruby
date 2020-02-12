@@ -21,6 +21,7 @@ module Aws::EC2
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -41,6 +42,12 @@ module Aws::EC2
     # @return [String]
     def key_material
       data[:key_material]
+    end
+
+    # The ID of the key pair.
+    # @return [String]
+    def key_pair_id
+      data[:key_pair_id]
     end
 
     # @!endgroup

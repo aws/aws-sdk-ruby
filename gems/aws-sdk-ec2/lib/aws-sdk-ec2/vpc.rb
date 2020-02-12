@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -48,6 +49,12 @@ module Aws::EC2
     # @return [String]
     def state
       data[:state]
+    end
+
+    # The ID of the AWS account that owns the VPC.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
     end
 
     # The allowed tenancy of instances launched into the VPC.
@@ -135,10 +142,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_available(options = {})
+    def wait_until_available(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcAvailable.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -152,10 +159,10 @@ module Aws::EC2
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [Vpc]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(vpc_ids: [@id]))
       Vpc.new({
         id: @id,
@@ -263,7 +270,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   vpc.associate_dhcp_options({
-    #     dhcp_options_id: "String", # required
+    #     dhcp_options_id: "DefaultingDhcpOptionsId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -287,7 +294,7 @@ module Aws::EC2
     #   vpc.attach_classic_link_instance({
     #     dry_run: false,
     #     groups: ["String"], # required
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -312,7 +319,7 @@ module Aws::EC2
     #
     #   vpc.attach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -321,7 +328,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def attach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -418,23 +425,38 @@ module Aws::EC2
     #
     #   subnet = vpc.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
+    #     outpost_arn: "String",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :availability_zone
-    #   The Availability Zone for the subnet.
+    #   The Availability Zone or Local Zone for the subnet.
     #
     #   Default: AWS selects one for you. If you create more than one subnet
-    #   in your VPC, we may not necessarily select a different zone for each
+    #   in your VPC, we do not necessarily select a different zone for each
     #   subnet.
+    #
+    #   To create a subnet in a Local Zone, set this value to the Local Zone
+    #   ID, for example `us-west-2-lax-1a`. For information about the Regions
+    #   that support Local Zones, see [Available Regions][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+    # @option options [String] :availability_zone_id
+    #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -469,9 +491,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -531,7 +553,7 @@ module Aws::EC2
     #
     #   vpc.detach_classic_link_instance({
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -552,7 +574,7 @@ module Aws::EC2
     #
     #   vpc.detach_internet_gateway({
     #     dry_run: false,
-    #     internet_gateway_id: "String", # required
+    #     internet_gateway_id: "InternetGatewayId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -561,7 +583,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :internet_gateway_id
-    #   The ID of the Internet gateway.
+    #   The ID of the internet gateway.
     # @return [EmptyStructure]
     def detach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
@@ -628,9 +650,9 @@ module Aws::EC2
     #   Indicates whether the DNS resolution is supported for the VPC. If
     #   enabled, queries to the Amazon provided DNS server at the
     #   169.254.169.253 IP address, or the reserved IP address at the base of
-    #   the VPC network range "plus two" will succeed. If disabled, the
-    #   Amazon provided DNS service in the VPC that resolves public DNS
-    #   hostnames to IP addresses is not enabled.
+    #   the VPC network range "plus two" succeed. If disabled, the Amazon
+    #   provided DNS service in the VPC that resolves public DNS hostnames to
+    #   IP addresses is not enabled.
     #
     #   You cannot modify the DNS resolution and DNS hostnames attributes in
     #   the same request. Use separate requests for each attribute.
@@ -663,10 +685,10 @@ module Aws::EC2
     #   The ID of the VPC with which you are creating the VPC peering
     #   connection. You must specify this parameter in the request.
     # @option options [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)
@@ -722,22 +744,15 @@ module Aws::EC2
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
     # @option options [Boolean] :dry_run
@@ -752,20 +767,22 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def accepted_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "accepter-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -796,12 +813,13 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -831,6 +849,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -847,7 +869,7 @@ module Aws::EC2
     #     a Scheduled Instance (`spot` \| `scheduled`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
-    #     unsigned integer. The high byte is an opaque internal value and
+    #     unsigned integer. The high byte is used for internal purposes and
     #     should be ignored. The low byte is set based on the state
     #     represented. The valid values are: 0 (pending), 16 (running), 32
     #     (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
@@ -875,6 +897,16 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-options.http-tokens` - The metadata request authorization
+    #     state (`optional` \| `required`)
+    #
+    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #     request put response hop limit (integer, possible values `1` to
+    #     `64`)
+    #
+    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
+    #     on http endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -981,8 +1013,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -1033,22 +1068,15 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of the
-    #     tag's key). If you want to list only resources where Purpose is X,
-    #     see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `tenancy` - The tenancy of an instance (`dedicated` \| `default` \|
     #     `host`).
@@ -1058,7 +1086,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run
@@ -1115,48 +1143,46 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "attachment.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_internet_gateways(options)
-        resp.data.internet_gateways.each do |i|
-          batch << InternetGateway.new(
-            id: i.internet_gateway_id,
-            data: i,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.internet_gateways.each do |i|
+            batch << InternetGateway.new(
+              id: i.internet_gateway_id,
+              data: i,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       InternetGateway::Collection.new(batches)
     end
@@ -1191,9 +1217,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -1213,26 +1236,21 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network ACL.
     # @option options [Boolean] :dry_run
@@ -1247,20 +1265,22 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_acls(options)
-        resp.data.network_acls.each do |n|
-          batch << NetworkAcl.new(
-            id: n.network_acl_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_acls.each do |n|
+            batch << NetworkAcl.new(
+              id: n.network_acl_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkAcl::Collection.new(batches)
     end
@@ -1311,7 +1331,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -1366,7 +1386,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -1379,22 +1399,15 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
     # @option options [Boolean] :dry_run
@@ -1409,20 +1422,22 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end
@@ -1469,22 +1484,15 @@ module Aws::EC2
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering connection.
     # @option options [Boolean] :dry_run
@@ -1499,20 +1507,22 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def requested_vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "requester-vpc-info.vpc-id",
           values: [@id]
         }])
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -1546,6 +1556,8 @@ module Aws::EC2
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
+    #
     #   * `route-table-id` - The ID of the route table.
     #
     #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
@@ -1568,6 +1580,8 @@ module Aws::EC2
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
     #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
     #     created when the route table was created; `CreateRoute` indicates
@@ -1584,22 +1598,17 @@ module Aws::EC2
     #   * `route.vpc-peering-connection-id` - The ID of a VPC peering
     #     connection specified in a route in the table.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run
@@ -1614,20 +1623,22 @@ module Aws::EC2
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_route_tables(options)
-        resp.data.route_tables.each do |r|
-          batch << RouteTable.new(
-            id: r.route_table_id,
-            data: r,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.route_tables.each do |r|
+            batch << RouteTable.new(
+              id: r.route_table_id,
+              data: r,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       RouteTable::Collection.new(batches)
     end
@@ -1644,14 +1655,12 @@ module Aws::EC2
     #     group_ids: ["String"],
     #     group_names: ["String"],
     #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters. If using multiple filters for rules, the results
-    #   include security groups for which any combination of rules - not
-    #   necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results include
+    #   security groups for which any combination of rules - not necessarily a
+    #   single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -1715,19 +1724,25 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the owner of the security group.
     #
-    #   * `tag-key` - The key of a tag assigned to the security group.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-value` - The value of a tag assigned to the security group.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
     # @option options [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   \[EC2-Classic and default VPC only\] The names of the security groups.
     #   You can specify either the security group name or the security group
     #   ID. For security groups in a nondefault VPC, use the `group-name`
     #   filter to describe security groups by name.
@@ -1738,30 +1753,25 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :next_token
-    #   The token to request the next page of results.
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_security_groups(options)
-        resp.data.security_groups.each do |s|
-          batch << SecurityGroup.new(
-            id: s.group_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.security_groups.each do |s|
+            batch << SecurityGroup.new(
+              id: s.group_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       SecurityGroup::Collection.new(batches)
     end
@@ -1782,20 +1792,23 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -1806,26 +1819,23 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of
-    #     what the tag's key is). If you want to list only resources where
-    #     Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the subnet.
     # @option options [Array<String>] :subnet_ids
@@ -1840,20 +1850,22 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = Aws::Util.deep_merge(options, filters: [{
           name: "vpc-id",
           values: [@id]
         }])
         resp = @client.describe_subnets(options)
-        resp.data.subnets.each do |s|
-          batch << Subnet.new(
-            id: s.subnet_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.subnets.each do |s|
+            batch << Subnet.new(
+              id: s.subnet_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Subnet::Collection.new(batches)
     end

@@ -24,6 +24,7 @@ module Aws::IAM
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -39,8 +40,8 @@ module Aws::IAM
     end
     alias :access_key_id :id
 
-    # The status of the access key. `Active` means the key is valid for API
-    # calls; `Inactive` means it is not.
+    # The status of the access key. `Active` means that the key is valid for
+    # API calls; `Inactive` means it is not.
     # @return [String]
     def status
       data[:status]

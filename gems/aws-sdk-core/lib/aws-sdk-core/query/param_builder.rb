@@ -66,7 +66,7 @@ module Aws
         when ListShape      then list(ref, value, prefix)
         when MapShape       then map(ref, value, prefix)
         when BlobShape      then set(prefix, blob(value))
-        when TimestampShape then set(prefix, timestamp(value))
+        when TimestampShape then set(prefix, timestamp(ref, value))
         else set(prefix, value.to_s)
         end
       end
@@ -83,8 +83,14 @@ module Aws
         ref.shape.flattened
       end
 
-      def timestamp(value)
-        value.utc.iso8601
+      def timestamp(ref, value)
+        case ref['timestampFormat'] || ref.shape['timestampFormat']
+        when 'unixTimestamp' then value.to_i
+        when 'rfc822' then value.utc.httpdate
+        else
+          # query defaults to iso8601
+          value.utc.iso8601
+        end
       end
 
       def blob(value)

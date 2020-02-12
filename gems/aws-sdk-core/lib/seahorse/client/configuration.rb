@@ -104,7 +104,7 @@ module Seahorse
       #
       # @return [self]
       def add_option(name, default = nil, &block)
-        default = DynamicDefault.new(Proc.new) if block_given?
+        default = DynamicDefault.new(block) if block_given?
         @defaults[name.to_sym] << default
         self
       end
@@ -197,7 +197,15 @@ module Seahorse
 
         def value_at(opt_name)
           value = @struct[opt_name]
-          value.is_a?(Defaults) ? resolve_defaults(opt_name, value) : value
+          if value.is_a?(Defaults)
+            # this config value is used by endpoint discovery
+            if opt_name == :endpoint && @struct.members.include?(:regional_endpoint)
+              @struct[:regional_endpoint] = true
+            end
+            resolve_defaults(opt_name, value)
+          else
+            value
+          end
         end
 
         def resolve_defaults(opt_name, defaults)

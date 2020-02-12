@@ -1,6 +1,161 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2019-10-29)
+------------------
+
+* Feature - Adds support for providing domain names that can embed streaming sessions
+
+1.37.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2019-09-09)
+------------------
+
+* Feature - IamRoleArn support in CreateFleet, UpdateFleet, CreateImageBuilder APIs
+
+1.35.0 (2019-08-20)
+------------------
+
+* Feature - Includes API updates to support streaming through VPC endpoints for image builders and stacks.
+
+1.34.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2019-07-02)
+------------------
+
+* Feature - Adding ImageBuilderName in Fleet API and Documentation updates for AppStream.
+
+1.32.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2019-06-14)
+------------------
+
+* Feature - Added 2 new values(WINDOWS_SERVER_2016, WINDOWS_SERVER_2019) for PlatformType enum.
+
+1.29.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2019-05-17)
+------------------
+
+* Feature - API update.
+
+1.27.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-02-11)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-01-21)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2018-10-18)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.14.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2018-07-13)
+------------------
+
+* Feature - API update.
+
+1.12.0 (2018-07-10)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-06-26)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2018-06-22)
+------------------
+
+* Feature - API update.
+
+1.9.0 (2018-06-04)
+------------------
+
+* Feature - API update.
+
+1.8.0 (2018-05-25)
+------------------
+
+* Feature - API update.
+
 1.7.0 (2018-03-22)
 ------------------
 

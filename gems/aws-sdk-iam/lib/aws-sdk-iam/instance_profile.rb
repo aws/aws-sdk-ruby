@@ -21,6 +21,7 @@ module Aws::IAM
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,23 +33,23 @@ module Aws::IAM
     alias :instance_profile_name :name
 
     # The path to the instance profile. For more information about paths,
-    # see [IAM Identifiers][1] in the *Using IAM* guide.
+    # see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
     end
 
     # The stable and unique string identifying the instance profile. For
-    # more information about IDs, see [IAM Identifiers][1] in the *Using
-    # IAM* guide.
+    # more information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def instance_profile_id
       data[:instance_profile_id]
@@ -56,11 +57,11 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) specifying the instance profile. For
     # more information about ARNs and how to use them in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -127,10 +128,10 @@ module Aws::IAM
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [InstanceProfile]
-    def wait_until_exists(options = {})
+    def wait_until_exists(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceProfileExists.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       waiter.wait(params.merge(instance_profile_name: @name))
       InstanceProfile.new({
         name: @name,
@@ -244,7 +245,7 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name of the role to add.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -279,7 +280,7 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name of the role to remove.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-

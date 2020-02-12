@@ -8,6 +8,94 @@
 module Aws::Shield
   module Types
 
+    # Exception that indicates the specified `AttackId` does not exist, or
+    # the requester does not have the appropriate permissions to access the
+    # `AttackId`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # In order to grant the necessary access to the DDoS Response Team, the
+    # user submitting `AssociateDRTRole` must have the `iam:PassRole`
+    # permission. This error indicates the user did not have the appropriate
+    # permissions. For more information, see [Granting a User Permissions to
+    # Pass a Role to an AWS Service][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AccessDeniedForDependencyException AWS API Documentation
+    #
+    class AccessDeniedForDependencyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateDRTLogBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_bucket: "LogBucket", # required
+    #       }
+    #
+    # @!attribute [rw] log_bucket
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketRequest AWS API Documentation
+    #
+    class AssociateDRTLogBucketRequest < Struct.new(
+      :log_bucket)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucketResponse AWS API Documentation
+    #
+    class AssociateDRTLogBucketResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AssociateDRTRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role the DRT will use to
+    #   access your AWS account.
+    #
+    #   Prior to making the `AssociateDRTRole` request, you must attach the
+    #   [AWSShieldDRTAccessPolicy][1] managed policy to this role. For more
+    #   information see [Attaching and Detaching IAM Policies](
+    #   https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleRequest AWS API Documentation
+    #
+    class AssociateDRTRoleRequest < Struct.new(
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRoleResponse AWS API Documentation
+    #
+    class AssociateDRTRoleResponse < Aws::EmptyStructure; end
+
     # The details of a DDoS attack.
     #
     # @!attribute [rw] attack_id
@@ -71,12 +159,16 @@ module Aws::Shield
     # Details of the described attack.
     #
     # @!attribute [rw] attack_layer
-    #   The type of DDoS event that was observed. `NETWORK` indicates layer
-    #   3 and layer 4 events and `APPLICATION` indicates layer 7 events.
+    #   The type of distributed denial of service (DDoS) event that was
+    #   observed. `NETWORK` indicates layer 3 and layer 4 events and
+    #   `APPLICATION` indicates layer 7 events.
     #   @return [String]
     #
     # @!attribute [rw] attack_property_identifier
-    #   Defines the DDoS attack property information that is provided.
+    #   Defines the DDoS attack property information that is provided. The
+    #   `WORDPRESS_PINGBACK_REFLECTOR` and `WORDPRESS_PINGBACK_SOURCE`
+    #   values are valid only for WordPress reflective pingback DDoS
+    #   attacks.
     #   @return [String]
     #
     # @!attribute [rw] top_contributors
@@ -181,6 +273,12 @@ module Aws::Shield
     #   * ACK\_FLOOD
     #
     #   * REQUEST\_FLOOD
+    #
+    #   * HTTP\_REFLECTION
+    #
+    #   * UDS\_REFLECTION
+    #
+    #   * MEMCACHED\_REFLECTION
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription AWS API Documentation
@@ -237,11 +335,15 @@ module Aws::Shield
     #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
     #     `
     #
-    #   * For AWS CloudFront distribution:
+    #   * For an AWS CloudFront distribution:
     #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
     #
-    #   * For Amazon Route 53:
-    #     `arn:aws:route53::account-id:hostedzone/hosted-zone-id `
+    #   * For an AWS Global Accelerator accelerator:
+    #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+    #     `
+    #
+    #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id
+    #     `
     #
     #   * For an Elastic IP address:
     #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
@@ -338,22 +440,74 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessRequest AWS API Documentation
+    #
+    class DescribeDRTAccessRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role the DRT used to access
+    #   your AWS account.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_bucket_list
+    #   The list of Amazon S3 buckets accessed by the DRT.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccessResponse AWS API Documentation
+    #
+    class DescribeDRTAccessResponse < Struct.new(
+      :role_arn,
+      :log_bucket_list)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsRequest AWS API Documentation
+    #
+    class DescribeEmergencyContactSettingsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses that the DRT can use to contact you during
+    #   a suspected attack.
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettingsResponse AWS API Documentation
+    #
+    class DescribeEmergencyContactSettingsResponse < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeProtectionRequest
     #   data as a hash:
     #
     #       {
-    #         protection_id: "ProtectionId", # required
+    #         protection_id: "ProtectionId",
+    #         resource_arn: "ResourceArn",
     #       }
     #
     # @!attribute [rw] protection_id
     #   The unique identifier (ID) for the Protection object that is
-    #   described.
+    #   described. When submitting the `DescribeProtection` request you must
+    #   provide either the `ResourceArn` or the `ProtectionID`, but not
+    #   both.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN (Amazon Resource Name) of the AWS resource for the
+    #   Protection object that is described. When submitting the
+    #   `DescribeProtection` request you must provide either the
+    #   `ResourceArn` or the `ProtectionID`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest AWS API Documentation
     #
     class DescribeProtectionRequest < Struct.new(
-      :protection_id)
+      :protection_id,
+      :resource_arn)
       include Aws::Structure
     end
 
@@ -385,6 +539,60 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateDRTLogBucketRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_bucket: "LogBucket", # required
+    #       }
+    #
+    # @!attribute [rw] log_bucket
+    #   The Amazon S3 bucket that contains your AWS WAF logs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketRequest AWS API Documentation
+    #
+    class DisassociateDRTLogBucketRequest < Struct.new(
+      :log_bucket)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucketResponse AWS API Documentation
+    #
+    class DisassociateDRTLogBucketResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleRequest AWS API Documentation
+    #
+    class DisassociateDRTRoleRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRoleResponse AWS API Documentation
+    #
+    class DisassociateDRTRoleResponse < Aws::EmptyStructure; end
+
+    # Contact information that the DRT can use to contact you during a
+    # suspected attack.
+    #
+    # @note When making an API call, you may pass EmergencyContact
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "EmailAddress", # required
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   An email address that the DRT can use to contact you during a
+    #   suspected attack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EmergencyContact AWS API Documentation
+    #
+    class EmergencyContact < Struct.new(
+      :email_address)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest AWS API Documentation
@@ -399,6 +607,115 @@ module Aws::Shield
     #
     class GetSubscriptionStateResponse < Struct.new(
       :subscription_state)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that a problem occurred with the service
+    # infrastructure. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would not cause any change
+    # to occur.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the NextToken specified in the request
+    # is invalid. Submit the request using the NextToken value that was
+    # returned in the response.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidPaginationTokenException AWS API Documentation
+    #
+    class InvalidPaginationTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the parameters passed to the API are
+    # invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the resource is invalid. You might not
+    # have access to the resource, or the resource might not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/InvalidResourceException AWS API Documentation
+    #
+    class InvalidResourceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Specifies how many protections of a given type you can create.
+    #
+    # @!attribute [rw] type
+    #   The type of protection.
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum number of protections that can be created for the
+    #   specified `Type`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Limit AWS API Documentation
+    #
+    class Limit < Struct.new(
+      :type,
+      :max)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the operation would exceed a limit.
+    #
+    # `Type` is the type of limit that would be exceeded.
+    #
+    # `Limit` is the threshold that would be exceeded.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LimitsExceededException AWS API Documentation
+    #
+    class LimitsExceededException < Struct.new(
+      :message,
+      :type,
+      :limit)
       include Aws::Structure
     end
 
@@ -455,6 +772,13 @@ module Aws::Shield
     # @!attribute [rw] max_results
     #   The maximum number of AttackSummary objects to be returned. If this
     #   is left blank, the first 20 results will be returned.
+    #
+    #   This is a maximum value; it is possible that AWS WAF will return the
+    #   results in smaller batches. That is, the number of AttackSummary
+    #   objects returned could be less than `MaxResults`, even if there are
+    #   still more AttackSummary objects yet to return. If there are more
+    #   AttackSummary objects to return, AWS WAF will always also return a
+    #   `NextToken`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksRequest AWS API Documentation
@@ -477,6 +801,11 @@ module Aws::Shield
     #   data available. If not null, more results are available. Pass this
     #   value for the `NextMarker` parameter in a subsequent call to
     #   `ListAttacks` to retrieve the next set of items.
+    #
+    #   AWS WAF might return the list of AttackSummary objects in batches
+    #   smaller than the number specified by MaxResults. If there are more
+    #   AttackSummary objects to return, AWS WAF will always also return a
+    #   `NextToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksResponse AWS API Documentation
@@ -503,6 +832,13 @@ module Aws::Shield
     # @!attribute [rw] max_results
     #   The maximum number of Protection objects to be returned. If this is
     #   left blank the first 20 results will be returned.
+    #
+    #   This is a maximum value; it is possible that AWS WAF will return the
+    #   results in smaller batches. That is, the number of Protection
+    #   objects returned could be less than `MaxResults`, even if there are
+    #   still more Protection objects yet to return. If there are more
+    #   Protection objects to return, AWS WAF will always also return a
+    #   `NextToken`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsRequest AWS API Documentation
@@ -525,6 +861,11 @@ module Aws::Shield
     #   ListProtections requests, specify the value of NextToken from the
     #   previous response to get information about another batch of
     #   Protections.
+    #
+    #   AWS WAF might return the list of Protection objects in batches
+    #   smaller than the number specified by MaxResults. If there are more
+    #   Protection objects to return, AWS WAF will always also return a
+    #   `NextToken`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsResponse AWS API Documentation
@@ -532,6 +873,21 @@ module Aws::Shield
     class ListProtectionsResponse < Struct.new(
       :protections,
       :next_token)
+      include Aws::Structure
+    end
+
+    # You are trying to update a subscription that has not yet completed the
+    # 1-year commitment. You can change the `AutoRenew` parameter during the
+    # last 30 days of your subscription. This exception indicates that you
+    # are attempting to change `AutoRenew` prior to that period.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/LockedSubscriptionException AWS API Documentation
+    #
+    class LockedSubscriptionException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -545,6 +901,31 @@ module Aws::Shield
     #
     class Mitigation < Struct.new(
       :mitigation_name)
+      include Aws::Structure
+    end
+
+    # The ARN of the role that you specifed does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/NoAssociatedRoleException AWS API Documentation
+    #
+    class NoAssociatedRoleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception that indicates that the protection state has been modified
+    # by another client. You can retry the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/OptimisticLockException AWS API Documentation
+    #
+    class OptimisticLockException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -570,6 +951,30 @@ module Aws::Shield
       :id,
       :name,
       :resource_arn)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exception indicating the specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -612,16 +1017,38 @@ module Aws::Shield
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
+    # @!attribute [rw] end_time
+    #   The date and time your subscription will end.
+    #   @return [Time]
+    #
     # @!attribute [rw] time_commitment_in_seconds
     #   The length, in seconds, of the AWS Shield Advanced subscription for
     #   the account.
     #   @return [Integer]
     #
+    # @!attribute [rw] auto_renew
+    #   If `ENABLED`, the subscription will be automatically renewed at the
+    #   end of the existing subscription period.
+    #
+    #   When you initally create a subscription, `AutoRenew` is set to
+    #   `ENABLED`. You can change this by submitting an `UpdateSubscription`
+    #   request. If the `UpdateSubscription` request does not included a
+    #   value for `AutoRenew`, the existing value for `AutoRenew` remains
+    #   unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   Specifies how many protections of a given type you can create.
+    #   @return [Array<Types::Limit>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
       :start_time,
-      :time_commitment_in_seconds)
+      :end_time,
+      :time_commitment_in_seconds,
+      :auto_renew,
+      :limits)
       include Aws::Structure
     end
 
@@ -716,6 +1143,60 @@ module Aws::Shield
       :to_exclusive)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateEmergencyContactSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         emergency_contact_list: [
+    #           {
+    #             email_address: "EmailAddress", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] emergency_contact_list
+    #   A list of email addresses that the DRT can use to contact you during
+    #   a suspected attack.
+    #   @return [Array<Types::EmergencyContact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsRequest AWS API Documentation
+    #
+    class UpdateEmergencyContactSettingsRequest < Struct.new(
+      :emergency_contact_list)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettingsResponse AWS API Documentation
+    #
+    class UpdateEmergencyContactSettingsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_renew: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] auto_renew
+    #   When you initally create a subscription, `AutoRenew` is set to
+    #   `ENABLED`. If `ENABLED`, the subscription will be automatically
+    #   renewed at the end of the existing subscription period. You can
+    #   change this by submitting an `UpdateSubscription` request. If the
+    #   `UpdateSubscription` request does not included a value for
+    #   `AutoRenew`, the existing value for `AutoRenew` remains unchanged.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionRequest AWS API Documentation
+    #
+    class UpdateSubscriptionRequest < Struct.new(
+      :auto_renew)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscriptionResponse AWS API Documentation
+    #
+    class UpdateSubscriptionResponse < Aws::EmptyStructure; end
 
   end
 end

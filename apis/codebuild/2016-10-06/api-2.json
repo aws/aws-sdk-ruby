@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"AWS CodeBuild",
+    "serviceId":"CodeBuild",
     "signatureVersion":"v4",
     "targetPrefix":"CodeBuild_20161006",
     "uid":"codebuild-2016-10-06"
@@ -47,6 +48,30 @@
         {"shape":"InvalidInputException"}
       ]
     },
+    "BatchGetReportGroups":{
+      "name":"BatchGetReportGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetReportGroupsInput"},
+      "output":{"shape":"BatchGetReportGroupsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "BatchGetReports":{
+      "name":"BatchGetReports",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchGetReportsInput"},
+      "output":{"shape":"BatchGetReportsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
     "CreateProject":{
       "name":"CreateProject",
       "http":{
@@ -55,6 +80,20 @@
       },
       "input":{"shape":"CreateProjectInput"},
       "output":{"shape":"CreateProjectOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceAlreadyExistsException"},
+        {"shape":"AccountLimitExceededException"}
+      ]
+    },
+    "CreateReportGroup":{
+      "name":"CreateReportGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateReportGroupInput"},
+      "output":{"shape":"CreateReportGroupOutput"},
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"ResourceAlreadyExistsException"},
@@ -88,6 +127,55 @@
         {"shape":"InvalidInputException"}
       ]
     },
+    "DeleteReport":{
+      "name":"DeleteReport",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteReportInput"},
+      "output":{"shape":"DeleteReportOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "DeleteReportGroup":{
+      "name":"DeleteReportGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteReportGroupInput"},
+      "output":{"shape":"DeleteReportGroupOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "DeleteResourcePolicy":{
+      "name":"DeleteResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteResourcePolicyInput"},
+      "output":{"shape":"DeleteResourcePolicyOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "DeleteSourceCredentials":{
+      "name":"DeleteSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteSourceCredentialsInput"},
+      "output":{"shape":"DeleteSourceCredentialsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "DeleteWebhook":{
       "name":"DeleteWebhook",
       "http":{
@@ -100,6 +188,46 @@
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"OAuthProviderException"}
+      ]
+    },
+    "DescribeTestCases":{
+      "name":"DescribeTestCases",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTestCasesInput"},
+      "output":{"shape":"DescribeTestCasesOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "GetResourcePolicy":{
+      "name":"GetResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetResourcePolicyInput"},
+      "output":{"shape":"GetResourcePolicyOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ImportSourceCredentials":{
+      "name":"ImportSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ImportSourceCredentialsInput"},
+      "output":{"shape":"ImportSourceCredentialsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"AccountLimitExceededException"},
+        {"shape":"ResourceAlreadyExistsException"}
       ]
     },
     "InvalidateProjectCache":{
@@ -161,6 +289,89 @@
         {"shape":"InvalidInputException"}
       ]
     },
+    "ListReportGroups":{
+      "name":"ListReportGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListReportGroupsInput"},
+      "output":{"shape":"ListReportGroupsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ListReports":{
+      "name":"ListReports",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListReportsInput"},
+      "output":{"shape":"ListReportsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ListReportsForReportGroup":{
+      "name":"ListReportsForReportGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListReportsForReportGroupInput"},
+      "output":{"shape":"ListReportsForReportGroupOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "ListSharedProjects":{
+      "name":"ListSharedProjects",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSharedProjectsInput"},
+      "output":{"shape":"ListSharedProjectsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ListSharedReportGroups":{
+      "name":"ListSharedReportGroups",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSharedReportGroupsInput"},
+      "output":{"shape":"ListSharedReportGroupsOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"}
+      ]
+    },
+    "ListSourceCredentials":{
+      "name":"ListSourceCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListSourceCredentialsInput"},
+      "output":{"shape":"ListSourceCredentialsOutput"}
+    },
+    "PutResourcePolicy":{
+      "name":"PutResourcePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutResourcePolicyInput"},
+      "output":{"shape":"PutResourcePolicyOutput"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InvalidInputException"}
+      ]
+    },
     "StartBuild":{
       "name":"StartBuild",
       "http":{
@@ -196,6 +407,19 @@
       },
       "input":{"shape":"UpdateProjectInput"},
       "output":{"shape":"UpdateProjectOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UpdateReportGroup":{
+      "name":"UpdateReportGroup",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateReportGroupInput"},
+      "output":{"shape":"UpdateReportGroupOutput"},
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"}
@@ -245,6 +469,14 @@
         "NO_ARTIFACTS"
       ]
     },
+    "AuthType":{
+      "type":"string",
+      "enum":[
+        "OAUTH",
+        "BASIC_AUTH",
+        "PERSONAL_ACCESS_TOKEN"
+      ]
+    },
     "BatchDeleteBuildsInput":{
       "type":"structure",
       "required":["ids"],
@@ -287,30 +519,68 @@
         "projectsNotFound":{"shape":"ProjectNames"}
       }
     },
+    "BatchGetReportGroupsInput":{
+      "type":"structure",
+      "required":["reportGroupArns"],
+      "members":{
+        "reportGroupArns":{"shape":"ReportGroupArns"}
+      }
+    },
+    "BatchGetReportGroupsOutput":{
+      "type":"structure",
+      "members":{
+        "reportGroups":{"shape":"ReportGroups"},
+        "reportGroupsNotFound":{"shape":"ReportGroupArns"}
+      }
+    },
+    "BatchGetReportsInput":{
+      "type":"structure",
+      "required":["reportArns"],
+      "members":{
+        "reportArns":{"shape":"ReportArns"}
+      }
+    },
+    "BatchGetReportsOutput":{
+      "type":"structure",
+      "members":{
+        "reports":{"shape":"Reports"},
+        "reportsNotFound":{"shape":"ReportArns"}
+      }
+    },
     "Boolean":{"type":"boolean"},
     "Build":{
       "type":"structure",
       "members":{
         "id":{"shape":"NonEmptyString"},
         "arn":{"shape":"NonEmptyString"},
+        "buildNumber":{"shape":"WrapperLong"},
         "startTime":{"shape":"Timestamp"},
         "endTime":{"shape":"Timestamp"},
         "currentPhase":{"shape":"String"},
         "buildStatus":{"shape":"StatusType"},
         "sourceVersion":{"shape":"NonEmptyString"},
+        "resolvedSourceVersion":{"shape":"NonEmptyString"},
         "projectName":{"shape":"NonEmptyString"},
         "phases":{"shape":"BuildPhases"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"BuildArtifacts"},
+        "secondaryArtifacts":{"shape":"BuildArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "logs":{"shape":"LogsLocation"},
         "timeoutInMinutes":{"shape":"WrapperInt"},
+        "queuedTimeoutInMinutes":{"shape":"WrapperInt"},
         "buildComplete":{"shape":"Boolean"},
         "initiator":{"shape":"String"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "networkInterface":{"shape":"NetworkInterface"}
+        "networkInterface":{"shape":"NetworkInterface"},
+        "encryptionKey":{"shape":"NonEmptyString"},
+        "exportedEnvironmentVariables":{"shape":"ExportedEnvironmentVariables"},
+        "reportArns":{"shape":"BuildReportArns"},
+        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"}
       }
     },
     "BuildArtifacts":{
@@ -318,8 +588,17 @@
       "members":{
         "location":{"shape":"String"},
         "sha256sum":{"shape":"String"},
-        "md5sum":{"shape":"String"}
+        "md5sum":{"shape":"String"},
+        "overrideArtifactName":{"shape":"WrapperBoolean"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"},
+        "artifactIdentifier":{"shape":"String"}
       }
+    },
+    "BuildArtifactsList":{
+      "type":"list",
+      "member":{"shape":"BuildArtifacts"},
+      "max":12,
+      "min":0
     },
     "BuildIds":{
       "type":"list",
@@ -349,6 +628,7 @@
       "type":"string",
       "enum":[
         "SUBMITTED",
+        "QUEUED",
         "PROVISIONING",
         "DOWNLOAD_SOURCE",
         "INSTALL",
@@ -364,6 +644,10 @@
       "type":"list",
       "member":{"shape":"BuildPhase"}
     },
+    "BuildReportArns":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
     "Builds":{
       "type":"list",
       "member":{"shape":"Build"}
@@ -372,19 +656,38 @@
       "type":"list",
       "member":{"shape":"BuildNotDeleted"}
     },
+    "CacheMode":{
+      "type":"string",
+      "enum":[
+        "LOCAL_DOCKER_LAYER_CACHE",
+        "LOCAL_SOURCE_CACHE",
+        "LOCAL_CUSTOM_CACHE"
+      ]
+    },
     "CacheType":{
       "type":"string",
       "enum":[
         "NO_CACHE",
-        "S3"
+        "S3",
+        "LOCAL"
       ]
+    },
+    "CloudWatchLogsConfig":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{"shape":"LogsConfigStatusType"},
+        "groupName":{"shape":"String"},
+        "streamName":{"shape":"String"}
+      }
     },
     "ComputeType":{
       "type":"string",
       "enum":[
         "BUILD_GENERAL1_SMALL",
         "BUILD_GENERAL1_MEDIUM",
-        "BUILD_GENERAL1_LARGE"
+        "BUILD_GENERAL1_LARGE",
+        "BUILD_GENERAL1_2XLARGE"
       ]
     },
     "CreateProjectInput":{
@@ -393,21 +696,29 @@
         "name",
         "source",
         "artifacts",
-        "environment"
+        "environment",
+        "serviceRole"
       ],
       "members":{
         "name":{"shape":"ProjectName"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badgeEnabled":{"shape":"WrapperBoolean"}
+        "badgeEnabled":{"shape":"WrapperBoolean"},
+        "logsConfig":{"shape":"LogsConfig"},
+        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"}
       }
     },
     "CreateProjectOutput":{
@@ -416,12 +727,32 @@
         "project":{"shape":"Project"}
       }
     },
+    "CreateReportGroupInput":{
+      "type":"structure",
+      "required":[
+        "name",
+        "type",
+        "exportConfig"
+      ],
+      "members":{
+        "name":{"shape":"ReportGroupName"},
+        "type":{"shape":"ReportType"},
+        "exportConfig":{"shape":"ReportExportConfig"}
+      }
+    },
+    "CreateReportGroupOutput":{
+      "type":"structure",
+      "members":{
+        "reportGroup":{"shape":"ReportGroup"}
+      }
+    },
     "CreateWebhookInput":{
       "type":"structure",
       "required":["projectName"],
       "members":{
         "projectName":{"shape":"ProjectName"},
-        "branchFilter":{"shape":"String"}
+        "branchFilter":{"shape":"String"},
+        "filterGroups":{"shape":"FilterGroups"}
       }
     },
     "CreateWebhookOutput":{
@@ -429,6 +760,10 @@
       "members":{
         "webhook":{"shape":"Webhook"}
       }
+    },
+    "CredentialProviderType":{
+      "type":"string",
+      "enum":["SECRETS_MANAGER"]
     },
     "DeleteProjectInput":{
       "type":"structure",
@@ -442,6 +777,55 @@
       "members":{
       }
     },
+    "DeleteReportGroupInput":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
+    "DeleteReportGroupOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteReportInput":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
+    "DeleteReportOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteResourcePolicyInput":{
+      "type":"structure",
+      "required":["resourceArn"],
+      "members":{
+        "resourceArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "DeleteResourcePolicyOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteSourceCredentialsInput":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
+    "DeleteSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
+    },
     "DeleteWebhookInput":{
       "type":"structure",
       "required":["projectName"],
@@ -452,6 +836,23 @@
     "DeleteWebhookOutput":{
       "type":"structure",
       "members":{
+      }
+    },
+    "DescribeTestCasesInput":{
+      "type":"structure",
+      "required":["reportArn"],
+      "members":{
+        "reportArn":{"shape":"String"},
+        "nextToken":{"shape":"String"},
+        "maxResults":{"shape":"PageSize"},
+        "filter":{"shape":"TestCaseFilter"}
+      }
+    },
+    "DescribeTestCasesOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "testCases":{"shape":"TestCases"}
       }
     },
     "EnvironmentImage":{
@@ -490,7 +891,12 @@
     },
     "EnvironmentType":{
       "type":"string",
-      "enum":["LINUX_CONTAINER"]
+      "enum":[
+        "WINDOWS_CONTAINER",
+        "LINUX_CONTAINER",
+        "LINUX_GPU_CONTAINER",
+        "ARM_CONTAINER"
+      ]
     },
     "EnvironmentVariable":{
       "type":"structure",
@@ -508,20 +914,92 @@
       "type":"string",
       "enum":[
         "PLAINTEXT",
-        "PARAMETER_STORE"
+        "PARAMETER_STORE",
+        "SECRETS_MANAGER"
       ]
     },
     "EnvironmentVariables":{
       "type":"list",
       "member":{"shape":"EnvironmentVariable"}
     },
+    "ExportedEnvironmentVariable":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"NonEmptyString"},
+        "value":{"shape":"String"}
+      }
+    },
+    "ExportedEnvironmentVariables":{
+      "type":"list",
+      "member":{"shape":"ExportedEnvironmentVariable"}
+    },
+    "FileSystemType":{
+      "type":"string",
+      "enum":["EFS"]
+    },
+    "FilterGroup":{
+      "type":"list",
+      "member":{"shape":"WebhookFilter"}
+    },
+    "FilterGroups":{
+      "type":"list",
+      "member":{"shape":"FilterGroup"}
+    },
+    "GetResourcePolicyInput":{
+      "type":"structure",
+      "required":["resourceArn"],
+      "members":{
+        "resourceArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "GetResourcePolicyOutput":{
+      "type":"structure",
+      "members":{
+        "policy":{"shape":"NonEmptyString"}
+      }
+    },
     "GitCloneDepth":{
       "type":"integer",
       "min":0
     },
+    "GitSubmodulesConfig":{
+      "type":"structure",
+      "required":["fetchSubmodules"],
+      "members":{
+        "fetchSubmodules":{"shape":"WrapperBoolean"}
+      }
+    },
+    "ImagePullCredentialsType":{
+      "type":"string",
+      "enum":[
+        "CODEBUILD",
+        "SERVICE_ROLE"
+      ]
+    },
     "ImageVersions":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "ImportSourceCredentialsInput":{
+      "type":"structure",
+      "required":[
+        "token",
+        "serverType",
+        "authType"
+      ],
+      "members":{
+        "username":{"shape":"NonEmptyString"},
+        "token":{"shape":"SensitiveNonEmptyString"},
+        "serverType":{"shape":"ServerType"},
+        "authType":{"shape":"AuthType"},
+        "shouldOverwrite":{"shape":"WrapperBoolean"}
+      }
+    },
+    "ImportSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"}
+      }
     },
     "InvalidInputException":{
       "type":"structure",
@@ -545,7 +1023,7 @@
       "type":"string",
       "max":127,
       "min":1,
-      "pattern":"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=@+\\\\-]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$"
     },
     "LanguageType":{
       "type":"string",
@@ -558,7 +1036,8 @@
         "DOCKER",
         "ANDROID",
         "DOTNET",
-        "BASE"
+        "BASE",
+        "PHP"
       ]
     },
     "ListBuildsForProjectInput":{
@@ -617,12 +1096,124 @@
         "projects":{"shape":"ProjectNames"}
       }
     },
+    "ListReportGroupsInput":{
+      "type":"structure",
+      "members":{
+        "sortOrder":{"shape":"SortOrderType"},
+        "sortBy":{"shape":"ReportGroupSortByType"},
+        "nextToken":{"shape":"String"},
+        "maxResults":{"shape":"PageSize"}
+      }
+    },
+    "ListReportGroupsOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "reportGroups":{"shape":"ReportGroupArns"}
+      }
+    },
+    "ListReportsForReportGroupInput":{
+      "type":"structure",
+      "required":["reportGroupArn"],
+      "members":{
+        "reportGroupArn":{"shape":"String"},
+        "nextToken":{"shape":"String"},
+        "sortOrder":{"shape":"SortOrderType"},
+        "maxResults":{"shape":"PageSize"},
+        "filter":{"shape":"ReportFilter"}
+      }
+    },
+    "ListReportsForReportGroupOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "reports":{"shape":"ReportArns"}
+      }
+    },
+    "ListReportsInput":{
+      "type":"structure",
+      "members":{
+        "sortOrder":{"shape":"SortOrderType"},
+        "nextToken":{"shape":"String"},
+        "maxResults":{"shape":"PageSize"},
+        "filter":{"shape":"ReportFilter"}
+      }
+    },
+    "ListReportsOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "reports":{"shape":"ReportArns"}
+      }
+    },
+    "ListSharedProjectsInput":{
+      "type":"structure",
+      "members":{
+        "sortBy":{"shape":"SharedResourceSortByType"},
+        "sortOrder":{"shape":"SortOrderType"},
+        "maxResults":{"shape":"PageSize"},
+        "nextToken":{"shape":"NonEmptyString"}
+      }
+    },
+    "ListSharedProjectsOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "projects":{"shape":"ProjectArns"}
+      }
+    },
+    "ListSharedReportGroupsInput":{
+      "type":"structure",
+      "members":{
+        "sortOrder":{"shape":"SortOrderType"},
+        "sortBy":{"shape":"SharedResourceSortByType"},
+        "nextToken":{"shape":"String"},
+        "maxResults":{"shape":"PageSize"}
+      }
+    },
+    "ListSharedReportGroupsOutput":{
+      "type":"structure",
+      "members":{
+        "nextToken":{"shape":"String"},
+        "reportGroups":{"shape":"ReportGroupArns"}
+      }
+    },
+    "ListSourceCredentialsInput":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "ListSourceCredentialsOutput":{
+      "type":"structure",
+      "members":{
+        "sourceCredentialsInfos":{"shape":"SourceCredentialsInfos"}
+      }
+    },
+    "LogsConfig":{
+      "type":"structure",
+      "members":{
+        "cloudWatchLogs":{"shape":"CloudWatchLogsConfig"},
+        "s3Logs":{"shape":"S3LogsConfig"}
+      }
+    },
+    "LogsConfigStatusType":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "LogsLocation":{
       "type":"structure",
       "members":{
         "groupName":{"shape":"String"},
         "streamName":{"shape":"String"},
-        "deepLink":{"shape":"String"}
+        "deepLink":{"shape":"String"},
+        "s3DeepLink":{"shape":"String"},
+        "cloudWatchLogsArn":{"shape":"String"},
+        "s3LogsArn":{"shape":"String"},
+        "cloudWatchLogs":{"shape":"CloudWatchLogsConfig"},
+        "s3Logs":{"shape":"S3LogsConfig"}
       }
     },
     "NetworkInterface":{
@@ -642,6 +1233,11 @@
       },
       "exception":true
     },
+    "PageSize":{
+      "type":"integer",
+      "max":100,
+      "min":1
+    },
     "PhaseContext":{
       "type":"structure",
       "members":{
@@ -658,7 +1254,8 @@
       "enum":[
         "DEBIAN",
         "AMAZON_LINUX",
-        "UBUNTU"
+        "UBUNTU",
+        "WINDOWS_SERVER"
       ]
     },
     "Project":{
@@ -668,19 +1265,32 @@
         "arn":{"shape":"String"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "created":{"shape":"Timestamp"},
         "lastModified":{"shape":"Timestamp"},
         "webhook":{"shape":"Webhook"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badge":{"shape":"ProjectBadge"}
+        "badge":{"shape":"ProjectBadge"},
+        "logsConfig":{"shape":"LogsConfig"},
+        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"}
       }
+    },
+    "ProjectArns":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":100,
+      "min":1
     },
     "ProjectArtifacts":{
       "type":"structure",
@@ -691,8 +1301,17 @@
         "path":{"shape":"String"},
         "namespaceType":{"shape":"ArtifactNamespace"},
         "name":{"shape":"String"},
-        "packaging":{"shape":"ArtifactPackaging"}
+        "packaging":{"shape":"ArtifactPackaging"},
+        "overrideArtifactName":{"shape":"WrapperBoolean"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"},
+        "artifactIdentifier":{"shape":"String"}
       }
+    },
+    "ProjectArtifactsList":{
+      "type":"list",
+      "member":{"shape":"ProjectArtifacts"},
+      "max":12,
+      "min":0
     },
     "ProjectBadge":{
       "type":"structure",
@@ -706,8 +1325,13 @@
       "required":["type"],
       "members":{
         "type":{"shape":"CacheType"},
-        "location":{"shape":"String"}
+        "location":{"shape":"String"},
+        "modes":{"shape":"ProjectCacheModes"}
       }
+    },
+    "ProjectCacheModes":{
+      "type":"list",
+      "member":{"shape":"CacheMode"}
     },
     "ProjectDescription":{
       "type":"string",
@@ -727,8 +1351,24 @@
         "computeType":{"shape":"ComputeType"},
         "environmentVariables":{"shape":"EnvironmentVariables"},
         "privilegedMode":{"shape":"WrapperBoolean"},
-        "certificate":{"shape":"String"}
+        "certificate":{"shape":"String"},
+        "registryCredential":{"shape":"RegistryCredential"},
+        "imagePullCredentialsType":{"shape":"ImagePullCredentialsType"}
       }
+    },
+    "ProjectFileSystemLocation":{
+      "type":"structure",
+      "members":{
+        "type":{"shape":"FileSystemType"},
+        "location":{"shape":"String"},
+        "mountPoint":{"shape":"String"},
+        "identifier":{"shape":"String"},
+        "mountOptions":{"shape":"String"}
+      }
+    },
+    "ProjectFileSystemLocations":{
+      "type":"list",
+      "member":{"shape":"ProjectFileSystemLocation"}
     },
     "ProjectName":{
       "type":"string",
@@ -741,6 +1381,12 @@
       "member":{"shape":"NonEmptyString"},
       "max":100,
       "min":1
+    },
+    "ProjectSecondarySourceVersions":{
+      "type":"list",
+      "member":{"shape":"ProjectSourceVersion"},
+      "max":12,
+      "min":0
     },
     "ProjectSortByType":{
       "type":"string",
@@ -757,14 +1403,172 @@
         "type":{"shape":"SourceType"},
         "location":{"shape":"String"},
         "gitCloneDepth":{"shape":"GitCloneDepth"},
+        "gitSubmodulesConfig":{"shape":"GitSubmodulesConfig"},
         "buildspec":{"shape":"String"},
         "auth":{"shape":"SourceAuth"},
-        "insecureSsl":{"shape":"WrapperBoolean"}
+        "reportBuildStatus":{"shape":"WrapperBoolean"},
+        "insecureSsl":{"shape":"WrapperBoolean"},
+        "sourceIdentifier":{"shape":"String"}
       }
+    },
+    "ProjectSourceVersion":{
+      "type":"structure",
+      "required":[
+        "sourceIdentifier",
+        "sourceVersion"
+      ],
+      "members":{
+        "sourceIdentifier":{"shape":"String"},
+        "sourceVersion":{"shape":"String"}
+      }
+    },
+    "ProjectSources":{
+      "type":"list",
+      "member":{"shape":"ProjectSource"},
+      "max":12,
+      "min":0
     },
     "Projects":{
       "type":"list",
       "member":{"shape":"Project"}
+    },
+    "PutResourcePolicyInput":{
+      "type":"structure",
+      "required":[
+        "policy",
+        "resourceArn"
+      ],
+      "members":{
+        "policy":{"shape":"NonEmptyString"},
+        "resourceArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "PutResourcePolicyOutput":{
+      "type":"structure",
+      "members":{
+        "resourceArn":{"shape":"NonEmptyString"}
+      }
+    },
+    "RegistryCredential":{
+      "type":"structure",
+      "required":[
+        "credential",
+        "credentialProvider"
+      ],
+      "members":{
+        "credential":{"shape":"NonEmptyString"},
+        "credentialProvider":{"shape":"CredentialProviderType"}
+      }
+    },
+    "Report":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"},
+        "type":{"shape":"ReportType"},
+        "name":{"shape":"String"},
+        "reportGroupArn":{"shape":"NonEmptyString"},
+        "executionId":{"shape":"String"},
+        "status":{"shape":"ReportStatusType"},
+        "created":{"shape":"Timestamp"},
+        "expired":{"shape":"Timestamp"},
+        "exportConfig":{"shape":"ReportExportConfig"},
+        "truncated":{"shape":"WrapperBoolean"},
+        "testSummary":{"shape":"TestReportSummary"}
+      }
+    },
+    "ReportArns":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":100,
+      "min":1
+    },
+    "ReportExportConfig":{
+      "type":"structure",
+      "members":{
+        "exportConfigType":{"shape":"ReportExportConfigType"},
+        "s3Destination":{"shape":"S3ReportExportConfig"}
+      }
+    },
+    "ReportExportConfigType":{
+      "type":"string",
+      "enum":[
+        "S3",
+        "NO_EXPORT"
+      ]
+    },
+    "ReportFilter":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"ReportStatusType"}
+      }
+    },
+    "ReportGroup":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"},
+        "name":{"shape":"ReportGroupName"},
+        "type":{"shape":"ReportType"},
+        "exportConfig":{"shape":"ReportExportConfig"},
+        "created":{"shape":"Timestamp"},
+        "lastModified":{"shape":"Timestamp"}
+      }
+    },
+    "ReportGroupArns":{
+      "type":"list",
+      "member":{"shape":"NonEmptyString"},
+      "max":100,
+      "min":1
+    },
+    "ReportGroupName":{
+      "type":"string",
+      "max":128,
+      "min":2
+    },
+    "ReportGroupSortByType":{
+      "type":"string",
+      "enum":[
+        "NAME",
+        "CREATED_TIME",
+        "LAST_MODIFIED_TIME"
+      ]
+    },
+    "ReportGroups":{
+      "type":"list",
+      "member":{"shape":"ReportGroup"},
+      "max":100,
+      "min":1
+    },
+    "ReportPackagingType":{
+      "type":"string",
+      "enum":[
+        "ZIP",
+        "NONE"
+      ]
+    },
+    "ReportStatusCounts":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"WrapperInt"}
+    },
+    "ReportStatusType":{
+      "type":"string",
+      "enum":[
+        "GENERATING",
+        "SUCCEEDED",
+        "FAILED",
+        "INCOMPLETE",
+        "DELETING"
+      ]
+    },
+    "ReportType":{
+      "type":"string",
+      "enum":["TEST"]
+    },
+    "Reports":{
+      "type":"list",
+      "member":{"shape":"Report"},
+      "max":100,
+      "min":1
     },
     "ResourceAlreadyExistsException":{
       "type":"structure",
@@ -778,10 +1582,49 @@
       },
       "exception":true
     },
+    "S3LogsConfig":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{"shape":"LogsConfigStatusType"},
+        "location":{"shape":"String"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"}
+      }
+    },
+    "S3ReportExportConfig":{
+      "type":"structure",
+      "members":{
+        "bucket":{"shape":"NonEmptyString"},
+        "path":{"shape":"String"},
+        "packaging":{"shape":"ReportPackagingType"},
+        "encryptionKey":{"shape":"NonEmptyString"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"}
+      }
+    },
     "SecurityGroupIds":{
       "type":"list",
       "member":{"shape":"NonEmptyString"},
       "max":5
+    },
+    "SensitiveNonEmptyString":{
+      "type":"string",
+      "min":1,
+      "sensitive":true
+    },
+    "ServerType":{
+      "type":"string",
+      "enum":[
+        "GITHUB",
+        "BITBUCKET",
+        "GITHUB_ENTERPRISE"
+      ]
+    },
+    "SharedResourceSortByType":{
+      "type":"string",
+      "enum":[
+        "ARN",
+        "MODIFIED_TIME"
+      ]
     },
     "SortOrderType":{
       "type":"string",
@@ -802,6 +1645,18 @@
       "type":"string",
       "enum":["OAUTH"]
     },
+    "SourceCredentialsInfo":{
+      "type":"structure",
+      "members":{
+        "arn":{"shape":"NonEmptyString"},
+        "serverType":{"shape":"ServerType"},
+        "authType":{"shape":"AuthType"}
+      }
+    },
+    "SourceCredentialsInfos":{
+      "type":"list",
+      "member":{"shape":"SourceCredentialsInfo"}
+    },
     "SourceType":{
       "type":"string",
       "enum":[
@@ -810,7 +1665,8 @@
         "GITHUB",
         "S3",
         "BITBUCKET",
-        "GITHUB_ENTERPRISE"
+        "GITHUB_ENTERPRISE",
+        "NO_SOURCE"
       ]
     },
     "StartBuildInput":{
@@ -818,15 +1674,20 @@
       "required":["projectName"],
       "members":{
         "projectName":{"shape":"NonEmptyString"},
+        "secondarySourcesOverride":{"shape":"ProjectSources"},
+        "secondarySourcesVersionOverride":{"shape":"ProjectSecondarySourceVersions"},
         "sourceVersion":{"shape":"String"},
         "artifactsOverride":{"shape":"ProjectArtifacts"},
+        "secondaryArtifactsOverride":{"shape":"ProjectArtifactsList"},
         "environmentVariablesOverride":{"shape":"EnvironmentVariables"},
         "sourceTypeOverride":{"shape":"SourceType"},
         "sourceLocationOverride":{"shape":"String"},
         "sourceAuthOverride":{"shape":"SourceAuth"},
         "gitCloneDepthOverride":{"shape":"GitCloneDepth"},
+        "gitSubmodulesConfigOverride":{"shape":"GitSubmodulesConfig"},
         "buildspecOverride":{"shape":"String"},
         "insecureSslOverride":{"shape":"WrapperBoolean"},
+        "reportBuildStatusOverride":{"shape":"WrapperBoolean"},
         "environmentTypeOverride":{"shape":"EnvironmentType"},
         "imageOverride":{"shape":"NonEmptyString"},
         "computeTypeOverride":{"shape":"ComputeType"},
@@ -835,7 +1696,12 @@
         "serviceRoleOverride":{"shape":"NonEmptyString"},
         "privilegedModeOverride":{"shape":"WrapperBoolean"},
         "timeoutInMinutesOverride":{"shape":"TimeOut"},
-        "idempotencyToken":{"shape":"String"}
+        "queuedTimeoutInMinutesOverride":{"shape":"TimeOut"},
+        "encryptionKeyOverride":{"shape":"NonEmptyString"},
+        "idempotencyToken":{"shape":"String"},
+        "logsConfigOverride":{"shape":"LogsConfig"},
+        "registryCredentialOverride":{"shape":"RegistryCredential"},
+        "imagePullCredentialsTypeOverride":{"shape":"ImagePullCredentialsType"}
       }
     },
     "StartBuildOutput":{
@@ -887,6 +1753,42 @@
       "max":50,
       "min":0
     },
+    "TestCase":{
+      "type":"structure",
+      "members":{
+        "reportArn":{"shape":"NonEmptyString"},
+        "testRawDataPath":{"shape":"String"},
+        "prefix":{"shape":"String"},
+        "name":{"shape":"String"},
+        "status":{"shape":"String"},
+        "durationInNanoSeconds":{"shape":"WrapperLong"},
+        "message":{"shape":"String"},
+        "expired":{"shape":"Timestamp"}
+      }
+    },
+    "TestCaseFilter":{
+      "type":"structure",
+      "members":{
+        "status":{"shape":"String"}
+      }
+    },
+    "TestCases":{
+      "type":"list",
+      "member":{"shape":"TestCase"}
+    },
+    "TestReportSummary":{
+      "type":"structure",
+      "required":[
+        "total",
+        "statusCounts",
+        "durationInNanoSeconds"
+      ],
+      "members":{
+        "total":{"shape":"WrapperInt"},
+        "statusCounts":{"shape":"ReportStatusCounts"},
+        "durationInNanoSeconds":{"shape":"WrapperLong"}
+      }
+    },
     "TimeOut":{
       "type":"integer",
       "max":480,
@@ -900,15 +1802,22 @@
         "name":{"shape":"NonEmptyString"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
+        "sourceVersion":{"shape":"String"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
         "timeoutInMinutes":{"shape":"TimeOut"},
+        "queuedTimeoutInMinutes":{"shape":"TimeOut"},
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badgeEnabled":{"shape":"WrapperBoolean"}
+        "badgeEnabled":{"shape":"WrapperBoolean"},
+        "logsConfig":{"shape":"LogsConfig"},
+        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"}
       }
     },
     "UpdateProjectOutput":{
@@ -917,13 +1826,28 @@
         "project":{"shape":"Project"}
       }
     },
+    "UpdateReportGroupInput":{
+      "type":"structure",
+      "required":["arn"],
+      "members":{
+        "arn":{"shape":"NonEmptyString"},
+        "exportConfig":{"shape":"ReportExportConfig"}
+      }
+    },
+    "UpdateReportGroupOutput":{
+      "type":"structure",
+      "members":{
+        "reportGroup":{"shape":"ReportGroup"}
+      }
+    },
     "UpdateWebhookInput":{
       "type":"structure",
       "required":["projectName"],
       "members":{
         "projectName":{"shape":"ProjectName"},
         "branchFilter":{"shape":"String"},
-        "rotateSecret":{"shape":"Boolean"}
+        "rotateSecret":{"shape":"Boolean"},
+        "filterGroups":{"shape":"FilterGroups"}
       }
     },
     "UpdateWebhookOutput":{
@@ -936,7 +1860,7 @@
       "type":"string",
       "max":255,
       "min":1,
-      "pattern":"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=@+\\\\-]*)$"
+      "pattern":"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$"
     },
     "VpcConfig":{
       "type":"structure",
@@ -953,8 +1877,31 @@
         "payloadUrl":{"shape":"NonEmptyString"},
         "secret":{"shape":"NonEmptyString"},
         "branchFilter":{"shape":"String"},
+        "filterGroups":{"shape":"FilterGroups"},
         "lastModifiedSecret":{"shape":"Timestamp"}
       }
+    },
+    "WebhookFilter":{
+      "type":"structure",
+      "required":[
+        "type",
+        "pattern"
+      ],
+      "members":{
+        "type":{"shape":"WebhookFilterType"},
+        "pattern":{"shape":"String"},
+        "excludeMatchedPattern":{"shape":"WrapperBoolean"}
+      }
+    },
+    "WebhookFilterType":{
+      "type":"string",
+      "enum":[
+        "EVENT",
+        "BASE_REF",
+        "HEAD_REF",
+        "ACTOR_ACCOUNT_ID",
+        "FILE_PATH"
+      ]
     },
     "WrapperBoolean":{"type":"boolean"},
     "WrapperInt":{"type":"integer"},

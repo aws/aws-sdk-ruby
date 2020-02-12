@@ -42,6 +42,6 @@ require_relative 'aws-sdk-iotanalytics/customizations'
 # @service
 module Aws::IoTAnalytics
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.26.0'
 
 end

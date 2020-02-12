@@ -96,8 +96,9 @@ module Aws::DynamoDB
     #
     #      </note>
     #
-    #     For more information on expression attribute names, see [Accessing
-    #     Item Attributes][2] in the *Amazon DynamoDB Developer Guide*.
+    #     For more information about expression attribute names, see
+    #     [Accessing Item Attributes][2] in the *Amazon DynamoDB Developer
+    #     Guide*.
     #
     #   * `Keys` - An array of primary key attribute values that define
     #     specific items in the table. For each primary key, you must provide
@@ -111,9 +112,9 @@ module Aws::DynamoDB
     #     scalars, sets, or elements of a JSON document. The attributes in the
     #     expression must be separated by commas.
     #
-    #     If no attribute names are specified, then all attributes will be
-    #     returned. If any of the requested attributes are not found, they
-    #     will not appear in the result.
+    #     If no attribute names are specified, then all attributes are
+    #     returned. If any of the requested attributes are not found, they do
+    #     not appear in the result.
     #
     #     For more information, see [Accessing Item Attributes][2] in the
     #     *Amazon DynamoDB Developer Guide*.
@@ -124,9 +125,9 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
-    #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+    #   [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html
     # @option options [String] :return_consumed_capacity
     #   Determines the level of detail about provisioned throughput
     #   consumption that is returned in the response:
@@ -198,7 +199,7 @@ module Aws::DynamoDB
     #       Attribute values must not be null; string and binary type
     #       attributes must have lengths greater than zero; and set type
     #       attributes must not be empty. Requests that contain empty values
-    #       will be rejected with a `ValidationException` exception.
+    #       are rejected with a `ValidationException` exception.
     #
     #       If you specify any attributes that are part of an index key, then
     #       the data types for those attributes must match those of the schema
@@ -274,23 +275,32 @@ module Aws::DynamoDB
     #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
     #           non_key_attributes: ["NonKeyAttributeName"],
     #         },
-    #         provisioned_throughput: { # required
+    #         provisioned_throughput: {
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
     #       },
     #     ],
-    #     provisioned_throughput: { # required
+    #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
+    #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
     #     },
     #     stream_specification: {
-    #       stream_enabled: false,
+    #       stream_enabled: false, # required
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
     #     sse_specification: {
-    #       enabled: false, # required
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKeyString", # required
+    #         value: "TagValueString", # required
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
@@ -315,7 +325,7 @@ module Aws::DynamoDB
     #     * `RANGE` - sort key
     #
     #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   The term "hash attribute" derives from the DynamoDB usage of an
     #   internal hash function to evenly distribute data items across
     #   partitions, based on their partition key values.
     #
@@ -334,18 +344,18 @@ module Aws::DynamoDB
     #   have a `KeyType` of `HASH`, and the second element must have a
     #   `KeyType` of `RANGE`.
     #
-    #   For more information, see [Specifying the Primary Key][2] in the
-    #   *Amazon DynamoDB Developer Guide*.
+    #   For more information, see [Working with Tables][2] in the *Amazon
+    #   DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
-    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
     # @option options [Array<Types::LocalSecondaryIndex>] :local_secondary_indexes
-    #   One or more local secondary indexes (the maximum is five) to be
-    #   created on the table. Each index is scoped to a given partition key
-    #   value. There is a 10 GB size limit per partition key value; otherwise,
-    #   the size of a local secondary index is unconstrained.
+    #   One or more local secondary indexes (the maximum is 5) to be created
+    #   on the table. Each index is scoped to a given partition key value.
+    #   There is a 10 GB size limit per partition key value; otherwise, the
+    #   size of a local secondary index is unconstrained.
     #
     #   Each local secondary index in the array includes the following:
     #
@@ -369,7 +379,7 @@ module Aws::DynamoDB
     #         the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -378,13 +388,13 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     # @option options [Array<Types::GlobalSecondaryIndex>] :global_secondary_indexes
-    #   One or more global secondary indexes (the maximum is five) to be
-    #   created on the table. Each global secondary index in the array
-    #   includes the following:
+    #   One or more global secondary indexes (the maximum is 20) to be created
+    #   on the table. Each global secondary index in the array includes the
+    #   following:
     #
     #   * `IndexName` - The name of the global secondary index. Must be unique
     #     only for this table.
@@ -405,7 +415,7 @@ module Aws::DynamoDB
     #         the index.
     #
     #       * `INCLUDE` - Only the specified table attributes are projected
-    #         into the index. The list of projected attributes are in
+    #         into the index. The list of projected attributes is in
     #         `NonKeyAttributes`.
     #
     #       * `ALL` - All of the table attributes are projected into the
@@ -414,30 +424,50 @@ module Aws::DynamoDB
     #     * `NonKeyAttributes` - A list of one or more non-key attribute names
     #       that are projected into the secondary index. The total count of
     #       attributes provided in `NonKeyAttributes`, summed across all of
-    #       the secondary indexes, must not exceed 20. If you project the same
-    #       attribute into two different indexes, this counts as two distinct
-    #       attributes when determining the total.
+    #       the secondary indexes, must not exceed 100. If you project the
+    #       same attribute into two different indexes, this counts as two
+    #       distinct attributes when determining the total.
     #
     #   * `ProvisionedThroughput` - The provisioned throughput settings for
     #     the global secondary index, consisting of read and write capacity
     #     units.
-    # @option options [required, Types::ProvisionedThroughput] :provisioned_throughput
+    # @option options [String] :billing_mode
+    #   Controls how you are charged for read and write throughput and how you
+    #   manage capacity. This setting can be changed later.
+    #
+    #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
+    #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
+    #     Mode][1].
+    #
+    #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
+    #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
+    #     [On-Demand Mode][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
     #   operation.
+    #
+    #   If you set BillingMode as `PROVISIONED`, you must specify this
+    #   property. If you set BillingMode as `PAY_PER_REQUEST`, you cannot
+    #   specify this property.
     #
     #   For current minimum and maximum provisioned throughput values, see
     #   [Limits][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     # @option options [Types::StreamSpecification] :stream_specification
     #   The settings for DynamoDB Streams on the table. These settings consist
     #   of:
     #
-    #   * `StreamEnabled` - Indicates whether Streams is to be enabled (true)
-    #     or disabled (false).
+    #   * `StreamEnabled` - Indicates whether DynamoDB Streams is to be
+    #     enabled (true) or disabled (false).
     #
     #   * `StreamViewType` - When an item in the table is modified,
     #     `StreamViewType` determines what information is written to the
@@ -456,6 +486,13 @@ module Aws::DynamoDB
     #       item are written to the stream.
     # @option options [Types::SSESpecification] :sse_specification
     #   Represents the settings used to enable server-side encryption.
+    # @option options [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to label the table. For more information,
+    #   see [Tagging for DynamoDB][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html
     # @return [Table]
     def create_table(options = {})
       resp = @client.create_table(options)

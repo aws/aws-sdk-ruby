@@ -42,6 +42,8 @@ module Aws
           when TimestampShape
             if value =~ /\d+(\.\d*)/
               Time.at(value.to_f)
+            elsif value =~ /^\d+$/
+              Time.at(value.to_i)
             else
               begin
                 Time.parse(value)

@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,111 +48,215 @@ module Aws::ApplicationDiscoveryService
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -178,6 +287,45 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def associate_configuration_items_to_application(params = {}, options = {})
       req = build_request(:associate_configuration_items_to_application, params)
+      req.send_request(options)
+    end
+
+    # Deletes one or more import tasks, each identified by their import ID.
+    # Each import task has a number of records that can identify servers or
+    # applications.
+    #
+    # AWS Application Discovery Service has built-in matching logic that
+    # will identify when discovered servers match existing entries that
+    # you've previously discovered, the information for the
+    # already-existing discovered server is updated. When you delete an
+    # import task that contains records that were used to match, the
+    # information in those matched records that comes from the deleted
+    # records will also be deleted.
+    #
+    # @option params [required, Array<String>] :import_task_ids
+    #   The IDs for the import tasks that you want to delete.
+    #
+    # @return [Types::BatchDeleteImportDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteImportDataResponse#errors #errors} => Array&lt;Types::BatchDeleteImportDataError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_import_data({
+    #     import_task_ids: ["ImportTaskIdentifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].import_task_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR", "OVER_LIMIT"
+    #   resp.errors[0].error_description #=> String
+    #
+    # @overload batch_delete_import_data(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_import_data(params = {}, options = {})
+      req = build_request(:batch_delete_import_data, params)
       req.send_request(options)
     end
 
@@ -301,8 +449,9 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Lists agents or the Connector by ID or lists all agents/Connectors
-    # associated with your user account if you did not specify an ID.
+    # Lists agents or connectors as specified by ID or other filters. All
+    # agents/connectors associated with your user account can be listed if
+    # you call `DescribeAgents` as is without passing any parameters.
     #
     # @option params [Array<String>] :agent_ids
     #   The agent or the Connector IDs for which you want information. If you
@@ -370,19 +519,33 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves attributes for a list of configuration item IDs. All of the
-    # supplied IDs must be for the same asset type (server, application,
-    # process, or connection). Output fields are specific to the asset type
-    # selected. For example, the output for a *server* configuration item
-    # includes a list of attributes about the server, such as host name,
-    # operating system, and number of network cards.
+    # Retrieves attributes for a list of configuration item IDs.
     #
-    # For a complete list of outputs for each asset type, see [Using the
-    # DescribeConfigurations Action][1].
+    # <note markdown="1"> All of the supplied IDs must be for the same asset type from one of
+    # the following:
+    #
+    #  * server
+    #
+    # * application
+    #
+    # * process
+    #
+    # * connection
+    #
+    #  Output fields are specific to the asset type specified. For example,
+    # the output for a *server* configuration item includes a list of
+    # attributes about the server, such as host name, operating system,
+    # number of network cards, etc.
+    #
+    #  For a complete list of outputs for each asset type, see [Using the
+    # DescribeConfigurations Action][1] in the *AWS Application Discovery
+    # Service User Guide*.
+    #
+    #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations
     #
     # @option params [required, Array<String>] :configuration_ids
     #   One or more configuration IDs.
@@ -410,24 +573,70 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Deprecated. Use `DescribeExportTasks` instead.
-    #
-    # Retrieves the status of a given export process. You can retrieve
-    # status from a maximum of 100 processes.
+    # Lists exports as specified by ID. All continuous exports associated
+    # with your user account can be listed if you call
+    # `DescribeContinuousExports` as is without passing any parameters.
     #
     # @option params [Array<String>] :export_ids
-    #   A unique identifier that you can use to query the export status.
+    #   The unique IDs assigned to the exports.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that you want to display as a part of
-    #   the query.
+    #   A number between 1 and 100 specifying the maximum number of continuous
+    #   export descriptions returned.
     #
     # @option params [String] :next_token
-    #   A token to get the next set of results. For example, if you specify
-    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
-    #   results in a set of 10. Use the token in the query to get the next set
-    #   of 10.
+    #   The token from the previous call to `DescribeExportTasks`.
+    #
+    # @return [Types::DescribeContinuousExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContinuousExportsResponse#descriptions #descriptions} => Array&lt;Types::ContinuousExportDescription&gt;
+    #   * {Types::DescribeContinuousExportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_continuous_exports({
+    #     export_ids: ["ConfigurationsExportId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.descriptions #=> Array
+    #   resp.descriptions[0].export_id #=> String
+    #   resp.descriptions[0].status #=> String, one of "START_IN_PROGRESS", "START_FAILED", "ACTIVE", "ERROR", "STOP_IN_PROGRESS", "STOP_FAILED", "INACTIVE"
+    #   resp.descriptions[0].status_detail #=> String
+    #   resp.descriptions[0].s3_bucket #=> String
+    #   resp.descriptions[0].start_time #=> Time
+    #   resp.descriptions[0].stop_time #=> Time
+    #   resp.descriptions[0].data_source #=> String, one of "AGENT"
+    #   resp.descriptions[0].schema_storage_config #=> Hash
+    #   resp.descriptions[0].schema_storage_config["DatabaseName"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_continuous_exports(params = {})
+    # @param [Hash] params ({})
+    def describe_continuous_exports(params = {}, options = {})
+      req = build_request(:describe_continuous_exports, params)
+      req.send_request(options)
+    end
+
+    # `DescribeExportConfigurations` is deprecated. Use
+    # [DescribeImportTasks][1], instead.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_DescribeExportTasks.html
+    #
+    # @option params [Array<String>] :export_ids
+    #   A list of continuous export IDs to search for.
+    #
+    # @option params [Integer] :max_results
+    #   A number between 1 and 100 specifying the maximum number of continuous
+    #   export descriptions returned.
+    #
+    # @option params [String] :next_token
+    #   The token from the previous call to describe-export-tasks.
     #
     # @return [Types::DescribeExportConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -529,9 +738,80 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configuration items that are tagged with a
-    # specific tag. Or retrieves a list of all tags assigned to a specific
-    # configuration item.
+    # Returns an array of import tasks for your account, including status
+    # information, times, IDs, the Amazon S3 Object URL for the import file,
+    # and more.
+    #
+    # @option params [Array<Types::ImportTaskFilter>] :filters
+    #   An array of name-value pairs that you provide to filter the results
+    #   for the `DescribeImportTask` request to a specific subset of results.
+    #   Currently, wildcard values aren't supported for filters.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want this request to return, up
+    #   to 100.
+    #
+    # @option params [String] :next_token
+    #   The token to request a specific page of results.
+    #
+    # @return [Types::DescribeImportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImportTasksResponse#next_token #next_token} => String
+    #   * {Types::DescribeImportTasksResponse#tasks #tasks} => Array&lt;Types::ImportTask&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_import_tasks({
+    #     filters: [
+    #       {
+    #         name: "IMPORT_TASK_ID", # accepts IMPORT_TASK_ID, STATUS, NAME
+    #         values: ["ImportTaskFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.tasks #=> Array
+    #   resp.tasks[0].import_task_id #=> String
+    #   resp.tasks[0].client_request_token #=> String
+    #   resp.tasks[0].name #=> String
+    #   resp.tasks[0].import_url #=> String
+    #   resp.tasks[0].status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_COMPLETE_WITH_ERRORS", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.tasks[0].import_request_time #=> Time
+    #   resp.tasks[0].import_completion_time #=> Time
+    #   resp.tasks[0].import_deleted_time #=> Time
+    #   resp.tasks[0].server_import_success #=> Integer
+    #   resp.tasks[0].server_import_failure #=> Integer
+    #   resp.tasks[0].application_import_success #=> Integer
+    #   resp.tasks[0].application_import_failure #=> Integer
+    #   resp.tasks[0].errors_and_failed_entries_zip #=> String
+    #
+    # @overload describe_import_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_import_tasks(params = {}, options = {})
+      req = build_request(:describe_import_tasks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of configuration items that have tags as specified by
+    # the key-value pairs, name and value, passed to the optional parameter
+    # `filters`.
+    #
+    # There are three valid tag filter names:
+    #
+    # * tagKey
+    #
+    # * tagValue
+    #
+    # * configurationId
+    #
+    # Also, all configuration items associated with your user account that
+    # have tags can be listed if you call `DescribeTags` as is without
+    # passing any parameters.
     #
     # @option params [Array<Types::TagFilter>] :filters
     #   You can filter the list using a *key*-*value* format. You can separate
@@ -632,6 +912,9 @@ module Aws::ApplicationDiscoveryService
 
     # Retrieves a short summary of discovered assets.
     #
+    # This API operation takes no request parameters and is called as is at
+    # the command prompt as shown in the example.
+    #
     # @return [Types::GetDiscoverySummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDiscoverySummaryResponse#servers #servers} => Integer
@@ -669,9 +952,9 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configuration items according to criteria that you
-    # specify in a filter. The filter criteria identifies the relationship
-    # requirements.
+    # Retrieves a list of configuration items as specified by the value
+    # passed to the required parameter `configurationType`. Optional
+    # filtering may be applied to refine search results.
     #
     # @option params [required, String] :configuration_type
     #   A valid configuration identified by Application Discovery Service.
@@ -683,11 +966,12 @@ module Aws::ApplicationDiscoveryService
     #   `\{"key": "serverType", "value": "webServer"\}`
     #
     #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Querying Discovered Configuration Items][1].
+    #   with this action, see [Using the ListConfigurations Action][1] in the
+    #   *AWS Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #
     # @option params [Integer] :max_results
     #   The total number of items to return. The maximum value is 100.
@@ -702,11 +986,12 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<Types::OrderByElement>] :order_by
     #   Certain filter criteria return output that can be sorted in ascending
     #   or descending order. For a list of output characteristics for each
-    #   filter, see [Using the ListConfigurations Action][1].
+    #   filter, see [Using the ListConfigurations Action][1] in the *AWS
+    #   Application Discovery Service User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
+    #   [1]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
     #
     # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -803,6 +1088,33 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def list_server_neighbors(params = {}, options = {})
       req = build_request(:list_server_neighbors, params)
+      req.send_request(options)
+    end
+
+    # Start the continuous flow of agent's discovered data into Amazon
+    # Athena.
+    #
+    # @return [Types::StartContinuousExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContinuousExportResponse#export_id #export_id} => String
+    #   * {Types::StartContinuousExportResponse#s3_bucket #s3_bucket} => String
+    #   * {Types::StartContinuousExportResponse#start_time #start_time} => Time
+    #   * {Types::StartContinuousExportResponse#data_source #data_source} => String
+    #   * {Types::StartContinuousExportResponse#schema_storage_config #schema_storage_config} => Hash&lt;String,String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #   resp.s3_bucket #=> String
+    #   resp.start_time #=> Time
+    #   resp.data_source #=> String, one of "AGENT"
+    #   resp.schema_storage_config #=> Hash
+    #   resp.schema_storage_config["DatabaseName"] #=> String
+    #
+    # @overload start_continuous_export(params = {})
+    # @param [Hash] params ({})
+    def start_continuous_export(params = {}, options = {})
+      req = build_request(:start_continuous_export, params)
       req.send_request(options)
     end
 
@@ -908,6 +1220,135 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Starts an import task, which allows you to import details of your
+    # on-premises environment directly into AWS Migration Hub without having
+    # to use the Application Discovery Service (ADS) tools such as the
+    # Discovery Connector or Discovery Agent. This gives you the option to
+    # perform migration assessment and planning directly from your imported
+    # data, including the ability to group your devices as applications and
+    # track their migration status.
+    #
+    # To start an import request, do this:
+    #
+    # 1.  Download the specially formatted comma separated value (CSV)
+    #     import template, which you can find here:
+    #     [https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import\_template.csv][1].
+    #
+    # 2.  Fill out the template with your server and application data.
+    #
+    # 3.  Upload your import file to an Amazon S3 bucket, and make a note of
+    #     it's Object URL. Your import file must be in the CSV format.
+    #
+    # 4.  Use the console or the `StartImportTask` command with the AWS CLI
+    #     or one of the AWS SDKs to import the records from your file.
+    #
+    # For more information, including step-by-step procedures, see
+    # [Migration Hub Import][2] in the *AWS Application Discovery Service
+    # User Guide*.
+    #
+    # <note markdown="1"> There are limits to the number of import tasks you can create (and
+    # delete) in an AWS account. For more information, see [AWS Application
+    # Discovery Service Limits][3] in the *AWS Application Discovery Service
+    # User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv
+    # [2]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-import.html
+    # [3]: https://docs.aws.amazon.com/application-discovery/latest/userguide/ads_service_limits.html
+    #
+    # @option params [String] :client_request_token
+    #   Optional. A unique token that you can provide to prevent the same
+    #   import request from occurring more than once. If you don't provide a
+    #   token, a token is automatically generated.
+    #
+    #   Sending more than one `StartImportTask` request with the same client
+    #   request token will return information about the original import task
+    #   with that client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   A descriptive name for this request. You can use this name to filter
+    #   future requests related to this import task, such as identifying
+    #   applications and servers that were included in this import task. We
+    #   recommend that you use a meaningful name for each import task.
+    #
+    # @option params [required, String] :import_url
+    #   The URL for your import file that you've uploaded to Amazon S3.
+    #
+    #   <note markdown="1"> If you're using the AWS CLI, this URL is structured as follows:
+    #   `s3://BucketName/ImportFileName.CSV`
+    #
+    #    </note>
+    #
+    # @return [Types::StartImportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportTaskResponse#task #task} => Types::ImportTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import_task({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "ImportTaskName", # required
+    #     import_url: "ImportURL", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task.import_task_id #=> String
+    #   resp.task.client_request_token #=> String
+    #   resp.task.name #=> String
+    #   resp.task.import_url #=> String
+    #   resp.task.status #=> String, one of "IMPORT_IN_PROGRESS", "IMPORT_COMPLETE", "IMPORT_COMPLETE_WITH_ERRORS", "IMPORT_FAILED", "IMPORT_FAILED_SERVER_LIMIT_EXCEEDED", "IMPORT_FAILED_RECORD_LIMIT_EXCEEDED", "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "DELETE_FAILED_LIMIT_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.task.import_request_time #=> Time
+    #   resp.task.import_completion_time #=> Time
+    #   resp.task.import_deleted_time #=> Time
+    #   resp.task.server_import_success #=> Integer
+    #   resp.task.server_import_failure #=> Integer
+    #   resp.task.application_import_success #=> Integer
+    #   resp.task.application_import_failure #=> Integer
+    #   resp.task.errors_and_failed_entries_zip #=> String
+    #
+    # @overload start_import_task(params = {})
+    # @param [Hash] params ({})
+    def start_import_task(params = {}, options = {})
+      req = build_request(:start_import_task, params)
+      req.send_request(options)
+    end
+
+    # Stop the continuous flow of agent's discovered data into Amazon
+    # Athena.
+    #
+    # @option params [required, String] :export_id
+    #   The unique ID assigned to this export.
+    #
+    # @return [Types::StopContinuousExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopContinuousExportResponse#start_time #start_time} => Time
+    #   * {Types::StopContinuousExportResponse#stop_time #stop_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_continuous_export({
+    #     export_id: "ConfigurationsExportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.start_time #=> Time
+    #   resp.stop_time #=> Time
+    #
+    # @overload stop_continuous_export(params = {})
+    # @param [Hash] params ({})
+    def stop_continuous_export(params = {}, options = {})
+      req = build_request(:stop_continuous_export, params)
+      req.send_request(options)
+    end
+
     # Instructs the specified agents or connectors to stop collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
@@ -979,7 +1420,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -62,6 +62,15 @@ module Aws::MarketplaceEntitlementService
     GetEntitlementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "NextToken"))
     GetEntitlementsResult.struct_class = Types::GetEntitlementsResult
 
+    InternalServiceErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -69,6 +78,7 @@ module Aws::MarketplaceEntitlementService
       api.version = "2017-01-11"
 
       api.metadata = {
+        "apiVersion" => "2017-01-11",
         "endpointPrefix" => "entitlement.marketplace",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -76,6 +86,7 @@ module Aws::MarketplaceEntitlementService
         "signatureVersion" => "v4",
         "signingName" => "aws-marketplace",
         "targetPrefix" => "AWSMPEntitlementService",
+        "uid" => "entitlement.marketplace-2017-01-11",
       }
 
       api.add_operation(:get_entitlements, Seahorse::Model::Operation.new.tap do |o|

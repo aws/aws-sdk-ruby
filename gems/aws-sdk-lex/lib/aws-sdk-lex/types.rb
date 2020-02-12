@@ -8,6 +8,34 @@
 module Aws::Lex
   module Types
 
+    # Either the Amazon Lex bot is still building, or one of the dependent
+    # services (Amazon Polly, AWS Lambda) failed with an internal service
+    # error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/BadGatewayException AWS API Documentation
+    #
+    class BadGatewayException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Request validation failed, there is no usable message in the context,
+    # or the bot build failed, is still in progress, or contains unbuilt
+    # changes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents an option to be shown on the client platform (Facebook,
     # Slack, etc.)
     #
@@ -26,6 +54,199 @@ module Aws::Lex
     class Button < Struct.new(
       :text,
       :value)
+      include Aws::Structure
+    end
+
+    # Two clients are using the same AWS account, Amazon Lex bot, and user
+    # ID.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_name: "BotName", # required
+    #         bot_alias: "BotAlias", # required
+    #         user_id: "UserId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user associated with the session data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSessionRequest AWS API Documentation
+    #
+    class DeleteSessionRequest < Struct.new(
+      :bot_name,
+      :bot_alias,
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_name
+    #   The name of the bot associated with the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias
+    #   The alias in use for the bot associated with the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the client application user.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DeleteSessionResponse AWS API Documentation
+    #
+    class DeleteSessionResponse < Struct.new(
+      :bot_name,
+      :bot_alias,
+      :user_id,
+      :session_id)
+      include Aws::Structure
+    end
+
+    # One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
+    # exception. For example,
+    #
+    # * If Amazon Lex does not have sufficient permissions to call a Lambda
+    #   function.
+    #
+    # * If a Lambda function takes longer than 30 seconds to execute.
+    #
+    # * If a fulfillment Lambda function returns a `Delegate` dialog action
+    #   without removing any slot values.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DependencyFailedException AWS API Documentation
+    #
+    class DependencyFailedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes the next action that the bot should take in its interaction
+    # with the user and provides information about the context in which the
+    # action takes place. Use the `DialogAction` data type to set the
+    # interaction to a specific state, or to return the interaction to a
+    # previous state.
+    #
+    # @note When making an API call, you may pass DialogAction
+    #   data as a hash:
+    #
+    #       {
+    #         type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #         intent_name: "IntentName",
+    #         slots: {
+    #           "String" => "String",
+    #         },
+    #         slot_to_elicit: "String",
+    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #         message: "Text",
+    #         message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The next action that the bot should take in its interaction with the
+    #   user. The possible values are:
+    #
+    #   * `ConfirmIntent` - The next action is asking the user if the intent
+    #     is complete and ready to be fulfilled. This is a yes/no question
+    #     such as "Place the order?"
+    #
+    #   * `Close` - Indicates that the there will not be a response from the
+    #     user. For example, the statement "Your order has been placed"
+    #     does not require a response.
+    #
+    #   * `Delegate` - The next action is determined by Amazon Lex.
+    #
+    #   * `ElicitIntent` - The next action is to determine the intent that
+    #     the user wants to fulfill.
+    #
+    #   * `ElicitSlot` - The next action is to elicit a slot value from the
+    #     user.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   Map of the slots that have been gathered and their values.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] slot_to_elicit
+    #   The name of the slot that should be elicited from the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] fulfillment_state
+    #   The fulfillment state of the intent. The possible values are:
+    #
+    #   * `Failed` - The Lambda function associated with the intent failed
+    #     to fulfill the intent.
+    #
+    #   * `Fulfilled` - The intent has fulfilled by the Lambda function
+    #     associated with the intent.
+    #
+    #   * `ReadyForFulfillment` - All of the information necessary for the
+    #     intent is present and the intent ready to be fulfilled by the
+    #     client application.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message that should be shown to the user. If you don't specify
+    #   a message, Amazon Lex will use the message configured for the
+    #   intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_format
+    #   * `PlainText` - The message contains plain UTF-8 text.
+    #
+    #   * `CustomPayload` - The message is a custom format for the client.
+    #
+    #   * `SSML` - The message contains text formatted for voice output.
+    #
+    #   * `Composite` - The message contains an escaped JSON object
+    #     containing one or more messages. For more information, see
+    #     [Message Groups][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/howitworks-manage-prompts.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/DialogAction AWS API Documentation
+    #
+    class DialogAction < Struct.new(
+      :type,
+      :intent_name,
+      :slots,
+      :slot_to_elicit,
+      :fulfillment_state,
+      :message,
+      :message_format)
       include Aws::Structure
     end
 
@@ -60,6 +281,251 @@ module Aws::Lex
       :attachment_link_url,
       :image_url,
       :buttons)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_name: "BotName", # required
+    #         bot_alias: "BotAlias", # required
+    #         user_id: "UserId", # required
+    #         checkpoint_label_filter: "IntentSummaryCheckpointLabel",
+    #       }
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] checkpoint_label_filter
+    #   A string used to filter the intents returned in the
+    #   `recentIntentSummaryView` structure.
+    #
+    #   When you specify a filter, only intents with their `checkpointLabel`
+    #   field set to that string are returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionRequest AWS API Documentation
+    #
+    class GetSessionRequest < Struct.new(
+      :bot_name,
+      :bot_alias,
+      :user_id,
+      :checkpoint_label_filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recent_intent_summary_view
+    #   An array of information about the intents used in the session. The
+    #   array can contain a maximum of three summaries. If more than three
+    #   intents are used in the session, the `recentIntentSummaryView`
+    #   operation contains information about the last three intents used.
+    #
+    #   If you set the `checkpointLabelFilter` parameter in the request, the
+    #   array contains only the intents with the specified label.
+    #   @return [Array<Types::IntentSummary>]
+    #
+    # @!attribute [rw] session_attributes
+    #   Map of key/value pairs representing the session-specific context
+    #   information. It contains application information passed between
+    #   Amazon Lex and a client application.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] session_id
+    #   A unique identifier for the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialog_action
+    #   Describes the current state of the bot.
+    #   @return [Types::DialogAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GetSessionResponse AWS API Documentation
+    #
+    class GetSessionResponse < Struct.new(
+      :recent_intent_summary_view,
+      :session_attributes,
+      :session_id,
+      :dialog_action)
+      include Aws::Structure
+    end
+
+    # Provides information about the state of an intent. You can use this
+    # information to get the current state of an intent so that you can
+    # process the intent, or so that you can return the intent to its
+    # previous state.
+    #
+    # @note When making an API call, you may pass IntentSummary
+    #   data as a hash:
+    #
+    #       {
+    #         intent_name: "IntentName",
+    #         checkpoint_label: "IntentSummaryCheckpointLabel",
+    #         slots: {
+    #           "String" => "String",
+    #         },
+    #         confirmation_status: "None", # accepts None, Confirmed, Denied
+    #         dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #         fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #         slot_to_elicit: "String",
+    #       }
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] checkpoint_label
+    #   A user-defined label that identifies a particular intent. You can
+    #   use this label to return to a previous intent.
+    #
+    #   Use the `checkpointLabelFilter` parameter of the `GetSessionRequest`
+    #   operation to filter the intents returned by the operation to those
+    #   with only the specified label.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   Map of the slots that have been gathered and their values.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] confirmation_status
+    #   The status of the intent after the user responds to the confirmation
+    #   prompt. If the user confirms the intent, Amazon Lex sets this field
+    #   to `Confirmed`. If the user denies the intent, Amazon Lex sets this
+    #   value to `Denied`. The possible values are:
+    #
+    #   * `Confirmed` - The user has responded "Yes" to the confirmation
+    #     prompt, confirming that the intent is complete and that it is
+    #     ready to be fulfilled.
+    #
+    #   * `Denied` - The user has responded "No" to the confirmation
+    #     prompt.
+    #
+    #   * `None` - The user has never been prompted for confirmation; or,
+    #     the user was prompted but did not confirm or deny the prompt.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialog_action_type
+    #   The next action that the bot should take in its interaction with the
+    #   user. The possible values are:
+    #
+    #   * `ConfirmIntent` - The next action is asking the user if the intent
+    #     is complete and ready to be fulfilled. This is a yes/no question
+    #     such as "Place the order?"
+    #
+    #   * `Close` - Indicates that the there will not be a response from the
+    #     user. For example, the statement "Your order has been placed"
+    #     does not require a response.
+    #
+    #   * `ElicitIntent` - The next action is to determine the intent that
+    #     the user wants to fulfill.
+    #
+    #   * `ElicitSlot` - The next action is to elicit a slot value from the
+    #     user.
+    #   @return [String]
+    #
+    # @!attribute [rw] fulfillment_state
+    #   The fulfillment state of the intent. The possible values are:
+    #
+    #   * `Failed` - The Lambda function associated with the intent failed
+    #     to fulfill the intent.
+    #
+    #   * `Fulfilled` - The intent has fulfilled by the Lambda function
+    #     associated with the intent.
+    #
+    #   * `ReadyForFulfillment` - All of the information necessary for the
+    #     intent is present and the intent ready to be fulfilled by the
+    #     client application.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_to_elicit
+    #   The next slot to elicit from the user. If there is not slot to
+    #   elicit, the field is blank.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/IntentSummary AWS API Documentation
+    #
+    class IntentSummary < Struct.new(
+      :intent_name,
+      :checkpoint_label,
+      :slots,
+      :confirmation_status,
+      :dialog_action_type,
+      :fulfillment_state,
+      :slot_to_elicit)
+      include Aws::Structure
+    end
+
+    # Internal service error. Retry the call.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Exceeded a limit.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # This exception is not used.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/LoopDetectedException AWS API Documentation
+    #
+    class LoopDetectedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The accept header in the request does not have a valid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/NotAcceptableException AWS API Documentation
+    #
+    class NotAcceptableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource (such as the Amazon Lex bot or an alias) that is referred
+    # to is not found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -126,7 +592,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
     #   @return [String]
     #
     # @!attribute [rw] request_attributes
@@ -146,7 +612,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -193,7 +659,10 @@ module Aws::Lex
     #     For example, if you specify `audio/mpeg` as the value, Amazon Lex
     #     returns speech in the MPEG format.
     #
-    #     The following are the accepted values:
+    #   * If the value is `audio/pcm`, the speech returned is `audio/pcm` in
+    #     16-bit, little endian format.
+    #
+    #   * The following are the accepted values:
     #
     #     * audio/mpeg
     #
@@ -241,7 +710,8 @@ module Aws::Lex
     #
     # @!attribute [rw] slots
     #   Map of zero or more intent slots (name/value pairs) Amazon Lex
-    #   detected from the user input during the conversation.
+    #   detected from the user input during the conversation. The field is
+    #   base-64 encoded.
     #
     #   Amazon Lex creates a resolution list containing likely values for a
     #   slot. The value that it returns is determined by the
@@ -260,13 +730,21 @@ module Aws::Lex
     #   information.
     #   @return [String]
     #
+    # @!attribute [rw] sentiment_response
+    #   The sentiment expressed in and utterance.
+    #
+    #   When the bot is configured to send utterances to Amazon Comprehend
+    #   for sentiment analysis, this field contains the result of the
+    #   analysis.
+    #   @return [String]
+    #
     # @!attribute [rw] message
     #   The message to convey to the user. The message can come from the
     #   bot's configuration or from a Lambda function.
     #
     #   If the intent is not configured with a Lambda function, or if the
-    #   Lambda function returned `Delegate` as the `dialogAction.type` its
-    #   response, Amazon Lex decides on the next course of action and
+    #   Lambda function returned `Delegate` as the `dialogAction.type` in
+    #   its response, Amazon Lex decides on the next course of action and
     #   selects an appropriate message from the bot's configuration based
     #   on the current interaction context. For example, if Amazon Lex
     #   isn't able to understand user input, it uses a clarification prompt
@@ -370,6 +848,10 @@ module Aws::Lex
     #   Amazon Lex sends that message in the response.
     #   @return [IO]
     #
+    # @!attribute [rw] session_id
+    #   The unique identifier for the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse AWS API Documentation
     #
     class PostContentResponse < Struct.new(
@@ -377,12 +859,14 @@ module Aws::Lex
       :intent_name,
       :slots,
       :session_attributes,
+      :sentiment_response,
       :message,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
       :input_transcript,
-      :audio_stream)
+      :audio_stream,
+      :session_id)
       include Aws::Structure
     end
 
@@ -445,7 +929,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] request_attributes
@@ -459,7 +943,7 @@ module Aws::Lex
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] input_text
@@ -524,6 +1008,14 @@ module Aws::Lex
     #   If the Lambda function returns a message, Amazon Lex passes it to
     #   the client in its response.
     #   @return [String]
+    #
+    # @!attribute [rw] sentiment_response
+    #   The sentiment expressed in and utterance.
+    #
+    #   When the bot is configured to send utterances to Amazon Comprehend
+    #   for sentiment analysis, this field contains the result of the
+    #   analysis.
+    #   @return [Types::SentimentResponse]
     #
     # @!attribute [rw] message_format
     #   The format of the response message. One of the following values:
@@ -601,6 +1093,10 @@ module Aws::Lex
     #   from a code hook (Lambda function).
     #   @return [Types::ResponseCard]
     #
+    # @!attribute [rw] session_id
+    #   A unique identifier for the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextResponse AWS API Documentation
     #
     class PostTextResponse < Struct.new(
@@ -608,10 +1104,249 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :sentiment_response,
       :message_format,
       :dialog_state,
       :slot_to_elicit,
-      :response_card)
+      :response_card,
+      :session_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_name: "BotName", # required
+    #         bot_alias: "BotAlias", # required
+    #         user_id: "UserId", # required
+    #         session_attributes: {
+    #           "String" => "String",
+    #         },
+    #         dialog_action: {
+    #           type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #           intent_name: "IntentName",
+    #           slots: {
+    #             "String" => "String",
+    #           },
+    #           slot_to_elicit: "String",
+    #           fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #           message: "Text",
+    #           message_format: "PlainText", # accepts PlainText, CustomPayload, SSML, Composite
+    #         },
+    #         recent_intent_summary_view: [
+    #           {
+    #             intent_name: "IntentName",
+    #             checkpoint_label: "IntentSummaryCheckpointLabel",
+    #             slots: {
+    #               "String" => "String",
+    #             },
+    #             confirmation_status: "None", # accepts None, Confirmed, Denied
+    #             dialog_action_type: "ElicitIntent", # required, accepts ElicitIntent, ConfirmIntent, ElicitSlot, Close, Delegate
+    #             fulfillment_state: "Fulfilled", # accepts Fulfilled, Failed, ReadyForFulfillment
+    #             slot_to_elicit: "String",
+    #           },
+    #         ],
+    #         accept: "Accept",
+    #       }
+    #
+    # @!attribute [rw] bot_name
+    #   The name of the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_alias
+    #   The alias in use for the bot that contains the session data.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the client application user. Amazon Lex uses this to
+    #   identify a user's conversation with your bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_attributes
+    #   Map of key/value pairs representing the session-specific context
+    #   information. It contains application information passed between
+    #   Amazon Lex and a client application.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dialog_action
+    #   Sets the next action that the bot should take to fulfill the
+    #   conversation.
+    #   @return [Types::DialogAction]
+    #
+    # @!attribute [rw] recent_intent_summary_view
+    #   A summary of the recent intents for the bot. You can use the intent
+    #   summary view to set a checkpoint label on an intent and modify
+    #   attributes of intents. You can also use it to remove or add intent
+    #   summary objects to the list.
+    #
+    #   An intent that you modify or add to the list must make sense for the
+    #   bot. For example, the intent name must be valid for the bot. You
+    #   must provide valid values for:
+    #
+    #   * `intentName`
+    #
+    #   * slot names
+    #
+    #   * `slotToElict`
+    #
+    #   If you send the `recentIntentSummaryView` parameter in a
+    #   `PutSession` request, the contents of the new summary view replaces
+    #   the old summary view. For example, if a `GetSession` request returns
+    #   three intents in the summary view and you call `PutSession` with one
+    #   intent in the summary view, the next call to `GetSession` will only
+    #   return one intent.
+    #   @return [Array<Types::IntentSummary>]
+    #
+    # @!attribute [rw] accept
+    #   The message that Amazon Lex returns in the response can be either
+    #   text or speech based depending on the value of this field.
+    #
+    #   * If the value is `text/plain; charset=utf-8`, Amazon Lex returns
+    #     text in the response.
+    #
+    #   * If the value begins with `audio/`, Amazon Lex returns speech in
+    #     the response. Amazon Lex uses Amazon Polly to generate the speech
+    #     in the configuration that you specify. For example, if you specify
+    #     `audio/mpeg` as the value, Amazon Lex returns speech in the MPEG
+    #     format.
+    #
+    #   * If the value is `audio/pcm`, the speech is returned as `audio/pcm`
+    #     in 16-bit, little endian format.
+    #
+    #   * The following are the accepted values:
+    #
+    #     * `audio/mpeg`
+    #
+    #     * `audio/ogg`
+    #
+    #     * `audio/pcm`
+    #
+    #     * `audio/*` (defaults to mpeg)
+    #
+    #     * `text/plain; charset=utf-8`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSessionRequest AWS API Documentation
+    #
+    class PutSessionRequest < Struct.new(
+      :bot_name,
+      :bot_alias,
+      :user_id,
+      :session_attributes,
+      :dialog_action,
+      :recent_intent_summary_view,
+      :accept)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] content_type
+    #   Content type as specified in the `Accept` HTTP header in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_name
+    #   The name of the current intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] slots
+    #   Map of zero or more intent slots Amazon Lex detected from the user
+    #   input during the conversation.
+    #
+    #   Amazon Lex creates a resolution list containing likely values for a
+    #   slot. The value that it returns is determined by the
+    #   `valueSelectionStrategy` selected when the slot type was created or
+    #   updated. If `valueSelectionStrategy` is set to `ORIGINAL_VALUE`, the
+    #   value provided by the user is returned, if the user value is similar
+    #   to the slot values. If `valueSelectionStrategy` is set to
+    #   `TOP_RESOLUTION` Amazon Lex returns the first value in the
+    #   resolution list or, if there is no resolution list, null. If you
+    #   don't specify a `valueSelectionStrategy` the default is
+    #   `ORIGINAL_VALUE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_attributes
+    #   Map of key/value pairs representing session-specific context
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The next message that should be presented to the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_format
+    #   The format of the response message. One of the following values:
+    #
+    #   * `PlainText` - The message contains plain UTF-8 text.
+    #
+    #   * `CustomPayload` - The message is a custom format for the client.
+    #
+    #   * `SSML` - The message contains text formatted for voice output.
+    #
+    #   * `Composite` - The message contains an escaped JSON object
+    #     containing one or more messages from the groups that messages were
+    #     assigned to when the intent was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialog_state
+    #   * `ConfirmIntent` - Amazon Lex is expecting a "yes" or "no"
+    #     response to confirm the intent before fulfilling an intent.
+    #
+    #   * `ElicitIntent` - Amazon Lex wants to elicit the user's intent.
+    #
+    #   * `ElicitSlot` - Amazon Lex is expecting the value of a slot for the
+    #     current intent.
+    #
+    #   * `Failed` - Conveys that the conversation with the user has failed.
+    #     This can happen for various reasons, including the user does not
+    #     provide an appropriate response to prompts from the service, or if
+    #     the Lambda function fails to fulfill the intent.
+    #
+    #   * `Fulfilled` - Conveys that the Lambda function has sucessfully
+    #     fulfilled the intent.
+    #
+    #   * `ReadyForFulfillment` - Conveys that the client has to fulfill the
+    #     intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] slot_to_elicit
+    #   If the `dialogState` is `ElicitSlot`, returns the name of the slot
+    #   for which Amazon Lex is eliciting a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] audio_stream
+    #   The audio version of the message to convey to the user.
+    #   @return [IO]
+    #
+    # @!attribute [rw] session_id
+    #   A unique identifier for the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PutSessionResponse AWS API Documentation
+    #
+    class PutSessionResponse < Struct.new(
+      :content_type,
+      :intent_name,
+      :slots,
+      :session_attributes,
+      :message,
+      :message_format,
+      :dialog_state,
+      :slot_to_elicit,
+      :audio_stream,
+      :session_id)
+      include Aws::Structure
+    end
+
+    # The input speech is too long.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/RequestTimeoutException AWS API Documentation
+    #
+    class RequestTimeoutException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -638,6 +1373,41 @@ module Aws::Lex
       :version,
       :content_type,
       :generic_attachments)
+      include Aws::Structure
+    end
+
+    # The sentiment expressed in an utterance.
+    #
+    # When the bot is configured to send utterances to Amazon Comprehend for
+    # sentiment analysis, this field structure contains the result of the
+    # analysis.
+    #
+    # @!attribute [rw] sentiment_label
+    #   The inferred sentiment that Amazon Comprehend has the highest
+    #   confidence in.
+    #   @return [String]
+    #
+    # @!attribute [rw] sentiment_score
+    #   The likelihood that the sentiment was correctly inferred.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/SentimentResponse AWS API Documentation
+    #
+    class SentimentResponse < Struct.new(
+      :sentiment_label,
+      :sentiment_score)
+      include Aws::Structure
+    end
+
+    # The Content-Type header (`PostContent` API) has an invalid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/UnsupportedMediaTypeException AWS API Documentation
+    #
+    class UnsupportedMediaTypeException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

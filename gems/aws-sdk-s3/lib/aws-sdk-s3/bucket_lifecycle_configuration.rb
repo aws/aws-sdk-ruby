@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,6 +31,7 @@ module Aws::S3
       @bucket_name
     end
 
+    # Container for a lifecycle rule.
     # @return [Array<Types::LifecycleRule>]
     def rules
       data[:rules]
@@ -212,13 +214,13 @@ module Aws::S3
     #             {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #             },
     #           ],
     #           noncurrent_version_transitions: [
     #             {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, DEEP_ARCHIVE
     #             },
     #           ],
     #           noncurrent_version_expiration: {
@@ -233,6 +235,7 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [Types::BucketLifecycleConfiguration] :lifecycle_configuration
+    #   Container for lifecycle rules. You can add as many as 1,000 rules.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

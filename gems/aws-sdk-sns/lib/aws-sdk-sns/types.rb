@@ -35,7 +35,7 @@ module Aws::SNS
     # @!attribute [rw] action_name
     #   The action you want to allow for the specified principal(s).
     #
-    #   Valid values: any Amazon SNS action name.
+    #   Valid values: Any Amazon SNS action name, for example `Publish`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionInput AWS API Documentation
@@ -45,6 +45,19 @@ module Aws::SNS
       :label,
       :aws_account_id,
       :action_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the user has been denied access to the requested
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AuthorizationErrorException AWS API Documentation
+    #
+    class AuthorizationErrorException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -84,6 +97,19 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out)
+      include Aws::Structure
+    end
+
+    # Can't perform multiple operations on a tag simultaneously. Perform
+    # the operations sequentially.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConcurrentAccessException AWS API Documentation
+    #
+    class ConcurrentAccessException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -171,7 +197,7 @@ module Aws::SNS
     # @!attribute [rw] platform
     #   The following platforms are supported: ADM (Amazon Device
     #   Messaging), APNS (Apple Push Notification Service), APNS\_SANDBOX,
-    #   and GCM (Google Cloud Messaging).
+    #   and FCM (Firebase Cloud Messaging).
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -179,7 +205,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationInput AWS API Documentation
@@ -228,7 +254,7 @@ module Aws::SNS
     #   a device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using GCM or ADM, the device token equivalent is called the
+    #   when using FCM or ADM, the device token equivalent is called the
     #   registration ID.
     #   @return [String]
     #
@@ -243,7 +269,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpointInput AWS API Documentation
@@ -263,6 +289,15 @@ module Aws::SNS
     #
     #       {
     #         name: "topicName", # required
+    #         attributes: {
+    #           "attributeName" => "attributeValue",
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -273,10 +308,54 @@ module Aws::SNS
     #   be between 1 and 256 characters long.
     #   @return [String]
     #
+    # @!attribute [rw] attributes
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the
+    #   special request parameters that the `CreateTopic` action uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the
+    #     topic.
+    #
+    #   The following attribute applies only to
+    #   [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
+    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags to add to a new topic.
+    #
+    #   <note markdown="1"> To be able to tag a topic on creation, you must have the
+    #   `sns:CreateTopic` and `sns:TagResource` permissions.
+    #
+    #    </note>
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicInput AWS API Documentation
     #
     class CreateTopicInput < Struct.new(
-      :name)
+      :name,
+      :attributes,
+      :tags)
       include Aws::Structure
     end
 
@@ -369,6 +448,33 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Exception error indicating endpoint disabled.
+    #
+    # @!attribute [rw] message
+    #   Message for endpoint disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/EndpointDisabledException AWS API Documentation
+    #
+    class EndpointDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the number of filter polices in your AWS account
+    # exceeds the limit. To add more filter polices, submit an SNS Limit
+    # Increase case in the AWS Support Center.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/FilterPolicyLimitExceededException AWS API Documentation
+    #
+    class FilterPolicyLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for GetEndpointAttributes action.
     #
     # @note When making an API call, you may pass GetEndpointAttributesInput
@@ -394,19 +500,23 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   Attributes include the following:
     #
-    #   * `CustomUserData` -- arbitrary user data to associate with the
+    #   * `CustomUserData` – arbitrary user data to associate with the
     #     endpoint. Amazon SNS does not use this data. The data must be in
     #     UTF-8 format and less than 2KB.
     #
-    #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
+    #   * `Enabled` – flag that enables/disables delivery to the endpoint.
     #     Amazon SNS will set this to false when a notification service
     #     indicates to Amazon SNS that the endpoint is invalid. Users can
     #     set it back to true, typically after updating Token.
     #
-    #   * `Token` -- device token, also referred to as a registration id,
-    #     for an app and mobile device. This is returned from the
-    #     notification service when an app and mobile device are registered
-    #     with the notification service.
+    #   * `Token` – device token, also referred to as a registration id, for
+    #     an app and mobile device. This is returned from the notification
+    #     service when an app and mobile device are registered with the
+    #     notification service.
+    #
+    #     <note markdown="1"> The device token for the iOS platform is returned in lowercase.
+    #
+    #      </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesResponse AWS API Documentation
@@ -441,16 +551,16 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   Attributes include the following:
     #
-    #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
+    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
     #
-    #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
+    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
     #     notifications should be sent.
     #
-    #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
+    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
     #     notifications should be sent.
     #
-    #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
+    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
     #     notifications should be sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #   @return [Hash<String,String>]
@@ -482,7 +592,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput AWS API Documentation
@@ -531,22 +641,41 @@ module Aws::SNS
     #   A map of the subscription's attributes. Attributes in this map
     #   include the following:
     #
-    #   * `SubscriptionArn` -- the subscription's ARN
+    #   * `ConfirmationWasAuthenticated` – `true` if the subscription
+    #     confirmation request was authenticated.
     #
-    #   * `TopicArn` -- the topic ARN that the subscription is associated
-    #     with
+    #   * `DeliveryPolicy` – The JSON serialization of the subscription's
+    #     delivery policy.
     #
-    #   * `Owner` -- the AWS account ID of the subscription's owner
-    #
-    #   * `ConfirmationWasAuthenticated` -- true if the subscription
-    #     confirmation request was authenticated
-    #
-    #   * `DeliveryPolicy` -- the JSON serialization of the subscription's
-    #     delivery policy
-    #
-    #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
+    #   * `EffectiveDeliveryPolicy` – The JSON serialization of the
     #     effective delivery policy that takes into account the topic
-    #     delivery policy and account system defaults
+    #     delivery policy and account system defaults.
+    #
+    #   * `FilterPolicy` – The filter policy JSON that is assigned to the
+    #     subscription.
+    #
+    #   * `Owner` – The AWS account ID of the subscription's owner.
+    #
+    #   * `PendingConfirmation` – `true` if the subscription hasn't been
+    #     confirmed. To confirm a pending subscription, call the
+    #     `ConfirmSubscription` action with a confirmation token.
+    #
+    #   * `RawMessageDelivery` – `true` if raw message delivery is enabled
+    #     for the subscription. Raw messages are free of JSON formatting and
+    #     can be sent to HTTP/S and Amazon SQS endpoints.
+    #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't
+    #     be delivered due to client errors (for example, when the
+    #     subscribed endpoint is unreachable) or server errors (for example,
+    #     when the service that powers the subscribed endpoint becomes
+    #     unavailable) are held in the dead-letter queue for further
+    #     analysis or reprocessing.
+    #
+    #   * `SubscriptionArn` – The subscription's ARN.
+    #
+    #   * `TopicArn` – The topic ARN that the subscription is associated
+    #     with.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse AWS API Documentation
@@ -582,36 +711,192 @@ module Aws::SNS
     #   A map of the topic's attributes. Attributes in this map include the
     #   following:
     #
-    #   * `TopicArn` -- the topic's ARN
+    #   * `DeliveryPolicy` – The JSON serialization of the topic's delivery
+    #     policy.
     #
-    #   * `Owner` -- the AWS account ID of the topic's owner
+    #   * `DisplayName` – The human-readable name used in the `From` field
+    #     for notifications to `email` and `email-json` endpoints.
     #
-    #   * `Policy` -- the JSON serialization of the topic's access control
-    #     policy
+    #   * `Owner` – The AWS account ID of the topic's owner.
     #
-    #   * `DisplayName` -- the human-readable name used in the "From"
-    #     field for notifications to email and email-json endpoints
+    #   * `Policy` – The JSON serialization of the topic's access control
+    #     policy.
     #
-    #   * `SubscriptionsPending` -- the number of subscriptions pending
-    #     confirmation on this topic
+    #   * `SubscriptionsConfirmed` – The number of confirmed subscriptions
+    #     for the topic.
     #
-    #   * `SubscriptionsConfirmed` -- the number of confirmed subscriptions
-    #     on this topic
+    #   * `SubscriptionsDeleted` – The number of deleted subscriptions for
+    #     the topic.
     #
-    #   * `SubscriptionsDeleted` -- the number of deleted subscriptions on
-    #     this topic
+    #   * `SubscriptionsPending` – The number of subscriptions pending
+    #     confirmation for the topic.
     #
-    #   * `DeliveryPolicy` -- the JSON serialization of the topic's
-    #     delivery policy
+    #   * `TopicArn` – The topic's ARN.
     #
-    #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
-    #     effective delivery policy that takes into account system defaults
+    #   * `EffectiveDeliveryPolicy` – Yhe JSON serialization of the
+    #     effective delivery policy, taking system defaults into account.
+    #
+    #   The following attribute applies only to
+    #   [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
+    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesResponse AWS API Documentation
     #
     class GetTopicAttributesResponse < Struct.new(
       :attributes)
+      include Aws::Structure
+    end
+
+    # Indicates an internal service error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a request parameter does not comply with the associated
+    # constraints.
+    #
+    # @!attribute [rw] message
+    #   The parameter value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The credential signature isn't valid. You must use an HTTPS endpoint
+    # and sign your request using Signature Version 4.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidSecurityException AWS API Documentation
+    #
+    class InvalidSecurityException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ciphertext references a key that doesn't exist or that you don't
+    # have access to.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSAccessDeniedException AWS API Documentation
+    #
+    class KMSAccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified customer master key
+    # (CMK) isn't enabled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSDisabledException AWS API Documentation
+    #
+    class KMSDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # isn't valid for this request. For more information, see [How Key
+    # State Affects Use of a Customer Master Key][1] in the *AWS Key
+    # Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSNotFoundException AWS API Documentation
+    #
+    class KMSNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The AWS access key ID needs a subscription for the service.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSOptInRequired AWS API Documentation
+    #
+    class KMSOptInRequired < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling. For more information
+    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/KMSThrottlingException AWS API Documentation
+    #
+    class KMSThrottlingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -836,6 +1121,35 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic for which to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags associated with the specified topic.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTopicsInput
     #   data as a hash:
     #
@@ -885,8 +1199,8 @@ module Aws::SNS
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/sns/latest/api/API_Publish.html
-    # [2]: http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
+    # [1]: https://docs.aws.amazon.com/sns/latest/api/API_Publish.html
+    # [2]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html
     #
     # @note When making an API call, you may pass MessageAttributeValue
     #   data as a hash:
@@ -899,22 +1213,21 @@ module Aws::SNS
     #
     # @!attribute [rw] data_type
     #   Amazon SNS supports the following logical data types: String,
-    #   Number, and Binary. For more information, see [Message Attribute
-    #   Data Types][1].
+    #   String.Array, Number, and Binary. For more information, see [Message
+    #   Attribute Data Types][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes
     #   @return [String]
     #
     # @!attribute [rw] string_value
     #   Strings are Unicode with UTF8 binary encoding. For a list of code
-    #   values, see
-    #   [http://en.wikipedia.org/wiki/ASCII#ASCII\_printable\_characters][1].
+    #   values, see [ASCII Printable Characters][1].
     #
     #
     #
-    #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
+    #   [1]: https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
     #   @return [String]
     #
     # @!attribute [rw] binary_value
@@ -928,6 +1241,18 @@ module Aws::SNS
       :data_type,
       :string_value,
       :binary_value)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -975,6 +1300,19 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Exception error indicating platform application disabled.
+    #
+    # @!attribute [rw] message
+    #   Message for platform application disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PlatformApplicationDisabledException AWS API Documentation
+    #
+    class PlatformApplicationDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for Publish action.
     #
     # @note When making an API call, you may pass PublishInput
@@ -1004,8 +1342,6 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   Either TopicArn or EndpointArn, but not both.
-    #
     #   If you don't specify a value for the `TargetArn` parameter, you
     #   must specify a value for the `PhoneNumber` or `TopicArn` parameters.
     #   @return [String]
@@ -1019,17 +1355,35 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The message you want to send to the topic.
+    #   The message you want to send.
     #
-    #   If you want to send the same message to all transport protocols,
-    #   include the text of the message as a String value.
+    #   If you are publishing to a topic and you want to send the same
+    #   message to all transport protocols, include the text of the message
+    #   as a String value. If you want to send different messages for each
+    #   transport protocol, set the value of the `MessageStructure`
+    #   parameter to `json` and use a JSON object for the `Message`
+    #   parameter.
     #
-    #   If you want to send different messages for each transport protocol,
-    #   set the value of the `MessageStructure` parameter to `json` and use
-    #   a JSON object for the `Message` parameter.
     #
-    #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB
-    #   in size (262144 bytes, not 262144 characters).
+    #
+    #   Constraints:
+    #
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings
+    #     and at most 256 KB in size (262,144 bytes, not 262,144
+    #     characters).
+    #
+    #   * For SMS, each message can contain up to 140 characters. This
+    #     character limit depends on the encoding schema. For example, an
+    #     SMS message can contain 160 GSM characters, 140 ASCII characters,
+    #     or 70 UCS-2 characters.
+    #
+    #     If you publish a message that exceeds this size limit, Amazon SNS
+    #     sends the message as multiple messages, each fitting within the
+    #     size limit. Messages aren't truncated mid-word but are cut off at
+    #     whole-word boundaries.
+    #
+    #     The total size limit for a single SMS `Publish` action is 1,600
+    #     characters.
     #
     #   JSON-specific constraints:
     #
@@ -1085,16 +1439,7 @@ module Aws::SNS
     #   You can define other top-level keys that define the message you want
     #   to send to a specific transport protocol (e.g., "http").
     #
-    #   For information about sending different messages for each protocol
-    #   using the AWS Management Console, go to [Create Different Messages
-    #   for Each Protocol][1] in the *Amazon Simple Notification Service
-    #   Getting Started Guide*.
-    #
     #   Valid value: `json`
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/gsg/Publish.html#sns-message-formatting-by-protocol
     #   @return [String]
     #
     # @!attribute [rw] message_attributes
@@ -1155,6 +1500,18 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Can't tag resource. Verify that the topic exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for SetEndpointAttributes action.
     #
     # @note When making an API call, you may pass SetEndpointAttributesInput
@@ -1175,19 +1532,19 @@ module Aws::SNS
     #   A map of the endpoint attributes. Attributes in this map include the
     #   following:
     #
-    #   * `CustomUserData` -- arbitrary user data to associate with the
+    #   * `CustomUserData` – arbitrary user data to associate with the
     #     endpoint. Amazon SNS does not use this data. The data must be in
     #     UTF-8 format and less than 2KB.
     #
-    #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
+    #   * `Enabled` – flag that enables/disables delivery to the endpoint.
     #     Amazon SNS will set this to false when a notification service
     #     indicates to Amazon SNS that the endpoint is invalid. Users can
     #     set it back to true, typically after updating Token.
     #
-    #   * `Token` -- device token, also referred to as a registration id,
-    #     for an app and mobile device. This is returned from the
-    #     notification service when an app and mobile device are registered
-    #     with the notification service.
+    #   * `Token` – device token, also referred to as a registration id, for
+    #     an app and mobile device. This is returned from the notification
+    #     service when an app and mobile device are registered with the
+    #     notification service.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributesInput AWS API Documentation
@@ -1218,36 +1575,36 @@ module Aws::SNS
     #   A map of the platform application attributes. Attributes in this map
     #   include the following:
     #
-    #   * `PlatformCredential` -- The credential received from the
+    #   * `PlatformCredential` – The credential received from the
     #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential
-    #     is private key. For GCM, PlatformCredential is "API key". For
+    #     is private key. For FCM, PlatformCredential is "API key". For
     #     ADM, PlatformCredential is "client secret".
     #
-    #   * `PlatformPrincipal` -- The principal received from the
-    #     notification service. For APNS/APNS\_SANDBOX, PlatformPrincipal is
-    #     SSL certificate. For GCM, PlatformPrincipal is not applicable. For
+    #   * `PlatformPrincipal` – The principal received from the notification
+    #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
+    #     certificate. For FCM, PlatformPrincipal is not applicable. For
     #     ADM, PlatformPrincipal is "client id".
     #
-    #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
+    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
     #
-    #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
+    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
     #     notifications should be sent.
     #
-    #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
+    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
     #     notifications should be sent.
     #
-    #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
+    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
     #     notifications should be sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #
-    #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `FailureFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+    #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
     #   @return [Hash<String,String>]
     #
@@ -1284,8 +1641,10 @@ module Aws::SNS
     #   messages, you will incur costs that exceed your limit.
     #
     #   By default, the spend limit is set to the maximum allowed by Amazon
-    #   SNS. If you want to exceed the maximum, contact [AWS Support][1] or
-    #   your AWS sales representative for a service limit increase.
+    #   SNS. If you want to raise the limit, submit an [SNS Limit Increase
+    #   case][1]. For **New limit value**, enter your desired monthly spend
+    #   limit. In the **Use Case Description** field, explain that you are
+    #   requesting an SMS monthly spend limit increase.
     #
     #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
     #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
@@ -1349,8 +1708,8 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/
-    #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesInput AWS API Documentation
@@ -1382,10 +1741,31 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   subscriptions attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `DeliveryPolicy` \| `RawMessageDelivery`
+    #   The following lists the names, descriptions, and values of the
+    #   special request parameters that the `SetTopicAttributes` action
+    #   uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the
+    #     need for the endpoints to process JSON formatting, which is
+    #     otherwise created for Amazon SNS metadata.
+    #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't
+    #     be delivered due to client errors (for example, when the
+    #     subscribed endpoint is unreachable) or server errors (for example,
+    #     when the service that powers the subscribed endpoint becomes
+    #     unavailable) are held in the dead-letter queue for further
+    #     analysis or reprocessing.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -1417,10 +1797,37 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attribute_name
-    #   The name of the attribute you want to set. Only a subset of the
-    #   topic's attributes are mutable.
+    #   A map of attributes with their corresponding values.
     #
-    #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
+    #   The following lists the names, descriptions, and values of the
+    #   special request parameters that the `SetTopicAttributes` action
+    #   uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `DisplayName` – The display name to use for a topic with SMS
+    #     subscriptions.
+    #
+    #   * `Policy` – The policy that defines who can access your topic. By
+    #     default, only the topic owner can publish or subscribe to the
+    #     topic.
+    #
+    #   The following attribute applies only to
+    #   [server-side-encryption][1]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SNS or a custom CMK. For more information, see
+    #     [Key Terms][2]. For more examples, see [KeyId][3] in the *AWS Key
+    #     Management Service API Reference*.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms
+    #   [3]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -1436,6 +1843,19 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # A tag has been added to a resource with the same ARN as a deleted
+    # resource. Wait a short while and then retry the operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/StaleTagException AWS API Documentation
+    #
+    class StaleTagException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Input for Subscribe action.
     #
     # @note When making an API call, you may pass SubscribeInput
@@ -1445,6 +1865,10 @@ module Aws::SNS
     #         topic_arn: "topicARN", # required
     #         protocol: "protocol", # required
     #         endpoint: "endpoint",
+    #         attributes: {
+    #           "attributeName" => "attributeValue",
+    #         },
+    #         return_subscription_arn: false,
     #       }
     #
     # @!attribute [rw] topic_arn
@@ -1454,22 +1878,22 @@ module Aws::SNS
     # @!attribute [rw] protocol
     #   The protocol you want to use. Supported protocols include:
     #
-    #   * `http` -- delivery of JSON-encoded message via HTTP POST
+    #   * `http` – delivery of JSON-encoded message via HTTP POST
     #
-    #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+    #   * `https` – delivery of JSON-encoded message via HTTPS POST
     #
-    #   * `email` -- delivery of message via SMTP
+    #   * `email` – delivery of message via SMTP
     #
-    #   * `email-json` -- delivery of JSON-encoded message via SMTP
+    #   * `email-json` – delivery of JSON-encoded message via SMTP
     #
-    #   * `sms` -- delivery of message via SMS
+    #   * `sms` – delivery of message via SMS
     #
-    #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+    #   * `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
     #
-    #   * `application` -- delivery of JSON-encoded message to an
-    #     EndpointArn for a mobile app and device.
+    #   * `application` – delivery of JSON-encoded message to an EndpointArn
+    #     for a mobile app and device.
     #
-    #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+    #   * `lambda` – delivery of JSON-encoded message to an Amazon Lambda
     #     function.
     #   @return [String]
     #
@@ -1478,10 +1902,10 @@ module Aws::SNS
     #   by protocol:
     #
     #   * For the `http` protocol, the endpoint is an URL beginning with
-    #     "http://"
+    #     `http://`
     #
     #   * For the `https` protocol, the endpoint is a URL beginning with
-    #     "https://"
+    #     `https://`
     #
     #   * For the `email` protocol, the endpoint is an email address
     #
@@ -1496,25 +1920,77 @@ module Aws::SNS
     #   * For the `application` protocol, the endpoint is the EndpointArn of
     #     a mobile app and device.
     #
-    #   * For the `lambda` protocol, the endpoint is the ARN of an AWS
+    #   * For the `lambda` protocol, the endpoint is the ARN of an Amazon
     #     Lambda function.
     #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   A map of attributes with their corresponding values.
+    #
+    #   The following lists the names, descriptions, and values of the
+    #   special request parameters that the `SetTopicAttributes` action
+    #   uses:
+    #
+    #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
+    #     failed deliveries to HTTP/S endpoints.
+    #
+    #   * `FilterPolicy` – The simple JSON object that lets your subscriber
+    #     receive only a subset of messages, rather than receiving every
+    #     message published to the topic.
+    #
+    #   * `RawMessageDelivery` – When set to `true`, enables raw message
+    #     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the
+    #     need for the endpoints to process JSON formatting, which is
+    #     otherwise created for Amazon SNS metadata.
+    #
+    #   * `RedrivePolicy` – When specified, sends undeliverable messages to
+    #     the specified Amazon SQS dead-letter queue. Messages that can't
+    #     be delivered due to client errors (for example, when the
+    #     subscribed endpoint is unreachable) or server errors (for example,
+    #     when the service that powers the subscribed endpoint becomes
+    #     unavailable) are held in the dead-letter queue for further
+    #     analysis or reprocessing.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] return_subscription_arn
+    #   Sets whether the response from the `Subscribe` request includes the
+    #   subscription ARN, even if the subscription is not yet confirmed.
+    #
+    #   * If you have the subscription ARN returned, the response includes
+    #     the ARN in all cases, even if the subscription is not yet
+    #     confirmed.
+    #
+    #   * If you don't have the subscription ARN returned, in addition to
+    #     the ARN for confirmed subscriptions, the response also includes
+    #     the `pending subscription` ARN value for subscriptions that
+    #     aren't yet confirmed. A subscription becomes confirmed when the
+    #     subscriber calls the `ConfirmSubscription` action with a
+    #     confirmation token.
+    #
+    #   If you set this parameter to `true`, .
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeInput AWS API Documentation
     #
     class SubscribeInput < Struct.new(
       :topic_arn,
       :protocol,
-      :endpoint)
+      :endpoint,
+      :attributes,
+      :return_subscription_arn)
       include Aws::Structure
     end
 
     # Response for Subscribe action.
     #
     # @!attribute [rw] subscription_arn
-    #   The ARN of the subscription, if the service was able to create a
-    #   subscription immediately (without requiring endpoint owner
-    #   confirmation).
+    #   The ARN of the subscription if it is confirmed, or the string
+    #   "pending confirmation" if the subscription requires confirmation.
+    #   However, if the API request parameter `ReturnSubscriptionArn` is
+    #   true, then the value is always the subscription ARN, even if the
+    #   subscription requires confirmation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse AWS API Documentation
@@ -1557,6 +2033,118 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the customer already owns the maximum allowed number of
+    # subscriptions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscriptionLimitExceededException AWS API Documentation
+    #
+    class SubscriptionLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The list of tags to be added to the specified topic.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The required key portion of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The optional value portion of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Can't add more than 50 tags to a topic.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request doesn't comply with the IAM tag policy. Correct your
+    # request and then retry it.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic to which to add tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be added to the specified topic. A tag consists of a
+    #   required key and an optional value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Indicates that the rate at which requests have been submitted for this
+    # action exceeds the limit for your account.
+    #
+    # @!attribute [rw] message
+    #   Throttled request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ThrottledException AWS API Documentation
+    #
+    class ThrottledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A wrapper type for the topic's Amazon Resource Name (ARN). To
     # retrieve a topic's attributes, use `GetTopicAttributes`.
     #
@@ -1568,6 +2156,19 @@ module Aws::SNS
     #
     class Topic < Struct.new(
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that the customer already owns the maximum allowed number of
+    # topics.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/TopicLimitExceededException AWS API Documentation
+    #
+    class TopicLimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1590,6 +2191,34 @@ module Aws::SNS
       :subscription_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AmazonResourceName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the topic from which to remove tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to remove from the specified topic.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
   end
 end

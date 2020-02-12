@@ -2638,6 +2638,22 @@ module Aws::MTurk
     #
     class RejectQualificationRequestResponse < Aws::EmptyStructure; end
 
+    # Your request is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] turk_error_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RequestError AWS API Documentation
+    #
+    class RequestError < Struct.new(
+      :message,
+      :turk_error_code)
+      include Aws::Structure
+    end
+
     # Both the AssignmentReviewReport and the HITReviewReport elements
     # contains the ReviewActionDetail data structure. This structure is
     # returned multiple times for each action specified in the Review
@@ -2893,6 +2909,23 @@ module Aws::MTurk
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotificationResponse AWS API Documentation
     #
     class SendTestEventNotificationResponse < Aws::EmptyStructure; end
+
+    # Amazon Mechanical Turk is temporarily unable to process your request.
+    # Try your call again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] turk_error_code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ServiceFault AWS API Documentation
+    #
+    class ServiceFault < Struct.new(
+      :message,
+      :turk_error_code)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateExpirationForHITRequest
     #   data as a hash:

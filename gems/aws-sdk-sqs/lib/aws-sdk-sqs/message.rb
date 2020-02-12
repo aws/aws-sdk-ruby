@@ -24,6 +24,7 @@ module Aws::SQS
       @receipt_handle = extract_receipt_handle(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -57,10 +58,26 @@ module Aws::SQS
       data[:body]
     end
 
-    # `SenderId`, `SentTimestamp`, `ApproximateReceiveCount`, and/or
-    # `ApproximateFirstReceiveTimestamp`. `SentTimestamp` and
-    # `ApproximateFirstReceiveTimestamp` are each returned as an integer
-    # representing the [epoch time][1] in milliseconds.
+    # A map of the attributes requested in ` ReceiveMessage ` to their
+    # respective values. Supported attributes:
+    #
+    # * `ApproximateReceiveCount`
+    #
+    # * `ApproximateFirstReceiveTimestamp`
+    #
+    # * `MessageDeduplicationId`
+    #
+    # * `MessageGroupId`
+    #
+    # * `SenderId`
+    #
+    # * `SentTimestamp`
+    #
+    # * `SequenceNumber`
+    #
+    # `ApproximateFirstReceiveTimestamp` and `SentTimestamp` are each
+    # returned as an integer representing the [epoch time][1] in
+    # milliseconds.
     #
     #
     #
@@ -84,12 +101,12 @@ module Aws::SQS
     end
 
     # Each message attribute consists of a `Name`, `Type`, and `Value`. For
-    # more information, see [Message Attribute Items and Validation][1] in
-    # the *Amazon Simple Queue Service Developer Guide*.
+    # more information, see [Amazon SQS Message Attributes][1] in the
+    # *Amazon Simple Queue Service Developer Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
+    # [1]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html
     # @return [Hash<String,Types::MessageAttributeValue>]
     def message_attributes
       data[:message_attributes]

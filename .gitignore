@@ -9,3 +9,4 @@ coverage
 /Gemfile.lock
 /TODO
 *.DS_Store
+.idea

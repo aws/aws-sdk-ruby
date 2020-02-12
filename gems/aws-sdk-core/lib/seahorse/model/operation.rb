@@ -8,6 +8,7 @@ module Seahorse
         @deprecated = false
         @errors = []
         @metadata = {}
+        @async = false
       end
 
       # @return [String, nil]
@@ -22,8 +23,17 @@ module Seahorse
       # @return [Boolean]
       attr_accessor :deprecated
 
+      # @return [Boolean]
+      attr_accessor :endpoint_operation
+
+      # @return [Hash]
+      attr_accessor :endpoint_discovery
+
       # @return [String, nil]
       attr_accessor :documentation
+
+      # @return [Hash, nil]
+      attr_accessor :endpoint_pattern
 
       # @return [String, nil]
       attr_accessor :authorizer
@@ -40,6 +50,9 @@ module Seahorse
       # APIG only
       # @return [Boolean]
       attr_accessor :require_apikey
+
+      # @return [Boolean]
+      attr_accessor :async
 
       def [](key)
         @metadata[key.to_s]

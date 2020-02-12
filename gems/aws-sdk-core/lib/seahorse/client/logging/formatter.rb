@@ -173,9 +173,11 @@ module Seahorse
         end
 
         def _http_response_body(response)
-          response.context.http_response.body.respond_to?(:rewind) ?
-            summarize_value(response.context.http_response.body_contents) :
+          if response.context.http_response.body.respond_to?(:rewind)
+            summarize_value(response.context.http_response.body_contents)
+          else
             ''
+          end
         end
 
         def _error_class(response)

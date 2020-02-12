@@ -25,6 +25,18 @@ module AwsSdkCodeGenerator
 
       # @return [Array<StructClass>]
       def structures
+        unless @service.protocol_settings.empty?
+          if @service.protocol_settings['h2'] == 'eventstream'
+            @service.api['shapes'].each do |_, shape|
+              if shape['eventstream']
+                # add event trait to all members if not exists
+                shape['members'].each do |name, ref|
+                  @service.api['shapes'][ref['shape']]['event'] = true
+                end
+              end
+            end
+          end
+        end
         @service.api['shapes'].inject([]) do |list, (shape_name, shape)|
           # APIG model can have input/output shape with downcase and '__'
           if @service.protocol == 'api-gateway'
@@ -144,9 +156,13 @@ module AwsSdkCodeGenerator
       end
 
       def struct_type?(shape)
-        shape['type'] == 'structure' &&
-        !shape['error'] &&
-        !shape['exception']
+        if !!!shape['event'] && (shape['error'] || shape['exception'])
+          # non event error shape with more than one member
+          shape['type'] == 'structure' &&
+            shape['members'] && shape['members'].size > 0
+        else
+          shape['type'] == 'structure'
+        end
       end
 
       def compute_input_shapes(api)
@@ -169,6 +185,7 @@ module AwsSdkCodeGenerator
         return if inputs.include?(shape_ref['shape']) # recursion
         inputs << shape_ref['shape']
         s = shape(shape_ref)
+        raise "cannot locate shape #{shape_ref['shape']}" if s.nil?
         case s['type']
         when 'structure'
           return if s['members'].nil?

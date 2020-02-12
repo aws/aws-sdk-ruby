@@ -71,7 +71,10 @@
         {"shape":"CertificateNotFoundException"},
         {"shape":"UnsupportedProtocolException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"},
+        {"shape":"TooManyUniqueTargetGroupsPerLoadBalancerException"}
       ]
     },
     "CreateLoadBalancer":{
@@ -122,7 +125,11 @@
         {"shape":"TargetGroupNotFoundException"},
         {"shape":"InvalidConfigurationRequestException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"UnsupportedProtocolException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"},
+        {"shape":"TooManyUniqueTargetGroupsPerLoadBalancerException"}
       ]
     },
     "CreateTargetGroup":{
@@ -261,7 +268,8 @@
       },
       "errors":[
         {"shape":"ListenerNotFoundException"},
-        {"shape":"LoadBalancerNotFoundException"}
+        {"shape":"LoadBalancerNotFoundException"},
+        {"shape":"UnsupportedProtocolException"}
       ]
     },
     "DescribeLoadBalancerAttributes":{
@@ -307,7 +315,8 @@
       },
       "errors":[
         {"shape":"ListenerNotFoundException"},
-        {"shape":"RuleNotFoundException"}
+        {"shape":"RuleNotFoundException"},
+        {"shape":"UnsupportedProtocolException"}
       ]
     },
     "DescribeSSLPolicies":{
@@ -415,7 +424,10 @@
         {"shape":"InvalidConfigurationRequestException"},
         {"shape":"UnsupportedProtocolException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
-        {"shape":"TooManyTargetsException"}
+        {"shape":"TooManyTargetsException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"},
+        {"shape":"TooManyUniqueTargetGroupsPerLoadBalancerException"}
       ]
     },
     "ModifyLoadBalancerAttributes":{
@@ -452,7 +464,11 @@
         {"shape":"OperationNotPermittedException"},
         {"shape":"TooManyRegistrationsForTargetIdException"},
         {"shape":"TooManyTargetsException"},
-        {"shape":"TargetGroupNotFoundException"}
+        {"shape":"TargetGroupNotFoundException"},
+        {"shape":"UnsupportedProtocolException"},
+        {"shape":"TooManyActionsException"},
+        {"shape":"InvalidLoadBalancerActionException"},
+        {"shape":"TooManyUniqueTargetGroupsPerLoadBalancerException"}
       ]
     },
     "ModifyTargetGroup":{
@@ -615,18 +631,32 @@
   "shapes":{
     "Action":{
       "type":"structure",
-      "required":[
-        "Type",
-        "TargetGroupArn"
-      ],
+      "required":["Type"],
       "members":{
         "Type":{"shape":"ActionTypeEnum"},
-        "TargetGroupArn":{"shape":"TargetGroupArn"}
+        "TargetGroupArn":{"shape":"TargetGroupArn"},
+        "AuthenticateOidcConfig":{"shape":"AuthenticateOidcActionConfig"},
+        "AuthenticateCognitoConfig":{"shape":"AuthenticateCognitoActionConfig"},
+        "Order":{"shape":"ActionOrder"},
+        "RedirectConfig":{"shape":"RedirectActionConfig"},
+        "FixedResponseConfig":{"shape":"FixedResponseActionConfig"},
+        "ForwardConfig":{"shape":"ForwardActionConfig"}
       }
+    },
+    "ActionOrder":{
+      "type":"integer",
+      "max":50000,
+      "min":1
     },
     "ActionTypeEnum":{
       "type":"string",
-      "enum":["forward"]
+      "enum":[
+        "forward",
+        "authenticate-oidc",
+        "authenticate-cognito",
+        "redirect",
+        "fixed-response"
+      ]
     },
     "Actions":{
       "type":"list",
@@ -677,6 +707,94 @@
       },
       "exception":true
     },
+    "AuthenticateCognitoActionAuthenticationRequestExtraParams":{
+      "type":"map",
+      "key":{"shape":"AuthenticateCognitoActionAuthenticationRequestParamName"},
+      "value":{"shape":"AuthenticateCognitoActionAuthenticationRequestParamValue"}
+    },
+    "AuthenticateCognitoActionAuthenticationRequestParamName":{"type":"string"},
+    "AuthenticateCognitoActionAuthenticationRequestParamValue":{"type":"string"},
+    "AuthenticateCognitoActionConditionalBehaviorEnum":{
+      "type":"string",
+      "enum":[
+        "deny",
+        "allow",
+        "authenticate"
+      ]
+    },
+    "AuthenticateCognitoActionConfig":{
+      "type":"structure",
+      "required":[
+        "UserPoolArn",
+        "UserPoolClientId",
+        "UserPoolDomain"
+      ],
+      "members":{
+        "UserPoolArn":{"shape":"AuthenticateCognitoActionUserPoolArn"},
+        "UserPoolClientId":{"shape":"AuthenticateCognitoActionUserPoolClientId"},
+        "UserPoolDomain":{"shape":"AuthenticateCognitoActionUserPoolDomain"},
+        "SessionCookieName":{"shape":"AuthenticateCognitoActionSessionCookieName"},
+        "Scope":{"shape":"AuthenticateCognitoActionScope"},
+        "SessionTimeout":{"shape":"AuthenticateCognitoActionSessionTimeout"},
+        "AuthenticationRequestExtraParams":{"shape":"AuthenticateCognitoActionAuthenticationRequestExtraParams"},
+        "OnUnauthenticatedRequest":{"shape":"AuthenticateCognitoActionConditionalBehaviorEnum"}
+      }
+    },
+    "AuthenticateCognitoActionScope":{"type":"string"},
+    "AuthenticateCognitoActionSessionCookieName":{"type":"string"},
+    "AuthenticateCognitoActionSessionTimeout":{"type":"long"},
+    "AuthenticateCognitoActionUserPoolArn":{"type":"string"},
+    "AuthenticateCognitoActionUserPoolClientId":{"type":"string"},
+    "AuthenticateCognitoActionUserPoolDomain":{"type":"string"},
+    "AuthenticateOidcActionAuthenticationRequestExtraParams":{
+      "type":"map",
+      "key":{"shape":"AuthenticateOidcActionAuthenticationRequestParamName"},
+      "value":{"shape":"AuthenticateOidcActionAuthenticationRequestParamValue"}
+    },
+    "AuthenticateOidcActionAuthenticationRequestParamName":{"type":"string"},
+    "AuthenticateOidcActionAuthenticationRequestParamValue":{"type":"string"},
+    "AuthenticateOidcActionAuthorizationEndpoint":{"type":"string"},
+    "AuthenticateOidcActionClientId":{"type":"string"},
+    "AuthenticateOidcActionClientSecret":{"type":"string"},
+    "AuthenticateOidcActionConditionalBehaviorEnum":{
+      "type":"string",
+      "enum":[
+        "deny",
+        "allow",
+        "authenticate"
+      ]
+    },
+    "AuthenticateOidcActionConfig":{
+      "type":"structure",
+      "required":[
+        "Issuer",
+        "AuthorizationEndpoint",
+        "TokenEndpoint",
+        "UserInfoEndpoint",
+        "ClientId"
+      ],
+      "members":{
+        "Issuer":{"shape":"AuthenticateOidcActionIssuer"},
+        "AuthorizationEndpoint":{"shape":"AuthenticateOidcActionAuthorizationEndpoint"},
+        "TokenEndpoint":{"shape":"AuthenticateOidcActionTokenEndpoint"},
+        "UserInfoEndpoint":{"shape":"AuthenticateOidcActionUserInfoEndpoint"},
+        "ClientId":{"shape":"AuthenticateOidcActionClientId"},
+        "ClientSecret":{"shape":"AuthenticateOidcActionClientSecret"},
+        "SessionCookieName":{"shape":"AuthenticateOidcActionSessionCookieName"},
+        "Scope":{"shape":"AuthenticateOidcActionScope"},
+        "SessionTimeout":{"shape":"AuthenticateOidcActionSessionTimeout"},
+        "AuthenticationRequestExtraParams":{"shape":"AuthenticateOidcActionAuthenticationRequestExtraParams"},
+        "OnUnauthenticatedRequest":{"shape":"AuthenticateOidcActionConditionalBehaviorEnum"},
+        "UseExistingClientSecret":{"shape":"AuthenticateOidcActionUseExistingClientSecret"}
+      }
+    },
+    "AuthenticateOidcActionIssuer":{"type":"string"},
+    "AuthenticateOidcActionScope":{"type":"string"},
+    "AuthenticateOidcActionSessionCookieName":{"type":"string"},
+    "AuthenticateOidcActionSessionTimeout":{"type":"long"},
+    "AuthenticateOidcActionTokenEndpoint":{"type":"string"},
+    "AuthenticateOidcActionUseExistingClientSecret":{"type":"boolean"},
+    "AuthenticateOidcActionUserInfoEndpoint":{"type":"string"},
     "AvailabilityZone":{
       "type":"structure",
       "members":{
@@ -807,12 +925,7 @@
     },
     "CreateTargetGroupInput":{
       "type":"structure",
-      "required":[
-        "Name",
-        "Protocol",
-        "Port",
-        "VpcId"
-      ],
+      "required":["Name"],
       "members":{
         "Name":{"shape":"TargetGroupName"},
         "Protocol":{"shape":"ProtocolEnum"},
@@ -820,6 +933,7 @@
         "VpcId":{"shape":"VpcId"},
         "HealthCheckProtocol":{"shape":"ProtocolEnum"},
         "HealthCheckPort":{"shape":"HealthCheckPort"},
+        "HealthCheckEnabled":{"shape":"HealthCheckEnabled"},
         "HealthCheckPath":{"shape":"Path"},
         "HealthCheckIntervalSeconds":{"shape":"HealthCheckIntervalSeconds"},
         "HealthCheckTimeoutSeconds":{"shape":"HealthCheckTimeoutSeconds"},
@@ -1110,6 +1224,37 @@
       },
       "exception":true
     },
+    "FixedResponseActionConfig":{
+      "type":"structure",
+      "required":["StatusCode"],
+      "members":{
+        "MessageBody":{"shape":"FixedResponseActionMessage"},
+        "StatusCode":{"shape":"FixedResponseActionStatusCode"},
+        "ContentType":{"shape":"FixedResponseActionContentType"}
+      }
+    },
+    "FixedResponseActionContentType":{
+      "type":"string",
+      "max":32,
+      "min":0
+    },
+    "FixedResponseActionMessage":{
+      "type":"string",
+      "max":1024,
+      "min":0
+    },
+    "FixedResponseActionStatusCode":{
+      "type":"string",
+      "pattern":"^(2|4|5)\\d\\d$"
+    },
+    "ForwardActionConfig":{
+      "type":"structure",
+      "members":{
+        "TargetGroups":{"shape":"TargetGroupList"},
+        "TargetGroupStickinessConfig":{"shape":"TargetGroupStickinessConfig"}
+      }
+    },
+    "HealthCheckEnabled":{"type":"boolean"},
     "HealthCheckIntervalSeconds":{
       "type":"integer",
       "max":300,
@@ -1123,7 +1268,7 @@
     },
     "HealthCheckTimeoutSeconds":{
       "type":"integer",
-      "max":60,
+      "max":120,
       "min":2
     },
     "HealthUnavailableException":{
@@ -1136,7 +1281,27 @@
       },
       "exception":true
     },
+    "HostHeaderConditionConfig":{
+      "type":"structure",
+      "members":{
+        "Values":{"shape":"ListOfString"}
+      }
+    },
     "HttpCode":{"type":"string"},
+    "HttpHeaderConditionConfig":{
+      "type":"structure",
+      "members":{
+        "HttpHeaderName":{"shape":"HttpHeaderConditionName"},
+        "Values":{"shape":"ListOfString"}
+      }
+    },
+    "HttpHeaderConditionName":{"type":"string"},
+    "HttpRequestMethodConditionConfig":{
+      "type":"structure",
+      "members":{
+        "Values":{"shape":"ListOfString"}
+      }
+    },
     "IncompatibleProtocolsException":{
       "type":"structure",
       "members":{
@@ -1154,6 +1319,17 @@
       },
       "error":{
         "code":"InvalidConfigurationRequest",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidLoadBalancerActionException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidLoadBalancerAction",
         "httpStatusCode":400,
         "senderFault":true
       },
@@ -1280,7 +1456,8 @@
       "type":"structure",
       "members":{
         "IpAddress":{"shape":"IpAddress"},
-        "AllocationId":{"shape":"AllocationId"}
+        "AllocationId":{"shape":"AllocationId"},
+        "PrivateIPv4Address":{"shape":"PrivateIPv4Address"}
       }
     },
     "LoadBalancerAddresses":{
@@ -1447,6 +1624,7 @@
         "HealthCheckProtocol":{"shape":"ProtocolEnum"},
         "HealthCheckPort":{"shape":"HealthCheckPort"},
         "HealthCheckPath":{"shape":"Path"},
+        "HealthCheckEnabled":{"shape":"HealthCheckEnabled"},
         "HealthCheckIntervalSeconds":{"shape":"HealthCheckIntervalSeconds"},
         "HealthCheckTimeoutSeconds":{"shape":"HealthCheckTimeoutSeconds"},
         "HealthyThresholdCount":{"shape":"HealthCheckThresholdCount"},
@@ -1482,6 +1660,12 @@
       "max":1024,
       "min":1
     },
+    "PathPatternConditionConfig":{
+      "type":"structure",
+      "members":{
+        "Values":{"shape":"ListOfString"}
+      }
+    },
     "Port":{
       "type":"integer",
       "max":65535,
@@ -1498,12 +1682,72 @@
       },
       "exception":true
     },
+    "PrivateIPv4Address":{"type":"string"},
     "ProtocolEnum":{
       "type":"string",
       "enum":[
         "HTTP",
         "HTTPS",
-        "TCP"
+        "TCP",
+        "TLS",
+        "UDP",
+        "TCP_UDP"
+      ]
+    },
+    "QueryStringConditionConfig":{
+      "type":"structure",
+      "members":{
+        "Values":{"shape":"QueryStringKeyValuePairList"}
+      }
+    },
+    "QueryStringKeyValuePair":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"StringValue"},
+        "Value":{"shape":"StringValue"}
+      }
+    },
+    "QueryStringKeyValuePairList":{
+      "type":"list",
+      "member":{"shape":"QueryStringKeyValuePair"}
+    },
+    "RedirectActionConfig":{
+      "type":"structure",
+      "required":["StatusCode"],
+      "members":{
+        "Protocol":{"shape":"RedirectActionProtocol"},
+        "Port":{"shape":"RedirectActionPort"},
+        "Host":{"shape":"RedirectActionHost"},
+        "Path":{"shape":"RedirectActionPath"},
+        "Query":{"shape":"RedirectActionQuery"},
+        "StatusCode":{"shape":"RedirectActionStatusCodeEnum"}
+      }
+    },
+    "RedirectActionHost":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "RedirectActionPath":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "RedirectActionPort":{"type":"string"},
+    "RedirectActionProtocol":{
+      "type":"string",
+      "pattern":"^(HTTPS?|#\\{protocol\\})$"
+    },
+    "RedirectActionQuery":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
+    "RedirectActionStatusCodeEnum":{
+      "type":"string",
+      "enum":[
+        "HTTP_301",
+        "HTTP_302"
       ]
     },
     "RegisterTargetsInput":{
@@ -1589,7 +1833,13 @@
       "type":"structure",
       "members":{
         "Field":{"shape":"ConditionFieldName"},
-        "Values":{"shape":"ListOfString"}
+        "Values":{"shape":"ListOfString"},
+        "HostHeaderConfig":{"shape":"HostHeaderConditionConfig"},
+        "PathPatternConfig":{"shape":"PathPatternConditionConfig"},
+        "HttpHeaderConfig":{"shape":"HttpHeaderConditionConfig"},
+        "QueryStringConfig":{"shape":"QueryStringConditionConfig"},
+        "HttpRequestMethodConfig":{"shape":"HttpRequestMethodConditionConfig"},
+        "SourceIpConfig":{"shape":"SourceIpConditionConfig"}
       }
     },
     "RuleConditionList":{
@@ -1692,10 +1942,7 @@
     },
     "SetSubnetsInput":{
       "type":"structure",
-      "required":[
-        "LoadBalancerArn",
-        "Subnets"
-      ],
+      "required":["LoadBalancerArn"],
       "members":{
         "LoadBalancerArn":{"shape":"LoadBalancerArn"},
         "Subnets":{"shape":"Subnets"},
@@ -1706,6 +1953,12 @@
       "type":"structure",
       "members":{
         "AvailabilityZones":{"shape":"AvailabilityZones"}
+      }
+    },
+    "SourceIpConditionConfig":{
+      "type":"structure",
+      "members":{
+        "Values":{"shape":"ListOfString"}
       }
     },
     "SslPolicies":{
@@ -1738,7 +1991,8 @@
       "type":"structure",
       "members":{
         "SubnetId":{"shape":"SubnetId"},
-        "AllocationId":{"shape":"AllocationId"}
+        "AllocationId":{"shape":"AllocationId"},
+        "PrivateIPv4Address":{"shape":"PrivateIPv4Address"}
       }
     },
     "SubnetMappings":{
@@ -1823,6 +2077,7 @@
         "VpcId":{"shape":"VpcId"},
         "HealthCheckProtocol":{"shape":"ProtocolEnum"},
         "HealthCheckPort":{"shape":"HealthCheckPort"},
+        "HealthCheckEnabled":{"shape":"HealthCheckEnabled"},
         "HealthCheckIntervalSeconds":{"shape":"HealthCheckIntervalSeconds"},
         "HealthCheckTimeoutSeconds":{"shape":"HealthCheckTimeoutSeconds"},
         "HealthyThresholdCount":{"shape":"HealthCheckThresholdCount"},
@@ -1866,6 +2121,10 @@
       "type":"list",
       "member":{"shape":"TargetGroupAttribute"}
     },
+    "TargetGroupList":{
+      "type":"list",
+      "member":{"shape":"TargetGroupTuple"}
+    },
     "TargetGroupName":{"type":"string"},
     "TargetGroupNames":{
       "type":"list",
@@ -1882,6 +2141,23 @@
       },
       "exception":true
     },
+    "TargetGroupStickinessConfig":{
+      "type":"structure",
+      "members":{
+        "Enabled":{"shape":"TargetGroupStickinessEnabled"},
+        "DurationSeconds":{"shape":"TargetGroupStickinessDurationSeconds"}
+      }
+    },
+    "TargetGroupStickinessDurationSeconds":{"type":"integer"},
+    "TargetGroupStickinessEnabled":{"type":"boolean"},
+    "TargetGroupTuple":{
+      "type":"structure",
+      "members":{
+        "TargetGroupArn":{"shape":"TargetGroupArn"},
+        "Weight":{"shape":"TargetGroupWeight"}
+      }
+    },
+    "TargetGroupWeight":{"type":"integer"},
     "TargetGroups":{
       "type":"list",
       "member":{"shape":"TargetGroup"}
@@ -1919,6 +2195,7 @@
         "Target.DeregistrationInProgress",
         "Target.InvalidState",
         "Target.IpUnusable",
+        "Target.HealthCheckDisabled",
         "Elb.InternalError"
       ]
     },
@@ -1938,8 +2215,20 @@
       "type":"string",
       "enum":[
         "instance",
-        "ip"
+        "ip",
+        "lambda"
       ]
+    },
+    "TooManyActionsException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TooManyActions",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "TooManyCertificatesException":{
       "type":"structure",
@@ -2024,6 +2313,17 @@
       },
       "error":{
         "code":"TooManyTargets",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TooManyUniqueTargetGroupsPerLoadBalancerException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TooManyUniqueTargetGroupsPerLoadBalancer",
         "httpStatusCode":400,
         "senderFault":true
       },

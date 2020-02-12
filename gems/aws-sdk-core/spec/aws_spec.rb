@@ -18,7 +18,7 @@ module Aws
     end
 
     it 'does not allow assigning config object to non-hash objects' do
-      expect(-> { Aws.config = [1,2,3] }).to raise_error(ArgumentError)
+      expect { Aws.config = [1, 2, 3] }.to raise_error(ArgumentError)
     end
 
   end

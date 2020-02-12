@@ -109,7 +109,8 @@ describe 'Client Interface:' do
       expect(tracker[:b].member_c.read).to eq('baz')
       expect(tracker[:c].member_d.struct_member_a).to eq('foo')
       expect(tracker[:c].member_d.struct_member_b).to eq('bar')
-      expect(tracker[:later].size).to eq(3)
+      # error event is also an event
+      expect(tracker[:later].size).to eq(4)
       expect(tracker[:later][0]).to eq(tracker[:a])
       expect(tracker[:later][1]).to eq(tracker[:b])
       expect(tracker[:later][2]).to eq(tracker[:c])

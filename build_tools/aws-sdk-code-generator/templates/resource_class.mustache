@@ -30,6 +30,7 @@ module {{module_name}}
       @data = Aws::EmptyStructure.new
       {{/shape}}
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -97,10 +98,10 @@ module {{module_name}}
     # @option options [Proc] :before_attempt
     # @option options [Proc] :before_wait
     # @return [{{class_name}}]
-    def wait_until_{{name}}(options = {})
+    def wait_until_{{name}}(options = {}, &block)
       options, params = separate_params_and_options(options)
       waiter = Waiters::{{waiter_class_name}}.new(options)
-      yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+      yield_waiter_and_warn(waiter, &block) if block_given?
       {{#wait_call}}
       {{#lines}}
       {{{.}}}{{/lines}}

@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -43,101 +48,205 @@ module Aws::ElasticBeanstalk
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -281,7 +390,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
     #
     # @option params [String] :application_name
     #   The name of the application to which the specified source bundles
@@ -295,7 +404,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [Array<String>] :version_labels
     #   A list of version labels, specifying one or more application source
@@ -335,7 +444,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -375,6 +484,13 @@ module Aws::ElasticBeanstalk
     # @option params [Types::ApplicationResourceLifecycleConfig] :resource_lifecycle_config
     #   Specify an application resource lifecycle configuration to prevent
     #   your application from accumulating too many versions.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the application.
+    #
+    #   Elastic Beanstalk applies these tags only to the application.
+    #   Environments that you create in the application don't inherit the
+    #   tags.
     #
     # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -422,6 +538,12 @@ module Aws::ElasticBeanstalk
     #         },
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -515,16 +637,26 @@ module Aws::ElasticBeanstalk
     #   doesn't already exist.
     #
     # @option params [Boolean] :process
-    #   Preprocesses and validates the environment manifest (`env.yaml`) and
+    #   Pre-processes and validates the environment manifest (`env.yaml`) and
     #   configuration files (`*.config` files in the `.ebextensions` folder)
     #   in the source bundle. Validating configuration files can identify
     #   issues prior to deploying the application version to an environment.
+    #
+    #   You must turn processing on for application versions that you create
+    #   using AWS CodeBuild or AWS CodeCommit. For application versions built
+    #   from a source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
     #   proxy server or Docker configuration.
     #
     #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the application version.
+    #
+    #   Elastic Beanstalk applies these tags only to the application version.
+    #   Environments that use the application version don't inherit the tags.
     #
     # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -586,6 +718,12 @@ module Aws::ElasticBeanstalk
     #     },
     #     auto_create_application: false,
     #     process: false,
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -616,6 +754,9 @@ module Aws::ElasticBeanstalk
     # Creates a configuration template. Templates are associated with a
     # specific application and are used to deploy different versions of the
     # application with the same configuration settings.
+    #
+    # Templates aren't associated with any environment. The
+    # `EnvironmentName` response element is always `null`.
     #
     # Related Topics
     #
@@ -685,6 +826,9 @@ module Aws::ElasticBeanstalk
     #   option to the requested value. The new value overrides the value
     #   obtained from the solution stack or the source configuration template.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the configuration template.
+    #
     # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
@@ -738,6 +882,12 @@ module Aws::ElasticBeanstalk
     #         namespace: "OptionNamespace",
     #         option_name: "ConfigurationOptionName",
     #         value: "ConfigurationOptionValue",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -799,7 +949,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
     #   Describes this environment.
@@ -813,7 +963,7 @@ module Aws::ElasticBeanstalk
     #   This specifies the tier to use for creating this environment.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   This specifies the tags applied to resources in the environment.
+    #   Specifies the tags applied to resources in the environment.
     #
     # @option params [String] :version_label
     #   The name of the application version to deploy.
@@ -834,6 +984,13 @@ module Aws::ElasticBeanstalk
     #   This is an alternative to specifying a template name. If specified,
     #   AWS Elastic Beanstalk sets the configuration values to the default
     #   values associated with the specified solution stack.
+    #
+    #   For a list of current solution stacks, see [Elastic Beanstalk
+    #   Supported Platforms][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
     #
     # @option params [String] :platform_arn
     #   The ARN of the platform.
@@ -960,7 +1117,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -1000,6 +1157,13 @@ module Aws::ElasticBeanstalk
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   The configuration option settings to apply to the builder environment.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Specifies the tags applied to the new platform version.
+    #
+    #   Elastic Beanstalk applies these tags only to the platform version.
+    #   Environments that you create using the platform version don't inherit
+    #   the tags.
+    #
     # @return [Types::CreatePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePlatformVersionResult#platform_summary #platform_summary} => Types::PlatformSummary
@@ -1021,6 +1185,12 @@ module Aws::ElasticBeanstalk
     #         namespace: "OptionNamespace",
     #         option_name: "ConfigurationOptionName",
     #         value: "ConfigurationOptionValue",
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -2062,6 +2232,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_resources.instances[0].id #=> String
     #   resp.environment_resources.launch_configurations #=> Array
     #   resp.environment_resources.launch_configurations[0].name #=> String
+    #   resp.environment_resources.launch_templates #=> Array
+    #   resp.environment_resources.launch_templates[0].id #=> String
     #   resp.environment_resources.load_balancers #=> Array
     #   resp.environment_resources.load_balancers[0].name #=> String
     #   resp.environment_resources.triggers #=> Array
@@ -2197,7 +2369,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -2369,13 +2541,13 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Retrives detailed information about the health of instances in your
+    # Retrieves detailed information about the health of instances in your
     # AWS Elastic Beanstalk. This operation requires [enhanced health
     # reporting][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
     #
     # @option params [String] :environment_name
     #   Specify the AWS Elastic Beanstalk environment by name.
@@ -2499,6 +2671,7 @@ module Aws::ElasticBeanstalk
     #   resp.instance_health_list[0].system.cpu_utilization.io_wait #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.irq #=> Float
     #   resp.instance_health_list[0].system.cpu_utilization.soft_irq #=> Float
+    #   resp.instance_health_list[0].system.cpu_utilization.privileged #=> Float
     #   resp.instance_health_list[0].system.load_average #=> Array
     #   resp.instance_health_list[0].system.load_average[0] #=> Float
     #   resp.instance_health_list[0].deployment.version_label #=> String
@@ -2714,7 +2887,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
@@ -3090,7 +3263,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
     #
     # @option params [Boolean] :force_terminate
     #   Terminates the target environment even if another environment in the
@@ -3174,7 +3347,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3596,7 +3769,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
     #   If this parameter is specified, AWS Elastic Beanstalk updates the
@@ -3790,7 +3963,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3840,8 +4013,8 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
-    # [2]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce to be updated.
@@ -3981,7 +4154,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

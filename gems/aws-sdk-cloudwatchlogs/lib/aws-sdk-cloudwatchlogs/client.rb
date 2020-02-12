@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,111 +48,215 @@ module Aws::CloudWatchLogs
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -166,6 +275,12 @@ module Aws::CloudWatchLogs
     # This enables Amazon CloudWatch Logs to decrypt this data whenever it
     # is requested.
     #
+    # <note markdown="1"> **Important:** CloudWatch Logs supports only symmetric CMKs. Do not
+    # use an associate an asymmetric CMK with your log group. For more
+    # information, see [Using Symmetric and Asymmetric Keys][1].
+    #
+    #  </note>
+    #
     # Note that it can take up to 5 minutes for this operation to take
     # effect.
     #
@@ -173,17 +288,23 @@ module Aws::CloudWatchLogs
     # not exist or the CMK is disabled, you will receive an
     # `InvalidParameterException` error.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
     # @option params [required, String] :kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. This must be a symmetric CMK. For more information, see [Amazon
+    #   Resource Names - AWS Key Management Service (AWS KMS)][1] and [Using
+    #   Symmetric and Asymmetric Keys][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -242,6 +363,9 @@ module Aws::CloudWatchLogs
     # you can specify a prefix to be used as the Amazon S3 key prefix for
     # all exported objects.
     #
+    # Exporting to S3 buckets that are encrypted with AES-256 is supported.
+    # Exporting to S3 buckets encrypted with SSE-KMS is not supported.
+    #
     # @option params [String] :task_name
     #   The name of the export task.
     #
@@ -254,12 +378,12 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, Integer] :from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
-    #   stamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp earlier than this time are not exported.
     #
     # @option params [required, Integer] :to
     #   The end time of the range for the request, expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time stamp
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp
     #   later than this time are not exported.
     #
     # @option params [required, String] :destination
@@ -301,7 +425,7 @@ module Aws::CloudWatchLogs
 
     # Creates a log group with the specified name.
     #
-    # You can create up to 5000 log groups per account.
+    # You can create up to 20,000 log groups per account.
     #
     # You must use the following guidelines when naming a log group:
     #
@@ -310,8 +434,8 @@ module Aws::CloudWatchLogs
     # * Log group names can be between 1 and 512 characters long.
     #
     # * Log group names consist of the following characters: a-z, A-Z, 0-9,
-    #   '\_' (underscore), '-' (hyphen), '/' (forward slash), and
-    #   '.' (period).
+    #   '\_' (underscore), '-' (hyphen), '/' (forward slash), '.'
+    #   (period), and '#' (number sign)
     #
     # If you associate a AWS Key Management Service (AWS KMS) customer
     # master key (CMK) with the log group, ingested data is encrypted using
@@ -323,6 +447,16 @@ module Aws::CloudWatchLogs
     # not exist or the CMK is disabled, you will receive an
     # `InvalidParameterException` error.
     #
+    # <note markdown="1"> **Important:** CloudWatch Logs supports only symmetric CMKs. Do not
+    # associate an asymmetric CMK with your log group. For more information,
+    # see [Using Symmetric and Asymmetric Keys][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
@@ -333,7 +467,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value pairs to use for the tags.
@@ -362,7 +496,8 @@ module Aws::CloudWatchLogs
     # Creates a log stream for the specified log group.
     #
     # There is no limit on the number of log streams that you can create for
-    # a log group.
+    # a log group. There is a limit of 50 TPS on `CreateLogStream`
+    # operations, after which transactions are throttled.
     #
     # You must use the following guidelines when naming a log stream:
     #
@@ -738,7 +873,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -825,12 +960,14 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #
     # @option params [String] :metric_name
-    #   The name of the CloudWatch metric to which the monitored log
-    #   information should be published. For example, you may publish to a
-    #   metric called ErrorCount.
+    #   Filters results to include only those with the specified metric name.
+    #   If you include this parameter in your request, you must also include
+    #   the `metricNamespace` parameter.
     #
     # @option params [String] :metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   Filters results to include only those in the specified namespace. If
+    #   you include this parameter in your request, you must also include the
+    #   `metricName` parameter.
     #
     # @return [Types::DescribeMetricFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -868,6 +1005,59 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def describe_metric_filters(params = {}, options = {})
       req = build_request(:describe_metric_filters, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of CloudWatch Logs Insights queries that are scheduled,
+    # executing, or have been executed recently in this account. You can
+    # request all queries, or limit it to queries of a specific log group or
+    # queries with a certain status.
+    #
+    # @option params [String] :log_group_name
+    #   Limits the returned queries to only those for the specified log group.
+    #
+    # @option params [String] :status
+    #   Limits the returned queries to only those that have the specified
+    #   status. Valid values are `Cancelled`, `Complete`, `Failed`, `Running`,
+    #   and `Scheduled`.
+    #
+    # @option params [Integer] :max_results
+    #   Limits the number of returned queries to the specified number.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. The token expires after
+    #   24 hours.
+    #
+    # @return [Types::DescribeQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueriesResponse#queries #queries} => Array&lt;Types::QueryInfo&gt;
+    #   * {Types::DescribeQueriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_queries({
+    #     log_group_name: "LogGroupName",
+    #     status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queries #=> Array
+    #   resp.queries[0].query_id #=> String
+    #   resp.queries[0].query_string #=> String
+    #   resp.queries[0].status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #   resp.queries[0].create_time #=> Integer
+    #   resp.queries[0].log_group_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueries AWS API Documentation
+    #
+    # @overload describe_queries(params = {})
+    # @param [Hash] params ({})
+    def describe_queries(params = {}, options = {})
+      req = build_request(:describe_queries, params)
       req.send_request(options)
     end
 
@@ -1007,24 +1197,43 @@ module Aws::CloudWatchLogs
     # specifying the token in a subsequent call.
     #
     # @option params [required, String] :log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #
     # @option params [Array<String>] :log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
+    #
+    # @option params [String] :log_stream_name_prefix
+    #   Filters the results to include only events from log streams that have
+    #   names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
     #   this time are not returned.
     #
     # @option params [String] :filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #
     # @option params [String] :next_token
     #   The token for the next set of events to return. (You received this
@@ -1040,6 +1249,11 @@ module Aws::CloudWatchLogs
     #   the matched log events in the first log stream are searched first,
     #   then those in the next log stream, and so on. The default is false.
     #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   ignored and the value will be assumed to be true. The response from
+    #   this operation will always interleave events from multiple log streams
+    #   within a log group.
+    #
     # @return [Types::FilterLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FilterLogEventsResponse#events #events} => Array&lt;Types::FilteredLogEvent&gt;
@@ -1051,6 +1265,7 @@ module Aws::CloudWatchLogs
     #   resp = client.filter_log_events({
     #     log_group_name: "LogGroupName", # required
     #     log_stream_names: ["LogStreamName"],
+    #     log_stream_name_prefix: "LogStreamName",
     #     start_time: 1,
     #     end_time: 1,
     #     filter_pattern: "FilterPattern",
@@ -1096,17 +1311,21 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this
+    #   time or later than this time are included. Events with a timestamp
+    #   earlier than this time are not included.
     #
     # @option params [Integer] :end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or
+    #   later than this time are not included.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    #   Using this token works only when you specify `true` for
+    #   `startFromHead`.
     #
     # @option params [Integer] :limit
     #   The maximum number of log events returned. If you don't specify a
@@ -1117,6 +1336,9 @@ module Aws::CloudWatchLogs
     #   If the value is true, the earliest log events are returned first. If
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
+    #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
     #
     # @return [Types::GetLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1154,6 +1376,143 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Returns a list of the fields that are included in log events in the
+    # specified log group, along with the percentage of log events that
+    # contain each field. The search is limited to a time period that you
+    # specify.
+    #
+    # In the results, fields that start with @ are fields generated by
+    # CloudWatch Logs. For example, `@timestamp` is the timestamp of each
+    # log event.
+    #
+    # The response results are sorted by the frequency percentage, starting
+    # with the highest percentage.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group to search.
+    #
+    # @option params [Integer] :time
+    #   The time to set as the center of the query. If you specify `time`, the
+    #   8 minutes before and 8 minutes after this time are searched. If you
+    #   omit `time`, the past 15 minutes are queried.
+    #
+    #   The `time` value is specified as epoch time, the number of seconds
+    #   since January 1, 1970, 00:00:00 UTC.
+    #
+    # @return [Types::GetLogGroupFieldsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogGroupFieldsResponse#log_group_fields #log_group_fields} => Array&lt;Types::LogGroupField&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_group_fields({
+    #     log_group_name: "LogGroupName", # required
+    #     time: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_group_fields #=> Array
+    #   resp.log_group_fields[0].name #=> String
+    #   resp.log_group_fields[0].percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFields AWS API Documentation
+    #
+    # @overload get_log_group_fields(params = {})
+    # @param [Hash] params ({})
+    def get_log_group_fields(params = {}, options = {})
+      req = build_request(:get_log_group_fields, params)
+      req.send_request(options)
+    end
+
+    # Retrieves all the fields and values of a single log event. All fields
+    # are retrieved, even if the original query that produced the
+    # `logRecordPointer` retrieved only a subset of fields. Fields are
+    # returned as field name/field value pairs.
+    #
+    # Additionally, the entire unparsed log event is returned within
+    # `@message`.
+    #
+    # @option params [required, String] :log_record_pointer
+    #   The pointer corresponding to the log event record you want to
+    #   retrieve. You get this from the response of a `GetQueryResults`
+    #   operation. In that response, the value of the `@ptr` field for a log
+    #   event is the value to use as `logRecordPointer` to retrieve that
+    #   complete log event record.
+    #
+    # @return [Types::GetLogRecordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLogRecordResponse#log_record #log_record} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_log_record({
+    #     log_record_pointer: "LogRecordPointer", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_record #=> Hash
+    #   resp.log_record["Field"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecord AWS API Documentation
+    #
+    # @overload get_log_record(params = {})
+    # @param [Hash] params ({})
+    def get_log_record(params = {}, options = {})
+      req = build_request(:get_log_record, params)
+      req.send_request(options)
+    end
+
+    # Returns the results from the specified query.
+    #
+    # Only the fields requested in the query are returned, along with a
+    # `@ptr` field which is the identifier for the log record. You can use
+    # the value of `@ptr` in a operation to get the full log record.
+    #
+    # `GetQueryResults` does not start a query execution. To run a query,
+    # use .
+    #
+    # If the value of the `Status` field in the output is `Running`, this
+    # operation returns only partial results. If you see a value of
+    # `Scheduled` or `Running` for the status, you can retry the operation
+    # later to see the final results.
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query.
+    #
+    # @return [Types::GetQueryResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsResponse#results #results} => Array&lt;Array&lt;Types::ResultField&gt;&gt;
+    #   * {Types::GetQueryResultsResponse#statistics #statistics} => Types::QueryStatistics
+    #   * {Types::GetQueryResultsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0] #=> Array
+    #   resp.results[0][0].field #=> String
+    #   resp.results[0][0].value #=> String
+    #   resp.statistics.records_matched #=> Float
+    #   resp.statistics.records_scanned #=> Float
+    #   resp.statistics.bytes_scanned #=> Float
+    #   resp.status #=> String, one of "Scheduled", "Running", "Complete", "Failed", "Cancelled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResults AWS API Documentation
+    #
+    # @overload get_query_results(params = {})
+    # @param [Hash] params ({})
+    def get_query_results(params = {}, options = {})
+      req = build_request(:get_query_results, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for the specified log group.
     #
     # @option params [required, String] :log_group_name
@@ -1183,18 +1542,18 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
-    # Creates or updates a destination. A destination encapsulates a
-    # physical resource (such as an Amazon Kinesis stream) and enables you
-    # to subscribe to a real-time stream of log events for a different
-    # account, ingested using PutLogEvents. Currently, the only supported
-    # physical resource is a Kinesis stream belonging to the same account as
-    # the destination.
+    # Creates or updates a destination. This operation is used only to
+    # create destinations for cross-account subscriptions.
+    #
+    # A destination encapsulates a physical resource (such as an Amazon
+    # Kinesis stream) and enables you to subscribe to a real-time stream of
+    # log events for a different account, ingested using PutLogEvents.
     #
     # Through an access policy, a destination controls what is written to
-    # its Kinesis stream. By default, `PutDestination` does not set any
-    # access policy with the destination, which means a cross-account user
-    # cannot call PutSubscriptionFilter against this destination. To enable
-    # this, the destination owner must call PutDestinationPolicy after
+    # it. By default, `PutDestination` does not set any access policy with
+    # the destination, which means a cross-account user cannot call
+    # PutSubscriptionFilter against this destination. To enable this, the
+    # destination owner must call PutDestinationPolicy after
     # `PutDestination`.
     #
     # @option params [required, String] :destination_name
@@ -1245,7 +1604,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html
     #
     # @option params [required, String] :destination_name
     #   A name for an existing destination.
@@ -1276,10 +1635,11 @@ module Aws::CloudWatchLogs
     #
     # You must include the sequence token obtained from the response of the
     # previous call. An upload in a newly created log stream does not
-    # require a sequence token. You can also get the sequence token using
-    # DescribeLogStreams. If you call `PutLogEvents` twice within a narrow
-    # time period using the same value for `sequenceToken`, both calls may
-    # be successful, or one may be rejected.
+    # require a sequence token. You can also get the sequence token in the
+    # `expectedSequenceToken` field from `InvalidSequenceTokenException`. If
+    # you call `PutLogEvents` twice within a narrow time period using the
+    # same value for `sequenceToken`, both calls may be successful, or one
+    # may be rejected.
     #
     # The batch of events must satisfy the following constraints:
     #
@@ -1290,17 +1650,26 @@ module Aws::CloudWatchLogs
     # * None of the log events in the batch can be more than 2 hours in the
     #   future.
     #
-    # * None of the log events in the batch can be older than 14 days or the
-    #   retention period of the log group.
+    # * None of the log events in the batch can be older than 14 days or
+    #   older than the retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their time stamp (the time the event occurred, expressed as the
-    #   number of milliseconds after Jan 1, 1970 00:00:00 UTC).
-    #
-    # * The maximum number of log events in a batch is 10,000.
+    #   their timestamp. The timestamp is the time the event occurred,
+    #   expressed as the number of milliseconds after Jan 1, 1970 00:00:00
+    #   UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the
+    #   timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
+    #   example, 2017-09-15T13:45:30.)
     #
     # * A batch of log events in a single request cannot span more than 24
     #   hours. Otherwise, the operation fails.
+    #
+    # * The maximum number of log events in a batch is 10,000.
+    #
+    # * There is a quota of 5 requests per second per log stream. Additional
+    #   requests are throttled. This quota can't be changed.
+    #
+    # If a call to PutLogEvents returns "UnrecognizedClientException" the
+    # most likely cause is an invalid AWS access key ID or secret key.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1403,7 +1772,7 @@ module Aws::CloudWatchLogs
 
     # Creates or updates a resource policy allowing other AWS services to
     # put log events to this account, such as Amazon Route 53. An account
-    # can have up to 50 resource policies per region.
+    # can have up to 10 resource policies per region.
     #
     # @option params [String] :policy_name
     #   Name of the new policy. This parameter is required.
@@ -1411,17 +1780,17 @@ module Aws::CloudWatchLogs
     # @option params [String] :policy_document
     #   Details of the new policy, including the identity of the principal
     #   that is enabled to put logs to this account. This is formatted as a
-    #   JSON string.
+    #   JSON string. This parameter is required.
     #
     #   The following example creates a resource policy enabling the Route 53
     #   service to put DNS query logs in to the specified log group. Replace
     #   "logArn" with the ARN of your CloudWatch Logs resource, such as a
     #   log group or log stream.
     #
-    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal":
-    #   \\\{ "Service": \[ "route53.amazonaws.com" \] \\},
-    #   "Action":"logs:PutLogEvents", "Resource": logArn \\} \] \\}
+    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
+    #   "Service": [ "route53.amazonaws.com" ] \},
+    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1565,6 +1934,115 @@ module Aws::CloudWatchLogs
       req.send_request(options)
     end
 
+    # Schedules a query of a log group using CloudWatch Logs Insights. You
+    # specify the log group and time range to query, and the query string to
+    # use.
+    #
+    # For more information, see [CloudWatch Logs Insights Query Syntax][1].
+    #
+    # Queries time out after 15 minutes of execution. If your queries are
+    # timing out, reduce the time range being searched, or partition your
+    # query into a number of queries.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [String] :log_group_name
+    #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #
+    # @option params [Array<String>] :log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #
+    # @option params [required, Integer] :start_time
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, Integer] :end_time
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch time,
+    #   the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #
+    # @option params [required, String] :query_string
+    #   The query string to use. For more information, see [CloudWatch Logs
+    #   Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of log events to return in the query. If the query
+    #   string uses the `fields` command, only the specified fields and their
+    #   values are returned. The default is 1000.
+    #
+    # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryResponse#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query({
+    #     log_group_name: "LogGroupName",
+    #     log_group_names: ["LogGroupName"],
+    #     start_time: 1, # required
+    #     end_time: 1, # required
+    #     query_string: "QueryString", # required
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQuery AWS API Documentation
+    #
+    # @overload start_query(params = {})
+    # @param [Hash] params ({})
+    def start_query(params = {}, options = {})
+      req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
+    # Stops a CloudWatch Logs Insights query that is in progress. If the
+    # query has already ended, the operation returns an error indicating
+    # that the specified query is not running.
+    #
+    # @option params [required, String] :query_id
+    #   The ID number of the query to stop. If necessary, you can use
+    #   `DescribeQueries` to find this ID number.
+    #
+    # @return [Types::StopQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopQueryResponse#success #success} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_query({
+    #     query_id: "QueryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.success #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQuery AWS API Documentation
+    #
+    # @overload stop_query(params = {})
+    # @param [Hash] params ({})
+    def stop_query(params = {}, options = {})
+      req = build_request(:stop_query, params)
+      req.send_request(options)
+    end
+
     # Adds or updates the specified tags for the specified log group.
     #
     # To list the tags for a log group, use ListTagsLogGroup. To remove
@@ -1575,7 +2053,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1609,9 +2087,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [required, String] :filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #
     # @option params [required, Array<String>] :log_event_messages
     #   The log event messages to test.
@@ -1686,7 +2164,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

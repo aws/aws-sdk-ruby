@@ -12,6 +12,7 @@ require_relative 'aws-sdk-lambda/types'
 require_relative 'aws-sdk-lambda/client_api'
 require_relative 'aws-sdk-lambda/client'
 require_relative 'aws-sdk-lambda/errors'
+require_relative 'aws-sdk-lambda/waiters'
 require_relative 'aws-sdk-lambda/resource'
 require_relative 'aws-sdk-lambda/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-lambda/customizations'
 # @service
 module Aws::Lambda
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.35.0'
 
 end

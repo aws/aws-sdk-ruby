@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
     # @option options [Hash, String] :waiters
     # @option options [Hash, String] :resources
     # @option options [Hash, String] :examples
+    # @option options [Hash, String] :smoke_tests
     # @option options [Hash<gem,version>] :gem_dependencies ({})
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
@@ -30,6 +31,7 @@ module AwsSdkCodeGenerator
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
+      @smoke_tests = load_json(options[:smoke_tests])
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
@@ -39,6 +41,7 @@ module AwsSdkCodeGenerator
 
       # computed attributes
       @protocol = api.fetch('metadata').fetch('protocol')
+      @protocol_settings = api.fetch('metadata')['protocolSettings'] || {}
       @api_version = api.fetch('metadata')['apiVersion']
       @signature_version = api.fetch('metadata')['signatureVersion']
       @full_name = api.fetch('metadata')['serviceFullName']
@@ -65,6 +68,9 @@ module AwsSdkCodeGenerator
 
     # @return [Hash, nil] The service shared examples model.
     attr_reader :examples
+
+    # @return [Hash, nil] The service smoke test model.
+    attr_reader :smoke_tests
 
     # @return [Hash<String,String>] A hash of gem dependencies. Hash keys
     #   are gem names, values are versions.
@@ -93,6 +99,9 @@ module AwsSdkCodeGenerator
 
     # @return [String] The service protocol, e.g. "json", "query", etc.
     attr_reader :protocol
+
+    # @return [Hash] The service protocol settings
+    attr_reader :protocol_settings
 
     # @return [String] The service API version, e.g. "YYYY-MM-DD".
     attr_reader :api_version

@@ -22,6 +22,14 @@ module Aws
         expect(Structure.new(:abc).new.to_hash).to eq({})
       end
 
+      it 'accepts :members member' do
+        s = Structure.new(:members, :foo).new(foo: 'bar', members: ['foo'])
+        expect(s.to_hash).to eq({
+          foo: 'bar',
+          members: ['foo']
+        })
+      end
+
       it 'only serializes non-nil members' do
         s = Structure.new(:abc, :mno).new(abc:'abc')
         expect(s.to_hash).to eq(abc: 'abc')
@@ -66,5 +74,15 @@ module Aws
       end
 
     end
+
+    describe "#to_s" do
+      it 'filters sensitive parameters' do
+        struct = Structure.new(:trait, :access_token).new
+        struct.trait = "Trait"
+        struct.access_token = "asdf1234"
+        expect(struct.to_s).to eq("{:trait=>\"Trait\", :access_token=>\"[FILTERED]\"}")
+      end
+    end
+
   end
 end

@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,6 +31,7 @@ module Aws::S3
       @bucket_name
     end
 
+    # Container for the bucket owner's display name and ID.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -206,7 +208,16 @@ module Aws::S3
     # @option options [String] :acl
     #   The canned ACL to apply to the bucket.
     # @option options [Types::AccessControlPolicy] :access_control_policy
+    #   Contains the elements that set the ACL permissions for an object per
+    #   grantee.
     # @option options [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
+    #   used as a message integrity check to verify that the request body was
+    #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [String] :grant_full_control
     #   Allows grantee the read, write, read ACP, and write ACP permissions on
     #   the bucket.

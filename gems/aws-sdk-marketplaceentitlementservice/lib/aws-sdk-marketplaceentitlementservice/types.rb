@@ -163,5 +163,42 @@ module Aws::MarketplaceEntitlementService
       include Aws::Structure
     end
 
+    # An internal error has occurred. Retry your request. If the problem
+    # persists, post a message with details on the AWS forums.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameters in your request was invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The calls to the GetEntitlements API are throttled.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
   end
 end

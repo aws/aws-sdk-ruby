@@ -409,7 +409,7 @@ module Aws::ElasticLoadBalancing
     #   The listeners.
     #
     #   For more information, see [Listeners for Your Classic Load
-    #   Balancer][1] in the *Classic Load Balancer Guide*.
+    #   Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -457,7 +457,7 @@ module Aws::ElasticLoadBalancing
     #   A list of tags to assign to the load balancer.
     #
     #   For more information about tagging your load balancer, see [Tag Your
-    #   Classic Load Balancer][1] in the *Classic Load Balancer Guide*.
+    #   Classic Load Balancer][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1314,6 +1314,8 @@ module Aws::ElasticLoadBalancing
     #   * classic-listeners
     #
     #   * classic-load-balancers
+    #
+    #   * classic-registered-instances
     #   @return [String]
     #
     # @!attribute [rw] max
@@ -1332,7 +1334,7 @@ module Aws::ElasticLoadBalancing
     #
     # For information about the protocols and the ports supported by Elastic
     # Load Balancing, see [Listeners for Your Classic Load Balancer][1] in
-    # the *Classic Load Balancer Guide*.
+    # the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1449,7 +1451,7 @@ module Aws::ElasticLoadBalancing
     #   across all instances regardless of the Availability Zones.
     #
     #   For more information, see [Configure Cross-Zone Load Balancing][1]
-    #   in the *Classic Load Balancer Guide*.
+    #   in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1462,7 +1464,7 @@ module Aws::ElasticLoadBalancing
     #   you specify.
     #
     #   For more information, see [Enable Access Logs][1] in the *Classic
-    #   Load Balancer Guide*.
+    #   Load Balancers Guide*.
     #
     #
     #
@@ -1475,7 +1477,7 @@ module Aws::ElasticLoadBalancing
     #   unhealthy instance.
     #
     #   For more information, see [Configure Connection Draining][1] in the
-    #   *Classic Load Balancer Guide*.
+    #   *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1489,7 +1491,7 @@ module Aws::ElasticLoadBalancing
     #   By default, Elastic Load Balancing maintains a 60-second idle
     #   connection timeout for both front-end and back-end connections of
     #   your load balancer. For more information, see [Configure Idle
-    #   Connection Timeout][1] in the *Classic Load Balancer Guide*.
+    #   Connection Timeout][1] in the *Classic Load Balancers Guide*.
     #
     #
     #
@@ -1525,7 +1527,7 @@ module Aws::ElasticLoadBalancing
     #   The DNS name of the load balancer.
     #
     #   For more information, see [Configure a Custom Domain Name][1] in the
-    #   *Classic Load Balancer Guide*.
+    #   *Classic Load Balancers Guide*.
     #
     #
     #

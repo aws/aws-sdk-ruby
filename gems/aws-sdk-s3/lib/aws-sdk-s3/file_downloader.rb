@@ -24,15 +24,18 @@ module Aws
         @mode = options[:mode] || "auto"
         @thread_count = options[:thread_count] || THREAD_COUNT
         @chunk_size = options[:chunk_size]
-        @bucket = options[:bucket]
-        @key = options[:key]
+        @params = {
+          bucket: options[:bucket],
+          key: options[:key],
+        }
+        @params[:version_id] = options[:version_id] if options[:version_id]
 
         case @mode
         when "auto" then multipart_download
         when "single_request" then single_request
         when "get_range"
           if @chunk_size
-            resp = @client.head_object(bucket: @bucket, key: @key)
+            resp = @client.head_object(@params)
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
           else
             msg = "In :get_range mode, :chunk_size must be provided"
@@ -48,7 +51,7 @@ module Aws
       private
 
       def multipart_download
-        resp = @client.head_object(bucket: @bucket, key: @key, part_number: 1)
+        resp = @client.head_object(@params.merge(part_number: 1))
         count = resp.parts_count
         if count.nil? || count <= 1
           resp.content_length < MIN_CHUNK_SIZE ?
@@ -56,7 +59,7 @@ module Aws
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
         else
           # partNumber is an option
-          resp = @client.head_object(bucket: @bucket, key: @key)
+          resp = @client.head_object(@params)
           resp.content_length < MIN_CHUNK_SIZE ?
             single_request :
             compute_mode(resp.content_length, count)
@@ -112,9 +115,7 @@ module Aws
           batch.each do |chunk|
             threads << Thread.new do
               resp = @client.get_object(
-                :bucket => @bucket,
-                :key => @key,
-                param.to_sym => chunk
+                @params.merge(param.to_sym => chunk)
               )
               write(resp)
             end
@@ -131,7 +132,7 @@ module Aws
 
       def single_request
         @client.get_object(
-          bucket: @bucket, key: @key, response_target: @path
+          @params.merge(response_target: @path)
         )
       end
     end

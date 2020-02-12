@@ -58,7 +58,7 @@ module Seahorse
           else
             options[:default] = default
           end
-          options[:default_block] = Proc.new if block_given?
+          options[:default_block] = block if block_given?
           self.options << PluginOption.new(name, options)
         end
 
@@ -109,6 +109,7 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
+          @doc_default = nil
           options.each_pair do |opt_name, opt_value|
             self.send("#{opt_name}=", opt_value)
           end
@@ -119,12 +120,12 @@ module Seahorse
         attr_accessor :default_block
         attr_accessor :required
         attr_accessor :doc_type
-        attr_accessor :doc_default
+        attr_writer :doc_default
         attr_accessor :docstring
 
         def doc_default
-          if @doc_default.nil?
-            Proc === default ? nil : default
+          if @doc_default.nil? && !default.is_a?(Proc)
+            default
           else
             @doc_default
           end

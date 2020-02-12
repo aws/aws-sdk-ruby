@@ -7,13 +7,14 @@ module Aws
 
       FIFTEEN_MEGABYTES = 15 * 1024 * 1024
 
+      # @param [Hash] options
       # @option options [Client] :client
-      # @option options [Integer] :multipart_threshold Files greater than
-      #   `:multipart_threshold` bytes are uploaded using S3 multipart APIs.
+      # @option options [Integer] :multipart_threshold (15728640)
       def initialize(options = {})
         @options = options
         @client = options[:client] || Client.new
-        @multipart_threshold = options[:multipart_threshold] || FIFTEEN_MEGABYTES
+        @multipart_threshold = options[:multipart_threshold] ||
+                               FIFTEEN_MEGABYTES
       end
 
       # @return [Client]
@@ -23,9 +24,9 @@ module Aws
       #   using a {MultipartFileUploader}.
       attr_reader :multipart_threshold
 
-      # @param [String,Pathname,File,Tempfile] source
-      # @option options [required,String] :bucket
-      # @option options [required,String] :key
+      # @param [String, Pathname, File, Tempfile] source The file to upload.
+      # @option options [required, String] :bucket The bucket to upload to.
+      # @option options [required, String] :key The key for the object.
       # @return [void]
       def upload(source, options = {})
         if File.size(source) >= multipart_threshold
@@ -37,19 +38,17 @@ module Aws
 
       private
 
-      def put_object(source, options)
-        open_file(source) do |file|
-          @client.put_object(options.merge(body: file))
+      def open_file(source)
+        if String === source || Pathname === source
+          File.open(source, 'rb') { |file| yield(file) }
+        else
+          yield(source)
         end
       end
 
-      def open_file(source)
-        if String === source || Pathname === source
-          file = File.open(source, 'rb')
-          yield(file)
-          file.close
-        else
-          yield(source)
+      def put_object(source, options)
+        open_file(source) do |file|
+          @client.put_object(options.merge(body: file))
         end
       end
 

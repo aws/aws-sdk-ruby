@@ -7,8 +7,11 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            length = context.http_request.body.size
-            context.http_request.headers['Content-Length'] = length
+            # If it's an IO object and not a File / String / String IO
+            if context.http_request.body.respond_to?(:size)
+              length = context.http_request.body.size
+              context.http_request.headers['Content-Length'] = length
+            end
             @handler.call(context)
           end
 

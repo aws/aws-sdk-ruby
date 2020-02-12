@@ -397,7 +397,7 @@ describe 'Interfaces' do
         band = Sample::Band.new(name:'name', client: client)
         expect {
           band.identifiers
-        }.to output(/DEPRECATION WARNING: called deprecated method `identifiers'/).to_stderr
+        }.to output(/DEPRECATION WARNING/).to_stderr
         # second invocation generates no warning, even from new instance
         band2 = Sample::Band.new(name:'name', client: client)
         expect {

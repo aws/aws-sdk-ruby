@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -55,7 +56,7 @@ module Aws::EC2
       data[:groups]
     end
 
-    # The type of interface.
+    # The type of network interface.
     # @return [String]
     def interface_type
       data[:interface_type]
@@ -71,6 +72,12 @@ module Aws::EC2
     # @return [String]
     def mac_address
       data[:mac_address]
+    end
+
+    # The Amazon Resource Name (ARN) of the Outpost.
+    # @return [String]
+    def outpost_arn
+      data[:outpost_arn]
     end
 
     # The AWS account ID of the owner of the network interface.
@@ -295,7 +302,7 @@ module Aws::EC2
     #   The number of secondary IP addresses to assign to the network
     #   interface. You can't specify this parameter when also specifying
     #   private IP addresses.
-    # @return [EmptyStructure]
+    # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
       resp = @client.assign_private_ip_addresses(options)
@@ -307,7 +314,7 @@ module Aws::EC2
     #   network_interface.attach({
     #     device_index: 1, # required
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :device_index
@@ -344,9 +351,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -416,6 +423,26 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :force
     #   Specifies whether to force a detachment.
+    #
+    #   <note markdown="1"> * Use the `Force` parameter only as a last resort to detach a network
+    #     interface from a failed instance.
+    #
+    #   * If you use the `Force` parameter to detach a network interface, you
+    #     might not be able to attach a different network interface to the
+    #     same index on the instance without first stopping and starting the
+    #     instance.
+    #
+    #   * If you force the detachment of a network interface, the [instance
+    #     metadata][1] might not get updated. This means that the attributes
+    #     associated with the detached network interface might still be
+    #     visible. The instance metadata will get updated when you stop and
+    #     start the instance.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @return [EmptyStructure]
     def detach(options = {})
       options = options.merge(attachment_id: data[:attachment][:attachment_id])
@@ -463,7 +490,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
+    #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)

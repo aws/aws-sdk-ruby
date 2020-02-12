@@ -1,5 +1,4 @@
 require 'openssl'
-require 'base64'
 
 module Aws
   module S3
@@ -13,6 +12,9 @@ module Aws
           :put_bucket_lifecycle,
           :put_bucket_policy,
           :put_bucket_tagging,
+          :put_object_legal_hold,
+          :put_object_lock_configuration,
+          :put_object_retention
         ]
 
         # @api private
@@ -34,18 +36,18 @@ module Aws
           # @return [String<MD5>]
           def md5(value)
             if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
-              Base64.encode64(OpenSSL::Digest::MD5.file(value).digest).strip
+              OpenSSL::Digest::MD5.file(value).base64digest
             elsif value.respond_to?(:read)
               md5 = OpenSSL::Digest::MD5.new
               update_in_chunks(md5, value)
-              Base64.encode64(md5.digest).strip
+              md5.base64digest
             else
-              Base64.encode64(OpenSSL::Digest::MD5.digest(value)).strip
+              OpenSSL::Digest::MD5.digest(value).base64digest
             end
           end
 
           def update_in_chunks(digest, io)
-            while chunk = io.read(CHUNK_SIZE)
+            while chunk = io.read(CHUNK_SIZE, buffer ||= "")
               digest.update(chunk)
             end
             io.rewind

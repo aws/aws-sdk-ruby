@@ -41,6 +41,16 @@
           "path": "@"
         }
       },
+      "CreateNatGateway": {
+        "request": { "operation": "CreateNatGateway" },
+        "resource": {
+          "type": "NatGateway",
+          "identifiers": [
+            { "target": "Id", "source": "response", "path": "NatGateway.NatGatewayId" }
+          ],
+          "path": "NatGateway"
+        }
+      },
       "CreateNetworkAcl": {
         "request": { "operation": "CreateNetworkAcl" },
         "resource": {
@@ -205,6 +215,14 @@
           ]
         }
       },
+      "NatGateway": {
+        "resource": {
+          "type": "NatGateway",
+          "identifiers": [
+            { "target": "Id", "source": "input" }
+          ]
+        }
+      },
       "NetworkAcl": {
         "resource": {
           "type": "NetworkAcl",
@@ -359,6 +377,16 @@
             { "target": "Name", "source": "response", "path": "KeyPairs[].KeyName" }
           ],
           "path": "KeyPairs[]"
+        }
+      },
+      "NatGateways": {
+        "request": { "operation": "DescribeNatGateways" },
+        "resource": {
+          "type": "NatGateway",
+          "identifiers": [
+            { "target": "Id", "source": "response", "path": "NatGateways[].NatGatewayId" }
+          ],
+          "path": "NatGateways[]"
         }
       },
       "NetworkAcls": {
@@ -1231,6 +1259,68 @@
         }
       }
     },
+    "NatGateway": {
+      "identifiers": [
+        {
+          "name": "Id",
+          "memberName": "NatGatewayId"
+        }
+      ],
+      "shape": "NatGateway",
+      "load": {
+        "request": {
+          "operation": "DescribeNatGateways",
+          "params": [
+            { "target": "NatGatewayIds[0]", "source": "identifier", "name": "Id" }
+          ]
+        },
+        "path": "NatGateways[0]"
+      },
+      "actions": {
+        "CreateTags": {
+          "request": {
+            "operation": "CreateTags",
+            "params": [
+              { "target": "Resources[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "Tag",
+            "identifiers": [
+              { "target": "ResourceId", "source": "identifier", "name": "Id" },
+              { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
+              { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteNatGateway",
+            "params": [
+              { "target": "NatGatewayId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "Subnet": {
+          "resource": {
+            "type": "Subnet",
+            "identifiers": [
+              { "target": "Id", "source": "data", "path": "SubnetId" }
+            ]
+          }
+        },
+        "Address": {
+          "resource": {
+            "type": "VpcAddress",
+            "identifiers": [
+              { "target": "AllocationId", "source": "data", "path": "AllocationId" }
+            ]
+          }
+        }
+      }
+    },
     "NetworkInterface": {
       "identifiers": [
         {
@@ -1904,6 +1994,22 @@
               { "target": "Id", "source": "response", "path": "Reservations[].Instances[].InstanceId" }
             ],
             "path": "Reservations[].Instances[]"
+          }
+        },
+        "NatGateways": {
+          "request": {
+            "operation": "DescribeNatGateways",
+            "params": [
+              { "target": "Filter[0].Name", "source": "string", "value": "subnet-id" },
+              { "target": "Filter[0].Values[0]", "source": "identifier", "name": "Id" }
+            ]
+          },
+          "resource": {
+            "type": "NatGateway",
+            "identifiers": [
+              { "target": "Id", "source": "response", "path": "NatGateways[].NatGatewayId" }
+            ],
+            "path": "NatGateways[]"
           }
         },
         "NetworkInterfaces": {

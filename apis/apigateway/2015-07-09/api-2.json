@@ -389,7 +389,8 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"NotFoundException"},
-        {"shape":"TooManyRequestsException"}
+        {"shape":"TooManyRequestsException"},
+        {"shape":"BadRequestException"}
       ]
     },
     "DeleteGatewayResponse":{
@@ -1905,7 +1906,8 @@
         "enabled":{"shape":"Boolean"},
         "createdDate":{"shape":"Timestamp"},
         "lastUpdatedDate":{"shape":"Timestamp"},
-        "stageKeys":{"shape":"ListOfString"}
+        "stageKeys":{"shape":"ListOfString"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "ApiKeyIds":{
@@ -1941,7 +1943,8 @@
       "type":"structure",
       "members":{
         "apiId":{"shape":"String"},
-        "stage":{"shape":"String"}
+        "stage":{"shape":"String"},
+        "throttle":{"shape":"MapOfApiStageThrottleSettings"}
       }
     },
     "Authorizer":{
@@ -2044,7 +2047,8 @@
         "description":{"shape":"String"},
         "pemEncodedCertificate":{"shape":"String"},
         "createdDate":{"shape":"Timestamp"},
-        "expirationDate":{"shape":"Timestamp"}
+        "expirationDate":{"shape":"Timestamp"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "ClientCertificates":{
@@ -2088,7 +2092,8 @@
         "generateDistinctId":{"shape":"Boolean"},
         "value":{"shape":"String"},
         "stageKeys":{"shape":"ListOfStageKeys"},
-        "customerId":{"shape":"String"}
+        "customerId":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "CreateAuthorizerRequest":{
@@ -2147,7 +2152,8 @@
         "cacheClusterEnabled":{"shape":"NullableBoolean"},
         "cacheClusterSize":{"shape":"CacheClusterSize"},
         "variables":{"shape":"MapOfStringToString"},
-        "canarySettings":{"shape":"DeploymentCanarySettings"}
+        "canarySettings":{"shape":"DeploymentCanarySettings"},
+        "tracingEnabled":{"shape":"NullableBoolean"}
       }
     },
     "CreateDocumentationPartRequest":{
@@ -2196,7 +2202,9 @@
         "certificateArn":{"shape":"String"},
         "regionalCertificateName":{"shape":"String"},
         "regionalCertificateArn":{"shape":"String"},
-        "endpointConfiguration":{"shape":"EndpointConfiguration"}
+        "endpointConfiguration":{"shape":"EndpointConfiguration"},
+        "tags":{"shape":"MapOfStringToString"},
+        "securityPolicy":{"shape":"SecurityPolicy"}
       }
     },
     "CreateModelRequest":{
@@ -2265,7 +2273,8 @@
         "minimumCompressionSize":{"shape":"NullableInteger"},
         "apiKeySource":{"shape":"ApiKeySourceType"},
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
-        "policy":{"shape":"String"}
+        "policy":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "CreateStageRequest":{
@@ -2289,6 +2298,7 @@
         "variables":{"shape":"MapOfStringToString"},
         "documentationVersion":{"shape":"String"},
         "canarySettings":{"shape":"CanarySettings"},
+        "tracingEnabled":{"shape":"Boolean"},
         "tags":{"shape":"MapOfStringToString"}
       }
     },
@@ -2317,7 +2327,8 @@
         "description":{"shape":"String"},
         "apiStages":{"shape":"ListOfApiStage"},
         "throttle":{"shape":"ThrottleSettings"},
-        "quota":{"shape":"QuotaSettings"}
+        "quota":{"shape":"QuotaSettings"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "CreateVpcLinkRequest":{
@@ -2329,7 +2340,8 @@
       "members":{
         "name":{"shape":"String"},
         "description":{"shape":"String"},
-        "targetArns":{"shape":"ListOfString"}
+        "targetArns":{"shape":"ListOfString"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "DeleteApiKeyRequest":{
@@ -2834,8 +2846,20 @@
         "regionalCertificateArn":{"shape":"String"},
         "distributionDomainName":{"shape":"String"},
         "distributionHostedZoneId":{"shape":"String"},
-        "endpointConfiguration":{"shape":"EndpointConfiguration"}
+        "endpointConfiguration":{"shape":"EndpointConfiguration"},
+        "domainNameStatus":{"shape":"DomainNameStatus"},
+        "domainNameStatusMessage":{"shape":"String"},
+        "securityPolicy":{"shape":"SecurityPolicy"},
+        "tags":{"shape":"MapOfStringToString"}
       }
+    },
+    "DomainNameStatus":{
+      "type":"string",
+      "enum":[
+        "AVAILABLE",
+        "UPDATING",
+        "PENDING"
+      ]
     },
     "DomainNames":{
       "type":"structure",
@@ -2851,14 +2875,16 @@
     "EndpointConfiguration":{
       "type":"structure",
       "members":{
-        "types":{"shape":"ListOfEndpointType"}
+        "types":{"shape":"ListOfEndpointType"},
+        "vpcEndpointIds":{"shape":"ListOfString"}
       }
     },
     "EndpointType":{
       "type":"string",
       "enum":[
         "REGIONAL",
-        "EDGE"
+        "EDGE",
+        "PRIVATE"
       ]
     },
     "ExportResponse":{
@@ -2964,7 +2990,8 @@
     "GenerateClientCertificateRequest":{
       "type":"structure",
       "members":{
-        "description":{"shape":"String"}
+        "description":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "GetAccountRequest":{
@@ -4147,10 +4174,10 @@
       ]
     },
     "Long":{"type":"long"},
-    "MapOfHeaderValues":{
+    "MapOfApiStageThrottleSettings":{
       "type":"map",
       "key":{"shape":"String"},
-      "value":{"shape":"String"}
+      "value":{"shape":"ThrottleSettings"}
     },
     "MapOfIntegrationResponse":{
       "type":"map",
@@ -4570,7 +4597,8 @@
         "minimumCompressionSize":{"shape":"NullableInteger"},
         "apiKeySource":{"shape":"ApiKeySourceType"},
         "endpointConfiguration":{"shape":"EndpointConfiguration"},
-        "policy":{"shape":"String"}
+        "policy":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "RestApis":{
@@ -4629,6 +4657,13 @@
         }
       }
     },
+    "SecurityPolicy":{
+      "type":"string",
+      "enum":[
+        "TLS_1_0",
+        "TLS_1_2"
+      ]
+    },
     "ServiceUnavailableException":{
       "type":"structure",
       "members":{
@@ -4658,6 +4693,8 @@
         "documentationVersion":{"shape":"String"},
         "accessLogSettings":{"shape":"AccessLogSettings"},
         "canarySettings":{"shape":"CanarySettings"},
+        "tracingEnabled":{"shape":"Boolean"},
+        "webAclArn":{"shape":"String"},
         "tags":{"shape":"MapOfStringToString"},
         "createdDate":{"shape":"Timestamp"},
         "lastUpdatedDate":{"shape":"Timestamp"}
@@ -4725,7 +4762,8 @@
           "location":"uri",
           "locationName":"authorizer_id"
         },
-        "headers":{"shape":"MapOfHeaderValues"},
+        "headers":{"shape":"MapOfStringToString"},
+        "multiValueHeaders":{"shape":"MapOfStringToList"},
         "pathWithQueryString":{"shape":"String"},
         "body":{"shape":"String"},
         "stageVariables":{"shape":"MapOfStringToString"},
@@ -4769,7 +4807,8 @@
         },
         "pathWithQueryString":{"shape":"String"},
         "body":{"shape":"String"},
-        "headers":{"shape":"MapOfHeaderValues"},
+        "headers":{"shape":"MapOfStringToString"},
+        "multiValueHeaders":{"shape":"MapOfStringToList"},
         "clientCertificateId":{"shape":"String"},
         "stageVariables":{"shape":"MapOfStringToString"}
       }
@@ -4779,7 +4818,8 @@
       "members":{
         "status":{"shape":"Integer"},
         "body":{"shape":"String"},
-        "headers":{"shape":"MapOfHeaderValues"},
+        "headers":{"shape":"MapOfStringToString"},
+        "multiValueHeaders":{"shape":"MapOfStringToList"},
         "log":{"shape":"String"},
         "latency":{"shape":"Long"}
       }
@@ -5276,7 +5316,8 @@
         "apiStages":{"shape":"ListOfApiStage"},
         "throttle":{"shape":"ThrottleSettings"},
         "quota":{"shape":"QuotaSettings"},
-        "productCode":{"shape":"String"}
+        "productCode":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "UsagePlanKey":{
@@ -5316,7 +5357,8 @@
         "description":{"shape":"String"},
         "targetArns":{"shape":"ListOfString"},
         "status":{"shape":"VpcLinkStatus"},
-        "statusMessage":{"shape":"String"}
+        "statusMessage":{"shape":"String"},
+        "tags":{"shape":"MapOfStringToString"}
       }
     },
     "VpcLinkStatus":{

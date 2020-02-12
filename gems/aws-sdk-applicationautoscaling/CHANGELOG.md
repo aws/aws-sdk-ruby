@@ -1,6 +1,141 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2019-12-04)
+------------------
+
+* Feature - This release supports auto scaling of provisioned concurrency for AWS Lambda.
+
+1.34.0 (2019-11-25)
+------------------
+
+* Feature - This release supports auto scaling of document classifier endpoints for Comprehend; and supports target tracking based on the average capacity utilization metric for AppStream 2.0 fleets.
+
+1.33.0 (2019-11-22)
+------------------
+
+* Feature - Update default endpoint for Application Auto Scaling.
+
+1.32.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2019-10-03)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
+1.30.0 (2019-08-29)
+------------------
+
+* Feature - With the current release, you can suspend and later resume any of the following scaling actions in Application Auto Scaling: scheduled scaling actions, dynamic scaling in actions, dynamic scaling out actions.
+
+1.29.0 (2019-08-12)
+------------------
+
+* Feature - Documentation updates for Application Auto Scaling
+
+1.28.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.24.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.23.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2019-02-28)
+------------------
+
+* Feature - API update.
+
+1.18.0 (2019-02-15)
+------------------
+
+* Feature - API update.
+
+1.17.0 (2019-02-04)
+------------------
+
+* Feature - API update.
+
+1.16.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.15.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.14.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.13.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.12.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-07-10)
+------------------
+
+* Feature - API update.
+
+1.10.0 (2018-07-09)
+------------------
+
+* Feature - API update.
+
+1.9.0 (2018-06-26)
+------------------
+
+* Feature - API update.
+
 1.8.0 (2018-02-28)
 ------------------
 

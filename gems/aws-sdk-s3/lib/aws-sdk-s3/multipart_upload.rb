@@ -27,6 +27,7 @@ module Aws::S3
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -70,6 +71,8 @@ module Aws::S3
       data[:storage_class]
     end
 
+    # Specifies the owner of the object that is part of the multipart
+    # upload.
     # @return [Types::Owner]
     def owner
       data[:owner]
@@ -215,11 +218,15 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Types::AbortMultipartUploadOutput]
     def abort(options = {})
       options = options.merge(
@@ -246,12 +253,17 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [Types::CompletedMultipartUpload] :multipart_upload
+    #   The container for the multipart upload request information.
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [Object]
     def complete(options = {})
       options = options.merge(
@@ -297,11 +309,15 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :request_payer
-    #   Confirms that the requester knows that she or he will be charged for
-    #   the request. Bucket owners need not specify this parameter in their
-    #   requests. Documentation on downloading objects from requester pays
-    #   buckets can be found at
-    #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+    #   Confirms that the requester knows that they will be charged for the
+    #   request. Bucket owners need not specify this parameter in their
+    #   requests. For information about downloading objects from requester
+    #   pays buckets, see [Downloading Objects in Requestor Pays Buckets][1]
+    #   in the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     # @return [MultipartUploadPart::Collection]
     def parts(options = {})
       batches = Enumerator.new do |y|

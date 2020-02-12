@@ -16,11 +16,12 @@ module Aws::IAM
       options = Hash === args.last ? args.pop.dup : {}
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
 
-    # A set of key value pairs containing information about IAM entity usage
+    # A set of key–value pairs containing information about IAM entity usage
     # and IAM quotas.
     # @return [Hash<String,Integer>]
     def summary_map

@@ -67,6 +67,9 @@ module Aws::SimpleDB
     Attribute.add_member(:alternate_value_encoding, Shapes::ShapeRef.new(shape: String, location_name: "AlternateValueEncoding"))
     Attribute.struct_class = Types::Attribute
 
+    AttributeDoesNotExist.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    AttributeDoesNotExist.struct_class = Types::AttributeDoesNotExist
+
     AttributeList.member = Shapes::ShapeRef.new(shape: Attribute, location_name: "Attribute")
 
     AttributeNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "AttributeName")
@@ -111,6 +114,9 @@ module Aws::SimpleDB
 
     DomainNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "DomainName")
 
+    DuplicateItemName.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    DuplicateItemName.struct_class = Types::DuplicateItemName
+
     GetAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     GetAttributesRequest.add_member(:item_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
     GetAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
@@ -119,6 +125,21 @@ module Aws::SimpleDB
 
     GetAttributesResult.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "Attributes"))
     GetAttributesResult.struct_class = Types::GetAttributesResult
+
+    InvalidNextToken.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    InvalidNextToken.struct_class = Types::InvalidNextToken
+
+    InvalidNumberPredicates.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    InvalidNumberPredicates.struct_class = Types::InvalidNumberPredicates
+
+    InvalidNumberValueTests.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    InvalidNumberValueTests.struct_class = Types::InvalidNumberValueTests
+
+    InvalidParameterValue.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    InvalidParameterValue.struct_class = Types::InvalidParameterValue
+
+    InvalidQueryExpression.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    InvalidQueryExpression.struct_class = Types::InvalidQueryExpression
 
     Item.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     Item.add_member(:alternate_name_encoding, Shapes::ShapeRef.new(shape: String, location_name: "AlternateNameEncoding"))
@@ -134,6 +155,30 @@ module Aws::SimpleDB
     ListDomainsResult.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "DomainNames"))
     ListDomainsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListDomainsResult.struct_class = Types::ListDomainsResult
+
+    MissingParameter.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    MissingParameter.struct_class = Types::MissingParameter
+
+    NoSuchDomain.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NoSuchDomain.struct_class = Types::NoSuchDomain
+
+    NumberDomainAttributesExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberDomainAttributesExceeded.struct_class = Types::NumberDomainAttributesExceeded
+
+    NumberDomainBytesExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberDomainBytesExceeded.struct_class = Types::NumberDomainBytesExceeded
+
+    NumberDomainsExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberDomainsExceeded.struct_class = Types::NumberDomainsExceeded
+
+    NumberItemAttributesExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberItemAttributesExceeded.struct_class = Types::NumberItemAttributesExceeded
+
+    NumberSubmittedAttributesExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberSubmittedAttributesExceeded.struct_class = Types::NumberSubmittedAttributesExceeded
+
+    NumberSubmittedItemsExceeded.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    NumberSubmittedItemsExceeded.struct_class = Types::NumberSubmittedItemsExceeded
 
     PutAttributesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DomainName"))
     PutAttributesRequest.add_member(:item_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ItemName"))
@@ -154,6 +199,9 @@ module Aws::SimpleDB
 
     ReplaceableItemList.member = Shapes::ShapeRef.new(shape: ReplaceableItem, location_name: "Item")
 
+    RequestTimeout.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    RequestTimeout.struct_class = Types::RequestTimeout
+
     SelectRequest.add_member(:select_expression, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SelectExpression"))
     SelectRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SelectRequest.add_member(:consistent_read, Shapes::ShapeRef.new(shape: Boolean, location_name: "ConsistentRead"))
@@ -162,6 +210,9 @@ module Aws::SimpleDB
     SelectResult.add_member(:items, Shapes::ShapeRef.new(shape: ItemList, location_name: "Items"))
     SelectResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SelectResult.struct_class = Types::SelectResult
+
+    TooManyRequestedAttributes.add_member(:box_usage, Shapes::ShapeRef.new(shape: Float, location_name: "BoxUsage"))
+    TooManyRequestedAttributes.struct_class = Types::TooManyRequestedAttributes
 
     UpdateCondition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     UpdateCondition.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -175,10 +226,12 @@ module Aws::SimpleDB
       api.version = "2009-04-15"
 
       api.metadata = {
+        "apiVersion" => "2009-04-15",
         "endpointPrefix" => "sdb",
         "protocol" => "query",
         "serviceFullName" => "Amazon SimpleDB",
         "signatureVersion" => "v2",
+        "uid" => "sdb-2009-04-15",
         "xmlNamespace" => "http://sdb.amazonaws.com/doc/2009-04-15/",
       }
 

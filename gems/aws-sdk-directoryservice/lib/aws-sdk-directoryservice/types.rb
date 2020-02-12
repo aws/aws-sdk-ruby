@@ -8,6 +8,55 @@
 module Aws::DirectoryService
   module Types
 
+    # @note When making an API call, you may pass AcceptSharedDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         shared_directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectoryRequest AWS API Documentation
+    #
+    class AcceptSharedDirectoryRequest < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory
+    #   The shared directory in the directory consumer account.
+    #   @return [Types::SharedDirectory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AcceptSharedDirectoryResult AWS API Documentation
+    #
+    class AcceptSharedDirectoryResult < Struct.new(
+      :shared_directory)
+      include Aws::Structure
+    end
+
+    # You do not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddIpRoutesRequest
     #   data as a hash:
     #
@@ -170,6 +219,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # An authentication error occurred.
+    #
+    # @!attribute [rw] message
+    #   The textual message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The identifier of the request that caused the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AuthenticationFailedException AWS API Documentation
+    #
+    class AuthenticationFailedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelSchemaExtensionRequest
     #   data as a hash:
     #
@@ -198,6 +265,160 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtensionResult AWS API Documentation
     #
     class CancelSchemaExtensionResult < Aws::EmptyStructure; end
+
+    # Information about the certificate.
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   Describes a state change for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] common_name
+    #   The common name for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_date_time
+    #   The date and time that the certificate was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_date_time
+    #   The date and time when the certificate will expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :certificate_id,
+      :state,
+      :state_reason,
+      :common_name,
+      :registered_date_time,
+      :expiry_date_time)
+      include Aws::Structure
+    end
+
+    # The certificate has already been registered into the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateAlreadyExistsException AWS API Documentation
+    #
+    class CertificateAlreadyExistsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate is not present in the system for describe or
+    # deregister activities.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateDoesNotExistException AWS API Documentation
+    #
+    class CertificateDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate is being used for the LDAP security connection and
+    # cannot be removed without disabling LDAP security.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInUseException AWS API Documentation
+    #
+    class CertificateInUseException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Contains general information about a certificate.
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] common_name
+    #   The common name for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInfo AWS API Documentation
+    #
+    class CertificateInfo < Struct.new(
+      :certificate_id,
+      :common_name,
+      :state)
+      include Aws::Structure
+    end
+
+    # The certificate could not be added because the certificate limit has
+    # been reached.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateLimitExceededException AWS API Documentation
+    #
+    class CertificateLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # A client exception has occurred.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ClientException AWS API Documentation
+    #
+    class ClientException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
 
     # Contains information about a computer account in a directory.
     #
@@ -270,10 +491,16 @@ module Aws::DirectoryService
     #           customer_dns_ips: ["IpAddr"], # required
     #           customer_user_name: "UserName", # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
-    #   The fully-qualified name of the on-premises directory, such as
+    #   The fully qualified name of the on-premises directory, such as
     #   `corp.example.com`.
     #   @return [String]
     #
@@ -286,7 +513,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -298,6 +525,10 @@ module Aws::DirectoryService
     #   information for the operation.
     #   @return [Types::DirectoryConnectSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to AD Connector.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest AWS API Documentation
     #
     class ConnectDirectoryRequest < Struct.new(
@@ -306,7 +537,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :size,
-      :connect_settings)
+      :connect_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -497,6 +729,12 @@ module Aws::DirectoryService
     #           vpc_id: "VpcId", # required
     #           subnet_ids: ["SubnetId"], # required
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -505,17 +743,20 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] short_name
-    #   The short name of the directory, such as `CORP`.
+    #   The NetBIOS name of the directory, such as `CORP`.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password for the directory administrator. The directory creation
-    #   process creates a directory administrator account with the username
+    #   process creates a directory administrator account with the user name
     #   `Administrator` and this password.
+    #
+    #   If you need to change the password for the administrator account,
+    #   you can use the ResetUserPassword API call.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory.
+    #   A description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -527,6 +768,10 @@ module Aws::DirectoryService
     #   for the operation.
     #   @return [Types::DirectoryVpcSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the Simple AD directory.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryRequest AWS API Documentation
     #
     class CreateDirectoryRequest < Struct.new(
@@ -535,7 +780,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :size,
-      :vpc_settings)
+      :vpc_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -552,7 +798,37 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Creates a Microsoft AD in the AWS cloud.
+    # @note When making an API call, you may pass CreateLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the directory to which you want to subscribe and
+    #   receive real-time logs to your specified CloudWatch log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the CloudWatch log group where the real-time domain
+    #   controller logs are forwarded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionRequest AWS API Documentation
+    #
+    class CreateLogSubscriptionRequest < Struct.new(
+      :directory_id,
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateLogSubscriptionResult AWS API Documentation
+    #
+    class CreateLogSubscriptionResult < Aws::EmptyStructure; end
+
+    # Creates an AWS Managed Microsoft AD directory.
     #
     # @note When making an API call, you may pass CreateMicrosoftADRequest
     #   data as a hash:
@@ -567,29 +843,37 @@ module Aws::DirectoryService
     #           subnet_ids: ["SubnetId"], # required
     #         },
     #         edition: "Enterprise", # accepts Enterprise, Standard
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
-    #   The fully qualified domain name for the directory, such as
-    #   `corp.example.com`. This name will resolve inside your VPC only. It
-    #   does not need to be publicly resolvable.
+    #   The fully qualified domain name for the AWS Managed Microsoft AD
+    #   directory, such as `corp.example.com`. This name will resolve inside
+    #   your VPC only. It does not need to be publicly resolvable.
     #   @return [String]
     #
     # @!attribute [rw] short_name
-    #   The NetBIOS name for your domain. A short identifier for your
-    #   domain, such as `CORP`. If you don't specify a NetBIOS name, it
-    #   will default to the first part of your directory DNS. For example,
-    #   `CORP` for the directory DNS `corp.example.com`.
+    #   The NetBIOS name for your domain, such as `CORP`. If you don't
+    #   specify a NetBIOS name, it will default to the first part of your
+    #   directory DNS. For example, `CORP` for the directory DNS
+    #   `corp.example.com`.
     #   @return [String]
     #
     # @!attribute [rw] password
     #   The password for the default administrative user named `Admin`.
+    #
+    #   If you need to change the password for the administrator account,
+    #   you can use the ResetUserPassword API call.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A textual description for the directory. This label will appear on
-    #   the AWS console `Directory Details` page after the directory is
-    #   created.
+    #   A description for the directory. This label will appear on the AWS
+    #   console `Directory Details` page after the directory is created.
     #   @return [String]
     #
     # @!attribute [rw] vpc_settings
@@ -598,9 +882,13 @@ module Aws::DirectoryService
     #   @return [Types::DirectoryVpcSettings]
     #
     # @!attribute [rw] edition
-    #   AWS Microsoft AD is available in two editions: Standard and
-    #   Enterprise. Enterprise is the default.
+    #   AWS Managed Microsoft AD is available in two editions: `Standard`
+    #   and `Enterprise`. `Enterprise` is the default.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be assigned to the AWS Managed Microsoft AD directory.
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest AWS API Documentation
     #
@@ -610,7 +898,8 @@ module Aws::DirectoryService
       :password,
       :description,
       :vpc_settings,
-      :edition)
+      :edition,
+      :tags)
       include Aws::Structure
     end
 
@@ -668,14 +957,14 @@ module Aws::DirectoryService
 
     # AWS Directory Service for Microsoft Active Directory allows you to
     # configure trust relationships. For example, you can establish a trust
-    # between your Microsoft AD in the AWS cloud, and your existing
+    # between your AWS Managed Microsoft AD directory, and your existing
     # on-premises Microsoft Active Directory. This would allow you to
     # provide users and groups access to resources in either domain, with a
     # single set of credentials.
     #
     # This action initiates the creation of the AWS side of a trust
-    # relationship between a Microsoft AD in the AWS cloud and an external
-    # domain.
+    # relationship between an AWS Managed Microsoft AD directory and an
+    # external domain.
     #
     # @note When making an API call, you may pass CreateTrustRequest
     #   data as a hash:
@@ -685,13 +974,14 @@ module Aws::DirectoryService
     #         remote_domain_name: "RemoteDomainName", # required
     #         trust_password: "TrustPassword", # required
     #         trust_direction: "One-Way: Outgoing", # required, accepts One-Way: Outgoing, One-Way: Incoming, Two-Way
-    #         trust_type: "Forest", # accepts Forest
+    #         trust_type: "Forest", # accepts Forest, External
     #         conditional_forwarder_ip_addrs: ["IpAddr"],
+    #         selective_auth: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The Directory ID of the Microsoft AD in the AWS cloud for which to
-    #   establish the trust relationship.
+    #   The Directory ID of the AWS Managed Microsoft AD directory for which
+    #   to establish the trust relationship.
     #   @return [String]
     #
     # @!attribute [rw] remote_domain_name
@@ -709,13 +999,17 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] trust_type
-    #   The trust relationship type.
+    #   The trust relationship type. `Forest` is the default.
     #   @return [String]
     #
     # @!attribute [rw] conditional_forwarder_ip_addrs
     #   The IP addresses of the remote DNS server associated with
     #   RemoteDomainName.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] selective_auth
+    #   Optional parameter to enable selective authentication for the trust.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustRequest AWS API Documentation
     #
@@ -725,7 +1019,8 @@ module Aws::DirectoryService
       :trust_password,
       :trust_direction,
       :trust_type,
-      :conditional_forwarder_ip_addrs)
+      :conditional_forwarder_ip_addrs,
+      :selective_auth)
       include Aws::Structure
     end
 
@@ -809,6 +1104,29 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLogSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the directory whose log subscription you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionRequest AWS API Documentation
+    #
+    class DeleteLogSubscriptionRequest < Struct.new(
+      :directory_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteLogSubscriptionResult AWS API Documentation
+    #
+    class DeleteLogSubscriptionResult < Aws::EmptyStructure; end
+
     # Contains the inputs for the DeleteSnapshot operation.
     #
     # @note When making an API call, you may pass DeleteSnapshotRequest
@@ -843,7 +1161,7 @@ module Aws::DirectoryService
     end
 
     # Deletes the local side of an existing trust relationship between the
-    # Microsoft AD in the AWS cloud and the external domain.
+    # AWS Managed Microsoft AD directory and the external domain.
     #
     # @note When making an API call, you may pass DeleteTrustRequest
     #   data as a hash:
@@ -882,6 +1200,34 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeregisterCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_id: "CertificateId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificateRequest AWS API Documentation
+    #
+    class DeregisterCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterCertificateResult AWS API Documentation
+    #
+    class DeregisterCertificateResult < Aws::EmptyStructure; end
+
     # Removes the specified directory as a publisher to the specified SNS
     # topic.
     #
@@ -916,6 +1262,43 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult AWS API Documentation
     #
     class DeregisterEventTopicResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_id: "CertificateId", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificateRequest AWS API Documentation
+    #
+    class DescribeCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   Information about the certificate, including registered date time,
+    #   certificate state, the reason for the state, expiration date time,
+    #   and certificate common name.
+    #   @return [Types::Certificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeCertificateResult AWS API Documentation
+    #
+    class DescribeCertificateResult < Struct.new(
+      :certificate)
+      include Aws::Structure
+    end
 
     # Describes a conditional forwarder.
     #
@@ -980,7 +1363,7 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The *DescribeDirectoriesResult.NextToken* value from a previous call
+    #   The `DescribeDirectoriesResult.NextToken` value from a previous call
     #   to DescribeDirectories. Pass null if this is the first call.
     #   @return [String]
     #
@@ -1005,14 +1388,14 @@ module Aws::DirectoryService
     #   The list of DirectoryDescription objects that were retrieved.
     #
     #   It is possible that this list contains less than the number of items
-    #   specified in the *Limit* member of the request. This occurs if there
+    #   specified in the `Limit` member of the request. This occurs if there
     #   are less than the requested number of items left to retrieve, or if
     #   the limitations of the operation have been exceeded.
     #   @return [Array<Types::DirectoryDescription>]
     #
     # @!attribute [rw] next_token
     #   If not null, more results are available. Pass this value for the
-    #   *NextToken* parameter in a subsequent call to DescribeDirectories to
+    #   `NextToken` parameter in a subsequent call to DescribeDirectories to
     #   retrieve the next set of items.
     #   @return [String]
     #
@@ -1128,6 +1511,119 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLDAPSSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # accepts Client
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security the customer wants to enable, either
+    #   server or client. Currently supports only `Client`, (the default).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The type of next token used for pagination.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of items that should be displayed on one page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettingsRequest AWS API Documentation
+    #
+    class DescribeLDAPSSettingsRequest < Struct.new(
+      :directory_id,
+      :type,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ldaps_settings_info
+    #   Information about LDAP security for the specified directory,
+    #   including status of enablement, state last updated date time, and
+    #   the reason for the state.
+    #   @return [Array<Types::LDAPSSettingInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The next token used to retrieve the LDAPS settings if the number of
+    #   setting types exceeds page limit and there is another page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeLDAPSSettingsResult AWS API Documentation
+    #
+    class DescribeLDAPSSettingsResult < Struct.new(
+      :ldaps_settings_info,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSharedDirectoriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         owner_directory_id: "DirectoryId", # required
+    #         shared_directory_ids: ["DirectoryId"],
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] owner_directory_id
+    #   Returns the identifier of the directory in the directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_directory_ids
+    #   A list of identifiers of all shared directories in your account.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `DescribeSharedDirectoriesResult.NextToken` value from a
+    #   previous call to DescribeSharedDirectories. Pass null if this is the
+    #   first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The number of shared directories to return in the response object.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectoriesRequest AWS API Documentation
+    #
+    class DescribeSharedDirectoriesRequest < Struct.new(
+      :owner_directory_id,
+      :shared_directory_ids,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directories
+    #   A list of all shared directories in your account.
+    #   @return [Array<Types::SharedDirectory>]
+    #
+    # @!attribute [rw] next_token
+    #   If not null, token that indicates that more results are available.
+    #   Pass this value for the `NextToken` parameter in a subsequent call
+    #   to DescribeSharedDirectories to retrieve the next set of items.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSharedDirectoriesResult AWS API Documentation
+    #
+    class DescribeSharedDirectoriesResult < Struct.new(
+      :shared_directories,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the inputs for the DescribeSnapshots operation.
     #
     # @note When making an API call, you may pass DescribeSnapshotsRequest
@@ -1194,9 +1690,10 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Describes the trust relationships for a particular Microsoft AD in the
-    # AWS cloud. If no input parameters are are provided, such as directory
-    # ID or trust ID, this request describes all the trust relationships.
+    # Describes the trust relationships for a particular AWS Managed
+    # Microsoft AD directory. If no input parameters are are provided, such
+    # as directory ID or trust ID, this request describes all the trust
+    # relationships.
     #
     # @note When making an API call, you may pass DescribeTrustsRequest
     #   data as a hash:
@@ -1266,6 +1763,24 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The specified directory has already been shared with this AWS account.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryAlreadySharedException AWS API Documentation
+    #
+    class DirectoryAlreadySharedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Contains information for the ConnectDirectory operation when an AD
     # Connector directory is being created.
     #
@@ -1294,9 +1809,9 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
-    #   The username of an account in the on-premises directory that is used
-    #   to connect to the directory. This account must have the following
-    #   privileges:
+    #   The user name of an account in the on-premises directory that is
+    #   used to connect to the directory. This account must have the
+    #   following permissions:
     #
     #   * Read users and groups
     #
@@ -1322,11 +1837,11 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of subnet identifiers in the VPC that the AD connector is in.
+    #   A list of subnet identifiers in the VPC that the AD Connector is in.
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
-    #   The username of the service account in the on-premises directory.
+    #   The user name of the service account in the on-premises directory.
     #   @return [String]
     #
     # @!attribute [rw] security_group_id
@@ -1360,7 +1875,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The fully-qualified name of the directory.
+    #   The fully qualified name of the directory.
     #   @return [String]
     #
     # @!attribute [rw] short_name
@@ -1389,7 +1904,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The textual description for the directory.
+    #   The description for the directory.
     #   @return [String]
     #
     # @!attribute [rw] dns_ip_addrs
@@ -1403,6 +1918,25 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] stage
     #   The current stage of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_status
+    #   Current directory status of the shared AWS Managed Microsoft AD
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a shared
+    #   directory request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
     #   @return [String]
     #
     # @!attribute [rw] launch_time
@@ -1443,7 +1977,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] sso_enabled
-    #   Indicates if single-sign on is enabled for the directory. For more
+    #   Indicates if single sign-on is enabled for the directory. For more
     #   information, see EnableSso and DisableSso.
     #   @return [Boolean]
     #
@@ -1451,6 +1985,11 @@ module Aws::DirectoryService
     #   The desired number of domain controllers in the directory if the
     #   directory is Microsoft AD.
     #   @return [Integer]
+    #
+    # @!attribute [rw] owner_directory_description
+    #   Describes the AWS Managed Microsoft AD directory in the directory
+    #   owner account.
+    #   @return [Types::OwnerDirectoryDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
     #
@@ -1465,6 +2004,9 @@ module Aws::DirectoryService
       :description,
       :dns_ip_addrs,
       :stage,
+      :share_status,
+      :share_method,
+      :share_notes,
       :launch_time,
       :stage_last_updated_date_time,
       :type,
@@ -1474,18 +2016,57 @@ module Aws::DirectoryService
       :radius_status,
       :stage_reason,
       :sso_enabled,
-      :desired_number_of_domain_controllers)
+      :desired_number_of_domain_controllers,
+      :owner_directory_description)
       include Aws::Structure
     end
 
-    # Contains directory limit information for a region.
+    # The specified directory does not exist in the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDoesNotExistException AWS API Documentation
+    #
+    class DirectoryDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The maximum number of directories in the region has been reached. You
+    # can use the GetDirectoryLimits operation to determine your directory
+    # limits in the region.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryLimitExceededException AWS API Documentation
+    #
+    class DirectoryLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Contains directory limit information for a Region.
     #
     # @!attribute [rw] cloud_only_directories_limit
-    #   The maximum number of cloud directories allowed in the region.
+    #   The maximum number of cloud directories allowed in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_directories_current_count
-    #   The current number of cloud directories in the region.
+    #   The current number of cloud directories in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_directories_limit_reached
@@ -1493,24 +2074,26 @@ module Aws::DirectoryService
     #   @return [Boolean]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_limit
-    #   The maximum number of Microsoft AD directories allowed in the
-    #   region.
+    #   The maximum number of AWS Managed Microsoft AD directories allowed
+    #   in the region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_current_count
-    #   The current number of Microsoft AD directories in the region.
+    #   The current number of AWS Managed Microsoft AD directories in the
+    #   region.
     #   @return [Integer]
     #
     # @!attribute [rw] cloud_only_microsoft_ad_limit_reached
-    #   Indicates if the Microsoft AD directory limit has been reached.
+    #   Indicates if the AWS Managed Microsoft AD directory limit has been
+    #   reached.
     #   @return [Boolean]
     #
     # @!attribute [rw] connected_directories_limit
-    #   The maximum number of connected directories allowed in the region.
+    #   The maximum number of connected directories allowed in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] connected_directories_current_count
-    #   The current number of connected directories in the region.
+    #   The current number of connected directories in the Region.
     #   @return [Integer]
     #
     # @!attribute [rw] connected_directories_limit_reached
@@ -1529,6 +2112,42 @@ module Aws::DirectoryService
       :connected_directories_limit,
       :connected_directories_current_count,
       :connected_directories_limit_reached)
+      include Aws::Structure
+    end
+
+    # The specified directory has not been shared with this AWS account.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryNotSharedException AWS API Documentation
+    #
+    class DirectoryNotSharedException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified directory is unavailable or could not be found.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryUnavailableException AWS API Documentation
+    #
+    class DirectoryUnavailableException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -1589,6 +2208,36 @@ module Aws::DirectoryService
       :availability_zones)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DisableLDAPSRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # required, accepts Client
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security that the customer wants to enable. The
+    #   security can be either server or client, but currently only the
+    #   default `Client` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPSRequest AWS API Documentation
+    #
+    class DisableLDAPSRequest < Struct.new(
+      :directory_id,
+      :type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPSResult AWS API Documentation
+    #
+    class DisableLDAPSResult < Aws::EmptyStructure; end
 
     # Contains the inputs for the DisableRadius operation.
     #
@@ -1725,6 +2374,55 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The maximum allowed number of domain controllers per directory was
+    # exceeded. The default limit per directory is 20 domain controllers.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DomainControllerLimitExceededException AWS API Documentation
+    #
+    class DomainControllerLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableLDAPSRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         type: "Client", # required, accepts Client
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of LDAP security the customer wants to enable. The security
+    #   can be either server or client, but currently only the default
+    #   `Client` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPSRequest AWS API Documentation
+    #
+    class EnableLDAPSRequest < Struct.new(
+      :directory_id,
+      :type)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableLDAPSResult AWS API Documentation
+    #
+    class EnableLDAPSResult < Aws::EmptyStructure; end
+
     # Contains the inputs for the EnableRadius operation.
     #
     # @note When making an API call, you may pass EnableRadiusRequest
@@ -1815,6 +2513,42 @@ module Aws::DirectoryService
     #
     class EnableSsoResult < Aws::EmptyStructure; end
 
+    # The specified entity already exists.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EntityAlreadyExistsException AWS API Documentation
+    #
+    class EntityAlreadyExistsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified entity could not be found.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EntityDoesNotExistException AWS API Documentation
+    #
+    class EntityDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
     # Information about SNS topic and AWS Directory Service directory
     # associations.
     #
@@ -1864,7 +2598,7 @@ module Aws::DirectoryService
     #
     # @!attribute [rw] directory_limits
     #   A DirectoryLimits object that contains the directory limits for the
-    #   current region.
+    #   current rRegion.
     #   @return [Types::DirectoryLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsResult AWS API Documentation
@@ -1905,6 +2639,135 @@ module Aws::DirectoryService
     #
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits)
+      include Aws::Structure
+    end
+
+    # The account does not have sufficient permission to perform the
+    # operation.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InsufficientPermissionsException AWS API Documentation
+    #
+    class InsufficientPermissionsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The certificate PEM that was provided has incorrect encoding.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidCertificateException AWS API Documentation
+    #
+    class InvalidCertificateException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The LDAP activities could not be performed because they are limited by
+    # the LDAPS status.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidLDAPSStatusException AWS API Documentation
+    #
+    class InvalidLDAPSStatusException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The `NextToken` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # One or more parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The new password provided by the user does not meet the password
+    # complexity requirements defined in your directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidPasswordException AWS API Documentation
+    #
+    class InvalidPasswordException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # The specified shared target is not valid.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -1976,6 +2839,100 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # The maximum allowed number of IP addresses was exceeded. The default
+    # limit is 100 IP address blocks.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRouteLimitExceededException AWS API Documentation
+    #
+    class IpRouteLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Contains general information about the LDAPS settings.
+    #
+    # @!attribute [rw] ldaps_status
+    #   The state of the LDAPS settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] ldaps_status_reason
+    #   Describes a state change for LDAPS.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time when the LDAPS settings were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LDAPSSettingInfo AWS API Documentation
+    #
+    class LDAPSSettingInfo < Struct.new(
+      :ldaps_status,
+      :ldaps_status_reason,
+      :last_updated_date_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCertificatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token for requesting another page of certificates if the
+    #   `NextToken` response element indicates that more certificates are
+    #   available. Use the value of the returned `NextToken` element in your
+    #   request until the token comes back as `null`. Pass `null` if this is
+    #   the first call.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The number of items that should show up on one page
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificatesRequest AWS API Documentation
+    #
+    class ListCertificatesRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Indicates whether another page of certificates is available when the
+    #   number of available certificates exceeds the page limit.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificates_info
+    #   A list of certificates with basic details including certificate ID,
+    #   certificate common name, certificate state.
+    #   @return [Array<Types::CertificateInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificatesResult AWS API Documentation
+    #
+    class ListCertificatesResult < Struct.new(
+      :next_token,
+      :certificates_info)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListIpRoutesRequest
     #   data as a hash:
     #
@@ -2024,6 +2981,57 @@ module Aws::DirectoryService
     #
     class ListIpRoutesResult < Struct.new(
       :ip_routes_info,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListLogSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId",
+    #         next_token: "NextToken",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   If a *DirectoryID* is provided, lists only the log subscription
+    #   associated with that directory. If no *DirectoryId* is provided,
+    #   lists all log subscriptions associated with your AWS account. If
+    #   there are no log subscriptions for the AWS account or the directory,
+    #   an empty list will be returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsRequest AWS API Documentation
+    #
+    class ListLogSubscriptionsRequest < Struct.new(
+      :directory_id,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_subscriptions
+    #   A list of active LogSubscription objects for calling the AWS
+    #   account.
+    #   @return [Array<Types::LogSubscription>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListLogSubscriptionsResult AWS API Documentation
+    #
+    class ListLogSubscriptionsResult < Struct.new(
+      :log_subscriptions,
       :next_token)
       include Aws::Structure
     end
@@ -2125,6 +3133,109 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # Represents a log subscription, which tracks real-time data from a
+    # chosen log group to a specified destination.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier (ID) of the directory that you want to associate with the
+    #   log subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_created_date_time
+    #   The date and time that the log subscription was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/LogSubscription AWS API Documentation
+    #
+    class LogSubscription < Struct.new(
+      :directory_id,
+      :log_group_name,
+      :subscription_created_date_time)
+      include Aws::Structure
+    end
+
+    # The LDAP activities could not be performed because at least one valid
+    # certificate must be registered with the system.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/NoAvailableCertificateException AWS API Documentation
+    #
+    class NoAvailableCertificateException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Exception encountered while trying to access your AWS organization.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OrganizationsException AWS API Documentation
+    #
+    class OrganizationsException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Describes the directory owner account details that have been shared to
+    # the directory consumer account.
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD directory in the
+    #   directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   Identifier of the directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_ip_addrs
+    #   IP address of the directory’s domain controllers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_settings
+    #   Information about the VPC settings for the directory.
+    #   @return [Types::DirectoryVpcSettingsDescription]
+    #
+    # @!attribute [rw] radius_settings
+    #   A RadiusSettings object that contains information about the RADIUS
+    #   server.
+    #   @return [Types::RadiusSettings]
+    #
+    # @!attribute [rw] radius_status
+    #   Information about the status of the RADIUS server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/OwnerDirectoryDescription AWS API Documentation
+    #
+    class OwnerDirectoryDescription < Struct.new(
+      :directory_id,
+      :account_id,
+      :dns_ip_addrs,
+      :vpc_settings,
+      :radius_settings,
+      :radius_status)
+      include Aws::Structure
+    end
+
     # Contains information about a Remote Authentication Dial In User
     # Service (RADIUS) server.
     #
@@ -2165,7 +3276,7 @@ module Aws::DirectoryService
     #   @return [Integer]
     #
     # @!attribute [rw] shared_secret
-    #   Not currently used.
+    #   Required for enabling RADIUS on the directory.
     #   @return [String]
     #
     # @!attribute [rw] authentication_protocol
@@ -2191,6 +3302,41 @@ module Aws::DirectoryService
       :authentication_protocol,
       :display_label,
       :use_same_username)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         certificate_data: "CertificateData", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_data
+    #   The certificate PEM string that needs to be registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateRequest AWS API Documentation
+    #
+    class RegisterCertificateRequest < Struct.new(
+      :directory_id,
+      :certificate_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_id
+    #   The identifier of the certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterCertificateResult AWS API Documentation
+    #
+    class RegisterCertificateResult < Struct.new(
+      :certificate_id)
       include Aws::Structure
     end
 
@@ -2227,6 +3373,38 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicResult AWS API Documentation
     #
     class RegisterEventTopicResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RejectSharedDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         shared_directory_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectoryRequest AWS API Documentation
+    #
+    class RejectSharedDirectoryRequest < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RejectSharedDirectoryResult AWS API Documentation
+    #
+    class RejectSharedDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass RemoveIpRoutesRequest
     #   data as a hash:
@@ -2284,6 +3462,41 @@ module Aws::DirectoryService
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceResult AWS API Documentation
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ResetUserPasswordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         user_name: "CustomerUserName", # required
+    #         new_password: "UserPassword", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD or Simple AD directory in
+    #   which the user resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The user name of the user whose password will be reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_password
+    #   The new password that will be reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordRequest AWS API Documentation
+    #
+    class ResetUserPasswordRequest < Struct.new(
+      :directory_id,
+      :user_name,
+      :new_password)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordResult AWS API Documentation
+    #
+    class ResetUserPasswordResult < Aws::EmptyStructure; end
 
     # An object representing the inputs for the RestoreFromSnapshot
     # operation.
@@ -2357,6 +3570,195 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # An exception has occurred in AWS Directory Service.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ServiceException AWS API Documentation
+    #
+    class ServiceException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ShareDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         share_notes: "Notes",
+    #         share_target: { # required
+    #           id: "TargetId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT
+    #         },
+    #         share_method: "ORGANIZATIONS", # required, accepts ORGANIZATIONS, HANDSHAKE
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD directory that you want
+    #   to share with other AWS accounts.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_target
+    #   Identifier for the directory consumer account with whom the
+    #   directory is to be shared.
+    #   @return [Types::ShareTarget]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a directory
+    #   sharing request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryRequest AWS API Documentation
+    #
+    class ShareDirectoryRequest < Struct.new(
+      :directory_id,
+      :share_notes,
+      :share_target,
+      :share_method)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the directory that is stored in the directory consumer
+    #   account that is shared from the specified directory (`DirectoryId`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareDirectoryResult AWS API Documentation
+    #
+    class ShareDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # The maximum number of AWS accounts that you can share with this
+    # directory has been reached.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareLimitExceededException AWS API Documentation
+    #
+    class ShareLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Identifier that contains details about the directory consumer account.
+    #
+    # @note When making an API call, you may pass ShareTarget
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TargetId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the directory consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of identifier to be used in the `Id` field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ShareTarget AWS API Documentation
+    #
+    class ShareTarget < Struct.new(
+      :id,
+      :type)
+      include Aws::Structure
+    end
+
+    # Details about the shared directory in the directory owner account for
+    # which the share request in the directory consumer account has been
+    # accepted.
+    #
+    # @!attribute [rw] owner_account_id
+    #   Identifier of the directory owner account, which contains the
+    #   directory that has been shared to the consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_directory_id
+    #   Identifier of the directory in the directory owner account.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_method
+    #   The method used when sharing a directory to determine whether the
+    #   directory should be shared within your AWS organization
+    #   (`ORGANIZATIONS`) or with any AWS account by sending a shared
+    #   directory request (`HANDSHAKE`).
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_account_id
+    #   Identifier of the directory consumer account that has access to the
+    #   shared directory (`OwnerDirectoryId`) in the directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the shared directory in the directory consumer
+    #   account. This identifier is different for each directory owner
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_status
+    #   Current directory status of the shared AWS Managed Microsoft AD
+    #   directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_notes
+    #   A directory share request that is sent by the directory owner to the
+    #   directory consumer. The request includes a typed message to help the
+    #   directory consumer administrator determine whether to approve or
+    #   reject the share invitation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date_time
+    #   The date and time that the shared directory was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the shared directory was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SharedDirectory AWS API Documentation
+    #
+    class SharedDirectory < Struct.new(
+      :owner_account_id,
+      :owner_directory_id,
+      :share_method,
+      :shared_account_id,
+      :shared_directory_id,
+      :share_status,
+      :share_notes,
+      :created_date_time,
+      :last_updated_date_time)
+      include Aws::Structure
+    end
+
     # Describes a directory snapshot.
     #
     # @!attribute [rw] directory_id
@@ -2392,6 +3794,26 @@ module Aws::DirectoryService
       :name,
       :status,
       :start_time)
+      include Aws::Structure
+    end
+
+    # The maximum number of manual snapshots for the directory has been
+    # reached. You can use the GetSnapshotLimits operation to determine the
+    # snapshot limits for a directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SnapshotLimitExceededException AWS API Documentation
+    #
+    class SnapshotLimitExceededException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -2504,8 +3926,26 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Describes a trust relationship between an Microsoft AD in the AWS
-    # cloud and an external domain.
+    # The maximum allowed number of tags was exceeded.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Describes a trust relationship between an AWS Managed Microsoft AD
+    # directory and an external domain.
     #
     # @!attribute [rw] directory_id
     #   The Directory ID of the AWS directory involved in the trust
@@ -2522,7 +3962,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] trust_type
-    #   The trust relationship type.
+    #   The trust relationship type. `Forest` is the default.
     #   @return [String]
     #
     # @!attribute [rw] trust_direction
@@ -2549,6 +3989,10 @@ module Aws::DirectoryService
     #   The reason for the TrustState.
     #   @return [String]
     #
+    # @!attribute [rw] selective_auth
+    #   Current state of selective authentication for the trust.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Trust AWS API Documentation
     #
     class Trust < Struct.new(
@@ -2561,7 +4005,94 @@ module Aws::DirectoryService
       :created_date_time,
       :last_updated_date_time,
       :state_last_updated_date_time,
-      :trust_state_reason)
+      :trust_state_reason,
+      :selective_auth)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UnshareDirectoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         unshare_target: { # required
+    #           id: "TargetId", # required
+    #           type: "ACCOUNT", # required, accepts ACCOUNT
+    #         },
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The identifier of the AWS Managed Microsoft AD directory that you
+    #   want to stop sharing.
+    #   @return [String]
+    #
+    # @!attribute [rw] unshare_target
+    #   Identifier for the directory consumer account with whom the
+    #   directory has to be unshared.
+    #   @return [Types::UnshareTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectoryRequest AWS API Documentation
+    #
+    class UnshareDirectoryRequest < Struct.new(
+      :directory_id,
+      :unshare_target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] shared_directory_id
+    #   Identifier of the directory stored in the directory consumer account
+    #   that is to be unshared from the specified directory (`DirectoryId`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareDirectoryResult AWS API Documentation
+    #
+    class UnshareDirectoryResult < Struct.new(
+      :shared_directory_id)
+      include Aws::Structure
+    end
+
+    # Identifier that contains details about the directory consumer account
+    # with whom the directory is being unshared.
+    #
+    # @note When making an API call, you may pass UnshareTarget
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TargetId", # required
+    #         type: "ACCOUNT", # required, accepts ACCOUNT
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the directory consumer account.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Type of identifier to be used in the *Id* field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnshareTarget AWS API Documentation
+    #
+    class UnshareTarget < Struct.new(
+      :id,
+      :type)
+      include Aws::Structure
+    end
+
+    # The operation is not supported.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UnsupportedOperationException AWS API Documentation
+    #
+    class UnsupportedOperationException < Struct.new(
+      :message,
+      :request_id)
       include Aws::Structure
     end
 
@@ -2678,8 +4209,66 @@ module Aws::DirectoryService
     #
     class UpdateRadiusResult < Aws::EmptyStructure; end
 
-    # Initiates the verification of an existing trust relationship between a
-    # Microsoft AD in the AWS cloud and an external domain.
+    # @note When making an API call, you may pass UpdateTrustRequest
+    #   data as a hash:
+    #
+    #       {
+    #         trust_id: "TrustId", # required
+    #         selective_auth: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] trust_id
+    #   Identifier of the trust relationship.
+    #   @return [String]
+    #
+    # @!attribute [rw] selective_auth
+    #   Updates selective authentication for the trust.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrustRequest AWS API Documentation
+    #
+    class UpdateTrustRequest < Struct.new(
+      :trust_id,
+      :selective_auth)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] trust_id
+    #   Identifier of the trust relationship.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateTrustResult AWS API Documentation
+    #
+    class UpdateTrustResult < Struct.new(
+      :request_id,
+      :trust_id)
+      include Aws::Structure
+    end
+
+    # The user provided a username that does not exist in your directory.
+    #
+    # @!attribute [rw] message
+    #   The descriptive message for the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The AWS request identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UserDoesNotExistException AWS API Documentation
+    #
+    class UserDoesNotExistException < Struct.new(
+      :message,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # Initiates the verification of an existing trust relationship between
+    # an AWS Managed Microsoft AD directory and an external domain.
     #
     # @note When making an API call, you may pass VerifyTrustRequest
     #   data as a hash:

@@ -21,6 +21,7 @@ module Aws::SNS
       @arn = extract_arn(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,16 +33,16 @@ module Aws::SNS
 
     # Attributes include the following:
     #
-    # * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
+    # * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #   notifications should be sent.
     #
-    # * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
+    # * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
     #   notifications should be sent.
     #
-    # * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
+    # * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
     #   notifications should be sent.
     #
-    # * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
+    # * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
     #   notifications should be sent upon Direct Publish delivery failure
     #   (permanent) to one of the application's endpoints.
     # @return [Hash<String,String>]
@@ -101,7 +102,7 @@ module Aws::SNS
     #   device. The specific name for Token will vary, depending on which
     #   notification service is being used. For example, when using APNS as
     #   the notification service, you need the device token. Alternatively,
-    #   when using GCM or ADM, the device token equivalent is called the
+    #   when using FCM or ADM, the device token equivalent is called the
     #   registration ID.
     # @option options [String] :custom_user_data
     #   Arbitrary user data to associate with the endpoint. Amazon SNS does
@@ -111,7 +112,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
+    #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     # @return [PlatformEndpoint]
     def create_platform_endpoint(options = {})
       options = options.merge(platform_application_arn: @arn)
@@ -145,36 +146,36 @@ module Aws::SNS
     #   A map of the platform application attributes. Attributes in this map
     #   include the following:
     #
-    #   * `PlatformCredential` -- The credential received from the
-    #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential is
-    #     private key. For GCM, PlatformCredential is "API key". For ADM,
+    #   * `PlatformCredential` – The credential received from the notification
+    #     service. For APNS/APNS\_SANDBOX, PlatformCredential is private key.
+    #     For FCM, PlatformCredential is "API key". For ADM,
     #     PlatformCredential is "client secret".
     #
-    #   * `PlatformPrincipal` -- The principal received from the notification
+    #   * `PlatformPrincipal` – The principal received from the notification
     #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
-    #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+    #     certificate. For FCM, PlatformPrincipal is not applicable. For ADM,
     #     PlatformPrincipal is "client id".
     #
-    #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
+    #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
     #
-    #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
+    #   * `EventEndpointDeleted` – Topic ARN to which EndpointDeleted event
     #     notifications should be sent.
     #
-    #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
+    #   * `EventEndpointUpdated` – Topic ARN to which EndpointUpdate event
     #     notifications should be sent.
     #
-    #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
+    #   * `EventDeliveryFailure` – Topic ARN to which DeliveryFailure event
     #     notifications should be sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #
-    #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+    #   * `FailureFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
     #     write access to use CloudWatch Logs on your behalf.
     #
-    #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+    #   * `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
     #     successfully delivered messages.
     # @return [EmptyStructure]
     def set_attributes(options = {})

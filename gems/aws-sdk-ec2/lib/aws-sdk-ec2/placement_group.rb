@@ -21,6 +21,7 @@ module Aws::EC2
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -41,6 +42,25 @@ module Aws::EC2
     # @return [String]
     def strategy
       data[:strategy]
+    end
+
+    # The number of partitions. Valid only if **strategy** is set to
+    # `partition`.
+    # @return [Integer]
+    def partition_count
+      data[:partition_count]
+    end
+
+    # The ID of the placement group.
+    # @return [String]
+    def group_id
+      data[:group_id]
+    end
+
+    # Any tags applied to the placement group.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup
@@ -209,12 +229,13 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -244,6 +265,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -260,7 +285,7 @@ module Aws::EC2
     #     a Scheduled Instance (`spot` \| `scheduled`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
-    #     unsigned integer. The high byte is an opaque internal value and
+    #     unsigned integer. The high byte is used for internal purposes and
     #     should be ignored. The low byte is set based on the state
     #     represented. The valid values are: 0 (pending), 16 (running), 32
     #     (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
@@ -288,6 +313,16 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-options.http-tokens` - The metadata request authorization
+    #     state (`optional` \| `required`)
+    #
+    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #     request put response hop limit (integer, possible values `1` to
+    #     `64`)
+    #
+    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
+    #     on http endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -394,8 +429,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -446,22 +484,15 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
-    #     you get any resources assigned both the tag key Purpose (regardless
-    #     of what the tag's value is), and the tag value X (regardless of the
-    #     tag's key). If you want to list only resources where Purpose is X,
-    #     see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources that have a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `tenancy` - The tenancy of an instance (`dedicated` \| `default` \|
     #     `host`).
@@ -471,7 +502,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run

@@ -7,8 +7,11 @@ module BuildTools
 
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
-    # Minimum `aws-sdk-core` version for eventstream support
-    EVENTSTREAM_CORE_VERSION = "3.21.1"
+    # Minimum `aws-sdk-core` version for new gem builds
+    MINIMUM_CORE_VERSION = "3.71.0"
+    # Minimum `aws-sdk-core` version for new S3 gem builds
+    MINIMUM_CORE_VERSION_S3 = "3.83.0"
+
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
@@ -59,7 +62,8 @@ module BuildTools
         paginators: model_path('paginators-1.json', config['models']),
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
-        examples: model_path('examples-1.json', config['models']),
+        examples: load_examples(svc_name, config['models']),
+        smoke_tests: model_path('smoke.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []
@@ -76,6 +80,17 @@ module BuildTools
       docs = JSON.load(File.read(model_path('docs-2.json', models_dir)))
       BuildTools::Customizations.apply_doc_customizations(svc_name, docs)
       docs
+    end
+
+    def load_examples(svc_name, models_dir)
+      path = model_path('examples-1.json', models_dir)
+      if path
+        examples = JSON.load(File.read(path))
+        BuildTools::Customizations.apply_example_customizations(svc_name, examples)
+        examples
+      else
+        nil
+      end
     end
 
     def add_plugins(api, plugins)
@@ -97,12 +112,14 @@ module BuildTools
       end
 
       gems_dir = File.expand_path('../../gems', __FILE__)
-      (["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
+      prefix = gem == 'sts' ? ["#{gems_dir}/aws-sdk-core/lib/aws-sdk-#{gem}"] :
+        ["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"]
+      (prefix + parts).join('/') + '.rb'
     end
 
     def gem_version(gem_name)
       path = "#{$GEMS_DIR}/#{gem_name}/VERSION"
-      if File.exists?(path)
+      if File.exist?(path)
         File.read(path).rstrip
       else
         "1.0.0"
@@ -111,11 +128,14 @@ module BuildTools
 
     def gem_dependencies(api, dependencies)
       version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
-      eventstream_version_string = eventstream?(api) ? "', '>= #{EVENTSTREAM_CORE_VERSION}" : ''
-      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{eventstream_version_string}"
+      min_core = api['metadata']['serviceId'] == 'S3' ?
+        MINIMUM_CORE_VERSION_S3 :
+        MINIMUM_CORE_VERSION
+      core_version_string = "', '>= #{min_core}"
+      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{core_version_string}"
 
       case api['metadata']['signatureVersion']
-      when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
+      when 'v4' then dependencies['aws-sigv4'] = '~> 1.1'
       when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
       end
       dependencies
@@ -123,7 +143,7 @@ module BuildTools
 
     def model_path(model_name, models_dir)
       path = File.expand_path("../../apis/#{models_dir}/#{model_name}", __FILE__)
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
 
     def eventstream?(api)

@@ -42,6 +42,6 @@ require_relative 'aws-sdk-dynamodbstreams/customizations'
 # @service
 module Aws::DynamoDBStreams
 
-  GEM_VERSION = '1.0.1'
+  GEM_VERSION = '1.16.0'
 
 end

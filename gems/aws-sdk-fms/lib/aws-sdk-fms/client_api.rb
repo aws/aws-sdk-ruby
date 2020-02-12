@@ -12,12 +12,19 @@ module Aws::FMS
     include Seahorse::Model
 
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
+    AccountRoleStatus = Shapes::StringShape.new(name: 'AccountRoleStatus')
     AssociateAdminAccountRequest = Shapes::StructureShape.new(name: 'AssociateAdminAccountRequest')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ComplianceViolator = Shapes::StructureShape.new(name: 'ComplianceViolator')
     ComplianceViolators = Shapes::ListShape.new(name: 'ComplianceViolators')
+    CustomerPolicyScopeId = Shapes::StringShape.new(name: 'CustomerPolicyScopeId')
+    CustomerPolicyScopeIdList = Shapes::ListShape.new(name: 'CustomerPolicyScopeIdList')
+    CustomerPolicyScopeIdType = Shapes::StringShape.new(name: 'CustomerPolicyScopeIdType')
+    CustomerPolicyScopeMap = Shapes::MapShape.new(name: 'CustomerPolicyScopeMap')
     DeleteNotificationChannelRequest = Shapes::StructureShape.new(name: 'DeleteNotificationChannelRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
+    DependentServiceName = Shapes::StringShape.new(name: 'DependentServiceName')
+    DetailedInfo = Shapes::StringShape.new(name: 'DetailedInfo')
     DisassociateAdminAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAdminAccountRequest')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
@@ -30,15 +37,24 @@ module Aws::FMS
     GetNotificationChannelResponse = Shapes::StructureShape.new(name: 'GetNotificationChannelResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
+    GetProtectionStatusRequest = Shapes::StructureShape.new(name: 'GetProtectionStatusRequest')
+    GetProtectionStatusResponse = Shapes::StructureShape.new(name: 'GetProtectionStatusResponse')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
+    InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
+    IssueInfoMap = Shapes::MapShape.new(name: 'IssueInfoMap')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListComplianceStatusRequest = Shapes::StructureShape.new(name: 'ListComplianceStatusRequest')
     ListComplianceStatusResponse = Shapes::StructureShape.new(name: 'ListComplianceStatusResponse')
+    ListMemberAccountsRequest = Shapes::StructureShape.new(name: 'ListMemberAccountsRequest')
+    ListMemberAccountsResponse = Shapes::StructureShape.new(name: 'ListMemberAccountsResponse')
     ListPoliciesRequest = Shapes::StructureShape.new(name: 'ListPoliciesRequest')
     ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManagedServiceData = Shapes::StringShape.new(name: 'ManagedServiceData')
+    MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Policy = Shapes::StructureShape.new(name: 'Policy')
@@ -50,6 +66,7 @@ module Aws::FMS
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyUpdateToken = Shapes::StringShape.new(name: 'PolicyUpdateToken')
+    ProtectionData = Shapes::StringShape.new(name: 'ProtectionData')
     PutNotificationChannelRequest = Shapes::StructureShape.new(name: 'PutNotificationChannelRequest')
     PutPolicyRequest = Shapes::StructureShape.new(name: 'PutPolicyRequest')
     PutPolicyResponse = Shapes::StructureShape.new(name: 'PutPolicyResponse')
@@ -59,13 +76,23 @@ module Aws::FMS
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
+    ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
+    ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     ResourceTags = Shapes::ListShape.new(name: 'ResourceTags')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+    ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     SecurityServicePolicyData = Shapes::StructureShape.new(name: 'SecurityServicePolicyData')
     SecurityServiceType = Shapes::StringShape.new(name: 'SecurityServiceType')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     ViolationReason = Shapes::StringShape.new(name: 'ViolationReason')
 
     AssociateAdminAccountRequest.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "AdminAccount"))
@@ -78,9 +105,15 @@ module Aws::FMS
 
     ComplianceViolators.member = Shapes::ShapeRef.new(shape: ComplianceViolator)
 
+    CustomerPolicyScopeIdList.member = Shapes::ShapeRef.new(shape: CustomerPolicyScopeId)
+
+    CustomerPolicyScopeMap.key = Shapes::ShapeRef.new(shape: CustomerPolicyScopeIdType)
+    CustomerPolicyScopeMap.value = Shapes::ShapeRef.new(shape: CustomerPolicyScopeIdList)
+
     DeleteNotificationChannelRequest.struct_class = Types::DeleteNotificationChannelRequest
 
     DeletePolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
+    DeletePolicyRequest.add_member(:delete_all_policy_resources, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteAllPolicyResources"))
     DeletePolicyRequest.struct_class = Types::DeletePolicyRequest
 
     DisassociateAdminAccountRequest.struct_class = Types::DisassociateAdminAccountRequest
@@ -95,6 +128,7 @@ module Aws::FMS
     GetAdminAccountRequest.struct_class = Types::GetAdminAccountRequest
 
     GetAdminAccountResponse.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AdminAccount"))
+    GetAdminAccountResponse.add_member(:role_status, Shapes::ShapeRef.new(shape: AccountRoleStatus, location_name: "RoleStatus"))
     GetAdminAccountResponse.struct_class = Types::GetAdminAccountResponse
 
     GetComplianceDetailRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
@@ -117,6 +151,38 @@ module Aws::FMS
     GetPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
+    GetProtectionStatusRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
+    GetProtectionStatusRequest.add_member(:member_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "MemberAccountId"))
+    GetProtectionStatusRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "StartTime"))
+    GetProtectionStatusRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "EndTime"))
+    GetProtectionStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetProtectionStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    GetProtectionStatusRequest.struct_class = Types::GetProtectionStatusRequest
+
+    GetProtectionStatusResponse.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AdminAccountId"))
+    GetProtectionStatusResponse.add_member(:service_type, Shapes::ShapeRef.new(shape: SecurityServiceType, location_name: "ServiceType"))
+    GetProtectionStatusResponse.add_member(:data, Shapes::ShapeRef.new(shape: ProtectionData, location_name: "Data"))
+    GetProtectionStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    GetProtectionStatusResponse.struct_class = Types::GetProtectionStatusResponse
+
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidTypeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
+    IssueInfoMap.key = Shapes::ShapeRef.new(shape: DependentServiceName)
+    IssueInfoMap.value = Shapes::ShapeRef.new(shape: DetailedInfo)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListComplianceStatusRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     ListComplianceStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListComplianceStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
@@ -126,6 +192,14 @@ module Aws::FMS
     ListComplianceStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListComplianceStatusResponse.struct_class = Types::ListComplianceStatusResponse
 
+    ListMemberAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMemberAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListMemberAccountsRequest.struct_class = Types::ListMemberAccountsRequest
+
+    ListMemberAccountsResponse.add_member(:member_accounts, Shapes::ShapeRef.new(shape: MemberAccounts, location_name: "MemberAccounts"))
+    ListMemberAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMemberAccountsResponse.struct_class = Types::ListMemberAccountsResponse
+
     ListPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
     ListPoliciesRequest.struct_class = Types::ListPoliciesRequest
@@ -134,14 +208,25 @@ module Aws::FMS
     ListPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListPoliciesResponse.struct_class = Types::ListPoliciesResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MemberAccounts.member = Shapes::ShapeRef.new(shape: AWSAccountId)
+
     Policy.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
     Policy.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "PolicyName"))
     Policy.add_member(:policy_update_token, Shapes::ShapeRef.new(shape: PolicyUpdateToken, location_name: "PolicyUpdateToken"))
     Policy.add_member(:security_service_policy_data, Shapes::ShapeRef.new(shape: SecurityServicePolicyData, required: true, location_name: "SecurityServicePolicyData"))
     Policy.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "ResourceType"))
+    Policy.add_member(:resource_type_list, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "ResourceTypeList"))
     Policy.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "ResourceTags"))
     Policy.add_member(:exclude_resource_tags, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "ExcludeResourceTags"))
     Policy.add_member(:remediation_enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RemediationEnabled"))
+    Policy.add_member(:include_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "IncludeMap"))
+    Policy.add_member(:exclude_map, Shapes::ShapeRef.new(shape: CustomerPolicyScopeMap, location_name: "ExcludeMap"))
     Policy.struct_class = Types::Policy
 
     PolicyComplianceDetail.add_member(:policy_owner, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "PolicyOwner"))
@@ -150,6 +235,7 @@ module Aws::FMS
     PolicyComplianceDetail.add_member(:violators, Shapes::ShapeRef.new(shape: ComplianceViolators, location_name: "Violators"))
     PolicyComplianceDetail.add_member(:evaluation_limit_exceeded, Shapes::ShapeRef.new(shape: Boolean, location_name: "EvaluationLimitExceeded"))
     PolicyComplianceDetail.add_member(:expired_at, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ExpiredAt"))
+    PolicyComplianceDetail.add_member(:issue_info_map, Shapes::ShapeRef.new(shape: IssueInfoMap, location_name: "IssueInfoMap"))
     PolicyComplianceDetail.struct_class = Types::PolicyComplianceDetail
 
     PolicyComplianceStatus.add_member(:policy_owner, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "PolicyOwner"))
@@ -158,6 +244,7 @@ module Aws::FMS
     PolicyComplianceStatus.add_member(:member_account, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "MemberAccount"))
     PolicyComplianceStatus.add_member(:evaluation_results, Shapes::ShapeRef.new(shape: EvaluationResults, location_name: "EvaluationResults"))
     PolicyComplianceStatus.add_member(:last_updated, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "LastUpdated"))
+    PolicyComplianceStatus.add_member(:issue_info_map, Shapes::ShapeRef.new(shape: IssueInfoMap, location_name: "IssueInfoMap"))
     PolicyComplianceStatus.struct_class = Types::PolicyComplianceStatus
 
     PolicyComplianceStatusList.member = Shapes::ShapeRef.new(shape: PolicyComplianceStatus)
@@ -177,21 +264,47 @@ module Aws::FMS
     PutNotificationChannelRequest.struct_class = Types::PutNotificationChannelRequest
 
     PutPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutPolicyRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     PutPolicyRequest.struct_class = Types::PutPolicyRequest
 
     PutPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, location_name: "Policy"))
     PutPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
     PutPolicyResponse.struct_class = Types::PutPolicyResponse
 
-    ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
-    ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: ResourceTagKey, required: true, location_name: "Key"))
+    ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: ResourceTagValue, location_name: "Value"))
     ResourceTag.struct_class = Types::ResourceTag
 
     ResourceTags.member = Shapes::ShapeRef.new(shape: ResourceTag)
 
+    ResourceTypeList.member = Shapes::ShapeRef.new(shape: ResourceType)
+
     SecurityServicePolicyData.add_member(:type, Shapes::ShapeRef.new(shape: SecurityServiceType, required: true, location_name: "Type"))
     SecurityServicePolicyData.add_member(:managed_service_data, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "ManagedServiceData"))
     SecurityServicePolicyData.struct_class = Types::SecurityServicePolicyData
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
 
     # @api private
@@ -200,12 +313,16 @@ module Aws::FMS
       api.version = "2018-01-01"
 
       api.metadata = {
+        "apiVersion" => "2018-01-01",
         "endpointPrefix" => "fms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "FMS",
         "serviceFullName" => "Firewall Management Service",
+        "serviceId" => "FMS",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSFMS_20180101",
+        "uid" => "fms-2018-01-01",
       }
 
       api.add_operation(:associate_admin_account, Seahorse::Model::Operation.new.tap do |o|
@@ -294,6 +411,18 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+      end)
+
+      api.add_operation(:get_protection_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProtectionStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProtectionStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProtectionStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:list_compliance_status, Seahorse::Model::Operation.new.tap do |o|
@@ -304,6 +433,28 @@ module Aws::FMS
         o.output = Shapes::ShapeRef.new(shape: ListComplianceStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_member_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMemberAccounts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMemberAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMemberAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -316,6 +467,24 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:put_notification_channel, Seahorse::Model::Operation.new.tap do |o|
@@ -338,7 +507,34 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
     end
 

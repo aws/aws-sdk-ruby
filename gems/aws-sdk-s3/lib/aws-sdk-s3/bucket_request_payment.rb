@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -178,7 +179,16 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
+    #   &gt;The base64-encoded 128-bit MD5 digest of the data. You must use
+    #   this header as a message integrity check to verify that the request
+    #   body was not corrupted in transit. For more information, see [RFC
+    #   1864][1].
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [required, Types::RequestPaymentConfiguration] :request_payment_configuration
+    #   Container for Payer.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

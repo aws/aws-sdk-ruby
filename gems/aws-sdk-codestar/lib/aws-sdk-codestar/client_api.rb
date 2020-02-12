@@ -13,7 +13,13 @@ module Aws::CodeStar
 
     AssociateTeamMemberRequest = Shapes::StructureShape.new(name: 'AssociateTeamMemberRequest')
     AssociateTeamMemberResult = Shapes::StructureShape.new(name: 'AssociateTeamMemberResult')
+    BucketKey = Shapes::StringShape.new(name: 'BucketKey')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    Code = Shapes::StructureShape.new(name: 'Code')
+    CodeCommitCodeDestination = Shapes::StructureShape.new(name: 'CodeCommitCodeDestination')
+    CodeDestination = Shapes::StructureShape.new(name: 'CodeDestination')
+    CodeSource = Shapes::StructureShape.new(name: 'CodeSource')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResult = Shapes::StructureShape.new(name: 'CreateProjectResult')
@@ -32,6 +38,8 @@ module Aws::CodeStar
     DisassociateTeamMemberRequest = Shapes::StructureShape.new(name: 'DisassociateTeamMemberRequest')
     DisassociateTeamMemberResult = Shapes::StructureShape.new(name: 'DisassociateTeamMemberResult')
     Email = Shapes::StringShape.new(name: 'Email')
+    GitHubCodeDestination = Shapes::StructureShape.new(name: 'GitHubCodeDestination')
+    GitHubPersonalToken = Shapes::StringShape.new(name: 'GitHubPersonalToken')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidServiceRoleException = Shapes::StructureShape.new(name: 'InvalidServiceRoleException')
     LastModifiedTimestamp = Shapes::TimestampShape.new(name: 'LastModifiedTimestamp')
@@ -56,16 +64,28 @@ module Aws::CodeStar
     ProjectId = Shapes::StringShape.new(name: 'ProjectId')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
     ProjectNotFoundException = Shapes::StructureShape.new(name: 'ProjectNotFoundException')
+    ProjectStatus = Shapes::StructureShape.new(name: 'ProjectStatus')
     ProjectSummary = Shapes::StructureShape.new(name: 'ProjectSummary')
     ProjectTemplateId = Shapes::StringShape.new(name: 'ProjectTemplateId')
     ProjectsList = Shapes::ListShape.new(name: 'ProjectsList')
+    Reason = Shapes::StringShape.new(name: 'Reason')
     RemoteAccessAllowed = Shapes::BooleanShape.new(name: 'RemoteAccessAllowed')
+    RepositoryDescription = Shapes::StringShape.new(name: 'RepositoryDescription')
+    RepositoryEnableIssues = Shapes::BooleanShape.new(name: 'RepositoryEnableIssues')
+    RepositoryIsPrivate = Shapes::BooleanShape.new(name: 'RepositoryIsPrivate')
+    RepositoryName = Shapes::StringShape.new(name: 'RepositoryName')
+    RepositoryOwner = Shapes::StringShape.new(name: 'RepositoryOwner')
+    RepositoryType = Shapes::StringShape.new(name: 'RepositoryType')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourcesResult = Shapes::ListShape.new(name: 'ResourcesResult')
     Role = Shapes::StringShape.new(name: 'Role')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    SourceCode = Shapes::ListShape.new(name: 'SourceCode')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StackId = Shapes::StringShape.new(name: 'StackId')
+    State = Shapes::StringShape.new(name: 'State')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagProjectRequest = Shapes::StructureShape.new(name: 'TagProjectRequest')
@@ -76,6 +96,11 @@ module Aws::CodeStar
     TeamMemberAlreadyAssociatedException = Shapes::StructureShape.new(name: 'TeamMemberAlreadyAssociatedException')
     TeamMemberNotFoundException = Shapes::StructureShape.new(name: 'TeamMemberNotFoundException')
     TeamMemberResult = Shapes::ListShape.new(name: 'TeamMemberResult')
+    TemplateParameterKey = Shapes::StringShape.new(name: 'TemplateParameterKey')
+    TemplateParameterMap = Shapes::MapShape.new(name: 'TemplateParameterMap')
+    TemplateParameterValue = Shapes::StringShape.new(name: 'TemplateParameterValue')
+    Toolchain = Shapes::StructureShape.new(name: 'Toolchain')
+    ToolchainSource = Shapes::StructureShape.new(name: 'ToolchainSource')
     UntagProjectRequest = Shapes::StructureShape.new(name: 'UntagProjectRequest')
     UntagProjectResult = Shapes::StructureShape.new(name: 'UntagProjectResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
@@ -102,10 +127,27 @@ module Aws::CodeStar
     AssociateTeamMemberResult.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     AssociateTeamMemberResult.struct_class = Types::AssociateTeamMemberResult
 
+    Code.add_member(:source, Shapes::ShapeRef.new(shape: CodeSource, required: true, location_name: "source"))
+    Code.add_member(:destination, Shapes::ShapeRef.new(shape: CodeDestination, required: true, location_name: "destination"))
+    Code.struct_class = Types::Code
+
+    CodeCommitCodeDestination.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    CodeCommitCodeDestination.struct_class = Types::CodeCommitCodeDestination
+
+    CodeDestination.add_member(:code_commit, Shapes::ShapeRef.new(shape: CodeCommitCodeDestination, location_name: "codeCommit"))
+    CodeDestination.add_member(:git_hub, Shapes::ShapeRef.new(shape: GitHubCodeDestination, location_name: "gitHub"))
+    CodeDestination.struct_class = Types::CodeDestination
+
+    CodeSource.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3"))
+    CodeSource.struct_class = Types::CodeSource
+
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
     CreateProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     CreateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     CreateProjectRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
+    CreateProjectRequest.add_member(:source_code, Shapes::ShapeRef.new(shape: SourceCode, location_name: "sourceCode"))
+    CreateProjectRequest.add_member(:toolchain, Shapes::ShapeRef.new(shape: Toolchain, location_name: "toolchain"))
+    CreateProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
@@ -154,6 +196,7 @@ module Aws::CodeStar
     DescribeProjectResult.add_member(:created_time_stamp, Shapes::ShapeRef.new(shape: CreatedTimestamp, location_name: "createdTimeStamp"))
     DescribeProjectResult.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "stackId"))
     DescribeProjectResult.add_member(:project_template_id, Shapes::ShapeRef.new(shape: ProjectTemplateId, location_name: "projectTemplateId"))
+    DescribeProjectResult.add_member(:status, Shapes::ShapeRef.new(shape: ProjectStatus, location_name: "status"))
     DescribeProjectResult.struct_class = Types::DescribeProjectResult
 
     DescribeUserProfileRequest.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, required: true, location_name: "userArn"))
@@ -172,6 +215,15 @@ module Aws::CodeStar
     DisassociateTeamMemberRequest.struct_class = Types::DisassociateTeamMemberRequest
 
     DisassociateTeamMemberResult.struct_class = Types::DisassociateTeamMemberResult
+
+    GitHubCodeDestination.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
+    GitHubCodeDestination.add_member(:description, Shapes::ShapeRef.new(shape: RepositoryDescription, location_name: "description"))
+    GitHubCodeDestination.add_member(:type, Shapes::ShapeRef.new(shape: RepositoryType, required: true, location_name: "type"))
+    GitHubCodeDestination.add_member(:owner, Shapes::ShapeRef.new(shape: RepositoryOwner, required: true, location_name: "owner"))
+    GitHubCodeDestination.add_member(:private_repository, Shapes::ShapeRef.new(shape: RepositoryIsPrivate, required: true, location_name: "privateRepository"))
+    GitHubCodeDestination.add_member(:issues_enabled, Shapes::ShapeRef.new(shape: RepositoryEnableIssues, required: true, location_name: "issuesEnabled"))
+    GitHubCodeDestination.add_member(:token, Shapes::ShapeRef.new(shape: GitHubPersonalToken, required: true, location_name: "token"))
+    GitHubCodeDestination.struct_class = Types::GitHubCodeDestination
 
     ListProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box"=>true}))
@@ -216,6 +268,10 @@ module Aws::CodeStar
     ListUserProfilesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUserProfilesResult.struct_class = Types::ListUserProfilesResult
 
+    ProjectStatus.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
+    ProjectStatus.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
+    ProjectStatus.struct_class = Types::ProjectStatus
+
     ProjectSummary.add_member(:project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "projectId"))
     ProjectSummary.add_member(:project_arn, Shapes::ShapeRef.new(shape: ProjectArn, location_name: "projectArn"))
     ProjectSummary.struct_class = Types::ProjectSummary
@@ -226,6 +282,12 @@ module Aws::CodeStar
     Resource.struct_class = Types::Resource
 
     ResourcesResult.member = Shapes::ShapeRef.new(shape: Resource)
+
+    S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
+    S3Location.add_member(:bucket_key, Shapes::ShapeRef.new(shape: BucketKey, location_name: "bucketKey"))
+    S3Location.struct_class = Types::S3Location
+
+    SourceCode.member = Shapes::ShapeRef.new(shape: Code)
 
     TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -245,6 +307,17 @@ module Aws::CodeStar
     TeamMember.struct_class = Types::TeamMember
 
     TeamMemberResult.member = Shapes::ShapeRef.new(shape: TeamMember)
+
+    TemplateParameterMap.key = Shapes::ShapeRef.new(shape: TemplateParameterKey)
+    TemplateParameterMap.value = Shapes::ShapeRef.new(shape: TemplateParameterValue)
+
+    Toolchain.add_member(:source, Shapes::ShapeRef.new(shape: ToolchainSource, required: true, location_name: "source"))
+    Toolchain.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    Toolchain.add_member(:stack_parameters, Shapes::ShapeRef.new(shape: TemplateParameterMap, location_name: "stackParameters"))
+    Toolchain.struct_class = Types::Toolchain
+
+    ToolchainSource.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3"))
+    ToolchainSource.struct_class = Types::ToolchainSource
 
     UntagProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     UntagProjectRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "tags"))
@@ -299,12 +372,16 @@ module Aws::CodeStar
       api.version = "2017-04-19"
 
       api.metadata = {
+        "apiVersion" => "2017-04-19",
         "endpointPrefix" => "codestar",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "CodeStar",
         "serviceFullName" => "AWS CodeStar",
+        "serviceId" => "CodeStar",
         "signatureVersion" => "v4",
         "targetPrefix" => "CodeStar_20170419",
+        "uid" => "codestar-2017-04-19",
       }
 
       api.add_operation(:associate_team_member, Seahorse::Model::Operation.new.tap do |o|

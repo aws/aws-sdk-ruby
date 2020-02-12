@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,101 +48,205 @@ module Aws::CloudDirectory
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    # @option options [String] :session_token
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
+    #
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
+    #
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
+    #
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
+    #
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -193,7 +302,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AddFacetToObject AWS API Documentation
     #
     # @overload add_facet_to_object(params = {})
     # @param [Hash] params ({})
@@ -231,7 +340,7 @@ module Aws::CloudDirectory
     #   resp.applied_schema_arn #=> String
     #   resp.directory_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ApplySchema AWS API Documentation
     #
     # @overload apply_schema(params = {})
     # @param [Hash] params ({})
@@ -281,7 +390,7 @@ module Aws::CloudDirectory
     #
     #   resp.attached_object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachObject AWS API Documentation
     #
     # @overload attach_object(params = {})
     # @param [Hash] params ({})
@@ -318,7 +427,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachPolicy AWS API Documentation
     #
     # @overload attach_policy(params = {})
     # @param [Hash] params ({})
@@ -359,7 +468,7 @@ module Aws::CloudDirectory
     #
     #   resp.attached_object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndex AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachToIndex AWS API Documentation
     #
     # @overload attach_to_index(params = {})
     # @param [Hash] params ({})
@@ -369,11 +478,11 @@ module Aws::CloudDirectory
     end
 
     # Attaches a typed link to a specified source and target object. For
-    # more information, see [Typed link][1].
+    # more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to
@@ -438,7 +547,7 @@ module Aws::CloudDirectory
     #   resp.typed_link_specifier.identity_attribute_values[0].value.number_value #=> String
     #   resp.typed_link_specifier.identity_attribute_values[0].value.datetime_value #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AttachTypedLink AWS API Documentation
     #
     # @overload attach_typed_link(params = {})
     # @param [Hash] params ({})
@@ -517,6 +626,13 @@ module Aws::CloudDirectory
     #             facet_name: "FacetName",
     #           },
     #           attribute_names: ["AttributeName"], # required
+    #         },
+    #         list_object_parents: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
     #         },
     #         list_object_policies: {
     #           object_reference: { # required
@@ -641,6 +757,33 @@ module Aws::CloudDirectory
     #           next_token: "NextToken",
     #           max_results: 1,
     #         },
+    #         get_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_names: ["AttributeName"], # required
+    #         },
     #       },
     #     ],
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
@@ -743,10 +886,23 @@ module Aws::CloudDirectory
     #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
     #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
     #   resp.responses[0].successful_response.list_incoming_typed_links.next_token #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes #=> Array
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.schema_arn #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.facet_name #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.name #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.datetime_value #=> Time
+    #   resp.responses[0].successful_response.list_object_parents.parent_links #=> Array
+    #   resp.responses[0].successful_response.list_object_parents.parent_links[0].object_identifier #=> String
+    #   resp.responses[0].successful_response.list_object_parents.parent_links[0].link_name #=> String
+    #   resp.responses[0].successful_response.list_object_parents.next_token #=> String
     #   resp.responses[0].exception_response.type #=> String, one of "ValidationException", "InvalidArnException", "ResourceNotFoundException", "InvalidNextTokenException", "AccessDeniedException", "NotNodeException", "FacetValidationException", "CannotListParentOfRootException", "NotIndexException", "NotPolicyException", "DirectoryNotEnabledException", "LimitExceededException", "InternalServiceException"
     #   resp.responses[0].exception_response.message #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchRead AWS API Documentation
     #
     # @overload batch_read(params = {})
     # @param [Hash] params ({})
@@ -980,6 +1136,51 @@ module Aws::CloudDirectory
     #             ],
     #           },
     #         },
+    #         update_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_updates: [ # required
+    #             {
+    #               attribute_key: {
+    #                 schema_arn: "Arn", # required
+    #                 facet_name: "FacetName", # required
+    #                 name: "AttributeName", # required
+    #               },
+    #               attribute_action: {
+    #                 attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #                 attribute_update_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #   })
@@ -1006,7 +1207,7 @@ module Aws::CloudDirectory
     #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.number_value #=> String
     #   resp.responses[0].attach_typed_link.typed_link_specifier.identity_attribute_values[0].value.datetime_value #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWrite AWS API Documentation
     #
     # @overload batch_write(params = {})
     # @param [Hash] params ({})
@@ -1017,6 +1218,14 @@ module Aws::CloudDirectory
 
     # Creates a Directory by copying the published schema into the
     # directory. A directory cannot be created without a schema.
+    #
+    # You can also quickly create a directory using a managed schema, called
+    # the `QuickStartSchema`. For more information, see [Managed Schema][1]
+    # in the *Amazon Cloud Directory Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html
     #
     # @option params [required, String] :name
     #   The name of the Directory. Should be unique per account, per region.
@@ -1046,7 +1255,7 @@ module Aws::CloudDirectory
     #   resp.object_identifier #=> String
     #   resp.applied_schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectory AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateDirectory AWS API Documentation
     #
     # @overload create_directory(params = {})
     # @param [Hash] params ({})
@@ -1068,7 +1277,7 @@ module Aws::CloudDirectory
     # @option params [Array<Types::FacetAttribute>] :attributes
     #   The attributes that are associated with the Facet.
     #
-    # @option params [required, String] :object_type
+    # @option params [String] :object_type
     #   Specifies whether a given object created from this facet is of type
     #   node, leaf node, policy or index.
     #
@@ -1094,7 +1303,13 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
+    #
+    # @option params [String] :facet_style
+    #   There are two different styles that you can define on any given facet,
+    #   `Static` and `Dynamic`. For static facets, all attributes must be
+    #   defined in the schema. For dynamic facets, attributes can be defined
+    #   during data plane operations.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1107,7 +1322,7 @@ module Aws::CloudDirectory
     #       {
     #         name: "AttributeName", # required
     #         attribute_definition: {
-    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME, VARIANT
     #           default_value: {
     #             string_value: "StringAttributeValue",
     #             binary_value: "data",
@@ -1132,10 +1347,11 @@ module Aws::CloudDirectory
     #         required_behavior: "REQUIRED_ALWAYS", # accepts REQUIRED_ALWAYS, NOT_REQUIRED
     #       },
     #     ],
-    #     object_type: "NODE", # required, accepts NODE, LEAF_NODE, POLICY, INDEX
+    #     object_type: "NODE", # accepts NODE, LEAF_NODE, POLICY, INDEX
+    #     facet_style: "STATIC", # accepts STATIC, DYNAMIC
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateFacet AWS API Documentation
     #
     # @overload create_facet(params = {})
     # @param [Hash] params ({})
@@ -1144,11 +1360,12 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Creates an index object. See [Indexing][1] for more information.
+    # Creates an index object. See [Indexing and search][1] for more
+    # information.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.html
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory where the index should be created.
@@ -1193,7 +1410,7 @@ module Aws::CloudDirectory
     #
     #   resp.object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndex AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateIndex AWS API Documentation
     #
     # @overload create_index(params = {})
     # @param [Hash] params ({})
@@ -1267,7 +1484,7 @@ module Aws::CloudDirectory
     #
     #   resp.object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateObject AWS API Documentation
     #
     # @overload create_object(params = {})
     # @param [Hash] params ({})
@@ -1309,7 +1526,7 @@ module Aws::CloudDirectory
     #
     #   resp.schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateSchema AWS API Documentation
     #
     # @overload create_schema(params = {})
     # @param [Hash] params ({})
@@ -1318,11 +1535,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Creates a TypedLinkFacet. For more information, see [Typed link][1].
+    # Creates a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -1342,7 +1559,7 @@ module Aws::CloudDirectory
     #       attributes: [ # required
     #         {
     #           name: "AttributeName", # required
-    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME, VARIANT
     #           default_value: {
     #             string_value: "StringAttributeValue",
     #             binary_value: "data",
@@ -1366,7 +1583,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CreateTypedLinkFacet AWS API Documentation
     #
     # @overload create_typed_link_facet(params = {})
     # @param [Hash] params ({})
@@ -1396,7 +1613,7 @@ module Aws::CloudDirectory
     #
     #   resp.directory_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectory AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteDirectory AWS API Documentation
     #
     # @overload delete_directory(params = {})
     # @param [Hash] params ({})
@@ -1425,7 +1642,7 @@ module Aws::CloudDirectory
     #     name: "FacetName", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteFacet AWS API Documentation
     #
     # @overload delete_facet(params = {})
     # @param [Hash] params ({})
@@ -1435,7 +1652,13 @@ module Aws::CloudDirectory
     end
 
     # Deletes an object and its associated attributes. Only objects with no
-    # children and no parents can be deleted.
+    # children and no parents can be deleted. The maximum number of
+    # attributes that can be deleted during an object deletion is 30. For
+    # more information, see [Amazon Cloud Directory Limits][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
@@ -1455,7 +1678,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteObject AWS API Documentation
     #
     # @overload delete_object(params = {})
     # @param [Hash] params ({})
@@ -1485,7 +1708,7 @@ module Aws::CloudDirectory
     #
     #   resp.schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteSchema AWS API Documentation
     #
     # @overload delete_schema(params = {})
     # @param [Hash] params ({})
@@ -1494,11 +1717,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Deletes a TypedLinkFacet. For more information, see [Typed link][1].
+    # Deletes a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -1516,7 +1739,7 @@ module Aws::CloudDirectory
     #     name: "TypedLinkName", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DeleteTypedLinkFacet AWS API Documentation
     #
     # @overload delete_typed_link_facet(params = {})
     # @param [Hash] params ({})
@@ -1557,7 +1780,7 @@ module Aws::CloudDirectory
     #
     #   resp.detached_object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndex AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachFromIndex AWS API Documentation
     #
     # @overload detach_from_index(params = {})
     # @param [Hash] params ({})
@@ -1598,7 +1821,7 @@ module Aws::CloudDirectory
     #
     #   resp.detached_object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachObject AWS API Documentation
     #
     # @overload detach_object(params = {})
     # @param [Hash] params ({})
@@ -1634,7 +1857,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachPolicy AWS API Documentation
     #
     # @overload detach_policy(params = {})
     # @param [Hash] params ({})
@@ -1644,11 +1867,11 @@ module Aws::CloudDirectory
     end
 
     # Detaches a typed link from a specified source and target object. For
-    # more information, see [Typed link][1].
+    # more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to
@@ -1689,7 +1912,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DetachTypedLink AWS API Documentation
     #
     # @overload detach_typed_link(params = {})
     # @param [Hash] params ({})
@@ -1719,7 +1942,7 @@ module Aws::CloudDirectory
     #
     #   resp.directory_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectory AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DisableDirectory AWS API Documentation
     #
     # @overload disable_directory(params = {})
     # @param [Hash] params ({})
@@ -1748,7 +1971,7 @@ module Aws::CloudDirectory
     #
     #   resp.directory_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectory AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/EnableDirectory AWS API Documentation
     #
     # @overload enable_directory(params = {})
     # @param [Hash] params ({})
@@ -1777,7 +2000,7 @@ module Aws::CloudDirectory
     #
     #   resp.applied_schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersion AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetAppliedSchemaVersion AWS API Documentation
     #
     # @overload get_applied_schema_version(params = {})
     # @param [Hash] params ({})
@@ -1808,7 +2031,7 @@ module Aws::CloudDirectory
     #   resp.directory.state #=> String, one of "ENABLED", "DISABLED", "DELETED"
     #   resp.directory.creation_date_time #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectory AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetDirectory AWS API Documentation
     #
     # @overload get_directory(params = {})
     # @param [Hash] params ({})
@@ -1843,13 +2066,92 @@ module Aws::CloudDirectory
     #
     #   resp.facet.name #=> String
     #   resp.facet.object_type #=> String, one of "NODE", "LEAF_NODE", "POLICY", "INDEX"
+    #   resp.facet.facet_style #=> String, one of "STATIC", "DYNAMIC"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetFacet AWS API Documentation
     #
     # @overload get_facet(params = {})
     # @param [Hash] params ({})
     def get_facet(params = {}, options = {})
       req = build_request(:get_facet, params)
+      req.send_request(options)
+    end
+
+    # Retrieves attributes that are associated with a typed link.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the typed link resides. For more information, see arns or [Typed
+    #   Links][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
+    #
+    # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #
+    # @option params [required, Array<String>] :attribute_names
+    #   A list of attribute names whose values will be retrieved.
+    #
+    # @option params [String] :consistency_level
+    #   The consistency level at which to retrieve the attributes on a typed
+    #   link.
+    #
+    # @return [Types::GetLinkAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLinkAttributesResponse#attributes #attributes} => Array&lt;Types::AttributeKeyAndValue&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_link_attributes({
+    #     directory_arn: "Arn", # required
+    #     typed_link_specifier: { # required
+    #       typed_link_facet: { # required
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       },
+    #       source_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       target_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       identity_attribute_values: [ # required
+    #         {
+    #           attribute_name: "AttributeName", # required
+    #           value: { # required
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     attribute_names: ["AttributeName"], # required
+    #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].key.schema_arn #=> String
+    #   resp.attributes[0].key.facet_name #=> String
+    #   resp.attributes[0].key.name #=> String
+    #   resp.attributes[0].value.string_value #=> String
+    #   resp.attributes[0].value.binary_value #=> String
+    #   resp.attributes[0].value.boolean_value #=> Boolean
+    #   resp.attributes[0].value.number_value #=> String
+    #   resp.attributes[0].value.datetime_value #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetLinkAttributes AWS API Documentation
+    #
+    # @overload get_link_attributes(params = {})
+    # @param [Hash] params ({})
+    def get_link_attributes(params = {}, options = {})
+      req = build_request(:get_link_attributes, params)
       req.send_request(options)
     end
 
@@ -1906,7 +2208,7 @@ module Aws::CloudDirectory
     #   resp.attributes[0].value.number_value #=> String
     #   resp.attributes[0].value.datetime_value #=> Time
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectAttributes AWS API Documentation
     #
     # @overload get_object_attributes(params = {})
     # @param [Hash] params ({})
@@ -1948,7 +2250,7 @@ module Aws::CloudDirectory
     #   resp.schema_facets[0].facet_name #=> String
     #   resp.object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetObjectInformation AWS API Documentation
     #
     # @overload get_object_information(params = {})
     # @param [Hash] params ({})
@@ -1962,7 +2264,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json
     #
     # @option params [required, String] :schema_arn
     #   The ARN of the schema to retrieve.
@@ -1983,7 +2285,7 @@ module Aws::CloudDirectory
     #   resp.name #=> String
     #   resp.document #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJson AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetSchemaAsJson AWS API Documentation
     #
     # @overload get_schema_as_json(params = {})
     # @param [Hash] params ({})
@@ -1993,11 +2295,11 @@ module Aws::CloudDirectory
     end
 
     # Returns the identity attribute order for a specific TypedLinkFacet.
-    # For more information, see [Typed link][1].
+    # For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -2022,7 +2324,7 @@ module Aws::CloudDirectory
     #   resp.identity_attribute_order #=> Array
     #   resp.identity_attribute_order[0] #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformation AWS API Documentation
     #
     # @overload get_typed_link_facet_information(params = {})
     # @param [Hash] params ({})
@@ -2067,7 +2369,7 @@ module Aws::CloudDirectory
     #   resp.schema_arns[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAppliedSchemaArns AWS API Documentation
     #
     # @overload list_applied_schema_arns(params = {})
     # @param [Hash] params ({})
@@ -2125,7 +2427,7 @@ module Aws::CloudDirectory
     #   resp.index_attachments[0].object_identifier #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndices AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListAttachedIndices AWS API Documentation
     #
     # @overload list_attached_indices(params = {})
     # @param [Hash] params ({})
@@ -2161,7 +2463,7 @@ module Aws::CloudDirectory
     #   resp.schema_arns[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDevelopmentSchemaArns AWS API Documentation
     #
     # @overload list_development_schema_arns(params = {})
     # @param [Hash] params ({})
@@ -2204,7 +2506,7 @@ module Aws::CloudDirectory
     #   resp.directories[0].creation_date_time #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectories AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListDirectories AWS API Documentation
     #
     # @overload list_directories(params = {})
     # @param [Hash] params ({})
@@ -2245,7 +2547,7 @@ module Aws::CloudDirectory
     #
     #   resp.attributes #=> Array
     #   resp.attributes[0].name #=> String
-    #   resp.attributes[0].attribute_definition.type #=> String, one of "STRING", "BINARY", "BOOLEAN", "NUMBER", "DATETIME"
+    #   resp.attributes[0].attribute_definition.type #=> String, one of "STRING", "BINARY", "BOOLEAN", "NUMBER", "DATETIME", "VARIANT"
     #   resp.attributes[0].attribute_definition.default_value.string_value #=> String
     #   resp.attributes[0].attribute_definition.default_value.binary_value #=> String
     #   resp.attributes[0].attribute_definition.default_value.boolean_value #=> Boolean
@@ -2261,7 +2563,7 @@ module Aws::CloudDirectory
     #   resp.attributes[0].required_behavior #=> String, one of "REQUIRED_ALWAYS", "NOT_REQUIRED"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetAttributes AWS API Documentation
     #
     # @overload list_facet_attributes(params = {})
     # @param [Hash] params ({})
@@ -2300,7 +2602,7 @@ module Aws::CloudDirectory
     #   resp.facet_names[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNames AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListFacetNames AWS API Documentation
     #
     # @overload list_facet_names(params = {})
     # @param [Hash] params ({})
@@ -2312,11 +2614,11 @@ module Aws::CloudDirectory
     # Returns a paginated list of all the incoming TypedLinkSpecifier
     # information for an object. It also supports filtering by typed link
     # facet and identity attributes. For more information, see [Typed
-    # link][1].
+    # Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to list
@@ -2404,7 +2706,7 @@ module Aws::CloudDirectory
     #   resp.link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIncomingTypedLinks AWS API Documentation
     #
     # @overload list_incoming_typed_links(params = {})
     # @param [Hash] params ({})
@@ -2426,12 +2728,12 @@ module Aws::CloudDirectory
     #
     # @option params [Integer] :max_results
     #   The maximum number of objects in a single page to retrieve from the
-    #   index during a request. For more information, see [AWS Directory
-    #   Service Limits][1].
+    #   index during a request. For more information, see [Amazon Cloud
+    #   Directory Limits][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd
+    #   [1]: http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -2498,12 +2800,54 @@ module Aws::CloudDirectory
     #   resp.index_attachments[0].object_identifier #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndex AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListIndex AWS API Documentation
     #
     # @overload list_index(params = {})
     # @param [Hash] params ({})
     def list_index(params = {}, options = {})
       req = build_request(:list_index, params)
+      req.send_request(options)
+    end
+
+    # Lists the major version families of each managed schema. If a major
+    # version ARN is provided as SchemaArn, the minor version revisions in
+    # that family are listed instead.
+    #
+    # @option params [String] :schema_arn
+    #   The response for ListManagedSchemaArns. When this parameter is used,
+    #   all minor version ARNs for a major version are listed.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to retrieve.
+    #
+    # @return [Types::ListManagedSchemaArnsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListManagedSchemaArnsResponse#schema_arns #schema_arns} => Array&lt;String&gt;
+    #   * {Types::ListManagedSchemaArnsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_managed_schema_arns({
+    #     schema_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schema_arns #=> Array
+    #   resp.schema_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListManagedSchemaArns AWS API Documentation
+    #
+    # @overload list_managed_schema_arns(params = {})
+    # @param [Hash] params ({})
+    def list_managed_schema_arns(params = {}, options = {})
+      req = build_request(:list_managed_schema_arns, params)
       req.send_request(options)
     end
 
@@ -2567,7 +2911,7 @@ module Aws::CloudDirectory
     #   resp.attributes[0].value.datetime_value #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectAttributes AWS API Documentation
     #
     # @overload list_object_attributes(params = {})
     # @param [Hash] params ({})
@@ -2622,7 +2966,7 @@ module Aws::CloudDirectory
     #   resp.children["LinkName"] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildren AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectChildren AWS API Documentation
     #
     # @overload list_object_children(params = {})
     # @param [Hash] params ({})
@@ -2645,7 +2989,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory to which the parent path applies.
@@ -2685,7 +3029,7 @@ module Aws::CloudDirectory
     #   resp.path_to_object_identifiers_list[0].object_identifiers[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentPaths AWS API Documentation
     #
     # @overload list_object_parent_paths(params = {})
     # @param [Hash] params ({})
@@ -2717,10 +3061,15 @@ module Aws::CloudDirectory
     #   update of an object is reflected in a subsequent read operation of
     #   that same object.
     #
+    # @option params [Boolean] :include_all_links_to_each_parent
+    #   When set to True, returns all ListObjectParentsResponse$ParentLinks.
+    #   There could be multiple links between a parent-child pair.
+    #
     # @return [Types::ListObjectParentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListObjectParentsResponse#parents #parents} => Hash&lt;String,String&gt;
     #   * {Types::ListObjectParentsResponse#next_token #next_token} => String
+    #   * {Types::ListObjectParentsResponse#parent_links #parent_links} => Array&lt;Types::ObjectIdentifierAndLinkNameTuple&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2732,6 +3081,7 @@ module Aws::CloudDirectory
     #     next_token: "NextToken",
     #     max_results: 1,
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #     include_all_links_to_each_parent: false,
     #   })
     #
     # @example Response structure
@@ -2739,8 +3089,11 @@ module Aws::CloudDirectory
     #   resp.parents #=> Hash
     #   resp.parents["ObjectIdentifier"] #=> String
     #   resp.next_token #=> String
+    #   resp.parent_links #=> Array
+    #   resp.parent_links[0].object_identifier #=> String
+    #   resp.parent_links[0].link_name #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParents AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParents AWS API Documentation
     #
     # @overload list_object_parents(params = {})
     # @param [Hash] params ({})
@@ -2794,7 +3147,7 @@ module Aws::CloudDirectory
     #   resp.attached_policy_ids[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPolicies AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectPolicies AWS API Documentation
     #
     # @overload list_object_policies(params = {})
     # @param [Hash] params ({})
@@ -2806,11 +3159,11 @@ module Aws::CloudDirectory
     # Returns a paginated list of all the outgoing TypedLinkSpecifier
     # information for an object. It also supports filtering by typed link
     # facet and identity attributes. For more information, see [Typed
-    # link][1].
+    # Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) of the directory where you want to list
@@ -2899,7 +3252,7 @@ module Aws::CloudDirectory
     #   resp.typed_link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListOutgoingTypedLinks AWS API Documentation
     #
     # @overload list_outgoing_typed_links(params = {})
     # @param [Hash] params ({})
@@ -2953,7 +3306,7 @@ module Aws::CloudDirectory
     #   resp.object_identifiers[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachments AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPolicyAttachments AWS API Documentation
     #
     # @overload list_policy_attachments(params = {})
     # @param [Hash] params ({})
@@ -2995,7 +3348,7 @@ module Aws::CloudDirectory
     #   resp.schema_arns[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArns AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListPublishedSchemaArns AWS API Documentation
     #
     # @overload list_published_schema_arns(params = {})
     # @param [Hash] params ({})
@@ -3041,7 +3394,7 @@ module Aws::CloudDirectory
     #   resp.tags[0].value #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -3051,11 +3404,11 @@ module Aws::CloudDirectory
     end
 
     # Returns a paginated list of all attribute definitions for a particular
-    # TypedLinkFacet. For more information, see [Typed link][1].
+    # TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3088,7 +3441,7 @@ module Aws::CloudDirectory
     #
     #   resp.attributes #=> Array
     #   resp.attributes[0].name #=> String
-    #   resp.attributes[0].type #=> String, one of "STRING", "BINARY", "BOOLEAN", "NUMBER", "DATETIME"
+    #   resp.attributes[0].type #=> String, one of "STRING", "BINARY", "BOOLEAN", "NUMBER", "DATETIME", "VARIANT"
     #   resp.attributes[0].default_value.string_value #=> String
     #   resp.attributes[0].default_value.binary_value #=> String
     #   resp.attributes[0].default_value.boolean_value #=> Boolean
@@ -3102,7 +3455,7 @@ module Aws::CloudDirectory
     #   resp.attributes[0].required_behavior #=> String, one of "REQUIRED_ALWAYS", "NOT_REQUIRED"
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetAttributes AWS API Documentation
     #
     # @overload list_typed_link_facet_attributes(params = {})
     # @param [Hash] params ({})
@@ -3112,11 +3465,11 @@ module Aws::CloudDirectory
     end
 
     # Returns a paginated list of `TypedLink` facet names for a particular
-    # schema. For more information, see [Typed link][1].
+    # schema. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3147,7 +3500,7 @@ module Aws::CloudDirectory
     #   resp.facet_names[0] #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListTypedLinkFacetNames AWS API Documentation
     #
     # @overload list_typed_link_facet_names(params = {})
     # @param [Hash] params ({})
@@ -3166,7 +3519,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory.
@@ -3208,7 +3561,7 @@ module Aws::CloudDirectory
     #   resp.policy_to_path_list[0].policies[0].policy_type #=> String
     #   resp.next_token #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicy AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LookupPolicy AWS API Documentation
     #
     # @overload lookup_policy(params = {})
     # @param [Hash] params ({})
@@ -3254,7 +3607,7 @@ module Aws::CloudDirectory
     #
     #   resp.published_schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PublishSchema AWS API Documentation
     #
     # @overload publish_schema(params = {})
     # @param [Hash] params ({})
@@ -3268,7 +3621,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_schemas.html#jsonformat
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_jsonformat.html#schemas_json
     #
     # @option params [required, String] :schema_arn
     #   The ARN of the schema to update.
@@ -3291,7 +3644,7 @@ module Aws::CloudDirectory
     #
     #   resp.arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJson AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/PutSchemaFromJson AWS API Documentation
     #
     # @overload put_schema_from_json(params = {})
     # @param [Hash] params ({})
@@ -3326,7 +3679,7 @@ module Aws::CloudDirectory
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObject AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RemoveFacetFromObject AWS API Documentation
     #
     # @overload remove_facet_from_object(params = {})
     # @param [Hash] params ({})
@@ -3358,7 +3711,7 @@ module Aws::CloudDirectory
     #     ],
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/TagResource AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -3385,7 +3738,7 @@ module Aws::CloudDirectory
     #     tag_keys: ["TagKey"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResource AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -3430,7 +3783,7 @@ module Aws::CloudDirectory
     #         attribute: {
     #           name: "AttributeName", # required
     #           attribute_definition: {
-    #             type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #             type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME, VARIANT
     #             default_value: {
     #               string_value: "StringAttributeValue",
     #               binary_value: "data",
@@ -3460,12 +3813,91 @@ module Aws::CloudDirectory
     #     object_type: "NODE", # accepts NODE, LEAF_NODE, POLICY, INDEX
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateFacet AWS API Documentation
     #
     # @overload update_facet(params = {})
     # @param [Hash] params ({})
     def update_facet(params = {}, options = {})
       req = build_request(:update_facet, params)
+      req.send_request(options)
+    end
+
+    # Updates a given typed link’s attributes. Attributes to be updated must
+    # not contribute to the typed link’s identity, as defined by its
+    # `IdentityAttributeOrder`.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the updated typed link resides. For more information, see arns
+    #   or [Typed Links][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
+    #
+    # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #
+    # @option params [required, Array<Types::LinkAttributeUpdate>] :attribute_updates
+    #   The attributes update structure.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_link_attributes({
+    #     directory_arn: "Arn", # required
+    #     typed_link_specifier: { # required
+    #       typed_link_facet: { # required
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       },
+    #       source_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       target_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       identity_attribute_values: [ # required
+    #         {
+    #           attribute_name: "AttributeName", # required
+    #           value: { # required
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     attribute_updates: [ # required
+    #       {
+    #         attribute_key: {
+    #           schema_arn: "Arn", # required
+    #           facet_name: "FacetName", # required
+    #           name: "AttributeName", # required
+    #         },
+    #         attribute_action: {
+    #           attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #           attribute_update_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateLinkAttributes AWS API Documentation
+    #
+    # @overload update_link_attributes(params = {})
+    # @param [Hash] params ({})
+    def update_link_attributes(params = {}, options = {})
+      req = build_request(:update_link_attributes, params)
       req.send_request(options)
     end
 
@@ -3517,7 +3949,7 @@ module Aws::CloudDirectory
     #
     #   resp.object_identifier #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributes AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateObjectAttributes AWS API Documentation
     #
     # @overload update_object_attributes(params = {})
     # @param [Hash] params ({})
@@ -3551,7 +3983,7 @@ module Aws::CloudDirectory
     #
     #   resp.schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateSchema AWS API Documentation
     #
     # @overload update_schema(params = {})
     # @param [Hash] params ({})
@@ -3560,11 +3992,11 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Updates a TypedLinkFacet. For more information, see [Typed link][1].
+    # Updates a TypedLinkFacet. For more information, see [Typed Links][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @option params [required, String] :schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the schema. For
@@ -3585,11 +4017,11 @@ module Aws::CloudDirectory
     #   specified are presumed to match the entire range. Filters are
     #   interpreted in the order of the attributes on the typed link facet,
     #   not the order in which they are supplied to any API calls. For more
-    #   information about identity attributes, see [Typed link][1].
+    #   information about identity attributes, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3602,7 +4034,7 @@ module Aws::CloudDirectory
     #       {
     #         attribute: { # required
     #           name: "AttributeName", # required
-    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME
+    #           type: "STRING", # required, accepts STRING, BINARY, BOOLEAN, NUMBER, DATETIME, VARIANT
     #           default_value: {
     #             string_value: "StringAttributeValue",
     #             binary_value: "data",
@@ -3627,7 +4059,7 @@ module Aws::CloudDirectory
     #     identity_attribute_order: ["AttributeName"], # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacet AWS API Documentation
     #
     # @overload update_typed_link_facet(params = {})
     # @param [Hash] params ({})
@@ -3675,7 +4107,7 @@ module Aws::CloudDirectory
     #   resp.upgraded_schema_arn #=> String
     #   resp.directory_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradeAppliedSchema AWS API Documentation
     #
     # @overload upgrade_applied_schema(params = {})
     # @param [Hash] params ({})
@@ -3722,7 +4154,7 @@ module Aws::CloudDirectory
     #
     #   resp.upgraded_schema_arn #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchema AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpgradePublishedSchema AWS API Documentation
     #
     # @overload upgrade_published_schema(params = {})
     # @param [Hash] params ({})
@@ -3744,7 +4176,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

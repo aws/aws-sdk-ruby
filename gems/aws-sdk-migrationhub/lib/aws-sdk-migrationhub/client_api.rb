@@ -13,6 +13,9 @@ module Aws::MigrationHub
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ApplicationId = Shapes::StringShape.new(name: 'ApplicationId')
+    ApplicationIds = Shapes::ListShape.new(name: 'ApplicationIds')
+    ApplicationState = Shapes::StructureShape.new(name: 'ApplicationState')
+    ApplicationStateList = Shapes::ListShape.new(name: 'ApplicationStateList')
     ApplicationStatus = Shapes::StringShape.new(name: 'ApplicationStatus')
     AssociateCreatedArtifactRequest = Shapes::StructureShape.new(name: 'AssociateCreatedArtifactRequest')
     AssociateCreatedArtifactResult = Shapes::StructureShape.new(name: 'AssociateCreatedArtifactResult')
@@ -41,11 +44,14 @@ module Aws::MigrationHub
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DryRunOperation = Shapes::StructureShape.new(name: 'DryRunOperation')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    HomeRegionNotSetException = Shapes::StructureShape.new(name: 'HomeRegionNotSetException')
     ImportMigrationTaskRequest = Shapes::StructureShape.new(name: 'ImportMigrationTaskRequest')
     ImportMigrationTaskResult = Shapes::StructureShape.new(name: 'ImportMigrationTaskResult')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     LatestResourceAttributeList = Shapes::ListShape.new(name: 'LatestResourceAttributeList')
+    ListApplicationStatesRequest = Shapes::StructureShape.new(name: 'ListApplicationStatesRequest')
+    ListApplicationStatesResult = Shapes::StructureShape.new(name: 'ListApplicationStatesResult')
     ListCreatedArtifactsRequest = Shapes::StructureShape.new(name: 'ListCreatedArtifactsRequest')
     ListCreatedArtifactsResult = Shapes::StructureShape.new(name: 'ListCreatedArtifactsResult')
     ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
@@ -86,6 +92,18 @@ module Aws::MigrationHub
     Token = Shapes::StringShape.new(name: 'Token')
     UnauthorizedOperation = Shapes::StructureShape.new(name: 'UnauthorizedOperation')
     UpdateDateTime = Shapes::TimestampShape.new(name: 'UpdateDateTime')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ApplicationIds.member = Shapes::ShapeRef.new(shape: ApplicationId)
+
+    ApplicationState.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "ApplicationId"))
+    ApplicationState.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatus, location_name: "ApplicationStatus"))
+    ApplicationState.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "LastUpdatedTime"))
+    ApplicationState.struct_class = Types::ApplicationState
+
+    ApplicationStateList.member = Shapes::ShapeRef.new(shape: ApplicationState)
 
     AssociateCreatedArtifactRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     AssociateCreatedArtifactRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
@@ -157,6 +175,12 @@ module Aws::MigrationHub
 
     DiscoveredResourceList.member = Shapes::ShapeRef.new(shape: DiscoveredResource)
 
+    DryRunOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    DryRunOperation.struct_class = Types::DryRunOperation
+
+    HomeRegionNotSetException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    HomeRegionNotSetException.struct_class = Types::HomeRegionNotSetException
+
     ImportMigrationTaskRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     ImportMigrationTaskRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
     ImportMigrationTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
@@ -164,7 +188,22 @@ module Aws::MigrationHub
 
     ImportMigrationTaskResult.struct_class = Types::ImportMigrationTaskResult
 
+    InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     LatestResourceAttributeList.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
+
+    ListApplicationStatesRequest.add_member(:application_ids, Shapes::ShapeRef.new(shape: ApplicationIds, location_name: "ApplicationIds"))
+    ListApplicationStatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationStatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListApplicationStatesRequest.struct_class = Types::ListApplicationStatesRequest
+
+    ListApplicationStatesResult.add_member(:application_state_list, Shapes::ShapeRef.new(shape: ApplicationStateList, location_name: "ApplicationStateList"))
+    ListApplicationStatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListApplicationStatesResult.struct_class = Types::ListApplicationStatesResult
 
     ListCreatedArtifactsRequest.add_member(:progress_update_stream, Shapes::ShapeRef.new(shape: ProgressUpdateStream, required: true, location_name: "ProgressUpdateStream"))
     ListCreatedArtifactsRequest.add_member(:migration_task_name, Shapes::ShapeRef.new(shape: MigrationTaskName, required: true, location_name: "MigrationTaskName"))
@@ -222,6 +261,7 @@ module Aws::MigrationHub
 
     NotifyApplicationStateRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "ApplicationId"))
     NotifyApplicationStateRequest.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatus, required: true, location_name: "Status"))
+    NotifyApplicationStateRequest.add_member(:update_date_time, Shapes::ShapeRef.new(shape: UpdateDateTime, location_name: "UpdateDateTime"))
     NotifyApplicationStateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
     NotifyApplicationStateRequest.struct_class = Types::NotifyApplicationStateRequest
 
@@ -236,6 +276,9 @@ module Aws::MigrationHub
     NotifyMigrationTaskStateRequest.struct_class = Types::NotifyMigrationTaskStateRequest
 
     NotifyMigrationTaskStateResult.struct_class = Types::NotifyMigrationTaskStateResult
+
+    PolicyErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    PolicyErrorException.struct_class = Types::PolicyErrorException
 
     ProgressUpdateStreamSummary.add_member(:progress_update_stream_name, Shapes::ShapeRef.new(shape: ProgressUpdateStream, location_name: "ProgressUpdateStreamName"))
     ProgressUpdateStreamSummary.struct_class = Types::ProgressUpdateStreamSummary
@@ -256,10 +299,19 @@ module Aws::MigrationHub
 
     ResourceAttributeList.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     Task.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
     Task.add_member(:status_detail, Shapes::ShapeRef.new(shape: StatusDetail, location_name: "StatusDetail"))
     Task.add_member(:progress_percent, Shapes::ShapeRef.new(shape: ProgressPercent, location_name: "ProgressPercent"))
     Task.struct_class = Types::Task
+
+    UnauthorizedOperation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    UnauthorizedOperation.struct_class = Types::UnauthorizedOperation
 
 
     # @api private
@@ -268,12 +320,15 @@ module Aws::MigrationHub
       api.version = "2017-05-31"
 
       api.metadata = {
+        "apiVersion" => "2017-05-31",
         "endpointPrefix" => "mgh",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "AWS Migration Hub",
+        "serviceId" => "Migration Hub",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSMigrationHub",
+        "uid" => "AWSMigrationHub-2017-05-31",
       }
 
       api.add_operation(:associate_created_artifact, Seahorse::Model::Operation.new.tap do |o|
@@ -289,6 +344,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:associate_discovered_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -305,6 +361,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:create_progress_update_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -319,6 +376,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: DryRunOperation)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:delete_progress_update_stream, Seahorse::Model::Operation.new.tap do |o|
@@ -334,6 +392,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_application_state, Seahorse::Model::Operation.new.tap do |o|
@@ -348,6 +407,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:describe_migration_task, Seahorse::Model::Operation.new.tap do |o|
@@ -361,6 +421,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:disassociate_created_artifact, Seahorse::Model::Operation.new.tap do |o|
@@ -376,6 +437,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:disassociate_discovered_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -391,6 +453,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:import_migration_task, Seahorse::Model::Operation.new.tap do |o|
@@ -406,6 +469,26 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+      end)
+
+      api.add_operation(:list_application_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationStatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationStatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_created_artifacts, Seahorse::Model::Operation.new.tap do |o|
@@ -419,6 +502,13 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_discovered_resources, Seahorse::Model::Operation.new.tap do |o|
@@ -432,6 +522,13 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_migration_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -446,6 +543,13 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_progress_update_streams, Seahorse::Model::Operation.new.tap do |o|
@@ -458,6 +562,13 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:notify_application_state, Seahorse::Model::Operation.new.tap do |o|
@@ -474,6 +585,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: PolicyErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:notify_migration_task_state, Seahorse::Model::Operation.new.tap do |o|
@@ -489,6 +601,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
 
       api.add_operation(:put_resource_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -504,6 +617,7 @@ module Aws::MigrationHub
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperation)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: HomeRegionNotSetException)
       end)
     end
 

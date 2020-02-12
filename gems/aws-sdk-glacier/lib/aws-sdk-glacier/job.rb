@@ -27,6 +27,7 @@ module Aws::Glacier
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -383,7 +384,7 @@ module Aws::Glacier
     #       find the checksum of the entire output. Using the DescribeJob API,
     #       obtain job information of the job that provided you the output.
     #       The response includes the checksum of the entire archive stored in
-    #       Amazon Glacier. You compare this value with the checksum you
+    #       Amazon S3 Glacier. You compare this value with the checksum you
     #       computed to ensure you have downloaded the entire archive content
     #       with no errors.
     # @return [Types::GetJobOutputOutput]

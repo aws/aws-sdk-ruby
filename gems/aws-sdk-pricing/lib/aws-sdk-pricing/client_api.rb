@@ -54,6 +54,9 @@ module Aws::Pricing
     DescribeServicesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeServicesResponse.struct_class = Types::DescribeServicesResponse
 
+    ExpiredNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
+
     Filter.add_member(:type, Shapes::ShapeRef.new(shape: FilterType, required: true, location_name: "Type"))
     Filter.add_member(:field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Field"))
     Filter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -83,6 +86,18 @@ module Aws::Pricing
     GetProductsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetProductsResponse.struct_class = Types::GetProductsResponse
 
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidNextTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    NotFoundException.struct_class = Types::NotFoundException
+
     PriceList.member = Shapes::ShapeRef.new(shape: PriceListItemJSON, metadata: {"jsonvalue"=>true})
 
     Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
@@ -98,13 +113,16 @@ module Aws::Pricing
       api.version = "2017-10-15"
 
       api.metadata = {
+        "apiVersion" => "2017-10-15",
         "endpointPrefix" => "api.pricing",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Pricing",
         "serviceFullName" => "AWS Price List Service",
         "signatureVersion" => "v4",
         "signingName" => "pricing",
         "targetPrefix" => "AWSPriceListService",
+        "uid" => "pricing-2017-10-15",
       }
 
       api.add_operation(:describe_services, Seahorse::Model::Operation.new.tap do |o|

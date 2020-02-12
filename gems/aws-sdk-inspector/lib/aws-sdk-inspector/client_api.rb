@@ -68,11 +68,14 @@ module Aws::Inspector
     AutoScalingGroup = Shapes::StringShape.new(name: 'AutoScalingGroup')
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     BatchDescribeArnList = Shapes::ListShape.new(name: 'BatchDescribeArnList')
+    BatchDescribeExclusionsArnList = Shapes::ListShape.new(name: 'BatchDescribeExclusionsArnList')
     Bool = Shapes::BooleanShape.new(name: 'Bool')
     CreateAssessmentTargetRequest = Shapes::StructureShape.new(name: 'CreateAssessmentTargetRequest')
     CreateAssessmentTargetResponse = Shapes::StructureShape.new(name: 'CreateAssessmentTargetResponse')
     CreateAssessmentTemplateRequest = Shapes::StructureShape.new(name: 'CreateAssessmentTemplateRequest')
     CreateAssessmentTemplateResponse = Shapes::StructureShape.new(name: 'CreateAssessmentTemplateResponse')
+    CreateExclusionsPreviewRequest = Shapes::StructureShape.new(name: 'CreateExclusionsPreviewRequest')
+    CreateExclusionsPreviewResponse = Shapes::StructureShape.new(name: 'CreateExclusionsPreviewResponse')
     CreateResourceGroupRequest = Shapes::StructureShape.new(name: 'CreateResourceGroupRequest')
     CreateResourceGroupResponse = Shapes::StructureShape.new(name: 'CreateResourceGroupResponse')
     DeleteAssessmentRunRequest = Shapes::StructureShape.new(name: 'DeleteAssessmentRunRequest')
@@ -85,6 +88,8 @@ module Aws::Inspector
     DescribeAssessmentTemplatesRequest = Shapes::StructureShape.new(name: 'DescribeAssessmentTemplatesRequest')
     DescribeAssessmentTemplatesResponse = Shapes::StructureShape.new(name: 'DescribeAssessmentTemplatesResponse')
     DescribeCrossAccountAccessRoleResponse = Shapes::StructureShape.new(name: 'DescribeCrossAccountAccessRoleResponse')
+    DescribeExclusionsRequest = Shapes::StructureShape.new(name: 'DescribeExclusionsRequest')
+    DescribeExclusionsResponse = Shapes::StructureShape.new(name: 'DescribeExclusionsResponse')
     DescribeFindingsRequest = Shapes::StructureShape.new(name: 'DescribeFindingsRequest')
     DescribeFindingsResponse = Shapes::StructureShape.new(name: 'DescribeFindingsResponse')
     DescribeResourceGroupsRequest = Shapes::StructureShape.new(name: 'DescribeResourceGroupsRequest')
@@ -95,6 +100,10 @@ module Aws::Inspector
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventSubscription = Shapes::StructureShape.new(name: 'EventSubscription')
     EventSubscriptionList = Shapes::ListShape.new(name: 'EventSubscriptionList')
+    Exclusion = Shapes::StructureShape.new(name: 'Exclusion')
+    ExclusionMap = Shapes::MapShape.new(name: 'ExclusionMap')
+    ExclusionPreview = Shapes::StructureShape.new(name: 'ExclusionPreview')
+    ExclusionPreviewList = Shapes::ListShape.new(name: 'ExclusionPreviewList')
     FailedItemDetails = Shapes::StructureShape.new(name: 'FailedItemDetails')
     FailedItemErrorCode = Shapes::StringShape.new(name: 'FailedItemErrorCode')
     FailedItems = Shapes::MapShape.new(name: 'FailedItems')
@@ -106,6 +115,8 @@ module Aws::Inspector
     FindingList = Shapes::ListShape.new(name: 'FindingList')
     GetAssessmentReportRequest = Shapes::StructureShape.new(name: 'GetAssessmentReportRequest')
     GetAssessmentReportResponse = Shapes::StructureShape.new(name: 'GetAssessmentReportResponse')
+    GetExclusionsPreviewRequest = Shapes::StructureShape.new(name: 'GetExclusionsPreviewRequest')
+    GetExclusionsPreviewResponse = Shapes::StructureShape.new(name: 'GetExclusionsPreviewResponse')
     GetTelemetryMetadataRequest = Shapes::StructureShape.new(name: 'GetTelemetryMetadataRequest')
     GetTelemetryMetadataResponse = Shapes::StructureShape.new(name: 'GetTelemetryMetadataResponse')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
@@ -119,6 +130,7 @@ module Aws::Inspector
     IocConfidence = Shapes::IntegerShape.new(name: 'IocConfidence')
     Ipv4Address = Shapes::StringShape.new(name: 'Ipv4Address')
     Ipv4AddressList = Shapes::ListShape.new(name: 'Ipv4AddressList')
+    Ipv6Addresses = Shapes::ListShape.new(name: 'Ipv6Addresses')
     KernelVersion = Shapes::StringShape.new(name: 'KernelVersion')
     LimitExceededErrorCode = Shapes::StringShape.new(name: 'LimitExceededErrorCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -133,6 +145,8 @@ module Aws::Inspector
     ListEventSubscriptionsMaxResults = Shapes::IntegerShape.new(name: 'ListEventSubscriptionsMaxResults')
     ListEventSubscriptionsRequest = Shapes::StructureShape.new(name: 'ListEventSubscriptionsRequest')
     ListEventSubscriptionsResponse = Shapes::StructureShape.new(name: 'ListEventSubscriptionsResponse')
+    ListExclusionsRequest = Shapes::StructureShape.new(name: 'ListExclusionsRequest')
+    ListExclusionsResponse = Shapes::StructureShape.new(name: 'ListExclusionsResponse')
     ListFindingsRequest = Shapes::StructureShape.new(name: 'ListFindingsRequest')
     ListFindingsResponse = Shapes::StructureShape.new(name: 'ListFindingsResponse')
     ListMaxResults = Shapes::IntegerShape.new(name: 'ListMaxResults')
@@ -147,6 +161,8 @@ module Aws::Inspector
     Message = Shapes::StringShape.new(name: 'Message')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     NamePattern = Shapes::StringShape.new(name: 'NamePattern')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NoSuchEntityErrorCode = Shapes::StringShape.new(name: 'NoSuchEntityErrorCode')
     NoSuchEntityException = Shapes::StructureShape.new(name: 'NoSuchEntityException')
     NumericSeverity = Shapes::FloatShape.new(name: 'NumericSeverity')
@@ -156,6 +172,10 @@ module Aws::Inspector
     PreviewAgentsMaxResults = Shapes::IntegerShape.new(name: 'PreviewAgentsMaxResults')
     PreviewAgentsRequest = Shapes::StructureShape.new(name: 'PreviewAgentsRequest')
     PreviewAgentsResponse = Shapes::StructureShape.new(name: 'PreviewAgentsResponse')
+    PreviewGenerationInProgressException = Shapes::StructureShape.new(name: 'PreviewGenerationInProgressException')
+    PreviewStatus = Shapes::StringShape.new(name: 'PreviewStatus')
+    PrivateIp = Shapes::StructureShape.new(name: 'PrivateIp')
+    PrivateIpAddresses = Shapes::ListShape.new(name: 'PrivateIpAddresses')
     ProviderName = Shapes::StringShape.new(name: 'ProviderName')
     RegisterCrossAccountAccessRoleRequest = Shapes::StructureShape.new(name: 'RegisterCrossAccountAccessRoleRequest')
     RemoveAttributesFromFindingsRequest = Shapes::StructureShape.new(name: 'RemoveAttributesFromFindingsRequest')
@@ -172,7 +192,14 @@ module Aws::Inspector
     RulesPackage = Shapes::StructureShape.new(name: 'RulesPackage')
     RulesPackageList = Shapes::ListShape.new(name: 'RulesPackageList')
     RulesPackageName = Shapes::StringShape.new(name: 'RulesPackageName')
+    Scope = Shapes::StructureShape.new(name: 'Scope')
+    ScopeList = Shapes::ListShape.new(name: 'ScopeList')
+    ScopeType = Shapes::StringShape.new(name: 'ScopeType')
+    ScopeValue = Shapes::StringShape.new(name: 'ScopeValue')
+    SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
+    SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
+    ServiceTemporarilyUnavailableException = Shapes::StructureShape.new(name: 'ServiceTemporarilyUnavailableException')
     SetTagsForResourceRequest = Shapes::StructureShape.new(name: 'SetTagsForResourceRequest')
     Severity = Shapes::StringShape.new(name: 'Severity')
     SeverityList = Shapes::ListShape.new(name: 'SeverityList')
@@ -187,11 +214,13 @@ module Aws::Inspector
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
     TelemetryMetadata = Shapes::StructureShape.new(name: 'TelemetryMetadata')
     TelemetryMetadataList = Shapes::ListShape.new(name: 'TelemetryMetadataList')
     Text = Shapes::StringShape.new(name: 'Text')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
+    UUID = Shapes::StringShape.new(name: 'UUID')
     UnsubscribeFromEventRequest = Shapes::StructureShape.new(name: 'UnsubscribeFromEventRequest')
     UnsupportedFeatureException = Shapes::StructureShape.new(name: 'UnsupportedFeatureException')
     UpdateAssessmentTargetRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentTargetRequest')
@@ -199,6 +228,11 @@ module Aws::Inspector
     UserAttributeKeyList = Shapes::ListShape.new(name: 'UserAttributeKeyList')
     UserAttributeList = Shapes::ListShape.new(name: 'UserAttributeList')
     Version = Shapes::StringShape.new(name: 'Version')
+
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: AccessDeniedErrorCode, required: true, location_name: "errorCode"))
+    AccessDeniedException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AddAttributesToFindingsRequest.add_member(:finding_arns, Shapes::ShapeRef.new(shape: AddRemoveAttributesFindingArnList, required: true, location_name: "findingArns"))
     AddAttributesToFindingsRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: UserAttributeList, required: true, location_name: "attributes"))
@@ -236,6 +270,12 @@ module Aws::Inspector
     AgentPreview.struct_class = Types::AgentPreview
 
     AgentPreviewList.member = Shapes::ShapeRef.new(shape: AgentPreview)
+
+    AgentsAlreadyRunningAssessmentException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AgentsAlreadyRunningAssessmentException.add_member(:agents, Shapes::ShapeRef.new(shape: AgentAlreadyRunningAssessmentList, required: true, location_name: "agents"))
+    AgentsAlreadyRunningAssessmentException.add_member(:agents_truncated, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "agentsTruncated"))
+    AgentsAlreadyRunningAssessmentException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AgentsAlreadyRunningAssessmentException.struct_class = Types::AgentsAlreadyRunningAssessmentException
 
     AssessmentRulesPackageArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -281,6 +321,12 @@ module Aws::Inspector
 
     AssessmentRunInProgressArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
+    AssessmentRunInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    AssessmentRunInProgressException.add_member(:assessment_run_arns, Shapes::ShapeRef.new(shape: AssessmentRunInProgressArnList, required: true, location_name: "assessmentRunArns"))
+    AssessmentRunInProgressException.add_member(:assessment_run_arns_truncated, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "assessmentRunArnsTruncated"))
+    AssessmentRunInProgressException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    AssessmentRunInProgressException.struct_class = Types::AssessmentRunInProgressException
+
     AssessmentRunList.member = Shapes::ShapeRef.new(shape: AssessmentRun)
 
     AssessmentRunNotification.add_member(:date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "date"))
@@ -303,7 +349,7 @@ module Aws::Inspector
 
     AssessmentTarget.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     AssessmentTarget.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "name"))
-    AssessmentTarget.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    AssessmentTarget.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     AssessmentTarget.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     AssessmentTarget.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     AssessmentTarget.struct_class = Types::AssessmentTarget
@@ -339,6 +385,8 @@ module Aws::Inspector
     AssetAttributes.add_member(:ami_id, Shapes::ShapeRef.new(shape: AmiId, location_name: "amiId"))
     AssetAttributes.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname"))
     AssetAttributes.add_member(:ipv4_addresses, Shapes::ShapeRef.new(shape: Ipv4AddressList, location_name: "ipv4Addresses"))
+    AssetAttributes.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AssetAttributes.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
     AssetAttributes.struct_class = Types::AssetAttributes
 
     Attribute.add_member(:key, Shapes::ShapeRef.new(shape: AttributeKey, required: true, location_name: "key"))
@@ -351,8 +399,10 @@ module Aws::Inspector
 
     BatchDescribeArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
+    BatchDescribeExclusionsArnList.member = Shapes::ShapeRef.new(shape: Arn)
+
     CreateAssessmentTargetRequest.add_member(:assessment_target_name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "assessmentTargetName"))
-    CreateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    CreateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     CreateAssessmentTargetRequest.struct_class = Types::CreateAssessmentTargetRequest
 
     CreateAssessmentTargetResponse.add_member(:assessment_target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTargetArn"))
@@ -367,6 +417,12 @@ module Aws::Inspector
 
     CreateAssessmentTemplateResponse.add_member(:assessment_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTemplateArn"))
     CreateAssessmentTemplateResponse.struct_class = Types::CreateAssessmentTemplateResponse
+
+    CreateExclusionsPreviewRequest.add_member(:assessment_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTemplateArn"))
+    CreateExclusionsPreviewRequest.struct_class = Types::CreateExclusionsPreviewRequest
+
+    CreateExclusionsPreviewResponse.add_member(:preview_token, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "previewToken"))
+    CreateExclusionsPreviewResponse.struct_class = Types::CreateExclusionsPreviewResponse
 
     CreateResourceGroupRequest.add_member(:resource_group_tags, Shapes::ShapeRef.new(shape: ResourceGroupTags, required: true, location_name: "resourceGroupTags"))
     CreateResourceGroupRequest.struct_class = Types::CreateResourceGroupRequest
@@ -409,6 +465,14 @@ module Aws::Inspector
     DescribeCrossAccountAccessRoleResponse.add_member(:registered_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "registeredAt"))
     DescribeCrossAccountAccessRoleResponse.struct_class = Types::DescribeCrossAccountAccessRoleResponse
 
+    DescribeExclusionsRequest.add_member(:exclusion_arns, Shapes::ShapeRef.new(shape: BatchDescribeExclusionsArnList, required: true, location_name: "exclusionArns"))
+    DescribeExclusionsRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    DescribeExclusionsRequest.struct_class = Types::DescribeExclusionsRequest
+
+    DescribeExclusionsResponse.add_member(:exclusions, Shapes::ShapeRef.new(shape: ExclusionMap, required: true, location_name: "exclusions"))
+    DescribeExclusionsResponse.add_member(:failed_items, Shapes::ShapeRef.new(shape: FailedItems, required: true, location_name: "failedItems"))
+    DescribeExclusionsResponse.struct_class = Types::DescribeExclusionsResponse
+
     DescribeFindingsRequest.add_member(:finding_arns, Shapes::ShapeRef.new(shape: BatchDescribeArnList, required: true, location_name: "findingArns"))
     DescribeFindingsRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     DescribeFindingsRequest.struct_class = Types::DescribeFindingsRequest
@@ -441,6 +505,26 @@ module Aws::Inspector
     EventSubscription.struct_class = Types::EventSubscription
 
     EventSubscriptionList.member = Shapes::ShapeRef.new(shape: EventSubscription)
+
+    Exclusion.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
+    Exclusion.add_member(:title, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "title"))
+    Exclusion.add_member(:description, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "description"))
+    Exclusion.add_member(:recommendation, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "recommendation"))
+    Exclusion.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeList, required: true, location_name: "scopes"))
+    Exclusion.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "attributes"))
+    Exclusion.struct_class = Types::Exclusion
+
+    ExclusionMap.key = Shapes::ShapeRef.new(shape: Arn)
+    ExclusionMap.value = Shapes::ShapeRef.new(shape: Exclusion)
+
+    ExclusionPreview.add_member(:title, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "title"))
+    ExclusionPreview.add_member(:description, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "description"))
+    ExclusionPreview.add_member(:recommendation, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "recommendation"))
+    ExclusionPreview.add_member(:scopes, Shapes::ShapeRef.new(shape: ScopeList, required: true, location_name: "scopes"))
+    ExclusionPreview.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeList, location_name: "attributes"))
+    ExclusionPreview.struct_class = Types::ExclusionPreview
+
+    ExclusionPreviewList.member = Shapes::ShapeRef.new(shape: ExclusionPreview)
 
     FailedItemDetails.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailedItemErrorCode, required: true, location_name: "failureCode"))
     FailedItemDetails.add_member(:retryable, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "retryable"))
@@ -492,6 +576,18 @@ module Aws::Inspector
     GetAssessmentReportResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
     GetAssessmentReportResponse.struct_class = Types::GetAssessmentReportResponse
 
+    GetExclusionsPreviewRequest.add_member(:assessment_template_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTemplateArn"))
+    GetExclusionsPreviewRequest.add_member(:preview_token, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "previewToken"))
+    GetExclusionsPreviewRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    GetExclusionsPreviewRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMaxResults, location_name: "maxResults"))
+    GetExclusionsPreviewRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
+    GetExclusionsPreviewRequest.struct_class = Types::GetExclusionsPreviewRequest
+
+    GetExclusionsPreviewResponse.add_member(:preview_status, Shapes::ShapeRef.new(shape: PreviewStatus, required: true, location_name: "previewStatus"))
+    GetExclusionsPreviewResponse.add_member(:exclusion_previews, Shapes::ShapeRef.new(shape: ExclusionPreviewList, location_name: "exclusionPreviews"))
+    GetExclusionsPreviewResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    GetExclusionsPreviewResponse.struct_class = Types::GetExclusionsPreviewResponse
+
     GetTelemetryMetadataRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
     GetTelemetryMetadataRequest.struct_class = Types::GetTelemetryMetadataRequest
 
@@ -503,7 +599,28 @@ module Aws::Inspector
     InspectorServiceAttributes.add_member(:rules_package_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "rulesPackageArn"))
     InspectorServiceAttributes.struct_class = Types::InspectorServiceAttributes
 
+    InternalException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InternalException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InternalException.struct_class = Types::InternalException
+
+    InvalidCrossAccountRoleException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InvalidCrossAccountRoleException.add_member(:error_code, Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleErrorCode, required: true, location_name: "errorCode"))
+    InvalidCrossAccountRoleException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InvalidCrossAccountRoleException.struct_class = Types::InvalidCrossAccountRoleException
+
+    InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    InvalidInputException.add_member(:error_code, Shapes::ShapeRef.new(shape: InvalidInputErrorCode, required: true, location_name: "errorCode"))
+    InvalidInputException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     Ipv4AddressList.member = Shapes::ShapeRef.new(shape: Ipv4Address)
+
+    Ipv6Addresses.member = Shapes::ShapeRef.new(shape: Text)
+
+    LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    LimitExceededException.add_member(:error_code, Shapes::ShapeRef.new(shape: LimitExceededErrorCode, required: true, location_name: "errorCode"))
+    LimitExceededException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAssessmentRunAgentsRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
     ListAssessmentRunAgentsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: AgentFilter, location_name: "filter"))
@@ -553,6 +670,15 @@ module Aws::Inspector
     ListEventSubscriptionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEventSubscriptionsResponse.struct_class = Types::ListEventSubscriptionsResponse
 
+    ListExclusionsRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
+    ListExclusionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExclusionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListMaxResults, location_name: "maxResults"))
+    ListExclusionsRequest.struct_class = Types::ListExclusionsRequest
+
+    ListExclusionsResponse.add_member(:exclusion_arns, Shapes::ShapeRef.new(shape: ListReturnedArnList, required: true, location_name: "exclusionArns"))
+    ListExclusionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExclusionsResponse.struct_class = Types::ListExclusionsResponse
+
     ListFindingsRequest.add_member(:assessment_run_arns, Shapes::ShapeRef.new(shape: ListParentArnList, location_name: "assessmentRunArns"))
     ListFindingsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FindingFilter, location_name: "filter"))
     ListFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -581,6 +707,25 @@ module Aws::Inspector
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: Text, location_name: "networkInterfaceId"))
+    NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: Text, location_name: "subnetId"))
+    NetworkInterface.add_member(:vpc_id, Shapes::ShapeRef.new(shape: Text, location_name: "vpcId"))
+    NetworkInterface.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "privateDnsName"))
+    NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: Text, location_name: "privateIpAddress"))
+    NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
+    NetworkInterface.add_member(:public_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "publicDnsName"))
+    NetworkInterface.add_member(:public_ip, Shapes::ShapeRef.new(shape: Text, location_name: "publicIp"))
+    NetworkInterface.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
+    NetworkInterface.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "securityGroups"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
+    NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
+    NoSuchEntityException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    NoSuchEntityException.add_member(:error_code, Shapes::ShapeRef.new(shape: NoSuchEntityErrorCode, required: true, location_name: "errorCode"))
+    NoSuchEntityException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    NoSuchEntityException.struct_class = Types::NoSuchEntityException
+
     PreviewAgentsRequest.add_member(:preview_agents_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "previewAgentsArn"))
     PreviewAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PreviewAgentsMaxResults, location_name: "maxResults"))
@@ -589,6 +734,15 @@ module Aws::Inspector
     PreviewAgentsResponse.add_member(:agent_previews, Shapes::ShapeRef.new(shape: AgentPreviewList, required: true, location_name: "agentPreviews"))
     PreviewAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     PreviewAgentsResponse.struct_class = Types::PreviewAgentsResponse
+
+    PreviewGenerationInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    PreviewGenerationInProgressException.struct_class = Types::PreviewGenerationInProgressException
+
+    PrivateIp.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: Text, location_name: "privateDnsName"))
+    PrivateIp.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: Text, location_name: "privateIpAddress"))
+    PrivateIp.struct_class = Types::PrivateIp
+
+    PrivateIpAddresses.member = Shapes::ShapeRef.new(shape: PrivateIp)
 
     RegisterCrossAccountAccessRoleRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
     RegisterCrossAccountAccessRoleRequest.struct_class = Types::RegisterCrossAccountAccessRoleRequest
@@ -623,6 +777,22 @@ module Aws::Inspector
     RulesPackage.struct_class = Types::RulesPackage
 
     RulesPackageList.member = Shapes::ShapeRef.new(shape: RulesPackage)
+
+    Scope.add_member(:key, Shapes::ShapeRef.new(shape: ScopeType, location_name: "key"))
+    Scope.add_member(:value, Shapes::ShapeRef.new(shape: ScopeValue, location_name: "value"))
+    Scope.struct_class = Types::Scope
+
+    ScopeList.member = Shapes::ShapeRef.new(shape: Scope)
+
+    SecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: Text, location_name: "groupName"))
+    SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: Text, location_name: "groupId"))
+    SecurityGroup.struct_class = Types::SecurityGroup
+
+    SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
+
+    ServiceTemporarilyUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    ServiceTemporarilyUnavailableException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    ServiceTemporarilyUnavailableException.struct_class = Types::ServiceTemporarilyUnavailableException
 
     SetTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     SetTagsForResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
@@ -659,6 +829,8 @@ module Aws::Inspector
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
     TelemetryMetadata.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, required: true, location_name: "messageType"))
     TelemetryMetadata.add_member(:count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "count"))
     TelemetryMetadata.add_member(:data_size, Shapes::ShapeRef.new(shape: Long, location_name: "dataSize"))
@@ -675,9 +847,13 @@ module Aws::Inspector
     UnsubscribeFromEventRequest.add_member(:topic_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "topicArn"))
     UnsubscribeFromEventRequest.struct_class = Types::UnsubscribeFromEventRequest
 
+    UnsupportedFeatureException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
+    UnsupportedFeatureException.add_member(:can_retry, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "canRetry"))
+    UnsupportedFeatureException.struct_class = Types::UnsupportedFeatureException
+
     UpdateAssessmentTargetRequest.add_member(:assessment_target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTargetArn"))
     UpdateAssessmentTargetRequest.add_member(:assessment_target_name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "assessmentTargetName"))
-    UpdateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    UpdateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     UpdateAssessmentTargetRequest.struct_class = Types::UpdateAssessmentTargetRequest
 
     UserAttributeKeyList.member = Shapes::ShapeRef.new(shape: AttributeKey)
@@ -691,12 +867,15 @@ module Aws::Inspector
       api.version = "2016-02-16"
 
       api.metadata = {
+        "apiVersion" => "2016-02-16",
         "endpointPrefix" => "inspector",
         "jsonVersion" => "1.1",
         "protocol" => "json",
         "serviceFullName" => "Amazon Inspector",
+        "serviceId" => "Inspector",
         "signatureVersion" => "v4",
         "targetPrefix" => "InspectorService",
+        "uid" => "inspector-2016-02-16",
       }
 
       api.add_operation(:add_attributes_to_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -709,6 +888,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -722,6 +902,8 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_assessment_template, Seahorse::Model::Operation.new.tap do |o|
@@ -735,6 +917,21 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
+      end)
+
+      api.add_operation(:create_exclusions_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExclusionsPreview"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExclusionsPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExclusionsPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: PreviewGenerationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:create_resource_group, Seahorse::Model::Operation.new.tap do |o|
@@ -747,6 +944,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -760,6 +958,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -773,6 +972,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:delete_assessment_template, Seahorse::Model::Operation.new.tap do |o|
@@ -786,6 +986,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:describe_assessment_runs, Seahorse::Model::Operation.new.tap do |o|
@@ -825,6 +1026,16 @@ module Aws::Inspector
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: DescribeCrossAccountAccessRoleResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_exclusions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExclusions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExclusionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExclusionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:describe_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -869,6 +1080,25 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
+      end)
+
+      api.add_operation(:get_exclusions_preview, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExclusionsPreview"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetExclusionsPreviewRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExclusionsPreviewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_telemetry_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -972,6 +1202,24 @@ module Aws::Inspector
         )
       end)
 
+      api.add_operation(:list_exclusions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExclusions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExclusionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExclusionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_findings, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListFindings"
         o.http_method = "POST"
@@ -1048,6 +1296,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:remove_attributes_from_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,6 +1309,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:set_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1072,6 +1322,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:start_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1087,6 +1338,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
         o.errors << Shapes::ShapeRef.new(shape: AgentsAlreadyRunningAssessmentException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:stop_assessment_run, Seahorse::Model::Operation.new.tap do |o|
@@ -1099,6 +1351,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:subscribe_to_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1112,6 +1365,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:unsubscribe_from_event, Seahorse::Model::Operation.new.tap do |o|
@@ -1124,6 +1378,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
 
       api.add_operation(:update_assessment_target, Seahorse::Model::Operation.new.tap do |o|
@@ -1136,6 +1391,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceTemporarilyUnavailableException)
       end)
     end
 

@@ -6,7 +6,7 @@ module Seahorse
     class << self
 
       def uri_escape(string)
-        CGI.escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+        CGI.escape(string.to_s.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
       end
 
       def uri_path_escape(path)
