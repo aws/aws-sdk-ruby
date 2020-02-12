@@ -74,7 +74,7 @@ module Aws
     def process_credentials(options)
       config = Aws.shared_config
       profile_name = determine_profile_name(options)
-      if config.config_enabled? && process_provider = config.credentials_process(profile_name)
+      if config.config_enabled? && process_provider = config.credential_process(profile: profile_name)
         ProcessCredentials.new(process_provider)
       else
         nil
