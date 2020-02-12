@@ -326,6 +326,7 @@ SDK operation invocation before giving up. Used in `standard` and
           @request_count        = 0
           @last_max_rate        = 0
           @last_throttle_time   = Time.new.to_f
+          @time_window          = 0
         end
 
         def token_bucket_acquire(amount)
@@ -440,7 +441,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
           get_send_token(client_rate_limiter, context.config.retry_mode)
           response = @handler.call(context)
-          request_bookkeeping(response, retry_quota, context.config.retry_mode)
+          request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
 
           return response unless retryable?(response, context)
 
@@ -466,7 +467,7 @@ SDK operation invocation before giving up. Used in `standard` and
           end
         end
 
-        def request_bookkeeping(response, retry_quota, retry_mode)
+        def request_bookkeeping(response, retry_quota, client_rate_limiter, retry_mode)
           # maxsendrate is updated if on adaptive mode and based on response
           # retry quota is updated if the request is successful (both modes)
           retry_quota.release(response.successful?)
