@@ -60,10 +60,13 @@ module Aws::SQS
     MessageAttributeNameList = Shapes::ListShape.new(name: 'MessageAttributeNameList', flattened: true)
     MessageAttributeValue = Shapes::StructureShape.new(name: 'MessageAttributeValue')
     MessageBodyAttributeMap = Shapes::MapShape.new(name: 'MessageBodyAttributeMap', flattened: true)
+    MessageBodySystemAttributeMap = Shapes::MapShape.new(name: 'MessageBodySystemAttributeMap', flattened: true)
     MessageList = Shapes::ListShape.new(name: 'MessageList', flattened: true)
     MessageNotInflight = Shapes::StructureShape.new(name: 'MessageNotInflight')
     MessageSystemAttributeMap = Shapes::MapShape.new(name: 'MessageSystemAttributeMap', flattened: true)
     MessageSystemAttributeName = Shapes::StringShape.new(name: 'MessageSystemAttributeName')
+    MessageSystemAttributeNameForSends = Shapes::StringShape.new(name: 'MessageSystemAttributeNameForSends')
+    MessageSystemAttributeValue = Shapes::StructureShape.new(name: 'MessageSystemAttributeValue')
     OverLimit = Shapes::StructureShape.new(name: 'OverLimit')
     PurgeQueueInProgress = Shapes::StructureShape.new(name: 'PurgeQueueInProgress')
     PurgeQueueRequest = Shapes::StructureShape.new(name: 'PurgeQueueRequest')
@@ -146,6 +149,7 @@ module Aws::SQS
 
     CreateQueueRequest.add_member(:queue_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueName"))
     CreateQueueRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: QueueAttributeMap, location_name: "Attribute"))
+    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tag"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
     CreateQueueResult.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl"))
@@ -230,10 +234,20 @@ module Aws::SQS
     MessageBodyAttributeMap.key = Shapes::ShapeRef.new(shape: String, location_name: "Name")
     MessageBodyAttributeMap.value = Shapes::ShapeRef.new(shape: MessageAttributeValue, location_name: "Value")
 
+    MessageBodySystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeNameForSends, location_name: "Name")
+    MessageBodySystemAttributeMap.value = Shapes::ShapeRef.new(shape: MessageSystemAttributeValue, location_name: "Value")
+
     MessageList.member = Shapes::ShapeRef.new(shape: Message, location_name: "Message")
 
     MessageSystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeName, location_name: "Name")
     MessageSystemAttributeMap.value = Shapes::ShapeRef.new(shape: String, location_name: "Value")
+
+    MessageSystemAttributeValue.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "StringValue"))
+    MessageSystemAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
+    MessageSystemAttributeValue.add_member(:string_list_values, Shapes::ShapeRef.new(shape: StringList, location_name: "StringListValue", metadata: {"flattened"=>true}))
+    MessageSystemAttributeValue.add_member(:binary_list_values, Shapes::ShapeRef.new(shape: BinaryList, location_name: "BinaryListValue", metadata: {"flattened"=>true}))
+    MessageSystemAttributeValue.add_member(:data_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataType"))
+    MessageSystemAttributeValue.struct_class = Types::MessageSystemAttributeValue
 
     PurgeQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     PurgeQueueRequest.struct_class = Types::PurgeQueueRequest
@@ -267,6 +281,7 @@ module Aws::SQS
     SendMessageBatchRequestEntry.add_member(:message_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageBody"))
     SendMessageBatchRequestEntry.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DelaySeconds"))
     SendMessageBatchRequestEntry.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttribute"))
+    SendMessageBatchRequestEntry.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttribute"))
     SendMessageBatchRequestEntry.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
     SendMessageBatchRequestEntry.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
     SendMessageBatchRequestEntry.struct_class = Types::SendMessageBatchRequestEntry
@@ -281,6 +296,7 @@ module Aws::SQS
     SendMessageBatchResultEntry.add_member(:message_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageId"))
     SendMessageBatchResultEntry.add_member(:md5_of_message_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MD5OfMessageBody"))
     SendMessageBatchResultEntry.add_member(:md5_of_message_attributes, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageAttributes"))
+    SendMessageBatchResultEntry.add_member(:md5_of_message_system_attributes, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageSystemAttributes"))
     SendMessageBatchResultEntry.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
     SendMessageBatchResultEntry.struct_class = Types::SendMessageBatchResultEntry
 
@@ -290,12 +306,14 @@ module Aws::SQS
     SendMessageRequest.add_member(:message_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MessageBody"))
     SendMessageRequest.add_member(:delay_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DelaySeconds"))
     SendMessageRequest.add_member(:message_attributes, Shapes::ShapeRef.new(shape: MessageBodyAttributeMap, location_name: "MessageAttribute"))
+    SendMessageRequest.add_member(:message_system_attributes, Shapes::ShapeRef.new(shape: MessageBodySystemAttributeMap, location_name: "MessageSystemAttribute"))
     SendMessageRequest.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageDeduplicationId"))
     SendMessageRequest.add_member(:message_group_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageGroupId"))
     SendMessageRequest.struct_class = Types::SendMessageRequest
 
     SendMessageResult.add_member(:md5_of_message_body, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageBody"))
     SendMessageResult.add_member(:md5_of_message_attributes, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageAttributes"))
+    SendMessageResult.add_member(:md5_of_message_system_attributes, Shapes::ShapeRef.new(shape: String, location_name: "MD5OfMessageSystemAttributes"))
     SendMessageResult.add_member(:message_id, Shapes::ShapeRef.new(shape: String, location_name: "MessageId"))
     SendMessageResult.add_member(:sequence_number, Shapes::ShapeRef.new(shape: String, location_name: "SequenceNumber"))
     SendMessageResult.struct_class = Types::SendMessageResult
@@ -326,11 +344,15 @@ module Aws::SQS
       api.version = "2012-11-05"
 
       api.metadata = {
+        "apiVersion" => "2012-11-05",
         "endpointPrefix" => "sqs",
         "errorPrefix" => "AWS.SimpleQueueService.",
         "protocol" => "query",
+        "serviceAbbreviation" => "Amazon SQS",
         "serviceFullName" => "Amazon Simple Queue Service",
+        "serviceId" => "SQS",
         "signatureVersion" => "v4",
+        "uid" => "sqs-2012-11-05",
         "xmlNamespace" => "http://queue.amazonaws.com/doc/2012-11-05/",
       }
 

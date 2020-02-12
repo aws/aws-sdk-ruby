@@ -16,6 +16,25 @@ module Aws
       # @api private
       FIFTEEN_MINUTES = 60 * 15
 
+      BLACKLISTED_HEADERS = [
+        'accept',
+        'cache-control',
+        'content-length', # due to a ELB bug
+        'expect',
+        'from',
+        'if-match',
+        'if-none-match',
+        'if-modified-since',
+        'if-unmodified-since',
+        'if-range',
+        'max-forwards',
+        'pragma',
+        'proxy-authorization',
+        'referer',
+        'te',
+        'user-agent'
+      ].freeze
+
       # @option options [Client] :client Optionally provide an existing
       #   S3 client
       def initialize(options = {})
@@ -31,12 +50,25 @@ module Aws
       #   attempts to set this value to greater than one week (604800) will
       #   raise an exception.
       #
+      # @option params [Time] :time (Time.now) The starting time for when the
+      #   presigned url becomes active.
+      #
       # @option params [Boolean] :secure (true) When `false`, a HTTP URL
       #   is returned instead of the default HTTPS URL.
       #
       # @option params [Boolean] :virtual_host (false) When `true`, the
       #   bucket name will be used as the hostname. This will cause
       #   the returned URL to be 'http' and not 'https'.
+      #
+      # @option params [Boolean] :use_accelerate_endpoint (false) When `true`,
+      #   Presigner will attempt to use accelerated endpoint.
+      #
+      # @option params [Array<String>] :whitelist_headers ([]) Additional
+      #   headers to be included for the signed request. Certain headers beyond
+      #   the authorization header could, in theory, be changed for various
+      #   reasons (including but not limited to proxies) while in transit and
+      #   after signing. This would lead to signature errors being returned,
+      #   despite no actual problems with signing. (see BLACKLISTED_HEADERS)
       #
       # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`
       #   exceeds one week.
@@ -46,11 +78,15 @@ module Aws
           raise ArgumentError, ":key must not be blank"
         end
         virtual_host = !!params.delete(:virtual_host)
+        time = params.delete(:time)
+        whitelisted_headers = params.delete(:whitelist_headers) || []
+        unsigned_headers = BLACKLISTED_HEADERS - whitelisted_headers
         scheme = http_scheme(params, virtual_host)
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
-        sign_but_dont_send(req, expires_in(params), scheme)
+
+        sign_but_dont_send(req, expires_in(params), scheme, time, unsigned_headers)
         req.send_request.data
       end
 
@@ -65,11 +101,15 @@ module Aws
       end
 
       def expires_in(params)
-        if expires_in = params.delete(:expires_in)
+        if (expires_in = params.delete(:expires_in))
           if expires_in > ONE_WEEK
-            msg = "expires_in value of #{expires_in} exceeds one-week maximum"
-            raise ArgumentError, msg
+            raise ArgumentError,
+                  "expires_in value of #{expires_in} exceeds one-week maximum"
+          elsif expires_in <= 0 
+            raise ArgumentError,
+                  "expires_in value of #{expires_in} cannot be 0 or less"
           end
+
           expires_in
         else
           FIFTEEN_MINUTES
@@ -89,16 +129,16 @@ module Aws
       end
 
       # @param [Seahorse::Client::Request] req
-      def sign_but_dont_send(req, expires_in, scheme)
-
+      def sign_but_dont_send(req, expires_in, scheme, time, unsigned_headers)
         http_req = req.context.http_request
 
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
 
-        signer = build_signer(req.context.config)
+        signer = build_signer(req.context.config, unsigned_headers)
 
+        req.context[:presigned_url] = true
         req.handle(step: :send) do |context|
 
           if scheme != http_req.endpoint.scheme
@@ -124,41 +164,23 @@ module Aws
             url: http_req.endpoint,
             headers: http_req.headers,
             body_digest: 'UNSIGNED-PAYLOAD',
-            expires_in: expires_in
+            expires_in: expires_in,
+            time: time
           ).to_s
 
           Seahorse::Client::Response.new(context: context, data: url)
         end
       end
 
-      def build_signer(cfg)
+      def build_signer(cfg, unsigned_headers)
         Aws::Sigv4::Signer.new(
           service: 's3',
           region: cfg.region,
           credentials_provider: cfg.credentials,
-          unsigned_headers: [
-            'cache-control',
-            'content-length', # due to a ELB bug
-            'expect',
-            'max-forwards',
-            'pragma',
-            'te',
-            'if-match',
-            'if-none-match',
-            'if-modified-since',
-            'if-unmodified-since',
-            'if-range',
-            'accept',
-            'proxy-authorization',
-            'from',
-            'referer',
-            'user-agent',
-            'x-amzn-trace-id'
-          ],
+          unsigned_headers: unsigned_headers,
           uri_escape_path: false
         )
       end
-
     end
   end
 end

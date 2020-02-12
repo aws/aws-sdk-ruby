@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,112 +48,205 @@ module Aws::LexModelBuildingService
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -202,6 +300,7 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateBotVersionResponse#version #version} => String
     #   * {Types::CreateBotVersionResponse#locale #locale} => String
     #   * {Types::CreateBotVersionResponse#child_directed #child_directed} => Boolean
+    #   * {Types::CreateBotVersionResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -228,7 +327,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -238,6 +337,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion AWS API Documentation
     #
@@ -323,6 +423,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -413,6 +514,8 @@ module Aws::LexModelBuildingService
     #   * {Types::CreateSlotTypeVersionResponse#version #version} => String
     #   * {Types::CreateSlotTypeVersionResponse#checksum #checksum} => String
     #   * {Types::CreateSlotTypeVersionResponse#value_selection_strategy #value_selection_strategy} => String
+    #   * {Types::CreateSlotTypeVersionResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::CreateSlotTypeVersionResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -434,6 +537,9 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion AWS API Documentation
     #
@@ -446,7 +552,13 @@ module Aws::LexModelBuildingService
 
     # Deletes all versions of the bot, including the `$LATEST` version. To
     # delete a specific version of the bot, use the DeleteBotVersion
-    # operation.
+    # operation. The `DeleteBot` operation doesn't immediately remove the
+    # bot schema. Instead, it is marked for deletion and removed later.
+    #
+    # Amazon Lex stores utterances indefinitely for improving the ability of
+    # your bot to respond to user inputs. These utterances are not removed
+    # when the bot is deleted. To remove the utterances, use the
+    # DeleteUtterances operation.
     #
     # If a bot has an alias, you can't delete it. Instead, the `DeleteBot`
     # operation returns a `ResourceInUseException` exception that includes a
@@ -729,8 +841,11 @@ module Aws::LexModelBuildingService
     # operation, and then stored indefinitely for use in improving the
     # ability of your bot to respond to user input.
     #
-    # Use the `DeleteStoredUtterances` operation to manually delete stored
-    # utterances for a specific user.
+    # Use the `DeleteUtterances` operation to manually delete stored
+    # utterances for a specific user. When you use the `DeleteUtterances`
+    # operation, utterances stored for improving your bot's ability to
+    # respond to user input are deleted immediately. Utterances stored for
+    # use with the `GetUtterancesView` operation are deleted after 15 days.
     #
     # This operation requires permissions for the `lex:DeleteUtterances`
     # action.
@@ -794,6 +909,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotResponse#version #version} => String
     #   * {Types::GetBotResponse#locale #locale} => String
     #   * {Types::GetBotResponse#child_directed #child_directed} => Boolean
+    #   * {Types::GetBotResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     #
     # @example Example: To get information about a bot
@@ -875,7 +991,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -885,6 +1001,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot AWS API Documentation
     #
@@ -915,6 +1032,7 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotAliasResponse#last_updated_date #last_updated_date} => Time
     #   * {Types::GetBotAliasResponse#created_date #created_date} => Time
     #   * {Types::GetBotAliasResponse#checksum #checksum} => String
+    #   * {Types::GetBotAliasResponse#conversation_logs #conversation_logs} => Types::ConversationLogsResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -932,6 +1050,13 @@ module Aws::LexModelBuildingService
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.checksum #=> String
+    #   resp.conversation_logs.log_settings #=> Array
+    #   resp.conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.conversation_logs.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAlias AWS API Documentation
     #
@@ -989,6 +1114,13 @@ module Aws::LexModelBuildingService
     #   resp.bot_aliases[0].last_updated_date #=> Time
     #   resp.bot_aliases[0].created_date #=> Time
     #   resp.bot_aliases[0].checksum #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings #=> Array
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.bot_aliases[0].conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.bot_aliases[0].conversation_logs.iam_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliases AWS API Documentation
@@ -1173,7 +1305,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -1256,7 +1388,7 @@ module Aws::LexModelBuildingService
     #   resp.bots #=> Array
     #   resp.bots[0].name #=> String
     #   resp.bots[0].description #=> String
-    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.bots[0].status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.bots[0].last_updated_date #=> Time
     #   resp.bots[0].created_date #=> Time
     #   resp.bots[0].version #=> String
@@ -1731,6 +1863,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -1941,6 +2074,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetSlotTypeResponse#version #version} => String
     #   * {Types::GetSlotTypeResponse#checksum #checksum} => String
     #   * {Types::GetSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
+    #   * {Types::GetSlotTypeResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::GetSlotTypeResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     #
     # @example Example: To get information about a slot type
@@ -1990,6 +2125,9 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType AWS API Documentation
     #
@@ -2168,12 +2306,16 @@ module Aws::LexModelBuildingService
     # about the old version and the new so that you can compare the
     # performance across the two versions.
     #
-    # <note markdown="1"> Utterance statistics are generated once a day. Data is available for
-    # the last 15 days. You can request information for up to 5 versions in
-    # each request. The response contains information about a maximum of 100
-    # utterances for each version.
+    # Utterance statistics are generated once a day. Data is available for
+    # the last 15 days. You can request information for up to 5 versions of
+    # your bot in each request. Amazon Lex returns the most frequent
+    # utterances received by the bot in the last 15 days. The response
+    # contains information about a maximum of 100 utterances for each
+    # version.
     #
-    #  </note>
+    # If you set `childDirected` field to true when you created your bot, or
+    # if you opted out of participating in improving Amazon Lex, utterances
+    # are not available.
     #
     # This operation requires permissions for the `lex:GetUtterancesView`
     # action.
@@ -2187,7 +2329,7 @@ module Aws::LexModelBuildingService
     #   returned. The limit is 5 versions per request.
     #
     # @option params [required, String] :status_type
-    #   To return utterances that were recognized and handled, use`Detected`.
+    #   To return utterances that were recognized and handled, use `Detected`.
     #   To return utterances that were not recognized, use `Missed`.
     #
     # @return [Types::GetUtterancesViewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2239,7 +2381,7 @@ module Aws::LexModelBuildingService
     # which are set to their default values. If you don't specify values for
     # required fields, Amazon Lex throws an exception. This operation
     # requires permissions for the lex:PutBot action. For more information,
-    # see auth-and-access-control.
+    # see security-iam.
     # `
     #
     # @option params [required, String] :name
@@ -2256,7 +2398,7 @@ module Aws::LexModelBuildingService
     # @option params [Types::Prompt] :clarification_prompt
     #   When Amazon Lex doesn't understand the user's intent, it uses this
     #   message to get clarification. To specify how many times Amazon Lex
-    #   should repeate the clarification prompt, use the `maxAttempts` field.
+    #   should repeat the clarification prompt, use the `maxAttempts` field.
     #   If Amazon Lex still doesn't understand, it sends the message in the
     #   `abortStatement` field.
     #
@@ -2265,6 +2407,35 @@ module Aws::LexModelBuildingService
     #   pizza and drinks, you might create this clarification prompt: "What
     #   would you like to do? You can say 'Order a pizza' or 'Order a
     #   drink.'"
+    #
+    #   If you have defined a fallback intent, it will be invoked if the
+    #   clarification prompt is repeated the number of times defined in the
+    #   `maxAttempts` field. For more information, see [
+    #   AMAZON.FallbackIntent][1].
+    #
+    #   If you don't define a clarification prompt, at runtime Amazon Lex
+    #   will return a 400 Bad Request exception in three cases:
+    #
+    #   * Follow-up prompt - When the user responds to a follow-up prompt but
+    #     does not provide an intent. For example, in response to a follow-up
+    #     prompt that says "Would you like anything else today?" the user
+    #     says "Yes." Amazon Lex will return a 400 Bad Request exception
+    #     because it does not have a clarification prompt to send to the user
+    #     to get an intent.
+    #
+    #   * Lambda function - When using a Lambda function, you return an
+    #     `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #   * PutSession operation - When using the `PutSession` operation, you
+    #     send an `ElicitIntent` dialog type. Since Amazon Lex does not have a
+    #     clarification prompt to get an intent from the user, it returns a
+    #     400 Bad Request exception.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #
     # @option params [Types::Statement] :abort_statement
     #   When Amazon Lex can't understand the user's input in context, it
@@ -2283,6 +2454,14 @@ module Aws::LexModelBuildingService
     #   one of the intents. This intent might require the `CrustType` slot.
     #   You specify the `valueElicitationPrompt` field when you create the
     #   `CrustType` slot.
+    #
+    #   If you have defined a fallback intent the abort statement will not be
+    #   sent to the user, the fallback intent is used instead. For more
+    #   information, see [ AMAZON.FallbackIntent][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html
     #
     # @option params [Integer] :idle_session_ttl_in_seconds
     #   The maximum time in seconds that Amazon Lex retains the data gathered
@@ -2307,12 +2486,12 @@ module Aws::LexModelBuildingService
     # @option params [String] :voice_id
     #   The Amazon Polly voice ID that you want Amazon Lex to use for voice
     #   interactions with the user. The locale configured for the voice must
-    #   match the locale of the bot. For more information, see [Available
-    #   Voices][1] in the *Amazon Polly Developer Guide*.
+    #   match the locale of the bot. For more information, see [Voices in
+    #   Amazon Polly][1] in the *Amazon Polly Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
     #
     # @option params [String] :checksum
     #   Identifies a specific revision of the `$LATEST` version.
@@ -2370,7 +2549,15 @@ module Aws::LexModelBuildingService
     #
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #
+    # @option params [Boolean] :detect_sentiment
+    #   When set to `true` user utterances are sent to Amazon Comprehend for
+    #   sentiment analysis. If you don't specify `detectSentiment`, the
+    #   default is `false`.
+    #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the bot is created. This
+    #   is the same as calling the `CreateBotVersion` operation. If you don't
+    #   specify `createVersion`, the default is `false`.
     #
     # @return [Types::PutBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2390,6 +2577,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#locale #locale} => String
     #   * {Types::PutBotResponse#child_directed #child_directed} => Boolean
     #   * {Types::PutBotResponse#create_version #create_version} => Boolean
+    #   * {Types::PutBotResponse#detect_sentiment #detect_sentiment} => Boolean
     #
     #
     # @example Example: To create a bot
@@ -2415,7 +2603,7 @@ module Aws::LexModelBuildingService
     #       max_attempts: 1, 
     #       messages: [
     #         {
-    #           content: "I'm sorry, I didn't hear that. Can you repeate what you just said?", 
+    #           content: "I'm sorry, I didn't hear that. Can you repeat what you just said?", 
     #           content_type: "PlainText", 
     #         }, 
     #         {
@@ -2519,6 +2707,7 @@ module Aws::LexModelBuildingService
     #     process_behavior: "SAVE", # accepts SAVE, BUILD
     #     locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #     child_directed: false, # required
+    #     detect_sentiment: false,
     #     create_version: false,
     #   })
     #
@@ -2540,7 +2729,7 @@ module Aws::LexModelBuildingService
     #   resp.abort_statement.messages[0].content #=> String
     #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
-    #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
+    #   resp.status #=> String, one of "BUILDING", "READY", "READY_BASIC_TESTING", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
@@ -2551,6 +2740,7 @@ module Aws::LexModelBuildingService
     #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
     #   resp.create_version #=> Boolean
+    #   resp.detect_sentiment #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot AWS API Documentation
     #
@@ -2592,6 +2782,9 @@ module Aws::LexModelBuildingService
     #   match the `$LATEST` version, you get a `PreconditionFailedException`
     #   exception.
     #
+    # @option params [Types::ConversationLogsRequest] :conversation_logs
+    #   Settings for conversation logs for the alias.
+    #
     # @return [Types::PutBotAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBotAliasResponse#name #name} => String
@@ -2601,6 +2794,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotAliasResponse#last_updated_date #last_updated_date} => Time
     #   * {Types::PutBotAliasResponse#created_date #created_date} => Time
     #   * {Types::PutBotAliasResponse#checksum #checksum} => String
+    #   * {Types::PutBotAliasResponse#conversation_logs #conversation_logs} => Types::ConversationLogsResponse
     #
     # @example Request syntax with placeholder values
     #
@@ -2610,6 +2804,17 @@ module Aws::LexModelBuildingService
     #     bot_version: "Version", # required
     #     bot_name: "BotName", # required
     #     checksum: "String",
+    #     conversation_logs: {
+    #       log_settings: [ # required
+    #         {
+    #           log_type: "AUDIO", # required, accepts AUDIO, TEXT
+    #           destination: "CLOUDWATCH_LOGS", # required, accepts CLOUDWATCH_LOGS, S3
+    #           kms_key_arn: "KmsKeyArn",
+    #           resource_arn: "ResourceArn", # required
+    #         },
+    #       ],
+    #       iam_role_arn: "IamRoleArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2621,6 +2826,13 @@ module Aws::LexModelBuildingService
     #   resp.last_updated_date #=> Time
     #   resp.created_date #=> Time
     #   resp.checksum #=> String
+    #   resp.conversation_logs.log_settings #=> Array
+    #   resp.conversation_logs.log_settings[0].log_type #=> String, one of "AUDIO", "TEXT"
+    #   resp.conversation_logs.log_settings[0].destination #=> String, one of "CLOUDWATCH_LOGS", "S3"
+    #   resp.conversation_logs.log_settings[0].kms_key_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_arn #=> String
+    #   resp.conversation_logs.log_settings[0].resource_prefix #=> String
+    #   resp.conversation_logs.iam_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias AWS API Documentation
     #
@@ -2816,6 +3028,9 @@ module Aws::LexModelBuildingService
     #   exception.
     #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the intent is created.
+    #   This is the same as calling the `CreateIntentVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
     #
     # @return [Types::PutIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3132,6 +3347,7 @@ module Aws::LexModelBuildingService
     #         priority: 1,
     #         sample_utterances: ["Utterance"],
     #         response_card: "ResponseCard",
+    #         obfuscation_setting: "NONE", # accepts NONE, DEFAULT_OBFUSCATION
     #       },
     #     ],
     #     sample_utterances: ["Utterance"],
@@ -3225,6 +3441,7 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].sample_utterances #=> Array
     #   resp.slots[0].sample_utterances[0] #=> String
     #   resp.slots[0].response_card #=> String
+    #   resp.slots[0].obfuscation_setting #=> String, one of "NONE", "DEFAULT_OBFUSCATION"
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
@@ -3350,6 +3567,20 @@ module Aws::LexModelBuildingService
     #   `ORIGINAL_VALUE`.
     #
     # @option params [Boolean] :create_version
+    #   When set to `true` a new numbered version of the slot type is created.
+    #   This is the same as calling the `CreateSlotTypeVersion` operation. If
+    #   you do not specify `createVersion`, the default is `false`.
+    #
+    # @option params [String] :parent_slot_type_signature
+    #   The built-in slot type used as the parent of the slot type. When you
+    #   define a parent slot type, the new slot type has all of the same
+    #   configuration as the parent.
+    #
+    #   Only `AMAZON.AlphaNumeric` is supported.
+    #
+    # @option params [Array<Types::SlotTypeConfiguration>] :slot_type_configurations
+    #   Configuration information that extends the parent built-in slot type.
+    #   The configuration is added to the settings for the parent slot type.
     #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3362,6 +3593,8 @@ module Aws::LexModelBuildingService
     #   * {Types::PutSlotTypeResponse#checksum #checksum} => String
     #   * {Types::PutSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
     #   * {Types::PutSlotTypeResponse#create_version #create_version} => Boolean
+    #   * {Types::PutSlotTypeResponse#parent_slot_type_signature #parent_slot_type_signature} => String
+    #   * {Types::PutSlotTypeResponse#slot_type_configurations #slot_type_configurations} => Array&lt;Types::SlotTypeConfiguration&gt;
     #
     #
     # @example Example: To Create a Slot Type
@@ -3413,6 +3646,14 @@ module Aws::LexModelBuildingService
     #     checksum: "String",
     #     value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
     #     create_version: false,
+    #     parent_slot_type_signature: "CustomOrBuiltinSlotTypeName",
+    #     slot_type_configurations: [
+    #       {
+    #         regex_configuration: {
+    #           pattern: "RegexPattern", # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3429,6 +3670,9 @@ module Aws::LexModelBuildingService
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
     #   resp.create_version #=> Boolean
+    #   resp.parent_slot_type_signature #=> String
+    #   resp.slot_type_configurations #=> Array
+    #   resp.slot_type_configurations[0].regex_configuration.pattern #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType AWS API Documentation
     #
@@ -3515,7 +3759,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

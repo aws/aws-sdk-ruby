@@ -23,6 +23,7 @@ module Aws::Batch
     CEState = Shapes::StringShape.new(name: 'CEState')
     CEStatus = Shapes::StringShape.new(name: 'CEStatus')
     CEType = Shapes::StringShape.new(name: 'CEType')
+    CRAllocationStrategy = Shapes::StringShape.new(name: 'CRAllocationStrategy')
     CRType = Shapes::StringShape.new(name: 'CRType')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
@@ -55,6 +56,10 @@ module Aws::Batch
     DescribeJobQueuesResponse = Shapes::StructureShape.new(name: 'DescribeJobQueuesResponse')
     DescribeJobsRequest = Shapes::StructureShape.new(name: 'DescribeJobsRequest')
     DescribeJobsResponse = Shapes::StructureShape.new(name: 'DescribeJobsResponse')
+    Device = Shapes::StructureShape.new(name: 'Device')
+    DeviceCgroupPermission = Shapes::StringShape.new(name: 'DeviceCgroupPermission')
+    DeviceCgroupPermissions = Shapes::ListShape.new(name: 'DeviceCgroupPermissions')
+    DevicesList = Shapes::ListShape.new(name: 'DevicesList')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Host = Shapes::StructureShape.new(name: 'Host')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -74,14 +79,29 @@ module Aws::Batch
     JobSummaryList = Shapes::ListShape.new(name: 'JobSummaryList')
     JobTimeout = Shapes::StructureShape.new(name: 'JobTimeout')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
+    LaunchTemplateSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateSpecification')
+    LinuxParameters = Shapes::StructureShape.new(name: 'LinuxParameters')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
     MountPoints = Shapes::ListShape.new(name: 'MountPoints')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
+    NodeDetails = Shapes::StructureShape.new(name: 'NodeDetails')
+    NodeOverrides = Shapes::StructureShape.new(name: 'NodeOverrides')
+    NodeProperties = Shapes::StructureShape.new(name: 'NodeProperties')
+    NodePropertiesSummary = Shapes::StructureShape.new(name: 'NodePropertiesSummary')
+    NodePropertyOverride = Shapes::StructureShape.new(name: 'NodePropertyOverride')
+    NodePropertyOverrides = Shapes::ListShape.new(name: 'NodePropertyOverrides')
+    NodeRangeProperties = Shapes::ListShape.new(name: 'NodeRangeProperties')
+    NodeRangeProperty = Shapes::StructureShape.new(name: 'NodeRangeProperty')
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
+    ResourceRequirement = Shapes::StructureShape.new(name: 'ResourceRequirement')
+    ResourceRequirements = Shapes::ListShape.new(name: 'ResourceRequirements')
+    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     String = Shapes::StringShape.new(name: 'String')
@@ -120,6 +140,7 @@ module Aws::Batch
     AttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     AttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     AttemptContainerDetail.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
+    AttemptContainerDetail.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
     AttemptContainerDetail.struct_class = Types::AttemptContainerDetail
 
     AttemptDetail.add_member(:container, Shapes::ShapeRef.new(shape: AttemptContainerDetail, location_name: "container"))
@@ -135,6 +156,9 @@ module Aws::Batch
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
     CancelJobResponse.struct_class = Types::CancelJobResponse
+
+    ClientException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ClientException.struct_class = Types::ClientException
 
     ComputeEnvironmentDetail.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentName"))
     ComputeEnvironmentDetail.add_member(:compute_environment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentArn"))
@@ -156,18 +180,21 @@ module Aws::Batch
     ComputeEnvironmentOrders.member = Shapes::ShapeRef.new(shape: ComputeEnvironmentOrder)
 
     ComputeResource.add_member(:type, Shapes::ShapeRef.new(shape: CRType, required: true, location_name: "type"))
+    ComputeResource.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: CRAllocationStrategy, location_name: "allocationStrategy"))
     ComputeResource.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "minvCpus"))
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
     ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceTypes"))
     ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
-    ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "securityGroupIds"))
+    ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
     ComputeResource.add_member(:instance_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceRole"))
     ComputeResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ComputeResource.add_member(:placement_group, Shapes::ShapeRef.new(shape: String, location_name: "placementGroup"))
     ComputeResource.add_member(:bid_percentage, Shapes::ShapeRef.new(shape: Integer, location_name: "bidPercentage"))
     ComputeResource.add_member(:spot_iam_fleet_role, Shapes::ShapeRef.new(shape: String, location_name: "spotIamFleetRole"))
+    ComputeResource.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "launchTemplate"))
     ComputeResource.struct_class = Types::ComputeResource
 
     ComputeResourceUpdate.add_member(:minv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "minvCpus"))
@@ -192,17 +219,23 @@ module Aws::Batch
     ContainerDetail.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     ContainerDetail.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     ContainerDetail.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "logStreamName"))
+    ContainerDetail.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    ContainerDetail.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaceList, location_name: "networkInterfaces"))
+    ContainerDetail.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    ContainerDetail.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
     ContainerOverrides.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "memory"))
     ContainerOverrides.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
+    ContainerOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ContainerOverrides.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environment"))
+    ContainerOverrides.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
     ContainerOverrides.struct_class = Types::ContainerOverrides
 
-    ContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
-    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "vcpus"))
-    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "memory"))
+    ContainerProperties.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    ContainerProperties.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
+    ContainerProperties.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "memory"))
     ContainerProperties.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "command"))
     ContainerProperties.add_member(:job_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobRoleArn"))
     ContainerProperties.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
@@ -212,6 +245,9 @@ module Aws::Batch
     ContainerProperties.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
     ContainerProperties.add_member(:ulimits, Shapes::ShapeRef.new(shape: Ulimits, location_name: "ulimits"))
     ContainerProperties.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
+    ContainerProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    ContainerProperties.add_member(:resource_requirements, Shapes::ShapeRef.new(shape: ResourceRequirements, location_name: "resourceRequirements"))
+    ContainerProperties.add_member(:linux_parameters, Shapes::ShapeRef.new(shape: LinuxParameters, location_name: "linuxParameters"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
     ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
@@ -289,6 +325,15 @@ module Aws::Batch
     DescribeJobsResponse.add_member(:jobs, Shapes::ShapeRef.new(shape: JobDetailList, location_name: "jobs"))
     DescribeJobsResponse.struct_class = Types::DescribeJobsResponse
 
+    Device.add_member(:host_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hostPath"))
+    Device.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
+    Device.add_member(:permissions, Shapes::ShapeRef.new(shape: DeviceCgroupPermissions, location_name: "permissions"))
+    Device.struct_class = Types::Device
+
+    DeviceCgroupPermissions.member = Shapes::ShapeRef.new(shape: DeviceCgroupPermission)
+
+    DevicesList.member = Shapes::ShapeRef.new(shape: Device)
+
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: KeyValuePair)
 
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
@@ -303,6 +348,7 @@ module Aws::Batch
     JobDefinition.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     JobDefinition.add_member(:container_properties, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "containerProperties"))
     JobDefinition.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
+    JobDefinition.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
     JobDefinition.struct_class = Types::JobDefinition
 
     JobDefinitionList.member = Shapes::ShapeRef.new(shape: JobDefinition)
@@ -327,6 +373,8 @@ module Aws::Batch
     JobDetail.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     JobDetail.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     JobDetail.add_member(:container, Shapes::ShapeRef.new(shape: ContainerDetail, location_name: "container"))
+    JobDetail.add_member(:node_details, Shapes::ShapeRef.new(shape: NodeDetails, location_name: "nodeDetails"))
+    JobDetail.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
     JobDetail.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesDetail, location_name: "arrayProperties"))
     JobDetail.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     JobDetail.struct_class = Types::JobDetail
@@ -353,6 +401,7 @@ module Aws::Batch
     JobSummary.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
     JobSummary.add_member(:container, Shapes::ShapeRef.new(shape: ContainerSummary, location_name: "container"))
     JobSummary.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesSummary, location_name: "arrayProperties"))
+    JobSummary.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodePropertiesSummary, location_name: "nodeProperties"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -364,8 +413,17 @@ module Aws::Batch
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     KeyValuePair.struct_class = Types::KeyValuePair
 
+    LaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
+    LaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
+    LaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    LaunchTemplateSpecification.struct_class = Types::LaunchTemplateSpecification
+
+    LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
+    LinuxParameters.struct_class = Types::LinuxParameters
+
     ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
     ListJobsRequest.add_member(:array_job_id, Shapes::ShapeRef.new(shape: String, location_name: "arrayJobId"))
+    ListJobsRequest.add_member(:multi_node_job_id, Shapes::ShapeRef.new(shape: String, location_name: "multiNodeJobId"))
     ListJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -382,6 +440,43 @@ module Aws::Batch
 
     MountPoints.member = Shapes::ShapeRef.new(shape: MountPoint)
 
+    NetworkInterface.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
+    NetworkInterface.add_member(:ipv6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    NetworkInterface.add_member(:private_ipv_4_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpv4Address"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
+    NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface)
+
+    NodeDetails.add_member(:node_index, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeIndex"))
+    NodeDetails.add_member(:is_main_node, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMainNode"))
+    NodeDetails.struct_class = Types::NodeDetails
+
+    NodeOverrides.add_member(:num_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "numNodes"))
+    NodeOverrides.add_member(:node_property_overrides, Shapes::ShapeRef.new(shape: NodePropertyOverrides, location_name: "nodePropertyOverrides"))
+    NodeOverrides.struct_class = Types::NodeOverrides
+
+    NodeProperties.add_member(:num_nodes, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "numNodes"))
+    NodeProperties.add_member(:main_node, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "mainNode"))
+    NodeProperties.add_member(:node_range_properties, Shapes::ShapeRef.new(shape: NodeRangeProperties, required: true, location_name: "nodeRangeProperties"))
+    NodeProperties.struct_class = Types::NodeProperties
+
+    NodePropertiesSummary.add_member(:is_main_node, Shapes::ShapeRef.new(shape: Boolean, location_name: "isMainNode"))
+    NodePropertiesSummary.add_member(:num_nodes, Shapes::ShapeRef.new(shape: Integer, location_name: "numNodes"))
+    NodePropertiesSummary.add_member(:node_index, Shapes::ShapeRef.new(shape: Integer, location_name: "nodeIndex"))
+    NodePropertiesSummary.struct_class = Types::NodePropertiesSummary
+
+    NodePropertyOverride.add_member(:target_nodes, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetNodes"))
+    NodePropertyOverride.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
+    NodePropertyOverride.struct_class = Types::NodePropertyOverride
+
+    NodePropertyOverrides.member = Shapes::ShapeRef.new(shape: NodePropertyOverride)
+
+    NodeRangeProperties.member = Shapes::ShapeRef.new(shape: NodeRangeProperty)
+
+    NodeRangeProperty.add_member(:target_nodes, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetNodes"))
+    NodeRangeProperty.add_member(:container, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "container"))
+    NodeRangeProperty.struct_class = Types::NodeRangeProperty
+
     ParametersMap.key = Shapes::ShapeRef.new(shape: String)
     ParametersMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -389,6 +484,7 @@ module Aws::Batch
     RegisterJobDefinitionRequest.add_member(:type, Shapes::ShapeRef.new(shape: JobDefinitionType, required: true, location_name: "type"))
     RegisterJobDefinitionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     RegisterJobDefinitionRequest.add_member(:container_properties, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "containerProperties"))
+    RegisterJobDefinitionRequest.add_member(:node_properties, Shapes::ShapeRef.new(shape: NodeProperties, location_name: "nodeProperties"))
     RegisterJobDefinitionRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     RegisterJobDefinitionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     RegisterJobDefinitionRequest.struct_class = Types::RegisterJobDefinitionRequest
@@ -398,8 +494,17 @@ module Aws::Batch
     RegisterJobDefinitionResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "revision"))
     RegisterJobDefinitionResponse.struct_class = Types::RegisterJobDefinitionResponse
 
+    ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))
+    ResourceRequirement.struct_class = Types::ResourceRequirement
+
+    ResourceRequirements.member = Shapes::ShapeRef.new(shape: ResourceRequirement)
+
     RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
     RetryStrategy.struct_class = Types::RetryStrategy
+
+    ServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServerException.struct_class = Types::ServerException
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -410,6 +515,7 @@ module Aws::Batch
     SubmitJobRequest.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     SubmitJobRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     SubmitJobRequest.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
+    SubmitJobRequest.add_member(:node_overrides, Shapes::ShapeRef.new(shape: NodeOverrides, location_name: "nodeOverrides"))
     SubmitJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     SubmitJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: JobTimeout, location_name: "timeout"))
     SubmitJobRequest.struct_class = Types::SubmitJobRequest
@@ -467,11 +573,15 @@ module Aws::Batch
       api.version = "2016-08-10"
 
       api.metadata = {
+        "apiVersion" => "2016-08-10",
         "endpointPrefix" => "batch",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "serviceAbbreviation" => "AWS Batch",
         "serviceFullName" => "AWS Batch",
+        "serviceId" => "Batch",
         "signatureVersion" => "v4",
+        "uid" => "batch-2016-08-10",
       }
 
       api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|
@@ -542,6 +652,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeComputeEnvironmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_job_definitions, Seahorse::Model::Operation.new.tap do |o|
@@ -552,6 +668,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeJobDefinitionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_job_queues, Seahorse::Model::Operation.new.tap do |o|
@@ -562,6 +684,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: DescribeJobQueuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -582,6 +710,12 @@ module Aws::Batch
         o.output = Shapes::ShapeRef.new(shape: ListJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:register_job_definition, Seahorse::Model::Operation.new.tap do |o|

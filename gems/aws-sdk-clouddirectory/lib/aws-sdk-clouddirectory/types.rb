@@ -8,6 +8,18 @@
 module Aws::CloudDirectory
   module Types
 
+    # Access denied. Check your permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddFacetToObjectRequest
     #   data as a hash:
     #
@@ -733,11 +745,12 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] batch_reference_name
-    #   The batch reference name. See [Batches][1] for more information.
+    #   The batch reference name. See [Transaction Support][1] for more
+    #   information.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateIndex AWS API Documentation
@@ -819,11 +832,12 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] batch_reference_name
-    #   The batch reference name. See [Batches][1] for more information.
+    #   The batch reference name. See [Transaction Support][1] for more
+    #   information.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchCreateObject AWS API Documentation
@@ -947,11 +961,12 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] batch_reference_name
-    #   The batch reference name. See [Batches][1] for more information.
+    #   The batch reference name. See [Transaction Support][1] for more
+    #   information.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchDetachObject AWS API Documentation
@@ -1639,6 +1654,50 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchListObjectParents
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   The reference that identifies an object.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParents AWS API Documentation
+    #
+    class BatchListObjectParents < Struct.new(
+      :object_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] parent_links
+    #   @return [Array<Types::ObjectIdentifierAndLinkNameTuple>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchListObjectParentsResponse AWS API Documentation
+    #
+    class BatchListObjectParentsResponse < Struct.new(
+      :parent_links,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Returns policies attached to an object in pagination fashion inside a
     # BatchRead operation. For more information, see ListObjectPolicies and
     # BatchReadRequest$Operations.
@@ -1893,7 +1952,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #   @return [Array<Types::PolicyToPath>]
     #
     # @!attribute [rw] next_token
@@ -1979,6 +2038,13 @@ module Aws::CloudDirectory
     #             facet_name: "FacetName",
     #           },
     #           attribute_names: ["AttributeName"], # required
+    #         },
+    #         list_object_parents: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           next_token: "NextToken",
+    #           max_results: 1,
     #         },
     #         list_object_policies: {
     #           object_reference: { # required
@@ -2152,7 +2218,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
     #   @return [Types::BatchListObjectParentPaths]
     #
     # @!attribute [rw] get_object_information
@@ -2163,6 +2229,9 @@ module Aws::CloudDirectory
     #   Retrieves attributes within a facet that are associated with an
     #   object.
     #   @return [Types::BatchGetObjectAttributes]
+    #
+    # @!attribute [rw] list_object_parents
+    #   @return [Types::BatchListObjectParents]
     #
     # @!attribute [rw] list_object_policies
     #   Returns policies attached to an object in pagination fashion.
@@ -2185,7 +2254,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #   @return [Types::BatchLookupPolicy]
     #
     # @!attribute [rw] list_index
@@ -2196,22 +2265,22 @@ module Aws::CloudDirectory
     #   Returns a paginated list of all the outgoing TypedLinkSpecifier
     #   information for an object. It also supports filtering by typed link
     #   facet and identity attributes. For more information, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchListOutgoingTypedLinks]
     #
     # @!attribute [rw] list_incoming_typed_links
     #   Returns a paginated list of all the incoming TypedLinkSpecifier
     #   information for an object. It also supports filtering by typed link
     #   facet and identity attributes. For more information, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchListIncomingTypedLinks]
     #
     # @!attribute [rw] get_link_attributes
@@ -2227,6 +2296,7 @@ module Aws::CloudDirectory
       :list_object_parent_paths,
       :get_object_information,
       :get_object_attributes,
+      :list_object_parents,
       :list_object_policies,
       :list_policy_attachments,
       :lookup_policy,
@@ -2308,6 +2378,13 @@ module Aws::CloudDirectory
     #                 facet_name: "FacetName",
     #               },
     #               attribute_names: ["AttributeName"], # required
+    #             },
+    #             list_object_parents: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               next_token: "NextToken",
+    #               max_results: 1,
     #             },
     #             list_object_policies: {
     #               object_reference: { # required
@@ -2530,7 +2607,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
     #   @return [Types::BatchListObjectParentPathsResponse]
     #
     # @!attribute [rw] list_object_policies
@@ -2554,7 +2631,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #   @return [Types::BatchLookupPolicyResponse]
     #
     # @!attribute [rw] list_index
@@ -2565,27 +2642,30 @@ module Aws::CloudDirectory
     #   Returns a paginated list of all the outgoing TypedLinkSpecifier
     #   information for an object. It also supports filtering by typed link
     #   facet and identity attributes. For more information, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchListOutgoingTypedLinksResponse]
     #
     # @!attribute [rw] list_incoming_typed_links
     #   Returns a paginated list of all the incoming TypedLinkSpecifier
     #   information for an object. It also supports filtering by typed link
     #   facet and identity attributes. For more information, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchListIncomingTypedLinksResponse]
     #
     # @!attribute [rw] get_link_attributes
     #   The list of attributes to retrieve from the typed link.
     #   @return [Types::BatchGetLinkAttributesResponse]
+    #
+    # @!attribute [rw] list_object_parents
+    #   @return [Types::BatchListObjectParentsResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchReadSuccessfulResponse AWS API Documentation
     #
@@ -2602,7 +2682,8 @@ module Aws::CloudDirectory
       :list_index,
       :list_outgoing_typed_links,
       :list_incoming_typed_links,
-      :get_link_attributes)
+      :get_link_attributes,
+      :list_object_parents)
       include Aws::Structure
     end
 
@@ -2775,6 +2856,26 @@ module Aws::CloudDirectory
     #
     class BatchUpdateObjectAttributesResponse < Struct.new(
       :object_identifier)
+      include Aws::Structure
+    end
+
+    # A `BatchWrite` exception has occurred.
+    #
+    # @!attribute [rw] index
+    #   @return [Integer]
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/BatchWriteException AWS API Documentation
+    #
+    class BatchWriteException < Struct.new(
+      :index,
+      :type,
+      :message)
       include Aws::Structure
     end
 
@@ -3074,11 +3175,12 @@ module Aws::CloudDirectory
     #   @return [Types::BatchDetachPolicy]
     #
     # @!attribute [rw] create_index
-    #   Creates an index object. See [Indexing][1] for more information.
+    #   Creates an index object. See [Indexing and search][1] for more
+    #   information.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm
     #   @return [Types::BatchCreateIndex]
     #
     # @!attribute [rw] attach_to_index
@@ -3091,20 +3193,20 @@ module Aws::CloudDirectory
     #
     # @!attribute [rw] attach_typed_link
     #   Attaches a typed link to a specified source and target object. For
-    #   more information, see [Typed link][1].
+    #   more information, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchAttachTypedLink]
     #
     # @!attribute [rw] detach_typed_link
     #   Detaches a typed link from a specified source and target object. For
-    #   more information, see [Typed link][1].
+    #   more information, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchDetachTypedLink]
     #
     # @!attribute [rw] update_link_attributes
@@ -3172,11 +3274,12 @@ module Aws::CloudDirectory
     #   @return [Types::BatchDetachPolicyResponse]
     #
     # @!attribute [rw] create_index
-    #   Creates an index object. See [Indexing][1] for more information.
+    #   Creates an index object. See [Indexing and search][1] for more
+    #   information.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_indexing.html
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/indexing_search.htm
     #   @return [Types::BatchCreateIndexResponse]
     #
     # @!attribute [rw] attach_to_index
@@ -3189,20 +3292,20 @@ module Aws::CloudDirectory
     #
     # @!attribute [rw] attach_typed_link
     #   Attaches a typed link to a specified source and target object. For
-    #   more information, see [Typed link][1].
+    #   more information, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchAttachTypedLinkResponse]
     #
     # @!attribute [rw] detach_typed_link
     #   Detaches a typed link from a specified source and target object. For
-    #   more information, see [Typed link][1].
+    #   more information, see [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Types::BatchDetachTypedLinkResponse]
     #
     # @!attribute [rw] update_link_attributes
@@ -3519,6 +3622,18 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Cannot list the parents of a Directory root.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/CannotListParentOfRootException AWS API Documentation
+    #
+    class CannotListParentOfRootException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDirectoryRequest
     #   data as a hash:
     #
@@ -3651,7 +3766,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #   @return [String]
     #
     # @!attribute [rw] facet_style
@@ -4264,6 +4379,57 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that a Directory could not be created due to a naming
+    # conflict. Choose a different name and try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryAlreadyExistsException AWS API Documentation
+    #
+    class DirectoryAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A directory that has been deleted and to which access has been
+    # attempted. Note: The requested resource will eventually cease to
+    # exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryDeletedException AWS API Documentation
+    #
+    class DirectoryDeletedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An operation can only operate on a disabled directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryNotDisabledException AWS API Documentation
+    #
+    class DirectoryNotDisabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Operations are only permitted on enabled directories.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/DirectoryNotEnabledException AWS API Documentation
+    #
+    class DirectoryNotEnabledException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisableDirectoryRequest
     #   data as a hash:
     #
@@ -4327,7 +4493,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_whatarefacets.html
     #
     # @!attribute [rw] name
     #   The name of the Facet.
@@ -4351,6 +4517,18 @@ module Aws::CloudDirectory
       :name,
       :object_type,
       :facet_style)
+      include Aws::Structure
+    end
+
+    # A facet with the same name already exists.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAlreadyExistsException AWS API Documentation
+    #
+    class FacetAlreadyExistsException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4398,7 +4576,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
     #   @return [Types::FacetAttributeDefinition]
     #
     # @!attribute [rw] attribute_reference
@@ -4407,7 +4585,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
     #   @return [Types::FacetAttributeReference]
     #
     # @!attribute [rw] required_behavior
@@ -4429,7 +4607,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
     #
     # @note When making an API call, you may pass FacetAttributeDefinition
     #   data as a hash:
@@ -4497,7 +4675,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
     #   @return [String]
     #
     # @!attribute [rw] target_attribute_name
@@ -4506,7 +4684,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#attributereferences
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_attributereferences.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetAttributeReference AWS API Documentation
@@ -4566,6 +4744,44 @@ module Aws::CloudDirectory
     class FacetAttributeUpdate < Struct.new(
       :attribute,
       :action)
+      include Aws::Structure
+    end
+
+    # Occurs when deleting a facet that contains an attribute that is a
+    # target to an attribute reference in a different facet.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetInUseException AWS API Documentation
+    #
+    class FacetInUseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified Facet could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetNotFoundException AWS API Documentation
+    #
+    class FacetNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The Facet that you provided was not well formed or could not be
+    # validated with the schema.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/FacetValidationException AWS API Documentation
+    #
+    class FacetValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4700,11 +4916,11 @@ module Aws::CloudDirectory
     # @!attribute [rw] directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
     #   where the typed link resides. For more information, see arns or
-    #   [Typed link][1].
+    #   [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [String]
     #
     # @!attribute [rw] typed_link_specifier
@@ -4923,17 +5139,31 @@ module Aws::CloudDirectory
     #   Filters are interpreted in the order of the attributes on the typed
     #   link facet, not the order in which they are supplied to any API
     #   calls. For more information about identity attributes, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/GetTypedLinkFacetInformationResponse AWS API Documentation
     #
     class GetTypedLinkFacetInformationResponse < Struct.new(
       :identity_attribute_order)
+      include Aws::Structure
+    end
+
+    # Indicates a failure occurred while performing a check for backward
+    # compatibility between the specified schema and the schema that is
+    # currently applied to the directory.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/IncompatibleSchemaException AWS API Documentation
+    #
+    class IncompatibleSchemaException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -4956,6 +5186,145 @@ module Aws::CloudDirectory
     class IndexAttachment < Struct.new(
       :indexed_attributes,
       :object_identifier)
+      include Aws::Structure
+    end
+
+    # An object has been attempted to be attached to an object that does not
+    # have the appropriate attribute value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/IndexedAttributeMissingException AWS API Documentation
+    #
+    class IndexedAttributeMissingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates a problem that must be resolved by Amazon Web Services. This
+    # might be a transient error in which case you can retry your request
+    # until it succeeds. Otherwise, go to the [AWS Service Health
+    # Dashboard][1] site to see if there are any operational issues with the
+    # service.
+    #
+    #
+    #
+    # [1]: http://status.aws.amazon.com/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InternalServiceException AWS API Documentation
+    #
+    class InternalServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided ARN value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that an attempt to make an attachment was invalid. For
+    # example, attaching two nodes with a link type that is not applicable
+    # to the nodes or attempting to apply a schema to a directory a second
+    # time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidAttachmentException AWS API Documentation
+    #
+    class InvalidAttachmentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An attempt to modify a Facet resulted in an invalid schema exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidFacetUpdateException AWS API Documentation
+    #
+    class InvalidFacetUpdateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the `NextToken` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when any of the rule parameter keys or values are invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidRuleException AWS API Documentation
+    #
+    class InvalidRuleException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the provided `SchemaDoc` value is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidSchemaDocException AWS API Documentation
+    #
+    class InvalidSchemaDocException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Can occur for multiple reasons such as when you tag a resource that
+    # doesn’t exist or if you specify a higher number of tags for a resource
+    # than the allowed limit. Allowed limit is 50 tags per resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/InvalidTaggingRequestException AWS API Documentation
+    #
+    class InvalidTaggingRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that limits are exceeded. See [Limits][1] for more
+    # information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5028,6 +5397,19 @@ module Aws::CloudDirectory
     class LinkAttributeUpdate < Struct.new(
       :attribute_key,
       :attribute_action)
+      include Aws::Structure
+    end
+
+    # Indicates that a link could not be created due to a naming conflict.
+    # Choose a different name and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/LinkNameAlreadyInUseException AWS API Documentation
+    #
+    class LinkNameAlreadyInUseException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5488,12 +5870,12 @@ module Aws::CloudDirectory
     #
     # @!attribute [rw] max_results
     #   The maximum number of objects in a single page to retrieve from the
-    #   index during a request. For more information, see [AWS Directory
-    #   Service Limits][1].
+    #   index during a request. For more information, see [Amazon Cloud
+    #   Directory Limits][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd
+    #   [1]: http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5789,6 +6171,7 @@ module Aws::CloudDirectory
     #         next_token: "NextToken",
     #         max_results: 1,
     #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #         include_all_links_to_each_parent: false,
     #       }
     #
     # @!attribute [rw] directory_arn
@@ -5816,6 +6199,11 @@ module Aws::CloudDirectory
     #   that same object.
     #   @return [String]
     #
+    # @!attribute [rw] include_all_links_to_each_parent
+    #   When set to True, returns all ListObjectParentsResponse$ParentLinks.
+    #   There could be multiple links between a parent-child pair.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentsRequest AWS API Documentation
     #
     class ListObjectParentsRequest < Struct.new(
@@ -5823,7 +6211,8 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results,
-      :consistency_level)
+      :consistency_level,
+      :include_all_links_to_each_parent)
       include Aws::Structure
     end
 
@@ -5836,11 +6225,16 @@ module Aws::CloudDirectory
     #   The pagination token.
     #   @return [String]
     #
+    # @!attribute [rw] parent_links
+    #   Returns a list of parent reference and LinkName Tuples.
+    #   @return [Array<Types::ObjectIdentifierAndLinkNameTuple>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ListObjectParentsResponse AWS API Documentation
     #
     class ListObjectParentsResponse < Struct.new(
       :parents,
-      :next_token)
+      :next_token,
+      :parent_links)
       include Aws::Structure
     end
 
@@ -6324,7 +6718,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #   @return [Array<Types::PolicyToPath>]
     #
     # @!attribute [rw] next_token
@@ -6336,6 +6730,58 @@ module Aws::CloudDirectory
     class LookupPolicyResponse < Struct.new(
       :policy_to_path_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested operation can only operate on index
+    # objects.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotIndexException AWS API Documentation
+    #
+    class NotIndexException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when any invalid operations are performed on an object that is
+    # not a node, such as calling `ListObjectChildren` for a leaf node
+    # object.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotNodeException AWS API Documentation
+    #
+    class NotNodeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested operation can only operate on policy
+    # objects.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/NotPolicyException AWS API Documentation
+    #
+    class NotPolicyException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that the object is not attached to the index.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectAlreadyDetachedException AWS API Documentation
+    #
+    class ObjectAlreadyDetachedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6457,6 +6903,37 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # A pair of ObjectIdentifier and LinkName.
+    #
+    # @!attribute [rw] object_identifier
+    #   The ID that is associated with the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_name
+    #   The name of the link between the parent and the child object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectIdentifierAndLinkNameTuple AWS API Documentation
+    #
+    class ObjectIdentifierAndLinkNameTuple < Struct.new(
+      :object_identifier,
+      :link_name)
+      include Aws::Structure
+    end
+
+    # Indicates that the requested operation cannot be completed because the
+    # object has not been detached from the tree.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectNotDetachedException AWS API Documentation
+    #
+    class ObjectNotDetachedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The reference that identifies an object.
     #
     # @note When making an API call, you may pass ObjectReference
@@ -6471,9 +6948,8 @@ module Aws::CloudDirectory
     #   parent/child links leading to it from the directory root. Use the
     #   link names from each parent/child link to construct the path. Path
     #   selectors start with a slash (/) and link names are separated by
-    #   slashes. For more information about paths, see [Accessing
-    #   Objects][1]. You can identify an object in one of the following
-    #   ways:
+    #   slashes. For more information about paths, see [Access Objects][1].
+    #   You can identify an object in one of the following ways:
     #
     #   * *$ObjectIdentifier* - An object identifier is an opaque string
     #     provided by Amazon Cloud Directory. When creating objects, the
@@ -6487,7 +6963,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#accessingobjects
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_access_objects.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ObjectReference AWS API Documentation
@@ -6523,7 +6999,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#policies
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
     #
     # @!attribute [rw] policy_id
     #   The ID of `PolicyAttachment`.
@@ -6693,6 +7169,36 @@ module Aws::CloudDirectory
     #
     class RemoveFacetFromObjectResponse < Aws::EmptyStructure; end
 
+    # The specified resource could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Occurs when a conflict with a previous successful write is detected.
+    # For example, if a write operation occurs on an object and then an
+    # attempt is made to read the object using “SERIALIZABLE” consistency,
+    # this exception may result. This generally occurs when the previous
+    # write did not have time to propagate to the host serving the current
+    # request. A retry (with appropriate backoff logic) is the recommended
+    # response to this exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/RetryableConflictException AWS API Documentation
+    #
+    class RetryableConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains an Amazon Resource Name (ARN) and parameters that are
     # associated with the rule.
     #
@@ -6723,6 +7229,31 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that a schema could not be created due to a naming conflict.
+    # Please select a different name and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaAlreadyExistsException AWS API Documentation
+    #
+    class SchemaAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Indicates that a schema is already published.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/SchemaAlreadyPublishedException AWS API Documentation
+    #
+    class SchemaAlreadyPublishedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A facet.
     #
     # @note When making an API call, you may pass SchemaFacet
@@ -6740,7 +7271,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html
     #   @return [String]
     #
     # @!attribute [rw] facet_name
@@ -6752,6 +7283,19 @@ module Aws::CloudDirectory
     class SchemaFacet < Struct.new(
       :schema_arn,
       :facet_name)
+      include Aws::Structure
+    end
+
+    # The object could not be deleted because links still exist. Remove the
+    # links and then try the operation again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/StillContainsLinksException AWS API Documentation
+    #
+    class StillContainsLinksException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -6866,7 +7410,7 @@ module Aws::CloudDirectory
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters
+    # [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_range_filters.html
     #
     # @note When making an API call, you may pass TypedAttributeValueRange
     #   data as a hash:
@@ -7222,6 +7766,18 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # Indicates that the requested index type is not supported.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UnsupportedIndexTypeException AWS API Documentation
+    #
+    class UnsupportedIndexTypeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -7379,11 +7935,11 @@ module Aws::CloudDirectory
     # @!attribute [rw] directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
     #   where the updated typed link resides. For more information, see arns
-    #   or [Typed link][1].
+    #   or [Typed Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [String]
     #
     # @!attribute [rw] typed_link_specifier
@@ -7564,11 +8120,11 @@ module Aws::CloudDirectory
     #   Filters are interpreted in the order of the attributes on the typed
     #   link facet, not the order in which they are supplied to any API
     #   calls. For more information about identity attributes, see [Typed
-    #   link][1].
+    #   Links][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   [1]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/UpdateTypedLinkFacetRequest AWS API Documentation
@@ -7687,6 +8243,19 @@ module Aws::CloudDirectory
     #
     class UpgradePublishedSchemaResponse < Struct.new(
       :upgraded_schema_arn)
+      include Aws::Structure
+    end
+
+    # Indicates that your request is malformed in some manner. See the
+    # exception message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2017-01-11/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

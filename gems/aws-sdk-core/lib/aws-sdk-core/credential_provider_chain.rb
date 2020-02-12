@@ -21,8 +21,10 @@ module Aws
       [
         [:static_credentials, {}],
         [:env_credentials, {}],
+        [:assume_role_web_identity_credentials, {}],
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
+        [:process_credentials, {}],
         [:instance_profile_credentials, {
           retries: @config ? @config.instance_profile_credentials_retries : 0,
           http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
@@ -58,12 +60,24 @@ module Aws
       nil
     end
 
+    def determine_profile_name(options)
+      (options[:config] && options[:config].profile) || ENV['AWS_PROFILE'] || ENV['AWS_DEFAULT_PROFILE'] || 'default'
+    end
+
     def shared_credentials(options)
-      if options[:config]
-        SharedCredentials.new(profile_name: options[:config].profile)
+      profile_name = determine_profile_name(options)
+      SharedCredentials.new(profile_name: profile_name)
+    rescue Errors::NoSuchProfileError
+      nil
+    end
+
+    def process_credentials(options)
+      config = Aws.shared_config
+      profile_name = determine_profile_name(options)
+      if config.config_enabled? && process_provider = config.credentials_process(profile_name)
+        ProcessCredentials.new(process_provider)
       else
-        SharedCredentials.new(
-          profile_name: ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE'])
+        nil
       end
     rescue Errors::NoSuchProfileError
       nil
@@ -71,13 +85,23 @@ module Aws
 
     def assume_role_credentials(options)
       if Aws.shared_config.config_enabled?
-        profile, region = nil, nil
-        if options[:config]
-          profile = options[:config].profile
-          region = options[:config].region
-          assume_role_with_profile(options[:config].profile, options[:config].region)
-        end
-        assume_role_with_profile(profile, region)
+        assume_role_with_profile(options)
+      else
+        nil
+      end
+    end
+
+    def assume_role_web_identity_credentials(options)
+      if (role_arn = ENV['AWS_ROLE_ARN']) &&
+        (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
+        AssumeRoleWebIdentityCredentials.new(
+          role_arn: role_arn,
+          web_identity_token_file: token_file,
+          role_session_name: ENV['AWS_ROLE_SESSION_NAME']
+        )
+      elsif Aws.shared_config.config_enabled?
+        profile = options[:config].profile if options[:config]
+        Aws.shared_config.assume_role_web_identity_credentials_from_config(profile)
       else
         nil
       end
@@ -91,9 +115,11 @@ module Aws
       end
     end
 
-    def assume_role_with_profile(prof, region)
+    def assume_role_with_profile(options)
+      profile_name = determine_profile_name(options)
+      region = (options[:config] && options[:config].region)
       Aws.shared_config.assume_role_credentials_from_config(
-        profile: prof,
+        profile: profile_name,
         region: region,
         chain_config: @config
       )

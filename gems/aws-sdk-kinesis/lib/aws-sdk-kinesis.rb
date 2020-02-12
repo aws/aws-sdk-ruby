@@ -15,6 +15,8 @@ require_relative 'aws-sdk-kinesis/errors'
 require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
 require_relative 'aws-sdk-kinesis/customizations'
+require_relative 'aws-sdk-kinesis/async_client'
+require_relative 'aws-sdk-kinesis/event_streams'
 
 # This module provides support for Amazon Kinesis. This module is available in the
 # `aws-sdk-kinesis` gem.
@@ -43,6 +45,6 @@ require_relative 'aws-sdk-kinesis/customizations'
 # @service
 module Aws::Kinesis
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.20.0'
 
 end

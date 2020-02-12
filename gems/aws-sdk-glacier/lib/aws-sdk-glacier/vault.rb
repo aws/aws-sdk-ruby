@@ -24,6 +24,7 @@ module Aws::Glacier
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -53,7 +54,7 @@ module Aws::Glacier
       data[:creation_date]
     end
 
-    # The Universal Coordinated Time (UTC) date when Amazon Glacier
+    # The Universal Coordinated Time (UTC) date when Amazon S3 Glacier
     # completed the last vault inventory. This value should be a string in
     # the ISO 8601 date format, for example `2012-03-20T17:03:43.221Z`.
     # @return [Time]

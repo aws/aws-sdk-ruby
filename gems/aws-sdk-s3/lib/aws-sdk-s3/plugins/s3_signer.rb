@@ -17,6 +17,8 @@ module Aws
         end
 
         option(:sigv4_region) do |cfg|
+          raise Aws::Errors::MissingRegionError if cfg.region.nil?
+
           Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
@@ -113,7 +115,7 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response)
+            if wrong_sigv4_region?(response) && !fips_region?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -133,6 +135,10 @@ module Aws
             S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
           end
 
+          def fips_region?(resp)
+            resp.context.http_request.endpoint.host.include?('fips')
+          end
+
           def wrong_sigv4_region?(resp)
             resp.context.http_response.status_code == 400 &&
             (
@@ -144,6 +150,7 @@ module Aws
           def resign_with_new_region(context, actual_region)
             context.http_response.body.truncate(0)
             context.http_request.endpoint.host = S3Signer.new_hostname(context, actual_region)
+            context.metadata[:redirect_region] = actual_region
             Aws::Plugins::SignatureV4.apply_signature(
               context: context,
               signer: S3Signer.build_v4_signer(
@@ -192,15 +199,23 @@ module Aws
           end
 
           def new_hostname(context, region)
-            bucket = context.params[:bucket]
-            if region == 'us-east-1'
-              "#{bucket}.s3.amazonaws.com"
+            # Check to see if the bucket is actually an ARN and resolve it
+            # Otherwise it will retry with the ARN as the bucket name.
+            resolved_bucket, resolved_region, arn = BucketARN.resolve_arn!(
+              context.params[:bucket],
+              region,
+              context.config.s3_use_arn_region
+            )
+            uri = URI.parse(
+              Aws::Partitions::EndpointProvider.resolve(resolved_region, 's3')
+            )
+
+            if arn
+              BucketARN.resolve_url!(uri, arn).host
             else
-              endpoint = Aws::Partitions::EndpointProvider.resolve(region, 's3')
-              bucket + '.' + URI.parse(endpoint).host
+              resolved_bucket + '.' + uri.host
             end
           end
-
         end
       end
     end

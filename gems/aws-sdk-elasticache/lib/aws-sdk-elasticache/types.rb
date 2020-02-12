@@ -35,7 +35,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -63,10 +63,20 @@ module Aws::ElastiCache
     #   this list for the `CacheNodeType` parameter.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] scale_down_modifications
+    #   A string list, each element of which specifies a cache node type
+    #   which you can use to scale your cluster or replication group.
+    #
+    #   When scaling down on a Redis cluster or replication group using
+    #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
+    #   this list for the `CacheNodeType` parameter.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage AWS API Documentation
     #
     class AllowedNodeTypeModificationsMessage < Struct.new(
-      :scale_up_modifications)
+      :scale_up_modifications,
+      :scale_down_modifications)
       include Aws::Structure
     end
 
@@ -136,6 +146,66 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchApplyUpdateActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
+    #         service_update_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_group_ids
+    #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/BatchApplyUpdateActionMessage AWS API Documentation
+    #
+    class BatchApplyUpdateActionMessage < Struct.new(
+      :replication_group_ids,
+      :cache_cluster_ids,
+      :service_update_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchStopUpdateActionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
+    #         service_update_name: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_group_ids
+    #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/BatchStopUpdateActionMessage AWS API Documentation
+    #
+    class BatchStopUpdateActionMessage < Struct.new(
+      :replication_group_ids,
+      :cache_cluster_ids,
+      :service_update_name)
+      include Aws::Structure
+    end
+
     # Contains all of the attributes of a specific cluster.
     #
     # @!attribute [rw] cache_cluster_id
@@ -170,14 +240,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -185,6 +256,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -196,38 +270,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -353,6 +424,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -360,6 +435,9 @@ module Aws::ElastiCache
     #   cluster is created. To enable in-transit encryption on a cluster you
     #   must set `TransitEncryptionEnabled` to `true` when you create a
     #   cluster.
+    #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -371,6 +449,9 @@ module Aws::ElastiCache
     #   cluster is created. To enable at-rest encryption on a cluster you
     #   must set `AtRestEncryptionEnabled` to `true` when you create a
     #   cluster.
+    #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -401,6 +482,7 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
       :at_rest_encryption_enabled)
       include Aws::Structure
@@ -439,8 +521,8 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family associated with this
     #   cache engine.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -494,14 +576,15 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
-    #     **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #     `cache.t2.medium`
-    #
-    #     **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #     `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #     **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #     `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #     `cache.m5.24xlarge`
     #
     #     **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #     `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #     **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #     `cache.t2.medium`
     #
     #   * Previous generation: (not recommended)
     #
@@ -509,6 +592,9 @@ module Aws::ElastiCache
     #
     #     **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #     `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #     **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #     `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     # * Compute optimized:
     #
@@ -520,38 +606,35 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
-    #     **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #     `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #     **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #     `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #     `cache.r5.24xlarge`
+    #
+    #     **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #     `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #     `cache.r4.16xlarge`
     #
     #   * Previous generation: (not recommended)
     #
     #     **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #     `cache.m2.4xlarge`
     #
-    # **Notes:**
+    #     **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #     `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    # * All T2 instances are created in an Amazon Virtual Private Cloud
-    #   (Amazon VPC).
+    # **Additional node type info**
     #
-    # * Redis (cluster mode disabled): Redis backup/restore is not supported
-    #   on T1 and T2 instances.
+    # * All current generation instance types are created in Amazon VPC by
+    #   default.
     #
-    # * Redis (cluster mode enabled): Backup/restore is not supported on T1
+    # * Redis append-only files (AOF) are not supported for T1 or T2
     #   instances.
     #
-    # * Redis Append-only files (AOF) functionality is not supported for T1
-    #   or T2 instances.
+    # * Redis Multi-AZ with automatic failover is not supported on T1
+    #   instances.
     #
-    # For a complete listing of node types and specifications, see [Amazon
-    # ElastiCache Product Features and Details][1] and either [Cache Node
-    # Type-Specific Parameters for Memcached][2] or [Cache Node
-    # Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    # [1]: http://aws.amazon.com/elasticache/details
-    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    # * Redis configuration variables `appendonly` and `appendfsync` are not
+    #   supported on Redis version 2.8.22 and later.
     #
     # @!attribute [rw] cache_node_id
     #   The cache node identifier. A node ID is a numeric identifier (0001,
@@ -646,7 +729,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificParameter AWS API Documentation
@@ -682,6 +765,55 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The status of the service update on the cache node
+    #
+    # @!attribute [rw] cache_node_id
+    #   The node ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_status
+    #   The update status of the node
+    #   @return [String]
+    #
+    # @!attribute [rw] node_deletion_date
+    #   The deletion date of the node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_start_date
+    #   The start date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_end_date
+    #   The end date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_initiated_by
+    #   Reflects whether the update was initiated by the customer or
+    #   automatically applied
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_initiated_date
+    #   The date when the update is triggered
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_status_modified_date
+    #   The date when the NodeUpdateStatus was last modified&gt;
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeUpdateStatus AWS API Documentation
+    #
+    class CacheNodeUpdateStatus < Struct.new(
+      :cache_node_id,
+      :node_update_status,
+      :node_deletion_date,
+      :node_update_start_date,
+      :node_update_end_date,
+      :node_update_initiated_by,
+      :node_update_initiated_date,
+      :node_update_status_modified_date)
+      include Aws::Structure
+    end
+
     # Represents the output of a `CreateCacheParameterGroup` operation.
     #
     # @!attribute [rw] cache_parameter_group_name
@@ -692,8 +824,8 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that this cache
     #   parameter group is compatible with.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -922,6 +1054,105 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CompleteMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data is being migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Forces the migration to stop without ensuring that data is in sync.
+    #   It is recommended to use this option only to abort the migration and
+    #   not recommended when application wants to continue migration to
+    #   ElastiCache.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationMessage AWS API Documentation
+    #
+    class CompleteMigrationMessage < Struct.new(
+      :replication_group_id,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CompleteMigrationResponse AWS API Documentation
+    #
+    class CompleteMigrationResponse < Struct.new(
+      :replication_group)
+      include Aws::Structure
+    end
+
+    # Node group (shard) configuration options when adding or removing
+    # replicas. Each node group (shard) configuration has the following
+    # members: NodeGroupId, NewReplicaCount, and PreferredAvailabilityZones.
+    #
+    # @note When making an API call, you may pass ConfigureShard
+    #   data as a hash:
+    #
+    #       {
+    #         node_group_id: "AllowedNodeGroupId", # required
+    #         new_replica_count: 1, # required
+    #         preferred_availability_zones: ["String"],
+    #       }
+    #
+    # @!attribute [rw] node_group_id
+    #   The 4-digit id for the node group you are configuring. For Redis
+    #   (cluster mode disabled) replication groups, the node group id is
+    #   always 0001. To find a Redis (cluster mode enabled)'s node group's
+    #   (shard's) id, see [Finding a Shard's Id][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/shard-find-id.html
+    #   @return [String]
+    #
+    # @!attribute [rw] new_replica_count
+    #   The number of replicas you want in this node group at the end of
+    #   this operation. The maximum value for `NewReplicaCount` is 5. The
+    #   minimum value depends upon the type of Redis replication group you
+    #   are working with.
+    #
+    #   The minimum number of replicas in a shard or replication group is:
+    #
+    #   * Redis (cluster mode disabled)
+    #
+    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #
+    #     * If Multi-AZ with Automatic Failover is not enable: 0
+    #
+    #   * Redis (cluster mode enabled): 0 (though you will not be able to
+    #     failover to a replica if your primary node fails)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] preferred_availability_zones
+    #   A list of `PreferredAvailabilityZone` strings that specify which
+    #   availability zones the replication group's nodes are to be in. The
+    #   nummber of `PreferredAvailabilityZone` values must equal the value
+    #   of `NewReplicaCount` plus 1 to account for the primary node. If this
+    #   member of `ReplicaConfiguration` is omitted, ElastiCache for Redis
+    #   selects the availability zone for each of the replicas.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ConfigureShard AWS API Documentation
+    #
+    class ConfigureShard < Struct.new(
+      :node_group_id,
+      :new_replica_count,
+      :preferred_availability_zones)
+      include Aws::Structure
+    end
+
     # Represents the input of a `CopySnapshotMessage` operation.
     #
     # @note When making an API call, you may pass CopySnapshotMessage
@@ -931,6 +1162,7 @@ module Aws::ElastiCache
     #         source_snapshot_name: "String", # required
     #         target_snapshot_name: "String", # required
     #         target_bucket: "String",
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] source_snapshot_name
@@ -958,8 +1190,12 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access
+    #   [2]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the target snapshot.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotMessage AWS API Documentation
@@ -967,7 +1203,8 @@ module Aws::ElastiCache
     class CopySnapshotMessage < Struct.new(
       :source_snapshot_name,
       :target_snapshot_name,
-      :target_bucket)
+      :target_bucket,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -1025,7 +1262,7 @@ module Aws::ElastiCache
     #
     #   **Constraints:**
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or
+    #   * A name must contain from 1 to 50 alphanumeric characters or
     #     hyphens.
     #
     #   * The first character must be a letter.
@@ -1035,10 +1272,6 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] replication_group_id
-    #   Due to current limitations on Redis (cluster mode disabled), this
-    #   operation or parameter is not supported on Redis (cluster mode
-    #   enabled) replication groups.
-    #
     #   The ID of the replication group to which this cluster should belong.
     #   If this parameter is specified, the cluster is added to the
     #   specified replication group as a read replica; otherwise, the
@@ -1126,14 +1359,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -1141,6 +1375,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -1152,38 +1389,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1205,7 +1439,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_name
@@ -1227,7 +1461,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
     #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
@@ -1330,7 +1564,8 @@ module Aws::ElastiCache
     #
     #    </note>
     #
-    #   Default: 0 (i.e., automatic backups are disabled for this cluster).
+    #   Default: 0 (i.e., automatic backups are disabled for this cache
+    #   cluster).
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_window
@@ -1351,14 +1586,6 @@ module Aws::ElastiCache
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
     #
-    #   This parameter is valid only if:
-    #
-    #   * The parameter `TransitEncryptionEnabled` was set to `true` when
-    #     the cluster was created.
-    #
-    #   * The line `requirepass` was added to the database configuration
-    #     file.
-    #
     #   Password constraints:
     #
     #   * Must be only printable ASCII characters.
@@ -1366,8 +1593,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -1436,8 +1664,8 @@ module Aws::ElastiCache
     #   The name of the cache parameter group family that the cache
     #   parameter group can be used with.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1582,6 +1810,7 @@ module Aws::ElastiCache
     #         replicas_per_node_group: 1,
     #         node_group_configuration: [
     #           {
+    #             node_group_id: "AllowedNodeGroupId",
     #             slots: "String",
     #             replica_count: 1,
     #             primary_availability_zone: "String",
@@ -1612,6 +1841,7 @@ module Aws::ElastiCache
     #         auth_token: "String",
     #         transit_encryption_enabled: false,
     #         at_rest_encryption_enabled: false,
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -1620,7 +1850,7 @@ module Aws::ElastiCache
     #
     #   Constraints:
     #
-    #   * A name must contain from 1 to 20 alphanumeric characters or
+    #   * A name must contain from 1 to 40 alphanumeric characters or
     #     hyphens.
     #
     #   * The first character must be a letter.
@@ -1659,7 +1889,7 @@ module Aws::ElastiCache
     #
     #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
@@ -1675,7 +1905,7 @@ module Aws::ElastiCache
     #   omit this parameter (it will default to 1), or you can explicitly
     #   set it to a value between 2 and 6.
     #
-    #   The maximum permitted value for `NumCacheClusters` is 6 (primary
+    #   The maximum permitted value for `NumCacheClusters` is 6 (1 primary
     #   plus 5 replicas).
     #   @return [Integer]
     #
@@ -1716,13 +1946,17 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] node_group_configuration
     #   A list of node group (shard) configuration options. Each node group
-    #   (shard) configuration has the following: Slots,
-    #   PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount.
+    #   (shard) configuration has the following members:
+    #   `PrimaryAvailabilityZone`, `ReplicaAvailabilityZones`,
+    #   `ReplicaCount`, and `Slots`.
     #
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
     #   to individually configure each node group (shard), or you can omit
-    #   this parameter.
+    #   this parameter. However, when seeding a Redis (cluster mode enabled)
+    #   cluster from a S3 rdb file, you must configure each node group
+    #   (shard) using this parameter because you must specify the slots for
+    #   each node group.
     #   @return [Array<Types::NodeGroupConfiguration>]
     #
     # @!attribute [rw] cache_node_type
@@ -1738,14 +1972,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -1753,6 +1988,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -1764,38 +2002,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -1817,13 +2052,19 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #   @return [String]
     #
     # @!attribute [rw] cache_parameter_group_name
     #   The name of the parameter group to associate with this replication
     #   group. If this argument is omitted, the default cache parameter
     #   group for the specified engine is used.
+    #
+    #   <note markdown="1"> If you are restoring to an engine version that is different than the
+    #   original, you must specify the default version of that version. For
+    #   example, `CacheParameterGroupName=default.redis4.0`.
+    #
+    #    </note>
     #
     #   If you are running Redis version 3.2.4 or later, only one node group
     #   (shard), and want to use a default parameter group, we recommend
@@ -1846,7 +2087,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html
     #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
@@ -1863,9 +2104,11 @@ module Aws::ElastiCache
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A list of cost allocation tags to be added to this resource. A tag
-    #   is a key-value pair. A tag key does not have to be accompanied by a
-    #   tag value.
+    #   A list of cost allocation tags to be added to this resource. Tags
+    #   are comma-separated key,value pairs (e.g. Key=`myKey`,
+    #   Value=`myKeyValue`. You can include multiple tags as shown
+    #   following: Key=`myKey`, Value=`myKeyValue` Key=`mySecondKey`,
+    #   Value=`mySecondKeyValue`.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] snapshot_arns
@@ -1958,13 +2201,11 @@ module Aws::ElastiCache
     #   **Reserved parameter.** The password used to access a password
     #   protected server.
     #
-    #   This parameter is valid only if:
+    #   `AuthToken` can be specified only on replication groups where
+    #   `TransitEncryptionEnabled` is `true`.
     #
-    #   * The parameter `TransitEncryptionEnabled` was set to `true` when
-    #     the cluster was created.
-    #
-    #   * The line `requirepass` was added to the database configuration
-    #     file.
+    #   For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
+    #   `true`, an `AuthToken`, and a `CacheSubnetGroup`.
     #
     #   Password constraints:
     #
@@ -1973,8 +2214,9 @@ module Aws::ElastiCache
     #   * Must be at least 16 characters and no more than 128 characters in
     #     length.
     #
-    #   * Cannot contain any of the following characters: '/', '"', or
-    #     '@'.
+    #   * The only permitted printable special characters are !, &amp;, #,
+    #     $, ^, &lt;, &gt;, and -. Other printable special characters cannot
+    #     be used in the AUTH token.
     #
     #   For more information, see [AUTH password][1] at
     #   http://redis.io/commands/AUTH.
@@ -1993,13 +2235,19 @@ module Aws::ElastiCache
     #   cluster.
     #
     #   This parameter is valid only if the `Engine` parameter is `redis`,
-    #   the `EngineVersion` parameter is `3.2.4` or later, and the cluster
-    #   is being created in an Amazon VPC.
+    #   the `EngineVersion` parameter is `3.2.6`, `4.x` or later, and the
+    #   cluster is being created in an Amazon VPC.
     #
     #   If you enable in-transit encryption, you must also specify a value
     #   for `CacheSubnetGroup`.
     #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
+    #
     #   Default: `false`
+    #
+    #   For HIPAA compliance, you must specify `TransitEncryptionEnabled` as
+    #   `true`, an `AuthToken`, and a `CacheSubnetGroup`.
     #   @return [Boolean]
     #
     # @!attribute [rw] at_rest_encryption_enabled
@@ -2010,13 +2258,15 @@ module Aws::ElastiCache
     #   replication group you must set `AtRestEncryptionEnabled` to `true`
     #   when you create the replication group.
     #
-    #   <note markdown="1"> This parameter is valid only if the `Engine` parameter is `redis`
-    #   and the cluster is being created in an Amazon VPC.
-    #
-    #    </note>
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the disk on the cluster.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
@@ -2048,7 +2298,8 @@ module Aws::ElastiCache
       :snapshot_window,
       :auth_token,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -2073,6 +2324,7 @@ module Aws::ElastiCache
     #         replication_group_id: "String",
     #         cache_cluster_id: "String",
     #         snapshot_name: "String", # required
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -2089,12 +2341,17 @@ module Aws::ElastiCache
     #   A name for the snapshot being created.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotMessage AWS API Documentation
     #
     class CreateSnapshotMessage < Struct.new(
       :replication_group_id,
       :cache_cluster_id,
-      :snapshot_name)
+      :snapshot_name,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -2107,6 +2364,113 @@ module Aws::ElastiCache
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
+      include Aws::Structure
+    end
+
+    # The endpoint from which data should be migrated.
+    #
+    # @note When making an API call, you may pass CustomerNodeEndpoint
+    #   data as a hash:
+    #
+    #       {
+    #         address: "String",
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] address
+    #   The address of the node endpoint
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port of the node endpoint
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CustomerNodeEndpoint AWS API Documentation
+    #
+    class CustomerNodeEndpoint < Struct.new(
+      :address,
+      :port)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DecreaseReplicaCountMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         new_replica_count: 1,
+    #         replica_configuration: [
+    #           {
+    #             node_group_id: "AllowedNodeGroupId", # required
+    #             new_replica_count: 1, # required
+    #             preferred_availability_zones: ["String"],
+    #           },
+    #         ],
+    #         replicas_to_remove: ["String"],
+    #         apply_immediately: false, # required
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The id of the replication group from which you want to remove
+    #   replica nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_replica_count
+    #   The number of read replica nodes you want at the completion of this
+    #   operation. For Redis (cluster mode disabled) replication groups,
+    #   this is the number of replica nodes in the replication group. For
+    #   Redis (cluster mode enabled) replication groups, this is the number
+    #   of replica nodes in each of the replication group's node groups.
+    #
+    #   The minimum number of replicas in a shard or replication group is:
+    #
+    #   * Redis (cluster mode disabled)
+    #
+    #     * If Multi-AZ with Automatic Failover is enabled: 1
+    #
+    #     * If Multi-AZ with Automatic Failover is not enabled: 0
+    #
+    #   * Redis (cluster mode enabled): 0 (though you will not be able to
+    #     failover to a replica if your primary node fails)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replica_configuration
+    #   A list of `ConfigureShard` objects that can be used to configure
+    #   each shard in a Redis (cluster mode enabled) replication group. The
+    #   `ConfigureShard` has three members: `NewReplicaCount`,
+    #   `NodeGroupId`, and `PreferredAvailabilityZones`.
+    #   @return [Array<Types::ConfigureShard>]
+    #
+    # @!attribute [rw] replicas_to_remove
+    #   A list of the node ids to remove from the replication group or node
+    #   group (shard).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] apply_immediately
+    #   If `True`, the number of replica nodes is decreased immediately.
+    #   `ApplyImmediately=False` is not currently supported.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCountMessage AWS API Documentation
+    #
+    class DecreaseReplicaCountMessage < Struct.new(
+      :replication_group_id,
+      :new_replica_count,
+      :replica_configuration,
+      :replicas_to_remove,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DecreaseReplicaCountResult AWS API Documentation
+    #
+    class DecreaseReplicaCountResult < Struct.new(
+      :replication_group)
       include Aws::Structure
     end
 
@@ -2392,8 +2756,8 @@ module Aws::ElastiCache
     #   The name of a specific cache parameter group family to return
     #   details for.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #
     #   Constraints:
     #
@@ -2629,8 +2993,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_parameter_group_family
     #   The name of the cache parameter group family.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #   @return [String]
     #
     # @!attribute [rw] max_records
@@ -2833,14 +3197,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -2848,6 +3213,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -2859,38 +3227,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -2982,14 +3347,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -2997,6 +3363,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -3008,38 +3377,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -3089,6 +3455,45 @@ module Aws::ElastiCache
       :duration,
       :product_description,
       :offering_type,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeServiceUpdatesMessage
+    #   data as a hash:
+    #
+    #       {
+    #         service_update_name: "String",
+    #         service_update_status: ["available"], # accepts available, cancelled, expired
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_status
+    #   The status of the service update
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServiceUpdatesMessage AWS API Documentation
+    #
+    class DescribeServiceUpdatesMessage < Struct.new(
+      :service_update_name,
+      :service_update_status,
       :max_records,
       :marker)
       include Aws::Structure
@@ -3190,6 +3595,86 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeUpdateActionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         service_update_name: "String",
+    #         replication_group_ids: ["String"],
+    #         cache_cluster_ids: ["String"],
+    #         engine: "String",
+    #         service_update_status: ["available"], # accepts available, cancelled, expired
+    #         service_update_time_range: {
+    #           start_time: Time.now,
+    #           end_time: Time.now,
+    #         },
+    #         update_action_status: ["not-applied"], # accepts not-applied, waiting-to-start, in-progress, stopping, stopped, complete
+    #         show_node_level_update_status: false,
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group_ids
+    #   The replication group IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cache_cluster_ids
+    #   The cache cluster IDs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_status
+    #   The status of the service update
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_update_time_range
+    #   The range of time specified to search for service updates that are
+    #   in available status
+    #   @return [Types::TimeRangeFilter]
+    #
+    # @!attribute [rw] update_action_status
+    #   The status of the update action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] show_node_level_update_status
+    #   Dictates whether to include node level update status in the response
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUpdateActionsMessage AWS API Documentation
+    #
+    class DescribeUpdateActionsMessage < Struct.new(
+      :service_update_name,
+      :replication_group_ids,
+      :cache_cluster_ids,
+      :engine,
+      :service_update_status,
+      :service_update_time_range,
+      :update_action_status,
+      :show_node_level_update_status,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # Provides ownership and status information for an Amazon EC2 security
     # group.
     #
@@ -3240,8 +3725,8 @@ module Aws::ElastiCache
     #   Specifies the name of the cache parameter group family to which the
     #   engine default parameters apply.
     #
-    #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
-    #   `redis3.2`
+    #   Valid values are: `memcached1.4` \| `memcached1.5` \| `redis2.6` \|
+    #   `redis2.8` \| `redis3.2` \| `redis4.0` \| `redis5.0` \|
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -3320,6 +3805,96 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass IncreaseReplicaCountMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         new_replica_count: 1,
+    #         replica_configuration: [
+    #           {
+    #             node_group_id: "AllowedNodeGroupId", # required
+    #             new_replica_count: 1, # required
+    #             preferred_availability_zones: ["String"],
+    #           },
+    #         ],
+    #         apply_immediately: false, # required
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The id of the replication group to which you want to add replica
+    #   nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_replica_count
+    #   The number of read replica nodes you want at the completion of this
+    #   operation. For Redis (cluster mode disabled) replication groups,
+    #   this is the number of replica nodes in the replication group. For
+    #   Redis (cluster mode enabled) replication groups, this is the number
+    #   of replica nodes in each of the replication group's node groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replica_configuration
+    #   A list of `ConfigureShard` objects that can be used to configure
+    #   each shard in a Redis (cluster mode enabled) replication group. The
+    #   `ConfigureShard` has three members: `NewReplicaCount`,
+    #   `NodeGroupId`, and `PreferredAvailabilityZones`.
+    #   @return [Array<Types::ConfigureShard>]
+    #
+    # @!attribute [rw] apply_immediately
+    #   If `True`, the number of replica nodes is increased immediately.
+    #   `ApplyImmediately=False` is not currently supported.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCountMessage AWS API Documentation
+    #
+    class IncreaseReplicaCountMessage < Struct.new(
+      :replication_group_id,
+      :new_replica_count,
+      :replica_configuration,
+      :apply_immediately)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/IncreaseReplicaCountResult AWS API Documentation
+    #
+    class IncreaseReplicaCountResult < Struct.new(
+      :replication_group)
+      include Aws::Structure
+    end
+
+    # Two or more incompatible parameters were specified.
+    #
+    # @!attribute [rw] message
+    #   Two or more parameters that must not be used together were used
+    #   together.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidParameterCombinationException AWS API Documentation
+    #
+    class InvalidParameterCombinationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The value for a parameter is invalid.
+    #
+    # @!attribute [rw] message
+    #   A parameter value is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidParameterValueException AWS API Documentation
+    #
+    class InvalidParameterValueException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input parameters for the `ListAllowedNodeTypeModifications`
     # operation.
     #
@@ -3379,7 +3954,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResourceMessage AWS API Documentation
@@ -3412,6 +3987,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -3488,16 +4065,9 @@ module Aws::ElastiCache
     #   Availability Zone.
     #
     #    Only newly created nodes are located in different Availability
-    #   Zones. For instructions on how to move existing Memcached nodes to
-    #   different Availability Zones, see the **Availability Zone
-    #   Considerations** section of [Cache Node Considerations for
-    #   Memcached][1].
+    #   Zones.
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
     #   @return [String]
     #
     # @!attribute [rw] new_availability_zones
@@ -3581,7 +4151,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/mem-ug/CacheNodes.SupportedTypes.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] cache_security_group_names
@@ -3681,7 +4251,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -3709,6 +4279,42 @@ module Aws::ElastiCache
     #   A valid cache node type that you want to scale this cluster up to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
     #
     class ModifyCacheClusterMessage < Struct.new(
@@ -3728,7 +4334,9 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :snapshot_retention_limit,
       :snapshot_window,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -3841,6 +4449,7 @@ module Aws::ElastiCache
     #         primary_cluster_id: "String",
     #         snapshotting_cluster_id: "String",
     #         automatic_failover_enabled: false,
+    #         node_group_id: "String",
     #         cache_security_group_names: ["String"],
     #         security_group_ids: ["String"],
     #         preferred_maintenance_window: "String",
@@ -3853,7 +4462,8 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
-    #         node_group_id: "String",
+    #         auth_token: "String",
+    #         auth_token_update_strategy: "SET", # accepts SET, ROTATE
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -3889,10 +4499,14 @@ module Aws::ElastiCache
     #
     #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] node_group_id
+    #   Deprecated. This parameter is not used.
+    #   @return [String]
     #
     # @!attribute [rw] cache_security_group_names
     #   A list of cache security group names to authorize for the clusters
@@ -3992,7 +4606,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -4025,8 +4639,40 @@ module Aws::ElastiCache
     #   group to.
     #   @return [String]
     #
-    # @!attribute [rw] node_group_id
-    #   The name of the Node Group (called shard in the console).
+    # @!attribute [rw] auth_token
+    #   Reserved parameter. The password used to access a password protected
+    #   server. This parameter must be specified with the
+    #   `auth-token-update-strategy ` parameter. Password constraints:
+    #
+    #   * Must be only printable ASCII characters
+    #
+    #   * Must be at least 16 characters and no more than 128 characters in
+    #     length
+    #
+    #   * Cannot contain any of the following characters: '/', '"', or
+    #     '@', '%'
+    #
+    #   For more information, see AUTH password at [AUTH][1].
+    #
+    #
+    #
+    #   [1]: http://redis.io/commands/AUTH
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_token_update_strategy
+    #   Specifies the strategy to use to update the AUTH token. This
+    #   parameter must be specified with the `auth-token` parameter.
+    #   Possible values:
+    #
+    #   * Rotate
+    #
+    #   * Set
+    #
+    #   For more information, see [Authenticating Users with Redis AUTH][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
@@ -4037,6 +4683,7 @@ module Aws::ElastiCache
       :primary_cluster_id,
       :snapshotting_cluster_id,
       :automatic_failover_enabled,
+      :node_group_id,
       :cache_security_group_names,
       :security_group_ids,
       :preferred_maintenance_window,
@@ -4049,7 +4696,8 @@ module Aws::ElastiCache
       :snapshot_retention_limit,
       :snapshot_window,
       :cache_node_type,
-      :node_group_id)
+      :auth_token,
+      :auth_token_update_strategy)
       include Aws::Structure
     end
 
@@ -4077,10 +4725,12 @@ module Aws::ElastiCache
     #         apply_immediately: false, # required
     #         resharding_configuration: [
     #           {
+    #             node_group_id: "AllowedNodeGroupId",
     #             preferred_availability_zones: ["String"],
     #           },
     #         ],
-    #         node_groups_to_remove: ["String"],
+    #         node_groups_to_remove: ["AllowedNodeGroupId"],
+    #         node_groups_to_retain: ["AllowedNodeGroupId"],
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -4114,8 +4764,22 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] node_groups_to_remove
     #   If the value of `NodeGroupCount` is less than the current number of
-    #   node groups (shards), `NodeGroupsToRemove` is a required list of
-    #   node group ids to remove from the cluster.
+    #   node groups (shards), then either `NodeGroupsToRemove` or
+    #   `NodeGroupsToRetain` is required. `NodeGroupsToRemove` is a list of
+    #   `NodeGroupId`s to remove from the cluster.
+    #
+    #   ElastiCache for Redis will attempt to remove all node groups listed
+    #   by `NodeGroupsToRemove` from the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] node_groups_to_retain
+    #   If the value of `NodeGroupCount` is less than the current number of
+    #   node groups (shards), then either `NodeGroupsToRemove` or
+    #   `NodeGroupsToRetain` is required. `NodeGroupsToRetain` is a list of
+    #   `NodeGroupId`s to retain in the cluster.
+    #
+    #   ElastiCache for Redis will attempt to remove all node groups except
+    #   those listed by `NodeGroupsToRetain` from the cluster.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupShardConfigurationMessage AWS API Documentation
@@ -4125,7 +4789,8 @@ module Aws::ElastiCache
       :node_group_count,
       :apply_immediately,
       :resharding_configuration,
-      :node_groups_to_remove)
+      :node_groups_to_remove,
+      :node_groups_to_retain)
       include Aws::Structure
     end
 
@@ -4149,8 +4814,8 @@ module Aws::ElastiCache
     #   The identifier for the node group (shard). A Redis (cluster mode
     #   disabled) replication group contains only 1 node group; therefore,
     #   the node group ID is 0001. A Redis (cluster mode enabled)
-    #   replication group contains 1 to 15 node groups numbered 0001 to
-    #   0015.
+    #   replication group contains 1 to 90 node groups numbered 0001 to
+    #   0090. Optionally, the user can provide the id for a node group.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -4160,6 +4825,10 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] primary_endpoint
     #   The endpoint of the primary node in this node group (shard).
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] reader_endpoint
+    #   The endpoint of the replica nodes in this node group (shard).
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] slots
@@ -4177,6 +4846,7 @@ module Aws::ElastiCache
       :node_group_id,
       :status,
       :primary_endpoint,
+      :reader_endpoint,
       :slots,
       :node_group_members)
       include Aws::Structure
@@ -4190,11 +4860,17 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
+    #         node_group_id: "AllowedNodeGroupId",
     #         slots: "String",
     #         replica_count: 1,
     #         primary_availability_zone: "String",
     #         replica_availability_zones: ["String"],
     #       }
+    #
+    # @!attribute [rw] node_group_id
+    #   Either the ElastiCache for Redis supplied 4-digit id or a user
+    #   supplied id for the node group these configuration values apply to.
+    #   @return [String]
     #
     # @!attribute [rw] slots
     #   A string that specifies the keyspace for a particular node group.
@@ -4222,6 +4898,7 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupConfiguration AWS API Documentation
     #
     class NodeGroupConfiguration < Struct.new(
+      :node_group_id,
       :slots,
       :replica_count,
       :primary_availability_zone,
@@ -4241,8 +4918,9 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] read_endpoint
-    #   Represents the information required for client programs to connect
-    #   to a cache node.
+    #   The information required for client programs to connect to a node
+    #   for read operations. The read endpoint is only applicable on Redis
+    #   (cluster mode disabled) clusters.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] preferred_availability_zone
@@ -4251,7 +4929,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] current_role
     #   The role that is currently assigned to the node - `primary` or
-    #   `replica`.
+    #   `replica`. This member is only applicable for Redis (cluster mode
+    #   disabled) replication groups.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupMember AWS API Documentation
@@ -4262,6 +4941,78 @@ module Aws::ElastiCache
       :read_endpoint,
       :preferred_availability_zone,
       :current_role)
+      include Aws::Structure
+    end
+
+    # The status of the service update on the node group member
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The cache cluster ID
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_node_id
+    #   The node ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_status
+    #   The update status of the node
+    #   @return [String]
+    #
+    # @!attribute [rw] node_deletion_date
+    #   The deletion date of the node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_start_date
+    #   The start date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_end_date
+    #   The end date of the update for a node
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_initiated_by
+    #   Reflects whether the update was initiated by the customer or
+    #   automatically applied
+    #   @return [String]
+    #
+    # @!attribute [rw] node_update_initiated_date
+    #   The date when the update is triggered
+    #   @return [Time]
+    #
+    # @!attribute [rw] node_update_status_modified_date
+    #   The date when the NodeUpdateStatus was last modified
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupMemberUpdateStatus AWS API Documentation
+    #
+    class NodeGroupMemberUpdateStatus < Struct.new(
+      :cache_cluster_id,
+      :cache_node_id,
+      :node_update_status,
+      :node_deletion_date,
+      :node_update_start_date,
+      :node_update_end_date,
+      :node_update_initiated_by,
+      :node_update_initiated_date,
+      :node_update_status_modified_date)
+      include Aws::Structure
+    end
+
+    # The status of the service update on the node group
+    #
+    # @!attribute [rw] node_group_id
+    #   The ID of the node group
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_member_update_status
+    #   The status of the service update on the node group member
+    #   @return [Array<Types::NodeGroupMemberUpdateStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupUpdateStatus AWS API Documentation
+    #
+    class NodeGroupUpdateStatus < Struct.new(
+      :node_group_id,
+      :node_group_member_update_status)
       include Aws::Structure
     end
 
@@ -4375,7 +5126,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Parameter AWS API Documentation
@@ -4432,8 +5183,8 @@ module Aws::ElastiCache
     #
     # @!attribute [rw] cache_node_ids_to_remove
     #   A list of cache node IDs that are being removed (or will be removed)
-    #   from the cluster. A node ID is a numeric identifier (0001, 0002,
-    #   etc.).
+    #   from the cluster. A node ID is a 4-digit numeric identifier (0001,
+    #   0002, etc.).
     #   @return [Array<String>]
     #
     # @!attribute [rw] engine_version
@@ -4445,13 +5196,47 @@ module Aws::ElastiCache
     #   to.
     #   @return [String]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
       :num_cache_nodes,
       :cache_node_ids_to_remove,
       :engine_version,
-      :cache_node_type)
+      :cache_node_type,
+      :auth_token_status)
+      include Aws::Structure
+    end
+
+    # Update action that has been processed for the corresponding apply/stop
+    # request
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] update_action_status
+    #   The status of the update action on the Redis cluster
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ProcessedUpdateAction AWS API Documentation
+    #
+    class ProcessedUpdateAction < Struct.new(
+      :replication_group_id,
+      :cache_cluster_id,
+      :service_update_name,
+      :update_action_status)
       include Aws::Structure
     end
 
@@ -4593,7 +5378,7 @@ module Aws::ElastiCache
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -4631,8 +5416,8 @@ module Aws::ElastiCache
     #   @return [Types::ReplicationGroupPendingModifiedValues]
     #
     # @!attribute [rw] member_clusters
-    #   The identifiers of all the nodes that are part of this replication
-    #   group.
+    #   The names of all the cache clusters that are part of this
+    #   replication group.
     #   @return [Array<String>]
     #
     # @!attribute [rw] node_groups
@@ -4656,7 +5441,7 @@ module Aws::ElastiCache
     #
     #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
@@ -4710,6 +5495,10 @@ module Aws::ElastiCache
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] auth_token_last_modified_date
+    #   The date the auth token was last modified
+    #   @return [Time]
+    #
     # @!attribute [rw] transit_encryption_enabled
     #   A flag that enables in-transit encryption when set to `true`.
     #
@@ -4717,6 +5506,9 @@ module Aws::ElastiCache
     #   cluster is created. To enable in-transit encryption on a cluster you
     #   must set `TransitEncryptionEnabled` to `true` when you create a
     #   cluster.
+    #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
     #
     #   Default: `false`
     #   @return [Boolean]
@@ -4729,8 +5521,15 @@ module Aws::ElastiCache
     #   must set `AtRestEncryptionEnabled` to `true` when you create a
     #   cluster.
     #
+    #   **Required:** Only available when creating a replication group in an
+    #   Amazon VPC using redis version `3.2.6`, `4.x` or later.
+    #
     #   Default: `false`
     #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the disk in the cluster.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
@@ -4749,8 +5548,10 @@ module Aws::ElastiCache
       :cluster_enabled,
       :cache_node_type,
       :auth_token_enabled,
+      :auth_token_last_modified_date,
       :transit_encryption_enabled,
-      :at_rest_encryption_enabled)
+      :at_rest_encryption_enabled,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -4791,7 +5592,7 @@ module Aws::ElastiCache
     #
     #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
@@ -4800,12 +5601,17 @@ module Aws::ElastiCache
     #   The status of an online resharding operation.
     #   @return [Types::ReshardingStatus]
     #
+    # @!attribute [rw] auth_token_status
+    #   The auth token status
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
       :automatic_failover_status,
-      :resharding)
+      :resharding,
+      :auth_token_status)
       include Aws::Structure
     end
 
@@ -4832,14 +5638,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -4847,6 +5654,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -4858,38 +5668,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -4928,6 +5735,13 @@ module Aws::ElastiCache
     #   The recurring price charged to run this reserved cache node.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @!attribute [rw] reservation_arn
+    #   The Amazon Resource Name (ARN) of the reserved cache node.
+    #
+    #   Example:
+    #   `arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNode AWS API Documentation
     #
     class ReservedCacheNode < Struct.new(
@@ -4942,7 +5756,8 @@ module Aws::ElastiCache
       :product_description,
       :offering_type,
       :state,
-      :recurring_charges)
+      :recurring_charges,
+      :reservation_arn)
       include Aws::Structure
     end
 
@@ -4983,14 +5798,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -4998,6 +5814,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -5009,38 +5828,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] duration
@@ -5152,8 +5968,14 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
+    #         node_group_id: "AllowedNodeGroupId",
     #         preferred_availability_zones: ["String"],
     #       }
+    #
+    # @!attribute [rw] node_group_id
+    #   Either the ElastiCache for Redis supplied 4-digit id or a user
+    #   supplied id for the node group these configuration values apply to.
+    #   @return [String]
     #
     # @!attribute [rw] preferred_availability_zones
     #   A list of preferred availability zones for the nodes in this
@@ -5163,6 +5985,7 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReshardingConfiguration AWS API Documentation
     #
     class ReshardingConfiguration < Struct.new(
+      :node_group_id,
       :preferred_availability_zones)
       include Aws::Structure
     end
@@ -5251,6 +6074,102 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # An update that you can apply to your Redis clusters.
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_release_date
+    #   The date when the service update is initially available
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_update_end_date
+    #   The date after which the service update is no longer available
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_update_severity
+    #   The severity of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_recommended_apply_by_date
+    #   The recommendend date to apply the service update in order to ensure
+    #   compliance. For information on compliance, see [Self-Service
+    #   Security Updates for Compliance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_update_status
+    #   The status of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_description
+    #   Provides details of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_type
+    #   Reflects the nature of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The Elasticache engine version to which the update applies. Either
+    #   Redis or Memcached engine version
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_update_after_recommended_apply_by_date
+    #   Indicates whether the service update will be automatically applied
+    #   once the recommended apply-by date has expired.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] estimated_update_time
+    #   The estimated length of time the service update will take
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceUpdate AWS API Documentation
+    #
+    class ServiceUpdate < Struct.new(
+      :service_update_name,
+      :service_update_release_date,
+      :service_update_end_date,
+      :service_update_severity,
+      :service_update_recommended_apply_by_date,
+      :service_update_status,
+      :service_update_description,
+      :service_update_type,
+      :engine,
+      :engine_version,
+      :auto_update_after_recommended_apply_by_date,
+      :estimated_update_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_updates
+    #   A list of service updates
+    #   @return [Array<Types::ServiceUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceUpdatesMessage AWS API Documentation
+    #
+    class ServiceUpdatesMessage < Struct.new(
+      :marker,
+      :service_updates)
+      include Aws::Structure
+    end
+
     # Represents the progress of an online resharding operation.
     #
     # @!attribute [rw] progress_percentage
@@ -5308,14 +6227,15 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
-    #       `cache.t2.medium`
-    #
-    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
-    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+    #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
+    #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
+    #       `cache.m5.24xlarge`
     #
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
+    #
+    #       **T2 node types:** `cache.t2.micro`, `cache.t2.small`,
+    #       `cache.t2.medium`
     #
     #     * Previous generation: (not recommended)
     #
@@ -5323,6 +6243,9 @@ module Aws::ElastiCache
     #
     #       **M1 node types:** `cache.m1.small`, `cache.m1.medium`,
     #       `cache.m1.large`, `cache.m1.xlarge`
+    #
+    #       **M3 node types:** `cache.m3.medium`, `cache.m3.large`,
+    #       `cache.m3.xlarge`, `cache.m3.2xlarge`
     #
     #   * Compute optimized:
     #
@@ -5334,38 +6257,35 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
-    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
+    #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
+    #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
+    #       `cache.r5.24xlarge`
+    #
+    #       **R4 node types:** `cache.r4.large`, `cache.r4.xlarge`,
+    #       `cache.r4.2xlarge`, `cache.r4.4xlarge`, `cache.r4.8xlarge`,
+    #       `cache.r4.16xlarge`
     #
     #     * Previous generation: (not recommended)
     #
     #       **M2 node types:** `cache.m2.xlarge`, `cache.m2.2xlarge`,
     #       `cache.m2.4xlarge`
     #
-    #   **Notes:**
+    #       **R3 node types:** `cache.r3.large`, `cache.r3.xlarge`,
+    #       `cache.r3.2xlarge`, `cache.r3.4xlarge`, `cache.r3.8xlarge`
     #
-    #   * All T2 instances are created in an Amazon Virtual Private Cloud
-    #     (Amazon VPC).
+    #   **Additional node type info**
     #
-    #   * Redis (cluster mode disabled): Redis backup/restore is not
-    #     supported on T1 and T2 instances.
+    #   * All current generation instance types are created in Amazon VPC by
+    #     default.
     #
-    #   * Redis (cluster mode enabled): Backup/restore is not supported on
-    #     T1 instances.
+    #   * Redis append-only files (AOF) are not supported for T1 or T2
+    #     instances.
     #
-    #   * Redis Append-only files (AOF) functionality is not supported for
-    #     T1 or T2 instances.
+    #   * Redis Multi-AZ with automatic failover is not supported on T1
+    #     instances.
     #
-    #   For a complete listing of node types and specifications, see [Amazon
-    #   ElastiCache Product Features and Details][1] and either [Cache Node
-    #   Type-Specific Parameters for Memcached][2] or [Cache Node
-    #   Type-Specific Parameters for Redis][3].
-    #
-    #
-    #
-    #   [1]: http://aws.amazon.com/elasticache/details
-    #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
-    #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+    #   * Redis configuration variables `appendonly` and `appendfsync` are
+    #     not supported on Redis version 2.8.22 and later.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -5481,7 +6401,7 @@ module Aws::ElastiCache
     #
     #   * Redis versions earlier than 2.8.6.
     #
-    #   * Redis (cluster mode disabled): T1 and T2 cache node types.
+    #   * Redis (cluster mode disabled): T1 node types.
     #
     #   * Redis (cluster mode enabled): T1 node types.
     #   @return [String]
@@ -5489,6 +6409,10 @@ module Aws::ElastiCache
     # @!attribute [rw] node_snapshots
     #   A list of the cache nodes in the source cluster.
     #   @return [Array<Types::NodeSnapshot>]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
     #
@@ -5516,7 +6440,50 @@ module Aws::ElastiCache
       :snapshot_window,
       :num_node_groups,
       :automatic_failover,
-      :node_snapshots)
+      :node_snapshots,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMigrationMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         customer_node_endpoint_list: [ # required
+    #           {
+    #             address: "String",
+    #             port: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group to which data should be migrated.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_node_endpoint_list
+    #   List of endpoints from which data should be migrated. For Redis
+    #   (cluster mode disabled), list should have only one element.
+    #   @return [Array<Types::CustomerNodeEndpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationMessage AWS API Documentation
+    #
+    class StartMigrationMessage < Struct.new(
+      :replication_group_id,
+      :customer_node_endpoint_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/StartMigrationResponse AWS API Documentation
+    #
+    class StartMigrationResponse < Struct.new(
+      :replication_group)
       include Aws::Structure
     end
 
@@ -5587,7 +6554,7 @@ module Aws::ElastiCache
     #
     #       {
     #         replication_group_id: "String", # required
-    #         node_group_id: "String", # required
+    #         node_group_id: "AllowedNodeGroupId", # required
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -5619,6 +6586,207 @@ module Aws::ElastiCache
     #
     class TestFailoverResult < Struct.new(
       :replication_group)
+      include Aws::Structure
+    end
+
+    # Filters update actions from the service updates that are in available
+    # status during the time range.
+    #
+    # @note When making an API call, you may pass TimeRangeFilter
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time range filter
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time range filter
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TimeRangeFilter AWS API Documentation
+    #
+    class TimeRangeFilter < Struct.new(
+      :start_time,
+      :end_time)
+      include Aws::Structure
+    end
+
+    # Update action that has failed to be processed for the corresponding
+    # apply/stop request
+    #
+    # @!attribute [rw] replication_group_id
+    #   The replication group ID
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] error_type
+    #   The error type for requests that are not processed
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message that describes the reason the request was not
+    #   processed
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UnprocessedUpdateAction AWS API Documentation
+    #
+    class UnprocessedUpdateAction < Struct.new(
+      :replication_group_id,
+      :cache_cluster_id,
+      :service_update_name,
+      :error_type,
+      :error_message)
+      include Aws::Structure
+    end
+
+    # The status of the service update for a specific replication group
+    #
+    # @!attribute [rw] replication_group_id
+    #   The ID of the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_cluster_id
+    #   The ID of the cache cluster
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_name
+    #   The unique ID of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_release_date
+    #   The date the update is first available
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_update_severity
+    #   The severity of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_status
+    #   The status of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] service_update_recommended_apply_by_date
+    #   The recommended date to apply the service update to ensure
+    #   compliance. For information on compliance, see [Self-Service
+    #   Security Updates for Compliance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_update_type
+    #   Reflects the nature of the service update
+    #   @return [String]
+    #
+    # @!attribute [rw] update_action_available_date
+    #   The date that the service update is available to a replication group
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_action_status
+    #   The status of the update action
+    #   @return [String]
+    #
+    # @!attribute [rw] nodes_updated
+    #   The progress of the service update on the replication group
+    #   @return [String]
+    #
+    # @!attribute [rw] update_action_status_modified_date
+    #   The date when the UpdateActionStatus was last modified
+    #   @return [Time]
+    #
+    # @!attribute [rw] sla_met
+    #   If yes, all nodes in the replication group have been updated by the
+    #   recommended apply-by date. If no, at least one node in the
+    #   replication group have not been updated by the recommended apply-by
+    #   date. If N/A, the replication group was created after the
+    #   recommended apply-by date.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_update_status
+    #   The status of the service update on the node group
+    #   @return [Array<Types::NodeGroupUpdateStatus>]
+    #
+    # @!attribute [rw] cache_node_update_status
+    #   The status of the service update on the cache node
+    #   @return [Array<Types::CacheNodeUpdateStatus>]
+    #
+    # @!attribute [rw] estimated_update_time
+    #   The estimated length of time for the update to complete
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The Elasticache engine to which the update applies. Either Redis or
+    #   Memcached
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateAction AWS API Documentation
+    #
+    class UpdateAction < Struct.new(
+      :replication_group_id,
+      :cache_cluster_id,
+      :service_update_name,
+      :service_update_release_date,
+      :service_update_severity,
+      :service_update_status,
+      :service_update_recommended_apply_by_date,
+      :service_update_type,
+      :update_action_available_date,
+      :update_action_status,
+      :nodes_updated,
+      :update_action_status_modified_date,
+      :sla_met,
+      :node_group_update_status,
+      :cache_node_update_status,
+      :estimated_update_time,
+      :engine)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] processed_update_actions
+    #   Update actions that have been processed successfully
+    #   @return [Array<Types::ProcessedUpdateAction>]
+    #
+    # @!attribute [rw] unprocessed_update_actions
+    #   Update actions that haven't been processed successfully
+    #   @return [Array<Types::UnprocessedUpdateAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateActionResultsMessage AWS API Documentation
+    #
+    class UpdateActionResultsMessage < Struct.new(
+      :processed_update_actions,
+      :unprocessed_update_actions)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional marker returned from a prior request. Use this marker
+    #   for pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_actions
+    #   Returns a list of update actions
+    #   @return [Array<Types::UpdateAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/UpdateActionsMessage AWS API Documentation
+    #
+    class UpdateActionsMessage < Struct.new(
+      :marker,
+      :update_actions)
       include Aws::Structure
     end
 

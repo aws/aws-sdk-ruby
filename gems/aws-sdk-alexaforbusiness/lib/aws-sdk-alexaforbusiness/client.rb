@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,128 +48,245 @@ module Aws::AlexaForBusiness
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Associates a skill with the organization under the customer's AWS
+    # account. If a skill is private, the user implicitly accepts access to
+    # this skill during enablement.
+    #
+    # @option params [required, String] :skill_id
+    #   The unique identifier of the skill.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.approve_skill({
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ApproveSkill AWS API Documentation
+    #
+    # @overload approve_skill(params = {})
+    # @param [Hash] params ({})
+    def approve_skill(params = {}, options = {})
+      req = build_request(:approve_skill, params)
+      req.send_request(options)
+    end
 
     # Associates a contact with a given address book.
     #
@@ -189,6 +311,32 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def associate_contact_with_address_book(params = {}, options = {})
       req = build_request(:associate_contact_with_address_book, params)
+      req.send_request(options)
+    end
+
+    # Associates a device with the specified network profile.
+    #
+    # @option params [required, String] :device_arn
+    #   The device ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile to associate with a device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_device_with_network_profile({
+    #     device_arn: "Arn", # required
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithNetworkProfile AWS API Documentation
+    #
+    # @overload associate_device_with_network_profile(params = {})
+    # @param [Hash] params ({})
+    def associate_device_with_network_profile(params = {}, options = {})
+      req = build_request(:associate_device_with_network_profile, params)
       req.send_request(options)
     end
 
@@ -248,6 +396,55 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Associates a skill with a skill group.
+    #
+    # @option params [String] :skill_group_arn
+    #   The ARN of the skill group to associate the skill to. Required.
+    #
+    # @option params [required, String] :skill_id
+    #   The unique identifier of the skill.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_skill_with_skill_group({
+    #     skill_group_arn: "Arn",
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithSkillGroup AWS API Documentation
+    #
+    # @overload associate_skill_with_skill_group(params = {})
+    # @param [Hash] params ({})
+    def associate_skill_with_skill_group(params = {}, options = {})
+      req = build_request(:associate_skill_with_skill_group, params)
+      req.send_request(options)
+    end
+
+    # Makes a private skill available for enrolled users to enable on their
+    # devices.
+    #
+    # @option params [required, String] :skill_id
+    #   The private skill ID you want to make available to enrolled users.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_skill_with_users({
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillWithUsers AWS API Documentation
+    #
+    # @overload associate_skill_with_users(params = {})
+    # @param [Hash] params ({})
+    def associate_skill_with_users(params = {}, options = {})
+      req = build_request(:associate_skill_with_users, params)
+      req.send_request(options)
+    end
+
     # Creates an address book with the specified details.
     #
     # @option params [required, String] :name
@@ -288,6 +485,131 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Creates a recurring schedule for usage reports to deliver to the
+    # specified S3 location with a specified daily or weekly interval.
+    #
+    # @option params [String] :schedule_name
+    #   The name identifier of the schedule.
+    #
+    # @option params [String] :s3_bucket_name
+    #   The S3 bucket name of the output reports. If this isn't specified,
+    #   the report can be retrieved from a download link by calling
+    #   ListBusinessReportSchedule.
+    #
+    # @option params [String] :s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #
+    # @option params [required, String] :format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #
+    # @option params [required, Types::BusinessReportContentRange] :content_range
+    #   The content range of the reports.
+    #
+    # @option params [Types::BusinessReportRecurrence] :recurrence
+    #   The recurrence of the reports. If this isn't specified, the report
+    #   will only be delivered one time when the API is called.
+    #
+    # @option params [String] :client_request_token
+    #   The client request token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateBusinessReportScheduleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBusinessReportScheduleResponse#schedule_arn #schedule_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_business_report_schedule({
+    #     schedule_name: "BusinessReportScheduleName",
+    #     s3_bucket_name: "CustomerS3BucketName",
+    #     s3_key_prefix: "S3KeyPrefix",
+    #     format: "CSV", # required, accepts CSV, CSV_ZIP
+    #     content_range: { # required
+    #       interval: "ONE_DAY", # accepts ONE_DAY, ONE_WEEK, THIRTY_DAYS
+    #     },
+    #     recurrence: {
+    #       start_date: "Date",
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateBusinessReportSchedule AWS API Documentation
+    #
+    # @overload create_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def create_business_report_schedule(params = {}, options = {})
+      req = build_request(:create_business_report_schedule, params)
+      req.send_request(options)
+    end
+
+    # Adds a new conference provider under the user's AWS account.
+    #
+    # @option params [required, String] :conference_provider_name
+    #   The name of the conference provider.
+    #
+    # @option params [required, String] :conference_provider_type
+    #   Represents a type within a list of predefined types.
+    #
+    # @option params [Types::IPDialIn] :ip_dial_in
+    #   The IP endpoint and protocol for calling.
+    #
+    # @option params [Types::PSTNDialIn] :pstn_dial_in
+    #   The information for PSTN conferencing.
+    #
+    # @option params [required, Types::MeetingSetting] :meeting_setting
+    #   The meeting settings for the conference provider.
+    #
+    # @option params [String] :client_request_token
+    #   The request token of the client.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateConferenceProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConferenceProviderResponse#conference_provider_arn #conference_provider_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_conference_provider({
+    #     conference_provider_name: "ConferenceProviderName", # required
+    #     conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
+    #     ip_dial_in: {
+    #       endpoint: "Endpoint", # required
+    #       comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
+    #     },
+    #     pstn_dial_in: {
+    #       country_code: "CountryCode", # required
+    #       phone_number: "OutboundPhoneNumber", # required
+    #       one_click_id_delay: "OneClickIdDelay", # required
+    #       one_click_pin_delay: "OneClickPinDelay", # required
+    #     },
+    #     meeting_setting: { # required
+    #       require_pin: "YES", # required, accepts YES, NO, OPTIONAL
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conference_provider_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateConferenceProvider AWS API Documentation
+    #
+    # @overload create_conference_provider(params = {})
+    # @param [Hash] params ({})
+    def create_conference_provider(params = {}, options = {})
+      req = build_request(:create_conference_provider, params)
+      req.send_request(options)
+    end
+
     # Creates a contact with the specified details.
     #
     # @option params [String] :display_name
@@ -301,8 +623,17 @@ module Aws::AlexaForBusiness
     #   The last name of the contact that is used to call the contact on the
     #   device.
     #
-    # @option params [required, String] :phone_number
-    #   The phone number of the contact in E.164 format.
+    # @option params [String] :phone_number
+    #   The phone number of the contact in E.164 format. The phone number type
+    #   defaults to WORK. You can specify PhoneNumber or PhoneNumbers. We
+    #   recommend that you use PhoneNumbers, which lets you specify the phone
+    #   number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @option params [String] :client_request_token
     #   A unique, user-specified identifier for this request that ensures
@@ -321,7 +652,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName", # required
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber", # required
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -335,6 +678,122 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def create_contact(params = {}, options = {})
       req = build_request(:create_contact, params)
+      req.send_request(options)
+    end
+
+    # Creates a gateway group with the specified details.
+    #
+    # @option params [required, String] :name
+    #   The name of the gateway group.
+    #
+    # @option params [String] :description
+    #   The description of the gateway group.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateGatewayGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGatewayGroupResponse#gateway_group_arn #gateway_group_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_gateway_group({
+    #     name: "GatewayGroupName", # required
+    #     description: "GatewayGroupDescription",
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateGatewayGroup AWS API Documentation
+    #
+    # @overload create_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def create_gateway_group(params = {}, options = {})
+      req = build_request(:create_gateway_group, params)
+      req.send_request(options)
+    end
+
+    # Creates a network profile with the specified details.
+    #
+    # @option params [required, String] :network_profile_name
+    #   The name of the network profile associated with a device.
+    #
+    # @option params [String] :description
+    #   Detailed information about a device's network profile.
+    #
+    # @option params [required, String] :ssid
+    #   The SSID of the Wi-Fi network.
+    #
+    # @option params [required, String] :security_type
+    #   The security type of the Wi-Fi network. This can be WPA2\_ENTERPRISE,
+    #   WPA2\_PSK, WPA\_PSK, WEP, or OPEN.
+    #
+    # @option params [String] :eap_method
+    #   The authentication standard that is used in the EAP framework.
+    #   Currently, EAP\_TLS is supported.
+    #
+    # @option params [String] :current_password
+    #   The current password of the Wi-Fi network.
+    #
+    # @option params [String] :next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This password
+    #   is asynchronously transmitted to the device and is used when the
+    #   password of the network changes to NextPassword.
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #
+    # @option params [Array<String>] :trust_anchors
+    #   The root certificates of your authentication server that is installed
+    #   on your devices and used to trust your authentication server during
+    #   EAP negotiation.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateNetworkProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkProfileResponse#network_profile_arn #network_profile_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_profile({
+    #     network_profile_name: "NetworkProfileName", # required
+    #     description: "NetworkProfileDescription",
+    #     ssid: "NetworkSsid", # required
+    #     security_type: "OPEN", # required, accepts OPEN, WEP, WPA_PSK, WPA2_PSK, WPA2_ENTERPRISE
+    #     eap_method: "EAP_TLS", # accepts EAP_TLS
+    #     current_password: "CurrentWiFiPassword",
+    #     next_password: "NextWiFiPassword",
+    #     certificate_authority_arn: "Arn",
+    #     trust_anchors: ["TrustAnchor"],
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateNetworkProfile AWS API Documentation
+    #
+    # @overload create_network_profile(params = {})
+    # @param [Hash] params ({})
+    def create_network_profile(params = {}, options = {})
+      req = build_request(:create_network_profile, params)
       req.send_request(options)
     end
 
@@ -358,6 +817,10 @@ module Aws::AlexaForBusiness
     # @option params [required, String] :wake_word
     #   A wake word for Alexa, Echo, Amazon, or a computer.
     #
+    # @option params [String] :locale
+    #   The locale of the room profile. (This is currently only available to a
+    #   limited preview audience.)
+    #
     # @option params [String] :client_request_token
     #   The user-specified token that is used during the creation of a
     #   profile.
@@ -374,6 +837,9 @@ module Aws::AlexaForBusiness
     # @option params [Boolean] :pstn_enabled
     #   Whether PSTN calling is enabled.
     #
+    # @option params [Types::CreateMeetingRoomConfiguration] :meeting_room_configuration
+    #   The meeting room settings of a room profile.
+    #
     # @return [Types::CreateProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProfileResponse#profile_arn #profile_arn} => String
@@ -387,10 +853,27 @@ module Aws::AlexaForBusiness
     #     distance_unit: "METRIC", # required, accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # required, accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # required, accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     client_request_token: "ClientRequestToken",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
+    #     meeting_room_configuration: {
+    #       room_utilization_metrics_enabled: false,
+    #       end_of_meeting_reminder: {
+    #         reminder_at_minutes: [1], # required
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # required, accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false, # required
+    #       },
+    #       instant_booking: {
+    #         duration_in_minutes: 1, # required
+    #         enabled: false, # required
+    #       },
+    #       require_check_in: {
+    #         release_after_minutes: 1, # required
+    #         enabled: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -444,8 +927,8 @@ module Aws::AlexaForBusiness
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -541,8 +1024,8 @@ module Aws::AlexaForBusiness
     #     client_request_token: "ClientRequestToken",
     #     tags: [
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -582,6 +1065,51 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Deletes the recurring report delivery schedule with the specified
+    # schedule ARN.
+    #
+    # @option params [required, String] :schedule_arn
+    #   The ARN of the business report schedule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_business_report_schedule({
+    #     schedule_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteBusinessReportSchedule AWS API Documentation
+    #
+    # @overload delete_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def delete_business_report_schedule(params = {}, options = {})
+      req = build_request(:delete_business_report_schedule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a conference provider.
+    #
+    # @option params [required, String] :conference_provider_arn
+    #   The ARN of the conference provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_conference_provider({
+    #     conference_provider_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteConferenceProvider AWS API Documentation
+    #
+    # @overload delete_conference_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_conference_provider(params = {}, options = {})
+      req = build_request(:delete_conference_provider, params)
+      req.send_request(options)
+    end
+
     # Deletes a contact by the contact ARN.
     #
     # @option params [required, String] :contact_arn
@@ -601,6 +1129,101 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def delete_contact(params = {}, options = {})
       req = build_request(:delete_contact, params)
+      req.send_request(options)
+    end
+
+    # Removes a device from Alexa For Business.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device for which to request details.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_device({
+    #     device_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDevice AWS API Documentation
+    #
+    # @overload delete_device(params = {})
+    # @param [Hash] params ({})
+    def delete_device(params = {}, options = {})
+      req = build_request(:delete_device, params)
+      req.send_request(options)
+    end
+
+    # When this action is called for a specified shared device, it allows
+    # authorized users to delete the device's entire previous history of
+    # voice input data and associated response data. This action can be
+    # called once every 24 hours for a specific shared device.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of the device.
+    #
+    # @option params [required, String] :device_usage_type
+    #   The type of usage data to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_device_usage_data({
+    #     device_arn: "Arn", # required
+    #     device_usage_type: "VOICE", # required, accepts VOICE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteDeviceUsageData AWS API Documentation
+    #
+    # @overload delete_device_usage_data(params = {})
+    # @param [Hash] params ({})
+    def delete_device_usage_data(params = {}, options = {})
+      req = build_request(:delete_device_usage_data, params)
+      req.send_request(options)
+    end
+
+    # Deletes a gateway group.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteGatewayGroup AWS API Documentation
+    #
+    # @overload delete_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def delete_gateway_group(params = {}, options = {})
+      req = build_request(:delete_gateway_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a network profile by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteNetworkProfile AWS API Documentation
+    #
+    # @overload delete_network_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_network_profile(params = {}, options = {})
+      req = build_request(:delete_network_profile, params)
       req.send_request(options)
     end
 
@@ -678,6 +1301,32 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def delete_room_skill_parameter(params = {}, options = {})
       req = build_request(:delete_room_skill_parameter, params)
+      req.send_request(options)
+    end
+
+    # Unlinks a third-party account from a skill.
+    #
+    # @option params [required, String] :skill_id
+    #   The unique identifier of a skill.
+    #
+    # @option params [String] :room_arn
+    #   The room that the skill is authorized for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_skill_authorization({
+    #     skill_id: "SkillId", # required
+    #     room_arn: "Arn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteSkillAuthorization AWS API Documentation
+    #
+    # @overload delete_skill_authorization(params = {})
+    # @param [Hash] params ({})
+    def delete_skill_authorization(params = {}, options = {})
+      req = build_request(:delete_skill_authorization, params)
       req.send_request(options)
     end
 
@@ -779,6 +1428,55 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Disassociates a skill from a skill group.
+    #
+    # @option params [String] :skill_group_arn
+    #   The unique identifier of a skill. Required.
+    #
+    # @option params [required, String] :skill_id
+    #   The ARN of a skill group to associate to a skill.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_skill_from_skill_group({
+    #     skill_group_arn: "Arn",
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromSkillGroup AWS API Documentation
+    #
+    # @overload disassociate_skill_from_skill_group(params = {})
+    # @param [Hash] params ({})
+    def disassociate_skill_from_skill_group(params = {}, options = {})
+      req = build_request(:disassociate_skill_from_skill_group, params)
+      req.send_request(options)
+    end
+
+    # Makes a private skill unavailable for enrolled users and prevents them
+    # from enabling it on their devices.
+    #
+    # @option params [required, String] :skill_id
+    #   The private skill ID you want to make unavailable for enrolled users.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_skill_from_users({
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateSkillFromUsers AWS API Documentation
+    #
+    # @overload disassociate_skill_from_users(params = {})
+    # @param [Hash] params ({})
+    def disassociate_skill_from_users(params = {}, options = {})
+      req = build_request(:disassociate_skill_from_users, params)
+      req.send_request(options)
+    end
+
     # Disassociates a skill group from a specified room. This disables all
     # skills in the skill group on all devices in the room.
     #
@@ -804,6 +1502,28 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def disassociate_skill_group_from_room(params = {}, options = {})
       req = build_request(:disassociate_skill_group_from_room, params)
+      req.send_request(options)
+    end
+
+    # Forgets smart home appliances associated to a room.
+    #
+    # @option params [required, String] :room_arn
+    #   The room that the appliances are associated with.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.forget_smart_home_appliances({
+    #     room_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ForgetSmartHomeAppliances AWS API Documentation
+    #
+    # @overload forget_smart_home_appliances(params = {})
+    # @param [Hash] params ({})
+    def forget_smart_home_appliances(params = {}, options = {})
+      req = build_request(:forget_smart_home_appliances, params)
       req.send_request(options)
     end
 
@@ -837,6 +1557,62 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Retrieves the existing conference preferences.
+    #
+    # @return [Types::GetConferencePreferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConferencePreferenceResponse#preference #preference} => Types::ConferencePreference
+    #
+    # @example Response structure
+    #
+    #   resp.preference.default_conference_provider_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferencePreference AWS API Documentation
+    #
+    # @overload get_conference_preference(params = {})
+    # @param [Hash] params ({})
+    def get_conference_preference(params = {}, options = {})
+      req = build_request(:get_conference_preference, params)
+      req.send_request(options)
+    end
+
+    # Gets details about a specific conference provider.
+    #
+    # @option params [required, String] :conference_provider_arn
+    #   The ARN of the newly created conference provider.
+    #
+    # @return [Types::GetConferenceProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConferenceProviderResponse#conference_provider #conference_provider} => Types::ConferenceProvider
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_conference_provider({
+    #     conference_provider_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conference_provider.arn #=> String
+    #   resp.conference_provider.name #=> String
+    #   resp.conference_provider.type #=> String, one of "CHIME", "BLUEJEANS", "FUZE", "GOOGLE_HANGOUTS", "POLYCOM", "RINGCENTRAL", "SKYPE_FOR_BUSINESS", "WEBEX", "ZOOM", "CUSTOM"
+    #   resp.conference_provider.ip_dial_in.endpoint #=> String
+    #   resp.conference_provider.ip_dial_in.comms_protocol #=> String, one of "SIP", "SIPS", "H323"
+    #   resp.conference_provider.pstn_dial_in.country_code #=> String
+    #   resp.conference_provider.pstn_dial_in.phone_number #=> String
+    #   resp.conference_provider.pstn_dial_in.one_click_id_delay #=> String
+    #   resp.conference_provider.pstn_dial_in.one_click_pin_delay #=> String
+    #   resp.conference_provider.meeting_setting.require_pin #=> String, one of "YES", "NO", "OPTIONAL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetConferenceProvider AWS API Documentation
+    #
+    # @overload get_conference_provider(params = {})
+    # @param [Hash] params ({})
+    def get_conference_provider(params = {}, options = {})
+      req = build_request(:get_conference_provider, params)
+      req.send_request(options)
+    end
+
     # Gets the contact details by the contact ARN.
     #
     # @option params [required, String] :contact_arn
@@ -859,6 +1635,12 @@ module Aws::AlexaForBusiness
     #   resp.contact.first_name #=> String
     #   resp.contact.last_name #=> String
     #   resp.contact.phone_number #=> String
+    #   resp.contact.phone_numbers #=> Array
+    #   resp.contact.phone_numbers[0].number #=> String
+    #   resp.contact.phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contact.sip_addresses #=> Array
+    #   resp.contact.sip_addresses[0].uri #=> String
+    #   resp.contact.sip_addresses[0].type #=> String, one of "WORK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact AWS API Documentation
     #
@@ -893,10 +1675,15 @@ module Aws::AlexaForBusiness
     #   resp.device.software_version #=> String
     #   resp.device.mac_address #=> String
     #   resp.device.room_arn #=> String
-    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
+    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED", "FAILED"
     #   resp.device.device_status_info.device_status_details #=> Array
-    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.device.device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
+    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.device.device_status_info.connection_status_updated_time #=> Time
+    #   resp.device.network_profile_info.network_profile_arn #=> String
+    #   resp.device.network_profile_info.certificate_arn #=> String
+    #   resp.device.network_profile_info.certificate_expiration_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
     #
@@ -904,6 +1691,131 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def get_device(params = {}, options = {})
       req = build_request(:get_device, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a gateway.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The ARN of the gateway to get.
+    #
+    # @return [Types::GetGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayResponse#gateway #gateway} => Types::Gateway
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway({
+    #     gateway_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway.arn #=> String
+    #   resp.gateway.name #=> String
+    #   resp.gateway.description #=> String
+    #   resp.gateway.gateway_group_arn #=> String
+    #   resp.gateway.software_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGateway AWS API Documentation
+    #
+    # @overload get_gateway(params = {})
+    # @param [Hash] params ({})
+    def get_gateway(params = {}, options = {})
+      req = build_request(:get_gateway, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a gateway group.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to get.
+    #
+    # @return [Types::GetGatewayGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGatewayGroupResponse#gateway_group #gateway_group} => Types::GatewayGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_group.arn #=> String
+    #   resp.gateway_group.name #=> String
+    #   resp.gateway_group.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetGatewayGroup AWS API Documentation
+    #
+    # @overload get_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def get_gateway_group(params = {}, options = {})
+      req = build_request(:get_gateway_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configured values for the user enrollment invitation
+    # email template.
+    #
+    # @return [Types::GetInvitationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInvitationConfigurationResponse#organization_name #organization_name} => String
+    #   * {Types::GetInvitationConfigurationResponse#contact_email #contact_email} => String
+    #   * {Types::GetInvitationConfigurationResponse#private_skill_ids #private_skill_ids} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.organization_name #=> String
+    #   resp.contact_email #=> String
+    #   resp.private_skill_ids #=> Array
+    #   resp.private_skill_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetInvitationConfiguration AWS API Documentation
+    #
+    # @overload get_invitation_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_invitation_configuration(params = {}, options = {})
+      req = build_request(:get_invitation_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets the network profile details by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @return [Types::GetNetworkProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkProfileResponse#network_profile #network_profile} => Types::NetworkProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile.network_profile_arn #=> String
+    #   resp.network_profile.network_profile_name #=> String
+    #   resp.network_profile.description #=> String
+    #   resp.network_profile.ssid #=> String
+    #   resp.network_profile.security_type #=> String, one of "OPEN", "WEP", "WPA_PSK", "WPA2_PSK", "WPA2_ENTERPRISE"
+    #   resp.network_profile.eap_method #=> String, one of "EAP_TLS"
+    #   resp.network_profile.current_password #=> String
+    #   resp.network_profile.next_password #=> String
+    #   resp.network_profile.certificate_authority_arn #=> String
+    #   resp.network_profile.trust_anchors #=> Array
+    #   resp.network_profile.trust_anchors[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetNetworkProfile AWS API Documentation
+    #
+    # @overload get_network_profile(params = {})
+    # @param [Hash] params ({})
+    def get_network_profile(params = {}, options = {})
+      req = build_request(:get_network_profile, params)
       req.send_request(options)
     end
 
@@ -926,14 +1838,26 @@ module Aws::AlexaForBusiness
     #
     #   resp.profile.profile_arn #=> String
     #   resp.profile.profile_name #=> String
+    #   resp.profile.is_default #=> Boolean
     #   resp.profile.address #=> String
     #   resp.profile.timezone #=> String
     #   resp.profile.distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profile.temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profile.wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profile.locale #=> String
     #   resp.profile.setup_mode_disabled #=> Boolean
     #   resp.profile.max_volume_limit #=> Integer
     #   resp.profile.pstn_enabled #=> Boolean
+    #   resp.profile.address_book_arn #=> String
+    #   resp.profile.meeting_room_configuration.room_utilization_metrics_enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_at_minutes #=> Array
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_at_minutes[0] #=> Integer
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.reminder_type #=> String, one of "ANNOUNCEMENT_TIME_CHECK", "ANNOUNCEMENT_VARIABLE_TIME_LEFT", "CHIME", "KNOCK"
+    #   resp.profile.meeting_room_configuration.end_of_meeting_reminder.enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.instant_booking.duration_in_minutes #=> Integer
+    #   resp.profile.meeting_room_configuration.instant_booking.enabled #=> Boolean
+    #   resp.profile.meeting_room_configuration.require_check_in.release_after_minutes #=> Integer
+    #   resp.profile.meeting_room_configuration.require_check_in.enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetProfile AWS API Documentation
     #
@@ -1046,29 +1970,126 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists the Device Event history for up to 30 days. If EventType isn't
-    # specified in the request, this returns a list of all device events in
-    # reverse chronological order. If EventType is specified, this returns a
-    # list of device events for that EventType in reverse chronological
-    # order.
+    # Lists the details of the schedules that a user configured. A download
+    # URL of the report associated with each schedule is returned every time
+    # this action is called. A new download URL is returned each time, and
+    # is valid for 24 hours.
+    #
+    # @option params [String] :next_token
+    #   The token used to list the remaining schedules from the previous API
+    #   call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of schedules listed in the call.
+    #
+    # @return [Types::ListBusinessReportSchedulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBusinessReportSchedulesResponse#business_report_schedules #business_report_schedules} => Array&lt;Types::BusinessReportSchedule&gt;
+    #   * {Types::ListBusinessReportSchedulesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_business_report_schedules({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.business_report_schedules #=> Array
+    #   resp.business_report_schedules[0].schedule_arn #=> String
+    #   resp.business_report_schedules[0].schedule_name #=> String
+    #   resp.business_report_schedules[0].s3_bucket_name #=> String
+    #   resp.business_report_schedules[0].s3_key_prefix #=> String
+    #   resp.business_report_schedules[0].format #=> String, one of "CSV", "CSV_ZIP"
+    #   resp.business_report_schedules[0].content_range.interval #=> String, one of "ONE_DAY", "ONE_WEEK", "THIRTY_DAYS"
+    #   resp.business_report_schedules[0].recurrence.start_date #=> String
+    #   resp.business_report_schedules[0].last_business_report.status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.business_report_schedules[0].last_business_report.failure_code #=> String, one of "ACCESS_DENIED", "NO_SUCH_BUCKET", "INTERNAL_FAILURE"
+    #   resp.business_report_schedules[0].last_business_report.s3_location.path #=> String
+    #   resp.business_report_schedules[0].last_business_report.s3_location.bucket_name #=> String
+    #   resp.business_report_schedules[0].last_business_report.delivery_time #=> Time
+    #   resp.business_report_schedules[0].last_business_report.download_url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListBusinessReportSchedules AWS API Documentation
+    #
+    # @overload list_business_report_schedules(params = {})
+    # @param [Hash] params ({})
+    def list_business_report_schedules(params = {}, options = {})
+      req = build_request(:list_business_report_schedules, params)
+      req.send_request(options)
+    end
+
+    # Lists conference providers under a specific AWS account.
+    #
+    # @option params [String] :next_token
+    #   The tokens used for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of conference providers to be returned, per
+    #   paginated calls.
+    #
+    # @return [Types::ListConferenceProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConferenceProvidersResponse#conference_providers #conference_providers} => Array&lt;Types::ConferenceProvider&gt;
+    #   * {Types::ListConferenceProvidersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_conference_providers({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.conference_providers #=> Array
+    #   resp.conference_providers[0].arn #=> String
+    #   resp.conference_providers[0].name #=> String
+    #   resp.conference_providers[0].type #=> String, one of "CHIME", "BLUEJEANS", "FUZE", "GOOGLE_HANGOUTS", "POLYCOM", "RINGCENTRAL", "SKYPE_FOR_BUSINESS", "WEBEX", "ZOOM", "CUSTOM"
+    #   resp.conference_providers[0].ip_dial_in.endpoint #=> String
+    #   resp.conference_providers[0].ip_dial_in.comms_protocol #=> String, one of "SIP", "SIPS", "H323"
+    #   resp.conference_providers[0].pstn_dial_in.country_code #=> String
+    #   resp.conference_providers[0].pstn_dial_in.phone_number #=> String
+    #   resp.conference_providers[0].pstn_dial_in.one_click_id_delay #=> String
+    #   resp.conference_providers[0].pstn_dial_in.one_click_pin_delay #=> String
+    #   resp.conference_providers[0].meeting_setting.require_pin #=> String, one of "YES", "NO", "OPTIONAL"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListConferenceProviders AWS API Documentation
+    #
+    # @overload list_conference_providers(params = {})
+    # @param [Hash] params ({})
+    def list_conference_providers(params = {}, options = {})
+      req = build_request(:list_conference_providers, params)
+      req.send_request(options)
+    end
+
+    # Lists the device event history, including device connection status,
+    # for up to 30 days.
     #
     # @option params [required, String] :device_arn
     #   The ARN of a device.
     #
     # @option params [String] :event_type
-    #   The event type to filter device events.
+    #   The event type to filter device events. If EventType isn't specified,
+    #   this returns a list of all device events in reverse chronological
+    #   order. If EventType is specified, this returns a list of device events
+    #   for that EventType in reverse chronological order.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response only includes results beyond the token, up to
-    #   the value specified by MaxResults.
+    #   the value specified by MaxResults. When the end of results is reached,
+    #   the response has a value of null.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to include in the response. If more
-    #   results exist than the specified MaxResults value, a token is included
-    #   in the response so that the remaining results can be retrieved.
-    #   Required.
+    #   The maximum number of results to include in the response. The default
+    #   value is 50. If more results exist than the specified MaxResults
+    #   value, a token is included in the response so that the remaining
+    #   results can be retrieved.
     #
     # @return [Types::ListDeviceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1101,22 +2122,114 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Retrieves a list of gateway group summaries. Use GetGatewayGroup to
+    # retrieve details of a specific gateway group.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate though multiple pages of gateway group
+    #   summaries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of gateway group summaries to return. The default
+    #   is 50.
+    #
+    # @return [Types::ListGatewayGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewayGroupsResponse#gateway_groups #gateway_groups} => Array&lt;Types::GatewayGroupSummary&gt;
+    #   * {Types::ListGatewayGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateway_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_groups #=> Array
+    #   resp.gateway_groups[0].arn #=> String
+    #   resp.gateway_groups[0].name #=> String
+    #   resp.gateway_groups[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGatewayGroups AWS API Documentation
+    #
+    # @overload list_gateway_groups(params = {})
+    # @param [Hash] params ({})
+    def list_gateway_groups(params = {}, options = {})
+      req = build_request(:list_gateway_groups, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of gateway summaries. Use GetGateway to retrieve
+    # details of a specific gateway. An optional gateway group ARN can be
+    # provided to only retrieve gateway summaries of gateways that are
+    # associated with that gateway group ARN.
+    #
+    # @option params [String] :gateway_group_arn
+    #   The gateway group ARN for which to list gateways.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate though multiple pages of gateway summaries.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of gateway summaries to return. The default is 50.
+    #
+    # @return [Types::ListGatewaysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGatewaysResponse#gateways #gateways} => Array&lt;Types::GatewaySummary&gt;
+    #   * {Types::ListGatewaysResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_gateways({
+    #     gateway_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateways #=> Array
+    #   resp.gateways[0].arn #=> String
+    #   resp.gateways[0].name #=> String
+    #   resp.gateways[0].description #=> String
+    #   resp.gateways[0].gateway_group_arn #=> String
+    #   resp.gateways[0].software_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListGateways AWS API Documentation
+    #
+    # @overload list_gateways(params = {})
+    # @param [Hash] params ({})
+    def list_gateways(params = {}, options = {})
+      req = build_request(:list_gateways, params)
+      req.send_request(options)
+    end
+
     # Lists all enabled skills in a specific skill group.
     #
     # @option params [String] :skill_group_arn
-    #   The ARN of the skill group for which to list enabled skills. Required.
+    #   The ARN of the skill group for which to list enabled skills.
+    #
+    # @option params [String] :enablement_type
+    #   Whether the skill is enabled under the user's account.
+    #
+    # @option params [String] :skill_type
+    #   Whether the skill is publicly available or is a private skill.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
     #   pagination of results from this action. If this parameter is
     #   specified, the response includes only results beyond the token, up to
-    #   the value specified by `MaxResults`. Required.
+    #   the value specified by `MaxResults`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to include in the response. If more
     #   results exist than the specified `MaxResults` value, a token is
     #   included in the response so that the remaining results can be
-    #   retrieved. Required.
+    #   retrieved.
     #
     # @return [Types::ListSkillsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,6 +2240,8 @@ module Aws::AlexaForBusiness
     #
     #   resp = client.list_skills({
     #     skill_group_arn: "Arn",
+    #     enablement_type: "ENABLED", # accepts ENABLED, PENDING
+    #     skill_type: "PUBLIC", # accepts PUBLIC, PRIVATE, ALL
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1137,6 +2252,8 @@ module Aws::AlexaForBusiness
     #   resp.skill_summaries[0].skill_id #=> String
     #   resp.skill_summaries[0].skill_name #=> String
     #   resp.skill_summaries[0].supports_linking #=> Boolean
+    #   resp.skill_summaries[0].enablement_type #=> String, one of "ENABLED", "PENDING"
+    #   resp.skill_summaries[0].skill_type #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkills AWS API Documentation
@@ -1148,10 +2265,151 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Lists all tags for a specific resource.
+    # Lists all categories in the Alexa skill store.
+    #
+    # @option params [String] :next_token
+    #   The tokens used for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of categories returned, per paginated calls.
+    #
+    # @return [Types::ListSkillsStoreCategoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSkillsStoreCategoriesResponse#category_list #category_list} => Array&lt;Types::Category&gt;
+    #   * {Types::ListSkillsStoreCategoriesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_skills_store_categories({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.category_list #=> Array
+    #   resp.category_list[0].category_id #=> Integer
+    #   resp.category_list[0].category_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreCategories AWS API Documentation
+    #
+    # @overload list_skills_store_categories(params = {})
+    # @param [Hash] params ({})
+    def list_skills_store_categories(params = {}, options = {})
+      req = build_request(:list_skills_store_categories, params)
+      req.send_request(options)
+    end
+
+    # Lists all skills in the Alexa skill store by category.
+    #
+    # @option params [required, Integer] :category_id
+    #   The category ID for which the skills are being retrieved from the
+    #   skill store.
+    #
+    # @option params [String] :next_token
+    #   The tokens used for pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of skills returned per paginated calls.
+    #
+    # @return [Types::ListSkillsStoreSkillsByCategoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSkillsStoreSkillsByCategoryResponse#skills_store_skills #skills_store_skills} => Array&lt;Types::SkillsStoreSkill&gt;
+    #   * {Types::ListSkillsStoreSkillsByCategoryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_skills_store_skills_by_category({
+    #     category_id: 1, # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.skills_store_skills #=> Array
+    #   resp.skills_store_skills[0].skill_id #=> String
+    #   resp.skills_store_skills[0].skill_name #=> String
+    #   resp.skills_store_skills[0].short_description #=> String
+    #   resp.skills_store_skills[0].icon_url #=> String
+    #   resp.skills_store_skills[0].sample_utterances #=> Array
+    #   resp.skills_store_skills[0].sample_utterances[0] #=> String
+    #   resp.skills_store_skills[0].skill_details.product_description #=> String
+    #   resp.skills_store_skills[0].skill_details.invocation_phrase #=> String
+    #   resp.skills_store_skills[0].skill_details.release_date #=> String
+    #   resp.skills_store_skills[0].skill_details.end_user_license_agreement #=> String
+    #   resp.skills_store_skills[0].skill_details.generic_keywords #=> Array
+    #   resp.skills_store_skills[0].skill_details.generic_keywords[0] #=> String
+    #   resp.skills_store_skills[0].skill_details.bullet_points #=> Array
+    #   resp.skills_store_skills[0].skill_details.bullet_points[0] #=> String
+    #   resp.skills_store_skills[0].skill_details.new_in_this_version_bullet_points #=> Array
+    #   resp.skills_store_skills[0].skill_details.new_in_this_version_bullet_points[0] #=> String
+    #   resp.skills_store_skills[0].skill_details.skill_types #=> Array
+    #   resp.skills_store_skills[0].skill_details.skill_types[0] #=> String
+    #   resp.skills_store_skills[0].skill_details.reviews #=> Hash
+    #   resp.skills_store_skills[0].skill_details.reviews["ReviewKey"] #=> String
+    #   resp.skills_store_skills[0].skill_details.developer_info.developer_name #=> String
+    #   resp.skills_store_skills[0].skill_details.developer_info.privacy_policy #=> String
+    #   resp.skills_store_skills[0].skill_details.developer_info.email #=> String
+    #   resp.skills_store_skills[0].skill_details.developer_info.url #=> String
+    #   resp.skills_store_skills[0].supports_linking #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSkillsStoreSkillsByCategory AWS API Documentation
+    #
+    # @overload list_skills_store_skills_by_category(params = {})
+    # @param [Hash] params ({})
+    def list_skills_store_skills_by_category(params = {}, options = {})
+      req = build_request(:list_skills_store_skills_by_category, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the smart home appliances associated with a room.
+    #
+    # @option params [required, String] :room_arn
+    #   The room that the appliances are associated with.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of appliances to be returned, per paginated calls.
+    #
+    # @option params [String] :next_token
+    #   The tokens used for pagination.
+    #
+    # @return [Types::ListSmartHomeAppliancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSmartHomeAppliancesResponse#smart_home_appliances #smart_home_appliances} => Array&lt;Types::SmartHomeAppliance&gt;
+    #   * {Types::ListSmartHomeAppliancesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_smart_home_appliances({
+    #     room_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.smart_home_appliances #=> Array
+    #   resp.smart_home_appliances[0].friendly_name #=> String
+    #   resp.smart_home_appliances[0].description #=> String
+    #   resp.smart_home_appliances[0].manufacturer_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListSmartHomeAppliances AWS API Documentation
+    #
+    # @overload list_smart_home_appliances(params = {})
+    # @param [Hash] params ({})
+    def list_smart_home_appliances(params = {}, options = {})
+      req = build_request(:list_smart_home_appliances, params)
+      req.send_request(options)
+    end
+
+    # Lists all tags for the specified resource.
     #
     # @option params [required, String] :arn
-    #   The ARN of the specific resource for which to list tags. Required.
+    #   The ARN of the specified resource for which to list tags.
     #
     # @option params [String] :next_token
     #   An optional token returned from a prior request. Use this token for
@@ -1194,6 +2452,64 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Sets the conference preferences on a specific conference provider at
+    # the account level.
+    #
+    # @option params [required, Types::ConferencePreference] :conference_preference
+    #   The conference preference of a specific conference provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_conference_preference({
+    #     conference_preference: { # required
+    #       default_conference_provider_arn: "Arn",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutConferencePreference AWS API Documentation
+    #
+    # @overload put_conference_preference(params = {})
+    # @param [Hash] params ({})
+    def put_conference_preference(params = {}, options = {})
+      req = build_request(:put_conference_preference, params)
+      req.send_request(options)
+    end
+
+    # Configures the email template for the user enrollment invitation with
+    # the specified attributes.
+    #
+    # @option params [required, String] :organization_name
+    #   The name of the organization sending the enrollment invite to a user.
+    #
+    # @option params [String] :contact_email
+    #   The email ID of the organization or individual contact that the
+    #   enrolled user can use.
+    #
+    # @option params [Array<String>] :private_skill_ids
+    #   The list of private skill IDs that you want to recommend to the user
+    #   to enable in the invitation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_invitation_configuration({
+    #     organization_name: "OrganizationName", # required
+    #     contact_email: "Email",
+    #     private_skill_ids: ["SkillId"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutInvitationConfiguration AWS API Documentation
+    #
+    # @overload put_invitation_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_invitation_configuration(params = {}, options = {})
+      req = build_request(:put_invitation_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates room skill parameter details by room, skill, and parameter key
     # ID. Not all skills have a room skill parameter.
     #
@@ -1227,6 +2543,118 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def put_room_skill_parameter(params = {}, options = {})
       req = build_request(:put_room_skill_parameter, params)
+      req.send_request(options)
+    end
+
+    # Links a user's account to a third-party skill provider. If this API
+    # operation is called by an assumed IAM role, the skill being linked
+    # must be a private skill. Also, the skill must be owned by the AWS
+    # account that assumed the IAM role.
+    #
+    # @option params [required, Hash<String,String>] :authorization_result
+    #   The authorization result specific to OAUTH code grant output. "Code”
+    #   must be populated in the AuthorizationResult map to establish the
+    #   authorization.
+    #
+    # @option params [required, String] :skill_id
+    #   The unique identifier of a skill.
+    #
+    # @option params [String] :room_arn
+    #   The room that the skill is authorized for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_skill_authorization({
+    #     authorization_result: { # required
+    #       "Key" => "Value",
+    #     },
+    #     skill_id: "SkillId", # required
+    #     room_arn: "Arn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/PutSkillAuthorization AWS API Documentation
+    #
+    # @overload put_skill_authorization(params = {})
+    # @param [Hash] params ({})
+    def put_skill_authorization(params = {}, options = {})
+      req = build_request(:put_skill_authorization, params)
+      req.send_request(options)
+    end
+
+    # Registers an Alexa-enabled device built by an Original Equipment
+    # Manufacturer (OEM) using Alexa Voice Service (AVS).
+    #
+    # @option params [required, String] :client_id
+    #   The client ID of the OEM used for code-based linking authorization on
+    #   an AVS device.
+    #
+    # @option params [required, String] :user_code
+    #   The code that is obtained after your AVS device has made a POST
+    #   request to LWA as a part of the Device Authorization Request component
+    #   of the OAuth code-based linking specification.
+    #
+    # @option params [required, String] :product_id
+    #   The product ID used to identify your AVS device during authorization.
+    #
+    # @option params [required, String] :device_serial_number
+    #   The key generated by the OEM that uniquely identifies a specified
+    #   instance of your AVS device.
+    #
+    # @option params [required, String] :amazon_id
+    #   The device type ID for your AVS device generated by Amazon when the
+    #   OEM creates a new product on Amazon's Developer Console.
+    #
+    # @return [Types::RegisterAVSDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterAVSDeviceResponse#device_arn #device_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_avs_device({
+    #     client_id: "ClientId", # required
+    #     user_code: "UserCode", # required
+    #     product_id: "ProductId", # required
+    #     device_serial_number: "DeviceSerialNumberForAVS", # required
+    #     amazon_id: "AmazonId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RegisterAVSDevice AWS API Documentation
+    #
+    # @overload register_avs_device(params = {})
+    # @param [Hash] params ({})
+    def register_avs_device(params = {}, options = {})
+      req = build_request(:register_avs_device, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a skill from the organization under a user's AWS
+    # account. If the skill is a private skill, it moves to an AcceptStatus
+    # of PENDING. Any private or public skill that is rejected can be added
+    # later by calling the ApproveSkill API.
+    #
+    # @option params [required, String] :skill_id
+    #   The unique identifier of the skill.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_skill({
+    #     skill_id: "SkillId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/RejectSkill AWS API Documentation
+    #
+    # @overload reject_skill(params = {})
+    # @param [Hash] params ({})
+    def reject_skill(params = {}, options = {})
+      req = build_request(:reject_skill, params)
       req.send_request(options)
     end
 
@@ -1417,6 +2845,12 @@ module Aws::AlexaForBusiness
     #   resp.contacts[0].first_name #=> String
     #   resp.contacts[0].last_name #=> String
     #   resp.contacts[0].phone_number #=> String
+    #   resp.contacts[0].phone_numbers #=> Array
+    #   resp.contacts[0].phone_numbers[0].number #=> String
+    #   resp.contacts[0].phone_numbers[0].type #=> String, one of "MOBILE", "WORK", "HOME"
+    #   resp.contacts[0].sip_addresses #=> Array
+    #   resp.contacts[0].sip_addresses[0].uri #=> String
+    #   resp.contacts[0].sip_addresses[0].type #=> String, one of "WORK"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -1447,13 +2881,15 @@ module Aws::AlexaForBusiness
     # @option params [Array<Types::Filter>] :filters
     #   The filters to use to list a specified set of devices. Supported
     #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
-    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and
-    #   ConnectionStatus (ONLINE and OFFLINE).
+    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly,
+    #   ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName,
+    #   NetworkProfileArn, Feature, and FailureCode.
     #
     # @option params [Array<Types::Sort>] :sort_criteria
     #   The sort order to use in listing the specified set of devices.
     #   Supported sort keys are DeviceName, DeviceStatus, RoomName,
-    #   DeviceType, DeviceSerialNumber, and ConnectionStatus.
+    #   DeviceType, DeviceSerialNumber, ConnectionStatus, NetworkProfileName,
+    #   NetworkProfileArn, Feature, and FailureCode.
     #
     # @return [Types::SearchDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1489,12 +2925,17 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].device_name #=> String
     #   resp.devices[0].software_version #=> String
     #   resp.devices[0].mac_address #=> String
-    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
+    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED", "FAILED"
+    #   resp.devices[0].network_profile_arn #=> String
+    #   resp.devices[0].network_profile_name #=> String
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
-    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.devices[0].device_status_info.device_status_details[0].feature #=> String, one of "BLUETOOTH", "VOLUME", "NOTIFICATIONS", "LISTS", "SKILLS", "NETWORK_PROFILE", "SETTINGS", "ALL"
+    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE", "CREDENTIALS_ACCESS_FAILURE", "TLS_VERSION_MISMATCH", "ASSOCIATION_REJECTION", "AUTHENTICATION_FAILURE", "DHCP_FAILURE", "INTERNET_UNAVAILABLE", "DNS_FAILURE", "UNKNOWN_FAILURE", "CERTIFICATE_ISSUING_LIMIT_EXCEEDED", "INVALID_CERTIFICATE_AUTHORITY", "NETWORK_PROFILE_NOT_FOUND", "INVALID_PASSWORD_STATE", "PASSWORD_NOT_FOUND"
     #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
+    #   resp.devices[0].device_status_info.connection_status_updated_time #=> Time
+    #   resp.devices[0].created_time #=> Time
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -1504,6 +2945,76 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def search_devices(params = {}, options = {})
       req = build_request(:search_devices, params)
+      req.send_request(options)
+    end
+
+    # Searches network profiles and lists the ones that meet a set of filter
+    # and sort criteria.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response includes only results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters to use to list a specified set of network profiles. Valid
+    #   filters are NetworkProfileName, Ssid, and SecurityType.
+    #
+    # @option params [Array<Types::Sort>] :sort_criteria
+    #   The sort order to use to list the specified set of network profiles.
+    #   Valid sort criteria includes NetworkProfileName, Ssid, and
+    #   SecurityType.
+    #
+    # @return [Types::SearchNetworkProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchNetworkProfilesResponse#network_profiles #network_profiles} => Array&lt;Types::NetworkProfileData&gt;
+    #   * {Types::SearchNetworkProfilesResponse#next_token #next_token} => String
+    #   * {Types::SearchNetworkProfilesResponse#total_count #total_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_network_profiles({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     sort_criteria: [
+    #       {
+    #         key: "SortKey", # required
+    #         value: "ASC", # required, accepts ASC, DESC
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profiles #=> Array
+    #   resp.network_profiles[0].network_profile_arn #=> String
+    #   resp.network_profiles[0].network_profile_name #=> String
+    #   resp.network_profiles[0].description #=> String
+    #   resp.network_profiles[0].ssid #=> String
+    #   resp.network_profiles[0].security_type #=> String, one of "OPEN", "WEP", "WPA_PSK", "WPA2_PSK", "WPA2_ENTERPRISE"
+    #   resp.network_profiles[0].eap_method #=> String, one of "EAP_TLS"
+    #   resp.network_profiles[0].certificate_authority_arn #=> String
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchNetworkProfiles AWS API Documentation
+    #
+    # @overload search_network_profiles(params = {})
+    # @param [Hash] params ({})
+    def search_network_profiles(params = {}, options = {})
+      req = build_request(:search_network_profiles, params)
       req.send_request(options)
     end
 
@@ -1560,11 +3071,13 @@ module Aws::AlexaForBusiness
     #   resp.profiles #=> Array
     #   resp.profiles[0].profile_arn #=> String
     #   resp.profiles[0].profile_name #=> String
+    #   resp.profiles[0].is_default #=> Boolean
     #   resp.profiles[0].address #=> String
     #   resp.profiles[0].timezone #=> String
     #   resp.profiles[0].distance_unit #=> String, one of "METRIC", "IMPERIAL"
     #   resp.profiles[0].temperature_unit #=> String, one of "FAHRENHEIT", "CELSIUS"
     #   resp.profiles[0].wake_word #=> String, one of "ALEXA", "AMAZON", "ECHO", "COMPUTER"
+    #   resp.profiles[0].locale #=> String
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -1783,8 +3296,82 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Triggers an asynchronous flow to send text, SSML, or audio
+    # announcements to rooms that are identified by a search or filter.
+    #
+    # @option params [required, Array<Types::Filter>] :room_filters
+    #   The filters to use to send an announcement to a specified list of
+    #   rooms. The supported filter keys are RoomName, ProfileName, RoomArn,
+    #   and ProfileArn. To send to all rooms, specify an empty RoomFilters
+    #   list.
+    #
+    # @option params [required, Types::Content] :content
+    #   The announcement content. This can contain only one of the three
+    #   possible announcement types (text, SSML or audio).
+    #
+    # @option params [Integer] :time_to_live_in_seconds
+    #   The time to live for an announcement. Default is 300. If delivery
+    #   doesn't occur within this time, the announcement is not delivered.
+    #
+    # @option params [required, String] :client_request_token
+    #   The unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::SendAnnouncementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendAnnouncementResponse#announcement_arn #announcement_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_announcement({
+    #     room_filters: [ # required
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     content: { # required
+    #       text_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "TextValue", # required
+    #         },
+    #       ],
+    #       ssml_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           value: "SsmlValue", # required
+    #         },
+    #       ],
+    #       audio_list: [
+    #         {
+    #           locale: "en-US", # required, accepts en-US
+    #           location: "AudioLocation", # required
+    #         },
+    #       ],
+    #     },
+    #     time_to_live_in_seconds: 1,
+    #     client_request_token: "ClientRequestToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.announcement_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SendAnnouncement AWS API Documentation
+    #
+    # @overload send_announcement(params = {})
+    # @param [Hash] params ({})
+    def send_announcement(params = {}, options = {})
+      req = build_request(:send_announcement, params)
+      req.send_request(options)
+    end
+
     # Sends an enrollment invitation email with a URL to a user. The URL is
-    # valid for 72 hours or until you call this operation again, whichever
+    # valid for 30 days or until you call this operation again, whichever
     # comes first.
     #
     # @option params [String] :user_arn
@@ -1807,8 +3394,23 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Resets a device and its account to the known default settings, by
-    # clearing all information and settings set by previous users.
+    # Resets a device and its account to the known default settings. This
+    # clears all information and settings set by previous users in the
+    # following ways:
+    #
+    # * Bluetooth - This unpairs all bluetooth devices paired with your echo
+    #   device.
+    #
+    # * Volume - This resets the echo device's volume to the default value.
+    #
+    # * Notifications - This clears all notifications from your echo device.
+    #
+    # * Lists - This clears all to-do items from your echo device.
+    #
+    # * Settings - This internally syncs the room's profile (if the device
+    #   is assigned to a room), contacts, address books, delegation access
+    #   for account linking, and communications (if enabled on the room
+    #   profile).
     #
     # @option params [String] :room_arn
     #   The ARN of the room with which the device to sync is associated.
@@ -1827,7 +3429,7 @@ module Aws::AlexaForBusiness
     #   resp = client.start_device_sync({
     #     room_arn: "Arn",
     #     device_arn: "Arn",
-    #     features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, ALL
+    #     features: ["BLUETOOTH"], # required, accepts BLUETOOTH, VOLUME, NOTIFICATIONS, LISTS, SKILLS, NETWORK_PROFILE, SETTINGS, ALL
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartDeviceSync AWS API Documentation
@@ -1836,6 +3438,29 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def start_device_sync(params = {}, options = {})
       req = build_request(:start_device_sync, params)
+      req.send_request(options)
+    end
+
+    # Initiates the discovery of any smart home appliances associated with
+    # the room.
+    #
+    # @option params [required, String] :room_arn
+    #   The room where smart home appliance discovery was initiated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_smart_home_appliance_discovery({
+    #     room_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/StartSmartHomeApplianceDiscovery AWS API Documentation
+    #
+    # @overload start_smart_home_appliance_discovery(params = {})
+    # @param [Hash] params ({})
+    def start_smart_home_appliance_discovery(params = {}, options = {})
+      req = build_request(:start_smart_home_appliance_discovery, params)
       req.send_request(options)
     end
 
@@ -1856,8 +3481,8 @@ module Aws::AlexaForBusiness
     #     arn: "Arn", # required
     #     tags: [ # required
     #       {
-    #         key: "TagKey",
-    #         value: "TagValue",
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -1928,6 +3553,100 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates the configuration of the report delivery schedule with the
+    # specified schedule ARN.
+    #
+    # @option params [required, String] :schedule_arn
+    #   The ARN of the business report schedule.
+    #
+    # @option params [String] :s3_bucket_name
+    #   The S3 location of the output reports.
+    #
+    # @option params [String] :s3_key_prefix
+    #   The S3 key where the report is delivered.
+    #
+    # @option params [String] :format
+    #   The format of the generated report (individual CSV files or zipped
+    #   files of individual files).
+    #
+    # @option params [String] :schedule_name
+    #   The name identifier of the schedule.
+    #
+    # @option params [Types::BusinessReportRecurrence] :recurrence
+    #   The recurrence of the reports.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_business_report_schedule({
+    #     schedule_arn: "Arn", # required
+    #     s3_bucket_name: "CustomerS3BucketName",
+    #     s3_key_prefix: "S3KeyPrefix",
+    #     format: "CSV", # accepts CSV, CSV_ZIP
+    #     schedule_name: "BusinessReportScheduleName",
+    #     recurrence: {
+    #       start_date: "Date",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateBusinessReportSchedule AWS API Documentation
+    #
+    # @overload update_business_report_schedule(params = {})
+    # @param [Hash] params ({})
+    def update_business_report_schedule(params = {}, options = {})
+      req = build_request(:update_business_report_schedule, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing conference provider's settings.
+    #
+    # @option params [required, String] :conference_provider_arn
+    #   The ARN of the conference provider.
+    #
+    # @option params [required, String] :conference_provider_type
+    #   The type of the conference provider.
+    #
+    # @option params [Types::IPDialIn] :ip_dial_in
+    #   The IP endpoint and protocol for calling.
+    #
+    # @option params [Types::PSTNDialIn] :pstn_dial_in
+    #   The information for PSTN conferencing.
+    #
+    # @option params [required, Types::MeetingSetting] :meeting_setting
+    #   The meeting settings for the conference provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_conference_provider({
+    #     conference_provider_arn: "Arn", # required
+    #     conference_provider_type: "CHIME", # required, accepts CHIME, BLUEJEANS, FUZE, GOOGLE_HANGOUTS, POLYCOM, RINGCENTRAL, SKYPE_FOR_BUSINESS, WEBEX, ZOOM, CUSTOM
+    #     ip_dial_in: {
+    #       endpoint: "Endpoint", # required
+    #       comms_protocol: "SIP", # required, accepts SIP, SIPS, H323
+    #     },
+    #     pstn_dial_in: {
+    #       country_code: "CountryCode", # required
+    #       phone_number: "OutboundPhoneNumber", # required
+    #       one_click_id_delay: "OneClickIdDelay", # required
+    #       one_click_pin_delay: "OneClickPinDelay", # required
+    #     },
+    #     meeting_setting: { # required
+    #       require_pin: "YES", # required, accepts YES, NO, OPTIONAL
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateConferenceProvider AWS API Documentation
+    #
+    # @overload update_conference_provider(params = {})
+    # @param [Hash] params ({})
+    def update_conference_provider(params = {}, options = {})
+      req = build_request(:update_conference_provider, params)
+      req.send_request(options)
+    end
+
     # Updates the contact details by the contact ARN.
     #
     # @option params [required, String] :contact_arn
@@ -1943,7 +3662,16 @@ module Aws::AlexaForBusiness
     #   The updated last name of the contact.
     #
     # @option params [String] :phone_number
-    #   The updated phone number of the contact.
+    #   The updated phone number of the contact. The phone number type
+    #   defaults to WORK. You can either specify PhoneNumber or PhoneNumbers.
+    #   We recommend that you use PhoneNumbers, which lets you specify the
+    #   phone number type and multiple numbers.
+    #
+    # @option params [Array<Types::PhoneNumber>] :phone_numbers
+    #   The list of phone numbers for the contact.
+    #
+    # @option params [Array<Types::SipAddress>] :sip_addresses
+    #   The list of SIP addresses for the contact.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1954,7 +3682,19 @@ module Aws::AlexaForBusiness
     #     display_name: "ContactName",
     #     first_name: "ContactName",
     #     last_name: "ContactName",
-    #     phone_number: "E164PhoneNumber",
+    #     phone_number: "RawPhoneNumber",
+    #     phone_numbers: [
+    #       {
+    #         number: "RawPhoneNumber", # required
+    #         type: "MOBILE", # required, accepts MOBILE, WORK, HOME
+    #       },
+    #     ],
+    #     sip_addresses: [
+    #       {
+    #         uri: "SipUri", # required
+    #         type: "WORK", # required, accepts WORK
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact AWS API Documentation
@@ -1992,6 +3732,125 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates the details of a gateway. If any optional field is not
+    # provided, the existing corresponding value is left unmodified.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The ARN of the gateway to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the gateway.
+    #
+    # @option params [String] :description
+    #   The updated description of the gateway.
+    #
+    # @option params [String] :software_version
+    #   The updated software version of the gateway. The gateway automatically
+    #   updates its software version during normal operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway({
+    #     gateway_arn: "Arn", # required
+    #     name: "GatewayName",
+    #     description: "GatewayDescription",
+    #     software_version: "GatewayVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGateway AWS API Documentation
+    #
+    # @overload update_gateway(params = {})
+    # @param [Hash] params ({})
+    def update_gateway(params = {}, options = {})
+      req = build_request(:update_gateway, params)
+      req.send_request(options)
+    end
+
+    # Updates the details of a gateway group. If any optional field is not
+    # provided, the existing corresponding value is left unmodified.
+    #
+    # @option params [required, String] :gateway_group_arn
+    #   The ARN of the gateway group to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the gateway group.
+    #
+    # @option params [String] :description
+    #   The updated description of the gateway group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_gateway_group({
+    #     gateway_group_arn: "Arn", # required
+    #     name: "GatewayGroupName",
+    #     description: "GatewayGroupDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateGatewayGroup AWS API Documentation
+    #
+    # @overload update_gateway_group(params = {})
+    # @param [Hash] params ({})
+    def update_gateway_group(params = {}, options = {})
+      req = build_request(:update_gateway_group, params)
+      req.send_request(options)
+    end
+
+    # Updates a network profile by the network profile ARN.
+    #
+    # @option params [required, String] :network_profile_arn
+    #   The ARN of the network profile associated with a device.
+    #
+    # @option params [String] :network_profile_name
+    #   The name of the network profile associated with a device.
+    #
+    # @option params [String] :description
+    #   Detailed information about a device's network profile.
+    #
+    # @option params [String] :current_password
+    #   The current password of the Wi-Fi network.
+    #
+    # @option params [String] :next_password
+    #   The next, or subsequent, password of the Wi-Fi network. This password
+    #   is asynchronously transmitted to the device and is used when the
+    #   password of the network changes to NextPassword.
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The ARN of the Private Certificate Authority (PCA) created in AWS
+    #   Certificate Manager (ACM). This is used to issue certificates to the
+    #   devices.
+    #
+    # @option params [Array<String>] :trust_anchors
+    #   The root certificate(s) of your authentication server that will be
+    #   installed on your devices and used to trust your authentication server
+    #   during EAP negotiation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_profile({
+    #     network_profile_arn: "Arn", # required
+    #     network_profile_name: "NetworkProfileName",
+    #     description: "NetworkProfileDescription",
+    #     current_password: "CurrentWiFiPassword",
+    #     next_password: "NextWiFiPassword",
+    #     certificate_authority_arn: "Arn",
+    #     trust_anchors: ["TrustAnchor"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateNetworkProfile AWS API Documentation
+    #
+    # @overload update_network_profile(params = {})
+    # @param [Hash] params ({})
+    def update_network_profile(params = {}, options = {})
+      req = build_request(:update_network_profile, params)
+      req.send_request(options)
+    end
+
     # Updates an existing room profile by room profile ARN.
     #
     # @option params [String] :profile_arn
@@ -1999,6 +3858,10 @@ module Aws::AlexaForBusiness
     #
     # @option params [String] :profile_name
     #   The updated name for the room profile.
+    #
+    # @option params [Boolean] :is_default
+    #   Sets the profile as default if selected. If this is missing, no update
+    #   is done to the default status.
     #
     # @option params [String] :timezone
     #   The updated timezone for the room profile.
@@ -2015,6 +3878,10 @@ module Aws::AlexaForBusiness
     # @option params [String] :wake_word
     #   The updated wake word for the room profile.
     #
+    # @option params [String] :locale
+    #   The updated locale for the room profile. (This is currently only
+    #   available to a limited preview audience.)
+    #
     # @option params [Boolean] :setup_mode_disabled
     #   Whether the setup mode of the profile is enabled.
     #
@@ -2024,6 +3891,9 @@ module Aws::AlexaForBusiness
     # @option params [Boolean] :pstn_enabled
     #   Whether the PSTN setting of the room profile is enabled.
     #
+    # @option params [Types::UpdateMeetingRoomConfiguration] :meeting_room_configuration
+    #   The updated meeting room settings of a room profile.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2031,14 +3901,32 @@ module Aws::AlexaForBusiness
     #   resp = client.update_profile({
     #     profile_arn: "Arn",
     #     profile_name: "ProfileName",
+    #     is_default: false,
     #     timezone: "Timezone",
     #     address: "Address",
     #     distance_unit: "METRIC", # accepts METRIC, IMPERIAL
     #     temperature_unit: "FAHRENHEIT", # accepts FAHRENHEIT, CELSIUS
     #     wake_word: "ALEXA", # accepts ALEXA, AMAZON, ECHO, COMPUTER
+    #     locale: "DeviceLocale",
     #     setup_mode_disabled: false,
     #     max_volume_limit: 1,
     #     pstn_enabled: false,
+    #     meeting_room_configuration: {
+    #       room_utilization_metrics_enabled: false,
+    #       end_of_meeting_reminder: {
+    #         reminder_at_minutes: [1],
+    #         reminder_type: "ANNOUNCEMENT_TIME_CHECK", # accepts ANNOUNCEMENT_TIME_CHECK, ANNOUNCEMENT_VARIABLE_TIME_LEFT, CHIME, KNOCK
+    #         enabled: false,
+    #       },
+    #       instant_booking: {
+    #         duration_in_minutes: 1,
+    #         enabled: false,
+    #       },
+    #       require_check_in: {
+    #         release_after_minutes: 1,
+    #         enabled: false,
+    #       },
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateProfile AWS API Documentation
@@ -2131,7 +4019,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

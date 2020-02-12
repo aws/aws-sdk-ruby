@@ -24,6 +24,7 @@ module Aws::AutoScaling
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -40,18 +41,19 @@ module Aws::AutoScaling
     end
     alias :instance_id :id
 
+    # The instance type of the EC2 instance.
+    # @return [String]
+    def instance_type
+      data[:instance_type]
+    end
+
     # The Availability Zone for the instance.
     # @return [String]
     def availability_zone
       data[:availability_zone]
     end
 
-    # The lifecycle state for the instance. For more information, see [Auto
-    # Scaling Lifecycle][1] in the *Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # The lifecycle state for the instance.
     # @return [String]
     def lifecycle_state
       data[:lifecycle_state]
@@ -59,8 +61,8 @@ module Aws::AutoScaling
 
     # The last reported health status of this instance. "Healthy" means
     # that the instance is healthy and should remain in service.
-    # "Unhealthy" means that the instance is unhealthy and Auto Scaling
-    # should terminate and replace it.
+    # "Unhealthy" means that the instance is unhealthy and Amazon EC2 Auto
+    # Scaling should terminate and replace it.
     # @return [String]
     def health_status
       data[:health_status]
@@ -79,11 +81,20 @@ module Aws::AutoScaling
       data[:launch_template]
     end
 
-    # Indicates whether the instance is protected from termination by Auto
-    # Scaling when scaling in.
+    # Indicates whether the instance is protected from termination by Amazon
+    # EC2 Auto Scaling when scaling in.
     # @return [Boolean]
     def protected_from_scale_in
       data[:protected_from_scale_in]
+    end
+
+    # The number of capacity units contributed by the instance based on its
+    # instance type.
+    #
+    # Valid Range: Minimum value of 1. Maximum value of 999.
+    # @return [String]
+    def weighted_capacity
+      data[:weighted_capacity]
     end
 
     # @!endgroup
@@ -316,18 +327,18 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :health_status
-    #   The health status of the instance. Set to `Healthy` if you want the
-    #   instance to remain in service. Set to `Unhealthy` if you want the
-    #   instance to be out of service. Auto Scaling will terminate and replace
-    #   the unhealthy instance.
+    #   The health status of the instance. Set to `Healthy` to have the
+    #   instance remain in service. Set to `Unhealthy` to have the instance be
+    #   out of service. Amazon EC2 Auto Scaling terminates and replaces the
+    #   unhealthy instance.
     # @option options [Boolean] :should_respect_grace_period
     #   If the Auto Scaling group of the specified instance has a
     #   `HealthCheckGracePeriod` specified for the group, by default, this
-    #   call will respect the grace period. Set this to `False`, if you do not
-    #   want the call to respect the grace period associated with the group.
+    #   call respects the grace period. Set this to `False`, to have the call
+    #   not respect the grace period associated with the group.
     #
-    #   For more information, see the description of the health check grace
-    #   period for CreateAutoScalingGroup.
+    #   For more information about the health check grace period, see
+    #   CreateAutoScalingGroup.
     # @return [EmptyStructure]
     def set_health(options = {})
       options = options.merge(instance_id: @id)

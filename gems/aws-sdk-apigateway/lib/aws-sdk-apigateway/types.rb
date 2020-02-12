@@ -18,7 +18,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -58,7 +58,7 @@ module Aws::APIGateway
     # The successful response returns a `200 OK` status code and a payload
     # similar to the following:
     #
-    #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-\{rel\}.html", "name": "account", "templated": true \}, "self": \{ "href": "/account" \}, "account:update": \{ "href": "/account" \} \}, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "throttleSettings": \{ "rateLimit": 500, "burstLimit": 1000 \} \}
+    #     \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-\{rel\}.html", "name": "account", "templated": true \}, "self": \{ "href": "/account" \}, "account:update": \{ "href": "/account" \} \}, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "throttleSettings": \{ "rateLimit": 500, "burstLimit": 1000 \} \}
     #
     # In addition to making the REST API call directly, you can use the AWS
     # CLI and an AWS SDK to access this resource.
@@ -71,10 +71,10 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html
-    # [3]: http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
-    # [4]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html
+    # [1]: https://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html
+    # [3]: https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
+    # [4]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html
     #
     # @!attribute [rw] cloudwatch_role_arn
     #   The ARN of an Amazon CloudWatch role for the current Account.
@@ -112,7 +112,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
     #
     # @!attribute [rw] id
     #   The identifier of the API Key.
@@ -152,6 +152,11 @@ module Aws::APIGateway
     #   resource.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ApiKey < Struct.new(
       :id,
       :value,
@@ -161,7 +166,8 @@ module Aws::APIGateway
       :enabled,
       :created_date,
       :last_updated_date,
-      :stage_keys)
+      :stage_keys,
+      :tags)
       include Aws::Structure
     end
 
@@ -190,7 +196,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
     #
     # @!attribute [rw] warnings
     #   A list of warning messages logged during the import of API keys when
@@ -219,6 +225,12 @@ module Aws::APIGateway
     #       {
     #         api_id: "String",
     #         stage: "String",
+    #         throttle: {
+    #           "String" => {
+    #             burst_limit: 1,
+    #             rate_limit: 1.0,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] api_id
@@ -229,9 +241,15 @@ module Aws::APIGateway
     #   API stage name of the associated API stage in a usage plan.
     #   @return [String]
     #
+    # @!attribute [rw] throttle
+    #   Map containing method level throttling information for API stage in
+    #   a usage plan.
+    #   @return [Hash<String,Types::ThrottleSettings>]
+    #
     class ApiStage < Struct.new(
       :api_id,
-      :stage)
+      :stage,
+      :throttle)
       include Aws::Structure
     end
 
@@ -240,12 +258,14 @@ module Aws::APIGateway
     # method.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] id
     #   The identifier for the authorizer resource.
@@ -270,7 +290,7 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
-    #   Optional customer-defined field, used in Swagger imports and exports
+    #   Optional customer-defined field, used in OpenAPI imports and exports
     #   without functional impact.
     #   @return [String]
     #
@@ -321,12 +341,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -353,12 +374,14 @@ module Aws::APIGateway
     # Represents a collection of Authorizer resources.
     #
     # <div class="seeAlso">
-    # [Enable custom authorization][1]
+    # [Use Lambda Function as Authorizer][1] [Use Cognito User Pool as
+    # Authorizer][2]
     # </div>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -370,6 +393,18 @@ module Aws::APIGateway
     class Authorizers < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The submitted request is not valid, for example, the input is
+    # incomplete or incorrect. See the accompanying error message for
+    # details.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class BadRequestException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -387,7 +422,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] base_path
     #   The base path name that callers of the API must provide as part of
@@ -417,7 +452,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -489,7 +524,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
     #
     # @!attribute [rw] client_certificate_id
     #   The identifier of the client certificate.
@@ -513,12 +548,18 @@ module Aws::APIGateway
     #   The timestamp when the client certificate will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class ClientCertificate < Struct.new(
       :client_certificate_id,
       :description,
       :pem_encoded_certificate,
       :created_date,
-      :expiration_date)
+      :expiration_date,
+      :tags)
       include Aws::Structure
     end
 
@@ -530,7 +571,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -542,6 +583,17 @@ module Aws::APIGateway
     class ClientCertificates < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The request configuration has conflicts. For details, see the
+    # accompanying error message.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -563,6 +615,9 @@ module Aws::APIGateway
     #           },
     #         ],
     #         customer_id: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -596,6 +651,12 @@ module Aws::APIGateway
     #   AWS SaaS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateApiKeyRequest < Struct.new(
       :name,
       :description,
@@ -603,7 +664,8 @@ module Aws::APIGateway
       :generate_distinct_id,
       :value,
       :stage_keys,
-      :customer_id)
+      :customer_id,
+      :tags)
       include Aws::Structure
     end
 
@@ -649,7 +711,7 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] auth_type
-    #   Optional customer-defined field, used in Swagger imports and exports
+    #   Optional customer-defined field, used in OpenAPI imports and exports
     #   without functional impact.
     #   @return [String]
     #
@@ -700,12 +762,13 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. API Gateway will
-    #   match the `aud` field of the incoming token from the client against
-    #   the specified regular expression. It will invoke the authorizer's
-    #   Lambda function when there is a match. Otherwise, it will return a
-    #   401 Unauthorized response without calling the Lambda function. The
-    #   validation expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. For
+    #   `COGNITO_USER_POOLS` authorizers, API Gateway will match the `aud`
+    #   field of the incoming token from the client against the specified
+    #   regular expression. It will invoke the authorizer's Lambda function
+    #   when there is a match. Otherwise, it will return a 401 Unauthorized
+    #   response without calling the Lambda function. The validation
+    #   expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -749,7 +812,7 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   The base path name that callers of the API must provide as part of
     #   the URL after the domain name. This value must be unique for all of
-    #   the mappings across a single API. Leave this blank if you do not
+    #   the mappings across a single API. Specify '(none)' if you do not
     #   want callers to specify a base path name after the domain name.
     #   @return [String]
     #
@@ -759,7 +822,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage
     #   The name of the API's stage that you want to use for this mapping.
-    #   Leave this blank if you do not want callers to explicitly specify
+    #   Specify '(none)' if you do not want callers to explicitly specify
     #   the stage name after any base path name.
     #   @return [String]
     #
@@ -793,6 +856,7 @@ module Aws::APIGateway
     #           },
     #           use_stage_cache: false,
     #         },
+    #         tracing_enabled: false,
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -835,6 +899,11 @@ module Aws::APIGateway
     #   deployment is a canary release deployment.
     #   @return [Types::DeploymentCanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
     class CreateDeploymentRequest < Struct.new(
       :rest_api_id,
       :stage_name,
@@ -843,7 +912,8 @@ module Aws::APIGateway
       :cache_cluster_enabled,
       :cache_cluster_size,
       :variables,
-      :canary_settings)
+      :canary_settings,
+      :tracing_enabled)
       include Aws::Structure
     end
 
@@ -876,7 +946,7 @@ module Aws::APIGateway
     # @!attribute [rw] properties
     #   \[Required\] The new documentation content map of the targeted API
     #   entity. Enclosed key-value pairs are API-specific, but only
-    #   Swagger-compliant key-value pairs can be exported and, hence,
+    #   OpenAPI-compliant key-value pairs can be exported and, hence,
     #   published.
     #   @return [String]
     #
@@ -939,7 +1009,12 @@ module Aws::APIGateway
     #         regional_certificate_arn: "String",
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
+    #         tags: {
+    #           "String" => "String",
+    #         },
+    #         security_policy: "TLS_1_0", # accepts TLS_1_0, TLS_1_2
     #       }
     #
     # @!attribute [rw] domain_name
@@ -995,6 +1070,17 @@ module Aws::APIGateway
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
     class CreateDomainNameRequest < Struct.new(
       :domain_name,
       :certificate_name,
@@ -1004,7 +1090,9 @@ module Aws::APIGateway
       :certificate_arn,
       :regional_certificate_name,
       :regional_certificate_arn,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :tags,
+      :security_policy)
       include Aws::Structure
     end
 
@@ -1140,8 +1228,12 @@ module Aws::APIGateway
     #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #           vpc_endpoint_ids: ["String"],
     #         },
     #         policy: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1192,6 +1284,12 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1201,7 +1299,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -1229,6 +1328,7 @@ module Aws::APIGateway
     #           },
     #           use_stage_cache: false,
     #         },
+    #         tracing_enabled: false,
     #         tags: {
     #           "String" => "String",
     #         },
@@ -1239,7 +1339,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   \[Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource. Stage names can only
+    #   contain alphanumeric characters, hyphens, and underscores. Maximum
+    #   length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -1273,6 +1375,11 @@ module Aws::APIGateway
     #   The canary deployment settings of this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The key-value map of strings. The valid character set is
     #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
@@ -1289,6 +1396,7 @@ module Aws::APIGateway
       :variables,
       :documentation_version,
       :canary_settings,
+      :tracing_enabled,
       :tags)
       include Aws::Structure
     end
@@ -1342,6 +1450,12 @@ module Aws::APIGateway
     #           {
     #             api_id: "String",
     #             stage: "String",
+    #             throttle: {
+    #               "String" => {
+    #                 burst_limit: 1,
+    #                 rate_limit: 1.0,
+    #               },
+    #             },
     #           },
     #         ],
     #         throttle: {
@@ -1352,6 +1466,9 @@ module Aws::APIGateway
     #           limit: 1,
     #           offset: 1,
     #           period: "DAY", # accepts DAY, WEEK, MONTH
+    #         },
+    #         tags: {
+    #           "String" => "String",
     #         },
     #       }
     #
@@ -1375,12 +1492,19 @@ module Aws::APIGateway
     #   The quota of the usage plan.
     #   @return [Types::QuotaSettings]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateUsagePlanRequest < Struct.new(
       :name,
       :description,
       :api_stages,
       :throttle,
-      :quota)
+      :quota,
+      :tags)
       include Aws::Structure
     end
 
@@ -1396,6 +1520,9 @@ module Aws::APIGateway
     #         name: "String", # required
     #         description: "String",
     #         target_arns: ["String"], # required
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1412,10 +1539,17 @@ module Aws::APIGateway
     #   same AWS account of the API owner.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateVpcLinkRequest < Struct.new(
       :name,
       :description,
-      :target_arns)
+      :target_arns,
+      :tags)
       include Aws::Structure
     end
 
@@ -1479,6 +1613,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name of the BasePathMapping resource to
     #   delete.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     class DeleteBasePathMappingRequest < Struct.new(
@@ -1976,7 +2112,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
     # [2]: https://aws.amazon.com/tools/
     #
     # @!attribute [rw] id
@@ -2060,8 +2196,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
-    # [2]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
+    # [2]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
     # [3]: https://aws.amazon.com/tools/
     #
     # @!attribute [rw] position
@@ -2090,8 +2226,8 @@ module Aws::APIGateway
     #
     # The content map is a JSON string of API-specific key-value pairs.
     # Although an API can use any shape for the content map, only the
-    # Swagger-compliant documentation fields will be injected into the
-    # associated API entity definition in the exported Swagger definition
+    # OpenAPI-compliant documentation fields will be injected into the
+    # associated API entity definition in the exported OpenAPI definition
     # file.
     #
     # </div>
@@ -2102,7 +2238,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] id
     #   The DocumentationPart identifier, generated by API Gateway when the
@@ -2122,12 +2258,12 @@ module Aws::APIGateway
     #   A content map of API-specific key-value pairs describing the
     #   targeted API entity. The map must be encoded as a JSON string, e.g.,
     #   `"\{ "description": "The API does ..." \}"`. Only
-    #   Swagger-compliant documentation-related fields from the
+    #   OpenAPI-compliant documentation-related fields from the
     #   <literal>properties</literal>
     #
     #    map are exported and, hence, published as part of the API entity
     #   definitions, while the original documentation parts are exported in
-    #   a Swagger extension of `x-amazon-apigateway-documentation`.
+    #   a OpenAPI extension of `x-amazon-apigateway-documentation`.
     #   @return [String]
     #
     class DocumentationPart < Struct.new(
@@ -2141,7 +2277,7 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # This is used to return the result when documentation parts in an
-    # external (e.g., Swagger) file are imported into API Gateway
+    # external (e.g., OpenAPI) file are imported into API Gateway
     # </div>
     #
     # <div class="seeAlso">
@@ -2151,8 +2287,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
-    # [2]: http://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+    # [2]: https://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/
     #
     # @!attribute [rw] ids
     #   A list of the returned documentation part identifiers.
@@ -2251,7 +2387,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2271,7 +2407,7 @@ module Aws::APIGateway
     # <div class="remarks" markdown="1">
     # Publishing API documentation involves creating a documentation version
     # associated with an API stage and exporting the versioned documentation
-    # to an external (e.g., Swagger) file.
+    # to an external (e.g., OpenAPI) file.
     #
     # </div>
     #
@@ -2281,7 +2417,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] version
     #   The version identifier of the API documentation snapshot.
@@ -2316,7 +2452,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2354,7 +2490,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] domain_name
     #   The custom domain name as an API host name, for example,
@@ -2393,7 +2529,7 @@ module Aws::APIGateway
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
     #   @return [String]
     #
     # @!attribute [rw] regional_certificate_name
@@ -2417,7 +2553,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://aws.amazon.com/documentation/cloudfront/
+    #   [1]: https://aws.amazon.com/documentation/cloudfront/
     #   @return [String]
     #
     # @!attribute [rw] distribution_hosted_zone_id
@@ -2429,13 +2565,35 @@ module Aws::APIGateway
     #
     #
     #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region
     #   @return [String]
     #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this DomainName showing the endpoint
     #   types of the domain name.
     #   @return [Types::EndpointConfiguration]
+    #
+    # @!attribute [rw] domain_name_status
+    #   The status of the DomainName migration. The valid values are
+    #   `AVAILABLE` and `UPDATING`. If the status is `UPDATING`, the domain
+    #   cannot be modified further until the existing operation is complete.
+    #   If it is `AVAILABLE`, the domain can be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name_status_message
+    #   An optional text message containing detailed information about
+    #   status of the DomainName migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_policy
+    #   The Transport Layer Security (TLS) version + cipher suite for this
+    #   DomainName. The valid values are `TLS_1_0` and `TLS_1_2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
     #
     class DomainName < Struct.new(
       :domain_name,
@@ -2448,7 +2606,11 @@ module Aws::APIGateway
       :regional_certificate_arn,
       :distribution_domain_name,
       :distribution_hosted_zone_id,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :domain_name_status,
+      :domain_name_status_message,
+      :security_policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -2460,7 +2622,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2483,6 +2645,7 @@ module Aws::APIGateway
     #
     #       {
     #         types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
+    #         vpc_endpoint_ids: ["String"],
     #       }
     #
     # @!attribute [rw] types
@@ -2493,8 +2656,14 @@ module Aws::APIGateway
     #   API, the endpoint type is `PRIVATE`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   A list of VpcEndpointIds of an API (RestApi) against which to create
+    #   Route53 ALIASes. It is only supported for `PRIVATE` endpoint type.
+    #   @return [Array<String>]
+    #
     class EndpointConfiguration < Struct.new(
-      :types)
+      :types,
+      :vpc_endpoint_ids)
       include Aws::Structure
     end
 
@@ -2605,8 +2774,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
     #
     # @!attribute [rw] response_type
     #   The response type of the associated GatewayResponse. Valid values
@@ -2699,8 +2868,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/supported-gateway-response-types.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/customize-gateway-responses.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -2722,14 +2891,24 @@ module Aws::APIGateway
     #
     #       {
     #         description: "String",
+    #         tags: {
+    #           "String" => "String",
+    #         },
     #       }
     #
     # @!attribute [rw] description
     #   The description of the ClientCertificate.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class GenerateClientCertificateRequest < Struct.new(
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -2883,9 +3062,9 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path name that callers of the API must provide
     #   as part of the URL after the domain name. This value must be unique
-    #   for all of the mappings across a single API. Leave this blank if you
-    #   do not want callers to specify any base path name after the domain
-    #   name.
+    #   for all of the mappings across a single API. Specify '(none)' if
+    #   you do not want callers to specify any base path name after the
+    #   domain name.
     #   @return [String]
     #
     class GetBasePathMappingRequest < Struct.new(
@@ -3251,15 +3430,15 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] export_type
-    #   \[Required\] The type of export. Currently only 'swagger' is
-    #   supported.
+    #   \[Required\] The type of export. Acceptable values are 'oas30' for
+    #   OpenAPI 3.0.x and 'swagger' for Swagger/OpenAPI 2.0.
     #   @return [String]
     #
     # @!attribute [rw] parameters
     #   A key-value map of query string parameters that specify properties
     #   of the export, depending on the requested `exportType`. For
-    #   `exportType` `swagger`, any combination of the following parameters
-    #   are supported: `extensions='integrations'` or
+    #   `exportType` `oas30` and `swagger`, any combination of the following
+    #   parameters are supported: `extensions='integrations'` or
     #   `extensions='apigateway'` will export the API with
     #   x-amazon-apigateway-integration extensions.
     #   `extensions='authorizers'` will export the API with
@@ -3270,8 +3449,8 @@ module Aws::APIGateway
     # @!attribute [rw] accepts
     #   The content-type of the export, for example `application/json`.
     #   Currently `application/json` and `application/yaml` are supported
-    #   for `exportType` of `swagger`. This should be specified in the
-    #   `Accept` header for direct API requests.
+    #   for `exportType` of`oas30` and `swagger`. This should be specified
+    #   in the `Accept` header for direct API requests.
     #   @return [String]
     #
     class GetExportRequest < Struct.new(
@@ -3922,8 +4101,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -4175,7 +4353,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
     #   @return [String]
     #
     # @!attribute [rw] format
@@ -4195,7 +4373,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Import documentation parts from an external (e.g., Swagger) definition
+    # Import documentation parts from an external (e.g., OpenAPI) definition
     # file.
     #
     # @note When making an API call, you may pass ImportDocumentationPartsRequest
@@ -4226,7 +4404,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] Raw byte array representing the to-be-imported
-    #   documentation parts. To import from a Swagger file, this is a JSON
+    #   documentation parts. To import from an OpenAPI file, this is a JSON
     #   object.
     #   @return [String]
     #
@@ -4273,8 +4451,8 @@ module Aws::APIGateway
     #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
-    #   To handle imported `basePath`, set `parameters` as
-    #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
+    #   To handle imported `basepath`, set `parameters` as
+    #   `basepath=ignore`, `basepath=prepend` or `basepath=split`.
     #
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
@@ -4289,7 +4467,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] The POST request body containing external API
-    #   definitions. Currently, only Swagger definition JSON files are
+    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
@@ -4313,7 +4491,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] type
     #   Specifies an API method integration type. The valid value is one of
@@ -4398,7 +4576,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
+    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -4471,7 +4649,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -4481,11 +4659,15 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies the integration's cache namespace.
+    #   An API-specific tag group of related cached parameters. To be valid
+    #   values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies the integration's cache key parameters.
+    #   A list of request parameters whose values API Gateway caches. To be
+    #   valid values for `cacheKeyParameters`, these parameters must also be
+    #   specified for Method `requestParameters`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] integration_responses
@@ -4507,7 +4689,7 @@ module Aws::APIGateway
     #   The successful response returns `200 OK` status and a payload as
     #   follows:
     #
-    #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \}
+    #       \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \}
     #
     #
     #
@@ -4519,7 +4701,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    #   [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #   @return [Hash<String,Types::IntegrationResponse>]
     #
     class Integration < Struct.new(
@@ -4550,7 +4732,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] status_code
     #   Specifies the status code that is used to map the integration
@@ -4615,6 +4797,21 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The request exceeded the rate limit. Retry after the specified time
+    # period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class LimitExceededException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a client-facing interface by which the client calls the API
     # to access back-end resources. A **Method** resource is integrated with
     # an Integration resource. Both consist of a request and one or more
@@ -4644,7 +4841,7 @@ module Aws::APIGateway
     # The successful response returns a `200 OK` status code and a payload
     # similar to the following:
     #
-    #     \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+    #     \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
     #
     # In the example above, the response template for the `200 OK` response
     # maps the JSON output from the `ListStreams` action in the back end to
@@ -4662,8 +4859,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
     #
     # @!attribute [rw] http_method
     #   The method's HTTP verb.
@@ -4693,11 +4890,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -4741,7 +4934,7 @@ module Aws::APIGateway
     #   The successful response returns a `200 OK` status code and a payload
     #   similar to the following:
     #
-    #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.operator": false, "method.response.header.operand_2": false, "method.response.header.operand_1": false \}, "statusCode": "200" \}
+    #       \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.operator": false, "method.response.header.operand_2": false, "method.response.header.operand_1": false \}, "statusCode": "200" \}
     #
     #
     #
@@ -4753,7 +4946,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html
     #   @return [Hash<String,Types::MethodResponse>]
     #
     # @!attribute [rw] method_integration
@@ -4777,7 +4970,7 @@ module Aws::APIGateway
     #   The successful response returns a `200 OK` status code and a payload
     #   similar to the following:
     #
-    #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n "a": "$input.params('operand1')",\n "b": "$input.params('operand2')", \n "op": "$input.params('operator')" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n "result": "$res.a, $res.b, $res.op => $res.c",\n "a" : "$res.a",\n "b" : "$res.b",\n "op" : "$res.op",\n "c" : "$res.c"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
+    #       \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n "a": "$input.params('operand1')",\n "b": "$input.params('operand2')", \n "op": "$input.params('operator')" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n "result": "$res.a, $res.b, $res.op => $res.c",\n "a" : "$res.a",\n "b" : "$res.b",\n "op" : "$res.op",\n "c" : "$res.c"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
     #
     #
     #
@@ -4789,7 +4982,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html
+    #   [1]: https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html
     #   @return [Types::Integration]
     #
     # @!attribute [rw] authorization_scopes
@@ -4841,7 +5034,7 @@ module Aws::APIGateway
     # The successful response returns `200 OK` status and a payload as
     # follows:
     #
-    #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \}
+    #     \{ "_links": \{ "curies": \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \}
     #
     #
     #
@@ -4853,7 +5046,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] status_code
     #   The method response's status code.
@@ -4901,7 +5094,7 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] logging_level
-    #   Specifies the logging level for this method, which effects the log
+    #   Specifies the logging level for this method, which affects the log
     #   entries pushed to Amazon CloudWatch Logs. The PATCH path for this
     #   setting is `/\{method_setting_key\}/logging/loglevel`, and the
     #   available levels are `OFF`, `ERROR`, and `INFO`.
@@ -4909,7 +5102,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] data_trace_enabled
     #   Specifies whether data trace logging is enabled for this method,
-    #   which effects the log entries pushed to Amazon CloudWatch Logs. The
+    #   which affects the log entries pushed to Amazon CloudWatch Logs. The
     #   PATCH path for this setting is
     #   `/\{method_setting_key\}/logging/dataTrace`, and the value is a
     #   Boolean.
@@ -5019,7 +5212,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
     #
     # @!attribute [rw] id
     #   The identifier for the model resource.
@@ -5067,7 +5260,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5079,6 +5272,17 @@ module Aws::APIGateway
     class Models < Struct.new(
       :position,
       :items)
+      include Aws::Structure
+    end
+
+    # The requested resource is not found. Make sure that the request URI is
+    # correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -5131,7 +5335,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] from
@@ -5319,7 +5523,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
+    #   [1]: https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -5365,11 +5569,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] cache_namespace
-    #   Specifies a put integration input's cache namespace.
+    #   A list of request parameters whose values are to be cached.
     #   @return [String]
     #
     # @!attribute [rw] cache_key_parameters
-    #   Specifies a put integration input's cache key parameters.
+    #   An API-specific tag group of related cached parameters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] content_handling
@@ -5385,7 +5589,7 @@ module Aws::APIGateway
     #
     #   If this property is not defined, the request payload will be passed
     #   through from the method request to integration request without
-    #   modification, provided that the `passthroughBehaviors` is configured
+    #   modification, provided that the `passthroughBehavior` is configured
     #   to support payload pass-through.
     #   @return [String]
     #
@@ -5560,11 +5764,7 @@ module Aws::APIGateway
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
     #   you can assign the `operationName` of `ListPets` for the `GET /pets`
-    #   method in [PetStore][1] example.
-    #
-    #
-    #
-    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   method in the `PetStore` example.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -5729,7 +5929,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] body
     #   \[Required\] The PUT request body containing external API
-    #   definitions. Currently, only Swagger definition JSON files are
+    #   definitions. Currently, only OpenAPI definition JSON/YAML files are
     #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
@@ -5778,7 +5978,7 @@ module Aws::APIGateway
     # A set of validation rules for incoming Method requests.
     #
     # <div class="remarks" markdown="1">
-    # In Swagger, a RequestValidator of an API is defined by the
+    # In OpenAPI, a RequestValidator of an API is defined by the
     # [x-amazon-apigateway-request-validators.requestValidator][1] object.
     # It the referenced using the [x-amazon-apigateway-request-validator][2]
     # property.
@@ -5791,9 +5991,9 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator
-    # [3]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator
+    # [3]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
     #
     # @!attribute [rw] id
     #   The identifier of this RequestValidator.
@@ -5824,7 +6024,7 @@ module Aws::APIGateway
     # A collection of RequestValidator resources of a given RestApi.
     #
     # <div class="remarks" markdown="1">
-    # In Swagger, the RequestValidators of an API is defined by the
+    # In OpenAPI, the RequestValidators of an API is defined by the
     # [x-amazon-apigateway-request-validators][1] extension.
     #
     # </div>
@@ -5835,8 +6035,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5859,7 +6059,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] id
     #   The resource's identifier.
@@ -5896,7 +6096,7 @@ module Aws::APIGateway
     #
     #   ##### Response
     #
-    #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+    #       \{ "_links": \{ "curies": [ \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
     #
     #   If the `OPTIONS` is enabled on the resource, you can follow the
     #   example here to get that method. Just replace the `GET` of the last
@@ -5924,7 +6124,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -5947,7 +6147,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] id
     #   The API's identifier. This identifier is unique across all of your
@@ -6007,6 +6207,11 @@ module Aws::APIGateway
     #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -6018,7 +6223,8 @@ module Aws::APIGateway
       :minimum_compression_size,
       :api_key_source,
       :endpoint_configuration,
-      :policy)
+      :policy,
+      :tags)
       include Aws::Structure
     end
 
@@ -6032,7 +6238,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -6143,6 +6349,21 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The requested service is not available. For details see the
+    # accompanying error message. Retry after the specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
     # Represents a unique identifier for a version of a deployed RestApi
     # that is callable by users.
     #
@@ -6152,7 +6373,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
     #
     # @!attribute [rw] deployment_id
     #   The identifier of the Deployment that the stage points to.
@@ -6164,7 +6385,9 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage_name
     #   The name of the stage is the first path segment in the Uniform
-    #   Resource Identifier (URI) of a call to API Gateway.
+    #   Resource Identifier (URI) of a call to API Gateway. Stage names can
+    #   only contain alphanumeric characters, hyphens, and underscores.
+    #   Maximum length is 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6209,6 +6432,15 @@ module Aws::APIGateway
     #   Settings for the canary deployment in this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tracing_enabled
+    #   Specifies whether active tracing with X-ray is enabled for the
+    #   Stage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] web_acl_arn
+    #   The ARN of the WebAcl associated with the Stage.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The collection of tags. Each tag element is associated with a given
     #   resource.
@@ -6235,6 +6467,8 @@ module Aws::APIGateway
       :documentation_version,
       :access_log_settings,
       :canary_settings,
+      :tracing_enabled,
+      :web_acl_arn,
       :tags,
       :created_date,
       :last_updated_date)
@@ -6275,7 +6509,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
     #
     # @!attribute [rw] item
     #   The current page of elements from this collection.
@@ -6300,8 +6534,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6338,7 +6571,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings
     #
     # @!attribute [rw] value
     #   The Apache [Velocity Template Language (VTL)][1] template content
@@ -6346,7 +6579,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://velocity.apache.org/engine/devel/vtl-reference-guide.html
+    #   [1]: https://velocity.apache.org/engine/devel/vtl-reference-guide.html
     #   @return [String]
     #
     class Template < Struct.new(
@@ -6364,6 +6597,9 @@ module Aws::APIGateway
     #         authorizer_id: "String", # required
     #         headers: {
     #           "String" => "String",
+    #         },
+    #         multi_value_headers: {
+    #           "String" => ["String"],
     #         },
     #         path_with_query_string: "String",
     #         body: "String",
@@ -6390,6 +6626,12 @@ module Aws::APIGateway
     #   or identity source, should be specified.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   \[Optional\] The headers as a map from string to list of values to
+    #   simulate an incoming invocation request. This is where the incoming
+    #   authorization token, or identity source, may be specified.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] path_with_query_string
     #   \[Optional\] The URI path, including query string, of the simulated
     #   invocation request. Use this to specify path parameters and query
@@ -6414,6 +6656,7 @@ module Aws::APIGateway
       :rest_api_id,
       :authorizer_id,
       :headers,
+      :multi_value_headers,
       :path_with_query_string,
       :body,
       :stage_variables,
@@ -6454,7 +6697,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+    #   [1]: https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
     #   @return [Hash<String,String>]
     #
     class TestInvokeAuthorizerResponse < Struct.new(
@@ -6481,6 +6724,9 @@ module Aws::APIGateway
     #         body: "String",
     #         headers: {
     #           "String" => "String",
+    #         },
+    #         multi_value_headers: {
+    #           "String" => ["String"],
     #         },
     #         client_certificate_id: "String",
     #         stage_variables: {
@@ -6515,6 +6761,11 @@ module Aws::APIGateway
     #   request.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   The headers as a map from string to list of values to simulate an
+    #   incoming invocation request.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] client_certificate_id
     #   A ClientCertificate identifier to use in the test invocation. API
     #   Gateway will use the certificate when making the HTTPS request to
@@ -6533,6 +6784,7 @@ module Aws::APIGateway
       :path_with_query_string,
       :body,
       :headers,
+      :multi_value_headers,
       :client_certificate_id,
       :stage_variables)
       include Aws::Structure
@@ -6546,7 +6798,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console
     #
     # @!attribute [rw] status
     #   The HTTP status code.
@@ -6560,6 +6812,11 @@ module Aws::APIGateway
     #   The headers of the HTTP response.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] multi_value_headers
+    #   The headers of the HTTP response as a map from string to list of
+    #   values.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @!attribute [rw] log
     #   The API Gateway execution log for the test invoke request.
     #   @return [String]
@@ -6572,6 +6829,7 @@ module Aws::APIGateway
       :status,
       :body,
       :headers,
+      :multi_value_headers,
       :log,
       :latency)
       include Aws::Structure
@@ -6603,6 +6861,31 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # The request has reached its throttling limit. Retry after the
+    # specified time period.
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TooManyRequestsException < Struct.new(
+      :retry_after_seconds,
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is denied because the caller has insufficient permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Removes a tag from a given resource.
     #
     # @note When making an API call, you may pass UntagResourceRequest
@@ -6615,8 +6898,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] resource_arn
     #   \[Required\] The ARN of a resource that can be tagged. The resource
-    #   ARN must be URL-encoded. At present, Stage is the only taggable
-    #   resource.
+    #   ARN must be URL-encoded.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -6752,6 +7034,8 @@ module Aws::APIGateway
     # @!attribute [rw] base_path
     #   \[Required\] The base path of the BasePathMapping resource to
     #   change.
+    #
+    #   To specify an empty base path, set this parameter to `'(none)'`.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7504,8 +7788,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage
     #
     # @!attribute [rw] usage_plan_id
     #   The plan Id associated with this usage data.
@@ -7556,7 +7840,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] id
     #   The identifier of a UsagePlan resource.
@@ -7588,6 +7872,11 @@ module Aws::APIGateway
     #   plan as a SaaS product on AWS Marketplace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class UsagePlan < Struct.new(
       :id,
       :name,
@@ -7595,7 +7884,8 @@ module Aws::APIGateway
       :api_stages,
       :throttle,
       :quota,
-      :product_code)
+      :product_code,
+      :tags)
       include Aws::Structure
     end
 
@@ -7613,7 +7903,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] id
     #   The Id of a usage plan key.
@@ -7649,7 +7939,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -7672,7 +7962,7 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] position
     #   @return [String]
@@ -7731,13 +8021,19 @@ module Aws::APIGateway
     #   A description about the VPC link status.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     class VpcLink < Struct.new(
       :id,
       :name,
       :description,
       :target_arns,
       :status,
-      :status_message)
+      :status_message,
+      :tags)
       include Aws::Structure
     end
 
@@ -7750,8 +8046,8 @@ module Aws::APIGateway
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html
+    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html
+    # [2]: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html
     #
     # @!attribute [rw] position
     #   @return [String]

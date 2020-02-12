@@ -21,6 +21,7 @@ end
 Given(/^I create a bucket resource$/) do
   @bucket_name = "aws-sdk-resources-#{Time.now.to_i}-#{rand(1000)}"
   @bucket = @s3.create_bucket(bucket: @bucket_name)
+  @s3.client.wait_until(:bucket_exists, bucket: @bucket_name)
   @created_buckets << @bucket
 end
 

@@ -1,4 +1,5 @@
 require 'json'
+require 'cgi'
 
 module BuildTools
   class CustomService
@@ -20,6 +21,8 @@ module BuildTools
       @output_dir = options[:output_dir] || File.expand_path('../../gems', __FILE__)
     end
 
+    attr_reader :svc_name
+
     def build
       AwsSdkCodeGenerator::Service.new(
         name: @svc_name,
@@ -36,6 +39,8 @@ module BuildTools
         remove_plugins: [
           'Aws::Plugins::UserAgent',
           'Aws::Plugins::RegionalEndpoint',
+          'Aws::Plugins::EndpointDiscovery',
+          'Aws::Plugins::EndpointPattern',
           'Aws::Plugins::CredentialsConfiguration'
         ]
       )
@@ -49,12 +54,12 @@ module BuildTools
 
     def model_path(model_dir)
       path = File.expand_path("#{model_dir}/service-2.json", __FILE__)
-      File.exists?(path) ? path : nil
+      File.exist?(path) ? path : nil
     end
 
     def gem_dependencies
       {
-        'aws-sdk-core' => '>= 3.12\', \'< 4.0',
+        'aws-sdk-core' => '>= 3.46.1\', \'< 4.0',
         'aws-sigv4' => '~> 1.0'
       }
     end
@@ -75,9 +80,11 @@ module BuildTools
     end
 
     def validate(svc_name)
-      # replace all non alphanumber with space, can make camel case string
-      raw = svc_name.gsub(/[^0-9a-zA-Z]/i, ' ')
-      raw.split(' ').collect(&:capitalize).join
+      # replace all non alphanumber with space, and make camel case string
+      raw = CGI::unescape(svc_name)
+      raw.gsub(/[^0-9a-zA-Z]/i, ' ').split(' ').each do |part|
+        part[0] = part[0].upcase
+      end.join
     end
 
   end

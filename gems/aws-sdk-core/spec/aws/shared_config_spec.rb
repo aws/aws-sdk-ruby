@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../spec_helper'
 
 module Aws
   describe SharedConfig do
@@ -104,6 +104,86 @@ module Aws
         )
         expect(config.region).to eq("us-west-2")
       end
+    end
+
+    context 'endpoint_discovery selection' do
+
+      it 'can resolves endpoint_discovery from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "endpoint_discovery_enabled"
+        )
+        expect(config.endpoint_discovery).to eq("true")
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "endpoint_discovery_disabled"
+        )
+        expect(config.endpoint_discovery).to eq("false")
+      end
+
+    end
+
+    context 'sts_regional_endpoints selection' do
+
+      it 'can resolve sts_regional_endpoints from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "sts_regional"
+        )
+        expect(config.sts_regional_endpoints).to eq('regional')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "sts_legacy"
+        )
+        expect(config.sts_regional_endpoints).to eq('legacy')
+      end
+
+    end
+
+    context 's3_us_east_1_regional_endpoint selection' do
+
+      it 'can resolve s3_us_east_1_regional_endpoint from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "s3_iad_regional"
+        )
+        expect(config.s3_us_east_1_regional_endpoint).to eq('regional')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: "s3_iad_legacy"
+        )
+        expect(config.s3_us_east_1_regional_endpoint).to eq('legacy')
+      end
+
+    end
+
+    context 's3_use_arn_region' do
+
+      it 'can resolve s3_use_arn_region from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_use_arn_region'
+        )
+        expect(config.s3_use_arn_region).to eq('true')
+
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 's3_do_not_use_arn_region'
+        )
+        expect(config.s3_use_arn_region).to eq('false')
+      end
+
     end
 
   end

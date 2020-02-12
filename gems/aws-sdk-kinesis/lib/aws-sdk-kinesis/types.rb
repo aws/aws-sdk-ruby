@@ -25,7 +25,7 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The set of key-value pairs to use to create the tags.
+    #   A set of up to 10 key-value pairs to use to create the tags.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamInput AWS API Documentation
@@ -33,6 +33,81 @@ module Aws::Kinesis
     class AddTagsToStreamInput < Struct.new(
       :stream_name,
       :tags)
+      include Aws::Structure
+    end
+
+    # An object that represents the details of the consumer you registered.
+    #
+    # @!attribute [rw] consumer_name
+    #   The name of the consumer is something you choose when you register
+    #   the consumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_arn
+    #   When you register a consumer, Kinesis Data Streams generates an ARN
+    #   for it. You need this ARN to be able to call SubscribeToShard.
+    #
+    #   If you delete a consumer and then create a new one with the same
+    #   name, it won't have the same ARN. That's because consumer ARNs
+    #   contain the creation timestamp. This is important to keep in mind if
+    #   you have IAM policies that reference consumer ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_status
+    #   A consumer can't read data while in the `CREATING` or `DELETING`
+    #   states.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_creation_timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Consumer AWS API Documentation
+    #
+    class Consumer < Struct.new(
+      :consumer_name,
+      :consumer_arn,
+      :consumer_status,
+      :consumer_creation_timestamp)
+      include Aws::Structure
+    end
+
+    # An object that represents the details of a registered consumer.
+    #
+    # @!attribute [rw] consumer_name
+    #   The name of the consumer is something you choose when you register
+    #   the consumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_arn
+    #   When you register a consumer, Kinesis Data Streams generates an ARN
+    #   for it. You need this ARN to be able to call SubscribeToShard.
+    #
+    #   If you delete a consumer and then create a new one with the same
+    #   name, it won't have the same ARN. That's because consumer ARNs
+    #   contain the creation timestamp. This is important to keep in mind if
+    #   you have IAM policies that reference consumer ARNs.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_status
+    #   A consumer can't read data while in the `CREATING` or `DELETING`
+    #   states.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_creation_timestamp
+    #   @return [Time]
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the stream with which you registered the consumer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ConsumerDescription AWS API Documentation
+    #
+    class ConsumerDescription < Struct.new(
+      :consumer_name,
+      :consumer_arn,
+      :consumer_status,
+      :consumer_creation_timestamp,
+      :stream_arn)
       include Aws::Structure
     end
 
@@ -104,16 +179,65 @@ module Aws::Kinesis
     #
     #       {
     #         stream_name: "StreamName", # required
+    #         enforce_consumer_deletion: false,
     #       }
     #
     # @!attribute [rw] stream_name
     #   The name of the stream to delete.
     #   @return [String]
     #
+    # @!attribute [rw] enforce_consumer_deletion
+    #   If this parameter is unset (`null`) or if you set it to `false`, and
+    #   the stream has registered consumers, the call to `DeleteStream`
+    #   fails with a `ResourceInUseException`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStreamInput AWS API Documentation
     #
     class DeleteStreamInput < Struct.new(
-      :stream_name)
+      :stream_name,
+      :enforce_consumer_deletion)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeregisterStreamConsumerInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "StreamARN",
+    #         consumer_name: "ConsumerName",
+    #         consumer_arn: "ConsumerARN",
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the Kinesis data stream that the consumer is registered
+    #   with. For more information, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_name
+    #   The name that you gave to the consumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_arn
+    #   The ARN returned by Kinesis Data Streams when you registered the
+    #   consumer. If you don't know the ARN of the consumer that you want
+    #   to deregister, you can use the ListStreamConsumers operation to get
+    #   a list of the descriptions of all the consumers that are currently
+    #   registered with a given data stream. The description of a consumer
+    #   contains its ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeregisterStreamConsumerInput AWS API Documentation
+    #
+    class DeregisterStreamConsumerInput < Struct.new(
+      :stream_arn,
+      :consumer_name,
+      :consumer_arn)
       include Aws::Structure
     end
 
@@ -136,6 +260,54 @@ module Aws::Kinesis
     class DescribeLimitsOutput < Struct.new(
       :shard_limit,
       :open_shard_count)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStreamConsumerInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "StreamARN",
+    #         consumer_name: "ConsumerName",
+    #         consumer_arn: "ConsumerARN",
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the Kinesis data stream that the consumer is registered
+    #   with. For more information, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_name
+    #   The name that you gave to the consumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_arn
+    #   The ARN returned by Kinesis Data Streams when you registered the
+    #   consumer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumerInput AWS API Documentation
+    #
+    class DescribeStreamConsumerInput < Struct.new(
+      :stream_arn,
+      :consumer_name,
+      :consumer_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] consumer_description
+    #   An object that represents the details of the consumer.
+    #   @return [Types::ConsumerDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamConsumerOutput AWS API Documentation
+    #
+    class DescribeStreamConsumerOutput < Struct.new(
+      :consumer_description)
       include Aws::Structure
     end
 
@@ -390,6 +562,31 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The provided iterator exceeds the maximum age allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredIteratorException AWS API Documentation
+    #
+    class ExpiredIteratorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token passed to the operation is expired.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ExpiredNextTokenException AWS API Documentation
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Represents the input for GetRecords.
     #
     # @note When making an API call, you may pass GetRecordsInput
@@ -583,6 +780,146 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/InternalFailureException AWS API Documentation
+    #
+    class InternalFailureException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # A specified parameter exceeds its restrictions, is not supported, or
+    # can't be used. For more information, see the returned message.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The ciphertext references a key that doesn't exist or that you don't
+    # have access to.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSAccessDeniedException AWS API Documentation
+    #
+    class KMSAccessDeniedException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified customer master key
+    # (CMK) isn't enabled.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSDisabledException AWS API Documentation
+    #
+    class KMSDisabledException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # isn't valid for this request. For more information, see [How Key
+    # State Affects Use of a Customer Master Key][1] in the *AWS Key
+    # Management Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSInvalidStateException AWS API Documentation
+    #
+    class KMSInvalidStateException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # can't be found.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSNotFoundException AWS API Documentation
+    #
+    class KMSNotFoundException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The AWS access key ID needs a subscription for the service.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSOptInRequired AWS API Documentation
+    #
+    class KMSOptInRequired < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling. For more information
+    # about throttling, see [Limits][1] in the *AWS Key Management Service
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/KMSThrottlingException AWS API Documentation
+    #
+    class KMSThrottlingException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The requested resource exceeds the maximum number allowed, or the
+    # number of concurrent stream requests exceeds the maximum number
+    # allowed.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListShardsInput
     #   data as a hash:
     #
@@ -627,7 +964,9 @@ module Aws::Kinesis
     #   @return [String]
     #
     # @!attribute [rw] exclusive_start_shard_id
-    #   The ID of the shard to start the list with.
+    #   Specify this parameter to indicate that you want to list the shards
+    #   starting with the shard whose ID immediately follows
+    #   `ExclusiveStartShardId`.
     #
     #   If you don't specify this parameter, the default behavior is for
     #   `ListShards` to list the shards starting with the first one in the
@@ -697,6 +1036,113 @@ module Aws::Kinesis
     #
     class ListShardsOutput < Struct.new(
       :shards,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStreamConsumersInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         stream_creation_timestamp: Time.now,
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the Kinesis data stream for which you want to list the
+    #   registered consumers. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of consumers that are registered with the data
+    #   stream is greater than the default value for the `MaxResults`
+    #   parameter, or if you explicitly specify a value for `MaxResults`
+    #   that is less than the number of consumers that are registered with
+    #   the data stream, the response includes a pagination token named
+    #   `NextToken`. You can specify this `NextToken` value in a subsequent
+    #   call to `ListStreamConsumers` to list the next set of registered
+    #   consumers.
+    #
+    #   Don't specify `StreamName` or `StreamCreationTimestamp` if you
+    #   specify `NextToken` because the latter unambiguously identifies the
+    #   stream.
+    #
+    #   You can optionally specify a value for the `MaxResults` parameter
+    #   when you specify `NextToken`. If you specify a `MaxResults` value
+    #   that is less than the number of consumers that the operation returns
+    #   if you don't specify `MaxResults`, the response will contain a new
+    #   `NextToken` value. You can use the new `NextToken` value in a
+    #   subsequent call to the `ListStreamConsumers` operation to list the
+    #   next set of consumers.
+    #
+    #   Tokens expire after 300 seconds. When you obtain a value for
+    #   `NextToken` in the response to a call to `ListStreamConsumers`, you
+    #   have 300 seconds to use that value. If you specify an expired token
+    #   in a call to `ListStreamConsumers`, you get
+    #   `ExpiredNextTokenException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of consumers that you want a single call of
+    #   `ListStreamConsumers` to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_creation_timestamp
+    #   Specify this input parameter to distinguish data streams that have
+    #   the same name. For example, if you create a data stream and then
+    #   delete it, and you later create another data stream with the same
+    #   name, you can use this input parameter to specify which of the two
+    #   streams you want to list the consumers for.
+    #
+    #   You can't specify this parameter if you specify the NextToken
+    #   parameter.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersInput AWS API Documentation
+    #
+    class ListStreamConsumersInput < Struct.new(
+      :stream_arn,
+      :next_token,
+      :max_results,
+      :stream_creation_timestamp)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] consumers
+    #   An array of JSON objects. Each object represents one registered
+    #   consumer.
+    #   @return [Array<Types::Consumer>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of consumers that are registered with the data
+    #   stream is greater than the default value for the `MaxResults`
+    #   parameter, or if you explicitly specify a value for `MaxResults`
+    #   that is less than the number of registered consumers, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListStreamConsumers` to
+    #   list the next set of registered consumers. For more information
+    #   about the use of this pagination token when calling the
+    #   `ListStreamConsumers` operation, see
+    #   ListStreamConsumersInput$NextToken.
+    #
+    #   Tokens expire after 300 seconds. When you obtain a value for
+    #   `NextToken` in the response to a call to `ListStreamConsumers`, you
+    #   have 300 seconds to use that value. If you specify an expired token
+    #   in a call to `ListStreamConsumers`, you get
+    #   `ExpiredNextTokenException`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamConsumersOutput AWS API Documentation
+    #
+    class ListStreamConsumersOutput < Struct.new(
+      :consumers,
       :next_token)
       include Aws::Structure
     end
@@ -834,6 +1280,28 @@ module Aws::Kinesis
       :stream_name,
       :shard_to_merge,
       :adjacent_shard_to_merge)
+      include Aws::Structure
+    end
+
+    # The request rate for the stream is too high, or the requested data is
+    # too large for the available throughput. Reduce the frequency or size
+    # of your requests. For more information, see [Streams Limits][1] in the
+    # *Amazon Kinesis Data Streams Developer Guide*, and [Error Retries and
+    # Exponential Backoff in AWS][2] in the *AWS General Reference*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+    # [2]: http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ProvisionedThroughputExceededException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1122,6 +1590,51 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RegisterStreamConsumerInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_arn: "StreamARN", # required
+    #         consumer_name: "ConsumerName", # required
+    #       }
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the Kinesis data stream that you want to register the
+    #   consumer with. For more info, see [Amazon Resource Names (ARNs) and
+    #   AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_name
+    #   For a given Kinesis data stream, each consumer must have a unique
+    #   name. However, consumer names don't have to be unique across data
+    #   streams.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumerInput AWS API Documentation
+    #
+    class RegisterStreamConsumerInput < Struct.new(
+      :stream_arn,
+      :consumer_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] consumer
+    #   An object that represents the details of the consumer you
+    #   registered. When you register a consumer, it gets an ARN that is
+    #   generated by Kinesis Data Streams.
+    #   @return [Types::Consumer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RegisterStreamConsumerOutput AWS API Documentation
+    #
+    class RegisterStreamConsumerOutput < Struct.new(
+      :consumer)
+      include Aws::Structure
+    end
+
     # Represents the input for `RemoveTagsFromStream`.
     #
     # @note When making an API call, you may pass RemoveTagsFromStreamInput
@@ -1146,6 +1659,36 @@ module Aws::Kinesis
     class RemoveTagsFromStreamInput < Struct.new(
       :stream_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # The resource is not available for this operation. For successful
+    # operation, the resource must be in the `ACTIVE` state.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # The requested resource could not be found. The stream might not be
+    # specified correctly.
+    #
+    # @!attribute [rw] message
+    #   A message that provides information about the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :event_type)
       include Aws::Structure
     end
 
@@ -1285,6 +1828,33 @@ module Aws::Kinesis
       :stream_name,
       :encryption_type,
       :key_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartingPosition
+    #   data as a hash:
+    #
+    #       {
+    #         type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #         sequence_number: "SequenceNumber",
+    #         timestamp: Time.now,
+    #       }
+    #
+    # @!attribute [rw] type
+    #   @return [String]
+    #
+    # @!attribute [rw] sequence_number
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartingPosition AWS API Documentation
+    #
+    class StartingPosition < Struct.new(
+      :type,
+      :sequence_number,
+      :timestamp)
       include Aws::Structure
     end
 
@@ -1508,6 +2078,10 @@ module Aws::Kinesis
     #   The number of open shards in the stream.
     #   @return [Integer]
     #
+    # @!attribute [rw] consumer_count
+    #   The number of enhanced fan-out consumers registered with the stream.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescriptionSummary AWS API Documentation
     #
     class StreamDescriptionSummary < Struct.new(
@@ -1519,7 +2093,83 @@ module Aws::Kinesis
       :enhanced_monitoring,
       :encryption_type,
       :key_id,
-      :open_shard_count)
+      :open_shard_count,
+      :consumer_count)
+      include Aws::Structure
+    end
+
+    # After you call SubscribeToShard, Kinesis Data Streams sends events of
+    # this type to your consumer.
+    #
+    # @!attribute [rw] records
+    #   @return [Array<Types::Record>]
+    #
+    # @!attribute [rw] continuation_sequence_number
+    #   Use this as `StartingSequenceNumber` in the next call to
+    #   SubscribeToShard.
+    #   @return [String]
+    #
+    # @!attribute [rw] millis_behind_latest
+    #   The number of milliseconds the read records are from the tip of the
+    #   stream, indicating how far behind current time the consumer is. A
+    #   value of zero indicates that record processing is caught up, and
+    #   there are no new records to process at this moment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardEvent AWS API Documentation
+    #
+    class SubscribeToShardEvent < Struct.new(
+      :records,
+      :continuation_sequence_number,
+      :millis_behind_latest,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SubscribeToShardInput
+    #   data as a hash:
+    #
+    #       {
+    #         consumer_arn: "ConsumerARN", # required
+    #         shard_id: "ShardId", # required
+    #         starting_position: { # required
+    #           type: "AT_SEQUENCE_NUMBER", # required, accepts AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER, TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #           sequence_number: "SequenceNumber",
+    #           timestamp: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] consumer_arn
+    #   For this parameter, use the value you obtained when you called
+    #   RegisterStreamConsumer.
+    #   @return [String]
+    #
+    # @!attribute [rw] shard_id
+    #   The ID of the shard you want to subscribe to. To see a list of all
+    #   the shards for a given stream, use ListShards.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   @return [Types::StartingPosition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardInput AWS API Documentation
+    #
+    class SubscribeToShardInput < Struct.new(
+      :consumer_arn,
+      :shard_id,
+      :starting_position)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   The event stream that your consumer can use to read records from the
+    #   shard.
+    #   @return [Types::SubscribeToShardEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardOutput AWS API Documentation
+    #
+    class SubscribeToShardOutput < Struct.new(
+      :event_stream)
       include Aws::Structure
     end
 
@@ -1594,6 +2244,30 @@ module Aws::Kinesis
       :current_shard_count,
       :target_shard_count)
       include Aws::Structure
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardEventStream AWS API Documentation
+    #
+    class SubscribeToShardEventStream < Enumerator
+
+      def event_types
+        [
+          :subscribe_to_shard_event,
+          :resource_not_found_exception,
+          :resource_in_use_exception,
+          :kms_disabled_exception,
+          :kms_invalid_state_exception,
+          :kms_access_denied_exception,
+          :kms_not_found_exception,
+          :kms_opt_in_required,
+          :kms_throttling_exception,
+          :internal_failure_exception
+        ]
+      end
+
     end
 
   end

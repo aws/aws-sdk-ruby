@@ -34,6 +34,9 @@ requests are made, and retries are disabled.
         if client.config.stub_responses
           client.setup_stubbing
           client.handlers.remove(RetryErrors::Handler)
+          client.handlers.remove(ClientMetricsPlugin::Handler)
+          client.handlers.remove(ClientMetricsSendPlugin::LatencyHandler)
+          client.handlers.remove(ClientMetricsSendPlugin::AttemptHandler)
         end
       end
 
@@ -42,15 +45,18 @@ requests are made, and retries are disabled.
         def call(context)
           stub = context.client.next_stub(context)
           resp = Seahorse::Client::Response.new(context: context)
-          apply_stub(stub, resp)
-          resp
+          async_mode = context.client.is_a? Seahorse::Client::AsyncBase
+          apply_stub(stub, resp, async_mode)
+
+          async_mode ? Seahorse::Client::AsyncResponse.new(
+            context: context, stream: context[:input_event_stream_handler].event_emitter.stream, sync_queue: Queue.new) : resp
         end
 
-        def apply_stub(stub, response)
+        def apply_stub(stub, response, async_mode = false)
           http_resp = response.context.http_response
           case
           when stub[:error] then signal_error(stub[:error], http_resp)
-          when stub[:http] then signal_http(stub[:http], http_resp)
+          when stub[:http] then signal_http(stub[:http], http_resp, async_mode)
           when stub[:data] then response.data = stub[:data]
           end
         end
@@ -64,9 +70,18 @@ requests are made, and retries are disabled.
         end
 
         # @param [Seahorse::Client::Http::Response] stub
-        # @param [Seahorse::Client::Http::Response] http_resp
-        def signal_http(stub, http_resp)
-          http_resp.signal_headers(stub.status_code, stub.headers.to_h)
+        # @param [Seahorse::Client::Http::Response | Seahorse::Client::Http::AsyncResponse] http_resp
+        # @param [Boolean] async_mode
+        def signal_http(stub, http_resp, async_mode = false)
+          if async_mode
+            h2_headers = stub.headers.to_h.inject([]) do |arr, (k, v)|
+              arr << [k, v]
+            end
+            h2_headers << [":status", stub.status_code]
+            http_resp.signal_headers(h2_headers)
+          else
+            http_resp.signal_headers(stub.status_code, stub.headers.to_h)
+          end
           while chunk = stub.body.read(1024 * 1024)
             http_resp.signal_data(chunk)
           end

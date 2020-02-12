@@ -175,6 +175,11 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def operation_eventstreaming?(operation, api)
+      !!eventstream_input?(operation, api) ||
+        !!eventstream_output?(operation, api)
+    end
+
     def eventstream_output?(operation, api)
       return false unless operation.key? 'output'
       output_shape = api['shapes'][operation['output']['shape']]
@@ -185,13 +190,12 @@ module AwsSdkCodeGenerator
       return false
     end
 
-    # currently not support eventstream input
     def eventstream_input?(operation, api)
       return false unless operation.key? 'input'
       input_shape = api['shapes'][operation['input']['shape']]
       return false unless input_shape.key? 'members'
       input_shape['members'].each do |name, ref|
-        return true if Api.eventstream?(ref, api)
+        return ref['shape'] if Api.eventstream?(ref, api)
       end
       return false
     end
@@ -219,7 +223,7 @@ module AwsSdkCodeGenerator
     end
 
     module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix,
-      :eventstream_output?, :eventstream_input?
+      :eventstream_output?, :eventstream_input?, :operation_eventstreaming?
 
   end
 end

@@ -8,6 +8,17 @@
 module Aws::IoTJobsDataPlane
   module Types
 
+    # The certificate is invalid.
+    #
+    # @!attribute [rw] message
+    #   Additional information about the exception.
+    #   @return [String]
+    #
+    class CertificateValidationException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeJobExecutionRequest
     #   data as a hash:
     #
@@ -85,6 +96,33 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
+    # The contents of the request were invalid. For example, this code is
+    # returned when an UpdateJobExecution request contains invalid status
+    # details. The message contains details about the error.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # An update attempted to change the job execution to a state that is
+    # invalid because of the job execution's current state (for example, an
+    # attempt to change a request in state SUCCESS to state IN\_PROGRESS).
+    # In this case, the body of the error message also contains the
+    # executionState field.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class InvalidStateTransitionException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Contains data about a job execution.
     #
     # @!attribute [rw] job_id
@@ -121,6 +159,11 @@ module Aws::IoTJobsDataPlane
     #   was last updated.
     #   @return [Integer]
     #
+    # @!attribute [rw] approximate_seconds_before_timed_out
+    #   The estimated number of seconds that remain before the job execution
+    #   status will be changed to `TIMED_OUT`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] version_number
     #   The version of the job execution. Job execution versions are
     #   incremented each time they are updated by a device.
@@ -144,6 +187,7 @@ module Aws::IoTJobsDataPlane
       :queued_at,
       :started_at,
       :last_updated_at,
+      :approximate_seconds_before_timed_out,
       :version_number,
       :execution_number,
       :job_document)
@@ -216,6 +260,28 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartNextPendingJobExecutionRequest
     #   data as a hash:
     #
@@ -224,6 +290,7 @@ module Aws::IoTJobsDataPlane
     #         status_details: {
     #           "DetailsKey" => "DetailsValue",
     #         },
+    #         step_timeout_in_minutes: 1,
     #       }
     #
     # @!attribute [rw] thing_name
@@ -235,9 +302,22 @@ module Aws::IoTJobsDataPlane
     #   execution. If not specified, the statusDetails are unchanged.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] step_timeout_in_minutes
+    #   Specifies the amount of time this device has to finish execution of
+    #   this job. If the job execution status is not set to a terminal state
+    #   before this timer expires, or before the timer is reset (by calling
+    #   `UpdateJobExecution`, setting the status to `IN_PROGRESS` and
+    #   specifying a new timeout value in field `stepTimeoutInMinutes`) the
+    #   job execution status will be automatically set to `TIMED_OUT`. Note
+    #   that setting this timeout has no effect on that job execution
+    #   timeout which may have been specified when the job was created
+    #   (`CreateJob` using field `timeoutConfig`).
+    #   @return [Integer]
+    #
     class StartNextPendingJobExecutionRequest < Struct.new(
       :thing_name,
-      :status_details)
+      :status_details,
+      :step_timeout_in_minutes)
       include Aws::Structure
     end
 
@@ -250,16 +330,43 @@ module Aws::IoTJobsDataPlane
       include Aws::Structure
     end
 
+    # The job is in a terminal state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TerminalStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The rate exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message associated with the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   The payload associated with the exception.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message,
+      :payload)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateJobExecutionRequest
     #   data as a hash:
     #
     #       {
     #         job_id: "JobId", # required
     #         thing_name: "ThingName", # required
-    #         status: "QUEUED", # required, accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #         status: "QUEUED", # required, accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, TIMED_OUT, REJECTED, REMOVED, CANCELED
     #         status_details: {
     #           "DetailsKey" => "DetailsValue",
     #         },
+    #         step_timeout_in_minutes: 1,
     #         expected_version: 1,
     #         include_job_execution_state: false,
     #         include_job_document: false,
@@ -284,6 +391,18 @@ module Aws::IoTJobsDataPlane
     #   of the job execution. If not specified, the statusDetails are
     #   unchanged.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] step_timeout_in_minutes
+    #   Specifies the amount of time this device has to finish execution of
+    #   this job. If the job execution status is not set to a terminal state
+    #   before this timer expires, or before the timer is reset (by again
+    #   calling `UpdateJobExecution`, setting the status to `IN_PROGRESS`
+    #   and specifying a new timeout value in this field) the job execution
+    #   status will be automatically set to `TIMED_OUT`. Note that setting
+    #   or resetting this timeout has no effect on that job execution
+    #   timeout which may have been specified when the job was created
+    #   (`CreateJob` using field `timeoutConfig`).
+    #   @return [Integer]
     #
     # @!attribute [rw] expected_version
     #   Optional. The expected current version of the job execution. Each
@@ -316,6 +435,7 @@ module Aws::IoTJobsDataPlane
       :thing_name,
       :status,
       :status_details,
+      :step_timeout_in_minutes,
       :expected_version,
       :include_job_execution_state,
       :include_job_document,

@@ -45,6 +45,15 @@ module Aws
             expect(resp.context.http_request.headers['authorization']).to include('cn-north-1')
           end
 
+          it 'supports vpc endpoint queue URL' do
+            url = "https://vpce-xxxx-yyyy.sqs.us-east-1.vpce."\
+              "amazonaws.com/1234567890/demo"
+            client = Client.new(stub_responses:true, region: 'cn-north-1')
+            resp = client.send(method, params.merge(queue_url: url))
+            expect(resp.context.http_request.headers['authorization'])
+              .to include('us-east-1')
+          end
+
           it 'raises an error for a badly formatted queue url' do
             expect {
               client = Client.new(stub_responses:true)

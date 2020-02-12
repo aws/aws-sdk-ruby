@@ -16,7 +16,7 @@ require_relative 'aws-sdk-opsworkscm/waiters'
 require_relative 'aws-sdk-opsworkscm/resource'
 require_relative 'aws-sdk-opsworkscm/customizations'
 
-# This module provides support for AWS OpsWorks for Chef Automate. This module is available in the
+# This module provides support for AWS OpsWorks CM. This module is available in the
 # `aws-sdk-opsworkscm` gem.
 #
 # # Client
@@ -29,7 +29,7 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS OpsWorks for Chef Automate all
+# Errors returned from AWS OpsWorks CM all
 # extend {Errors::ServiceError}.
 #
 #     begin
@@ -43,6 +43,6 @@ require_relative 'aws-sdk-opsworkscm/customizations'
 # @service
 module Aws::OpsWorksCM
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.28.0'
 
 end

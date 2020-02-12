@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::CodeDeploy
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -200,15 +298,17 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more application revisions.
+    # Gets information about one or more application revisions. The maximum
+    # number of application revisions that can be returned is 25.
     #
     # @option params [required, String] :application_name
     #   The name of an AWS CodeDeploy application about which to get revision
     #   information.
     #
     # @option params [required, Array<Types::RevisionLocation>] :revisions
-    #   Information to get about the application revisions, including type and
-    #   location.
+    #   An array of `RevisionLocation` objects that specify information to get
+    #   about the application revisions, including type and location. The
+    #   maximum number of `RevisionLocation` objects you can specify is 25.
     #
     # @return [Types::BatchGetApplicationRevisionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -222,7 +322,7 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     revisions: [ # required
     #       {
-    #         revision_type: "S3", # accepts S3, GitHub, String
+    #         revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
     #         s3_location: {
     #           bucket: "S3Bucket",
     #           key: "S3Key",
@@ -238,6 +338,10 @@ module Aws::CodeDeploy
     #           content: "RawStringContent",
     #           sha256: "RawStringSha256",
     #         },
+    #         app_spec_content: {
+    #           content: "RawStringContent",
+    #           sha256: "RawStringSha256",
+    #         },
     #       },
     #     ],
     #   })
@@ -247,7 +351,7 @@ module Aws::CodeDeploy
     #   resp.application_name #=> String
     #   resp.error_message #=> String
     #   resp.revisions #=> Array
-    #   resp.revisions[0].revision_location.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.revisions[0].revision_location.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.revisions[0].revision_location.s3_location.bucket #=> String
     #   resp.revisions[0].revision_location.s3_location.key #=> String
     #   resp.revisions[0].revision_location.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -257,6 +361,8 @@ module Aws::CodeDeploy
     #   resp.revisions[0].revision_location.git_hub_location.commit_id #=> String
     #   resp.revisions[0].revision_location.string.content #=> String
     #   resp.revisions[0].revision_location.string.sha256 #=> String
+    #   resp.revisions[0].revision_location.app_spec_content.content #=> String
+    #   resp.revisions[0].revision_location.app_spec_content.sha256 #=> String
     #   resp.revisions[0].generic_revision_info.description #=> String
     #   resp.revisions[0].generic_revision_info.deployment_groups #=> Array
     #   resp.revisions[0].generic_revision_info.deployment_groups[0] #=> String
@@ -273,10 +379,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more applications.
+    # Gets information about one or more applications. The maximum number of
+    # applications that can be returned is 25.
     #
     # @option params [required, Array<String>] :application_names
-    #   A list of application names separated by spaces.
+    #   A list of application names separated by spaces. The maximum number of
+    #   application names you can specify is 25.
     #
     # @return [Types::BatchGetApplicationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -296,7 +404,7 @@ module Aws::CodeDeploy
     #   resp.applications_info[0].create_time #=> Time
     #   resp.applications_info[0].linked_to_git_hub #=> Boolean
     #   resp.applications_info[0].git_hub_account_name #=> String
-    #   resp.applications_info[0].compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.applications_info[0].compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications AWS API Documentation
     #
@@ -314,7 +422,7 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #
     # @option params [required, Array<String>] :deployment_group_names
-    #   The deployment groups' names.
+    #   The names of the deployment groups.
     #
     # @return [Types::BatchGetDeploymentGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -347,7 +455,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].name #=> String
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].hook #=> String
     #   resp.deployment_groups_info[0].service_role_arn #=> String
-    #   resp.deployment_groups_info[0].target_revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployment_groups_info[0].target_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_groups_info[0].target_revision.s3_location.bucket #=> String
     #   resp.deployment_groups_info[0].target_revision.s3_location.key #=> String
     #   resp.deployment_groups_info[0].target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -357,6 +465,8 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].target_revision.git_hub_location.commit_id #=> String
     #   resp.deployment_groups_info[0].target_revision.string.content #=> String
     #   resp.deployment_groups_info[0].target_revision.string.sha256 #=> String
+    #   resp.deployment_groups_info[0].target_revision.app_spec_content.content #=> String
+    #   resp.deployment_groups_info[0].target_revision.app_spec_content.sha256 #=> String
     #   resp.deployment_groups_info[0].trigger_configurations #=> Array
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_target_arn #=> String
@@ -380,6 +490,13 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployment_groups_info[0].load_balancer_info.target_group_info_list #=> Array
     #   resp.deployment_groups_info[0].load_balancer_info.target_group_info_list[0].name #=> String
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].target_groups #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].target_groups[0].name #=> String
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns[0] #=> String
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployment_groups_info[0].last_successful_deployment.deployment_id #=> String
     #   resp.deployment_groups_info[0].last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_groups_info[0].last_successful_deployment.end_time #=> Time
@@ -398,7 +515,10 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
-    #   resp.deployment_groups_info[0].compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployment_groups_info[0].compute_platform #=> String, one of "Server", "Lambda", "ECS"
+    #   resp.deployment_groups_info[0].ecs_services #=> Array
+    #   resp.deployment_groups_info[0].ecs_services[0].service_name #=> String
+    #   resp.deployment_groups_info[0].ecs_services[0].cluster_name #=> String
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -410,14 +530,23 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more instance that are part of a
-    # deployment group.
+    # <note markdown="1"> This method works, but is deprecated. Use `BatchGetDeploymentTargets`
+    # instead.
+    #
+    #  </note>
+    #
+    # Returns an array of one or more instances associated with a
+    # deployment. This method works with EC2/On-premises and AWS Lambda
+    # compute platforms. The newer `BatchGetDeploymentTargets` works with
+    # all compute platforms. The maximum number of instances that can be
+    # returned is 25.
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
     #
     # @option params [required, Array<String>] :instance_ids
-    #   The unique IDs of instances in the deployment group.
+    #   The unique IDs of instances used in the deployment. The maximum number
+    #   of instance IDs you can specify is 25.
     #
     # @return [Types::BatchGetDeploymentInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -459,10 +588,129 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more deployments.
+    # Returns an array of one or more targets associated with a deployment.
+    # This method works with all compute types and should be used instead of
+    # the deprecated `BatchGetDeploymentInstances`. The maximum number of
+    # targets that can be returned is 25.
+    #
+    # The type of targets returned depends on the deployment's compute
+    # platform:
+    #
+    # * **EC2/On-premises**\: Information about EC2 instance targets.
+    #
+    # * **AWS Lambda**\: Information about Lambda functions targets.
+    #
+    # * **Amazon ECS**\: Information about Amazon ECS service targets.
+    #
+    # @option params [String] :deployment_id
+    #   The unique ID of a deployment.
+    #
+    # @option params [Array<String>] :target_ids
+    #   The unique IDs of the deployment targets. The compute platform of the
+    #   deployment determines the type of the targets and their formats. The
+    #   maximum number of deployment target IDs you can specify is 25.
+    #
+    #   * For deployments that use the EC2/On-premises compute platform, the
+    #     target IDs are EC2 or on-premises instances IDs, and their target
+    #     type is `instanceTarget`.
+    #
+    #   * For deployments that use the AWS Lambda compute platform, the target
+    #     IDs are the names of Lambda functions, and their target type is
+    #     `instanceTarget`.
+    #
+    #   * For deployments that use the Amazon ECS compute platform, the target
+    #     IDs are pairs of Amazon ECS clusters and services specified using
+    #     the format `<clustername>:<servicename>`. Their target type is
+    #     `ecsTarget`.
+    #
+    # @return [Types::BatchGetDeploymentTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDeploymentTargetsOutput#deployment_targets #deployment_targets} => Array&lt;Types::DeploymentTarget&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_deployment_targets({
+    #     deployment_id: "DeploymentId",
+    #     target_ids: ["TargetId"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment_targets #=> Array
+    #   resp.deployment_targets[0].deployment_target_type #=> String, one of "InstanceTarget", "LambdaTarget", "ECSTarget"
+    #   resp.deployment_targets[0].instance_target.deployment_id #=> String
+    #   resp.deployment_targets[0].instance_target.target_id #=> String
+    #   resp.deployment_targets[0].instance_target.target_arn #=> String
+    #   resp.deployment_targets[0].instance_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_targets[0].instance_target.last_updated_at #=> Time
+    #   resp.deployment_targets[0].instance_target.lifecycle_events #=> Array
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_targets[0].instance_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_targets[0].instance_target.instance_label #=> String, one of "Blue", "Green"
+    #   resp.deployment_targets[0].lambda_target.deployment_id #=> String
+    #   resp.deployment_targets[0].lambda_target.target_id #=> String
+    #   resp.deployment_targets[0].lambda_target.target_arn #=> String
+    #   resp.deployment_targets[0].lambda_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_targets[0].lambda_target.last_updated_at #=> Time
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events #=> Array
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_targets[0].lambda_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.function_name #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.function_alias #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.current_version #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.target_version #=> String
+    #   resp.deployment_targets[0].lambda_target.lambda_function_info.target_version_weight #=> Float
+    #   resp.deployment_targets[0].ecs_target.deployment_id #=> String
+    #   resp.deployment_targets[0].ecs_target.target_id #=> String
+    #   resp.deployment_targets[0].ecs_target.target_arn #=> String
+    #   resp.deployment_targets[0].ecs_target.last_updated_at #=> Time
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events #=> Array
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_targets[0].ecs_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_targets[0].ecs_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_targets[0].ecs_target.task_sets_info #=> Array
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].identifer #=> String
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].desired_count #=> Integer
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].pending_count #=> Integer
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].running_count #=> Integer
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].status #=> String
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].traffic_weight #=> Float
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].target_group.name #=> String
+    #   resp.deployment_targets[0].ecs_target.task_sets_info[0].task_set_label #=> String, one of "Blue", "Green"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentTargets AWS API Documentation
+    #
+    # @overload batch_get_deployment_targets(params = {})
+    # @param [Hash] params ({})
+    def batch_get_deployment_targets(params = {}, options = {})
+      req = build_request(:batch_get_deployment_targets, params)
+      req.send_request(options)
+    end
+
+    # Gets information about one or more deployments. The maximum number of
+    # deployments that can be returned is 25.
     #
     # @option params [required, Array<String>] :deployment_ids
-    #   A list of deployment IDs, separated by spaces.
+    #   A list of deployment IDs, separated by spaces. The maximum number of
+    #   deployment IDs you can specify is 25.
     #
     # @return [Types::BatchGetDeploymentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -481,7 +729,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_group_name #=> String
     #   resp.deployments_info[0].deployment_config_name #=> String
     #   resp.deployments_info[0].deployment_id #=> String
-    #   resp.deployments_info[0].previous_revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployments_info[0].previous_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployments_info[0].previous_revision.s3_location.bucket #=> String
     #   resp.deployments_info[0].previous_revision.s3_location.key #=> String
     #   resp.deployments_info[0].previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -491,7 +739,9 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].previous_revision.git_hub_location.commit_id #=> String
     #   resp.deployments_info[0].previous_revision.string.content #=> String
     #   resp.deployments_info[0].previous_revision.string.sha256 #=> String
-    #   resp.deployments_info[0].revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployments_info[0].previous_revision.app_spec_content.content #=> String
+    #   resp.deployments_info[0].previous_revision.app_spec_content.sha256 #=> String
+    #   resp.deployments_info[0].revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployments_info[0].revision.s3_location.bucket #=> String
     #   resp.deployments_info[0].revision.s3_location.key #=> String
     #   resp.deployments_info[0].revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -501,8 +751,10 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].revision.git_hub_location.commit_id #=> String
     #   resp.deployments_info[0].revision.string.content #=> String
     #   resp.deployments_info[0].revision.string.sha256 #=> String
+    #   resp.deployments_info[0].revision.app_spec_content.content #=> String
+    #   resp.deployments_info[0].revision.app_spec_content.sha256 #=> String
     #   resp.deployments_info[0].status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployments_info[0].error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE"
+    #   resp.deployments_info[0].error_information.code #=> String, one of "AGENT_ISSUE", "ALARM_ACTIVE", "APPLICATION_MISSING", "AUTOSCALING_VALIDATION_ERROR", "AUTO_SCALING_CONFIGURATION", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND", "CUSTOMER_APPLICATION_UNHEALTHY", "DEPLOYMENT_GROUP_MISSING", "ECS_UPDATE_ERROR", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "HEALTH_CONSTRAINTS", "HEALTH_CONSTRAINTS_INVALID", "HOOK_EXECUTION_FAILURE", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "INTERNAL_ERROR", "INVALID_ECS_SERVICE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "INVALID_REVISION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "NO_EC2_SUBSCRIPTION", "NO_INSTANCES", "OVER_MAX_INSTANCES", "RESOURCE_LIMIT_EXCEEDED", "REVISION_MISSING", "THROTTLED", "TIMEOUT"
     #   resp.deployments_info[0].error_information.message #=> String
     #   resp.deployments_info[0].create_time #=> Time
     #   resp.deployments_info[0].start_time #=> Time
@@ -546,11 +798,18 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployments_info[0].load_balancer_info.target_group_info_list #=> Array
     #   resp.deployments_info[0].load_balancer_info.target_group_info_list[0].name #=> String
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list #=> Array
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].target_groups #=> Array
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].target_groups[0].name #=> String
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns #=> Array
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns[0] #=> String
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns #=> Array
+    #   resp.deployments_info[0].load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployments_info[0].additional_deployment_status_info #=> String
     #   resp.deployments_info[0].file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #   resp.deployments_info[0].deployment_status_messages #=> Array
     #   resp.deployments_info[0].deployment_status_messages[0] #=> String
-    #   resp.deployments_info[0].compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployments_info[0].compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -561,10 +820,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Gets information about one or more on-premises instances.
+    # Gets information about one or more on-premises instances. The maximum
+    # number of on-premises instances that can be returned is 25.
     #
     # @option params [required, Array<String>] :instance_names
     #   The names of the on-premises instances about which to get information.
+    #   The maximum number of instance names you can specify is 25.
     #
     # @return [Types::BatchGetOnPremisesInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -606,8 +867,14 @@ module Aws::CodeDeploy
     # soon as all instances have a status of Ready.)
     #
     # @option params [String] :deployment_id
-    #   The deployment ID of the blue/green deployment for which you want to
-    #   start rerouting traffic to the replacement environment.
+    #   The unique ID of a blue/green deployment for which you want to start
+    #   rerouting traffic to the replacement environment.
+    #
+    # @option params [String] :deployment_wait_type
+    #   The status of the deployment's waiting period. READY\_WAIT indicates
+    #   the deployment is ready to start shifting traffic. TERMINATION\_WAIT
+    #   indicates the traffic is shifted, but the original target is not
+    #   terminated.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -615,6 +882,7 @@ module Aws::CodeDeploy
     #
     #   resp = client.continue_deployment({
     #     deployment_id: "DeploymentId",
+    #     deployment_wait_type: "READY_WAIT", # accepts READY_WAIT, TERMINATION_WAIT
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment AWS API Documentation
@@ -633,8 +901,13 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #
     # @option params [String] :compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`).
+    #   The destination platform type for the deployment (`Lambda`, `Server`,
+    #   or `ECS`).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to CodeDeploy applications to help you
+    #   organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
     #
     # @return [Types::CreateApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -644,7 +917,13 @@ module Aws::CodeDeploy
     #
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
-    #     compute_platform: "Server", # accepts Server, Lambda
+    #     compute_platform: "Server", # accepts Server, Lambda, ECS
+    #     tags: [
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -664,8 +943,8 @@ module Aws::CodeDeploy
     # group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :deployment_group_name
     #   The name of the deployment group.
@@ -674,30 +953,47 @@ module Aws::CodeDeploy
     #   The type and location of the revision to deploy.
     #
     # @option params [String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
-    #   If not specified, the value configured in the deployment group will be
-    #   used as the default. If the deployment group does not have a
-    #   deployment configuration associated with it, then
-    #   CodeDeployDefault.OneAtATime will be used by default.
+    #   If not specified, the value configured in the deployment group is used
+    #   as the default. If the deployment group does not have a deployment
+    #   configuration associated with it, CodeDeployDefault.OneAtATime is used
+    #   by default.
     #
     # @option params [String] :description
     #   A comment about the deployment.
     #
     # @option params [Boolean] :ignore_application_stop_failures
-    #   If set to true, then if the deployment causes the ApplicationStop
-    #   deployment lifecycle event to an instance to fail, the deployment to
-    #   that instance will not be considered to have failed at that point and
-    #   will continue on to the BeforeInstall deployment lifecycle event.
+    #   If true, then if an ApplicationStop, BeforeBlockTraffic, or
+    #   AfterBlockTraffic deployment lifecycle event to an instance fails,
+    #   then the deployment continues to the next deployment lifecycle event.
+    #   For example, if ApplicationStop fails, the deployment continues with
+    #   DownloadBundle. If BeforeBlockTraffic fails, the deployment continues
+    #   with BlockTraffic. If AfterBlockTraffic fails, the deployment
+    #   continues with ApplicationStop.
     #
-    #   If set to false or not specified, then if the deployment causes the
-    #   ApplicationStop deployment lifecycle event to fail to an instance, the
-    #   deployment to that instance will stop, and the deployment to that
-    #   instance will be considered to have failed.
+    #   If false or not specified, then if a lifecycle event fails during a
+    #   deployment to an instance, that deployment fails. If deployment to
+    #   that instance is part of an overall deployment and the number of
+    #   healthy hosts is not less than the minimum number of healthy hosts,
+    #   then a deployment to the next instance is attempted.
+    #
+    #   During a deployment, the AWS CodeDeploy agent runs the scripts
+    #   specified for ApplicationStop, BeforeBlockTraffic, and
+    #   AfterBlockTraffic in the AppSpec file from the previous successful
+    #   deployment. (All other scripts are run from the AppSpec file in the
+    #   current deployment.) If one of these scripts contains an error and
+    #   does not run successfully, the deployment can fail.
+    #
+    #   If the cause of the failure is a script from the last successful
+    #   deployment that will never run successfully, create a new deployment
+    #   and use `ignoreApplicationStopFailures` to specify that the
+    #   ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures
+    #   should be ignored.
     #
     # @option params [Types::TargetInstances] :target_instances
-    #   Information about the instances that will belong to the replacement
+    #   Information about the instances that belong to the replacement
     #   environment in a blue/green deployment.
     #
     # @option params [Types::AutoRollbackConfiguration] :auto_rollback_configuration
@@ -735,7 +1031,7 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     deployment_group_name: "DeploymentGroupName",
     #     revision: {
-    #       revision_type: "S3", # accepts S3, GitHub, String
+    #       revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
@@ -748,6 +1044,10 @@ module Aws::CodeDeploy
     #         commit_id: "CommitId",
     #       },
     #       string: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
+    #       },
+    #       app_spec_content: {
     #         content: "RawStringContent",
     #         sha256: "RawStringSha256",
     #       },
@@ -824,12 +1124,11 @@ module Aws::CodeDeploy
     #   of FLEET\_PERCENT and a value of 95.
     #
     # @option params [Types::TrafficRoutingConfig] :traffic_routing_config
-    #   The configuration that specifies how the deployment traffic will be
-    #   routed.
+    #   The configuration that specifies how the deployment traffic is routed.
     #
     # @option params [String] :compute_platform
-    #   The destination platform type for the deployment (`Lambda` or
-    #   `Server`&gt;).
+    #   The destination platform type for the deployment (`Lambda`, `Server`,
+    #   or `ECS`).
     #
     # @return [Types::CreateDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -854,7 +1153,7 @@ module Aws::CodeDeploy
     #         linear_interval: 1,
     #       },
     #     },
-    #     compute_platform: "Server", # accepts Server, Lambda
+    #     compute_platform: "Server", # accepts Server, Lambda, ECS
     #   })
     #
     # @example Response structure
@@ -870,12 +1169,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Creates a deployment group to which application revisions will be
+    # Creates a deployment group to which application revisions are
     # deployed.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
     #   The name of a new deployment group for the specified application.
@@ -888,7 +1187,7 @@ module Aws::CodeDeploy
     #
     #   CodeDeployDefault.OneAtATime is the default deployment configuration.
     #   It is used if a configuration isn't specified for the deployment or
-    #   the deployment group.
+    #   deployment group.
     #
     #   For more information about the predefined deployment configurations in
     #   AWS CodeDeploy, see [Working with Deployment Groups in AWS
@@ -896,20 +1195,20 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter. The deployment group will
-    #   include EC2 instances with any of the specified tags. Cannot be used
-    #   in the same call as ec2TagSet.
+    #   The Amazon EC2 tags on which to filter. The deployment group includes
+    #   EC2 instances with any of the specified tags. Cannot be used in the
+    #   same call as ec2TagSet.
     #
     # @option params [Array<Types::TagFilter>] :on_premises_instance_tag_filters
     #   The on-premises instance tags on which to filter. The deployment group
-    #   will include on-premises instances with any of the specified tags.
-    #   Cannot be used in the same call as OnPremisesTagSet.
+    #   includes on-premises instances with any of the specified tags. Cannot
+    #   be used in the same call as OnPremisesTagSet.
     #
     # @option params [Array<String>] :auto_scaling_groups
-    #   A list of associated Auto Scaling groups.
+    #   A list of associated Amazon EC2 Auto Scaling groups.
     #
     # @option params [required, String] :service_role_arn
     #   A service role ARN that allows AWS CodeDeploy to act on the user's
@@ -922,7 +1221,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add about Amazon CloudWatch alarms when the deployment
@@ -946,14 +1245,25 @@ module Aws::CodeDeploy
     #
     # @option params [Types::EC2TagSet] :ec2_tag_set
     #   Information about groups of tags applied to EC2 instances. The
-    #   deployment group will include only EC2 instances identified by all the
-    #   tag groups. Cannot be used in the same call as ec2TagFilters.
+    #   deployment group includes only EC2 instances identified by all the tag
+    #   groups. Cannot be used in the same call as ec2TagFilters.
+    #
+    # @option params [Array<Types::ECSService>] :ecs_services
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform. A
+    #   target Amazon ECS service is specified as an Amazon ECS cluster and
+    #   service name pair using the format `<clustername>:<servicename>`.
     #
     # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
     #   Information about groups of tags applied to on-premises instances. The
-    #   deployment group will include only on-premises instances identified by
-    #   all the tag groups. Cannot be used in the same call as
+    #   deployment group includes only on-premises instances identified by all
+    #   of the tag groups. Cannot be used in the same call as
     #   onPremisesInstanceTagFilters.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to CodeDeploy deployment groups to help
+    #   you organize and categorize them. Each tag consists of a key and an
+    #   optional value, both of which you define.
     #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1029,6 +1339,21 @@ module Aws::CodeDeploy
     #           name: "TargetGroupName",
     #         },
     #       ],
+    #       target_group_pair_info_list: [
+    #         {
+    #           target_groups: [
+    #             {
+    #               name: "TargetGroupName",
+    #             },
+    #           ],
+    #           prod_traffic_route: {
+    #             listener_arns: ["ListenerArn"],
+    #           },
+    #           test_traffic_route: {
+    #             listener_arns: ["ListenerArn"],
+    #           },
+    #         },
+    #       ],
     #     },
     #     ec2_tag_set: {
     #       ec2_tag_set_list: [
@@ -1041,6 +1366,12 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     ecs_services: [
+    #       {
+    #         service_name: "ECSServiceName",
+    #         cluster_name: "ECSClusterName",
+    #       },
+    #     ],
     #     on_premises_tag_set: {
     #       on_premises_tag_set_list: [
     #         [
@@ -1052,6 +1383,12 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     tags: [
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1070,8 +1407,8 @@ module Aws::CodeDeploy
     # Deletes an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1098,8 +1435,8 @@ module Aws::CodeDeploy
     #  </note>
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1121,12 +1458,11 @@ module Aws::CodeDeploy
     # Deletes a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #
     # @return [Types::DeleteDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1207,8 +1543,8 @@ module Aws::CodeDeploy
     # Gets information about an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @return [Types::GetApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1227,7 +1563,7 @@ module Aws::CodeDeploy
     #   resp.application.create_time #=> Time
     #   resp.application.linked_to_git_hub #=> Boolean
     #   resp.application.git_hub_account_name #=> String
-    #   resp.application.compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.application.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication AWS API Documentation
     #
@@ -1258,7 +1594,7 @@ module Aws::CodeDeploy
     #   resp = client.get_application_revision({
     #     application_name: "ApplicationName", # required
     #     revision: { # required
-    #       revision_type: "S3", # accepts S3, GitHub, String
+    #       revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
@@ -1274,13 +1610,17 @@ module Aws::CodeDeploy
     #         content: "RawStringContent",
     #         sha256: "RawStringSha256",
     #       },
+    #       app_spec_content: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.application_name #=> String
-    #   resp.revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.revision.s3_location.bucket #=> String
     #   resp.revision.s3_location.key #=> String
     #   resp.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -1290,6 +1630,8 @@ module Aws::CodeDeploy
     #   resp.revision.git_hub_location.commit_id #=> String
     #   resp.revision.string.content #=> String
     #   resp.revision.string.sha256 #=> String
+    #   resp.revision.app_spec_content.content #=> String
+    #   resp.revision.app_spec_content.sha256 #=> String
     #   resp.revision_info.description #=> String
     #   resp.revision_info.deployment_groups #=> Array
     #   resp.revision_info.deployment_groups[0] #=> String
@@ -1308,8 +1650,15 @@ module Aws::CodeDeploy
 
     # Gets information about a deployment.
     #
+    # <note markdown="1"> The `content` property of the `appSpecContent` object in the returned
+    # revision is always null. Use `GetApplicationRevision` and the `sha256`
+    # property of the returned `appSpecContent` object to get the content of
+    # the deployment’s AppSpec file.
+    #
+    #  </note>
+    #
     # @option params [required, String] :deployment_id
-    #   A deployment ID associated with the applicable IAM user or AWS
+    #   The unique ID of a deployment associated with the IAM user or AWS
     #   account.
     #
     # @return [Types::GetDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1328,7 +1677,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_group_name #=> String
     #   resp.deployment_info.deployment_config_name #=> String
     #   resp.deployment_info.deployment_id #=> String
-    #   resp.deployment_info.previous_revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployment_info.previous_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_info.previous_revision.s3_location.bucket #=> String
     #   resp.deployment_info.previous_revision.s3_location.key #=> String
     #   resp.deployment_info.previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -1338,7 +1687,9 @@ module Aws::CodeDeploy
     #   resp.deployment_info.previous_revision.git_hub_location.commit_id #=> String
     #   resp.deployment_info.previous_revision.string.content #=> String
     #   resp.deployment_info.previous_revision.string.sha256 #=> String
-    #   resp.deployment_info.revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployment_info.previous_revision.app_spec_content.content #=> String
+    #   resp.deployment_info.previous_revision.app_spec_content.sha256 #=> String
+    #   resp.deployment_info.revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_info.revision.s3_location.bucket #=> String
     #   resp.deployment_info.revision.s3_location.key #=> String
     #   resp.deployment_info.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -1348,8 +1699,10 @@ module Aws::CodeDeploy
     #   resp.deployment_info.revision.git_hub_location.commit_id #=> String
     #   resp.deployment_info.revision.string.content #=> String
     #   resp.deployment_info.revision.string.sha256 #=> String
+    #   resp.deployment_info.revision.app_spec_content.content #=> String
+    #   resp.deployment_info.revision.app_spec_content.sha256 #=> String
     #   resp.deployment_info.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployment_info.error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE"
+    #   resp.deployment_info.error_information.code #=> String, one of "AGENT_ISSUE", "ALARM_ACTIVE", "APPLICATION_MISSING", "AUTOSCALING_VALIDATION_ERROR", "AUTO_SCALING_CONFIGURATION", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND", "CUSTOMER_APPLICATION_UNHEALTHY", "DEPLOYMENT_GROUP_MISSING", "ECS_UPDATE_ERROR", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "HEALTH_CONSTRAINTS", "HEALTH_CONSTRAINTS_INVALID", "HOOK_EXECUTION_FAILURE", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "INTERNAL_ERROR", "INVALID_ECS_SERVICE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "INVALID_REVISION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "NO_EC2_SUBSCRIPTION", "NO_INSTANCES", "OVER_MAX_INSTANCES", "RESOURCE_LIMIT_EXCEEDED", "REVISION_MISSING", "THROTTLED", "TIMEOUT"
     #   resp.deployment_info.error_information.message #=> String
     #   resp.deployment_info.create_time #=> Time
     #   resp.deployment_info.start_time #=> Time
@@ -1393,11 +1746,18 @@ module Aws::CodeDeploy
     #   resp.deployment_info.load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployment_info.load_balancer_info.target_group_info_list #=> Array
     #   resp.deployment_info.load_balancer_info.target_group_info_list[0].name #=> String
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list #=> Array
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].target_groups #=> Array
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].target_groups[0].name #=> String
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns #=> Array
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns[0] #=> String
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns #=> Array
+    #   resp.deployment_info.load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployment_info.additional_deployment_status_info #=> String
     #   resp.deployment_info.file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #   resp.deployment_info.deployment_status_messages #=> Array
     #   resp.deployment_info.deployment_status_messages[0] #=> String
-    #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
     #
@@ -1411,8 +1771,8 @@ module Aws::CodeDeploy
     # Gets information about a deployment configuration.
     #
     # @option params [required, String] :deployment_config_name
-    #   The name of a deployment configuration associated with the applicable
-    #   IAM user or AWS account.
+    #   The name of a deployment configuration associated with the IAM user or
+    #   AWS account.
     #
     # @return [Types::GetDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1431,7 +1791,7 @@ module Aws::CodeDeploy
     #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
     #   resp.deployment_config_info.minimum_healthy_hosts.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
     #   resp.deployment_config_info.create_time #=> Time
-    #   resp.deployment_config_info.compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployment_config_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
     #   resp.deployment_config_info.traffic_routing_config.type #=> String, one of "TimeBasedCanary", "TimeBasedLinear", "AllAtOnce"
     #   resp.deployment_config_info.traffic_routing_config.time_based_canary.canary_percentage #=> Integer
     #   resp.deployment_config_info.traffic_routing_config.time_based_canary.canary_interval #=> Integer
@@ -1450,12 +1810,11 @@ module Aws::CodeDeploy
     # Gets information about a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [required, String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
     #
     # @return [Types::GetDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1486,7 +1845,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_scaling_groups[0].name #=> String
     #   resp.deployment_group_info.auto_scaling_groups[0].hook #=> String
     #   resp.deployment_group_info.service_role_arn #=> String
-    #   resp.deployment_group_info.target_revision.revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.deployment_group_info.target_revision.revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.deployment_group_info.target_revision.s3_location.bucket #=> String
     #   resp.deployment_group_info.target_revision.s3_location.key #=> String
     #   resp.deployment_group_info.target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -1496,6 +1855,8 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.target_revision.git_hub_location.commit_id #=> String
     #   resp.deployment_group_info.target_revision.string.content #=> String
     #   resp.deployment_group_info.target_revision.string.sha256 #=> String
+    #   resp.deployment_group_info.target_revision.app_spec_content.content #=> String
+    #   resp.deployment_group_info.target_revision.app_spec_content.sha256 #=> String
     #   resp.deployment_group_info.trigger_configurations #=> Array
     #   resp.deployment_group_info.trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_group_info.trigger_configurations[0].trigger_target_arn #=> String
@@ -1519,6 +1880,13 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployment_group_info.load_balancer_info.target_group_info_list #=> Array
     #   resp.deployment_group_info.load_balancer_info.target_group_info_list[0].name #=> String
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list #=> Array
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].target_groups #=> Array
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].target_groups[0].name #=> String
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns #=> Array
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].prod_traffic_route.listener_arns[0] #=> String
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns #=> Array
+    #   resp.deployment_group_info.load_balancer_info.target_group_pair_info_list[0].test_traffic_route.listener_arns[0] #=> String
     #   resp.deployment_group_info.last_successful_deployment.deployment_id #=> String
     #   resp.deployment_group_info.last_successful_deployment.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_group_info.last_successful_deployment.end_time #=> Time
@@ -1537,7 +1905,10 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
-    #   resp.deployment_group_info.compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployment_group_info.compute_platform #=> String, one of "Server", "Lambda", "ECS"
+    #   resp.deployment_group_info.ecs_services #=> Array
+    #   resp.deployment_group_info.ecs_services[0].service_name #=> String
+    #   resp.deployment_group_info.ecs_services[0].cluster_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -1593,6 +1964,95 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Returns information about a deployment target.
+    #
+    # @option params [String] :deployment_id
+    #   The unique ID of a deployment.
+    #
+    # @option params [String] :target_id
+    #   The unique ID of a deployment target.
+    #
+    # @return [Types::GetDeploymentTargetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeploymentTargetOutput#deployment_target #deployment_target} => Types::DeploymentTarget
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployment_target({
+    #     deployment_id: "DeploymentId",
+    #     target_id: "TargetId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deployment_target.deployment_target_type #=> String, one of "InstanceTarget", "LambdaTarget", "ECSTarget"
+    #   resp.deployment_target.instance_target.deployment_id #=> String
+    #   resp.deployment_target.instance_target.target_id #=> String
+    #   resp.deployment_target.instance_target.target_arn #=> String
+    #   resp.deployment_target.instance_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_target.instance_target.last_updated_at #=> Time
+    #   resp.deployment_target.instance_target.lifecycle_events #=> Array
+    #   resp.deployment_target.instance_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_target.instance_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_target.instance_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_target.instance_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_target.instance_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_target.instance_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_target.instance_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_target.instance_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_target.instance_target.instance_label #=> String, one of "Blue", "Green"
+    #   resp.deployment_target.lambda_target.deployment_id #=> String
+    #   resp.deployment_target.lambda_target.target_id #=> String
+    #   resp.deployment_target.lambda_target.target_arn #=> String
+    #   resp.deployment_target.lambda_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_target.lambda_target.last_updated_at #=> Time
+    #   resp.deployment_target.lambda_target.lifecycle_events #=> Array
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_target.lambda_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_target.lambda_target.lambda_function_info.function_name #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.function_alias #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.current_version #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.target_version #=> String
+    #   resp.deployment_target.lambda_target.lambda_function_info.target_version_weight #=> Float
+    #   resp.deployment_target.ecs_target.deployment_id #=> String
+    #   resp.deployment_target.ecs_target.target_id #=> String
+    #   resp.deployment_target.ecs_target.target_arn #=> String
+    #   resp.deployment_target.ecs_target.last_updated_at #=> Time
+    #   resp.deployment_target.ecs_target.lifecycle_events #=> Array
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].lifecycle_event_name #=> String
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].diagnostics.error_code #=> String, one of "Success", "ScriptMissing", "ScriptNotExecutable", "ScriptTimedOut", "ScriptFailed", "UnknownError"
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].diagnostics.script_name #=> String
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].diagnostics.message #=> String
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].diagnostics.log_tail #=> String
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].start_time #=> Time
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].end_time #=> Time
+    #   resp.deployment_target.ecs_target.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.deployment_target.ecs_target.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
+    #   resp.deployment_target.ecs_target.task_sets_info #=> Array
+    #   resp.deployment_target.ecs_target.task_sets_info[0].identifer #=> String
+    #   resp.deployment_target.ecs_target.task_sets_info[0].desired_count #=> Integer
+    #   resp.deployment_target.ecs_target.task_sets_info[0].pending_count #=> Integer
+    #   resp.deployment_target.ecs_target.task_sets_info[0].running_count #=> Integer
+    #   resp.deployment_target.ecs_target.task_sets_info[0].status #=> String
+    #   resp.deployment_target.ecs_target.task_sets_info[0].traffic_weight #=> Float
+    #   resp.deployment_target.ecs_target.task_sets_info[0].target_group.name #=> String
+    #   resp.deployment_target.ecs_target.task_sets_info[0].task_set_label #=> String, one of "Blue", "Green"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentTarget AWS API Documentation
+    #
+    # @overload get_deployment_target(params = {})
+    # @param [Hash] params ({})
+    def get_deployment_target(params = {}, options = {})
+      req = build_request(:get_deployment_target, params)
+      req.send_request(options)
+    end
+
     # Gets information about an on-premises instance.
     #
     # @option params [required, String] :instance_name
@@ -1632,8 +2092,8 @@ module Aws::CodeDeploy
     # Lists information about revisions for an application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :sort_by
     #   The column name to use to sort the list results:
@@ -1647,7 +2107,7 @@ module Aws::CodeDeploy
     #   * lastUsedTime: Sort by the time the revisions were last used in a
     #     deployment.
     #
-    #   If not specified or set to null, the results will be returned in an
+    #   If not specified or set to null, the results are returned in an
     #   arbitrary order.
     #
     # @option params [String] :sort_order
@@ -1657,14 +2117,14 @@ module Aws::CodeDeploy
     #
     #   * descending: descending order.
     #
-    #   If not specified, the results will be sorted in ascending order.
+    #   If not specified, the results are sorted in ascending order.
     #
-    #   If set to null, the results will be sorted in an arbitrary order.
+    #   If set to null, the results are sorted in an arbitrary order.
     #
     # @option params [String] :s3_bucket
     #   An Amazon S3 bucket name to limit the search for revisions.
     #
-    #   If set to null, all of the user's buckets will be searched.
+    #   If set to null, all of the user's buckets are searched.
     #
     # @option params [String] :s3_key_prefix
     #   A key prefix for the set of Amazon S3 objects to limit the search for
@@ -1683,7 +2143,7 @@ module Aws::CodeDeploy
     #   * ignore: List all revisions.
     #
     # @option params [String] :next_token
-    #   An identifier returned from the previous list application revisions
+    #   An identifier returned from the previous `ListApplicationRevisions`
     #   call. It can be used to return the next set of applications in the
     #   list.
     #
@@ -1707,7 +2167,7 @@ module Aws::CodeDeploy
     # @example Response structure
     #
     #   resp.revisions #=> Array
-    #   resp.revisions[0].revision_type #=> String, one of "S3", "GitHub", "String"
+    #   resp.revisions[0].revision_type #=> String, one of "S3", "GitHub", "String", "AppSpecContent"
     #   resp.revisions[0].s3_location.bucket #=> String
     #   resp.revisions[0].s3_location.key #=> String
     #   resp.revisions[0].s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
@@ -1717,6 +2177,8 @@ module Aws::CodeDeploy
     #   resp.revisions[0].git_hub_location.commit_id #=> String
     #   resp.revisions[0].string.content #=> String
     #   resp.revisions[0].string.sha256 #=> String
+    #   resp.revisions[0].app_spec_content.content #=> String
+    #   resp.revisions[0].app_spec_content.sha256 #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions AWS API Documentation
@@ -1728,8 +2190,7 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the applications registered with the applicable IAM user or AWS
-    # account.
+    # Lists the applications registered with the IAM user or AWS account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list applications call. It
@@ -1761,13 +2222,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment configurations with the applicable IAM user or
-    # AWS account.
+    # Lists the deployment configurations with the IAM user or AWS account.
     #
     # @option params [String] :next_token
-    #   An identifier returned from the previous list deployment
-    #   configurations call. It can be used to return the next set of
-    #   deployment configurations in the list.
+    #   An identifier returned from the previous `ListDeploymentConfigs` call.
+    #   It can be used to return the next set of deployment configurations in
+    #   the list.
     #
     # @return [Types::ListDeploymentConfigsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1795,12 +2255,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the deployment groups for an application registered with the
-    # applicable IAM user or AWS account.
+    # Lists the deployment groups for an application registered with the IAM
+    # user or AWS account.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list deployment groups call.
@@ -1836,8 +2296,15 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Lists the instance for a deployment associated with the applicable IAM
-    # user or AWS account.
+    # <note markdown="1"> The newer BatchGetDeploymentTargets should be used instead because it
+    # works with all compute types. `ListDeploymentInstances` throws an
+    # exception if it is used with a compute platform other than
+    # EC2/On-premises or AWS Lambda.
+    #
+    #  </note>
+    #
+    # Lists the instance for a deployment associated with the IAM user or
+    # AWS account.
     #
     # @option params [required, String] :deployment_id
     #   The unique ID of a deployment.
@@ -1850,18 +2317,18 @@ module Aws::CodeDeploy
     # @option params [Array<String>] :instance_status_filter
     #   A subset of instances to list by status:
     #
-    #   * Pending: Include those instance with pending deployments.
+    #   * Pending: Include those instances with pending deployments.
     #
-    #   * InProgress: Include those instance where deployments are still in
+    #   * InProgress: Include those instances where deployments are still in
     #     progress.
     #
     #   * Succeeded: Include those instances with successful deployments.
     #
-    #   * Failed: Include those instance with failed deployments.
+    #   * Failed: Include those instances with failed deployments.
     #
-    #   * Skipped: Include those instance with skipped deployments.
+    #   * Skipped: Include those instances with skipped deployments.
     #
-    #   * Unknown: Include those instance with deployments in an unknown
+    #   * Unknown: Include those instances with deployments in an unknown
     #     state.
     #
     # @option params [Array<String>] :instance_type_filter
@@ -1899,16 +2366,77 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Returns an array of target IDs that are associated a deployment.
+    #
+    # @option params [String] :deployment_id
+    #   The unique ID of a deployment.
+    #
+    # @option params [String] :next_token
+    #   A token identifier returned from the previous `ListDeploymentTargets`
+    #   call. It can be used to return the next set of deployment targets in
+    #   the list.
+    #
+    # @option params [Hash<String,Array>] :target_filters
+    #   A key used to filter the returned targets. The two valid values are:
+    #
+    #   * `TargetStatus` - A `TargetStatus` filter string can be `Failed`,
+    #     `InProgress`, `Pending`, `Ready`, `Skipped`, `Succeeded`, or
+    #     `Unknown`.
+    #
+    #   * `ServerInstanceLabel` - A `ServerInstanceLabel` filter string can be
+    #     `Blue` or `Green`.
+    #
+    # @return [Types::ListDeploymentTargetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeploymentTargetsOutput#target_ids #target_ids} => Array&lt;String&gt;
+    #   * {Types::ListDeploymentTargetsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_deployment_targets({
+    #     deployment_id: "DeploymentId",
+    #     next_token: "NextToken",
+    #     target_filters: {
+    #       "TargetStatus" => ["FilterValue"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_ids #=> Array
+    #   resp.target_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentTargets AWS API Documentation
+    #
+    # @overload list_deployment_targets(params = {})
+    # @param [Hash] params ({})
+    def list_deployment_targets(params = {}, options = {})
+      req = build_request(:list_deployment_targets, params)
+      req.send_request(options)
+    end
+
     # Lists the deployments in a deployment group for an application
-    # registered with the applicable IAM user or AWS account.
+    # registered with the IAM user or AWS account.
     #
     # @option params [String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
+    #
+    #   <note markdown="1"> If `applicationName` is specified, then `deploymentGroupName` must be
+    #   specified. If it is not specified, then `deploymentGroupName` must not
+    #   be specified.
+    #
+    #    </note>
     #
     # @option params [String] :deployment_group_name
-    #   The name of an existing deployment group for the specified
-    #   application.
+    #   The name of a deployment group for the specified application.
+    #
+    #   <note markdown="1"> If `deploymentGroupName` is specified, then `applicationName` must be
+    #   specified. If it is not specified, then `applicationName` must not be
+    #   specified.
+    #
+    #    </note>
     #
     # @option params [Array<String>] :include_only_statuses
     #   A subset of deployments to list by status:
@@ -2001,7 +2529,7 @@ module Aws::CodeDeploy
     # Gets a list of names for one or more on-premises instances.
     #
     # Unless otherwise specified, both registered and deregistered
-    # on-premises instance names will be listed. To list only registered or
+    # on-premises instance names are listed. To list only registered or
     # deregistered on-premises instance names, use the registration status
     # parameter.
     #
@@ -2015,8 +2543,8 @@ module Aws::CodeDeploy
     #     resulting list.
     #
     # @option params [Array<Types::TagFilter>] :tag_filters
-    #   The on-premises instance tags that will be used to restrict the
-    #   corresponding on-premises instance names returned.
+    #   The on-premises instance tags that are used to restrict the
+    #   on-premises instance names returned.
     #
     # @option params [String] :next_token
     #   An identifier returned from the previous list on-premises instances
@@ -2057,12 +2585,52 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Returns a list of tags for the resource identified by a specified ARN.
+    # Tags are used to organize and categorize your CodeDeploy resources.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of a CodeDeploy resource. `ListTagsForResource` returns all
+    #   the tags associated with the resource that is identified by the
+    #   `ResourceArn`.
+    #
+    # @option params [String] :next_token
+    #   An identifier returned from the previous `ListTagsForResource` call.
+    #   It can be used to return the next set of applications in the list.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets the result of a Lambda validation function. The function
     # validates one or both lifecycle events (`BeforeAllowTraffic` and
     # `AfterAllowTraffic`) and returns `Succeeded` or `Failed`.
     #
     # @option params [String] :deployment_id
-    #   The ID of the deployment. Pass this ID to a Lambda function that
+    #   The unique ID of a deployment. Pass this ID to a Lambda function that
     #   validates a deployment lifecycle event.
     #
     # @option params [String] :lifecycle_event_hook_execution_id
@@ -2103,8 +2671,8 @@ module Aws::CodeDeploy
     # application.
     #
     # @option params [required, String] :application_name
-    #   The name of an AWS CodeDeploy application associated with the
-    #   applicable IAM user or AWS account.
+    #   The name of an AWS CodeDeploy application associated with the IAM user
+    #   or AWS account.
     #
     # @option params [String] :description
     #   A comment about the revision.
@@ -2121,7 +2689,7 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     description: "Description",
     #     revision: { # required
-    #       revision_type: "S3", # accepts S3, GitHub, String
+    #       revision_type: "S3", # accepts S3, GitHub, String, AppSpecContent
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
@@ -2134,6 +2702,10 @@ module Aws::CodeDeploy
     #         commit_id: "CommitId",
     #       },
     #       string: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
+    #       },
+    #       app_spec_content: {
     #         content: "RawStringContent",
     #         sha256: "RawStringSha256",
     #       },
@@ -2217,11 +2789,11 @@ module Aws::CodeDeploy
 
     # In a blue/green deployment, overrides any specified wait time and
     # starts terminating instances immediately after the traffic routing is
-    # completed.
+    # complete.
     #
     # @option params [String] :deployment_id
-    #   The ID of the blue/green deployment for which you want to skip the
-    #   instance termination wait time.
+    #   The unique ID of a blue/green deployment for which you want to skip
+    #   the instance termination wait time.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2276,6 +2848,71 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Associates the list of tags in the input `Tags` parameter with the
+    # resource identified by the `ResourceArn` input parameter.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of a resource, such as a CodeDeploy application or deployment
+    #   group.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   A list of tags that `TagResource` associates with a resource. The
+    #   resource is identified by the `ResourceArn` input parameter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "Key",
+    #         value: "Value",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a resource from a list of tags. The resource is
+    # identified by the `ResourceArn` input parameter. The tags are
+    # identfied by the list of keys in the `TagKeys` input parameter.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN that specifies from which resource to disassociate the tags
+    #   with the keys in the `TagKeys` input paramter.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of keys of `Tag` objects. The `Tag` objects identified by the
+    #   keys are disassociated from the resource specified by the
+    #   `ResourceArn` input parameter.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["Key"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Changes the name of an application.
     #
     # @option params [String] :application_name
@@ -2305,7 +2942,8 @@ module Aws::CodeDeploy
     # Changes information about a deployment group.
     #
     # @option params [required, String] :application_name
-    #   The application name corresponding to the deployment group to update.
+    #   The application name that corresponds to the deployment group to
+    #   update.
     #
     # @option params [required, String] :current_deployment_group_name
     #   The current name of the deployment group.
@@ -2343,7 +2981,7 @@ module Aws::CodeDeploy
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
+    #   [1]: https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
     #
     # @option params [Types::AlarmConfiguration] :alarm_configuration
     #   Information to add or change about Amazon CloudWatch alarms when the
@@ -2367,13 +3005,19 @@ module Aws::CodeDeploy
     #
     # @option params [Types::EC2TagSet] :ec2_tag_set
     #   Information about groups of tags applied to on-premises instances. The
-    #   deployment group will include only EC2 instances identified by all the
-    #   tag groups.
+    #   deployment group includes only EC2 instances identified by all the tag
+    #   groups.
+    #
+    # @option params [Array<Types::ECSService>] :ecs_services
+    #   The target Amazon ECS services in the deployment group. This applies
+    #   only to deployment groups that use the Amazon ECS compute platform. A
+    #   target Amazon ECS service is specified as an Amazon ECS cluster and
+    #   service name pair using the format `<clustername>:<servicename>`.
     #
     # @option params [Types::OnPremisesTagSet] :on_premises_tag_set
     #   Information about an on-premises instance tag set. The deployment
-    #   group will include only on-premises instances identified by all the
-    #   tag groups.
+    #   group includes only on-premises instances identified by all the tag
+    #   groups.
     #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2450,6 +3094,21 @@ module Aws::CodeDeploy
     #           name: "TargetGroupName",
     #         },
     #       ],
+    #       target_group_pair_info_list: [
+    #         {
+    #           target_groups: [
+    #             {
+    #               name: "TargetGroupName",
+    #             },
+    #           ],
+    #           prod_traffic_route: {
+    #             listener_arns: ["ListenerArn"],
+    #           },
+    #           test_traffic_route: {
+    #             listener_arns: ["ListenerArn"],
+    #           },
+    #         },
+    #       ],
     #     },
     #     ec2_tag_set: {
     #       ec2_tag_set_list: [
@@ -2462,6 +3121,12 @@ module Aws::CodeDeploy
     #         ],
     #       ],
     #     },
+    #     ecs_services: [
+    #       {
+    #         service_name: "ECSServiceName",
+    #         cluster_name: "ECSClusterName",
+    #       },
+    #     ],
     #     on_premises_tag_set: {
     #       on_premises_tag_set_list: [
     #         [
@@ -2503,7 +3168,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2520,7 +3185,7 @@ module Aws::CodeDeploy
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #

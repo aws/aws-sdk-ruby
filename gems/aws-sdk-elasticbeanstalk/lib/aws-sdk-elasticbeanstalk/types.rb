@@ -527,11 +527,15 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] nice
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `Nice` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] system
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `System` state over
     #   the last 10 seconds.
     #   @return [Float]
@@ -542,17 +546,30 @@ module Aws::ElasticBeanstalk
     #   @return [Float]
     #
     # @!attribute [rw] io_wait
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `I/O Wait` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `IRQ` state over
     #   the last 10 seconds.
     #   @return [Float]
     #
     # @!attribute [rw] soft_irq
+    #   Available on Linux environments only.
+    #
     #   Percentage of time that the CPU has spent in the `SoftIRQ` state
+    #   over the last 10 seconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] privileged
+    #   Available on Windows environments only.
+    #
+    #   Percentage of time that the CPU has spent in the `Privileged` state
     #   over the last 10 seconds.
     #   @return [Float]
     #
@@ -565,7 +582,8 @@ module Aws::ElasticBeanstalk
       :idle,
       :io_wait,
       :irq,
-      :soft_irq)
+      :soft_irq,
+      :privileged)
       include Aws::Structure
     end
 
@@ -636,7 +654,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #   @return [String]
     #
     # @!attribute [rw] version_labels
@@ -768,7 +786,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html
     #
     # @note When making an API call, you may pass ConfigurationOptionSetting
     #   data as a hash:
@@ -958,6 +976,12 @@ module Aws::ElasticBeanstalk
     #             },
     #           },
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -977,12 +1001,21 @@ module Aws::ElasticBeanstalk
     #   your application from accumulating too many versions.
     #   @return [Types::ApplicationResourceLifecycleConfig]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the application.
+    #
+    #   Elastic Beanstalk applies these tags only to the application.
+    #   Environments that you create in the application don't inherit the
+    #   tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationMessage AWS API Documentation
     #
     class CreateApplicationMessage < Struct.new(
       :application_name,
       :description,
-      :resource_lifecycle_config)
+      :resource_lifecycle_config,
+      :tags)
       include Aws::Structure
     end
 
@@ -1011,6 +1044,12 @@ module Aws::ElasticBeanstalk
     #         },
     #         auto_create_application: false,
     #         process: false,
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] application_name
@@ -1078,6 +1117,14 @@ module Aws::ElasticBeanstalk
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the application version.
+    #
+    #   Elastic Beanstalk applies these tags only to the application
+    #   version. Environments that use the application version don't
+    #   inherit the tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage AWS API Documentation
     #
     class CreateApplicationVersionMessage < Struct.new(
@@ -1088,7 +1135,8 @@ module Aws::ElasticBeanstalk
       :source_bundle,
       :build_configuration,
       :auto_create_application,
-      :process)
+      :process,
+      :tags)
       include Aws::Structure
     end
 
@@ -1114,6 +1162,12 @@ module Aws::ElasticBeanstalk
     #             namespace: "OptionNamespace",
     #             option_name: "ConfigurationOptionName",
     #             value: "ConfigurationOptionValue",
+    #           },
+    #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -1189,6 +1243,10 @@ module Aws::ElasticBeanstalk
     #   template.
     #   @return [Array<Types::ConfigurationOptionSetting>]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the configuration template.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplateMessage AWS API Documentation
     #
     class CreateConfigurationTemplateMessage < Struct.new(
@@ -1199,7 +1257,8 @@ module Aws::ElasticBeanstalk
       :source_configuration,
       :environment_id,
       :description,
-      :option_settings)
+      :option_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -1275,7 +1334,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1294,7 +1353,7 @@ module Aws::ElasticBeanstalk
     #   @return [Types::EnvironmentTier]
     #
     # @!attribute [rw] tags
-    #   This specifies the tags applied to resources in the environment.
+    #   Specifies the tags applied to resources in the environment.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] version_label
@@ -1324,7 +1383,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
@@ -1383,6 +1442,12 @@ module Aws::ElasticBeanstalk
     #             value: "ConfigurationOptionValue",
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] platform_name
@@ -1406,6 +1471,14 @@ module Aws::ElasticBeanstalk
     #   environment.
     #   @return [Array<Types::ConfigurationOptionSetting>]
     #
+    # @!attribute [rw] tags
+    #   Specifies the tags applied to the new platform version.
+    #
+    #   Elastic Beanstalk applies these tags only to the platform version.
+    #   Environments that you create using the platform version don't
+    #   inherit the tags.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersionRequest AWS API Documentation
     #
     class CreatePlatformVersionRequest < Struct.new(
@@ -1413,7 +1486,8 @@ module Aws::ElasticBeanstalk
       :platform_version,
       :platform_definition_bundle,
       :environment_name,
-      :option_settings)
+      :option_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -1881,7 +1955,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1894,7 +1968,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #   @return [String]
     #
     # @!attribute [rw] causes
@@ -2293,6 +2367,10 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] instance_health_list
     #   Detailed health information about each instance.
+    #
+    #   The output differs slightly between Linux and Windows environments.
+    #   There is a difference in the members that are supported under the
+    #   `<CPUUtilization>` type.
     #   @return [Array<Types::SingleInstanceHealth>]
     #
     # @!attribute [rw] refreshed_at
@@ -2338,6 +2416,19 @@ module Aws::ElasticBeanstalk
     #
     class DescribePlatformVersionResult < Struct.new(
       :platform_description)
+      include Aws::Structure
+    end
+
+    # A generic service exception has occurred.
+    #
+    # @!attribute [rw] message
+    #   The exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ElasticBeanstalkServiceException AWS API Documentation
+    #
+    class ElasticBeanstalkServiceException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -2435,7 +2526,7 @@ module Aws::ElasticBeanstalk
     #   * `Grey`\: Default health for a new environment. The environment is
     #     not fully launched and health checks have not started or health
     #     checks are suspended during an `UpdateEnvironment` or
-    #     `RestartEnvironement` request.
+    #     `RestartEnvironment` request.
     #
     #   Default: `Grey`
     #   @return [String]
@@ -2447,7 +2538,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -2527,7 +2618,11 @@ module Aws::ElasticBeanstalk
     #   @return [Time]
     #
     # @!attribute [rw] message
-    #   The retrieved information.
+    #   The retrieved information. Currently contains a presigned Amazon S3
+    #   URL. The files are deleted after 15 minutes.
+    #
+    #   Anyone in possession of this URL can access the files before they
+    #   are deleted. Make the URL available only to trusted parties.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentInfoDescription AWS API Documentation
@@ -2547,7 +2642,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @!attribute [rw] link_name
     #   The name of the link.
@@ -2584,6 +2679,10 @@ module Aws::ElasticBeanstalk
     #   The Auto Scaling launch configurations in use by this environment.
     #   @return [Array<Types::LaunchConfiguration>]
     #
+    # @!attribute [rw] launch_templates
+    #   The Amazon EC2 launch templates in use by this environment.
+    #   @return [Array<Types::LaunchTemplate>]
+    #
     # @!attribute [rw] load_balancers
     #   The LoadBalancers in use by this environment.
     #   @return [Array<Types::LoadBalancer>]
@@ -2603,6 +2702,7 @@ module Aws::ElasticBeanstalk
       :auto_scaling_groups,
       :instances,
       :launch_configurations,
+      :launch_templates,
       :load_balancers,
       :triggers,
       :queues)
@@ -2649,10 +2749,22 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] name
     #   The name of this environment tier.
+    #
+    #   Valid values:
+    #
+    #   * For *Web server tier* – `WebServer`
+    #
+    #   * For *Worker tier* – `Worker`
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of this environment tier.
+    #
+    #   Valid values:
+    #
+    #   * For *Web server tier* – `Standard`
+    #
+    #   * For *Worker tier* – `SQS/HTTP`
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2767,7 +2879,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #
     # @!attribute [rw] no_data
     #   **Grey.** AWS Elastic Beanstalk and the health agent are reporting
@@ -2889,6 +3001,19 @@ module Aws::ElasticBeanstalk
     #
     class LaunchConfiguration < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Describes an Amazon EC2 launch template.
+    #
+    # @!attribute [rw] id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchTemplate AWS API Documentation
+    #
+    class LaunchTemplate < Struct.new(
+      :id)
       include Aws::Structure
     end
 
@@ -3772,7 +3897,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #   @return [String]
     #
     # @!attribute [rw] color
@@ -3782,7 +3907,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #   @return [String]
     #
     # @!attribute [rw] causes
@@ -4031,7 +4156,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os
     #   @return [Array<Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SystemStatus AWS API Documentation
@@ -4116,7 +4241,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
     #   @return [Boolean]
     #
     # @!attribute [rw] force_terminate
@@ -4394,7 +4519,7 @@ module Aws::ElasticBeanstalk
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #   @return [String]
     #
     # @!attribute [rw] description

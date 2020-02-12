@@ -8,6 +8,19 @@
 module Aws::ResourceGroups
   module Types
 
+    # The request does not comply with validation rules that are defined for
+    # the request parameters.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateGroupInput
     #   data as a hash:
     #
@@ -15,7 +28,7 @@ module Aws::ResourceGroups
     #         name: "GroupName", # required
     #         description: "GroupDescription",
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #         tags: {
@@ -26,7 +39,7 @@ module Aws::ResourceGroups
     # @!attribute [rw] name
     #   The name of the group, which is the identifier of the group in other
     #   operations. A resource group name cannot be updated after it is
-    #   created. A resource group name can have a maximum of 127 characters,
+    #   created. A resource group name can have a maximum of 128 characters,
     #   including letters, numbers, hyphens, dots, and underscores. The name
     #   cannot start with `AWS` or `aws`; these are reserved. A resource
     #   group name must be unique within your account.
@@ -45,8 +58,8 @@ module Aws::ResourceGroups
     #
     # @!attribute [rw] tags
     #   The tags to add to the group. A tag is a string-to-string map of
-    #   key-value pairs. Tag keys can have a maximum character length of 127
-    #   characters, and tag values can have a maximum length of 255
+    #   key-value pairs. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
     #   characters.
     #   @return [Hash<String,String>]
     #
@@ -107,6 +120,18 @@ module Aws::ResourceGroups
     #
     class DeleteGroupOutput < Struct.new(
       :group)
+      include Aws::Structure
+    end
+
+    # The caller is not authorized to make the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -176,7 +201,7 @@ module Aws::ResourceGroups
     #       }
     #
     # @!attribute [rw] arn
-    #   The ARN of the resource for which you want a list of tags. The
+    #   The ARN of the resource group for which you want a list of tags. The
     #   resource must exist within the account you are using.
     #   @return [String]
     #
@@ -188,11 +213,11 @@ module Aws::ResourceGroups
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the tagged resource.
+    #   The ARN of the tagged resource group.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags associated with the specified resource.
+    #   The tags associated with the specified resource group.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsOutput AWS API Documentation
@@ -226,6 +251,52 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # A filter name and value pair that is used to obtain more specific
+    # results from a list of groups.
+    #
+    # @note When making an API call, you may pass GroupFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["GroupFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more filter values. Allowed filter values vary by group
+    #   filter name, and are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupFilter AWS API Documentation
+    #
+    class GroupFilter < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
+    # The ARN and group name of a group.
+    #
+    # @!attribute [rw] group_name
+    #   The name of a resource group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_arn
+    #   The ARN of a resource group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupIdentifier AWS API Documentation
+    #
+    class GroupIdentifier < Struct.new(
+      :group_name,
+      :group_arn)
+      include Aws::Structure
+    end
+
     # The underlying resource query of a resource group. Resources that
     # match query results are part of the group.
     #
@@ -247,11 +318,29 @@ module Aws::ResourceGroups
       include Aws::Structure
     end
 
+    # An internal error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListGroupResourcesInput
     #   data as a hash:
     #
     #       {
     #         group_name: "GroupName", # required
+    #         filters: [
+    #           {
+    #             name: "resource-type", # required, accepts resource-type
+    #             values: ["ResourceFilterValue"], # required
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -259,6 +348,17 @@ module Aws::ResourceGroups
     # @!attribute [rw] group_name
     #   The name of the resource group.
     #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters, formatted as ResourceFilter objects, that you want to apply
+    #   to a ListGroupResources operation.
+    #
+    #   * `resource-type` - Filter resources by their type. Specify up to
+    #     five resource types in the format AWS::ServiceCode::ResourceType.
+    #     For example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #   @return [Array<Types::ResourceFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of group member ARNs that are returned in a
@@ -277,6 +377,7 @@ module Aws::ResourceGroups
     #
     class ListGroupResourcesInput < Struct.new(
       :group_name,
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
@@ -292,11 +393,19 @@ module Aws::ResourceGroups
     #   request, to get more results.
     #   @return [String]
     #
+    # @!attribute [rw] query_errors
+    #   A list of `QueryError` objects. Each error is an object that
+    #   contains `ErrorCode` and `Message` structures. Possible values for
+    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [Array<Types::QueryError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput AWS API Documentation
     #
     class ListGroupResourcesOutput < Struct.new(
       :resource_identifiers,
-      :next_token)
+      :next_token,
+      :query_errors)
       include Aws::Structure
     end
 
@@ -304,9 +413,26 @@ module Aws::ResourceGroups
     #   data as a hash:
     #
     #       {
+    #         filters: [
+    #           {
+    #             name: "resource-type", # required, accepts resource-type
+    #             values: ["GroupFilterValue"], # required
+    #           },
+    #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters, formatted as GroupFilter objects, that you want to apply to
+    #   a ListGroups operation.
+    #
+    #   * `resource-type` - Filter groups by resource type. Specify up to
+    #     five resource types in the format AWS::ServiceCode::ResourceType.
+    #     For example, AWS::EC2::Instance, or AWS::S3::Bucket.
+    #
+    #   ^
+    #   @return [Array<Types::GroupFilter>]
     #
     # @!attribute [rw] max_results
     #   The maximum number of resource group results that are returned by
@@ -322,11 +448,17 @@ module Aws::ResourceGroups
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsInput AWS API Documentation
     #
     class ListGroupsInput < Struct.new(
+      :filters,
       :max_results,
       :next_token)
       include Aws::Structure
     end
 
+    # @!attribute [rw] group_identifiers
+    #   A list of GroupIdentifier objects. Each identifier is an object that
+    #   contains both the GroupName and the GroupArn.
+    #   @return [Array<Types::GroupIdentifier>]
+    #
     # @!attribute [rw] groups
     #   A list of resource groups.
     #   @return [Array<Types::Group>]
@@ -339,8 +471,91 @@ module Aws::ResourceGroups
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsOutput AWS API Documentation
     #
     class ListGroupsOutput < Struct.new(
+      :group_identifiers,
       :groups,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The request uses an HTTP method which is not allowed for the specified
+    # resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/MethodNotAllowedException AWS API Documentation
+    #
+    class MethodNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more resources specified in the request do not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # A two-part error structure that can occur in `ListGroupResources` or
+    # `SearchResources` operations on CloudFormation stack-based queries.
+    # The error occurs if the CloudFormation stack on which the query is
+    # based either does not exist, or has a status that renders the stack
+    # inactive. A `QueryError` occurrence does not necessarily mean that AWS
+    # Resource Groups could not complete the operation, but the resulting
+    # group might have no member resources.
+    #
+    # @!attribute [rw] error_code
+    #   Possible values are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message that explains the `ErrorCode` value. Messages might state
+    #   that the specified CloudFormation stack does not exist (or no longer
+    #   exists). For `CLOUDFORMATION_STACK_INACTIVE`, the message typically
+    #   states that the CloudFormation stack has a status that is not (or no
+    #   longer) active, such as `CREATE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/QueryError AWS API Documentation
+    #
+    class QueryError < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # A filter name and value pair that is used to obtain more specific
+    # results from a list of resources.
+    #
+    # @note When making an API call, you may pass ResourceFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "resource-type", # required, accepts resource-type
+    #         values: ["ResourceFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Filter names are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   One or more filter values. Allowed filter values vary by resource
+    #   filter name, and are case-sensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceFilter AWS API Documentation
+    #
+    class ResourceFilter < Struct.new(
+      :name,
+      :values)
       include Aws::Structure
     end
 
@@ -369,21 +584,55 @@ module Aws::ResourceGroups
     #   data as a hash:
     #
     #       {
-    #         type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #         type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #         query: "Query", # required
     #       }
     #
     # @!attribute [rw] type
-    #   The type of the query. The valid value in this release is
-    #   `TAG_FILTERS_1_0`.
+    #   The type of the query. The valid values in this release are
+    #   `TAG_FILTERS_1_0` and `CLOUDFORMATION_STACK_1_0`.
     #
     #   <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you
     #   specify a collection of simple tag filters for resource types and
-    #   tags, as supported by the AWS Tagging API GetResources operation.
-    #   When more than one element is present, only resources that match all
-    #   filters are part of the result. If a filter specifies more than one
-    #   value for a key, a resource matches the filter if its tag value
-    #   matches any of the specified values.
+    #   tags, as supported by the AWS Tagging API [GetResources][1]
+    #   operation. If you specify more than one tag key, only resources that
+    #   match all tag keys, and at least one value of each specified tag
+    #   key, are returned in your query. If you specify more than one value
+    #   for a tag key, a resource matches the filter if it has a tag key
+    #   value that matches *any* of the specified values.
+    #
+    #   For example, consider the following sample query for resources that
+    #   have two tags, `Stage` and `Version`, with two values each.
+    #   (`[\{"Key":"Stage","Values":["Test","Deploy"]\},\{"Key":"Version","Values":["1","2"]\}]`)
+    #   The results of this query might include the following.
+    #
+    #   * An EC2 instance that has the following two tags:
+    #     `\{"Key":"Stage","Value":"Deploy"\}`, and
+    #     `\{"Key":"Version","Value":"2"\}`
+    #
+    #   * An S3 bucket that has the following two tags:
+    #     \\\{"Key":"Stage","Value":"Test"\\}, and
+    #     \\\{"Key":"Version","Value":"1"\\}
+    #
+    #   The query would not return the following results, however. The
+    #   following EC2 instance does not have all tag keys specified in the
+    #   filter, so it is rejected. The RDS database has all of the tag keys,
+    #   but no values that match at least one of the specified tag key
+    #   values in the filter.
+    #
+    #   * An EC2 instance that has only the following tag:
+    #     `\{"Key":"Stage","Value":"Deploy"\}`.
+    #
+    #   * An RDS database that has the following two tags:
+    #     `\{"Key":"Stage","Value":"Archived"\}`, and
+    #     `\{"Key":"Version","Value":"4"\}`
+    #
+    #   <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that
+    #   lets you specify a CloudFormation stack ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html
     #   @return [String]
     #
     # @!attribute [rw] query
@@ -403,7 +652,7 @@ module Aws::ResourceGroups
     #
     #       {
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #         max_results: 1,
@@ -447,11 +696,19 @@ module Aws::ResourceGroups
     #   request, to get more results.
     #   @return [String]
     #
+    # @!attribute [rw] query_errors
+    #   A list of `QueryError` objects. Each error is an object that
+    #   contains `ErrorCode` and `Message` structures. Possible values for
+    #   `ErrorCode` are `CLOUDFORMATION_STACK_INACTIVE` and
+    #   `CLOUDFORMATION_STACK_NOT_EXISTING`.
+    #   @return [Array<Types::QueryError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput AWS API Documentation
     #
     class SearchResourcesOutput < Struct.new(
       :resource_identifiers,
-      :next_token)
+      :next_token,
+      :query_errors)
       include Aws::Structure
     end
 
@@ -472,8 +729,8 @@ module Aws::ResourceGroups
     # @!attribute [rw] tags
     #   The tags to add to the specified resource. A tag is a
     #   string-to-string map of key-value pairs. Tag keys can have a maximum
-    #   character length of 127 characters, and tag values can have a
-    #   maximum length of 255 characters.
+    #   character length of 128 characters, and tag values can have a
+    #   maximum length of 256 characters.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagInput AWS API Documentation
@@ -497,6 +754,31 @@ module Aws::ResourceGroups
     class TagOutput < Struct.new(
       :arn,
       :tags)
+      include Aws::Structure
+    end
+
+    # The caller has exceeded throttling limits.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request has not been applied because it lacks valid authentication
+    # credentials for the target resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UnauthorizedException AWS API Documentation
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -585,7 +867,7 @@ module Aws::ResourceGroups
     #       {
     #         group_name: "GroupName", # required
     #         resource_query: { # required
-    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0
+    #           type: "TAG_FILTERS_1_0", # required, accepts TAG_FILTERS_1_0, CLOUDFORMATION_STACK_1_0
     #           query: "Query", # required
     #         },
     #       }

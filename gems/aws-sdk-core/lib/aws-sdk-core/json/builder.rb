@@ -56,9 +56,11 @@ module Aws
       end
 
       def timestamp(ref, value)
-        if ref['timestampFormat'] == 'iso8601'
-          value.utc.iso8601
+        case ref['timestampFormat'] || ref.shape['timestampFormat']
+        when 'iso8601' then value.utc.iso8601
+        when 'rfc822' then value.utc.httpdate
         else
+          # rest-json and jsonrpc default to unixTimestamp
           value.to_i
         end
       end

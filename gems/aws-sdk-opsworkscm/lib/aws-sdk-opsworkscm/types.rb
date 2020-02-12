@@ -255,6 +255,12 @@ module Aws::OpsWorksCM
     #       {
     #         server_name: "ServerName", # required
     #         description: "String",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] server_name
@@ -265,11 +271,33 @@ module Aws::OpsWorksCM
     #   A user-defined description of the backup.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks-CM server backup.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key
+    #     and value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for tag-supported AWS
+    #     OpsWorks-CM resources.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupRequest AWS API Documentation
     #
     class CreateBackupRequest < Struct.new(
       :server_name,
-      :description)
+      :description,
+      :tags)
       include Aws::Structure
     end
 
@@ -289,6 +317,9 @@ module Aws::OpsWorksCM
     #
     #       {
     #         associate_public_ip_address: false,
+    #         custom_domain: "CustomDomain",
+    #         custom_certificate: "CustomCertificate",
+    #         custom_private_key: "CustomPrivateKey",
     #         disable_automated_backup: false,
     #         engine: "String",
     #         engine_model: "String",
@@ -309,6 +340,12 @@ module Aws::OpsWorksCM
     #         security_group_ids: ["String"],
     #         service_role_arn: "ServiceRoleArn", # required
     #         subnet_ids: ["String"],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #         backup_id: "BackupId",
     #       }
     #
@@ -317,6 +354,50 @@ module Aws::OpsWorksCM
     #   Valid values are `true` or `false`. The default value is `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] custom_domain
+    #   Supported on servers running Chef Automate 2. An optional public
+    #   endpoint of a server, such as `https://aws.my-company.com`. To
+    #   access the server, create a CNAME DNS record in your preferred DNS
+    #   service that points the custom domain to the endpoint that is
+    #   generated when the server is created (the value of the CreateServer
+    #   Endpoint attribute). You cannot access the server by using the
+    #   generated `Endpoint` value if the server is using a custom domain.
+    #   If you specify a custom domain, you must also specify values for
+    #   `CustomCertificate` and `CustomPrivateKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate
+    #   Supported on servers running Chef Automate 2. A PEM-formatted HTTPS
+    #   certificate. The value can be be a single, self-signed certificate,
+    #   or a certificate chain. If you specify a custom certificate, you
+    #   must also specify values for `CustomDomain` and `CustomPrivateKey`.
+    #   The following are requirements for the `CustomCertificate` value:
+    #
+    #   * You can provide either a self-signed, custom certificate, or the
+    #     full certificate chain.
+    #
+    #   * The certificate must be a valid X509 certificate, or a certificate
+    #     chain in PEM format.
+    #
+    #   * The certificate must be valid at the time of upload. A certificate
+    #     can't be used before its validity period begins (the
+    #     certificate's `NotBefore` date), or after it expires (the
+    #     certificate's `NotAfter` date).
+    #
+    #   * The certificate’s common name or subject alternative names (SANs),
+    #     if present, must match the value of `CustomDomain`.
+    #
+    #   * The certificate must match the value of `CustomPrivateKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_private_key
+    #   Supported on servers running Chef Automate 2. A private key in PEM
+    #   format for connecting to the server by using HTTPS. The private key
+    #   must not be encrypted; it cannot be protected by a password or
+    #   passphrase. If you specify a custom private key, you must also
+    #   specify values for `CustomDomain` and `CustomCertificate`.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
     #   `false`. The default value is `true`.
@@ -324,7 +405,7 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] engine
     #   The configuration management engine to use. Valid values include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
@@ -343,26 +424,33 @@ module Aws::OpsWorksCM
     #
     #   **Attributes accepted in a Chef createServer request:**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API. When no CHEF\_PIVOTAL\_KEY is
-    #     set, one is generated and returned in the response.
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA public key. The
+    #     corresponding private key is required to access the Chef API. When
+    #     no CHEF\_AUTOMATE\_PIVOTAL\_KEY is set, a private key is generated
+    #     and returned in the response.
     #
-    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the
-    #     administrative user in the Chef Automate GUI. The password length
-    #     is a minimum of eight characters, and a maximum of 32. The
-    #     password can contain letters, numbers, and special characters
-    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
-    #     case letter, one upper case letter, one number, and one special
-    #     character. When no CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is
-    #     generated and returned in the response.
+    #   * `CHEF_AUTOMATE_ADMIN_PASSWORD`\: The password for the
+    #     administrative user in the Chef Automate web-based dashboard. The
+    #     password length is a minimum of eight characters, and a maximum of
+    #     32. The password can contain letters, numbers, and special
+    #     characters (!/@#$%^&amp;+=\_). The password must contain at least
+    #     one lower case letter, one upper case letter, one number, and one
+    #     special character. When no CHEF\_AUTOMATE\_ADMIN\_PASSWORD is set,
+    #     one is generated and returned in the response.
     #
     #   **Attributes accepted in a Puppet createServer request:**
     #
     #   * `PUPPET_ADMIN_PASSWORD`\: To work with the Puppet Enterprise
     #     console, a password must use ASCII characters.
     #
-    #   ^
+    #   * `PUPPET_R10K_REMOTE`\: The r10k remote is the URL of your control
+    #     repository (for example,
+    #     ssh://git@your.git-repo.com:user/control-repo.git). Specifying an
+    #     r10k remote opens TCP port 8170.
+    #
+    #   * `PUPPET_R10K_PRIVATE_KEY`\: If you are using a private Git
+    #     repository, add PUPPET\_R10K\_PRIVATE\_KEY to specify a
+    #     PEM-encoded private SSH key.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] backup_retention_count
@@ -389,9 +477,7 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type to use. For example, `m4.large`.
-    #   Recommended instance types include `t2.medium` and greater, `m4.*`,
-    #   or `c4.xlarge` and greater.
+    #   The Amazon EC2 instance type to use. For example, `m5.large`.
     #   @return [String]
     #
     # @!attribute [rw] key_pair
@@ -470,8 +556,30 @@ module Aws::OpsWorksCM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values to attach to an AWS
+    #   OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
+    #   server.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key
+    #     and value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS
+    #     OpsWorks-CM server.
+    #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] backup_id
     #   If you specify this field, AWS OpsWorks CM creates the server by
@@ -482,6 +590,9 @@ module Aws::OpsWorksCM
     #
     class CreateServerRequest < Struct.new(
       :associate_public_ip_address,
+      :custom_domain,
+      :custom_certificate,
+      :custom_private_key,
       :disable_automated_backup,
       :engine,
       :engine_model,
@@ -497,6 +608,7 @@ module Aws::OpsWorksCM
       :security_group_ids,
       :service_role_arn,
       :subnet_ids,
+      :tags,
       :backup_id)
       include Aws::Structure
     end
@@ -594,23 +706,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeBackups` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsRequest AWS API Documentation
@@ -628,15 +728,7 @@ module Aws::OpsWorksCM
     #   @return [Array<Types::Backup>]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeBackups` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeBackups` requests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsResponse AWS API Documentation
@@ -779,23 +871,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeServers` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   To receive a paginated response, use this parameter to specify the
-    #   maximum number of results to be returned with a single call. If the
-    #   number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersRequest AWS API Documentation
@@ -810,6 +890,13 @@ module Aws::OpsWorksCM
     # @!attribute [rw] servers
     #   Contains the response to a `DescribeServers` request.
     #
+    #   *For Chef Automate servers:* If
+    #   `DescribeServersResponse$Servers$EngineAttributes` includes
+    #   CHEF\_MAJOR\_UPGRADE\_AVAILABLE, you can upgrade the Chef Automate
+    #   server to Chef Automate 2. To be eligible for upgrade, a server
+    #   running Chef Automate 1 must have had at least one successful
+    #   maintenance run after November 1, 2019.
+    #
     #   *For Puppet Server:*
     #   `DescribeServersResponse$Servers$EngineAttributes` contains
     #   PUPPET\_API\_CA\_CERT. This is the PEM-encoded CA certificate that
@@ -818,15 +905,7 @@ module Aws::OpsWorksCM
     #   @return [Array<Types::Server>]
     #
     # @!attribute [rw] next_token
-    #   NextToken is a string that is returned in some command responses. It
-    #   indicates that not all entries have been returned, and that you must
-    #   run at least one more request to get remaining items. To get
-    #   remaining results, call `DescribeServers` again, and assign the
-    #   token from the previous results as the value of the `nextToken`
-    #   parameter. If there are no more results, the response object's
-    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-    #   that was not returned in your previous results causes an
-    #   `InvalidNextTokenException` to occur.
+    #   This is not currently implemented for `DescribeServers` requests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersResponse AWS API Documentation
@@ -920,6 +999,213 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportServerEngineAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_attribute_name: "String", # required
+    #         server_name: "ServerName", # required
+    #         input_attributes: [
+    #           {
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] export_attribute_name
+    #   The name of the export attribute. Currently, the supported export
+    #   attribute is `Userdata`. This exports a user data script that
+    #   includes parameters and values provided in the `InputAttributes`
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server from which you are exporting the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_attributes
+    #   The list of engine attributes. The list type is `EngineAttribute`.
+    #   An `EngineAttribute` list item is a pair that includes an attribute
+    #   name and its value. For the `Userdata` ExportAttributeName, the
+    #   following are supported engine attribute names.
+    #
+    #   * **RunList** In Chef, a list of roles or recipes that are run in
+    #     the specified order. In Puppet, this parameter is ignored.
+    #
+    #   * **OrganizationName** In Chef, an organization name. AWS OpsWorks
+    #     for Chef Automate always creates the organization `default`. In
+    #     Puppet, this parameter is ignored.
+    #
+    #   * **NodeEnvironment** In Chef, a node environment (for example,
+    #     development, staging, or one-box). In Puppet, this parameter is
+    #     ignored.
+    #
+    #   * **NodeClientVersion** In Chef, the version of the Chef engine
+    #     (three numbers separated by dots, such as 13.8.5). If this
+    #     attribute is empty, OpsWorks for Chef Automate uses the most
+    #     current version. In Puppet, this parameter is ignored.
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeRequest AWS API Documentation
+    #
+    class ExportServerEngineAttributeRequest < Struct.new(
+      :export_attribute_name,
+      :server_name,
+      :input_attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] engine_attribute
+    #   The requested engine attribute pair with attribute name and value.
+    #   @return [Types::EngineAttribute]
+    #
+    # @!attribute [rw] server_name
+    #   The server name used in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ExportServerEngineAttributeResponse AWS API Documentation
+    #
+    class ExportServerEngineAttributeResponse < Struct.new(
+      :engine_attribute,
+      :server_name)
+      include Aws::Structure
+    end
+
+    # This occurs when the provided nextToken is not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   nextToken failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The resource is in a state that does not allow you to perform a
+    # specified action.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that provides more detail if a
+    #   resource is in a state that is not valid for performing a specified
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The limit of servers or backups has been reached.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that the maximum allowed number of
+    #   servers or backups has been exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef
+    #   Automate or AWS OpsWorks for Puppet Enterprise server for which you
+    #   want to show applied tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `ListTagsForResource` again, and assign the
+    #   token from the previous results as the value of the `nextToken`
+    #   parameter. If there are no more results, the response object's
+    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
+    #   that was not returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   Tags that have been applied to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that you can use as the value of `NextToken` in subsequent
+    #   calls to the API to show more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # The requested resource cannot be created because it already exists.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message in response to a CreateServer request
+    #   that a resource cannot be created because it already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource does not exist, or access was denied.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about
+    #   problems locating or accessing a resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RestoreServerRequest
     #   data as a hash:
     #
@@ -939,9 +1225,9 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The type of the instance to create. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `m4.large`.
-    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you
+    #   The type of instance to restore. Valid values must be specified in
+    #   the following format: `^([cm][34]|t2).*` For example, `m5.large`.
+    #   Valid values are `m5.large`, `r5.xlarge`, and `r5.2xlarge`. If you
     #   do not specify this parameter, RestoreServer uses the instance type
     #   from the specified backup.
     #   @return [String]
@@ -988,6 +1274,12 @@ module Aws::OpsWorksCM
     #   server.
     #   @return [String]
     #
+    # @!attribute [rw] custom_domain
+    #   An optional public endpoint of a server, such as
+    #   `https://aws.my-company.com`. You cannot access the server by using
+    #   the `Endpoint` value if the server has a `CustomDomain` specified.
+    #   @return [String]
+    #
     # @!attribute [rw] disable_automated_backup
     #   Disables automated backups. The number of stored backups is
     #   dependent on the value of PreferredBackupCount.
@@ -995,12 +1287,14 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] endpoint
     #   A DNS name that can be used to access the engine. Example:
-    #   `myserver-asdfghjkl.us-east-1.opsworks.io`
+    #   `myserver-asdfghjkl.us-east-1.opsworks.io`. You cannot access the
+    #   server by using the `Endpoint` value if the server has a
+    #   `CustomDomain` specified.
     #   @return [String]
     #
     # @!attribute [rw] engine
     #   The engine type of the server. Valid values in this release include
-    #   `Chef` and `Puppet`.
+    #   `ChefAutomate` and `Puppet`.
     #   @return [String]
     #
     # @!attribute [rw] engine_model
@@ -1016,9 +1310,9 @@ module Aws::OpsWorksCM
     #
     #   **Attributes returned in a createServer response for Chef**
     #
-    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is
-    #     generated by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API.
+    #   * `CHEF_AUTOMATE_PIVOTAL_KEY`\: A base64-encoded RSA private key
+    #     that is generated by AWS OpsWorks for Chef Automate. This private
+    #     key is required to access the Chef API.
     #
     #   * `CHEF_STARTER_KIT`\: A base64-encoded ZIP file. The ZIP file
     #     contains a Chef starter kit, which includes a README, a
@@ -1110,6 +1404,7 @@ module Aws::OpsWorksCM
       :server_name,
       :created_at,
       :cloud_formation_stack_arn,
+      :custom_domain,
       :disable_automated_backup,
       :endpoint,
       :engine,
@@ -1180,6 +1475,20 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_attributes
     #   Engine attributes that are specific to the server on which you want
     #   to run maintenance.
+    #
+    #   **Attributes accepted in a StartMaintenance request for Chef**
+    #
+    #   * `CHEF_MAJOR_UPGRADE`\: If a Chef Automate server is eligible for
+    #     upgrade to Chef Automate 2, add this engine attribute to a
+    #     `StartMaintenance` request and set the value to `true` to upgrade
+    #     the server to Chef Automate 2. For more information, see [Upgrade
+    #     an AWS OpsWorks for Chef Automate Server to Chef Automate 2][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceRequest AWS API Documentation
@@ -1200,6 +1509,124 @@ module Aws::OpsWorksCM
       :server)
       include Aws::Structure
     end
+
+    # A map that contains tag keys and tag values to attach to an AWS
+    # OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise
+    # server. Leading and trailing white spaces are trimmed from both the
+    # key and value. A maximum of 50 user-applied tags is allowed for
+    # tag-supported AWS OpsWorks-CM resources.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A tag key, such as `Stage` or `Name`. A tag key cannot be empty. The
+    #   key can be a maximum of 127 characters, and can contain only Unicode
+    #   letters, numbers, or separators, or the following special
+    #   characters: `+ - = . _ : /`
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   An optional tag value, such as `Production` or `test-owcm-server`.
+    #   The value can be a maximum of 255 characters, and contain only
+    #   Unicode letters, numbers, or separators, or the following special
+    #   characters: `+ - = . _ : /`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of a resource to which you want to
+    #   apply tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map that contains tag keys and tag values to attach to AWS
+    #   OpsWorks-CM servers or backups.
+    #
+    #   * The key cannot be empty.
+    #
+    #   * The key can be a maximum of 127 characters, and can contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * The value can be a maximum 255 characters, and contain only
+    #     Unicode letters, numbers, or separators, or the following special
+    #     characters: `+ - = . _ : /`
+    #
+    #   * Leading and trailing white spaces are trimmed from both the key
+    #     and value.
+    #
+    #   * A maximum of 50 user-applied tags is allowed for any AWS
+    #     OpsWorks-CM server or backup.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "AWSOpsWorksCMResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Number (ARN) of a resource from which you want
+    #   to remove tags. For example,
+    #   `arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of tags that you want to remove.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateServerEngineAttributesRequest
     #   data as a hash:
@@ -1301,6 +1728,20 @@ module Aws::OpsWorksCM
     #
     class UpdateServerResponse < Struct.new(
       :server)
+      include Aws::Structure
+    end
+
+    # One or more of the provided request parameters are not valid.
+    #
+    # @!attribute [rw] message
+    #   Error or informational message that can contain more detail about a
+    #   validation failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

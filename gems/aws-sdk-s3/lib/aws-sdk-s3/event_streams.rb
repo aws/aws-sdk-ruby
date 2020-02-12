@@ -14,27 +14,31 @@ module Aws::S3
       end
 
       def on_records_event(&block)
-        @event_emitter.on(:records, Proc.new)
+        @event_emitter.on(:records, block) if block_given?
       end
 
       def on_stats_event(&block)
-        @event_emitter.on(:stats, Proc.new)
+        @event_emitter.on(:stats, block) if block_given?
       end
 
       def on_progress_event(&block)
-        @event_emitter.on(:progress, Proc.new)
+        @event_emitter.on(:progress, block) if block_given?
       end
 
       def on_cont_event(&block)
-        @event_emitter.on(:cont, Proc.new)
+        @event_emitter.on(:cont, block) if block_given?
       end
 
       def on_end_event(&block)
-        @event_emitter.on(:end, Proc.new)
+        @event_emitter.on(:end, block) if block_given?
       end
 
       def on_error_event(&block)
-        @event_emitter.on(:error, Proc.new)
+        @event_emitter.on(:error, block) if block_given?
+      end
+
+      def on_initial_response_event(&block)
+        @event_emitter.on(:initial_response, block) if block_given?
       end
 
       def on_event(&block)
@@ -43,6 +47,8 @@ module Aws::S3
         on_progress_event(&block)
         on_cont_event(&block)
         on_end_event(&block)
+        on_error_event(&block)
+        on_initial_response_event(&block)
       end
 
       # @api private

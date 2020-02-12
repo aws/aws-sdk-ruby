@@ -12,10 +12,11 @@ require_relative 'aws-sdk-eks/types'
 require_relative 'aws-sdk-eks/client_api'
 require_relative 'aws-sdk-eks/client'
 require_relative 'aws-sdk-eks/errors'
+require_relative 'aws-sdk-eks/waiters'
 require_relative 'aws-sdk-eks/resource'
 require_relative 'aws-sdk-eks/customizations'
 
-# This module provides support for Amazon Elastic Container Service for Kubernetes. This module is available in the
+# This module provides support for Amazon Elastic Kubernetes Service. This module is available in the
 # `aws-sdk-eks` gem.
 #
 # # Client
@@ -28,7 +29,7 @@ require_relative 'aws-sdk-eks/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Elastic Container Service for Kubernetes all
+# Errors returned from Amazon Elastic Kubernetes Service all
 # extend {Errors::ServiceError}.
 #
 #     begin
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-eks/customizations'
 # @service
 module Aws::EKS
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.31.0'
 
 end

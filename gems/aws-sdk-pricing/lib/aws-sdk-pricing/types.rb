@@ -86,6 +86,18 @@ module Aws::Pricing
       include Aws::Structure
     end
 
+    # The pagination token expired. Try again without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ExpiredNextTokenException AWS API Documentation
+    #
+    class ExpiredNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The constraints that you want all returned products to match.
     #
     # @note When making an API call, you may pass Filter
@@ -266,6 +278,55 @@ module Aws::Pricing
       :format_version,
       :price_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # An error on the server occurred during the processing of your request.
+    # Try again later.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/InternalErrorException AWS API Documentation
+    #
+    class InternalErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The pagination token is invalid. Try again without a pagination token.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One or more parameters had an invalid value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The requested resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

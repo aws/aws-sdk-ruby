@@ -8,7 +8,12 @@
 module Aws::CloudHSMV2
   module Types
 
-    # Contains information about a backup of an AWS CloudHSM cluster.
+    # Contains information about a backup of an AWS CloudHSM cluster. All
+    # backup objects contain the BackupId, BackupState, ClusterId, and
+    # CreateTimestamp parameters. Backups that were copied into a
+    # destination region additionally contain the CopyTimestamp,
+    # SourceBackup, SourceCluster, and SourceRegion paramters. A backup that
+    # is pending deletion will include the DeleteTimestamp parameter.
     #
     # @!attribute [rw] backup_id
     #   The identifier (ID) of the backup.
@@ -26,13 +31,45 @@ module Aws::CloudHSMV2
     #   The date and time when the backup was created.
     #   @return [Time]
     #
+    # @!attribute [rw] copy_timestamp
+    #   The date and time when the backup was copied from a source backup.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_region
+    #   The AWS region that contains the source backup from which the new
+    #   backup was copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup
+    #   The identifier (ID) of the source backup from which the new backup
+    #   was copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cluster
+    #   The identifier (ID) of the cluster containing the source backup from
+    #   which the new backup was copied. .
+    #   @return [String]
+    #
+    # @!attribute [rw] delete_timestamp
+    #   The date and time when the backup will be permanently deleted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Backup AWS API Documentation
     #
     class Backup < Struct.new(
       :backup_id,
       :backup_state,
       :cluster_id,
-      :create_timestamp)
+      :create_timestamp,
+      :copy_timestamp,
+      :source_region,
+      :source_backup,
+      :source_cluster,
+      :delete_timestamp,
+      :tag_list)
       include Aws::Structure
     end
 
@@ -70,6 +107,79 @@ module Aws::CloudHSMV2
       :aws_hardware_certificate,
       :manufacturer_hardware_certificate,
       :cluster_certificate)
+      include Aws::Structure
+    end
+
+    # The request was rejected because the requester does not have
+    # permission to perform the requested operation.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmAccessDeniedException AWS API Documentation
+    #
+    class CloudHsmAccessDeniedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because of an AWS CloudHSM internal failure.
+    # The request can be retried.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmInternalFailureException AWS API Documentation
+    #
+    class CloudHsmInternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it is not a valid request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmInvalidRequestException AWS API Documentation
+    #
+    class CloudHsmInvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it refers to a resource that cannot
+    # be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmResourceNotFoundException AWS API Documentation
+    #
+    class CloudHsmResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an error occurred.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmServiceException AWS API Documentation
+    #
+    class CloudHsmServiceException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CloudHsmTagException AWS API Documentation
+    #
+    class CloudHsmTagException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -118,8 +228,8 @@ module Aws::CloudHSMV2
     #   @return [String]
     #
     # @!attribute [rw] subnet_mapping
-    #   A map of the cluster's subnets and their corresponding Availability
-    #   Zones.
+    #   A map from availability zone to the cluster’s subnet in that
+    #   availability zone.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] vpc_id
@@ -131,6 +241,9 @@ module Aws::CloudHSMV2
     #   Contains one or more certificates or a certificate signing request
     #   (CSR).
     #   @return [Types::Certificates]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Cluster AWS API Documentation
     #
@@ -147,7 +260,61 @@ module Aws::CloudHSMV2
       :state_message,
       :subnet_mapping,
       :vpc_id,
-      :certificates)
+      :certificates,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CopyBackupToRegionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destination_region: "Region", # required
+    #         backup_id: "BackupId", # required
+    #         tag_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] destination_region
+    #   The AWS region that will contain your copied CloudHSM cluster
+    #   backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup that will be copied to the destination region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionRequest AWS API Documentation
+    #
+    class CopyBackupToRegionRequest < Struct.new(
+      :destination_region,
+      :backup_id,
+      :tag_list)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_backup
+    #   Information on the backup that will be copied to the destination
+    #   region, including CreateTimestamp, SourceBackup, SourceCluster, and
+    #   Source Region. CreateTimestamp of the destination backup will be the
+    #   same as that of the source backup.
+    #
+    #   You will need to use the `sourceBackupID` returned in this operation
+    #   to use the DescribeBackups operation on the backup that will be
+    #   copied to the destination region.
+    #   @return [Types::DestinationBackup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CopyBackupToRegionResponse AWS API Documentation
+    #
+    class CopyBackupToRegionResponse < Struct.new(
+      :destination_backup)
       include Aws::Structure
     end
 
@@ -158,6 +325,12 @@ module Aws::CloudHSMV2
     #         subnet_ids: ["SubnetId"], # required
     #         hsm_type: "HsmType", # required
     #         source_backup_id: "BackupId",
+    #         tag_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] subnet_ids
@@ -181,12 +354,16 @@ module Aws::CloudHSMV2
     #   cluster. To find the backup ID, use DescribeBackups.
     #   @return [String]
     #
+    # @!attribute [rw] tag_list
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
       :subnet_ids,
       :hsm_type,
-      :source_backup_id)
+      :source_backup_id,
+      :tag_list)
       include Aws::Structure
     end
 
@@ -244,6 +421,36 @@ module Aws::CloudHSMV2
     #
     class CreateHsmResponse < Struct.new(
       :hsm)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup to be deleted. To find the ID of a backup, use
+    #   the DescribeBackups operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackupRequest AWS API Documentation
+    #
+    class DeleteBackupRequest < Struct.new(
+      :backup_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   Information on the `Backup` object deleted.
+    #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackupResponse AWS API Documentation
+    #
+    class DeleteBackupResponse < Struct.new(
+      :backup)
       include Aws::Structure
     end
 
@@ -336,6 +543,7 @@ module Aws::CloudHSMV2
     #         filters: {
     #           "Field" => ["String"],
     #         },
+    #         sort_ascending: false,
     #       }
     #
     # @!attribute [rw] next_token
@@ -355,6 +563,10 @@ module Aws::CloudHSMV2
     #   Use the `backupIds` filter to return only the specified backups.
     #   Specify backups by their backup identifier (ID).
     #
+    #   Use the `sourceBackupIds` filter to return only the backups created
+    #   from a source backup. The `sourceBackupID` of a source backup is
+    #   returned by the CopyBackupToRegion operation.
+    #
     #   Use the `clusterIds` filter to return only the backups for the
     #   specified clusters. Specify clusters by their cluster identifier
     #   (ID).
@@ -363,12 +575,18 @@ module Aws::CloudHSMV2
     #   specified state.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] sort_ascending
+    #   Designates whether or not to sort the return backups by ascending
+    #   chronological order of generation.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackupsRequest AWS API Documentation
     #
     class DescribeBackupsRequest < Struct.new(
       :next_token,
       :max_results,
-      :filters)
+      :filters,
+      :sort_ascending)
       include Aws::Structure
     end
 
@@ -453,6 +671,38 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # Contains information about the backup that will be copied and created
+    # by the CopyBackupToRegion operation.
+    #
+    # @!attribute [rw] create_timestamp
+    #   The date and time when both the source backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_region
+    #   The AWS region that contains the source backup from which the new
+    #   backup was copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_backup
+    #   The identifier (ID) of the source backup from which the new backup
+    #   was copied.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cluster
+    #   The identifier (ID) of the cluster containing the source backup from
+    #   which the new backup was copied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DestinationBackup AWS API Documentation
+    #
+    class DestinationBackup < Struct.new(
+      :create_timestamp,
+      :source_region,
+      :source_backup,
+      :source_cluster)
+      include Aws::Structure
+    end
+
     # Contains information about a hardware security module (HSM) in an AWS
     # CloudHSM cluster.
     #
@@ -524,11 +774,11 @@ module Aws::CloudHSMV2
     #
     # @!attribute [rw] trust_anchor
     #   The issuing certificate of the issuing certificate authority (CA)
-    #   that issued (signed) the cluster certificate. This can be a root
-    #   (self-signed) certificate or a certificate chain that begins with
-    #   the certificate that issued the cluster certificate and ends with a
-    #   root certificate. The certificate or certificate chain must be in
-    #   PEM format and can contain a maximum of 5000 characters.
+    #   that issued (signed) the cluster certificate. You must use a
+    #   self-signed certificate. The certificate used to sign the HSM CSR
+    #   must be directly available, and thus must be the root certificate.
+    #   The certificate must be in PEM format and can contain a maximum of
+    #   5000 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeClusterRequest AWS API Documentation
@@ -560,7 +810,7 @@ module Aws::CloudHSMV2
     #   data as a hash:
     #
     #       {
-    #         resource_id: "ClusterId", # required
+    #         resource_id: "ResourceId", # required
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -608,6 +858,36 @@ module Aws::CloudHSMV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RestoreBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup to be restored. To find the ID of a backup, use
+    #   the DescribeBackups operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackupRequest AWS API Documentation
+    #
+    class RestoreBackupRequest < Struct.new(
+      :backup_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   Information on the `Backup` object created.
+    #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackupResponse AWS API Documentation
+    #
+    class RestoreBackupResponse < Struct.new(
+      :backup)
+      include Aws::Structure
+    end
+
     # Contains a tag. A tag is a key-value pair.
     #
     # @note When making an API call, you may pass Tag
@@ -638,7 +918,7 @@ module Aws::CloudHSMV2
     #   data as a hash:
     #
     #       {
-    #         resource_id: "ClusterId", # required
+    #         resource_id: "ResourceId", # required
     #         tag_list: [ # required
     #           {
     #             key: "TagKey", # required
@@ -672,7 +952,7 @@ module Aws::CloudHSMV2
     #   data as a hash:
     #
     #       {
-    #         resource_id: "ClusterId", # required
+    #         resource_id: "ResourceId", # required
     #         tag_key_list: ["TagKey"], # required
     #       }
     #

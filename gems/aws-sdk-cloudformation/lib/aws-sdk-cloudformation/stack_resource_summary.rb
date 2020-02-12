@@ -24,6 +24,7 @@ module Aws::CloudFormation
       @logical_id = extract_logical_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -51,7 +52,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     # @return [String]
     def resource_type
       data[:resource_type]
@@ -73,6 +74,20 @@ module Aws::CloudFormation
     # @return [String]
     def resource_status_reason
       data[:resource_status_reason]
+    end
+
+    # Information about whether the resource's actual configuration
+    # differs, or has *drifted*, from its expected configuration, as defined
+    # in the stack template and any values specified as template parameters.
+    # For more information, see [Detecting Unregulated Configuration Changes
+    # to Stacks and Resources][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+    # @return [Types::StackResourceDriftInformationSummary]
+    def drift_information
+      data[:drift_information]
     end
 
     # @!endgroup

@@ -8,6 +8,17 @@
 module Aws::IoTDataPlane
   module Types
 
+    # The specified version does not match the version of the document.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ConflictException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the DeleteThingShadow operation.
     #
     # @note When making an API call, you may pass DeleteThingShadowRequest
@@ -66,6 +77,39 @@ module Aws::IoTDataPlane
       include Aws::Structure
     end
 
+    # An unexpected error has occurred.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InternalFailureException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The request is not valid.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class InvalidRequestException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified combination of HTTP verb and URI is not supported.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class MethodNotAllowedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The input for the Publish operation.
     #
     # @note When making an API call, you may pass PublishRequest
@@ -93,6 +137,72 @@ module Aws::IoTDataPlane
       :topic,
       :qos,
       :payload)
+      include Aws::Structure
+    end
+
+    # The payload exceeds the maximum size allowed.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class RequestEntityTooLargeException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The specified resource does not exist.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The rate exceeds the limit.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class ThrottlingException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # You are not authorized to perform this operation.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class UnauthorizedException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # The document encoding is not supported.
+    #
+    # @!attribute [rw] message
+    #   The message for the exception.
+    #   @return [String]
+    #
+    class UnsupportedDocumentEncodingException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

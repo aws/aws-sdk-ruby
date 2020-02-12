@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -35,6 +36,12 @@ module Aws::EC2
     # @return [Array<Types::DhcpConfiguration>]
     def dhcp_configurations
       data[:dhcp_configurations]
+    end
+
+    # The ID of the AWS account that owns the DHCP options set.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
     end
 
     # Any tags assigned to the DHCP options set.
@@ -178,7 +185,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options.associate_with_vpc({
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -214,9 +221,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []

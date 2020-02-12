@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::ECR
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -166,8 +264,14 @@ module Aws::ECR
 
     # @!group API Operations
 
-    # Check the availability of multiple image layers in a specified
-    # registry and repository.
+    # Checks the availability of one or more image layers in a repository.
+    #
+    # When an image is pushed to a repository, each image layer is checked
+    # to verify if it has been uploaded before. If it is, then the image
+    # layer is skipped.
+    #
+    # When an image is pulled from a repository, each image layer is checked
+    # once to verify it is available to be pulled.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -221,8 +325,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes a list of specified images within a specified repository.
-    # Images are specified with either `imageTag` or `imageDigest`.
+    # Deletes a list of specified images within a repository. Images are
+    # specified with either an `imageTag` or `imageDigest`.
     #
     # You can remove a tag from an image by specifying the image's tag in
     # your request. When you remove the last tag from an image, the image is
@@ -309,9 +413,11 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Gets detailed information for specified images within a specified
-    # repository. Images are specified with either `imageTag` or
-    # `imageDigest`.
+    # Gets detailed information for an image. Images are specified with
+    # either an `imageTag` or `imageDigest`.
+    #
+    # When an image is pulled, the BatchGetImage API is called once to
+    # retrieve the image manifest.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -412,6 +518,9 @@ module Aws::ECR
     # provide a `sha256` digest of the image layer for data validation
     # purposes.
     #
+    # When an image is pushed, the CompleteLayerUpload API is called once
+    # per each new image layer to verify that the upload has completed.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -465,13 +574,38 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates an image repository.
+    # Creates a repository. For more information, see [Amazon ECR
+    # Repositories][1] in the *Amazon Elastic Container Registry User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
     #
     # @option params [required, String] :repository_name
     #   The name to use for the repository. The repository name may be
     #   specified on its own (such as `nginx-web-app`) or it can be prepended
     #   with a namespace to group the repository into a category (such as
     #   `project-a/nginx-web-app`).
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The metadata that you apply to the repository to help you categorize
+    #   and organize them. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character length
+    #   of 128 characters, and tag values can have a maximum length of 256
+    #   characters.
+    #
+    # @option params [String] :image_tag_mutability
+    #   The tag mutability setting for the repository. If this parameter is
+    #   omitted, the default setting of `MUTABLE` will be used which will
+    #   allow image tags to be overwritten. If `IMMUTABLE` is specified, all
+    #   image tags within the repository will be immutable which will prevent
+    #   them from being overwritten.
+    #
+    # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities after
+    #   being pushed to the repository.
     #
     # @return [Types::CreateRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -500,6 +634,16 @@ module Aws::ECR
     #
     #   resp = client.create_repository({
     #     repository_name: "RepositoryName", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     image_tag_mutability: "MUTABLE", # accepts MUTABLE, IMMUTABLE
+    #     image_scanning_configuration: {
+    #       scan_on_push: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -509,6 +653,8 @@ module Aws::ECR
     #   resp.repository.repository_name #=> String
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
+    #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
     #
@@ -519,7 +665,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes the specified lifecycle policy.
+    # Deletes the lifecycle policy associated with the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -559,8 +705,9 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes an existing image repository. If a repository contains images,
-    # you must use the `force` option to delete it.
+    # Deletes a repository. If the repository contains images, you must
+    # either delete all images in the repository or use the `force` option
+    # to delete the repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -612,6 +759,8 @@ module Aws::ECR
     #   resp.repository.repository_name #=> String
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
+    #   resp.repository.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repository.image_scanning_configuration.scan_on_push #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
     #
@@ -622,7 +771,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes the repository policy from a specified repository.
+    # Deletes the repository policy associated with the specified
+    # repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -677,8 +827,91 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Returns metadata about the images in a repository, including image
-    # size, image tags, and creation date.
+    # Returns the scan findings for the specified image.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to describe the image scan findings for. If you do
+    #   not specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The repository for the image for which to describe the scan findings.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeImageScanFindings` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is null when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of image scan results returned by
+    #   `DescribeImageScanFindings` in paginated output. When this parameter
+    #   is used, `DescribeImageScanFindings` only returns `maxResults` results
+    #   in a single page along with a `nextToken` response element. The
+    #   remaining results of the initial request can be seen by sending
+    #   another `DescribeImageScanFindings` request with the returned
+    #   `nextToken` value. This value can be between 1 and 1000. If this
+    #   parameter is not used, then `DescribeImageScanFindings` returns up to
+    #   100 results and a `nextToken` value, if applicable.
+    #
+    # @return [Types::DescribeImageScanFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImageScanFindingsResponse#registry_id #registry_id} => String
+    #   * {Types::DescribeImageScanFindingsResponse#repository_name #repository_name} => String
+    #   * {Types::DescribeImageScanFindingsResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::DescribeImageScanFindingsResponse#image_scan_status #image_scan_status} => Types::ImageScanStatus
+    #   * {Types::DescribeImageScanFindingsResponse#image_scan_findings #image_scan_findings} => Types::ImageScanFindings
+    #   * {Types::DescribeImageScanFindingsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_scan_findings({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.description #=> String
+    #   resp.image_scan_findings.image_scan_completed_at #=> Time
+    #   resp.image_scan_findings.vulnerability_source_updated_at #=> Time
+    #   resp.image_scan_findings.findings #=> Array
+    #   resp.image_scan_findings.findings[0].name #=> String
+    #   resp.image_scan_findings.findings[0].description #=> String
+    #   resp.image_scan_findings.findings[0].uri #=> String
+    #   resp.image_scan_findings.findings[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL", "UNDEFINED"
+    #   resp.image_scan_findings.findings[0].attributes #=> Array
+    #   resp.image_scan_findings.findings[0].attributes[0].key #=> String
+    #   resp.image_scan_findings.findings[0].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.image_scan_findings.finding_severity_counts #=> Hash
+    #   resp.image_scan_findings.finding_severity_counts["FindingSeverity"] #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImageScanFindings AWS API Documentation
+    #
+    # @overload describe_image_scan_findings(params = {})
+    # @param [Hash] params ({})
+    def describe_image_scan_findings(params = {}, options = {})
+      req = build_request(:describe_image_scan_findings, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about the images in a repository.
     #
     # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
@@ -694,8 +927,7 @@ module Aws::ECR
     #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
-    #   A list of repositories to describe. If this parameter is omitted, then
-    #   all repositories in a registry are described.
+    #   The repository that contains the images to describe.
     #
     # @option params [Array<Types::ImageIdentifier>] :image_ids
     #   The list of image IDs for the requested repository.
@@ -714,7 +946,7 @@ module Aws::ECR
     #   only returns `maxResults` results in a single page along with a
     #   `nextToken` response element. The remaining results of the initial
     #   request can be seen by sending another `DescribeImages` request with
-    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   the returned `nextToken` value. This value can be between 1 and 1000.
     #   If this parameter is not used, then `DescribeImages` returns up to 100
     #   results and a `nextToken` value, if applicable. This option cannot be
     #   used when you specify images with `imageIds`.
@@ -742,7 +974,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -756,6 +988,12 @@ module Aws::ECR
     #   resp.image_details[0].image_tags[0] #=> String
     #   resp.image_details[0].image_size_in_bytes #=> Integer
     #   resp.image_details[0].image_pushed_at #=> Time
+    #   resp.image_details[0].image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_details[0].image_scan_status.description #=> String
+    #   resp.image_details[0].image_scan_findings_summary.image_scan_completed_at #=> Time
+    #   resp.image_details[0].image_scan_findings_summary.vulnerability_source_updated_at #=> Time
+    #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts #=> Hash
+    #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts["FindingSeverity"] #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -800,7 +1038,7 @@ module Aws::ECR
     #   single page along with a `nextToken` response element. The remaining
     #   results of the initial request can be seen by sending another
     #   `DescribeRepositories` request with the returned `nextToken` value.
-    #   This value can be between 1 and 100. If this parameter is not used,
+    #   This value can be between 1 and 1000. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
     #   `nextToken` value, if applicable. This option cannot be used when you
     #   specify repositories with `repositoryNames`.
@@ -852,6 +1090,8 @@ module Aws::ECR
     #   resp.repositories[0].repository_name #=> String
     #   resp.repositories[0].repository_uri #=> String
     #   resp.repositories[0].created_at #=> Time
+    #   resp.repositories[0].image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #   resp.repositories[0].image_scanning_configuration.scan_on_push #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories AWS API Documentation
@@ -863,20 +1103,26 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves a token that is valid for a specified registry for 12 hours.
-    # This command allows you to use the `docker` CLI to push and pull
-    # images with Amazon ECR. If you do not specify a registry, the default
-    # registry is assumed.
+    # Retrieves an authorization token. An authorization token represents
+    # your IAM authentication credentials and can be used to access any
+    # Amazon ECR registry that your IAM principal has access to. The
+    # authorization token is valid for 12 hours.
     #
-    # The `authorizationToken` returned for each registry specified is a
-    # base64 encoded string that can be decoded and used in a `docker login`
-    # command to authenticate to a registry. The AWS CLI offers an `aws ecr
-    # get-login` command that simplifies the login process.
+    # The `authorizationToken` returned is a base64 encoded string that can
+    # be decoded and used in a `docker login` command to authenticate to a
+    # registry. The AWS CLI offers an `get-login-password` command that
+    # simplifies the login process. For more information, see [Registry
+    # Authentication][1] in the *Amazon Elastic Container Registry User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth
     #
     # @option params [Array<String>] :registry_ids
     #   A list of AWS account IDs that are associated with the registries for
-    #   which to get authorization tokens. If you do not specify a registry,
-    #   the default registry is assumed.
+    #   which to get AuthorizationData objects. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @return [Types::GetAuthorizationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -927,6 +1173,9 @@ module Aws::ECR
     # image layer. You can only get URLs for image layers that are
     # referenced in an image.
     #
+    # When an image is pulled, the GetDownloadUrlForLayer API is called once
+    # per image layer.
+    #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
     # cases, you should use the `docker` CLI to pull, tag, and push images.
@@ -972,7 +1221,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the specified lifecycle policy.
+    # Retrieves the lifecycle policy for the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1012,8 +1261,8 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the results of the specified lifecycle policy preview
-    # request.
+    # Retrieves the results of the lifecycle policy preview request for the
+    # specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1043,7 +1292,7 @@ module Aws::ECR
     #   response element. The remaining results of the initial request can be
     #   seen by sending  another `GetLifecyclePolicyPreviewRequest` request
     #   with the returned `nextToken`  value. This value can be between 1 and
-    #   100. If this  parameter is not used, then
+    #   1000. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
     #   `nextToken` value, if  applicable. This option cannot be used when you
     #   specify images with `imageIds`.
@@ -1076,7 +1325,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -1105,7 +1354,7 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Retrieves the repository policy for a specified repository.
+    # Retrieves the repository policy for the specified repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1159,7 +1408,12 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Notify Amazon ECR that you intend to upload an image layer.
+    # Notifies Amazon ECR that you intend to upload an image layer.
+    #
+    # When an image is pushed, the InitiateLayerUpload API is called once
+    # per image layer that has not already been uploaded. Whether an image
+    # layer has been uploaded before is determined by the
+    # BatchCheckLayerAvailability API action.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -1201,14 +1455,14 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Lists all the image IDs for a given repository.
+    # Lists all the image IDs for the specified repository.
     #
-    # You can filter images based on whether or not they are tagged by
-    # setting the `tagStatus` parameter to `TAGGED` or `UNTAGGED`. For
-    # example, you can filter your results to return only `UNTAGGED` images
-    # and then pipe that result to a BatchDeleteImage operation to delete
-    # them. Or, you can filter your results to return only `TAGGED` images
-    # to list all of the tags in your repository.
+    # You can filter images based on whether or not they are tagged by using
+    # the `tagStatus` filter and specifying either `TAGGED`, `UNTAGGED` or
+    # `ANY`. For example, you can filter your results to return only
+    # `UNTAGGED` images and then pipe that result to a BatchDeleteImage
+    # operation to delete them. Or, you can filter your results to return
+    # only `TAGGED` images to list all of the tags in your repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1237,7 +1491,7 @@ module Aws::ECR
     #   returns `maxResults` results in a single page along with a `nextToken`
     #   response element. The remaining results of the initial request can be
     #   seen by sending another `ListImages` request with the returned
-    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   `nextToken` value. This value can be between 1 and 1000. If this
     #   parameter is not used, then `ListImages` returns up to 100 results and
     #   a `nextToken` value, if applicable.
     #
@@ -1277,7 +1531,7 @@ module Aws::ECR
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filter: {
-    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+    #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED, ANY
     #     },
     #   })
     #
@@ -1297,8 +1551,44 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # List the tags for an Amazon ECR resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the only supported resource is an Amazon
+    #   ECR repository.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Creates or updates the image manifest and tags associated with an
     # image.
+    #
+    # When an image is pushed and all new image layers have been uploaded,
+    # the PutImage API is called once to create or update the image manifest
+    # and tags associated with the image.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -1351,12 +1641,112 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates or updates a lifecycle policy. For information about lifecycle
-    # policy syntax, see [Lifecycle Policy Template][1].
+    # Updates the image scanning configuration for the specified repository.
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image scanning configuration
+    #   setting. If you do not specify a registry, the default registry is
+    #   assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository in which to update the image scanning
+    #   configuration setting.
+    #
+    # @option params [required, Types::ImageScanningConfiguration] :image_scanning_configuration
+    #   The image scanning configuration for the repository. This setting
+    #   determines whether images are scanned for known vulnerabilities after
+    #   being pushed to the repository.
+    #
+    # @return [Types::PutImageScanningConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutImageScanningConfigurationResponse#registry_id #registry_id} => String
+    #   * {Types::PutImageScanningConfigurationResponse#repository_name #repository_name} => String
+    #   * {Types::PutImageScanningConfigurationResponse#image_scanning_configuration #image_scanning_configuration} => Types::ImageScanningConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_image_scanning_configuration({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_scanning_configuration: { # required
+    #       scan_on_push: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_scanning_configuration.scan_on_push #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageScanningConfiguration AWS API Documentation
+    #
+    # @overload put_image_scanning_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_image_scanning_configuration(params = {}, options = {})
+      req = build_request(:put_image_scanning_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates the image tag mutability settings for the specified
+    # repository. For more information, see [Image Tag Mutability][1] in the
+    # *Amazon Elastic Container Registry User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to update the image tag mutability settings. If
+    #   you do not specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository in which to update the image tag mutability
+    #   settings.
+    #
+    # @option params [required, String] :image_tag_mutability
+    #   The tag mutability setting for the repository. If `MUTABLE` is
+    #   specified, image tags can be overwritten. If `IMMUTABLE` is specified,
+    #   all image tags within the repository will be immutable which will
+    #   prevent them from being overwritten.
+    #
+    # @return [Types::PutImageTagMutabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutImageTagMutabilityResponse#registry_id #registry_id} => String
+    #   * {Types::PutImageTagMutabilityResponse#repository_name #repository_name} => String
+    #   * {Types::PutImageTagMutabilityResponse#image_tag_mutability #image_tag_mutability} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_image_tag_mutability({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_tag_mutability: "MUTABLE", # required, accepts MUTABLE, IMMUTABLE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_tag_mutability #=> String, one of "MUTABLE", "IMMUTABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageTagMutability AWS API Documentation
+    #
+    # @overload put_image_tag_mutability(params = {})
+    # @param [Hash] params ({})
+    def put_image_tag_mutability(params = {}, options = {})
+      req = build_request(:put_image_tag_mutability, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates the lifecycle policy for the specified repository.
+    # For more information, see [Lifecycle Policy Template][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1398,8 +1788,13 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Applies a repository policy on a specified repository to control
-    # access permissions.
+    # Applies a repository policy to the specified repository to control
+    # access permissions. For more information, see [Amazon ECR Repository
+    # Policies][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1410,7 +1805,13 @@ module Aws::ECR
     #   The name of the repository to receive the policy.
     #
     # @option params [required, String] :policy_text
-    #   The JSON repository policy text to apply to the repository.
+    #   The JSON repository policy text to apply to the repository. For more
+    #   information, see [Amazon ECR Repository Policy Examples][1] in the
+    #   *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html
     #
     # @option params [Boolean] :force
     #   If the policy you are attempting to set on a repository policy would
@@ -1448,8 +1849,65 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Starts a preview of the specified lifecycle policy. This allows you to
-    # see the results before creating the lifecycle policy.
+    # Starts an image vulnerability scan. An image scan can only be started
+    # once per day on an individual image. This limit includes if an image
+    # was scanned on initial push. For more information, see [Image
+    # Scanning][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html
+    #
+    # @option params [String] :registry_id
+    #   The AWS account ID associated with the registry that contains the
+    #   repository in which to start an image scan request. If you do not
+    #   specify a registry, the default registry is assumed.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the images to scan.
+    #
+    # @option params [required, Types::ImageIdentifier] :image_id
+    #   An object with identifying information for an Amazon ECR image.
+    #
+    # @return [Types::StartImageScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImageScanResponse#registry_id #registry_id} => String
+    #   * {Types::StartImageScanResponse#repository_name #repository_name} => String
+    #   * {Types::StartImageScanResponse#image_id #image_id} => Types::ImageIdentifier
+    #   * {Types::StartImageScanResponse#image_scan_status #image_scan_status} => Types::ImageScanStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_image_scan({
+    #     registry_id: "RegistryId",
+    #     repository_name: "RepositoryName", # required
+    #     image_id: { # required
+    #       image_digest: "ImageDigest",
+    #       image_tag: "ImageTag",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.registry_id #=> String
+    #   resp.repository_name #=> String
+    #   resp.image_id.image_digest #=> String
+    #   resp.image_id.image_tag #=> String
+    #   resp.image_scan_status.status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.image_scan_status.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartImageScan AWS API Documentation
+    #
+    # @overload start_image_scan(params = {})
+    # @param [Hash] params ({})
+    def start_image_scan(params = {}, options = {})
+      req = build_request(:start_image_scan, params)
+      req.send_request(options)
+    end
+
+    # Starts a preview of a lifecycle policy for the specified repository.
+    # This allows you to see the results before associating the lifecycle
+    # policy with the repository.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1494,7 +1952,77 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Adds specified tags to a resource with the specified ARN. Existing
+    # tags on a resource are not changed if they are not specified in the
+    # request parameters.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the the resource to which to add
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to the resource. A tag is an array of key-value pairs.
+    #   Tag keys can have a maximum character length of 128 characters, and
+    #   tag values can have a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon ECR
+    #   repository.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
+    #
+    # When an image is pushed, each new image layer is uploaded in parts.
+    # The maximum size of each image layer part can be 20971520 bytes (or
+    # about 20MB). The UploadLayerPart API is called once per each new image
+    # layer part.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
     # for general use by customers for pulling and pushing images. In most
@@ -1570,14 +2098,129 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.wait_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name                       | params                          | :delay   | :max_attempts |
+    # | --------------------------------- | ------------------------------- | -------- | ------------- |
+    # | image_scan_complete               | {#describe_image_scan_findings} | 5        | 60            |
+    # | lifecycle_policy_preview_complete | {#get_lifecycle_policy_preview} | 5        | 20            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        image_scan_complete: Waiters::ImageScanComplete,
+        lifecycle_policy_preview_complete: Waiters::LifecyclePolicyPreviewComplete
+      }
     end
 
     class << self

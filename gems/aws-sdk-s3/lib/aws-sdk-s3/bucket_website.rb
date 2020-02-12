@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,21 +31,27 @@ module Aws::S3
       @bucket_name
     end
 
+    # Specifies the redirect behavior of all requests to a website endpoint
+    # of an Amazon S3 bucket.
     # @return [Types::RedirectAllRequestsTo]
     def redirect_all_requests_to
       data[:redirect_all_requests_to]
     end
 
+    # The name of the index document for the website.
     # @return [Types::IndexDocument]
     def index_document
       data[:index_document]
     end
 
+    # The name of the error document for the website.
     # @return [Types::ErrorDocument]
     def error_document
       data[:error_document]
     end
 
+    # Rules that define when a redirect is applied and the redirect
+    # behavior.
     # @return [Array<Types::RoutingRule>]
     def routing_rules
       data[:routing_rules]
@@ -227,7 +234,15 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. You must use this
+    #   header as a message integrity check to verify that the request body
+    #   was not corrupted in transit. For more information, see [RFC 1864][1].
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [required, Types::WebsiteConfiguration] :website_configuration
+    #   Container for the request.
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

@@ -21,6 +21,7 @@ module Aws::IAM
       @arn = extract_arn(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -38,12 +39,12 @@ module Aws::IAM
 
     # The stable and unique string identifying the policy.
     #
-    # For more information about IDs, see [IAM Identifiers][1] in the *Using
-    # IAM* guide.
+    # For more information about IDs, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def policy_id
       data[:policy_id]
@@ -51,12 +52,12 @@ module Aws::IAM
 
     # The path to the policy.
     #
-    # For more information about paths, see [IAM Identifiers][1] in the
-    # *Using IAM* guide.
+    # For more information about paths, see [IAM Identifiers][1] in the *IAM
+    # User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
@@ -74,6 +75,20 @@ module Aws::IAM
     # @return [Integer]
     def attachment_count
       data[:attachment_count]
+    end
+
+    # The number of entities (users and roles) for which the policy is used
+    # to set the permissions boundary.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Integer]
+    def permissions_boundary_usage_count
+      data[:permissions_boundary_usage_count]
     end
 
     # Specifies whether the policy can be attached to an IAM user, group, or
@@ -261,7 +276,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -285,7 +300,7 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name (friendly name, not ARN) of the role to attach the policy to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -310,7 +325,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to attach the policy
     #   to.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -336,17 +351,22 @@ module Aws::IAM
     #   The JSON policy document that you want to use as the content for this
     #   new version of the policy.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -364,7 +384,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     # @return [PolicyVersion]
     def create_version(options = {})
       options = options.merge(policy_arn: @arn)
@@ -397,7 +417,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM group to detach the
     #   policy from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -422,7 +442,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM role to detach the policy
     #   from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -447,7 +467,7 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to detach the policy
     #   from.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -468,6 +488,7 @@ module Aws::IAM
     #
     #   attached_groups = policy.attached_groups({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -475,16 +496,26 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Group::Collection]
     def attached_groups(options = {})
       batches = Enumerator.new do |y|
@@ -512,6 +543,7 @@ module Aws::IAM
     #
     #   attached_roles = policy.attached_roles({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -519,16 +551,26 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Role::Collection]
     def attached_roles(options = {})
       batches = Enumerator.new do |y|
@@ -556,6 +598,7 @@ module Aws::IAM
     #
     #   attached_users = policy.attached_users({
     #     path_prefix: "pathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path_prefix
@@ -563,16 +606,26 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [User::Collection]
     def attached_users(options = {})
       batches = Enumerator.new do |y|

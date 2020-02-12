@@ -21,6 +21,7 @@ module Aws::RDS
       @name = extract_name(args, options)
       @data = Aws::EmptyStructure.new
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -171,7 +172,7 @@ module Aws::RDS
     #   If specified, filters the results to include only options for the
     #   specified major engine version.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @return [OptionGroupOption::Collection]
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
@@ -206,10 +207,10 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [String] :option_group_name
-    #   The name of the option group to describe. Cannot be supplied together
+    #   The name of the option group to describe. Can't be supplied together
     #   with EngineName or MajorEngineVersion.
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [String] :major_engine_version
     #   Filters the list of option groups to only include groups associated
     #   with a specific database engine version. If specified, then EngineName
@@ -258,6 +259,7 @@ module Aws::RDS
     #     default_only: false,
     #     list_supported_character_sets: false,
     #     list_supported_timezones: false,
+    #     include_all: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :engine_version
@@ -274,18 +276,28 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter is not currently supported.
+    #   This parameter isn't currently supported.
     # @option options [Boolean] :default_only
-    #   Indicates that only the default version of the specified engine or
-    #   engine and major version combination is returned.
+    #   A value that indicates whether only the default version of the
+    #   specified engine or engine and major version combination is returned.
     # @option options [Boolean] :list_supported_character_sets
-    #   If this parameter is specified and the requested engine supports the
+    #   A value that indicates whether to list the supported character sets
+    #   for each engine version.
+    #
+    #   If this parameter is enabled and the requested engine supports the
     #   `CharacterSetName` parameter for `CreateDBInstance`, the response
     #   includes a list of supported character sets for each engine version.
     # @option options [Boolean] :list_supported_timezones
-    #   If this parameter is specified and the requested engine supports the
+    #   A value that indicates whether to list the supported time zones for
+    #   each engine version.
+    #
+    #   If this parameter is enabled and the requested engine supports the
     #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
     #   list of supported time zones for each engine version.
+    # @option options [Boolean] :include_all
+    #   A value that indicates whether to include engine versions that aren't
+    #   available in the list. The default is to list only available engine
+    #   versions.
     # @return [DBEngineVersion::Collection]
     def versions(options = {})
       batches = Enumerator.new do |y|

@@ -21,6 +21,7 @@ module Aws::RDS
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -113,6 +114,18 @@ module Aws::RDS
     # @return [String]
     def reserved_db_instance_arn
       data[:reserved_db_instance_arn]
+    end
+
+    # The unique identifier for the lease associated with the reserved DB
+    # instance.
+    #
+    # <note markdown="1"> AWS Support might request the lease ID for an issue related to a
+    # reserved DB instance.
+    #
+    #  </note>
+    # @return [String]
+    def lease_id
+      data[:lease_id]
     end
 
     # @!endgroup

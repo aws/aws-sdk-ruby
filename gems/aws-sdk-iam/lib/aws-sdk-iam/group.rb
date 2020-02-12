@@ -21,6 +21,7 @@ module Aws::IAM
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -32,23 +33,23 @@ module Aws::IAM
     alias :group_name :name
 
     # The path to the group. For more information about paths, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def path
       data[:path]
     end
 
     # The stable and unique string identifying the group. For more
-    # information about IDs, see [IAM Identifiers][1] in the *Using IAM*
-    # guide.
+    # information about IDs, see [IAM Identifiers][1] in the *IAM User
+    # Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def group_id
       data[:group_id]
@@ -56,11 +57,11 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) specifying the group. For more
     # information about ARNs and how to use them in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     # @return [String]
     def arn
       data[:arn]
@@ -218,7 +219,7 @@ module Aws::IAM
     # @option options [required, String] :user_name
     #   The name of the user to add.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -247,7 +248,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(group_name: @name)
@@ -268,16 +269,16 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This parameter allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (through its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
     # @return [Group]
     def create(options = {})
@@ -300,7 +301,7 @@ module Aws::IAM
     # @option options [required, String] :policy_name
     #   The name of the policy document.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -311,17 +312,22 @@ module Aws::IAM
     # @option options [required, String] :policy_document
     #   The policy document.
     #
+    #   You must provide policies in JSON format in IAM. However, for AWS
+    #   CloudFormation templates formatted in YAML, you can provide the policy
+    #   in JSON or YAML format. AWS CloudFormation always converts a YAML
+    #   policy to JSON format before submitting it to IAM.
+    #
     #   The [regex pattern][1] used to validate this parameter is a string of
     #   characters consisting of the following:
     #
     #   * Any printable ASCII character ranging from the space character
-    #     (\\u0020) through the end of the ASCII character range
+    #     (`\u0020`) through the end of the ASCII character range
     #
     #   * The printable characters in the Basic Latin and Latin-1 Supplement
-    #     character set (through \\u00FF)
+    #     character set (through `\u00FF`)
     #
-    #   * The special characters tab (\\u0009), line feed (\\u000A), and
-    #     carriage return (\\u000D)
+    #   * The special characters tab (`\u0009`), line feed (`\u000A`), and
+    #     carriage return (`\u000D`)
     #
     #
     #
@@ -362,7 +368,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(group_name: @name)
@@ -379,7 +385,7 @@ module Aws::IAM
     # @option options [required, String] :user_name
     #   The name of the user to remove.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
     #   \_+=,.@-
@@ -405,11 +411,11 @@ module Aws::IAM
     #   New path for the IAM group. Only include this if changing the group's
     #   path.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #
@@ -419,14 +425,9 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the group's
     #   name.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
-    #   characters consisting of upper and lowercase alphanumeric characters
-    #   with no spaces. You can also include any of the following characters:
-    #   \_+=,.@-
-    #
-    #
-    #
-    #   [1]: http://wikipedia.org/wiki/regex
+    #   IAM user, group, role, and policy names must be unique within the
+    #   account. Names are not distinguished by case. For example, you cannot
+    #   create resources named both "MyResource" and "myresource".
     # @return [Group]
     def update(options = {})
       options = options.merge(group_name: @name)
@@ -450,11 +451,11 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (through its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
     #   string that must begin and end with forward slashes. In addition, it
-    #   can contain any ASCII character from the ! (\\u0021) through the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
+    #   can contain any ASCII character from the ! (`\u0021`) through the DEL
+    #   character (`\u007F`), including most punctuation characters, digits,
     #   and upper and lowercased letters.
     #
     #

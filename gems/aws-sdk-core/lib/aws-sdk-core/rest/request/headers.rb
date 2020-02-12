@@ -32,9 +32,19 @@ module Aws
           value = apply_json_trait(value) if ref['jsonvalue']
           headers[ref.location_name] =
             case ref.shape
-            when TimestampShape then value.utc.httpdate
+            when TimestampShape then timestamp(ref, value)
             else value.to_s
             end
+        end
+
+        def timestamp(ref, value)
+          case ref['timestampFormat'] || ref.shape['timestampFormat']
+          when 'unixTimestamp' then value.to_i
+          when 'iso8601' then value.utc.iso8601
+          else
+            # header default to rfc822
+            value.utc.httpdate
+          end
         end
 
         def apply_header_map(headers, ref, values)

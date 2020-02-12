@@ -12,6 +12,7 @@ require_relative 'aws-sdk-acmpca/types'
 require_relative 'aws-sdk-acmpca/client_api'
 require_relative 'aws-sdk-acmpca/client'
 require_relative 'aws-sdk-acmpca/errors'
+require_relative 'aws-sdk-acmpca/waiters'
 require_relative 'aws-sdk-acmpca/resource'
 require_relative 'aws-sdk-acmpca/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-acmpca/customizations'
 # @service
 module Aws::ACMPCA
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.21.0'
 
 end

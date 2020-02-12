@@ -15,12 +15,14 @@ require_relative 'seahorse/client/plugin_list'
 require_relative 'seahorse/client/request'
 require_relative 'seahorse/client/request_context'
 require_relative 'seahorse/client/response'
+require_relative 'seahorse/client/async_response'
 
 # client http
 
 require_relative 'seahorse/client/http/headers'
 require_relative 'seahorse/client/http/request'
 require_relative 'seahorse/client/http/response'
+require_relative 'seahorse/client/http/async_response'
 
 # client logging
 
@@ -32,12 +34,18 @@ require_relative 'seahorse/client/logging/formatter'
 require_relative 'seahorse/client/net_http/connection_pool'
 require_relative 'seahorse/client/net_http/handler'
 
+# http2 handler
+
+require_relative 'seahorse/client/h2/connection'
+require_relative 'seahorse/client/h2/handler'
+
 # plugins
 
 require_relative 'seahorse/client/plugins/content_length'
 require_relative 'seahorse/client/plugins/endpoint'
 require_relative 'seahorse/client/plugins/logging'
 require_relative 'seahorse/client/plugins/net_http'
+require_relative 'seahorse/client/plugins/h2'
 require_relative 'seahorse/client/plugins/raise_response_errors'
 require_relative 'seahorse/client/plugins/response_target'
 
@@ -49,3 +57,4 @@ require_relative 'seahorse/model/authorizer'
 require_relative 'seahorse/model/shapes'
 
 require_relative 'seahorse/client/base'
+require_relative 'seahorse/client/async_base'

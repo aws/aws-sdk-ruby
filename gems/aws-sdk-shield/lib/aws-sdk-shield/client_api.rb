@@ -11,6 +11,7 @@ module Aws::Shield
 
     include Seahorse::Model
 
+    AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessDeniedForDependencyException = Shapes::StructureShape.new(name: 'AccessDeniedForDependencyException')
     AssociateDRTLogBucketRequest = Shapes::StructureShape.new(name: 'AssociateDRTLogBucketRequest')
     AssociateDRTLogBucketResponse = Shapes::StructureShape.new(name: 'AssociateDRTLogBucketResponse')
@@ -112,6 +113,12 @@ module Aws::Shield
     UpdateSubscriptionResponse = Shapes::StructureShape.new(name: 'UpdateSubscriptionResponse')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
+    AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccessDeniedForDependencyException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    AccessDeniedForDependencyException.struct_class = Types::AccessDeniedForDependencyException
+
     AssociateDRTLogBucketRequest.add_member(:log_bucket, Shapes::ShapeRef.new(shape: LogBucket, required: true, location_name: "LogBucket"))
     AssociateDRTLogBucketRequest.struct_class = Types::AssociateDRTLogBucketRequest
 
@@ -196,7 +203,8 @@ module Aws::Shield
     DescribeEmergencyContactSettingsResponse.add_member(:emergency_contact_list, Shapes::ShapeRef.new(shape: EmergencyContactList, location_name: "EmergencyContactList"))
     DescribeEmergencyContactSettingsResponse.struct_class = Types::DescribeEmergencyContactSettingsResponse
 
-    DescribeProtectionRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, required: true, location_name: "ProtectionId"))
+    DescribeProtectionRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "ProtectionId"))
+    DescribeProtectionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     DescribeProtectionRequest.struct_class = Types::DescribeProtectionRequest
 
     DescribeProtectionResponse.add_member(:protection, Shapes::ShapeRef.new(shape: Protection, location_name: "Protection"))
@@ -226,11 +234,31 @@ module Aws::Shield
     GetSubscriptionStateResponse.add_member(:subscription_state, Shapes::ShapeRef.new(shape: SubscriptionState, required: true, location_name: "SubscriptionState"))
     GetSubscriptionStateResponse.struct_class = Types::GetSubscriptionStateResponse
 
+    InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalErrorException.struct_class = Types::InternalErrorException
+
+    InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidPaginationTokenException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
+
+    InvalidParameterException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidResourceException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidResourceException.struct_class = Types::InvalidResourceException
+
     Limit.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     Limit.add_member(:max, Shapes::ShapeRef.new(shape: Long, location_name: "Max"))
     Limit.struct_class = Types::Limit
 
     Limits.member = Shapes::ShapeRef.new(shape: Limit)
+
+    LimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    LimitsExceededException.add_member(:type, Shapes::ShapeRef.new(shape: LimitType, location_name: "Type"))
+    LimitsExceededException.add_member(:limit, Shapes::ShapeRef.new(shape: LimitNumber, location_name: "Limit"))
+    LimitsExceededException.struct_class = Types::LimitsExceededException
 
     ListAttacksRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnFilterList, location_name: "ResourceArns"))
     ListAttacksRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeRange, location_name: "StartTime"))
@@ -251,12 +279,21 @@ module Aws::Shield
     ListProtectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListProtectionsResponse.struct_class = Types::ListProtectionsResponse
 
+    LockedSubscriptionException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    LockedSubscriptionException.struct_class = Types::LockedSubscriptionException
+
     LogBucketList.member = Shapes::ShapeRef.new(shape: LogBucket)
 
     Mitigation.add_member(:mitigation_name, Shapes::ShapeRef.new(shape: String, location_name: "MitigationName"))
     Mitigation.struct_class = Types::Mitigation
 
     MitigationList.member = Shapes::ShapeRef.new(shape: Mitigation)
+
+    NoAssociatedRoleException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    NoAssociatedRoleException.struct_class = Types::NoAssociatedRoleException
+
+    OptimisticLockException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    OptimisticLockException.struct_class = Types::OptimisticLockException
 
     Protection.add_member(:id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "Id"))
     Protection.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, location_name: "Name"))
@@ -265,7 +302,13 @@ module Aws::Shield
 
     Protections.member = Shapes::ShapeRef.new(shape: Protection)
 
+    ResourceAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
     ResourceArnFilterList.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     SubResourceSummary.add_member(:type, Shapes::ShapeRef.new(shape: SubResourceType, location_name: "Type"))
     SubResourceSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
@@ -321,12 +364,16 @@ module Aws::Shield
       api.version = "2016-06-02"
 
       api.metadata = {
+        "apiVersion" => "2016-06-02",
         "endpointPrefix" => "shield",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS Shield",
         "serviceFullName" => "AWS Shield",
+        "serviceId" => "Shield",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSShield_20160616",
+        "uid" => "shield-2016-06-02",
       }
 
       api.add_operation(:associate_drt_log_bucket, Seahorse::Model::Operation.new.tap do |o|
@@ -414,7 +461,7 @@ module Aws::Shield
         o.input = Shapes::ShapeRef.new(shape: DescribeAttackRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAttackResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_drt_access, Seahorse::Model::Operation.new.tap do |o|
@@ -444,6 +491,7 @@ module Aws::Shield
         o.input = Shapes::ShapeRef.new(shape: DescribeProtectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeProtectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 

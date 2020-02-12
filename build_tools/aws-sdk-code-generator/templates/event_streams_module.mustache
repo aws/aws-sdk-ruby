@@ -3,7 +3,32 @@
 {{/generated_src_warning}}
 module {{module_name}}
   module EventStreams
-    {{#eventstreams}}
+    {{#input_eventstreams}}
+    class {{class_name}}
+
+      def initialize
+        @event_emitter = Aws::EventEmitter.new
+      end
+
+      {{#event_entries}}
+      {{param_hash}}
+      def signal_{{name}}_event(params = {})
+        @event_emitter.emit(:{{name}}, params)
+      end
+
+      {{/event_entries}}
+      def signal_end_stream
+        @event_emitter.emit(:end_stream, {})
+      end
+
+      # @api private
+      # @return Aws::EventEmitter
+      attr_reader :event_emitter
+
+    end
+
+    {{/input_eventstreams}}
+    {{#output_eventstreams}}
     class {{class_name}}
 
       def initialize
@@ -12,18 +37,24 @@ module {{module_name}}
 
       {{#types}}
       def on_{{.}}_event(&block)
-        @event_emitter.on(:{{.}}, Proc.new)
+        @event_emitter.on(:{{.}}, block) if block_given?
       end
 
       {{/types}}
       def on_error_event(&block)
-        @event_emitter.on(:error, Proc.new)
+        @event_emitter.on(:error, block) if block_given?
+      end
+
+      def on_initial_response_event(&block)
+        @event_emitter.on(:initial_response, block) if block_given?
       end
 
       def on_event(&block)
         {{#types}}
         on_{{.}}_event(&block)
         {{/types}}
+        on_error_event(&block)
+        on_initial_response_event(&block)
       end
 
       # @api private
@@ -31,7 +62,7 @@ module {{module_name}}
       attr_reader :event_emitter
 
     end
-    {{/eventstreams}}
+    {{/output_eventstreams}}
 
   end
 end

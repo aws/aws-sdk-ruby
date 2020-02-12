@@ -18,6 +18,7 @@ module Seahorse
 
         @pools_mutex = Mutex.new
         @pools = {}
+        @default_logger = Logger.new($stdout)
 
         OPTIONS = {
           http_proxy: nil,
@@ -52,14 +53,14 @@ module Seahorse
 
         # Makes an HTTP request, yielding a Net::HTTPResponse object.
         #
-        #   pool.request('http://domain', Net::HTTP::Get.new('/')) do |resp|
+        #   pool.request(URI.parse('http://domain'), Net::HTTP::Get.new('/')) do |resp|
         #     puts resp.code # status code
         #     puts resp.to_h.inspect # dump the headers
         #     puts resp.body
         #   end
         #
-        # @param [String] endpoint The HTTP(S) endpoint to
-        #    connect to (e.g. 'https://domain.com').
+        # @param [URI::HTTP, URI::HTTPS] endpoint The HTTP(S) endpoint
+        #    to connect to (e.g. 'https://domain.com').
         #
         # @param [Net::HTTPRequest] request The request to make.  This can be
         #   any request object from Net::HTTP (e.g. Net::HTTP::Get,
@@ -131,7 +132,7 @@ module Seahorse
           nil
         end
 
-        # Closes and removes removes all sessions from the pool.
+        # Closes and removes all sessions from the pool.
         # If empty! is called while there are outstanding requests they may
         # get checked back into the pool, leaving the pool in a non-empty
         # state.
@@ -165,16 +166,16 @@ module Seahorse
           #   requests through.  Formatted like 'http://proxy.com:123'.
           #
           # @option options [Float] :http_open_timeout (15) The number of
-          #   seconds to wait when opening a HTTP session before rasing a
+          #   seconds to wait when opening an HTTP session before raising a
           #   `Timeout::Error`.
           #
           # @option options [Integer] :http_read_timeout (60) The default
           #   number of seconds to wait for response data.  This value can
           #   safely be set
-          #   per-request on the session yeidled by {#session_for}.
+          #   per-request on the session yielded by {#session_for}.
           #
           # @option options [Float] :http_idle_timeout (5) The number of
-          #   seconds a connection is allowed to sit idble before it is
+          #   seconds a connection is allowed to sit idle before it is
           #   considered stale.  Stale connections are closed and removed
           #   from the pool before making a request.
           #
@@ -183,7 +184,7 @@ module Seahorse
           #   request body.  This option has no effect unless the request has
           #   "Expect" header set to "100-continue".  Defaults to `nil` which
           #   disables this behaviour.  This value can safely be set per
-          #   request on the session yeidled by {#session_for}.
+          #   request on the session yielded by {#session_for}.
           #
           # @option options [Boolean] :http_wire_trace (false) When `true`,
           #   HTTP debug output will be sent to the `:logger`.
@@ -200,13 +201,13 @@ module Seahorse
           # @option options [String] :ssl_ca_bundle Full path to the SSL
           #   certificate authority bundle file that should be used when
           #   verifying peer certificates.  If you do not pass
-          #   `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+          #   `:ssl_ca_bundle` or `:ssl_ca_directory` the system default
           #   will be used if available.
           #
           # @option options [String] :ssl_ca_directory Full path of the
           #   directory that contains the unbundled SSL certificate
           #   authority files for verifying peer certificates.  If you do
-          #   not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+          #   not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the
           #   system default will be used if available.
           #
           # @return [ConnectionPool]
@@ -217,7 +218,7 @@ module Seahorse
             end
           end
 
-          # @return [Array<ConnectionPool>] Returns a list of of the
+          # @return [Array<ConnectionPool>] Returns a list of the
           #   constructed connection pools.
           def pools
             @pools_mutex.synchronize do
@@ -231,7 +232,7 @@ module Seahorse
           # @return [Hash]
           def pool_options options
             wire_trace = !!options[:http_wire_trace]
-            logger = options[:logger] || Logger.new($stdout) if wire_trace
+            logger = options[:logger] || @default_logger if wire_trace
             verify_peer = options.key?(:ssl_verify_peer) ?
               !!options[:ssl_verify_peer] : true
             {
@@ -279,6 +280,7 @@ module Seahorse
           http = ExtendedSession.new(Net::HTTP.new(*args.compact))
           http.set_debug_output(logger) if http_wire_trace?
           http.open_timeout = http_open_timeout
+          http.keep_alive_timeout = http_idle_timeout if http.respond_to?(:keep_alive_timeout=)
 
           if endpoint.scheme == 'https'
             http.use_ssl = true
@@ -301,13 +303,10 @@ module Seahorse
         # Removes stale sessions from the pool.  This method *must* be called
         # @note **Must** be called behind a `@pool_mutex` synchronize block.
         def _clean
-          now = Time.now
+          now = Aws::Util.monotonic_milliseconds
           @pool.each_pair do |endpoint,sessions|
             sessions.delete_if do |session|
-              if
-                session.last_used.nil? or
-                now - session.last_used > http_idle_timeout
-              then
+              if session.last_used.nil? or now - session.last_used > http_idle_timeout * 1000
                 session.finish
                 true
               end
@@ -315,7 +314,7 @@ module Seahorse
           end
         end
 
-        # Helper methods extended onto Net::HTTPSession objects opend by the
+        # Helper methods extended onto Net::HTTPSession objects opened by the
         # connection pool.
         # @api private
         class ExtendedSession < Delegator
@@ -325,7 +324,7 @@ module Seahorse
             @http = http
           end
 
-          # @return [Time,nil]
+          # @return [Integer,nil]
           attr_reader :last_used
 
           def __getobj__
@@ -338,8 +337,8 @@ module Seahorse
 
           # Sends the request and tracks that this session has been used.
           def request(*args, &block)
-            @last_used = Time.now
             @http.request(*args, &block)
+            @last_used = Aws::Util.monotonic_milliseconds
           end
 
           # Attempts to close/finish the session without raising an error.

@@ -473,6 +473,30 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # The request failed due to an unknown error.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/InternalServiceError AWS API Documentation
+    #
+    class InternalServiceError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # One of the arguments provided is invalid for this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/InvalidArgumentException AWS API Documentation
+    #
+    class InvalidArgumentException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A time-ordered series of data points, correpsonding to a dimension of
     # a Performance Insights metric.
     #
@@ -550,6 +574,18 @@ module Aws::PI
       :metric,
       :group_by,
       :filter)
+      include Aws::Structure
+    end
+
+    # The user is not authorized to perform this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/NotAuthorizedException AWS API Documentation
+    #
+    class NotAuthorizedException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

@@ -6,6 +6,9 @@ module Aws
   # return when a client is using stubbed responses. Pass
   # `:stub_responses => true` to a client constructor to enable this
   # behavior.
+  #
+  # Also allows you to see the requests made by the client by reading the
+  # api_requests instance variable
   module ClientStubs
 
     # @api private
@@ -16,6 +19,19 @@ module Aws
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
         end
+      end
+
+      # When a client is stubbed allow the user to access the requests made
+      @api_requests = []
+
+      requests = @api_requests
+      self.handle do |context|
+        requests << {
+          operation_name: context.operation_name,
+          params: context.params,
+          context: context
+        }
+        @handler.call(context)
       end
     end
 
@@ -166,6 +182,27 @@ module Aws
       end
     end
 
+    # Allows you to access all of the requests that the stubbed client has made
+    #
+    # @params [Boolean] exclude_presign Setting to true for filtering out not sent requests from
+    #                 generating presigned urls. Default to false.
+    # @return [Array] Returns an array of the api requests made, each request object contains the
+    #                 :operation_name, :params, and :context of the request. 
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
+    def api_requests(options = {})
+      if config.stub_responses
+        if options[:exclude_presign]
+          @api_requests.reject {|req| req[:context][:presigned_url] }
+        else
+          @api_requests
+        end
+      else
+        msg = 'This method is only implemented for stubbed clients, and is '
+        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        raise NotImplementedError.new(msg)
+      end
+    end
+
     # Generates and returns stubbed response data from the named operation.
     #
     #     s3 = Aws::S3::Client.new
@@ -254,7 +291,7 @@ module Aws
     def data_to_http_resp(operation_name, data)
       api = config.api
       operation = api.operation(operation_name)
-      ParamValidator.validate!(operation.output, data)
+      ParamValidator.new(operation.output, input: false).validate!(data)
       protocol_helper.stub_data(api, operation, data)
     end
 

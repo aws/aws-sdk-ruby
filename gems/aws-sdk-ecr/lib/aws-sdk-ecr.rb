@@ -12,6 +12,7 @@ require_relative 'aws-sdk-ecr/types'
 require_relative 'aws-sdk-ecr/client_api'
 require_relative 'aws-sdk-ecr/client'
 require_relative 'aws-sdk-ecr/errors'
+require_relative 'aws-sdk-ecr/waiters'
 require_relative 'aws-sdk-ecr/resource'
 require_relative 'aws-sdk-ecr/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-ecr/customizations'
 # @service
 module Aws::ECR
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.25.0'
 
 end

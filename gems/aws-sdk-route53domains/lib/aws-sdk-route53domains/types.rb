@@ -394,6 +394,21 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # The number of domains has exceeded the allowed threshold for the
+    # account.
+    #
+    # @!attribute [rw] message
+    #   The number of domains has exceeded the allowed threshold for the
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainLimitExceeded AWS API Documentation
+    #
+    class DomainLimitExceeded < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Information about one suggested domain name.
     #
     # @!attribute [rw] domain_name
@@ -521,6 +536,19 @@ module Aws::Route53Domains
     #
     class DomainTransferability < Struct.new(
       :transferable)
+      include Aws::Structure
+    end
+
+    # The request is already in progress for the domain.
+    #
+    # @!attribute [rw] message
+    #   The request is already in progress for the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DuplicateRequest AWS API Documentation
+    #
+    class DuplicateRequest < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -986,6 +1014,25 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # The requested item is not acceptable. For example, for an OperationId
+    # it might refer to the ID of an operation that is already completed.
+    # For a domain name, it might not be a valid domain name or belong to
+    # the requester account.
+    #
+    # @!attribute [rw] message
+    #   The requested item is not acceptable. For example, for an
+    #   OperationId it might refer to the ID of an operation that is already
+    #   completed. For a domain name, it might not be a valid domain name or
+    #   belong to the requester account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/InvalidInput AWS API Documentation
+    #
+    class InvalidInput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The ListDomains request includes the following elements.
     #
     # @note When making an API call, you may pass ListDomainsRequest
@@ -1170,6 +1217,21 @@ module Aws::Route53Domains
     class Nameserver < Struct.new(
       :name,
       :glue_ips)
+      include Aws::Structure
+    end
+
+    # The number of operations or jobs running exceeded the allowed
+    # threshold for the account.
+    #
+    # @!attribute [rw] message
+    #   The number of operations or jobs running exceeded the allowed
+    #   threshold for the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/OperationLimitExceeded AWS API Documentation
+    #
+    class OperationLimitExceeded < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -1523,6 +1585,19 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # The top-level domain does not support this operation.
+    #
+    # @!attribute [rw] message
+    #   The top-level domain does not support this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TLDRulesViolation AWS API Documentation
+    #
+    class TLDRulesViolation < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # Each tag includes the following elements.
     #
     # @note When making an API call, you may pass Tag
@@ -1753,6 +1828,19 @@ module Aws::Route53Domains
     #
     class TransferDomainResponse < Struct.new(
       :operation_id)
+      include Aws::Structure
+    end
+
+    # Amazon Route 53 does not support this top-level domain (TLD).
+    #
+    # @!attribute [rw] message
+    #   Amazon Route 53 does not support this top-level domain (TLD).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UnsupportedTLD AWS API Documentation
+    #
+    class UnsupportedTLD < Struct.new(
+      :message)
       include Aws::Structure
     end
 

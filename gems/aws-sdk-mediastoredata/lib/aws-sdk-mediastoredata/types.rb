@@ -8,6 +8,18 @@
 module Aws::MediaStoreData
   module Types
 
+    # The specified container was not found for the specified account.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ContainerNotFoundException AWS API Documentation
+    #
+    class ContainerNotFoundException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteObjectRequest
     #   data as a hash:
     #
@@ -136,8 +148,10 @@ module Aws::MediaStoreData
     #
     # @!attribute [rw] range
     #   The range bytes of an object to retrieve. For more information about
-    #   the `Range` header, go to
+    #   the `Range` header, see
     #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
+    #   AWS Elemental MediaStore ignores this header for partially uploaded
+    #   objects that have streaming upload availability.
     #
     #
     #
@@ -209,6 +223,18 @@ module Aws::MediaStoreData
       include Aws::Structure
     end
 
+    # The service is temporarily unavailable.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # A metadata entry for a folder or object.
     #
     # @!attribute [rw] name
@@ -262,13 +288,27 @@ module Aws::MediaStoreData
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum results to return. The service might return fewer
-    #   results.
+    #   The maximum number of results to return per API request. For
+    #   example, you submit a `ListItems` request with `MaxResults` set at
+    #   500. Although 2,000 items match your request, the service returns no
+    #   more than the first 500 items. (The service also returns a
+    #   `NextToken` value that you can use to fetch the next batch of
+    #   results.) The service might return fewer results than the
+    #   `MaxResults` value.
+    #
+    #   If `MaxResults` is not included in the request, the service defaults
+    #   to pagination with a maximum of 1,000 results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` received in the `ListItemsResponse` for the same
-    #   container and path. Tokens expire after 15 minutes.
+    #   The token that identifies which batch of results that you want to
+    #   see. For example, you submit a `ListItems` request with `MaxResults`
+    #   set at 500. The service returns the first batch of results (up to
+    #   500) and a `NextToken` value. To see the next batch of results, you
+    #   can submit the `ListItems` request a second time and specify the
+    #   `NextToken` value.
+    #
+    #   Tokens expire after 15 minutes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsRequest AWS API Documentation
@@ -281,12 +321,16 @@ module Aws::MediaStoreData
     end
 
     # @!attribute [rw] items
-    #   Metadata entries for the folders and objects at the requested path.
+    #   The metadata entries for the folders and objects at the requested
+    #   path.
     #   @return [Array<Types::Item>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` used to request the next page of results using
-    #   `ListItems`.
+    #   The token that can be used in a request to view the next set of
+    #   results. For example, you submit a `ListItems` request that matches
+    #   2,000 items with `MaxResults` set at 500. The service returns the
+    #   first batch of results (up to 500) and a `NextToken` value that can
+    #   be used to fetch the next batch of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsResponse AWS API Documentation
@@ -294,6 +338,18 @@ module Aws::MediaStoreData
     class ListItemsResponse < Struct.new(
       :items,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Could not perform an operation on an object that does not exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ObjectNotFoundException AWS API Documentation
+    #
+    class ObjectNotFoundException < Struct.new(
+      :message)
       include Aws::Structure
     end
 
@@ -306,6 +362,7 @@ module Aws::MediaStoreData
     #         content_type: "ContentType",
     #         cache_control: "StringPrimitive",
     #         storage_class: "TEMPORAL", # accepts TEMPORAL
+    #         upload_availability: "STANDARD", # accepts STANDARD, STREAMING
     #       }
     #
     # @!attribute [rw] body
@@ -369,6 +426,18 @@ module Aws::MediaStoreData
     #   into durable storage shortly after being received.
     #   @return [String]
     #
+    # @!attribute [rw] upload_availability
+    #   Indicates the availability of an object while it is still uploading.
+    #   If the value is set to `streaming`, the object is available for
+    #   downloading after some initial buffering but before the object is
+    #   uploaded completely. If the value is set to `standard`, the object
+    #   is available for downloading only when it is uploaded completely.
+    #   The default value for this header is `standard`.
+    #
+    #   To use this header, you must also set the HTTP `Transfer-Encoding`
+    #   header to `chunked`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectRequest AWS API Documentation
     #
     class PutObjectRequest < Struct.new(
@@ -376,7 +445,8 @@ module Aws::MediaStoreData
       :path,
       :content_type,
       :cache_control,
-      :storage_class)
+      :storage_class,
+      :upload_availability)
       include Aws::Structure
     end
 
@@ -389,8 +459,8 @@ module Aws::MediaStoreData
     #   @return [String]
     #
     # @!attribute [rw] storage_class
-    #   The storage class where the object was persisted. Should be
-    #   “Temporal”.
+    #   The storage class where the object was persisted. The class should
+    #   be “Temporal”.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectResponse AWS API Documentation
@@ -399,6 +469,18 @@ module Aws::MediaStoreData
       :content_sha256,
       :etag,
       :storage_class)
+      include Aws::Structure
+    end
+
+    # The requested content range is not valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/RequestedRangeNotSatisfiableException AWS API Documentation
+    #
+    class RequestedRangeNotSatisfiableException < Struct.new(
+      :message)
       include Aws::Structure
     end
 

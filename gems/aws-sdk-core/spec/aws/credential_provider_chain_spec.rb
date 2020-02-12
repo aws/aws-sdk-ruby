@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require 'securerandom'
 
 module Aws
   describe CredentialProviderChain do
@@ -147,6 +148,17 @@ module Aws
     describe 'with shared credentials' do
 
       let(:path) { File.join('HOME', '.aws', 'credentials') }
+      let(:profile_name) { SecureRandom.hex }
+      let(:access_key_id) { SecureRandom.hex }
+      let(:secret_access_key) { SecureRandom.hex }
+      let(:session_token) { SecureRandom.hex }
+      let(:credentials_file) { <<CREDS.strip
+[#{profile_name}]
+aws_access_key_id = #{access_key_id}
+aws_secret_access_key = #{secret_access_key}
+aws_session_token = #{session_token}
+CREDS
+      }
 
       before(:each) do
         allow(File).to receive(:exist?).with(path).and_return(true)
@@ -160,14 +172,19 @@ module Aws
       end
 
       it 'returns no credentials when the shared file profile is missing' do
-        no_default = <<-CREDS.strip
-[fooprofile]
-aws_access_key_id = ACCESS_KEY_1
-aws_secret_access_key = SECRET_KEY_1
-aws_session_token = TOKEN_1
-        CREDS
-        expect(File).to receive(:read).with(path).and_return(no_default)
+        expect(File).to receive(:read).with(path).and_return(credentials_file)
         expect(chain.resolve).to be(nil)
+      end
+
+      it 'returns credentials from proper profile when AWS_DEFAULT_PROFILE is used' do
+        ENV['AWS_DEFAULT_PROFILE'] = profile_name
+        expect(File).to receive(:read).with(path).and_return(credentials_file)
+        expect(credentials).to be_kind_of(SharedCredentials)
+        expect(credentials.set?).to be(true)
+        creds = credentials.credentials
+        expect(creds.access_key_id).to eq(access_key_id)
+        expect(creds.secret_access_key).to eq(secret_access_key)
+        expect(creds.session_token).to eq(session_token)
       end
 
     end

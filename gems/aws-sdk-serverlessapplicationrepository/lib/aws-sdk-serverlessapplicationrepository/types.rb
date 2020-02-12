@@ -37,6 +37,14 @@ module Aws::ServerlessApplicationRepository
     #   location of your GitHub repository for the application.
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   Whether the author of this application has been verified. This means
+    #   means that AWS has made a good faith review, as a reasonable and
+    #   prudent service provider, of the information provided by the
+    #   requester and has confirmed that the requester's identity is as
+    #   claimed.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   Labels to improve discovery of apps in search results.
     #
@@ -71,6 +79,11 @@ module Aws::ServerlessApplicationRepository
     #   A valid identifier from https://spdx.org/licenses/.
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   The URL to the public profile of a verified author. This URL is
+    #   submitted by the author.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Version information about the application.
     #   @return [Types::Version]
@@ -83,12 +96,50 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
+      include Aws::Structure
+    end
+
+    # A list of application summaries nested in the application.
+    #
+    # @!attribute [rw] dependencies
+    #   An array of application summaries nested in the application.
+    #   @return [Array<Types::ApplicationDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencyPage AWS API Documentation
+    #
+    class ApplicationDependencyPage < Struct.new(
+      :dependencies,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # A nested application summary.
+    #
+    # @!attribute [rw] application_id
+    #   The Amazon Resource Name (ARN) of the nested application.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version of the nested application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationDependencySummary AWS API Documentation
+    #
+    class ApplicationDependencySummary < Struct.new(
+      :application_id,
+      :semantic_version)
       include Aws::Structure
     end
 
@@ -135,7 +186,8 @@ module Aws::ServerlessApplicationRepository
     #       }
     #
     # @!attribute [rw] actions
-    #   See [Application Permissions][1] for the list of supported actions.
+    #   For the list of actions supported for this operation, see
+    #   [Application Permissions][1].
     #
     #
     #
@@ -143,7 +195,7 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
-    #   An AWS account ID, or * to make the application public.
+    #   An array of AWS account IDs, or * to make the application public.
     #   @return [Array<String>]
     #
     # @!attribute [rw] statement_id
@@ -244,6 +296,24 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # One of the parameters in the request is invalid.
+    #
+    # @!attribute [rw] error_code
+    #   400
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   One of the parameters in the request is invalid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Details of the change set.
     #
     # @!attribute [rw] application_id
@@ -282,6 +352,24 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # The resource already exists.
+    #
+    # @!attribute [rw] error_code
+    #   409
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The resource already exists.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Create an application request.
     #
     # @!attribute [rw] author
@@ -313,13 +401,13 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] license_body
     #   A local text file that contains the license of the app that matches
-    #   the spdxLicenseID value of your application. The file is of the
-    #   format file://&lt;path>/&lt;filename>.
+    #   the spdxLicenseID value of your application. The file has the format
+    #   file://&lt;path>/&lt;filename>.
     #
     #   Maximum size 5 MB
     #
-    #   Note: Only one of licenseBody and licenseUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of licenseBody and licenseUrl; otherwise,
+    #   an error results.
     #   @return [String]
     #
     # @!attribute [rw] license_url
@@ -328,8 +416,8 @@ module Aws::ServerlessApplicationRepository
     #
     #   Maximum size 5 MB
     #
-    #   Note: Only one of licenseBody and licenseUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of licenseBody and licenseUrl; otherwise,
+    #   an error results.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -343,12 +431,12 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] readme_body
     #   A local text readme file in Markdown language that contains a more
     #   detailed description of the application and how it works. The file
-    #   is of the format file://&lt;path>/&lt;filename>.
+    #   has the format file://&lt;path>/&lt;filename>.
     #
     #   Maximum size 5 MB
     #
-    #   Note: Only one of readmeBody and readmeUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of readmeBody and readmeUrl; otherwise, an
+    #   error results.
     #   @return [String]
     #
     # @!attribute [rw] readme_url
@@ -357,8 +445,8 @@ module Aws::ServerlessApplicationRepository
     #
     #   Maximum size 5 MB
     #
-    #   Note: Only one of readmeBody and readmeUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of readmeBody and readmeUrl; otherwise, an
+    #   error results.
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
@@ -371,9 +459,16 @@ module Aws::ServerlessApplicationRepository
     #   [1]: https://semver.org/
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
@@ -386,18 +481,18 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] template_body
     #   The local raw packaged AWS SAM template file of your application.
-    #   The file is of the format file://&lt;path>/&lt;filename>.
+    #   The file has the format file://&lt;path>/&lt;filename>.
     #
-    #   Note: Only one of templateBody and templateUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of templateBody and templateUrl; otherwise
+    #   an error results.
     #   @return [String]
     #
     # @!attribute [rw] template_url
-    #   A link to the S3 object cotaining the packaged AWS SAM template of
+    #   A link to the S3 object containing the packaged AWS SAM template of
     #   your application.
     #
-    #   Note: Only one of templateBody and templateUrl can be specified,
-    #   otherwise an error will result.
+    #   You can specify only one of templateBody and templateUrl; otherwise
+    #   an error results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationInput AWS API Documentation
@@ -413,6 +508,7 @@ module Aws::ServerlessApplicationRepository
       :readme_body,
       :readme_url,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :spdx_license_id,
       :template_body,
@@ -434,6 +530,7 @@ module Aws::ServerlessApplicationRepository
     #         readme_body: "__string",
     #         readme_url: "__string",
     #         semantic_version: "__string",
+    #         source_code_archive_url: "__string",
     #         source_code_url: "__string",
     #         spdx_license_id: "__string",
     #         template_body: "__string",
@@ -470,6 +567,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   @return [String]
     #
@@ -495,6 +595,7 @@ module Aws::ServerlessApplicationRepository
       :readme_body,
       :readme_url,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :spdx_license_id,
       :template_body,
@@ -517,6 +618,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -532,6 +636,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -544,20 +651,29 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end
 
     # Create a version request.
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] template_body
@@ -571,6 +687,7 @@ module Aws::ServerlessApplicationRepository
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionInput AWS API Documentation
     #
     class CreateApplicationVersionInput < Struct.new(
+      :source_code_archive_url,
       :source_code_url,
       :template_body,
       :template_url)
@@ -583,6 +700,7 @@ module Aws::ServerlessApplicationRepository
     #       {
     #         application_id: "__string", # required
     #         semantic_version: "__string", # required
+    #         source_code_archive_url: "__string",
     #         source_code_url: "__string",
     #         template_body: "__string",
     #         template_url: "__string",
@@ -592,6 +710,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @!attribute [rw] source_code_archive_url
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -608,6 +729,7 @@ module Aws::ServerlessApplicationRepository
     class CreateApplicationVersionRequest < Struct.new(
       :application_id,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_body,
       :template_url)
@@ -623,7 +745,16 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] parameter_definitions
     #   @return [Array<Types::ParameterDefinition>]
     #
+    # @!attribute [rw] required_capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources_supported
+    #   @return [Boolean]
+    #
     # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @!attribute [rw] source_code_archive_url
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -638,7 +769,10 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :creation_time,
       :parameter_definitions,
+      :required_capabilities,
+      :resources_supported,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_url)
       include Aws::Structure
@@ -646,9 +780,98 @@ module Aws::ServerlessApplicationRepository
 
     # Create an application change set request.
     #
+    # @!attribute [rw] capabilities
+    #   A list of values that you must specify before you can deploy certain
+    #   applications. Some applications might include resources that can
+    #   affect permissions in your AWS account, for example, by creating new
+    #   AWS Identity and Access Management (IAM) users. For those
+    #   applications, you must explicitly acknowledge their capabilities by
+    #   specifying this parameter.
+    #
+    #   The only valid values are CAPABILITY\_IAM, CAPABILITY\_NAMED\_IAM,
+    #   CAPABILITY\_RESOURCE\_POLICY, and CAPABILITY\_AUTO\_EXPAND.
+    #
+    #   The following resources require you to specify CAPABILITY\_IAM or
+    #   CAPABILITY\_NAMED\_IAM: [AWS::IAM::Group][1],
+    #   [AWS::IAM::InstanceProfile][2], [AWS::IAM::Policy][3], and
+    #   [AWS::IAM::Role][4]. If the application contains IAM resources, you
+    #   can specify either CAPABILITY\_IAM or CAPABILITY\_NAMED\_IAM. If the
+    #   application contains IAM resources with custom names, you must
+    #   specify CAPABILITY\_NAMED\_IAM.
+    #
+    #   The following resources require you to specify
+    #   CAPABILITY\_RESOURCE\_POLICY: [AWS::Lambda::Permission][5],
+    #   [AWS::IAM:Policy][3],
+    #   [AWS::ApplicationAutoScaling::ScalingPolicy][6],
+    #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
+    #   [AWS::SNS:TopicPolicy][9].
+    #
+    #   Applications that contain one or more nested applications require
+    #   you to specify CAPABILITY\_AUTO\_EXPAND.
+    #
+    #   If your application template contains any of the above resources, we
+    #   recommend that you review all permissions associated with the
+    #   application before deploying. If you don't specify this parameter
+    #   for an application that requires capabilities, the call will fail.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] change_set_name
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arns
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] parameter_overrides
     #   A list of parameter values for the parameters of the application.
     #   @return [Array<Types::ParameterValue>]
+    #
+    # @!attribute [rw] resource_types
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rollback_configuration
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
@@ -661,23 +884,41 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] stack_name
-    #   The name or the unique ID of the stack for which you are creating a
-    #   change set. AWS CloudFormation generates the change set by comparing
-    #   this stack's information with the information that you submit, such
-    #   as a modified template or different parameter input values.
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [String]
     #
-    #   Constraints: Minimum length of 1.
+    # @!attribute [rw] tags
+    #   This property corresponds to the parameter of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+    #   </i> API.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] template_id
+    #   The UUID returned by CreateCloudFormationTemplate.
     #
     #   Pattern:
-    #   (\[a-zA-Z\]\[-a-zA-Z0-9\]*)\|(arn:\\b(aws\|aws-us-gov\|aws-cn)\\b:\[-a-zA-Z0-9:/.\_+\]*)
+    #   \[0-9a-fA-F\]\\\{8\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{12\\}
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetInput AWS API Documentation
     #
     class CreateCloudFormationChangeSetInput < Struct.new(
+      :capabilities,
+      :change_set_name,
+      :client_token,
+      :description,
+      :notification_arns,
       :parameter_overrides,
+      :resource_types,
+      :rollback_configuration,
       :semantic_version,
-      :stack_name)
+      :stack_name,
+      :tags,
+      :template_id)
       include Aws::Structure
     end
 
@@ -686,21 +927,67 @@ module Aws::ServerlessApplicationRepository
     #
     #       {
     #         application_id: "__string", # required
+    #         capabilities: ["__string"],
+    #         change_set_name: "__string",
+    #         client_token: "__string",
+    #         description: "__string",
+    #         notification_arns: ["__string"],
     #         parameter_overrides: [
     #           {
     #             name: "__string", # required
     #             value: "__string", # required
     #           },
     #         ],
+    #         resource_types: ["__string"],
+    #         rollback_configuration: {
+    #           monitoring_time_in_minutes: 1,
+    #           rollback_triggers: [
+    #             {
+    #               arn: "__string", # required
+    #               type: "__string", # required
+    #             },
+    #           ],
+    #         },
     #         semantic_version: "__string",
     #         stack_name: "__string", # required
+    #         tags: [
+    #           {
+    #             key: "__string", # required
+    #             value: "__string", # required
+    #           },
+    #         ],
+    #         template_id: "__string",
     #       }
     #
     # @!attribute [rw] application_id
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] change_set_name
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arns
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] parameter_overrides
     #   @return [Array<Types::ParameterValue>]
+    #
+    # @!attribute [rw] resource_types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rollback_configuration
+    #   This property corresponds to the <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
+    #   @return [Types::RollbackConfiguration]
     #
     # @!attribute [rw] semantic_version
     #   @return [String]
@@ -708,13 +995,28 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] stack_name
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] template_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetRequest AWS API Documentation
     #
     class CreateCloudFormationChangeSetRequest < Struct.new(
       :application_id,
+      :capabilities,
+      :change_set_name,
+      :client_token,
+      :description,
+      :notification_arns,
       :parameter_overrides,
+      :resource_types,
+      :rollback_configuration,
       :semantic_version,
-      :stack_name)
+      :stack_name,
+      :tags,
+      :template_id)
       include Aws::Structure
     end
 
@@ -740,6 +1042,62 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCloudFormationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         semantic_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplateRequest AWS API Documentation
+    #
+    class CreateCloudFormationTemplateRequest < Struct.new(
+      :application_id,
+      :semantic_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationTemplateResponse AWS API Documentation
+    #
+    class CreateCloudFormationTemplateResponse < Struct.new(
+      :application_id,
+      :creation_time,
+      :expiration_time,
+      :semantic_version,
+      :status,
+      :template_id,
+      :template_url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteApplicationRequest
     #   data as a hash:
     #
@@ -754,6 +1112,24 @@ module Aws::ServerlessApplicationRepository
     #
     class DeleteApplicationRequest < Struct.new(
       :application_id)
+      include Aws::Structure
+    end
+
+    # The client is not authenticated.
+    #
+    # @!attribute [rw] error_code
+    #   403
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The client is not authenticated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -821,6 +1197,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -836,6 +1215,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -848,12 +1230,136 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCloudFormationTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         template_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateRequest AWS API Documentation
+    #
+    class GetCloudFormationTemplateRequest < Struct.new(
+      :application_id,
+      :template_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetCloudFormationTemplateResponse AWS API Documentation
+    #
+    class GetCloudFormationTemplateResponse < Struct.new(
+      :application_id,
+      :creation_time,
+      :expiration_time,
+      :semantic_version,
+      :status,
+      :template_id,
+      :template_url)
+      include Aws::Structure
+    end
+
+    # The AWS Serverless Application Repository service encountered an
+    # internal error.
+    #
+    # @!attribute [rw] error_code
+    #   500
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The AWS Serverless Application Repository service encountered an
+    #   internal error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListApplicationDependenciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         max_items: 1,
+    #         next_token: "__string",
+    #         semantic_version: "__string",
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesRequest AWS API Documentation
+    #
+    class ListApplicationDependenciesRequest < Struct.new(
+      :application_id,
+      :max_items,
+      :next_token,
+      :semantic_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dependencies
+    #   @return [Array<Types::ApplicationDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationDependenciesResponse AWS API Documentation
+    #
+    class ListApplicationDependenciesResponse < Struct.new(
+      :dependencies,
+      :next_token)
       include Aws::Structure
     end
 
@@ -931,6 +1437,26 @@ module Aws::ServerlessApplicationRepository
     class ListApplicationsResponse < Struct.new(
       :applications,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The resource (for example, an access policy statement) specified in
+    # the request doesn't exist.
+    #
+    # @!attribute [rw] error_code
+    #   404
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The resource (for example, an access policy statement) specified in
+    #   the request doesn't exist.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Struct.new(
+      :error_code,
+      :message)
       include Aws::Structure
     end
 
@@ -1126,6 +1652,189 @@ module Aws::ServerlessApplicationRepository
       include Aws::Structure
     end
 
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    # </i> Data Type.
+    #
+    # @note When making an API call, you may pass RollbackConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         monitoring_time_in_minutes: 1,
+    #         rollback_triggers: [
+    #           {
+    #             arn: "__string", # required
+    #             type: "__string", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] monitoring_time_in_minutes
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rollback_triggers
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+    #   </i> Data Type.
+    #   @return [Array<Types::RollbackTrigger>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackConfiguration AWS API Documentation
+    #
+    class RollbackConfiguration < Struct.new(
+      :monitoring_time_in_minutes,
+      :rollback_triggers)
+      include Aws::Structure
+    end
+
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    # </i> Data Type.
+    #
+    # @note When making an API call, you may pass RollbackTrigger
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #         type: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    #   </i> Data Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+    #   </i> Data Type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/RollbackTrigger AWS API Documentation
+    #
+    class RollbackTrigger < Struct.new(
+      :arn,
+      :type)
+      include Aws::Structure
+    end
+
+    # This property corresponds to the <i>AWS CloudFormation <a
+    # href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+    # </i> Data Type.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "__string", # required
+    #         value: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+    #   </i> Data Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   This property corresponds to the content of the same name for the
+    #   <i>AWS CloudFormation <a
+    #   href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">
+    #   Tag</a> </i> Data Type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # Details of the template.
+    #
+    # @!attribute [rw] application_id
+    #   The application Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time this resource was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time this template expires. Templates expire 1 hour
+    #   after creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version of the application:
+    #
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the template creation workflow.
+    #
+    #   Possible values: PREPARING \| ACTIVE \| EXPIRED
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   The UUID returned by CreateCloudFormationTemplate.
+    #
+    #   Pattern:
+    #   \[0-9a-fA-F\]\\\{8\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{4\\}\\-\[0-9a-fA-F\]\\\{12\\}
+    #   @return [String]
+    #
+    # @!attribute [rw] template_url
+    #   A link to the template that can be used to deploy the application
+    #   using AWS CloudFormation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/TemplateDetails AWS API Documentation
+    #
+    class TemplateDetails < Struct.new(
+      :application_id,
+      :creation_time,
+      :expiration_time,
+      :semantic_version,
+      :status,
+      :template_id,
+      :template_url)
+      include Aws::Structure
+    end
+
+    # The client is sending more than the allowed number of requests per
+    # unit of time.
+    #
+    # @!attribute [rw] error_code
+    #   429
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The client is sending more than the allowed number of requests per
+    #   unit of time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Struct.new(
+      :error_code,
+      :message)
+      include Aws::Structure
+    end
+
     # Update the application request.
     #
     # @!attribute [rw] author
@@ -1243,6 +1952,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] home_page_url
     #   @return [String]
     #
+    # @!attribute [rw] is_verified_author
+    #   @return [Boolean]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -1258,6 +1970,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] spdx_license_id
     #   @return [String]
     #
+    # @!attribute [rw] verified_author_url
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   Application version details.
     #   @return [Types::Version]
@@ -1270,11 +1985,13 @@ module Aws::ServerlessApplicationRepository
       :creation_time,
       :description,
       :home_page_url,
+      :is_verified_author,
       :labels,
       :license_url,
       :name,
       :readme_url,
       :spdx_license_id,
+      :verified_author_url,
       :version)
       include Aws::Structure
     end
@@ -1293,6 +2010,58 @@ module Aws::ServerlessApplicationRepository
     #   An array of parameter types supported by the application.
     #   @return [Array<Types::ParameterDefinition>]
     #
+    # @!attribute [rw] required_capabilities
+    #   A list of values that you must specify before you can deploy certain
+    #   applications. Some applications might include resources that can
+    #   affect permissions in your AWS account, for example, by creating new
+    #   AWS Identity and Access Management (IAM) users. For those
+    #   applications, you must explicitly acknowledge their capabilities by
+    #   specifying this parameter.
+    #
+    #   The only valid values are CAPABILITY\_IAM, CAPABILITY\_NAMED\_IAM,
+    #   CAPABILITY\_RESOURCE\_POLICY, and CAPABILITY\_AUTO\_EXPAND.
+    #
+    #   The following resources require you to specify CAPABILITY\_IAM or
+    #   CAPABILITY\_NAMED\_IAM: [AWS::IAM::Group][1],
+    #   [AWS::IAM::InstanceProfile][2], [AWS::IAM::Policy][3], and
+    #   [AWS::IAM::Role][4]. If the application contains IAM resources, you
+    #   can specify either CAPABILITY\_IAM or CAPABILITY\_NAMED\_IAM. If the
+    #   application contains IAM resources with custom names, you must
+    #   specify CAPABILITY\_NAMED\_IAM.
+    #
+    #   The following resources require you to specify
+    #   CAPABILITY\_RESOURCE\_POLICY: [AWS::Lambda::Permission][5],
+    #   [AWS::IAM:Policy][3],
+    #   [AWS::ApplicationAutoScaling::ScalingPolicy][6],
+    #   [AWS::S3::BucketPolicy][7], [AWS::SQS::QueuePolicy][8], and
+    #   [AWS::SNS::TopicPolicy][9].
+    #
+    #   Applications that contain one or more nested applications require
+    #   you to specify CAPABILITY\_AUTO\_EXPAND.
+    #
+    #   If your application template contains any of the above resources, we
+    #   recommend that you review all permissions associated with the
+    #   application before deploying. If you don't specify this parameter
+    #   for an application that requires capabilities, the call will fail.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html
+    #   [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-policy.html
+    #   [4]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
+    #   [5]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-lambda-permission.html
+    #   [6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html
+    #   [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html
+    #   [8]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html
+    #   [9]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources_supported
+    #   Whether all of the AWS resources contained in this application are
+    #   supported in the region in which it is being retrieved.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
@@ -1303,9 +2072,16 @@ module Aws::ServerlessApplicationRepository
     #   [1]: https://semver.org/
     #   @return [String]
     #
+    # @!attribute [rw] source_code_archive_url
+    #   A link to the S3 object that contains the ZIP archive of the source
+    #   code for this version of your application.
+    #
+    #   Maximum size 50 MB
+    #   @return [String]
+    #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @!attribute [rw] template_url
@@ -1318,7 +2094,10 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :creation_time,
       :parameter_definitions,
+      :required_capabilities,
+      :resources_supported,
       :semantic_version,
+      :source_code_archive_url,
       :source_code_url,
       :template_url)
       include Aws::Structure
@@ -1346,7 +2125,7 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] source_code_url
     #   A link to a public repository for the source code of your
-    #   application.
+    #   application, for example the URL of a specific GitHub commit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/VersionSummary AWS API Documentation

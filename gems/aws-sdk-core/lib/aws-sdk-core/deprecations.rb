@@ -35,33 +35,39 @@ module Aws
   # @api private
   module Deprecations
 
-    # @param [Symbol] method_name The name of the deprecated method.
+    # @param [Symbol] method The name of the deprecated method.
     #
     # @option options [String] :message The warning message to issue
     #   when the deprecated method is called.
     #
-    # @option options [Symbol] :use The name of an use
-    #   method that should be used.
+    # @option options [String] :use The name of a method that should be used.
     #
-    def deprecated(method_name, options = {})
+    # @option options [String] :version The version that will remove the
+    #   deprecated method.
+    #
+    def deprecated(method, options = {})
 
       deprecation_msg = options[:message] || begin
-        msg = "DEPRECATION WARNING: called deprecated method `#{method_name}' "
-        msg << "of an #{self}"
-        msg << ", use #{options[:use]} instead" if options[:use]
+        msg = "#################### DEPRECATION WARNING ####################\n"
+        msg << "Called deprecated method `#{method}` of #{self}."
+        msg << " Use `#{options[:use]}` instead.\n" if options[:use]
+        if options[:version]
+          msg << "Method `#{method}` will be removed in #{options[:version]}."
+        end
+        msg << "\n#############################################################"
         msg
       end
 
-      alias_method(:"deprecated_#{method_name}", method_name)
+      alias_method(:"deprecated_#{method}", method)
 
       warned = false # we only want to issue this warning once
 
-      define_method(method_name) do |*args,&block|
+      define_method(method) do |*args, &block|
         unless warned
           warned = true
           warn(deprecation_msg + "\n" + caller.join("\n"))
         end
-        send("deprecated_#{method_name}", *args, &block)
+        send("deprecated_#{method}", *args, &block)
       end
     end
 

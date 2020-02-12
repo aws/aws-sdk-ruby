@@ -42,6 +42,6 @@ require_relative 'aws-sdk-marketplaceentitlementservice/customizations'
 # @service
 module Aws::MarketplaceEntitlementService
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.16.0'
 
 end

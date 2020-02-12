@@ -22,6 +22,7 @@ module Aws
         ShapeRef.new(shape: shape)
       end
       @validate_required = options[:validate_required] != false
+      @input = options[:input].nil? ? true : !!options[:input]
     end
 
     # @param [Hash] params
@@ -39,6 +40,7 @@ module Aws
       return unless correct_type?(ref, values, errors, context)
 
       if ref.eventstream
+        # input eventstream is provided from event signals
         values.each do |value|
           # each event is structure type
           case value[:message_type]
@@ -58,7 +60,8 @@ module Aws
         # ensure required members are present
         if @validate_required
           shape.required.each do |member_name|
-            if values[member_name].nil?
+            input_eventstream = ref.shape.member(member_name).eventstream && @input
+            if values[member_name].nil? && !input_eventstream
               param = "#{context}[#{member_name.inspect}]"
               errors << "missing required parameter #{param}"
             end
@@ -138,7 +141,7 @@ module Aws
           errors << expected_got(context, "true or false", value)
         end
       when BlobShape
-        unless io_like?(value) or value.is_a?(String)
+        unless value.is_a?(String) || io_like?(value)
           errors << expected_got(context, "a String or IO object", value)
         end
       else
@@ -147,6 +150,11 @@ module Aws
     end
 
     def correct_type?(ref, value, errors, context)
+      if ref.eventstream && @input
+        errors << "instead of providing value directly for eventstreams at input,"\
+          " expected to use #signal events per stream"
+        return false
+      end
       case value
       when Hash then true
       when ref.shape.struct_class then true
@@ -158,9 +166,7 @@ module Aws
     end
 
     def io_like?(value)
-      value.respond_to?(:read) &&
-      value.respond_to?(:rewind) &&
-      value.respond_to?(:size)
+      value.respond_to?(:read) && value.respond_to?(:rewind)
     end
 
     def error_messages(errors)

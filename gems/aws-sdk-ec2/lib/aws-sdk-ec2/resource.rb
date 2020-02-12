@@ -58,19 +58,19 @@ module Aws::EC2
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
     #     ],
-    #     image_id: "String",
-    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #     image_id: "ImageId",
+    #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -88,9 +88,11 @@ module Aws::EC2
     #       availability_zone: "String",
     #       affinity: "String",
     #       group_name: "String",
+    #       partition_number: 1,
     #       host_id: "String",
     #       tenancy: "default", # accepts default, dedicated, host
     #       spread_domain: "String",
+    #       host_resource_group_arn: "String",
     #     },
     #     ramdisk_id: "String",
     #     security_group_ids: ["String"],
@@ -125,11 +127,12 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
     #         subnet_id: "String",
+    #         interface_type: "String",
     #       },
     #     ],
     #     private_ip_address: "String",
@@ -138,9 +141,15 @@ module Aws::EC2
     #         type: "String", # required
     #       },
     #     ],
+    #     elastic_inference_accelerators: [
+    #       {
+    #         type: "String", # required
+    #         count: 1,
+    #       },
+    #     ],
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -171,18 +180,32 @@ module Aws::EC2
     #       core_count: 1,
     #       threads_per_core: 1,
     #     },
+    #     capacity_reservation_specification: {
+    #       capacity_reservation_preference: "open", # accepts open, none
+    #       capacity_reservation_target: {
+    #         capacity_reservation_id: "String",
+    #       },
+    #     },
+    #     hibernation_options: {
+    #       configured: false,
+    #     },
+    #     license_specifications: [
+    #       {
+    #         license_configuration_arn: "String",
+    #       },
+    #     ],
+    #     metadata_options: {
+    #       http_tokens: "optional", # accepts optional, required
+    #       http_put_response_hop_limit: 1,
+    #       http_endpoint: "disabled", # accepts disabled, enabled
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries. You can't specify both a
-    #   snapshot ID and an encryption value. This is because only blank
-    #   volumes can be encrypted on creation. If a snapshot is the basis for a
-    #   volume, it is not blank and its encryption status is used for the
-    #   volume encryption status.
+    #   The block device mapping entries.
     # @option options [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
-    #   is required to launch an instance and must be specified here or in a
-    #   launch template.
+    #   The ID of the AMI. An AMI ID is required to launch an instance and
+    #   must be specified here or in a launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
@@ -191,20 +214,26 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # @option options [Integer] :ipv_6_address_count
-    #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+    #   \[EC2-VPC\] The number of IPv6 addresses to associate with the primary
     #   network interface. Amazon EC2 chooses the IPv6 addresses from the
     #   range of your subnet. You cannot specify this option and the option to
     #   assign specific IPv6 addresses in the same request. You can specify
     #   this option if you've specified a minimum number of instances to
     #   launch.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
     # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
-    #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
-    #   subnet to associate with the primary network interface. You cannot
-    #   specify this option and the option to assign a number of IPv6
-    #   addresses in the same request. You cannot specify this option if
-    #   you've specified a minimum number of instances to launch.
+    #   \[EC2-VPC\] The IPv6 addresses from the range of the subnet to
+    #   associate with the primary network interface. You cannot specify this
+    #   option and the option to assign a number of IPv6 addresses in the same
+    #   request. You cannot specify this option if you've specified a minimum
+    #   number of instances to launch.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
     # @option options [String] :kernel_id
     #   The ID of the kernel.
     #
@@ -214,14 +243,19 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [String] :key_name
     #   The name of the key pair. You can create a key pair using
-    #   CreateKeyPair or ImportKeyPair.
+    #   [CreateKeyPair][1] or [ImportKeyPair][2].
     #
     #   If you do not specify a key pair, you can't connect to the instance
     #   unless you choose an AMI that is configured to allow users another way
     #   to log in.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     # @option options [required, Integer] :max_count
     #   The maximum number of instances to launch. If you specify more
     #   instances than Amazon EC2 can launch in the target Availability Zone,
@@ -250,11 +284,14 @@ module Aws::EC2
     #
     #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
     # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
-    #   The monitoring for the instance.
+    #   Specifies whether detailed monitoring is enabled for the instance.
     # @option options [Types::Placement] :placement
     #   The placement for the instance.
     # @option options [String] :ramdisk_id
-    #   The ID of the RAM disk.
+    #   The ID of the RAM disk to select. Some kernels require additional
+    #   drivers at launch. Check the kernel requirements for information about
+    #   whether you need to specify a RAM disk. To find kernel requirements,
+    #   go to the AWS Resource Center and search for the kernel ID.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
@@ -262,30 +299,42 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
     # @option options [Array<String>] :security_group_ids
-    #   One or more security group IDs. You can create a security group using
-    #   CreateSecurityGroup.
+    #   The IDs of the security groups. You can create a security group using
+    #   [CreateSecurityGroup][1].
     #
-    #   Default: Amazon EC2 uses the default security group.
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
     # @option options [Array<String>] :security_groups
-    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   \[EC2-Classic, default VPC\] The names of the security groups. For a
     #   nondefault VPC, you must use security group IDs instead.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface.
     #
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :subnet_id
     #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
+    #
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface.
     # @option options [String] :user_data
     #   The user data to make available to the instance. For more information,
     #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
     #   [Adding User Data][2] (Windows). If you are using a command line tool,
     #   base64-encoding is performed for you, and you can load the text from a
-    #   file. Otherwise, you must provide base64-encoded text.
+    #   file. Otherwise, you must provide base64-encoded text. User data is
+    #   limited to 16 KB.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
     # @option options [String] :additional_info
     #   Reserved.
     # @option options [String] :client_token
@@ -297,16 +346,20 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     # @option options [Boolean] :disable_api_termination
     #   If you set this parameter to `true`, you can't terminate the instance
     #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
-    #   change this attribute to `false` after launch, use
-    #   ModifyInstanceAttribute. Alternatively, if you set
-    #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
-    #   the instance by running the shutdown command from the instance.
+    #   change this attribute after launch, use [ModifyInstanceAttribute][1].
+    #   Alternatively, if you set `InstanceInitiatedShutdownBehavior` to
+    #   `terminate`, you can terminate the instance by running the shutdown
+    #   command from the instance.
     #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -330,7 +383,9 @@ module Aws::EC2
     #
     #   Default: `stop`
     # @option options [Array<Types::InstanceNetworkInterfaceSpecification>] :network_interfaces
-    #   One or more network interfaces.
+    #   The network interfaces to associate with the instance. If you specify
+    #   a network interface, you must specify any security groups and subnets
+    #   as part of the network interface.
     # @option options [String] :private_ip_address
     #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
     #   the IPv4 address range of the subnet.
@@ -340,13 +395,33 @@ module Aws::EC2
     #   private IP address as the primary IP address in a network interface
     #   specification. You cannot specify this option if you're launching
     #   more than one instance in the request.
+    #
+    #   You cannot specify this option and the network interfaces option in
+    #   the same request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance. An Elastic GPU is a GPU
+    #   resource that you can attach to your Windows instance to accelerate
+    #   the graphics performance of your applications. For more information,
+    #   see [ Amazon EC2 Elastic GPUs][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    # @option options [Array<Types::ElasticInferenceAccelerator>] :elastic_inference_accelerators
+    #   An elastic inference accelerator to associate with the instance.
+    #   Elastic inference accelerators are a resource you can attach to your
+    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
+    #   workloads.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can only tag
     #   instances and volumes on launch. The specified tags are applied to all
     #   instances or volumes that are created during launch. To tag a resource
-    #   after it has been created, see CreateTags.
+    #   after it has been created, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
@@ -354,17 +429,23 @@ module Aws::EC2
     #   template, but not both.
     # @option options [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
+    #
+    #   For RunInstances, persistent Spot Instance requests are only supported
+    #   when **InstanceInterruptionBehavior** is set to either `hibernate` or
+    #   `stop`.
     # @option options [Types::CreditSpecificationRequest] :credit_specification
-    #   The credit option for CPU usage of the instance. Valid values are
-    #   `standard` and `unlimited`. To change this attribute after launch, use
-    #   ModifyInstanceCreditSpecification. For more information, see [T2
-    #   Instances][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   The credit option for CPU usage of the burstable performance instance.
+    #   Valid values are `standard` and `unlimited`. To change this attribute
+    #   after launch, use [ ModifyInstanceCreditSpecification][1]. For more
+    #   information, see [Burstable Performance Instances][2] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
     #
-    #   Default: `standard`
+    #   Default: `standard` (T2 instances) or `unlimited` (T3/T3a instances)
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceCreditSpecification.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
     # @option options [Types::CpuOptionsRequest] :cpu_options
     #   The CPU options for the instance. For more information, see
     #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
@@ -372,7 +453,30 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    # @option options [Types::CapacityReservationSpecification] :capacity_reservation_specification
+    #   Information about the Capacity Reservation targeting option. If you do
+    #   not specify this parameter, the instance's Capacity Reservation
+    #   preference defaults to `open`, which enables it to run in any open
+    #   Capacity Reservation that has matching attributes (instance type,
+    #   platform, Availability Zone).
+    # @option options [Types::HibernationOptionsRequest] :hibernation_options
+    #   Indicates whether an instance is enabled for hibernation. For more
+    #   information, see [Hibernate Your Instance][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # @option options [Array<Types::LicenseConfigurationRequest>] :license_specifications
+    #   The license configurations.
+    # @option options [Types::InstanceMetadataOptionsRequest] :metadata_options
+    #   The metadata options for the instance. For more information, see
+    #   [Instance Metadata and User Data][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -411,7 +515,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   keypair = ec2.create_key_pair({
-    #     key_name: "String", # required
+    #     key_name: "KeyPairName", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -436,9 +540,43 @@ module Aws::EC2
 
     # @example Request syntax with placeholder values
     #
+    #   natgateway = ec2.create_nat_gateway({
+    #     allocation_id: "AllocationId", # required
+    #     client_token: "String",
+    #     subnet_id: "SubnetId", # required
+    #   })
+    # @param [Hash] options ({})
+    # @option options [required, String] :allocation_id
+    #   The allocation ID of an Elastic IP address to associate with the NAT
+    #   gateway. If the Elastic IP address is associated with another
+    #   resource, you must first disassociate it.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #   Constraint: Maximum 64 ASCII characters.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    # @option options [required, String] :subnet_id
+    #   The subnet in which to create the NAT gateway.
+    # @return [NatGateway]
+    def create_nat_gateway(options = {})
+      resp = @client.create_nat_gateway(options)
+      NatGateway.new(
+        id: resp.data.nat_gateway.nat_gateway_id,
+        data: resp.data.nat_gateway,
+        client: @client
+      )
+    end
+
+    # @example Request syntax with placeholder values
+    #
     #   networkacl = ec2.create_network_acl({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -474,11 +612,12 @@ module Aws::EC2
     #     private_ip_addresses: [
     #       {
     #         primary: false,
-    #         private_ip_address: "String", # required
+    #         private_ip_address: "String",
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
-    #     subnet_id: "String", # required
+    #     interface_type: "efa", # accepts efa
+    #     subnet_id: "SubnetId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [String] :description
@@ -522,7 +661,15 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+    # @option options [String] :interface_type
+    #   Indicates the type of network interface. To create an Elastic Fabric
+    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
+    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     # @option options [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
     # @return [NetworkInterface]
@@ -539,8 +686,9 @@ module Aws::EC2
     #
     #   placementgroup = ec2.create_placement_group({
     #     dry_run: false,
-    #     group_name: "String", # required
-    #     strategy: "cluster", # required, accepts cluster, spread
+    #     group_name: "String",
+    #     strategy: "cluster", # accepts cluster, spread, partition
+    #     partition_count: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -548,13 +696,16 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [required, String] :group_name
+    # @option options [String] :group_name
     #   A name for the placement group. Must be unique within the scope of
-    #   your account for the region.
+    #   your account for the Region.
     #
     #   Constraints: Up to 255 ASCII characters
-    # @option options [required, String] :strategy
+    # @option options [String] :strategy
     #   The placement strategy.
+    # @option options [Integer] :partition_count
+    #   The number of partitions. Valid only when **Strategy** is set to
+    #   `partition`.
     # @return [PlacementGroup]
     def create_placement_group(options = {})
       resp = @client.create_placement_group(options)
@@ -568,7 +719,7 @@ module Aws::EC2
     #
     #   routetable = ec2.create_route_table({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -593,7 +744,7 @@ module Aws::EC2
     #   securitygroup = ec2.create_security_group({
     #     description: "String", # required
     #     group_name: "String", # required
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -635,10 +786,10 @@ module Aws::EC2
     #
     #   snapshot = ec2.create_snapshot({
     #     description: "String",
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -675,24 +826,39 @@ module Aws::EC2
     #
     #   subnet = ec2.create_subnet({
     #     availability_zone: "String",
+    #     availability_zone_id: "String",
     #     cidr_block: "String", # required
     #     ipv_6_cidr_block: "String",
-    #     vpc_id: "String", # required
+    #     outpost_arn: "String",
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :availability_zone
-    #   The Availability Zone for the subnet.
+    #   The Availability Zone or Local Zone for the subnet.
     #
     #   Default: AWS selects one for you. If you create more than one subnet
-    #   in your VPC, we may not necessarily select a different zone for each
+    #   in your VPC, we do not necessarily select a different zone for each
     #   subnet.
+    #
+    #   To create a subnet in a Local Zone, set this value to the Local Zone
+    #   ID, for example `us-west-2-lax-1a`. For information about the Regions
+    #   that support Local Zones, see [Available Regions][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+    # @option options [String] :availability_zone_id
+    #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [required, String] :cidr_block
     #   The IPv4 network range for the subnet, in CIDR notation. For example,
     #   `10.0.0.0/24`.
     # @option options [String] :ipv_6_cidr_block
     #   The IPv6 network range for the subnet, in CIDR notation. The subnet
     #   size must use a /64 prefix length.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
     # @option options [required, String] :vpc_id
     #   The ID of the VPC.
     # @option options [Boolean] :dry_run
@@ -729,11 +895,14 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<String>] :resources
-    #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
+    #   The IDs of the resources, separated by spaces.
+    #
+    #   Constraints: Up to 1000 resource IDs. We recommend breaking up this
+    #   request into smaller batches.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [EmptyStructure]
     def create_tags(options = {})
       resp = @client.create_tags(options)
@@ -746,14 +915,15 @@ module Aws::EC2
     #     availability_zone: "String", # required
     #     encrypted: false,
     #     iops: 1,
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
+    #     outpost_arn: "String",
     #     size: 1,
-    #     snapshot_id: "String",
+    #     snapshot_id: "SnapshotId",
     #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
     #         tags: [
     #           {
     #             key: "String",
@@ -765,82 +935,80 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
-    #   The Availability Zone in which to create the volume. Use
-    #   DescribeAvailabilityZones to list the Availability Zones that are
-    #   currently available to you.
+    #   The Availability Zone in which to create the volume.
     # @option options [Boolean] :encrypted
-    #   Specifies whether the volume should be encrypted. Encrypted Amazon EBS
-    #   volumes may only be attached to instances that support Amazon EBS
-    #   encryption. Volumes that are created from encrypted snapshots are
-    #   automatically encrypted. There is no way to create an encrypted volume
-    #   from an unencrypted snapshot or vice versa. If your AMI uses encrypted
-    #   volumes, you can only launch it on supported instance types. For more
-    #   information, see [Amazon EBS Encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   Specifies whether the volume should be encrypted. The effect of
+    #   setting the encryption state to `true` depends on the volume origin
+    #   (new or from a snapshot), starting encryption state, ownership, and
+    #   whether encryption by default is enabled. For more information, see
+    #   [Encryption by Default][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #   Encrypted Amazon EBS volumes must be attached to instances that
+    #   support Amazon EBS encryption. For more information, see [Supported
+    #   Instance Types][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
     # @option options [Integer] :iops
     #   The number of I/O operations per second (IOPS) to provision for the
-    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
-    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1].
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000
+    #   IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed
+    #   only on [Nitro-based instances][1]. Other instance families guarantee
+    #   performance up to 32,000 IOPS. For more information, see [Amazon EBS
+    #   Volume Types][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     # @option options [String] :kms_key_id
-    #   An identifier for the AWS Key Management Service (AWS KMS) customer
-    #   master key (CMK) to use when creating the encrypted volume. This
-    #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. If a
-    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   The identifier of the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use for Amazon EBS encryption. If this parameter
+    #   is not specified, your AWS managed CMK for EBS is used. If `KmsKeyId`
+    #   is specified, the encrypted state must be `true`.
     #
-    #   The CMK identifier may be provided in any of the following formats:
+    #   You can specify the CMK using any of the following:
     #
-    #   * Key ID
+    #   * Key ID. For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.
     #
-    #   * Key alias
+    #   * Key alias. For example, alias/ExampleAlias.
     #
-    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
-    #     followed by the region of the CMK, the AWS account ID of the CMK
-    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #   * Key ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #
-    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
-    #     namespace, followed by the region of the CMK, the AWS account ID of
-    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
-    #     example,
+    #   * Alias ARN. For example,
     #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
     #
-    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
-    #   may appear to complete even though you provided an invalid identifier.
-    #   The action will eventually fail.
+    #   AWS authenticates the CMK asynchronously. Therefore, if you specify an
+    #   ID, alias, or ARN that is not valid, the action can appear to
+    #   complete, but eventually fails.
+    # @option options [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost.
     # @option options [Integer] :size
-    #   The size of the volume, in GiBs.
+    #   The size of the volume, in GiBs. You must specify either a snapshot ID
+    #   or a volume size.
     #
-    #   Constraints: 1-16384 for `gp2`, 4-16384 for `io1`, 500-16384 for
-    #   `st1`, 500-16384 for `sc1`, and 1-1024 for `standard`. If you specify
-    #   a snapshot, the volume size must be equal to or larger than the
-    #   snapshot size.
+    #   Constraints: 1-16,384 for `gp2`, 4-16,384 for `io1`, 500-16,384 for
+    #   `st1`, 500-16,384 for `sc1`, and 1-1,024 for `standard`. If you
+    #   specify a snapshot, the volume size must be equal to or larger than
+    #   the snapshot size.
     #
     #   Default: If you're creating the volume from a snapshot and don't
     #   specify a volume size, the default is the snapshot size.
     # @option options [String] :snapshot_id
-    #   The snapshot from which to create the volume.
+    #   The snapshot from which to create the volume. You must specify either
+    #   a snapshot ID or a volume size.
     # @option options [String] :volume_type
     #   The volume type. This can be `gp2` for General Purpose SSD, `io1` for
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
     #   Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Defaults: If no volume type is specified, the default is `standard` in
-    #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
-    #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
-    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
-    #   defaults to `gp2`.
+    #   Default: `gp2`
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -863,8 +1031,11 @@ module Aws::EC2
     #   vpc = ec2.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
+    #     ipv_6_pool: "String",
+    #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
+    #     ipv_6_cidr_block_network_border_group: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :cidr_block
@@ -874,6 +1045,14 @@ module Aws::EC2
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
     #   for the VPC. You cannot specify the range of IP addresses, or the size
     #   of the CIDR block.
+    # @option options [String] :ipv_6_pool
+    #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
+    #   block.
+    # @option options [String] :ipv_6_cidr_block
+    #   The IPv6 CIDR block from the IPv6 address pool. You must also specify
+    #   `Ipv6Pool` in the request.
+    #
+    #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -891,6 +1070,12 @@ module Aws::EC2
     #   Use the `default` or `dedicated` values only.
     #
     #   Default: `default`
+    # @option options [String] :ipv_6_cidr_block_network_border_group
+    #   The name of the location from which we advertise the IPV6 CIDR block.
+    #   Use this parameter to limit the address to this location.
+    #
+    #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
+    #   parameter.
     # @return [Vpc]
     def create_vpc(options = {})
       resp = @client.create_vpc(options)
@@ -907,7 +1092,7 @@ module Aws::EC2
     #     dry_run: false,
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
-    #     vpc_id: "String",
+    #     vpc_id: "VpcId",
     #     peer_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -927,10 +1112,10 @@ module Aws::EC2
     #   The ID of the requester VPC. You must specify this parameter in the
     #   request.
     # @option options [String] :peer_region
-    #   The region code for the accepter VPC, if the accepter VPC is located
-    #   in a region other than the region in which you make the request.
+    #   The Region code for the accepter VPC, if the accepter VPC is located
+    #   in a Region other than the Region in which you make the request.
     #
-    #   Default: The region in which you make the request.
+    #   Default: The Region in which you make the request.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
       resp = @client.create_vpc_peering_connection(options)
@@ -944,7 +1129,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   ec2.disassociate_route_table({
-    #     association_id: "String", # required
+    #     association_id: "RouteTableAssociationId", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -966,7 +1151,7 @@ module Aws::EC2
     #
     #   keypairinfo = ec2.import_key_pair({
     #     dry_run: false,
-    #     key_name: "String", # required
+    #     key_name: "KeyPairName", # required
     #     public_key_material: "data", # required
     #   })
     # @param [Hash] options ({})
@@ -993,19 +1178,19 @@ module Aws::EC2
     #
     #   image = ec2.register_image({
     #     image_location: "String",
-    #     architecture: "i386", # accepts i386, x86_64
+    #     architecture: "i386", # accepts i386, x86_64, arm64
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
     #         virtual_name: "String",
     #         ebs: {
-    #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
-    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           kms_key_id: "String",
+    #           encrypted: false,
     #         },
     #         no_device: "String",
     #       },
@@ -1013,24 +1198,31 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     ena_support: false,
-    #     kernel_id: "String",
+    #     kernel_id: "KernelId",
     #     name: "String", # required
     #     billing_products: ["String"],
-    #     ramdisk_id: "String",
+    #     ramdisk_id: "RamdiskId",
     #     root_device_name: "String",
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :image_location
-    #   The full path to your AMI manifest in Amazon S3 storage.
+    #   The full path to your AMI manifest in Amazon S3 storage. The specified
+    #   bucket must have the `aws-exec-read` canned access control list (ACL)
+    #   to ensure that it can be accessed by Amazon EC2. For more information,
+    #   see [Canned ACLs][1] in the *Amazon S3 Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
     # @option options [String] :architecture
     #   The architecture of the AMI.
     #
     #   Default: For Amazon EBS-backed AMIs, `i386`. For instance store-backed
     #   AMIs, the architecture specified in the manifest file.
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
-    #   One or more block device mapping entries.
+    #   The block device mapping entries.
     # @option options [String] :description
     #   A description for your AMI.
     # @option options [Boolean] :dry_run
@@ -1111,6 +1303,9 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
+    #   * `network-border-group` - The location from where the IP address is
+    #     advertised.
+    #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
@@ -1121,23 +1316,21 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1193,17 +1386,20 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `dhcp-options-id` - The ID of a set of DHCP options.
+    #   * `dhcp-options-id` - The ID of a DHCP options set.
     #
     #   * `key` - The key for one of the options (for example, `domain-name`).
     #
     #   * `value` - The value for one of the options.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `owner-id` - The ID of the AWS account that owns the DHCP options
+    #     set.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -1216,16 +1412,18 @@ module Aws::EC2
     # @return [DhcpOptions::Collection]
     def dhcp_options_sets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_dhcp_options(options)
-        resp.data.dhcp_options.each do |d|
-          batch << DhcpOptions.new(
-            id: d.dhcp_options_id,
-            data: d,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.dhcp_options.each do |d|
+            batch << DhcpOptions.new(
+              id: d.dhcp_options_id,
+              data: d,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       DhcpOptions::Collection.new(batches)
     end
@@ -1259,9 +1457,10 @@ module Aws::EC2
     #   an AWS account ID, `self` (the sender of the request), or `all`
     #   (public AMIs).
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
-    #   * `architecture` - The image architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The image architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `block-device-mapping.delete-on-termination` - A Boolean value that
     #     indicates whether the Amazon EBS volume is deleted on instance
@@ -1278,6 +1477,9 @@ module Aws::EC2
     #
     #   * `block-device-mapping.volume-type` - The volume type of the EBS
     #     volume (`gp2` \| `io1` \| `st1 `\| `sc1` \| `standard`).
+    #
+    #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
+    #     the EBS volume is encrypted.
     #
     #   * `description` - The description of the image (provided during image
     #     creation).
@@ -1332,11 +1534,11 @@ module Aws::EC2
     #   * `sriov-net-support` - A value of `simple` indicates that enhanced
     #     networking with the Intel 82599 VF interface is enabled.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -1345,7 +1547,7 @@ module Aws::EC2
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
     # @option options [Array<String>] :image_ids
-    #   One or more image IDs.
+    #   The image IDs.
     #
     #   Default: Describes all images available to you.
     # @option options [Array<String>] :owners
@@ -1399,12 +1601,13 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `affinity` - The affinity setting for an instance running on a
     #     Dedicated Host (`default` \| `host`).
     #
-    #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
+    #   * `architecture` - The instance architecture (`i386` \| `x86_64` \|
+    #     `arm64`).
     #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
@@ -1434,6 +1637,10 @@ module Aws::EC2
     #   * `group-name` - The name of the security group for the instance.
     #     EC2-Classic only.
     #
+    #   * `hibernation-options.configured` - A Boolean that indicates whether
+    #     the instance is enabled for hibernation. A value of `true` means
+    #     that the instance is enabled for hibernation.
+    #
     #   * `host-id` - The ID of the Dedicated Host on which the instance is
     #     running, if applicable.
     #
@@ -1450,7 +1657,7 @@ module Aws::EC2
     #     a Scheduled Instance (`spot` \| `scheduled`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
-    #     unsigned integer. The high byte is an opaque internal value and
+    #     unsigned integer. The high byte is used for internal purposes and
     #     should be ignored. The low byte is set based on the state
     #     represented. The valid values are: 0 (pending), 16 (running), 32
     #     (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).
@@ -1478,6 +1685,16 @@ module Aws::EC2
     #     and so on).
     #
     #   * `launch-time` - The time when the instance was launched.
+    #
+    #   * `metadata-options.http-tokens` - The metadata request authorization
+    #     state (`optional` \| `required`)
+    #
+    #   * `metadata-options.http-put-response-hop-limit` - The http metadata
+    #     request put response hop limit (integer, possible values `1` to
+    #     `64`)
+    #
+    #   * `metadata-options.http-endpoint` - Enable or disable metadata access
+    #     on http endpoint (`enabled` \| `disabled`)
     #
     #   * `monitoring-state` - Indicates whether detailed monitoring is
     #     enabled (`disabled` \| `enabled`).
@@ -1584,8 +1801,11 @@ module Aws::EC2
     #   * `placement-group-name` - The name of the placement group for the
     #     instance.
     #
-    #   * `platform` - The platform. Use `windows` if you have Windows
-    #     instances; otherwise, leave blank.
+    #   * `placement-partition-number` - The partition in which the instance
+    #     is located.
+    #
+    #   * `platform` - The platform. To list only Windows instances, use
+    #     `windows`.
     #
     #   * `private-dns-name` - The private IPv4 DNS name of the instance.
     #
@@ -1636,14 +1856,14 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
-    #     filter to find all resources assigned a tag with a specific key,
+    #     filter to find all resources that have a tag with a specific key,
     #     regardless of the tag value.
     #
     #   * `tenancy` - The tenancy of an instance (`dedicated` \| `default` \|
@@ -1654,7 +1874,7 @@ module Aws::EC2
     #
     #   * `vpc-id` - The ID of the VPC that the instance is running in.
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The instance IDs.
     #
     #   Default: Describes all your instances.
     # @option options [Boolean] :dry_run
@@ -1716,11 +1936,14 @@ module Aws::EC2
     #
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `owner-id` - The ID of the AWS account that owns the internet
+    #     gateway.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -1731,22 +1954,24 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :internet_gateway_ids
-    #   One or more Internet gateway IDs.
+    #   One or more internet gateway IDs.
     #
-    #   Default: Describes all your Internet gateways.
+    #   Default: Describes all your internet gateways.
     # @return [InternetGateway::Collection]
     def internet_gateways(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_internet_gateways(options)
-        resp.data.internet_gateways.each do |i|
-          batch << InternetGateway.new(
-            id: i.internet_gateway_id,
-            data: i,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.internet_gateways.each do |i|
+            batch << InternetGateway.new(
+              id: i.internet_gateway_id,
+              data: i,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       InternetGateway::Collection.new(batches)
     end
@@ -1770,19 +1995,22 @@ module Aws::EC2
     #       },
     #     ],
     #     key_names: ["String"],
+    #     key_pair_ids: ["String"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `fingerprint` - The fingerprint of the key pair.
     #
     #   * `key-name` - The name of the key pair.
     # @option options [Array<String>] :key_names
-    #   One or more key pair names.
+    #   The key pair names.
     #
     #   Default: Describes all your key pairs.
+    # @option options [Array<String>] :key_pair_ids
+    #   The IDs of the key pairs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -1803,6 +2031,69 @@ module Aws::EC2
         y.yield(batch)
       end
       KeyPairInfo::Collection.new(batches)
+    end
+
+    # @param [String] id
+    # @return [NatGateway]
+    def nat_gateway(id)
+      NatGateway.new(
+        id: id,
+        client: @client
+      )
+    end
+
+    # @example Request syntax with placeholder values
+    #
+    #   nat_gateways = ec2.nat_gateways({
+    #     filter: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     nat_gateway_ids: ["String"],
+    #   })
+    # @param [Hash] options ({})
+    # @option options [Array<Types::Filter>] :filter
+    #   One or more filters.
+    #
+    #   * `nat-gateway-id` - The ID of the NAT gateway.
+    #
+    #   * `state` - The state of the NAT gateway (`pending` \| `failed` \|
+    #     `available` \| `deleting` \| `deleted`).
+    #
+    #   * `subnet-id` - The ID of the subnet in which the NAT gateway resides.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
+    #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
+    # @option options [Array<String>] :nat_gateway_ids
+    #   One or more NAT gateway IDs.
+    # @return [NatGateway::Collection]
+    def nat_gateways(options = {})
+      batches = Enumerator.new do |y|
+        resp = @client.describe_nat_gateways(options)
+        resp.each_page do |page|
+          batch = []
+          page.data.nat_gateways.each do |n|
+            batch << NatGateway.new(
+              id: n.nat_gateway_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
+        end
+      end
+      NatGateway::Collection.new(batches)
     end
 
     # @param [String] id
@@ -1844,9 +2135,6 @@ module Aws::EC2
     #
     #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
     #
-    #   * `entry.egress` - Indicates whether the entry applies to egress
-    #     traffic.
-    #
     #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
     #
     #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
@@ -1866,15 +2154,17 @@ module Aws::EC2
     #     \| `deny`).
     #
     #   * `entry.rule-number` - The number of an entry (in other words, rule)
-    #     in the ACL's set of entries.
+    #     in the set of ACL entries.
     #
     #   * `network-acl-id` - The ID of the network ACL.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `owner-id` - The ID of the AWS account that owns the network ACL.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -1893,16 +2183,18 @@ module Aws::EC2
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_network_acls(options)
-        resp.data.network_acls.each do |n|
-          batch << NetworkAcl.new(
-            id: n.network_acl_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_acls.each do |n|
+            batch << NetworkAcl.new(
+              id: n.network_acl_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkAcl::Collection.new(batches)
     end
@@ -1962,7 +2254,7 @@ module Aws::EC2
     #
     #   * `attachment.attachment-id` - The ID of the interface attachment.
     #
-    #   * `attachment.attach.time` - The time that the network interface was
+    #   * `attachment.attach-time` - The time that the network interface was
     #     attached to an instance.
     #
     #   * `attachment.delete-on-termination` - Indicates whether the
@@ -2017,7 +2309,7 @@ module Aws::EC2
     #     being managed by an AWS service (for example, AWS Management
     #     Console, Auto Scaling, and so on).
     #
-    #   * `source-desk-check` - Indicates whether the network interface
+    #   * `source-dest-check` - Indicates whether the network interface
     #     performs source/destination checking. A value of `true` means
     #     checking is enabled, and `false` means checking is disabled. The
     #     value must be `false` for the network interface to perform network
@@ -2030,11 +2322,11 @@ module Aws::EC2
     #
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2053,16 +2345,18 @@ module Aws::EC2
     # @return [NetworkInterface::Collection]
     def network_interfaces(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_network_interfaces(options)
-        resp.data.network_interfaces.each do |n|
-          batch << NetworkInterface.new(
-            id: n.network_interface_id,
-            data: n,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.network_interfaces.each do |n|
+            batch << NetworkInterface.new(
+              id: n.network_interface_id,
+              data: n,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       NetworkInterface::Collection.new(batches)
     end
@@ -2087,10 +2381,11 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     group_names: ["String"],
+    #     group_ids: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `group-name` - The name of the placement group.
     #
@@ -2098,17 +2393,19 @@ module Aws::EC2
     #     \| `deleting` \| `deleted`).
     #
     #   * `strategy` - The strategy of the placement group (`cluster` \|
-    #     `spread`).
+    #     `spread` \| `partition`).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :group_names
-    #   One or more placement group names.
+    #   The names of the placement groups.
     #
     #   Default: Describes all your placement groups, or only those otherwise
     #   specified.
+    # @option options [Array<String>] :group_ids
+    #   The IDs of the placement groups.
     # @return [PlacementGroup::Collection]
     def placement_groups(options = {})
       batches = Enumerator.new do |y|
@@ -2173,6 +2470,8 @@ module Aws::EC2
     #     route table for the VPC (`true` \| `false`). Route tables that do
     #     not have an association ID are not returned in the response.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the route table.
+    #
     #   * `route-table-id` - The ID of the route table.
     #
     #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
@@ -2195,6 +2494,8 @@ module Aws::EC2
     #
     #   * `route.nat-gateway-id` - The ID of a NAT gateway.
     #
+    #   * `route.transit-gateway-id` - The ID of a transit gateway.
+    #
     #   * `route.origin` - Describes how the route was created.
     #     `CreateRouteTable` indicates that the route was automatically
     #     created when the route table was created; `CreateRoute` indicates
@@ -2211,15 +2512,17 @@ module Aws::EC2
     #   * `route.vpc-peering-connection-id` - The ID of a VPC peering
     #     connection specified in a route in the table.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
+    #
+    #   * `transit-gateway-id` - The ID of a transit gateway.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     # @option options [Boolean] :dry_run
@@ -2234,16 +2537,18 @@ module Aws::EC2
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_route_tables(options)
-        resp.data.route_tables.each do |r|
-          batch << RouteTable.new(
-            id: r.route_table_id,
-            data: r,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.route_tables.each do |r|
+            batch << RouteTable.new(
+              id: r.route_table_id,
+              data: r,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       RouteTable::Collection.new(batches)
     end
@@ -2269,14 +2574,12 @@ module Aws::EC2
     #     group_ids: ["String"],
     #     group_names: ["String"],
     #     dry_run: false,
-    #     next_token: "String",
-    #     max_results: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters. If using multiple filters for rules, the results
-    #   include security groups for which any combination of rules - not
-    #   necessarily a single rule - match all filters.
+    #   The filters. If using multiple filters for rules, the results include
+    #   security groups for which any combination of rules - not necessarily a
+    #   single rule - match all filters.
     #
     #   * `description` - The description of the security group.
     #
@@ -2340,6 +2643,12 @@ module Aws::EC2
     #
     #   * `owner-id` - The AWS account ID of the owner of the security group.
     #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
@@ -2347,12 +2656,12 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
     # @option options [Array<String>] :group_ids
-    #   One or more security group IDs. Required for security groups in a
+    #   The IDs of the security groups. Required for security groups in a
     #   nondefault VPC.
     #
     #   Default: Describes all your security groups.
     # @option options [Array<String>] :group_names
-    #   \[EC2-Classic and default VPC only\] One or more security group names.
+    #   \[EC2-Classic and default VPC only\] The names of the security groups.
     #   You can specify either the security group name or the security group
     #   ID. For security groups in a nondefault VPC, use the `group-name`
     #   filter to describe security groups by name.
@@ -2363,26 +2672,21 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-    # @option options [String] :next_token
-    #   The token to request the next page of results.
-    # @option options [Integer] :max_results
-    #   The maximum number of results to return in a single call. To retrieve
-    #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000. If this
-    #   parameter is not specified, then all results are returned.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_security_groups(options)
-        resp.data.security_groups.each do |s|
-          batch << SecurityGroup.new(
-            id: s.group_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.security_groups.each do |s|
+            batch << SecurityGroup.new(
+              id: s.group_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       SecurityGroup::Collection.new(batches)
     end
@@ -2412,14 +2716,17 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `description` - A description of the snapshot.
     #
+    #   * `encrypted` - Indicates whether the snapshot is encrypted (`true` \|
+    #     `false`)
+    #
     #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
-    #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
-    #     confused with the user-configured AWS account alias, which is set
-    #     from the IAM console.
+    #     `self` \| `all` \| `aws-marketplace` \| `microsoft`) of snapshot
+    #     owners. Not to be confused with the user-configured AWS account
+    #     alias, which is set from the IAM console.
     #
     #   * `owner-id` - The ID of the AWS account that owns the snapshot.
     #
@@ -2433,11 +2740,11 @@ module Aws::EC2
     #   * `status` - The status of the snapshot (`pending` \| `completed` \|
     #     `error`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2447,15 +2754,14 @@ module Aws::EC2
     #
     #   * `volume-size` - The size of the volume, in GiB.
     # @option options [Array<String>] :owner_ids
-    #   Returns the snapshots owned by the specified owner. Multiple owners
-    #   can be specified.
+    #   Describes the snapshots owned by these owners.
     # @option options [Array<String>] :restorable_by_user_ids
-    #   One or more AWS accounts IDs that can create volumes from the
-    #   snapshot.
+    #   The IDs of the AWS accounts that can create volumes from the snapshot.
     # @option options [Array<String>] :snapshot_ids
-    #   One or more snapshot IDs.
+    #   The snapshot IDs.
     #
-    #   Default: Describes snapshots for which you have launch permissions.
+    #   Default: Describes the snapshots for which you have create volume
+    #   permissions.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2505,20 +2811,23 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `availabilityZone` - The Availability Zone for the subnet. You can
-    #     also use `availability-zone` as the filter name.
+    #   * `availability-zone` - The Availability Zone for the subnet. You can
+    #     also use `availabilityZone` as the filter name.
+    #
+    #   * `availability-zone-id` - The ID of the Availability Zone for the
+    #     subnet. You can also use `availabilityZoneId` as the filter name.
     #
     #   * `available-ip-address-count` - The number of IPv4 addresses in the
     #     subnet that are available.
     #
-    #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
+    #   * `cidr-block` - The IPv4 CIDR block of the subnet. The CIDR block you
     #     specify must exactly match the subnet's CIDR block for information
     #     to be returned for the subnet. You can also use `cidr` or
-    #     `cidr-block` as the filter names.
+    #     `cidrBlock` as the filter names.
     #
-    #   * `defaultForAz` - Indicates whether this is the default subnet for
-    #     the Availability Zone. You can also use `default-for-az` as the
-    #     filter name.
+    #   * `default-for-az` - Indicates whether this is the default subnet for
+    #     the Availability Zone. You can also use `defaultForAz` as the filter
+    #     name.
     #
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the subnet.
@@ -2529,15 +2838,19 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
     #     block associated with the subnet.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the subnet.
+    #
     #   * `state` - The state of the subnet (`pending` \| `available`).
+    #
+    #   * `subnet-arn` - The Amazon Resource Name (ARN) of the subnet.
     #
     #   * `subnet-id` - The ID of the subnet.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2556,16 +2869,18 @@ module Aws::EC2
     # @return [Subnet::Collection]
     def subnets(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_subnets(options)
-        resp.data.subnets.each do |s|
-          batch << Subnet.new(
-            id: s.subnet_id,
-            data: s,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.subnets.each do |s|
+            batch << Subnet.new(
+              id: s.subnet_id,
+              data: s,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Subnet::Collection.new(batches)
     end
@@ -2593,7 +2908,7 @@ module Aws::EC2
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   The filters.
     #
     #   * `attachment.attach-time` - The time stamp when the attachment
     #     initiated.
@@ -2615,7 +2930,12 @@ module Aws::EC2
     #
     #   * `create-time` - The time stamp when the volume was created.
     #
-    #   * `encrypted` - The encryption status of the volume.
+    #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
+    #     `false`)
+    #
+    #   * `fast-restored` - Indicates whether the volume was created from a
+    #     snapshot that is enabled for fast snapshot restore (`true` \|
+    #     `false`).
     #
     #   * `size` - The size of the volume, in GiB.
     #
@@ -2624,11 +2944,11 @@ module Aws::EC2
     #   * `status` - The status of the volume (`creating` \| `available` \|
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2641,7 +2961,7 @@ module Aws::EC2
     #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
     #     Magnetic volumes.
     # @option options [Array<String>] :volume_ids
-    #   One or more volume IDs.
+    #   The volume IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2702,6 +3022,9 @@ module Aws::EC2
     #   * `instance-id` - The ID of the instance the address is associated
     #     with, if any.
     #
+    #   * `network-border-group` - The location from where the IP address is
+    #     advertised.
+    #
     #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
     #     that the address is associated with, if any.
     #
@@ -2712,23 +3035,21 @@ module Aws::EC2
     #
     #   * `public-ip` - The Elastic IP address.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
     #     regardless of the tag value.
     # @option options [Array<String>] :public_ips
-    #   \[EC2-Classic\] One or more Elastic IP addresses.
+    #   One or more Elastic IP addresses.
     #
     #   Default: Describes all your Elastic IP addresses.
     # @option options [Array<String>] :allocation_ids
-    #   \[EC2-VPC\] One or more allocation IDs.
-    #
-    #   Default: Describes all your Elastic IP addresses.
+    #   \[EC2-VPC\] Information about the allocation IDs.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2806,11 +3127,11 @@ module Aws::EC2
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2829,16 +3150,18 @@ module Aws::EC2
     # @return [VpcPeeringConnection::Collection]
     def vpc_peering_connections(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_vpc_peering_connections(options)
-        resp.data.vpc_peering_connections.each do |v|
-          batch << VpcPeeringConnection.new(
-            id: v.vpc_peering_connection_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpc_peering_connections.each do |v|
+            batch << VpcPeeringConnection.new(
+              id: v.vpc_peering_connection_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       VpcPeeringConnection::Collection.new(batches)
     end
@@ -2878,6 +3201,9 @@ module Aws::EC2
     #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
     #     associated with the VPC.
     #
+    #   * `ipv6-cidr-block-association.ipv6-pool` - The ID of the IPv6 address
+    #     pool from which the IPv6 CIDR block is allocated.
+    #
     #   * `ipv6-cidr-block-association.association-id` - The association ID
     #     for an IPv6 CIDR block associated with the VPC.
     #
@@ -2886,13 +3212,15 @@ module Aws::EC2
     #
     #   * `isDefault` - Indicates whether the VPC is the default VPC.
     #
+    #   * `owner-id` - The ID of the AWS account that owns the VPC.
+    #
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
-    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource. Specify the key of the tag in the filter name and
-    #     the value of the tag in the filter value. For example, for the tag
-    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
-    #     filter value.
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. Use this
     #     filter to find all resources assigned a tag with a specific key,
@@ -2911,16 +3239,18 @@ module Aws::EC2
     # @return [Vpc::Collection]
     def vpcs(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         resp = @client.describe_vpcs(options)
-        resp.data.vpcs.each do |v|
-          batch << Vpc.new(
-            id: v.vpc_id,
-            data: v,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.vpcs.each do |v|
+            batch << Vpc.new(
+              id: v.vpc_id,
+              data: v,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       Vpc::Collection.new(batches)
     end

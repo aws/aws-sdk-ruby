@@ -21,6 +21,7 @@ module Aws::S3
       @bucket_name = extract_bucket_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -30,6 +31,8 @@ module Aws::S3
       @bucket_name
     end
 
+    # A set of origins and methods (cross-origin access that you want to
+    # allow). You can add up to 100 rules to the configuration.
     # @return [Array<Types::CORSRule>]
     def cors_rules
       data[:cors_rules]
@@ -196,7 +199,22 @@ module Aws::S3
     #   })
     # @param [Hash] options ({})
     # @option options [required, Types::CORSConfiguration] :cors_configuration
+    #   Describes the cross-origin access configuration for objects in an
+    #   Amazon S3 bucket. For more information, see [Enabling Cross-Origin
+    #   Resource Sharing][1] in the *Amazon Simple Storage Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev//cors.html
     # @option options [String] :content_md5
+    #   The base64-encoded 128-bit MD5 digest of the data. This header must be
+    #   used as a message integrity check to verify that the request body was
+    #   not corrupted in transit. For more information, go to [RFC 1864.][1]
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)

@@ -21,6 +21,7 @@ module Aws::EC2
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -31,6 +32,12 @@ module Aws::EC2
     end
     alias :key_name :name
 
+    # The ID of the key pair.
+    # @return [String]
+    def key_pair_id
+      data[:key_pair_id]
+    end
+
     # If you used CreateKeyPair to create the key pair, this is the SHA-1
     # digest of the DER encoded private key. If you used ImportKeyPair to
     # provide AWS the public key, this is the MD5 public key fingerprint as
@@ -38,6 +45,12 @@ module Aws::EC2
     # @return [String]
     def key_fingerprint
       data[:key_fingerprint]
+    end
+
+    # Any tags applied to the key pair.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
     end
 
     # @!endgroup

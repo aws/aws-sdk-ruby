@@ -21,6 +21,7 @@ module Aws::EC2
       @id = extract_id(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -31,13 +32,19 @@ module Aws::EC2
     end
     alias :internet_gateway_id :id
 
-    # Any VPCs attached to the Internet gateway.
+    # Any VPCs attached to the internet gateway.
     # @return [Array<Types::InternetGatewayAttachment>]
     def attachments
       data[:attachments]
     end
 
-    # Any tags assigned to the Internet gateway.
+    # The ID of the AWS account that owns the internet gateway.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
+    # Any tags assigned to the internet gateway.
     # @return [Array<Types::Tag>]
     def tags
       data[:tags]
@@ -179,7 +186,7 @@ module Aws::EC2
     #
     #   internet_gateway.attach_to_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -214,9 +221,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, Array<Types::Tag>] :tags
-    #   One or more tags. The `value` parameter is required, but if you don't
-    #   want the tag to have a value, specify the parameter with no value, and
-    #   we set the value to an empty string.
+    #   The tags. The `value` parameter is required, but if you don't want
+    #   the tag to have a value, specify the parameter with no value, and we
+    #   set the value to an empty string.
     # @return [Tag::Collection]
     def create_tags(options = {})
       batch = []
@@ -255,7 +262,7 @@ module Aws::EC2
     #
     #   internet_gateway.detach_from_vpc({
     #     dry_run: false,
-    #     vpc_id: "String", # required
+    #     vpc_id: "VpcId", # required
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run

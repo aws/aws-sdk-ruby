@@ -15,14 +15,14 @@ module Aws::CloudFront
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (25)
+      # @option options [Integer] :max_attempts (35)
       # @option options [Integer] :delay (60)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 25,
+          max_attempts: 35,
           delay: 60,
           poller: Aws::Waiters::Poller.new(
             operation_name: :get_distribution,

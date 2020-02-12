@@ -253,7 +253,7 @@ module Aws
       #
       # @return [void]
       def before_request(&block)
-        @default_config = @default_config.with(before_request: Proc.new)
+        @default_config = @default_config.with(before_request: block) if block_given?
       end
 
       # Polls the queue, yielded a message, or an array of messages.

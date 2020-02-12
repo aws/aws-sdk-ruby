@@ -12,6 +12,7 @@ require_relative 'aws-sdk-databasemigrationservice/types'
 require_relative 'aws-sdk-databasemigrationservice/client_api'
 require_relative 'aws-sdk-databasemigrationservice/client'
 require_relative 'aws-sdk-databasemigrationservice/errors'
+require_relative 'aws-sdk-databasemigrationservice/waiters'
 require_relative 'aws-sdk-databasemigrationservice/resource'
 require_relative 'aws-sdk-databasemigrationservice/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-databasemigrationservice/customizations'
 # @service
 module Aws::DatabaseMigrationService
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.30.0'
 
 end

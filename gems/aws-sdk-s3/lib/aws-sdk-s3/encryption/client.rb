@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module Aws
   module S3
 
@@ -178,8 +180,10 @@ module Aws
       class Client
 
         extend Deprecations
+        extend Forwardable
+        def_delegators :@client, :config, :delete_object, :head_object
 
-        # Creates a new encryption client. You must provide on of the following
+        # Creates a new encryption client. You must provide one of the following
         # options:
         #
         # * `:encryption_key`

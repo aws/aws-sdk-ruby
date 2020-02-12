@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -43,122 +48,215 @@ module Aws::CodePipeline
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :simple_json (false)
-    #   Disables request parameter conversion, validation, and formatting.
-    #   Also disable response data type conversions. This option is useful
-    #   when you want to ensure the highest level of performance by
-    #   avoiding overhead of walking request parameters and response data
-    #   structures.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   When `:simple_json` is enabled, the request parameters hash must
-    #   be formatted exactly as the DynamoDB API expects.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -167,7 +265,7 @@ module Aws::CodePipeline
     # @!group API Operations
 
     # Returns information about a specified job and whether that job has
-    # been received by the job worker. Only used for custom actions.
+    # been received by the job worker. Used for custom actions only.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job for which you want to
@@ -203,8 +301,8 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Confirms a job worker has received the specified job. Only used for
-    # partner actions.
+    # Confirms a job worker has received the specified job. Used for partner
+    # actions only.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job.
@@ -251,8 +349,8 @@ module Aws::CodePipeline
     #   The category of the custom action, such as a build action or a test
     #   action.
     #
-    #   <note markdown="1"> Although Source and Approval are listed as valid values, they are not
-    #   currently functional. These values are reserved for future use.
+    #   <note markdown="1"> Although `Source` and `Approval` are listed as valid values, they are
+    #   not currently functional. These values are reserved for future use.
     #
     #    </note>
     #
@@ -264,7 +362,7 @@ module Aws::CodePipeline
     #   The version identifier of the custom action.
     #
     # @option params [Types::ActionTypeSettings] :settings
-    #   Returns information about the settings for an action type.
+    #   URLs that provide users information about this custom action.
     #
     # @option params [Array<Types::ActionConfigurationProperty>] :configuration_properties
     #   The configuration properties for the custom action.
@@ -279,7 +377,7 @@ module Aws::CodePipeline
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
+    #   [1]: https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
     #
     # @option params [required, Types::ArtifactDetails] :input_artifact_details
     #   The details of the input artifact for the action, such as its commit
@@ -289,9 +387,13 @@ module Aws::CodePipeline
     #   The details of the output artifact of the action, such as its commit
     #   ID.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the custom action.
+    #
     # @return [Types::CreateCustomActionTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomActionTypeOutput#action_type #action_type} => Types::ActionType
+    #   * {Types::CreateCustomActionTypeOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -324,6 +426,12 @@ module Aws::CodePipeline
     #       minimum_count: 1, # required
     #       maximum_count: 1, # required
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -348,6 +456,9 @@ module Aws::CodePipeline
     #   resp.action_type.input_artifact_details.maximum_count #=> Integer
     #   resp.action_type.output_artifact_details.minimum_count #=> Integer
     #   resp.action_type.output_artifact_details.maximum_count #=> Integer
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType AWS API Documentation
     #
@@ -360,13 +471,24 @@ module Aws::CodePipeline
 
     # Creates a pipeline.
     #
+    # <note markdown="1"> In the pipeline structure, you must include either `artifactStore` or
+    # `artifactStores` in your pipeline, but you cannot use both. If you
+    # create a cross-region action in your pipeline, you must use
+    # `artifactStores`.
+    #
+    #  </note>
+    #
     # @option params [required, Types::PipelineDeclaration] :pipeline
     #   Represents the structure of actions and stages to be performed in the
     #   pipeline.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the pipeline.
+    #
     # @return [Types::CreatePipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineOutput#pipeline #pipeline} => Types::PipelineDeclaration
+    #   * {Types::CreatePipelineOutput#tags #tags} => Array&lt;Types::Tag&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -374,12 +496,22 @@ module Aws::CodePipeline
     #     pipeline: { # required
     #       name: "PipelineName", # required
     #       role_arn: "RoleArn", # required
-    #       artifact_store: { # required
+    #       artifact_store: {
     #         type: "S3", # required, accepts S3
     #         location: "ArtifactStoreLocation", # required
     #         encryption_key: {
     #           id: "EncryptionKeyId", # required
     #           type: "KMS", # required, accepts KMS
+    #         },
+    #       },
+    #       artifact_stores: {
+    #         "AWSRegionName" => {
+    #           type: "S3", # required, accepts S3
+    #           location: "ArtifactStoreLocation", # required
+    #           encryption_key: {
+    #             id: "EncryptionKeyId", # required
+    #             type: "KMS", # required, accepts KMS
+    #           },
     #         },
     #       },
     #       stages: [ # required
@@ -415,12 +547,20 @@ module Aws::CodePipeline
     #                 },
     #               ],
     #               role_arn: "RoleArn",
+    #               region: "AWSRegionName",
+    #               namespace: "ActionNamespace",
     #             },
     #           ],
     #         },
     #       ],
     #       version: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -431,6 +571,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -450,7 +595,12 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline AWS API Documentation
     #
@@ -461,9 +611,9 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Marks a custom action as deleted. PollForJobs for the custom action
-    # will fail after the action is marked for deletion. Only used for
-    # custom actions.
+    # Marks a custom action as deleted. `PollForJobs` for the custom action
+    # fails after the action is marked for deletion. Used for custom actions
+    # only.
     #
     # To re-create a custom action after it has been deleted you must use a
     # string in the version field that has never been used before. This
@@ -525,7 +675,7 @@ module Aws::CodePipeline
 
     # Deletes a previously created webhook by name. Deleting the webhook
     # stops AWS CodePipeline from starting a pipeline every time an external
-    # event occurs. The API will return successfully when trying to delete a
+    # event occurs. The API returns successfully when trying to delete a
     # webhook that is already deleted. If a deleted webhook is re-created by
     # calling PutWebhook with the same name, it will have a different URL.
     #
@@ -551,7 +701,7 @@ module Aws::CodePipeline
 
     # Removes the connection between the webhook that was created by
     # CodePipeline and the external tool with events to be detected.
-    # Currently only supported for webhooks that target an action type of
+    # Currently supported only for webhooks that target an action type of
     # GitHub.
     #
     # @option params [String] :webhook_name
@@ -586,13 +736,13 @@ module Aws::CodePipeline
     #   outbound transition of artifacts.
     #
     # @option params [required, String] :transition_type
-    #   Specifies whether artifacts will be prevented from transitioning into
-    #   the stage and being processed by the actions in that stage (inbound),
-    #   or prevented from transitioning from the stage after they have been
+    #   Specifies whether artifacts are prevented from transitioning into the
+    #   stage and being processed by the actions in that stage (inbound), or
+    #   prevented from transitioning from the stage after they have been
     #   processed by the actions in that stage (outbound).
     #
     # @option params [required, String] :reason
-    #   The reason given to the user why a stage is disabled, such as waiting
+    #   The reason given to the user that a stage is disabled, such as waiting
     #   for manual approval or manual tests. This message is displayed in the
     #   pipeline console UI.
     #
@@ -629,10 +779,10 @@ module Aws::CodePipeline
     #   next stage (outbound).
     #
     # @option params [required, String] :transition_type
-    #   Specifies whether artifacts will be allowed to enter the stage and be
-    #   processed by the actions in that stage (inbound) or whether
-    #   already-processed artifacts will be allowed to transition to the next
-    #   stage (outbound).
+    #   Specifies whether artifacts are allowed to enter the stage and be
+    #   processed by the actions in that stage (inbound) or whether already
+    #   processed artifacts are allowed to transition to the next stage
+    #   (outbound).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -653,13 +803,13 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Returns information about a job. Only used for custom actions.
+    # Returns information about a job. Used for custom actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. Additionally, this API returns any secret
-    # values defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID for the job.
@@ -686,6 +836,9 @@ module Aws::CodePipeline
     #   resp.job_details.data.pipeline_context.pipeline_name #=> String
     #   resp.job_details.data.pipeline_context.stage.name #=> String
     #   resp.job_details.data.pipeline_context.action.name #=> String
+    #   resp.job_details.data.pipeline_context.action.action_execution_id #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_arn #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_execution_id #=> String
     #   resp.job_details.data.input_artifacts #=> Array
     #   resp.job_details.data.input_artifacts[0].name #=> String
     #   resp.job_details.data.input_artifacts[0].revision #=> String
@@ -722,12 +875,11 @@ module Aws::CodePipeline
     #
     # @option params [required, String] :name
     #   The name of the pipeline for which you want to get information.
-    #   Pipeline names must be unique under an Amazon Web Services (AWS) user
-    #   account.
+    #   Pipeline names must be unique under an AWS user account.
     #
     # @option params [Integer] :version
     #   The version number of the pipeline. If you do not specify a version,
-    #   defaults to the most current version.
+    #   defaults to the current version.
     #
     # @return [Types::GetPipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -749,6 +901,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -768,6 +925,8 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
@@ -810,7 +969,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.pipeline_name #=> String
     #   resp.pipeline_execution.pipeline_version #=> Integer
     #   resp.pipeline_execution.pipeline_execution_id #=> String
-    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution.status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution.artifact_revisions #=> Array
     #   resp.pipeline_execution.artifact_revisions[0].name #=> String
     #   resp.pipeline_execution.artifact_revisions[0].revision_id #=> String
@@ -830,6 +989,12 @@ module Aws::CodePipeline
 
     # Returns information about the state of a pipeline, including the
     # stages and actions.
+    #
+    # <note markdown="1"> Values returned in the `revisionId` and `revisionUrl` fields indicate
+    # the source revision information, such as the commit ID, for the
+    # current state.
+    #
+    #  </note>
     #
     # @option params [required, String] :name
     #   The name of the pipeline about which you want to get information.
@@ -863,7 +1028,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].current_revision.revision_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.revision_change_id #=> String
     #   resp.stage_states[0].action_states[0].current_revision.created #=> Time
-    #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Succeeded", "Failed"
+    #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.stage_states[0].action_states[0].latest_execution.summary #=> String
     #   resp.stage_states[0].action_states[0].latest_execution.last_status_change #=> Time
     #   resp.stage_states[0].action_states[0].latest_execution.token #=> String
@@ -876,7 +1041,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].entity_url #=> String
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
-    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Succeeded"
+    #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -889,14 +1054,14 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Requests the details of a job for a third party action. Only used for
-    # partner actions.
+    # Requests the details of a job for a third party action. Used for
+    # partner actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. Additionally, this API returns any secret
-    # values defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID used for identifying the job.
@@ -929,6 +1094,9 @@ module Aws::CodePipeline
     #   resp.job_details.data.pipeline_context.pipeline_name #=> String
     #   resp.job_details.data.pipeline_context.stage.name #=> String
     #   resp.job_details.data.pipeline_context.action.name #=> String
+    #   resp.job_details.data.pipeline_context.action.action_execution_id #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_arn #=> String
+    #   resp.job_details.data.pipeline_context.pipeline_execution_id #=> String
     #   resp.job_details.data.input_artifacts #=> Array
     #   resp.job_details.data.input_artifacts[0].name #=> String
     #   resp.job_details.data.input_artifacts[0].revision #=> String
@@ -955,6 +1123,93 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def get_third_party_job_details(params = {}, options = {})
       req = build_request(:get_third_party_job_details, params)
+      req.send_request(options)
+    end
+
+    # Lists the action executions that have occurred in a pipeline.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which you want to list action execution
+    #   history.
+    #
+    # @option params [Types::ActionExecutionFilter] :filter
+    #   Input information used to filter action execution history.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value. Action execution history is retained for up to 12 months, based
+    #   on action execution start times. Default value is 100.
+    #
+    #   <note markdown="1"> Detailed execution history is available for executions run on or after
+    #   February 21, 2019.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous `ListActionExecutions`
+    #   call, which can be used to return the next set of action executions in
+    #   the list.
+    #
+    # @return [Types::ListActionExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActionExecutionsOutput#action_execution_details #action_execution_details} => Array&lt;Types::ActionExecutionDetail&gt;
+    #   * {Types::ListActionExecutionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_action_executions({
+    #     pipeline_name: "PipelineName", # required
+    #     filter: {
+    #       pipeline_execution_id: "PipelineExecutionId",
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_execution_details #=> Array
+    #   resp.action_execution_details[0].pipeline_execution_id #=> String
+    #   resp.action_execution_details[0].action_execution_id #=> String
+    #   resp.action_execution_details[0].pipeline_version #=> Integer
+    #   resp.action_execution_details[0].stage_name #=> String
+    #   resp.action_execution_details[0].action_name #=> String
+    #   resp.action_execution_details[0].start_time #=> Time
+    #   resp.action_execution_details[0].last_update_time #=> Time
+    #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
+    #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
+    #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
+    #   resp.action_execution_details[0].input.action_type_id.provider #=> String
+    #   resp.action_execution_details[0].input.action_type_id.version #=> String
+    #   resp.action_execution_details[0].input.configuration #=> Hash
+    #   resp.action_execution_details[0].input.configuration["ActionConfigurationKey"] #=> String
+    #   resp.action_execution_details[0].input.resolved_configuration #=> Hash
+    #   resp.action_execution_details[0].input.resolved_configuration["String"] #=> String
+    #   resp.action_execution_details[0].input.role_arn #=> String
+    #   resp.action_execution_details[0].input.region #=> String
+    #   resp.action_execution_details[0].input.input_artifacts #=> Array
+    #   resp.action_execution_details[0].input.input_artifacts[0].name #=> String
+    #   resp.action_execution_details[0].input.input_artifacts[0].s3location.bucket #=> String
+    #   resp.action_execution_details[0].input.input_artifacts[0].s3location.key #=> String
+    #   resp.action_execution_details[0].input.namespace #=> String
+    #   resp.action_execution_details[0].output.output_artifacts #=> Array
+    #   resp.action_execution_details[0].output.output_artifacts[0].name #=> String
+    #   resp.action_execution_details[0].output.output_artifacts[0].s3location.bucket #=> String
+    #   resp.action_execution_details[0].output.output_artifacts[0].s3location.key #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_id #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_summary #=> String
+    #   resp.action_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.action_execution_details[0].output.output_variables #=> Hash
+    #   resp.action_execution_details[0].output.output_variables["OutputVariablesKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionExecutions AWS API Documentation
+    #
+    # @overload list_action_executions(params = {})
+    # @param [Hash] params ({})
+    def list_action_executions(params = {}, options = {})
+      req = build_request(:list_action_executions, params)
       req.send_request(options)
     end
 
@@ -1025,12 +1280,11 @@ module Aws::CodePipeline
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another call with the returned nextToken
-    #   value. The available pipeline execution history is limited to the most
-    #   recent 12 months, based on pipeline execution start times. Default
-    #   value is 100.
+    #   value. Pipeline history is limited to the most recent 12 months, based
+    #   on pipeline execution start times. Default value is 100.
     #
     # @option params [String] :next_token
-    #   The token that was returned from the previous ListPipelineExecutions
+    #   The token that was returned from the previous `ListPipelineExecutions`
     #   call, which can be used to return the next set of pipeline executions
     #   in the list.
     #
@@ -1051,7 +1305,7 @@ module Aws::CodePipeline
     #
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
-    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -1059,6 +1313,9 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision"
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
+    #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1073,8 +1330,8 @@ module Aws::CodePipeline
     # Gets a summary of all of the pipelines associated with your account.
     #
     # @option params [String] :next_token
-    #   An identifier that was returned from the previous list pipelines call,
-    #   which can be used to return the next set of pipelines in the list.
+    #   An identifier that was returned from the previous list pipelines call.
+    #   It can be used to return the next set of pipelines in the list.
     #
     # @return [Types::ListPipelinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1105,9 +1362,52 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Gets a listing of all the webhooks in this region for this account.
-    # The output lists all webhooks and includes the webhook URL and ARN, as
-    # well the configuration for each webhook.
+    # Gets the set of key-value pairs (metadata) that are used to manage the
+    # resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to get tags for.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous API call, which would be
+    #   used to return the next page of the list. The ListTagsforResource call
+    #   lists all available tags in one call and does not use pagination.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListTagsForResourceOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Gets a listing of all the webhooks in this AWS Region for this
+    # account. The output lists all webhooks and includes the webhook URL
+    # and ARN and the configuration for each webhook.
     #
     # @option params [String] :next_token
     #   The token that was returned from the previous ListWebhooks call, which
@@ -1147,6 +1447,9 @@ module Aws::CodePipeline
     #   resp.webhooks[0].error_code #=> String
     #   resp.webhooks[0].last_triggered #=> Time
     #   resp.webhooks[0].arn #=> String
+    #   resp.webhooks[0].tags #=> Array
+    #   resp.webhooks[0].tags[0].key #=> String
+    #   resp.webhooks[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooks AWS API Documentation
@@ -1158,16 +1461,16 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Returns information about any jobs for AWS CodePipeline to act upon.
-    # PollForJobs is only valid for action types with "Custom" in the
+    # Returns information about any jobs for AWS CodePipeline to act on.
+    # `PollForJobs` is valid only for action types with "Custom" in the
     # owner field. If the action type contains "AWS" or "ThirdParty" in
-    # the owner field, the PollForJobs action returns an error.
+    # the owner field, the `PollForJobs` action returns an error.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts. Additionally, this API returns any secret
-    # values defined for the action.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts. This API also returns any secret values defined for
+    # the action.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -1180,7 +1483,7 @@ module Aws::CodePipeline
     #   queryable properties, this value must be null or an empty map. For an
     #   action type with a queryable property, you must supply that property
     #   as a key in the map. Only jobs whose action configuration matches the
-    #   mapped value will be returned.
+    #   mapped value are returned.
     #
     # @return [Types::PollForJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1214,6 +1517,9 @@ module Aws::CodePipeline
     #   resp.jobs[0].data.pipeline_context.pipeline_name #=> String
     #   resp.jobs[0].data.pipeline_context.stage.name #=> String
     #   resp.jobs[0].data.pipeline_context.action.name #=> String
+    #   resp.jobs[0].data.pipeline_context.action.action_execution_id #=> String
+    #   resp.jobs[0].data.pipeline_context.pipeline_arn #=> String
+    #   resp.jobs[0].data.pipeline_context.pipeline_execution_id #=> String
     #   resp.jobs[0].data.input_artifacts #=> Array
     #   resp.jobs[0].data.input_artifacts[0].name #=> String
     #   resp.jobs[0].data.input_artifacts[0].revision #=> String
@@ -1245,12 +1551,12 @@ module Aws::CodePipeline
     end
 
     # Determines whether there are any third party jobs for a job worker to
-    # act on. Only used for partner actions.
+    # act on. Used for partner actions only.
     #
     # When this API is called, AWS CodePipeline returns temporary
-    # credentials for the Amazon S3 bucket used to store artifacts for the
-    # pipeline, if the action requires access to that Amazon S3 bucket for
-    # input or output artifacts.
+    # credentials for the S3 bucket used to store artifacts for the
+    # pipeline, if the action requires access to that S3 bucket for input or
+    # output artifacts.
     #
     # @option params [required, Types::ActionTypeId] :action_type_id
     #   Represents information about an action type.
@@ -1293,15 +1599,15 @@ module Aws::CodePipeline
     # source.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline that will start processing the revision to
-    #   the source.
+    #   The name of the pipeline that starts processing the revision to the
+    #   source.
     #
     # @option params [required, String] :stage_name
-    #   The name of the stage that contains the action that will act upon the
+    #   The name of the stage that contains the action that acts on the
     #   revision.
     #
     # @option params [required, String] :action_name
-    #   The name of the action that will process the revision.
+    #   The name of the action that processes the revision.
     #
     # @option params [required, Types::ActionRevision] :action_revision
     #   Represents information about the version (or revision) of an action.
@@ -1356,7 +1662,7 @@ module Aws::CodePipeline
     # @option params [required, String] :token
     #   The system-generated token used to identify a unique approval request.
     #   The token for each open approval request can be obtained using the
-    #   GetPipelineState action and is used to validate that the approval
+    #   GetPipelineState action. It is used to validate that the approval
     #   request corresponding to this token is still valid.
     #
     # @return [Types::PutApprovalResultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1390,11 +1696,11 @@ module Aws::CodePipeline
     end
 
     # Represents the failure of a job as returned to the pipeline by a job
-    # worker. Only used for custom actions.
+    # worker. Used for custom actions only.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job that failed. This is the
-    #   same ID returned from PollForJobs.
+    #   same ID returned from `PollForJobs`.
     #
     # @option params [required, Types::FailureDetails] :failure_details
     #   The details about the failure of a job.
@@ -1422,27 +1728,32 @@ module Aws::CodePipeline
     end
 
     # Represents the success of a job as returned to the pipeline by a job
-    # worker. Only used for custom actions.
+    # worker. Used for custom actions only.
     #
     # @option params [required, String] :job_id
     #   The unique system-generated ID of the job that succeeded. This is the
-    #   same ID returned from PollForJobs.
+    #   same ID returned from `PollForJobs`.
     #
     # @option params [Types::CurrentRevision] :current_revision
-    #   The ID of the current revision of the artifact successfully worked
-    #   upon by the job.
+    #   The ID of the current revision of the artifact successfully worked on
+    #   by the job.
     #
     # @option params [String] :continuation_token
     #   A token generated by a job worker, such as an AWS CodeDeploy
     #   deployment ID, that a successful job provides to identify a custom
-    #   action in progress. Future jobs will use this token in order to
-    #   identify the running instance of the action. It can be reused to
-    #   return additional information about the progress of the custom action.
-    #   When the action is complete, no continuation token should be supplied.
+    #   action in progress. Future jobs use this token to identify the running
+    #   instance of the action. It can be reused to return more information
+    #   about the progress of the custom action. When the action is complete,
+    #   no continuation token should be supplied.
     #
     # @option params [Types::ExecutionDetails] :execution_details
     #   The execution details of the successful job, such as the actions taken
     #   by the job worker.
+    #
+    # @option params [Hash<String,String>] :output_variables
+    #   Key-value pairs produced as output by a job worker that can be made
+    #   available to a downstream action configuration. `outputVariables` can
+    #   be included only when there is no continuation token on the request.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1462,6 +1773,9 @@ module Aws::CodePipeline
     #       external_execution_id: "ExecutionId",
     #       percent_complete: 1,
     #     },
+    #     output_variables: {
+    #       "OutputVariablesKey" => "OutputVariablesValue",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResult AWS API Documentation
@@ -1474,11 +1788,11 @@ module Aws::CodePipeline
     end
 
     # Represents the failure of a third party job as returned to the
-    # pipeline by a job worker. Only used for partner actions.
+    # pipeline by a job worker. Used for partner actions only.
     #
     # @option params [required, String] :job_id
     #   The ID of the job that failed. This is the same ID returned from
-    #   PollForThirdPartyJobs.
+    #   `PollForThirdPartyJobs`.
     #
     # @option params [required, String] :client_token
     #   The clientToken portion of the clientId and clientToken pair used to
@@ -1512,11 +1826,11 @@ module Aws::CodePipeline
     end
 
     # Represents the success of a third party job as returned to the
-    # pipeline by a job worker. Only used for partner actions.
+    # pipeline by a job worker. Used for partner actions only.
     #
     # @option params [required, String] :job_id
     #   The ID of the job that successfully completed. This is the same ID
-    #   returned from PollForThirdPartyJobs.
+    #   returned from `PollForThirdPartyJobs`.
     #
     # @option params [required, String] :client_token
     #   The clientToken portion of the clientId and clientToken pair used to
@@ -1529,11 +1843,10 @@ module Aws::CodePipeline
     # @option params [String] :continuation_token
     #   A token generated by a job worker, such as an AWS CodeDeploy
     #   deployment ID, that a successful job provides to identify a partner
-    #   action in progress. Future jobs will use this token in order to
-    #   identify the running instance of the action. It can be reused to
-    #   return additional information about the progress of the partner
-    #   action. When the action is complete, no continuation token should be
-    #   supplied.
+    #   action in progress. Future jobs use this token to identify the running
+    #   instance of the action. It can be reused to return more information
+    #   about the progress of the partner action. When the action is complete,
+    #   no continuation token should be supplied.
     #
     # @option params [Types::ExecutionDetails] :execution_details
     #   The details of the actions taken and results produced on an artifact
@@ -1582,9 +1895,12 @@ module Aws::CodePipeline
     # @option params [required, Types::WebhookDefinition] :webhook
     #   The detail provided in an input file to create the webhook, such as
     #   the webhook name, the pipeline name, and the action name. Give the
-    #   webhook a unique name which identifies the webhook being defined. You
-    #   may choose to name the webhook after the pipeline and action it
-    #   targets so that you can easily recognize what it's used for later.
+    #   webhook a unique name that helps you identify it. You might name the
+    #   webhook after the pipeline and action it targets so that you can
+    #   easily recognize what it's used for later.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the webhook.
     #
     # @return [Types::PutWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1609,6 +1925,12 @@ module Aws::CodePipeline
     #         secret_token: "WebhookAuthConfigurationSecretToken",
     #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1627,6 +1949,9 @@ module Aws::CodePipeline
     #   resp.webhook.error_code #=> String
     #   resp.webhook.last_triggered #=> Time
     #   resp.webhook.arn #=> String
+    #   resp.webhook.tags #=> Array
+    #   resp.webhook.tags[0].key #=> String
+    #   resp.webhook.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhook AWS API Documentation
     #
@@ -1662,7 +1987,9 @@ module Aws::CodePipeline
     end
 
     # Resumes the pipeline execution by retrying the last failed actions in
-    # a stage.
+    # a stage. You can retry a stage immediately if any of the actions in
+    # the stage fail. When you retry, all actions that are still in progress
+    # continue working, and failed actions are triggered again.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline that contains the failed stage.
@@ -1712,6 +2039,13 @@ module Aws::CodePipeline
     # @option params [required, String] :name
     #   The name of the pipeline to start.
     #
+    # @option params [String] :client_request_token
+    #   The system-generated unique ID used to identify a unique execution
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionOutput#pipeline_execution_id #pipeline_execution_id} => String
@@ -1720,6 +2054,7 @@ module Aws::CodePipeline
     #
     #   resp = client.start_pipeline_execution({
     #     name: "PipelineName", # required
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @example Response structure
@@ -1735,10 +2070,122 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Stops the specified pipeline execution. You choose to either stop the
+    # pipeline execution by completing in-progress actions without starting
+    # subsequent actions, or by abandoning in-progress actions. While
+    # completing or abandoning in-progress actions, the pipeline execution
+    # is in a `Stopping` state. After all in-progress actions are completed
+    # or abandoned, the pipeline execution is in a `Stopped` state.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline to stop.
+    #
+    # @option params [required, String] :pipeline_execution_id
+    #   The ID of the pipeline execution to be stopped in the current stage.
+    #   Use the `GetPipelineState` action to retrieve the current
+    #   pipelineExecutionId.
+    #
+    # @option params [Boolean] :abandon
+    #   Use this option to stop the pipeline execution by abandoning, rather
+    #   than finishing, in-progress actions.
+    #
+    #   <note markdown="1"> This option can lead to failed or out-of-sequence tasks.
+    #
+    #    </note>
+    #
+    # @option params [String] :reason
+    #   Use this option to enter comments, such as the reason the pipeline was
+    #   stopped.
+    #
+    # @return [Types::StopPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopPipelineExecutionOutput#pipeline_execution_id #pipeline_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_pipeline_execution({
+    #     pipeline_name: "PipelineName", # required
+    #     pipeline_execution_id: "PipelineExecutionId", # required
+    #     abandon: false,
+    #     reason: "StopPipelineExecutionReason",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StopPipelineExecution AWS API Documentation
+    #
+    # @overload stop_pipeline_execution(params = {})
+    # @param [Hash] params ({})
+    def stop_pipeline_execution(params = {}, options = {})
+      req = build_request(:stop_pipeline_execution, params)
+      req.send_request(options)
+    end
+
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # that can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource you want to add tags
+    #   to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags you want to modify or add to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from an AWS resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The list of keys for the tags to be removed from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates a specified pipeline with edits or changes to its structure.
-    # Use a JSON file with the pipeline structure in conjunction with
-    # UpdatePipeline to provide the full structure of the pipeline. Updating
-    # the pipeline increases the version number of the pipeline by 1.
+    # Use a JSON file with the pipeline structure and `UpdatePipeline` to
+    # provide the full structure of the pipeline. Updating the pipeline
+    # increases the version number of the pipeline by 1.
     #
     # @option params [required, Types::PipelineDeclaration] :pipeline
     #   The name of the pipeline to be updated.
@@ -1753,12 +2200,22 @@ module Aws::CodePipeline
     #     pipeline: { # required
     #       name: "PipelineName", # required
     #       role_arn: "RoleArn", # required
-    #       artifact_store: { # required
+    #       artifact_store: {
     #         type: "S3", # required, accepts S3
     #         location: "ArtifactStoreLocation", # required
     #         encryption_key: {
     #           id: "EncryptionKeyId", # required
     #           type: "KMS", # required, accepts KMS
+    #         },
+    #       },
+    #       artifact_stores: {
+    #         "AWSRegionName" => {
+    #           type: "S3", # required, accepts S3
+    #           location: "ArtifactStoreLocation", # required
+    #           encryption_key: {
+    #             id: "EncryptionKeyId", # required
+    #             type: "KMS", # required, accepts KMS
+    #           },
     #         },
     #       },
     #       stages: [ # required
@@ -1794,6 +2251,8 @@ module Aws::CodePipeline
     #                 },
     #               ],
     #               role_arn: "RoleArn",
+    #               region: "AWSRegionName",
+    #               namespace: "ActionNamespace",
     #             },
     #           ],
     #         },
@@ -1810,6 +2269,11 @@ module Aws::CodePipeline
     #   resp.pipeline.artifact_store.location #=> String
     #   resp.pipeline.artifact_store.encryption_key.id #=> String
     #   resp.pipeline.artifact_store.encryption_key.type #=> String, one of "KMS"
+    #   resp.pipeline.artifact_stores #=> Hash
+    #   resp.pipeline.artifact_stores["AWSRegionName"].type #=> String, one of "S3"
+    #   resp.pipeline.artifact_stores["AWSRegionName"].location #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.id #=> String
+    #   resp.pipeline.artifact_stores["AWSRegionName"].encryption_key.type #=> String, one of "KMS"
     #   resp.pipeline.stages #=> Array
     #   resp.pipeline.stages[0].name #=> String
     #   resp.pipeline.stages[0].blockers #=> Array
@@ -1829,6 +2293,8 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts #=> Array
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
+    #   resp.pipeline.stages[0].actions[0].region #=> String
+    #   resp.pipeline.stages[0].actions[0].namespace #=> String
     #   resp.pipeline.version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
@@ -1853,7 +2319,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

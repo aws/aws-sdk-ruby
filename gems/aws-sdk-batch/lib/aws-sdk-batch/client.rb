@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -43,112 +48,205 @@ module Aws::Batch
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -205,39 +303,67 @@ module Aws::Batch
     # Creates an AWS Batch compute environment. You can create `MANAGED` or
     # `UNMANAGED` compute environments.
     #
-    # In a managed compute environment, AWS Batch manages the compute
-    # resources within the environment, based on the compute resources that
-    # you specify. Instances launched into a managed compute environment use
-    # a recent, approved version of the Amazon ECS-optimized AMI. You can
-    # choose to use Amazon EC2 On-Demand Instances in your managed compute
-    # environment, or you can use Amazon EC2 Spot Instances that only launch
-    # when the Spot bid price is below a specified percentage of the
-    # On-Demand price.
+    # In a managed compute environment, AWS Batch manages the capacity and
+    # instance types of the compute resources within the environment. This
+    # is based on the compute resource specification that you define or the
+    # [launch template][1] that you specify when you create the compute
+    # environment. You can choose to use Amazon EC2 On-Demand Instances or
+    # Spot Instances in your managed compute environment. You can optionally
+    # set a maximum price so that Spot Instances only launch when the Spot
+    # Instance price is below a specified percentage of the On-Demand price.
+    #
+    # <note markdown="1"> Multi-node parallel jobs are not supported on Spot Instances.
+    #
+    #  </note>
     #
     # In an unmanaged compute environment, you can manage your own compute
     # resources. This provides more compute resource configuration options,
     # such as using a custom AMI, but you must ensure that your AMI meets
     # the Amazon ECS container instance AMI specification. For more
-    # information, see [Container Instance AMIs][1] in the *Amazon Elastic
+    # information, see [Container Instance AMIs][2] in the *Amazon Elastic
     # Container Service Developer Guide*. After you have created your
     # unmanaged compute environment, you can use the
     # DescribeComputeEnvironments operation to find the Amazon ECS cluster
-    # that is associated with it and then manually launch your container
+    # that is associated with it. Then, manually launch your container
     # instances into that Amazon ECS cluster. For more information, see
-    # [Launching an Amazon ECS Container Instance][2] in the *Amazon Elastic
+    # [Launching an Amazon ECS Container Instance][3] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
+    # <note markdown="1"> AWS Batch does not upgrade the AMIs in a compute environment after it
+    # is created (for example, when a newer version of the Amazon
+    # ECS-optimized AMI is available). You are responsible for the
+    # management of the guest operating system (including updates and
+    # security patches) and any additional application software or utilities
+    # that you install on the compute resources. To use a new AMI for your
+    # AWS Batch jobs:
+    #
+    #  1.  Create a new compute environment with the new AMI.
+    #
+    # 2.  Add the compute environment to an existing job queue.
+    #
+    # 3.  Remove the old compute environment from your job queue.
+    #
+    # 4.  Delete the old compute environment.
+    #
+    #  </note>
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
-    # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
     #
     # @option params [required, String] :compute_environment_name
     #   The name for your compute environment. Up to 128 letters (uppercase
     #   and lowercase), numbers, hyphens, and underscores are allowed.
     #
     # @option params [required, String] :type
-    #   The type of the compute environment.
+    #   The type of the compute environment. For more information, see
+    #   [Compute Environments][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [String] :state
     #   The state of the compute environment. If the state is `ENABLED`, then
@@ -246,7 +372,13 @@ module Aws::Batch
     #
     # @option params [Types::ComputeResource] :compute_resources
     #   Details of the compute resources managed by the compute environment.
-    #   This parameter is required for managed compute environments.
+    #   This parameter is required for managed compute environments. For more
+    #   information, see [Compute Environments][1] in the *AWS Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html
     #
     # @option params [required, String] :service_role
     #   The full Amazon Resource Name (ARN) of the IAM role that allows AWS
@@ -365,20 +497,27 @@ module Aws::Batch
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #     compute_resources: {
     #       type: "EC2", # required, accepts EC2, SPOT
+    #       allocation_strategy: "BEST_FIT", # accepts BEST_FIT, BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
     #       minv_cpus: 1, # required
     #       maxv_cpus: 1, # required
     #       desiredv_cpus: 1,
     #       instance_types: ["String"], # required
     #       image_id: "String",
     #       subnets: ["String"], # required
-    #       security_group_ids: ["String"], # required
+    #       security_group_ids: ["String"],
     #       ec2_key_pair: "String",
     #       instance_role: "String", # required
     #       tags: {
     #         "String" => "String",
     #       },
+    #       placement_group: "String",
     #       bid_percentage: 1,
     #       spot_iam_fleet_role: "String",
+    #       launch_template: {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       },
     #     },
     #     service_role: "String", # required
     #   })
@@ -417,10 +556,10 @@ module Aws::Batch
     # @option params [required, Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
-    #   when associated with same compute environment. Priority is determined
-    #   in descending order, for example, a job queue with a priority value of
-    #   `10` is given scheduling preference over a job queue with a priority
-    #   value of `1`.
+    #   when associated with the same compute environment. Priority is
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job queue
+    #   with a priority value of `1`.
     #
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
@@ -595,7 +734,8 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Deregisters an AWS Batch job definition.
+    # Deregisters an AWS Batch job definition. Job definitions will be
+    # permanently deleted after 180 days.
     #
     # @option params [required, String] :job_definition
     #   The name and revision (`name:revision`) or full Amazon Resource Name
@@ -739,6 +879,7 @@ module Aws::Batch
     #   resp.compute_environments[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "DELETED", "VALID", "INVALID"
     #   resp.compute_environments[0].status_reason #=> String
     #   resp.compute_environments[0].compute_resources.type #=> String, one of "EC2", "SPOT"
+    #   resp.compute_environments[0].compute_resources.allocation_strategy #=> String, one of "BEST_FIT", "BEST_FIT_PROGRESSIVE", "SPOT_CAPACITY_OPTIMIZED"
     #   resp.compute_environments[0].compute_resources.minv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.maxv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.desiredv_cpus #=> Integer
@@ -753,8 +894,12 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.instance_role #=> String
     #   resp.compute_environments[0].compute_resources.tags #=> Hash
     #   resp.compute_environments[0].compute_resources.tags["String"] #=> String
+    #   resp.compute_environments[0].compute_resources.placement_group #=> String
     #   resp.compute_environments[0].compute_resources.bid_percentage #=> Integer
     #   resp.compute_environments[0].compute_resources.spot_iam_fleet_role #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.launch_template_id #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.launch_template_name #=> String
+    #   resp.compute_environments[0].compute_resources.launch_template.version #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.next_token #=> String
     #
@@ -771,8 +916,8 @@ module Aws::Batch
     # as `ACTIVE`) to only return job definitions that match that status.
     #
     # @option params [Array<String>] :job_definitions
-    #   A space-separated list of up to 100 job definition names or full
-    #   Amazon Resource Name (ARN) entries.
+    #   A list of up to 100 job definition names or full Amazon Resource Name
+    #   (ARN) entries.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results returned by `DescribeJobDefinitions` in
@@ -892,7 +1037,52 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ulimits[0].name #=> String
     #   resp.job_definitions[0].container_properties.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].container_properties.user #=> String
+    #   resp.job_definitions[0].container_properties.instance_type #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements #=> Array
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].container_properties.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].container_properties.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
+    #   resp.job_definitions[0].node_properties.num_nodes #=> Integer
+    #   resp.job_definitions[0].node_properties.main_node #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].target_nodes #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.image #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.vcpus #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.memory #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.command[0] #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].read_only #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.mount_points[0].source_volume #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.readonly_root_filesystem #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.privileged #=> Boolean
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].hard_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].name #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.user #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.job_definitions[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1003,7 +1193,7 @@ module Aws::Batch
     # Describes a list of AWS Batch jobs.
     #
     # @option params [required, Array<String>] :jobs
-    #   A space-separated list of up to 100 job IDs.
+    #   A list of up to 100 job IDs.
     #
     # @return [Types::DescribeJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1078,6 +1268,10 @@ module Aws::Batch
     #   resp.jobs[0].attempts[0].container.exit_code #=> Integer
     #   resp.jobs[0].attempts[0].container.reason #=> String
     #   resp.jobs[0].attempts[0].container.log_stream_name #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces #=> Array
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].attempts[0].container.network_interfaces[0].private_ipv_4_address #=> String
     #   resp.jobs[0].attempts[0].started_at #=> Integer
     #   resp.jobs[0].attempts[0].stopped_at #=> Integer
     #   resp.jobs[0].attempts[0].status_reason #=> String
@@ -1120,6 +1314,57 @@ module Aws::Batch
     #   resp.jobs[0].container.container_instance_arn #=> String
     #   resp.jobs[0].container.task_arn #=> String
     #   resp.jobs[0].container.log_stream_name #=> String
+    #   resp.jobs[0].container.instance_type #=> String
+    #   resp.jobs[0].container.network_interfaces #=> Array
+    #   resp.jobs[0].container.network_interfaces[0].attachment_id #=> String
+    #   resp.jobs[0].container.network_interfaces[0].ipv6_address #=> String
+    #   resp.jobs[0].container.network_interfaces[0].private_ipv_4_address #=> String
+    #   resp.jobs[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
+    #   resp.jobs[0].node_details.node_index #=> Integer
+    #   resp.jobs[0].node_details.is_main_node #=> Boolean
+    #   resp.jobs[0].node_properties.num_nodes #=> Integer
+    #   resp.jobs[0].node_properties.main_node #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].target_nodes #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.image #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.vcpus #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.memory #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.command #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.command[0] #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.job_role_arn #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].host.source_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.volumes[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.environment[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].read_only #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.mount_points[0].source_volume #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.readonly_root_filesystem #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.privileged #=> Boolean
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].hard_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].name #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.ulimits[0].soft_limit #=> Integer
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.user #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.instance_type #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].value #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.resource_requirements[0].type #=> String, one of "GPU"
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].host_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].container_path #=> String
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions #=> Array
+    #   resp.jobs[0].node_properties.node_range_properties[0].container.linux_parameters.devices[0].permissions[0] #=> String, one of "READ", "WRITE", "MKNOD"
     #   resp.jobs[0].array_properties.status_summary #=> Hash
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
@@ -1135,9 +1380,19 @@ module Aws::Batch
       req.send_request(options)
     end
 
-    # Returns a list of task jobs for a specified job queue. You can filter
-    # the results by job status with the `jobStatus` parameter. If you do
-    # not specify a status, only `RUNNING` jobs are returned.
+    # Returns a list of AWS Batch jobs.
+    #
+    # You must specify only one of the following:
+    #
+    # * a job queue ID to return a list of jobs in that job queue
+    #
+    # * a multi-node parallel job ID to return a list of that job's nodes
+    #
+    # * an array job ID to return a list of that job's children
+    #
+    # You can filter the results by job status with the `jobStatus`
+    # parameter. If you do not specify a status, only `RUNNING` jobs are
+    # returned.
     #
     # @option params [String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
@@ -1146,6 +1401,11 @@ module Aws::Batch
     # @option params [String] :array_job_id
     #   The job ID for an array job. Specifying an array job ID with this
     #   parameter lists all child jobs from within the specified array.
+    #
+    # @option params [String] :multi_node_job_id
+    #   The job ID for a multi-node parallel job. Specifying a multi-node
+    #   parallel job ID with this parameter lists all nodes that are
+    #   associated with the specified job.
     #
     # @option params [String] :job_status
     #   The job status with which to filter jobs in the specified queue. If
@@ -1222,6 +1482,7 @@ module Aws::Batch
     #   resp = client.list_jobs({
     #     job_queue: "String",
     #     array_job_id: "String",
+    #     multi_node_job_id: "String",
     #     job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
     #     max_results: 1,
     #     next_token: "String",
@@ -1241,6 +1502,9 @@ module Aws::Batch
     #   resp.job_summary_list[0].container.reason #=> String
     #   resp.job_summary_list[0].array_properties.size #=> Integer
     #   resp.job_summary_list[0].array_properties.index #=> Integer
+    #   resp.job_summary_list[0].node_properties.is_main_node #=> Boolean
+    #   resp.job_summary_list[0].node_properties.num_nodes #=> Integer
+    #   resp.job_summary_list[0].node_properties.node_index #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
@@ -1269,8 +1533,22 @@ module Aws::Batch
     #   parameter defaults from the job definition.
     #
     # @option params [Types::ContainerProperties] :container_properties
-    #   An object with various properties specific for container-based jobs.
-    #   This parameter is required if the `type` parameter is `container`.
+    #   An object with various properties specific to single-node
+    #   container-based jobs. If the job definition's `type` parameter is
+    #   `container`, then you must specify either `containerProperties` or
+    #   `nodeProperties`.
+    #
+    # @option params [Types::NodeProperties] :node_properties
+    #   An object with various properties specific to multi-node parallel
+    #   jobs. If you specify node properties for a job, it becomes a
+    #   multi-node parallel job. For more information, see [Multi-node
+    #   Parallel Jobs][1] in the *AWS Batch User Guide*. If the job
+    #   definition's `type` parameter is `container`, then you must specify
+    #   either `containerProperties` or `nodeProperties`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/multi-node-parallel-jobs.html
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
@@ -1290,7 +1568,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1328,14 +1606,14 @@ module Aws::Batch
     #
     #   resp = client.register_job_definition({
     #     job_definition_name: "String", # required
-    #     type: "container", # required, accepts container
+    #     type: "container", # required, accepts container, multinode
     #     parameters: {
     #       "String" => "String",
     #     },
     #     container_properties: {
-    #       image: "String", # required
-    #       vcpus: 1, # required
-    #       memory: 1, # required
+    #       image: "String",
+    #       vcpus: 1,
+    #       memory: 1,
     #       command: ["String"],
     #       job_role_arn: "String",
     #       volumes: [
@@ -1369,6 +1647,85 @@ module Aws::Batch
     #         },
     #       ],
     #       user: "String",
+    #       instance_type: "String",
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
+    #       linux_parameters: {
+    #         devices: [
+    #           {
+    #             host_path: "String", # required
+    #             container_path: "String",
+    #             permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     node_properties: {
+    #       num_nodes: 1, # required
+    #       main_node: 1, # required
+    #       node_range_properties: [ # required
+    #         {
+    #           target_nodes: "String", # required
+    #           container: {
+    #             image: "String",
+    #             vcpus: 1,
+    #             memory: 1,
+    #             command: ["String"],
+    #             job_role_arn: "String",
+    #             volumes: [
+    #               {
+    #                 host: {
+    #                   source_path: "String",
+    #                 },
+    #                 name: "String",
+    #               },
+    #             ],
+    #             environment: [
+    #               {
+    #                 name: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #             mount_points: [
+    #               {
+    #                 container_path: "String",
+    #                 read_only: false,
+    #                 source_volume: "String",
+    #               },
+    #             ],
+    #             readonly_root_filesystem: false,
+    #             privileged: false,
+    #             ulimits: [
+    #               {
+    #                 hard_limit: 1, # required
+    #                 name: "String", # required
+    #                 soft_limit: 1, # required
+    #               },
+    #             ],
+    #             user: "String",
+    #             instance_type: "String",
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
+    #               },
+    #             ],
+    #             linux_parameters: {
+    #               devices: [
+    #                 {
+    #                   host_path: "String", # required
+    #                   container_path: "String",
+    #                   permissions: ["READ"], # accepts READ, WRITE, MKNOD
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       ],
     #     },
     #     retry_strategy: {
     #       attempts: 1,
@@ -1413,21 +1770,22 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #
     # @option params [Array<Types::JobDependency>] :depends_on
     #   A list of dependencies for the job. A job can depend upon a maximum of
     #   20 jobs. You can specify a `SEQUENTIAL` type dependency without
     #   specifying a job ID for array jobs so that each child array job
     #   completes sequentially, starting at index 0. You can also specify an
-    #   `N_TO_N` type dependency with a job ID for array jobs so that each
-    #   index child of this job must wait for the corresponding index child of
-    #   each dependency to complete before it can begin.
+    #   `N_TO_N` type dependency with a job ID for array jobs. In that case,
+    #   each index child of this job must wait for the corresponding index
+    #   child of each dependency to complete before it can begin.
     #
     # @option params [required, String] :job_definition
-    #   The job definition used by this job. This value can be either a
-    #   `name:revision` or the Amazon Resource Name (ARN) for the job
-    #   definition.
+    #   The job definition used by this job. This value can be one of `name`,
+    #   `name:revision`, or the Amazon Resource Name (ARN) for the job
+    #   definition. If `name` is specified without a revision then the latest
+    #   active revision is used.
     #
     # @option params [Hash<String,String>] :parameters
     #   Additional parameters passed to the job that replace parameter
@@ -1445,6 +1803,10 @@ module Aws::Batch
     #   variables (that are specified in the job definition or Docker image)
     #   on a container or add new environment variables to it with an
     #   `environment` override.
+    #
+    # @option params [Types::NodeOverrides] :node_overrides
+    #   A list of node overrides in JSON format that specify the node range to
+    #   target and the container overrides for that node range.
     #
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs from this SubmitJob
@@ -1464,7 +1826,7 @@ module Aws::Batch
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1510,10 +1872,43 @@ module Aws::Batch
     #       vcpus: 1,
     #       memory: 1,
     #       command: ["String"],
+    #       instance_type: "String",
     #       environment: [
     #         {
     #           name: "String",
     #           value: "String",
+    #         },
+    #       ],
+    #       resource_requirements: [
+    #         {
+    #           value: "String", # required
+    #           type: "GPU", # required, accepts GPU
+    #         },
+    #       ],
+    #     },
+    #     node_overrides: {
+    #       num_nodes: 1,
+    #       node_property_overrides: [
+    #         {
+    #           target_nodes: "String", # required
+    #           container_overrides: {
+    #             vcpus: 1,
+    #             memory: 1,
+    #             command: ["String"],
+    #             instance_type: "String",
+    #             environment: [
+    #               {
+    #                 name: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #             resource_requirements: [
+    #               {
+    #                 value: "String", # required
+    #                 type: "GPU", # required, accepts GPU
+    #               },
+    #             ],
+    #           },
     #         },
     #       ],
     #     },
@@ -1675,10 +2070,10 @@ module Aws::Batch
     # @option params [Integer] :priority
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
-    #   when associated with same compute environment. Priority is determined
-    #   in descending order, for example, a job queue with a priority value of
-    #   `10` is given scheduling preference over a job queue with a priority
-    #   value of `1`.
+    #   when associated with the same compute environment. Priority is
+    #   determined in descending order, for example, a job queue with a
+    #   priority value of `10` is given scheduling preference over a job queue
+    #   with a priority value of `1`.
     #
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
@@ -1748,7 +2143,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

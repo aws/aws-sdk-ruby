@@ -24,6 +24,7 @@ module Aws::RDS
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -41,8 +42,7 @@ module Aws::RDS
 
     # The date of the maintenance window when the action is applied. The
     # maintenance action is applied to the resource during its first
-    # maintenance window after this date. If this date is specified, any
-    # `next-maintenance` opt-in requests are ignored.
+    # maintenance window after this date.
     # @return [Time]
     def auto_applied_after_date
       data[:auto_applied_after_date]
@@ -50,8 +50,7 @@ module Aws::RDS
 
     # The date when the maintenance action is automatically applied. The
     # maintenance action is applied to the resource on this date regardless
-    # of the maintenance window for the resource. If this date is specified,
-    # any `immediate` opt-in requests are ignored.
+    # of the maintenance window for the resource.
     # @return [Time]
     def forced_apply_date
       data[:forced_apply_date]
@@ -66,7 +65,7 @@ module Aws::RDS
 
     # The effective date when the pending maintenance action is applied to
     # the resource. This date takes into account opt-in requests received
-    # from the ApplyPendingMaintenanceAction API, the
+    # from the `ApplyPendingMaintenanceAction` API, the
     # `AutoAppliedAfterDate`, and the `ForcedApplyDate`. This value is blank
     # if an opt-in request has not been received and nothing has been
     # specified as `AutoAppliedAfterDate` or `ForcedApplyDate`.

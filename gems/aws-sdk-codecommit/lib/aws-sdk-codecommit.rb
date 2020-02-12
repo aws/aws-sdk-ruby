@@ -42,6 +42,6 @@ require_relative 'aws-sdk-codecommit/customizations'
 # @service
 module Aws::CodeCommit
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.30.0'
 
 end

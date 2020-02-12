@@ -76,6 +76,15 @@ module Aws
         ])
       end
 
+      it 'raises an error when providing eventstream at input' do
+        validate({event_stream: [].each }, 'instead of providing value directly for eventstreams at input, expected to use #signal events per stream')
+      end
+
+      it 'accepts no eventstream input even when marked required' do
+        shapes['StructureShape']['required'] = %w(EventStream)
+        validate({})
+      end
+
     end
 
     describe 'lists' do

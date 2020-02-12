@@ -15,10 +15,15 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/endpoint_discovery.rb'
+require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
+require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 
@@ -43,112 +48,205 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::RetryErrors)
     add_plugin(Aws::Plugins::GlobalConfiguration)
     add_plugin(Aws::Plugins::RegionalEndpoint)
+    add_plugin(Aws::Plugins::EndpointDiscovery)
+    add_plugin(Aws::Plugins::EndpointPattern)
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
+    add_plugin(Aws::Plugins::ClientMetricsPlugin)
+    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestXml)
 
-    # @option options [required, Aws::CredentialProvider] :credentials
-    #   Your AWS credentials. This can be an instance of any one of the
-    #   following classes:
+    # @overload initialize(options)
+    #   @param [Hash] options
+    #   @option options [required, Aws::CredentialProvider] :credentials
+    #     Your AWS credentials. This can be an instance of any one of the
+    #     following classes:
     #
-    #   * `Aws::Credentials` - Used for configuring static, non-refreshing
-    #     credentials.
+    #     * `Aws::Credentials` - Used for configuring static, non-refreshing
+    #       credentials.
     #
-    #   * `Aws::InstanceProfileCredentials` - Used for loading credentials
-    #     from an EC2 IMDS on an EC2 instance.
+    #     * `Aws::InstanceProfileCredentials` - Used for loading credentials
+    #       from an EC2 IMDS on an EC2 instance.
     #
-    #   * `Aws::SharedCredentials` - Used for loading credentials from a
-    #     shared file, such as `~/.aws/config`.
+    #     * `Aws::SharedCredentials` - Used for loading credentials from a
+    #       shared file, such as `~/.aws/config`.
     #
-    #   * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
+    #     * `Aws::AssumeRoleCredentials` - Used when you need to assume a role.
     #
-    #   When `:credentials` are not configured directly, the following
-    #   locations will be searched for credentials:
+    #     When `:credentials` are not configured directly, the following
+    #     locations will be searched for credentials:
     #
-    #   * `Aws.config[:credentials]`
-    #   * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
-    #   * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
-    #   * EC2 IMDS instance profile - When used by default, the timeouts are
-    #     very aggressive. Construct and pass an instance of
-    #     `Aws::InstanceProfileCredentails` to enable retries and extended
-    #     timeouts.
+    #     * `Aws.config[:credentials]`
+    #     * The `:access_key_id`, `:secret_access_key`, and `:session_token` options.
+    #     * ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY']
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
+    #     * EC2 IMDS instance profile - When used by default, the timeouts are
+    #       very aggressive. Construct and pass an instance of
+    #       `Aws::InstanceProfileCredentails` to enable retries and extended
+    #       timeouts.
     #
-    # @option options [required, String] :region
-    #   The AWS region to connect to.  The configured `:region` is
-    #   used to determine the service `:endpoint`. When not passed,
-    #   a default `:region` is search for in the following locations:
+    #   @option options [required, String] :region
+    #     The AWS region to connect to.  The configured `:region` is
+    #     used to determine the service `:endpoint`. When not passed,
+    #     a default `:region` is search for in the following locations:
     #
-    #   * `Aws.config[:region]`
-    #   * `ENV['AWS_REGION']`
-    #   * `ENV['AMAZON_REGION']`
-    #   * `ENV['AWS_DEFAULT_REGION']`
-    #   * `~/.aws/credentials`
-    #   * `~/.aws/config`
+    #     * `Aws.config[:region]`
+    #     * `ENV['AWS_REGION']`
+    #     * `ENV['AMAZON_REGION']`
+    #     * `ENV['AWS_DEFAULT_REGION']`
+    #     * `~/.aws/credentials`
+    #     * `~/.aws/config`
     #
-    # @option options [String] :access_key_id
+    #   @option options [String] :access_key_id
     #
-    # @option options [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters into
-    #   the required types.
+    #   @option options [Boolean] :active_endpoint_cache (false)
+    #     When set to `true`, a thread polling for endpoints will be running in
+    #     the background every 60 secs (default). Defaults to `false`.
     #
-    # @option options [String] :endpoint
-    #   The client endpoint is normally constructed from the `:region`
-    #   option. You should only configure an `:endpoint` when connecting
-    #   to test endpoints. This should be avalid HTTP(S) URI.
+    #   @option options [Boolean] :client_side_monitoring (false)
+    #     When `true`, client-side metrics will be collected for all API requests from
+    #     this client.
     #
-    # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
-    #   The log formatter.
+    #   @option options [String] :client_side_monitoring_client_id ("")
+    #     Allows you to provide an identifier for this client which will be attached to
+    #     all generated client side metrics. Defaults to an empty string.
     #
-    # @option options [Symbol] :log_level (:info)
-    #   The log level to send messages to the `:logger` at.
+    #   @option options [String] :client_side_monitoring_host ("127.0.0.1")
+    #     Allows you to specify the DNS hostname or IPv4 or IPv6 address that the client
+    #     side monitoring agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [Logger] :logger
-    #   The Logger instance to send log messages to.  If this option
-    #   is not set, logging will be disabled.
+    #   @option options [Integer] :client_side_monitoring_port (31000)
+    #     Required for publishing client metrics. The port that the client side monitoring
+    #     agent is running on, where client metrics will be published via UDP.
     #
-    # @option options [String] :profile ("default")
-    #   Used when loading credentials from the shared credentials file
-    #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #   @option options [Aws::ClientSideMonitoring::Publisher] :client_side_monitoring_publisher (Aws::ClientSideMonitoring::Publisher)
+    #     Allows you to provide a custom client-side monitoring publisher class. By default,
+    #     will use the Client Side Monitoring Agent Publisher.
     #
-    # @option options [Float] :retry_base_delay (0.3)
-    #   The base delay in seconds used by the default backoff function.
+    #   @option options [Boolean] :convert_params (true)
+    #     When `true`, an attempt is made to coerce request parameters into
+    #     the required types.
     #
-    # @option options [Symbol] :retry_jitter (:none)
-    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #   @option options [Boolean] :disable_host_prefix_injection (false)
+    #     Set to true to disable SDK automatically adding host prefix
+    #     to default service endpoint when available.
     #
-    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #   @option options [String] :endpoint
+    #     The client endpoint is normally constructed from the `:region`
+    #     option. You should only configure an `:endpoint` when connecting
+    #     to test endpoints. This should be avalid HTTP(S) URI.
     #
-    # @option options [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
+    #   @option options [Integer] :endpoint_cache_max_entries (1000)
+    #     Used for the maximum size limit of the LRU cache storing endpoints data
+    #     for endpoint discovery enabled operations. Defaults to 1000.
     #
-    # @option options [Integer] :retry_max_delay (0)
-    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #   @option options [Integer] :endpoint_cache_max_threads (10)
+    #     Used for the maximum threads in use for polling endpoints to be cached, defaults to 10.
     #
-    # @option options [String] :secret_access_key
+    #   @option options [Integer] :endpoint_cache_poll_interval (60)
+    #     When :endpoint_discovery and :active_endpoint_cache is enabled,
+    #     Use this option to config the time interval in seconds for making
+    #     requests fetching endpoints information. Defaults to 60 sec.
     #
-    # @option options [String] :session_token
+    #   @option options [Boolean] :endpoint_discovery (false)
+    #     When set to `true`, endpoint discovery will be enabled for operations when available. Defaults to `false`.
     #
-    # @option options [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #   @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+    #     The log formatter.
     #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
+    #   @option options [Symbol] :log_level (:info)
+    #     The log level to send messages to the `:logger` at.
     #
-    # @option options [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
+    #   @option options [Logger] :logger
+    #     The Logger instance to send log messages to.  If this option
+    #     is not set, logging will be disabled.
+    #
+    #   @option options [String] :profile ("default")
+    #     Used when loading credentials from the shared credentials file
+    #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Float] :retry_base_delay (0.3)
+    #     The base delay in seconds used by the default backoff function.
+    #
+    #   @option options [Symbol] :retry_jitter (:none)
+    #     A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #     @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
+    #   @option options [Integer] :retry_limit (3)
+    #     The maximum number of times to retry failed requests.  Only
+    #     ~ 500 level server errors and certain ~ 400 level client errors
+    #     are retried.  Generally, these are throttling errors, data
+    #     checksum errors, networking errors, timeout errors and auth
+    #     errors from expired credentials.
+    #
+    #   @option options [Integer] :retry_max_delay (0)
+    #     The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
+    #
+    #   @option options [String] :secret_access_key
+    #
+    #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :stub_responses (false)
+    #     Causes the client to return stubbed responses. By default
+    #     fake responses are generated and returned. You can specify
+    #     the response data to return or errors to raise by calling
+    #     {ClientStubs#stub_responses}. See {ClientStubs} for more information.
+    #
+    #     ** Please note ** When response stubbing is enabled, no HTTP
+    #     requests are made, and retries are disabled.
+    #
+    #   @option options [Boolean] :validate_params (true)
+    #     When `true`, request parameters are validated before
+    #     sending the request.
+    #
+    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
+    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #
+    #   @option options [Float] :http_open_timeout (15) The number of
+    #     seconds to wait when opening a HTTP session before rasing a
+    #     `Timeout::Error`.
+    #
+    #   @option options [Integer] :http_read_timeout (60) The default
+    #     number of seconds to wait for response data.  This value can
+    #     safely be set
+    #     per-request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Float] :http_idle_timeout (5) The number of
+    #     seconds a connection is allowed to sit idble before it is
+    #     considered stale.  Stale connections are closed and removed
+    #     from the pool before making a request.
+    #
+    #   @option options [Float] :http_continue_timeout (1) The number of
+    #     seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has
+    #     "Expect" header set to "100-continue".  Defaults to `nil` which
+    #     disables this behaviour.  This value can safely be set per
+    #     request on the session yeidled by {#session_for}.
+    #
+    #   @option options [Boolean] :http_wire_trace (false) When `true`,
+    #     HTTP debug output will be sent to the `:logger`.
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
+    #     SSL peer certificates are verified when establishing a
+    #     connection.
+    #
+    #   @option options [String] :ssl_ca_bundle Full path to the SSL
+    #     certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass
+    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
+    #     will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory Full path of the
+    #     directory that contains the unbundled SSL certificate
+    #     authority files for verifying peer certificates.  If you do
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
+    #     system default will be used if available.
     #
     def initialize(*args)
       super
@@ -165,7 +263,7 @@ module Aws::CloudFront
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #
     # @option params [required, Types::CloudFrontOriginAccessIdentityConfig] :cloud_front_origin_access_identity_config
     #   The current configuration information for the identity.
@@ -194,7 +292,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
     #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -203,8 +301,25 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new web distribution. Send a `POST` request to the
-    # `/CloudFront API version/distribution`/`distribution ID` resource.
+    # Creates a new web distribution. You create a CloudFront distribution
+    # to tell CloudFront where you want content to be delivered from, and
+    # the details about how to track and manage content delivery. Send a
+    # `POST` request to the `/CloudFront API
+    # version/distribution`/`distribution ID` resource.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using [UpdateDistribution][1], follow the steps included in the
+    # documentation to get the current configuration and then make your
+    # updates. This helps to make sure that you include all of the required
+    # fields. To view a summary, see [Required Fields for Create
+    # Distribution and Update Distribution][2] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -227,7 +342,7 @@ module Aws::CloudFront
     #       default_root_object: "string",
     #       origins: { # required
     #         quantity: 1, # required
-    #         items: [
+    #         items: [ # required
     #           {
     #             id: "string", # required
     #             domain_name: "string", # required
@@ -254,6 +369,28 @@ module Aws::CloudFront
     #               },
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       origin_groups: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             id: "string", # required
+    #             failover_criteria: { # required
+    #               status_codes: { # required
+    #                 quantity: 1, # required
+    #                 items: [1], # required
+    #               },
+    #             },
+    #             members: { # required
+    #               quantity: 1, # required
+    #               items: [ # required
+    #                 {
+    #                   origin_id: "string", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -303,6 +440,7 @@ module Aws::CloudFront
     #             {
     #               lambda_function_arn: "LambdaFunctionARN", # required
     #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
     #             },
     #           ],
     #         },
@@ -357,6 +495,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -375,7 +514,7 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
-    #       comment: "string", # required
+    #       comment: "CommentType", # required
     #       logging: {
     #         enabled: false, # required
     #         include_cookies: false, # required
@@ -444,6 +583,15 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -476,6 +624,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
@@ -512,6 +661,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
@@ -540,10 +690,13 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistribution2019_03_26 AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -576,7 +729,7 @@ module Aws::CloudFront
     #         default_root_object: "string",
     #         origins: { # required
     #           quantity: 1, # required
-    #           items: [
+    #           items: [ # required
     #             {
     #               id: "string", # required
     #               domain_name: "string", # required
@@ -603,6 +756,28 @@ module Aws::CloudFront
     #                 },
     #                 origin_read_timeout: 1,
     #                 origin_keepalive_timeout: 1,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         origin_groups: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               id: "string", # required
+    #               failover_criteria: { # required
+    #                 status_codes: { # required
+    #                   quantity: 1, # required
+    #                   items: [1], # required
+    #                 },
+    #               },
+    #               members: { # required
+    #                 quantity: 1, # required
+    #                 items: [ # required
+    #                   {
+    #                     origin_id: "string", # required
+    #                   },
+    #                 ],
     #               },
     #             },
     #           ],
@@ -652,6 +827,7 @@ module Aws::CloudFront
     #               {
     #                 lambda_function_arn: "LambdaFunctionARN", # required
     #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 include_body: false,
     #               },
     #             ],
     #           },
@@ -706,6 +882,7 @@ module Aws::CloudFront
     #                   {
     #                     lambda_function_arn: "LambdaFunctionARN", # required
     #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     include_body: false,
     #                   },
     #                 ],
     #               },
@@ -724,7 +901,7 @@ module Aws::CloudFront
     #             },
     #           ],
     #         },
-    #         comment: "string", # required
+    #         comment: "CommentType", # required
     #         logging: {
     #           enabled: false, # required
     #           include_cookies: false, # required
@@ -802,6 +979,15 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -834,6 +1020,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
@@ -870,6 +1057,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
@@ -898,10 +1086,13 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTags2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionWithTags2019_03_26 AWS API Documentation
     #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -975,7 +1166,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
     #
     # @overload create_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -1035,7 +1226,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
     #
     # @overload create_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -1081,7 +1272,7 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidation2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateInvalidation2019_03_26 AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1125,7 +1316,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKey2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreatePublicKey2019_03_26 AWS API Documentation
     #
     # @overload create_public_key(params = {})
     # @param [Hash] params ({})
@@ -1134,12 +1325,12 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new RMTP distribution. An RTMP distribution is similar to a
+    # Creates a new RTMP distribution. An RTMP distribution is similar to a
     # web distribution, but an RTMP distribution streams media files using
     # the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files
     # using HTTP.
     #
-    # To create a new web distribution, submit a `POST` request to the
+    # To create a new distribution, submit a `POST` request to the
     # *CloudFront API version*/distribution resource. The request body must
     # include a document with a *StreamingDistributionConfig* element. The
     # response echoes the `StreamingDistributionConfig` element and returns
@@ -1167,7 +1358,7 @@ module Aws::CloudFront
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html
     #
     # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
     #   The streaming distribution's configuration information.
@@ -1240,7 +1431,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistribution2019_03_26 AWS API Documentation
     #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1332,7 +1523,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTags2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTags2019_03_26 AWS API Documentation
     #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -1359,7 +1550,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
     #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1386,7 +1577,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistribution2019_03_26 AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
@@ -1413,7 +1604,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
     #
     # @overload delete_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -1440,7 +1631,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
     #
     # @overload delete_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -1467,7 +1658,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKey2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKey2019_03_26 AWS API Documentation
     #
     # @overload delete_public_key(params = {})
     # @param [Hash] params ({})
@@ -1519,7 +1710,7 @@ module Aws::CloudFront
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
     #
     # @option params [required, String] :id
     #   The distribution ID.
@@ -1537,7 +1728,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteStreamingDistribution2019_03_26 AWS API Documentation
     #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1570,7 +1761,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1601,7 +1792,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfig2019_03_26 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -1613,7 +1804,8 @@ module Aws::CloudFront
     # Get the information about a distribution.
     #
     # @option params [required, String] :id
-    #   The distribution's ID.
+    #   The distribution's ID. If the ID is empty, an empty distribution
+    #   configuration is returned.
     #
     # @return [Types::GetDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1664,6 +1856,15 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -1696,6 +1897,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
@@ -1732,6 +1934,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
@@ -1760,9 +1963,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistribution2019_03_26 AWS API Documentation
     #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
@@ -1774,7 +1980,8 @@ module Aws::CloudFront
     # Get the configuration information about a distribution.
     #
     # @option params [required, String] :id
-    #   The distribution's ID.
+    #   The distribution's ID. If the ID is empty, an empty distribution
+    #   configuration is returned.
     #
     # @return [Types::GetDistributionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1812,6 +2019,15 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -1844,6 +2060,7 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items #=> Array
@@ -1880,6 +2097,7 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution_config.custom_error_responses.items #=> Array
@@ -1910,7 +2128,7 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfig2019_03_26 AWS API Documentation
     #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -1955,7 +2173,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryption2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryption2019_03_26 AWS API Documentation
     #
     # @overload get_field_level_encryption(params = {})
     # @param [Hash] params ({})
@@ -1998,7 +2216,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
     #
     # @overload get_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -2039,7 +2257,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
     #
     # @overload get_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -2079,7 +2297,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryptionProfileConfig2019_03_26 AWS API Documentation
     #
     # @overload get_field_level_encryption_profile_config(params = {})
     # @param [Hash] params ({})
@@ -2118,7 +2336,7 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidation2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidation2019_03_26 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
@@ -2153,7 +2371,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKey2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKey2019_03_26 AWS API Documentation
     #
     # @overload get_public_key(params = {})
     # @param [Hash] params ({})
@@ -2186,7 +2404,7 @@ module Aws::CloudFront
     #   resp.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfig2019_03_26 AWS API Documentation
     #
     # @overload get_public_key_config(params = {})
     # @param [Hash] params ({})
@@ -2244,7 +2462,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistribution2019_03_26 AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2289,7 +2507,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfig2019_03_26 AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -2335,7 +2553,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentities2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentities2019_03_26 AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -2344,7 +2562,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # List distributions.
+    # List CloudFront distributions.
     #
     # @option params [String] :marker
     #   Use this when paginating results to indicate where to begin in your
@@ -2401,6 +2619,15 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -2433,6 +2660,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
@@ -2469,6 +2697,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
@@ -2493,8 +2722,11 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].web_acl_id #=> String
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
+    #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributions2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributions2019_03_26 AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
@@ -2569,6 +2801,15 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].id #=> String
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items #=> Array
+    #   resp.distribution_list.items[0].origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -2601,6 +2842,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
@@ -2637,6 +2879,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
@@ -2661,8 +2904,11 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].web_acl_id #=> String
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
+    #   resp.distribution_list.items[0].alias_icp_recordals #=> Array
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].cname #=> String
+    #   resp.distribution_list.items[0].alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLId2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLId2019_03_26 AWS API Documentation
     #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
@@ -2718,7 +2964,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
     #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigs2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionConfigs2019_03_26 AWS API Documentation
     #
     # @overload list_field_level_encryption_configs(params = {})
     # @param [Hash] params ({})
@@ -2770,7 +3016,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.field_level_encryption_profile_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfiles2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionProfiles2019_03_26 AWS API Documentation
     #
     # @overload list_field_level_encryption_profiles(params = {})
     # @param [Hash] params ({})
@@ -2822,7 +3068,7 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidations2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidations2019_03_26 AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
@@ -2867,7 +3113,7 @@ module Aws::CloudFront
     #   resp.public_key_list.items[0].encoded_key #=> String
     #   resp.public_key_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeys2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListPublicKeys2019_03_26 AWS API Documentation
     #
     # @overload list_public_keys(params = {})
     # @param [Hash] params ({})
@@ -2921,7 +3167,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributions2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListStreamingDistributions2019_03_26 AWS API Documentation
     #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
@@ -2951,7 +3197,7 @@ module Aws::CloudFront
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResource2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResource2019_03_26 AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2984,7 +3230,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResource2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/TagResource2019_03_26 AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -3012,7 +3258,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResource2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UntagResource2019_03_26 AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -3057,7 +3303,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateCloudFrontOriginAccessIdentity2019_03_26 AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -3066,35 +3312,57 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Updates the configuration for a web distribution. Perform the
-    # following steps.
+    # Updates the configuration for a web distribution.
+    #
+    # When you update a distribution, there are more required fields than
+    # when you create a distribution. When you update your distribution by
+    # using this API action, follow the steps here to get the current
+    # configuration and then make your updates, to make sure that you
+    # include all of the required fields. To view a summary, see [Required
+    # Fields for Create Distribution and Update Distribution][1] in the
+    # *Amazon CloudFront Developer Guide*.
+    #
+    # The update process includes getting the current distribution
+    # configuration, updating the XML document that is returned to make your
+    # changes, and then submitting an `UpdateDistribution` request to make
+    # the updates.
     #
     # For information about updating a distribution using the CloudFront
-    # console, see [Creating or Updating a Web Distribution Using the
-    # CloudFront Console ][1] in the *Amazon CloudFront Developer Guide*.
+    # console instead, see [Creating a Distribution][2] in the *Amazon
+    # CloudFront Developer Guide*.
     #
     # **To update a web distribution using the CloudFront API**
     #
-    # 1.  Submit a GetDistributionConfig request to get the current
+    # 1.  Submit a [GetDistributionConfig][3] request to get the current
     #     configuration and an `Etag` header for the distribution.
     #
-    #     <note markdown="1"> If you update the distribution again, you need to get a new `Etag`
+    #     <note markdown="1"> If you update the distribution again, you must get a new `Etag`
     #     header.
     #
     #      </note>
     #
     # 2.  Update the XML document that was returned in the response to your
-    #     `GetDistributionConfig` request to include the desired changes.
-    #     You can't change the value of `CallerReference`. If you try to
-    #     change this value, CloudFront returns an `IllegalUpdate` error.
+    #     `GetDistributionConfig` request to include your changes.
     #
-    #     The new configuration replaces the existing configuration; the
-    #     values that you specify in an `UpdateDistribution` request are not
-    #     merged into the existing configuration. When you add, delete, or
-    #     replace values in an element that allows multiple values (for
-    #     example, `CNAME`), you must specify all of the values that you
-    #     want to appear in the updated distribution. In addition, you must
-    #     update the corresponding `Quantity` element.
+    #     When you edit the XML file, be aware of the following:
+    #
+    #      * You must strip out the ETag parameter that is returned.
+    #
+    #     * Additional fields are required when you update a distribution.
+    #       There may be fields included in the XML file for features that
+    #       you haven't configured for your distribution. This is expected
+    #       and required to successfully update the distribution.
+    #
+    #     * You can't change the value of `CallerReference`. If you try to
+    #       change this value, CloudFront returns an `IllegalUpdate` error.
+    #
+    #     * The new configuration replaces the existing configuration; the
+    #       values that you specify in an `UpdateDistribution` request are
+    #       not merged into your existing configuration. When you add,
+    #       delete, or replace values in an element that allows multiple
+    #       values (for example, `CNAME`), you must specify all of the
+    #       values that you want to appear in the updated distribution. In
+    #       addition, you must update the corresponding `Quantity` element.
     #
     # 3.  Submit an `UpdateDistribution` request to update the configuration
     #     for your distribution:
@@ -3110,25 +3378,16 @@ module Aws::CloudFront
     # 4.  Review the response to the `UpdateDistribution` request to confirm
     #     that the configuration was successfully updated.
     #
-    # 5.  Optional: Submit a GetDistribution request to confirm that your
-    #     changes have propagated. When propagation is complete, the value
-    #     of `Status` is `Deployed`.
-    #
-    #     Beginning with the 2012-05-05 version of the CloudFront API, we
-    #     made substantial changes to the format of the XML document that
-    #     you include in the request body when you create or update a
-    #     distribution. With previous versions of the API, we discovered
-    #     that it was too easy to accidentally delete one or more values for
-    #     an element that accepts multiple values, for example, CNAMEs and
-    #     trusted signers. Our changes for the 2012-05-05 release are
-    #     intended to prevent these accidental deletions and to notify you
-    #     when there's a mismatch between the number of values you say
-    #     you're specifying in the `Quantity` element and the number of
-    #     values you're actually specifying.
+    # 5.  Optional: Submit a [GetDistribution][4] request to confirm that
+    #     your changes have propagated. When propagation is complete, the
+    #     value of `Status` is `Deployed`.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html
+    # [3]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html
+    # [4]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
     #   The distribution's configuration information.
@@ -3157,7 +3416,7 @@ module Aws::CloudFront
     #       default_root_object: "string",
     #       origins: { # required
     #         quantity: 1, # required
-    #         items: [
+    #         items: [ # required
     #           {
     #             id: "string", # required
     #             domain_name: "string", # required
@@ -3184,6 +3443,28 @@ module Aws::CloudFront
     #               },
     #               origin_read_timeout: 1,
     #               origin_keepalive_timeout: 1,
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       origin_groups: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             id: "string", # required
+    #             failover_criteria: { # required
+    #               status_codes: { # required
+    #                 quantity: 1, # required
+    #                 items: [1], # required
+    #               },
+    #             },
+    #             members: { # required
+    #               quantity: 1, # required
+    #               items: [ # required
+    #                 {
+    #                   origin_id: "string", # required
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -3233,6 +3514,7 @@ module Aws::CloudFront
     #             {
     #               lambda_function_arn: "LambdaFunctionARN", # required
     #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #               include_body: false,
     #             },
     #           ],
     #         },
@@ -3287,6 +3569,7 @@ module Aws::CloudFront
     #                 {
     #                   lambda_function_arn: "LambdaFunctionARN", # required
     #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   include_body: false,
     #                 },
     #               ],
     #             },
@@ -3305,7 +3588,7 @@ module Aws::CloudFront
     #           },
     #         ],
     #       },
-    #       comment: "string", # required
+    #       comment: "CommentType", # required
     #       logging: {
     #         enabled: false, # required
     #         include_cookies: false, # required
@@ -3376,6 +3659,15 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].id #=> String
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].failover_criteria.status_codes.items[0] #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.quantity #=> Integer
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items #=> Array
+    #   resp.distribution.distribution_config.origin_groups.items[0].members.items[0].origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -3408,6 +3700,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
@@ -3444,6 +3737,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].include_body #=> Boolean
     #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
@@ -3472,9 +3766,12 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.web_acl_id #=> String
     #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
+    #   resp.distribution.alias_icp_recordals #=> Array
+    #   resp.distribution.alias_icp_recordals[0].cname #=> String
+    #   resp.distribution.alias_icp_recordals[0].icp_recordal_status #=> String, one of "APPROVED", "SUSPENDED", "PENDING"
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistribution2019_03_26 AWS API Documentation
     #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
@@ -3555,7 +3852,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionConfig2019_03_26 AWS API Documentation
     #
     # @overload update_field_level_encryption_config(params = {})
     # @param [Hash] params ({})
@@ -3622,7 +3919,7 @@ module Aws::CloudFront
     #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfile2019_03_26 AWS API Documentation
     #
     # @overload update_field_level_encryption_profile(params = {})
     # @param [Hash] params ({})
@@ -3672,7 +3969,7 @@ module Aws::CloudFront
     #   resp.public_key.public_key_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKey2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKey2019_03_26 AWS API Documentation
     #
     # @overload update_public_key(params = {})
     # @param [Hash] params ({})
@@ -3762,7 +4059,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistribution2017_10_30 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateStreamingDistribution2019_03_26 AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -3784,7 +4081,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3801,7 +4098,7 @@ module Aws::CloudFront
     # In between attempts, the waiter will sleep.
     #
     #     # polls in a loop, sleeping between attempts
-    #     client.waiter_until(waiter_name, params)
+    #     client.wait_until(waiter_name, params)
     #
     # ## Configuration
     #
@@ -3852,7 +4149,7 @@ module Aws::CloudFront
     #
     # | waiter_name                     | params                        | :delay   | :max_attempts |
     # | ------------------------------- | ----------------------------- | -------- | ------------- |
-    # | distribution_deployed           | {#get_distribution}           | 60       | 25            |
+    # | distribution_deployed           | {#get_distribution}           | 60       | 35            |
     # | invalidation_completed          | {#get_invalidation}           | 20       | 30            |
     # | streaming_distribution_deployed | {#get_streaming_distribution} | 60       | 25            |
     #

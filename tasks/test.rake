@@ -57,6 +57,6 @@ task 'test:features' do
   abort("one or more test suites failed: %s" % [failures.join(', ')]) unless failures.empty?
 end
 
-desc 'Runs unit and integration tests'
-task 'test' => ['test:spec', 'test:features']
+desc 'Runs unit and integration tests after rebuilding gems'
+task 'test' => ['build', 'test:spec', 'test:features']
 task 'default' => 'test'

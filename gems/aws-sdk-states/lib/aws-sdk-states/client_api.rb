@@ -23,12 +23,12 @@ module Aws::States
     ActivityTimedOutEventDetails = Shapes::StructureShape.new(name: 'ActivityTimedOutEventDetails')
     ActivityWorkerLimitExceeded = Shapes::StructureShape.new(name: 'ActivityWorkerLimitExceeded')
     Arn = Shapes::StringShape.new(name: 'Arn')
-    Cause = Shapes::StringShape.new(name: 'Cause')
+    CloudWatchLogsLogGroup = Shapes::StructureShape.new(name: 'CloudWatchLogsLogGroup')
+    ConnectorParameters = Shapes::StringShape.new(name: 'ConnectorParameters')
     CreateActivityInput = Shapes::StructureShape.new(name: 'CreateActivityInput')
     CreateActivityOutput = Shapes::StructureShape.new(name: 'CreateActivityOutput')
     CreateStateMachineInput = Shapes::StructureShape.new(name: 'CreateStateMachineInput')
     CreateStateMachineOutput = Shapes::StructureShape.new(name: 'CreateStateMachineOutput')
-    Data = Shapes::StringShape.new(name: 'Data')
     Definition = Shapes::StringShape.new(name: 'Definition')
     DeleteActivityInput = Shapes::StructureShape.new(name: 'DeleteActivityInput')
     DeleteActivityOutput = Shapes::StructureShape.new(name: 'DeleteActivityOutput')
@@ -42,7 +42,6 @@ module Aws::States
     DescribeStateMachineForExecutionOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineForExecutionOutput')
     DescribeStateMachineInput = Shapes::StructureShape.new(name: 'DescribeStateMachineInput')
     DescribeStateMachineOutput = Shapes::StructureShape.new(name: 'DescribeStateMachineOutput')
-    Error = Shapes::StringShape.new(name: 'Error')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventId = Shapes::IntegerShape.new(name: 'EventId')
     ExecutionAbortedEventDetails = Shapes::StructureShape.new(name: 'ExecutionAbortedEventDetails')
@@ -64,9 +63,11 @@ module Aws::States
     HistoryEventList = Shapes::ListShape.new(name: 'HistoryEventList')
     HistoryEventType = Shapes::StringShape.new(name: 'HistoryEventType')
     Identity = Shapes::StringShape.new(name: 'Identity')
+    IncludeExecutionData = Shapes::BooleanShape.new(name: 'IncludeExecutionData')
     InvalidArn = Shapes::StructureShape.new(name: 'InvalidArn')
     InvalidDefinition = Shapes::StructureShape.new(name: 'InvalidDefinition')
     InvalidExecutionInput = Shapes::StructureShape.new(name: 'InvalidExecutionInput')
+    InvalidLoggingConfiguration = Shapes::StructureShape.new(name: 'InvalidLoggingConfiguration')
     InvalidName = Shapes::StructureShape.new(name: 'InvalidName')
     InvalidOutput = Shapes::StructureShape.new(name: 'InvalidOutput')
     InvalidToken = Shapes::StructureShape.new(name: 'InvalidToken')
@@ -80,12 +81,22 @@ module Aws::States
     ListActivitiesOutput = Shapes::StructureShape.new(name: 'ListActivitiesOutput')
     ListExecutionsInput = Shapes::StructureShape.new(name: 'ListExecutionsInput')
     ListExecutionsOutput = Shapes::StructureShape.new(name: 'ListExecutionsOutput')
+    ListExecutionsPageToken = Shapes::StringShape.new(name: 'ListExecutionsPageToken')
     ListStateMachinesInput = Shapes::StructureShape.new(name: 'ListStateMachinesInput')
     ListStateMachinesOutput = Shapes::StructureShape.new(name: 'ListStateMachinesOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
+    LogDestination = Shapes::StructureShape.new(name: 'LogDestination')
+    LogDestinationList = Shapes::ListShape.new(name: 'LogDestinationList')
+    LogLevel = Shapes::StringShape.new(name: 'LogLevel')
+    LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
+    MapIterationEventDetails = Shapes::StructureShape.new(name: 'MapIterationEventDetails')
+    MapStateStartedEventDetails = Shapes::StructureShape.new(name: 'MapStateStartedEventDetails')
     MissingRequiredParameter = Shapes::StructureShape.new(name: 'MissingRequiredParameter')
     Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
+    ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     ReverseOrder = Shapes::BooleanShape.new(name: 'ReverseOrder')
     SendTaskFailureInput = Shapes::StructureShape.new(name: 'SendTaskFailureInput')
     SendTaskFailureOutput = Shapes::StructureShape.new(name: 'SendTaskFailureOutput')
@@ -93,6 +104,10 @@ module Aws::States
     SendTaskHeartbeatOutput = Shapes::StructureShape.new(name: 'SendTaskHeartbeatOutput')
     SendTaskSuccessInput = Shapes::StructureShape.new(name: 'SendTaskSuccessInput')
     SendTaskSuccessOutput = Shapes::StructureShape.new(name: 'SendTaskSuccessOutput')
+    SensitiveCause = Shapes::StringShape.new(name: 'SensitiveCause')
+    SensitiveData = Shapes::StringShape.new(name: 'SensitiveData')
+    SensitiveDataJobInput = Shapes::StringShape.new(name: 'SensitiveDataJobInput')
+    SensitiveError = Shapes::StringShape.new(name: 'SensitiveError')
     StartExecutionInput = Shapes::StructureShape.new(name: 'StartExecutionInput')
     StartExecutionOutput = Shapes::StructureShape.new(name: 'StartExecutionOutput')
     StateEnteredEventDetails = Shapes::StructureShape.new(name: 'StateEnteredEventDetails')
@@ -104,19 +119,46 @@ module Aws::States
     StateMachineList = Shapes::ListShape.new(name: 'StateMachineList')
     StateMachineListItem = Shapes::StructureShape.new(name: 'StateMachineListItem')
     StateMachineStatus = Shapes::StringShape.new(name: 'StateMachineStatus')
+    StateMachineType = Shapes::StringShape.new(name: 'StateMachineType')
+    StateMachineTypeNotSupported = Shapes::StructureShape.new(name: 'StateMachineTypeNotSupported')
     StopExecutionInput = Shapes::StructureShape.new(name: 'StopExecutionInput')
     StopExecutionOutput = Shapes::StructureShape.new(name: 'StopExecutionOutput')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     TaskDoesNotExist = Shapes::StructureShape.new(name: 'TaskDoesNotExist')
+    TaskFailedEventDetails = Shapes::StructureShape.new(name: 'TaskFailedEventDetails')
+    TaskScheduledEventDetails = Shapes::StructureShape.new(name: 'TaskScheduledEventDetails')
+    TaskStartFailedEventDetails = Shapes::StructureShape.new(name: 'TaskStartFailedEventDetails')
+    TaskStartedEventDetails = Shapes::StructureShape.new(name: 'TaskStartedEventDetails')
+    TaskSubmitFailedEventDetails = Shapes::StructureShape.new(name: 'TaskSubmitFailedEventDetails')
+    TaskSubmittedEventDetails = Shapes::StructureShape.new(name: 'TaskSubmittedEventDetails')
+    TaskSucceededEventDetails = Shapes::StructureShape.new(name: 'TaskSucceededEventDetails')
     TaskTimedOut = Shapes::StructureShape.new(name: 'TaskTimedOut')
+    TaskTimedOutEventDetails = Shapes::StructureShape.new(name: 'TaskTimedOutEventDetails')
     TaskToken = Shapes::StringShape.new(name: 'TaskToken')
     TimeoutInSeconds = Shapes::IntegerShape.new(name: 'TimeoutInSeconds')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyTags = Shapes::StructureShape.new(name: 'TooManyTags')
+    UnsignedInteger = Shapes::IntegerShape.new(name: 'UnsignedInteger')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateStateMachineInput = Shapes::StructureShape.new(name: 'UpdateStateMachineInput')
     UpdateStateMachineOutput = Shapes::StructureShape.new(name: 'UpdateStateMachineOutput')
 
-    ActivityFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ActivityFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ActivityDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ActivityDoesNotExist.struct_class = Types::ActivityDoesNotExist
+
+    ActivityFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ActivityFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ActivityFailedEventDetails.struct_class = Types::ActivityFailedEventDetails
+
+    ActivityLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ActivityLimitExceeded.struct_class = Types::ActivityLimitExceeded
 
     ActivityList.member = Shapes::ShapeRef.new(shape: ActivityListItem)
 
@@ -125,12 +167,12 @@ module Aws::States
     ActivityListItem.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     ActivityListItem.struct_class = Types::ActivityListItem
 
-    ActivityScheduleFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ActivityScheduleFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ActivityScheduleFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ActivityScheduleFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ActivityScheduleFailedEventDetails.struct_class = Types::ActivityScheduleFailedEventDetails
 
     ActivityScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resource"))
-    ActivityScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    ActivityScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     ActivityScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
     ActivityScheduledEventDetails.add_member(:heartbeat_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "heartbeatInSeconds", metadata: {"box"=>true}))
     ActivityScheduledEventDetails.struct_class = Types::ActivityScheduledEventDetails
@@ -138,14 +180,21 @@ module Aws::States
     ActivityStartedEventDetails.add_member(:worker_name, Shapes::ShapeRef.new(shape: Identity, location_name: "workerName"))
     ActivityStartedEventDetails.struct_class = Types::ActivityStartedEventDetails
 
-    ActivitySucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
+    ActivitySucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     ActivitySucceededEventDetails.struct_class = Types::ActivitySucceededEventDetails
 
-    ActivityTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ActivityTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ActivityTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ActivityTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ActivityTimedOutEventDetails.struct_class = Types::ActivityTimedOutEventDetails
 
+    ActivityWorkerLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ActivityWorkerLimitExceeded.struct_class = Types::ActivityWorkerLimitExceeded
+
+    CloudWatchLogsLogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
+    CloudWatchLogsLogGroup.struct_class = Types::CloudWatchLogsLogGroup
+
     CreateActivityInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateActivityInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateActivityInput.struct_class = Types::CreateActivityInput
 
     CreateActivityOutput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
@@ -155,6 +204,9 @@ module Aws::States
     CreateStateMachineInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     CreateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    CreateStateMachineInput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, location_name: "type"))
+    CreateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
+    CreateStateMachineInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateStateMachineInput.struct_class = Types::CreateStateMachineInput
 
     CreateStateMachineOutput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
@@ -188,8 +240,8 @@ module Aws::States
     DescribeExecutionOutput.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, required: true, location_name: "status"))
     DescribeExecutionOutput.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
     DescribeExecutionOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
-    DescribeExecutionOutput.add_member(:input, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "input"))
-    DescribeExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
+    DescribeExecutionOutput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, required: true, location_name: "input"))
+    DescribeExecutionOutput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     DescribeExecutionOutput.struct_class = Types::DescribeExecutionOutput
 
     DescribeStateMachineForExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -210,16 +262,27 @@ module Aws::States
     DescribeStateMachineOutput.add_member(:status, Shapes::ShapeRef.new(shape: StateMachineStatus, location_name: "status"))
     DescribeStateMachineOutput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, required: true, location_name: "definition"))
     DescribeStateMachineOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "roleArn"))
+    DescribeStateMachineOutput.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, required: true, location_name: "type"))
     DescribeStateMachineOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
+    DescribeStateMachineOutput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     DescribeStateMachineOutput.struct_class = Types::DescribeStateMachineOutput
 
-    ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ExecutionAbortedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ExecutionAbortedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ExecutionAbortedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ExecutionAbortedEventDetails.struct_class = Types::ExecutionAbortedEventDetails
 
-    ExecutionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ExecutionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ExecutionAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExecutionAlreadyExists.struct_class = Types::ExecutionAlreadyExists
+
+    ExecutionDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExecutionDoesNotExist.struct_class = Types::ExecutionDoesNotExist
+
+    ExecutionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ExecutionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ExecutionFailedEventDetails.struct_class = Types::ExecutionFailedEventDetails
+
+    ExecutionLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ExecutionLimitExceeded.struct_class = Types::ExecutionLimitExceeded
 
     ExecutionList.member = Shapes::ShapeRef.new(shape: ExecutionListItem)
 
@@ -231,15 +294,15 @@ module Aws::States
     ExecutionListItem.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stopDate"))
     ExecutionListItem.struct_class = Types::ExecutionListItem
 
-    ExecutionStartedEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    ExecutionStartedEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     ExecutionStartedEventDetails.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
     ExecutionStartedEventDetails.struct_class = Types::ExecutionStartedEventDetails
 
-    ExecutionSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
+    ExecutionSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     ExecutionSucceededEventDetails.struct_class = Types::ExecutionSucceededEventDetails
 
-    ExecutionTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    ExecutionTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    ExecutionTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    ExecutionTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     ExecutionTimedOutEventDetails.struct_class = Types::ExecutionTimedOutEventDetails
 
     GetActivityTaskInput.add_member(:activity_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "activityArn"))
@@ -247,7 +310,7 @@ module Aws::States
     GetActivityTaskInput.struct_class = Types::GetActivityTaskInput
 
     GetActivityTaskOutput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, location_name: "taskToken"))
-    GetActivityTaskOutput.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    GetActivityTaskOutput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveDataJobInput, location_name: "input"))
     GetActivityTaskOutput.struct_class = Types::GetActivityTaskOutput
 
     GetExecutionHistoryInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -270,11 +333,24 @@ module Aws::States
     HistoryEvent.add_member(:activity_started_event_details, Shapes::ShapeRef.new(shape: ActivityStartedEventDetails, location_name: "activityStartedEventDetails"))
     HistoryEvent.add_member(:activity_succeeded_event_details, Shapes::ShapeRef.new(shape: ActivitySucceededEventDetails, location_name: "activitySucceededEventDetails"))
     HistoryEvent.add_member(:activity_timed_out_event_details, Shapes::ShapeRef.new(shape: ActivityTimedOutEventDetails, location_name: "activityTimedOutEventDetails"))
+    HistoryEvent.add_member(:task_failed_event_details, Shapes::ShapeRef.new(shape: TaskFailedEventDetails, location_name: "taskFailedEventDetails"))
+    HistoryEvent.add_member(:task_scheduled_event_details, Shapes::ShapeRef.new(shape: TaskScheduledEventDetails, location_name: "taskScheduledEventDetails"))
+    HistoryEvent.add_member(:task_start_failed_event_details, Shapes::ShapeRef.new(shape: TaskStartFailedEventDetails, location_name: "taskStartFailedEventDetails"))
+    HistoryEvent.add_member(:task_started_event_details, Shapes::ShapeRef.new(shape: TaskStartedEventDetails, location_name: "taskStartedEventDetails"))
+    HistoryEvent.add_member(:task_submit_failed_event_details, Shapes::ShapeRef.new(shape: TaskSubmitFailedEventDetails, location_name: "taskSubmitFailedEventDetails"))
+    HistoryEvent.add_member(:task_submitted_event_details, Shapes::ShapeRef.new(shape: TaskSubmittedEventDetails, location_name: "taskSubmittedEventDetails"))
+    HistoryEvent.add_member(:task_succeeded_event_details, Shapes::ShapeRef.new(shape: TaskSucceededEventDetails, location_name: "taskSucceededEventDetails"))
+    HistoryEvent.add_member(:task_timed_out_event_details, Shapes::ShapeRef.new(shape: TaskTimedOutEventDetails, location_name: "taskTimedOutEventDetails"))
     HistoryEvent.add_member(:execution_failed_event_details, Shapes::ShapeRef.new(shape: ExecutionFailedEventDetails, location_name: "executionFailedEventDetails"))
     HistoryEvent.add_member(:execution_started_event_details, Shapes::ShapeRef.new(shape: ExecutionStartedEventDetails, location_name: "executionStartedEventDetails"))
     HistoryEvent.add_member(:execution_succeeded_event_details, Shapes::ShapeRef.new(shape: ExecutionSucceededEventDetails, location_name: "executionSucceededEventDetails"))
     HistoryEvent.add_member(:execution_aborted_event_details, Shapes::ShapeRef.new(shape: ExecutionAbortedEventDetails, location_name: "executionAbortedEventDetails"))
     HistoryEvent.add_member(:execution_timed_out_event_details, Shapes::ShapeRef.new(shape: ExecutionTimedOutEventDetails, location_name: "executionTimedOutEventDetails"))
+    HistoryEvent.add_member(:map_state_started_event_details, Shapes::ShapeRef.new(shape: MapStateStartedEventDetails, location_name: "mapStateStartedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_started_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationStartedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_succeeded_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationSucceededEventDetails"))
+    HistoryEvent.add_member(:map_iteration_failed_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationFailedEventDetails"))
+    HistoryEvent.add_member(:map_iteration_aborted_event_details, Shapes::ShapeRef.new(shape: MapIterationEventDetails, location_name: "mapIterationAbortedEventDetails"))
     HistoryEvent.add_member(:lambda_function_failed_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionFailedEventDetails, location_name: "lambdaFunctionFailedEventDetails"))
     HistoryEvent.add_member(:lambda_function_schedule_failed_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionScheduleFailedEventDetails, location_name: "lambdaFunctionScheduleFailedEventDetails"))
     HistoryEvent.add_member(:lambda_function_scheduled_event_details, Shapes::ShapeRef.new(shape: LambdaFunctionScheduledEventDetails, location_name: "lambdaFunctionScheduledEventDetails"))
@@ -287,28 +363,49 @@ module Aws::States
 
     HistoryEventList.member = Shapes::ShapeRef.new(shape: HistoryEvent)
 
-    LambdaFunctionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    LambdaFunctionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    InvalidArn.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidArn.struct_class = Types::InvalidArn
+
+    InvalidDefinition.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidDefinition.struct_class = Types::InvalidDefinition
+
+    InvalidExecutionInput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidExecutionInput.struct_class = Types::InvalidExecutionInput
+
+    InvalidLoggingConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidLoggingConfiguration.struct_class = Types::InvalidLoggingConfiguration
+
+    InvalidName.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidName.struct_class = Types::InvalidName
+
+    InvalidOutput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidOutput.struct_class = Types::InvalidOutput
+
+    InvalidToken.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidToken.struct_class = Types::InvalidToken
+
+    LambdaFunctionFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    LambdaFunctionFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     LambdaFunctionFailedEventDetails.struct_class = Types::LambdaFunctionFailedEventDetails
 
-    LambdaFunctionScheduleFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    LambdaFunctionScheduleFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    LambdaFunctionScheduleFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    LambdaFunctionScheduleFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     LambdaFunctionScheduleFailedEventDetails.struct_class = Types::LambdaFunctionScheduleFailedEventDetails
 
     LambdaFunctionScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resource"))
-    LambdaFunctionScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    LambdaFunctionScheduledEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     LambdaFunctionScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
     LambdaFunctionScheduledEventDetails.struct_class = Types::LambdaFunctionScheduledEventDetails
 
-    LambdaFunctionStartFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    LambdaFunctionStartFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    LambdaFunctionStartFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    LambdaFunctionStartFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     LambdaFunctionStartFailedEventDetails.struct_class = Types::LambdaFunctionStartFailedEventDetails
 
-    LambdaFunctionSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
+    LambdaFunctionSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     LambdaFunctionSucceededEventDetails.struct_class = Types::LambdaFunctionSucceededEventDetails
 
-    LambdaFunctionTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    LambdaFunctionTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    LambdaFunctionTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    LambdaFunctionTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     LambdaFunctionTimedOutEventDetails.struct_class = Types::LambdaFunctionTimedOutEventDetails
 
     ListActivitiesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
@@ -322,11 +419,11 @@ module Aws::States
     ListExecutionsInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     ListExecutionsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "statusFilter"))
     ListExecutionsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
-    ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListExecutionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsInput.struct_class = Types::ListExecutionsInput
 
     ListExecutionsOutput.add_member(:executions, Shapes::ShapeRef.new(shape: ExecutionList, required: true, location_name: "executions"))
-    ListExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListExecutionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExecutionsPageToken, location_name: "nextToken"))
     ListExecutionsOutput.struct_class = Types::ListExecutionsOutput
 
     ListStateMachinesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "maxResults"))
@@ -337,9 +434,39 @@ module Aws::States
     ListStateMachinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListStateMachinesOutput.struct_class = Types::ListStateMachinesOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
+    LogDestination.add_member(:cloud_watch_logs_log_group, Shapes::ShapeRef.new(shape: CloudWatchLogsLogGroup, location_name: "cloudWatchLogsLogGroup"))
+    LogDestination.struct_class = Types::LogDestination
+
+    LogDestinationList.member = Shapes::ShapeRef.new(shape: LogDestination)
+
+    LoggingConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "level"))
+    LoggingConfiguration.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location_name: "includeExecutionData"))
+    LoggingConfiguration.add_member(:destinations, Shapes::ShapeRef.new(shape: LogDestinationList, location_name: "destinations"))
+    LoggingConfiguration.struct_class = Types::LoggingConfiguration
+
+    MapIterationEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    MapIterationEventDetails.add_member(:index, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "index"))
+    MapIterationEventDetails.struct_class = Types::MapIterationEventDetails
+
+    MapStateStartedEventDetails.add_member(:length, Shapes::ShapeRef.new(shape: UnsignedInteger, location_name: "length"))
+    MapStateStartedEventDetails.struct_class = Types::MapStateStartedEventDetails
+
+    MissingRequiredParameter.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MissingRequiredParameter.struct_class = Types::MissingRequiredParameter
+
+    ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ResourceNotFound.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
+    ResourceNotFound.struct_class = Types::ResourceNotFound
+
     SendTaskFailureInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
-    SendTaskFailureInput.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    SendTaskFailureInput.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    SendTaskFailureInput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    SendTaskFailureInput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     SendTaskFailureInput.struct_class = Types::SendTaskFailureInput
 
     SendTaskFailureOutput.struct_class = Types::SendTaskFailureOutput
@@ -350,14 +477,14 @@ module Aws::States
     SendTaskHeartbeatOutput.struct_class = Types::SendTaskHeartbeatOutput
 
     SendTaskSuccessInput.add_member(:task_token, Shapes::ShapeRef.new(shape: TaskToken, required: true, location_name: "taskToken"))
-    SendTaskSuccessInput.add_member(:output, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "output"))
+    SendTaskSuccessInput.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, required: true, location_name: "output"))
     SendTaskSuccessInput.struct_class = Types::SendTaskSuccessInput
 
     SendTaskSuccessOutput.struct_class = Types::SendTaskSuccessOutput
 
     StartExecutionInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     StartExecutionInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
-    StartExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    StartExecutionInput.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     StartExecutionInput.struct_class = Types::StartExecutionInput
 
     StartExecutionOutput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
@@ -365,31 +492,123 @@ module Aws::States
     StartExecutionOutput.struct_class = Types::StartExecutionOutput
 
     StateEnteredEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    StateEnteredEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: Data, location_name: "input"))
+    StateEnteredEventDetails.add_member(:input, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "input"))
     StateEnteredEventDetails.struct_class = Types::StateEnteredEventDetails
 
     StateExitedEventDetails.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
-    StateExitedEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: Data, location_name: "output"))
+    StateExitedEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
     StateExitedEventDetails.struct_class = Types::StateExitedEventDetails
+
+    StateMachineAlreadyExists.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StateMachineAlreadyExists.struct_class = Types::StateMachineAlreadyExists
+
+    StateMachineDeleting.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StateMachineDeleting.struct_class = Types::StateMachineDeleting
+
+    StateMachineDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StateMachineDoesNotExist.struct_class = Types::StateMachineDoesNotExist
+
+    StateMachineLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StateMachineLimitExceeded.struct_class = Types::StateMachineLimitExceeded
 
     StateMachineList.member = Shapes::ShapeRef.new(shape: StateMachineListItem)
 
     StateMachineListItem.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     StateMachineListItem.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    StateMachineListItem.add_member(:type, Shapes::ShapeRef.new(shape: StateMachineType, required: true, location_name: "type"))
     StateMachineListItem.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDate"))
     StateMachineListItem.struct_class = Types::StateMachineListItem
 
+    StateMachineTypeNotSupported.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    StateMachineTypeNotSupported.struct_class = Types::StateMachineTypeNotSupported
+
     StopExecutionInput.add_member(:execution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "executionArn"))
-    StopExecutionInput.add_member(:error, Shapes::ShapeRef.new(shape: Error, location_name: "error"))
-    StopExecutionInput.add_member(:cause, Shapes::ShapeRef.new(shape: Cause, location_name: "cause"))
+    StopExecutionInput.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    StopExecutionInput.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
     StopExecutionInput.struct_class = Types::StopExecutionInput
 
     StopExecutionOutput.add_member(:stop_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "stopDate"))
     StopExecutionOutput.struct_class = Types::StopExecutionOutput
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    TaskDoesNotExist.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TaskDoesNotExist.struct_class = Types::TaskDoesNotExist
+
+    TaskFailedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskFailedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    TaskFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    TaskFailedEventDetails.struct_class = Types::TaskFailedEventDetails
+
+    TaskScheduledEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskScheduledEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskScheduledEventDetails.add_member(:region, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "region"))
+    TaskScheduledEventDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ConnectorParameters, required: true, location_name: "parameters"))
+    TaskScheduledEventDetails.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: TimeoutInSeconds, location_name: "timeoutInSeconds", metadata: {"box"=>true}))
+    TaskScheduledEventDetails.struct_class = Types::TaskScheduledEventDetails
+
+    TaskStartFailedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskStartFailedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskStartFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    TaskStartFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    TaskStartFailedEventDetails.struct_class = Types::TaskStartFailedEventDetails
+
+    TaskStartedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskStartedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskStartedEventDetails.struct_class = Types::TaskStartedEventDetails
+
+    TaskSubmitFailedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskSubmitFailedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskSubmitFailedEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    TaskSubmitFailedEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    TaskSubmitFailedEventDetails.struct_class = Types::TaskSubmitFailedEventDetails
+
+    TaskSubmittedEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskSubmittedEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskSubmittedEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
+    TaskSubmittedEventDetails.struct_class = Types::TaskSubmittedEventDetails
+
+    TaskSucceededEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskSucceededEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskSucceededEventDetails.add_member(:output, Shapes::ShapeRef.new(shape: SensitiveData, location_name: "output"))
+    TaskSucceededEventDetails.struct_class = Types::TaskSucceededEventDetails
+
+    TaskTimedOut.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TaskTimedOut.struct_class = Types::TaskTimedOut
+
+    TaskTimedOutEventDetails.add_member(:resource_type, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resourceType"))
+    TaskTimedOutEventDetails.add_member(:resource, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "resource"))
+    TaskTimedOutEventDetails.add_member(:error, Shapes::ShapeRef.new(shape: SensitiveError, location_name: "error"))
+    TaskTimedOutEventDetails.add_member(:cause, Shapes::ShapeRef.new(shape: SensitiveCause, location_name: "cause"))
+    TaskTimedOutEventDetails.struct_class = Types::TaskTimedOutEventDetails
+
+    TooManyTags.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTags.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceName"))
+    TooManyTags.struct_class = Types::TooManyTags
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
     UpdateStateMachineInput.add_member(:state_machine_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "stateMachineArn"))
     UpdateStateMachineInput.add_member(:definition, Shapes::ShapeRef.new(shape: Definition, location_name: "definition"))
     UpdateStateMachineInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "roleArn"))
+    UpdateStateMachineInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     UpdateStateMachineInput.struct_class = Types::UpdateStateMachineInput
 
     UpdateStateMachineOutput.add_member(:update_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDate"))
@@ -402,12 +621,16 @@ module Aws::States
       api.version = "2016-11-23"
 
       api.metadata = {
+        "apiVersion" => "2016-11-23",
         "endpointPrefix" => "states",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "serviceAbbreviation" => "AWS SFN",
         "serviceFullName" => "AWS Step Functions",
+        "serviceId" => "SFN",
         "signatureVersion" => "v4",
         "targetPrefix" => "AWSStepFunctions",
+        "uid" => "states-2016-11-23",
       }
 
       api.add_operation(:create_activity, Seahorse::Model::Operation.new.tap do |o|
@@ -418,6 +641,7 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: CreateActivityOutput)
         o.errors << Shapes::ShapeRef.new(shape: ActivityLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
       end)
 
       api.add_operation(:create_state_machine, Seahorse::Model::Operation.new.tap do |o|
@@ -429,9 +653,12 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
         o.errors << Shapes::ShapeRef.new(shape: InvalidName)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoggingConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
       end)
 
       api.add_operation(:delete_activity, Seahorse::Model::Operation.new.tap do |o|
@@ -544,6 +771,7 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: InvalidToken)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)
+        o.errors << Shapes::ShapeRef.new(shape: StateMachineTypeNotSupported)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -565,6 +793,16 @@ module Aws::States
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:send_task_failure, Seahorse::Model::Operation.new.tap do |o|
@@ -626,6 +864,27 @@ module Aws::States
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTags)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
       api.add_operation(:update_state_machine, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateStateMachine"
         o.http_method = "POST"
@@ -634,6 +893,7 @@ module Aws::States
         o.output = Shapes::ShapeRef.new(shape: UpdateStateMachineOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArn)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDefinition)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLoggingConfiguration)
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameter)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDeleting)
         o.errors << Shapes::ShapeRef.new(shape: StateMachineDoesNotExist)

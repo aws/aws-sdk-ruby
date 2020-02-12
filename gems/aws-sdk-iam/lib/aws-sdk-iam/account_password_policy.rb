@@ -16,6 +16,7 @@ module Aws::IAM
       options = Hash === args.last ? args.pop.dup : {}
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -251,7 +252,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do not
@@ -289,7 +290,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     # @option options [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
     #

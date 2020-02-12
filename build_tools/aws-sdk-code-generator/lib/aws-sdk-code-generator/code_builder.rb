@@ -57,11 +57,18 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/plugins/apig_endpoint.rb", apig_endpoint_class)
         end
         y.yield("#{prefix}.rb", service_module(prefix))
-        y.yield("#{prefix}/customizations.rb", '')
+        unless prefix == 'aws-sdk-sts'
+          y.yield("#{prefix}/customizations.rb", '')
+        end
         y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/event_streams.rb", event_streams_module) if has_eventstream
+        if has_eventstream
+          y.yield("#{prefix}/event_streams.rb", event_streams_module)
+        end
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
+        if @service.protocol_settings['h2'] == 'eventstream'
+          y.yield("#{prefix}/async_client.rb", async_client_class)
+        end
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", root_resource_class)
@@ -97,6 +104,7 @@ module AwsSdkCodeGenerator
       Views::ClientClass.new(
         service_identifier: @service.identifier,
         service_name: @service.name,
+        protocol_settings: @service.protocol_settings,
         module_name: @service.module_name,
         gem_name: @service.gem_name,
         gem_version: @service.gem_version,
@@ -110,6 +118,24 @@ module AwsSdkCodeGenerator
         waiters: @service.waiters,
         examples: @service.examples,
         custom: @service.protocol == 'api-gateway'
+      ).render
+    end
+
+    def async_client_class
+      Views::AsyncClientClass.new(
+        service_identifier: @service.identifier,
+        service_name: @service.name,
+        protocol_settings: @service.protocol_settings,
+        module_name: @service.module_name,
+        gem_name: @service.gem_name,
+        gem_version: @service.gem_version,
+        aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
+        protocol: @service.protocol,
+        signature_version: @service.signature_version,
+        add_plugins: @service.add_plugins,
+        remove_plugins: @service.remove_plugins,
+        api: @service.api,
+        async_client: true
       ).render
     end
 

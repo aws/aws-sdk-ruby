@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1.0 (2019-03-13)
+------------------
+
+* Feature - Support signature V4 signing per event
+
 1.0.3 (2018-06-28)
 ------------------
 

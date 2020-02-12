@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"Amazon WorkMail",
+    "serviceId":"WorkMail",
     "signatureVersion":"v4",
     "targetPrefix":"WorkMailService",
     "uid":"workmail-2017-10-01"
@@ -64,7 +65,8 @@
         {"shape":"MailDomainNotFoundException"},
         {"shape":"MailDomainStateException"},
         {"shape":"OrganizationNotFoundException"},
-        {"shape":"OrganizationStateException"}
+        {"shape":"OrganizationStateException"},
+        {"shape":"LimitExceededException"}
       ],
       "idempotent":true
     },
@@ -332,6 +334,21 @@
       ],
       "idempotent":true
     },
+    "GetMailboxDetails":{
+      "name":"GetMailboxDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetMailboxDetailsRequest"},
+      "output":{"shape":"GetMailboxDetailsResponse"},
+      "errors":[
+        {"shape":"OrganizationNotFoundException"},
+        {"shape":"OrganizationStateException"},
+        {"shape":"EntityNotFoundException"}
+      ],
+      "idempotent":true
+    },
     "ListAliases":{
       "name":"ListAliases",
       "http":{
@@ -443,6 +460,18 @@
       ],
       "idempotent":true
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceRequest"},
+      "output":{"shape":"ListTagsForResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "ListUsers":{
       "name":"ListUsers",
       "http":{
@@ -519,6 +548,49 @@
       ],
       "idempotent":true
     },
+    "TagResource":{
+      "name":"TagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"TagResourceRequest"},
+      "output":{"shape":"TagResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"TooManyTagsException"},
+        {"shape":"OrganizationStateException"}
+      ]
+    },
+    "UntagResource":{
+      "name":"UntagResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UntagResourceRequest"},
+      "output":{"shape":"UntagResourceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
+    "UpdateMailboxQuota":{
+      "name":"UpdateMailboxQuota",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateMailboxQuotaRequest"},
+      "output":{"shape":"UpdateMailboxQuotaResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"OrganizationNotFoundException"},
+        {"shape":"OrganizationStateException"},
+        {"shape":"EntityNotFoundException"},
+        {"shape":"EntityStateException"}
+      ],
+      "idempotent":true
+    },
     "UpdatePrimaryEmailAddress":{
       "name":"UpdatePrimaryEmailAddress",
       "http":{
@@ -570,6 +642,11 @@
     "Aliases":{
       "type":"list",
       "member":{"shape":"EmailAddress"}
+    },
+    "AmazonResourceName":{
+      "type":"string",
+      "max":1011,
+      "min":1
     },
     "AssociateDelegateToResourceRequest":{
       "type":"structure",
@@ -841,7 +918,8 @@
         "DirectoryType":{"shape":"String"},
         "DefaultMailDomain":{"shape":"String"},
         "CompletedDate":{"shape":"Timestamp"},
-        "ErrorMessage":{"shape":"String"}
+        "ErrorMessage":{"shape":"String"},
+        "ARN":{"shape":"AmazonResourceName"}
       }
     },
     "DescribeResourceRequest":{
@@ -984,6 +1062,24 @@
       },
       "exception":true
     },
+    "GetMailboxDetailsRequest":{
+      "type":"structure",
+      "required":[
+        "OrganizationId",
+        "UserId"
+      ],
+      "members":{
+        "OrganizationId":{"shape":"OrganizationId"},
+        "UserId":{"shape":"WorkMailIdentifier"}
+      }
+    },
+    "GetMailboxDetailsResponse":{
+      "type":"structure",
+      "members":{
+        "MailboxQuota":{"shape":"MailboxQuota"},
+        "MailboxSize":{"shape":"MailboxSize"}
+      }
+    },
     "Group":{
       "type":"structure",
       "members":{
@@ -1020,6 +1116,13 @@
       "exception":true
     },
     "InvalidPasswordException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
+    },
+    "LimitExceededException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"String"}
@@ -1152,6 +1255,19 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListTagsForResourceRequest":{
+      "type":"structure",
+      "required":["ResourceARN"],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"}
+      }
+    },
+    "ListTagsForResourceResponse":{
+      "type":"structure",
+      "members":{
+        "Tags":{"shape":"TagList"}
+      }
+    },
     "ListUsersRequest":{
       "type":"structure",
       "required":["OrganizationId"],
@@ -1181,6 +1297,15 @@
         "Message":{"shape":"String"}
       },
       "exception":true
+    },
+    "MailboxQuota":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "MailboxSize":{
+      "type":"double",
+      "min":0
     },
     "MaxResults":{
       "type":"integer",
@@ -1383,6 +1508,13 @@
       "min":1,
       "pattern":"[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z0-9]{2,})?"
     },
+    "ResourceNotFoundException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
+    },
     "ResourceType":{
       "type":"string",
       "enum":[
@@ -1398,13 +1530,103 @@
       "type":"string",
       "max":256
     },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "Key",
+        "Value"
+      ],
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"},
+      "max":50,
+      "min":0
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "max":50,
+      "min":0
+    },
+    "TagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "Tags"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "TagValue":{
+      "type":"string",
+      "max":256,
+      "min":0
+    },
     "Timestamp":{"type":"timestamp"},
+    "TooManyTagsException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"String"}
+      },
+      "exception":true
+    },
     "UnsupportedOperationException":{
       "type":"structure",
       "members":{
         "Message":{"shape":"String"}
       },
       "exception":true
+    },
+    "UntagResourceRequest":{
+      "type":"structure",
+      "required":[
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceARN":{"shape":"AmazonResourceName"},
+        "TagKeys":{"shape":"TagKeyList"}
+      }
+    },
+    "UntagResourceResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateMailboxQuotaRequest":{
+      "type":"structure",
+      "required":[
+        "OrganizationId",
+        "UserId",
+        "MailboxQuota"
+      ],
+      "members":{
+        "OrganizationId":{"shape":"OrganizationId"},
+        "UserId":{"shape":"WorkMailIdentifier"},
+        "MailboxQuota":{"shape":"MailboxQuota"}
+      }
+    },
+    "UpdateMailboxQuotaResponse":{
+      "type":"structure",
+      "members":{
+      }
     },
     "UpdatePrimaryEmailAddressRequest":{
       "type":"structure",

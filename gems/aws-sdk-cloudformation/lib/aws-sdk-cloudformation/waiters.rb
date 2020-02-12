@@ -182,13 +182,19 @@ module Aws::CloudFormation
               },
               {
                 "argument" => "stacks[].stack_status",
+                "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              },
+              {
+                "argument" => "stacks[].stack_status",
                 "expected" => "UPDATE_ROLLBACK_FAILED",
                 "matcher" => "pathAny",
                 "state" => "failure"
               },
               {
                 "argument" => "stacks[].stack_status",
-                "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
+                "expected" => "UPDATE_ROLLBACK_COMPLETE",
                 "matcher" => "pathAny",
                 "state" => "failure"
               }
@@ -233,6 +239,80 @@ module Aws::CloudFormation
                 "matcher" => "error",
                 "expected" => "ValidationError",
                 "state" => "retry"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_stacks)
+      # @return (see Client#describe_stacks)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until stack status is IMPORT_COMPLETE.
+    class StackImportComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (120)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 120,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_stacks,
+            acceptors: [
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "IMPORT_COMPLETE",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "expected" => "ROLLBACK_COMPLETE",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "stacks[].stack_status"
+              },
+              {
+                "expected" => "ROLLBACK_FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "stacks[].stack_status"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "IMPORT_ROLLBACK_IN_PROGRESS",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              },
+              {
+                "argument" => "stacks[].stack_status",
+                "expected" => "IMPORT_ROLLBACK_FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              },
+              {
+                "expected" => "IMPORT_ROLLBACK_COMPLETE",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "stacks[].stack_status"
+              },
+              {
+                "expected" => "ValidationError",
+                "matcher" => "error",
+                "state" => "failure"
               }
             ]
           )
@@ -303,6 +383,51 @@ module Aws::CloudFormation
 
       # @option (see Client#describe_stacks)
       # @return (see Client#describe_stacks)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until type registration is COMPLETE.
+    class TypeRegistrationComplete
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (120)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 120,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_type_registration,
+            acceptors: [
+              {
+                "argument" => "progress_status",
+                "expected" => "COMPLETE",
+                "matcher" => "path",
+                "state" => "success"
+              },
+              {
+                "argument" => "progress_status",
+                "expected" => "FAILED",
+                "matcher" => "path",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_type_registration)
+      # @return (see Client#describe_type_registration)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

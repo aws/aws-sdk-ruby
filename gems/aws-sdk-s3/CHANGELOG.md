@@ -1,6 +1,282 @@
 Unreleased Changes
 ------------------
 
+1.60.2 (2020-02-07)
+------------------
+
+* Issue - Allow `Aws::S3::Encrypted::Client` to be used with a Resource client.
+
+1.60.1 (2019-12-19)
+------------------
+
+* Issue - Allow downcased option for S3 us-east-1 regionalization.
+
+1.60.0 (2019-12-18)
+------------------
+
+* Feature - Updates Amazon S3 endpoints allowing you to configure your client to opt-in to using S3 with the us-east-1 regional endpoint, instead of global.
+
+1.59.1 (2019-12-17)
+------------------
+
+* Issue - Added validation in the s3 presigner to check for 0 or negative expire_in times.
+
+1.59.0 (2019-12-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fixed an issue with Access Point ARNs not resigning correctly.
+
+* Issue - Fixed S3 gemspec to require a minimum core version to support S3 Access Point ARNs. (GitHub PR #2184)
+
+1.58.0 (2019-12-03)
+------------------
+
+* Feature - Amazon S3 Access Points is a new S3 feature that simplifies managing data access at scale for shared data sets on Amazon S3. Access Points provide a customizable way to access the objects in a bucket, with a unique hostname and access policy that enforces the specific permissions and network controls for any request made through the access point. This represents a new way of provisioning access to shared data sets.
+
+1.57.0 (2019-11-20)
+------------------
+
+* Feature - This release introduces support for Amazon S3 Replication Time Control, a new feature of S3 Replication that provides a predictable replication time backed by a Service Level Agreement. S3 Replication Time Control helps customers meet compliance or business requirements for data replication, and provides visibility into the replication process with new Amazon CloudWatch Metrics.
+
+1.56.0 (2019-11-18)
+------------------
+
+* Feature - Added support for S3 Replication for existing objects. This release allows customers who have requested and been granted access to replicate existing S3 objects across buckets.
+
+* Issue - Fix issue where `Aws::Errors::MissingRegionError` was not thrown for S3 or S3Control clients.
+
+1.55.0 (2019-11-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2019-11-13)
+------------------
+
+* Feature - Support `:s3_us_east_1_regional_endpoint` with `regional` to enable IAD regional endpoint for S3.
+
+1.53.0 (2019-10-31)
+------------------
+
+* Feature - S3 Inventory now supports a new field 'IntelligentTieringAccessTier' that reports the access tier (frequent or infrequent) of objects stored in Intelligent-Tiering storage class.
+
+1.52.0 (2019-10-28)
+------------------
+
+* Feature - Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range.
+
+1.51.0 (2019-10-23)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2019-10-17)
+------------------
+
+* Feature - Add support to yield the response in #upload_file if a block is given.
+
+1.49.0 (2019-10-10)
+------------------
+
+* Feature - Support `#delete_object` and `#head_object` for encryption client.
+
+1.48.0 (2019-08-30)
+------------------
+
+* Feature - Added a `:whitelist_headers` option to S3 presigner.
+
+1.47.0 (2019-08-28)
+------------------
+
+* Feature - Added a `:time` option to S3 presigner.
+
+1.46.0 (2019-07-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2019-07-03)
+------------------
+
+* Feature - Add S3 x-amz-server-side-encryption-context support.
+
+1.44.0 (2019-07-01)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2019-06-17)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2019-06-04)
+------------------
+
+* Feature - Documentation updates for s3
+
+1.41.0 (2019-05-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2019-05-21)
+------------------
+
+* Feature - API update.
+
+1.39.0 (2019-05-16)
+------------------
+
+* Feature - API update.
+
+1.38.0 (2019-05-15)
+------------------
+
+* Feature - API update.
+
+1.37.0 (2019-05-14)
+------------------
+
+* Feature - API update.
+
+1.36.1 (2019-04-19)
+------------------
+
+* Issue - Reduce memory usage of `Aws::S3::Object#upload_stream` when `StringIO` is used
+
+1.36.0 (2019-03-27)
+------------------
+
+* Feature - API update.
+
+1.35.0 (2019-03-22)
+------------------
+
+* Feature - API update.
+
+1.34.0 (2019-03-21)
+------------------
+
+* Feature - API update.
+
+1.33.0 (2019-03-18)
+------------------
+
+* Feature - API update.
+
+1.32.0 (2019-03-14)
+------------------
+
+* Feature - API update.
+
+1.31.0 (2019-03-08)
+------------------
+
+* Feature - API update.
+
+1.30.1 (2019-01-11)
+------------------
+
+* Issue - Plugin updates to support client-side monitoring.
+
+1.30.0 (2018-12-04)
+------------------
+
+* Feature - API update.
+
+1.29.0 (2018-11-30)
+------------------
+
+* Feature - API update.
+
+1.28.0 (2018-11-29)
+------------------
+
+* Feature - API update.
+
+* Issue - Update operations needs Content-MD5 header
+
+1.27.0 (2018-11-27)
+------------------
+
+* Feature - API update.
+
+1.26.0 (2018-11-26)
+------------------
+
+* Feature - API update.
+
+1.25.0 (2018-11-20)
+------------------
+
+* Feature - API update.
+
+1.24.1 (2018-11-16)
+------------------
+
+* Issue - Update version dependency on `aws-sdk-core` to support endpoint discovery.
+
+1.24.0 (2018-11-15)
+------------------
+
+* Feature - API update.
+
+1.23.1 (2018-10-30)
+------------------
+
+* Issue - Support multipart upload empty stream (GitHub Issue #1880)
+* Issue - Aws::S3::Encryption::IOAuthDecrypter - Fixes issue where the body tag being split across packets could cause GCM decryption to fail intermittently.
+
+1.23.0 (2018-10-24)
+------------------
+
+* Feature - API update.
+
+1.22.0 (2018-10-23)
+------------------
+
+* Feature - API update.
+
+1.21.0 (2018-10-04)
+------------------
+
+* Feature - API update.
+
+1.20.0 (2018-09-19)
+------------------
+
+* Feature - API update.
+
+1.19.0 (2018-09-06)
+------------------
+
+* Feature - Adds code paths and plugins for future SDK instrumentation and telemetry.
+
+1.18.0 (2018-09-05)
+------------------
+
+* Feature - API update.
+
+1.17.1 (2018-08-29)
+------------------
+
+* Issue - Update example for bucket#url (Github Issue#1868)
+
+* Issue - Support opt-out counting #presigned_url as #api_requests (Github Issue#1866)
+
+1.17.0 (2018-07-11)
+------------------
+
+* Feature - API update.
+
+1.16.1 (2018-07-10)
+------------------
+
+* Issue - Avoids region redirects for FIPS endpoints
+
 1.16.0 (2018-06-28)
 ------------------
 
@@ -194,4 +470,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-s3` gem.
-

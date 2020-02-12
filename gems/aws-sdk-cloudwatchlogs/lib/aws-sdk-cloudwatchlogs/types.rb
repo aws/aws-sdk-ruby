@@ -22,12 +22,14 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of the CMK to use when encrypting log
-    #   data. For more information, see [Amazon Resource Names - AWS Key
-    #   Management Service (AWS KMS)][1].
+    #   data. This must be a symmetric CMK. For more information, see
+    #   [Amazon Resource Names - AWS Key Management Service (AWS KMS)][1]
+    #   and [Using Symmetric and Asymmetric Keys][2].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest AWS API Documentation
@@ -84,14 +86,14 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] from
     #   The start time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
-    #   stamp earlier than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp earlier than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
     #   The end time of the range for the request, expressed as the number
-    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a time
-    #   stamp later than this time are not exported.
+    #   of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a
+    #   timestamp later than this time are not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] destination
@@ -150,7 +152,7 @@ module Aws::CloudWatchLogs
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -187,6 +189,18 @@ module Aws::CloudWatchLogs
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
+      include Aws::Structure
+    end
+
+    # The event was already logged.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DataAlreadyAcceptedException AWS API Documentation
+    #
+    class DataAlreadyAcceptedException < Struct.new(
+      :expected_sequence_token)
       include Aws::Structure
     end
 
@@ -509,7 +523,7 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #   @return [String]
     #
     # @!attribute [rw] order_by
@@ -604,13 +618,15 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   The name of the CloudWatch metric to which the monitored log
-    #   information should be published. For example, you may publish to a
-    #   metric called ErrorCount.
+    #   Filters results to include only those with the specified metric
+    #   name. If you include this parameter in your request, you must also
+    #   include the `metricNamespace` parameter.
     #   @return [String]
     #
     # @!attribute [rw] metric_namespace
-    #   The namespace of the CloudWatch metric.
+    #   Filters results to include only those in the specified namespace. If
+    #   you include this parameter in your request, you must also include
+    #   the `metricName` parameter.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFiltersRequest AWS API Documentation
@@ -638,6 +654,63 @@ module Aws::CloudWatchLogs
     #
     class DescribeMetricFiltersResponse < Struct.new(
       :metric_filters,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeQueriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName",
+    #         status: "Scheduled", # accepts Scheduled, Running, Complete, Failed, Cancelled
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   Limits the returned queries to only those for the specified log
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Limits the returned queries to only those that have the specified
+    #   status. Valid values are `Cancelled`, `Complete`, `Failed`,
+    #   `Running`, and `Scheduled`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Limits the number of returned queries to the specified number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueriesRequest AWS API Documentation
+    #
+    class DescribeQueriesRequest < Struct.new(
+      :log_group_name,
+      :status,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queries
+    #   The list of queries that match the request.
+    #   @return [Array<Types::QueryInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. The token expires
+    #   after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeQueriesResponse AWS API Documentation
+    #
+    class DescribeQueriesResponse < Struct.new(
+      :queries,
       :next_token)
       include Aws::Structure
     end
@@ -818,13 +891,13 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] from
     #   The start time, expressed as the number of milliseconds after Jan 1,
-    #   1970 00:00:00 UTC. Events with a time stamp before this time are not
+    #   1970 00:00:00 UTC. Events with a timestamp before this time are not
     #   exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
     #   The end time, expressed as the number of milliseconds after Jan 1,
-    #   1970 00:00:00 UTC. Events with a time stamp later than this time are
+    #   1970 00:00:00 UTC. Events with a timestamp later than this time are
     #   not exported.
     #   @return [Integer]
     #
@@ -904,6 +977,7 @@ module Aws::CloudWatchLogs
     #       {
     #         log_group_name: "LogGroupName", # required
     #         log_stream_names: ["LogStreamName"],
+    #         log_stream_name_prefix: "LogStreamName",
     #         start_time: 1,
     #         end_time: 1,
     #         filter_pattern: "FilterPattern",
@@ -913,28 +987,48 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] log_group_name
-    #   The name of the log group.
+    #   The name of the log group to search.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_names
-    #   Optional list of log stream names.
+    #   Filters the results to only logs from the log streams in this list.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, the action returns an `InvalidParameterException`
+    #   error.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_stream_name_prefix
+    #   Filters the results to include only events from log streams that
+    #   have names starting with this prefix.
+    #
+    #   If you specify a value for both `logStreamNamePrefix` and
+    #   `logStreamNames`, but the value for `logStreamNamePrefix` does not
+    #   match any log stream names specified in `logStreamNames`, the action
+    #   returns an `InvalidParameterException` error.
+    #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp before this
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this
     #   time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
     #   this time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] filter_pattern
-    #   The filter pattern to use. If not provided, all the events are
-    #   matched.
+    #   The filter pattern to use. For more information, see [Filter and
+    #   Pattern Syntax][1].
+    #
+    #   If not provided, all the events are matched.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -954,6 +1048,11 @@ module Aws::CloudWatchLogs
     #   all the matched log events in the first log stream are searched
     #   first, then those in the next log stream, and so on. The default is
     #   false.
+    #
+    #   **IMPORTANT:** Starting on June 17, 2019, this parameter will be
+    #   ignored and the value will be assumed to be true. The response from
+    #   this operation will always interleave events from multiple log
+    #   streams within a log group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
@@ -961,6 +1060,7 @@ module Aws::CloudWatchLogs
     class FilterLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_names,
+      :log_stream_name_prefix,
       :start_time,
       :end_time,
       :filter_pattern,
@@ -996,7 +1096,7 @@ module Aws::CloudWatchLogs
     # Represents a matched event.
     #
     # @!attribute [rw] log_stream_name
-    #   The name of the log stream this event belongs to.
+    #   The name of the log stream to which this event belongs.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -1051,19 +1151,23 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] start_time
     #   The start of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp earlier
-    #   than this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to
+    #   this time or later than this time are included. Events with a
+    #   timestamp earlier than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
     #   The end of the time range, expressed as the number of milliseconds
-    #   after Jan 1, 1970 00:00:00 UTC. Events with a time stamp later than
-    #   this time are not included.
+    #   after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or
+    #   later than this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
+    #
+    #   Using this token works only when you specify `true` for
+    #   `startFromHead`.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1076,6 +1180,9 @@ module Aws::CloudWatchLogs
     #   If the value is true, the earliest log events are returned first. If
     #   the value is false, the latest log events are returned first. The
     #   default value is false.
+    #
+    #   If you are using `nextToken` in this operation, you must specify
+    #   `true` for `startFromHead`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
@@ -1097,12 +1204,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] next_forward_token
     #   The token for the next set of items in the forward direction. The
-    #   token expires after 24 hours.
+    #   token expires after 24 hours. If you have reached the end of the
+    #   stream, it will return the same token you passed in.
     #   @return [String]
     #
     # @!attribute [rw] next_backward_token
     #   The token for the next set of items in the backward direction. The
-    #   token expires after 24 hours.
+    #   token expires after 24 hours. This token will never be null. If you
+    #   have reached the end of the stream, it will return the same token
+    #   you passed in.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsResponse AWS API Documentation
@@ -1111,6 +1221,133 @@ module Aws::CloudWatchLogs
       :events,
       :next_forward_token,
       :next_backward_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLogGroupFieldsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #         time: 1,
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The time to set as the center of the query. If you specify `time`,
+    #   the 8 minutes before and 8 minutes after this time are searched. If
+    #   you omit `time`, the past 15 minutes are queried.
+    #
+    #   The `time` value is specified as epoch time, the number of seconds
+    #   since January 1, 1970, 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsRequest AWS API Documentation
+    #
+    class GetLogGroupFieldsRequest < Struct.new(
+      :log_group_name,
+      :time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_group_fields
+    #   The array of fields found in the query. Each object in the array
+    #   contains the name of the field, along with the percentage of time it
+    #   appeared in the log events that were queried.
+    #   @return [Array<Types::LogGroupField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogGroupFieldsResponse AWS API Documentation
+    #
+    class GetLogGroupFieldsResponse < Struct.new(
+      :log_group_fields)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLogRecordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_record_pointer: "LogRecordPointer", # required
+    #       }
+    #
+    # @!attribute [rw] log_record_pointer
+    #   The pointer corresponding to the log event record you want to
+    #   retrieve. You get this from the response of a `GetQueryResults`
+    #   operation. In that response, the value of the `@ptr` field for a log
+    #   event is the value to use as `logRecordPointer` to retrieve that
+    #   complete log event record.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecordRequest AWS API Documentation
+    #
+    class GetLogRecordRequest < Struct.new(
+      :log_record_pointer)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] log_record
+    #   The requested log event, as a JSON string.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogRecordResponse AWS API Documentation
+    #
+    class GetLogRecordResponse < Struct.new(
+      :log_record)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryResultsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_id: "QueryId", # required
+    #       }
+    #
+    # @!attribute [rw] query_id
+    #   The ID number of the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsRequest AWS API Documentation
+    #
+    class GetQueryResultsRequest < Struct.new(
+      :query_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   The log events that matched the query criteria during the most
+    #   recent time it ran.
+    #
+    #   The `results` value is an array of arrays. Each log event is one
+    #   object in the top-level array. Each of these log event objects is an
+    #   array of `field`/`value` pairs.
+    #   @return [Array<Array<Types::ResultField>>]
+    #
+    # @!attribute [rw] statistics
+    #   Includes the number of log events scanned by the query, the number
+    #   of log events that matched the query criteria, and the total number
+    #   of bytes in the log events that were scanned.
+    #   @return [Types::QueryStatistics]
+    #
+    # @!attribute [rw] status
+    #   The status of the most recent running of the query. Possible values
+    #   are `Cancelled`, `Complete`, `Failed`, `Running`, `Scheduled`,
+    #   `Timeout`, and `Unknown`.
+    #
+    #   Queries time out after 15 minutes of execution. To avoid having your
+    #   queries time out, reduce the time range being searched, or partition
+    #   your query into a number of queries.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
+    #
+    class GetQueryResultsResponse < Struct.new(
+      :results,
+      :statistics,
+      :status)
       include Aws::Structure
     end
 
@@ -1127,7 +1364,7 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] timestamp
     #   The time the event occurred, expressed as the number of milliseconds
-    #   fter Jan 1, 1970 00:00:00 UTC.
+    #   after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1139,6 +1376,20 @@ module Aws::CloudWatchLogs
     class InputLogEvent < Struct.new(
       :timestamp,
       :message)
+      include Aws::Structure
+    end
+
+    # The sequence token is not valid. You can get the correct sequence
+    # token in the `expectedSequenceToken` field in the
+    # `InvalidSequenceTokenException` message.
+    #
+    # @!attribute [rw] expected_sequence_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidSequenceTokenException AWS API Documentation
+    #
+    class InvalidSequenceTokenException < Struct.new(
+      :expected_sequence_token)
       include Aws::Structure
     end
 
@@ -1218,6 +1469,26 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The fields contained in log events found by a `GetLogGroupFields`
+    # operation, along with the percentage of queried log events in which
+    # each field appears.
+    #
+    # @!attribute [rw] name
+    #   The name of a log field.
+    #   @return [String]
+    #
+    # @!attribute [rw] percent
+    #   The percentage of log events queried that contained the field.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupField AWS API Documentation
+    #
+    class LogGroupField < Struct.new(
+      :name,
+      :percent)
+      include Aws::Structure
+    end
+
     # Represents a log stream, which is a sequence of log events from a
     # single emitter of logs.
     #
@@ -1236,11 +1507,12 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] last_event_timestamp
-    #   the time of the most recent log event in the log stream in
+    #   The time of the most recent log event in the log stream in
     #   CloudWatch Logs. This number is expressed as the number of
-    #   milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTime updates
-    #   on an eventual consistency basis. It typically updates in less than
-    #   an hour from ingestion, but may take longer in some rare situations.
+    #   milliseconds after Jan 1, 1970 00:00:00 UTC. The `lastEventTime`
+    #   value updates on an eventual consistency basis. It typically updates
+    #   in less than an hour from ingestion, but may take longer in some
+    #   rare situations.
     #   @return [Integer]
     #
     # @!attribute [rw] last_ingestion_time
@@ -1258,6 +1530,11 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
+    #
+    #   **IMPORTANT:**On June 17, 2019, this parameter was deprecated for
+    #   log streams, and is always reported as zero. This change applies
+    #   only to log streams. The `storedBytes` parameter for log groups is
+    #   not affected.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
@@ -1274,6 +1551,27 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The query string is not valid. Details about this error are displayed
+    # in a `QueryCompileError` object. For more information, see .
+    #
+    # For more information about valid query syntax, see [CloudWatch Logs
+    # Insights Query Syntax][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #
+    # @!attribute [rw] query_compile_error
+    #   Reserved.
+    #   @return [Types::QueryCompileError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MalformedQueryException AWS API Documentation
+    #
+    class MalformedQueryException < Struct.new(
+      :query_compile_error)
+      include Aws::Structure
+    end
+
     # Metric filters express how CloudWatch Logs would extract metric
     # observations from ingested log events and transform them into metric
     # data in a CloudWatch metric.
@@ -1284,9 +1582,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] metric_transformations
@@ -1336,7 +1634,7 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
-    # Indicates how to transform ingested log events in to metric data in a
+    # Indicates how to transform ingested log events to metric data in a
     # CloudWatch metric.
     #
     # @note When making an API call, you may pass MetricTransformation
@@ -1593,18 +1891,17 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] policy_document
     #   Details of the new policy, including the identity of the principal
     #   that is enabled to put logs to this account. This is formatted as a
-    #   JSON string.
+    #   JSON string. This parameter is required.
     #
     #   The following example creates a resource policy enabling the Route
     #   53 service to put DNS query logs in to the specified log group.
     #   Replace "logArn" with the ARN of your CloudWatch Logs resource,
     #   such as a log group or log stream.
     #
-    #   \\\{ "Version": "2012-10-17" "Statement": \[ \\\{ "Sid":
-    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow",
-    #   "Principal": \\\{ "Service": \[ "route53.amazonaws.com" \]
-    #   \\}, "Action":"logs:PutLogEvents", "Resource": logArn \\} \]
-    #   \\}
+    #   `\{ "Version": "2012-10-17", "Statement": [ \{ "Sid":
+    #   "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": \{
+    #   "Service": [ "route53.amazonaws.com" ] \},
+    #   "Action":"logs:PutLogEvents", "Resource": "logArn" \} ] \} `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicyRequest AWS API Documentation
@@ -1723,6 +2020,103 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Reserved.
+    #
+    # @!attribute [rw] location
+    #   Reserved.
+    #   @return [Types::QueryCompileErrorLocation]
+    #
+    # @!attribute [rw] message
+    #   Reserved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileError AWS API Documentation
+    #
+    class QueryCompileError < Struct.new(
+      :location,
+      :message)
+      include Aws::Structure
+    end
+
+    # Reserved.
+    #
+    # @!attribute [rw] start_char_offset
+    #   Reserved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_char_offset
+    #   Reserved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryCompileErrorLocation AWS API Documentation
+    #
+    class QueryCompileErrorLocation < Struct.new(
+      :start_char_offset,
+      :end_char_offset)
+      include Aws::Structure
+    end
+
+    # Information about one CloudWatch Logs Insights query that matches the
+    # request in a `DescribeQueries` operation.
+    #
+    # @!attribute [rw] query_id
+    #   The unique ID number of this query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The query string used in this query.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of this query. Possible values are `Cancelled`,
+    #   `Complete`, `Failed`, `Running`, `Scheduled`, and `Unknown`.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time that this query was created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group scanned by this query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryInfo AWS API Documentation
+    #
+    class QueryInfo < Struct.new(
+      :query_id,
+      :query_string,
+      :status,
+      :create_time,
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # Contains the number of log events scanned by the query, the number of
+    # log events that matched the query criteria, and the total number of
+    # bytes in the log events that were scanned.
+    #
+    # @!attribute [rw] records_matched
+    #   The number of log events that matched the query string.
+    #   @return [Float]
+    #
+    # @!attribute [rw] records_scanned
+    #   The total number of log events scanned during the query.
+    #   @return [Float]
+    #
+    # @!attribute [rw] bytes_scanned
+    #   The total number of bytes in the log events scanned during the
+    #   query.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/QueryStatistics AWS API Documentation
+    #
+    class QueryStatistics < Struct.new(
+      :records_matched,
+      :records_scanned,
+      :bytes_scanned)
+      include Aws::Structure
+    end
+
     # Represents the rejected events.
     #
     # @!attribute [rw] too_new_log_event_start_index
@@ -1758,7 +2152,7 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] last_updated_time
-    #   Time stamp showing when this policy was last updated, expressed as
+    #   Timestamp showing when this policy was last updated, expressed as
     #   the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
@@ -1768,6 +2162,25 @@ module Aws::CloudWatchLogs
       :policy_name,
       :policy_document,
       :last_updated_time)
+      include Aws::Structure
+    end
+
+    # Contains one field from one log event returned by a CloudWatch Logs
+    # Insights query, along with the value of that field.
+    #
+    # @!attribute [rw] field
+    #   The log event field.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of this field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResultField AWS API Documentation
+    #
+    class ResultField < Struct.new(
+      :field,
+      :value)
       include Aws::Structure
     end
 
@@ -1789,6 +2202,114 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartQueryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName",
+    #         log_group_names: ["LogGroupName"],
+    #         start_time: 1, # required
+    #         end_time: 1, # required
+    #         query_string: "QueryString", # required
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The log group on which to perform the query.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_names
+    #   The list of log groups to be queried. You can include up to 20 log
+    #   groups.
+    #
+    #   A `StartQuery` operation must include a `logGroupNames` or a
+    #   `logGroupName` parameter, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] start_time
+    #   The beginning of the time range to query. The range is inclusive, so
+    #   the specified start time is included in the query. Specified as
+    #   epoch time, the number of seconds since January 1, 1970, 00:00:00
+    #   UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time range to query. The range is inclusive, so the
+    #   specified end time is included in the query. Specified as epoch
+    #   time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_string
+    #   The query string to use. For more information, see [CloudWatch Logs
+    #   Insights Query Syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of log events to return in the query. If the
+    #   query string uses the `fields` command, only the specified fields
+    #   and their values are returned. The default is 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest AWS API Documentation
+    #
+    class StartQueryRequest < Struct.new(
+      :log_group_name,
+      :log_group_names,
+      :start_time,
+      :end_time,
+      :query_string,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The unique ID of the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryResponse AWS API Documentation
+    #
+    class StartQueryResponse < Struct.new(
+      :query_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopQueryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_id: "QueryId", # required
+    #       }
+    #
+    # @!attribute [rw] query_id
+    #   The ID number of the query to stop. If necessary, you can use
+    #   `DescribeQueries` to find this ID number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQueryRequest AWS API Documentation
+    #
+    class StopQueryRequest < Struct.new(
+      :query_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] success
+    #   This is true if the query was stopped by the `StopQuery` operation.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StopQueryResponse AWS API Documentation
+    #
+    class StopQueryResponse < Struct.new(
+      :success)
+      include Aws::Structure
+    end
+
     # Represents a subscription filter.
     #
     # @!attribute [rw] filter_name
@@ -1801,9 +2322,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -1872,9 +2393,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] filter_pattern
     #   A symbolic description of how CloudWatch Logs should interpret the
-    #   data in each log event. For example, a log event may contain time
-    #   stamps, IP addresses, strings, and so on. You use the filter pattern
-    #   to specify what to look for in the log event message.
+    #   data in each log event. For example, a log event may contain
+    #   timestamps, IP addresses, strings, and so on. You use the filter
+    #   pattern to specify what to look for in the log event message.
     #   @return [String]
     #
     # @!attribute [rw] log_event_messages

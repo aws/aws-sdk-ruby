@@ -8,6 +8,29 @@
 module Aws::Inspector
   module Types
 
+    # You do not have required permissions to access the requested resource.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Code that indicates the type of error that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message,
+      :error_code,
+      :can_retry)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AddAttributesToFindingsRequest
     #   data as a hash:
     #
@@ -152,6 +175,33 @@ module Aws::Inspector
       :operating_system,
       :kernel_version,
       :ipv4_address)
+      include Aws::Structure
+    end
+
+    # You started an assessment run, but one of the instances is already
+    # participating in another assessment run.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] agents
+    #   @return [Array<Types::AgentAlreadyRunningAssessment>]
+    #
+    # @!attribute [rw] agents_truncated
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentsAlreadyRunningAssessmentException AWS API Documentation
+    #
+    class AgentsAlreadyRunningAssessmentException < Struct.new(
+      :message,
+      :agents,
+      :agents_truncated,
+      :can_retry)
       include Aws::Structure
     end
 
@@ -376,6 +426,36 @@ module Aws::Inspector
       :start_time_range,
       :completion_time_range,
       :state_change_time_range)
+      include Aws::Structure
+    end
+
+    # You cannot perform a specified action if an assessment run is
+    # currently in progress.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_run_arns
+    #   The ARNs of the assessment runs that are currently in progress.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] assessment_run_arns_truncated
+    #   Boolean value that indicates whether the ARN list of the assessment
+    #   runs is truncated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunInProgressException AWS API Documentation
+    #
+    class AssessmentRunInProgressException < Struct.new(
+      :message,
+      :assessment_run_arns,
+      :assessment_run_arns_truncated,
+      :can_retry)
       include Aws::Structure
     end
 
@@ -632,6 +712,15 @@ module Aws::Inspector
     #   generated.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tags
+    #   The tags related to the EC2 instance where the finding is generated.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] network_interfaces
+    #   An array of the network interfaces interacting with the EC2 instance
+    #   where the finding is generated.
+    #   @return [Array<Types::NetworkInterface>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssetAttributes AWS API Documentation
     #
     class AssetAttributes < Struct.new(
@@ -640,7 +729,9 @@ module Aws::Inspector
       :auto_scaling_group,
       :ami_id,
       :hostname,
-      :ipv4_addresses)
+      :ipv4_addresses,
+      :tags,
+      :network_interfaces)
       include Aws::Structure
     end
 
@@ -686,6 +777,8 @@ module Aws::Inspector
     #
     # @!attribute [rw] resource_group_arn
     #   The ARN that specifies the resource group that is used to create the
+    #   assessment target. If resourceGroupArn is not specified, all EC2
+    #   instances in the current AWS account and region are included in the
     #   assessment target.
     #   @return [String]
     #
@@ -737,8 +830,7 @@ module Aws::Inspector
     #   @return [String]
     #
     # @!attribute [rw] duration_in_seconds
-    #   The duration of the assessment run in seconds. The default value is
-    #   3600 seconds (one hour).
+    #   The duration of the assessment run in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] rules_package_arns
@@ -1548,7 +1640,7 @@ module Aws::Inspector
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportRequest AWS API Documentation
@@ -1705,6 +1797,97 @@ module Aws::Inspector
       :schema_version,
       :assessment_run_arn,
       :rules_package_arn)
+      include Aws::Structure
+    end
+
+    # Internal server error.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InternalException AWS API Documentation
+    #
+    class InternalException < Struct.new(
+      :message,
+      :can_retry)
+      include Aws::Structure
+    end
+
+    # Amazon Inspector cannot assume the cross-account role that it needs to
+    # list your EC2 instances during the assessment run.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Code that indicates the type of error that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InvalidCrossAccountRoleException AWS API Documentation
+    #
+    class InvalidCrossAccountRoleException < Struct.new(
+      :message,
+      :error_code,
+      :can_retry)
+      include Aws::Structure
+    end
+
+    # The request was rejected because an invalid or out-of-range value was
+    # supplied for an input parameter.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Code that indicates the type of error that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Struct.new(
+      :message,
+      :error_code,
+      :can_retry)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it attempted to create resources
+    # beyond the current AWS account limits. The error code describes the
+    # limit exceeded.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Code that indicates the type of error that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Struct.new(
+      :message,
+      :error_code,
+      :can_retry)
       include Aws::Structure
     end
 
@@ -2293,6 +2476,92 @@ module Aws::Inspector
       include Aws::Structure
     end
 
+    # Contains information about the network interfaces interacting with an
+    # EC2 instance. This data type is used as one of the elements of the
+    # AssetAttributes data type.
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of a subnet associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of a VPC associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The name of a private DNS associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The private IP address associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   A list of the private IP addresses associated with the network
+    #   interface. Includes the privateDnsName and privateIpAddress.
+    #   @return [Array<Types::PrivateIp>]
+    #
+    # @!attribute [rw] public_dns_name
+    #   The name of a public DNS associated with the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ip
+    #   The public IP address from which the network interface is reachable.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv6_addresses
+    #   The IP addresses associated with the network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   A list of the security groups associated with the network interface.
+    #   Includes the groupId and groupName.
+    #   @return [Array<Types::SecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :network_interface_id,
+      :subnet_id,
+      :vpc_id,
+      :private_dns_name,
+      :private_ip_address,
+      :private_ip_addresses,
+      :public_dns_name,
+      :public_ip,
+      :ipv6_addresses,
+      :security_groups)
+      include Aws::Structure
+    end
+
+    # The request was rejected because it referenced an entity that does not
+    # exist. The error code describes the entity.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_code
+    #   Code that indicates the type of error that is generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can immediately retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/NoSuchEntityException AWS API Documentation
+    #
+    class NoSuchEntityException < Struct.new(
+      :message,
+      :error_code,
+      :can_retry)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PreviewAgentsRequest
     #   data as a hash:
     #
@@ -2346,6 +2615,39 @@ module Aws::Inspector
     class PreviewAgentsResponse < Struct.new(
       :agent_previews,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The request is rejected. The specified assessment template is
+    # currently generating an exclusions preview.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewGenerationInProgressException AWS API Documentation
+    #
+    class PreviewGenerationInProgressException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Contains information about a private IP address associated with a
+    # network interface. This data type is used as a response element in the
+    # DescribeFindings action.
+    #
+    # @!attribute [rw] private_dns_name
+    #   The DNS name of the private IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The full IP address of the network inteface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PrivateIp AWS API Documentation
+    #
+    class PrivateIp < Struct.new(
+      :private_dns_name,
+      :private_ip_address)
       include Aws::Structure
     end
 
@@ -2511,6 +2813,44 @@ module Aws::Inspector
     class Scope < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # Contains information about a security group associated with a network
+    # interface. This data type is used as one of the elements of the
+    # NetworkInterface data type.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SecurityGroup AWS API Documentation
+    #
+    class SecurityGroup < Struct.new(
+      :group_name,
+      :group_id)
+      include Aws::Structure
+    end
+
+    # The serice is temporary unavailable.
+    #
+    # @!attribute [rw] message
+    #   Details of the exception error.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   You can wait and then retry your request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ServiceTemporarilyUnavailableException AWS API Documentation
+    #
+    class ServiceTemporarilyUnavailableException < Struct.new(
+      :message,
+      :can_retry)
       include Aws::Structure
     end
 
@@ -2776,6 +3116,26 @@ module Aws::Inspector
       :resource_arn,
       :event,
       :topic_arn)
+      include Aws::Structure
+    end
+
+    # Used by the GetAssessmentReport API. The request was rejected because
+    # you tried to generate a report for an assessment run that existed
+    # before reporting was supported in Amazon Inspector. You can only
+    # generate reports for assessment runs that took place or will take
+    # place after generating reports in Amazon Inspector became available.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] can_retry
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsupportedFeatureException AWS API Documentation
+    #
+    class UnsupportedFeatureException < Struct.new(
+      :message,
+      :can_retry)
       include Aws::Structure
     end
 

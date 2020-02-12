@@ -117,6 +117,51 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An error occurred while processing the request.
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    class BaseException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `CancelElasticsearchServiceSoftwareUpdate` operation. Specifies the
+    # name of the Elasticsearch domain that you wish to cancel a service
+    # software update on.
+    #
+    # @note When making an API call, you may pass CancelElasticsearchServiceSoftwareUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to stop the latest service
+    #   software update on.
+    #   @return [String]
+    #
+    class CancelElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # The result of a `CancelElasticsearchServiceSoftwareUpdate` operation.
+    # Contains the status of the update.
+    #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch service software update.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
+    class CancelElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      :service_software_options)
+      include Aws::Structure
+    end
+
     # Options to specify the Cognito user and identity pools for Kibana
     # authentication. For more information, see [Amazon Cognito
     # Authentication for Kibana][1].
@@ -178,6 +223,23 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # A map from an ` ElasticsearchVersion ` to a list of compatible `
+    # ElasticsearchVersion ` s to which the domain can be upgraded.
+    #
+    # @!attribute [rw] source_version
+    #   The current version of Elasticsearch on which a domain is.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_versions
+    #   List of supported elastic search versions.
+    #   @return [Array<String>]
+    #
+    class CompatibleVersionsMap < Struct.new(
+      :source_version,
+      :target_versions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateElasticsearchDomainRequest
     #   data as a hash:
     #
@@ -185,12 +247,18 @@ module Aws::ElasticsearchService
     #         domain_name: "DomainName", # required
     #         elasticsearch_version: "ElasticsearchVersionString",
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
+    #           warm_enabled: false,
+    #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #           warm_count: 1,
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
@@ -216,6 +284,9 @@ module Aws::ElasticsearchService
     #           enabled: false,
     #           kms_key_id: "KmsKeyId",
     #         },
+    #         node_to_node_encryption_options: {
+    #           enabled: false,
+    #         },
     #         advanced_options: {
     #           "String" => "String",
     #         },
@@ -225,12 +296,16 @@ module Aws::ElasticsearchService
     #             enabled: false,
     #           },
     #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
     #   The name of the Elasticsearch domain that you are creating. Domain
     #   names are unique across the domains owned by an account within an
-    #   AWS region. Domain names must start with a letter or number and can
+    #   AWS region. Domain names must start with a lowercase letter and can
     #   contain the following characters: a-z (lowercase), 0-9, and -
     #   (hyphen).
     #   @return [String]
@@ -289,6 +364,10 @@ module Aws::ElasticsearchService
     #   Specifies the Encryption At Rest Options.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the NodeToNodeEncryptionOptions.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Option to allow references to indices in an HTTP request body. Must
     #   be `false` when configuring access to individual sub-resources. By
@@ -305,6 +384,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -315,8 +399,10 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -471,7 +557,7 @@ module Aws::ElasticsearchService
     #
     #       {
     #         domain_name: "DomainName",
-    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         elasticsearch_version: "ElasticsearchVersionString", # required
     #       }
     #
@@ -503,8 +589,9 @@ module Aws::ElasticsearchService
     # @!attribute [rw] limits_by_role
     #   Map of Role of the Instance and Limits that are applicable. Role
     #   performed by given Instance in Elasticsearch can be one of the
-    #   following: * Data: If the given InstanceType is used as Data node
-    #   * Master: If the given InstanceType is used as Master node
+    #   following: * data: If the given InstanceType is used as data node
+    #   * master: If the given InstanceType is used as master node
+    #   * ultra\_warm: If the given InstanceType is used as warm node
     #   @return [Hash<String,Types::Limits>]
     #
     class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
@@ -614,6 +701,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Options to configure endpoint for the Elasticsearch domain.
+    #
+    # @note When making an API call, you may pass DomainEndpointOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enforce_https: false,
+    #         tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       }
+    #
+    # @!attribute [rw] enforce_https
+    #   Specify if only HTTPS endpoint should be enabled for the
+    #   Elasticsearch domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tls_security_policy
+    #   Specify the TLS security policy that needs to be applied to the
+    #   HTTPS endpoint of Elasticsearch domain.
+    #    It can be one of the following values: *
+    #   <b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which
+    #     supports TLSv1.0 and higher.
+    #   * <b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which
+    #     supports only TLSv1.2
+    #   @return [String]
+    #
+    class DomainEndpointOptions < Struct.new(
+      :enforce_https,
+      :tls_security_policy)
+      include Aws::Structure
+    end
+
+    # The configured endpoint options for the domain and their current
+    # status.
+    #
+    # @!attribute [rw] options
+    #   Options to configure endpoint for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptions]
+    #
+    # @!attribute [rw] status
+    #   The status of the endpoint options for the Elasticsearch domain. See
+    #   `OptionStatus` for the status information that's included.
+    #   @return [Types::OptionStatus]
+    #
+    class DomainEndpointOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Specifies the `DomainName`.
     #   @return [String]
@@ -689,16 +825,23 @@ module Aws::ElasticsearchService
     #   data as a hash:
     #
     #       {
-    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         instance_count: 1,
     #         dedicated_master_enabled: false,
     #         zone_awareness_enabled: false,
-    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #         zone_awareness_config: {
+    #           availability_zone_count: 1,
+    #         },
+    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #         dedicated_master_count: 1,
+    #         warm_enabled: false,
+    #         warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #         warm_count: 1,
     #       }
     #
     # @!attribute [rw] instance_type
-    #   The instance type for an Elasticsearch cluster.
+    #   The instance type for an Elasticsearch cluster. UltraWarm instance
+    #   types are not supported for data instances.
     #   @return [String]
     #
     # @!attribute [rw] instance_count
@@ -723,6 +866,11 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness
     #   @return [Boolean]
     #
+    # @!attribute [rw] zone_awareness_config
+    #   Specifies the zone awareness configuration for a domain when zone
+    #   awareness is enabled.
+    #   @return [Types::ZoneAwarenessConfig]
+    #
     # @!attribute [rw] dedicated_master_type
     #   The instance type for a dedicated master node.
     #   @return [String]
@@ -732,13 +880,29 @@ module Aws::ElasticsearchService
     #   the cluster.
     #   @return [Integer]
     #
+    # @!attribute [rw] warm_enabled
+    #   True to enable warm storage.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] warm_type
+    #   The instance type for the Elasticsearch cluster's warm nodes.
+    #   @return [String]
+    #
+    # @!attribute [rw] warm_count
+    #   The number of warm nodes in the cluster.
+    #   @return [Integer]
+    #
     class ElasticsearchClusterConfig < Struct.new(
       :instance_type,
       :instance_count,
       :dedicated_master_enabled,
       :zone_awareness_enabled,
+      :zone_awareness_config,
       :dedicated_master_type,
-      :dedicated_master_count)
+      :dedicated_master_count,
+      :warm_enabled,
+      :warm_type,
+      :warm_count)
       include Aws::Structure
     end
 
@@ -808,6 +972,11 @@ module Aws::ElasticsearchService
     #   domain.
     #   @return [Types::EncryptionAtRestOptionsStatus]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the `NodeToNodeEncryptionOptions` for the Elasticsearch
+    #   domain.
+    #   @return [Types::NodeToNodeEncryptionOptionsStatus]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the `AdvancedOptions` for the domain. See [Configuring
     #   Advanced Options][1] for more information.
@@ -821,6 +990,10 @@ module Aws::ElasticsearchService
     #   Log publishing options for the given domain.
     #   @return [Types::LogPublishingOptionsStatus]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
+    #   @return [Types::DomainEndpointOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -830,8 +1003,10 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -888,6 +1063,12 @@ module Aws::ElasticsearchService
     #   `False` if the configuration is active.
     #   @return [Boolean]
     #
+    # @!attribute [rw] upgrade_processing
+    #   The status of an Elasticsearch domain version upgrade. `True` if
+    #   Amazon Elasticsearch Service is undergoing a version upgrade.
+    #   `False` if the configuration is active.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] elasticsearch_version
     #   @return [String]
     #
@@ -934,6 +1115,10 @@ module Aws::ElasticsearchService
     #   Specifies the status of the `EncryptionAtRestOptions`.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] node_to_node_encryption_options
+    #   Specifies the status of the `NodeToNodeEncryptionOptions`.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
@@ -941,6 +1126,14 @@ module Aws::ElasticsearchService
     # @!attribute [rw] log_publishing_options
     #   Log publishing options for the given domain.
     #   @return [Hash<String,Types::LogPublishingOption>]
+    #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch domain's service software.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
+    # @!attribute [rw] domain_endpoint_options
+    #   The current status of the Elasticsearch domain's endpoint options.
+    #   @return [Types::DomainEndpointOptions]
     #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
@@ -951,6 +1144,7 @@ module Aws::ElasticsearchService
       :endpoint,
       :endpoints,
       :processing,
+      :upgrade_processing,
       :elasticsearch_version,
       :elasticsearch_cluster_config,
       :ebs_options,
@@ -959,8 +1153,11 @@ module Aws::ElasticsearchService
       :vpc_options,
       :cognito_options,
       :encryption_at_rest_options,
+      :node_to_node_encryption_options,
       :advanced_options,
-      :log_publishing_options)
+      :log_publishing_options,
+      :service_software_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -1023,6 +1220,145 @@ module Aws::ElasticsearchService
     class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to `
+    # GetCompatibleElasticsearchVersions ` operation.
+    #
+    # @note When making an API call, you may pass GetCompatibleElasticsearchVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    class GetCompatibleElasticsearchVersionsRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by `
+    # GetCompatibleElasticsearchVersions ` operation.
+    #
+    # @!attribute [rw] compatible_elasticsearch_versions
+    #   A map of compatible Elasticsearch versions returned as part of the `
+    #   GetCompatibleElasticsearchVersions ` operation.
+    #   @return [Array<Types::CompatibleVersionsMap>]
+    #
+    class GetCompatibleElasticsearchVersionsResponse < Struct.new(
+      :compatible_elasticsearch_versions)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetUpgradeHistory ` operation.
+    #
+    # @note When making an API call, you may pass GetUpgradeHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Paginated APIs accepts NextToken input to returns next page results
+    #   and provides a NextToken output in the response which can be used by
+    #   the client to retrieve more results.
+    #   @return [String]
+    #
+    class GetUpgradeHistoryRequest < Struct.new(
+      :domain_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetUpgradeHistory ` operation.
+    #
+    # @!attribute [rw] upgrade_histories
+    #   A list of ` UpgradeHistory ` objects corresponding to each Upgrade
+    #   or Upgrade Eligibility Check performed on a domain returned as part
+    #   of ` GetUpgradeHistoryResponse ` object.
+    #   @return [Array<Types::UpgradeHistory>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token that needs to be supplied to the next call to get
+    #   the next page of results
+    #   @return [String]
+    #
+    class GetUpgradeHistoryResponse < Struct.new(
+      :upgrade_histories,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` GetUpgradeStatus ` operation.
+    #
+    # @note When making an API call, you may pass GetUpgradeStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    class GetUpgradeStatusRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` GetUpgradeStatus ` operation.
+    #
+    # @!attribute [rw] upgrade_step
+    #   Represents one of 3 steps that an Upgrade or Upgrade Eligibility
+    #   Check does through: * PreUpgradeCheck
+    #   * Snapshot
+    #   * Upgrade
+    #   @return [String]
+    #
+    # @!attribute [rw] step_status
+    #   One of 4 statuses that a step can go through returned as part of the
+    #   ` GetUpgradeStatusResponse ` object. The status can take one of the
+    #   following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_name
+    #   A string that describes the update briefly
+    #   @return [String]
+    #
+    class GetUpgradeStatusResponse < Struct.new(
+      :upgrade_step,
+      :step_status,
+      :upgrade_name)
       include Aws::Structure
     end
 
@@ -1293,6 +1629,43 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies the node-to-node encryption options.
+    #
+    # @note When making an API call, you may pass NodeToNodeEncryptionOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify true to enable node-to-node encryption.
+    #   @return [Boolean]
+    #
+    class NodeToNodeEncryptionOptions < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Status of the node-to-node encryption options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the node-to-node encryption options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::NodeToNodeEncryptionOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the node-to-node encryption options for the
+    #   specified Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class NodeToNodeEncryptionOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # Provides the current status of the entity.
     #
     # @!attribute [rw] creation_date
@@ -1546,6 +1919,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The current options of an Elasticsearch domain service software
+    # options.
+    #
+    # @!attribute [rw] current_version
+    #   The current service software version that is present on the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_version
+    #   The new service software version if one is available.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_available
+    #   `True` if you are able to update you service software version.
+    #   `False` if you are not able to update your service software version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cancellable
+    #   `True` if you are able to cancel your service software version
+    #   update. `False` if you are not able to cancel your service software
+    #   version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_status
+    #   The status of your service software update. This field can take the
+    #   following values: `ELIGIBLE`, `PENDING_UPDATE`, `IN_PROGRESS`,
+    #   `COMPLETED`, and `NOT_ELIGIBLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the `UpdateStatus`.
+    #   @return [String]
+    #
+    # @!attribute [rw] automated_update_date
+    #   Timestamp, in Epoch time, until which you can manually request a
+    #   service software update. After this date, we automatically update
+    #   your service software.
+    #   @return [Time]
+    #
+    class ServiceSoftwareOptions < Struct.new(
+      :current_version,
+      :new_version,
+      :update_available,
+      :cancellable,
+      :update_status,
+      :description,
+      :automated_update_date)
+      include Aws::Structure
+    end
+
     # Specifies the time, in UTC format, when the service takes a daily
     # automated snapshot of the specified Elasticsearch domain. Default
     # value is `0` hours.
@@ -1582,6 +2004,40 @@ module Aws::ElasticsearchService
     class SnapshotOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the
+    # `StartElasticsearchServiceSoftwareUpdate` operation. Specifies the
+    # name of the Elasticsearch domain that you wish to schedule a service
+    # software update on.
+    #
+    # @note When making an API call, you may pass StartElasticsearchServiceSoftwareUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to update to the latest service
+    #   software.
+    #   @return [String]
+    #
+    class StartElasticsearchServiceSoftwareUpdateRequest < Struct.new(
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # The result of a `StartElasticsearchServiceSoftwareUpdate` operation.
+    # Contains the status of the update.
+    #
+    # @!attribute [rw] service_software_options
+    #   The current status of the Elasticsearch service software update.
+    #   @return [Types::ServiceSoftwareOptions]
+    #
+    class StartElasticsearchServiceSoftwareUpdateResponse < Struct.new(
+      :service_software_options)
       include Aws::Structure
     end
 
@@ -1675,12 +2131,18 @@ module Aws::ElasticsearchService
     #       {
     #         domain_name: "DomainName", # required
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
+    #           zone_awareness_config: {
+    #             availability_zone_count: 1,
+    #           },
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, m5.large.elasticsearch, m5.xlarge.elasticsearch, m5.2xlarge.elasticsearch, m5.4xlarge.elasticsearch, m5.12xlarge.elasticsearch, r5.large.elasticsearch, r5.xlarge.elasticsearch, r5.2xlarge.elasticsearch, r5.4xlarge.elasticsearch, r5.12xlarge.elasticsearch, c5.large.elasticsearch, c5.xlarge.elasticsearch, c5.2xlarge.elasticsearch, c5.4xlarge.elasticsearch, c5.9xlarge.elasticsearch, c5.18xlarge.elasticsearch, ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch, i3.large.elasticsearch, i3.xlarge.elasticsearch, i3.2xlarge.elasticsearch, i3.4xlarge.elasticsearch, i3.8xlarge.elasticsearch, i3.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
+    #           warm_enabled: false,
+    #           warm_type: "ultrawarm1.medium.elasticsearch", # accepts ultrawarm1.medium.elasticsearch, ultrawarm1.large.elasticsearch
+    #           warm_count: 1,
     #         },
     #         ebs_options: {
     #           ebs_enabled: false,
@@ -1710,6 +2172,10 @@ module Aws::ElasticsearchService
     #             cloud_watch_logs_log_group_arn: "CloudWatchLogsLogGroupArn",
     #             enabled: false,
     #           },
+    #         },
+    #         domain_endpoint_options: {
+    #           enforce_https: false,
+    #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
     #         },
     #       }
     #
@@ -1771,6 +2237,11 @@ module Aws::ElasticsearchService
     #   to publish a given type of Elasticsearch log.
     #   @return [Hash<String,Types::LogPublishingOption>]
     #
+    # @!attribute [rw] domain_endpoint_options
+    #   Options to specify configuration that will be applied to the domain
+    #   endpoint.
+    #   @return [Types::DomainEndpointOptions]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -1780,7 +2251,8 @@ module Aws::ElasticsearchService
       :cognito_options,
       :advanced_options,
       :access_policies,
-      :log_publishing_options)
+      :log_publishing_options,
+      :domain_endpoint_options)
       include Aws::Structure
     end
 
@@ -1793,6 +2265,140 @@ module Aws::ElasticsearchService
     #
     class UpdateElasticsearchDomainConfigResponse < Struct.new(
       :domain_config)
+      include Aws::Structure
+    end
+
+    # Container for request parameters to ` UpgradeElasticsearchDomain `
+    # operation.
+    #
+    # @note When making an API call, you may pass UpgradeElasticsearchDomainRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         target_version: "ElasticsearchVersionString", # required
+    #         perform_check_only: false,
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of Elasticsearch that you intend to upgrade the domain
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_check_only
+    #   This flag, when set to True, indicates that an Upgrade Eligibility
+    #   Check needs to be performed. This will not actually perform the
+    #   Upgrade.
+    #   @return [Boolean]
+    #
+    class UpgradeElasticsearchDomainRequest < Struct.new(
+      :domain_name,
+      :target_version,
+      :perform_check_only)
+      include Aws::Structure
+    end
+
+    # Container for response returned by ` UpgradeElasticsearchDomain `
+    # operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of an Elasticsearch domain. Domain names are unique across
+    #   the domains owned by an account within an AWS region. Domain names
+    #   start with a letter or number and can contain the following
+    #   characters: a-z (lowercase), 0-9, and - (hyphen).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The version of Elasticsearch that you intend to upgrade the domain
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] perform_check_only
+    #   This flag, when set to True, indicates that an Upgrade Eligibility
+    #   Check needs to be performed. This will not actually perform the
+    #   Upgrade.
+    #   @return [Boolean]
+    #
+    class UpgradeElasticsearchDomainResponse < Struct.new(
+      :domain_name,
+      :target_version,
+      :perform_check_only)
+      include Aws::Structure
+    end
+
+    # History of the last 10 Upgrades and Upgrade Eligibility Checks.
+    #
+    # @!attribute [rw] upgrade_name
+    #   A string that describes the update briefly
+    #   @return [String]
+    #
+    # @!attribute [rw] start_timestamp
+    #   UTC Timestamp at which the Upgrade API call was made in
+    #   "yyyy-MM-ddTHH:mm:ssZ" format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] upgrade_status
+    #   The overall status of the update. The status can take one of the
+    #   following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] steps_list
+    #   A list of ` UpgradeStepItem ` s representing information about each
+    #   step performed as pard of a specific Upgrade or Upgrade Eligibility
+    #   Check.
+    #   @return [Array<Types::UpgradeStepItem>]
+    #
+    class UpgradeHistory < Struct.new(
+      :upgrade_name,
+      :start_timestamp,
+      :upgrade_status,
+      :steps_list)
+      include Aws::Structure
+    end
+
+    # Represents a single step of the Upgrade or Upgrade Eligibility Check
+    # workflow.
+    #
+    # @!attribute [rw] upgrade_step
+    #   Represents one of 3 steps that an Upgrade or Upgrade Eligibility
+    #   Check does through: * PreUpgradeCheck
+    #   * Snapshot
+    #   * Upgrade
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_step_status
+    #   The status of a particular step during an upgrade. The status can
+    #   take one of the following values: * In Progress
+    #   * Succeeded
+    #   * Succeeded with Issues
+    #   * Failed
+    #   @return [String]
+    #
+    # @!attribute [rw] issues
+    #   A list of strings containing detailed information about the errors
+    #   encountered in a particular step.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] progress_percent
+    #   The Floating point value representing progress percentage of a
+    #   particular step.
+    #   @return [Float]
+    #
+    class UpgradeStepItem < Struct.new(
+      :upgrade_step,
+      :upgrade_step_status,
+      :issues,
+      :progress_percent)
       include Aws::Structure
     end
 
@@ -1874,6 +2480,27 @@ module Aws::ElasticsearchService
     class VPCOptions < Struct.new(
       :subnet_ids,
       :security_group_ids)
+      include Aws::Structure
+    end
+
+    # Specifies the zone awareness configuration for the domain cluster,
+    # such as the number of availability zones.
+    #
+    # @note When making an API call, you may pass ZoneAwarenessConfig
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone_count: 1,
+    #       }
+    #
+    # @!attribute [rw] availability_zone_count
+    #   An integer value to indicate the number of availability zones for a
+    #   domain when zone awareness is enabled. This should be equal to
+    #   number of subnets if VPC endpoints is enabled
+    #   @return [Integer]
+    #
+    class ZoneAwarenessConfig < Struct.new(
+      :availability_zone_count)
       include Aws::Structure
     end
 

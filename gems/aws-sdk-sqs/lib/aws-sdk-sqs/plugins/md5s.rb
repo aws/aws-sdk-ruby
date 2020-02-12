@@ -50,7 +50,9 @@ module Aws
 
           def validate_single_message(body, attributes, response)
             validate_body(body, response)
-            validate_attributes(attributes, response) unless attributes.nil?
+            unless attributes.nil? || attributes.empty?
+              validate_attributes(attributes, response)
+            end
           end
 
           def validate_body(body, response)

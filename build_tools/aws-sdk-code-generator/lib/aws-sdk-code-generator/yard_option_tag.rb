@@ -14,13 +14,14 @@ module AwsSdkCodeGenerator
       @docstring = options.fetch(:docstring).to_s
       @default_value = options[:default_value]
       @option_hash_name = options.fetch(:option_hash_name, 'options')
+      @indent = options.fetch(:indent, "")
     end
 
     def build
       if @docstring.empty?
         first_line.rstrip
       else
-        first_line + Docstring.block_comment(@docstring, gap: '   ')
+        first_line + Docstring.block_comment(@docstring, gap: "   #{@indent}")
       end
     end
     alias to_str build
@@ -29,7 +30,7 @@ module AwsSdkCodeGenerator
     private
 
     def first_line
-      "# @option #{@option_hash_name} [#{@required}#{@ruby_type}] :#{@name}#{default_value}\n"
+      "# #{@indent}@option #{@option_hash_name} [#{@required}#{@ruby_type}] :#{@name}#{default_value}\n"
     end
 
     def default_value

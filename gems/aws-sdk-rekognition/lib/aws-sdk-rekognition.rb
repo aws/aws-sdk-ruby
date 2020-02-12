@@ -12,6 +12,7 @@ require_relative 'aws-sdk-rekognition/types'
 require_relative 'aws-sdk-rekognition/client_api'
 require_relative 'aws-sdk-rekognition/client'
 require_relative 'aws-sdk-rekognition/errors'
+require_relative 'aws-sdk-rekognition/waiters'
 require_relative 'aws-sdk-rekognition/resource'
 require_relative 'aws-sdk-rekognition/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-rekognition/customizations'
 # @service
 module Aws::Rekognition
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.33.0'
 
 end

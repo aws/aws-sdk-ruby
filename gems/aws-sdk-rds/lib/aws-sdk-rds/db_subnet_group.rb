@@ -21,6 +21,7 @@ module Aws::RDS
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -49,7 +50,7 @@ module Aws::RDS
       data[:subnet_group_status]
     end
 
-    # Contains a list of Subnet elements.
+    # Contains a list of `Subnet` elements.
     # @return [Array<Types::Subnet>]
     def subnets
       data[:subnets]
@@ -211,12 +212,7 @@ module Aws::RDS
     # @option options [required, Array<String>] :subnet_ids
     #   The EC2 Subnet IDs for the DB subnet group.
     # @option options [Array<Types::Tag>] :tags
-    #   A list of tags. For more information, see [Tagging Amazon RDS
-    #   Resources][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   Tags to assign to the DB subnet group.
     # @return [DBSubnetGroup]
     def create(options = {})
       options = options.merge(db_subnet_group_name: @name)

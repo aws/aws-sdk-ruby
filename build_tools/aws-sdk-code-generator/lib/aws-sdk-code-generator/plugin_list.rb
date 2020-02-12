@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
 
     def compute_plugins(options)
       plugins = {}
-      plugins.update(default_plugins)
+      plugins.update(options[:async_client] ? default_async_plugins : default_plugins)
       plugins.update(signature_plugins(options.fetch(:signature_version)))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
@@ -46,11 +46,28 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::RetryErrors' => "#{core_plugins}/retry_errors.rb",
         'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
         'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
+        'Aws::Plugins::EndpointDiscovery' => "#{core_plugins}/endpoint_discovery.rb",
+        'Aws::Plugins::EndpointPattern' => "#{core_plugins}/endpoint_pattern.rb",
         'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
+        'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
+        'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
+        'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb"
       }
+    end
+
+    def default_async_plugins
+      plugins = default_plugins.dup
+      plugins.delete('Aws::Plugins::ResponsePaging')
+      plugins.delete('Aws::Plugins::EndpointDiscovery')
+      plugins.delete('Aws::Plugins::EndpointPattern')
+      plugins.delete('Aws::Plugins::ClientMetricsPlugin')
+      plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
+      plugins.delete('Aws::Plugins::TransferEncoding')
+      plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"
+      plugins
     end
 
     def protocol_plugins(protocol)

@@ -36,6 +36,9 @@ module Aws::IoTDataPlane
     UpdateThingShadowResponse = Shapes::StructureShape.new(name: 'UpdateThingShadowResponse')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ConflictException.struct_class = Types::ConflictException
+
     DeleteThingShadowRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     DeleteThingShadowRequest.struct_class = Types::DeleteThingShadowRequest
 
@@ -52,12 +55,39 @@ module Aws::IoTDataPlane
     GetThingShadowResponse[:payload] = :payload
     GetThingShadowResponse[:payload_member] = GetThingShadowResponse.member(:payload)
 
+    InternalFailureException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InternalFailureException.struct_class = Types::InternalFailureException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    MethodNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    MethodNotAllowedException.struct_class = Types::MethodNotAllowedException
+
     PublishRequest.add_member(:topic, Shapes::ShapeRef.new(shape: Topic, required: true, location: "uri", location_name: "topic"))
     PublishRequest.add_member(:qos, Shapes::ShapeRef.new(shape: Qos, location: "querystring", location_name: "qos"))
     PublishRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Payload, location_name: "payload"))
     PublishRequest.struct_class = Types::PublishRequest
     PublishRequest[:payload] = :payload
     PublishRequest[:payload_member] = PublishRequest.member(:payload)
+
+    RequestEntityTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    RequestEntityTooLargeException.struct_class = Types::RequestEntityTooLargeException
+
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    UnauthorizedException.struct_class = Types::UnauthorizedException
+
+    UnsupportedDocumentEncodingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    UnsupportedDocumentEncodingException.struct_class = Types::UnsupportedDocumentEncodingException
 
     UpdateThingShadowRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
     UpdateThingShadowRequest.add_member(:payload, Shapes::ShapeRef.new(shape: JsonDocument, required: true, location_name: "payload"))
@@ -77,10 +107,12 @@ module Aws::IoTDataPlane
       api.version = "2015-05-28"
 
       api.metadata = {
+        "apiVersion" => "2015-05-28",
         "protocol" => "rest-json",
         "serviceFullName" => "AWS IoT Data Plane",
         "signatureVersion" => "v4",
         "signingName" => "iotdata",
+        "uid" => "iot-data-2015-05-28",
       }
 
       api.add_operation(:delete_thing_shadow, Seahorse::Model::Operation.new.tap do |o|

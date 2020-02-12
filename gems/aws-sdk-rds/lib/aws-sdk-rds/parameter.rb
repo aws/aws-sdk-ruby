@@ -21,6 +21,7 @@ module Aws::RDS
       @name = extract_name(args, options)
       @data = options.delete(:data)
       @client = options.delete(:client) || Client.new(options)
+      @waiter_block_warned = false
     end
 
     # @!group Read-Only Attributes
@@ -85,6 +86,12 @@ module Aws::RDS
     # @return [String]
     def apply_method
       data[:apply_method]
+    end
+
+    # The valid DB engine modes.
+    # @return [Array<String>]
+    def supported_engine_modes
+      data[:supported_engine_modes]
     end
 
     # @!endgroup

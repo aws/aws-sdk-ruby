@@ -52,6 +52,90 @@ module Aws::IAM
 
     end
 
+    class PolicyExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (1)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 1,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_policy,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "status",
+                "expected" => 200
+              },
+              {
+                "state" => "retry",
+                "matcher" => "error",
+                "expected" => "NoSuchEntity"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_policy)
+      # @return (see Client#get_policy)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class RoleExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :delay (1)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 20,
+          delay: 1,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_role,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => "status",
+                "expected" => 200
+              },
+              {
+                "state" => "retry",
+                "matcher" => "error",
+                "expected" => "NoSuchEntity"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_role)
+      # @return (see Client#get_role)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
     class UserExists
 
       # @param [Hash] options
