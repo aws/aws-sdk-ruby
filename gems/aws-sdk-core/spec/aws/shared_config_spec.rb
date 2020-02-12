@@ -8,13 +8,21 @@ module Aws
     end
 
     let(:mock_credential_file) do
-      File.expand_path(File.join(File.dirname(__FILE__),
-                                 '..', 'fixtures', 'credentials', 'mock_shared_credentials'))
+      File.expand_path(
+        File.join(
+          File.dirname(__FILE__),
+          '..', 'fixtures', 'credentials', 'mock_shared_credentials'
+        )
+      )
     end
 
     let(:mock_config_file) do
-      File.expand_path(File.join(File.dirname(__FILE__),
-                                 '..', 'fixtures', 'credentials', 'mock_shared_config'))
+      File.expand_path(
+        File.join(
+          File.dirname(__FILE__),
+          '..', 'fixtures', 'credentials', 'mock_shared_config'
+        )
+      )
     end
 
     context 'resolving config files' do

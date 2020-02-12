@@ -121,8 +121,7 @@ module Aws
       p = profile || @profile_name
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
-        if entry['web_identity_token_file'] &&
-           entry['role_arn']
+        if entry['web_identity_token_file'] && entry['role_arn']
           AssumeRoleWebIdentityCredentials.new(
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
@@ -141,9 +140,18 @@ module Aws
       end
     end
 
-    config_reader :region, :sts_regional_endpoints, :s3_us_east_1_regional_endpoint,
-                  :s3_use_arn_region, :csm_enabled, :csm_client_id, :csm_port, :csm_host,
-                  :endpoint_discovery_enabled, :credential_process
+    config_reader(
+      :credential_process,
+      :csm_client_id,
+      :csm_enabled,
+      :csm_host,
+      :csm_port,
+      :endpoint_discovery_enabled,
+      :region,
+      :s3_use_arn_region,
+      :s3_us_east_1_regional_endpoint,
+      :sts_regional_endpoints
+    )
 
     private
 
@@ -169,9 +177,10 @@ module Aws
         credential_source = opts.delete(:credential_source)
         credential_source ||= prof_cfg['credential_source']
         if opts[:source_profile] && credential_source
-          raise Errors::CredentialSourceConflictError, "Profile #{profile} has a source_profile, and "\
-              'a credential_source. For assume role credentials, must '\
-              'provide only source_profile or credential_source, not both.'
+          raise Errors::CredentialSourceConflictError,
+                "Profile #{profile} has a source_profile, and "\
+                'a credential_source. For assume role credentials, must '\
+                'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
           opts[:credentials] = resolve_source_profile(opts[:source_profile])
           if opts[:credentials]
