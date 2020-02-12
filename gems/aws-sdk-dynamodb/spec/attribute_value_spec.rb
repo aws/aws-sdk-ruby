@@ -97,6 +97,15 @@ module Aws
           expect(value.marshal(obj)).to eq(s: 'abc')
         end
 
+        it 'converts objects responding to #to_h to :m (map)' do
+          obj = Class.new { def to_h; { foo: 'bar', abc: 'mno' } end }.new
+          formatted = value.marshal(obj)
+          expect(formatted).to eq(m: {
+            "foo" => { s: 'bar' },
+            "abc" => { s: 'mno' },
+          })
+        end
+
         it 'converts booleans :bool' do
           # supports both true and false
           expect(value.marshal(true)).to eq(bool: true)
