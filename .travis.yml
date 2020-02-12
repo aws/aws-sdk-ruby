@@ -24,6 +24,8 @@ env:
   - PURE_RUBY=1
   - KITCHEN_SINK=1
 
+before_script: cat /home/travis/.rvm/log/*_jruby-1.7.27/gemsets.import.global.log /home/travis/.rvm/log/*_jruby-1.7.27/gemsets.import.default.log
+ 
 script: rake build && rake test:spec
 
 bundler_args: --without docs repl
