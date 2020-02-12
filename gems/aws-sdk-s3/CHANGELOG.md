@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reduce memory usage of `IOEncryptor` and `IODecryptor`.
+
 1.60.2 (2020-02-07)
 ------------------
 
