@@ -77,8 +77,6 @@ module Aws
       end
 
       it 'prefers assume role web identity over assume role' do
-        allow(File).to receive(:exist?).and_return(true)
-        allow(File).to receive(:read).and_return('token')
         assume_role_web_identity_stub(
           'arn:aws:iam:123456789012:role/foo',
           'AR_AKID',
@@ -102,11 +100,17 @@ module Aws
           'AR_TOKEN'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_plus_creds', region: 'us-east-1'
+          profile: 'ar_plus_creds', region: 'us-east-2'
         )
+
         expect(
           client.config.credentials.credentials.access_key_id
         ).to eq('AR_AKID')
+
+        sts_client = client.config.credentials.client
+        expect(
+          sts_client.config.region
+        ).to eq('us-east-2')
       end
 
       it 'prefers shared credential file static credentials over shared config' do
@@ -219,8 +223,6 @@ module Aws
         end
 
         it 'supports :source_profile from assume_role_web_identity' do
-          allow(File).to receive(:exist?).and_return(true)
-          allow(File).to receive(:read).and_return('token')
           assume_role_web_identity_stub(
             'arn:aws:iam:123456789012:role/foo',
             'AR_AKID_WEB',
@@ -235,11 +237,16 @@ module Aws
             'AR_TOKEN'
           )
           client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_web_src', region: 'us-east-1'
+            profile: 'ar_web_src', region: 'us-east-2'
           )
           expect(
             client.config.credentials.credentials.access_key_id
           ).to eq('AR_AKID')
+
+          sts_client = client.config.credentials.client
+          expect(
+            sts_client.config.region
+          ).to eq('us-east-2')
         end
 
         it 'supports :source_profile from process credentials' do
@@ -533,6 +540,7 @@ module Aws
     end
 
     def assume_role_web_identity_stub(role_arn, access_key, secret_key, token)
+      stub_token_file('token')
       stub_request(:post, 'https://sts.amazonaws.com/')
         .to_return(body: <<-RESP)
           <AssumeRoleWithWebIdentityResponse xmlns=\"https://sts.amazonaws.com/doc/2011-06-15/\">
@@ -558,6 +566,12 @@ module Aws
             </ResponseMetadata>
           </AssumeRoleWithWebIdentityResponse>
         RESP
+    end
+
+    def stub_token_file(token)
+      allow(File).to receive(:exist?).with('my-token.jwt').and_return(true)
+      allow(File).to receive(:read).and_call_original
+      allow(File).to receive(:read).with('my-token.jwt').and_return(token)
     end
   end
 end
