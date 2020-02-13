@@ -52,6 +52,7 @@ module Aws::MediaPackageVod
     ListPackagingConfigurationsResponse = Shapes::StructureShape.new(name: 'ListPackagingConfigurationsResponse')
     ListPackagingGroupsRequest = Shapes::StructureShape.new(name: 'ListPackagingGroupsRequest')
     ListPackagingGroupsResponse = Shapes::StructureShape.new(name: 'ListPackagingGroupsResponse')
+    ManifestLayout = Shapes::StringShape.new(name: 'ManifestLayout')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MssEncryption = Shapes::StructureShape.new(name: 'MssEncryption')
     MssManifest = Shapes::StructureShape.new(name: 'MssManifest')
@@ -64,12 +65,14 @@ module Aws::MediaPackageVod
     PackagingGroupCreateParameters = Shapes::StructureShape.new(name: 'PackagingGroupCreateParameters')
     PackagingGroupList = Shapes::StructureShape.new(name: 'PackagingGroupList')
     Profile = Shapes::StringShape.new(name: 'Profile')
+    SegmentTemplateFormat = Shapes::StringShape.new(name: 'SegmentTemplateFormat')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StreamOrder = Shapes::StringShape.new(name: 'StreamOrder')
     StreamSelection = Shapes::StructureShape.new(name: 'StreamSelection')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    __PeriodTriggersElement = Shapes::StringShape.new(name: '__PeriodTriggersElement')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
@@ -80,6 +83,7 @@ module Aws::MediaPackageVod
     __listOfMssManifest = Shapes::ListShape.new(name: '__listOfMssManifest')
     __listOfPackagingConfiguration = Shapes::ListShape.new(name: '__listOfPackagingConfiguration')
     __listOfPackagingGroup = Shapes::ListShape.new(name: '__listOfPackagingGroup')
+    __listOf__PeriodTriggersElement = Shapes::ListShape.new(name: '__listOf__PeriodTriggersElement')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
@@ -167,6 +171,7 @@ module Aws::MediaPackageVod
     DashEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     DashEncryption.struct_class = Types::DashEncryption
 
+    DashManifest.add_member(:manifest_layout, Shapes::ShapeRef.new(shape: ManifestLayout, location_name: "manifestLayout"))
     DashManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     DashManifest.add_member(:min_buffer_time_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "minBufferTimeSeconds"))
     DashManifest.add_member(:profile, Shapes::ShapeRef.new(shape: Profile, location_name: "profile"))
@@ -175,7 +180,9 @@ module Aws::MediaPackageVod
 
     DashPackage.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: __listOfDashManifest, required: true, location_name: "dashManifests"))
     DashPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: DashEncryption, location_name: "encryption"))
+    DashPackage.add_member(:period_triggers, Shapes::ShapeRef.new(shape: __listOf__PeriodTriggersElement, location_name: "periodTriggers"))
     DashPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
+    DashPackage.add_member(:segment_template_format, Shapes::ShapeRef.new(shape: SegmentTemplateFormat, location_name: "segmentTemplateFormat"))
     DashPackage.struct_class = Types::DashPackage
 
     DeleteAssetRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -361,6 +368,8 @@ module Aws::MediaPackageVod
     __listOfPackagingConfiguration.member = Shapes::ShapeRef.new(shape: PackagingConfiguration)
 
     __listOfPackagingGroup.member = Shapes::ShapeRef.new(shape: PackagingGroup)
+
+    __listOf__PeriodTriggersElement.member = Shapes::ShapeRef.new(shape: __PeriodTriggersElement)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
