@@ -17,4 +17,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('aws-sdk-core', version)
 
+  spec.post_install_message = 'NEWER VERSION AVAILABLE: Please upgrade to AWS SDK For Ruby V3'
 end

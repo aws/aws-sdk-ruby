@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add upgrade notice on first client initialization and gem install.
+
 2.11.444 (2020-02-13)
 ------------------
 
