@@ -54,7 +54,17 @@ module Aws
 
         Api::Customizations.apply_plugins(client_class)
 
+        soft_deprecation
         client_class
+      end
+
+      private
+
+      def soft_deprecation
+        unless @warned
+          @warned = true
+          warn("NEWER VERSION AVAILABLE: Please upgrade to AWS SDK For Ruby V3")
+        end
       end
 
     end

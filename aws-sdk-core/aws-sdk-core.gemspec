@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency('jmespath', '~> 1.0')
   spec.add_dependency('aws-sigv4', '~> 1.0')
 
+  spec.post_install_message = 'NEWER VERSION AVAILABLE: Please upgrade to AWS SDK For Ruby V3'
 end
