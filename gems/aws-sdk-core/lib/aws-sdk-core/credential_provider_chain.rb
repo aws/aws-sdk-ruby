@@ -121,7 +121,7 @@ module Aws
         cfg = {
           role_arn: role_arn,
           web_identity_token_file: token_file,
-          role_session_name: ENV['AWS_ROLE_SESSION_NAME'],
+          role_session_name: ENV['AWS_ROLE_SESSION_NAME']
         }
         cfg[:region] = region if region
         AssumeRoleWebIdentityCredentials.new(cfg)
