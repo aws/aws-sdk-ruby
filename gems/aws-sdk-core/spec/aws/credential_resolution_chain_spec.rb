@@ -22,6 +22,11 @@ module Aws
 
     let(:mock_instance_creds) { double('InstanceProfileCredentials', set?: false) }
 
+    before(:all) do
+      # Ensure the sample_rest_xml is built before any mocks occur
+      ApiHelper.sample_rest_xml
+    end
+
     before(:each) do
       allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
     end
