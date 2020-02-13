@@ -20,6 +20,12 @@ module Aws
       )
     end
 
+    let(:mock_instance_creds) { double('InstanceProfileCredentials', set?: false) }
+
+    before(:each) do
+      allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+    end
+
     describe 'default behavior' do
       before(:each) do
         stub_const('ENV', {})
@@ -154,6 +160,8 @@ module Aws
       end
 
       it 'attempts to fetch metadata credentials last' do
+        allow(InstanceProfileCredentials).to receive(:new).and_call_original
+
         stub_request(:put, 'http://169.254.169.254/latest/api/token')
           .to_return(
             status: 200,
@@ -312,6 +320,8 @@ module Aws
       end
 
       it 'can assume a role with EC2 Instance Metadata as a source' do
+        allow(InstanceProfileCredentials).to receive(:new).and_call_original
+
         profile = 'ar_ec2_src'
         resp = <<-JSON.strip
           {
@@ -456,6 +466,8 @@ module Aws
       end
 
       it 'attempts to fetch metadata credentials last' do
+        allow(InstanceProfileCredentials).to receive(:new).and_call_original
+
         stub_request(:put, 'http://169.254.169.254/latest/api/token')
           .to_return(
             status: 200,
