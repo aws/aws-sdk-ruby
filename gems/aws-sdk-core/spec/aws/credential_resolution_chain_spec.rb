@@ -100,7 +100,7 @@ module Aws
           'AR_TOKEN'
         )
         client = ApiHelper.sample_rest_xml::Client.new(
-          profile: 'ar_plus_creds', region: 'us-east-2'
+          profile: 'ar_plus_creds', region: 'us-west-2'
         )
 
         expect(
@@ -110,7 +110,7 @@ module Aws
         sts_client = client.config.credentials.client
         expect(
           sts_client.config.region
-        ).to eq('us-east-2')
+        ).to eq('us-west-2')
       end
 
       it 'prefers shared credential file static credentials over shared config' do
@@ -237,7 +237,7 @@ module Aws
             'AR_TOKEN'
           )
           client = ApiHelper.sample_rest_xml::Client.new(
-            profile: 'ar_web_src', region: 'us-east-2'
+            profile: 'ar_web_src', region: 'us-west-2'
           )
           expect(
             client.config.credentials.credentials.access_key_id
@@ -246,7 +246,7 @@ module Aws
           sts_client = client.config.credentials.client
           expect(
             sts_client.config.region
-          ).to eq('us-east-2')
+          ).to eq('us-west-2')
         end
 
         it 'supports :source_profile from process credentials' do
