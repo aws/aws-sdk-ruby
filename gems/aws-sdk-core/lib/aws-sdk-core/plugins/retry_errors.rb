@@ -343,7 +343,7 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         def token_bucket_refill
-          timestamp = Time.new.to_f
+          timestamp = Aws::Util.monotonic_milliseconds / 1000.0
           unless @last_timestamp
             @last_timestamp = timestamp
             return
@@ -373,7 +373,7 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         def update_measured_rate
-          t = Time.new.to_f
+          t = Aws::Util.monotonic_milliseconds / 1000.0
           time_bucket = (t * 2).floor / 2
           @request_count += 1
           if time_bucket > @last_tx_rate_bucket
