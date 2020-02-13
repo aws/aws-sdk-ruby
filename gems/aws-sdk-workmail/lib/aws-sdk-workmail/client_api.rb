@@ -11,6 +11,14 @@ module Aws::WorkMail
 
     include Seahorse::Model
 
+    AccessControlRule = Shapes::StructureShape.new(name: 'AccessControlRule')
+    AccessControlRuleAction = Shapes::StringShape.new(name: 'AccessControlRuleAction')
+    AccessControlRuleDescription = Shapes::StringShape.new(name: 'AccessControlRuleDescription')
+    AccessControlRuleEffect = Shapes::StringShape.new(name: 'AccessControlRuleEffect')
+    AccessControlRuleName = Shapes::StringShape.new(name: 'AccessControlRuleName')
+    AccessControlRuleNameList = Shapes::ListShape.new(name: 'AccessControlRuleNameList')
+    AccessControlRulesList = Shapes::ListShape.new(name: 'AccessControlRulesList')
+    ActionsList = Shapes::ListShape.new(name: 'ActionsList')
     Aliases = Shapes::ListShape.new(name: 'Aliases')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AssociateDelegateToResourceRequest = Shapes::StructureShape.new(name: 'AssociateDelegateToResourceRequest')
@@ -28,6 +36,8 @@ module Aws::WorkMail
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     Delegate = Shapes::StructureShape.new(name: 'Delegate')
+    DeleteAccessControlRuleRequest = Shapes::StructureShape.new(name: 'DeleteAccessControlRuleRequest')
+    DeleteAccessControlRuleResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlRuleResponse')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
     DeleteAliasResponse = Shapes::StructureShape.new(name: 'DeleteAliasResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
@@ -60,6 +70,8 @@ module Aws::WorkMail
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     EntityState = Shapes::StringShape.new(name: 'EntityState')
     EntityStateException = Shapes::StructureShape.new(name: 'EntityStateException')
+    GetAccessControlEffectRequest = Shapes::StructureShape.new(name: 'GetAccessControlEffectRequest')
+    GetAccessControlEffectResponse = Shapes::StructureShape.new(name: 'GetAccessControlEffectResponse')
     GetMailboxDetailsRequest = Shapes::StructureShape.new(name: 'GetMailboxDetailsRequest')
     GetMailboxDetailsResponse = Shapes::StructureShape.new(name: 'GetMailboxDetailsResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
@@ -68,7 +80,12 @@ module Aws::WorkMail
     InvalidConfigurationException = Shapes::StructureShape.new(name: 'InvalidConfigurationException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
+    IpAddress = Shapes::StringShape.new(name: 'IpAddress')
+    IpRange = Shapes::StringShape.new(name: 'IpRange')
+    IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListAccessControlRulesRequest = Shapes::StructureShape.new(name: 'ListAccessControlRulesRequest')
+    ListAccessControlRulesResponse = Shapes::StructureShape.new(name: 'ListAccessControlRulesResponse')
     ListAliasesRequest = Shapes::StructureShape.new(name: 'ListAliasesRequest')
     ListAliasesResponse = Shapes::StructureShape.new(name: 'ListAliasesResponse')
     ListGroupMembersRequest = Shapes::StructureShape.new(name: 'ListGroupMembersRequest')
@@ -108,6 +125,8 @@ module Aws::WorkMail
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PermissionValues = Shapes::ListShape.new(name: 'PermissionValues')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PutAccessControlRuleRequest = Shapes::StructureShape.new(name: 'PutAccessControlRuleRequest')
+    PutAccessControlRuleResponse = Shapes::StructureShape.new(name: 'PutAccessControlRuleResponse')
     PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
     PutMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'PutMailboxPermissionsResponse')
     RegisterToWorkMailRequest = Shapes::StructureShape.new(name: 'RegisterToWorkMailRequest')
@@ -142,10 +161,30 @@ module Aws::WorkMail
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
     UpdateResourceResponse = Shapes::StructureShape.new(name: 'UpdateResourceResponse')
     User = Shapes::StructureShape.new(name: 'User')
+    UserIdList = Shapes::ListShape.new(name: 'UserIdList')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserRole = Shapes::StringShape.new(name: 'UserRole')
     Users = Shapes::ListShape.new(name: 'Users')
     WorkMailIdentifier = Shapes::StringShape.new(name: 'WorkMailIdentifier')
+
+    AccessControlRule.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, location_name: "Name"))
+    AccessControlRule.add_member(:effect, Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect"))
+    AccessControlRule.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlRuleDescription, location_name: "Description"))
+    AccessControlRule.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "IpRanges"))
+    AccessControlRule.add_member(:not_ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "NotIpRanges"))
+    AccessControlRule.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "Actions"))
+    AccessControlRule.add_member(:not_actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "NotActions"))
+    AccessControlRule.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
+    AccessControlRule.add_member(:not_user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "NotUserIds"))
+    AccessControlRule.add_member(:date_created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateCreated"))
+    AccessControlRule.add_member(:date_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DateModified"))
+    AccessControlRule.struct_class = Types::AccessControlRule
+
+    AccessControlRuleNameList.member = Shapes::ShapeRef.new(shape: AccessControlRuleName)
+
+    AccessControlRulesList.member = Shapes::ShapeRef.new(shape: AccessControlRule)
+
+    ActionsList.member = Shapes::ShapeRef.new(shape: AccessControlRuleAction)
 
     Aliases.member = Shapes::ShapeRef.new(shape: EmailAddress)
 
@@ -202,6 +241,12 @@ module Aws::WorkMail
     Delegate.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     Delegate.add_member(:type, Shapes::ShapeRef.new(shape: MemberType, required: true, location_name: "Type"))
     Delegate.struct_class = Types::Delegate
+
+    DeleteAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    DeleteAccessControlRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, required: true, location_name: "Name"))
+    DeleteAccessControlRuleRequest.struct_class = Types::DeleteAccessControlRuleRequest
+
+    DeleteAccessControlRuleResponse.struct_class = Types::DeleteAccessControlRuleResponse
 
     DeleteAliasRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteAliasRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -327,6 +372,16 @@ module Aws::WorkMail
     EntityStateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     EntityStateException.struct_class = Types::EntityStateException
 
+    GetAccessControlEffectRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    GetAccessControlEffectRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, required: true, location_name: "IpAddress"))
+    GetAccessControlEffectRequest.add_member(:action, Shapes::ShapeRef.new(shape: AccessControlRuleAction, required: true, location_name: "Action"))
+    GetAccessControlEffectRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
+    GetAccessControlEffectRequest.struct_class = Types::GetAccessControlEffectRequest
+
+    GetAccessControlEffectResponse.add_member(:effect, Shapes::ShapeRef.new(shape: AccessControlRuleEffect, location_name: "Effect"))
+    GetAccessControlEffectResponse.add_member(:matched_rules, Shapes::ShapeRef.new(shape: AccessControlRuleNameList, location_name: "MatchedRules"))
+    GetAccessControlEffectResponse.struct_class = Types::GetAccessControlEffectResponse
+
     GetMailboxDetailsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     GetMailboxDetailsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "UserId"))
     GetMailboxDetailsRequest.struct_class = Types::GetMailboxDetailsRequest
@@ -354,8 +409,16 @@ module Aws::WorkMail
     InvalidPasswordException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidPasswordException.struct_class = Types::InvalidPasswordException
 
+    IpRangeList.member = Shapes::ShapeRef.new(shape: IpRange)
+
     LimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListAccessControlRulesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListAccessControlRulesRequest.struct_class = Types::ListAccessControlRulesRequest
+
+    ListAccessControlRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: AccessControlRulesList, location_name: "Rules"))
+    ListAccessControlRulesResponse.struct_class = Types::ListAccessControlRulesResponse
 
     ListAliasesRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     ListAliasesRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -480,6 +543,20 @@ module Aws::WorkMail
 
     Permissions.member = Shapes::ShapeRef.new(shape: Permission)
 
+    PutAccessControlRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: AccessControlRuleName, required: true, location_name: "Name"))
+    PutAccessControlRuleRequest.add_member(:effect, Shapes::ShapeRef.new(shape: AccessControlRuleEffect, required: true, location_name: "Effect"))
+    PutAccessControlRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: AccessControlRuleDescription, required: true, location_name: "Description"))
+    PutAccessControlRuleRequest.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "IpRanges"))
+    PutAccessControlRuleRequest.add_member(:not_ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "NotIpRanges"))
+    PutAccessControlRuleRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "Actions"))
+    PutAccessControlRuleRequest.add_member(:not_actions, Shapes::ShapeRef.new(shape: ActionsList, location_name: "NotActions"))
+    PutAccessControlRuleRequest.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
+    PutAccessControlRuleRequest.add_member(:not_user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "NotUserIds"))
+    PutAccessControlRuleRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutAccessControlRuleRequest.struct_class = Types::PutAccessControlRuleRequest
+
+    PutAccessControlRuleResponse.struct_class = Types::PutAccessControlRuleResponse
+
     PutMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     PutMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
     PutMailboxPermissionsRequest.add_member(:grantee_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GranteeId"))
@@ -578,6 +655,8 @@ module Aws::WorkMail
     User.add_member(:enabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EnabledDate"))
     User.add_member(:disabled_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DisabledDate"))
     User.struct_class = Types::User
+
+    UserIdList.member = Shapes::ShapeRef.new(shape: WorkMailIdentifier)
 
     Users.member = Shapes::ShapeRef.new(shape: User)
 
@@ -691,6 +770,16 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: ReservedNameException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:delete_access_control_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAccessControlRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAccessControlRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccessControlRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -849,6 +938,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:get_access_control_effect, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccessControlEffect"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAccessControlEffectRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAccessControlEffectResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:get_mailbox_details, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetMailboxDetails"
         o.http_method = "POST"
@@ -858,6 +959,16 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+      end)
+
+      api.add_operation(:list_access_control_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAccessControlRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListAccessControlRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAccessControlRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|
@@ -1009,6 +1120,19 @@ module Aws::WorkMail
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_access_control_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccessControlRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccessControlRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAccessControlRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:put_mailbox_permissions, Seahorse::Model::Operation.new.tap do |o|

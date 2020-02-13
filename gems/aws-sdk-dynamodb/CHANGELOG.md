@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2020-02-12)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Allow objects responding to #to_h to be marshaled to DynamoDB as a Hash.
+
 1.41.0 (2019-12-02)
 ------------------
 

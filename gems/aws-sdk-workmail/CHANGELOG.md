@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2020-02-12)
+------------------
+
+* Feature - This release adds support for access control rules management  in Amazon WorkMail.
+
 1.20.0 (2020-02-04)
 ------------------
 

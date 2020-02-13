@@ -380,6 +380,7 @@ module Aws::DirectoryService
     CertificateInfo.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "CertificateId"))
     CertificateInfo.add_member(:common_name, Shapes::ShapeRef.new(shape: CertificateCN, location_name: "CommonName"))
     CertificateInfo.add_member(:state, Shapes::ShapeRef.new(shape: CertificateState, location_name: "State"))
+    CertificateInfo.add_member(:expiry_date_time, Shapes::ShapeRef.new(shape: CertificateExpiryDateTime, location_name: "ExpiryDateTime"))
     CertificateInfo.struct_class = Types::CertificateInfo
 
     CertificateLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))

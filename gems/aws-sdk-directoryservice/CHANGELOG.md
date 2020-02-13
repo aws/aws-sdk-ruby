@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-02-12)
+------------------
+
+* Feature - Release to add the ExpirationDateTime as an output to ListCertificates so as to ease customers to look into their certificate lifetime and make timely decisions about renewing them.
+
 1.24.0 (2020-01-16)
 ------------------
 

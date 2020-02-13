@@ -117,6 +117,80 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies the advanced security configuration: whether advanced
+    # security is enabled, whether the internal database option is enabled.
+    #
+    # @!attribute [rw] enabled
+    #   True if advanced security is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internal_user_database_enabled
+    #   True if the internal user database is enabled.
+    #   @return [Boolean]
+    #
+    class AdvancedSecurityOptions < Struct.new(
+      :enabled,
+      :internal_user_database_enabled)
+      include Aws::Structure
+    end
+
+    # Specifies the advanced security configuration: whether advanced
+    # security is enabled, whether the internal database option is enabled,
+    # master username and password (if internal database is enabled), and
+    # master user ARN (if IAM is enabled).
+    #
+    # @note When making an API call, you may pass AdvancedSecurityOptionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         internal_user_database_enabled: false,
+    #         master_user_options: {
+    #           master_user_arn: "ARN",
+    #           master_user_name: "Username",
+    #           master_user_password: "Password",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   True if advanced security is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] internal_user_database_enabled
+    #   True if the internal user database is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] master_user_options
+    #   Credentials for the master user: username and password, ARN, or
+    #   both.
+    #   @return [Types::MasterUserOptions]
+    #
+    class AdvancedSecurityOptionsInput < Struct.new(
+      :enabled,
+      :internal_user_database_enabled,
+      :master_user_options)
+      include Aws::Structure
+    end
+
+    # Specifies the status of advanced security options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies advanced security options for the specified Elasticsearch
+    #   domain.
+    #   @return [Types::AdvancedSecurityOptions]
+    #
+    # @!attribute [rw] status
+    #   Status of the advanced security options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class AdvancedSecurityOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # An error occurred while processing the request.
     #
     # @!attribute [rw] message
@@ -300,6 +374,15 @@ module Aws::ElasticsearchService
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
     #         },
+    #         advanced_security_options: {
+    #           enabled: false,
+    #           internal_user_database_enabled: false,
+    #           master_user_options: {
+    #             master_user_arn: "ARN",
+    #             master_user_name: "Username",
+    #             master_user_password: "Password",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -389,6 +472,10 @@ module Aws::ElasticsearchService
     #   endpoint.
     #   @return [Types::DomainEndpointOptions]
     #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies advanced security options.
+    #   @return [Types::AdvancedSecurityOptionsInput]
+    #
     class CreateElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :elasticsearch_version,
@@ -402,7 +489,8 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
-      :domain_endpoint_options)
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -994,6 +1082,10 @@ module Aws::ElasticsearchService
     #   Specifies the `DomainEndpointOptions` for the Elasticsearch domain.
     #   @return [Types::DomainEndpointOptionsStatus]
     #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies `AdvancedSecurityOptions` for the domain.
+    #   @return [Types::AdvancedSecurityOptionsStatus]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -1006,7 +1098,8 @@ module Aws::ElasticsearchService
       :node_to_node_encryption_options,
       :advanced_options,
       :log_publishing_options,
-      :domain_endpoint_options)
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -1135,6 +1228,11 @@ module Aws::ElasticsearchService
     #   The current status of the Elasticsearch domain's endpoint options.
     #   @return [Types::DomainEndpointOptions]
     #
+    # @!attribute [rw] advanced_security_options
+    #   The current status of the Elasticsearch domain's advanced security
+    #   options.
+    #   @return [Types::AdvancedSecurityOptions]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -1157,7 +1255,8 @@ module Aws::ElasticsearchService
       :advanced_options,
       :log_publishing_options,
       :service_software_options,
-      :domain_endpoint_options)
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 
@@ -1626,6 +1725,38 @@ module Aws::ElasticsearchService
     class LogPublishingOptionsStatus < Struct.new(
       :options,
       :status)
+      include Aws::Structure
+    end
+
+    # Credentials for the master user: username and password, ARN, or both.
+    #
+    # @note When making an API call, you may pass MasterUserOptions
+    #   data as a hash:
+    #
+    #       {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       }
+    #
+    # @!attribute [rw] master_user_arn
+    #   ARN for the master user (if IAM is enabled).
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_name
+    #   The master user's username, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The master user's password, which is stored in the Amazon
+    #   Elasticsearch Service domain's internal database.
+    #   @return [String]
+    #
+    class MasterUserOptions < Struct.new(
+      :master_user_arn,
+      :master_user_name,
+      :master_user_password)
       include Aws::Structure
     end
 
@@ -2177,6 +2308,15 @@ module Aws::ElasticsearchService
     #           enforce_https: false,
     #           tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
     #         },
+    #         advanced_security_options: {
+    #           enabled: false,
+    #           internal_user_database_enabled: false,
+    #           master_user_options: {
+    #             master_user_arn: "ARN",
+    #             master_user_name: "Username",
+    #             master_user_password: "Password",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -2242,6 +2382,10 @@ module Aws::ElasticsearchService
     #   endpoint.
     #   @return [Types::DomainEndpointOptions]
     #
+    # @!attribute [rw] advanced_security_options
+    #   Specifies advanced security options.
+    #   @return [Types::AdvancedSecurityOptionsInput]
+    #
     class UpdateElasticsearchDomainConfigRequest < Struct.new(
       :domain_name,
       :elasticsearch_cluster_config,
@@ -2252,7 +2396,8 @@ module Aws::ElasticsearchService
       :advanced_options,
       :access_policies,
       :log_publishing_options,
-      :domain_endpoint_options)
+      :domain_endpoint_options,
+      :advanced_security_options)
       include Aws::Structure
     end
 

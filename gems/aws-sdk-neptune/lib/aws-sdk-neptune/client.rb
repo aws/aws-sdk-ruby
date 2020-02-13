@@ -530,8 +530,6 @@ module Aws::Neptune
     # snapshot, `SourceDBClusterSnapshotIdentifier` must be the Amazon
     # Resource Name (ARN) of the shared DB cluster snapshot.
     #
-    # You can't copy from one AWS Region to another.
-    #
     # @option params [required, String] :source_db_cluster_snapshot_identifier
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
@@ -723,6 +721,12 @@ module Aws::Neptune
     # You can use the `ReplicationSourceIdentifier` parameter to create the
     # DB cluster as a Read Replica of another DB cluster or Amazon Neptune
     # DB instance.
+    #
+    # Note that when you create a new cluster using `CreateDBCluster`
+    # directly, deletion protection is disabled by default (when you create
+    # a new production cluster in the console, deletion protection is
+    # enabled by default). You can only delete a DB cluster if its
+    # `DeletionProtection` field is set to `false`.
     #
     # @option params [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the DB cluster can
@@ -919,7 +923,7 @@ module Aws::Neptune
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB cluster has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled.
+    #   enabled. By default, deletion protection is enabled.
     #
     # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1473,12 +1477,15 @@ module Aws::Neptune
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled.
+    #   enabled. By default, deletion protection is disabled. See [Deleting a
+    #   DB Instance][1].
     #
-    #   You can enable or disable deletion protection for the DB cluster. For
-    #   more information, see CreateDBCluster. DB instances in a DB cluster
-    #   can be deleted even when deletion protection is enabled for the DB
-    #   cluster.
+    #   DB instances in a DB cluster can be deleted even when deletion
+    #   protection is enabled in their parent DB cluster.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1918,6 +1925,10 @@ module Aws::Neptune
     # DB cluster are deleted and can't be recovered. Manual DB cluster
     # snapshots of the specified DB cluster are not deleted.
     #
+    # Note that the DB Cluster cannot be deleted if deletion protection is
+    # enabled. To delete it, you must first set its `DeletionProtection`
+    # field to `False`.
+    #
     # @option params [required, String] :db_cluster_identifier
     #   The DB cluster identifier for the DB cluster to be deleted. This
     #   parameter isn't case-sensitive.
@@ -2138,7 +2149,7 @@ module Aws::Neptune
     # `true`.
     #
     # You can't delete a DB instance if it is the only instance in the DB
-    # cluster.
+    # cluster, or if it has deletion protection enabled.
     #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier for the DB instance to be deleted. This
@@ -2767,8 +2778,13 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Returns information about provisioned DB clusters. This API supports
+    # Returns information about provisioned DB clusters, and supports
     # pagination.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon RDS clusters and
+    # Amazon DocDB clusters.
+    #
+    #  </note>
     #
     # @option params [String] :db_cluster_identifier
     #   The user-supplied DB cluster identifier. If this parameter is
@@ -2790,7 +2806,12 @@ module Aws::Neptune
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
+    #     the results list to DB clusters created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB clusters are returned, you could use the following
+    #   command:
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -3002,8 +3023,13 @@ module Aws::Neptune
       req.send_request(options)
     end
 
-    # Returns information about provisioned instances. This API supports
+    # Returns information about provisioned instances, and supports
     # pagination.
+    #
+    # <note markdown="1"> This operation can also return information for Amazon RDS instances
+    # and Amazon DocDB instances.
+    #
+    #  </note>
     #
     # @option params [String] :db_instance_identifier
     #   The user-supplied instance identifier. If this parameter is specified,
@@ -3026,9 +3052,12 @@ module Aws::Neptune
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB instances identified by these ARNs.
+    #   * `engine` - Accepts an engine name (such as `neptune`), and restricts
+    #     the results list to DB instances created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB instances are returned, you could use the following
+    #   command:
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -4813,7 +4842,12 @@ module Aws::Neptune
     # @option params [Boolean] :deletion_protection
     #   A value that indicates whether the DB instance has deletion protection
     #   enabled. The database can't be deleted when deletion protection is
-    #   enabled. By default, deletion protection is disabled.
+    #   enabled. By default, deletion protection is disabled. See [Deleting a
+    #   DB Instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6112,6 +6146,169 @@ module Aws::Neptune
       req.send_request(options)
     end
 
+    # Starts an Amazon Neptune DB cluster that was stopped using the AWS
+    # console, the AWS CLI stop-db-cluster command, or the StopDBCluster
+    # API.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be started.
+    #   This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StartDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBCluster AWS API Documentation
+    #
+    # @overload start_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def start_db_cluster(params = {}, options = {})
+      req = build_request(:start_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Stops an Amazon Neptune DB cluster. When you stop a DB cluster,
+    # Neptune retains the DB cluster's metadata, including its endpoints
+    # and DB parameter groups.
+    #
+    # Neptune also retains the transaction logs so you can do a
+    # point-in-time restore if necessary.
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be stopped.
+    #   This parameter is stored as a lowercase string.
+    #
+    # @return [Types::StopDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster.allocated_storage #=> Integer
+    #   resp.db_cluster.availability_zones #=> Array
+    #   resp.db_cluster.availability_zones[0] #=> String
+    #   resp.db_cluster.backup_retention_period #=> Integer
+    #   resp.db_cluster.character_set_name #=> String
+    #   resp.db_cluster.database_name #=> String
+    #   resp.db_cluster.db_cluster_identifier #=> String
+    #   resp.db_cluster.db_cluster_parameter_group #=> String
+    #   resp.db_cluster.db_subnet_group #=> String
+    #   resp.db_cluster.status #=> String
+    #   resp.db_cluster.percent_progress #=> String
+    #   resp.db_cluster.earliest_restorable_time #=> Time
+    #   resp.db_cluster.endpoint #=> String
+    #   resp.db_cluster.reader_endpoint #=> String
+    #   resp.db_cluster.multi_az #=> Boolean
+    #   resp.db_cluster.engine #=> String
+    #   resp.db_cluster.engine_version #=> String
+    #   resp.db_cluster.latest_restorable_time #=> Time
+    #   resp.db_cluster.port #=> Integer
+    #   resp.db_cluster.master_username #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+    #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+    #   resp.db_cluster.preferred_backup_window #=> String
+    #   resp.db_cluster.preferred_maintenance_window #=> String
+    #   resp.db_cluster.replication_source_identifier #=> String
+    #   resp.db_cluster.read_replica_identifiers #=> Array
+    #   resp.db_cluster.read_replica_identifiers[0] #=> String
+    #   resp.db_cluster.db_cluster_members #=> Array
+    #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+    #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+    #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+    #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+    #   resp.db_cluster.vpc_security_groups #=> Array
+    #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.db_cluster.vpc_security_groups[0].status #=> String
+    #   resp.db_cluster.hosted_zone_id #=> String
+    #   resp.db_cluster.storage_encrypted #=> Boolean
+    #   resp.db_cluster.kms_key_id #=> String
+    #   resp.db_cluster.db_cluster_resource_id #=> String
+    #   resp.db_cluster.db_cluster_arn #=> String
+    #   resp.db_cluster.associated_roles #=> Array
+    #   resp.db_cluster.associated_roles[0].role_arn #=> String
+    #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_cluster.clone_group_id #=> String
+    #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_cluster.deletion_protection #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBCluster AWS API Documentation
+    #
+    # @overload stop_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def stop_db_cluster(params = {}, options = {})
+      req = build_request(:stop_db_cluster, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6125,7 +6322,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -772,7 +772,7 @@ module Aws::Neptune
     # @!attribute [rw] deletion_protection
     #   A value that indicates whether the DB cluster has deletion
     #   protection enabled. The database can't be deleted when deletion
-    #   protection is enabled. By default, deletion protection is disabled.
+    #   protection is enabled. By default, deletion protection is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBClusterMessage AWS API Documentation
@@ -1336,11 +1336,14 @@ module Aws::Neptune
     #   A value that indicates whether the DB instance has deletion
     #   protection enabled. The database can't be deleted when deletion
     #   protection is enabled. By default, deletion protection is disabled.
+    #   See [Deleting a DB Instance][1].
     #
-    #   You can enable or disable deletion protection for the DB cluster.
-    #   For more information, see CreateDBCluster. DB instances in a DB
-    #   cluster can be deleted even when deletion protection is enabled for
-    #   the DB cluster.
+    #   DB instances in a DB cluster can be deleted even when deletion
+    #   protection is enabled in their parent DB cluster.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CreateDBInstanceMessage AWS API Documentation
@@ -1833,8 +1836,9 @@ module Aws::Neptune
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
-    #   Indicates if the DB cluster has deletion protection enabled. The
-    #   database can't be deleted when deletion protection is enabled.
+    #   Indicates whether or not the DB cluster has deletion protection
+    #   enabled. The database can't be deleted when deletion protection is
+    #   enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBCluster AWS API Documentation
@@ -2083,7 +2087,22 @@ module Aws::Neptune
     #   @return [Array<String>]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   Specifies the identifier for the DB cluster snapshot.
+    #   Specifies the identifier for a DB cluster snapshot. Must match the
+    #   identifier of an existing snapshot.
+    #
+    #   After you restore a DB cluster using a
+    #   `DBClusterSnapshotIdentifier`, you must specify the same
+    #   `DBClusterSnapshotIdentifier` for any future updates to the DB
+    #   cluster. When you specify this property for an update, the DB
+    #   cluster is not restored from the snapshot again, and the data in the
+    #   database is not changed.
+    #
+    #   However, if you don't specify the `DBClusterSnapshotIdentifier`, an
+    #   empty DB cluster is created, and the original DB cluster is deleted.
+    #   If you specify a property that is different from the previous
+    #   snapshot restore property, the DB cluster is restored from the
+    #   snapshot specified by the `DBClusterSnapshotIdentifier`, and the
+    #   original DB cluster is deleted.
     #   @return [String]
     #
     # @!attribute [rw] db_cluster_identifier
@@ -2616,8 +2635,13 @@ module Aws::Neptune
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
-    #   Indicates if the DB instance has deletion protection enabled. The
-    #   database can't be deleted when deletion protection is enabled.
+    #   Indicates whether or not the DB instance has deletion protection
+    #   enabled. The instance can't be deleted when deletion protection is
+    #   enabled. See [Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBInstance AWS API Documentation
@@ -3547,7 +3571,12 @@ module Aws::Neptune
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB clusters identified by these ARNs.
     #
-    #   ^
+    #   * `engine` - Accepts an engine name (such as `neptune`), and
+    #     restricts the results list to DB clusters created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB clusters are returned, you could use the following
+    #   command:
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -3709,9 +3738,12 @@ module Aws::Neptune
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
-    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     information about the DB instances identified by these ARNs.
+    #   * `engine` - Accepts an engine name (such as `neptune`), and
+    #     restricts the results list to DB instances created by that engine.
+    #
+    #   For example, to invoke this API from the AWS CLI and filter so that
+    #   only Neptune DB instances are returned, you could use the following
+    #   command:
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -5502,6 +5534,11 @@ module Aws::Neptune
     #   A value that indicates whether the DB instance has deletion
     #   protection enabled. The database can't be deleted when deletion
     #   protection is enabled. By default, deletion protection is disabled.
+    #   See [Deleting a DB Instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
@@ -6881,6 +6918,72 @@ module Aws::Neptune
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be started.
+    #   This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBClusterMessage AWS API Documentation
+    #
+    class StartDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Neptune DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters action.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StartDBClusterResult AWS API Documentation
+    #
+    class StartDBClusterResult < Struct.new(
+      :db_cluster)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the Neptune DB cluster to be stopped.
+    #   This parameter is stored as a lowercase string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBClusterMessage AWS API Documentation
+    #
+    class StopDBClusterMessage < Struct.new(
+      :db_cluster_identifier)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_cluster
+    #   Contains the details of an Amazon Neptune DB cluster.
+    #
+    #   This data type is used as a response element in the
+    #   DescribeDBClusters action.
+    #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StopDBClusterResult AWS API Documentation
+    #
+    class StopDBClusterResult < Struct.new(
       :db_cluster)
       include Aws::Structure
     end

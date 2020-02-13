@@ -18,6 +18,9 @@ module Aws::ElasticsearchService
     AdditionalLimitList = Shapes::ListShape.new(name: 'AdditionalLimitList')
     AdvancedOptions = Shapes::MapShape.new(name: 'AdvancedOptions')
     AdvancedOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedOptionsStatus')
+    AdvancedSecurityOptions = Shapes::StructureShape.new(name: 'AdvancedSecurityOptions')
+    AdvancedSecurityOptionsInput = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsInput')
+    AdvancedSecurityOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedSecurityOptionsStatus')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
@@ -107,6 +110,7 @@ module Aws::ElasticsearchService
     LogPublishingOptions = Shapes::MapShape.new(name: 'LogPublishingOptions')
     LogPublishingOptionsStatus = Shapes::StructureShape.new(name: 'LogPublishingOptionsStatus')
     LogType = Shapes::StringShape.new(name: 'LogType')
+    MasterUserOptions = Shapes::StructureShape.new(name: 'MasterUserOptions')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
@@ -115,6 +119,7 @@ module Aws::ElasticsearchService
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
+    Password = Shapes::StringShape.new(name: 'Password')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PurchaseReservedElasticsearchInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingRequest')
     PurchaseReservedElasticsearchInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingResponse')
@@ -164,6 +169,7 @@ module Aws::ElasticsearchService
     UpgradeStepItem = Shapes::StructureShape.new(name: 'UpgradeStepItem')
     UpgradeStepsList = Shapes::ListShape.new(name: 'UpgradeStepsList')
     UserPoolId = Shapes::StringShape.new(name: 'UserPoolId')
+    Username = Shapes::StringShape.new(name: 'Username')
     VPCDerivedInfo = Shapes::StructureShape.new(name: 'VPCDerivedInfo')
     VPCDerivedInfoStatus = Shapes::StructureShape.new(name: 'VPCDerivedInfoStatus')
     VPCOptions = Shapes::StructureShape.new(name: 'VPCOptions')
@@ -191,6 +197,19 @@ module Aws::ElasticsearchService
     AdvancedOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AdvancedOptions, required: true, location_name: "Options"))
     AdvancedOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     AdvancedOptionsStatus.struct_class = Types::AdvancedOptionsStatus
+
+    AdvancedSecurityOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
+    AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
+
+    AdvancedSecurityOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    AdvancedSecurityOptionsInput.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
+    AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
+    AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
+
+    AdvancedSecurityOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, required: true, location_name: "Options"))
+    AdvancedSecurityOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    AdvancedSecurityOptionsStatus.struct_class = Types::AdvancedSecurityOptionsStatus
 
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
@@ -230,6 +249,7 @@ module Aws::ElasticsearchService
     CreateElasticsearchDomainRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
     CreateElasticsearchDomainRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     CreateElasticsearchDomainRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
+    CreateElasticsearchDomainRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     CreateElasticsearchDomainRequest.struct_class = Types::CreateElasticsearchDomainRequest
 
     CreateElasticsearchDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus, location_name: "DomainStatus"))
@@ -338,6 +358,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptionsStatus, location_name: "AdvancedOptions"))
     ElasticsearchDomainConfig.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptionsStatus, location_name: "LogPublishingOptions"))
     ElasticsearchDomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
+    ElasticsearchDomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
 
     ElasticsearchDomainStatus.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -362,6 +383,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     ElasticsearchDomainStatus.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     ElasticsearchDomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
+    ElasticsearchDomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
@@ -464,6 +486,11 @@ module Aws::ElasticsearchService
     LogPublishingOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "Options"))
     LogPublishingOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, location_name: "Status"))
     LogPublishingOptionsStatus.struct_class = Types::LogPublishingOptionsStatus
+
+    MasterUserOptions.add_member(:master_user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "MasterUserARN"))
+    MasterUserOptions.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
+    MasterUserOptions.add_member(:master_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "MasterUserPassword"))
+    MasterUserOptions.struct_class = Types::MasterUserOptions
 
     NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
@@ -580,6 +607,7 @@ module Aws::ElasticsearchService
     UpdateElasticsearchDomainConfigRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
     UpdateElasticsearchDomainConfigRequest.add_member(:log_publishing_options, Shapes::ShapeRef.new(shape: LogPublishingOptions, location_name: "LogPublishingOptions"))
     UpdateElasticsearchDomainConfigRequest.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
+    UpdateElasticsearchDomainConfigRequest.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsInput, location_name: "AdvancedSecurityOptions"))
     UpdateElasticsearchDomainConfigRequest.struct_class = Types::UpdateElasticsearchDomainConfigRequest
 
     UpdateElasticsearchDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: ElasticsearchDomainConfig, required: true, location_name: "DomainConfig"))

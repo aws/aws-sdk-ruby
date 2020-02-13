@@ -248,6 +248,10 @@ module Aws::Neptune
     SourceIdsList = Shapes::ListShape.new(name: 'SourceIdsList')
     SourceNotFoundFault = Shapes::StructureShape.new(name: 'SourceNotFoundFault')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartDBClusterMessage = Shapes::StructureShape.new(name: 'StartDBClusterMessage')
+    StartDBClusterResult = Shapes::StructureShape.new(name: 'StartDBClusterResult')
+    StopDBClusterMessage = Shapes::StructureShape.new(name: 'StopDBClusterMessage')
+    StopDBClusterResult = Shapes::StructureShape.new(name: 'StopDBClusterResult')
     StorageQuotaExceededFault = Shapes::StructureShape.new(name: 'StorageQuotaExceededFault')
     StorageTypeNotSupportedFault = Shapes::StructureShape.new(name: 'StorageTypeNotSupportedFault')
     String = Shapes::StringShape.new(name: 'String')
@@ -1263,6 +1267,18 @@ module Aws::Neptune
 
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
 
+    StartDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    StartDBClusterMessage.struct_class = Types::StartDBClusterMessage
+
+    StartDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
+    StartDBClusterResult.struct_class = Types::StartDBClusterResult
+
+    StopDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+    StopDBClusterMessage.struct_class = Types::StopDBClusterMessage
+
+    StopDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
+    StopDBClusterResult.struct_class = Types::StopDBClusterResult
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "SubnetAvailabilityZone"))
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
@@ -2055,6 +2071,28 @@ module Aws::Neptune
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: StorageQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
+      end)
+
+      api.add_operation(:start_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDBCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDBClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: StartDBClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
+      end)
+
+      api.add_operation(:stop_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopDBCluster"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopDBClusterMessage)
+        o.output = Shapes::ShapeRef.new(shape: StopDBClusterResult)
+        o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
       end)
     end
 
