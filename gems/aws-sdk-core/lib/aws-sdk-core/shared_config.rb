@@ -117,8 +117,8 @@ module Aws
       credentials
     end
 
-    def assume_role_web_identity_credentials_from_config(profile, opts = {})
-      p = profile || @profile_name
+    def assume_role_web_identity_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
@@ -225,7 +225,7 @@ module Aws
     def resolve_source_profile(profile, opts = {})
       if (creds = credentials(profile: profile))
         creds # static credentials
-      elsif (provider = assume_role_web_identity_credentials_from_config(profile, opts))
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials if provider.credentials.set?
