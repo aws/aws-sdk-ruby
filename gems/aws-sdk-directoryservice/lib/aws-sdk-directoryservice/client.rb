@@ -1494,8 +1494,8 @@ module Aws::DirectoryService
     #   The identifier of the directory.
     #
     # @option params [String] :type
-    #   The type of LDAP security the customer wants to enable, either server
-    #   or client. Currently supports only `Client`, (the default).
+    #   The type of LDAP security to enable. Currently only the value `Client`
+    #   is supported.
     #
     # @option params [String] :next_token
     #   The type of next token used for pagination.
@@ -1718,9 +1718,8 @@ module Aws::DirectoryService
     #   The identifier of the directory.
     #
     # @option params [required, String] :type
-    #   The type of LDAP security that the customer wants to enable. The
-    #   security can be either server or client, but currently only the
-    #   default `Client` is supported.
+    #   The type of LDAP security to enable. Currently only the value `Client`
+    #   is supported.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1811,9 +1810,8 @@ module Aws::DirectoryService
     #   The identifier of the directory.
     #
     # @option params [required, String] :type
-    #   The type of LDAP security the customer wants to enable. The security
-    #   can be either server or client, but currently only the default
-    #   `Client` is supported.
+    #   The type of LDAP security to enable. Currently only the value `Client`
+    #   is supported.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2005,6 +2003,7 @@ module Aws::DirectoryService
     #   resp.certificates_info[0].certificate_id #=> String
     #   resp.certificates_info[0].common_name #=> String
     #   resp.certificates_info[0].state #=> String, one of "Registering", "Registered", "RegisterFailed", "Deregistering", "Deregistered", "DeregisterFailed"
+    #   resp.certificates_info[0].expiry_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListCertificates AWS API Documentation
     #
@@ -2760,7 +2759,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

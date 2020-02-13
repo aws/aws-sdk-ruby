@@ -729,6 +729,8 @@ module Aws::Glue
     #   resp.jobs[0].command.python_version #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
+    #   resp.jobs[0].non_overridable_arguments #=> Hash
+    #   resp.jobs[0].non_overridable_arguments["GenericString"] #=> String
     #   resp.jobs[0].connections.connections #=> Array
     #   resp.jobs[0].connections.connections[0] #=> String
     #   resp.jobs[0].max_retries #=> Integer
@@ -1665,6 +1667,9 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #
+    # @option params [Hash<String,String>] :non_overridable_arguments
+    #   Non-overridable arguments for this job, specified as name-value pairs.
+    #
     # @option params [Types::ConnectionsList] :connections
     #   The connections used for this job.
     #
@@ -1788,6 +1793,9 @@ module Aws::Glue
     #       python_version: "PythonVersionString",
     #     },
     #     default_arguments: {
+    #       "GenericString" => "GenericString",
+    #     },
+    #     non_overridable_arguments: {
     #       "GenericString" => "GenericString",
     #     },
     #     connections: {
@@ -3731,6 +3739,8 @@ module Aws::Glue
     #   resp.job.command.python_version #=> String
     #   resp.job.default_arguments #=> Hash
     #   resp.job.default_arguments["GenericString"] #=> String
+    #   resp.job.non_overridable_arguments #=> Hash
+    #   resp.job.non_overridable_arguments["GenericString"] #=> String
     #   resp.job.connections.connections #=> Array
     #   resp.job.connections.connections[0] #=> String
     #   resp.job.max_retries #=> Integer
@@ -3948,6 +3958,8 @@ module Aws::Glue
     #   resp.jobs[0].command.python_version #=> String
     #   resp.jobs[0].default_arguments #=> Hash
     #   resp.jobs[0].default_arguments["GenericString"] #=> String
+    #   resp.jobs[0].non_overridable_arguments #=> Hash
+    #   resp.jobs[0].non_overridable_arguments["GenericString"] #=> String
     #   resp.jobs[0].connections.connections #=> Array
     #   resp.jobs[0].connections.connections[0] #=> String
     #   resp.jobs[0].max_retries #=> Integer
@@ -7399,6 +7411,9 @@ module Aws::Glue
     #       default_arguments: {
     #         "GenericString" => "GenericString",
     #       },
+    #       non_overridable_arguments: {
+    #         "GenericString" => "GenericString",
+    #       },
     #       connections: {
     #         connections: ["GenericString"],
     #       },
@@ -7923,7 +7938,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

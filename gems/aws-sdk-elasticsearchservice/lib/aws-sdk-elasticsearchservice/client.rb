@@ -407,6 +407,9 @@ module Aws::ElasticsearchService
     #   Options to specify configuration that will be applied to the domain
     #   endpoint.
     #
+    # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
+    #   Specifies advanced security options.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -470,6 +473,15 @@ module Aws::ElasticsearchService
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
     #     },
+    #     advanced_security_options: {
+    #       enabled: false,
+    #       internal_user_database_enabled: false,
+    #       master_user_options: {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -529,6 +541,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -611,6 +625,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -713,6 +729,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status.advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -838,6 +856,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
     #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
+    #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -921,6 +946,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].advanced_security_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].advanced_security_options.internal_user_database_enabled #=> Boolean
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -1490,6 +1517,9 @@ module Aws::ElasticsearchService
     #   Options to specify configuration that will be applied to the domain
     #   endpoint.
     #
+    # @option params [Types::AdvancedSecurityOptionsInput] :advanced_security_options
+    #   Specifies advanced security options.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -1544,6 +1574,15 @@ module Aws::ElasticsearchService
     #     domain_endpoint_options: {
     #       enforce_https: false,
     #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #     },
+    #     advanced_security_options: {
+    #       enabled: false,
+    #       internal_user_database_enabled: false,
+    #       master_user_options: {
+    #         master_user_arn: "ARN",
+    #         master_user_name: "Username",
+    #         master_user_password: "Password",
+    #       },
     #     },
     #   })
     #
@@ -1647,6 +1686,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.domain_endpoint_options.status.update_version #=> Integer
     #   resp.domain_config.domain_endpoint_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.domain_endpoint_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.options.internal_user_database_enabled #=> Boolean
+    #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_date #=> Time
+    #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
+    #   resp.domain_config.advanced_security_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.advanced_security_options.status.pending_deletion #=> Boolean
     #
     # @overload update_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1712,7 +1758,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

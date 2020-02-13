@@ -8,6 +8,73 @@
 module Aws::WorkMail
   module Types
 
+    # A rule that controls access to an Amazon WorkMail organization.
+    #
+    # @!attribute [rw] name
+    #   The rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The rule effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The rule description.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_ranges
+    #   IPv4 CIDR ranges to include in the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_ip_ranges
+    #   IPv4 CIDR ranges to exclude from the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] actions
+    #   Access protocol actions to include in the rule. Valid values include
+    #   `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`,
+    #   `WindowsOutlook`, and `WebMail`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_actions
+    #   Access protocol actions to exclude from the rule. Valid values
+    #   include `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`,
+    #   `WindowsOutlook`, and `WebMail`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_ids
+    #   User IDs to include in the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_user_ids
+    #   User IDs to exclude from the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] date_created
+    #   The date that the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] date_modified
+    #   The date that the rule was modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AccessControlRule AWS API Documentation
+    #
+    class AccessControlRule < Struct.new(
+      :name,
+      :effect,
+      :description,
+      :ip_ranges,
+      :not_ip_ranges,
+      :actions,
+      :not_actions,
+      :user_ids,
+      :not_user_ids,
+      :date_created,
+      :date_modified)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateDelegateToResourceRequest
     #   data as a hash:
     #
@@ -291,6 +358,34 @@ module Aws::WorkMail
       :type)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteAccessControlRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId",
+    #         name: "AccessControlRuleName", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier for the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the access control rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAccessControlRuleRequest AWS API Documentation
+    #
+    class DeleteAccessControlRuleRequest < Struct.new(
+      :organization_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAccessControlRuleResponse AWS API Documentation
+    #
+    class DeleteAccessControlRuleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteAliasRequest
     #   data as a hash:
@@ -915,6 +1010,60 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAccessControlEffectRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         ip_address: "IpAddress", # required
+    #         action: "AccessControlRuleAction", # required
+    #         user_id: "WorkMailIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier for the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The IPv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The access protocol action. Valid values include `ActiveSync`,
+    #   `AutoDiscover`, `EWS`, `IMAP`, `SMTP`, `WindowsOutlook`, and
+    #   `WebMail`.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetAccessControlEffectRequest AWS API Documentation
+    #
+    class GetAccessControlEffectRequest < Struct.new(
+      :organization_id,
+      :ip_address,
+      :action,
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effect
+    #   The rule effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] matched_rules
+    #   The rules that match the given parameters, resulting in an effect.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetAccessControlEffectResponse AWS API Documentation
+    #
+    class GetAccessControlEffectResponse < Struct.new(
+      :effect,
+      :matched_rules)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMailboxDetailsRequest
     #   data as a hash:
     #
@@ -1046,6 +1195,35 @@ module Aws::WorkMail
     #
     class LimitExceededException < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAccessControlRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier for the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAccessControlRulesRequest AWS API Documentation
+    #
+    class ListAccessControlRulesRequest < Struct.new(
+      :organization_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   The access control rules.
+    #   @return [Array<Types::AccessControlRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAccessControlRulesResponse AWS API Documentation
+    #
+    class ListAccessControlRulesResponse < Struct.new(
+      :rules)
       include Aws::Structure
     end
 
@@ -1652,6 +1830,86 @@ module Aws::WorkMail
       :permission_values)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutAccessControlRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "AccessControlRuleName", # required
+    #         effect: "ALLOW", # required, accepts ALLOW, DENY
+    #         description: "AccessControlRuleDescription", # required
+    #         ip_ranges: ["IpRange"],
+    #         not_ip_ranges: ["IpRange"],
+    #         actions: ["AccessControlRuleAction"],
+    #         not_actions: ["AccessControlRuleAction"],
+    #         user_ids: ["WorkMailIdentifier"],
+    #         not_user_ids: ["WorkMailIdentifier"],
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The rule name.
+    #   @return [String]
+    #
+    # @!attribute [rw] effect
+    #   The rule effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The rule description.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_ranges
+    #   IPv4 CIDR ranges to include in the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_ip_ranges
+    #   IPv4 CIDR ranges to exclude from the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] actions
+    #   Access protocol actions to include in the rule. Valid values include
+    #   `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`,
+    #   `WindowsOutlook`, and `WebMail`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_actions
+    #   Access protocol actions to exclude from the rule. Valid values
+    #   include `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`,
+    #   `WindowsOutlook`, and `WebMail`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_ids
+    #   User IDs to include in the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] not_user_ids
+    #   User IDs to exclude from the rule.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRuleRequest AWS API Documentation
+    #
+    class PutAccessControlRuleRequest < Struct.new(
+      :name,
+      :effect,
+      :description,
+      :ip_ranges,
+      :not_ip_ranges,
+      :actions,
+      :not_actions,
+      :user_ids,
+      :not_user_ids,
+      :organization_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRuleResponse AWS API Documentation
+    #
+    class PutAccessControlRuleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutMailboxPermissionsRequest
     #   data as a hash:

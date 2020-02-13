@@ -884,6 +884,9 @@ module Aws::EC2
     # see [IP Addresses Per Network Interface Per Instance Type][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
     #
+    # You must specify either the IPv6 addresses or the IPv6 address count
+    # in the request.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
@@ -950,6 +953,9 @@ module Aws::EC2
     # IP address from one network interface to another, check
     # `network/interfaces/macs/mac/local-ipv4s` in the instance metadata to
     # confirm that the remapping is complete.
+    #
+    # You must specify either the IP addresses or the IP address count in
+    # the request.
     #
     #
     #
@@ -18566,6 +18572,19 @@ module Aws::EC2
     #   retrieve the remaining results, make another call with the returned
     #   `nextToken` value.
     #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
+    #     the resource. Use the tag key in the filter name and the tag value
+    #     as the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify `tag:Owner`
+    #     for the filter name and `TeamA` for the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
+    #
     # @return [Types::DescribePublicIpv4PoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePublicIpv4PoolsResult#public_ipv_4_pools #public_ipv_4_pools} => Array&lt;Types::PublicIpv4Pool&gt;
@@ -18577,6 +18596,12 @@ module Aws::EC2
     #     pool_ids: ["String"],
     #     next_token: "NextToken",
     #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -18591,6 +18616,9 @@ module Aws::EC2
     #   resp.public_ipv_4_pools[0].pool_address_ranges[0].available_address_count #=> Integer
     #   resp.public_ipv_4_pools[0].total_address_count #=> Integer
     #   resp.public_ipv_4_pools[0].total_available_address_count #=> Integer
+    #   resp.public_ipv_4_pools[0].tags #=> Array
+    #   resp.public_ipv_4_pools[0].tags[0].key #=> String
+    #   resp.public_ipv_4_pools[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePublicIpv4Pools AWS API Documentation
@@ -35954,7 +35982,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

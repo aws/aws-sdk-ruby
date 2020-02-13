@@ -2452,6 +2452,9 @@ module Aws::Glue
     #         default_arguments: {
     #           "GenericString" => "GenericString",
     #         },
+    #         non_overridable_arguments: {
+    #           "GenericString" => "GenericString",
+    #         },
     #         connections: {
     #           connections: ["GenericString"],
     #         },
@@ -2516,6 +2519,11 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] non_overridable_arguments
+    #   Non-overridable arguments for this job, specified as name-value
+    #   pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -2643,6 +2651,7 @@ module Aws::Glue
       :execution_property,
       :command,
       :default_arguments,
+      :non_overridable_arguments,
       :connections,
       :max_retries,
       :allocated_capacity,
@@ -7266,6 +7275,11 @@ module Aws::Glue
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] non_overridable_arguments
+    #   Non-overridable arguments for this job, specified as name-value
+    #   pairs.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] connections
     #   The connections used for this job.
     #   @return [Types::ConnectionsList]
@@ -7385,6 +7399,7 @@ module Aws::Glue
       :execution_property,
       :command,
       :default_arguments,
+      :non_overridable_arguments,
       :connections,
       :max_retries,
       :allocated_capacity,
@@ -7743,6 +7758,9 @@ module Aws::Glue
     #         default_arguments: {
     #           "GenericString" => "GenericString",
     #         },
+    #         non_overridable_arguments: {
+    #           "GenericString" => "GenericString",
+    #         },
     #         connections: {
     #           connections: ["GenericString"],
     #         },
@@ -7799,6 +7817,11 @@ module Aws::Glue
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
     #   [2]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] non_overridable_arguments
+    #   Non-overridable arguments for this job, specified as name-value
+    #   pairs.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -7912,6 +7935,7 @@ module Aws::Glue
       :execution_property,
       :command,
       :default_arguments,
+      :non_overridable_arguments,
       :connections,
       :max_retries,
       :allocated_capacity,
@@ -11592,6 +11616,9 @@ module Aws::Glue
     #             python_version: "PythonVersionString",
     #           },
     #           default_arguments: {
+    #             "GenericString" => "GenericString",
+    #           },
+    #           non_overridable_arguments: {
     #             "GenericString" => "GenericString",
     #           },
     #           connections: {

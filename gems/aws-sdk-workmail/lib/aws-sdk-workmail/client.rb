@@ -468,6 +468,33 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes an access control rule for the specified WorkMail
+    # organization.
+    #
+    # @option params [String] :organization_id
+    #   The identifier for the organization.
+    #
+    # @option params [required, String] :name
+    #   The name of the access control rule.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_access_control_rule({
+    #     organization_id: "OrganizationId",
+    #     name: "AccessControlRuleName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteAccessControlRule AWS API Documentation
+    #
+    # @overload delete_access_control_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_access_control_rule(params = {}, options = {})
+      req = build_request(:delete_access_control_rule, params)
+      req.send_request(options)
+    end
+
     # Remove one or more specified aliases from a set of aliases for a given
     # user.
     #
@@ -892,6 +919,52 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Gets the effects of an organization's access control rules as they
+    # apply to a specified IPv4 address, access protocol action, or user ID.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization.
+    #
+    # @option params [required, String] :ip_address
+    #   The IPv4 address.
+    #
+    # @option params [required, String] :action
+    #   The access protocol action. Valid values include `ActiveSync`,
+    #   `AutoDiscover`, `EWS`, `IMAP`, `SMTP`, `WindowsOutlook`, and
+    #   `WebMail`.
+    #
+    # @option params [required, String] :user_id
+    #   The user ID.
+    #
+    # @return [Types::GetAccessControlEffectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccessControlEffectResponse#effect #effect} => String
+    #   * {Types::GetAccessControlEffectResponse#matched_rules #matched_rules} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_access_control_effect({
+    #     organization_id: "OrganizationId", # required
+    #     ip_address: "IpAddress", # required
+    #     action: "AccessControlRuleAction", # required
+    #     user_id: "WorkMailIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effect #=> String, one of "ALLOW", "DENY"
+    #   resp.matched_rules #=> Array
+    #   resp.matched_rules[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/GetAccessControlEffect AWS API Documentation
+    #
+    # @overload get_access_control_effect(params = {})
+    # @param [Hash] params ({})
+    def get_access_control_effect(params = {}, options = {})
+      req = build_request(:get_access_control_effect, params)
+      req.send_request(options)
+    end
+
     # Requests a user's mailbox details for a specified organization and
     # user.
     #
@@ -925,6 +998,51 @@ module Aws::WorkMail
     # @param [Hash] params ({})
     def get_mailbox_details(params = {}, options = {})
       req = build_request(:get_mailbox_details, params)
+      req.send_request(options)
+    end
+
+    # Lists the access control rules for the specified organization.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier for the organization.
+    #
+    # @return [Types::ListAccessControlRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccessControlRulesResponse#rules #rules} => Array&lt;Types::AccessControlRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_access_control_rules({
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].effect #=> String, one of "ALLOW", "DENY"
+    #   resp.rules[0].description #=> String
+    #   resp.rules[0].ip_ranges #=> Array
+    #   resp.rules[0].ip_ranges[0] #=> String
+    #   resp.rules[0].not_ip_ranges #=> Array
+    #   resp.rules[0].not_ip_ranges[0] #=> String
+    #   resp.rules[0].actions #=> Array
+    #   resp.rules[0].actions[0] #=> String
+    #   resp.rules[0].not_actions #=> Array
+    #   resp.rules[0].not_actions[0] #=> String
+    #   resp.rules[0].user_ids #=> Array
+    #   resp.rules[0].user_ids[0] #=> String
+    #   resp.rules[0].not_user_ids #=> Array
+    #   resp.rules[0].not_user_ids[0] #=> String
+    #   resp.rules[0].date_created #=> Time
+    #   resp.rules[0].date_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListAccessControlRules AWS API Documentation
+    #
+    # @overload list_access_control_rules(params = {})
+    # @param [Hash] params ({})
+    def list_access_control_rules(params = {}, options = {})
+      req = build_request(:list_access_control_rules, params)
       req.send_request(options)
     end
 
@@ -1328,6 +1446,71 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Adds a new access control rule for the specified organization. The
+    # rule allows or denies access to the organization for the specified
+    # IPv4 addresses, access protocol actions, and user IDs. Adding a new
+    # rule with the same name as an existing rule replaces the older rule.
+    #
+    # @option params [required, String] :name
+    #   The rule name.
+    #
+    # @option params [required, String] :effect
+    #   The rule effect.
+    #
+    # @option params [required, String] :description
+    #   The rule description.
+    #
+    # @option params [Array<String>] :ip_ranges
+    #   IPv4 CIDR ranges to include in the rule.
+    #
+    # @option params [Array<String>] :not_ip_ranges
+    #   IPv4 CIDR ranges to exclude from the rule.
+    #
+    # @option params [Array<String>] :actions
+    #   Access protocol actions to include in the rule. Valid values include
+    #   `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`, `WindowsOutlook`,
+    #   and `WebMail`.
+    #
+    # @option params [Array<String>] :not_actions
+    #   Access protocol actions to exclude from the rule. Valid values include
+    #   `ActiveSync`, `AutoDiscover`, `EWS`, `IMAP`, `SMTP`, `WindowsOutlook`,
+    #   and `WebMail`.
+    #
+    # @option params [Array<String>] :user_ids
+    #   User IDs to include in the rule.
+    #
+    # @option params [Array<String>] :not_user_ids
+    #   User IDs to exclude from the rule.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier of the organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_access_control_rule({
+    #     name: "AccessControlRuleName", # required
+    #     effect: "ALLOW", # required, accepts ALLOW, DENY
+    #     description: "AccessControlRuleDescription", # required
+    #     ip_ranges: ["IpRange"],
+    #     not_ip_ranges: ["IpRange"],
+    #     actions: ["AccessControlRuleAction"],
+    #     not_actions: ["AccessControlRuleAction"],
+    #     user_ids: ["WorkMailIdentifier"],
+    #     not_user_ids: ["WorkMailIdentifier"],
+    #     organization_id: "OrganizationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRule AWS API Documentation
+    #
+    # @overload put_access_control_rule(params = {})
+    # @param [Hash] params ({})
+    def put_access_control_rule(params = {}, options = {})
+      req = build_request(:put_access_control_rule, params)
+      req.send_request(options)
+    end
+
     # Sets permissions for a user, group, or resource. This replaces any
     # pre-existing permissions.
     #
@@ -1386,7 +1569,7 @@ module Aws::WorkMail
     #
     #
     #
-    # [1]: https://aws.amazon.com//workmail/pricing
+    # [1]: https://aws.amazon.com/workmail/pricing
     #
     # @option params [required, String] :organization_id
     #   The identifier for the organization under which the user, group, or
@@ -1627,7 +1810,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

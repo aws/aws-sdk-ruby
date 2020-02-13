@@ -374,12 +374,17 @@ module Aws::DirectoryService
     #   The state of the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] expiry_date_time
+    #   The date and time when the certificate will expire.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CertificateInfo AWS API Documentation
     #
     class CertificateInfo < Struct.new(
       :certificate_id,
       :common_name,
-      :state)
+      :state,
+      :expiry_date_time)
       include Aws::Structure
     end
 
@@ -1526,8 +1531,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of LDAP security the customer wants to enable, either
-    #   server or client. Currently supports only `Client`, (the default).
+    #   The type of LDAP security to enable. Currently only the value
+    #   `Client` is supported.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2222,9 +2227,8 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of LDAP security that the customer wants to enable. The
-    #   security can be either server or client, but currently only the
-    #   default `Client` is supported.
+    #   The type of LDAP security to enable. Currently only the value
+    #   `Client` is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableLDAPSRequest AWS API Documentation
@@ -2406,8 +2410,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of LDAP security the customer wants to enable. The security
-    #   can be either server or client, but currently only the default
+    #   The type of LDAP security to enable. Currently only the value
     #   `Client` is supported.
     #   @return [String]
     #
