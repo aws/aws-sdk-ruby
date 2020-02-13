@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.444 (2020-02-13)
+------------------
+
 * Feature - Aws::MediaPackageVod - Updated the API, and documentation for AWS Elemental MediaPackage VOD.
 
 2.11.443 (2020-02-12)
