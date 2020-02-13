@@ -277,6 +277,7 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         # Acquiring tokens from the retry quota
+        # TODO: networking_error == Timeout?  consider aligning terms used....
         def retry_quota?(is_networking_error)
           @capacity_amount = if is_networking_error
                                TIMEOUT_RETRY_COST
@@ -322,10 +323,10 @@ SDK operation invocation before giving up. Used in `standard` and
           @last_timestamp       = nil
           @enabled              = false
           @measured_tx_rate     = 0
-          @last_tx_rate_bucket  = Time.new.to_i
+          @last_tx_rate_bucket  = Aws::Util.monotonic_milliseconds / 1000
           @request_count        = 0
           @last_max_rate        = 0
-          @last_throttle_time   = Time.new.to_f
+          @last_throttle_time   = Aws::Util.monotonic_milliseconds / 1000.0
           @time_window          = 0
         end
 
@@ -336,6 +337,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
           token_bucket_refill
           # Next see if we have enough capacity for the requested amount
+          # TODO: Check config for blocking (instant fail)
           if amount > @current_capacity
             sleep((amount - @current_capacity / @fill_rate))
           end
@@ -368,7 +370,7 @@ SDK operation invocation before giving up. Used in `standard` and
           @current_capacity = [@current_capacity, @max_capacity].min
         end
 
-        def token_bucket_enable
+        def enable_token_bucket
           @enabled = true
         end
 
@@ -398,10 +400,11 @@ SDK operation invocation before giving up. Used in `standard` and
             # The fill_rate is from the token bucket
             @last_max_rate = rate_to_use
             calculate_time_window
-            @last_throttle_time = Time.new.to_f
+            @last_throttle_time = Aws::Util.monotonic_milliseconds / 1000.0
             calculated_rate = cubic_throttle(rate_to_use)
+            enable_token_bucket
           else
-            calculated_rate = cubic_success(Time.new.to_f)
+            calculated_rate = cubic_success(Aws::Util.monotonic_milliseconds / 1000.0)
           end
 
           new_rate = [calculated_rate, 2 * @measured_tx_rate].min
