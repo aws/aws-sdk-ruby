@@ -17,6 +17,8 @@ module Aws::Shield
     AssociateDRTLogBucketResponse = Shapes::StructureShape.new(name: 'AssociateDRTLogBucketResponse')
     AssociateDRTRoleRequest = Shapes::StructureShape.new(name: 'AssociateDRTRoleRequest')
     AssociateDRTRoleResponse = Shapes::StructureShape.new(name: 'AssociateDRTRoleResponse')
+    AssociateHealthCheckRequest = Shapes::StructureShape.new(name: 'AssociateHealthCheckRequest')
+    AssociateHealthCheckResponse = Shapes::StructureShape.new(name: 'AssociateHealthCheckResponse')
     AttackDetail = Shapes::StructureShape.new(name: 'AttackDetail')
     AttackId = Shapes::StringShape.new(name: 'AttackId')
     AttackLayer = Shapes::StringShape.new(name: 'AttackLayer')
@@ -52,6 +54,8 @@ module Aws::Shield
     DisassociateDRTLogBucketResponse = Shapes::StructureShape.new(name: 'DisassociateDRTLogBucketResponse')
     DisassociateDRTRoleRequest = Shapes::StructureShape.new(name: 'DisassociateDRTRoleRequest')
     DisassociateDRTRoleResponse = Shapes::StructureShape.new(name: 'DisassociateDRTRoleResponse')
+    DisassociateHealthCheckRequest = Shapes::StructureShape.new(name: 'DisassociateHealthCheckRequest')
+    DisassociateHealthCheckResponse = Shapes::StructureShape.new(name: 'DisassociateHealthCheckResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
     DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
@@ -59,6 +63,9 @@ module Aws::Shield
     EmergencyContactList = Shapes::ListShape.new(name: 'EmergencyContactList')
     GetSubscriptionStateRequest = Shapes::StructureShape.new(name: 'GetSubscriptionStateRequest')
     GetSubscriptionStateResponse = Shapes::StructureShape.new(name: 'GetSubscriptionStateResponse')
+    HealthCheckArn = Shapes::StringShape.new(name: 'HealthCheckArn')
+    HealthCheckId = Shapes::StringShape.new(name: 'HealthCheckId')
+    HealthCheckIds = Shapes::ListShape.new(name: 'HealthCheckIds')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -128,6 +135,12 @@ module Aws::Shield
     AssociateDRTRoleRequest.struct_class = Types::AssociateDRTRoleRequest
 
     AssociateDRTRoleResponse.struct_class = Types::AssociateDRTRoleResponse
+
+    AssociateHealthCheckRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, required: true, location_name: "ProtectionId"))
+    AssociateHealthCheckRequest.add_member(:health_check_arn, Shapes::ShapeRef.new(shape: HealthCheckArn, required: true, location_name: "HealthCheckArn"))
+    AssociateHealthCheckRequest.struct_class = Types::AssociateHealthCheckRequest
+
+    AssociateHealthCheckResponse.struct_class = Types::AssociateHealthCheckResponse
 
     AttackDetail.add_member(:attack_id, Shapes::ShapeRef.new(shape: AttackId, location_name: "AttackId"))
     AttackDetail.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
@@ -224,6 +237,12 @@ module Aws::Shield
 
     DisassociateDRTRoleResponse.struct_class = Types::DisassociateDRTRoleResponse
 
+    DisassociateHealthCheckRequest.add_member(:protection_id, Shapes::ShapeRef.new(shape: ProtectionId, required: true, location_name: "ProtectionId"))
+    DisassociateHealthCheckRequest.add_member(:health_check_arn, Shapes::ShapeRef.new(shape: HealthCheckArn, required: true, location_name: "HealthCheckArn"))
+    DisassociateHealthCheckRequest.struct_class = Types::DisassociateHealthCheckRequest
+
+    DisassociateHealthCheckResponse.struct_class = Types::DisassociateHealthCheckResponse
+
     EmergencyContact.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "EmailAddress"))
     EmergencyContact.struct_class = Types::EmergencyContact
 
@@ -233,6 +252,8 @@ module Aws::Shield
 
     GetSubscriptionStateResponse.add_member(:subscription_state, Shapes::ShapeRef.new(shape: SubscriptionState, required: true, location_name: "SubscriptionState"))
     GetSubscriptionStateResponse.struct_class = Types::GetSubscriptionStateResponse
+
+    HealthCheckIds.member = Shapes::ShapeRef.new(shape: HealthCheckId)
 
     InternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     InternalErrorException.struct_class = Types::InternalErrorException
@@ -298,6 +319,7 @@ module Aws::Shield
     Protection.add_member(:id, Shapes::ShapeRef.new(shape: ProtectionId, location_name: "Id"))
     Protection.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, location_name: "Name"))
     Protection.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
+    Protection.add_member(:health_check_ids, Shapes::ShapeRef.new(shape: HealthCheckIds, location_name: "HealthCheckIds"))
     Protection.struct_class = Types::Protection
 
     Protections.member = Shapes::ShapeRef.new(shape: Protection)
@@ -404,6 +426,19 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedForDependencyException)
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:associate_health_check, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateHealthCheck"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateHealthCheckRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateHealthCheckResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitsExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
       end)
 
       api.add_operation(:create_protection, Seahorse::Model::Operation.new.tap do |o|
@@ -529,6 +564,18 @@ module Aws::Shield
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:disassociate_health_check, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateHealthCheck"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateHealthCheckRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateHealthCheckResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OptimisticLockException)
       end)
 
       api.add_operation(:get_subscription_state, Seahorse::Model::Operation.new.tap do |o|

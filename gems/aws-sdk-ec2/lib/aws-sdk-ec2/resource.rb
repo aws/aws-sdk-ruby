@@ -971,6 +971,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_attach_enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
@@ -1055,6 +1056,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
+    # @option options [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
     # @return [Volume]
     def create_volume(options = {})
       resp = @client.create_volume(options)
@@ -2942,7 +2954,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2971,6 +2983,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.90.1 (2020-02-14)
+------------------
+
 * Issue - Perform a case-insensitive comparison when filtering sensitive parameters from logs
 * Issue - Add passthrough of region from client to STS when using assume_role_web_identity_credentials
 

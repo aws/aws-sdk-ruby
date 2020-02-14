@@ -8310,6 +8310,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         multi_attach_enabled: false,
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -8415,6 +8416,19 @@ module Aws::EC2
     #   The tags to apply to the volume during creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information,
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
     #
     class CreateVolumeRequest < Struct.new(
@@ -8427,7 +8441,8 @@ module Aws::EC2
       :snapshot_id,
       :volume_type,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :multi_attach_enabled)
       include Aws::Structure
     end
 
@@ -19598,7 +19613,7 @@ module Aws::EC2
     #
     #       {
     #         attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
-    #         volume_id: "String", # required
+    #         volume_id: "VolumeId", # required
     #         dry_run: false,
     #       }
     #
@@ -19659,7 +19674,7 @@ module Aws::EC2
     #         ],
     #         max_results: 1,
     #         next_token: "String",
-    #         volume_ids: ["String"],
+    #         volume_ids: ["VolumeId"],
     #         dry_run: false,
     #       }
     #
@@ -19765,7 +19780,7 @@ module Aws::EC2
     #
     #       {
     #         dry_run: false,
-    #         volume_ids: ["String"],
+    #         volume_ids: ["VolumeId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -19789,9 +19804,11 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   The filters. Supported filters: `volume-id`, `modification-state`,
-    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
-    #   `original-iops`, `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id` \| `modification-state`
+    #   \| `target-size` \| `target-iops` \| `target-volume-type` \|
+    #   `original-size` \| `original-iops` \| `original-volume-type` \|
+    #   `start-time` \| `originalMultiAttachEnabled` \|
+    #   `targetMultiAttachEnabled`.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -19840,7 +19857,7 @@ module Aws::EC2
     #             values: ["String"],
     #           },
     #         ],
-    #         volume_ids: ["String"],
+    #         volume_ids: ["VolumeId"],
     #         dry_run: false,
     #         max_results: 1,
     #         next_token: "String",
@@ -19871,6 +19888,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled
+    #     for Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|
@@ -21218,7 +21238,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_id
-    #   The ID of the instance.
+    #   The ID of the instance. If you are detaching a Multi-Attach enabled
+    #   volume, you must specify an instance ID.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -46266,6 +46287,10 @@ module Aws::EC2
     #   restore.
     #   @return [Boolean]
     #
+    # @!attribute [rw] multi_attach_enabled
+    #   Indicates whether Amazon EBS Multi-Attach is enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
     #
     class Volume < Struct.new(
@@ -46282,7 +46307,8 @@ module Aws::EC2
       :iops,
       :tags,
       :volume_type,
-      :fast_restored)
+      :fast_restored,
+      :multi_attach_enabled)
       include Aws::Structure
     end
 
@@ -46444,6 +46470,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the instances to which the volume is attached.
+    #
+    # @!attribute [rw] io_performance
+    #   The maximum IOPS supported by the attached instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the attached instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusAttachmentStatus AWS API Documentation
+    #
+    class VolumeStatusAttachmentStatus < Struct.new(
+      :io_performance,
+      :instance_id)
+      include Aws::Structure
+    end
+
     # Describes a volume status.
     #
     # @!attribute [rw] name
@@ -46484,6 +46528,10 @@ module Aws::EC2
     #   The earliest start time of the event.
     #   @return [Time]
     #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance associated with the event.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusEvent AWS API Documentation
     #
     class VolumeStatusEvent < Struct.new(
@@ -46491,7 +46539,8 @@ module Aws::EC2
       :event_id,
       :event_type,
       :not_after,
-      :not_before)
+      :not_before,
+      :instance_id)
       include Aws::Structure
     end
 
@@ -46539,6 +46588,10 @@ module Aws::EC2
     #   The volume status.
     #   @return [Types::VolumeStatusInfo]
     #
+    # @!attribute [rw] attachment_statuses
+    #   Information about the instances to which the volume is attached.
+    #   @return [Array<Types::VolumeStatusAttachmentStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusItem AWS API Documentation
     #
     class VolumeStatusItem < Struct.new(
@@ -46547,7 +46600,8 @@ module Aws::EC2
       :outpost_arn,
       :events,
       :volume_id,
-      :volume_status)
+      :volume_status,
+      :attachment_statuses)
       include Aws::Structure
     end
 

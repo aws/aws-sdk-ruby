@@ -1870,6 +1870,8 @@ module Aws::EC2
     VolumeState = Shapes::StringShape.new(name: 'VolumeState')
     VolumeStatusAction = Shapes::StructureShape.new(name: 'VolumeStatusAction')
     VolumeStatusActionsList = Shapes::ListShape.new(name: 'VolumeStatusActionsList')
+    VolumeStatusAttachmentStatus = Shapes::StructureShape.new(name: 'VolumeStatusAttachmentStatus')
+    VolumeStatusAttachmentStatusList = Shapes::ListShape.new(name: 'VolumeStatusAttachmentStatusList')
     VolumeStatusDetails = Shapes::StructureShape.new(name: 'VolumeStatusDetails')
     VolumeStatusDetailsList = Shapes::ListShape.new(name: 'VolumeStatusDetailsList')
     VolumeStatusEvent = Shapes::StructureShape.new(name: 'VolumeStatusEvent')
@@ -3210,6 +3212,7 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
     CreateVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateVolumeRequest.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAttachEnabled"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
     CreateVpcEndpointConnectionNotificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4707,7 +4710,7 @@ module Aws::EC2
     DescribeTransitGatewaysResult.struct_class = Types::DescribeTransitGatewaysResult
 
     DescribeVolumeAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: VolumeAttributeName, required: true, location_name: "Attribute"))
-    DescribeVolumeAttributeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeId"))
+    DescribeVolumeAttributeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
     DescribeVolumeAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeVolumeAttributeRequest.struct_class = Types::DescribeVolumeAttributeRequest
 
@@ -9309,6 +9312,7 @@ module Aws::EC2
     Volume.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "volumeType"))
     Volume.add_member(:fast_restored, Shapes::ShapeRef.new(shape: Boolean, location_name: "fastRestored"))
+    Volume.add_member(:multi_attach_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "multiAttachEnabled"))
     Volume.struct_class = Types::Volume
 
     VolumeAttachment.add_member(:attach_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "attachTime"))
@@ -9324,7 +9328,7 @@ module Aws::EC2
     VolumeDetail.add_member(:size, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "size"))
     VolumeDetail.struct_class = Types::VolumeDetail
 
-    VolumeIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "VolumeId")
+    VolumeIdStringList.member = Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId")
 
     VolumeList.member = Shapes::ShapeRef.new(shape: Volume, location_name: "item")
 
@@ -9352,6 +9356,12 @@ module Aws::EC2
 
     VolumeStatusActionsList.member = Shapes::ShapeRef.new(shape: VolumeStatusAction, location_name: "item")
 
+    VolumeStatusAttachmentStatus.add_member(:io_performance, Shapes::ShapeRef.new(shape: String, location_name: "ioPerformance"))
+    VolumeStatusAttachmentStatus.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    VolumeStatusAttachmentStatus.struct_class = Types::VolumeStatusAttachmentStatus
+
+    VolumeStatusAttachmentStatusList.member = Shapes::ShapeRef.new(shape: VolumeStatusAttachmentStatus, location_name: "item")
+
     VolumeStatusDetails.add_member(:name, Shapes::ShapeRef.new(shape: VolumeStatusName, location_name: "name"))
     VolumeStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     VolumeStatusDetails.struct_class = Types::VolumeStatusDetails
@@ -9363,6 +9373,7 @@ module Aws::EC2
     VolumeStatusEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: String, location_name: "eventType"))
     VolumeStatusEvent.add_member(:not_after, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "notAfter"))
     VolumeStatusEvent.add_member(:not_before, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "notBefore"))
+    VolumeStatusEvent.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     VolumeStatusEvent.struct_class = Types::VolumeStatusEvent
 
     VolumeStatusEventsList.member = Shapes::ShapeRef.new(shape: VolumeStatusEvent, location_name: "item")
@@ -9377,6 +9388,7 @@ module Aws::EC2
     VolumeStatusItem.add_member(:events, Shapes::ShapeRef.new(shape: VolumeStatusEventsList, location_name: "eventsSet"))
     VolumeStatusItem.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
     VolumeStatusItem.add_member(:volume_status, Shapes::ShapeRef.new(shape: VolumeStatusInfo, location_name: "volumeStatus"))
+    VolumeStatusItem.add_member(:attachment_statuses, Shapes::ShapeRef.new(shape: VolumeStatusAttachmentStatusList, location_name: "attachmentStatuses"))
     VolumeStatusItem.struct_class = Types::VolumeStatusItem
 
     VolumeStatusList.member = Shapes::ShapeRef.new(shape: VolumeStatusItem, location_name: "item")

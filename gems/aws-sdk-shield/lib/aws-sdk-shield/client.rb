@@ -368,6 +368,47 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Adds health-based detection to the Shield Advanced protection for a
+    # resource. Shield Advanced health-based detection uses the health of
+    # your AWS resource to improve responsiveness and accuracy in attack
+    # detection and mitigation.
+    #
+    # You define the health check in Route 53 and then associate it with
+    # your Shield Advanced protection. For more information, see [Shield
+    # Advanced Health-Based Detection][1] in the [AWS WAF and AWS Shield
+    # Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :protection_id
+    #   The unique identifier (ID) for the Protection object to add the health
+    #   check association to.
+    #
+    # @option params [required, String] :health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check to associate with
+    #   the protection.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_health_check({
+    #     protection_id: "ProtectionId", # required
+    #     health_check_arn: "HealthCheckArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateHealthCheck AWS API Documentation
+    #
+    # @overload associate_health_check(params = {})
+    # @param [Hash] params ({})
+    def associate_health_check(params = {}, options = {})
+      req = build_request(:associate_health_check, params)
+      req.send_request(options)
+    end
+
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
     # balancer, AWS Global Accelerator accelerator, Elastic IP Address, or
@@ -647,6 +688,8 @@ module Aws::Shield
     #   resp.protection.id #=> String
     #   resp.protection.name #=> String
     #   resp.protection.resource_arn #=> String
+    #   resp.protection.health_check_ids #=> Array
+    #   resp.protection.health_check_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection AWS API Documentation
     #
@@ -739,6 +782,47 @@ module Aws::Shield
     # @param [Hash] params ({})
     def disassociate_drt_role(params = {}, options = {})
       req = build_request(:disassociate_drt_role, params)
+      req.send_request(options)
+    end
+
+    # Removes health-based detection from the Shield Advanced protection for
+    # a resource. Shield Advanced health-based detection uses the health of
+    # your AWS resource to improve responsiveness and accuracy in attack
+    # detection and mitigation.
+    #
+    # You define the health check in Route 53 and then associate or
+    # disassociate it with your Shield Advanced protection. For more
+    # information, see [Shield Advanced Health-Based Detection][1] in the
+    # [AWS WAF and AWS Shield Developer Guide][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :protection_id
+    #   The unique identifier (ID) for the Protection object to remove the
+    #   health check association from.
+    #
+    # @option params [required, String] :health_check_arn
+    #   The Amazon Resource Name (ARN) of the health check that is associated
+    #   with the protection.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_health_check({
+    #     protection_id: "ProtectionId", # required
+    #     health_check_arn: "HealthCheckArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateHealthCheck AWS API Documentation
+    #
+    # @overload disassociate_health_check(params = {})
+    # @param [Hash] params ({})
+    def disassociate_health_check(params = {}, options = {})
+      req = build_request(:disassociate_health_check, params)
       req.send_request(options)
     end
 
@@ -879,6 +963,8 @@ module Aws::Shield
     #   resp.protections[0].id #=> String
     #   resp.protections[0].name #=> String
     #   resp.protections[0].resource_arn #=> String
+    #   resp.protections[0].health_check_ids #=> Array
+    #   resp.protections[0].health_check_ids[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections AWS API Documentation
@@ -959,7 +1045,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

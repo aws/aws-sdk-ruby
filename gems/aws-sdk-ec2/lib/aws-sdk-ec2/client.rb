@@ -8408,6 +8408,18 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
     #
+    # @option params [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Volume#attachments #attachments} => Array&lt;Types::VolumeAttachment&gt;
@@ -8424,6 +8436,7 @@ module Aws::EC2
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
     #   * {Types::Volume#fast_restored #fast_restored} => Boolean
+    #   * {Types::Volume#multi_attach_enabled #multi_attach_enabled} => Boolean
     #
     #
     # @example Example: To create a new volume
@@ -8500,6 +8513,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_attach_enabled: false,
     #   })
     #
     # @example Response structure
@@ -8526,6 +8540,7 @@ module Aws::EC2
     #   resp.tags[0].value #=> String
     #   resp.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.fast_restored #=> Boolean
+    #   resp.multi_attach_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -22561,7 +22576,7 @@ module Aws::EC2
     #
     #   resp = client.describe_volume_attribute({
     #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -22767,7 +22782,7 @@ module Aws::EC2
     #     ],
     #     max_results: 1,
     #     next_token: "String",
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     #
@@ -22788,11 +22803,15 @@ module Aws::EC2
     #   resp.volume_statuses[0].events[0].event_type #=> String
     #   resp.volume_statuses[0].events[0].not_after #=> Time
     #   resp.volume_statuses[0].events[0].not_before #=> Time
+    #   resp.volume_statuses[0].events[0].instance_id #=> String
     #   resp.volume_statuses[0].volume_id #=> String
     #   resp.volume_statuses[0].volume_status.details #=> Array
     #   resp.volume_statuses[0].volume_status.details[0].name #=> String, one of "io-enabled", "io-performance"
     #   resp.volume_statuses[0].volume_status.details[0].status #=> String
     #   resp.volume_statuses[0].volume_status.status #=> String, one of "ok", "impaired", "insufficient-data"
+    #   resp.volume_statuses[0].attachment_statuses #=> Array
+    #   resp.volume_statuses[0].attachment_statuses[0].io_performance #=> String
+    #   resp.volume_statuses[0].attachment_statuses[0].instance_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatus AWS API Documentation
     #
@@ -22845,6 +22864,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|
@@ -22997,7 +23019,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #     max_results: 1,
     #     next_token: "String",
@@ -23028,6 +23050,7 @@ module Aws::EC2
     #   resp.volumes[0].tags[0].value #=> String
     #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.volumes[0].fast_restored #=> Boolean
+    #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
@@ -23071,9 +23094,11 @@ module Aws::EC2
     #   described.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. Supported filters: `volume-id`, `modification-state`,
-    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
-    #   `original-iops`, `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id` \| `modification-state` \|
+    #   `target-size` \| `target-iops` \| `target-volume-type` \|
+    #   `original-size` \| `original-iops` \| `original-volume-type` \|
+    #   `start-time` \| `originalMultiAttachEnabled` \|
+    #   `targetMultiAttachEnabled`.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned by a previous paginated request.
@@ -23091,7 +23116,7 @@ module Aws::EC2
     #
     #   resp = client.describe_volumes_modifications({
     #     dry_run: false,
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -24541,7 +24566,8 @@ module Aws::EC2
     #   procedures.
     #
     # @option params [String] :instance_id
-    #   The ID of the instance.
+    #   The ID of the instance. If you are detaching a Multi-Attach enabled
+    #   volume, you must specify an instance ID.
     #
     # @option params [required, String] :volume_id
     #   The ID of the volume.
@@ -35982,7 +36008,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

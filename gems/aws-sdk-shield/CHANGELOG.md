@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2020-02-14)
+------------------
+
+* Feature - This release adds support for associating Amazon Route 53 health checks to AWS Shield Advanced protected resources.
+
 1.21.0 (2019-10-23)
 ------------------
 

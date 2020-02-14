@@ -283,6 +283,7 @@ module Aws::MediaTailor
     #
     #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
     #   * {Types::GetPlaybackConfigurationResponse#cdn_configuration #cdn_configuration} => Types::CdnConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#personalization_threshold_seconds #personalization_threshold_seconds} => Integer
     #   * {Types::GetPlaybackConfigurationResponse#dash_configuration #dash_configuration} => Types::DashConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#hls_configuration #hls_configuration} => Types::HlsConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#live_pre_roll_configuration #live_pre_roll_configuration} => Types::LivePreRollConfiguration
@@ -306,6 +307,7 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_url #=> String
     #   resp.cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.cdn_configuration.content_segment_url_prefix #=> String
+    #   resp.personalization_threshold_seconds #=> Integer
     #   resp.dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.dash_configuration.mpd_location #=> String
     #   resp.dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
@@ -360,6 +362,7 @@ module Aws::MediaTailor
     #   resp.items[0].ad_decision_server_url #=> String
     #   resp.items[0].cdn_configuration.ad_segment_url_prefix #=> String
     #   resp.items[0].cdn_configuration.content_segment_url_prefix #=> String
+    #   resp.items[0].personalization_threshold_seconds #=> Integer
     #   resp.items[0].dash_configuration.manifest_endpoint_prefix #=> String
     #   resp.items[0].dash_configuration.mpd_location #=> String
     #   resp.items[0].dash_configuration.origin_manifest_type #=> String, one of "SINGLE_PERIOD", "MULTI_PERIOD"
@@ -427,6 +430,10 @@ module Aws::MediaTailor
     #   The configuration for using a content delivery network (CDN), like
     #   Amazon CloudFront, for content and ad segment management.
     #
+    # @option params [Integer] :personalization_threshold_seconds
+    #   The maximum duration of underfilled ad time (in seconds) allowed in an
+    #   ad break.
+    #
     # @option params [Types::DashConfigurationForPut] :dash_configuration
     #   The configuration for DASH content.
     #
@@ -482,6 +489,7 @@ module Aws::MediaTailor
     #       ad_segment_url_prefix: "__string",
     #       content_segment_url_prefix: "__string",
     #     },
+    #     personalization_threshold_seconds: 1,
     #     dash_configuration: {
     #       mpd_location: "__string",
     #       origin_manifest_type: "SINGLE_PERIOD", # accepts SINGLE_PERIOD, MULTI_PERIOD
@@ -594,7 +602,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

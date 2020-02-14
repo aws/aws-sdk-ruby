@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2020-02-14)
+------------------
+
+* Feature - AWS Elemental MediaTailor SDK now allows configuration of Personalization Threshold for HLS and DASH streams.
+
 1.22.0 (2019-11-26)
 ------------------
 
