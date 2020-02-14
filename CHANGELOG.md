@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
+
+* Feature - Aws::SecurityHub - Updated the API, and documentation for AWS SecurityHub.
+
+* Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
+
 * Feature - Add upgrade notice on first client initialization and gem install.
 
 2.11.444 (2020-02-13)
