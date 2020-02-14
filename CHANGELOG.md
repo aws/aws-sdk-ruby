@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.445 (2020-02-14)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::MediaTailor - Updated the API, and documentation for AWS MediaTailor.
