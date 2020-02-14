@@ -56,9 +56,12 @@ CREDS
              secret_access_key: nil,
              session_token: nil,
              profile: nil,
+             region: nil,
              instance_profile_credentials_timeout: 1,
              instance_profile_credentials_retries: 0)
     end
+
+    let(:mock_instance_creds) { double('InstanceProfileCredentials', set?: false) }
 
     let(:chain) { CredentialProviderChain.new(config) }
 
@@ -66,10 +69,7 @@ CREDS
 
     before(:each) do
       stub_const('ENV', env)
-    end
-
-    it 'defaults to nil when credentials not set' do
-      expect(credentials).to be(nil)
+      allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
     end
 
     it 'hydrates credentials from config options' do
@@ -108,8 +108,6 @@ CREDS
     end
 
     it 'hydrates credentials from the instance profile service' do
-      mock_instance_creds = double('InstanceProfileCredentials')
-      expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
       expect(mock_instance_creds).to receive(:set?).and_return(true)
       expect(credentials).to be(mock_instance_creds)
     end

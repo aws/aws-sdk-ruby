@@ -117,16 +117,18 @@ module Aws
       credentials
     end
 
-    def assume_role_web_identity_credentials_from_config(profile)
-      p = profile || @profile_name
+    def assume_role_web_identity_credentials_from_config(opts = {})
+      p = opts[:profile] || @profile_name
       if @config_enabled && @parsed_config
         entry = @parsed_config.fetch(p, {})
         if entry['web_identity_token_file'] && entry['role_arn']
-          AssumeRoleWebIdentityCredentials.new(
+          cfg = {
             role_arn: entry['role_arn'],
             web_identity_token_file: entry['web_identity_token_file'],
             role_session_name: entry['role_session_name']
-          )
+          }
+          cfg[:region] = opts[:region] if opts[:region]
+          AssumeRoleWebIdentityCredentials.new(cfg)
         end
       end
     end
@@ -182,7 +184,7 @@ module Aws
                 'a credential_source. For assume role credentials, must '\
                 'provide only source_profile or credential_source, not both.'
         elsif opts[:source_profile]
-          opts[:credentials] = resolve_source_profile(opts[:source_profile])
+          opts[:credentials] = resolve_source_profile(opts[:source_profile], opts)
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg['role_session_name']
             opts[:role_session_name] ||= 'default_session'
@@ -220,10 +222,10 @@ module Aws
       end
     end
 
-    def resolve_source_profile(profile)
+    def resolve_source_profile(profile, opts = {})
       if (creds = credentials(profile: profile))
         creds # static credentials
-      elsif (provider = assume_role_web_identity_credentials_from_config(profile))
+      elsif (provider = assume_role_web_identity_credentials_from_config(opts.merge(profile: profile)))
         provider.credentials if provider.credentials.set?
       elsif (provider = assume_role_process_credentials_from_config(profile))
         provider.credentials if provider.credentials.set?

@@ -44,7 +44,10 @@ module Aws
 
     def static_profile_assume_role_web_identity_credentials(options)
       if Aws.shared_config.config_enabled? && options[:config] && options[:config].profile
-        Aws.shared_config.assume_role_web_identity_credentials_from_config(options[:config].profile)
+        Aws.shared_config.assume_role_web_identity_credentials_from_config(
+          profile: options[:config].profile,
+          region: options[:config].region
+        )
       end
     end
 
@@ -113,15 +116,21 @@ module Aws
     end
 
     def assume_role_web_identity_credentials(options)
+      region = options[:config].region if options[:config]
       if (role_arn = ENV['AWS_ROLE_ARN']) && (token_file = ENV['AWS_WEB_IDENTITY_TOKEN_FILE'])
-        AssumeRoleWebIdentityCredentials.new(
+        cfg = {
           role_arn: role_arn,
           web_identity_token_file: token_file,
           role_session_name: ENV['AWS_ROLE_SESSION_NAME']
-        )
+        }
+        cfg[:region] = region if region
+        AssumeRoleWebIdentityCredentials.new(cfg)
       elsif Aws.shared_config.config_enabled?
         profile = options[:config].profile if options[:config]
-        Aws.shared_config.assume_role_web_identity_credentials_from_config(profile)
+        Aws.shared_config.assume_role_web_identity_credentials_from_config(
+          profile: profile,
+          region: region
+        )
       end
     end
 
