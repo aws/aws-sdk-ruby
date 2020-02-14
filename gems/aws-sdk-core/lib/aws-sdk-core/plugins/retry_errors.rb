@@ -438,7 +438,7 @@ SDK operation invocation before giving up. Used in `standard` and
           puts "\n\n#########################################"
           retry_mode = context.config.retry_mode
           max_attempts = context.config.max_attempts
-          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries}"
+          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries} max_backoff: #{MAX_BACKOFF}"
           #############
 
           client_rate_limiter = context.metadata[:client_rate_limiter] ||= ClientRateLimiting.new
@@ -449,8 +449,7 @@ SDK operation invocation before giving up. Used in `standard` and
           request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
           return response unless retryable?(response, context)
 
-          context.retries += 1
-          return response if context.retries >= context.config.max_attempts
+          return response if context.retries >= (context.config.max_attempts - 1)
 
           error = ErrorInspector.new(response)
 
@@ -495,10 +494,11 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def exponential_backoff(retries)
           # for a transient error, use backoff
-          [Kernel.rand(0..1) * 2**(retries-1), MAX_BACKOFF].min
+          [Kernel.rand(0..1) * 2**(retries), MAX_BACKOFF].min
         end
 
         def retry_request(context, error)
+          context.retries += 1
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
           context.http_response.reset
