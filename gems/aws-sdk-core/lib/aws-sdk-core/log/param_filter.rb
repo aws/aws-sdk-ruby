@@ -7,7 +7,7 @@ module Aws
 
       # A managed list of sensitive parameters that should be filtered from
       # logs. This is updated automatically as part of each release. See the
-      # `tasks/sensitive.rake` for more information.
+      # `tasks/update-sensitive-params.rake` for more information.
       #
       # @api private
       # begin
@@ -31,7 +31,7 @@ module Aws
       def filter_hash(values)
         filtered = {}
         values.each_pair do |key, value|
-          filtered[key] = @filters.include?(key) ? '[FILTERED]' : filter(value)
+          filtered[key] = @filters.any? { |f| f.to_s.casecmp(key.to_s).zero? } ? '[FILTERED]' : filter(value)
         end
         filtered
       end

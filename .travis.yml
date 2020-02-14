@@ -3,6 +3,8 @@ language: ruby
 before_install:
   - gem install bundler -v '< 2'
 
+dist: trusty
+
 rvm:
   - 1.9.3
   - 2.0.0
@@ -12,7 +14,8 @@ rvm:
   - 2.4
   - 2.5
   - 2.6
-  - jruby-19mode
+  - 2.7
+  - jruby-1.7.27
   - jruby
 
 sudo: false
@@ -27,7 +30,7 @@ bundler_args: --without docs repl
 
 matrix:
   exclude:
-    - rvm: jruby-19mode
+    - rvm: jruby-1.7.27
       env: KITCHEN_SINK=1
     - rvm: jruby
       env: KITCHEN_SINK=1
@@ -39,7 +42,7 @@ matrix:
     - rvm: 2.3
       env: NO_H2=1
   allow_failures:
-    - rvm: jruby-19mode
+    - rvm: jruby-1.7.27
     - rvm: jruby
 
 notifications:

@@ -335,6 +335,7 @@ module Aws::MediaPackageVod
     #         dash_package: {
     #           dash_manifests: [ # required
     #             {
+    #               manifest_layout: "FULL", # accepts FULL, COMPACT
     #               manifest_name: "__string",
     #               min_buffer_time_seconds: 1,
     #               profile: "NONE", # accepts NONE, HBBTV_1_5
@@ -352,7 +353,9 @@ module Aws::MediaPackageVod
     #               url: "__string", # required
     #             },
     #           },
+    #           period_triggers: ["ADS"], # accepts ADS
     #           segment_duration_seconds: 1,
+    #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #         },
     #         hls_package: {
     #           encryption: {
@@ -547,6 +550,7 @@ module Aws::MediaPackageVod
     #   data as a hash:
     #
     #       {
+    #         manifest_layout: "FULL", # accepts FULL, COMPACT
     #         manifest_name: "__string",
     #         min_buffer_time_seconds: 1,
     #         profile: "NONE", # accepts NONE, HBBTV_1_5
@@ -556,6 +560,14 @@ module Aws::MediaPackageVod
     #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #         },
     #       }
+    #
+    # @!attribute [rw] manifest_layout
+    #   Determines the position of some tags in the Media Presentation
+    #   Description (MPD). When set to FULL, elements like SegmentTemplate
+    #   and ContentProtection are included in each Representation. When set
+    #   to COMPACT, duplicate elements are combined and presented at the
+    #   AdaptationSet level.
+    #   @return [String]
     #
     # @!attribute [rw] manifest_name
     #   An optional string to include in the name of the manifest.
@@ -578,6 +590,7 @@ module Aws::MediaPackageVod
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DashManifest AWS API Documentation
     #
     class DashManifest < Struct.new(
+      :manifest_layout,
       :manifest_name,
       :min_buffer_time_seconds,
       :profile,
@@ -593,6 +606,7 @@ module Aws::MediaPackageVod
     #       {
     #         dash_manifests: [ # required
     #           {
+    #             manifest_layout: "FULL", # accepts FULL, COMPACT
     #             manifest_name: "__string",
     #             min_buffer_time_seconds: 1,
     #             profile: "NONE", # accepts NONE, HBBTV_1_5
@@ -610,7 +624,9 @@ module Aws::MediaPackageVod
     #             url: "__string", # required
     #           },
     #         },
+    #         period_triggers: ["ADS"], # accepts ADS
     #         segment_duration_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #       }
     #
     # @!attribute [rw] dash_manifests
@@ -622,17 +638,38 @@ module Aws::MediaPackageVod
     #   configuration.
     #   @return [Types::DashEncryption]
     #
+    # @!attribute [rw] period_triggers
+    #   A list of triggers that controls when the outgoing Dynamic Adaptive
+    #   Streaming over HTTP (DASH) Media Presentation Description (MPD) will
+    #   be partitioned into multiple periods. If empty, the content will not
+    #   be partitioned into more than one period. If the list contains
+    #   "ADS", new periods will be created where the Asset contains
+    #   SCTE-35 ad markers.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] segment_duration_seconds
     #   Duration (in seconds) of each segment. Actual segments will be
     #   rounded to the nearest multiple of the source segment duration.
     #   @return [Integer]
+    #
+    # @!attribute [rw] segment_template_format
+    #   Determines the type of SegmentTemplate included in the Media
+    #   Presentation Description (MPD). When set to NUMBER\_WITH\_TIMELINE,
+    #   a full timeline is presented in each SegmentTemplate, with $Number$
+    #   media URLs. When set to TIME\_WITH\_TIMELINE, a full timeline is
+    #   presented in each SegmentTemplate, with $Time$ media URLs. When set
+    #   to NUMBER\_WITH\_DURATION, only a duration is included in each
+    #   SegmentTemplate, with $Number$ media URLs.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-vod-2018-11-07/DashPackage AWS API Documentation
     #
     class DashPackage < Struct.new(
       :dash_manifests,
       :encryption,
-      :segment_duration_seconds)
+      :period_triggers,
+      :segment_duration_seconds,
+      :segment_template_format)
       include Aws::Structure
     end
 

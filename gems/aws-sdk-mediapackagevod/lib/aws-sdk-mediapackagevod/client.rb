@@ -367,6 +367,7 @@ module Aws::MediaPackageVod
     #     dash_package: {
     #       dash_manifests: [ # required
     #         {
+    #           manifest_layout: "FULL", # accepts FULL, COMPACT
     #           manifest_name: "__string",
     #           min_buffer_time_seconds: 1,
     #           profile: "NONE", # accepts NONE, HBBTV_1_5
@@ -384,7 +385,9 @@ module Aws::MediaPackageVod
     #           url: "__string", # required
     #         },
     #       },
+    #       period_triggers: ["ADS"], # accepts ADS
     #       segment_duration_seconds: 1,
+    #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #     },
     #     hls_package: {
     #       encryption: {
@@ -455,6 +458,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
+    #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
@@ -465,7 +469,10 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.period_triggers #=> Array
+    #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
@@ -681,6 +688,7 @@ module Aws::MediaPackageVod
     #   resp.cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.cmaf_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.dash_manifests #=> Array
+    #   resp.dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
@@ -691,7 +699,10 @@ module Aws::MediaPackageVod
     #   resp.dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.dash_package.period_triggers #=> Array
+    #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.dash_package.segment_duration_seconds #=> Integer
+    #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.hls_package.encryption.constant_initialization_vector #=> String
     #   resp.hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.hls_package.encryption.speke_key_provider.role_arn #=> String
@@ -846,6 +857,7 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].cmaf_package.hls_manifests[0].stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.packaging_configurations[0].cmaf_package.segment_duration_seconds #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests #=> Array
+    #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_layout #=> String, one of "FULL", "COMPACT"
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].manifest_name #=> String
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].min_buffer_time_seconds #=> Integer
     #   resp.packaging_configurations[0].dash_package.dash_manifests[0].profile #=> String, one of "NONE", "HBBTV_1_5"
@@ -856,7 +868,10 @@ module Aws::MediaPackageVod
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids #=> Array
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.system_ids[0] #=> String
     #   resp.packaging_configurations[0].dash_package.encryption.speke_key_provider.url #=> String
+    #   resp.packaging_configurations[0].dash_package.period_triggers #=> Array
+    #   resp.packaging_configurations[0].dash_package.period_triggers[0] #=> String, one of "ADS"
     #   resp.packaging_configurations[0].dash_package.segment_duration_seconds #=> Integer
+    #   resp.packaging_configurations[0].dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.packaging_configurations[0].hls_package.encryption.constant_initialization_vector #=> String
     #   resp.packaging_configurations[0].hls_package.encryption.encryption_method #=> String, one of "AES_128", "SAMPLE_AES"
     #   resp.packaging_configurations[0].hls_package.encryption.speke_key_provider.role_arn #=> String
@@ -944,7 +959,7 @@ module Aws::MediaPackageVod
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagevod'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
