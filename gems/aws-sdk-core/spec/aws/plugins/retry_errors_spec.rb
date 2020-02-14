@@ -532,6 +532,8 @@ module Aws
 
         let(:handler) { RetryErrors::Handler.new }
 
+        let(:service_error) { RetryErrorsSvc::Errors::ServiceError.new(nil, nil) }
+
         before(:each) do
           resp.context.config = config
           operation.endpoint_discovery = {}
@@ -551,32 +553,49 @@ module Aws
             allow(Kernel).to receive(:rand).and_return(1)
           end
 
+          def run_retry(test_cases)
+
+            # Apply delay expectations first
+            test_cases.each do |test_case|
+              expect(Kernel).to receive(:sleep).with(test_case[:expect][:delay]) if test_case[:expect][:delay]
+            end
+
+            t = 0
+            handle do |context|
+              puts "CALLING MY HANDLER: t = #{t} avail_cap = #{resp.context[:retry_quota].available_capacity}.  retries = #{resp.context.retries}"
+              puts "\tCase def: #{test_cases[t]}"
+              if t > 0
+                # Apply expectations to previous call
+                expected = test_cases[t-1][:expect]
+                expect(resp.context[:retry_quota].available_capacity).to eq(expected[:available_capacity]) if expected[:available_capacity]
+                expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
+              end
+
+              # Setup the next response
+              test_case = test_cases[t]
+              resp.context.http_response.status_code = test_case[:response][:status_code]
+              resp.error = test_case[:error]
+
+              t += 1
+              resp
+            end
+
+            # Handle has finished called.  Apply final expectations.
+            expected = test_cases[t-1][:expect]
+            expect(resp.context[:retry_quota].available_capacity).to eq(expected[:available_capacity]) if expected[:available_capacity]
+            expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
+          end
+
           it 'retry eventually succeeds' do
-            resp.error = RetryErrorsSvc::Errors::ServiceError.new(nil, nil)
-            send_handler = double('send-handler')
-            expect(send_handler).to receive(:call)
-                                      .exactly(2).times
-                                      .with(resp.context) do
-              puts "--- FAILING CALL ---"
-              puts resp.context[:retry_quota].available_capacity
-              resp.context.http_response.status_code = 500
-              resp
-            end
+            service_error = RetryErrorsSvc::Errors::ServiceError.new(nil, nil)
 
-            expect(send_handler).to receive(:call)
-                                      .exactly(1).times
-                                      .with(resp.context) do
-              puts "--- SUCCESS CALL ---"
-              resp.error = nil
-              resp.context.http_response.status_code = 200
-              resp
-            end
+            test_case_def = [
+              {response: {status_code: 500, error: service_error}, expect: { available_capacity: 495, retries: 1, delay: 1 } },
+              {response: {status_code: 500, error: service_error}, expect: { available_capacity: 490, retries: 2, delay: 2 } },
+              {response: {status_code: 200, error: nil}, expect: { available_capacity: 495, retries: 2 } } # success
+            ]
 
-
-            allow(handler).to receive(:sleep).with(1)
-            allow(handler).to receive(:sleep).with(2)
-
-            handle(send_handler)
+            run_retry(test_case_def)
           end
 
           it 'fails due to max attempts reached' do

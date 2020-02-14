@@ -300,9 +300,9 @@ SDK operation invocation before giving up. Used in `standard` and
           # or unset.
           if is_response_successful
             @available_capacity += if @capacity_amount
-                                     NO_RETRY_INCREMENT
-                                   else
                                      @capacity_amount
+                                   else
+                                     NO_RETRY_INCREMENT
                                    end
           end
         end
@@ -341,7 +341,7 @@ SDK operation invocation before giving up. Used in `standard` and
           # Next see if we have enough capacity for the requested amount
           # TODO: Check config for blocking (instant fail)
           if amount > @current_capacity
-            sleep((amount - @current_capacity / @fill_rate))
+            Kernel.sleep((amount - @current_capacity / @fill_rate))
           end
           @current_capacity -= amount
         end
@@ -457,7 +457,7 @@ SDK operation invocation before giving up. Used in `standard` and
           return response unless retry_quota.retry_quota?(error)
 
           delay = exponential_backoff(context.retries)
-          sleep(delay)
+          Kernel.sleep(delay)
           retry_request(context, error)
         end
 
@@ -488,12 +488,9 @@ SDK operation invocation before giving up. Used in `standard` and
           return false if response.successful?
 
           error = ErrorInspector.new(response)
-          b = error.retryable?(context) &&
+          error.retryable?(context) &&
             context.http_response.body.respond_to?(:truncate)
-          puts "r1: #{error.retryable?(context)}"
-          puts "r2: #{ context.http_response.body.respond_to?(:truncate)}"
-          puts "Retryable? #{b}"
-          b
+
         end
 
         def exponential_backoff(retries)
