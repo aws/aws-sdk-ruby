@@ -325,10 +325,10 @@ SDK operation invocation before giving up. Used in `standard` and
           @last_timestamp       = nil
           @enabled              = false
           @measured_tx_rate     = 0
-          @last_tx_rate_bucket  = Aws::Util.monotonic_milliseconds / 1000
+          @last_tx_rate_bucket  = Aws::Util.monotonic_seconds
           @request_count        = 0
           @last_max_rate        = 0
-          @last_throttle_time   = Aws::Util.monotonic_milliseconds / 1000.0
+          @last_throttle_time   = Aws::Util.monotonic_seconds
           @time_window          = 0
         end
 
@@ -347,7 +347,7 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         def token_bucket_refill
-          timestamp = Aws::Util.monotonic_milliseconds / 1000.0
+          timestamp = Aws::Util.monotonic_seconds
           unless @last_timestamp
             @last_timestamp = timestamp
             return
@@ -377,7 +377,7 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         def update_measured_rate
-          t = Aws::Util.monotonic_milliseconds / 1000.0
+          t = Aws::Util.monotonic_seconds
           time_bucket = (t * 2).floor / 2
           @request_count += 1
           if time_bucket > @last_tx_rate_bucket
@@ -402,11 +402,11 @@ SDK operation invocation before giving up. Used in `standard` and
             # The fill_rate is from the token bucket
             @last_max_rate = rate_to_use
             calculate_time_window
-            @last_throttle_time = Aws::Util.monotonic_milliseconds / 1000.0
+            @last_throttle_time = Aws::Util.monotonic_seconds
             calculated_rate = cubic_throttle(rate_to_use)
             enable_token_bucket
           else
-            calculated_rate = cubic_success(Aws::Util.monotonic_milliseconds / 1000.0)
+            calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
           end
 
           new_rate = [calculated_rate, 2 * @measured_tx_rate].min
