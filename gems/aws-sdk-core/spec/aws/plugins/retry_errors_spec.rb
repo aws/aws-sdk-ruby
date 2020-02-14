@@ -74,7 +74,10 @@ module Aws
 
       describe 'ErrorInspector' do
         def inspector(error, http_status_code = 404)
-          RetryErrors::ErrorInspector.new(error, http_status_code)
+          resp = Seahorse::Client::Response.new
+          resp.error = error
+          resp.context.http_response.status_code = http_status_code
+          RetryErrors::ErrorInspector.new(resp)
         end
 
         describe '#expired_credentials?' do
@@ -549,7 +552,31 @@ module Aws
           end
 
           it 'retry eventually succeeds' do
-            handle { |_context| resp }
+            resp.error = RetryErrorsSvc::Errors::ServiceError.new(nil, nil)
+            send_handler = double('send-handler')
+            expect(send_handler).to receive(:call)
+                                      .exactly(2).times
+                                      .with(resp.context) do
+              puts "--- FAILING CALL ---"
+              puts resp.context[:retry_quota].available_capacity
+              resp.context.http_response.status_code = 500
+              resp
+            end
+
+            expect(send_handler).to receive(:call)
+                                      .exactly(1).times
+                                      .with(resp.context) do
+              puts "--- SUCCESS CALL ---"
+              resp.error = nil
+              resp.context.http_response.status_code = 200
+              resp
+            end
+
+
+            allow(handler).to receive(:sleep).with(1)
+            allow(handler).to receive(:sleep).with(2)
+
+            handle(send_handler)
           end
 
           it 'fails due to max attempts reached' do

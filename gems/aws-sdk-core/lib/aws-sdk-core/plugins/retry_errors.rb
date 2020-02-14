@@ -180,10 +180,10 @@ SDK operation invocation before giving up. Used in `standard` and
           ]
         )
 
-        def initialize(error, http_status_code)
-          @error = error
-          @name = extract_name(error)
-          @http_status_code = http_status_code
+        def initialize(response)
+          @error = response.error
+          @name = extract_name(@error)
+          @http_status_code = response.context.http_response.status_code
         end
 
         def expired_credentials?
@@ -256,7 +256,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def extract_name(error)
           if error.is_a?(Errors::ServiceError)
-            error.class.code
+            error.class.code || error.class.name.to_s
           else
             error.class.name.to_s
           end
@@ -270,6 +270,8 @@ SDK operation invocation before giving up. Used in `standard` and
         NO_RETRY_INCREMENT = 1
         TIMEOUT_RETRY_COST = 10
 
+        attr_reader :max_capacity, :available_capacity
+
         def initialize
           @max_capacity       = INITIAL_RETRY_TOKENS
           @available_capacity = INITIAL_RETRY_TOKENS
@@ -278,8 +280,8 @@ SDK operation invocation before giving up. Used in `standard` and
 
         # Acquiring tokens from the retry quota
         # TODO: networking_error == Timeout?  consider aligning terms used....
-        def retry_quota?(is_networking_error)
-          @capacity_amount = if is_networking_error
+        def retry_quota?(error)
+          @capacity_amount = if error.networking?
                                TIMEOUT_RETRY_COST
                              else
                                RETRY_COST
@@ -433,10 +435,10 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def call(context)
           #############
-          puts "erase me later"
+          puts "\n\n#########################################"
           retry_mode = context.config.retry_mode
           max_attempts = context.config.max_attempts
-          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}"
+          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries}"
           #############
 
           client_rate_limiter = context.metadata[:client_rate_limiter] ||= ClientRateLimiting.new
@@ -445,13 +447,14 @@ SDK operation invocation before giving up. Used in `standard` and
           get_send_token(client_rate_limiter, context.config.retry_mode)
           response = @handler.call(context)
           request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
-
           return response unless retryable?(response, context)
 
           context.retries += 1
           return response if context.retries >= context.config.max_attempts
 
-          return response unless retry_quota?(response)
+          error = ErrorInspector.new(response)
+
+          return response unless retry_quota.retry_quota?(error)
 
           delay = exponential_backoff(context.retries)
           sleep(delay)
@@ -476,7 +479,7 @@ SDK operation invocation before giving up. Used in `standard` and
           retry_quota.release(response.successful?)
 
           if retry_mode == 'adaptive'
-            error = error_for(response)
+            error = ErrorInspector.new(response)
             client_rate_limiter.update_client_sending_rate(error.throttling_error?)
           end
         end
@@ -484,25 +487,18 @@ SDK operation invocation before giving up. Used in `standard` and
         def retryable?(response, context)
           return false if response.successful?
 
-          error = error_for(response)
-          error.retryable?(context) &&
+          error = ErrorInspector.new(response)
+          b = error.retryable?(context) &&
             context.http_response.body.respond_to?(:truncate)
-        end
-
-        def retry_quota?(retry_quota)
-          # attempt to checkout a token from the retry quota bucket
-          # if none available, don't retry
-          retry_quota.retry_quota?
+          puts "r1: #{error.retryable?(context)}"
+          puts "r2: #{ context.http_response.body.respond_to?(:truncate)}"
+          puts "Retryable? #{b}"
+          b
         end
 
         def exponential_backoff(retries)
           # for a transient error, use backoff
-          [Kernel.rand(0..1) * 2**retries, MAX_BACKOFF].min
-        end
-
-        def error_for(response)
-          status_code = response.context.http_response.status_code
-          ErrorInspector.new(response.error, status_code)
+          [Kernel.rand(0..1) * 2**(retries-1), MAX_BACKOFF].min
         end
 
         def retry_request(context, error)
@@ -528,17 +524,12 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def retry_if_possible(response)
           context = response.context
-          error = error_for(response)
+          error = ErrorInspector.new(response)
           if should_retry?(context, error)
             retry_request(context, error)
           else
             response
           end
-        end
-
-        def error_for(response)
-          status_code = response.context.http_response.status_code
-          ErrorInspector.new(response.error, status_code)
         end
 
         def retry_request(context, error)
