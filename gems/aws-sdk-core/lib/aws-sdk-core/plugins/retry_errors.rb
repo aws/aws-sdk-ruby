@@ -329,7 +329,7 @@ SDK operation invocation before giving up. Used in `standard` and
           @request_count        = 0
           @last_max_rate        = 0
           @last_throttle_time   = Aws::Util.monotonic_seconds
-          @time_window          = 0
+          @calculated_rate      = nil
         end
 
         def token_bucket_acquire(amount)
@@ -401,27 +401,21 @@ SDK operation invocation before giving up. Used in `standard` and
 
             # The fill_rate is from the token bucket
             @last_max_rate = rate_to_use
-            calculate_time_window
             @last_throttle_time = Aws::Util.monotonic_seconds
-            calculated_rate = cubic_throttle(rate_to_use)
+            @calculated_rate = cubic_throttle(rate_to_use)
             enable_token_bucket
           else
-            calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
+            @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
           end
 
-          new_rate = [calculated_rate, 2 * @measured_tx_rate].min
+          new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
           token_bucket_update_rate(new_rate)
-        end
-
-        def calculate_time_window
-          # This is broken out into a separate calculation because it only
-          # gets updated when @last_max_rate changes so it can be cached.
-          @time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0/3)
         end
 
         def cubic_success(timestamp)
           dt = timestamp - @last_throttle_time
-          (SCALE_CONSTANT * ((dt - @time_window)**3)) + @last_max_rate
+          time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0/3)
+          (SCALE_CONSTANT * ((dt - time_window)**3)) + @last_max_rate
         end
 
         def cubic_throttle(rate_to_use)
@@ -441,11 +435,13 @@ SDK operation invocation before giving up. Used in `standard` and
           puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries} max_backoff: #{MAX_BACKOFF}"
           #############
 
-          client_rate_limiter = context.metadata[:client_rate_limiter] ||= ClientRateLimiting.new
-          retry_quota = context.metadata[:retry_quota] ||= RetryQuota.new
+          client_rate_limiter = context.client.metadata[:client_rate_limiter] ||= ClientRateLimiting.new
+          retry_quota = context.client.metadata[:retry_quota] ||= RetryQuota.new
 
           get_send_token(client_rate_limiter, context.config.retry_mode)
           response = @handler.call(context)
+          # response.context.http_response.status_code = 500  # TODO: remove me.  Manual testing only.
+
           request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
           return response unless retryable?(response, context)
 

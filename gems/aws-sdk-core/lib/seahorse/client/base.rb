@@ -18,6 +18,7 @@ module Seahorse
       def initialize(plugins, options)
         @config = build_config(plugins, options)
         @handlers = build_handler_list(plugins)
+        @metadata = {}
         after_initialize(plugins)
       end
 
@@ -26,6 +27,10 @@ module Seahorse
 
       # @return [HandlerList]
       attr_reader :handlers
+
+      # @api private
+      # @return [Hash]
+      attr_reader :metadata
 
       # Builds and returns a {Request} for the named operation.  The request
       # will not have been sent.

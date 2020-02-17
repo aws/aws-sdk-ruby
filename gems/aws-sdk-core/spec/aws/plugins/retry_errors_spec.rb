@@ -538,7 +538,7 @@ module Aws
           resp.context.config = config
           operation.endpoint_discovery = {}
           resp.context.operation = operation
-          resp.context.http_response.status_code = 400
+          resp.context.client =  Seahorse::Client::Base.new(endpoint:'http://example.com') # ApiHelper.sample_rest_xml::Client.new(region: 'us-west-2')
         end
 
         def handle(send_handler = nil, &block)
@@ -686,10 +686,43 @@ module Aws
         context 'adaptive mode' do
           before(:each) do
             resp.context.config.retry_mode = 'adaptive'
+
+            client_rate_limiter = resp.context.client.metadata[:client_rate_limiter] = RetryErrors::ClientRateLimiting.new
+            client_rate_limiter.instance_variable_set(:@last_throttle_time, 5)
+            client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
+            client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
           end
 
-          it 'retry eventually succeeds' do
-            handle { |_context| resp }
+          def success(timestamp, calculated_rate)
+            [{
+               response: { status_code: 200, error: nil, timestamp: timestamp},
+               expect: { calculated_rate: calculated_rate}
+             }]
+          end
+
+          def throttle(timestamp, calculated_rate)
+            [{
+               response: { status_code: 429, error: nil, timestamp: timestamp},
+               expect: { calculated_rate: calculated_rate}
+             }]
+          end
+
+          it 'verifies cubic calculations for successes' do
+
+            run_retry success(5, 7.0)
+            run_retry success(6, 9.6)
+            run_retry success(7, 10.0)
+            run_retry success(8, 10.45)
+            run_retry success(9, 13.4)
+            run_retry success(10, 21.2)
+            run_retry success(11, 36.4)
+          end
+
+          it 'verifies cubic calculations with throttling' do
+            run_retry success(5, 7.0)
+            run_retry success(6, 9.6)
+            run_retry throttle(7, 6.7) + throttle(8, 4.7) + success(10, 6.7)
+
           end
         end
 
@@ -702,44 +735,56 @@ module Aws
             end
           end
 
-          t = 0
+          i = 0
           handle do |_context|
-            if t > 0
+            if i > 0
               # Apply expectations to previous call
-              expected = test_cases[t - 1][:expect]
+              expected = test_cases[i - 1][:expect]
               if expected[:available_capacity]
-                expect(resp.context[:retry_quota].available_capacity)
+                expect(resp.context.client.metadata[:retry_quota].available_capacity)
                   .to eq(expected[:available_capacity])
               end
               if expected[:retries]
                 expect(resp.context.retries).to eq(expected[:retries])
               end
+              if expected[:calculated_rate]
+                expect(resp.context.client.metadata[:client_rate_limiter].instance_variable_get(:@calculated_rate))
+                  .to be_within(0.1).of(expected[:calculated_rate])
+              end
             end
 
             # Setup the next response
-            test_case = test_cases[t]
+            test_case = test_cases[i]
             status_code = test_case[:response][:status_code]
             resp.context.http_response.status_code = status_code
             resp.error = test_case[:error]
 
-            t += 1
+            if test_case[:response][:timestamp]
+              allow(Util).to receive(:monotonic_seconds).and_return(test_case[:response][:timestamp])
+            end
+
+            i += 1
             resp
           end
 
-          expect(t).to(
+          expect(i).to(
             eq(test_cases.size),
-            "Wrong number of retries. Handler was called #{t} times but "\
+            "Wrong number of retries. Handler was called #{i} times but "\
             "#{test_cases.size} test cases were defined."
           )
 
           # Handle has finished called.  Apply final expectations.
-          expected = test_cases[t - 1][:expect]
+          expected = test_cases[i - 1][:expect]
           if expected[:available_capacity]
-            expect(resp.context[:retry_quota].available_capacity)
+            expect(resp.context.client.metadata[:retry_quota].available_capacity)
               .to eq(expected[:available_capacity])
           end
           if expected[:retries]
             expect(resp.context.retries).to eq(expected[:retries])
+          end
+          if expected[:calculated_rate]
+            expect(resp.context.client.metadata[:client_rate_limiter].instance_variable_get(:@calculated_rate))
+              .to be_within(0.1).of(expected[:calculated_rate])
           end
         end
       end
