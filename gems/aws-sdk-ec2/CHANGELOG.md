@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2020-02-17)
+------------------
+
+* Feature - Documentation updates for EC2
+
 1.143.0 (2020-02-14)
 ------------------
 

@@ -1230,9 +1230,9 @@ module Aws::Rekognition
     # faces or might detect faces with lower confidence.
     #
     # You pass the input image either as base64-encoded image bytes or as a
-    # reference to an image in an Amazon S3 bucket. If you use the to call
-    # Amazon Rekognition operations, passing image bytes is not supported.
-    # The image must be either a PNG or JPEG formatted file.
+    # reference to an image in an Amazon S3 bucket. If you use the AWS CLI
+    # to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
     #
     # <note markdown="1"> This is a stateless API operation. That is, the operation does not
     # persist any data.
@@ -1704,9 +1704,14 @@ module Aws::Rekognition
     #   more information, see Images in the Amazon Rekognition developer
     #   guide.
     #
+    # @option params [Types::DetectTextFilters] :filters
+    #   Optional parameters that let you set the criteria that the text must
+    #   meet to be included in your response.
+    #
     # @return [Types::DetectTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectTextResponse#text_detections #text_detections} => Array&lt;Types::TextDetection&gt;
+    #   * {Types::DetectTextResponse#text_model_version #text_model_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1718,6 +1723,23 @@ module Aws::Rekognition
     #         name: "S3ObjectName",
     #         version: "S3ObjectVersion",
     #       },
+    #     },
+    #     filters: {
+    #       word_filter: {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       },
+    #       regions_of_interest: [
+    #         {
+    #           bounding_box: {
+    #             width: 1.0,
+    #             height: 1.0,
+    #             left: 1.0,
+    #             top: 1.0,
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1736,6 +1758,7 @@ module Aws::Rekognition
     #   resp.text_detections[0].geometry.polygon #=> Array
     #   resp.text_detections[0].geometry.polygon[0].x #=> Float
     #   resp.text_detections[0].geometry.polygon[0].y #=> Float
+    #   resp.text_model_version #=> String
     #
     # @overload detect_text(params = {})
     # @param [Hash] params ({})
@@ -2541,6 +2564,103 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def get_person_tracking(params = {}, options = {})
       req = build_request(:get_person_tracking, params)
+      req.send_request(options)
+    end
+
+    # Gets the text detection results of a Amazon Rekognition Video analysis
+    # started by StartTextDetection.
+    #
+    # Text detection with Amazon Rekognition Video is an asynchronous
+    # operation. You start text detection by calling StartTextDetection
+    # which returns a job identifier (`JobId`) When the text detection
+    # operation finishes, Amazon Rekognition publishes a completion status
+    # to the Amazon Simple Notification Service topic registered in the
+    # initial call to `StartTextDetection`. To get the results of the text
+    # detection operation, first check that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. if so, call `GetTextDetection`
+    # and pass the job identifier (`JobId`) from the initial call of
+    # `StartLabelDetection`.
+    #
+    # `GetTextDetection` returns an array of detected text
+    # (`TextDetections`) sorted by the time the text was detected, up to 50
+    # words per frame of video.
+    #
+    # Each element of the array includes the detected text, the precentage
+    # confidence in the acuracy of the detected text, the time the text was
+    # detected, bounding box information for where the text was located, and
+    # unique identifiers for words and their lines.
+    #
+    # Use MaxResults parameter to limit the number of text detections
+    # returned. If there are more results than specified in `MaxResults`,
+    # the value of `NextToken` in the operation response contains a
+    # pagination token for getting the next set of results. To get the next
+    # page of results, call `GetTextDetection` and populate the `NextToken`
+    # request parameter with the token value returned from the previous call
+    # to `GetTextDetection`.
+    #
+    # @option params [required, String] :job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartTextDetection`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more labels
+    #   to retrieve), Amazon Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of text.
+    #
+    # @return [Types::GetTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTextDetectionResponse#job_status #job_status} => String
+    #   * {Types::GetTextDetectionResponse#status_message #status_message} => String
+    #   * {Types::GetTextDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetTextDetectionResponse#text_detections #text_detections} => Array&lt;Types::TextDetectionResult&gt;
+    #   * {Types::GetTextDetectionResponse#next_token #next_token} => String
+    #   * {Types::GetTextDetectionResponse#text_model_version #text_model_version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_text_detection({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.text_detections #=> Array
+    #   resp.text_detections[0].timestamp #=> Integer
+    #   resp.text_detections[0].text_detection.detected_text #=> String
+    #   resp.text_detections[0].text_detection.type #=> String, one of "LINE", "WORD"
+    #   resp.text_detections[0].text_detection.id #=> Integer
+    #   resp.text_detections[0].text_detection.parent_id #=> Integer
+    #   resp.text_detections[0].text_detection.confidence #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.width #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.height #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.left #=> Float
+    #   resp.text_detections[0].text_detection.geometry.bounding_box.top #=> Float
+    #   resp.text_detections[0].text_detection.geometry.polygon #=> Array
+    #   resp.text_detections[0].text_detection.geometry.polygon[0].x #=> Float
+    #   resp.text_detections[0].text_detection.geometry.polygon[0].y #=> Float
+    #   resp.next_token #=> String
+    #   resp.text_model_version #=> String
+    #
+    # @overload get_text_detection(params = {})
+    # @param [Hash] params ({})
+    def get_text_detection(params = {}, options = {})
+      req = build_request(:get_text_detection, params)
       req.send_request(options)
     end
 
@@ -4228,6 +4348,98 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Starts asynchronous detection of text in a stored video.
+    #
+    # Amazon Rekognition Video can detect text in a video stored in an
+    # Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartTextDetection` returns a job identifier
+    # (`JobId`) which you use to get the results of the operation. When text
+    # detection is finished, Amazon Rekognition Video publishes a completion
+    # status to the Amazon Simple Notification Service topic that you
+    # specify in `NotificationChannel`.
+    #
+    # To get the results of the text detection operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. if
+    # so, call GetTextDetection and pass the job identifier (`JobId`) from
+    # the initial call to `StartTextDetection`.
+    #
+    # @option params [required, Types::Video] :video
+    #   Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    #   start operations such as StartLabelDetection use `Video` to specify a
+    #   video for analysis. The supported file formats are .mp4, .mov and
+    #   .avi.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartTextDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidentaly started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the completion status of a video analysis
+    #   operation. For more information, see api-video.
+    #
+    # @option params [String] :job_tag
+    #   An identifier returned in the completion status published by your
+    #   Amazon Simple Notification Service topic. For example, you can use
+    #   `JobTag` to group related jobs and identify them in the completion
+    #   notification.
+    #
+    # @option params [Types::StartTextDetectionFilters] :filters
+    #   Optional parameters that let you set criteria the text must meet to be
+    #   included in your response.
+    #
+    # @return [Types::StartTextDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTextDetectionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_text_detection({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #     filters: {
+    #       word_filter: {
+    #         min_confidence: 1.0,
+    #         min_bounding_box_height: 1.0,
+    #         min_bounding_box_width: 1.0,
+    #       },
+    #       regions_of_interest: [
+    #         {
+    #           bounding_box: {
+    #             width: 1.0,
+    #             height: 1.0,
+    #             left: 1.0,
+    #             top: 1.0,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_text_detection(params = {})
+    # @param [Hash] params ({})
+    def start_text_detection(params = {}, options = {})
+      req = build_request(:start_text_detection, params)
+      req.send_request(options)
+    end
+
     # Stops a running model. The operation might take a while to complete.
     # To check the current status, call DescribeProjectVersions.
     #
@@ -4293,7 +4505,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -289,7 +289,7 @@ module Aws::EC2
     #   security_group.authorize_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -485,7 +485,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   security_group.delete({
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -587,7 +587,7 @@ module Aws::EC2
     #   security_group.revoke_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_name: "String",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,

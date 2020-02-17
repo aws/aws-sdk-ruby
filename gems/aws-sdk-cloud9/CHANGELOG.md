@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-02-17)
+------------------
+
+* Feature - AWS Cloud9 now supports the ability to tag Cloud9 development environments.
+
 1.19.0 (2019-10-29)
 ------------------
 

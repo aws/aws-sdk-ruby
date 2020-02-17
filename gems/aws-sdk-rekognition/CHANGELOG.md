@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2020-02-17)
+------------------
+
+* Feature - This update adds the ability to detect text in videos and adds filters to image and video text detection.
+
 1.33.0 (2019-12-04)
 ------------------
 
