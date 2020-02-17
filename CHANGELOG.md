@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Cloud9 - Updated the API, and documentation for AWS Cloud9.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
 2.11.445 (2020-02-14)
 ------------------
 
