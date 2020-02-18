@@ -279,6 +279,7 @@ SDK operation invocation before giving up. Used in `standard` and
         attr_reader :max_capacity, :available_capacity
 
         def initialize
+          @mutex              = Mutex.new
           @max_capacity       = INITIAL_RETRY_TOKENS
           @available_capacity = INITIAL_RETRY_TOKENS
           @capacity_amount    = nil
@@ -287,17 +288,19 @@ SDK operation invocation before giving up. Used in `standard` and
         # Acquiring tokens from the retry quota
         # TODO: networking_error == Timeout?  consider aligning terms used....
         def retry_quota?(error)
-          @capacity_amount = if error.networking?
-                               TIMEOUT_RETRY_COST
-                             else
-                               RETRY_COST
-                             end
+          @mutex.synchronize do
+            @capacity_amount = if error.networking?
+                                 TIMEOUT_RETRY_COST
+                               else
+                                 RETRY_COST
+                               end
 
-          # unable to acquire capacity
-          return false if @capacity_amount > @available_capacity
+            # unable to acquire capacity
+            return false if @capacity_amount > @available_capacity
 
-          @available_capacity -= @capacity_amount
-          true
+            @available_capacity -= @capacity_amount
+            true
+          end
         end
 
         def release(is_response_successful)
@@ -305,11 +308,13 @@ SDK operation invocation before giving up. Used in `standard` and
           # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
           # or unset.
           if is_response_successful
+            @mutex.synchronize do
             @available_capacity += if @capacity_amount
                                      @capacity_amount
                                    else
                                      NO_RETRY_INCREMENT
                                    end
+            end
           end
         end
       end
@@ -325,6 +330,7 @@ SDK operation invocation before giving up. Used in `standard` and
         SCALE_CONSTANT = 0.4
 
         def initialize
+          @mutex                = Mutex.new
           @fill_rate            = nil
           @max_capacity         = nil
           @current_capacity     = 0
@@ -351,6 +357,33 @@ SDK operation invocation before giving up. Used in `standard` and
           end
           @current_capacity -= amount
         end
+
+        def update_client_sending_rate(is_throttling_error)
+          update_measured_rate
+
+          if is_throttling_error
+            rate_to_use = if @enabled
+                            [@measured_tx_rate, @fill_rate].min
+                          else
+                            @measured_tx_rate
+                          end
+
+            # The fill_rate is from the token bucket
+            @last_max_rate = rate_to_use
+            calculate_time_window
+            @last_throttle_time = Aws::Util.monotonic_seconds
+            @calculated_rate = cubic_throttle(rate_to_use)
+            enable_token_bucket
+          else
+            calculate_time_window
+            @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
+          end
+
+          new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
+          token_bucket_update_rate(new_rate)
+        end
+
+        private
 
         def token_bucket_refill
           timestamp = Aws::Util.monotonic_seconds
@@ -384,7 +417,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def update_measured_rate
           t = Aws::Util.monotonic_seconds
-          time_bucket = (t * 2).floor / 2
+          time_bucket = (t * 2).floor / 2.0
           @request_count += 1
           if time_bucket > @last_tx_rate_bucket
             current_rate = @request_count / (time_bucket - @last_tx_rate_bucket)
@@ -393,31 +426,6 @@ SDK operation invocation before giving up. Used in `standard` and
             @request_count = 0
             @last_tx_rate_bucket = time_bucket
           end
-        end
-
-        def update_client_sending_rate(is_throttling_error)
-          update_measured_rate
-
-          if is_throttling_error
-            rate_to_use = if @enabled
-                            [@measured_tx_rate, @fill_rate].min
-                          else
-                            @measured_tx_rate
-                          end
-
-            # The fill_rate is from the token bucket
-            @last_max_rate = rate_to_use
-            calculate_time_window
-            @last_throttle_time = Aws::Util.monotonic_seconds
-            @calculated_rate = cubic_throttle(rate_to_use)
-            enable_token_bucket
-          else
-            calculate_time_window
-            @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
-          end
-
-          new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
-          token_bucket_update_rate(new_rate)
         end
 
         def calculate_time_window

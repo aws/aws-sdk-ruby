@@ -592,9 +592,8 @@ module Aws
           end
 
           it 'fails due to retry quota reached after a single retry' do
-            stub_const(
-              'Aws::Plugins::RetryErrors::RetryQuota::INITIAL_RETRY_TOKENS', 5
-            )
+            resp.context.config.retry_quota.instance_variable_set(:@available_capacity, 5)
+
             test_case_def = [
               {
                 response: { status_code: 500, error: service_error },
@@ -610,9 +609,8 @@ module Aws
           end
 
           it 'does not retry if the retry quota is 0' do
-            stub_const(
-              'Aws::Plugins::RetryErrors::RetryQuota::INITIAL_RETRY_TOKENS', 0
-            )
+            resp.context.config.retry_quota.instance_variable_set(:@available_capacity, 0)
+
             test_case_def = [
               {
                 response: { status_code: 500, error: service_error },
