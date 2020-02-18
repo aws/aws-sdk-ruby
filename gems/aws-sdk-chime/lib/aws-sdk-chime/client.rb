@@ -910,6 +910,7 @@ module Aws::Chime
     #
     #   resp.meeting.meeting_id #=> String
     #   resp.meeting.media_placement.audio_host_url #=> String
+    #   resp.meeting.media_placement.audio_fallback_url #=> String
     #   resp.meeting.media_placement.screen_data_url #=> String
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.screen_viewing_url #=> String
@@ -1935,6 +1936,7 @@ module Aws::Chime
     #
     #   resp.meeting.meeting_id #=> String
     #   resp.meeting.media_placement.audio_host_url #=> String
+    #   resp.meeting.media_placement.audio_fallback_url #=> String
     #   resp.meeting.media_placement.screen_data_url #=> String
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.screen_viewing_url #=> String
@@ -2638,6 +2640,7 @@ module Aws::Chime
     #   resp.meetings #=> Array
     #   resp.meetings[0].meeting_id #=> String
     #   resp.meetings[0].media_placement.audio_host_url #=> String
+    #   resp.meetings[0].media_placement.audio_fallback_url #=> String
     #   resp.meetings[0].media_placement.screen_data_url #=> String
     #   resp.meetings[0].media_placement.screen_sharing_url #=> String
     #   resp.meetings[0].media_placement.screen_viewing_url #=> String
@@ -4052,7 +4055,7 @@ module Aws::Chime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chime'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

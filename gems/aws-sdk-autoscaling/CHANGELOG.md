@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2020-02-18)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now supports the ability to enable/disable target tracking, step scaling, and simple scaling policies.
+
 1.30.0 (2019-11-19)
 ------------------
 

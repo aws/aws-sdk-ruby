@@ -206,6 +206,7 @@ module Aws::AutoScaling
     ScalingActivityStatusCode = Shapes::StringShape.new(name: 'ScalingActivityStatusCode')
     ScalingPolicies = Shapes::ListShape.new(name: 'ScalingPolicies')
     ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
+    ScalingPolicyEnabled = Shapes::BooleanShape.new(name: 'ScalingPolicyEnabled')
     ScalingProcessQuery = Shapes::StructureShape.new(name: 'ScalingProcessQuery')
     ScheduledActionNames = Shapes::ListShape.new(name: 'ScheduledActionNames')
     ScheduledActionsType = Shapes::StructureShape.new(name: 'ScheduledActionsType')
@@ -853,6 +854,7 @@ module Aws::AutoScaling
     PutScalingPolicyType.add_member(:step_adjustments, Shapes::ShapeRef.new(shape: StepAdjustments, location_name: "StepAdjustments"))
     PutScalingPolicyType.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: EstimatedInstanceWarmup, location_name: "EstimatedInstanceWarmup"))
     PutScalingPolicyType.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
+    PutScalingPolicyType.add_member(:enabled, Shapes::ShapeRef.new(shape: ScalingPolicyEnabled, location_name: "Enabled"))
     PutScalingPolicyType.struct_class = Types::PutScalingPolicyType
 
     PutScheduledUpdateGroupActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
@@ -899,6 +901,7 @@ module Aws::AutoScaling
     ScalingPolicy.add_member(:estimated_instance_warmup, Shapes::ShapeRef.new(shape: EstimatedInstanceWarmup, location_name: "EstimatedInstanceWarmup"))
     ScalingPolicy.add_member(:alarms, Shapes::ShapeRef.new(shape: Alarms, location_name: "Alarms"))
     ScalingPolicy.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
+    ScalingPolicy.add_member(:enabled, Shapes::ShapeRef.new(shape: ScalingPolicyEnabled, location_name: "Enabled"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
     ScalingProcessQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))

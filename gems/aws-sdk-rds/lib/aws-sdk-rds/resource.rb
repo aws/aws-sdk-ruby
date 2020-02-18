@@ -65,6 +65,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -395,6 +397,20 @@ module Aws::RDS
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
+    # @option options [String] :domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the

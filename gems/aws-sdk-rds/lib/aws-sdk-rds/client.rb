@@ -2122,6 +2122,22 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2201,6 +2217,8 @@ module Aws::RDS
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     source_region: "String",
     #   })
     #
@@ -2276,6 +2294,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -5329,6 +5352,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -7344,6 +7372,11 @@ module Aws::RDS
     #   resp.db_clusters[0].activity_stream_kinesis_stream_name #=> String
     #   resp.db_clusters[0].copy_tags_to_snapshot #=> Boolean
     #   resp.db_clusters[0].cross_account_clone #=> Boolean
+    #   resp.db_clusters[0].domain_memberships #=> Array
+    #   resp.db_clusters[0].domain_memberships[0].domain #=> String
+    #   resp.db_clusters[0].domain_memberships[0].status #=> String
+    #   resp.db_clusters[0].domain_memberships[0].fqdn #=> String
+    #   resp.db_clusters[0].domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -10623,6 +10656,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -11202,6 +11240,15 @@ module Aws::RDS
     #   * The `DBInstanceParameterGroupName` parameter is only valid in
     #     combination with the `AllowMajorVersionUpgrade` parameter.
     #
+    # @option params [String] :domain
+    #   The Active Directory directory ID to move the DB cluster to. Specify
+    #   `none` to remove the cluster from its current domain. The domain must
+    #   be created prior to this operation.
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @option params [Types::ScalingConfiguration] :scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify scaling
     #   properties for DB clusters in `serverless` DB engine mode.
@@ -11279,6 +11326,8 @@ module Aws::RDS
     #     engine_version: "String",
     #     allow_major_version_upgrade: false,
     #     db_instance_parameter_group_name: "String",
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #     scaling_configuration: {
     #       min_capacity: 1,
     #       max_capacity: 1,
@@ -11363,6 +11412,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -13663,6 +13717,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -14726,6 +14785,23 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -14767,6 +14843,8 @@ module Aws::RDS
     #     enable_cloudwatch_logs_exports: ["String"],
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -14841,6 +14919,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -14852,23 +14935,23 @@ module Aws::RDS
     end
 
     # Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
-    # This action only applies to Aurora DB clusters.
     #
-    # The target DB cluster is created from the source snapshot with a
-    # default configuration. If you don't specify a security group, the new
-    # DB cluster is associated with the default security group.
+    # If a DB snapshot is specified, the target DB cluster is created from
+    # the source DB snapshot with a default configuration and default
+    # security group.
     #
-    # <note markdown="1"> This action only restores the DB cluster, not the DB instances for
-    # that DB cluster. You must invoke the `CreateDBInstance` action to
-    # create DB instances for the restored DB cluster, specifying the
-    # identifier of the restored DB cluster in `DBClusterIdentifier`. You
-    # can create DB instances only after the `RestoreDBClusterFromSnapshot`
-    # action has completed and the DB cluster is available.
-    #
-    #  </note>
+    # If a DB cluster snapshot is specified, the target DB cluster is
+    # created from the source DB cluster restore point with the same
+    # configuration as the original source DB cluster. If you don't specify
+    # a security group, the new DB cluster is associated with the default
+    # security group.
     #
     # For more information on Amazon Aurora, see [ What Is Amazon
     # Aurora?][1] in the *Amazon Aurora User Guide.*
+    #
+    # <note markdown="1"> This action only applies to Aurora DB clusters.
+    #
+    #  </note>
     #
     #
     #
@@ -15064,6 +15147,14 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -15119,6 +15210,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -15193,6 +15286,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -15413,6 +15511,23 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
+    # @option params [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #
+    # @option params [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -15459,6 +15574,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     #
     # @example Response structure
@@ -15533,6 +15650,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -17494,6 +17616,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBCluster AWS API Documentation
     #
@@ -17913,6 +18040,11 @@ module Aws::RDS
     #   resp.db_cluster.activity_stream_kinesis_stream_name #=> String
     #   resp.db_cluster.copy_tags_to_snapshot #=> Boolean
     #   resp.db_cluster.cross_account_clone #=> Boolean
+    #   resp.db_cluster.domain_memberships #=> Array
+    #   resp.db_cluster.domain_memberships[0].domain #=> String
+    #   resp.db_cluster.domain_memberships[0].status #=> String
+    #   resp.db_cluster.domain_memberships[0].fqdn #=> String
+    #   resp.db_cluster.domain_memberships[0].iam_role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBCluster AWS API Documentation
     #
@@ -18097,7 +18229,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

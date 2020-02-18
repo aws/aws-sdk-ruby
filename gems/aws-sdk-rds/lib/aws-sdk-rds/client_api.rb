@@ -773,6 +773,8 @@ module Aws::RDS
     CreateDBClusterMessage.add_member(:global_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "GlobalClusterIdentifier"))
     CreateDBClusterMessage.add_member(:enable_http_endpoint, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableHttpEndpoint"))
     CreateDBClusterMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    CreateDBClusterMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    CreateDBClusterMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     CreateDBClusterMessage.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion", metadata: {"documented"=>false}))
     CreateDBClusterMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBClusterMessage.struct_class = Types::CreateDBClusterMessage
@@ -1031,6 +1033,7 @@ module Aws::RDS
     DBCluster.add_member(:activity_stream_kinesis_stream_name, Shapes::ShapeRef.new(shape: String, location_name: "ActivityStreamKinesisStreamName"))
     DBCluster.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     DBCluster.add_member(:cross_account_clone, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CrossAccountClone"))
+    DBCluster.add_member(:domain_memberships, Shapes::ShapeRef.new(shape: DomainMembershipList, location_name: "DomainMemberships"))
     DBCluster.struct_class = Types::DBCluster
 
     DBClusterBacktrack.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
@@ -2066,6 +2069,8 @@ module Aws::RDS
     ModifyDBClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     ModifyDBClusterMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMajorVersionUpgrade"))
     ModifyDBClusterMessage.add_member(:db_instance_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceParameterGroupName"))
+    ModifyDBClusterMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    ModifyDBClusterMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     ModifyDBClusterMessage.add_member(:scaling_configuration, Shapes::ShapeRef.new(shape: ScalingConfiguration, location_name: "ScalingConfiguration"))
     ModifyDBClusterMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     ModifyDBClusterMessage.add_member(:enable_http_endpoint, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableHttpEndpoint"))
@@ -2584,6 +2589,8 @@ module Aws::RDS
     RestoreDBClusterFromS3Message.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBClusterFromS3Message.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBClusterFromS3Message.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    RestoreDBClusterFromS3Message.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    RestoreDBClusterFromS3Message.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBClusterFromS3Message.struct_class = Types::RestoreDBClusterFromS3Message
 
     RestoreDBClusterFromS3Result.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -2609,6 +2616,8 @@ module Aws::RDS
     RestoreDBClusterFromSnapshotMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterParameterGroupName"))
     RestoreDBClusterFromSnapshotMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBClusterFromSnapshotMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    RestoreDBClusterFromSnapshotMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBClusterFromSnapshotMessage.struct_class = Types::RestoreDBClusterFromSnapshotMessage
 
     RestoreDBClusterFromSnapshotResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -2631,6 +2640,8 @@ module Aws::RDS
     RestoreDBClusterToPointInTimeMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterParameterGroupName"))
     RestoreDBClusterToPointInTimeMessage.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBClusterToPointInTimeMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
+    RestoreDBClusterToPointInTimeMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBClusterToPointInTimeMessage.struct_class = Types::RestoreDBClusterToPointInTimeMessage
 
     RestoreDBClusterToPointInTimeResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -3502,6 +3513,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
       end)
 
       api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -3716,7 +3728,9 @@ module Aws::RDS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeDBProxyTargetGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDBProxyTargetGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -3734,6 +3748,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -4177,6 +4192,7 @@ module Aws::RDS
         o.output = Shapes::ShapeRef.new(shape: ModifyDBProxyTargetGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
       end)
 
       api.add_operation(:modify_db_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -4300,6 +4316,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DBProxyTargetAlreadyRegisteredFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDBProxyStateFault)
       end)
 
       api.add_operation(:remove_from_global_cluster, Seahorse::Model::Operation.new.tap do |o|

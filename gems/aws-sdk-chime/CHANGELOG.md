@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-02-18)
+------------------
+
+* Feature - Added AudioFallbackUrl to support Chime SDK client.
+
 1.19.0 (2020-02-12)
 ------------------
 

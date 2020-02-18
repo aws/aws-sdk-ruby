@@ -548,6 +548,7 @@ module Aws::AutoScaling
     #       target_value: 1.0, # required
     #       disable_scale_in: false,
     #     },
+    #     enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :policy_name
@@ -642,6 +643,7 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
+    # @option options [Boolean] :enabled
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -973,7 +975,15 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
     #   Valid Range: Minimum value of 604800.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

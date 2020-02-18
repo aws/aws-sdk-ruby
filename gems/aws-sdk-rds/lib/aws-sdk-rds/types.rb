@@ -1663,6 +1663,8 @@ module Aws::RDS
     #         global_cluster_identifier: "String",
     #         enable_http_endpoint: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #         source_region: "String",
     #       }
     #
@@ -2055,6 +2057,24 @@ module Aws::RDS
     #   to snapshots of the DB cluster. The default is not to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   The Active Directory directory ID to create the DB cluster in.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -2096,6 +2116,8 @@ module Aws::RDS
       :global_cluster_identifier,
       :enable_http_endpoint,
       :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -4807,6 +4829,11 @@ module Aws::RDS
     #   a different AWS account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain_memberships
+    #   The Active Directory Domain membership records associated with the
+    #   DB cluster.
+    #   @return [Array<Types::DomainMembership>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -4860,7 +4887,8 @@ module Aws::RDS
       :activity_stream_kms_key_id,
       :activity_stream_kinesis_stream_name,
       :copy_tags_to_snapshot,
-      :cross_account_clone)
+      :cross_account_clone,
+      :domain_memberships)
       include Aws::Structure
     end
 
@@ -10442,15 +10470,16 @@ module Aws::RDS
     end
 
     # An Active Directory Domain membership record associated with the DB
-    # instance.
+    # instance or cluster.
     #
     # @!attribute [rw] domain
     #   The identifier of the Active Directory Domain.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the DB instance's Active Directory Domain membership,
-    #   such as joined, pending-join, failed etc).
+    #   The status of the Active Directory Domain membership for the DB
+    #   instance or cluster. Values include joined, pending-join, failed,
+    #   and so on.
     #   @return [String]
     #
     # @!attribute [rw] fqdn
@@ -11606,6 +11635,8 @@ module Aws::RDS
     #         engine_version: "String",
     #         allow_major_version_upgrade: false,
     #         db_instance_parameter_group_name: "String",
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #         scaling_configuration: {
     #           min_capacity: 1,
     #           max_capacity: 1,
@@ -11847,6 +11878,17 @@ module Aws::RDS
     #     combination with the `AllowMajorVersionUpgrade` parameter.
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   The Active Directory directory ID to move the DB cluster to. Specify
+    #   `none` to remove the cluster from its current domain. The domain
+    #   must be created prior to this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @!attribute [rw] scaling_configuration
     #   The scaling properties of the DB cluster. You can only modify
     #   scaling properties for DB clusters in `serverless` DB engine mode.
@@ -11901,6 +11943,8 @@ module Aws::RDS
       :engine_version,
       :allow_major_version_upgrade,
       :db_instance_parameter_group_name,
+      :domain,
+      :domain_iam_role_name,
       :scaling_configuration,
       :deletion_protection,
       :enable_http_endpoint,
@@ -15307,6 +15351,8 @@ module Aws::RDS
     #         enable_cloudwatch_logs_exports: ["String"],
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -15608,6 +15654,25 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -15639,7 +15704,9 @@ module Aws::RDS
       :backtrack_window,
       :enable_cloudwatch_logs_exports,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 
@@ -15692,6 +15759,8 @@ module Aws::RDS
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -15906,6 +15975,16 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -15928,7 +16007,9 @@ module Aws::RDS
       :scaling_configuration,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 
@@ -15972,6 +16053,8 @@ module Aws::RDS
     #         db_cluster_parameter_group_name: "String",
     #         deletion_protection: false,
     #         copy_tags_to_snapshot: false,
+    #         domain: "String",
+    #         domain_iam_role_name: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -16174,6 +16257,25 @@ module Aws::RDS
     #   to copy them.
     #   @return [Boolean]
     #
+    # @!attribute [rw] domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    #
+    #   For Amazon Aurora DB clusters, Amazon RDS can use Kerberos
+    #   Authentication to authenticate users that connect to the DB cluster.
+    #   For more information, see [Using Kerberos Authentication for Aurora
+    #   MySQL][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurmysql-kerberos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -16193,7 +16295,9 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :db_cluster_parameter_group_name,
       :deletion_protection,
-      :copy_tags_to_snapshot)
+      :copy_tags_to_snapshot,
+      :domain,
+      :domain_iam_role_name)
       include Aws::Structure
     end
 

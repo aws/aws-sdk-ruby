@@ -495,6 +495,8 @@ module Aws::RDS
     #     db_cluster_parameter_group_name: "String",
     #     deletion_protection: false,
     #     copy_tags_to_snapshot: false,
+    #     domain: "String",
+    #     domain_iam_role_name: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -654,6 +656,12 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the restored DB
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
+    # @option options [String] :domain
+    #   Specify the Active Directory directory ID to restore the DB cluster
+    #   in. The domain must be created prior to this operation.
+    # @option options [String] :domain_iam_role_name
+    #   Specify the name of the IAM role to be used when making API calls to
+    #   the Directory Service.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

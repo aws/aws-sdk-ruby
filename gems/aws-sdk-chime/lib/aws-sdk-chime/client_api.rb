@@ -891,6 +891,7 @@ module Aws::Chime
     LogoutUserResponse.struct_class = Types::LogoutUserResponse
 
     MediaPlacement.add_member(:audio_host_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioHostUrl"))
+    MediaPlacement.add_member(:audio_fallback_url, Shapes::ShapeRef.new(shape: UriType, location_name: "AudioFallbackUrl"))
     MediaPlacement.add_member(:screen_data_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenDataUrl"))
     MediaPlacement.add_member(:screen_sharing_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenSharingUrl"))
     MediaPlacement.add_member(:screen_viewing_url, Shapes::ShapeRef.new(shape: UriType, location_name: "ScreenViewingUrl"))

@@ -2957,6 +2957,10 @@ module Aws::Chime
     #   The audio host URL.
     #   @return [String]
     #
+    # @!attribute [rw] audio_fallback_url
+    #   The audio fallback URL.
+    #   @return [String]
+    #
     # @!attribute [rw] screen_data_url
     #   The screen data URL.
     #   @return [String]
@@ -2981,6 +2985,7 @@ module Aws::Chime
     #
     class MediaPlacement < Struct.new(
       :audio_host_url,
+      :audio_fallback_url,
       :screen_data_url,
       :screen_sharing_url,
       :screen_viewing_url,

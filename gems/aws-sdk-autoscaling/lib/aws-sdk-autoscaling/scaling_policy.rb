@@ -123,6 +123,11 @@ module Aws::AutoScaling
       data[:target_tracking_configuration]
     end
 
+    # @return [Boolean]
+    def enabled
+      data[:enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]

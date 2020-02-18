@@ -832,7 +832,15 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
     #   Valid Range: Minimum value of 604800.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2609,6 +2617,7 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].target_tracking_configuration.customized_metric_specification.unit #=> String
     #   resp.scaling_policies[0].target_tracking_configuration.target_value #=> Float
     #   resp.scaling_policies[0].target_tracking_configuration.disable_scale_in #=> Boolean
+    #   resp.scaling_policies[0].enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies AWS API Documentation
@@ -3870,6 +3879,8 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     #
+    # @option params [Boolean] :enabled
+    #
     # @return [Types::PolicyARNType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PolicyARNType#policy_arn #policy_arn} => String
@@ -3932,6 +3943,7 @@ module Aws::AutoScaling
     #       target_value: 1.0, # required
     #       disable_scale_in: false,
     #     },
+    #     enabled: false,
     #   })
     #
     # @example Response structure
@@ -4677,7 +4689,15 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
     #   Valid Range: Minimum value of 604800.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4780,7 +4800,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
