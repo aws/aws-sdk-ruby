@@ -687,7 +687,7 @@ module Aws
           before(:each) do
             resp.context.config.retry_mode = 'adaptive'
 
-            client_rate_limiter = resp.context.client.metadata[:client_rate_limiter] = RetryErrors::ClientRateLimiting.new
+            client_rate_limiter = resp.context.config.client_rate_limiter
             client_rate_limiter.instance_variable_set(:@last_throttle_time, 5)
             client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
             client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
@@ -708,7 +708,6 @@ module Aws
           end
 
           it 'verifies cubic calculations for successes' do
-
             run_retry success(5, 7.0)
             run_retry success(6, 9.6)
             run_retry success(7, 10.0)
@@ -741,14 +740,14 @@ module Aws
               # Apply expectations to previous call
               expected = test_cases[i - 1][:expect]
               if expected[:available_capacity]
-                expect(resp.context.client.metadata[:retry_quota].available_capacity)
+                expect(resp.context.config.retry_quota.available_capacity)
                   .to eq(expected[:available_capacity])
               end
               if expected[:retries]
                 expect(resp.context.retries).to eq(expected[:retries])
               end
               if expected[:calculated_rate]
-                expect(resp.context.client.metadata[:client_rate_limiter].instance_variable_get(:@calculated_rate))
+                expect(resp.context.config.client_rate_limiter.instance_variable_get(:@calculated_rate))
                   .to be_within(0.1).of(expected[:calculated_rate])
               end
             end
@@ -776,14 +775,14 @@ module Aws
           # Handle has finished called.  Apply final expectations.
           expected = test_cases[i - 1][:expect]
           if expected[:available_capacity]
-            expect(resp.context.client.metadata[:retry_quota].available_capacity)
+            expect(resp.context.config.retry_quota.available_capacity)
               .to eq(expected[:available_capacity])
           end
           if expected[:retries]
             expect(resp.context.retries).to eq(expected[:retries])
           end
           if expected[:calculated_rate]
-            expect(resp.context.client.metadata[:client_rate_limiter].instance_variable_get(:@calculated_rate))
+            expect(resp.context.config.client_rate_limiter.instance_variable_get(:@calculated_rate))
               .to be_within(0.1).of(expected[:calculated_rate])
           end
         end

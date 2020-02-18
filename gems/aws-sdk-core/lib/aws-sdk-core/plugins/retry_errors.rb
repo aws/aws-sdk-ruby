@@ -108,6 +108,12 @@ SDK operation invocation before giving up. Used in `standard` and
         resolve_max_attempts(cfg)
       end
 
+      # @api private undocumented
+      option(:client_rate_limiter) { ClientRateLimiting.new }
+
+      # @api private undocumented
+      option(:retry_quota) { RetryQuota.new }
+
       def self.resolve_retry_mode(cfg)
         value = ENV['AWS_RETRY_MODE'] ||
                 Aws.shared_config.retry_mode(profile: cfg.profile) ||
@@ -401,10 +407,12 @@ SDK operation invocation before giving up. Used in `standard` and
 
             # The fill_rate is from the token bucket
             @last_max_rate = rate_to_use
+            calculate_time_window
             @last_throttle_time = Aws::Util.monotonic_seconds
             @calculated_rate = cubic_throttle(rate_to_use)
             enable_token_bucket
           else
+            calculate_time_window
             @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
           end
 
@@ -412,10 +420,15 @@ SDK operation invocation before giving up. Used in `standard` and
           token_bucket_update_rate(new_rate)
         end
 
+        def calculate_time_window
+          # This is broken out into a separate calculation because it only
+          # gets updated when @last_max_rate changes so it can be cached.
+          @time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0/3)
+        end
+
         def cubic_success(timestamp)
           dt = timestamp - @last_throttle_time
-          time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0/3)
-          (SCALE_CONSTANT * ((dt - time_window)**3)) + @last_max_rate
+          (SCALE_CONSTANT * ((dt - @time_window)**3)) + @last_max_rate
         end
 
         def cubic_throttle(rate_to_use)
@@ -435,8 +448,8 @@ SDK operation invocation before giving up. Used in `standard` and
           puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries} max_backoff: #{MAX_BACKOFF}"
           #############
 
-          client_rate_limiter = context.client.metadata[:client_rate_limiter] ||= ClientRateLimiting.new
-          retry_quota = context.client.metadata[:retry_quota] ||= RetryQuota.new
+          client_rate_limiter = context.config.client_rate_limiter
+          retry_quota = context.config.retry_quota
 
           get_send_token(client_rate_limiter, context.config.retry_mode)
           response = @handler.call(context)
