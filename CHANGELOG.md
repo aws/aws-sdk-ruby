@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.447 (2020-02-18)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::Chime - Updated the API, and documentation for Amazon Chime.
