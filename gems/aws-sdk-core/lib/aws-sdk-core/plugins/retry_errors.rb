@@ -353,7 +353,7 @@ SDK operation invocation before giving up. Used in `standard` and
           # Next see if we have enough capacity for the requested amount
           # TODO: Check config for blocking (instant fail)
           if amount > @current_capacity
-            Kernel.sleep((amount - @current_capacity / @fill_rate))
+            Kernel.sleep((amount - @current_capacity) / @fill_rate)
           end
           @current_capacity -= amount
         end
@@ -431,7 +431,7 @@ SDK operation invocation before giving up. Used in `standard` and
         def calculate_time_window
           # This is broken out into a separate calculation because it only
           # gets updated when @last_max_rate changes so it can be cached.
-          @time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0/3)
+          @time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0 / 3)
         end
 
         def cubic_success(timestamp)
@@ -453,24 +453,37 @@ SDK operation invocation before giving up. Used in `standard` and
           puts "\n\n#########################################"
           retry_mode = context.config.retry_mode
           max_attempts = context.config.max_attempts
-          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}.  Current Retries: #{context.retries} max_backoff: #{MAX_BACKOFF}"
+          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}."
+          puts "Current Retries: #{context.retries}"
+          puts '#########################################'
           #############
 
           client_rate_limiter = context.config.client_rate_limiter
           retry_quota = context.config.retry_quota
 
+          puts client_rate_limiter.inspect
+
           get_send_token(client_rate_limiter, context.config.retry_mode)
+
+          puts client_rate_limiter.inspect
+
           response = @handler.call(context)
-          # response.context.http_response.status_code = 500  # TODO: remove me.  Manual testing only.
 
           request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
+
+          puts client_rate_limiter.inspect
+
           return response unless retryable?(response, context)
 
-          return response if context.retries >= (context.config.max_attempts - 1)
+          puts client_rate_limiter.inspect
+
+          return response if context.retries >= context.config.max_attempts - 1
 
           error = ErrorInspector.new(response)
 
           return response unless retry_quota.retry_quota?(error)
+
+          puts client_rate_limiter.inspect
 
           delay = exponential_backoff(context.retries)
           Kernel.sleep(delay)
@@ -511,7 +524,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def exponential_backoff(retries)
           # for a transient error, use backoff
-          [Kernel.rand(0..1) * 2**(retries), MAX_BACKOFF].min
+          [Kernel.rand(0..1) * 2**retries, MAX_BACKOFF].min
         end
 
         def retry_request(context, error)

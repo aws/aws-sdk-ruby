@@ -687,25 +687,10 @@ module Aws
 
             client_rate_limiter = resp.context.config.client_rate_limiter
             client_rate_limiter.instance_variable_set(:@last_throttle_time, 5)
+            # Needs to be smaller than 't' in the iterations
             client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 500)
             client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
             client_rate_limiter.instance_variable_set(:@measured_tx_rate, 10)
-
-
-          end
-
-          def success(timestamp, calculated_rate)
-            [{
-               response: { status_code: 200, error: nil, timestamp: timestamp},
-               expect: { calculated_rate: calculated_rate}
-             }]
-          end
-
-          def throttle(timestamp, calculated_rate)
-            [{
-               response: { status_code: 429, error: nil, timestamp: timestamp},
-               expect: { calculated_rate: calculated_rate}
-             }]
           end
 
           it 'verifies cubic calculations for successes' do
@@ -721,8 +706,10 @@ module Aws
           it 'verifies cubic calculations with throttling' do
             run_retry success(5, 7.0)
             run_retry success(6, 9.6)
-            run_retry throttle(7, 6.7) + throttle(8, 4.7) + success(10, 6.7)
-
+            run_retry throttle(7, 6.8) + throttle(8, 4.7) + success(9, 6.6)
+            run_retry success(10, 6.8)
+            run_retry success(11, 7.6)
+            run_retry success(12, 11.5)
           end
         end
 
@@ -787,6 +774,82 @@ module Aws
               .to be_within(0.1).of(expected[:calculated_rate])
           end
         end
+
+        def success(timestamp, calculated_rate)
+          [{
+             response: { status_code: 200, error: nil, timestamp: timestamp},
+             expect: { calculated_rate: calculated_rate}
+           }]
+        end
+
+        def throttle(timestamp, calculated_rate)
+          [{
+             response: { status_code: 429, error: nil, timestamp: timestamp},
+             expect: { calculated_rate: calculated_rate}
+           }]
+        end
+      end
+
+      describe RetryErrors::ClientRateLimiting do
+        let(:client_rate_limiter) { RetryErrors::ClientRateLimiting.new }
+
+        ######
+        # Cubic Calculator tests
+        it 'sets the time window correctly from max rate' do
+          client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
+          client_rate_limiter.send(:calculate_time_window)
+          expect(client_rate_limiter.instance_variable_get(:@time_window)).to be_within(0.1).of(1.9)
+        end
+
+        it 'decreases rate by beta when throttled' do
+          rate_when_throttled = 8
+          new_rate = client_rate_limiter.send(:cubic_throttle, rate_when_throttled)
+          expect(new_rate).to eq(rate_when_throttled * 0.7)
+        end
+
+        it 'should match beta decrease' do
+          stub_const('Aws::Plugins::RetryErrors::ClientRateLimiting::BETA', 0.6)
+          client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
+
+          new_rate = client_rate_limiter.send(:cubic_throttle, 10)
+          client_rate_limiter.instance_variable_set(:@last_throttle_time, 1)
+          client_rate_limiter.send(:calculate_time_window)
+          expect(new_rate).to eq(6.0)
+
+          new_rate = client_rate_limiter.send(:cubic_success, 1)
+          expect(new_rate).to be_within(0.1).of(6.0)
+        end
+
+        #######
+        # Rate Clocker tests
+        it 'updates rate if after bucket range' do
+          client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
+          allow(Util).to receive(:monotonic_seconds).and_return(1)
+
+          client_rate_limiter.send(:update_measured_rate)
+          # This should be 1 * 0.8 + 0 * 0.2, or just 0.8
+          expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate)).to be_within(0.1).of(0.8)
+        end
+
+        it 'can measure a constant rate' do
+          client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
+
+          # send a constant 2 TPS
+          (1..8).each do |t|
+            allow(Util).to receive(:monotonic_seconds).and_return(t / 2.0)
+            client_rate_limiter.send(:update_measured_rate)
+          end
+
+          expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate)).to be_within(0.1).of(2.0)
+
+          # if we now wait 10 seconds (0.1 TPS)
+          # our rate is somewhere between 2 TPS and 0.1 TPS
+          allow(Util).to receive(:monotonic_seconds).and_return(14)
+          client_rate_limiter.send(:update_measured_rate)
+          rate = client_rate_limiter.instance_variable_get(:@measured_tx_rate)
+          expect(rate).to be_between(0.1, 2)
+        end
+
       end
 
       describe 'RetryErrors::ClientRateLimiting' do
