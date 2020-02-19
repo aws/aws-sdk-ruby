@@ -224,7 +224,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

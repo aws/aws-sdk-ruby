@@ -134,6 +134,12 @@ module Aws::EC2
       data[:fast_restored]
     end
 
+    # Indicates whether Amazon EBS Multi-Attach is enabled.
+    # @return [Boolean]
+    def multi_attach_enabled
+      data[:multi_attach_enabled]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -544,7 +550,8 @@ module Aws::EC2
     #   you use this option, you must perform file system check and repair
     #   procedures.
     # @option options [String] :instance_id
-    #   The ID of the instance.
+    #   The ID of the instance. If you are detaching a Multi-Attach enabled
+    #   volume, you must specify an instance ID.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -612,7 +619,7 @@ module Aws::EC2
     #     ],
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

@@ -1,13 +1,18 @@
 Unreleased Changes
 ------------------
 
+3.90.1 (2020-02-14)
+------------------
+
+* Issue - Perform a case-insensitive comparison when filtering sensitive parameters from logs
+* Issue - Add passthrough of region from client to STS when using assume_role_web_identity_credentials
+
 3.90.0 (2020-02-12)
 ------------------
 
-* Feature - Updated the list of parameters to filter when logging.
-
-* Issue - Parse all values from shared credentials file when using Aws.shared_config
-* Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present
+* Issue - Updated the list of parameters to filter when logging.
+* Issue - Parse all values from shared credentials file when using `Aws.shared_config`.
+* Issue - Honor explicit profile in client config when credentials from AWS_ environment variables are present.
 * Issue - Fixed a bug where `Transfer-Encoding` could never be set to `chunked` in streaming operations because all body objects (`String`, `StringIO`) would respond to `#size`.
 
 3.89.1 (2020-01-14)

@@ -2960,7 +2960,14 @@ module Aws::DynamoDB
     #   The first global table name that this operation will evaluate.
     #
     # @option params [Integer] :limit
-    #   The maximum number of table names to return.
+    #   The maximum number of table names to return, if the parameter is not
+    #   specified DynamoDB defaults to 100.
+    #
+    #   If the number of global tables DynamoDB finds reaches this limit, it
+    #   stops the operation and returns the table names collected up to that
+    #   point, with a table name in the `LastEvaluatedGlobalTableName` to
+    #   apply in a subsequent operation to the `ExclusiveStartGlobalTableName`
+    #   parameter.
     #
     # @option params [String] :region_name
     #   Lists the global tables in a specific Region.
@@ -4012,6 +4019,9 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::SSESpecification] :sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #
     # @return [Types::RestoreTableFromBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableFromBackupOutput#table_description #table_description} => Types::TableDescription
@@ -4059,6 +4069,11 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     sse_specification_override: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -4189,7 +4204,11 @@ module Aws::DynamoDB
     #
     # * Point in time recovery settings
     #
-    # @option params [required, String] :source_table_name
+    # @option params [String] :source_table_arn
+    #   The DynamoDB table that will be restored. This value is an Amazon
+    #   Resource Name (ARN).
+    #
+    # @option params [String] :source_table_name
     #   Name of the source table that is being restored.
     #
     # @option params [required, String] :target_table_name
@@ -4219,6 +4238,9 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::SSESpecification] :sse_specification_override
+    #   The new server-side encryption settings for the restored table.
+    #
     # @return [Types::RestoreTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreTableToPointInTimeOutput#table_description #table_description} => Types::TableDescription
@@ -4226,7 +4248,8 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.restore_table_to_point_in_time({
-    #     source_table_name: "TableName", # required
+    #     source_table_arn: "TableArn",
+    #     source_table_name: "TableName",
     #     target_table_name: "TableName", # required
     #     use_latest_restorable_time: false,
     #     restore_date_time: Time.now,
@@ -4268,6 +4291,11 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     sse_specification_override: {
+    #       enabled: false,
+    #       sse_type: "AES256", # accepts AES256, KMS
+    #       kms_master_key_id: "KMSMasterKeyId",
     #     },
     #   })
     #
@@ -6533,7 +6561,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

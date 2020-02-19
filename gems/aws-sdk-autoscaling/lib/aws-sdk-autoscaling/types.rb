@@ -1039,7 +1039,15 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
     #   Valid Range: Minimum value of 604800.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
@@ -1643,12 +1651,12 @@ module Aws::AutoScaling
 
     # @!attribute [rw] max_number_of_auto_scaling_groups
     #   The maximum number of groups allowed for your AWS account. The
-    #   default limit is 200 per AWS Region.
+    #   default is 200 groups per AWS Region.
     #   @return [Integer]
     #
     # @!attribute [rw] max_number_of_launch_configurations
     #   The maximum number of launch configurations allowed for your AWS
-    #   account. The default limit is 200 per AWS Region.
+    #   account. The default is 200 launch configurations per AWS Region.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_auto_scaling_groups
@@ -3280,7 +3288,14 @@ module Aws::AutoScaling
     #   capacity in terms of instances, or a performance attribute such as
     #   vCPUs, memory, or I/O.
     #
+    #   For more information, see [Instance Weighting for Amazon EC2 Auto
+    #   Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
     #   Valid Range: Minimum value of 1. Maximum value of 999.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateOverrides AWS API Documentation
@@ -4113,6 +4128,7 @@ module Aws::AutoScaling
     #           target_value: 1.0, # required
     #           disable_scale_in: false,
     #         },
+    #         enabled: false,
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -4233,6 +4249,17 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     #   @return [Types::TargetTrackingConfiguration]
     #
+    # @!attribute [rw] enabled
+    #   Indicates whether the scaling policy is enabled or disabled. The
+    #   default is enabled. For more information, see [Disabling a Scaling
+    #   Policy for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicyType AWS API Documentation
     #
     class PutScalingPolicyType < Struct.new(
@@ -4247,7 +4274,8 @@ module Aws::AutoScaling
       :metric_aggregation_type,
       :step_adjustments,
       :estimated_instance_warmup,
-      :target_tracking_configuration)
+      :target_tracking_configuration,
+      :enabled)
       include Aws::Structure
     end
 
@@ -4493,6 +4521,11 @@ module Aws::AutoScaling
     #   A target tracking scaling policy.
     #   @return [Types::TargetTrackingConfiguration]
     #
+    # @!attribute [rw] enabled
+    #   Indicates whether the policy is enabled (`true`) or disabled
+    #   (`false`).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingPolicy AWS API Documentation
     #
     class ScalingPolicy < Struct.new(
@@ -4509,7 +4542,8 @@ module Aws::AutoScaling
       :metric_aggregation_type,
       :estimated_instance_warmup,
       :alarms,
-      :target_tracking_configuration)
+      :target_tracking_configuration,
+      :enabled)
       include Aws::Structure
     end
 
@@ -5331,7 +5365,15 @@ module Aws::AutoScaling
     #   The maximum amount of time, in seconds, that an instance can be in
     #   service.
     #
+    #   For more information, see [Replacing Auto Scaling Instances Based on
+    #   Maximum Instance Lifetime][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
     #   Valid Range: Minimum value of 604800.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation

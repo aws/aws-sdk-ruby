@@ -1203,12 +1203,14 @@ module Aws::DynamoDB
     RestoreTableFromBackupInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
     RestoreTableFromBackupInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
     RestoreTableFromBackupInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
+    RestoreTableFromBackupInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
     RestoreTableFromBackupInput.struct_class = Types::RestoreTableFromBackupInput
 
     RestoreTableFromBackupOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     RestoreTableFromBackupOutput.struct_class = Types::RestoreTableFromBackupOutput
 
-    RestoreTableToPointInTimeInput.add_member(:source_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "SourceTableName"))
+    RestoreTableToPointInTimeInput.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "SourceTableArn"))
+    RestoreTableToPointInTimeInput.add_member(:source_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "SourceTableName"))
     RestoreTableToPointInTimeInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName"))
     RestoreTableToPointInTimeInput.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UseLatestRestorableTime"))
     RestoreTableToPointInTimeInput.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "RestoreDateTime"))
@@ -1216,6 +1218,7 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeInput.add_member(:global_secondary_index_override, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexOverride"))
     RestoreTableToPointInTimeInput.add_member(:local_secondary_index_override, Shapes::ShapeRef.new(shape: LocalSecondaryIndexList, location_name: "LocalSecondaryIndexOverride"))
     RestoreTableToPointInTimeInput.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "ProvisionedThroughputOverride"))
+    RestoreTableToPointInTimeInput.add_member(:sse_specification_override, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecificationOverride"))
     RestoreTableToPointInTimeInput.struct_class = Types::RestoreTableToPointInTimeInput
 
     RestoreTableToPointInTimeOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

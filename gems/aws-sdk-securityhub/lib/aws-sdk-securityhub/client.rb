@@ -289,8 +289,8 @@ module Aws::SecurityHub
     # Disables the standards specified by the provided
     # `StandardsSubscriptionArns`.
     #
-    # For more information, see [Standards Supported in AWS Security
-    # Hub][1].
+    # For more information, see [Compliance Standards][1] section of the
+    # *AWS Security Hub User Guide*.
     #
     #
     #
@@ -327,12 +327,12 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Enables the standards specified by the provided `standardsArn`.
+    # Enables the standards specified by the provided `StandardsArn`. To
+    # obtain the ARN for a standard, use the ` DescribeStandards `
+    # operation.
     #
-    # In this release, only CIS AWS Foundations standards are supported.
-    #
-    # For more information, see [Standards Supported in AWS Security
-    # Hub][1].
+    # For more information, see the [Compliance Standards][1] section of the
+    # *AWS Security Hub User Guide*.
     #
     #
     #
@@ -340,12 +340,6 @@ module Aws::SecurityHub
     #
     # @option params [required, Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
     #   The list of standards compliance checks to enable.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard.
-    #
-    #    The ARN for the standard is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1525,12 +1519,12 @@ module Aws::SecurityHub
     # accounts and the account used to make the request, which is the master
     # account. To successfully create a member, you must use this action
     # from an account that already has Security Hub enabled. To enable
-    # Security Hub, you can use the EnableSecurityHub operation.
+    # Security Hub, you can use the ` EnableSecurityHub ` operation.
     #
     # After you use `CreateMembers` to create member account associations in
-    # Security Hub, you must use the InviteMembers operation to invite the
-    # accounts to enable Security Hub and become member accounts in Security
-    # Hub.
+    # Security Hub, you must use the ` InviteMembers ` operation to invite
+    # the accounts to enable Security Hub and become member accounts in
+    # Security Hub.
     #
     # If the account owner accepts the invitation, the account becomes a
     # member account in Security Hub, and a permission policy is added that
@@ -1539,7 +1533,8 @@ module Aws::SecurityHub
     # findings start to be sent to both the member and master accounts.
     #
     # To remove the association between the master and member accounts, use
-    # the DisassociateFromMasterAccount or DisassociateMembers operation.
+    # the ` DisassociateFromMasterAccount ` or ` DisassociateMembers `
+    # operation.
     #
     # @option params [Array<Types::AccountDetails>] :account_details
     #   The list of accounts to associate with the Security Hub master
@@ -1736,7 +1731,13 @@ module Aws::SecurityHub
     #   retrieve.
     #
     # @option params [String] :next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeActionTargets` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1807,7 +1808,13 @@ module Aws::SecurityHub
     # findings.
     #
     # @option params [String] :next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeProducts` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -1847,6 +1854,52 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns a list of the available standards in Security Hub.
+    #
+    # For each standard, the results include the standard ARN, the name, and
+    # a description.
+    #
+    # @option params [String] :next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandards` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of standards to return.
+    #
+    # @return [Types::DescribeStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStandardsResponse#standards #standards} => Array&lt;Types::Standard&gt;
+    #   * {Types::DescribeStandardsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_standards({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.standards #=> Array
+    #   resp.standards[0].standards_arn #=> String
+    #   resp.standards[0].name #=> String
+    #   resp.standards[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandards AWS API Documentation
+    #
+    # @overload describe_standards(params = {})
+    # @param [Hash] params ({})
+    def describe_standards(params = {}, options = {})
+      req = build_request(:describe_standards, params)
+      req.send_request(options)
+    end
+
     # Returns a list of compliance standards controls.
     #
     # For each control, the results include information about whether it is
@@ -1858,9 +1911,13 @@ module Aws::SecurityHub
     #   standard.
     #
     # @option params [String] :next_token
-    #   For requests to get the next page of results, the pagination token
-    #   that was returned with the previous set of results. The initial
-    #   request does not include a pagination token.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandardsControls` operation, set the value of this parameter
+    #   to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of compliance standard controls to return.
@@ -1890,6 +1947,8 @@ module Aws::SecurityHub
     #   resp.controls[0].description #=> String
     #   resp.controls[0].remediation_url #=> String
     #   resp.controls[0].severity_rating #=> String, one of "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.controls[0].related_requirements #=> Array
+    #   resp.controls[0].related_requirements[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControls AWS API Documentation
@@ -2025,13 +2084,19 @@ module Aws::SecurityHub
     # Enables Security Hub for your account in the current Region or the
     # Region you specify in the request.
     #
-    # Enabling Security Hub also enables the CIS AWS Foundations standard.
-    #
     # When you enable Security Hub, you grant to Security Hub the
     # permissions necessary to gather findings from AWS Config, Amazon
     # GuardDuty, Amazon Inspector, and Amazon Macie.
     #
-    # To learn more, see [Setting Up AWS Security Hub][1].
+    # When you use the `EnableSecurityHub` operation to enable Security Hub,
+    # you also automatically enable the CIS AWS Foundations standard. You do
+    # not enable the Payment Card Industry Data Security Standard (PCI DSS)
+    # standard. To enable a standard, use the ` BatchEnableStandards `
+    # operation. To disable a standard, use the ` BatchDisableStandards `
+    # operation.
+    #
+    # To learn more, see [Setting Up AWS Security Hub][1] in the *AWS
+    # Security Hub User Guide*.
     #
     #
     #
@@ -2066,12 +2131,13 @@ module Aws::SecurityHub
     #   retrieve.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetEnabledStandards`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetEnabledStandards` operation, set the value of this parameter to
+    #   `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response.
@@ -2118,12 +2184,12 @@ module Aws::SecurityHub
     #   The finding attributes used to sort the list of returned findings.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetFindings` operation,
-    #   set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetFindings` operation, set the value of this parameter to `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of findings to return.
@@ -3051,10 +3117,12 @@ module Aws::SecurityHub
     #   The ARNs of the insights to describe.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `GetInsights` operation,
-    #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, to continue listing data, set `nextToken` in the request to
-    #   the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetInsights` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -3453,7 +3521,8 @@ module Aws::SecurityHub
     # Hub master account that the invitation is sent from.
     #
     # Before you can use this action to invite a member, you must first use
-    # the CreateMembers action to create the member account in Security Hub.
+    # the ` CreateMembers ` action to create the member account in Security
+    # Hub.
     #
     # When the account owner accepts the invitation to become a member
     # account and enables Security Hub, the master account can view the
@@ -3492,11 +3561,13 @@ module Aws::SecurityHub
     # subscribed to receive findings from in Security Hub.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the
+    #   The token that is required for pagination. On your first call to the
     #   `ListEnabledProductsForImport` operation, set the value of this
-    #   parameter to `NULL`. For subsequent calls to the operation, to
-    #   continue listing data, set `nextToken` in the request to the value of
-    #   `NextToken` from the previous response.
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
@@ -3535,10 +3606,13 @@ module Aws::SecurityHub
     #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `ListInvitations`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `NextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListInvitations` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @return [Types::ListInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3578,21 +3652,23 @@ module Aws::SecurityHub
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
-    #   If `onlyAssociated` is set to `TRUE`, the response includes member
+    #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to `ENABLED`
     #   or `DISABLED`.
     #
-    #   If `onlyAssociated` is set to `FALSE`, the response includes all
+    #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return in the response.
     #
     # @option params [String] :next_token
-    #   Paginates results. On your first call to the `ListMembers` operation,
-    #   set the value of this parameter to `NULL`. For subsequent calls to the
-    #   operation, to continue listing data, set `nextToken` in the request to
-    #   the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListMembers` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #
     # @return [Types::ListMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4953,7 +5029,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

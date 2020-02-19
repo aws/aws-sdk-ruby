@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2020-02-17)
+------------------
+
+* Feature - Documentation updates for EC2
+
+1.143.0 (2020-02-14)
+------------------
+
+* Feature - You can now enable Multi-Attach on Provisioned IOPS io1 volumes through the create-volume API.
+
 1.142.0 (2020-02-12)
 ------------------
 

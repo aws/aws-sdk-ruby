@@ -2945,8 +2945,8 @@ module Aws::SecurityHub
     # @!attribute [rw] compliance
     #   This data type is exclusive to findings that are generated as the
     #   result of a check run against a specific rule in a supported
-    #   standard (for example, CIS AWS Foundations). Contains
-    #   compliance-related finding details.
+    #   standard, such as CIS AWS Foundations. Contains compliance-related
+    #   finding details.
     #   @return [Types::Compliance]
     #
     # @!attribute [rw] verification_state
@@ -3898,8 +3898,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] compliance_status
     #   Exclusive to findings that are generated as the result of a check
-    #   run against a specific rule in a supported standard (for example,
-    #   CIS AWS Foundations). Contains compliance-related finding details.
+    #   run against a specific rule in a supported standard, such as CIS AWS
+    #   Foundations. Contains compliance-related finding details.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] verification_state
@@ -4327,12 +4327,6 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_subscription_requests
     #   The list of standards compliance checks to enable.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard.
-    #
-    #    The ARN for the standard is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandardsRequest AWS API Documentation
@@ -4861,8 +4855,8 @@ module Aws::SecurityHub
     end
 
     # Exclusive to findings that are generated as the result of a check run
-    # against a specific rule in a supported standard (for example, CIS AWS
-    # Foundations). Contains compliance-related finding details.
+    # against a specific rule in a supported standard, such as CIS AWS
+    # Foundations. Contains compliance-related finding details.
     #
     # Values include the following:
     #
@@ -5840,7 +5834,13 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeActionTargets` operation, set the value of this parameter
+    #   to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5863,7 +5863,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::ActionTarget>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeActionTargetsResponse AWS API Documentation
@@ -5917,7 +5917,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeProducts` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5937,7 +5943,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Product>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeProductsResponse AWS API Documentation
@@ -5963,9 +5969,13 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   For requests to get the next page of results, the pagination token
-    #   that was returned with the previous set of results. The initial
-    #   request does not include a pagination token.
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandardsControls` operation, set the value of this
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -5986,15 +5996,59 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsControl>]
     #
     # @!attribute [rw] next_token
-    #   If there are more compliance standards control remaining in the
-    #   results, then this is the pagination token to use to request the
-    #   next page of compliance standard controls.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsResponse AWS API Documentation
     #
     class DescribeStandardsControlsResponse < Struct.new(
       :controls,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStandardsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token that is required for pagination. On your first call to the
+    #   `DescribeStandards` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of standards to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsRequest AWS API Documentation
+    #
+    class DescribeStandardsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] standards
+    #   A list of available standards.
+    #   @return [Array<Types::Standard>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsResponse AWS API Documentation
+    #
+    class DescribeStandardsResponse < Struct.new(
+      :standards,
       :next_token)
       include Aws::Structure
     end
@@ -6133,12 +6187,13 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetEnabledStandards`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetEnabledStandards` operation, set the value of this parameter to
+    #   `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6160,7 +6215,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::StandardsSubscription>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetEnabledStandardsResponse AWS API Documentation
@@ -6744,12 +6799,12 @@ module Aws::SecurityHub
     #   @return [Array<Types::SortCriterion>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetFindings`
-    #   operation, set the value of this parameter to `NULL`.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetFindings` operation, set the value of this parameter to `NULL`.
     #
     #   For subsequent calls to the operation, to continue listing data, set
-    #   `nextToken` in the request to the value of `nextToken` from the
-    #   previous response.
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6771,7 +6826,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::AwsSecurityFinding>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindingsResponse AWS API Documentation
@@ -6825,10 +6880,12 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `GetInsights`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `GetInsights` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -6849,7 +6906,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Insight>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetInsightsResponse AWS API Documentation
@@ -7215,11 +7272,13 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the
+    #   The token that is required for pagination. On your first call to the
     #   `ListEnabledProductsForImport` operation, set the value of this
-    #   parameter to `NULL`. For subsequent calls to the operation, to
-    #   continue listing data, set `nextToken` in the request to the value
-    #   of `NextToken` from the previous response.
+    #   parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -7240,7 +7299,7 @@ module Aws::SecurityHub
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListEnabledProductsForImportResponse AWS API Documentation
@@ -7264,10 +7323,13 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `ListInvitations`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `NextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListInvitations` operation, set the value of this parameter to
+    #   `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListInvitationsRequest AWS API Documentation
@@ -7283,7 +7345,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Invitation>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListInvitationsResponse AWS API Documentation
@@ -7308,11 +7370,11 @@ module Aws::SecurityHub
     #   their relationship status with the master account. The default value
     #   is `TRUE`.
     #
-    #   If `onlyAssociated` is set to `TRUE`, the response includes member
+    #   If `OnlyAssociated` is set to `TRUE`, the response includes member
     #   accounts whose relationship status with the master is set to
     #   `ENABLED` or `DISABLED`.
     #
-    #   If `onlyAssociated` is set to `FALSE`, the response includes all
+    #   If `OnlyAssociated` is set to `FALSE`, the response includes all
     #   existing member accounts.
     #   @return [Boolean]
     #
@@ -7321,10 +7383,12 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Paginates results. On your first call to the `ListMembers`
-    #   operation, set the value of this parameter to `NULL`. For subsequent
-    #   calls to the operation, to continue listing data, set `nextToken` in
-    #   the request to the value of `nextToken` from the previous response.
+    #   The token that is required for pagination. On your first call to the
+    #   `ListMembers` operation, set the value of this parameter to `NULL`.
+    #
+    #   For subsequent calls to the operation, to continue listing data, set
+    #   the value of this parameter to the value returned from the previous
+    #   response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersRequest AWS API Documentation
@@ -7341,7 +7405,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::Member>]
     #
     # @!attribute [rw] next_token
-    #   The token that is required for pagination.
+    #   The pagination token to use to request the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListMembersResponse AWS API Documentation
@@ -8895,6 +8959,29 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about a specific standard.
+    #
+    # @!attribute [rw] standards_arn
+    #   The ARN of a standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the standard.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the standard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Standard AWS API Documentation
+    #
+    class Standard < Struct.new(
+      :standards_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
     # Details for an individual compliance standard control.
     #
     # @!attribute [rw] standards_control_arn
@@ -8932,7 +9019,7 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] remediation_url
     #   A link to remediation information for the control in the Security
-    #   Hub user documentation
+    #   Hub user documentation.
     #   @return [String]
     #
     # @!attribute [rw] severity_rating
@@ -8942,6 +9029,10 @@ module Aws::SecurityHub
     #   The finding severity is based on an assessment of how easy it would
     #   be to compromise AWS resources if the compliance issue is detected.
     #   @return [String]
+    #
+    # @!attribute [rw] related_requirements
+    #   The list of requirements that are related to this control.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StandardsControl AWS API Documentation
     #
@@ -8954,7 +9045,8 @@ module Aws::SecurityHub
       :title,
       :description,
       :remediation_url,
-      :severity_rating)
+      :severity_rating,
+      :related_requirements)
       include Aws::Structure
     end
 
@@ -8967,10 +9059,6 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] standards_arn
     #   The ARN of a standard.
-    #
-    #   In this release, Security Hub supports only the CIS AWS Foundations
-    #   standard, which uses the following ARN:
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0.`
     #   @return [String]
     #
     # @!attribute [rw] standards_input
@@ -9004,13 +9092,9 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_arn
-    #   The ARN of the standard that you want to enable.
-    #
-    #   In this release, Security Hub only supports the CIS AWS Foundations
-    #   standard.
-    #
-    #    Its ARN is
-    #   `arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0`.
+    #   The ARN of the standard that you want to enable. To view the list of
+    #   available standards and their ARNs, use the ` DescribeStandards `
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] standards_input

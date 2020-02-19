@@ -304,6 +304,10 @@ module Aws::Cloud9
     #   be the ARN of any AWS IAM principal. If this value is not specified,
     #   the ARN defaults to this environment's creator.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs that will be associated with the new AWS
+    #   Cloud9 development environment.
+    #
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentEC2Result#environment_id #environment_id} => String
@@ -335,6 +339,12 @@ module Aws::Cloud9
     #     subnet_id: "SubnetId",
     #     automatic_stop_time_minutes: 1,
     #     owner_arn: "UserArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -813,6 +823,102 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
+    # Gets a list of the tags associated with an AWS Cloud9 development
+    # environment.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to get the tags for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "EnvironmentArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds tags to an AWS Cloud9 development environment.
+    #
+    # Tags that you add to an AWS Cloud9 environment by using this method
+    # will NOT be automatically propagated to underlying resources.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to add tags to.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The list of tags to add to the given AWS Cloud9 development
+    #   environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "EnvironmentArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes tags from an AWS Cloud9 development environment.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the AWS Cloud9 development
+    #   environment to remove tags from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag names of the tags to remove from the given AWS Cloud9
+    #   development environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "EnvironmentArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Changes the settings of an existing AWS Cloud9 development
     # environment.
     #
@@ -937,7 +1043,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

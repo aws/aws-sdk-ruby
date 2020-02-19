@@ -78,7 +78,7 @@ module Aws::EC2
     #       },
     #     ],
     #     kernel_id: "String",
-    #     key_name: "String",
+    #     key_name: "KeyPairName",
     #     max_count: 1, # required
     #     min_count: 1, # required
     #     monitoring: {
@@ -95,8 +95,8 @@ module Aws::EC2
     #       host_resource_group_arn: "String",
     #     },
     #     ramdisk_id: "String",
-    #     security_group_ids: ["String"],
-    #     security_groups: ["String"],
+    #     security_group_ids: ["SecurityGroupId"],
+    #     security_groups: ["SecurityGroupName"],
     #     subnet_id: "String",
     #     user_data: "String",
     #     additional_info: "String",
@@ -115,7 +115,7 @@ module Aws::EC2
     #         delete_on_termination: false,
     #         description: "String",
     #         device_index: 1,
-    #         groups: ["String"],
+    #         groups: ["SecurityGroupId"],
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -159,7 +159,7 @@ module Aws::EC2
     #       },
     #     ],
     #     launch_template: {
-    #       launch_template_id: "String",
+    #       launch_template_id: "LaunchTemplateId",
     #       launch_template_name: "String",
     #       version: "String",
     #     },
@@ -183,7 +183,7 @@ module Aws::EC2
     #     capacity_reservation_specification: {
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
-    #         capacity_reservation_id: "String",
+    #         capacity_reservation_id: "CapacityReservationId",
     #       },
     #     },
     #     hibernation_options: {
@@ -515,7 +515,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   keypair = ec2.create_key_pair({
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -601,7 +601,7 @@ module Aws::EC2
     #   networkinterface = ec2.create_network_interface({
     #     description: "String",
     #     dry_run: false,
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -880,7 +880,7 @@ module Aws::EC2
     #
     #   ec2.create_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [ # required
     #       {
     #         key: "String",
@@ -913,7 +913,7 @@ module Aws::EC2
     #
     #   ec2.delete_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [
     #       {
     #         key: "String",
@@ -971,6 +971,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_attach_enabled: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :availability_zone
@@ -1055,6 +1056,17 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
+    # @option options [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
     # @return [Volume]
     def create_volume(options = {})
       resp = @client.create_volume(options)
@@ -1070,7 +1082,7 @@ module Aws::EC2
     #   vpc = ec2.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
-    #     ipv_6_pool: "String",
+    #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
@@ -1190,7 +1202,7 @@ module Aws::EC2
     #
     #   keypairinfo = ec2.import_key_pair({
     #     dry_run: false,
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     public_key_material: "data", # required
     #   })
     # @param [Hash] options ({})
@@ -1408,7 +1420,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   dhcp_options_sets = ec2.dhcp_options_sets({
-    #     dhcp_options_ids: ["String"],
+    #     dhcp_options_ids: ["DhcpOptionsId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -1486,7 +1498,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     image_ids: ["String"],
+    #     image_ids: ["ImageId"],
     #     owners: ["String"],
     #     dry_run: false,
     #   })
@@ -1635,7 +1647,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1961,7 +1973,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     internet_gateway_ids: ["String"],
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2033,8 +2045,8 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     key_names: ["String"],
-    #     key_pair_ids: ["String"],
+    #     key_names: ["KeyPairName"],
+    #     key_pair_ids: ["KeyPairId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2090,7 +2102,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     nat_gateway_ids: ["String"],
+    #     nat_gateway_ids: ["NatGatewayId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filter
@@ -2154,7 +2166,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_acl_ids: ["String"],
+    #     network_acl_ids: ["NetworkAclId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2257,7 +2269,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2419,8 +2431,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     group_names: ["String"],
-    #     group_ids: ["String"],
+    #     group_names: ["PlacementGroupName"],
+    #     group_ids: ["PlacementGroupId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2490,7 +2502,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     route_table_ids: ["String"],
+    #     route_table_ids: ["RouteTableId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2611,7 +2623,7 @@ module Aws::EC2
     #       },
     #     ],
     #     group_ids: ["String"],
-    #     group_names: ["String"],
+    #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2750,7 +2762,7 @@ module Aws::EC2
     #     ],
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2843,7 +2855,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2942,7 +2954,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -2971,6 +2983,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|
@@ -3134,7 +3149,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -3214,7 +3229,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     vpc_ids: ["String"],
+    #     vpc_ids: ["VpcId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

@@ -1357,7 +1357,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -1386,6 +1386,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|

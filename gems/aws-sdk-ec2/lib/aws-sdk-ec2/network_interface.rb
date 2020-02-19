@@ -497,12 +497,12 @@ module Aws::EC2
     #
     #   network_interface.modify_attribute({
     #     attachment: {
-    #       attachment_id: "String",
+    #       attachment_id: "NetworkInterfaceAttachmentId",
     #       delete_on_termination: false,
     #     },
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     dry_run: false,
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     source_dest_check: {
     #       value: false,
     #     },

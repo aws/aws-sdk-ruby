@@ -283,11 +283,11 @@ module Aws::EC2
     #
     #   resp = client.accept_reserved_instances_exchange_quote({
     #     dry_run: false,
-    #     reserved_instance_ids: ["String"], # required
+    #     reserved_instance_ids: ["ReservationId"], # required
     #     target_configurations: [
     #       {
     #         instance_count: 1,
-    #         offering_id: "String", # required
+    #         offering_id: "ReservedInstancesOfferingId", # required
     #       },
     #     ],
     #   })
@@ -324,7 +324,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_transit_gateway_peering_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -377,7 +377,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.accept_transit_gateway_vpc_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -429,8 +429,8 @@ module Aws::EC2
     #
     #   resp = client.accept_vpc_endpoint_connections({
     #     dry_run: false,
-    #     service_id: "ServiceId", # required
-    #     vpc_endpoint_ids: ["String"], # required
+    #     service_id: "VpcEndpointServiceId", # required
+    #     vpc_endpoint_ids: ["VpcEndpointId"], # required
     #   })
     #
     # @example Response structure
@@ -1428,9 +1428,9 @@ module Aws::EC2
     #
     #   resp = client.associate_route_table({
     #     dry_run: false,
-    #     route_table_id: "String", # required
-    #     subnet_id: "String",
-    #     gateway_id: "String",
+    #     route_table_id: "RouteTableId", # required
+    #     subnet_id: "SubnetId",
+    #     gateway_id: "RouteGatewayId",
     #   })
     #
     # @example Response structure
@@ -1523,8 +1523,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_transit_gateway_multicast_domain({
-    #     transit_gateway_multicast_domain_id: "String",
-    #     transit_gateway_attachment_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #     subnet_ids: ["String"],
     #     dry_run: false,
     #   })
@@ -1571,8 +1571,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_transit_gateway_route_table({
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -1599,6 +1599,9 @@ module Aws::EC2
     # your own IP addresses ([BYOIP][1]). The IPv6 CIDR block size is fixed
     # at /56.
     #
+    # You must specify one of the following in the request: an IPv4 CIDR
+    # block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.
+    #
     # For more information about associating CIDR blocks with your VPC and
     # applicable restrictions, see [VPC and Subnet Sizing][2] in the *Amazon
     # Virtual Private Cloud User Guide*.
@@ -1619,6 +1622,15 @@ module Aws::EC2
     # @option params [required, String] :vpc_id
     #   The ID of the VPC.
     #
+    # @option params [String] :ipv_6_cidr_block_network_border_group
+    #   The name of the location from which we advertise the IPV6 CIDR block.
+    #   Use this parameter to limit the CiDR block to this location.
+    #
+    #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
+    #   parameter.
+    #
+    #   You can have one IPv6 CIDR block association per network border group.
+    #
     # @option params [String] :ipv_6_pool
     #   The ID of an IPv6 address pool from which to allocate the IPv6 CIDR
     #   block.
@@ -1628,15 +1640,6 @@ module Aws::EC2
     #   `Ipv6Pool` in the request.
     #
     #   To let Amazon choose the IPv6 CIDR block for you, omit this parameter.
-    #
-    # @option params [String] :ipv_6_cidr_block_network_border_group
-    #   The name of the location from which we advertise the IPV6 CIDR block.
-    #   Use this parameter to limit the CiDR block to this location.
-    #
-    #   You must set `AmazonProvidedIpv6CidrBlock` to `true` to use this
-    #   parameter.
-    #
-    #   You can have one IPv6 CIDR block association per network border group.
     #
     # @return [Types::AssociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1650,9 +1653,9 @@ module Aws::EC2
     #     amazon_provided_ipv_6_cidr_block: false,
     #     cidr_block: "String",
     #     vpc_id: "VpcId", # required
-    #     ipv_6_pool: "String",
-    #     ipv_6_cidr_block: "String",
     #     ipv_6_cidr_block_network_border_group: "String",
+    #     ipv_6_pool: "Ipv6PoolEc2Id",
+    #     ipv_6_cidr_block: "String",
     #   })
     #
     # @example Response structure
@@ -1661,8 +1664,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
-    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
     #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
@@ -2179,7 +2182,7 @@ module Aws::EC2
     #
     #   resp = client.authorize_security_group_egress({
     #     dry_run: false,
-    #     group_id: "String", # required
+    #     group_id: "SecurityGroupId", # required
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -2417,8 +2420,8 @@ module Aws::EC2
     #   resp = client.authorize_security_group_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_id: "String",
-    #     group_name: "String",
+    #     group_id: "SecurityGroupId",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -2883,7 +2886,7 @@ module Aws::EC2
     #
     #   resp = client.cancel_spot_fleet_requests({
     #     dry_run: false,
-    #     spot_fleet_request_ids: ["String"], # required
+    #     spot_fleet_request_ids: ["SpotFleetRequestId"], # required
     #     terminate_instances: false, # required
     #   })
     #
@@ -2950,7 +2953,7 @@ module Aws::EC2
     #
     #   resp = client.cancel_spot_instance_requests({
     #     dry_run: false,
-    #     spot_instance_request_ids: ["String"], # required
+    #     spot_instance_request_ids: ["SpotInstanceRequestId"], # required
     #   })
     #
     # @example Response structure
@@ -3064,7 +3067,7 @@ module Aws::EC2
     #
     #   resp = client.copy_fpga_image({
     #     dry_run: false,
-    #     source_fpga_image_id: "String", # required
+    #     source_fpga_image_id: "FpgaImageId", # required
     #     description: "String",
     #     name: "String",
     #     source_region: "String", # required
@@ -3380,7 +3383,7 @@ module Aws::EC2
     #     description: "String",
     #     destination_region: "String",
     #     encrypted: false,
-    #     kms_key_id: "String",
+    #     kms_key_id: "KmsKeyId",
     #     presigned_url: "String",
     #     source_region: "String", # required
     #     source_snapshot_id: "String", # required
@@ -4085,8 +4088,8 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
-    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
     #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
@@ -4421,7 +4424,7 @@ module Aws::EC2
     #     launch_template_configs: [ # required
     #       {
     #         launch_template_specification: {
-    #           launch_template_id: "String",
+    #           launch_template_id: "LaunchTemplateId",
     #           launch_template_name: "LaunchTemplateName",
     #           version: "String",
     #         },
@@ -4429,7 +4432,7 @@ module Aws::EC2
     #           {
     #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
     #             max_price: "String",
-    #             subnet_id: "String",
+    #             subnet_id: "SubnetId",
     #             availability_zone: "String",
     #             weighted_capacity: 1.0,
     #             priority: 1.0,
@@ -4658,7 +4661,7 @@ module Aws::EC2
     #     client_token: "String",
     #     deliver_logs_permission_arn: "String",
     #     log_group_name: "String",
-    #     resource_ids: ["String"], # required
+    #     resource_ids: ["FlowLogResourceId"], # required
     #     resource_type: "VPC", # required, accepts VPC, Subnet, NetworkInterface
     #     traffic_type: "ACCEPT", # required, accepts ACCEPT, REJECT, ALL
     #     log_destination_type: "cloud-watch-logs", # accepts cloud-watch-logs, s3
@@ -5080,7 +5083,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_key_pair({
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     dry_run: false,
     #   })
     #
@@ -5192,7 +5195,7 @@ module Aws::EC2
     #     launch_template_name: "LaunchTemplateName", # required
     #     version_description: "VersionDescription",
     #     launch_template_data: { # required
-    #       kernel_id: "String",
+    #       kernel_id: "KernelId",
     #       ebs_optimized: false,
     #       iam_instance_profile: {
     #         arn: "String",
@@ -5207,7 +5210,7 @@ module Aws::EC2
     #             delete_on_termination: false,
     #             iops: 1,
     #             kms_key_id: "String",
-    #             snapshot_id: "String",
+    #             snapshot_id: "SnapshotId",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #           },
@@ -5220,7 +5223,7 @@ module Aws::EC2
     #           delete_on_termination: false,
     #           description: "String",
     #           device_index: 1,
-    #           groups: ["String"],
+    #           groups: ["SecurityGroupId"],
     #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
@@ -5228,7 +5231,7 @@ module Aws::EC2
     #               ipv_6_address: "String",
     #             },
     #           ],
-    #           network_interface_id: "String",
+    #           network_interface_id: "NetworkInterfaceId",
     #           private_ip_address: "String",
     #           private_ip_addresses: [
     #             {
@@ -5237,26 +5240,26 @@ module Aws::EC2
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
-    #           subnet_id: "String",
+    #           subnet_id: "SubnetId",
     #         },
     #       ],
-    #       image_id: "String",
+    #       image_id: "ImageId",
     #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
-    #       key_name: "String",
+    #       key_name: "KeyPairName",
     #       monitoring: {
     #         enabled: false,
     #       },
     #       placement: {
     #         availability_zone: "String",
     #         affinity: "String",
-    #         group_name: "String",
-    #         host_id: "String",
+    #         group_name: "PlacementGroupName",
+    #         host_id: "DedicatedHostId",
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         partition_number: 1,
     #       },
-    #       ram_disk_id: "String",
+    #       ram_disk_id: "RamdiskId",
     #       disable_api_termination: false,
     #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
     #       user_data: "String",
@@ -5282,8 +5285,8 @@ module Aws::EC2
     #           count: 1,
     #         },
     #       ],
-    #       security_group_ids: ["String"],
-    #       security_groups: ["String"],
+    #       security_group_ids: ["SecurityGroupId"],
+    #       security_groups: ["SecurityGroupName"],
     #       instance_market_options: {
     #         market_type: "spot", # accepts spot
     #         spot_options: {
@@ -5304,7 +5307,7 @@ module Aws::EC2
     #       capacity_reservation_specification: {
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
-    #           capacity_reservation_id: "String",
+    #           capacity_reservation_id: "CapacityReservationId",
     #         },
     #       },
     #       license_specifications: [
@@ -5460,7 +5463,7 @@ module Aws::EC2
     #     source_version: "String",
     #     version_description: "VersionDescription",
     #     launch_template_data: { # required
-    #       kernel_id: "String",
+    #       kernel_id: "KernelId",
     #       ebs_optimized: false,
     #       iam_instance_profile: {
     #         arn: "String",
@@ -5475,7 +5478,7 @@ module Aws::EC2
     #             delete_on_termination: false,
     #             iops: 1,
     #             kms_key_id: "String",
-    #             snapshot_id: "String",
+    #             snapshot_id: "SnapshotId",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
     #           },
@@ -5488,7 +5491,7 @@ module Aws::EC2
     #           delete_on_termination: false,
     #           description: "String",
     #           device_index: 1,
-    #           groups: ["String"],
+    #           groups: ["SecurityGroupId"],
     #           interface_type: "String",
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
@@ -5496,7 +5499,7 @@ module Aws::EC2
     #               ipv_6_address: "String",
     #             },
     #           ],
-    #           network_interface_id: "String",
+    #           network_interface_id: "NetworkInterfaceId",
     #           private_ip_address: "String",
     #           private_ip_addresses: [
     #             {
@@ -5505,26 +5508,26 @@ module Aws::EC2
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
-    #           subnet_id: "String",
+    #           subnet_id: "SubnetId",
     #         },
     #       ],
-    #       image_id: "String",
+    #       image_id: "ImageId",
     #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
-    #       key_name: "String",
+    #       key_name: "KeyPairName",
     #       monitoring: {
     #         enabled: false,
     #       },
     #       placement: {
     #         availability_zone: "String",
     #         affinity: "String",
-    #         group_name: "String",
-    #         host_id: "String",
+    #         group_name: "PlacementGroupName",
+    #         host_id: "DedicatedHostId",
     #         tenancy: "default", # accepts default, dedicated, host
     #         spread_domain: "String",
     #         host_resource_group_arn: "String",
     #         partition_number: 1,
     #       },
-    #       ram_disk_id: "String",
+    #       ram_disk_id: "RamdiskId",
     #       disable_api_termination: false,
     #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
     #       user_data: "String",
@@ -5550,8 +5553,8 @@ module Aws::EC2
     #           count: 1,
     #         },
     #       ],
-    #       security_group_ids: ["String"],
-    #       security_groups: ["String"],
+    #       security_group_ids: ["SecurityGroupId"],
+    #       security_groups: ["SecurityGroupName"],
     #       instance_market_options: {
     #         market_type: "spot", # accepts spot
     #         spot_options: {
@@ -5572,7 +5575,7 @@ module Aws::EC2
     #       capacity_reservation_specification: {
     #         capacity_reservation_preference: "open", # accepts open, none
     #         capacity_reservation_target: {
-    #           capacity_reservation_id: "String",
+    #           capacity_reservation_id: "CapacityReservationId",
     #         },
     #       },
     #       license_specifications: [
@@ -5717,8 +5720,8 @@ module Aws::EC2
     #
     #   resp = client.create_local_gateway_route({
     #     destination_cidr_block: "String", # required
-    #     local_gateway_route_table_id: "String", # required
-    #     local_gateway_virtual_interface_group_id: "String", # required
+    #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #     local_gateway_virtual_interface_group_id: "LocalGatewayVirtualInterfaceGroupId", # required
     #     dry_run: false,
     #   })
     #
@@ -5761,8 +5764,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_local_gateway_route_table_vpc_association({
-    #     local_gateway_route_table_id: "String", # required
-    #     vpc_id: "String", # required
+    #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
+    #     vpc_id: "VpcId", # required
     #     dry_run: false,
     #   })
     #
@@ -6243,7 +6246,7 @@ module Aws::EC2
     #   resp = client.create_network_interface({
     #     description: "String",
     #     dry_run: false,
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
     #       {
@@ -6517,7 +6520,7 @@ module Aws::EC2
     #         term: 1,
     #       },
     #     ],
-    #     reserved_instances_id: "String", # required
+    #     reserved_instances_id: "ReservationId", # required
     #   })
     #
     # @example Response structure
@@ -6646,11 +6649,11 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteTableGatewayId",
+    #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
-    #     local_gateway_id: "String",
+    #     local_gateway_id: "LocalGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -7053,7 +7056,7 @@ module Aws::EC2
     #   resp = client.create_snapshots({
     #     description: "String",
     #     instance_specification: { # required
-    #       instance_id: "String",
+    #       instance_id: "InstanceId",
     #       exclude_boot_volume: false,
     #     },
     #     tag_specifications: [
@@ -7369,7 +7372,7 @@ module Aws::EC2
     #
     #   resp = client.create_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [ # required
     #       {
     #         key: "String",
@@ -7975,7 +7978,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_transit_gateway_multicast_domain({
-    #     transit_gateway_id: "String", # required
+    #     transit_gateway_id: "TransitGatewayId", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
@@ -8046,7 +8049,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_transit_gateway_peering_attachment({
-    #     transit_gateway_id: "String", # required
+    #     transit_gateway_id: "TransitGatewayId", # required
     #     peer_transit_gateway_id: "String", # required
     #     peer_account_id: "String", # required
     #     peer_region: "String", # required
@@ -8119,8 +8122,8 @@ module Aws::EC2
     #
     #   resp = client.create_transit_gateway_route({
     #     destination_cidr_block: "String", # required
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String",
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #     blackhole: false,
     #     dry_run: false,
     #   })
@@ -8165,7 +8168,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_transit_gateway_route_table({
-    #     transit_gateway_id: "String", # required
+    #     transit_gateway_id: "TransitGatewayId", # required
     #     tag_specifications: [
     #       {
     #         resource_type: "client-vpn-endpoint", # accepts client-vpn-endpoint, customer-gateway, dedicated-host, dhcp-options, elastic-ip, fleet, fpga-image, host-reservation, image, instance, internet-gateway, key-pair, launch-template, natgateway, network-acl, network-interface, placement-group, reserved-instances, route-table, security-group, snapshot, spot-fleet-request, spot-instances-request, subnet, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-peering-connection, vpn-connection, vpn-gateway
@@ -8241,9 +8244,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_transit_gateway_vpc_attachment({
-    #     transit_gateway_id: "String", # required
-    #     vpc_id: "String", # required
-    #     subnet_ids: ["String"], # required
+    #     transit_gateway_id: "TransitGatewayId", # required
+    #     vpc_id: "VpcId", # required
+    #     subnet_ids: ["SubnetId"], # required
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
@@ -8408,6 +8411,18 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the volume during creation.
     #
+    # @option params [Boolean] :multi_attach_enabled
+    #   Specifies whether to enable Amazon EBS Multi-Attach. If you enable
+    #   Multi-Attach, you can attach the volume to up to 16 [Nitro-based
+    #   instances][1] in the same Availability Zone. For more information, see
+    #   [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Volume#attachments #attachments} => Array&lt;Types::VolumeAttachment&gt;
@@ -8424,6 +8439,7 @@ module Aws::EC2
     #   * {Types::Volume#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::Volume#volume_type #volume_type} => String
     #   * {Types::Volume#fast_restored #fast_restored} => Boolean
+    #   * {Types::Volume#multi_attach_enabled #multi_attach_enabled} => Boolean
     #
     #
     # @example Example: To create a new volume
@@ -8500,6 +8516,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     multi_attach_enabled: false,
     #   })
     #
     # @example Response structure
@@ -8526,6 +8543,7 @@ module Aws::EC2
     #   resp.tags[0].value #=> String
     #   resp.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.fast_restored #=> Boolean
+    #   resp.multi_attach_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
     #
@@ -8638,7 +8656,7 @@ module Aws::EC2
     #   resp = client.create_vpc({
     #     cidr_block: "String", # required
     #     amazon_provided_ipv_6_cidr_block: false,
-    #     ipv_6_pool: "String",
+    #     ipv_6_pool: "Ipv6PoolEc2Id",
     #     ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
@@ -8658,8 +8676,8 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
-    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].network_border_group #=> String
+    #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpc.cidr_block_association_set #=> Array
     #   resp.vpc.cidr_block_association_set[0].association_id #=> String
     #   resp.vpc.cidr_block_association_set[0].cidr_block #=> String
@@ -8779,9 +8797,9 @@ module Aws::EC2
     #     vpc_id: "VpcId", # required
     #     service_name: "String", # required
     #     policy_document: "String",
-    #     route_table_ids: ["String"],
-    #     subnet_ids: ["String"],
-    #     security_group_ids: ["String"],
+    #     route_table_ids: ["RouteTableId"],
+    #     subnet_ids: ["SubnetId"],
+    #     security_group_ids: ["SecurityGroupId"],
     #     client_token: "String",
     #     private_dns_enabled: false,
     #     tag_specifications: [
@@ -8886,7 +8904,7 @@ module Aws::EC2
     #
     #   resp = client.create_vpc_endpoint_connection_notification({
     #     dry_run: false,
-    #     service_id: "ServiceId",
+    #     service_id: "VpcEndpointServiceId",
     #     vpc_endpoint_id: "VpcEndpointId",
     #     connection_notification_arn: "String", # required
     #     connection_events: ["String"], # required
@@ -9682,7 +9700,7 @@ module Aws::EC2
     #
     #   resp = client.delete_flow_logs({
     #     dry_run: false,
-    #     flow_log_ids: ["String"], # required
+    #     flow_log_ids: ["VpcFlowLogId"], # required
     #   })
     #
     # @example Response structure
@@ -9993,7 +10011,7 @@ module Aws::EC2
     #
     #   resp = client.delete_local_gateway_route({
     #     destination_cidr_block: "String", # required
-    #     local_gateway_route_table_id: "String", # required
+    #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     dry_run: false,
     #   })
     #
@@ -10033,7 +10051,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_local_gateway_route_table_vpc_association({
-    #     local_gateway_route_table_vpc_association_id: "String", # required
+    #     local_gateway_route_table_vpc_association_id: "LocalGatewayRouteTableVpcAssociationId", # required
     #     dry_run: false,
     #   })
     #
@@ -10255,7 +10273,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_network_interface_permission({
-    #     network_interface_permission_id: "String", # required
+    #     network_interface_permission_id: "NetworkInterfacePermissionId", # required
     #     force: false,
     #     dry_run: false,
     #   })
@@ -10310,7 +10328,7 @@ module Aws::EC2
     #
     #   resp = client.delete_placement_group({
     #     dry_run: false,
-    #     group_name: "String", # required
+    #     group_name: "PlacementGroupName", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroup AWS API Documentation
@@ -10342,7 +10360,7 @@ module Aws::EC2
     #
     #   resp = client.delete_queued_reserved_instances({
     #     dry_run: false,
-    #     reserved_instances_ids: ["String"], # required
+    #     reserved_instances_ids: ["ReservationId"], # required
     #   })
     #
     # @example Response structure
@@ -10440,7 +10458,7 @@ module Aws::EC2
     #
     #   resp = client.delete_route_table({
     #     dry_run: false,
-    #     route_table_id: "String", # required
+    #     route_table_id: "RouteTableId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTable AWS API Documentation
@@ -10490,8 +10508,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_security_group({
-    #     group_id: "String",
-    #     group_name: "String",
+    #     group_id: "SecurityGroupId",
+    #     group_name: "SecurityGroupName",
     #     dry_run: false,
     #   })
     #
@@ -10694,7 +10712,7 @@ module Aws::EC2
     #
     #   resp = client.delete_tags({
     #     dry_run: false,
-    #     resources: ["String"], # required
+    #     resources: ["TaggableResourceId"], # required
     #     tags: [
     #       {
     #         key: "String",
@@ -10876,7 +10894,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway({
-    #     transit_gateway_id: "String", # required
+    #     transit_gateway_id: "TransitGatewayId", # required
     #     dry_run: false,
     #   })
     #
@@ -10928,7 +10946,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway_multicast_domain({
-    #     transit_gateway_multicast_domain_id: "String", # required
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId", # required
     #     dry_run: false,
     #   })
     #
@@ -10969,7 +10987,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway_peering_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -11022,7 +11040,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway_route({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     destination_cidr_block: "String", # required
     #     dry_run: false,
     #   })
@@ -11066,7 +11084,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway_route_table({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     dry_run: false,
     #   })
     #
@@ -11109,7 +11127,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_transit_gateway_vpc_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -11294,7 +11312,7 @@ module Aws::EC2
     #
     #   resp = client.delete_vpc_endpoint_service_configurations({
     #     dry_run: false,
-    #     service_ids: ["String"], # required
+    #     service_ids: ["VpcEndpointServiceId"], # required
     #   })
     #
     # @example Response structure
@@ -11335,7 +11353,7 @@ module Aws::EC2
     #
     #   resp = client.delete_vpc_endpoints({
     #     dry_run: false,
-    #     vpc_endpoint_ids: ["String"], # required
+    #     vpc_endpoint_ids: ["VpcEndpointId"], # required
     #   })
     #
     # @example Response structure
@@ -11604,9 +11622,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_transit_gateway_multicast_group_members({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     group_ip_address: "String",
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     dry_run: false,
     #   })
     #
@@ -11651,9 +11669,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_transit_gateway_multicast_group_sources({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     group_ip_address: "String",
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     dry_run: false,
     #   })
     #
@@ -12270,7 +12288,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_bundle_tasks({
-    #     bundle_ids: ["String"],
+    #     bundle_ids: ["BundleId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -12498,7 +12516,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -12563,7 +12581,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_authorization_rules({
-    #     client_vpn_endpoint_id: "String", # required
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #     dry_run: false,
     #     next_token: "NextToken",
     #     filters: [
@@ -12633,7 +12651,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_connections({
-    #     client_vpn_endpoint_id: "String", # required
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -12707,7 +12725,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_endpoints({
-    #     client_vpn_endpoint_ids: ["String"],
+    #     client_vpn_endpoint_ids: ["ClientVpnEndpointId"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #     filters: [
@@ -12799,7 +12817,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_routes({
-    #     client_vpn_endpoint_id: "String", # required
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -12874,7 +12892,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_client_vpn_target_networks({
-    #     client_vpn_endpoint_id: "String", # required
+    #     client_vpn_endpoint_id: "ClientVpnEndpointId", # required
     #     association_ids: ["String"],
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -13009,7 +13027,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_conversion_tasks({
-    #     conversion_task_ids: ["String"],
+    #     conversion_task_ids: ["ConversionTaskId"],
     #     dry_run: false,
     #   })
     #
@@ -13135,7 +13153,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_customer_gateways({
-    #     customer_gateway_ids: ["String"],
+    #     customer_gateway_ids: ["CustomerGatewayId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -13259,7 +13277,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_dhcp_options({
-    #     dhcp_options_ids: ["String"],
+    #     dhcp_options_ids: ["DhcpOptionsId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -13419,7 +13437,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_elastic_gpus({
-    #     elastic_gpu_ids: ["String"],
+    #     elastic_gpu_ids: ["ElasticGpuId"],
     #     dry_run: false,
     #     filters: [
     #       {
@@ -13492,7 +13510,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     export_image_task_ids: ["String"],
+    #     export_image_task_ids: ["ExportImageTaskId"],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -13989,7 +14007,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     flow_log_ids: ["String"],
+    #     flow_log_ids: ["VpcFlowLogId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -14044,7 +14062,7 @@ module Aws::EC2
     #
     #   resp = client.describe_fpga_image_attribute({
     #     dry_run: false,
-    #     fpga_image_id: "String", # required
+    #     fpga_image_id: "FpgaImageId", # required
     #     attribute: "description", # required, accepts description, name, loadPermission, productCodes
     #   })
     #
@@ -14135,7 +14153,7 @@ module Aws::EC2
     #
     #   resp = client.describe_fpga_images({
     #     dry_run: false,
-    #     fpga_image_ids: ["String"],
+    #     fpga_image_ids: ["FpgaImageId"],
     #     owners: ["String"],
     #     filters: [
     #       {
@@ -14253,7 +14271,7 @@ module Aws::EC2
     #     max_results: 1,
     #     min_duration: 1,
     #     next_token: "String",
-    #     offering_id: "String",
+    #     offering_id: "OfferingId",
     #   })
     #
     # @example Response structure
@@ -14328,7 +14346,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     host_reservation_id_set: ["String"],
+    #     host_reservation_id_set: ["HostReservationId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -14427,7 +14445,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     host_ids: ["String"],
+    #     host_ids: ["DedicatedHostId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -14531,7 +14549,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_iam_instance_profile_associations({
-    #     association_ids: ["String"],
+    #     association_ids: ["IamInstanceProfileAssociationId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -14751,7 +14769,7 @@ module Aws::EC2
     #
     #   resp = client.describe_image_attribute({
     #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
-    #     image_id: "String", # required
+    #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
     #
@@ -14973,7 +14991,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     image_ids: ["String"],
+    #     image_ids: ["ImageId"],
     #     owners: ["String"],
     #     dry_run: false,
     #   })
@@ -15069,7 +15087,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     import_task_ids: ["String"],
+    #     import_task_ids: ["ImportImageTaskId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -15154,7 +15172,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     import_task_ids: ["String"],
+    #     import_task_ids: ["ImportSnapshotTaskId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -15303,7 +15321,7 @@ module Aws::EC2
     #   resp = client.describe_instance_attribute({
     #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #     dry_run: false,
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #   })
     #
     # @example Response structure
@@ -15417,7 +15435,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     max_results: 1,
     #     next_token: "String",
     #   })
@@ -15602,7 +15620,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     max_results: 1,
     #     next_token: "String",
     #     dry_run: false,
@@ -16295,7 +16313,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     instance_ids: ["String"],
+    #     instance_ids: ["InstanceId"],
     #     dry_run: false,
     #     max_results: 1,
     #     next_token: "String",
@@ -16528,7 +16546,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     internet_gateway_ids: ["String"],
+    #     internet_gateway_ids: ["InternetGatewayId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -16595,7 +16613,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_ipv_6_pools({
-    #     pool_ids: ["String"],
+    #     pool_ids: ["Ipv6PoolEc2Id"],
     #     next_token: "NextToken",
     #     max_results: 1,
     #     dry_run: false,
@@ -16692,8 +16710,8 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     key_names: ["String"],
-    #     key_pair_ids: ["String"],
+    #     key_names: ["KeyPairName"],
+    #     key_pair_ids: ["KeyPairId"],
     #     dry_run: false,
     #   })
     #
@@ -16842,7 +16860,7 @@ module Aws::EC2
     #
     #   resp = client.describe_launch_template_versions({
     #     dry_run: false,
-    #     launch_template_id: "String",
+    #     launch_template_id: "LaunchTemplateId",
     #     launch_template_name: "LaunchTemplateName",
     #     versions: ["String"],
     #     min_version: "String",
@@ -17032,7 +17050,7 @@ module Aws::EC2
     #
     #   resp = client.describe_launch_templates({
     #     dry_run: false,
-    #     launch_template_ids: ["String"],
+    #     launch_template_ids: ["LaunchTemplateId"],
     #     launch_template_names: ["LaunchTemplateName"],
     #     filters: [
     #       {
@@ -17098,7 +17116,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_route_table_virtual_interface_group_associations({
-    #     local_gateway_route_table_virtual_interface_group_association_ids: ["String"],
+    #     local_gateway_route_table_virtual_interface_group_association_ids: ["LocalGatewayRouteTableVirtualInterfaceGroupAssociationId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17163,7 +17181,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_route_table_vpc_associations({
-    #     local_gateway_route_table_vpc_association_ids: ["String"],
+    #     local_gateway_route_table_vpc_association_ids: ["LocalGatewayRouteTableVpcAssociationId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17229,7 +17247,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_route_tables({
-    #     local_gateway_route_table_ids: ["String"],
+    #     local_gateway_route_table_ids: ["LocalGatewayRoutetableId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17292,7 +17310,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_virtual_interface_groups({
-    #     local_gateway_virtual_interface_group_ids: ["String"],
+    #     local_gateway_virtual_interface_group_ids: ["LocalGatewayVirtualInterfaceGroupId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17355,7 +17373,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateway_virtual_interfaces({
-    #     local_gateway_virtual_interface_ids: ["String"],
+    #     local_gateway_virtual_interface_ids: ["LocalGatewayVirtualInterfaceId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17422,7 +17440,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_local_gateways({
-    #     local_gateway_ids: ["String"],
+    #     local_gateway_ids: ["LocalGatewayId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -17630,7 +17648,7 @@ module Aws::EC2
     #       },
     #     ],
     #     max_results: 1,
-    #     nat_gateway_ids: ["String"],
+    #     nat_gateway_ids: ["NatGatewayId"],
     #     next_token: "String",
     #   })
     #
@@ -17813,7 +17831,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_acl_ids: ["String"],
+    #     network_acl_ids: ["NetworkAclId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -17960,7 +17978,7 @@ module Aws::EC2
     #   resp = client.describe_network_interface_attribute({
     #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
     #     dry_run: false,
-    #     network_interface_id: "String", # required
+    #     network_interface_id: "NetworkInterfaceId", # required
     #   })
     #
     # @example Response structure
@@ -18026,7 +18044,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_network_interface_permissions({
-    #     network_interface_permission_ids: ["String"],
+    #     network_interface_permission_ids: ["NetworkInterfacePermissionId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -18273,7 +18291,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -18384,8 +18402,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     group_names: ["String"],
-    #     group_ids: ["String"],
+    #     group_names: ["PlacementGroupName"],
+    #     group_ids: ["PlacementGroupId"],
     #   })
     #
     # @example Response structure
@@ -18458,7 +18476,7 @@ module Aws::EC2
     #     ],
     #     max_results: 1,
     #     next_token: "String",
-    #     prefix_list_ids: ["String"],
+    #     prefix_list_ids: ["PrefixListResourceId"],
     #   })
     #
     # @example Response structure
@@ -18593,7 +18611,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_public_ipv_4_pools({
-    #     pool_ids: ["String"],
+    #     pool_ids: ["Ipv4PoolEc2Id"],
     #     next_token: "NextToken",
     #     max_results: 1,
     #     filters: [
@@ -18858,7 +18876,7 @@ module Aws::EC2
     #       },
     #     ],
     #     offering_class: "standard", # accepts standard, convertible
-    #     reserved_instances_ids: ["String"],
+    #     reserved_instances_ids: ["ReservationId"],
     #     dry_run: false,
     #     offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
     #   })
@@ -18958,8 +18976,8 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     reserved_instances_id: "String",
-    #     reserved_instances_listing_id: "String",
+    #     reserved_instances_id: "ReservationId",
+    #     reserved_instances_listing_id: "ReservedInstancesListingId",
     #   })
     #
     # @example Response structure
@@ -19064,7 +19082,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     reserved_instances_modification_ids: ["String"],
+    #     reserved_instances_modification_ids: ["ReservedInstancesModificationId"],
     #     next_token: "String",
     #   })
     #
@@ -19255,7 +19273,7 @@ module Aws::EC2
     #     min_duration: 1,
     #     offering_class: "standard", # accepts standard, convertible
     #     product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
-    #     reserved_instances_offering_ids: ["String"],
+    #     reserved_instances_offering_ids: ["ReservedInstancesOfferingId"],
     #     dry_run: false,
     #     instance_tenancy: "default", # accepts default, dedicated, host
     #     max_results: 1,
@@ -19455,7 +19473,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     route_table_ids: ["String"],
+    #     route_table_ids: ["RouteTableId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -19768,7 +19786,7 @@ module Aws::EC2
     #     ],
     #     max_results: 1,
     #     next_token: "String",
-    #     scheduled_instance_ids: ["String"],
+    #     scheduled_instance_ids: ["ScheduledInstanceId"],
     #     slot_start_time_range: {
     #       earliest_time: Time.now,
     #       latest_time: Time.now,
@@ -19852,7 +19870,7 @@ module Aws::EC2
     #
     #   resp = client.describe_security_group_references({
     #     dry_run: false,
-    #     group_id: ["String"], # required
+    #     group_id: ["SecurityGroupId"], # required
     #   })
     #
     # @example Response structure
@@ -20043,7 +20061,7 @@ module Aws::EC2
     #       },
     #     ],
     #     group_ids: ["String"],
-    #     group_names: ["String"],
+    #     group_names: ["SecurityGroupName"],
     #     dry_run: false,
     #     next_token: "String",
     #     max_results: 1,
@@ -20163,7 +20181,7 @@ module Aws::EC2
     #
     #   resp = client.describe_snapshot_attribute({
     #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
-    #     snapshot_id: "String", # required
+    #     snapshot_id: "SnapshotId", # required
     #     dry_run: false,
     #   })
     #
@@ -20401,7 +20419,7 @@ module Aws::EC2
     #     next_token: "String",
     #     owner_ids: ["String"],
     #     restorable_by_user_ids: ["String"],
-    #     snapshot_ids: ["String"],
+    #     snapshot_ids: ["SnapshotId"],
     #     dry_run: false,
     #   })
     #
@@ -20548,7 +20566,7 @@ module Aws::EC2
     #     dry_run: false,
     #     max_results: 1,
     #     next_token: "String",
-    #     spot_fleet_request_id: "String", # required
+    #     spot_fleet_request_id: "SpotFleetRequestId", # required
     #   })
     #
     # @example Response structure
@@ -20667,7 +20685,7 @@ module Aws::EC2
     #     event_type: "instanceChange", # accepts instanceChange, fleetRequestChange, error, information
     #     max_results: 1,
     #     next_token: "String",
-    #     spot_fleet_request_id: "String", # required
+    #     spot_fleet_request_id: "SpotFleetRequestId", # required
     #     start_time: Time.now, # required
     #   })
     #
@@ -20783,7 +20801,7 @@ module Aws::EC2
     #     dry_run: false,
     #     max_results: 1,
     #     next_token: "String",
-    #     spot_fleet_request_ids: ["String"],
+    #     spot_fleet_request_ids: ["SpotFleetRequestId"],
     #   })
     #
     # @example Response structure
@@ -21130,7 +21148,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     spot_instance_request_ids: ["String"],
+    #     spot_instance_request_ids: ["SpotInstanceRequestId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -21578,7 +21596,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     subnet_ids: ["String"],
+    #     subnet_ids: ["SubnetId"],
     #     dry_run: false,
     #     next_token: "String",
     #     max_results: 1,
@@ -21769,7 +21787,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_traffic_mirror_filters({
-    #     traffic_mirror_filter_ids: ["String"],
+    #     traffic_mirror_filter_ids: ["TrafficMirrorFilterId"],
     #     dry_run: false,
     #     filters: [
     #       {
@@ -21883,7 +21901,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_traffic_mirror_sessions({
-    #     traffic_mirror_session_ids: ["String"],
+    #     traffic_mirror_session_ids: ["TrafficMirrorSessionId"],
     #     dry_run: false,
     #     filters: [
     #       {
@@ -21964,7 +21982,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_traffic_mirror_targets({
-    #     traffic_mirror_target_ids: ["String"],
+    #     traffic_mirror_target_ids: ["TrafficMirrorTargetId"],
     #     dry_run: false,
     #     filters: [
     #       {
@@ -22056,7 +22074,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateway_attachments({
-    #     transit_gateway_attachment_ids: ["String"],
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -22196,7 +22214,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateway_peering_attachments({
-    #     transit_gateway_attachment_ids: ["String"],
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -22361,7 +22379,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateway_vpc_attachments({
-    #     transit_gateway_attachment_ids: ["String"],
+    #     transit_gateway_attachment_ids: ["TransitGatewayAttachmentId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -22467,7 +22485,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_transit_gateways({
-    #     transit_gateway_ids: ["String"],
+    #     transit_gateway_ids: ["TransitGatewayId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -22561,7 +22579,7 @@ module Aws::EC2
     #
     #   resp = client.describe_volume_attribute({
     #     attribute: "autoEnableIO", # required, accepts autoEnableIO, productCodes
-    #     volume_id: "String", # required
+    #     volume_id: "VolumeId", # required
     #     dry_run: false,
     #   })
     #
@@ -22767,7 +22785,7 @@ module Aws::EC2
     #     ],
     #     max_results: 1,
     #     next_token: "String",
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #   })
     #
@@ -22788,11 +22806,15 @@ module Aws::EC2
     #   resp.volume_statuses[0].events[0].event_type #=> String
     #   resp.volume_statuses[0].events[0].not_after #=> Time
     #   resp.volume_statuses[0].events[0].not_before #=> Time
+    #   resp.volume_statuses[0].events[0].instance_id #=> String
     #   resp.volume_statuses[0].volume_id #=> String
     #   resp.volume_statuses[0].volume_status.details #=> Array
     #   resp.volume_statuses[0].volume_status.details[0].name #=> String, one of "io-enabled", "io-performance"
     #   resp.volume_statuses[0].volume_status.details[0].status #=> String
     #   resp.volume_statuses[0].volume_status.status #=> String, one of "ok", "impaired", "insufficient-data"
+    #   resp.volume_statuses[0].attachment_statuses #=> Array
+    #   resp.volume_statuses[0].attachment_statuses[0].io_performance #=> String
+    #   resp.volume_statuses[0].attachment_statuses[0].instance_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatus AWS API Documentation
     #
@@ -22845,6 +22867,9 @@ module Aws::EC2
     #
     #   * `encrypted` - Indicates whether the volume is encrypted (`true` \|
     #     `false`)
+    #
+    #   * `multi-attach-enabled` - Indicates whether the volume is enabled for
+    #     Multi-Attach (`true` \| `false`)
     #
     #   * `fast-restored` - Indicates whether the volume was created from a
     #     snapshot that is enabled for fast snapshot restore (`true` \|
@@ -22997,7 +23022,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     dry_run: false,
     #     max_results: 1,
     #     next_token: "String",
@@ -23028,6 +23053,7 @@ module Aws::EC2
     #   resp.volumes[0].tags[0].value #=> String
     #   resp.volumes[0].volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
     #   resp.volumes[0].fast_restored #=> Boolean
+    #   resp.volumes[0].multi_attach_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
@@ -23071,9 +23097,11 @@ module Aws::EC2
     #   described.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. Supported filters: `volume-id`, `modification-state`,
-    #   `target-size`, `target-iops`, `target-volume-type`, `original-size`,
-    #   `original-iops`, `original-volume-type`, `start-time`.
+    #   The filters. Supported filters: `volume-id` \| `modification-state` \|
+    #   `target-size` \| `target-iops` \| `target-volume-type` \|
+    #   `original-size` \| `original-iops` \| `original-volume-type` \|
+    #   `start-time` \| `originalMultiAttachEnabled` \|
+    #   `targetMultiAttachEnabled`.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned by a previous paginated request.
@@ -23091,7 +23119,7 @@ module Aws::EC2
     #
     #   resp = client.describe_volumes_modifications({
     #     dry_run: false,
-    #     volume_ids: ["String"],
+    #     volume_ids: ["VolumeId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -23252,7 +23280,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_ids: ["String"],
+    #     vpc_ids: ["VpcId"],
     #   })
     #
     # @example Response structure
@@ -23306,7 +23334,7 @@ module Aws::EC2
     #   resp = client.describe_vpc_classic_link_dns_support({
     #     max_results: 1,
     #     next_token: "DescribeVpcClassicLinkDnsSupportNextToken",
-    #     vpc_ids: ["String"],
+    #     vpc_ids: ["VpcId"],
     #   })
     #
     # @example Response structure
@@ -23371,7 +23399,7 @@ module Aws::EC2
     #
     #   resp = client.describe_vpc_endpoint_connection_notifications({
     #     dry_run: false,
-    #     connection_notification_id: "String",
+    #     connection_notification_id: "ConnectionNotificationId",
     #     filters: [
     #       {
     #         name: "String",
@@ -23531,7 +23559,7 @@ module Aws::EC2
     #
     #   resp = client.describe_vpc_endpoint_service_configurations({
     #     dry_run: false,
-    #     service_ids: ["String"],
+    #     service_ids: ["VpcEndpointServiceId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -23616,7 +23644,7 @@ module Aws::EC2
     #
     #   resp = client.describe_vpc_endpoint_service_permissions({
     #     dry_run: false,
-    #     service_id: "String", # required
+    #     service_id: "VpcEndpointServiceId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -23790,7 +23818,7 @@ module Aws::EC2
     #
     #   resp = client.describe_vpc_endpoints({
     #     dry_run: false,
-    #     vpc_endpoint_ids: ["String"],
+    #     vpc_endpoint_ids: ["VpcEndpointId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -23919,7 +23947,7 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     vpc_peering_connection_ids: ["String"],
+    #     vpc_peering_connection_ids: ["VpcPeeringConnectionId"],
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -24082,7 +24110,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     vpc_ids: ["String"],
+    #     vpc_ids: ["VpcId"],
     #     dry_run: false,
     #     next_token: "String",
     #     max_results: 1,
@@ -24102,8 +24130,8 @@ module Aws::EC2
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
-    #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].network_border_group #=> String
+    #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_pool #=> String
     #   resp.vpcs[0].cidr_block_association_set #=> Array
     #   resp.vpcs[0].cidr_block_association_set[0].association_id #=> String
     #   resp.vpcs[0].cidr_block_association_set[0].cidr_block #=> String
@@ -24200,7 +24228,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     vpn_connection_ids: ["String"],
+    #     vpn_connection_ids: ["VpnConnectionId"],
     #     dry_run: false,
     #   })
     #
@@ -24331,7 +24359,7 @@ module Aws::EC2
     #         values: ["String"],
     #       },
     #     ],
-    #     vpn_gateway_ids: ["String"],
+    #     vpn_gateway_ids: ["VpnGatewayId"],
     #     dry_run: false,
     #   })
     #
@@ -24541,7 +24569,8 @@ module Aws::EC2
     #   procedures.
     #
     # @option params [String] :instance_id
-    #   The ID of the instance.
+    #   The ID of the instance. If you are detaching a Multi-Attach enabled
+    #   volume, you must specify an instance ID.
     #
     # @option params [required, String] :volume_id
     #   The ID of the volume.
@@ -24718,7 +24747,7 @@ module Aws::EC2
     #
     #   resp = client.disable_fast_snapshot_restores({
     #     availability_zones: ["String"], # required
-    #     source_snapshot_ids: ["String"], # required
+    #     source_snapshot_ids: ["SnapshotId"], # required
     #     dry_run: false,
     #   })
     #
@@ -24774,8 +24803,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_transit_gateway_route_table_propagation({
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -24805,6 +24834,8 @@ module Aws::EC2
     # @option params [required, String] :route_table_id
     #   The ID of the route table.
     #
+    # @option params [Boolean] :dry_run
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -24822,6 +24853,7 @@ module Aws::EC2
     #   resp = client.disable_vgw_route_propagation({
     #     gateway_id: "VpnGatewayId", # required
     #     route_table_id: "RouteTableId", # required
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagation AWS API Documentation
@@ -25057,7 +25089,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_iam_instance_profile({
-    #     association_id: "String", # required
+    #     association_id: "IamInstanceProfileAssociationId", # required
     #   })
     #
     # @example Response structure
@@ -25187,8 +25219,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_transit_gateway_multicast_domain({
-    #     transit_gateway_multicast_domain_id: "String",
-    #     transit_gateway_attachment_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #     subnet_ids: ["String"],
     #     dry_run: false,
     #   })
@@ -25234,8 +25266,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_transit_gateway_route_table({
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -25286,8 +25318,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
-    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.ipv_6_cidr_block_association.network_border_group #=> String
+    #   resp.ipv_6_cidr_block_association.ipv_6_pool #=> String
     #   resp.cidr_block_association.association_id #=> String
     #   resp.cidr_block_association.cidr_block #=> String
     #   resp.cidr_block_association.cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
@@ -25394,7 +25426,7 @@ module Aws::EC2
     #
     #   resp = client.enable_fast_snapshot_restores({
     #     availability_zones: ["String"], # required
-    #     source_snapshot_ids: ["String"], # required
+    #     source_snapshot_ids: ["SnapshotId"], # required
     #     dry_run: false,
     #   })
     #
@@ -25450,8 +25482,8 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_transit_gateway_route_table_propagation({
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -25484,6 +25516,8 @@ module Aws::EC2
     #   The ID of the route table. The routing table must be associated with
     #   the same VPC that the virtual private gateway is attached to.
     #
+    # @option params [Boolean] :dry_run
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -25501,6 +25535,7 @@ module Aws::EC2
     #   resp = client.enable_vgw_route_propagation({
     #     gateway_id: "VpnGatewayId", # required
     #     route_table_id: "RouteTableId", # required
+    #     dry_run: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagation AWS API Documentation
@@ -25857,7 +25892,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.export_transit_gateway_routes({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -25909,7 +25944,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_associated_ipv_6_pool_cidrs({
-    #     pool_id: "String", # required
+    #     pool_id: "Ipv6PoolEc2Id", # required
     #     next_token: "NextToken",
     #     max_results: 1,
     #     dry_run: false,
@@ -26047,7 +26082,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_coip_pool_usage({
-    #     pool_id: "String", # required
+    #     pool_id: "CoipPoolId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -26659,11 +26694,11 @@ module Aws::EC2
     #
     #   resp = client.get_reserved_instances_exchange_quote({
     #     dry_run: false,
-    #     reserved_instance_ids: ["String"], # required
+    #     reserved_instance_ids: ["ReservationId"], # required
     #     target_configurations: [
     #       {
     #         instance_count: 1,
-    #         offering_id: "String", # required
+    #         offering_id: "ReservedInstancesOfferingId", # required
     #       },
     #     ],
     #   })
@@ -26738,7 +26773,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_attachment_propagations({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -26810,7 +26845,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_multicast_domain_associations({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     filters: [
     #       {
     #         name: "String",
@@ -26878,7 +26913,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_route_table_associations({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -26945,7 +26980,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_route_table_propagations({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -27174,7 +27209,7 @@ module Aws::EC2
     #         description: "String",
     #         device_name: "String",
     #         format: "String",
-    #         snapshot_id: "String",
+    #         snapshot_id: "SnapshotId",
     #         url: "String",
     #         user_bucket: {
     #           s3_bucket: "String",
@@ -27290,8 +27325,8 @@ module Aws::EC2
     #     launch_specification: {
     #       additional_info: "String",
     #       architecture: "i386", # accepts i386, x86_64, arm64
-    #       group_ids: ["String"],
-    #       group_names: ["String"],
+    #       group_ids: ["SecurityGroupId"],
+    #       group_names: ["SecurityGroupName"],
     #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
     #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
     #       monitoring: false,
@@ -27393,7 +27428,7 @@ module Aws::EC2
     #
     #   resp = client.import_key_pair({
     #     dry_run: false,
-    #     key_name: "KeyPairName", # required
+    #     key_name: "String", # required
     #     public_key_material: "data", # required
     #   })
     #
@@ -28170,7 +28205,7 @@ module Aws::EC2
     #
     #   resp = client.modify_hosts({
     #     auto_placement: "on", # accepts on, off
-    #     host_ids: ["String"], # required
+    #     host_ids: ["DedicatedHostId"], # required
     #     host_recovery: "on", # accepts on, off
     #     instance_type: "String",
     #     instance_family: "String",
@@ -28710,7 +28745,7 @@ module Aws::EC2
     #     capacity_reservation_specification: { # required
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
-    #         capacity_reservation_id: "String",
+    #         capacity_reservation_id: "CapacityReservationId",
     #       },
     #     },
     #     dry_run: false,
@@ -28770,7 +28805,7 @@ module Aws::EC2
     #     client_token: "String",
     #     instance_credit_specifications: [ # required
     #       {
-    #         instance_id: "String",
+    #         instance_id: "InstanceId",
     #         cpu_credits: "String",
     #       },
     #     ],
@@ -28907,7 +28942,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_instance_metadata_options({
-    #     instance_id: "String", # required
+    #     instance_id: "InstanceId", # required
     #     http_tokens: "optional", # accepts optional, required
     #     http_put_response_hop_limit: 1,
     #     http_endpoint: "disabled", # accepts disabled, enabled
@@ -29198,12 +29233,12 @@ module Aws::EC2
     #
     #   resp = client.modify_network_interface_attribute({
     #     attachment: {
-    #       attachment_id: "String",
+    #       attachment_id: "NetworkInterfaceAttachmentId",
     #       delete_on_termination: false,
     #     },
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     dry_run: false,
-    #     groups: ["String"],
+    #     groups: ["SecurityGroupId"],
     #     network_interface_id: "NetworkInterfaceId", # required
     #     source_dest_check: {
     #       value: false,
@@ -29253,7 +29288,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_reserved_instances({
-    #     reserved_instances_ids: ["String"], # required
+    #     reserved_instances_ids: ["ReservationId"], # required
     #     client_token: "String",
     #     target_configurations: [ # required
     #       {
@@ -29379,7 +29414,7 @@ module Aws::EC2
     #         },
     #       ],
     #     },
-    #     group_names: ["String"],
+    #     group_names: ["SecurityGroupName"],
     #     operation_type: "add", # accepts add, remove
     #     snapshot_id: "SnapshotId", # required
     #     user_ids: ["String"],
@@ -29873,9 +29908,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.modify_transit_gateway_vpc_attachment({
-    #     transit_gateway_attachment_id: "String", # required
-    #     add_subnet_ids: ["String"],
-    #     remove_subnet_ids: ["String"],
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
+    #     add_subnet_ids: ["SubnetId"],
+    #     remove_subnet_ids: ["SubnetId"],
     #     options: {
     #       dns_support: "enable", # accepts enable, disable
     #       ipv_6_support: "enable", # accepts enable, disable
@@ -30231,12 +30266,12 @@ module Aws::EC2
     #     vpc_endpoint_id: "VpcEndpointId", # required
     #     reset_policy: false,
     #     policy_document: "String",
-    #     add_route_table_ids: ["String"],
-    #     remove_route_table_ids: ["String"],
-    #     add_subnet_ids: ["String"],
-    #     remove_subnet_ids: ["String"],
-    #     add_security_group_ids: ["String"],
-    #     remove_security_group_ids: ["String"],
+    #     add_route_table_ids: ["RouteTableId"],
+    #     remove_route_table_ids: ["RouteTableId"],
+    #     add_subnet_ids: ["SubnetId"],
+    #     remove_subnet_ids: ["SubnetId"],
+    #     add_security_group_ids: ["SecurityGroupId"],
+    #     remove_security_group_ids: ["SecurityGroupId"],
     #     private_dns_enabled: false,
     #   })
     #
@@ -30348,7 +30383,7 @@ module Aws::EC2
     #
     #   resp = client.modify_vpc_endpoint_service_configuration({
     #     dry_run: false,
-    #     service_id: "ServiceId", # required
+    #     service_id: "VpcEndpointServiceId", # required
     #     private_dns_name: "String",
     #     remove_private_dns_name: false,
     #     acceptance_required: false,
@@ -30408,7 +30443,7 @@ module Aws::EC2
     #
     #   resp = client.modify_vpc_endpoint_service_permissions({
     #     dry_run: false,
-    #     service_id: "String", # required
+    #     service_id: "VpcEndpointServiceId", # required
     #     add_allowed_principals: ["String"],
     #     remove_allowed_principals: ["String"],
     #   })
@@ -30956,7 +30991,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.monitor_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -31246,7 +31281,7 @@ module Aws::EC2
     #
     #   resp = client.purchase_reserved_instances_offering({
     #     instance_count: 1, # required
-    #     reserved_instances_offering_id: "String", # required
+    #     reserved_instances_offering_id: "ReservedInstancesOfferingId", # required
     #     dry_run: false,
     #     limit_price: {
     #       amount: 1.0,
@@ -31439,7 +31474,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reboot_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -31665,9 +31700,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_transit_gateway_multicast_group_members({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     group_ip_address: "String",
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     dry_run: false,
     #   })
     #
@@ -31726,9 +31761,9 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_transit_gateway_multicast_group_sources({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     group_ip_address: "String",
-    #     network_interface_ids: ["String"],
+    #     network_interface_ids: ["NetworkInterfaceId"],
     #     dry_run: false,
     #   })
     #
@@ -31766,7 +31801,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reject_transit_gateway_peering_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -31819,7 +31854,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reject_transit_gateway_vpc_attachment({
-    #     transit_gateway_attachment_id: "String", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId", # required
     #     dry_run: false,
     #   })
     #
@@ -31871,8 +31906,8 @@ module Aws::EC2
     #
     #   resp = client.reject_vpc_endpoint_connections({
     #     dry_run: false,
-    #     service_id: "ServiceId", # required
-    #     vpc_endpoint_ids: ["String"], # required
+    #     service_id: "VpcEndpointServiceId", # required
+    #     vpc_endpoint_ids: ["VpcEndpointId"], # required
     #   })
     #
     # @example Response structure
@@ -32045,7 +32080,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.release_hosts({
-    #     host_ids: ["String"], # required
+    #     host_ids: ["DedicatedHostId"], # required
     #   })
     #
     # @example Response structure
@@ -32090,7 +32125,7 @@ module Aws::EC2
     #       arn: "String",
     #       name: "String",
     #     },
-    #     association_id: "String", # required
+    #     association_id: "IamInstanceProfileAssociationId", # required
     #   })
     #
     # @example Response structure
@@ -32360,12 +32395,12 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #     dry_run: false,
     #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId",
-    #     gateway_id: "RouteTableGatewayId",
+    #     gateway_id: "RouteGatewayId",
     #     instance_id: "InstanceId",
     #     local_target: false,
     #     nat_gateway_id: "NatGatewayId",
     #     transit_gateway_id: "TransitGatewayId",
-    #     local_gateway_id: "String",
+    #     local_gateway_id: "LocalGatewayId",
     #     network_interface_id: "NetworkInterfaceId",
     #     route_table_id: "RouteTableId", # required
     #     vpc_peering_connection_id: "VpcPeeringConnectionId",
@@ -32479,8 +32514,8 @@ module Aws::EC2
     #
     #   resp = client.replace_transit_gateway_route({
     #     destination_cidr_block: "String", # required
-    #     transit_gateway_route_table_id: "String", # required
-    #     transit_gateway_attachment_id: "String",
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
+    #     transit_gateway_attachment_id: "TransitGatewayAttachmentId",
     #     blackhole: false,
     #     dry_run: false,
     #   })
@@ -32571,7 +32606,7 @@ module Aws::EC2
     #     description: "String",
     #     dry_run: false,
     #     end_time: Time.now,
-    #     instances: ["String"], # required
+    #     instances: ["InstanceId"], # required
     #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
     #     start_time: Time.now,
     #     status: "ok", # required, accepts ok, impaired
@@ -32838,7 +32873,7 @@ module Aws::EC2
     #               delete_on_termination: false,
     #               description: "String",
     #               device_index: 1,
-    #               groups: ["String"],
+    #               groups: ["SecurityGroupId"],
     #               ipv_6_address_count: 1,
     #               ipv_6_addresses: [
     #                 {
@@ -33126,8 +33161,8 @@ module Aws::EC2
     #     instance_count: 1,
     #     launch_group: "String",
     #     launch_specification: {
-    #       security_group_ids: ["String"],
-    #       security_groups: ["String"],
+    #       security_group_ids: ["SecurityGroupId"],
+    #       security_groups: ["SecurityGroupName"],
     #       addressing_type: "String",
     #       block_device_mappings: [
     #         {
@@ -33150,10 +33185,10 @@ module Aws::EC2
     #         arn: "String",
     #         name: "String",
     #       },
-    #       image_id: "String",
+    #       image_id: "ImageId",
     #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, t3.nano, t3.micro, t3.small, t3.medium, t3.large, t3.xlarge, t3.2xlarge, t3a.nano, t3a.micro, t3a.small, t3a.medium, t3a.large, t3a.xlarge, t3a.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, r5.large, r5.xlarge, r5.2xlarge, r5.4xlarge, r5.8xlarge, r5.12xlarge, r5.16xlarge, r5.24xlarge, r5.metal, r5a.large, r5a.xlarge, r5a.2xlarge, r5a.4xlarge, r5a.8xlarge, r5a.12xlarge, r5a.16xlarge, r5a.24xlarge, r5d.large, r5d.xlarge, r5d.2xlarge, r5d.4xlarge, r5d.8xlarge, r5d.12xlarge, r5d.16xlarge, r5d.24xlarge, r5d.metal, r5ad.large, r5ad.xlarge, r5ad.2xlarge, r5ad.4xlarge, r5ad.8xlarge, r5ad.12xlarge, r5ad.16xlarge, r5ad.24xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, i3en.large, i3en.xlarge, i3en.2xlarge, i3en.3xlarge, i3en.6xlarge, i3en.12xlarge, i3en.24xlarge, i3en.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.12xlarge, c5.18xlarge, c5.24xlarge, c5.metal, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.12xlarge, c5d.18xlarge, c5d.24xlarge, c5d.metal, c5n.large, c5n.xlarge, c5n.2xlarge, c5n.4xlarge, c5n.9xlarge, c5n.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, g3s.xlarge, g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, p3dn.24xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.4xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, m5.12xlarge, m5.16xlarge, m5.24xlarge, m5.metal, m5a.large, m5a.xlarge, m5a.2xlarge, m5a.4xlarge, m5a.8xlarge, m5a.12xlarge, m5a.16xlarge, m5a.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.8xlarge, m5d.12xlarge, m5d.16xlarge, m5d.24xlarge, m5d.metal, m5ad.large, m5ad.xlarge, m5ad.2xlarge, m5ad.4xlarge, m5ad.8xlarge, m5ad.12xlarge, m5ad.16xlarge, m5ad.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge, z1d.large, z1d.xlarge, z1d.2xlarge, z1d.3xlarge, z1d.6xlarge, z1d.12xlarge, z1d.metal, u-6tb1.metal, u-9tb1.metal, u-12tb1.metal, u-18tb1.metal, u-24tb1.metal, a1.medium, a1.large, a1.xlarge, a1.2xlarge, a1.4xlarge, a1.metal, m5dn.large, m5dn.xlarge, m5dn.2xlarge, m5dn.4xlarge, m5dn.8xlarge, m5dn.12xlarge, m5dn.16xlarge, m5dn.24xlarge, m5n.large, m5n.xlarge, m5n.2xlarge, m5n.4xlarge, m5n.8xlarge, m5n.12xlarge, m5n.16xlarge, m5n.24xlarge, r5dn.large, r5dn.xlarge, r5dn.2xlarge, r5dn.4xlarge, r5dn.8xlarge, r5dn.12xlarge, r5dn.16xlarge, r5dn.24xlarge, r5n.large, r5n.xlarge, r5n.2xlarge, r5n.4xlarge, r5n.8xlarge, r5n.12xlarge, r5n.16xlarge, r5n.24xlarge, inf1.xlarge, inf1.2xlarge, inf1.6xlarge, inf1.24xlarge
-    #       kernel_id: "String",
-    #       key_name: "String",
+    #       kernel_id: "KernelId",
+    #       key_name: "KeyPairName",
     #       monitoring: {
     #         enabled: false, # required
     #       },
@@ -33163,7 +33198,7 @@ module Aws::EC2
     #           delete_on_termination: false,
     #           description: "String",
     #           device_index: 1,
-    #           groups: ["String"],
+    #           groups: ["SecurityGroupId"],
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
@@ -33188,8 +33223,8 @@ module Aws::EC2
     #         group_name: "String",
     #         tenancy: "default", # accepts default, dedicated, host
     #       },
-    #       ramdisk_id: "String",
-    #       subnet_id: "String",
+    #       ramdisk_id: "RamdiskId",
+    #       subnet_id: "SubnetId",
     #       user_data: "String",
     #     },
     #     spot_price: "String",
@@ -33732,7 +33767,7 @@ module Aws::EC2
     #
     #   resp = client.revoke_security_group_egress({
     #     dry_run: false,
-    #     group_id: "String", # required
+    #     group_id: "SecurityGroupId", # required
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -33871,8 +33906,8 @@ module Aws::EC2
     #   resp = client.revoke_security_group_ingress({
     #     cidr_ip: "String",
     #     from_port: 1,
-    #     group_id: "String",
-    #     group_name: "String",
+    #     group_id: "SecurityGroupId",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [
     #       {
     #         from_port: 1,
@@ -34381,7 +34416,7 @@ module Aws::EC2
     #       },
     #     ],
     #     kernel_id: "String",
-    #     key_name: "String",
+    #     key_name: "KeyPairName",
     #     max_count: 1, # required
     #     min_count: 1, # required
     #     monitoring: {
@@ -34398,8 +34433,8 @@ module Aws::EC2
     #       host_resource_group_arn: "String",
     #     },
     #     ramdisk_id: "String",
-    #     security_group_ids: ["String"],
-    #     security_groups: ["String"],
+    #     security_group_ids: ["SecurityGroupId"],
+    #     security_groups: ["SecurityGroupName"],
     #     subnet_id: "String",
     #     user_data: "String",
     #     additional_info: "String",
@@ -34418,7 +34453,7 @@ module Aws::EC2
     #         delete_on_termination: false,
     #         description: "String",
     #         device_index: 1,
-    #         groups: ["String"],
+    #         groups: ["SecurityGroupId"],
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -34462,7 +34497,7 @@ module Aws::EC2
     #       },
     #     ],
     #     launch_template: {
-    #       launch_template_id: "String",
+    #       launch_template_id: "LaunchTemplateId",
     #       launch_template_name: "String",
     #       version: "String",
     #     },
@@ -34486,7 +34521,7 @@ module Aws::EC2
     #     capacity_reservation_specification: {
     #       capacity_reservation_preference: "open", # accepts open, none
     #       capacity_reservation_target: {
-    #         capacity_reservation_id: "String",
+    #         capacity_reservation_id: "CapacityReservationId",
     #       },
     #     },
     #     hibernation_options: {
@@ -34765,7 +34800,7 @@ module Aws::EC2
     #             delete_on_termination: false,
     #             encrypted: false,
     #             iops: 1,
-    #             snapshot_id: "String",
+    #             snapshot_id: "SnapshotId",
     #             volume_size: 1,
     #             volume_type: "String",
     #           },
@@ -34778,10 +34813,10 @@ module Aws::EC2
     #         arn: "String",
     #         name: "String",
     #       },
-    #       image_id: "String", # required
+    #       image_id: "ImageId", # required
     #       instance_type: "String",
-    #       kernel_id: "String",
-    #       key_name: "String",
+    #       kernel_id: "KernelId",
+    #       key_name: "KeyPairName",
     #       monitoring: {
     #         enabled: false,
     #       },
@@ -34791,14 +34826,14 @@ module Aws::EC2
     #           delete_on_termination: false,
     #           description: "String",
     #           device_index: 1,
-    #           groups: ["String"],
+    #           groups: ["SecurityGroupId"],
     #           ipv_6_address_count: 1,
     #           ipv_6_addresses: [
     #             {
     #               ipv_6_address: "Ipv6Address",
     #             },
     #           ],
-    #           network_interface_id: "String",
+    #           network_interface_id: "NetworkInterfaceId",
     #           private_ip_address: "String",
     #           private_ip_address_configs: [
     #             {
@@ -34807,16 +34842,16 @@ module Aws::EC2
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
-    #           subnet_id: "String",
+    #           subnet_id: "SubnetId",
     #         },
     #       ],
     #       placement: {
     #         availability_zone: "String",
-    #         group_name: "String",
+    #         group_name: "PlacementGroupName",
     #       },
-    #       ramdisk_id: "String",
-    #       security_group_ids: ["String"],
-    #       subnet_id: "String",
+    #       ramdisk_id: "RamdiskId",
+    #       security_group_ids: ["SecurityGroupId"],
+    #       subnet_id: "SubnetId",
     #       user_data: "String",
     #     },
     #     scheduled_instance_id: "ScheduledInstanceId", # required
@@ -34866,7 +34901,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_local_gateway_routes({
-    #     local_gateway_route_table_id: "String", # required
+    #     local_gateway_route_table_id: "LocalGatewayRoutetableId", # required
     #     filters: [ # required
     #       {
     #         name: "String",
@@ -34956,7 +34991,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_transit_gateway_multicast_groups({
-    #     transit_gateway_multicast_domain_id: "String",
+    #     transit_gateway_multicast_domain_id: "TransitGatewayMulticastDomainId",
     #     filters: [
     #       {
     #         name: "String",
@@ -35045,7 +35080,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_transit_gateway_routes({
-    #     transit_gateway_route_table_id: "String", # required
+    #     transit_gateway_route_table_id: "TransitGatewayRouteTableId", # required
     #     filters: [ # required
     #       {
     #         name: "String",
@@ -35206,7 +35241,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     additional_info: "String",
     #     dry_run: false,
     #   })
@@ -35260,7 +35295,7 @@ module Aws::EC2
     #
     #   resp = client.start_vpc_endpoint_service_private_dns_verification({
     #     dry_run: false,
-    #     service_id: "ServiceId", # required
+    #     service_id: "VpcEndpointServiceId", # required
     #   })
     #
     # @example Response structure
@@ -35394,7 +35429,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     hibernate: false,
     #     dry_run: false,
     #     force: false,
@@ -35555,7 +35590,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.terminate_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -35677,7 +35712,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.unmonitor_instances({
-    #     instance_ids: ["String"], # required
+    #     instance_ids: ["InstanceId"], # required
     #     dry_run: false,
     #   })
     #
@@ -35757,8 +35792,8 @@ module Aws::EC2
     #
     #   resp = client.update_security_group_rule_descriptions_egress({
     #     dry_run: false,
-    #     group_id: "String",
-    #     group_name: "String",
+    #     group_id: "SecurityGroupId",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [ # required
     #       {
     #         from_port: 1,
@@ -35871,8 +35906,8 @@ module Aws::EC2
     #
     #   resp = client.update_security_group_rule_descriptions_ingress({
     #     dry_run: false,
-    #     group_id: "String",
-    #     group_name: "String",
+    #     group_id: "SecurityGroupId",
+    #     group_name: "SecurityGroupName",
     #     ip_permissions: [ # required
     #       {
     #         from_port: 1,
@@ -35982,7 +36017,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
