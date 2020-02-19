@@ -592,8 +592,8 @@ module Aws::AutoScaling
     # If you exceed your maximum limit of Auto Scaling groups, the call
     # fails. For information about viewing this limit, see
     # DescribeAccountLimits. For information about updating this limit, see
-    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
-    # User Guide*.
+    # [Amazon EC2 Auto Scaling Service Quotas][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     #
     #
@@ -978,8 +978,8 @@ module Aws::AutoScaling
     # If you exceed your maximum limit of launch configurations, the call
     # fails. For information about viewing this limit, see
     # DescribeAccountLimits. For information about updating this limit, see
-    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
-    # User Guide*.
+    # [Amazon EC2 Auto Scaling Service Quotas][1] in the *Amazon EC2 Auto
+    # Scaling User Guide*.
     #
     # For more information, see [Launch Configurations][2] in the *Amazon
     # EC2 Auto Scaling User Guide*.
@@ -1655,12 +1655,12 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Describes the current Amazon EC2 Auto Scaling resource limits for your
+    # Describes the current Amazon EC2 Auto Scaling resource quotas for your
     # AWS account.
     #
-    # For information about requesting an increase in these limits, see
-    # [Amazon EC2 Auto Scaling Limits][1] in the *Amazon EC2 Auto Scaling
-    # User Guide*.
+    # For information about requesting an increase, see [Amazon EC2 Auto
+    # Scaling Service Quotas][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
     #
     #
     #
@@ -3760,10 +3760,7 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Creates or updates a scaling policy for an Auto Scaling group. To
-    # update an existing scaling policy, use the existing policy name and
-    # set the parameters to change. Any existing parameter not changed in an
-    # update to an existing policy is not changed in this update request.
+    # Creates or updates a scaling policy for an Auto Scaling group.
     #
     # For more information about using scaling policies to scale your Auto
     # Scaling group automatically, see [Dynamic Scaling][1] in the *Amazon
@@ -3880,6 +3877,14 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     #
     # @option params [Boolean] :enabled
+    #   Indicates whether the scaling policy is enabled or disabled. The
+    #   default is enabled. For more information, see [Disabling a Scaling
+    #   Policy for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     #
     # @return [Types::PolicyARNType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4445,10 +4450,26 @@ module Aws::AutoScaling
     end
 
     # Terminates the specified instance and optionally adjusts the desired
-    # group size.
+    # group size. This call simply makes a termination request. The instance
+    # is not terminated immediately. When an instance is terminated, the
+    # instance status changes to `terminated`. You can't connect to or
+    # start an instance after you've terminated it.
     #
-    # This call simply makes a termination request. The instance is not
-    # terminated immediately.
+    # If you do not specify the option to decrement the desired capacity,
+    # Amazon EC2 Auto Scaling launches instances to replace the ones that
+    # are terminated.
+    #
+    # By default, Amazon EC2 Auto Scaling balances instances across all
+    # Availability Zones. If you decrement the desired capacity, your Auto
+    # Scaling group can become unbalanced between Availability Zones. Amazon
+    # EC2 Auto Scaling tries to rebalance the group, and rebalancing might
+    # terminate instances in other zones. For more information, see
+    # [Rebalancing Activities][1] in the *Amazon EC2 Auto Scaling User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -4800,7 +4821,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

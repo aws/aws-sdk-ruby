@@ -123,6 +123,8 @@ module Aws::AutoScaling
       data[:target_tracking_configuration]
     end
 
+    # Indicates whether the policy is enabled (`true`) or disabled
+    # (`false`).
     # @return [Boolean]
     def enabled
       data[:enabled]

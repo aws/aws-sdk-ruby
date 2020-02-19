@@ -994,6 +994,9 @@ module Aws::ServiceCatalog
 
     ListPortfolioAccessInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListPortfolioAccessInput.add_member(:portfolio_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PortfolioId"))
+    ListPortfolioAccessInput.add_member(:organization_parent_id, Shapes::ShapeRef.new(shape: Id, location_name: "OrganizationParentId"))
+    ListPortfolioAccessInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
+    ListPortfolioAccessInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
     ListPortfolioAccessInput.struct_class = Types::ListPortfolioAccessInput
 
     ListPortfolioAccessOutput.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "AccountIds"))
@@ -2313,6 +2316,13 @@ module Aws::ServiceCatalog
         o.input = Shapes::ShapeRef.new(shape: ListPortfolioAccessInput)
         o.output = Shapes::ShapeRef.new(shape: ListPortfolioAccessOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "page_size",
+          tokens: {
+            "next_page_token" => "page_token"
+          }
+        )
       end)
 
       api.add_operation(:list_portfolios, Seahorse::Model::Operation.new.tap do |o|

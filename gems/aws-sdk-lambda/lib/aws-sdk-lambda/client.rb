@@ -903,7 +903,7 @@ module Aws::Lambda
     #     memory_size: 128, 
     #     publish: true, 
     #     role: "arn:aws:iam::123456789012:role/service-role/role-name", # replace with the actual arn of the execution role you created
-    #     runtime: "nodejs8.10", 
+    #     runtime: "nodejs12.x", 
     #     timeout: 15, 
     #     vpc_config: {
     #     }, 
@@ -920,7 +920,7 @@ module Aws::Lambda
     #     last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
     #     memory_size: 128, 
     #     role: "arn:aws:iam::123456789012:role/service-role/role-name", 
-    #     runtime: "nodejs8.10", 
+    #     runtime: "nodejs12.x", 
     #     timeout: 123, 
     #     version: "1", 
     #     vpc_config: {
@@ -931,7 +931,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -970,7 +970,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1620,7 +1620,7 @@ module Aws::Lambda
     #       last_modified: Time.parse("2016-11-21T19:49:20.006+0000"), 
     #       memory_size: 128, 
     #       role: "arn:aws:iam::123456789012:role/lambda_basic_execution", 
-    #       runtime: "nodejs8.10", 
+    #       runtime: "nodejs12.x", 
     #       timeout: 3, 
     #       version: "$LATEST", 
     #       vpc_config: {
@@ -1643,7 +1643,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -1691,8 +1691,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns details about the concurrency configuration for a function. To
-    # set a concurrency limit for a function, use PutFunctionConcurrency.
+    # Returns details about the reserved concurrency configuration for a
+    # function. To set a concurrency limit for a function, use
+    # PutFunctionConcurrency.
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function.
@@ -1833,7 +1834,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1977,7 +1978,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersion AWS API Documentation
@@ -2027,7 +2028,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetLayerVersionByArn AWS API Documentation
@@ -2643,7 +2644,7 @@ module Aws::Lambda
     end
 
     # Returns a list of Lambda functions, with the version-specific
-    # configuration of each.
+    # configuration of each. Lambda returns up to 50 functions per call.
     #
     # Set `FunctionVersion` to `ALL` to include all published versions of
     # each function in addition to the unpublished version. To get more
@@ -2664,8 +2665,7 @@ module Aws::Lambda
     #   retrieve the next page of results.
     #
     # @option params [Integer] :max_items
-    #   Specify a value between 1 and 50 to limit the number of functions in
-    #   the response.
+    #   The maximum number of functions to return.
     #
     # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2679,7 +2679,7 @@ module Aws::Lambda
     #
     #   resp = client.list_functions({
     #     marker: "", 
-    #     max_items: 123, 
+    #     max_items: 25, 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -2704,7 +2704,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -2777,7 +2777,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layer_versions({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     layer_name: "LayerName", # required
     #     marker: "String",
     #     max_items: 1,
@@ -2792,7 +2792,7 @@ module Aws::Lambda
     #   resp.layer_versions[0].description #=> String
     #   resp.layer_versions[0].created_date #=> Time
     #   resp.layer_versions[0].compatible_runtimes #=> Array
-    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.layer_versions[0].compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.layer_versions[0].license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayerVersions AWS API Documentation
@@ -2830,7 +2830,7 @@ module Aws::Lambda
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_layers({
-    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     compatible_runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     marker: "String",
     #     max_items: 1,
     #   })
@@ -2846,7 +2846,7 @@ module Aws::Lambda
     #   resp.layers[0].latest_matching_version.description #=> String
     #   resp.layers[0].latest_matching_version.created_date #=> Time
     #   resp.layers[0].latest_matching_version.compatible_runtimes #=> Array
-    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.layers[0].latest_matching_version.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.layers[0].latest_matching_version.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListLayers AWS API Documentation
@@ -2952,7 +2952,7 @@ module Aws::Lambda
     end
 
     # Returns a list of [versions][1], with the version-specific
-    # configuration of each.
+    # configuration of each. Lambda returns up to 50 versions per call.
     #
     #
     #
@@ -2978,7 +2978,7 @@ module Aws::Lambda
     #   retrieve the next page of results.
     #
     # @option params [Integer] :max_items
-    #   Limit the number of versions that are returned.
+    #   The maximum number of versions to return.
     #
     # @return [Types::ListVersionsByFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2993,7 +2993,7 @@ module Aws::Lambda
     #   resp = client.list_versions_by_function({
     #     function_name: "myFunction", 
     #     marker: "", 
-    #     max_items: 123, 
+    #     max_items: 25, 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -3017,7 +3017,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -3124,7 +3124,7 @@ module Aws::Lambda
     #       s3_object_version: "S3ObjectVersion",
     #       zip_file: "data",
     #     },
-    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     compatible_runtimes: ["nodejs"], # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     license_info: "LicenseInfo",
     #   })
     #
@@ -3139,7 +3139,7 @@ module Aws::Lambda
     #   resp.created_date #=> Time
     #   resp.version #=> Integer
     #   resp.compatible_runtimes #=> Array
-    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.compatible_runtimes[0] #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.license_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishLayerVersion AWS API Documentation
@@ -3269,7 +3269,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3374,7 +3374,10 @@ module Aws::Lambda
     end
 
     # Configures options for [asynchronous invocation][1] on a function,
-    # version, or alias.
+    # version, or alias. If a configuration already exists for a function,
+    # version, or alias, this operation overwrites it. If you exclude any
+    # settings, they are removed. To set one option without affecting
+    # existing settings for other options, use PutFunctionEventInvokeConfig.
     #
     # By default, Lambda retries an asynchronous invocation twice if the
     # function returns an error. It retains events in a queue for up to six
@@ -3383,9 +3386,16 @@ module Aws::Lambda
     # retain discarded events, configure a dead-letter queue with
     # UpdateFunctionConfiguration.
     #
+    # To send an invocation record to a queue, topic, function, or event
+    # bus, specify a [destination][2]. You can configure separate
+    # destinations for successful invocations (on-success) and events that
+    # fail all processing attempts (on-failure). You can configure
+    # destinations in addition to or instead of a dead-letter queue.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html
+    # [2]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-async-destinations
     #
     # @option params [required, String] :function_name
     #   The name of the Lambda function, version, or alias.
@@ -4101,7 +4111,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4343,7 +4353,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, provided
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, nodejs10.x, nodejs12.x, java8, java11, python2.7, python3.6, python3.7, python3.8, dotnetcore1.0, dotnetcore2.0, dotnetcore2.1, nodejs4.3-edge, go1.x, ruby2.5, ruby2.7, provided
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -4359,7 +4369,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "provided"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "nodejs10.x", "nodejs12.x", "java8", "java11", "python2.7", "python3.6", "python3.7", "python3.8", "dotnetcore1.0", "dotnetcore2.0", "dotnetcore2.1", "nodejs4.3-edge", "go1.x", "ruby2.5", "ruby2.7", "provided"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -4506,7 +4516,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

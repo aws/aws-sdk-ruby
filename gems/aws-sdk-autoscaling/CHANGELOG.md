@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2020-02-19)
+------------------
+
+* Feature - Doc update for EC2 Auto Scaling: Add Enabled parameter for PutScalingPolicy
+
 1.31.0 (2020-02-18)
 ------------------
 

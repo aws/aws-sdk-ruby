@@ -644,6 +644,14 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_TargetTrackingConfiguration.html
     # @option options [Boolean] :enabled
+    #   Indicates whether the scaling policy is enabled or disabled. The
+    #   default is enabled. For more information, see [Disabling a Scaling
+    #   Policy for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)

@@ -1651,12 +1651,12 @@ module Aws::AutoScaling
 
     # @!attribute [rw] max_number_of_auto_scaling_groups
     #   The maximum number of groups allowed for your AWS account. The
-    #   default limit is 200 per AWS Region.
+    #   default is 200 groups per AWS Region.
     #   @return [Integer]
     #
     # @!attribute [rw] max_number_of_launch_configurations
     #   The maximum number of launch configurations allowed for your AWS
-    #   account. The default limit is 200 per AWS Region.
+    #   account. The default is 200 launch configurations per AWS Region.
     #   @return [Integer]
     #
     # @!attribute [rw] number_of_auto_scaling_groups
@@ -4250,6 +4250,14 @@ module Aws::AutoScaling
     #   @return [Types::TargetTrackingConfiguration]
     #
     # @!attribute [rw] enabled
+    #   Indicates whether the scaling policy is enabled or disabled. The
+    #   default is enabled. For more information, see [Disabling a Scaling
+    #   Policy for an Auto Scaling Group][1] in the *Amazon EC2 Auto Scaling
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enable-disable-scaling-policy.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicyType AWS API Documentation
@@ -4514,6 +4522,8 @@ module Aws::AutoScaling
     #   @return [Types::TargetTrackingConfiguration]
     #
     # @!attribute [rw] enabled
+    #   Indicates whether the policy is enabled (`true`) or disabled
+    #   (`false`).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingPolicy AWS API Documentation
