@@ -143,6 +143,38 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com:123')
         end
 
+        it 'includes WS port in Host when not 80' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'ws://domain.com:123'
+          )
+          expect(signature.headers['host']).to eq('domain.com:123')
+        end
+
+        it 'includes WSS port in Host when not 443' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'wss://domain.com:123'
+          )
+          expect(signature.headers['host']).to eq('domain.com:123')
+        end
+
+        it 'does not include trailing colon in HOST if WS default port' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'ws://domain.com'
+          )
+          expect(signature.headers['host']).to eq('domain.com')
+        end
+
+        it 'does not include trailing colon in HOST if WSS default port' do
+          signature = Signer.new(options).sign_request(
+            http_method: 'GET',
+            url: 'wss://domain.com'
+          )
+          expect(signature.headers['host']).to eq('domain.com')
+        end
+
         it 'sets the X-Amz-Date header' do
           now = Time.now
           allow(Time).to receive(:now).and_return(now)

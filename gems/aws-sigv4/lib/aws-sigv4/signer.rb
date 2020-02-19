@@ -558,7 +558,9 @@ module Aws
 
       def standard_port?(uri)
         (uri.scheme == 'http' && uri.port == 80) ||
-        (uri.scheme == 'https' && uri.port == 443)
+        (uri.scheme == 'https' && uri.port == 443) ||
+        (uri.scheme == 'ws' && (uri.port == 80 || uri.port.nil?)) ||
+        (uri.scheme == 'wss' && (uri.port == 443 || uri.port.nil?))
       end
 
       # @param [File, Tempfile, IO#read, String] value
