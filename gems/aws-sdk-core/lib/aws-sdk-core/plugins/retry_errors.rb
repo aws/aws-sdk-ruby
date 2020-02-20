@@ -349,38 +349,40 @@ SDK operation invocation before giving up. Used in `standard` and
           # throttling error
           return unless @enabled
 
-          token_bucket_refill
+          @mutex.synchronize { token_bucket_refill }
           # Next see if we have enough capacity for the requested amount
           # TODO: Check config for blocking (instant fail)
           if amount > @current_capacity
             Kernel.sleep((amount - @current_capacity) / @fill_rate)
           end
-          @current_capacity -= amount
+          @mutex.synchronize { @current_capacity -= amount }
         end
 
         def update_client_sending_rate(is_throttling_error)
-          update_measured_rate
+          @mutex.synchronize do
+            update_measured_rate
 
-          if is_throttling_error
-            rate_to_use = if @enabled
-                            [@measured_tx_rate, @fill_rate].min
-                          else
-                            @measured_tx_rate
-                          end
+            if is_throttling_error
+              rate_to_use = if @enabled
+                              [@measured_tx_rate, @fill_rate].min
+                            else
+                              @measured_tx_rate
+                            end
 
-            # The fill_rate is from the token bucket
-            @last_max_rate = rate_to_use
-            calculate_time_window
-            @last_throttle_time = Aws::Util.monotonic_seconds
-            @calculated_rate = cubic_throttle(rate_to_use)
-            enable_token_bucket
-          else
-            calculate_time_window
-            @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
+              # The fill_rate is from the token bucket
+              @last_max_rate = rate_to_use
+              calculate_time_window
+              @last_throttle_time = Aws::Util.monotonic_seconds
+              @calculated_rate = cubic_throttle(rate_to_use)
+              enable_token_bucket
+            else
+              calculate_time_window
+              @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
+            end
+
+            new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
+            token_bucket_update_rate(new_rate)
           end
-
-          new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
-          token_bucket_update_rate(new_rate)
         end
 
         private

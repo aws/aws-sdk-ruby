@@ -688,9 +688,8 @@ module Aws
             client_rate_limiter = resp.context.config.client_rate_limiter
             client_rate_limiter.instance_variable_set(:@last_throttle_time, 5)
             # Needs to be smaller than 't' in the iterations
-            client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 500)
+            client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 4.5)
             client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
-            client_rate_limiter.instance_variable_set(:@measured_tx_rate, 10)
           end
 
           it 'verifies cubic calculations for successes' do
