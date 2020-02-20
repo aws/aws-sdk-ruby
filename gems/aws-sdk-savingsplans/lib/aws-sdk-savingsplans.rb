@@ -42,6 +42,6 @@ require_relative 'aws-sdk-savingsplans/customizations'
 # @service
 module Aws::SavingsPlans
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end

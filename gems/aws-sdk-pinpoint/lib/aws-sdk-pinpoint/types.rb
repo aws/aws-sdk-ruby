@@ -2349,7 +2349,7 @@ module Aws::Pinpoint
     #         body: "__string",
     #         from_address: "__string",
     #         html_body: "__string",
-    #         title: "__string", # required
+    #         title: "__string",
     #       }
     #
     # @!attribute [rw] body
@@ -3197,7 +3197,7 @@ module Aws::Pinpoint
     #                   body: "__string",
     #                   from_address: "__string",
     #                   html_body: "__string",
-    #                   title: "__string", # required
+    #                   title: "__string",
     #                 },
     #                 gcm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -3349,7 +3349,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string", # required
+    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -10345,7 +10345,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           from_address: "__string",
     #           html_body: "__string",
-    #           title: "__string", # required
+    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -14965,7 +14965,7 @@ module Aws::Pinpoint
     #                   body: "__string",
     #                   from_address: "__string",
     #                   html_body: "__string",
-    #                   title: "__string", # required
+    #                   title: "__string",
     #                 },
     #                 gcm_message: {
     #                   action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -15117,7 +15117,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string", # required
+    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -16935,7 +16935,7 @@ module Aws::Pinpoint
     #                 body: "__string",
     #                 from_address: "__string",
     #                 html_body: "__string",
-    #                 title: "__string", # required
+    #                 title: "__string",
     #               },
     #               gcm_message: {
     #                 action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -17087,7 +17087,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             from_address: "__string",
     #             html_body: "__string",
-    #             title: "__string", # required
+    #             title: "__string",
     #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -17948,7 +17948,7 @@ module Aws::Pinpoint
     #             body: "__string",
     #             from_address: "__string",
     #             html_body: "__string",
-    #             title: "__string", # required
+    #             title: "__string",
     #           },
     #           gcm_message: {
     #             action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL

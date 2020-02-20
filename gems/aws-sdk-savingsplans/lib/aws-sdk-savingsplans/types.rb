@@ -143,8 +143,8 @@ module Aws::SavingsPlans
     #         savings_plan_offering_ids: ["UUID"],
     #         savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #         savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
-    #         products: ["EC2"], # accepts EC2, Fargate
-    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS
+    #         products: ["EC2"], # accepts EC2, Fargate, Lambda
+    #         service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
     #         usage_types: ["SavingsPlanRateUsageType"],
     #         operations: ["SavingsPlanRateOperation"],
     #         filters: [
@@ -238,7 +238,7 @@ module Aws::SavingsPlans
     #       {
     #         offering_ids: ["UUID"],
     #         payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #         product_type: "EC2", # accepts EC2, Fargate
+    #         product_type: "EC2", # accepts EC2, Fargate, Lambda
     #         plan_types: ["Compute"], # accepts Compute, EC2Instance
     #         durations: [1],
     #         currencies: ["CNY"], # accepts CNY, USD

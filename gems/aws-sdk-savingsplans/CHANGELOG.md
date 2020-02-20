@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-02-20)
+------------------
+
+* Feature - Added support for AWS Lambda in Compute Savings Plans
+
 1.1.0 (2019-11-06)
 ------------------
 
