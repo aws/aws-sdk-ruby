@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.449 (2020-02-20)
+------------------
+
 * Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
 
 * Feature - Aws::Pinpoint - Updated the API for Amazon Pinpoint.
