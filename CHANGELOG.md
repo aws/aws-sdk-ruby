@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppConfig - Updated the API, and documentation for Amazon AppConfig.
+
+* Feature - Aws::Pinpoint - Updated the API for Amazon Pinpoint.
+
+* Feature - Aws::SavingsPlans - Updated the API for AWS Savings Plans.
+
 2.11.448 (2020-02-19)
 ------------------
 
