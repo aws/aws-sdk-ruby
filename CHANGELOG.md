@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Imagebuilder - Updated the API, and documentation for EC2 Image Builder.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+* Feature - Aws::WAFV2 - Updated the API, documentation, and integration test for AWS WAFV2.
+
 2.11.449 (2020-02-20)
 ------------------
 
