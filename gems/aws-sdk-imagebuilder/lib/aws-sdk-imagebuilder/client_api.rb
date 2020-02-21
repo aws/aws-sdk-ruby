@@ -175,6 +175,7 @@ module Aws::Imagebuilder
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourcePolicyDocument = Shapes::StringShape.new(name: 'ResourcePolicyDocument')
     RestrictedInteger = Shapes::IntegerShape.new(name: 'RestrictedInteger')
     S3Logs = Shapes::StructureShape.new(name: 'S3Logs')
     Schedule = Shapes::StructureShape.new(name: 'Schedule')
@@ -468,7 +469,7 @@ module Aws::Imagebuilder
     GetComponentPolicyRequest.struct_class = Types::GetComponentPolicyRequest
 
     GetComponentPolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetComponentPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetComponentPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetComponentPolicyResponse.struct_class = Types::GetComponentPolicyResponse
 
     GetComponentRequest.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location: "querystring", location_name: "componentBuildVersionArn"))
@@ -496,14 +497,14 @@ module Aws::Imagebuilder
     GetImagePolicyRequest.struct_class = Types::GetImagePolicyRequest
 
     GetImagePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetImagePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetImagePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetImagePolicyResponse.struct_class = Types::GetImagePolicyResponse
 
     GetImageRecipePolicyRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location: "querystring", location_name: "imageRecipeArn"))
     GetImageRecipePolicyRequest.struct_class = Types::GetImageRecipePolicyRequest
 
     GetImageRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
-    GetImageRecipePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "policy"))
+    GetImageRecipePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, location_name: "policy"))
     GetImageRecipePolicyResponse.struct_class = Types::GetImageRecipePolicyResponse
 
     GetImageRecipeRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location: "querystring", location_name: "imageRecipeArn"))
@@ -805,7 +806,7 @@ module Aws::Imagebuilder
     OutputResources.struct_class = Types::OutputResources
 
     PutComponentPolicyRequest.add_member(:component_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, required: true, location_name: "componentArn"))
-    PutComponentPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutComponentPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutComponentPolicyRequest.struct_class = Types::PutComponentPolicyRequest
 
     PutComponentPolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -813,7 +814,7 @@ module Aws::Imagebuilder
     PutComponentPolicyResponse.struct_class = Types::PutComponentPolicyResponse
 
     PutImagePolicyRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: ImageBuildVersionArn, required: true, location_name: "imageArn"))
-    PutImagePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutImagePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutImagePolicyRequest.struct_class = Types::PutImagePolicyRequest
 
     PutImagePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))
@@ -821,7 +822,7 @@ module Aws::Imagebuilder
     PutImagePolicyResponse.struct_class = Types::PutImagePolicyResponse
 
     PutImageRecipePolicyRequest.add_member(:image_recipe_arn, Shapes::ShapeRef.new(shape: ImageRecipeArn, required: true, location_name: "imageRecipeArn"))
-    PutImageRecipePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "policy"))
+    PutImageRecipePolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: ResourcePolicyDocument, required: true, location_name: "policy"))
     PutImageRecipePolicyRequest.struct_class = Types::PutImageRecipePolicyRequest
 
     PutImageRecipePolicyResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "requestId"))

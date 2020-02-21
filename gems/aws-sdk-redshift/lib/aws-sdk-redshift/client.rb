@@ -1925,7 +1925,7 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         cluster_type: "String",
     #         node_type: "String",
-    #         number_of_nodes: 1, # required
+    #         number_of_nodes: 1,
     #         classic: false,
     #       },
     #     },
@@ -4283,7 +4283,8 @@ module Aws::Redshift
     #   "restore-cluster" to get configuration combinations based on an
     #   existing snapshot. Specify "recommend-node-config" to get
     #   configuration recommendations based on an existing cluster or
-    #   snapshot.
+    #   snapshot. Specify "resize-cluster" to get configuration combinations
+    #   for elastic resize based on an existing cluster.
     #
     # @option params [String] :cluster_identifier
     #   The identifier of the cluster to evaluate for possible node
@@ -4329,7 +4330,7 @@ module Aws::Redshift
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_node_configuration_options({
-    #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config
+    #     action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #     cluster_identifier: "String",
     #     snapshot_identifier: "String",
     #     owner_account: "String",
@@ -6948,7 +6949,7 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         cluster_type: "String",
     #         node_type: "String",
-    #         number_of_nodes: 1, # required
+    #         number_of_nodes: 1,
     #         classic: false,
     #       },
     #     },
@@ -7490,7 +7491,7 @@ module Aws::Redshift
     #   The new node type for the nodes you are adding. If not specified, the
     #   cluster's current node type is used.
     #
-    # @option params [required, Integer] :number_of_nodes
+    # @option params [Integer] :number_of_nodes
     #   The new number of nodes for the cluster.
     #
     # @option params [Boolean] :classic
@@ -7508,7 +7509,7 @@ module Aws::Redshift
     #     cluster_identifier: "String", # required
     #     cluster_type: "String",
     #     node_type: "String",
-    #     number_of_nodes: 1, # required
+    #     number_of_nodes: 1,
     #     classic: false,
     #   })
     #
@@ -8386,7 +8387,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

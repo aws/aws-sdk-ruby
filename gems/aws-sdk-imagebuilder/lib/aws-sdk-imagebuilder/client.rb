@@ -2094,7 +2094,7 @@ module Aws::Imagebuilder
     #
     #   resp = client.put_component_policy({
     #     component_arn: "ComponentBuildVersionArn", # required
-    #     policy: "NonEmptyString", # required
+    #     policy: "ResourcePolicyDocument", # required
     #   })
     #
     # @example Response structure
@@ -2129,7 +2129,7 @@ module Aws::Imagebuilder
     #
     #   resp = client.put_image_policy({
     #     image_arn: "ImageBuildVersionArn", # required
-    #     policy: "NonEmptyString", # required
+    #     policy: "ResourcePolicyDocument", # required
     #   })
     #
     # @example Response structure
@@ -2164,7 +2164,7 @@ module Aws::Imagebuilder
     #
     #   resp = client.put_image_recipe_policy({
     #     image_recipe_arn: "ImageRecipeArn", # required
-    #     policy: "NonEmptyString", # required
+    #     policy: "ResourcePolicyDocument", # required
     #   })
     #
     # @example Response structure
@@ -2523,7 +2523,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

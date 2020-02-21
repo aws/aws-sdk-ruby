@@ -3205,7 +3205,7 @@ module Aws::Imagebuilder
     #
     #       {
     #         component_arn: "ComponentBuildVersionArn", # required
-    #         policy: "NonEmptyString", # required
+    #         policy: "ResourcePolicyDocument", # required
     #       }
     #
     # @!attribute [rw] component_arn
@@ -3247,7 +3247,7 @@ module Aws::Imagebuilder
     #
     #       {
     #         image_arn: "ImageBuildVersionArn", # required
-    #         policy: "NonEmptyString", # required
+    #         policy: "ResourcePolicyDocument", # required
     #       }
     #
     # @!attribute [rw] image_arn
@@ -3289,7 +3289,7 @@ module Aws::Imagebuilder
     #
     #       {
     #         image_recipe_arn: "ImageRecipeArn", # required
-    #         policy: "NonEmptyString", # required
+    #         policy: "ResourcePolicyDocument", # required
     #       }
     #
     # @!attribute [rw] image_recipe_arn
