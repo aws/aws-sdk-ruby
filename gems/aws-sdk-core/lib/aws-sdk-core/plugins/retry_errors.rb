@@ -309,11 +309,11 @@ SDK operation invocation before giving up. Used in `standard` and
           # or unset.
           if is_response_successful
             @mutex.synchronize do
-            @available_capacity += if @capacity_amount
-                                     @capacity_amount
-                                   else
-                                     NO_RETRY_INCREMENT
-                                   end
+              @available_capacity += if @capacity_amount
+                                       @capacity_amount
+                                     else
+                                       NO_RETRY_INCREMENT
+                                     end
             end
           end
         end
@@ -344,18 +344,22 @@ SDK operation invocation before giving up. Used in `standard` and
           @calculated_rate      = nil
         end
 
-        def token_bucket_acquire(amount)
+        def token_bucket_acquire(amount, wait_to_fill=true)
           # Client side throttling is not enabled until we see a
           # throttling error
           return unless @enabled
 
-          @mutex.synchronize { token_bucket_refill }
-          # Next see if we have enough capacity for the requested amount
-          # TODO: Check config for blocking (instant fail)
-          if amount > @current_capacity
-            Kernel.sleep((amount - @current_capacity) / @fill_rate)
+          @mutex.synchronize do
+            token_bucket_refill
+
+            # Next see if we have enough capacity for the requested amount
+            while @current_capacity < amount
+              raise Aws::Errors::CapacityNotAvailableError unless wait_to_fill
+              @mutex.sleep((amount - @current_capacity) / @fill_rate)
+              token_bucket_refill
+            end
+            @current_capacity -= amount
           end
-          @mutex.synchronize { @current_capacity -= amount }
         end
 
         def update_client_sending_rate(is_throttling_error)

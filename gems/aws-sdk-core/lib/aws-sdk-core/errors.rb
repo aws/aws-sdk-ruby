@@ -265,6 +265,13 @@ Known AWS regions include (not specific to this service):
 
     end
 
+    class CapacityNotAvailableError < RuntimeError
+      def initialize(*args)
+        msg = 'Insufficient request capacity available.'
+        super(msg)
+      end
+    end
+
     # This module is mixed into another module, providing dynamic
     # error classes.  Error classes all inherit from {ServiceError}.
     #
