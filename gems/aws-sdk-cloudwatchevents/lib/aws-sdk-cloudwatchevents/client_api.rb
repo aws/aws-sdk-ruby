@@ -192,6 +192,7 @@ module Aws::CloudWatchEvents
 
     CreateEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     CreateEventBusRequest.add_member(:event_source_name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "EventSourceName"))
+    CreateEventBusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateEventBusRequest.struct_class = Types::CreateEventBusRequest
 
     CreateEventBusResponse.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: String, location_name: "EventBusArn"))
@@ -419,7 +420,7 @@ module Aws::CloudWatchEvents
     PutPartnerEventsRequest.struct_class = Types::PutPartnerEventsRequest
 
     PutPartnerEventsRequestEntry.add_member(:time, Shapes::ShapeRef.new(shape: EventTime, location_name: "Time"))
-    PutPartnerEventsRequestEntry.add_member(:source, Shapes::ShapeRef.new(shape: String, location_name: "Source"))
+    PutPartnerEventsRequestEntry.add_member(:source, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "Source"))
     PutPartnerEventsRequestEntry.add_member(:resources, Shapes::ShapeRef.new(shape: EventResourceList, location_name: "Resources"))
     PutPartnerEventsRequestEntry.add_member(:detail_type, Shapes::ShapeRef.new(shape: String, location_name: "DetailType"))
     PutPartnerEventsRequestEntry.add_member(:detail, Shapes::ShapeRef.new(shape: String, location_name: "Detail"))
@@ -598,6 +599,7 @@ module Aws::CloudWatchEvents
         o.input = Shapes::ShapeRef.new(shape: ActivateEventSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -635,6 +637,7 @@ module Aws::CloudWatchEvents
         o.input = Shapes::ShapeRef.new(shape: DeactivateEventSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -646,6 +649,7 @@ module Aws::CloudWatchEvents
         o.input = Shapes::ShapeRef.new(shape: DeleteEventBusRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_partner_event_source, Seahorse::Model::Operation.new.tap do |o|
@@ -655,6 +659,7 @@ module Aws::CloudWatchEvents
         o.input = Shapes::ShapeRef.new(shape: DeletePartnerEventSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_rule, Seahorse::Model::Operation.new.tap do |o|
