@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DocDB - Updated the documentation for Amazon DocumentDB with MongoDB compatibility.
+
+* Feature - Aws::EventBridge - Updated the API, and documentation for Amazon EventBridge.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::FSx - Updated the API, and documentation for Amazon FSx.
+
+* Feature - Aws::IoTEvents - Updated the documentation for AWS IoT Events.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
 2.11.450 (2020-02-21)
 ------------------
 
