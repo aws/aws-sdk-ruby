@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.451 (2020-02-24)
+------------------
+
 * Feature - Aws::DocDB - Updated the documentation for Amazon DocumentDB with MongoDB compatibility.
 
 * Feature - Aws::EventBridge - Updated the API, and documentation for Amazon EventBridge.
