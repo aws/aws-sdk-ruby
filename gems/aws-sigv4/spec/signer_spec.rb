@@ -127,52 +127,45 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        it 'includes HTTP port in Host when not 80' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'http://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context '#known URI schema' do
+
+          it 'ommits port in Host when default port and uri port are the same' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:443'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'includes port in Host when default port and uri port are different' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
         end
 
-        it 'includes HTTPS port in Host when not 443' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
-        end
+        context '#unknown uri schema' do
 
-        it 'includes WS port in Host when not 80' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'ws://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
-        end
+          it 'ommits port in Host when uri port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
 
-        it 'includes WSS port in Host when not 443' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'wss://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
-        end
+          end
 
-        it 'does not include trailing colon in HOST if WS default port' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'ws://domain.com'
-          )
-          expect(signature.headers['host']).to eq('domain.com')
-        end
+          it 'includes port in Host when uri port provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
 
-        it 'does not include trailing colon in HOST if WSS default port' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'wss://domain.com'
-          )
-          expect(signature.headers['host']).to eq('domain.com')
         end
 
         it 'sets the X-Amz-Date header' do
