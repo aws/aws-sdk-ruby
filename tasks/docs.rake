@@ -36,7 +36,7 @@ task 'docs' => ['docs:clobber', 'docs:update_readme'] do
   env = {}
   env['DOCSTRINGS'] = '1'
   env['BASEURL'] = 'http://docs.aws.amazon.com/'
-  env['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/sdkforruby/api/'
+  env['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/sdk-for-ruby/v2/api/'
   sh(env, 'bundle exec yard')
 end
 
