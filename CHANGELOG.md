@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.452 (2020-02-25)
+------------------
+
 * Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
 
 * Feature - Aws::Outposts - Updated the API, and documentation for AWS Outposts.
