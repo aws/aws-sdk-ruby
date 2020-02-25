@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kafka - Updated the API, and documentation for Managed Streaming for Kafka.
+
+* Feature - Aws::Outposts - Updated the API, and documentation for AWS Outposts.
+
+* Feature - Aws::SecretsManager - Updated the API, and documentation for AWS Secrets Manager.
+
+* Feature - Aws::States - Updated the API, and documentation for AWS Step Functions.
+
 2.11.451 (2020-02-24)
 ------------------
 
