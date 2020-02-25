@@ -350,9 +350,9 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].rate #=> String
     #   resp.search_results[0].currency #=> String, one of "CNY", "USD"
-    #   resp.search_results[0].unit #=> String, one of "Hrs"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -427,7 +427,7 @@ module Aws::SavingsPlans
     #   resp.savings_plans[0].savings_plan_type #=> String, one of "Compute", "EC2Instance"
     #   resp.savings_plans[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
     #   resp.savings_plans[0].product_types #=> Array
-    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate"
+    #   resp.savings_plans[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda"
     #   resp.savings_plans[0].currency #=> String, one of "CNY", "USD"
     #   resp.savings_plans[0].commitment #=> String
     #   resp.savings_plans[0].upfront_payment_amount #=> String
@@ -491,8 +491,8 @@ module Aws::SavingsPlans
     #     savings_plan_offering_ids: ["UUID"],
     #     savings_plan_payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
     #     savings_plan_types: ["Compute"], # accepts Compute, EC2Instance
-    #     products: ["EC2"], # accepts EC2, Fargate
-    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS
+    #     products: ["EC2"], # accepts EC2, Fargate, Lambda
+    #     service_codes: ["AmazonEC2"], # accepts AmazonEC2, AmazonECS, AWSLambda
     #     usage_types: ["SavingsPlanRateUsageType"],
     #     operations: ["SavingsPlanRateOperation"],
     #     filters: [
@@ -515,9 +515,9 @@ module Aws::SavingsPlans
     #   resp.search_results[0].savings_plan_offering.currency #=> String, one of "CNY", "USD"
     #   resp.search_results[0].savings_plan_offering.plan_description #=> String
     #   resp.search_results[0].rate #=> String
-    #   resp.search_results[0].unit #=> String, one of "Hrs"
-    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate"
-    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS"
+    #   resp.search_results[0].unit #=> String, one of "Hrs", "Lambda-GB-Second", "Request"
+    #   resp.search_results[0].product_type #=> String, one of "EC2", "Fargate", "Lambda"
+    #   resp.search_results[0].service_code #=> String, one of "AmazonEC2", "AmazonECS", "AWSLambda"
     #   resp.search_results[0].usage_type #=> String
     #   resp.search_results[0].operation #=> String
     #   resp.search_results[0].properties #=> Array
@@ -587,7 +587,7 @@ module Aws::SavingsPlans
     #   resp = client.describe_savings_plans_offerings({
     #     offering_ids: ["UUID"],
     #     payment_options: ["All Upfront"], # accepts All Upfront, Partial Upfront, No Upfront
-    #     product_type: "EC2", # accepts EC2, Fargate
+    #     product_type: "EC2", # accepts EC2, Fargate, Lambda
     #     plan_types: ["Compute"], # accepts Compute, EC2Instance
     #     durations: [1],
     #     currencies: ["CNY"], # accepts CNY, USD
@@ -610,7 +610,7 @@ module Aws::SavingsPlans
     #   resp.search_results #=> Array
     #   resp.search_results[0].offering_id #=> String
     #   resp.search_results[0].product_types #=> Array
-    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate"
+    #   resp.search_results[0].product_types[0] #=> String, one of "EC2", "Fargate", "Lambda"
     #   resp.search_results[0].plan_type #=> String, one of "Compute", "EC2Instance"
     #   resp.search_results[0].description #=> String
     #   resp.search_results[0].payment_option #=> String, one of "All Upfront", "Partial Upfront", "No Upfront"
@@ -730,7 +730,7 @@ module Aws::SavingsPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-savingsplans'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

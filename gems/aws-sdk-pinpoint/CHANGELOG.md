@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2020-02-20)
+------------------
+
+* Feature - As of this release of the Amazon Pinpoint API, the Title property is optional for the CampaignEmailMessage object.
+
 1.32.0 (2019-12-20)
 ------------------
 

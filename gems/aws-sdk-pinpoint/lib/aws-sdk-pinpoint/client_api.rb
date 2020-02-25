@@ -757,7 +757,7 @@ module Aws::Pinpoint
     CampaignEmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     CampaignEmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
     CampaignEmailMessage.add_member(:html_body, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlBody"))
-    CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Title"))
+    CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     CampaignEmailMessage.struct_class = Types::CampaignEmailMessage
 
     CampaignEventFilter.add_member(:dimensions, Shapes::ShapeRef.new(shape: EventDimensions, required: true, location_name: "Dimensions"))

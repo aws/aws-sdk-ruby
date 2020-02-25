@@ -372,7 +372,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string", # required
+    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -524,7 +524,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           from_address: "__string",
     #           html_body: "__string",
-    #           title: "__string", # required
+    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -7909,7 +7909,7 @@ module Aws::Pinpoint
     #               body: "__string",
     #               from_address: "__string",
     #               html_body: "__string",
-    #               title: "__string", # required
+    #               title: "__string",
     #             },
     #             gcm_message: {
     #               action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -8061,7 +8061,7 @@ module Aws::Pinpoint
     #           body: "__string",
     #           from_address: "__string",
     #           html_body: "__string",
-    #           title: "__string", # required
+    #           title: "__string",
     #         },
     #         gcm_message: {
     #           action: "OPEN_APP", # accepts OPEN_APP, DEEP_LINK, URL
@@ -9925,7 +9925,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

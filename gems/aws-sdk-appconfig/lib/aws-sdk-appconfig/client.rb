@@ -419,7 +419,33 @@ module Aws::AppConfig
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   dividing the total number of targets by the value specified for `Step
+    #   percentage`. For example, a linear deployment that uses a `Step
+    #   percentage` of 10 deploys the configuration to 10 percent of the
+    #   hosts. After those deployments are complete, the system deploys the
+    #   configuration to the next 10 percent. This continues until 100% of the
+    #   targets have successfully received the configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this formula,
+    #   `G` is the growth factor specified by the user and `N` is the number
+    #   of steps until the configuration is deployed to all targets. For
+    #   example, if you specify a growth factor of 2, then the system rolls
+    #   out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of the
+    #   targets, 4% of the targets, 8% of the targets, and continues until the
+    #   configuration has been deployed to all targets.
     #
     # @option params [required, String] :replicate_to
     #   Save the deployment strategy to a Systems Manager (SSM) document.
@@ -448,7 +474,7 @@ module Aws::AppConfig
     #     deployment_duration_in_minutes: 1, # required
     #     final_bake_time_in_minutes: 1,
     #     growth_factor: 1.0, # required
-    #     growth_type: "LINEAR", # accepts LINEAR
+    #     growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #     replicate_to: "NONE", # required, accepts NONE, SSM_DOCUMENT
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -461,7 +487,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -831,7 +857,7 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
@@ -881,7 +907,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -1062,7 +1088,7 @@ module Aws::AppConfig
     #   resp.items[0].name #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].deployment_duration_in_minutes #=> Integer
-    #   resp.items[0].growth_type #=> String, one of "LINEAR"
+    #   resp.items[0].growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.items[0].growth_factor #=> Float
     #   resp.items[0].final_bake_time_in_minutes #=> Integer
     #   resp.items[0].replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -1115,7 +1141,7 @@ module Aws::AppConfig
     #   resp.items[0].configuration_name #=> String
     #   resp.items[0].configuration_version #=> String
     #   resp.items[0].deployment_duration_in_minutes #=> Integer
-    #   resp.items[0].growth_type #=> String, one of "LINEAR"
+    #   resp.items[0].growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.items[0].growth_factor #=> Float
     #   resp.items[0].final_bake_time_in_minutes #=> Integer
     #   resp.items[0].state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
@@ -1282,7 +1308,7 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
@@ -1352,7 +1378,7 @@ module Aws::AppConfig
     #   resp.configuration_version #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.state #=> String, one of "BAKING", "VALIDATING", "DEPLOYING", "COMPLETE", "ROLLING_BACK", "ROLLED_BACK"
@@ -1557,7 +1583,33 @@ module Aws::AppConfig
     #   each interval.
     #
     # @option params [String] :growth_type
-    #   The algorithm used to define how percentage grows over time.
+    #   The algorithm used to define how percentage grows over time. AWS
+    #   AppConfig supports the following growth types:
+    #
+    #   **Linear**\: For this type, AppConfig processes the deployment by
+    #   increments of the growth factor evenly distributed over the deployment
+    #   time. For example, a linear deployment that uses a growth factor of 20
+    #   initially makes the configuration available to 20 percent of the
+    #   targets. After 1/5th of the deployment time has passed, the system
+    #   updates the percentage to 40 percent. This continues until 100% of the
+    #   targets are set to receive the deployed configuration.
+    #
+    #   **Exponential**\: For this type, AppConfig processes the deployment
+    #   exponentially using the following formula: `G*(2^N)`. In this formula,
+    #   `G` is the growth factor specified by the user and `N` is the number
+    #   of steps until the configuration is deployed to all targets. For
+    #   example, if you specify a growth factor of 2, then the system rolls
+    #   out the configuration as follows:
+    #
+    #   `2*(2^0)`
+    #
+    #   `2*(2^1)`
+    #
+    #   `2*(2^2)`
+    #
+    #   Expressed numerically, the deployment rolls out as follows: 2% of the
+    #   targets, 4% of the targets, 8% of the targets, and continues until the
+    #   configuration has been deployed to all targets.
     #
     # @return [Types::DeploymentStrategy] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1578,7 +1630,7 @@ module Aws::AppConfig
     #     deployment_duration_in_minutes: 1,
     #     final_bake_time_in_minutes: 1,
     #     growth_factor: 1.0,
-    #     growth_type: "LINEAR", # accepts LINEAR
+    #     growth_type: "LINEAR", # accepts LINEAR, EXPONENTIAL
     #   })
     #
     # @example Response structure
@@ -1587,7 +1639,7 @@ module Aws::AppConfig
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.deployment_duration_in_minutes #=> Integer
-    #   resp.growth_type #=> String, one of "LINEAR"
+    #   resp.growth_type #=> String, one of "LINEAR", "EXPONENTIAL"
     #   resp.growth_factor #=> Float
     #   resp.final_bake_time_in_minutes #=> Integer
     #   resp.replicate_to #=> String, one of "NONE", "SSM_DOCUMENT"
@@ -1706,7 +1758,7 @@ module Aws::AppConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfig'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
