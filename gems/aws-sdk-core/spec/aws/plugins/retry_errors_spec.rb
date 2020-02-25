@@ -73,185 +73,111 @@ module Aws
       end
 
       describe 'ErrorInspector' do
+
         def inspector(error, http_status_code = 404)
           resp = Seahorse::Client::Response.new
-          resp.error = error
+          resp.error = (error.is_a? Class) ? error.new(nil, nil) : error
           resp.context.http_response.status_code = http_status_code
           RetryErrors::ErrorInspector.new(resp)
         end
 
         describe '#expired_credentials?' do
-          it 'returns true for InvalidClientTokenId' do
-            error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
+          expired_credentials_errors = [
+            RetryErrorsSvc::Errors::UnrecognizedClientException,
+            RetryErrorsSvc::Errors::InvalidClientTokenId,
+            RetryErrorsSvc::Errors::InvalidAccessKeyId,
+            RetryErrorsSvc::Errors::AuthFailure,
+            RetryErrorsSvc::Errors::InvalidIdentityToken,
+            RetryErrorsSvc::Errors::ExpiredToken
+          ]
 
-          it 'returns true for UnrecognizedClientException' do
-            error = RetryErrorsSvc::Errors::UnrecognizedClientException.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true for InvalidAccessKeyId' do
-            error = RetryErrorsSvc::Errors::InvalidAccessKeyId.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true for AuthFailure' do
-            error = RetryErrorsSvc::Errors::AuthFailure.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true for InvalidIdentityToken' do
-            error = RetryErrorsSvc::Errors::InvalidIdentityToken.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
-          end
-
-          it 'returns true for ExpiredToken' do
-            error = RetryErrorsSvc::Errors::ExpiredToken.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
+          expired_credentials_errors.each do |e|
+            it "returns true for #{e.name}" do
+              expect(inspector(e).expired_credentials?).to be(true)
+            end
           end
 
           it 'returns true for error types that match /expired/' do
-            error = RetryErrorsSvc::Errors::SomethingExpiredError.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::SomethingExpiredErro).expired_credentials?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil, nil)
-            expect(inspector(error).expired_credentials?).to be(false)
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).expired_credentials?).to be(false)
           end
         end
 
         describe '#throttling_error?' do
-          it 'returns true for Throttling' do
-            error = RetryErrorsSvc::Errors::Throttling.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
+          thorttling_errors = [
+            RetryErrorsSvc::Errors::Throttling,
+            RetryErrorsSvc::Errors::ThrottlingException,
+            RetryErrorsSvc::Errors::ThrottledException,
+            RetryErrorsSvc::Errors::RequestThrottled,
+            RetryErrorsSvc::Errors::RequestThrottledException,
+            RetryErrorsSvc::Errors::ProvisionedThroughputExceededException,
+            RetryErrorsSvc::Errors::TransactionInProgressException,
+            RetryErrorsSvc::Errors::RequestLimitExceeded,
+            RetryErrorsSvc::Errors::BandwidthLimitExceeded,
+            RetryErrorsSvc::Errors::LimitExceededException,
+            RetryErrorsSvc::Errors::TooManyRequestsException,
+            RetryErrorsSvc::Errors::PriorRequestNotComplete,
+            RetryErrorsSvc::Errors::SlowDown,
+            RetryErrorsSvc::Errors::EC2ThrottledException
+          ]
 
-          it 'returns true for ThrottlingException' do
-            error = RetryErrorsSvc::Errors::ThrottlingException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for ThrottledException' do
-            error = RetryErrorsSvc::Errors::ThrottledException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for RequestThrottled' do
-            error = RetryErrorsSvc::Errors::RequestThrottled.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for RequestThrottledException' do
-            error = RetryErrorsSvc::Errors::RequestThrottledException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for ProvisionedThroughputExceededException' do
-            error = RetryErrorsSvc::Errors::ProvisionedThroughputExceededException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for TransactionInProgressException' do
-            error = RetryErrorsSvc::Errors::TransactionInProgressException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for RequestLimitExceeded' do
-            error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for BandwidthLimitExceeded' do
-            error = RetryErrorsSvc::Errors::BandwidthLimitExceeded.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for LimitExceededException' do
-            error = RetryErrorsSvc::Errors::LimitExceededException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for TooManyRequestsException' do
-            error = RetryErrorsSvc::Errors::TooManyRequestsException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for PriorRequestNotComplete' do
-            error = RetryErrorsSvc::Errors::PriorRequestNotComplete.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for SlowDown' do
-            error = RetryErrorsSvc::Errors::SlowDown.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
-          end
-
-          it 'returns true for EC2ThrottledException' do
-            error = RetryErrorsSvc::Errors::EC2ThrottledException.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
+          thorttling_errors.each do |e|
+            it "returns true for #{e.name}" do
+              expect(inspector(e).throttling_error?).to be(true)
+            end
           end
 
           it 'returns true for error types that match /throttl/' do
-            error = RetryErrorsSvc::Errors::Throttled.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::Throttled).throttling_error?).to be(true)
           end
 
           it 'returns true for response status code 429' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil, nil)
-            expect(inspector(error, 429).throttling_error?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 429).throttling_error?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = RetryErrorsSvc::Errors::SomeRandomError.new(nil, nil)
-            expect(inspector(error).throttling_error?).to be(false)
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).throttling_error?).to be(false)
           end
         end
 
         describe '#checksum?' do
           it 'returns true for CRC32CheckFailed' do
-            error = RetryErrorsSvc::Errors::CRC32CheckFailed.new(nil, nil)
-            expect(inspector(error).checksum?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::CRC32CheckFailed).checksum?).to be(true)
           end
 
           it 'returns true if the error extends Errors::ChecksumError' do
-            error = Errors::ChecksumError.new
-            expect(inspector(error).checksum?).to be(true)
+            expect(inspector(Errors::ChecksumError.new).checksum?).to be(true)
           end
 
           it 'returns false for other errors' do
-            error = double('error')
-            expect(inspector(error).checksum?).to be(false)
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?).to be(false)
           end
         end
 
         describe '#server?' do
           it 'returns true if the error is a 500 level error' do
-            error = RetryErrorsSvc::Errors::RandomError.new(nil, nil)
-            expect(inspector(error, 500).server?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::RandomError, 500).server?).to be(true)
           end
 
           it 'returns false if the error is not a 500 level error' do
-            error = RetryErrorsSvc::Errors::RandomError.new(nil, nil)
-            expect(inspector(error, 404).server?).to be(false)
+            expect(inspector(RetryErrorsSvc::Errors::RandomError, 404).server?).to be(false)
           end
         end
 
         describe '#networking?' do
           it 'returns true for RequestTimeout' do
-            error = RetryErrorsSvc::Errors::RequestTimeout.new(nil, nil)
-            expect(inspector(error).networking?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?).to be(true)
           end
 
           it 'returns true for RequestTimeoutException' do
-            error = RetryErrorsSvc::Errors::RequestTimeoutException.new(nil, nil)
-            expect(inspector(error).networking?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::RequestTimeoutException).networking?).to be(true)
           end
 
           it 'returns true for IDPCommunicationError' do
-            error = RetryErrorsSvc::Errors::IDPCommunicationError.new(nil, nil)
-            expect(inspector(error).networking?).to be(true)
+            expect(inspector(RetryErrorsSvc::Errors::IDPCommunicationError).networking?).to be(true)
           end
 
           it 'returns true if the error extends NetworkingError' do
@@ -538,13 +464,7 @@ module Aws
           resp.context.config = config
           operation.endpoint_discovery = {}
           resp.context.operation = operation
-          resp.context.client =  Seahorse::Client::Base.new(endpoint:'http://example.com') # ApiHelper.sample_rest_xml::Client.new(region: 'us-west-2')
-        end
-
-        def handle(send_handler = nil, &block)
-          allow(Kernel).to receive(:sleep)
-          handler.handler = send_handler || block
-          handler.call(resp.context)
+          resp.context.client =  Seahorse::Client::Base.new(endpoint: 'http://example.com')
         end
 
         context 'standard mode' do
@@ -711,6 +631,12 @@ module Aws
             #run_retry success(11, 7.6)
             #run_retry success(12, 11.5)
           end
+        end
+
+        # resp must be defined outside this helper as a Response object
+        def handle(send_handler = nil, &block)
+          handler.handler = send_handler || block
+          handler.call(resp.context)
         end
 
         # A helper method to test Standard and Adaptive tests
