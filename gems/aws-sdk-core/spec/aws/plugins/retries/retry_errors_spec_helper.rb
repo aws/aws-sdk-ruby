@@ -1,4 +1,6 @@
 
+RetryErrorsSvc = ApiHelper.sample_service
+
 # resp must be defined outside this helper as a Response object
 def handle(send_handler = nil, &block)
   handler.handler = send_handler || block

@@ -109,7 +109,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private undocumented
-      option(:client_rate_limiter) { ClientRateLimiting.new }
+      option(:client_rate_limiter) { ClientRateLimiter.new }
 
       # @api private undocumented
       option(:retry_quota) { RetryQuota.new }
@@ -320,7 +320,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
-      class ClientRateLimiting
+      class ClientRateLimiter
         MIN_CAPACITY = 1
         MIN_FILL_RATE = 0.5
         SMOOTH = 0.8
