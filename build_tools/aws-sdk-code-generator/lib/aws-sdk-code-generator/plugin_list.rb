@@ -52,7 +52,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
         'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
-        'Aws::Plugins::ClientMetricsPlugin' => "#{core_plugins}/client_metrics_plugin.rb",
+        'Aws::Plugins::ClientMetrics' => "#{core_plugins}/client_metrics.rb",
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
         'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb"
       }
@@ -63,7 +63,7 @@ module AwsSdkCodeGenerator
       plugins.delete('Aws::Plugins::ResponsePaging')
       plugins.delete('Aws::Plugins::EndpointDiscovery')
       plugins.delete('Aws::Plugins::EndpointPattern')
-      plugins.delete('Aws::Plugins::ClientMetricsPlugin')
+      plugins.delete('Aws::Plugins::ClientMetrics')
       plugins.delete('Aws::Plugins::ClientMetricsSendPlugin')
       plugins.delete('Aws::Plugins::TransferEncoding')
       plugins['Aws::Plugins::InvocationId'] = "#{core_plugins}/invocation_id.rb"

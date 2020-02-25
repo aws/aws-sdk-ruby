@@ -16,7 +16,7 @@ module Aws
           client_side_monitoring_publisher: stub_publisher
         )
         client.handlers.add(
-          ClientMetricsPlugin::Handler,
+          ClientMetrics::Handler,
           step: :initialize
         )
         client.handlers.add(
@@ -58,7 +58,7 @@ module Aws
             client_side_monitoring: false
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsPlugin::Handler
+            Aws::Plugins::ClientMetrics::Handler
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
@@ -76,7 +76,7 @@ module Aws
             client_side_monitoring_port: nil
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsPlugin::Handler
+            Aws::Plugins::ClientMetrics::Handler
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
@@ -95,7 +95,7 @@ module Aws
           expect(client.config.client_side_monitoring_port).to eq(31000)
           expect(client.config.client_side_monitoring_host).to eq("127.0.0.1")
           expect(client.handlers.to_a).to include(
-            Aws::Plugins::ClientMetricsPlugin::Handler
+            Aws::Plugins::ClientMetrics::Handler
           )
           expect(client.handlers.to_a).to include(
             Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
@@ -109,7 +109,7 @@ module Aws
           env["AWS_CSM_ENABLED"] = "fAlSe"
           client = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsPlugin
+            Aws::Plugins::ClientMetrics
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin
@@ -117,7 +117,7 @@ module Aws
           env["AWS_CSM_ENABLED"] = "F"
           client2 = ClientMetricsSvc::Client.new(stub_responses: true)
           expect(client2.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsPlugin
+            Aws::Plugins::ClientMetrics
           )
           expect(client2.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsSendPlugin
@@ -267,7 +267,7 @@ module Aws
               client_side_monitoring_publisher: stub_publisher
             )
             client.handlers.add(
-              ClientMetricsPlugin::Handler,
+              ClientMetrics::Handler,
               step: :initialize
             )
             client.handlers.add(
@@ -317,7 +317,7 @@ module Aws
               client_side_monitoring_publisher: stub_publisher
             )
             client.handlers.add(
-              ClientMetricsPlugin::Handler,
+              ClientMetrics::Handler,
               step: :initialize
             )
             client.handlers.add(
