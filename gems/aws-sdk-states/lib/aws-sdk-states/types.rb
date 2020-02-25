@@ -71,6 +71,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -244,6 +247,9 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
@@ -330,6 +336,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] definition
@@ -348,12 +357,22 @@ module Aws::States
     #
     # @!attribute [rw] type
     #   Determines whether a Standard or Express state machine is created.
-    #   If not set, Standard is created.
+    #   The default is `STANDARD`. You cannot update the `type` of a state
+    #   machine once it has been created.
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
     #   Defines what execution history events are logged and where they are
     #   logged.
+    #
+    #   <note markdown="1"> By default, the `level` is set to `OFF`. For more information see
+    #   [Log Levels][1] in the AWS Step Functions User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] tags
@@ -481,6 +500,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -515,7 +537,7 @@ module Aws::States
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that identifies the execution.
+    #   The Amazon Resource Name (ARN) that id entifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] state_machine_arn
@@ -536,6 +558,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -625,6 +650,11 @@ module Aws::States
     #   date.
     #   @return [Time]
     #
+    # @!attribute [rw] logging_configuration
+    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   options.
+    #   @return [Types::LoggingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecutionOutput AWS API Documentation
     #
     class DescribeStateMachineForExecutionOutput < Struct.new(
@@ -632,7 +662,8 @@ module Aws::States
       :name,
       :definition,
       :role_arn,
-      :update_date)
+      :update_date,
+      :logging_configuration)
       include Aws::Structure
     end
 
@@ -672,6 +703,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -694,6 +728,7 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] type
+    #   The `type` of the state machine (`STANDARD` or `EXPRESS`).
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -701,6 +736,8 @@ module Aws::States
     #   @return [Time]
     #
     # @!attribute [rw] logging_configuration
+    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   options.
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
@@ -799,7 +836,7 @@ module Aws::States
     # Contains details about an execution.
     #
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that identifies the execution.
+    #   The Amazon Resource Name (ARN) that id entifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] state_machine_arn
@@ -820,6 +857,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1642,6 +1682,9 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    # options.
+    #
     # @note When making an API call, you may pass LoggingConfiguration
     #   data as a hash:
     #
@@ -1662,14 +1705,14 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] include_execution_data
-    #   Determines whether execution history data is included in your log.
-    #   When set to `FALSE`, data is excluded.
+    #   Determines whether execution data is included in your log. When set
+    #   to `FALSE`, data is excluded.
     #   @return [Boolean]
     #
     # @!attribute [rw] destinations
-    #   An object that describes where your execution history events will be
-    #   logged. Limited to size 1. Required, if your log level is not set to
-    #   `OFF`.
+    #   An array of objects that describes where your execution history
+    #   events will be logged. Limited to size 1. Required, if your log
+    #   level is not set to `OFF`.
     #   @return [Array<Types::LogDestination>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LoggingConfiguration AWS API Documentation
@@ -1878,6 +1921,9 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
@@ -1905,7 +1951,7 @@ module Aws::States
     end
 
     # @!attribute [rw] execution_arn
-    #   The Amazon Resource Name (ARN) that identifies the execution.
+    #   The Amazon Resource Name (ARN) that id entifies the execution.
     #   @return [String]
     #
     # @!attribute [rw] start_date
@@ -1954,6 +2000,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] output
@@ -2038,6 +2087,9 @@ module Aws::States
     #   * special characters `` " # % \ ^ | ~ ` $ & , ; : / ``
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
+    #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2505,6 +2557,8 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
+    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   options.
     #   @return [Types::LoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/UpdateStateMachineInput AWS API Documentation

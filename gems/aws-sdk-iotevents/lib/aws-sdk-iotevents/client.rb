@@ -266,12 +266,12 @@ module Aws::IoTEvents
     #   A brief description of the detector model.
     #
     # @option params [String] :key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
-    #   route each input received to the appropriate detector (instance). This
-    #   parameter uses a JSON-path expression to specify the attribute-value
-    #   pair in the message payload of each input that is used to identify the
-    #   device associated with the input.
+    #   The input attribute key used to identify a device or system to create
+    #   a detector (an instance of the detector model) and then to route each
+    #   input received to the appropriate detector (instance). This parameter
+    #   uses a JSON-path expression in the message payload of each input to
+    #   specify the attribute-value pair that is used to identify the device
+    #   associated with the input.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that grants permission to AWS IoT Events to
@@ -610,7 +610,7 @@ module Aws::IoTEvents
       req.send_request(options)
     end
 
-    # Describes a detector model. If the `"version"` parameter is not
+    # Describes a detector model. If the `version` parameter is not
     # specified, information about the latest version is returned.
     #
     # @option params [required, String] :detector_model_name
@@ -930,11 +930,11 @@ module Aws::IoTEvents
 
     # Sets or updates the AWS IoT Events logging options.
     #
-    # If you update the value of any `"loggingOptions"` field, it takes up
-    # to one minute for the change to take effect. Also, if you change the
-    # policy attached to the role you specified in the `"roleArn"` field
-    # (for example, to correct an invalid policy) it takes up to five
-    # minutes for that change to take effect.
+    # If you update the value of any `loggingOptions` field, it takes up to
+    # one minute for the change to take effect. If you change the policy
+    # attached to the role you specified in the `roleArn` field (for
+    # example, to correct an invalid policy), it takes up to five minutes
+    # for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
     #   The new values of the AWS IoT Events logging options.
@@ -1320,7 +1320,7 @@ module Aws::IoTEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotevents'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -841,7 +841,7 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing `DBClusterParameterGroup`.
+    #   * Must not match the name of an existing `DBClusterParameterGroup`.
     #
     #   ^
     #
@@ -1521,11 +1521,7 @@ module Aws::DocDB
     end
 
     # Returns a list of certificate authority (CA) certificates provided by
-    # Amazon DocumentDB for this AWS account. For certain management
-    # features such as cluster and instance lifecycle management, Amazon
-    # DocumentDB leverages operational technology that is shared with Amazon
-    # RDS and Amazon Neptune. Use the `filterName=engine,Values=docdb`
-    # filter parameter to return only Amazon DocumentDB clusters.
+    # Amazon DocumentDB for this AWS account.
     #
     # @option params [String] :certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
@@ -1931,7 +1927,11 @@ module Aws::DocDB
     end
 
     # Returns information about provisioned Amazon DocumentDB clusters. This
-    # API operation supports pagination.
+    # API operation supports pagination. For certain management features
+    # such as cluster and instance lifecycle management, Amazon DocumentDB
+    # leverages operational technology that is shared with Amazon RDS and
+    # Amazon Neptune. Use the `filterName=engine,Values=docdb` filter
+    # parameter to return only Amazon DocumentDB clusters.
     #
     # @option params [String] :db_cluster_identifier
     #   The user-provided cluster identifier. If this parameter is specified,
@@ -4167,7 +4167,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

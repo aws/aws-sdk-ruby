@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2020-02-25)
+------------------
+
+* Feature - This release adds support for CloudWatch Logs for Standard Workflows.
+
 1.24.0 (2019-12-04)
 ------------------
 

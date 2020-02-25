@@ -2283,7 +2283,7 @@ module Aws::Redshift
     #             cluster_identifier: "String", # required
     #             cluster_type: "String",
     #             node_type: "String",
-    #             number_of_nodes: 1, # required
+    #             number_of_nodes: 1,
     #             classic: false,
     #           },
     #         },
@@ -4059,7 +4059,7 @@ module Aws::Redshift
     #   data as a hash:
     #
     #       {
-    #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config
+    #         action_type: "restore-cluster", # required, accepts restore-cluster, recommend-node-config, resize-cluster
     #         cluster_identifier: "String",
     #         snapshot_identifier: "String",
     #         owner_account: "String",
@@ -4079,7 +4079,8 @@ module Aws::Redshift
     #   Specify "restore-cluster" to get configuration combinations based
     #   on an existing snapshot. Specify "recommend-node-config" to get
     #   configuration recommendations based on an existing cluster or
-    #   snapshot.
+    #   snapshot. Specify "resize-cluster" to get configuration
+    #   combinations for elastic resize based on an existing cluster.
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -6340,7 +6341,7 @@ module Aws::Redshift
     #             cluster_identifier: "String", # required
     #             cluster_type: "String",
     #             node_type: "String",
-    #             number_of_nodes: 1, # required
+    #             number_of_nodes: 1,
     #             classic: false,
     #           },
     #         },
@@ -7140,7 +7141,7 @@ module Aws::Redshift
     #         cluster_identifier: "String", # required
     #         cluster_type: "String",
     #         node_type: "String",
-    #         number_of_nodes: 1, # required
+    #         number_of_nodes: 1,
     #         classic: false,
     #       }
     #
@@ -7961,9 +7962,9 @@ module Aws::Redshift
     #   example, "`at(2016-03-04T17:27:00)`".
     #
     #   Format of cron expressions is "`cron(Minutes Hours Day-of-month
-    #   Month Day-of-week Year)`". For example, "`cron(0, 10, *, *, MON,
-    #   *)`". For more information, see [Cron Expressions][1] in the
-    #   *Amazon CloudWatch Events User Guide*.
+    #   Month Day-of-week Year)`". For example, "`cron(0 10 ? * MON *)`".
+    #   For more information, see [Cron Expressions][1] in the *Amazon
+    #   CloudWatch Events User Guide*.
     #
     #
     #
@@ -8060,7 +8061,7 @@ module Aws::Redshift
     #           cluster_identifier: "String", # required
     #           cluster_type: "String",
     #           node_type: "String",
-    #           number_of_nodes: 1, # required
+    #           number_of_nodes: 1,
     #           classic: false,
     #         },
     #       }

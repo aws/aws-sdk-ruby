@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2020-02-24)
+------------------
+
+* Feature - Announcing persistent file systems for Amazon FSx for Lustre that are ideal for longer-term storage and workloads, and a new generation of scratch file systems that offer higher burst throughput for spiky workloads.
+
 1.14.0 (2019-12-23)
 ------------------
 

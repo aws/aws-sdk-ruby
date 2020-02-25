@@ -467,6 +467,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backup.file_system.lustre_configuration.mount_name #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #
@@ -628,21 +631,24 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :file_system_type
-    #   The type of Amazon FSx file system to create.
+    #   The type of Amazon FSx file system to create, either `WINDOWS` or
+    #   `LUSTRE`.
     #
     # @option params [required, Integer] :storage_capacity
     #   The storage capacity of the file system being created.
     #
     #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
     #
-    #   For Lustre file systems, valid values are 1,200, 2,400, 3,600, then
-    #   continuing in increments of 3600 GiB.
+    #   For `SCRATCH_1` Lustre file systems, valid values are 1,200, 2,400,
+    #   3,600, then continuing in increments of 3600 GiB. For `SCRATCH_2` and
+    #   `PERSISTENT_1` file systems, valid values are 1200, 2400, then
+    #   continuing in increments of 2400 GiB.
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
     #   accessible from. For Windows `MULTI_AZ_1` file system deployment
     #   types, provide exactly two subnet IDs, one for the preferred file
-    #   server and one for the standy file server. You specify one of these
+    #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
     #   PreferredSubnetID` property.
     #
@@ -661,10 +667,13 @@ module Aws::FSx
     #
     # @option params [String] :kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to encrypt
-    #   the file system's data for an Amazon FSx for Windows File Server file
-    #   system at rest. Amazon FSx for Lustre does not support KMS encryption.
-    #   For more information, see [Encrypt][1] in the *AWS Key Management
-    #   Service API Reference*.
+    #   the file system's data for Amazon FSx for Windows File Server file
+    #   systems and Amazon FSx for Lustre `PERSISTENT_1` file systems at rest.
+    #   In either case, if not specified, the Amazon FSx managed key is used.
+    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are
+    #   always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
     #
     #
     #
@@ -782,6 +791,8 @@ module Aws::FSx
     #       import_path: "ArchivePath",
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
+    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #       per_unit_storage_throughput: 1,
     #     },
     #   })
     #
@@ -827,6 +838,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -1041,6 +1055,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -1367,6 +1384,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.next_token #=> String
@@ -1612,6 +1632,9 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_systems[0].lustre_configuration.mount_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -1930,6 +1953,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -1953,7 +1979,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

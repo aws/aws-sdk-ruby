@@ -682,7 +682,7 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing `DBClusterParameterGroup`.
+    #   * Must not match the name of an existing `DBClusterParameterGroup`.
     #
     #   ^
     #

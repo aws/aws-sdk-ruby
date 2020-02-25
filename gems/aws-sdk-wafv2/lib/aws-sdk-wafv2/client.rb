@@ -276,7 +276,7 @@ module Aws::WAFV2
     # Balancer (ALB) or an API Gateway stage.
     #
     # For AWS CloudFront, you can associate the Web ACL by providing the
-    # `Id` of the WebACL to the CloudFront API call `UpdateDistribution`.
+    # `ARN` of the WebACL to the CloudFront API call `UpdateDistribution`.
     # For information, see [UpdateDistribution][2].
     #
     #
@@ -294,15 +294,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -717,7 +714,9 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # Creates a RegexPatternSet per the specifications provided.
+    # Creates a RegexPatternSet, which you reference in a
+    # RegexPatternSetReferenceStatement, to have AWS WAF inspect a web
+    # request component for the specified patterns.
     #
     #
     #
@@ -1799,7 +1798,7 @@ module Aws::WAFV2
     # API Gateway stage.
     #
     # For AWS CloudFront, you can disassociate the Web ACL by providing an
-    # empty `WebACLId` in the CloudFront API call `UpdateDistribution`. For
+    # empty web ACL ARN in the CloudFront API call `UpdateDistribution`. For
     # information, see [UpdateDistribution][2].
     #
     #
@@ -1813,15 +1812,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2553,8 +2549,8 @@ module Aws::WAFV2
     #  </note>
     #
     # Retrieves an array of managed rule groups that are available for you
-    # to use. This list includes all AWS managed rule groups and the AWS
-    # Marketplace managed rule groups that you're subscribed to.
+    # to use. This list includes all AWS Managed Rules rule groups and the
+    # AWS Marketplace managed rule groups that you're subscribed to.
     #
     #
     #
@@ -4098,7 +4094,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
