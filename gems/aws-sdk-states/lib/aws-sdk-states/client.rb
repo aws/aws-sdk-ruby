@@ -305,6 +305,9 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
@@ -359,7 +362,8 @@ module Aws::States
     # states that can do work (`Task` states), determine to which states to
     # transition next (`Choice` states), stop an execution with an error
     # (`Fail` states), and so on. State machines are specified using a
-    # JSON-based, structured language.
+    # JSON-based, structured language. For more information, see [Amazon
+    # States Language][1] in the AWS Step Functions User Guide.
     #
     # <note markdown="1"> This operation is eventually consistent. The results are best effort
     # and may not reflect very recent updates and changes.
@@ -369,13 +373,17 @@ module Aws::States
     # <note markdown="1"> `CreateStateMachine` is an idempotent API. Subsequent requests won’t
     # create a duplicate resource if it was already created.
     # `CreateStateMachine`'s idempotency check is based on the state
-    # machine `name` and `definition`. If a following request has a
-    # different `roleArn` or `tags`, Step Functions will ignore these
-    # differences and treat it as an idempotent request of the previous. In
-    # this case, `roleArn` and `tags` will not be updated, even if they are
-    # different.
+    # machine `name`, `definition`, `type`, and `LoggingConfiguration`. If a
+    # following request has a different `roleArn` or `tags`, Step Functions
+    # will ignore these differences and treat it as an idempotent request of
+    # the previous. In this case, `roleArn` and `tags` will not be updated,
+    # even if they are different.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
     #
     # @option params [required, String] :name
     #   The name of the state machine.
@@ -392,6 +400,9 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     # @option params [required, String] :definition
     #   The Amazon States Language definition of the state machine. See
     #   [Amazon States Language][1].
@@ -405,12 +416,22 @@ module Aws::States
     #   machine.
     #
     # @option params [String] :type
-    #   Determines whether a Standard or Express state machine is created. If
-    #   not set, Standard is created.
+    #   Determines whether a Standard or Express state machine is created. The
+    #   default is `STANDARD`. You cannot update the `type` of a state machine
+    #   once it has been created.
     #
     # @option params [Types::LoggingConfiguration] :logging_configuration
     #   Defines what execution history events are logged and where they are
     #   logged.
+    #
+    #   <note markdown="1"> By default, the `level` is set to `OFF`. For more information see [Log
+    #   Levels][1] in the AWS Step Functions User Guide.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be added when creating a state machine.
@@ -496,11 +517,11 @@ module Aws::States
 
     # Deletes a state machine. This is an asynchronous operation: It sets
     # the state machine's status to `DELETING` and begins the deletion
-    # process. Each state machine execution is deleted the next time it
-    # makes a state transition.
+    # process.
     #
-    # <note markdown="1"> The state machine itself is deleted after all executions are completed
-    # or deleted.
+    # <note markdown="1"> For `EXPRESS`state machines, the deletion will happen eventually
+    # (usually less than a minute). Running executions may emit logs after
+    # `DeleteStateMachine` API is called.
     #
     #  </note>
     #
@@ -567,6 +588,8 @@ module Aws::States
     # and may not reflect very recent updates and changes.
     #
     #  </note>
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
@@ -665,6 +688,8 @@ module Aws::States
     #
     #  </note>
     #
+    # This API action is not supported by `EXPRESS` state machines.
+    #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution you want state machine
     #   information for.
@@ -676,6 +701,7 @@ module Aws::States
     #   * {Types::DescribeStateMachineForExecutionOutput#definition #definition} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#role_arn #role_arn} => String
     #   * {Types::DescribeStateMachineForExecutionOutput#update_date #update_date} => Time
+    #   * {Types::DescribeStateMachineForExecutionOutput#logging_configuration #logging_configuration} => Types::LoggingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -690,6 +716,10 @@ module Aws::States
     #   resp.definition #=> String
     #   resp.role_arn #=> String
     #   resp.update_date #=> Time
+    #   resp.logging_configuration.level #=> String, one of "ALL", "ERROR", "FATAL", "OFF"
+    #   resp.logging_configuration.include_execution_data #=> Boolean
+    #   resp.logging_configuration.destinations #=> Array
+    #   resp.logging_configuration.destinations[0].cloud_watch_logs_log_group.log_group_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineForExecution AWS API Documentation
     #
@@ -767,6 +797,8 @@ module Aws::States
     # Keep all other arguments unchanged. Each pagination token expires
     # after 24 hours. Using an expired pagination token will return an *HTTP
     # 400 InvalidToken* error.
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution.
@@ -971,6 +1003,8 @@ module Aws::States
     # and may not reflect very recent updates and changes.
     #
     #  </note>
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine whose executions
@@ -1286,6 +1320,9 @@ module Aws::States
     #
     #   * control characters (`U+0000-001F`, `U+007F-009F`)
     #
+    #   To enable logging with CloudWatch Logs, the name should only contain
+    #   0-9, A-Z, a-z, - and \_.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
@@ -1329,6 +1366,8 @@ module Aws::States
     end
 
     # Stops an execution.
+    #
+    # This API action is not supported by `EXPRESS` state machines.
     #
     # @option params [required, String] :execution_arn
     #   The Amazon Resource Name (ARN) of the execution to stop.
@@ -1438,10 +1477,10 @@ module Aws::States
       req.send_request(options)
     end
 
-    # Updates an existing state machine by modifying its `definition` and/or
-    # `roleArn`. Running executions will continue to use the previous
-    # `definition` and `roleArn`. You must include at least one of
-    # `definition` or `roleArn` or you will receive a
+    # Updates an existing state machine by modifying its `definition`,
+    # `roleArn`, or `loggingConfiguration`. Running executions will continue
+    # to use the previous `definition` and `roleArn`. You must include at
+    # least one of `definition` or `roleArn` or you will receive a
     # `MissingRequiredParameter` error.
     #
     # <note markdown="1"> All `StartExecution` calls within a few seconds will use the updated
@@ -1466,6 +1505,8 @@ module Aws::States
     #   The Amazon Resource Name (ARN) of the IAM role of the state machine.
     #
     # @option params [Types::LoggingConfiguration] :logging_configuration
+    #   The `LoggingConfiguration` data type is used to set CloudWatch Logs
+    #   options.
     #
     # @return [Types::UpdateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1516,7 +1557,7 @@ module Aws::States
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

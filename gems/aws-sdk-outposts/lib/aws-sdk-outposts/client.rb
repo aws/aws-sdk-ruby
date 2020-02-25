@@ -306,6 +306,50 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Deletes the Outpost.
+    #
+    # @option params [required, String] :outpost_id
+    #   The ID of the Outpost.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_outpost({
+    #     outpost_id: "OutpostId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpost AWS API Documentation
+    #
+    # @overload delete_outpost(params = {})
+    # @param [Hash] params ({})
+    def delete_outpost(params = {}, options = {})
+      req = build_request(:delete_outpost, params)
+      req.send_request(options)
+    end
+
+    # Deletes the site.
+    #
+    # @option params [required, String] :site_id
+    #   The ID of the site.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_site({
+    #     site_id: "SiteId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSite AWS API Documentation
+    #
+    # @overload delete_site(params = {})
+    # @param [Hash] params ({})
+    def delete_site(params = {}, options = {})
+      req = build_request(:delete_site, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified Outpost.
     #
     # @option params [required, String] :outpost_id
@@ -479,7 +523,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
