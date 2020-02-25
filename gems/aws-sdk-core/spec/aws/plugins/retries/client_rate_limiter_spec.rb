@@ -128,7 +128,7 @@ module Aws
       end
 
       it 'enables the token bucket on throttling errors' do
-        client_rate_limiter.update_client_sending_rate(true)
+        client_rate_limiter.update_sending_rate(true)
         expect(client_rate_limiter.instance_variable_get(:@enabled)).to be(true)
       end
 

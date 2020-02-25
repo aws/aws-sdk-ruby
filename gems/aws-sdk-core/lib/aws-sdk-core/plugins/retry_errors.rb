@@ -190,10 +190,27 @@ SDK operation invocation before giving up. Used in `standard` and
           ]
         )
 
-        def initialize(response)
+        def initialize(*args)
+          case args.size
+          when 1
+            initialize_from_response(*args)
+          when 2
+            initialize_from_error(*args)
+          else
+            raise ArgumentError, 'Wrong number of arguments'
+          end
+        end
+
+        def initialize_from_response(response)
           @error = response.error
           @name = extract_name(@error)
           @http_status_code = response.context.http_response.status_code
+        end
+
+        def initialize_from_error(error, http_status_code)
+          @error = error
+          @name = extract_name(@error)
+          @http_status_code = http_status_code
         end
 
         def expired_credentials?
