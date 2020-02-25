@@ -11,6 +11,7 @@ module Aws
 
       ######
       # Cubic Calculator tests
+      #  Inspired by: https://github.com/jamesls/botocore/blob/f6bec32a13d6b45d29dc054726edd3c1cdf99b26/tests/unit/retries/test_throttling.py
       it 'sets the time window correctly from max rate' do
         client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
         client_rate_limiter.send(:calculate_time_window)
@@ -38,6 +39,7 @@ module Aws
 
       #######
       # Rate Clocker tests
+      # Inspired by: https://github.com/jamesls/botocore/blob/f6bec32a13d6b45d29dc054726edd3c1cdf99b26/tests/unit/retries/test_adaptive.py#L91
       it 'updates rate if after bucket range' do
         client_rate_limiter.instance_variable_set(:@last_tx_rate_bucket, 0)
         allow(Util).to receive(:monotonic_seconds).and_return(1)
@@ -68,6 +70,7 @@ module Aws
 
       #######
       # Token Bucket Tests
+      # Inspired by: https://github.com/jamesls/botocore/blob/f6bec32a13d6b45d29dc054726edd3c1cdf99b26/tests/unit/retries/test_bucket.py
       it 'can acquire amount' do
         client_rate_limiter.instance_variable_set(:@enabled, true)
         allow(Util).to receive(:monotonic_seconds).and_return(0)
