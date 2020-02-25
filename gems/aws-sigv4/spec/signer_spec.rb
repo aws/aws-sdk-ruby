@@ -127,7 +127,15 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        context '#known URI schema' do
+        context 'when URI schema is known' do
+
+          it 'ommits port in Host when port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
 
           it 'ommits port in Host when default port and uri port are the same' do
             signature = Signer.new(options).sign_request(
@@ -147,7 +155,7 @@ module Aws
 
         end
 
-        context '#unknown uri schema' do
+        context 'when URI schema is unknown' do
 
           it 'ommits port in Host when uri port not provided' do
             signature = Signer.new(options).sign_request(
