@@ -4,6 +4,7 @@ module Aws
   module Plugins
     # @api private
     class RetryErrors < Seahorse::Client::Plugin
+      # BEGIN LEGACY OPTIONS
       EQUAL_JITTER = ->(delay) { (delay / 2) + Kernel.rand(0..(delay / 2)) }
       FULL_JITTER = ->(delay) { Kernel.rand(0..delay) }
       NO_JITTER = ->(delay) { delay }
@@ -84,6 +85,8 @@ A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
 This option is only used in the `legacy` retry mode.
         DOCS
 
+      # END LEGACY OPTIONS
+
       option(
         :retry_mode,
         default: 'legacy',
@@ -141,6 +144,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
+      # This class will be obselete when APIs contain modeled exceptions
       class ErrorInspector
         EXPIRED_CREDS = Set.new(
           [
@@ -270,6 +274,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
+      # Used in 'standard' retry mode.
       class RetryQuota
         INITIAL_RETRY_TOKENS = 500
         RETRY_COST = 5
@@ -286,7 +291,6 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         # Acquiring tokens from the retry quota
-        # TODO: networking_error == Timeout?  consider aligning terms used....
         def retry_quota?(error)
           @mutex.synchronize do
             @capacity_amount = if error.networking?
@@ -320,6 +324,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
+      # Used in both 'standard' and 'adaptive' retry modes
       class ClientRateLimiter
         MIN_CAPACITY = 1
         MIN_FILL_RATE = 0.5
@@ -362,7 +367,7 @@ SDK operation invocation before giving up. Used in `standard` and
           end
         end
 
-        def update_client_sending_rate(is_throttling_error)
+        def update_sending_rate(is_throttling_error)
           @mutex.synchronize do
             update_measured_rate
 
@@ -455,41 +460,17 @@ SDK operation invocation before giving up. Used in `standard` and
         MAX_BACKOFF = 20
 
         def call(context)
-          #############
-          puts "\n\n#########################################"
-          retry_mode = context.config.retry_mode
-          max_attempts = context.config.max_attempts
-          puts "retry mode: #{retry_mode}, max_attempts: #{max_attempts}."
-          puts "Current Retries: #{context.retries}"
-          puts '#########################################'
-          #############
+          config = context.config
 
-          client_rate_limiter = context.config.client_rate_limiter
-          retry_quota = context.config.retry_quota
-
-          puts client_rate_limiter.inspect
-
-          get_send_token(client_rate_limiter, context.config.retry_mode)
-
-          puts client_rate_limiter.inspect
-
+          get_send_token(config)
           response = @handler.call(context)
-
-          request_bookkeeping(response, retry_quota, client_rate_limiter, context.config.retry_mode)
-
-          puts client_rate_limiter.inspect
-
+          request_bookkeeping(config, response)
           return response unless retryable?(response, context)
 
-          puts client_rate_limiter.inspect
-
-          return response if context.retries >= context.config.max_attempts - 1
+          return response if context.retries >= config.max_attempts - 1
 
           error = ErrorInspector.new(response)
-
-          return response unless retry_quota.retry_quota?(error)
-
-          puts client_rate_limiter.inspect
+          return response unless config.retry_quota.retry_quota?(error)
 
           delay = exponential_backoff(context.retries)
           Kernel.sleep(delay)
@@ -498,24 +479,24 @@ SDK operation invocation before giving up. Used in `standard` and
 
         private
 
-        def get_send_token(client_rate_limiter, retry_mode)
+        def get_send_token(config)
           # either fail fast or block until a token becomes available
           # must be configurable
           # need a maximum rate at which we can send requests (max_send_rate)
           # is unset until a throttle is seen
-          if retry_mode == 'adaptive'
-            client_rate_limiter.token_bucket_acquire(1)
+          if config.retry_mode == 'adaptive'
+            config.client_rate_limiter.token_bucket_acquire(1)
           end
         end
 
-        def request_bookkeeping(response, retry_quota, client_rate_limiter, retry_mode)
+        def request_bookkeeping(config, response)
           # maxsendrate is updated if on adaptive mode and based on response
           # retry quota is updated if the request is successful (both modes)
-          retry_quota.release(response.successful?)
+          config.retry_quota.release(response.successful?)
 
-          if retry_mode == 'adaptive'
-            error = ErrorInspector.new(response)
-            client_rate_limiter.update_client_sending_rate(error.throttling_error?)
+          if config.retry_mode == 'adaptive'
+            is_throttling_error = ErrorInspector.new(response).throttling_error?
+            config.client_rate_limiter.update_sending_rate(is_throttling_error)
           end
         end
 
@@ -525,7 +506,6 @@ SDK operation invocation before giving up. Used in `standard` and
           error = ErrorInspector.new(response)
           error.retryable?(context) &&
             context.http_response.body.respond_to?(:truncate)
-
         end
 
         def exponential_backoff(retries)
