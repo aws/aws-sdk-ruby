@@ -1,7 +1,7 @@
 {
   "metadata": {
     "endpointPrefix": "svcname",
-    "serviceId": "sample_svc",
+    "serviceId": "sample_errors_svc",
     "protocol": "rest-json"
   },
   "operations": {
@@ -442,6 +442,47 @@
         "Key": { "shape": "String"},
         "Value": { "shape": "String"},
         "ResourceId": { "shape": "String"}
+      }
+    },
+    "ServiceErrorWithMessage": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true
+    },
+    "RetryableErrorWithMessage": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {}
+    },
+    "RetryableErrorWithoutMessage": {
+      "type": "structure",
+      "members": {},
+      "exception": true,
+      "retryable": {}
+    },
+    "ThrottlingError": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {
+        "throttling": true
+      }
+    },
+    "RetryableNonThrottlingError": {
+      "type": "structure",
+      "members": {
+        "message": { "shape":  "String"}
+      },
+      "exception": true,
+      "retryable": {
+        "throttling": false
       }
     }
   }
