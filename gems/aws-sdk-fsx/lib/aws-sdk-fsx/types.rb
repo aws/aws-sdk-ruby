@@ -552,6 +552,8 @@ module Aws::FSx
     #         import_path: "ArchivePath",
     #         export_path: "ArchivePath",
     #         imported_file_chunk_size: 1,
+    #         deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #         per_unit_storage_throughput: 1,
     #       }
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -598,9 +600,48 @@ module Aws::FSx
     #   that a single file can be striped across is limited by the total
     #   number of disks that make up the file system.
     #
-    #   The chunk size default is 1,024 MiB (1 GiB) and can go as high as
+    #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
     #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5
     #   TB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] deployment_type
+    #   (Optional) Choose `SCRATCH_1` and `SCRATCH_2` deployment types when
+    #   you need temporary storage and shorter-term processing of data. The
+    #   `SCRATCH_2` deployment type provides in-transit encryption of data
+    #   and higher burst throughput capacity than `SCRATCH_1`.
+    #
+    #   Choose `PERSISTENT_1` deployment type for longer-term storage and
+    #   workloads and encryption of data in transit. To learn more about
+    #   deployment types, see [ FSx for Lustre Deployment Options][1].
+    #
+    #   Encryption of data in-transit is automatically enabled when you
+    #   access a `SCRATCH_2` or `PERSISTENT_1` file system from Amazon EC2
+    #   instances that [support this feature][2]. (Default = `SCRATCH_1`)
+    #
+    #   Encryption of data in-transit for `SCRATCH_2` and `PERSISTENT_1`
+    #   deployment types is supported when accessed from supported instance
+    #   types in supported AWS Regions. To learn more, [Encrypting Data in
+    #   Transit][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   (Optional) For the `PERSISTENT_1` deployment type, describes the
+    #   amount of read and write throughput for each 1 tebibyte of storage,
+    #   in MB/s/TiB. File system throughput capacity is calculated by
+    #   multiplying ﬁle system storage capacity (TiB) by the
+    #   PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
+    #   provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 120 MB/s
+    #   of ﬁle system throughput. You pay for the amount of throughput that
+    #   you provision. (Default = 200 MB/s/TiB)
+    #
+    #   Valid values are 50, 100, 200.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
@@ -609,7 +650,9 @@ module Aws::FSx
       :weekly_maintenance_start_time,
       :import_path,
       :export_path,
-      :imported_file_chunk_size)
+      :imported_file_chunk_size,
+      :deployment_type,
+      :per_unit_storage_throughput)
       include Aws::Structure
     end
 
@@ -654,6 +697,8 @@ module Aws::FSx
     #           import_path: "ArchivePath",
     #           export_path: "ArchivePath",
     #           imported_file_chunk_size: 1,
+    #           deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
+    #           per_unit_storage_throughput: 1,
     #         },
     #       }
     #
@@ -668,7 +713,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] file_system_type
-    #   The type of Amazon FSx file system to create.
+    #   The type of Amazon FSx file system to create, either `WINDOWS` or
+    #   `LUSTRE`.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity
@@ -676,15 +722,17 @@ module Aws::FSx
     #
     #   For Windows file systems, valid values are 32 GiB - 65,536 GiB.
     #
-    #   For Lustre file systems, valid values are 1,200, 2,400, 3,600, then
-    #   continuing in increments of 3600 GiB.
+    #   For `SCRATCH_1` Lustre file systems, valid values are 1,200, 2,400,
+    #   3,600, then continuing in increments of 3600 GiB. For `SCRATCH_2`
+    #   and `PERSISTENT_1` file systems, valid values are 1200, 2400, then
+    #   continuing in increments of 2400 GiB.
     #   @return [Integer]
     #
     # @!attribute [rw] subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
     #   accessible from. For Windows `MULTI_AZ_1` file system deployment
     #   types, provide exactly two subnet IDs, one for the preferred file
-    #   server and one for the standy file server. You specify one of these
+    #   server and one for the standby file server. You specify one of these
     #   subnets as the preferred subnet using the `WindowsConfiguration >
     #   PreferredSubnetID` property.
     #
@@ -706,9 +754,12 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system at rest. Amazon FSx for Lustre does not support
-    #   KMS encryption. For more information, see [Encrypt][1] in the *AWS
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and Amazon FSx for Lustre `PERSISTENT_1` file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The Amazon FSx for Lustre `SCRATCH_1` and
+    #   `SCRATCH_2` file systems are always encrypted at rest using Amazon
+    #   FSx managed keys. For more information, see [Encrypt][1] in the *AWS
     #   Key Management Service API Reference*.
     #
     #
@@ -850,7 +901,9 @@ module Aws::FSx
     #   true, all tags for the file system are copied to all automatic and
     #   user-initiated backups where the user doesn't specify tags. If this
     #   value is true, and you specify one or more tags, only the specified
-    #   tags are copied to backups.
+    #   tags are copied to backups. If you specify one or more tags when
+    #   creating a user-initiated backup, no tags are copied from the file
+    #   system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemWindowsConfiguration AWS API Documentation
@@ -1617,9 +1670,17 @@ module Aws::FSx
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the AWS Key Management Service (AWS KMS) key used to
-    #   encrypt the file system's data for an Amazon FSx for Windows File
-    #   Server file system. Amazon FSx for Lustre does not support KMS
-    #   encryption.
+    #   encrypt the file system's data for Amazon FSx for Windows File
+    #   Server file systems and persistent Amazon FSx for Lustre file
+    #   systems at rest. In either case, if not specified, the Amazon FSx
+    #   managed key is used. The scratch Amazon FSx for Lustre file systems
+    #   are always encrypted at rest using Amazon FSx managed keys. For more
+    #   information, see [Encrypt][1] in the *AWS Key Management Service API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1824,6 +1885,20 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # An invalid value for `PerUnitStorageThroughput` was provided. Please
+    # create your file system again, using a valid value.
+    #
+    # @!attribute [rw] message
+    #   A detailed error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/InvalidPerUnitStorageThroughput AWS API Documentation
+    #
+    class InvalidPerUnitStorageThroughput < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
     # The request object for `ListTagsForResource` operation.
     #
     # @note When making an API call, you may pass ListTagsForResourceRequest
@@ -1893,15 +1968,38 @@ module Aws::FSx
     #   returned in the response of the `CreateFileSystem` operation.
     #   @return [Types::DataRepositoryConfiguration]
     #
+    # @!attribute [rw] deployment_type
+    #   The deployment type of the FSX for Lustre file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   Per unit storage throughput represents the megabytes per second of
+    #   read or write throughput per 1 tebibyte of storage provisioned. File
+    #   system throughput capacity is equal to Storage capacity (TiB) *
+    #   PerUnitStorageThroughput (MB/s/TiB). This option is only valid for
+    #   `PERSISTENT_1` deployment types. Valid values are 50, 100, 200.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_name
+    #   You use the `MountName` value when mounting the file system.
+    #
+    #   For the `SCRATCH_1` deployment type, this value is always "`fsx`".
+    #   For `SCRATCH_2` and `PERSISTENT_1` deployment types, this value is a
+    #   string that is unique within an AWS Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
       :weekly_maintenance_start_time,
-      :data_repository_configuration)
+      :data_repository_configuration,
+      :deployment_type,
+      :per_unit_storage_throughput,
+      :mount_name)
       include Aws::Structure
     end
 
-    # File system configuration is required for this operation.
+    # A file system configuration is required for this operation.
     #
     # @!attribute [rw] message
     #   A detailed error message.
@@ -2518,7 +2616,9 @@ module Aws::FSx
     #   true, all tags on the file system are copied to all automatic
     #   backups and any user-initiated backups where the user doesn't
     #   specify any tags. If this value is true, and you specify one or more
-    #   tags, only the specified tags are copied to backups.
+    #   tags, only the specified tags are copied to backups. If you specify
+    #   one or more tags when creating a user-initiated backup, no tags are
+    #   copied from the file system, regardless of this value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/WindowsFileSystemConfiguration AWS API Documentation

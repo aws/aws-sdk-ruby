@@ -166,6 +166,8 @@ module Aws::SecurityHub
     InsightResultValueList = Shapes::ListShape.new(name: 'InsightResultValueList')
     InsightResults = Shapes::StructureShape.new(name: 'InsightResults')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
+    IntegrationTypeList = Shapes::ListShape.new(name: 'IntegrationTypeList')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidAccessException = Shapes::StructureShape.new(name: 'InvalidAccessException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
@@ -1000,6 +1002,8 @@ module Aws::SecurityHub
     InsightResults.add_member(:result_values, Shapes::ShapeRef.new(shape: InsightResultValueList, required: true, location_name: "ResultValues"))
     InsightResults.struct_class = Types::InsightResults
 
+    IntegrationTypeList.member = Shapes::ShapeRef.new(shape: IntegrationType)
+
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
     InternalException.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
     InternalException.struct_class = Types::InternalException
@@ -1144,6 +1148,7 @@ module Aws::SecurityHub
     Product.add_member(:company_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CompanyName"))
     Product.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     Product.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Categories"))
+    Product.add_member(:integration_types, Shapes::ShapeRef.new(shape: IntegrationTypeList, location_name: "IntegrationTypes"))
     Product.add_member(:marketplace_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "MarketplaceUrl"))
     Product.add_member(:activation_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ActivationUrl"))
     Product.add_member(:product_subscription_resource_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProductSubscriptionResourcePolicy"))

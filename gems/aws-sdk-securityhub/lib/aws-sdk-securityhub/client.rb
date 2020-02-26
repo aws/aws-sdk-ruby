@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics.rb'
+require 'aws-sdk-core/plugins/client_metrics_sender.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
@@ -54,8 +54,8 @@ module Aws::SecurityHub
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetricsPlugin)
-    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::ClientMetrics)
+    add_plugin(Aws::Plugins::ClientMetricsSender)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
@@ -289,8 +289,8 @@ module Aws::SecurityHub
     # Disables the standards specified by the provided
     # `StandardsSubscriptionArns`.
     #
-    # For more information, see [Compliance Standards][1] section of the
-    # *AWS Security Hub User Guide*.
+    # For more information, see [Security Standards][1] section of the *AWS
+    # Security Hub User Guide*.
     #
     #
     #
@@ -331,7 +331,7 @@ module Aws::SecurityHub
     # obtain the ARN for a standard, use the ` DescribeStandards `
     # operation.
     #
-    # For more information, see the [Compliance Standards][1] section of the
+    # For more information, see the [Security Standards][1] section of the
     # *AWS Security Hub User Guide*.
     #
     #
@@ -339,7 +339,7 @@ module Aws::SecurityHub
     # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html
     #
     # @option params [required, Array<Types::StandardsSubscriptionRequest>] :standards_subscription_requests
-    #   The list of standards compliance checks to enable.
+    #   The list of standards checks to enable.
     #
     # @return [Types::BatchEnableStandardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1840,6 +1840,8 @@ module Aws::SecurityHub
     #   resp.products[0].description #=> String
     #   resp.products[0].categories #=> Array
     #   resp.products[0].categories[0] #=> String
+    #   resp.products[0].integration_types #=> Array
+    #   resp.products[0].integration_types[0] #=> String, one of "SEND_FINDINGS_TO_SECURITY_HUB", "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
     #   resp.products[0].marketplace_url #=> String
     #   resp.products[0].activation_url #=> String
     #   resp.products[0].product_subscription_resource_policy #=> String
@@ -1900,7 +1902,7 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Returns a list of compliance standards controls.
+    # Returns a list of security standards controls.
     #
     # For each control, the results include information about whether it is
     # currently enabled, the severity, and a link to remediation
@@ -1920,7 +1922,7 @@ module Aws::SecurityHub
     #   response.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of compliance standard controls to return.
+    #   The maximum number of security standard controls to return.
     #
     # @return [Types::DescribeStandardsControlsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4984,18 +4986,18 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
-    # Used to control whether an individual compliance standard control is
+    # Used to control whether an individual security standard control is
     # enabled or disabled.
     #
     # @option params [required, String] :standards_control_arn
-    #   The ARN of the compliance standard control to enable or disable.
+    #   The ARN of the security standard control to enable or disable.
     #
     # @option params [String] :control_status
-    #   The updated status of the compliance standard control.
+    #   The updated status of the security standard control.
     #
     # @option params [String] :disabled_reason
-    #   A description of the reason why you are disabling a compliance
-    #   standard control.
+    #   A description of the reason why you are disabling a security standard
+    #   control.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5029,7 +5031,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

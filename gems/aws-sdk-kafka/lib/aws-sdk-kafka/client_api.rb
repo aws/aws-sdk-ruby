@@ -14,11 +14,13 @@ module Aws::Kafka
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     BrokerAZDistribution = Shapes::StringShape.new(name: 'BrokerAZDistribution')
     BrokerEBSVolumeInfo = Shapes::StructureShape.new(name: 'BrokerEBSVolumeInfo')
+    BrokerLogs = Shapes::StructureShape.new(name: 'BrokerLogs')
     BrokerNodeGroupInfo = Shapes::StructureShape.new(name: 'BrokerNodeGroupInfo')
     BrokerNodeInfo = Shapes::StructureShape.new(name: 'BrokerNodeInfo')
     BrokerSoftwareInfo = Shapes::StructureShape.new(name: 'BrokerSoftwareInfo')
     ClientAuthentication = Shapes::StructureShape.new(name: 'ClientAuthentication')
     ClientBroker = Shapes::StringShape.new(name: 'ClientBroker')
+    CloudWatchLogs = Shapes::StructureShape.new(name: 'CloudWatchLogs')
     ClusterInfo = Shapes::StructureShape.new(name: 'ClusterInfo')
     ClusterOperationInfo = Shapes::StructureShape.new(name: 'ClusterOperationInfo')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
@@ -47,6 +49,7 @@ module Aws::Kafka
     EnhancedMonitoring = Shapes::StringShape.new(name: 'EnhancedMonitoring')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorInfo = Shapes::StructureShape.new(name: 'ErrorInfo')
+    Firehose = Shapes::StructureShape.new(name: 'Firehose')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetBootstrapBrokersRequest = Shapes::StructureShape.new(name: 'GetBootstrapBrokersRequest')
     GetBootstrapBrokersResponse = Shapes::StructureShape.new(name: 'GetBootstrapBrokersResponse')
@@ -69,6 +72,7 @@ module Aws::Kafka
     ListNodesResponse = Shapes::StructureShape.new(name: 'ListNodesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MutableClusterInfo = Shapes::StructureShape.new(name: 'MutableClusterInfo')
     NodeExporter = Shapes::StructureShape.new(name: 'NodeExporter')
@@ -80,6 +84,7 @@ module Aws::Kafka
     OpenMonitoringInfo = Shapes::StructureShape.new(name: 'OpenMonitoringInfo')
     Prometheus = Shapes::StructureShape.new(name: 'Prometheus')
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
+    S3 = Shapes::StructureShape.new(name: 'S3')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StateInfo = Shapes::StructureShape.new(name: 'StateInfo')
     StorageInfo = Shapes::StructureShape.new(name: 'StorageInfo')
@@ -127,6 +132,11 @@ module Aws::Kafka
     BrokerEBSVolumeInfo.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "volumeSizeGB"))
     BrokerEBSVolumeInfo.struct_class = Types::BrokerEBSVolumeInfo
 
+    BrokerLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogs, location_name: "cloudWatchLogs"))
+    BrokerLogs.add_member(:firehose, Shapes::ShapeRef.new(shape: Firehose, location_name: "firehose"))
+    BrokerLogs.add_member(:s3, Shapes::ShapeRef.new(shape: S3, location_name: "s3"))
+    BrokerLogs.struct_class = Types::BrokerLogs
+
     BrokerNodeGroupInfo.add_member(:broker_az_distribution, Shapes::ShapeRef.new(shape: BrokerAZDistribution, location_name: "brokerAZDistribution"))
     BrokerNodeGroupInfo.add_member(:client_subnets, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "clientSubnets"))
     BrokerNodeGroupInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __stringMin5Max32, required: true, location_name: "instanceType"))
@@ -150,6 +160,10 @@ module Aws::Kafka
     ClientAuthentication.add_member(:tls, Shapes::ShapeRef.new(shape: Tls, location_name: "tls"))
     ClientAuthentication.struct_class = Types::ClientAuthentication
 
+    CloudWatchLogs.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    CloudWatchLogs.add_member(:log_group, Shapes::ShapeRef.new(shape: __string, location_name: "logGroup"))
+    CloudWatchLogs.struct_class = Types::CloudWatchLogs
+
     ClusterInfo.add_member(:active_operation_arn, Shapes::ShapeRef.new(shape: __string, location_name: "activeOperationArn"))
     ClusterInfo.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, location_name: "brokerNodeGroupInfo"))
     ClusterInfo.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
@@ -157,6 +171,7 @@ module Aws::Kafka
     ClusterInfo.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __string, location_name: "clusterName"))
     ClusterInfo.add_member(:creation_time, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "creationTime"))
     ClusterInfo.add_member(:current_broker_software_info, Shapes::ShapeRef.new(shape: BrokerSoftwareInfo, location_name: "currentBrokerSoftwareInfo"))
+    ClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     ClusterInfo.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location_name: "currentVersion"))
     ClusterInfo.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     ClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
@@ -207,6 +222,7 @@ module Aws::Kafka
     CreateClusterRequest.add_member(:encryption_info, Shapes::ShapeRef.new(shape: EncryptionInfo, location_name: "encryptionInfo"))
     CreateClusterRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     CreateClusterRequest.add_member(:kafka_version, Shapes::ShapeRef.new(shape: __stringMin1Max128, required: true, location_name: "kafkaVersion"))
+    CreateClusterRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     CreateClusterRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
     CreateClusterRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
     CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
@@ -293,6 +309,10 @@ module Aws::Kafka
     ErrorInfo.add_member(:error_string, Shapes::ShapeRef.new(shape: __string, location_name: "errorString"))
     ErrorInfo.struct_class = Types::ErrorInfo
 
+    Firehose.add_member(:delivery_stream, Shapes::ShapeRef.new(shape: __string, location_name: "deliveryStream"))
+    Firehose.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    Firehose.struct_class = Types::Firehose
+
     ForbiddenException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -376,11 +396,15 @@ module Aws::Kafka
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    LoggingInfo.add_member(:broker_logs, Shapes::ShapeRef.new(shape: BrokerLogs, required: true, location_name: "brokerLogs"))
+    LoggingInfo.struct_class = Types::LoggingInfo
+
     MutableClusterInfo.add_member(:broker_ebs_volume_info, Shapes::ShapeRef.new(shape: __listOfBrokerEBSVolumeInfo, location_name: "brokerEBSVolumeInfo"))
     MutableClusterInfo.add_member(:configuration_info, Shapes::ShapeRef.new(shape: ConfigurationInfo, location_name: "configurationInfo"))
     MutableClusterInfo.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integer, location_name: "numberOfBrokerNodes"))
     MutableClusterInfo.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoring, location_name: "openMonitoring"))
     MutableClusterInfo.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
+    MutableClusterInfo.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     MutableClusterInfo.struct_class = Types::MutableClusterInfo
 
     NodeExporter.add_member(:enabled_in_broker, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabledInBroker"))
@@ -414,6 +438,11 @@ module Aws::Kafka
     PrometheusInfo.add_member(:jmx_exporter, Shapes::ShapeRef.new(shape: JmxExporterInfo, location_name: "jmxExporter"))
     PrometheusInfo.add_member(:node_exporter, Shapes::ShapeRef.new(shape: NodeExporterInfo, location_name: "nodeExporter"))
     PrometheusInfo.struct_class = Types::PrometheusInfo
+
+    S3.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, location_name: "bucket"))
+    S3.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "enabled"))
+    S3.add_member(:prefix, Shapes::ShapeRef.new(shape: __string, location_name: "prefix"))
+    S3.struct_class = Types::S3
 
     ServiceUnavailableException.add_member(:invalid_parameter, Shapes::ShapeRef.new(shape: __string, location_name: "invalidParameter"))
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
@@ -476,6 +505,7 @@ module Aws::Kafka
     UpdateMonitoringRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "currentVersion"))
     UpdateMonitoringRequest.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoring, location_name: "enhancedMonitoring"))
     UpdateMonitoringRequest.add_member(:open_monitoring, Shapes::ShapeRef.new(shape: OpenMonitoringInfo, location_name: "openMonitoring"))
+    UpdateMonitoringRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     UpdateMonitoringRequest.struct_class = Types::UpdateMonitoringRequest
 
     UpdateMonitoringResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "clusterArn"))

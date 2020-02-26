@@ -127,20 +127,53 @@ module Aws
           expect(signature.headers['host']).to eq('domain.com')
         end
 
-        it 'includes HTTP port in Host when not 80' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'http://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when URI schema is known' do
+
+          it 'ommits port in Host when port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'ommits port in Host when default port and uri port are the same' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:443'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+          end
+
+          it 'includes port in Host when default port and uri port are different' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'https://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
         end
 
-        it 'includes HTTPS port in Host when not 443' do
-          signature = Signer.new(options).sign_request(
-            http_method: 'GET',
-            url: 'https://domain.com:123'
-          )
-          expect(signature.headers['host']).to eq('domain.com:123')
+        context 'when URI schema is unknown' do
+
+          it 'ommits port in Host when uri port not provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com'
+            )
+            expect(signature.headers['host']).to eq('domain.com')
+
+          end
+
+          it 'includes port in Host when uri port provided' do
+            signature = Signer.new(options).sign_request(
+              http_method: 'GET',
+              url: 'abcd://domain.com:123'
+            )
+            expect(signature.headers['host']).to eq('domain.com:123')
+          end
+
         end
 
         it 'sets the X-Amz-Date header' do

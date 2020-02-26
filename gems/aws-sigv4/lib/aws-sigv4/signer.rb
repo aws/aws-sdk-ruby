@@ -549,16 +549,12 @@ module Aws
       end
 
       def host(uri)
-        if standard_port?(uri)
+        # Handles known and unknown URI schemes; default_port nil when unknown.
+        if uri.default_port == uri.port
           uri.host
         else
           "#{uri.host}:#{uri.port}"
         end
-      end
-
-      def standard_port?(uri)
-        (uri.scheme == 'http' && uri.port == 80) ||
-        (uri.scheme == 'https' && uri.port == 443)
       end
 
       # @param [File, Tempfile, IO#read, String] value

@@ -195,7 +195,8 @@ module Aws::EC2
       data[:ena_support]
     end
 
-    # The hypervisor type of the instance.
+    # The hypervisor type of the instance. The value `xen` is used for both
+    # Xen and Nitro hypervisors.
     # @return [String]
     def hypervisor
       data[:hypervisor]

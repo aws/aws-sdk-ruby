@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics.rb'
+require 'aws-sdk-core/plugins/client_metrics_sender.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
@@ -54,8 +54,8 @@ module Aws::Snowball
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetricsPlugin)
-    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::ClientMetrics)
+    add_plugin(Aws::Plugins::ClientMetricsSender)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
@@ -447,6 +447,13 @@ module Aws::Snowball
     #   The type of AWS Snowball device to use for this cluster. Currently,
     #   the only supported device type for cluster jobs is `EDGE`.
     #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
+    #
     # @option params [required, String] :shipping_option
     #   The shipping speed for each node in this cluster. This speed doesn't
     #   dictate how soon you'll get each Snowball Edge device, rather it
@@ -472,6 +479,9 @@ module Aws::Snowball
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a cluster. This field is not supported
     #   in most regions.
+    #
+    # @option params [Types::TaxDocuments] :tax_documents
+    #   The tax documents required in your AWS Region.
     #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -555,6 +565,11 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #     forwarding_address_id: "AddressId",
+    #     tax_documents: {
+    #       ind: {
+    #         gstin: "GSTIN",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -654,9 +669,19 @@ module Aws::Snowball
     #   The type of AWS Snowball device to use for this job. Currently, the
     #   only supported device type for cluster jobs is `EDGE`.
     #
+    #   For more information, see [Snowball Edge Device Options][1] in the
+    #   Snowball Edge Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html
+    #
     # @option params [String] :forwarding_address_id
     #   The forwarding address ID for a job. This field is not supported in
     #   most regions.
+    #
+    # @option params [Types::TaxDocuments] :tax_documents
+    #   The tax documents required in your AWS Region.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -744,6 +769,11 @@ module Aws::Snowball
     #     cluster_id: "ClusterId",
     #     snowball_type: "STANDARD", # accepts STANDARD, EDGE, EDGE_C, EDGE_CG
     #     forwarding_address_id: "AddressId",
+    #     tax_documents: {
+    #       ind: {
+    #         gstin: "GSTIN",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -987,6 +1017,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
     #   resp.cluster_metadata.forwarding_address_id #=> String
+    #   resp.cluster_metadata.tax_documents.ind.gstin #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -1098,6 +1129,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_log_info.job_failure_log_uri #=> String
     #   resp.job_metadata.cluster_id #=> String
     #   resp.job_metadata.forwarding_address_id #=> String
+    #   resp.job_metadata.tax_documents.ind.gstin #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1138,6 +1170,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].job_log_info.job_failure_log_uri #=> String
     #   resp.sub_job_metadata[0].cluster_id #=> String
     #   resp.sub_job_metadata[0].forwarding_address_id #=> String
+    #   resp.sub_job_metadata[0].tax_documents.ind.gstin #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1874,7 +1907,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

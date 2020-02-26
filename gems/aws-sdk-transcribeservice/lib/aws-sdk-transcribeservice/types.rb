@@ -40,6 +40,48 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # Settings for content redaction within a transcription job.
+    #
+    # You can redact transcripts in US English (en-us). For more information
+    # see: [Automatic Content Redaction][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/transcribe/latest/dg/content-redaction.html
+    #
+    # @note When making an API call, you may pass ContentRedaction
+    #   data as a hash:
+    #
+    #       {
+    #         redaction_type: "PII", # required, accepts PII
+    #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #       }
+    #
+    # @!attribute [rw] redaction_type
+    #   Request parameter that defines the entities to be redacted. The only
+    #   accepted value is `PII`.
+    #   @return [String]
+    #
+    # @!attribute [rw] redaction_output
+    #   Request parameter where you choose whether to output only the
+    #   redacted transcript or generate an additional unredacted transcript.
+    #
+    #   When you choose `redacted` Amazon Transcribe outputs a JSON file
+    #   with only the redacted transcript and related information.
+    #
+    #   When you choose `redacted_and_unredacted` Amazon Transcribe outputs
+    #   a JSON file with the unredacted transcript and related information
+    #   in addition to the JSON file with the redacted transcript.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ContentRedaction AWS API Documentation
+    #
+    class ContentRedaction < Struct.new(
+      :redaction_type,
+      :redaction_output)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateVocabularyFilterRequest
     #   data as a hash:
     #
@@ -680,19 +722,17 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] media_file_uri
-    #   The S3 location of the input media file. The URI must be in the same
-    #   region as the API endpoint that you are calling. The general form
-    #   is:
+    #   The S3 object location of the input media file. The URI must be in
+    #   the same region as the API endpoint that you are calling. The
+    #   general form is:
     #
-    #   `
-    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
+    #   ` s3://<bucket-name>/<keyprefix>/<objectkey> `
     #
     #   For example:
     #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/example.mp4`
+    #   `s3://examplebucket/example.mp4`
     #
-    #   `https://s3.us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4`
+    #   `s3://examplebucket/mediadocs/example.mp4`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -845,6 +885,10 @@ module Aws::TranscribeService
     #           allow_deferred_execution: false,
     #           data_access_role_arn: "DataAccessRoleArn",
     #         },
+    #         content_redaction: {
+    #           redaction_type: "PII", # required, accepts PII
+    #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #         },
     #       }
     #
     # @!attribute [rw] transcription_job_name
@@ -880,12 +924,15 @@ module Aws::TranscribeService
     #   The location where the transcription is stored.
     #
     #   If you set the `OutputBucketName`, Amazon Transcribe puts the
-    #   transcription in the specified S3 bucket. When you call the
+    #   transcript in the specified S3 bucket. When you call the
     #   GetTranscriptionJob operation, the operation returns this location
-    #   in the `TranscriptFileUri` field. The S3 bucket must have
-    #   permissions that allow Amazon Transcribe to put files in the bucket.
-    #   For more information, see [Permissions Required for IAM User
-    #   Roles][1].
+    #   in the `TranscriptFileUri` field. If you enable content redaction,
+    #   the redacted transcript appears in `RedactedTranscriptFileUri`. If
+    #   you enable content redaction and choose to output an unredacted
+    #   transcript, that transcript's location still appears in the
+    #   `TranscriptFileUri`. The S3 bucket must have permissions that allow
+    #   Amazon Transcribe to put files in the bucket. For more information,
+    #   see [Permissions Required for IAM User Roles][1].
     #
     #   You can specify an AWS Key Management Service (KMS) key to encrypt
     #   the output of your transcription using the
@@ -948,6 +995,11 @@ module Aws::TranscribeService
     #   available to immediately run the job.
     #   @return [Types::JobExecutionSettings]
     #
+    # @!attribute [rw] content_redaction
+    #   An object that contains the request parameters for content
+    #   redaction.
+    #   @return [Types::ContentRedaction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
     class StartTranscriptionJobRequest < Struct.new(
@@ -959,7 +1011,8 @@ module Aws::TranscribeService
       :output_bucket_name,
       :output_encryption_kms_key_id,
       :settings,
-      :job_execution_settings)
+      :job_execution_settings,
+      :content_redaction)
       include Aws::Structure
     end
 
@@ -977,19 +1030,30 @@ module Aws::TranscribeService
     # Identifies the location of a transcription.
     #
     # @!attribute [rw] transcript_file_uri
-    #   The location where the transcription is stored.
+    #   The S3 object location of the the transcript.
     #
-    #   Use this URI to access the transcription. If you specified an S3
-    #   bucket in the `OutputBucketName` field when you created the job,
-    #   this is the URI of that bucket. If you chose to store the
-    #   transcription in Amazon Transcribe, this is a shareable URL that
-    #   provides secure access to that location.
+    #   Use this URI to access the transcript. If you specified an S3 bucket
+    #   in the `OutputBucketName` field when you created the job, this is
+    #   the URI of that bucket. If you chose to store the transcript in
+    #   Amazon Transcribe, this is a shareable URL that provides secure
+    #   access to that location.
+    #   @return [String]
+    #
+    # @!attribute [rw] redacted_transcript_file_uri
+    #   The S3 object location of the redacted transcript.
+    #
+    #   Use this URI to access the redacated transcript. If you specified an
+    #   S3 bucket in the `OutputBucketName` field when you created the job,
+    #   this is the URI of that bucket. If you chose to store the transcript
+    #   in Amazon Transcribe, this is a shareable URL that provides secure
+    #   access to that location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Transcript AWS API Documentation
     #
     class Transcript < Struct.new(
-      :transcript_file_uri)
+      :transcript_file_uri,
+      :redacted_transcript_file_uri)
       include Aws::Structure
     end
 
@@ -1090,6 +1154,11 @@ module Aws::TranscribeService
     #   Provides information about how a transcription job is executed.
     #   @return [Types::JobExecutionSettings]
     #
+    # @!attribute [rw] content_redaction
+    #   An object that describes content redaction settings for the
+    #   transcription job.
+    #   @return [Types::ContentRedaction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -1105,7 +1174,8 @@ module Aws::TranscribeService
       :completion_time,
       :failure_reason,
       :settings,
-      :job_execution_settings)
+      :job_execution_settings,
+      :content_redaction)
       include Aws::Structure
     end
 
@@ -1154,6 +1224,10 @@ module Aws::TranscribeService
     #   `GetTranscriptionJob` response's `TranscriptFileUri` field.
     #   @return [String]
     #
+    # @!attribute [rw] content_redaction
+    #   The content redaction settings of the transcription job.
+    #   @return [Types::ContentRedaction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary AWS API Documentation
     #
     class TranscriptionJobSummary < Struct.new(
@@ -1164,7 +1238,8 @@ module Aws::TranscribeService
       :language_code,
       :transcription_job_status,
       :failure_reason,
-      :output_location_type)
+      :output_location_type,
+      :content_redaction)
       include Aws::Structure
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2020-02-25)
+------------------
+
+* Feature - Amazon MSK has added support for Broker Log delivery to CloudWatch, S3, and Firehose.
+
 1.17.0 (2020-02-04)
 ------------------
 

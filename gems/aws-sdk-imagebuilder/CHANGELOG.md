@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2020-02-21)
+------------------
+
+* Feature - This release of EC2 Image Builder increases the maximum policy document size for Image Builder resource-based policy APIs.
+
 1.1.0 (2020-02-07)
 ------------------
 

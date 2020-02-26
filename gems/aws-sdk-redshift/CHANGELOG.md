@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2020-02-21)
+------------------
+
+* Feature - Extend elastic resize to support resizing clusters to different instance types.
+
 1.36.0 (2020-01-17)
 ------------------
 

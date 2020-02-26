@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics.rb'
+require 'aws-sdk-core/plugins/client_metrics_sender.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
@@ -54,8 +54,8 @@ module Aws::Kafka
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetricsPlugin)
-    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::ClientMetrics)
+    add_plugin(Aws::Plugins::ClientMetricsSender)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
@@ -278,6 +278,9 @@ module Aws::Kafka
     # @option params [required, String] :kafka_version
     #   The version of Apache Kafka.
     #
+    # @option params [Types::LoggingInfo] :logging_info
+    #   LoggingInfo details.
+    #
     # @option params [required, Integer] :number_of_broker_nodes
     #   The number of Kafka broker nodes in the Amazon MSK cluster.
     #
@@ -328,6 +331,23 @@ module Aws::Kafka
     #     },
     #     enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER
     #     kafka_version: "__stringMin1Max128", # required
+    #     logging_info: {
+    #       broker_logs: { # required
+    #         cloud_watch_logs: {
+    #           enabled: false, # required
+    #           log_group: "__string",
+    #         },
+    #         firehose: {
+    #           delivery_stream: "__string",
+    #           enabled: false, # required
+    #         },
+    #         s3: {
+    #           bucket: "__string",
+    #           enabled: false, # required
+    #           prefix: "__string",
+    #         },
+    #       },
+    #     },
     #     number_of_broker_nodes: 1, # required
     #     open_monitoring: {
     #       prometheus: { # required
@@ -474,6 +494,13 @@ module Aws::Kafka
     #   resp.cluster_info.current_broker_software_info.configuration_arn #=> String
     #   resp.cluster_info.current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info.current_broker_software_info.kafka_version #=> String
+    #   resp.cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_info.current_version #=> String
     #   resp.cluster_info.encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info.encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
@@ -530,6 +557,13 @@ module Aws::Kafka
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info.source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info.target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -539,6 +573,13 @@ module Aws::Kafka
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info.target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info.target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterOperation AWS API Documentation
     #
@@ -699,6 +740,13 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].source_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].source_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info #=> Array
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].kafka_broker_node_id #=> String
     #   resp.cluster_operation_info_list[0].target_cluster_info.broker_ebs_volume_info[0].volume_size_gb #=> Integer
@@ -708,6 +756,13 @@ module Aws::Kafka
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.jmx_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.open_monitoring.prometheus.node_exporter.enabled_in_broker #=> Boolean
     #   resp.cluster_operation_info_list[0].target_cluster_info.enhanced_monitoring #=> String, one of "DEFAULT", "PER_BROKER", "PER_TOPIC_PER_BROKER"
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_operation_info_list[0].target_cluster_info.logging_info.broker_logs.s3.prefix #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClusterOperations AWS API Documentation
@@ -759,6 +814,13 @@ module Aws::Kafka
     #   resp.cluster_info_list[0].current_broker_software_info.configuration_arn #=> String
     #   resp.cluster_info_list[0].current_broker_software_info.configuration_revision #=> Integer
     #   resp.cluster_info_list[0].current_broker_software_info.kafka_version #=> String
+    #   resp.cluster_info_list[0].logging_info.broker_logs.cloud_watch_logs.enabled #=> Boolean
+    #   resp.cluster_info_list[0].logging_info.broker_logs.cloud_watch_logs.log_group #=> String
+    #   resp.cluster_info_list[0].logging_info.broker_logs.firehose.delivery_stream #=> String
+    #   resp.cluster_info_list[0].logging_info.broker_logs.firehose.enabled #=> Boolean
+    #   resp.cluster_info_list[0].logging_info.broker_logs.s3.bucket #=> String
+    #   resp.cluster_info_list[0].logging_info.broker_logs.s3.enabled #=> Boolean
+    #   resp.cluster_info_list[0].logging_info.broker_logs.s3.prefix #=> String
     #   resp.cluster_info_list[0].current_version #=> String
     #   resp.cluster_info_list[0].encryption_info.encryption_at_rest.data_volume_kms_key_id #=> String
     #   resp.cluster_info_list[0].encryption_info.encryption_in_transit.client_broker #=> String, one of "TLS", "TLS_PLAINTEXT", "PLAINTEXT"
@@ -1178,6 +1240,9 @@ module Aws::Kafka
     # @option params [Types::OpenMonitoringInfo] :open_monitoring
     #   The settings for open monitoring.
     #
+    # @option params [Types::LoggingInfo] :logging_info
+    #   LoggingInfo details.
+    #
     # @return [Types::UpdateMonitoringResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateMonitoringResponse#cluster_arn #cluster_arn} => String
@@ -1196,6 +1261,23 @@ module Aws::Kafka
     #         },
     #         node_exporter: {
     #           enabled_in_broker: false, # required
+    #         },
+    #       },
+    #     },
+    #     logging_info: {
+    #       broker_logs: { # required
+    #         cloud_watch_logs: {
+    #           enabled: false, # required
+    #           log_group: "__string",
+    #         },
+    #         firehose: {
+    #           delivery_stream: "__string",
+    #           enabled: false, # required
+    #         },
+    #         s3: {
+    #           bucket: "__string",
+    #           enabled: false, # required
+    #           prefix: "__string",
     #         },
     #       },
     #     },
@@ -1228,7 +1310,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

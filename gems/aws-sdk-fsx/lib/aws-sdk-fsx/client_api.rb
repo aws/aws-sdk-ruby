@@ -104,12 +104,15 @@ module Aws::FSx
     InvalidExportPath = Shapes::StructureShape.new(name: 'InvalidExportPath')
     InvalidImportPath = Shapes::StructureShape.new(name: 'InvalidImportPath')
     InvalidNetworkSettings = Shapes::StructureShape.new(name: 'InvalidNetworkSettings')
+    InvalidPerUnitStorageThroughput = Shapes::StructureShape.new(name: 'InvalidPerUnitStorageThroughput')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LustreDeploymentType = Shapes::StringShape.new(name: 'LustreDeploymentType')
     LustreFileSystemConfiguration = Shapes::StructureShape.new(name: 'LustreFileSystemConfiguration')
+    LustreFileSystemMountName = Shapes::StringShape.new(name: 'LustreFileSystemMountName')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
@@ -120,6 +123,7 @@ module Aws::FSx
     NotServiceResourceError = Shapes::StructureShape.new(name: 'NotServiceResourceError')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     Parameter = Shapes::StringShape.new(name: 'Parameter')
+    PerUnitStorageThroughput = Shapes::IntegerShape.new(name: 'PerUnitStorageThroughput')
     ProgressPercent = Shapes::IntegerShape.new(name: 'ProgressPercent')
     ReportFormat = Shapes::StringShape.new(name: 'ReportFormat')
     ReportScope = Shapes::StringShape.new(name: 'ReportScope')
@@ -249,6 +253,8 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:import_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ImportPath"))
     CreateFileSystemLustreConfiguration.add_member(:export_path, Shapes::ShapeRef.new(shape: ArchivePath, location_name: "ExportPath"))
     CreateFileSystemLustreConfiguration.add_member(:imported_file_chunk_size, Shapes::ShapeRef.new(shape: Megabytes, location_name: "ImportedFileChunkSize"))
+    CreateFileSystemLustreConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
+    CreateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -439,6 +445,9 @@ module Aws::FSx
     InvalidNetworkSettings.add_member(:invalid_security_group_id, Shapes::ShapeRef.new(shape: SecurityGroupId, location_name: "InvalidSecurityGroupId"))
     InvalidNetworkSettings.struct_class = Types::InvalidNetworkSettings
 
+    InvalidPerUnitStorageThroughput.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidPerUnitStorageThroughput.struct_class = Types::InvalidPerUnitStorageThroughput
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     ListTagsForResourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -450,6 +459,9 @@ module Aws::FSx
 
     LustreFileSystemConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     LustreFileSystemConfiguration.add_member(:data_repository_configuration, Shapes::ShapeRef.new(shape: DataRepositoryConfiguration, location_name: "DataRepositoryConfiguration"))
+    LustreFileSystemConfiguration.add_member(:deployment_type, Shapes::ShapeRef.new(shape: LustreDeploymentType, location_name: "DeploymentType"))
+    LustreFileSystemConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    LustreFileSystemConfiguration.add_member(:mount_name, Shapes::ShapeRef.new(shape: LustreFileSystemMountName, location_name: "MountName"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -627,6 +639,7 @@ module Aws::FSx
         o.errors << Shapes::ShapeRef.new(shape: InvalidImportPath)
         o.errors << Shapes::ShapeRef.new(shape: InvalidExportPath)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNetworkSettings)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPerUnitStorageThroughput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: MissingFileSystemConfiguration)

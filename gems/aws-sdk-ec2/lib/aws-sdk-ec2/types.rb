@@ -14698,7 +14698,8 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \|
-    #     `xen`).
+    #     `xen`). The value `xen` is used for both Xen and Nitro
+    #     hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -27534,7 +27535,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   The hypervisor type of the instance.
+    #   The hypervisor type of the instance. The value `xen` is used for
+    #   both Xen and Nitro hypervisors.
     #   @return [String]
     #
     # @!attribute [rw] iam_instance_profile
@@ -40157,10 +40159,16 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
     #
     #
     #
@@ -42908,13 +42916,16 @@ module Aws::EC2
     #   The key-value pair for tagging the Spot Fleet request on creation.
     #   The value for `ResourceType` must be `spot-fleet-request`, otherwise
     #   the Spot Fleet request fails. To tag instances at launch, specify
-    #   the tags in the [launch template][1]. For information about tagging
-    #   after launch, see [Tagging Your Resources][2].
+    #   the tags in the [launch template][1] (valid only if you use
+    #   `LaunchTemplateConfigs`) or in the [ `SpotFleetTagSpecification`
+    #   ][2] (valid only if you use `LaunchSpecifications`). For information
+    #   about tagging after launch, see [Tagging Your Resources][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetTagSpecification.html
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
@@ -42962,8 +42973,14 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The type of resource. Currently, the only resource types that are
-    #   supported are `spot-fleet-request` and `instance`.
+    #   The type of resource. Currently, the only resource type that is
+    #   supported is `instance`. To tag the Spot Fleet request on creation,
+    #   use the `TagSpecifications` parameter in [
+    #   `SpotFleetRequestConfigData` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotFleetRequestConfigData.html
     #   @return [String]
     #
     # @!attribute [rw] tags
