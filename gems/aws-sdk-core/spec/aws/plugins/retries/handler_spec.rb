@@ -48,7 +48,7 @@ module Aws
               expect: { available_capacity: 495, retries: 1, delay: 1 }
             },
             {
-              response: {status_code: 500, error: service_error},
+              response: { status_code: 500, error: service_error },
               expect: { available_capacity: 490, retries: 2, delay: 2 }
             },
             {
@@ -122,7 +122,7 @@ module Aws
               expect: { available_capacity: 490, retries: 2, delay: 2 }
             },
             {
-              response: {status_code: 500, error: service_error },
+              response: { status_code: 500, error: service_error },
               expect: { available_capacity: 485, retries: 3, delay: 4 }
             },
             {
@@ -194,10 +194,10 @@ module Aws
           run_retry success(5, 7.0)
           run_retry success(6, 9.6)
           # TODO: These tests from the SEP are broken
-          #run_retry throttle(7, 6.8) + throttle(8, 4.7) + success(9, 6.6)
-          #run_retry success(10, 6.8)
-          #run_retry success(11, 7.6)
-          #run_retry success(12, 11.5)
+          # run_retry throttle(7, 6.8) + throttle(8, 4.7) + success(9, 6.6)
+          # run_retry success(10, 6.8)
+          # run_retry success(11, 7.6)
+          # run_retry success(12, 11.5)
         end
       end
     end

@@ -50,9 +50,9 @@ module Aws
         resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil, nil)
         send_handler = double('send-handler')
         expect(send_handler).to receive(:call)
-                                  .exactly(4).times
-                                  .with(resp.context)
-                                  .and_return(resp)
+          .exactly(4).times
+          .with(resp.context)
+          .and_return(resp)
         handle(send_handler)
       end
 
@@ -234,4 +234,3 @@ module Aws
     end
   end
 end
-
