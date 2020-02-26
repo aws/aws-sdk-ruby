@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2020-02-24)
+------------------
+
+* Feature - Documentation updates for iotcolumbo
+
 1.7.0 (2020-01-21)
 ------------------
 

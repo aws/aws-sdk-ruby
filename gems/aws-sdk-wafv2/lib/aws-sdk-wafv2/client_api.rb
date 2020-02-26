@@ -207,6 +207,7 @@ module Aws::WAFV2
     WAFNonexistentItemException = Shapes::StructureShape.new(name: 'WAFNonexistentItemException')
     WAFOptimisticLockException = Shapes::StructureShape.new(name: 'WAFOptimisticLockException')
     WAFServiceLinkedRoleErrorException = Shapes::StructureShape.new(name: 'WAFServiceLinkedRoleErrorException')
+    WAFSubscriptionNotFoundException = Shapes::StructureShape.new(name: 'WAFSubscriptionNotFoundException')
     WAFTagOperationException = Shapes::StructureShape.new(name: 'WAFTagOperationException')
     WAFTagOperationInternalErrorException = Shapes::StructureShape.new(name: 'WAFTagOperationInternalErrorException')
     WAFUnavailableEntityException = Shapes::StructureShape.new(name: 'WAFUnavailableEntityException')
@@ -827,6 +828,9 @@ module Aws::WAFV2
     WAFServiceLinkedRoleErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     WAFServiceLinkedRoleErrorException.struct_class = Types::WAFServiceLinkedRoleErrorException
 
+    WAFSubscriptionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFSubscriptionNotFoundException.struct_class = Types::WAFSubscriptionNotFoundException
+
     WAFTagOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFTagOperationException.struct_class = Types::WAFTagOperationException
 
@@ -902,6 +906,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
 
       api.add_operation(:create_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -948,6 +953,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
 
       api.add_operation(:create_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -966,6 +972,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
 
       api.add_operation(:delete_ip_set, Seahorse::Model::Operation.new.tap do |o|
@@ -978,6 +985,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
@@ -1003,6 +1011,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
@@ -1017,6 +1026,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFAssociatedItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
       end)
@@ -1312,6 +1322,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
 
       api.add_operation(:update_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1328,6 +1339,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFLimitsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2020-02-24)
+------------------
+
+* Feature - This release allows you to create and manage tags for event buses.
+
 1.3.0 (2019-10-23)
 ------------------
 

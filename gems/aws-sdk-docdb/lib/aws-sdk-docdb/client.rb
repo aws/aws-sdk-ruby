@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics.rb'
+require 'aws-sdk-core/plugins/client_metrics_sender.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
@@ -54,8 +54,8 @@ module Aws::DocDB
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetricsPlugin)
-    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::ClientMetrics)
+    add_plugin(Aws::Plugins::ClientMetricsSender)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
@@ -841,7 +841,7 @@ module Aws::DocDB
     #
     #   Constraints:
     #
-    #   * Must match the name of an existing `DBClusterParameterGroup`.
+    #   * Must not match the name of an existing `DBClusterParameterGroup`.
     #
     #   ^
     #
@@ -1521,11 +1521,7 @@ module Aws::DocDB
     end
 
     # Returns a list of certificate authority (CA) certificates provided by
-    # Amazon DocumentDB for this AWS account. For certain management
-    # features such as cluster and instance lifecycle management, Amazon
-    # DocumentDB leverages operational technology that is shared with Amazon
-    # RDS and Amazon Neptune. Use the `filterName=engine,Values=docdb`
-    # filter parameter to return only Amazon DocumentDB clusters.
+    # Amazon DocumentDB for this AWS account.
     #
     # @option params [String] :certificate_identifier
     #   The user-supplied certificate identifier. If this parameter is
@@ -1931,7 +1927,11 @@ module Aws::DocDB
     end
 
     # Returns information about provisioned Amazon DocumentDB clusters. This
-    # API operation supports pagination.
+    # API operation supports pagination. For certain management features
+    # such as cluster and instance lifecycle management, Amazon DocumentDB
+    # leverages operational technology that is shared with Amazon RDS and
+    # Amazon Neptune. Use the `filterName=engine,Values=docdb` filter
+    # parameter to return only Amazon DocumentDB clusters.
     #
     # @option params [String] :db_cluster_identifier
     #   The user-provided cluster identifier. If this parameter is specified,
@@ -4167,7 +4167,7 @@ module Aws::DocDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

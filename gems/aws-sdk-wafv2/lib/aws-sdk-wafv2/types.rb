@@ -17,6 +17,9 @@ module Aws::WAFV2
     #
     # All query arguments of a web request.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -35,6 +38,9 @@ module Aws::WAFV2
     #  </note>
     #
     # Specifies that AWS WAF should allow requests.
+    #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
     #
     #
     #
@@ -282,15 +288,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociateWebACLRequest AWS API Documentation
@@ -314,6 +317,9 @@ module Aws::WAFV2
     #
     # Specifies that AWS WAF should block requests.
     #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -333,6 +339,9 @@ module Aws::WAFV2
     #
     # The body of a web request. This immediately follows the request
     # headers.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     #
     #
@@ -759,6 +768,9 @@ module Aws::WAFV2
     #  </note>
     #
     # Specifies that AWS WAF should count requests.
+    #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
     #
     #
     #
@@ -1592,10 +1604,9 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # In a `WebACL`, this is the action that you want AWS WAF to perform
-    # when a web request doesn't match any of the rules in the `WebACL`.
-    # The default action must be a terminating action, so count is not
-    # allowed.
+    # In a WebACL, this is the action that you want AWS WAF to perform when
+    # a web request doesn't match any of the rules in the `WebACL`. The
+    # default action must be a terminating action, so count is not allowed.
     #
     #
     #
@@ -1970,15 +1981,12 @@ module Aws::WAFV2
     #
     #   The ARN must be in one of the following formats:
     #
-    #   * For a CloudFront distribution:
-    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
     #
-    #   * For an Application Load Balancer: `arn:aws:elasticloadbalancing:
-    #     region:account-id:loadbalancer/app/load-balancer-name
-    #     /load-balancer-id `
-    #
-    #   * For an Amazon API Gateway stage: `arn:aws:apigateway:region
-    #     ::/restapis/api-id/stages/stage-name `
+    #   * For an Amazon API Gateway stage:
+    #     `arn:aws:apigateway:region::/restapis/api-id/stages/stage-name `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DisassociateWebACLRequest AWS API Documentation
@@ -2073,6 +2081,9 @@ module Aws::WAFV2
     #   Inspect a single query argument. Provide the name of the query
     #   argument to inspect, such as *UserName* or *SalesRegion*. The name
     #   can be up to 30 characters long and isn't case sensitive.
+    #
+    #   This is used only to indicate the web request component for AWS WAF
+    #   to inspect, in the FieldToMatch specification.
     #   @return [Types::SingleQueryArgument]
     #
     # @!attribute [rw] all_query_arguments
@@ -2096,10 +2107,10 @@ module Aws::WAFV2
     #   body, such as data from a form.
     #
     #   Note that only the first 8 KB (8192 bytes) of the request body are
-    #   forwarded to AWS WAF for inspection. If you don't need to inspect
-    #   more than 8 KB, you can guarantee that you don't allow additional
-    #   bytes in by combining a statement that inspects the body of the web
-    #   request, such as ByteMatchStatement or
+    #   forwarded to AWS WAF for inspection by the underlying host service.
+    #   If you don't need to inspect more than 8 KB, you can guarantee that
+    #   you don't allow additional bytes in by combining a statement that
+    #   inspects the body of the web request, such as ByteMatchStatement or
     #   RegexPatternSetReferenceStatement, with a SizeConstraintStatement
     #   that enforces an 8 KB size limit on the body of the request. AWS WAF
     #   doesn't support inspecting the entire contents of web requests
@@ -3565,7 +3576,7 @@ module Aws::WAFV2
     # ListAvailableManagedRuleGroups. This provides information like the
     # name and vendor name, that you provide when you add a
     # ManagedRuleGroupStatement to a web ACL. Managed rule groups include
-    # AWS managed rule groups, which are free of charge to AWS WAF
+    # AWS Managed Rules rule groups, which are free of charge to AWS WAF
     # customers, and AWS Marketplace managed rule groups, which you can
     # subscribe to through AWS Marketplace.
     #
@@ -3584,8 +3595,8 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the managed rule group, provided by AWS or the
-    #   AWS Marketplace seller who manages it.
+    #   The description of the managed rule group, provided by AWS Managed
+    #   Rules or the AWS Marketplace seller who manages it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupSummary AWS API Documentation
@@ -3607,6 +3618,9 @@ module Aws::WAFV2
     # The HTTP method of a web request. The method indicates the type of
     # operation that the request is asking the origin to perform.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -3626,8 +3640,10 @@ module Aws::WAFV2
     #
     # Specifies that AWS WAF should do nothing. This is generally used to
     # try out a rule without performing any actions. You set the
-    # `OverrideAction` on the Rule, and override the actions that are set at
-    # the statement level.
+    # `OverrideAction` on the Rule.
+    #
+    # This is used only in the context of other settings, for example to
+    # specify values for RuleAction and web ACL DefaultAction.
     #
     #
     #
@@ -4174,6 +4190,9 @@ module Aws::WAFV2
     #
     # The query string of a web request. This is the part of a URL that
     # appears after a `?` character, if any.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     #
     #
@@ -5332,6 +5351,9 @@ module Aws::WAFV2
     #
     # One of the headers in a web request, identified by name, for example,
     # `User-Agent` or `Referer`. This setting isn't case sensitive.
+    #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
     #
     #
     #
@@ -7784,6 +7806,9 @@ module Aws::WAFV2
     # web request that identifies a resource, for example,
     # `/images/daily-ad.jpg`.
     #
+    # This is used only to indicate the web request component for AWS WAF to
+    # inspect, in the FieldToMatch specification.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
@@ -8001,6 +8026,16 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFServiceLinkedRoleErrorException AWS API Documentation
     #
     class WAFServiceLinkedRoleErrorException < Struct.new(
+      :message)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/WAFSubscriptionNotFoundException AWS API Documentation
+    #
+    class WAFSubscriptionNotFoundException < Struct.new(
       :message)
       include Aws::Structure
     end

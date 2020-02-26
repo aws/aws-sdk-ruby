@@ -48,6 +48,7 @@ module Aws::Snowball
     Ec2RequestFailedException = Shapes::StructureShape.new(name: 'Ec2RequestFailedException')
     EventTriggerDefinition = Shapes::StructureShape.new(name: 'EventTriggerDefinition')
     EventTriggerDefinitionList = Shapes::ListShape.new(name: 'EventTriggerDefinitionList')
+    GSTIN = Shapes::StringShape.new(name: 'GSTIN')
     GetJobManifestRequest = Shapes::StructureShape.new(name: 'GetJobManifestRequest')
     GetJobManifestResult = Shapes::StructureShape.new(name: 'GetJobManifestResult')
     GetJobUnlockCodeRequest = Shapes::StructureShape.new(name: 'GetJobUnlockCodeRequest')
@@ -56,6 +57,7 @@ module Aws::Snowball
     GetSnowballUsageResult = Shapes::StructureShape.new(name: 'GetSnowballUsageResult')
     GetSoftwareUpdatesRequest = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesRequest')
     GetSoftwareUpdatesResult = Shapes::StructureShape.new(name: 'GetSoftwareUpdatesResult')
+    INDTaxDocuments = Shapes::StructureShape.new(name: 'INDTaxDocuments')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
     InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
@@ -99,6 +101,7 @@ module Aws::Snowball
     SnowballType = Shapes::StringShape.new(name: 'SnowballType')
     SnsTopicARN = Shapes::StringShape.new(name: 'SnsTopicARN')
     String = Shapes::StringShape.new(name: 'String')
+    TaxDocuments = Shapes::StructureShape.new(name: 'TaxDocuments')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedAddressException = Shapes::StructureShape.new(name: 'UnsupportedAddressException')
     UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
@@ -158,6 +161,7 @@ module Aws::Snowball
     ClusterMetadata.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     ClusterMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     ClusterMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
+    ClusterMetadata.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     ClusterMetadata.struct_class = Types::ClusterMetadata
 
     CompatibleImage.add_member(:ami_id, Shapes::ShapeRef.new(shape: String, location_name: "AmiId"))
@@ -182,6 +186,7 @@ module Aws::Snowball
     CreateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
     CreateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     CreateClusterRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
+    CreateClusterRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
@@ -199,6 +204,7 @@ module Aws::Snowball
     CreateJobRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     CreateJobRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
     CreateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
+    CreateJobRequest.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -275,6 +281,9 @@ module Aws::Snowball
     GetSoftwareUpdatesResult.add_member(:updates_uri, Shapes::ShapeRef.new(shape: String, location_name: "UpdatesURI"))
     GetSoftwareUpdatesResult.struct_class = Types::GetSoftwareUpdatesResult
 
+    INDTaxDocuments.add_member(:gstin, Shapes::ShapeRef.new(shape: GSTIN, location_name: "GSTIN"))
+    INDTaxDocuments.struct_class = Types::INDTaxDocuments
+
     InvalidAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidAddressException.struct_class = Types::InvalidAddressException
 
@@ -324,6 +333,7 @@ module Aws::Snowball
     JobMetadata.add_member(:job_log_info, Shapes::ShapeRef.new(shape: JobLogs, location_name: "JobLogInfo"))
     JobMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
     JobMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
+    JobMetadata.add_member(:tax_documents, Shapes::ShapeRef.new(shape: TaxDocuments, location_name: "TaxDocuments"))
     JobMetadata.struct_class = Types::JobMetadata
 
     JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
@@ -400,6 +410,9 @@ module Aws::Snowball
     ShippingDetails.add_member(:inbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "InboundShipment"))
     ShippingDetails.add_member(:outbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "OutboundShipment"))
     ShippingDetails.struct_class = Types::ShippingDetails
+
+    TaxDocuments.add_member(:ind, Shapes::ShapeRef.new(shape: INDTaxDocuments, location_name: "IND"))
+    TaxDocuments.struct_class = Types::TaxDocuments
 
     UnsupportedAddressException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     UnsupportedAddressException.struct_class = Types::UnsupportedAddressException

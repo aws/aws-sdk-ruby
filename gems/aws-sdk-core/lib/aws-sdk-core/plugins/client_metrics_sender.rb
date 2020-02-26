@@ -2,7 +2,7 @@ require 'date'
 
 module Aws
   module Plugins
-    class ClientMetricsSendPlugin < Seahorse::Client::Plugin
+    class ClientMetricsSender < Seahorse::Client::Plugin
 
       def add_handlers(handlers, config)
         if config.client_side_monitoring && config.client_side_monitoring_port

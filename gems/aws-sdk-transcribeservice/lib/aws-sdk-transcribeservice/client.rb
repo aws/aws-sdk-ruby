@@ -21,8 +21,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
-require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
-require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
+require 'aws-sdk-core/plugins/client_metrics.rb'
+require 'aws-sdk-core/plugins/client_metrics_sender.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
@@ -54,8 +54,8 @@ module Aws::TranscribeService
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
-    add_plugin(Aws::Plugins::ClientMetricsPlugin)
-    add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
+    add_plugin(Aws::Plugins::ClientMetrics)
+    add_plugin(Aws::Plugins::ClientMetricsSender)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
@@ -475,7 +475,9 @@ module Aws::TranscribeService
     # Returns information about a transcription job. To see the status of
     # the job, check the `TranscriptionJobStatus` field. If the status is
     # `COMPLETED`, the job is finished and you can find the results at the
-    # location specified in the `TranscriptionFileUri` field.
+    # location specified in the `TranscriptFileUri` field. If you enable
+    # content redaction, the redacted transcript appears in
+    # `RedactedTranscriptFileUri`.
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the job.
@@ -499,6 +501,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
+    #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
     #   resp.transcription_job.start_time #=> Time
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
@@ -513,6 +516,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
+    #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
+    #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -645,6 +650,8 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].transcription_job_status #=> String, one of "QUEUED", "IN_PROGRESS", "FAILED", "COMPLETED"
     #   resp.transcription_job_summaries[0].failure_reason #=> String
     #   resp.transcription_job_summaries[0].output_location_type #=> String, one of "CUSTOMER_BUCKET", "SERVICE_BUCKET"
+    #   resp.transcription_job_summaries[0].content_redaction.redaction_type #=> String, one of "PII"
+    #   resp.transcription_job_summaries[0].content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobs AWS API Documentation
     #
@@ -786,11 +793,15 @@ module Aws::TranscribeService
     #   The location where the transcription is stored.
     #
     #   If you set the `OutputBucketName`, Amazon Transcribe puts the
-    #   transcription in the specified S3 bucket. When you call the
+    #   transcript in the specified S3 bucket. When you call the
     #   GetTranscriptionJob operation, the operation returns this location in
-    #   the `TranscriptFileUri` field. The S3 bucket must have permissions
-    #   that allow Amazon Transcribe to put files in the bucket. For more
-    #   information, see [Permissions Required for IAM User Roles][1].
+    #   the `TranscriptFileUri` field. If you enable content redaction, the
+    #   redacted transcript appears in `RedactedTranscriptFileUri`. If you
+    #   enable content redaction and choose to output an unredacted
+    #   transcript, that transcript's location still appears in the
+    #   `TranscriptFileUri`. The S3 bucket must have permissions that allow
+    #   Amazon Transcribe to put files in the bucket. For more information,
+    #   see [Permissions Required for IAM User Roles][1].
     #
     #   You can specify an AWS Key Management Service (KMS) key to encrypt the
     #   output of your transcription using the `OutputEncryptionKMSKeyId`
@@ -847,6 +858,9 @@ module Aws::TranscribeService
     #   execution if the concurrency limit is reached and there are no slots
     #   available to immediately run the job.
     #
+    # @option params [Types::ContentRedaction] :content_redaction
+    #   An object that contains the request parameters for content redaction.
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -877,6 +891,10 @@ module Aws::TranscribeService
     #       allow_deferred_execution: false,
     #       data_access_role_arn: "DataAccessRoleArn",
     #     },
+    #     content_redaction: {
+    #       redaction_type: "PII", # required, accepts PII
+    #       redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #     },
     #   })
     #
     # @example Response structure
@@ -888,6 +906,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.media_format #=> String, one of "mp3", "mp4", "wav", "flac"
     #   resp.transcription_job.media.media_file_uri #=> String
     #   resp.transcription_job.transcript.transcript_file_uri #=> String
+    #   resp.transcription_job.transcript.redacted_transcript_file_uri #=> String
     #   resp.transcription_job.start_time #=> Time
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
@@ -902,6 +921,8 @@ module Aws::TranscribeService
     #   resp.transcription_job.settings.vocabulary_filter_method #=> String, one of "remove", "mask"
     #   resp.transcription_job.job_execution_settings.allow_deferred_execution #=> Boolean
     #   resp.transcription_job.job_execution_settings.data_access_role_arn #=> String
+    #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
+    #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -1056,7 +1077,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

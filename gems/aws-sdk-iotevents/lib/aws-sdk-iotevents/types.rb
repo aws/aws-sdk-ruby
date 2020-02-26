@@ -8,7 +8,7 @@
 module Aws::IoTEvents
   module Types
 
-    # An action to be performed when the `"condition"` is TRUE.
+    # An action to be performed when the `condition` is TRUE.
     #
     # @note When making an API call, you may pass Action
     #   data as a hash:
@@ -81,8 +81,8 @@ module Aws::IoTEvents
     #   @return [Types::LambdaAction]
     #
     # @!attribute [rw] iot_events
-    #   Sends an IoT Events input, passing in information about the detector
-    #   model instance and the event that triggered the action.
+    #   Sends an AWS IoT Events input, passing in information about the
+    #   detector model instance and the event that triggered the action.
     #   @return [Types::IotEventsAction]
     #
     # @!attribute [rw] sqs
@@ -92,8 +92,8 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] firehose
     #   Sends information about the detector model instance and the event
-    #   that triggered the action to a Kinesis Data Firehose delivery
-    #   stream.
+    #   that triggered the action to an Amazon Kinesis Data Firehose
+    #   delivery stream.
     #   @return [Types::FirehoseAction]
     #
     class Action < Struct.new(
@@ -113,9 +113,8 @@ module Aws::IoTEvents
     # The attributes from the JSON payload that are made available by the
     # input. Inputs are derived from messages sent to the AWS IoT Events
     # system using `BatchPutMessage`. Each such message contains a JSON
-    # payload, and those attributes (and their paired values) specified here
-    # are available for use in the `condition` expressions used by
-    # detectors.
+    # payload. Those attributes (and their paired values) specified here are
+    # available for use in the `condition` expressions used by detectors.
     #
     # @note When making an API call, you may pass Attribute
     #   data as a hash:
@@ -128,10 +127,10 @@ module Aws::IoTEvents
     #   An expression that specifies an attribute-value pair in a JSON
     #   structure. Use this to specify an attribute from the JSON payload
     #   that is made available by the input. Inputs are derived from
-    #   messages sent to the AWS IoT Events system (`BatchPutMessage`). Each
-    #   such message contains a JSON payload, and the attribute (and its
-    #   paired value) specified here are available for use in the
-    #   `"condition"` expressions used by detectors.
+    #   messages sent to AWS IoT Events (`BatchPutMessage`). Each such
+    #   message contains a JSON payload. The attribute (and its paired
+    #   value) specified here are available for use in the `condition`
+    #   expressions used by detectors.
     #
     #   Syntax: `<field-name>.<field-name>...`
     #   @return [String]
@@ -380,12 +379,12 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system to
+    #   create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
-    #   This parameter uses a JSON-path expression to specify the
-    #   attribute-value pair in the message payload of each input that is
-    #   used to identify the device associated with the input.
+    #   This parameter uses a JSON-path expression in the message payload of
+    #   each input to specify the attribute-value pair that is used to
+    #   identify the device associated with the input.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -659,12 +658,12 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   The input attribute key used to identify a device or system in order
-    #   to create a detector (an instance of the detector model) and then to
+    #   The input attribute key used to identify a device or system to
+    #   create a detector (an instance of the detector model) and then to
     #   route each input received to the appropriate detector (instance).
-    #   This parameter uses a JSON-path expression to specify the
-    #   attribute-value pair in the message payload of each input that is
-    #   used to identify the device associated with the input.
+    #   This parameter uses a JSON-path expression in the message payload of
+    #   each input to specify the attribute-value pair that is used to
+    #   identify the device associated with the input.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_method
@@ -967,8 +966,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies the `"actions"` to be performed when the `"condition"`
-    # evaluates to TRUE.
+    # Specifies the `actions` to be performed when the `condition` evaluates
+    # to TRUE.
     #
     # @note When making an API call, you may pass Event
     #   data as a hash:
@@ -1021,10 +1020,10 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   \[Optional\] The Boolean expression that when TRUE causes the
-    #   `"actions"` to be performed. If not present, the actions are
-    #   performed (=TRUE); if the expression result is not a Boolean value,
-    #   the actions are NOT performed (=FALSE).
+    #   Optional. The Boolean expression that, when TRUE, causes the
+    #   `actions` to be performed. If not present, the actions are performed
+    #   (=TRUE). If the expression result is not a Boolean value, the
+    #   actions are not performed (=FALSE).
     #   @return [String]
     #
     # @!attribute [rw] actions
@@ -1039,7 +1038,8 @@ module Aws::IoTEvents
     end
 
     # Sends information about the detector model instance and the event that
-    # triggered the action to a Kinesis Data Firehose delivery stream.
+    # triggered the action to an Amazon Kinesis Data Firehose delivery
+    # stream.
     #
     # @note When making an API call, you may pass FirehoseAction
     #   data as a hash:
@@ -1137,7 +1137,7 @@ module Aws::IoTEvents
     #   input. Inputs are derived from messages sent to the AWS IoT Events
     #   system using `BatchPutMessage`. Each such message contains a JSON
     #   payload, and those attributes (and their paired values) specified
-    #   here are available for use in the `"condition"` expressions used by
+    #   here are available for use in the `condition` expressions used by
     #   detectors that monitor this input.
     #   @return [Array<Types::Attribute>]
     #
@@ -1223,7 +1223,7 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Information required to publish the MQTT message via the AWS IoT
+    # Information required to publish the MQTT message through the AWS IoT
     # message broker.
     #
     # @note When making an API call, you may pass IotTopicPublishAction
@@ -1234,7 +1234,9 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] mqtt_topic
-    #   The MQTT topic of the message.
+    #   The MQTT topic of the message. You can use a string expression that
+    #   includes variables (`$variable.<variable-name>`) and input values
+    #   (`$input.<input-name>.<path-to-datum>`) as the topic string.
     #   @return [String]
     #
     class IotTopicPublishAction < Struct.new(
@@ -1512,7 +1514,7 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] events
     #   Specifies the actions that are performed when the state is entered
-    #   and the `"condition"` is TRUE.
+    #   and the `condition` is TRUE.
     #   @return [Array<Types::Event>]
     #
     class OnEnterLifecycle < Struct.new(
@@ -1520,8 +1522,8 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # When exiting this state, perform these `"actions"` if the specified
-    # `"condition"` is TRUE.
+    # When exiting this state, perform these `actions` if the specified
+    # `condition` is TRUE.
     #
     # @note When making an API call, you may pass OnExitLifecycle
     #   data as a hash:
@@ -1574,8 +1576,8 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] events
-    #   Specifies the `"actions"` that are performed when the state is
-    #   exited and the `"condition"` is TRUE.
+    #   Specifies the `actions` that are performed when the state is exited
+    #   and the `condition` is TRUE.
     #   @return [Array<Types::Event>]
     #
     class OnExitLifecycle < Struct.new(
@@ -1583,7 +1585,7 @@ module Aws::IoTEvents
       include Aws::Structure
     end
 
-    # Specifies the actions performed when the `"condition"` evaluates to
+    # Specifies the actions performed when the `condition` evaluates to
     # TRUE.
     #
     # @note When making an API call, you may pass OnInputLifecycle
@@ -1682,13 +1684,13 @@ module Aws::IoTEvents
     #       }
     #
     # @!attribute [rw] events
-    #   Specifies the actions performed when the `"condition"` evaluates to
+    #   Specifies the actions performed when the `condition` evaluates to
     #   TRUE.
     #   @return [Array<Types::Event>]
     #
     # @!attribute [rw] transition_events
     #   Specifies the actions performed, and the next state entered, when a
-    #   `"condition"` evaluates to TRUE.
+    #   `condition` evaluates to TRUE.
     #   @return [Array<Types::TransitionEvent>]
     #
     class OnInputLifecycle < Struct.new(
@@ -1829,7 +1831,8 @@ module Aws::IoTEvents
     #
     # @!attribute [rw] seconds
     #   The number of seconds until the timer expires. The minimum value is
-    #   60 seconds to ensure accuracy.
+    #   60 seconds to ensure accuracy. The maximum value is 31622400
+    #   seconds.
     #   @return [Integer]
     #
     class SetTimerAction < Struct.new(
@@ -1878,7 +1881,7 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] use_base_64
-    #   Set this to TRUE if you want the data to be Base-64 encoded before
+    #   Set this to TRUE if you want the data to be base-64 encoded before
     #   it is written to the queue. Otherwise, set this to FALSE.
     #   @return [Boolean]
     #
@@ -2085,18 +2088,18 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] on_input
-    #   When an input is received and the `"condition"` is TRUE, perform the
-    #   specified `"actions"`.
+    #   When an input is received and the `condition` is TRUE, perform the
+    #   specified `actions`.
     #   @return [Types::OnInputLifecycle]
     #
     # @!attribute [rw] on_enter
-    #   When entering this state, perform these `"actions"` if the
-    #   `"condition"` is TRUE.
+    #   When entering this state, perform these `actions` if the `condition`
+    #   is TRUE.
     #   @return [Types::OnEnterLifecycle]
     #
     # @!attribute [rw] on_exit
-    #   When exiting this state, perform these `"actions"` if the specified
-    #   `"condition"` is TRUE.
+    #   When exiting this state, perform these `actions` if the specified
+    #   `condition` is TRUE.
     #   @return [Types::OnExitLifecycle]
     #
     class State < Struct.new(
@@ -2172,7 +2175,7 @@ module Aws::IoTEvents
     end
 
     # Specifies the actions performed and the next state entered when a
-    # `"condition"` evaluates to TRUE.
+    # `condition` evaluates to TRUE.
     #
     # @note When making an API call, you may pass TransitionEvent
     #   data as a hash:
@@ -2226,8 +2229,8 @@ module Aws::IoTEvents
     #   @return [String]
     #
     # @!attribute [rw] condition
-    #   \[Required\] A Boolean expression that when TRUE causes the actions
-    #   to be performed and the `"nextState"` to be entered.
+    #   Required. A Boolean expression that when TRUE causes the actions to
+    #   be performed and the `nextState` to be entered.
     #   @return [String]
     #
     # @!attribute [rw] actions
