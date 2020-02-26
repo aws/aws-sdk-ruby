@@ -115,13 +115,15 @@ module Seahorse
           end
         end
 
-        attr_reader :name
         attr_accessor :default
         attr_accessor :default_block
-        attr_accessor :required
         attr_accessor :doc_type
-        attr_writer :doc_default
         attr_accessor :docstring
+        attr_accessor :override
+        attr_accessor :required
+
+        attr_reader :name
+        attr_writer :doc_default
 
         def doc_default
           if @doc_default.nil? && !default.is_a?(Proc)
