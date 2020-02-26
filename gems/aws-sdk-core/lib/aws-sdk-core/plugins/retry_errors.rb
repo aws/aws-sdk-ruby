@@ -304,34 +304,33 @@ SDK operation invocation before giving up. Used in `standard` and
           @mutex              = Mutex.new
           @max_capacity       = INITIAL_RETRY_TOKENS
           @available_capacity = INITIAL_RETRY_TOKENS
-          @capacity_amount    = nil
         end
 
-        # Acquiring tokens from the retry quota
-        def retry_quota?(error)
+        # check if there is sufficient capacity to retry
+        def checkout_capacity(error)
           @mutex.synchronize do
-            @capacity_amount = if error.networking?
+            capacity_amount = if error.networking?
                                  TIMEOUT_RETRY_COST
                                else
                                  RETRY_COST
                                end
 
             # unable to acquire capacity
-            return false if @capacity_amount > @available_capacity
+            return false if capacity_amount > @available_capacity
 
-            @available_capacity -= @capacity_amount
-            true
+            @available_capacity -= capacity_amount
+            capacity_amount
           end
         end
 
-        def release(is_response_successful)
+        def release(is_response_successful, capacity_amount)
           # capacity_amount refers to the amount of capacity requested from
           # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
           # or unset.
           if is_response_successful
             @mutex.synchronize do
-              @available_capacity += if @capacity_amount
-                                       @capacity_amount
+              @available_capacity += if capacity_amount
+                                       capacity_amount
                                      else
                                        NO_RETRY_INCREMENT
                                      end
@@ -477,17 +476,18 @@ SDK operation invocation before giving up. Used in `standard` and
         MAX_BACKOFF = 20
 
         def call(context)
+          context.metadata[:retries] ||= {}
           config = context.config
 
           get_send_token(config)
           response = @handler.call(context)
-          request_bookkeeping(config, response)
+          request_bookkeeping(context, response)
           return response unless retryable?(response, context)
 
           return response if context.retries >= config.max_attempts - 1
 
           error = ErrorInspector.new(response)
-          return response unless config.retry_quota.retry_quota?(error)
+          return response unless (context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error))
 
           delay = exponential_backoff(context.retries)
           Kernel.sleep(delay)
@@ -505,11 +505,11 @@ SDK operation invocation before giving up. Used in `standard` and
             config.client_rate_limiter.token_bucket_acquire(1)
           end
         end
-
-        def request_bookkeeping(config, response)
-          # maxsendrate is updated if on adaptive mode and based on response
-          # retry quota is updated if the request is successful (both modes)
-          config.retry_quota.release(response.successful?)
+        # maxsendrate is updated if on adaptive mode and based on response
+        # retry quota is updated if the request is successful (both modes)
+        def request_bookkeeping(context, response)
+          config = context.config
+          config.retry_quota.release(response.successful?, context.metadata[:retries][:capacity_amount])
 
           if config.retry_mode == 'adaptive'
             is_throttling_error = ErrorInspector.new(response).throttling_error?
@@ -527,7 +527,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def exponential_backoff(retries)
           # for a transient error, use backoff
-          [Kernel.rand(0..1) * 2**retries, MAX_BACKOFF].min
+          [Kernel.rand * 2**retries, MAX_BACKOFF].min
         end
 
         def retry_request(context, error)
