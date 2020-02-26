@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.453 (2020-02-26)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
