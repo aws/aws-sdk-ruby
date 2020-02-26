@@ -3,8 +3,9 @@ require_relative '../../../support/retry_errors_helper'
 
 module Aws
   module Plugins
-    describe RetryErrors::ClientRateLimiter do
-      let(:client_rate_limiter) { RetryErrors::ClientRateLimiter.new }
+    describe Retries::ClientRateLimiter do
+      let(:client_rate_limiter) { Retries::ClientRateLimiter.new }
+
       let(:mutex) { client_rate_limiter.instance_variable_get(:@mutex) }
 
       ######
@@ -23,7 +24,7 @@ module Aws
       end
 
       it 'should match beta decrease' do
-        stub_const('Aws::Plugins::RetryErrors::ClientRateLimiter::BETA', 0.6)
+        stub_const('Aws::Plugins::Retries::ClientRateLimiter::BETA', 0.6)
         client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
 
         new_rate = client_rate_limiter.send(:cubic_throttle, 10)
@@ -119,7 +120,7 @@ module Aws
         client_rate_limiter.instance_variable_set(:@enabled, true)
         client_rate_limiter.send(:token_bucket_update_rate, 0.1)
 
-        expect(client_rate_limiter.instance_variable_get(:@fill_rate)).to eq(RetryErrors::ClientRateLimiter::MIN_FILL_RATE)
+        expect(client_rate_limiter.instance_variable_get(:@fill_rate)).to eq(Retries::ClientRateLimiter::MIN_FILL_RATE)
       end
 
       it 'acquires a token only when enabled' do

@@ -1,4 +1,7 @@
 require 'set'
+require_relative 'retries/error_inspector'
+require_relative 'retries/retry_quota'
+require_relative 'retries/client_rate_limiter'
 
 module Aws
   module Plugins
@@ -112,10 +115,10 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private undocumented
-      option(:client_rate_limiter) { ClientRateLimiter.new }
+      option(:client_rate_limiter) { Retries::ClientRateLimiter.new }
 
       # @api private undocumented
-      option(:retry_quota) { RetryQuota.new }
+      option(:retry_quota) { Retries::RetryQuota.new }
 
       def self.resolve_retry_mode(cfg)
         value = ENV['AWS_RETRY_MODE'] ||
@@ -143,317 +146,6 @@ SDK operation invocation before giving up. Used in `standard` and
         value
       end
 
-      # @api private
-      # This class will be obsolete when APIs contain modeled exceptions
-      class ErrorInspector
-        EXPIRED_CREDS = Set.new(
-          [
-            'InvalidClientTokenId',        # query services
-            'UnrecognizedClientException', # json services
-            'InvalidAccessKeyId',          # s3
-            'AuthFailure',                 # ec2
-            'InvalidIdentityToken',        # sts
-            'ExpiredToken'                 # route53
-          ]
-        )
-
-        THROTTLING_ERRORS = Set.new(
-          [
-            'Throttling',                             # query services
-            'ThrottlingException',                    # json services
-            'ThrottledException',                     # sns
-            'RequestThrottled',                       # sqs
-            'RequestThrottledException',              # generic service
-            'ProvisionedThroughputExceededException', # dynamodb
-            'TransactionInProgressException',         # dynamodb
-            'RequestLimitExceeded',                   # ec2
-            'BandwidthLimitExceeded',                 # cloud search
-            'LimitExceededException',                 # kinesis
-            'TooManyRequestsException',               # batch
-            'PriorRequestNotComplete',                # route53
-            'SlowDown',                               # s3
-            'EC2ThrottledException'                   # ec2
-          ]
-        )
-
-        CHECKSUM_ERRORS = Set.new(
-          [
-            'CRC32CheckFailed' # dynamodb
-          ]
-        )
-
-        NETWORKING_ERRORS = Set.new(
-          [
-            'RequestTimeout',          # s3
-            'RequestTimeoutException', # glacier
-            'IDPCommunicationError'    # sts
-          ]
-        )
-
-        def initialize(error, http_status_code)
-          @error = error
-          @name = extract_name(@error)
-          @http_status_code = http_status_code
-        end
-
-        def expired_credentials?
-          !!(EXPIRED_CREDS.include?(@name) || @name.match(/expired/i))
-        end
-
-        def throttling_error?
-          !!(THROTTLING_ERRORS.include?(@name) ||
-            @name.match(/throttl/i) ||
-            @http_status_code == 429) ||
-            modeled_throttling?
-        end
-
-        def checksum?
-          CHECKSUM_ERRORS.include?(@name) || @error.is_a?(Errors::ChecksumError)
-        end
-
-        def networking?
-          @error.is_a?(Seahorse::Client::NetworkingError) ||
-            @error.is_a?(Errors::NoSuchEndpointError) ||
-            NETWORKING_ERRORS.include?(@name)
-        end
-
-        def server?
-          (500..599).cover?(@http_status_code)
-        end
-
-        def endpoint_discovery?(context)
-          return false unless context.operation.endpoint_discovery
-
-          if @http_status_code == 421 ||
-             extract_name(@error) == 'InvalidEndpointException'
-            @error = Errors::EndpointDiscoveryError.new
-          end
-
-          # When endpoint discovery error occurs
-          # evict the endpoint from cache
-          if @error.is_a?(Errors::EndpointDiscoveryError)
-            key = context.config.endpoint_cache.extract_key(context)
-            context.config.endpoint_cache.delete(key)
-            true
-          else
-            false
-          end
-        end
-
-        def modeled_retryable?
-          @error.is_a?(Errors::ServiceError) && @error.retryable?
-        end
-
-        def modeled_throttling?
-          @error.is_a?(Errors::ServiceError) && @error.throttling?
-        end
-
-        def retryable?(context)
-          (expired_credentials? && refreshable_credentials?(context)) ||
-            throttling_error? ||
-            checksum? ||
-            networking? ||
-            server? ||
-            endpoint_discovery?(context) ||
-            modeled_retryable?
-        end
-
-        private
-
-        def refreshable_credentials?(context)
-          context.config.credentials.respond_to?(:refresh!)
-        end
-
-        def extract_name(error)
-          if error.is_a?(Errors::ServiceError)
-            error.class.code || error.class.name.to_s
-          else
-            error.class.name.to_s
-          end
-        end
-      end
-
-      # @api private
-      # Used in 'standard' and 'adaptive' retry modes.
-      class RetryQuota
-        INITIAL_RETRY_TOKENS = 500
-        RETRY_COST = 5
-        NO_RETRY_INCREMENT = 1
-        TIMEOUT_RETRY_COST = 10
-
-        attr_reader :max_capacity, :available_capacity
-
-        def initialize
-          @mutex              = Mutex.new
-          @max_capacity       = INITIAL_RETRY_TOKENS
-          @available_capacity = INITIAL_RETRY_TOKENS
-        end
-
-        # check if there is sufficient capacity to retry
-        def checkout_capacity(error_inspector)
-          @mutex.synchronize do
-            capacity_amount = if error_inspector.networking?
-                                TIMEOUT_RETRY_COST
-                              else
-                                RETRY_COST
-                              end
-
-            # unable to acquire capacity
-            return false if capacity_amount > @available_capacity
-
-            @available_capacity -= capacity_amount
-            capacity_amount
-          end
-        end
-
-        def release(is_response_successful, capacity_amount)
-          # capacity_amount refers to the amount of capacity requested from
-          # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
-          # or unset.
-          if is_response_successful
-            @mutex.synchronize do
-              @available_capacity += if capacity_amount
-                                       capacity_amount
-                                     else
-                                       NO_RETRY_INCREMENT
-                                     end
-            end
-          end
-        end
-      end
-
-      # @api private
-      # Used only in 'adaptive' retry mode
-      class ClientRateLimiter
-        MIN_CAPACITY = 1
-        MIN_FILL_RATE = 0.5
-        SMOOTH = 0.8
-        # How much to scale back after a throttling response
-        BETA = 0.7
-        # Controls how aggressively we scale up after being throttled
-        SCALE_CONSTANT = 0.4
-
-        def initialize
-          @mutex                = Mutex.new
-          @fill_rate            = nil
-          @max_capacity         = nil
-          @current_capacity     = 0
-          @last_timestamp       = nil
-          @enabled              = false
-          @measured_tx_rate     = 0
-          @last_tx_rate_bucket  = Aws::Util.monotonic_seconds
-          @request_count        = 0
-          @last_max_rate        = 0
-          @last_throttle_time   = Aws::Util.monotonic_seconds
-          @calculated_rate      = nil
-        end
-
-        def token_bucket_acquire(amount, wait_to_fill = true)
-          # Client side throttling is not enabled until we see a
-          # throttling error
-          return unless @enabled
-
-          @mutex.synchronize do
-            token_bucket_refill
-
-            # Next see if we have enough capacity for the requested amount
-            while @current_capacity < amount
-              raise Aws::Errors::CapacityNotAvailableError unless wait_to_fill
-              @mutex.sleep((amount - @current_capacity) / @fill_rate)
-              token_bucket_refill
-            end
-            @current_capacity -= amount
-          end
-        end
-
-        def update_sending_rate(is_throttling_error)
-          @mutex.synchronize do
-            update_measured_rate
-
-            if is_throttling_error
-              rate_to_use = if @enabled
-                              [@measured_tx_rate, @fill_rate].min
-                            else
-                              @measured_tx_rate
-                            end
-
-              # The fill_rate is from the token bucket
-              @last_max_rate = rate_to_use
-              calculate_time_window
-              @last_throttle_time = Aws::Util.monotonic_seconds
-              @calculated_rate = cubic_throttle(rate_to_use)
-              enable_token_bucket
-            else
-              calculate_time_window
-              @calculated_rate = cubic_success(Aws::Util.monotonic_seconds)
-            end
-
-            new_rate = [@calculated_rate, 2 * @measured_tx_rate].min
-            token_bucket_update_rate(new_rate)
-          end
-        end
-
-        private
-
-        def token_bucket_refill
-          timestamp = Aws::Util.monotonic_seconds
-          unless @last_timestamp
-            @last_timestamp = timestamp
-            return
-          end
-
-          fill_amount = (timestamp - @last_timestamp) * @fill_rate
-          @current_capacity = [
-            @max_capacity, @current_capacity + fill_amount
-          ].min
-
-          @last_timestamp = timestamp
-        end
-
-        def token_bucket_update_rate(new_rps)
-          # Refill based on our current rate before we update to the
-          # new fill rate
-          token_bucket_refill
-          @fill_rate = [new_rps, MIN_FILL_RATE].max
-          @max_capacity = [new_rps, MIN_CAPACITY].max
-          # When we scale down we can't have a current capacity that exceeds our
-          # max_capacity.
-          @current_capacity = [@current_capacity, @max_capacity].min
-        end
-
-        def enable_token_bucket
-          @enabled = true
-        end
-
-        def update_measured_rate
-          t = Aws::Util.monotonic_seconds
-          time_bucket = (t * 2).floor / 2.0
-          @request_count += 1
-          if time_bucket > @last_tx_rate_bucket
-            current_rate = @request_count / (time_bucket - @last_tx_rate_bucket)
-            @measured_tx_rate = (current_rate * SMOOTH) +
-                                (@measured_tx_rate * (1 - SMOOTH))
-            @request_count = 0
-            @last_tx_rate_bucket = time_bucket
-          end
-        end
-
-        def calculate_time_window
-          # This is broken out into a separate calculation because it only
-          # gets updated when @last_max_rate changes so it can be cached.
-          @time_window = ((@last_max_rate * (1 - BETA)) / SCALE_CONSTANT)**(1.0 / 3)
-        end
-
-        def cubic_success(timestamp)
-          dt = timestamp - @last_throttle_time
-          (SCALE_CONSTANT * ((dt - @time_window)**3)) + @last_max_rate
-        end
-
-        def cubic_throttle(rate_to_use)
-          rate_to_use * BETA
-        end
-      end
-
       class Handler < Seahorse::Client::Handler
         # Max backoff (in seconds)
         MAX_BACKOFF = 20
@@ -464,17 +156,15 @@ SDK operation invocation before giving up. Used in `standard` and
 
           get_send_token(config)
           response = @handler.call(context)
-          error_inspector = ErrorInspector.new(
-            response.error,
-            response.context.http_response.status_code
-          )
+          error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
           request_bookkeeping(context, response, error_inspector)
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
 
-          return response unless (context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error_inspector))
+          context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error_inspector)
+          return response unless context.metadata[:retries][:capacity_amount] > 0
 
           delay = exponential_backoff(context.retries)
           Kernel.sleep(delay)
@@ -540,7 +230,7 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def retry_if_possible(response)
           context = response.context
-          error_inspector = ErrorInspector.new(response.error, response.context.http_response.status_code)
+          error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
           if should_retry?(context, error_inspector)
             retry_request(context, error_inspector)
           else

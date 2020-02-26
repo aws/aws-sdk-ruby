@@ -3,10 +3,10 @@ require_relative '../../../support/retry_errors_helper'
 
 module Aws
   module Plugins
-    describe RetryErrors::ErrorInspector do
+    describe Retries::ErrorInspector do
       def inspector(error, http_status_code = 404)
         error = error.new(nil, nil) if error.is_a? Class
-        RetryErrors::ErrorInspector.new(error, http_status_code)
+        Retries::ErrorInspector.new(error, http_status_code)
       end
 
       describe '#expired_credentials?' do
