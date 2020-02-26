@@ -89,7 +89,7 @@ This option is only used in the `legacy` retry mode.
 
       option(
         :retry_mode,
-        default: 'legacy',
+        default: 'standard',
         doc_type: String,
         docstring: <<-DOCS) do |cfg|
 Specifies which retry algorithm to use. Defaults to `legacy`
@@ -144,7 +144,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
-      # This class will be obselete when APIs contain modeled exceptions
+      # This class will be obsolete when APIs contain modeled exceptions
       class ErrorInspector
         EXPIRED_CREDS = Set.new(
           [
@@ -291,7 +291,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
-      # Used in 'standard' retry mode.
+      # Used in 'standard' and 'adaptive' retry modes.
       class RetryQuota
         INITIAL_RETRY_TOKENS = 500
         RETRY_COST = 5
@@ -341,7 +341,7 @@ SDK operation invocation before giving up. Used in `standard` and
       end
 
       # @api private
-      # Used in both 'standard' and 'adaptive' retry modes
+      # Used only in 'adaptive' retry mode
       class ClientRateLimiter
         MIN_CAPACITY = 1
         MIN_FILL_RATE = 0.5

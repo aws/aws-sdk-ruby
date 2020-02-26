@@ -23,7 +23,7 @@ def run_retry(test_cases)
 
   i = 0
   handle do |_context|
-    apply_expectations(test_cases[i-1]) if i > 0
+    apply_expectations(test_cases[i - 1]) if i > 0
 
     # Setup the next response
     setup_next_response(test_cases[i])
@@ -50,9 +50,7 @@ def apply_expectations(test_case)
     expect(resp.context.config.retry_quota.available_capacity)
       .to eq(expected[:available_capacity])
   end
-  if expected[:retries]
-    expect(resp.context.retries).to eq(expected[:retries])
-  end
+  expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
   if expected[:calculated_rate]
     expect(resp.context.config.client_rate_limiter.instance_variable_get(:@calculated_rate))
       .to be_within(0.1).of(expected[:calculated_rate])
@@ -71,14 +69,14 @@ end
 
 def success(timestamp, calculated_rate)
   [{
-     response: { status_code: 200, error: nil, timestamp: timestamp},
-     expect: { calculated_rate: calculated_rate}
-   }]
+    response: { status_code: 200, error: nil, timestamp: timestamp },
+    expect: { calculated_rate: calculated_rate }
+  }]
 end
 
 def throttle(timestamp, calculated_rate)
   [{
-     response: { status_code: 429, error: nil, timestamp: timestamp},
-     expect: { calculated_rate: calculated_rate}
-   }]
+    response: { status_code: 429, error: nil, timestamp: timestamp },
+    expect: { calculated_rate: calculated_rate }
+  }]
 end

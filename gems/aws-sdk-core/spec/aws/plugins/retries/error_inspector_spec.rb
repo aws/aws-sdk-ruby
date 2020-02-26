@@ -4,10 +4,9 @@ require_relative 'retry_errors_spec_helper'
 module Aws
   module Plugins
     describe RetryErrors::ErrorInspector do
-
       def inspector(error, http_status_code = 404)
         resp = Seahorse::Client::Response.new
-        resp.error = (error.is_a? Class) ? error.new(nil, nil) : error
+        resp.error = error.is_a? Class ? error.new(nil, nil) : error
         resp.context.http_response.status_code = http_status_code
         RetryErrors::ErrorInspector.new(resp)
       end
@@ -134,7 +133,6 @@ module Aws
           expect(inspector(error, 307).networking?).to be(false)
         end
       end
-
     end
   end
 end

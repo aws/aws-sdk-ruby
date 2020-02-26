@@ -112,7 +112,7 @@ module Aws
         # Request a new token every 100ms (10 TPS) for 2 seconds.
         expect(mutex).not_to receive(:sleep)
         (0..20).each do |t|
-          allow(Util).to receive(:monotonic_seconds).and_return(1 + 0.1*t)
+          allow(Util).to receive(:monotonic_seconds).and_return(1 + 0.1 * t)
           client_rate_limiter.token_bucket_acquire(1)
         end
       end
@@ -136,7 +136,6 @@ module Aws
       end
 
       describe 'RetryErrors::ClientRateLimiter ThreadSafety' do
-
         it 'can change max rate while blocking' do
           # This isn't a stress test - we just verify we can change the rate while we acquire a token
           client_rate_limiter.instance_variable_set(:@enabled, true)
@@ -174,7 +173,7 @@ module Aws
 
           n_test_threads.times do |i|
             threads << Thread.new do
-              until shutdown_threads do
+              until shutdown_threads
                 client_rate_limiter.token_bucket_acquire(1)
                 acquisitions_by_thread[i] += 1
               end
@@ -193,10 +192,7 @@ module Aws
           mean = acquisitions_by_thread.sum.to_f / acquisitions_by_thread.size
           expect(acquisitions_by_thread.all? { |x| x > 0.3 * mean }).to be true
         end
-
       end
-
     end
   end
 end
-
