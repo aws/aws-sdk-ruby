@@ -293,10 +293,10 @@ SDK operation invocation before giving up. Used in `standard` and
         def checkout_capacity(error_inspector)
           @mutex.synchronize do
             capacity_amount = if error_inspector.networking?
-                                 TIMEOUT_RETRY_COST
-                               else
-                                 RETRY_COST
-                               end
+                                TIMEOUT_RETRY_COST
+                              else
+                                RETRY_COST
+                              end
 
             # unable to acquire capacity
             return false if capacity_amount > @available_capacity
@@ -348,7 +348,7 @@ SDK operation invocation before giving up. Used in `standard` and
           @calculated_rate      = nil
         end
 
-        def token_bucket_acquire(amount, wait_to_fill=true)
+        def token_bucket_acquire(amount, wait_to_fill = true)
           # Client side throttling is not enabled until we see a
           # throttling error
           return unless @enabled
@@ -464,7 +464,10 @@ SDK operation invocation before giving up. Used in `standard` and
 
           get_send_token(config)
           response = @handler.call(context)
-          error_inspector = ErrorInspector.new(response.error, response.context.http_response.status_code)
+          error_inspector = ErrorInspector.new(
+            response.error,
+            response.context.http_response.status_code
+          )
 
           request_bookkeeping(context, response, error_inspector)
           return response unless retryable?(context, response, error_inspector)

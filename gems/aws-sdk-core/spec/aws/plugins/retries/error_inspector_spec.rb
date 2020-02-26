@@ -1,5 +1,5 @@
 require_relative '../../../spec_helper'
-require_relative 'retry_errors_spec_helper'
+require_relative '../../../support/retry_errors_helper'
 
 module Aws
   module Plugins
@@ -26,7 +26,7 @@ module Aws
         end
 
         it 'returns true for error types that match /expired/' do
-          expect(inspector(RetryErrorsSvc::Errors::SomethingExpiredErro).expired_credentials?).to be(true)
+          expect(inspector(RetryErrorsSvc::Errors::SomethingExpiredError).expired_credentials?).to be(true)
         end
 
         it 'returns false for other errors' do

@@ -1,11 +1,9 @@
 require_relative '../../../spec_helper'
-require_relative 'retry_errors_spec_helper'
+require_relative '../../../support/retry_errors_helper'
 
 module Aws
   module Plugins
     describe RetryErrors::ClientRateLimiter do
-      let(:client_rate_limiter) { RetryErrors::ClientRateLimiter.new }
-
       let(:client_rate_limiter) { RetryErrors::ClientRateLimiter.new }
       let(:mutex) { client_rate_limiter.instance_variable_get(:@mutex) }
 

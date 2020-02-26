@@ -1,5 +1,5 @@
 require_relative '../../../spec_helper'
-require_relative 'retry_errors_spec_helper'
+require_relative '../../../support/retry_errors_helper'
 
 module Aws
   module Plugins
