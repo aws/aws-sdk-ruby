@@ -290,9 +290,9 @@ SDK operation invocation before giving up. Used in `standard` and
         end
 
         # check if there is sufficient capacity to retry
-        def checkout_capacity(error)
+        def checkout_capacity(error_inspector)
           @mutex.synchronize do
-            capacity_amount = if error.networking?
+            capacity_amount = if error_inspector.networking?
                                  TIMEOUT_RETRY_COST
                                else
                                  RETRY_COST
@@ -471,11 +471,11 @@ SDK operation invocation before giving up. Used in `standard` and
 
           return response if context.retries >= config.max_attempts - 1
 
-          return response unless (context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error))
+          return response unless (context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error_inspector))
 
           delay = exponential_backoff(context.retries)
           Kernel.sleep(delay)
-          retry_request(context, error)
+          retry_request(context, error_inspector)
         end
 
         private
@@ -537,9 +537,9 @@ SDK operation invocation before giving up. Used in `standard` and
 
         def retry_if_possible(response)
           context = response.context
-          error = ErrorInspector.new(response)
-          if should_retry?(context, error)
-            retry_request(context, error)
+          error_inspector = ErrorInspector.new(response.error, response.context.http_response.status_code)
+          if should_retry?(context, error_inspector)
+            retry_request(context, error_inspector)
           else
             response
           end
