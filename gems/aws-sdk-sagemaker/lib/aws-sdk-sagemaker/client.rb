@@ -902,7 +902,7 @@ module Aws::SageMaker
     #     },
     #     output_config: { # required
     #       s3_output_location: "S3Uri", # required
-    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603
+    #       target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1024,13 +1024,16 @@ module Aws::SageMaker
     # deploy models. You create the endpoint configuration with the
     # [CreateEndpointConfig][1] API.
     #
-    # <note markdown="1"> Use this API only for hosting models using Amazon SageMaker hosting
-    # services.
+    # Use this API to deploy models using Amazon SageMaker hosting services.
     #
-    #  You must not delete an `EndpointConfig` in use by an endpoint that is
-    # live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
-    # being performed on the endpoint. To update an endpoint, you must
-    # create a new `EndpointConfig`.
+    # For an example that calls this method when deploying a model to Amazon
+    # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
+    # Hosting Services (AWS SDK for Python (Boto 3)).][2]
+    #
+    # <note markdown="1"> You must not delete an `EndpointConfig` that is in use by an endpoint
+    # that is live or while the `UpdateEndpoint` or `CreateEndpoint`
+    # operations are being performed on the endpoint. To update an endpoint,
+    # you must create a new `EndpointConfig`.
     #
     #  </note>
     #
@@ -1045,10 +1048,7 @@ module Aws::SageMaker
     # status to `Creating`. After it creates the endpoint, it sets the
     # status to `InService`. Amazon SageMaker can then process incoming
     # requests for inferences. To check the status of an endpoint, use the
-    # [DescribeEndpoint][2] API.
-    #
-    # For an example, see [Exercise 1: Using the K-Means Algorithm Provided
-    # by Amazon SageMaker][3].
+    # [DescribeEndpoint][3] API.
     #
     # If any of the models hosted at this endpoint get model data from an
     # Amazon S3 location, Amazon SageMaker uses AWS Security Token Service
@@ -1062,8 +1062,8 @@ module Aws::SageMaker
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
-    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
-    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
+    # [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
@@ -1123,15 +1123,15 @@ module Aws::SageMaker
     # resources that you want Amazon SageMaker to provision. Then you call
     # the [CreateEndpoint][1] API.
     #
-    # <note markdown="1"> Use this API only if you want to use Amazon SageMaker hosting services
-    # to deploy models into production.
+    # <note markdown="1"> Use this API if you want to use Amazon SageMaker hosting services to
+    # deploy models into production.
     #
     #  </note>
     #
-    # In the request, you define one or more `ProductionVariant`s, each of
-    # which identifies a model. Each `ProductionVariant` parameter also
-    # describes the resources that you want Amazon SageMaker to provision.
-    # This includes the number and type of ML compute instances to deploy.
+    # In the request, you define a `ProductionVariant`, for each model that
+    # you want to deploy. Each `ProductionVariant` parameter also describes
+    # the resources that you want Amazon SageMaker to provision. This
+    # includes the number and type of ML compute instances to deploy.
     #
     # If you are hosting multiple models, you also assign a `VariantWeight`
     # to specify how much traffic you want to allocate to each model. For
@@ -1140,9 +1140,14 @@ module Aws::SageMaker
     # SageMaker distributes two-thirds of the traffic to Model A, and
     # one-third to model B.
     #
+    # For an example that calls this method when deploying a model to Amazon
+    # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
+    # Hosting Services (AWS SDK for Python (Boto 3)).][2]
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
     #
     # @option params [required, String] :endpoint_config_name
     #   The name of the endpoint configuration. You specify this name in a
@@ -2014,8 +2019,8 @@ module Aws::SageMaker
 
     # Creates a model in Amazon SageMaker. In the request, you name the
     # model and describe a primary container. For the primary container, you
-    # specify the docker image containing inference code, artifacts (from
-    # prior training), and custom environment map that the inference code
+    # specify the Docker image that contains inference code, artifacts (from
+    # prior training), and a custom environment map that the inference code
     # uses when you deploy the model for predictions.
     #
     # Use this API to create a model if you want to use Amazon SageMaker
@@ -2025,6 +2030,10 @@ module Aws::SageMaker
     # `CreateEndpointConfig` API, and then create an endpoint with the
     # `CreateEndpoint` API. Amazon SageMaker then deploys all of the
     # containers that you defined for the model in the hosting environment.
+    #
+    # For an example that calls this method when deploying a model to Amazon
+    # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
+    # Hosting Services (AWS SDK for Python (Boto 3)).][1]
     #
     # To run a batch transform using your model, you start a job with the
     # `CreateTransformJob` API. Amazon SageMaker uses your model and your
@@ -2040,6 +2049,10 @@ module Aws::SageMaker
     # you also use the IAM role to manage permissions the inference code
     # needs. For example, if the inference code access any other AWS
     # resources, you grant necessary permissions via this role.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto
     #
     # @option params [required, String] :model_name
     #   The name of the new model.
@@ -2883,9 +2896,9 @@ module Aws::SageMaker
     #       },
     #     ],
     #     experiment_config: {
-    #       experiment_name: "ExperimentConfigName",
-    #       trial_name: "ExperimentConfigName",
-    #       trial_component_display_name: "ExperimentConfigName",
+    #       experiment_name: "ExperimentEntityName",
+    #       trial_name: "ExperimentEntityName",
+    #       trial_component_display_name: "ExperimentEntityName",
     #     },
     #   })
     #
@@ -3235,9 +3248,9 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     experiment_config: {
-    #       experiment_name: "ExperimentConfigName",
-    #       trial_name: "ExperimentConfigName",
-    #       trial_component_display_name: "ExperimentConfigName",
+    #       experiment_name: "ExperimentEntityName",
+    #       trial_name: "ExperimentEntityName",
+    #       trial_component_display_name: "ExperimentEntityName",
     #     },
     #   })
     #
@@ -3430,9 +3443,9 @@ module Aws::SageMaker
     #       },
     #     ],
     #     experiment_config: {
-    #       experiment_name: "ExperimentConfigName",
-    #       trial_name: "ExperimentConfigName",
-    #       trial_component_display_name: "ExperimentConfigName",
+    #       experiment_name: "ExperimentEntityName",
+    #       trial_name: "ExperimentEntityName",
+    #       trial_component_display_name: "ExperimentEntityName",
     #     },
     #   })
     #
@@ -4694,7 +4707,7 @@ module Aws::SageMaker
     #   resp.input_config.data_input_config #=> String
     #   resp.input_config.framework #=> String, one of "TENSORFLOW", "KERAS", "MXNET", "ONNX", "PYTORCH", "XGBOOST"
     #   resp.output_config.s3_output_location #=> String
-    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603"
+    #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "amba_cv22"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeCompilationJob AWS API Documentation
     #
@@ -6255,8 +6268,8 @@ module Aws::SageMaker
     #
     # @option params [required, String] :workforce_name
     #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `"default"` when a workforce
-    #   is created and cannot be modified.
+    #   `WorkforceName` is automatically set to `default` when a workforce is
+    #   created and cannot be modified.
     #
     # @return [Types::DescribeWorkforceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6332,6 +6345,11 @@ module Aws::SageMaker
     # component, you must disassociate the component from all trials it is
     # associated with. To associate a trial component with a trial, call the
     # AssociateTrialComponent API.
+    #
+    # To get a list of the trials a component is associated with, use the
+    # Search API. Specify `ExperimentTrialComponent` for the `Resource`
+    # parameter. The list appears in the response under
+    # `Results.TrialComponent.Parents`.
     #
     # @option params [required, String] :trial_component_name
     #   The name of the component to disassociate from the trial.
@@ -6827,7 +6845,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].creation_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_start_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_end_time #=> Time
-    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "rasp3b", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603"
+    #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_inf1", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "amba_cv22"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -8459,13 +8477,19 @@ module Aws::SageMaker
     end
 
     # Lists the trials in your account. Specify an experiment name to limit
-    # the list to the trials that are part of that experiment. The list can
-    # be filtered to show only trials that were created in a specific time
-    # range. The list can be sorted by trial name or creation time.
+    # the list to the trials that are part of that experiment. Specify a
+    # trial component name to limit the list to the trials that associated
+    # with that trial component. The list can be filtered to show only
+    # trials that were created in a specific time range. The list can be
+    # sorted by trial name or creation time.
     #
     # @option params [String] :experiment_name
     #   A filter that returns only trials that are part of the specified
     #   experiment.
+    #
+    # @option params [String] :trial_component_name
+    #   A filter that returns only trials that are associated with the
+    #   specified trial component.
     #
     # @option params [Time,DateTime,Date,Integer,String] :created_after
     #   A filter that returns only trials created after the specified time.
@@ -8497,6 +8521,7 @@ module Aws::SageMaker
     #
     #   resp = client.list_trials({
     #     experiment_name: "ExperimentEntityName",
+    #     trial_component_name: "ExperimentEntityName",
     #     created_after: Time.now,
     #     created_before: Time.now,
     #     sort_by: "Name", # accepts Name, CreationTime
@@ -9484,6 +9509,27 @@ module Aws::SageMaker
     # @option params [required, String] :endpoint_config_name
     #   The name of the new endpoint configuration.
     #
+    # @option params [Boolean] :retain_all_variant_properties
+    #   When updating endpoint resources, enables or disables the retention of
+    #   variant properties, such as the instance count or the variant weight.
+    #   To retain the variant properties of an endpoint when updating it, set
+    #   `RetainAllVariantProperties` to `true`. To use the variant properties
+    #   specified in a new `EndpointConfig` call when updating an endpoint,
+    #   set `RetainAllVariantProperties` to `false`.
+    #
+    # @option params [Array<Types::VariantProperty>] :exclude_retained_variant_properties
+    #   When you are updating endpoint resources with
+    #   [RetainAllVariantProperties][1], whose value is set to `true`,
+    #   `ExcludeRetainedVariantProperties` specifies the list of type
+    #   [VariantProperty][2] to override with the values provided by
+    #   `EndpointConfig`. If you don't specify a value for
+    #   `ExcludeAllVariantProperties`, no variant properties are overridden.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html
+    #
     # @return [Types::UpdateEndpointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEndpointOutput#endpoint_arn #endpoint_arn} => String
@@ -9493,6 +9539,12 @@ module Aws::SageMaker
     #   resp = client.update_endpoint({
     #     endpoint_name: "EndpointName", # required
     #     endpoint_config_name: "EndpointConfigName", # required
+    #     retain_all_variant_properties: false,
+    #     exclude_retained_variant_properties: [
+    #       {
+    #         variant_property_type: "DesiredInstanceCount", # required, accepts DesiredInstanceCount, DesiredWeight, DataCaptureConfig
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -10085,14 +10137,14 @@ module Aws::SageMaker
     #
     # @option params [required, String] :workforce_name
     #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `"default"` when a workforce
-    #   is created and cannot be modified.
+    #   `WorkforceName` is automatically set to `default` when a workforce is
+    #   created and cannot be modified.
     #
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of one to four worker IP address ranges ([CIDRs][1]) that can
     #   be used to access tasks assigned to this workforce.
     #
-    #   Maximum: 4 CIDR values
+    #   Maximum: Four CIDR values
     #
     #
     #
@@ -10206,7 +10258,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

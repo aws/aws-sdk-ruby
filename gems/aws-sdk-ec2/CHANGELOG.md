@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2020-02-26)
+------------------
+
+* Feature - This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+
 1.144.0 (2020-02-17)
 ------------------
 

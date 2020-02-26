@@ -15987,6 +15987,7 @@ module Aws::EC2
     #     running, if applicable.
     #
     #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
+    #     The value `xen` is used for both Xen and Nitro hypervisors.
     #
     #   * `iam-instance-profile.arn` - The instance profile associated with
     #     the instance. Specified as an ARN.
@@ -32643,9 +32644,10 @@ module Aws::EC2
     # are in different Spot pools, you can improve the availability of your
     # fleet.
     #
-    # You can specify tags for the Spot Fleet and Spot Instances. You cannot
-    # tag other resource types in a Spot Fleet request because only the
-    # `spot-fleet-request` and `instance` resource types are supported.
+    # You can specify tags for the Spot Fleet request and instances launched
+    # by the fleet. You cannot tag other resource types in a Spot Fleet
+    # request because only the `spot-fleet-request` and `instance` resource
+    # types are supported.
     #
     # For more information, see [Spot Fleet Requests][1] in the *Amazon EC2
     # User Guide for Linux Instances*.
@@ -34182,10 +34184,16 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
-    #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency of the request. If you do not specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   For more information, see [Ensuring Idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     #
     #
@@ -36017,7 +36025,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

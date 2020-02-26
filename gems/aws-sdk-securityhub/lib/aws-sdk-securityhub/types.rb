@@ -1992,10 +1992,10 @@ module Aws::SecurityHub
     # @!attribute [rw] compatible_runtimes
     #   The layer's compatible runtimes. Maximum number of 5 items.
     #
-    #   Valid values: `nodejs8.10` \| `nodejs10.x` \| `nodejs12.x` \|
-    #   `java8` \| `java11` \| `python2.7` \| `python3.6` \| `python3.7` \|
-    #   `python3.8` \| `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \|
-    #   `ruby2.5` \| `provided`
+    #   Valid values: `nodejs10.x` \| `nodejs12.x` \| `java8` \| `java11` \|
+    #   `python2.7` \| `python3.6` \| `python3.7` \| `python3.8` \|
+    #   `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \| `ruby2.5` \|
+    #   `provided`
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_date
@@ -2332,11 +2332,11 @@ module Aws::SecurityHub
     # Provides consistent format for the contents of the Security
     # Hub-aggregated findings. `AwsSecurityFinding` format enables you to
     # share findings between AWS security services and third-party
-    # solutions, and compliance checks.
+    # solutions, and security standards checks.
     #
     # <note markdown="1"> A finding is a potential security issue generated either by AWS
     # services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by
-    # the integrated third-party solutions and compliance checks.
+    # the integrated third-party solutions and standards checks.
     #
     #  </note>
     #
@@ -2945,8 +2945,8 @@ module Aws::SecurityHub
     # @!attribute [rw] compliance
     #   This data type is exclusive to findings that are generated as the
     #   result of a check run against a specific rule in a supported
-    #   standard, such as CIS AWS Foundations. Contains compliance-related
-    #   finding details.
+    #   security standard, such as CIS AWS Foundations. Contains security
+    #   standard-related finding details.
     #   @return [Types::Compliance]
     #
     # @!attribute [rw] verification_state
@@ -3899,7 +3899,7 @@ module Aws::SecurityHub
     # @!attribute [rw] compliance_status
     #   Exclusive to findings that are generated as the result of a check
     #   run against a specific rule in a supported standard, such as CIS AWS
-    #   Foundations. Contains compliance-related finding details.
+    #   Foundations. Contains security standard-related finding details.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] verification_state
@@ -4326,7 +4326,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_subscription_requests
-    #   The list of standards compliance checks to enable.
+    #   The list of standards checks to enable.
     #   @return [Array<Types::StandardsSubscriptionRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchEnableStandardsRequest AWS API Documentation
@@ -4855,19 +4855,19 @@ module Aws::SecurityHub
     end
 
     # Exclusive to findings that are generated as the result of a check run
-    # against a specific rule in a supported standard, such as CIS AWS
-    # Foundations. Contains compliance-related finding details.
+    # against a specific rule in a supported security standard, such as CIS
+    # AWS Foundations. Contains security standard-related finding details.
     #
     # Values include the following:
     #
     # * Allowed values are the following:
     #
-    #   * `PASSED` - Compliance check passed for all evaluated resources.
+    #   * `PASSED` - Standards check passed for all evaluated resources.
     #
     #   * `WARNING` - Some information is missing or this check is not
     #     supported given your configuration.
     #
-    #   * `FAILED` - Compliance check failed for at least one evaluated
+    #   * `FAILED` - Standards check failed for at least one evaluated
     #     resource.
     #
     #   * `NOT_AVAILABLE` - Check could not be performed due to a service
@@ -4885,7 +4885,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] status
-    #   The result of a compliance check.
+    #   The result of a standards check.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
@@ -5979,7 +5979,7 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of compliance standard controls to return.
+    #   The maximum number of security standard controls to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeStandardsControlsRequest AWS API Documentation
@@ -5992,7 +5992,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] controls
-    #   A list of compliance standards controls.
+    #   A list of security standards controls.
     #   @return [Array<Types::StandardsControl>]
     #
     # @!attribute [rw] next_token
@@ -7841,6 +7841,17 @@ module Aws::SecurityHub
     #   The categories assigned to the product.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] integration_types
+    #   The types of integration that the product supports. Available values
+    #   are the following.
+    #
+    #   * `SEND_FINDINGS_TO_SECURITY_HUB` - Indicates that the integration
+    #     sends findings to Security Hub.
+    #
+    #   * `RECEIVE_FINDINGS_FROM_SECURITY_HUB` - Indicates that the
+    #     integration receives findings from Security Hub.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] marketplace_url
     #   The URL for the page that contains more information about the
     #   product.
@@ -7862,6 +7873,7 @@ module Aws::SecurityHub
       :company_name,
       :description,
       :categories,
+      :integration_types,
       :marketplace_url,
       :activation_url,
       :product_subscription_resource_policy)
@@ -8982,14 +8994,14 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details for an individual compliance standard control.
+    # Details for an individual security standard control.
     #
     # @!attribute [rw] standards_control_arn
-    #   The ARN of the compliance standard control.
+    #   The ARN of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] control_status
-    #   The current status of the compliance standard control. Indicates
+    #   The current status of the security standard control. Indicates
     #   whether the control is enabled or disabled. Security Hub does not
     #   check against disabled controls.
     #   @return [String]
@@ -9000,20 +9012,20 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] control_status_updated_at
-    #   The date and time that the status of the compliance standard control
+    #   The date and time that the status of the security standard control
     #   was most recently updated.
     #   @return [Time]
     #
     # @!attribute [rw] control_id
-    #   The identifier of the compliance standard control.
+    #   The identifier of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   The title of the compliance standard control.
+    #   The title of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The longer description of the compliance standard control. Provides
+    #   The longer description of the security standard control. Provides
     #   information about what the control is checking for.
     #   @return [String]
     #
@@ -9023,11 +9035,11 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] severity_rating
-    #   The severity of findings generated from this compliance standard
+    #   The severity of findings generated from this security standard
     #   control.
     #
     #   The finding severity is based on an assessment of how easy it would
-    #   be to compromise AWS resources if the compliance issue is detected.
+    #   be to compromise AWS resources if the issue is detected.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
@@ -10464,15 +10476,15 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] standards_control_arn
-    #   The ARN of the compliance standard control to enable or disable.
+    #   The ARN of the security standard control to enable or disable.
     #   @return [String]
     #
     # @!attribute [rw] control_status
-    #   The updated status of the compliance standard control.
+    #   The updated status of the security standard control.
     #   @return [String]
     #
     # @!attribute [rw] disabled_reason
-    #   A description of the reason why you are disabling a compliance
+    #   A description of the reason why you are disabling a security
     #   standard control.
     #   @return [String]
     #
