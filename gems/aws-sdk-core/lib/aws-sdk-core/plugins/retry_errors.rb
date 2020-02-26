@@ -190,24 +190,7 @@ SDK operation invocation before giving up. Used in `standard` and
           ]
         )
 
-        def initialize(*args)
-          case args.size
-          when 1
-            initialize_from_response(*args)
-          when 2
-            initialize_from_error(*args)
-          else
-            raise ArgumentError, 'Wrong number of arguments'
-          end
-        end
-
-        def initialize_from_response(response)
-          @error = response.error
-          @name = extract_name(@error)
-          @http_status_code = response.context.http_response.status_code
-        end
-
-        def initialize_from_error(error, http_status_code)
+        def initialize(error, http_status_code)
           @error = error
           @name = extract_name(@error)
           @http_status_code = http_status_code
@@ -481,12 +464,13 @@ SDK operation invocation before giving up. Used in `standard` and
 
           get_send_token(config)
           response = @handler.call(context)
-          request_bookkeeping(context, response)
-          return response unless retryable?(response, context)
+          error_inspector = ErrorInspector.new(response.error, response.context.http_response.status_code)
+
+          request_bookkeeping(context, response, error_inspector)
+          return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
 
-          error = ErrorInspector.new(response)
           return response unless (context.metadata[:retries][:capacity_amount] = config.retry_quota.checkout_capacity(error))
 
           delay = exponential_backoff(context.retries)
@@ -507,21 +491,20 @@ SDK operation invocation before giving up. Used in `standard` and
         end
         # maxsendrate is updated if on adaptive mode and based on response
         # retry quota is updated if the request is successful (both modes)
-        def request_bookkeeping(context, response)
+        def request_bookkeeping(context, response, error_inspector)
           config = context.config
           config.retry_quota.release(response.successful?, context.metadata[:retries][:capacity_amount])
 
           if config.retry_mode == 'adaptive'
-            is_throttling_error = ErrorInspector.new(response).throttling_error?
+            is_throttling_error = error_inspector.throttling_error?
             config.client_rate_limiter.update_sending_rate(is_throttling_error)
           end
         end
 
-        def retryable?(response, context)
+        def retryable?(context, response, error_inspector)
           return false if response.successful?
 
-          error = ErrorInspector.new(response)
-          error.retryable?(context) &&
+          error_inspector.retryable?(context) &&
             context.http_response.body.respond_to?(:truncate)
         end
 

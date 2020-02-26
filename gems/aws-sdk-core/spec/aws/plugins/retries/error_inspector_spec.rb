@@ -5,10 +5,8 @@ module Aws
   module Plugins
     describe RetryErrors::ErrorInspector do
       def inspector(error, http_status_code = 404)
-        resp = Seahorse::Client::Response.new
-        resp.error = error.is_a? Class ? error.new(nil, nil) : error
-        resp.context.http_response.status_code = http_status_code
-        RetryErrors::ErrorInspector.new(resp)
+        error = error.new(nil, nil) if error.is_a? Class
+        RetryErrors::ErrorInspector.new(error, http_status_code)
       end
 
       describe '#expired_credentials?' do
