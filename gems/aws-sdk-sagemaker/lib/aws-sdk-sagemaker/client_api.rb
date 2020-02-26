@@ -342,7 +342,6 @@ module Aws::SageMaker
     Experiment = Shapes::StructureShape.new(name: 'Experiment')
     ExperimentArn = Shapes::StringShape.new(name: 'ExperimentArn')
     ExperimentConfig = Shapes::StructureShape.new(name: 'ExperimentConfig')
-    ExperimentConfigName = Shapes::StringShape.new(name: 'ExperimentConfigName')
     ExperimentDescription = Shapes::StringShape.new(name: 'ExperimentDescription')
     ExperimentEntityName = Shapes::StringShape.new(name: 'ExperimentEntityName')
     ExperimentSource = Shapes::StructureShape.new(name: 'ExperimentSource')
@@ -905,6 +904,9 @@ module Aws::SageMaker
     UserProfileStatus = Shapes::StringShape.new(name: 'UserProfileStatus')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
+    VariantProperty = Shapes::StructureShape.new(name: 'VariantProperty')
+    VariantPropertyList = Shapes::ListShape.new(name: 'VariantPropertyList')
+    VariantPropertyType = Shapes::StringShape.new(name: 'VariantPropertyType')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
@@ -2141,9 +2143,9 @@ module Aws::SageMaker
     Experiment.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Experiment.struct_class = Types::Experiment
 
-    ExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "ExperimentName"))
-    ExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "TrialName"))
-    ExperimentConfig.add_member(:trial_component_display_name, Shapes::ShapeRef.new(shape: ExperimentConfigName, location_name: "TrialComponentDisplayName"))
+    ExperimentConfig.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    ExperimentConfig.add_member(:trial_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialName"))
+    ExperimentConfig.add_member(:trial_component_display_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialComponentDisplayName"))
     ExperimentConfig.struct_class = Types::ExperimentConfig
 
     ExperimentSource.add_member(:source_arn, Shapes::ShapeRef.new(shape: ExperimentSourceArn, required: true, location_name: "SourceArn"))
@@ -2848,6 +2850,7 @@ module Aws::SageMaker
     ListTrialComponentsResponse.struct_class = Types::ListTrialComponentsResponse
 
     ListTrialsRequest.add_member(:experiment_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "ExperimentName"))
+    ListTrialsRequest.add_member(:trial_component_name, Shapes::ShapeRef.new(shape: ExperimentEntityName, location_name: "TrialComponentName"))
     ListTrialsRequest.add_member(:created_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAfter"))
     ListTrialsRequest.add_member(:created_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedBefore"))
     ListTrialsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortTrialsBy, location_name: "SortBy"))
@@ -3663,6 +3666,8 @@ module Aws::SageMaker
 
     UpdateEndpointInput.add_member(:endpoint_name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "EndpointName"))
     UpdateEndpointInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
+    UpdateEndpointInput.add_member(:retain_all_variant_properties, Shapes::ShapeRef.new(shape: Boolean, location_name: "RetainAllVariantProperties"))
+    UpdateEndpointInput.add_member(:exclude_retained_variant_properties, Shapes::ShapeRef.new(shape: VariantPropertyList, location_name: "ExcludeRetainedVariantProperties"))
     UpdateEndpointInput.struct_class = Types::UpdateEndpointInput
 
     UpdateEndpointOutput.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: EndpointArn, required: true, location_name: "EndpointArn"))
@@ -3782,6 +3787,11 @@ module Aws::SageMaker
     UserSettings.add_member(:kernel_gateway_app_settings, Shapes::ShapeRef.new(shape: KernelGatewayAppSettings, location_name: "KernelGatewayAppSettings"))
     UserSettings.add_member(:tensor_board_app_settings, Shapes::ShapeRef.new(shape: TensorBoardAppSettings, location_name: "TensorBoardAppSettings"))
     UserSettings.struct_class = Types::UserSettings
+
+    VariantProperty.add_member(:variant_property_type, Shapes::ShapeRef.new(shape: VariantPropertyType, required: true, location_name: "VariantPropertyType"))
+    VariantProperty.struct_class = Types::VariantProperty
+
+    VariantPropertyList.member = Shapes::ShapeRef.new(shape: VariantProperty)
 
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))

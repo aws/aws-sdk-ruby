@@ -652,7 +652,7 @@ module Aws::SageMaker
     #
     #   * *Semantic segmentation verification* - Uses a variant of the
     #     Expectation Maximization approach to estimate the true class of
-    #     verification judgement for semantic segmentation labels based on
+    #     verification judgment for semantic segmentation labels based on
     #     annotations from individual workers.
     #
     #     `arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation`
@@ -969,7 +969,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] target_attribute_name
-    #   The name of the target variable in supervised learning, a.k.a. ‘y’.
+    #   The name of the target variable in supervised learning, a.k.a.
+    #   'y'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
@@ -2414,7 +2415,7 @@ module Aws::SageMaker
     #         },
     #         output_config: { # required
     #           s3_output_location: "S3Uri", # required
-    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603
+    #           target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -4288,9 +4289,9 @@ module Aws::SageMaker
     #           },
     #         ],
     #         experiment_config: {
-    #           experiment_name: "ExperimentConfigName",
-    #           trial_name: "ExperimentConfigName",
-    #           trial_component_display_name: "ExperimentConfigName",
+    #           experiment_name: "ExperimentEntityName",
+    #           trial_name: "ExperimentEntityName",
+    #           trial_component_display_name: "ExperimentEntityName",
     #         },
     #       }
     #
@@ -4490,9 +4491,9 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         experiment_config: {
-    #           experiment_name: "ExperimentConfigName",
-    #           trial_name: "ExperimentConfigName",
-    #           trial_component_display_name: "ExperimentConfigName",
+    #           experiment_name: "ExperimentEntityName",
+    #           trial_name: "ExperimentEntityName",
+    #           trial_component_display_name: "ExperimentEntityName",
     #         },
     #       }
     #
@@ -4762,9 +4763,9 @@ module Aws::SageMaker
     #           },
     #         ],
     #         experiment_config: {
-    #           experiment_name: "ExperimentConfigName",
-    #           trial_name: "ExperimentConfigName",
-    #           trial_component_display_name: "ExperimentConfigName",
+    #           experiment_name: "ExperimentEntityName",
+    #           trial_name: "ExperimentEntityName",
+    #           trial_component_display_name: "ExperimentEntityName",
     #         },
     #       }
     #
@@ -6323,8 +6324,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] resolved_attributes
     #   This contains ProblemType, AutoMLJobObjective and
-    #   CompletionCriteria. They’re auto-inferred values, if not provided by
-    #   you. If you do provide them, then they’ll be the same as provided.
+    #   CompletionCriteria. They're auto-inferred values, if not provided
+    #   by you. If you do provide them, then they'll be the same as
+    #   provided.
     #   @return [Types::ResolvedAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeAutoMLJobResponse AWS API Documentation
@@ -7148,7 +7150,7 @@ module Aws::SageMaker
     #   * Semantic segmentation labeling jobs using automated labeling: 20
     #     labels
     #
-    #   * Box bounding labeling jobs (all): 10 lables
+    #   * Box bounding labeling jobs (all): 10 labels
     #
     #   The file is a JSON structure in the following format:
     #
@@ -8615,7 +8617,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] workforce_name
     #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   `WorkforceName` is automatically set to `default` when a workforce
     #   is created and cannot be modified.
     #   @return [String]
     #
@@ -8629,7 +8631,7 @@ module Aws::SageMaker
     # @!attribute [rw] workforce
     #   A single private workforce, which is automatically created when you
     #   create your first private work team. You can create one private work
-    #   force in each AWS Region. By default, any workforce related API
+    #   force in each AWS Region. By default, any workforce-related API
     #   operation used in a specific region will apply to the workforce
     #   created in that region. To learn how to create a private workforce,
     #   see [Create a Private Workforce][1].
@@ -8994,9 +8996,9 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         experiment_name: "ExperimentConfigName",
-    #         trial_name: "ExperimentConfigName",
-    #         trial_component_display_name: "ExperimentConfigName",
+    #         experiment_name: "ExperimentEntityName",
+    #         trial_name: "ExperimentEntityName",
+    #         trial_component_display_name: "ExperimentEntityName",
     #       }
     #
     # @!attribute [rw] experiment_name
@@ -9561,7 +9563,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] task_count
-    #   The number of human tasks.
+    #   The number of distinct workers who will perform the same task on
+    #   each object. For example, if `TaskCount` is set to `3` for an image
+    #   classification labeling job, three workers will classify each input
+    #   image. Increasing `TaskCount` can improve label accuracy.
     #   @return [Integer]
     #
     # @!attribute [rw] task_availability_lifetime_in_seconds
@@ -14137,6 +14142,7 @@ module Aws::SageMaker
     #
     #       {
     #         experiment_name: "ExperimentEntityName",
+    #         trial_component_name: "ExperimentEntityName",
     #         created_after: Time.now,
     #         created_before: Time.now,
     #         sort_by: "Name", # accepts Name, CreationTime
@@ -14148,6 +14154,11 @@ module Aws::SageMaker
     # @!attribute [rw] experiment_name
     #   A filter that returns only trials that are part of the specified
     #   experiment.
+    #   @return [String]
+    #
+    # @!attribute [rw] trial_component_name
+    #   A filter that returns only trials that are associated with the
+    #   specified trial component.
     #   @return [String]
     #
     # @!attribute [rw] created_after
@@ -14181,6 +14192,7 @@ module Aws::SageMaker
     #
     class ListTrialsRequest < Struct.new(
       :experiment_name,
+      :trial_component_name,
       :created_after,
       :created_before,
       :sort_by,
@@ -15678,7 +15690,7 @@ module Aws::SageMaker
     #
     #       {
     #         s3_output_location: "S3Uri", # required
-    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, rasp3b, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603
+    #         target_device: "lambda", # required, accepts lambda, ml_m4, ml_m5, ml_c4, ml_c5, ml_p2, ml_p3, ml_inf1, jetson_tx1, jetson_tx2, jetson_nano, jetson_xavier, rasp3b, imx8qm, deeplens, rk3399, rk3288, aisage, sbe_c, qcs605, qcs603, amba_cv22
     #       }
     #
     # @!attribute [rw] s3_output_location
@@ -17647,7 +17659,7 @@ module Aws::SageMaker
     #   A list of one to four [Classless Inter-Domain Routing][1] (CIDR)
     #   values.
     #
-    #   Maximum: 4 CIDR values
+    #   Maximum: Four CIDR values
     #
     #   <note markdown="1"> The following Length Constraints apply to individual CIDR values in
     #   the CIDR value list.
@@ -19864,6 +19876,12 @@ module Aws::SageMaker
     #       {
     #         endpoint_name: "EndpointName", # required
     #         endpoint_config_name: "EndpointConfigName", # required
+    #         retain_all_variant_properties: false,
+    #         exclude_retained_variant_properties: [
+    #           {
+    #             variant_property_type: "DesiredInstanceCount", # required, accepts DesiredInstanceCount, DesiredWeight, DataCaptureConfig
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] endpoint_name
@@ -19874,11 +19892,36 @@ module Aws::SageMaker
     #   The name of the new endpoint configuration.
     #   @return [String]
     #
+    # @!attribute [rw] retain_all_variant_properties
+    #   When updating endpoint resources, enables or disables the retention
+    #   of variant properties, such as the instance count or the variant
+    #   weight. To retain the variant properties of an endpoint when
+    #   updating it, set `RetainAllVariantProperties` to `true`. To use the
+    #   variant properties specified in a new `EndpointConfig` call when
+    #   updating an endpoint, set `RetainAllVariantProperties` to `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_retained_variant_properties
+    #   When you are updating endpoint resources with
+    #   [RetainAllVariantProperties][1], whose value is set to `true`,
+    #   `ExcludeRetainedVariantProperties` specifies the list of type
+    #   [VariantProperty][2] to override with the values provided by
+    #   `EndpointConfig`. If you don't specify a value for
+    #   `ExcludeAllVariantProperties`, no variant properties are overridden.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_VariantProperty.html
+    #   @return [Array<Types::VariantProperty>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateEndpointInput AWS API Documentation
     #
     class UpdateEndpointInput < Struct.new(
       :endpoint_name,
-      :endpoint_config_name)
+      :endpoint_config_name,
+      :retain_all_variant_properties,
+      :exclude_retained_variant_properties)
       include Aws::Structure
     end
 
@@ -20519,7 +20562,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] workforce_name
     #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   `WorkforceName` is automatically set to `default` when a workforce
     #   is created and cannot be modified.
     #   @return [String]
     #
@@ -20527,7 +20570,7 @@ module Aws::SageMaker
     #   A list of one to four worker IP address ranges ([CIDRs][1]) that can
     #   be used to access tasks assigned to this workforce.
     #
-    #   Maximum: 4 CIDR values
+    #   Maximum: Four CIDR values
     #
     #
     #
@@ -20545,7 +20588,7 @@ module Aws::SageMaker
     # @!attribute [rw] workforce
     #   A single private workforce, which is automatically created when you
     #   create your first private work team. You can create one private work
-    #   force in each AWS Region. By default, any workforce related API
+    #   force in each AWS Region. By default, any workforce-related API
     #   operation used in a specific region will apply to the workforce
     #   created in that region. To learn how to create a private workforce,
     #   see [Create a Private Workforce][1].
@@ -20747,6 +20790,52 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies a production variant property type for an Endpoint.
+    #
+    # If you are updating an endpoint with the
+    # [RetainAllVariantProperties][1] option set to `true`, the
+    # `VariantProperty` objects listed in
+    # [ExcludeRetainedVariantProperties][2] override the existing variant
+    # properties of the endpoint.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-RetainAllVariantProperties
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpoint.html#SageMaker-UpdateEndpoint-request-ExcludeRetainedVariantProperties
+    #
+    # @note When making an API call, you may pass VariantProperty
+    #   data as a hash:
+    #
+    #       {
+    #         variant_property_type: "DesiredInstanceCount", # required, accepts DesiredInstanceCount, DesiredWeight, DataCaptureConfig
+    #       }
+    #
+    # @!attribute [rw] variant_property_type
+    #   The type of variant property. The supported values are:
+    #
+    #   * `DesiredInstanceCount`\: Overrides the existing variant instance
+    #     counts using the [InitialInstanceCount][1] values in the
+    #     [ProductionVariants][2].
+    #
+    #   * `DesiredWeight`\: Overrides the existing variant weights using the
+    #     [InitialVariantWeight][3] values in the [ProductionVariants][2].
+    #
+    #   * `DataCaptureConfig`\: (Not currently supported.)
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialInstanceCount
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html#SageMaker-CreateEndpointConfig-request-ProductionVariants
+    #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_ProductionVariant.html#SageMaker-Type-ProductionVariant-InitialVariantWeight
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VariantProperty AWS API Documentation
+    #
+    class VariantProperty < Struct.new(
+      :variant_property_type)
+      include Aws::Structure
+    end
+
     # Specifies a VPC that your training jobs and hosted models have access
     # to. Control access to and from your training and model containers by
     # configuring the VPC. For more information, see [Protect Endpoints by
@@ -20774,14 +20863,13 @@ module Aws::SageMaker
     #
     # @!attribute [rw] subnets
     #   The ID of the subnets in the VPC to which you want to connect your
-    #   training job or model.
+    #   training job or model. For information about the availability of
+    #   specific instance types, see [Supported Instance Types and
+    #   Availability Zones][1].
     #
-    #   <note markdown="1"> Amazon EC2 P3 accelerated computing instances are not available in
-    #   the c/d/e availability zones of region us-east-1. If you want to
-    #   create endpoints with P3 instances in VPC mode in region us-east-1,
-    #   create subnets in a/b/f availability zones instead.
     #
-    #    </note>
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/instance-types-az.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig AWS API Documentation
@@ -20794,7 +20882,7 @@ module Aws::SageMaker
 
     # A single private workforce, which is automatically created when you
     # create your first private work team. You can create one private work
-    # force in each AWS Region. By default, any workforce related API
+    # force in each AWS Region. By default, any workforce-related API
     # operation used in a specific region will apply to the workforce
     # created in that region. To learn how to create a private workforce,
     # see [Create a Private Workforce][1].
@@ -20805,7 +20893,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] workforce_name
     #   The name of the private workforce whose access you want to restrict.
-    #   `WorkforceName` is automatically set to `"default"` when a workforce
+    #   `WorkforceName` is automatically set to `default` when a workforce
     #   is created and cannot be modified.
     #   @return [String]
     #

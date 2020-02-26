@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.1.1 (2020-02-26)
+------------------
+
 * Issue - Handle signing for unknown protocols and default ports.
 
 1.1.0 (2019-03-13)
