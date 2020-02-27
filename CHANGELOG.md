@@ -8695,7 +8695,7 @@ Unreleased Changes
       #=> [:AccessKey, :AccessKeyLastUsed, :AccessKeyMetadata, ...]
 
   Each of these data type classes are now fully documented in the
-  [api reference docs](http://docs.aws.amazon.com/sdkforruby/api/index.html).
+  [api reference docs](http://docs.aws.amazon.com/sdk-for-ruby/v2/api/index.html).
 
 * Feature - Examples - The API reference documentation can now load client
   operation examples from disk. This allows users to contribute examples
@@ -9246,7 +9246,7 @@ Unreleased Changes
   #=> { ... }
   ```
 
-  See the API [PresignedPost documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/PresignedPost.html)
+  See the API [PresignedPost documentation](http://docs.aws.amazon.com/sdk-for-ruby/v2/api/Aws/S3/PresignedPost.html)
   for more information and examples.
 
   See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
@@ -9305,7 +9305,7 @@ Unreleased Changes
   end # message deleted here
   ```
 
-  See the [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/SQS/QueuePoller.html) for more examples.
+  See the [API reference documentation](http://docs.aws.amazon.com/sdk-for-ruby/v2/api/Aws/SQS/QueuePoller.html) for more examples.
 
 * Feature - Aws::ElasticTranscoder - API update to support Applied Color SpaceConversion.
 
@@ -9389,7 +9389,7 @@ Unreleased Changes
 ------------------
 
 * Feature - API Documentation - Updated the
-  [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
+  [API reference documentation](http://docs.aws.amazon.com/sdk-for-ruby/v2/api/frames.html)
   to use the new framless Yard layout.
 
 * Issue - Aws::STS - Reverted regionalized endpoints. Customers relying on the
