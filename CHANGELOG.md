@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.454 (2020-02-27)
+------------------
+
 * Feature - Aws::GlobalAccelerator - Updated the API, and documentation for AWS Global Accelerator.
 
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
