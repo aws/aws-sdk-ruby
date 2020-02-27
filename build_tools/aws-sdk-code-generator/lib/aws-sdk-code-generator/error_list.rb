@@ -31,8 +31,7 @@ module AwsSdkCodeGenerator
 
     def non_empty_error_struct?(shape)
       shape['type'] == 'structure' && !!!shape['event'] &&
-        (shape['error'] || shape['exception']) &&
-        shape['members'] && shape['members'].size > 0
+        (shape['error'] || shape['exception'])
     end
 
     def each(&block)

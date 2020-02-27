@@ -599,6 +599,8 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     DisassociateConnectionFromLagRequest.struct_class = Types::DisassociateConnectionFromLagRequest
 
+    DuplicateTagKeysException.struct_class = Types::DuplicateTagKeysException
+
     Interconnect.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
     Interconnect.add_member(:interconnect_name, Shapes::ShapeRef.new(shape: InterconnectName, location_name: "interconnectName"))
     Interconnect.add_member(:interconnect_state, Shapes::ShapeRef.new(shape: InterconnectState, location_name: "interconnectState"))
@@ -764,6 +766,8 @@ module Aws::DirectConnect
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))

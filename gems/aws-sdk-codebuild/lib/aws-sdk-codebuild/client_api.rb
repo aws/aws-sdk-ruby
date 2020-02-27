@@ -202,6 +202,8 @@ module Aws::CodeBuild
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
     WrapperLong = Shapes::IntegerShape.new(name: 'WrapperLong')
 
+    AccountLimitExceededException.struct_class = Types::AccountLimitExceededException
+
     BatchDeleteBuildsInput.add_member(:ids, Shapes::ShapeRef.new(shape: BuildIds, required: true, location_name: "ids"))
     BatchDeleteBuildsInput.struct_class = Types::BatchDeleteBuildsInput
 
@@ -444,6 +446,8 @@ module Aws::CodeBuild
     ImportSourceCredentialsOutput.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     ImportSourceCredentialsOutput.struct_class = Types::ImportSourceCredentialsOutput
 
+    InvalidInputException.struct_class = Types::InvalidInputException
+
     InvalidateProjectCacheInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
     InvalidateProjectCacheInput.struct_class = Types::InvalidateProjectCacheInput
 
@@ -553,6 +557,8 @@ module Aws::CodeBuild
     NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "networkInterfaceId"))
     NetworkInterface.struct_class = Types::NetworkInterface
+
+    OAuthProviderException.struct_class = Types::OAuthProviderException
 
     PhaseContext.add_member(:status_code, Shapes::ShapeRef.new(shape: String, location_name: "statusCode"))
     PhaseContext.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -702,6 +708,10 @@ module Aws::CodeBuild
     ReportStatusCounts.value = Shapes::ShapeRef.new(shape: WrapperInt)
 
     Reports.member = Shapes::ShapeRef.new(shape: Report)
+
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3LogsConfig.add_member(:status, Shapes::ShapeRef.new(shape: LogsConfigStatusType, required: true, location_name: "status"))
     S3LogsConfig.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))

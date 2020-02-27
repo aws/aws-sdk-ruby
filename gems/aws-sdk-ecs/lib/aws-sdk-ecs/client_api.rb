@@ -319,6 +319,8 @@ module Aws::ECS
     VolumeFromList = Shapes::ListShape.new(name: 'VolumeFromList')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     Attachment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Attachment.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     Attachment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
@@ -341,6 +343,8 @@ module Aws::ECS
     Attribute.add_member(:target_id, Shapes::ShapeRef.new(shape: String, location_name: "targetId"))
     Attribute.struct_class = Types::Attribute
 
+    AttributeLimitExceededException.struct_class = Types::AttributeLimitExceededException
+
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
     AutoScalingGroupProvider.add_member(:auto_scaling_group_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "autoScalingGroupArn"))
@@ -352,6 +356,8 @@ module Aws::ECS
     AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "securityGroups"))
     AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "assignPublicIp"))
     AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
+
+    BlockedException.struct_class = Types::BlockedException
 
     CapacityProvider.add_member(:capacity_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "capacityProviderArn"))
     CapacityProvider.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -390,7 +396,15 @@ module Aws::ECS
     Cluster.add_member(:attachments_status, Shapes::ShapeRef.new(shape: String, location_name: "attachmentsStatus"))
     Cluster.struct_class = Types::Cluster
 
+    ClusterContainsContainerInstancesException.struct_class = Types::ClusterContainsContainerInstancesException
+
+    ClusterContainsServicesException.struct_class = Types::ClusterContainsServicesException
+
+    ClusterContainsTasksException.struct_class = Types::ClusterContainsTasksException
+
     ClusterFieldList.member = Shapes::ShapeRef.new(shape: ClusterField)
+
+    ClusterNotFoundException.struct_class = Types::ClusterNotFoundException
 
     ClusterSetting.add_member(:name, Shapes::ShapeRef.new(shape: ClusterSettingName, location_name: "name"))
     ClusterSetting.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -792,6 +806,8 @@ module Aws::ECS
 
     InferenceAccelerators.member = Shapes::ShapeRef.new(shape: InferenceAccelerator)
 
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
     KernelCapabilities.add_member(:add, Shapes::ShapeRef.new(shape: StringList, location_name: "add"))
     KernelCapabilities.add_member(:drop, Shapes::ShapeRef.new(shape: StringList, location_name: "drop"))
     KernelCapabilities.struct_class = Types::KernelCapabilities
@@ -799,6 +815,8 @@ module Aws::ECS
     KeyValuePair.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     KeyValuePair.struct_class = Types::KeyValuePair
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     LinuxParameters.add_member(:capabilities, Shapes::ShapeRef.new(shape: KernelCapabilities, location_name: "capabilities"))
     LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
@@ -927,6 +945,8 @@ module Aws::ECS
     ManagedScaling.add_member(:maximum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "maximumScalingStepSize"))
     ManagedScaling.struct_class = Types::ManagedScaling
 
+    MissingVersionException.struct_class = Types::MissingVersionException
+
     MountPoint.add_member(:source_volume, Shapes::ShapeRef.new(shape: String, location_name: "sourceVolume"))
     MountPoint.add_member(:container_path, Shapes::ShapeRef.new(shape: String, location_name: "containerPath"))
     MountPoint.add_member(:read_only, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "readOnly"))
@@ -952,6 +972,8 @@ module Aws::ECS
 
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
 
+    NoUpdateAvailableException.struct_class = Types::NoUpdateAvailableException
+
     PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
     PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: String, location_name: "expression"))
     PlacementConstraint.struct_class = Types::PlacementConstraint
@@ -969,6 +991,10 @@ module Aws::ECS
     PlatformDevice.struct_class = Types::PlatformDevice
 
     PlatformDevices.member = Shapes::ShapeRef.new(shape: PlatformDevice)
+
+    PlatformTaskDefinitionIncompatibilityException.struct_class = Types::PlatformTaskDefinitionIncompatibilityException
+
+    PlatformUnknownException.struct_class = Types::PlatformUnknownException
 
     PortMapping.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     PortMapping.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
@@ -1062,6 +1088,10 @@ module Aws::ECS
     Resource.add_member(:string_set_value, Shapes::ShapeRef.new(shape: StringList, location_name: "stringSetValue"))
     Resource.struct_class = Types::Resource
 
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))
     ResourceRequirement.struct_class = Types::ResourceRequirement
@@ -1144,6 +1174,10 @@ module Aws::ECS
     ServiceEvents.member = Shapes::ShapeRef.new(shape: ServiceEvent)
 
     ServiceFieldList.member = Shapes::ShapeRef.new(shape: ServiceField)
+
+    ServiceNotActiveException.struct_class = Types::ServiceNotActiveException
+
+    ServiceNotFoundException.struct_class = Types::ServiceNotFoundException
 
     ServiceRegistries.member = Shapes::ShapeRef.new(shape: ServiceRegistry)
 
@@ -1248,6 +1282,8 @@ module Aws::ECS
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TargetNotFoundException.struct_class = Types::TargetNotFoundException
+
     Task.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     Task.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     Task.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -1349,6 +1385,8 @@ module Aws::ECS
 
     TaskSetFieldList.member = Shapes::ShapeRef.new(shape: TaskSetField)
 
+    TaskSetNotFoundException.struct_class = Types::TaskSetNotFoundException
+
     TaskSets.member = Shapes::ShapeRef.new(shape: TaskSet)
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
@@ -1366,6 +1404,8 @@ module Aws::ECS
     Ulimit.struct_class = Types::Ulimit
 
     UlimitList.member = Shapes::ShapeRef.new(shape: Ulimit)
+
+    UnsupportedFeatureException.struct_class = Types::UnsupportedFeatureException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "tagKeys"))
@@ -1395,6 +1435,8 @@ module Aws::ECS
     UpdateContainerInstancesStateResponse.add_member(:container_instances, Shapes::ShapeRef.new(shape: ContainerInstances, location_name: "containerInstances"))
     UpdateContainerInstancesStateResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     UpdateContainerInstancesStateResponse.struct_class = Types::UpdateContainerInstancesStateResponse
+
+    UpdateInProgressException.struct_class = Types::UpdateInProgressException
 
     UpdateServicePrimaryTaskSetRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cluster"))
     UpdateServicePrimaryTaskSetRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))

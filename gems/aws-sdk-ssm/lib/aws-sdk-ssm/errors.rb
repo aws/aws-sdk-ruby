@@ -26,6 +26,28 @@ module Aws::SSM
 
     end
 
+    class AssociatedInstances < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociatedInstances] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class AssociationAlreadyExists < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociationAlreadyExists] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class AssociationDoesNotExist < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -54,6 +76,17 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class AssociationLimitExceeded < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::AssociationLimitExceeded] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -298,6 +331,17 @@ module Aws::SSM
 
     end
 
+    class DuplicateInstanceId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::DuplicateInstanceId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class FeatureNotAvailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -538,6 +582,17 @@ module Aws::SSM
 
     end
 
+    class InvalidCommandId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidCommandId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class InvalidDeleteInventoryParametersException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -678,6 +733,17 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class InvalidFilterKey < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidFilterKey] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -879,6 +945,28 @@ module Aws::SSM
 
     end
 
+    class InvalidOutputFolder < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidOutputFolder] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class InvalidOutputLocation < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidOutputLocation] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class InvalidParameters < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -911,6 +999,17 @@ module Aws::SSM
 
     end
 
+    class InvalidPluginName < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidPluginName] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class InvalidPolicyAttributeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -939,6 +1038,28 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class InvalidResourceId < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidResourceId] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class InvalidResourceType < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidResourceType] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -1035,6 +1156,17 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class InvocationDoesNotExist < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvocationDoesNotExist] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -1452,6 +1584,17 @@ module Aws::SSM
 
     end
 
+    class StatusUnchanged < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::StatusUnchanged] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class SubTypeCountLimitExceededException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1496,6 +1639,17 @@ module Aws::SSM
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class TooManyTagsError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::TooManyTagsError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
