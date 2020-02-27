@@ -90,6 +90,22 @@ module Aws::GlobalAccelerator
 
     end
 
+    class ByoipCidrNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::ByoipCidrNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
     class EndpointGroupAlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -111,6 +127,22 @@ module Aws::GlobalAccelerator
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::GlobalAccelerator::Types::EndpointGroupNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class IncorrectCidrStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::GlobalAccelerator::Types::IncorrectCidrStateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
