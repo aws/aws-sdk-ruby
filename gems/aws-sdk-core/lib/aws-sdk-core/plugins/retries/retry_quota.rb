@@ -10,8 +10,6 @@ module Aws
         NO_RETRY_INCREMENT = 1
         TIMEOUT_RETRY_COST = 10
 
-        attr_reader :max_capacity, :available_capacity
-
         def initialize
           @mutex              = Mutex.new
           @max_capacity       = INITIAL_RETRY_TOKENS
@@ -35,18 +33,20 @@ module Aws
           end
         end
 
-        def release(is_response_successful, capacity_amount)
-          # capacity_amount refers to the amount of capacity requested from
-          # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
-          # or unset.
-          if is_response_successful
-            @mutex.synchronize do
-              @available_capacity += if capacity_amount
-                                       capacity_amount
-                                     else
-                                       NO_RETRY_INCREMENT
-                                     end
-            end
+        # capacity_amount refers to the amount of capacity requested from
+        # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
+        # or unset.
+        def release(capacity_amount)
+          # Implementation note:  The release() method is called as part
+          # of the "after-call" event, which means it gets invoked for
+          # every API call.  In the common case where the request is
+          # successful and we're at full capacity, we can avoid locking.
+          # We can't exceed max capacity so there's no work we have to do.
+          return if @available_capacity == @max_capacity
+
+          @mutex.synchronize do
+            @available_capacity += capacity_amount || NO_RETRY_INCREMENT
+            @available_capacity = [@available_capacity, @max_capacity].min
           end
         end
       end

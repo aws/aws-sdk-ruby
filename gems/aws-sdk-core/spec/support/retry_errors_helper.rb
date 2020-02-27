@@ -47,7 +47,7 @@ end
 def apply_expectations(test_case)
   expected = test_case[:expect]
   if expected[:available_capacity]
-    expect(resp.context.config.retry_quota.available_capacity)
+    expect(resp.context.config.retry_quota.instance_variable_get(:@available_capacity))
       .to eq(expected[:available_capacity])
   end
   expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]

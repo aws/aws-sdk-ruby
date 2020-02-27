@@ -186,7 +186,9 @@ SDK operation invocation before giving up. Used in `standard` and
         # retry quota is updated if the request is successful (both modes)
         def request_bookkeeping(context, response, error_inspector)
           config = context.config
-          config.retry_quota.release(response.successful?, context.metadata[:retries][:capacity_amount])
+          if response.successful?
+            config.retry_quota.release(context.metadata[:retries][:capacity_amount])
+          end
 
           if config.retry_mode == 'adaptive'
             is_throttling_error = error_inspector.throttling_error?
