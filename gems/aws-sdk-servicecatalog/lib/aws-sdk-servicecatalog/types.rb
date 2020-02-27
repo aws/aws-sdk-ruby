@@ -2636,6 +2636,12 @@ module Aws::ServiceCatalog
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
 
+    # The specified resource is a duplicate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DuplicateResourceException AWS API Documentation
+    #
+    class DuplicateResourceException < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/EnableAWSOrganizationsAccessInput AWS API Documentation
@@ -2847,6 +2853,20 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # One or more parameters provided to the operation are not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidParametersException AWS API Documentation
+    #
+    class InvalidParametersException < Aws::EmptyStructure; end
+
+    # An attempt was made to modify a resource that is in a state that is
+    # not valid. Check your resources to ensure that they are in valid
+    # states before retrying the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Aws::EmptyStructure; end
+
     # Summary information about a product path for a user.
     #
     # @!attribute [rw] id
@@ -2874,6 +2894,14 @@ module Aws::ServiceCatalog
       :name)
       include Aws::Structure
     end
+
+    # The current limits of the service would have been exceeded by this
+    # operation. Decrease your resource use or increase your service limits
+    # and retry the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListAcceptedPortfolioSharesInput
     #   data as a hash:
@@ -4052,6 +4080,12 @@ module Aws::ServiceCatalog
       :page_token)
       include Aws::Structure
     end
+
+    # The operation is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Aws::EmptyStructure; end
 
     # Information about the organization node.
     #
@@ -5460,6 +5494,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # A resource that is currently in use. Ensure that the resource is not
+    # in use and retry the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The specified resource was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # Information about a change to a resource attribute.
     #
     # @!attribute [rw] attribute
@@ -6043,6 +6090,15 @@ module Aws::ServiceCatalog
       :id)
       include Aws::Structure
     end
+
+    # An operation requiring TagOptions failed because the TagOptions
+    # migration process has not been performed for this account. Please use
+    # the AWS console to perform the migration process before retrying the
+    # operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionNotMigratedException AWS API Documentation
+    #
+    class TagOptionNotMigratedException < Aws::EmptyStructure; end
 
     # Summary information about a TagOption.
     #

@@ -8,6 +8,18 @@
 module Aws::Cloud9
   module Types
 
+    # The target request is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Aws::EmptyStructure; end
+
+    # A conflict occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ConflictException AWS API Documentation
+    #
+    class ConflictException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CreateEnvironmentEC2Request
     #   data as a hash:
     #
@@ -483,6 +495,24 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
+    # An access permissions issue occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/ForbiddenException AWS API Documentation
+    #
+    class ForbiddenException < Aws::EmptyStructure; end
+
+    # An internal server error occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Aws::EmptyStructure; end
+
+    # A service limit was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass ListEnvironmentsRequest
     #   data as a hash:
     #
@@ -563,6 +593,12 @@ module Aws::Cloud9
       include Aws::Structure
     end
 
+    # The target resource cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Aws::EmptyStructure; end
+
     # Metadata that is associated with AWS resources. In particular, a
     # name-value pair that can be associated with an AWS Cloud9 development
     # environment. There are two types of tags: *user tags* and *system
@@ -628,6 +664,12 @@ module Aws::Cloud9
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Too many service requests were made over the given time period.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

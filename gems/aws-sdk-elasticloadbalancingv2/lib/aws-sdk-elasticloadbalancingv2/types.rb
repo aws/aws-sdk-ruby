@@ -212,6 +212,12 @@ module Aws::ElasticLoadBalancingV2
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
+    # The specified allocation ID does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AllocationIdNotFoundException AWS API Documentation
+    #
+    class AllocationIdNotFoundException < Aws::EmptyStructure; end
+
     # Request parameters to use when integrating with Amazon Cognito to
     # authenticate users.
     #
@@ -433,6 +439,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified Availability Zone is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZoneNotSupportedException AWS API Documentation
+    #
+    class AvailabilityZoneNotSupportedException < Aws::EmptyStructure; end
+
     # Information about an SSL server certificate.
     #
     # @note When making an API call, you may pass Certificate
@@ -461,6 +473,12 @@ module Aws::ElasticLoadBalancingV2
       :is_default)
       include Aws::Structure
     end
+
+    # The specified certificate does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CertificateNotFoundException AWS API Documentation
+    #
+    class CertificateNotFoundException < Aws::EmptyStructure; end
 
     # Information about a cipher used in a policy.
     #
@@ -1697,6 +1715,30 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # A listener with the specified port already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateListenerException AWS API Documentation
+    #
+    class DuplicateListenerException < Aws::EmptyStructure; end
+
+    # A load balancer with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateLoadBalancerNameException AWS API Documentation
+    #
+    class DuplicateLoadBalancerNameException < Aws::EmptyStructure; end
+
+    # A tag key was specified more than once.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTagKeysException AWS API Documentation
+    #
+    class DuplicateTagKeysException < Aws::EmptyStructure; end
+
+    # A target group with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DuplicateTargetGroupNameException AWS API Documentation
+    #
+    class DuplicateTargetGroupNameException < Aws::EmptyStructure; end
+
     # Information about an action that returns a custom HTTP response.
     #
     # @note When making an API call, you may pass FixedResponseActionConfig
@@ -1766,6 +1808,13 @@ module Aws::ElasticLoadBalancingV2
       :target_group_stickiness_config)
       include Aws::Structure
     end
+
+    # The health of the specified targets could not be retrieved due to an
+    # internal error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/HealthUnavailableException AWS API Documentation
+    #
+    class HealthUnavailableException < Aws::EmptyStructure; end
 
     # Information about a host header condition.
     #
@@ -1874,6 +1923,49 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified configuration is not valid with this protocol.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/IncompatibleProtocolsException AWS API Documentation
+    #
+    class IncompatibleProtocolsException < Aws::EmptyStructure; end
+
+    # The requested configuration is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidConfigurationRequestException AWS API Documentation
+    #
+    class InvalidConfigurationRequestException < Aws::EmptyStructure; end
+
+    # The requested action is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidLoadBalancerActionException AWS API Documentation
+    #
+    class InvalidLoadBalancerActionException < Aws::EmptyStructure; end
+
+    # The requested scheme is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSchemeException AWS API Documentation
+    #
+    class InvalidSchemeException < Aws::EmptyStructure; end
+
+    # The specified security group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSecurityGroupException AWS API Documentation
+    #
+    class InvalidSecurityGroupException < Aws::EmptyStructure; end
+
+    # The specified subnet is out of available addresses.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidSubnetException AWS API Documentation
+    #
+    class InvalidSubnetException < Aws::EmptyStructure; end
+
+    # The specified target does not exist, is not in the same VPC as the
+    # target group, or has an unsupported instance type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Aws::EmptyStructure; end
+
     # Information about an Elastic Load Balancing resource limit for your
     # AWS account.
     #
@@ -1961,6 +2053,12 @@ module Aws::ElasticLoadBalancingV2
       :default_actions)
       include Aws::Structure
     end
+
+    # The specified listener does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ListenerNotFoundException AWS API Documentation
+    #
+    class ListenerNotFoundException < Aws::EmptyStructure; end
 
     # Information about a load balancer.
     #
@@ -2136,6 +2234,12 @@ module Aws::ElasticLoadBalancingV2
       :value)
       include Aws::Structure
     end
+
+    # The specified load balancer does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerNotFoundException AWS API Documentation
+    #
+    class LoadBalancerNotFoundException < Aws::EmptyStructure; end
 
     # Information about the state of the load balancer.
     #
@@ -2683,6 +2787,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # This operation is not allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/OperationNotPermittedException AWS API Documentation
+    #
+    class OperationNotPermittedException < Aws::EmptyStructure; end
+
     # Information about a path pattern condition.
     #
     # @note When making an API call, you may pass PathPatternConditionConfig
@@ -2710,6 +2820,12 @@ module Aws::ElasticLoadBalancingV2
       :values)
       include Aws::Structure
     end
+
+    # The specified priority is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/PriorityInUseException AWS API Documentation
+    #
+    class PriorityInUseException < Aws::EmptyStructure; end
 
     # Information about a query string condition.
     #
@@ -2958,6 +3074,12 @@ module Aws::ElasticLoadBalancingV2
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
+    # A specified resource is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
     # Information about a rule.
     #
     # @!attribute [rw] rule_arn
@@ -3126,6 +3248,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified rule does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleNotFoundException AWS API Documentation
+    #
+    class RuleNotFoundException < Aws::EmptyStructure; end
+
     # Information about the priorities for the rules for a listener.
     #
     # @note When making an API call, you may pass RulePriorityPair
@@ -3151,6 +3279,12 @@ module Aws::ElasticLoadBalancingV2
       :priority)
       include Aws::Structure
     end
+
+    # The specified SSL policy does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SSLPolicyNotFoundException AWS API Documentation
+    #
+    class SSLPolicyNotFoundException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SetIpAddressTypeInput
     #   data as a hash:
@@ -3410,6 +3544,12 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # The specified subnet does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SubnetNotFoundException AWS API Documentation
+    #
+    class SubnetNotFoundException < Aws::EmptyStructure; end
+
     # Information about a tag.
     #
     # @note When making an API call, you may pass Tag
@@ -3606,6 +3746,13 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
+    # You've reached the limit on the number of load balancers per target
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupAssociationLimitException AWS API Documentation
+    #
+    class TargetGroupAssociationLimitException < Aws::EmptyStructure; end
+
     # Information about a target group attribute.
     #
     # @note When making an API call, you may pass TargetGroupAttribute
@@ -3691,6 +3838,12 @@ module Aws::ElasticLoadBalancingV2
       :value)
       include Aws::Structure
     end
+
+    # The specified target group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupNotFoundException AWS API Documentation
+    #
+    class TargetGroupNotFoundException < Aws::EmptyStructure; end
 
     # Information about the target group stickiness for a rule.
     #
@@ -3855,6 +4008,79 @@ module Aws::ElasticLoadBalancingV2
       :target_health)
       include Aws::Structure
     end
+
+    # You've reached the limit on the number of actions per rule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyActionsException AWS API Documentation
+    #
+    class TooManyActionsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of certificates per load
+    # balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyCertificatesException AWS API Documentation
+    #
+    class TooManyCertificatesException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of listeners per load
+    # balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyListenersException AWS API Documentation
+    #
+    class TooManyListenersException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of load balancers for your AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyLoadBalancersException AWS API Documentation
+    #
+    class TooManyLoadBalancersException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of times a target can be
+    # registered with a load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyRegistrationsForTargetIdException AWS API Documentation
+    #
+    class TooManyRegistrationsForTargetIdException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of rules per load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyRulesException AWS API Documentation
+    #
+    class TooManyRulesException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of tags per load balancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of target groups for your AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTargetGroupsException AWS API Documentation
+    #
+    class TooManyTargetGroupsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of targets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyTargetsException AWS API Documentation
+    #
+    class TooManyTargetsException < Aws::EmptyStructure; end
+
+    # You've reached the limit on the number of unique target groups per
+    # load balancer across all listeners. If a target group is used by
+    # multiple actions for a load balancer, it is counted as only one use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TooManyUniqueTargetGroupsPerLoadBalancerException AWS API Documentation
+    #
+    class TooManyUniqueTargetGroupsPerLoadBalancerException < Aws::EmptyStructure; end
+
+    # The specified protocol is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/UnsupportedProtocolException AWS API Documentation
+    #
+    class UnsupportedProtocolException < Aws::EmptyStructure; end
 
   end
 end

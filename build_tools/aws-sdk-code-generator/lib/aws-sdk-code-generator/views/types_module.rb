@@ -156,13 +156,7 @@ module AwsSdkCodeGenerator
       end
 
       def struct_type?(shape)
-        if !!!shape['event'] && (shape['error'] || shape['exception'])
-          # non event error shape with more than one member
-          shape['type'] == 'structure' &&
-            shape['members'] && shape['members'].size > 0
-        else
-          shape['type'] == 'structure'
-        end
+        shape['type'] == 'structure'
       end
 
       def compute_input_shapes(api)

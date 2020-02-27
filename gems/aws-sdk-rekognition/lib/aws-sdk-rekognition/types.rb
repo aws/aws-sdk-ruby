@@ -8,6 +8,10 @@
 module Aws::Rekognition
   module Types
 
+    # You are not authorized to perform the action.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # Structure containing the estimated age range, in years, for a face.
     #
     # Amazon Rekognition estimates an age range for faces detected in the
@@ -2543,6 +2547,12 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # A `ClientRequestToken` input parameter was reused with an operation,
+    # but at least one of the other input parameters is different from the
+    # previous call to the operation.
+    #
+    class IdempotentParameterMismatchException < Aws::EmptyStructure; end
+
     # Provides the input image either as bytes or an S3 object.
     #
     # You pass image bytes to an Amazon Rekognition API operation by using
@@ -2616,6 +2626,12 @@ module Aws::Rekognition
       :sharpness)
       include Aws::Structure
     end
+
+    # The input image size exceeds the allowed limit. For more information,
+    # see Limits in Amazon Rekognition in the Amazon Rekognition Developer
+    # Guide.
+    #
+    class ImageTooLargeException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass IndexFacesRequest
     #   data as a hash:
@@ -2791,6 +2807,28 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Amazon Rekognition experienced a service issue. Try your call again.
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
+    # The provided image format is not supported.
+    #
+    class InvalidImageFormatException < Aws::EmptyStructure; end
+
+    # Pagination token in the request is not valid.
+    #
+    class InvalidPaginationTokenException < Aws::EmptyStructure; end
+
+    # Input parameter violated a constraint. Validate your parameter before
+    # calling the API operation again.
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # Amazon Rekognition is unable to access the S3 object specified in the
+    # request.
+    #
+    class InvalidS3ObjectException < Aws::EmptyStructure; end
+
     # The Kinesis data stream Amazon Rekognition to which the analysis
     # results of a Amazon Rekognition stream processor are streamed. For
     # more information, see CreateStreamProcessor in the Amazon Rekognition
@@ -2908,6 +2946,15 @@ module Aws::Rekognition
       :y)
       include Aws::Structure
     end
+
+    # An Amazon Rekognition service limit was exceeded. For example, if you
+    # start too many Amazon Rekognition Video jobs concurrently, calls to
+    # start operations (`StartLabelDetection`, for example) will raise a
+    # `LimitExceededException` exception (HTTP status code: 400) until the
+    # number of concurrently running jobs is below the Amazon Rekognition
+    # service limit.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListCollectionsRequest
     #   data as a hash:
@@ -3385,6 +3432,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The number of requests exceeded your throughput limit. If you want to
+    # increase this limit, contact Amazon Rekognition.
+    #
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RecognizeCelebritiesRequest
     #   data as a hash:
     #
@@ -3478,6 +3530,22 @@ module Aws::Rekognition
       :bounding_box)
       include Aws::Structure
     end
+
+    # A collection with the specified ID already exists.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The collection specified in the request cannot be found.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
+    # The requested resource isn't ready. For example, this exception
+    # occurs when you call `DetectCustomLabels` with a model version that
+    # isn't deployed.
+    #
+    class ResourceNotReadyException < Aws::EmptyStructure; end
 
     # Provides the S3 bucket name and object name.
     #
@@ -4598,6 +4666,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Amazon Rekognition is temporarily unable to process the request. Try
+    # your call again.
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
     # The dataset used for training.
     #
     # @note When making an API call, you may pass TrainingData
@@ -4741,6 +4814,11 @@ module Aws::Rekognition
       :frame_width)
       include Aws::Structure
     end
+
+    # The file size or duration of the supplied media is too large. The
+    # maximum file size is 10GB. The maximum duration is 6 hours.
+    #
+    class VideoTooLargeException < Aws::EmptyStructure; end
 
   end
 end

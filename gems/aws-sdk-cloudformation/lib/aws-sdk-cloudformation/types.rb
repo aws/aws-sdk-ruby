@@ -109,6 +109,12 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The resource with the name requested already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Aws::EmptyStructure; end
+
     # \[`Service-managed` permissions\] Describes whether StackSets
     # automatically deploys to AWS Organizations accounts that are added to
     # a target organization or organizational unit (OU).
@@ -205,6 +211,13 @@ module Aws::CloudFormation
       :resource_change)
       include Aws::Structure
     end
+
+    # The specified change set name or ID doesn't exit. To view valid
+    # change sets for a stack, use the `ListChangeSets` action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetNotFoundException AWS API Documentation
+    #
+    class ChangeSetNotFoundException < Aws::EmptyStructure; end
 
     # The `ChangeSetSummary` structure describes a change set, its status,
     # and the stack with which it's associated.
@@ -1459,6 +1472,12 @@ module Aws::CloudFormation
       :stack_set_id)
       include Aws::Structure
     end
+
+    # The specified resource exists, but has been changed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreatedButModifiedException AWS API Documentation
+    #
+    class CreatedButModifiedException < Aws::EmptyStructure; end
 
     # The input for the DeleteChangeSet action.
     #
@@ -3286,6 +3305,51 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The template contains resources with capabilities that weren't
+    # specified in the Capabilities parameter.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InsufficientCapabilitiesException AWS API Documentation
+    #
+    class InsufficientCapabilitiesException < Aws::EmptyStructure; end
+
+    # The specified change set can't be used to update the stack. For
+    # example, the change set status might be `CREATE_IN_PROGRESS`, or the
+    # stack status might be `UPDATE_IN_PROGRESS`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidChangeSetStatusException AWS API Documentation
+    #
+    class InvalidChangeSetStatusException < Aws::EmptyStructure; end
+
+    # The specified operation isn't valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Aws::EmptyStructure; end
+
+    # Error reserved for use by the [CloudFormation CLI][1]. CloudFormation
+    # does not return this error to users.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/InvalidStateTransitionException AWS API Documentation
+    #
+    class InvalidStateTransitionException < Aws::EmptyStructure; end
+
+    # The quota for the resource has already been reached.
+    #
+    # For information on resource and stack limitations, see [Limits][1] in
+    # the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # The input for the ListChangeSets action.
     #
     # @note When making an API call, you may pass ListChangeSetsInput
@@ -4111,6 +4175,42 @@ module Aws::CloudFormation
       :log_group_name)
       include Aws::Structure
     end
+
+    # The specified name is already in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/NameAlreadyExistsException AWS API Documentation
+    #
+    class NameAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified operation ID already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationIdAlreadyExistsException AWS API Documentation
+    #
+    class OperationIdAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Another operation is currently in progress for this stack set. Only
+    # one operation can be performed for a stack set at a given time.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationInProgressException AWS API Documentation
+    #
+    class OperationInProgressException < Aws::EmptyStructure; end
+
+    # The specified ID refers to an operation that doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationNotFoundException AWS API Documentation
+    #
+    class OperationNotFoundException < Aws::EmptyStructure; end
+
+    # Error reserved for use by the [CloudFormation CLI][1]. CloudFormation
+    # does not return this error to users.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/OperationStatusCheckFailedException AWS API Documentation
+    #
+    class OperationStatusCheckFailedException < Aws::EmptyStructure; end
 
     # The Output data type.
     #
@@ -5461,6 +5561,12 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The specified stack instance doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackInstanceNotFoundException AWS API Documentation
+    #
+    class StackInstanceNotFoundException < Aws::EmptyStructure; end
+
     # The structure that contains summary information about a stack
     # instance.
     #
@@ -6214,6 +6320,20 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # You can't yet delete this stack set, because it still contains one or
+    # more stack instances. Delete all stack instances from the stack set
+    # before deleting the stack set.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetNotEmptyException AWS API Documentation
+    #
+    class StackSetNotEmptyException < Aws::EmptyStructure; end
+
+    # The specified stack set doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetNotFoundException AWS API Documentation
+    #
+    class StackSetNotFoundException < Aws::EmptyStructure; end
+
     # The structure that contains information about a stack set operation.
     #
     # @!attribute [rw] operation_id
@@ -6770,6 +6890,13 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # Another operation has been performed on this stack set since the
+    # specified operation was performed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StaleRequestException AWS API Documentation
+    #
+    class StaleRequestException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StopStackSetOperationInput
     #   data as a hash:
     #
@@ -6857,6 +6984,18 @@ module Aws::CloudFormation
       :description)
       include Aws::Structure
     end
+
+    # A client request token already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TokenAlreadyExistsException AWS API Documentation
+    #
+    class TokenAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified type does not exist in the CloudFormation registry.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TypeNotFoundException AWS API Documentation
+    #
+    class TypeNotFoundException < Aws::EmptyStructure; end
 
     # Contains summary information about the specified CloudFormation type.
     #
