@@ -186,10 +186,10 @@ module Aws
 
           # We can't really rely on any guarantees about evenly distributing thread acquisitions
           # But we can sanity check that our implementation isn't drastically starving a thread
-          # Check that no thread has less than 30% of mean acquisitions
+          # Check that no thread has less than 20% of mean acquisitions
 
-          mean = acquisitions_by_thread.sum.to_f / acquisitions_by_thread.size
-          expect(acquisitions_by_thread.all? { |x| x > 0.3 * mean }).to be true
+          mean = acquisitions_by_thread.reduce(:+).to_f / acquisitions_by_thread.size
+          expect(acquisitions_by_thread.all? { |x| x > 0.2 * mean }).to be true
         end
       end
     end
