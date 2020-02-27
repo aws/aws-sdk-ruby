@@ -37,8 +37,7 @@ module Aws
         # the last retry.  It can either be RETRY_COST, TIMEOUT_RETRY_COST,
         # or unset.
         def release(capacity_amount)
-          # Implementation note:  The release() method is called as part
-          # of the "after-call" event, which means it gets invoked for
+          # Implementation note:  The release() method is called for
           # every API call.  In the common case where the request is
           # successful and we're at full capacity, we can avoid locking.
           # We can't exceed max capacity so there's no work we have to do.

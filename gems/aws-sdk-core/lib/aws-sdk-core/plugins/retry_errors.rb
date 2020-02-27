@@ -182,6 +182,7 @@ SDK operation invocation before giving up. Used in `standard` and
             config.client_rate_limiter.token_bucket_acquire(1)
           end
         end
+
         # maxsendrate is updated if on adaptive mode and based on response
         # retry quota is updated if the request is successful (both modes)
         def request_bookkeeping(context, response, error_inspector)
