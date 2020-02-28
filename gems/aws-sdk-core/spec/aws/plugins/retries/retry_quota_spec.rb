@@ -9,8 +9,10 @@ module Aws
 
       describe '#initialize' do
         it 'is initialized with max capacity' do
+          expected_max = 100
+          retry_quota = Retries::RetryQuota.new(max_capacity: expected_max)
           expect(retry_quota.instance_variable_get(:@available_capacity))
-            .to eq(retry_quota.instance_variable_get(:@max_capacity))
+            .to eq(expected_max)
         end
       end
 
