@@ -265,9 +265,11 @@ Known AWS regions include (not specific to this service):
 
     end
 
-    class CapacityNotAvailableError < RuntimeError
+    # Raised when attempting to retry a request
+    # and no capacity is available to retry (See adaptive retry_mode)
+    class RetryCapacityNotAvailableError < RuntimeError
       def initialize(*args)
-        msg = 'Insufficient request capacity available.'
+        msg = 'Insufficient client side capacity available to retry request.'
         super(msg)
       end
     end

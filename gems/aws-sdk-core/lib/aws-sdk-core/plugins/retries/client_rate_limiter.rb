@@ -37,7 +37,7 @@ module Aws
 
             # Next see if we have enough capacity for the requested amount
             while @current_capacity < amount
-              raise Aws::Errors::CapacityNotAvailableError unless wait_to_fill
+              raise Aws::Errors::RetryCapacityNotAvailableError unless wait_to_fill
               @mutex.sleep((amount - @current_capacity) / @fill_rate)
               token_bucket_refill
             end

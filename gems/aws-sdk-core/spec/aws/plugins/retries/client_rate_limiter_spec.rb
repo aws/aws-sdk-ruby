@@ -95,12 +95,12 @@ module Aws
         client_rate_limiter.token_bucket_acquire(100, true)
       end
 
-      it 'raises a CapacityNotAvailableError when non block mode fails to acquire a token' do
+      it 'raises a RetryCapacityNotAvailableError when non block mode fails to acquire a token' do
         client_rate_limiter.instance_variable_set(:@enabled, true)
         allow(Util).to receive(:monotonic_seconds).and_return(0)
         client_rate_limiter.send(:token_bucket_update_rate, 10)
 
-        expect { client_rate_limiter.token_bucket_acquire(100, false) }.to raise_error(Aws::Errors::CapacityNotAvailableError)
+        expect { client_rate_limiter.token_bucket_acquire(100, false) }.to raise_error(Aws::Errors::RetryCapacityNotAvailableError)
       end
 
       it 'can retrieve at max send rate' do

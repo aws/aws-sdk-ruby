@@ -22,7 +22,7 @@ module AwsSdkCodeGenerator
             members: members,
             data_type: "#{@module_name}::Types::#{name}",
             retryable: !!shape['retryable'],
-            throttling: shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
+            throttling: throttling?(shape)
           )
         end
         es
@@ -47,6 +47,10 @@ module AwsSdkCodeGenerator
     def needs_definition?(shape)
       (shape['members'] && shape['members'].size > 0) ||
           (shape['retryable'])
+    end
+
+    def throttling?(shape)
+      shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
     end
 
 
