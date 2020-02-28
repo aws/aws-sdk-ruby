@@ -1,4 +1,3 @@
-
 RetryErrorsSvc = ApiHelper.sample_service
 
 # Sets up the handler to run retry tests

@@ -1,8 +1,32 @@
-require_relative '../../../spec_helper'
-require_relative '../../../support/retry_errors_helper'
+require_relative '../../spec_helper'
+require_relative '../../support/retry_errors_helper'
 
 module Aws
   module Plugins
+    describe RetryErrors do
+      let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
+
+      it 'defaults config.retry_limit to 3' do
+        expect(client.config.retry_limit).to eq(3)
+      end
+
+      it 'defaults config.retry_max_delay to 0' do
+        expect(client.config.retry_max_delay).to eq(0)
+      end
+
+      it 'defaults config.retry_base_delay to 0.3' do
+        expect(client.config.retry_base_delay).to eq(0.3)
+      end
+
+      it 'defaults config.retry_jitter to :none' do
+        expect(client.config.retry_jitter).to eq(:none)
+      end
+
+      it 'defaults config.retry_mode to legacy' do
+        expect(client.config.retry_mode).to eq('legacy')
+      end
+    end
+
     describe RetryErrors::LegacyHandler do
       let(:credentials) { Credentials.new('akid', 'secret') }
 

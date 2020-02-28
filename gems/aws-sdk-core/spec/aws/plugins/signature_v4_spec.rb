@@ -194,21 +194,21 @@ module Aws
           allow(utc).to receive(:strftime).and_return(datetime)
         }
 
-        it `unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'` do
+        it "unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'" do
           resp = client.streaming_foo(foo_name: 'foo')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=stubbed-akid/20120101/region/svc-name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=6d86306ea8dcf03db133cd35bcf626b0a440daefadc8ddde3304517126edb1bb')
         end
 
-        it `signs payload for operations without 'v4-unsigned-payload' for 'authtype'` do
+        it "signs payload for operations without 'v4-unsigned-payload' for 'authtype'" do
           resp = client.non_streaming_bar(bar_name: 'bar')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
           expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=stubbed-akid/20120101/region/svc-name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=c6394995838d4b4a1ec9b19229d92bac3f11441308f953d89306663230e95713')
         end
 
-        it `signs payload for HTTP request even when 'v4-unsigned-payload' is set` do
+        it "signs payload for HTTP request even when 'v4-unsigned-payload' is set" do
           client = svc::Client.new(options.merge(
             region: 'region',
             endpoint: 'http://domain.region.amazonaws.com',
