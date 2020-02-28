@@ -48,6 +48,18 @@ module Aws
           ]
         )
 
+        # See: https://github.com/aws/aws-sdk-net/blob/5810dfe401e0eac2e59d02276d4b479224b4538e/sdk/src/Core/Amazon.Runtime/Pipeline/RetryHandler/RetryPolicy.cs#L78
+        CLOCK_SKEW_ERRORS = Set.new(
+          [
+            'RequestTimeTooSkewed',
+            'RequestExpired',
+            'InvalidSignatureException',
+            'SignatureDoesNotMatch',
+            'AuthFailure',
+            'RequestInTheFuture'
+          ]
+        )
+
         def initialize(error, http_status_code)
           @error = error
           @name = extract_name(@error)
@@ -106,6 +118,11 @@ module Aws
           @error.is_a?(Errors::ServiceError) && @error.throttling?
         end
 
+        def clock_skew?(context)
+          CLOCK_SKEW_ERRORS.include?(@name) &&
+            context.config.clock_skew.clock_skewed?(context)
+        end
+
         def retryable?(context)
           (expired_credentials? && refreshable_credentials?(context)) ||
             throttling_error? ||
@@ -113,7 +130,8 @@ module Aws
             networking? ||
             server? ||
             endpoint_discovery?(context) ||
-            modeled_retryable?
+            modeled_retryable? ||
+            clock_skew?(context)
         end
 
         private

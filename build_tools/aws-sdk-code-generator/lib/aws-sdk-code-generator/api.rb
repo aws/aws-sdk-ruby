@@ -126,3 +126,14 @@ module AwsSdkCodeGenerator
     end
   end
 end
+
+
+def days_since(ds)
+  d = Date.parse(ds)
+  diff = (Date.current - d).to_i
+  years = diff / 365
+  months = (diff % 365 ) / 30
+  puts "#{years} years, #{months} months"
+end
+
+               if session.last_used.nil? or now - session.last_used > http_idle_timeout * 1000

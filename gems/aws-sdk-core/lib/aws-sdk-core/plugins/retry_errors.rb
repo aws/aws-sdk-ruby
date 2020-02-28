@@ -2,6 +2,7 @@ require 'set'
 require_relative 'retries/error_inspector'
 require_relative 'retries/retry_quota'
 require_relative 'retries/client_rate_limiter'
+require_relative 'retries/clock_skew'
 
 module Aws
   module Plugins
@@ -114,11 +115,24 @@ SDK operation invocation before giving up. Used in `standard` and
         resolve_max_attempts(cfg)
       end
 
+      option(
+        :correct_clock_skew,
+        default: true,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS)
+whether to apply a clock skew
+correction and retry requests that fail because of an skewed client
+clock.
+      DOCS
+
       # @api private undocumented
       option(:client_rate_limiter) { Retries::ClientRateLimiter.new }
 
       # @api private undocumented
       option(:retry_quota) { Retries::RetryQuota.new }
+
+      # @api private undocumented
+      option(:clock_skew) { Retries::ClockSkew.new }
 
       def self.resolve_retry_mode(cfg)
         value = ENV['AWS_RETRY_MODE'] ||
@@ -159,6 +173,8 @@ SDK operation invocation before giving up. Used in `standard` and
           error_inspector = Retries::ErrorInspector.new(response.error, response.context.http_response.status_code)
 
           request_bookkeeping(context, response, error_inspector)
+          config.clock_skew.update_clock_skew(context) if error_inspector.clock_skew?(context)
+
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
@@ -216,6 +232,7 @@ SDK operation invocation before giving up. Used in `standard` and
           context.http_response.reset
           call(context)
         end
+
       end
 
       class LegacyHandler < Seahorse::Client::Handler

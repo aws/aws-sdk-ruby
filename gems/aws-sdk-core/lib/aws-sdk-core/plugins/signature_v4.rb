@@ -107,6 +107,8 @@ module Aws
           req.headers.delete('X-Amz-Security-Token')
           req.headers.delete('X-Amz-Date')
 
+          puts "Signing step...."
+
           # compute the signature
           begin
             signature = signer.sign_request(

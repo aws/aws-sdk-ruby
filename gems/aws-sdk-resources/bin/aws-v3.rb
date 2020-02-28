@@ -84,6 +84,13 @@ OptionParser.new do |opts|
 
 end.parse!
 
+# TODO: REMOVE ME
+class Time
+  def self.now
+    Time.new - 3900
+   end
+end
+
 # amend the $LOAD_PATH
 options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
@@ -185,6 +192,7 @@ end
 
 def run_with_irb
   require 'irb'
+  puts Time.now
   IRB.start
 end
 
