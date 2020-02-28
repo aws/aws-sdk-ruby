@@ -8,6 +8,12 @@
 module Aws::ElastiCache
   module Types
 
+    # The customer has exceeded the allowed rate of API calls.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/APICallRateForCustomerExceededFault AWS API Documentation
+    #
+    class APICallRateForCustomerExceededFault < Aws::EmptyStructure; end
+
     # Represents the input of an AddTagsToResource operation.
     #
     # @note When making an API call, you may pass AddTagsToResourceMessage
@@ -79,6 +85,20 @@ module Aws::ElastiCache
       :scale_down_modifications)
       include Aws::Structure
     end
+
+    # The specified Amazon EC2 security group is already authorized for the
+    # specified cache security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizationAlreadyExistsFault AWS API Documentation
+    #
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified Amazon EC2 security group is not authorized for the
+    # specified cache security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
 
     # Represents the input of an AuthorizeCacheSecurityGroupIngress
     # operation.
@@ -488,6 +508,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # You already have a cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterAlreadyExistsFault AWS API Documentation
+    #
+    class CacheClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Represents the output of a `DescribeCacheClusters` operation.
     #
     # @!attribute [rw] marker
@@ -506,6 +532,12 @@ module Aws::ElastiCache
       :cache_clusters)
       include Aws::Structure
     end
+
+    # The requested cluster ID does not refer to an existing cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterNotFoundFault AWS API Documentation
+    #
+    class CacheClusterNotFoundFault < Aws::EmptyStructure; end
 
     # Provides all of the details about a particular cache engine version.
     #
@@ -841,6 +873,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # A cache parameter group with the requested name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class CacheParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Represents the output of a `DescribeCacheParameters` operation.
     #
     # @!attribute [rw] marker
@@ -882,6 +920,20 @@ module Aws::ElastiCache
       :cache_parameter_group_name)
       include Aws::Structure
     end
+
+    # The requested cache parameter group name does not refer to an existing
+    # cache parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupNotFoundFault AWS API Documentation
+    #
+    class CacheParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the maximum
+    # number of cache security groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class CacheParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # Status of the cache parameter group.
     #
@@ -962,6 +1014,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # A cache security group with the specified name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupAlreadyExistsFault AWS API Documentation
+    #
+    class CacheSecurityGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Represents a cluster's status within a particular cache security
     # group.
     #
@@ -1002,6 +1060,20 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The requested cache security group name does not refer to an existing
+    # cache security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class CacheSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of cache security groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupQuotaExceededFault AWS API Documentation
+    #
+    class CacheSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
+
     # Represents the output of one of the following operations:
     #
     # * `CreateCacheSubnetGroup`
@@ -1035,6 +1107,19 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The requested cache subnet group name is already in use by an existing
+    # cache subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class CacheSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The requested cache subnet group is currently in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupInUse AWS API Documentation
+    #
+    class CacheSubnetGroupInUse < Aws::EmptyStructure; end
+
     # Represents the output of a `DescribeCacheSubnetGroups` operation.
     #
     # @!attribute [rw] marker
@@ -1053,6 +1138,34 @@ module Aws::ElastiCache
       :cache_subnet_groups)
       include Aws::Structure
     end
+
+    # The requested cache subnet group name does not refer to an existing
+    # cache subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class CacheSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of cache subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class CacheSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of subnets in a cache subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetQuotaExceededFault AWS API Documentation
+    #
+    class CacheSubnetQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of clusters per customer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ClusterQuotaForCustomerExceededFault AWS API Documentation
+    #
+    class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CompleteMigrationMessage
     #   data as a hash:
@@ -3868,6 +3981,50 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The requested cache node type is not available in the specified
+    # Availability Zone. For more information, see
+    # [InsufficientCacheClusterCapacity][1] in the ElastiCache User Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ErrorMessages.html#ErrorMessages.INSUFFICIENT_CACHE_CLUSTER_CAPACITY
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InsufficientCacheClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientCacheClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The requested Amazon Resource Name (ARN) does not refer to an existing
+    # resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidARNFault AWS API Documentation
+    #
+    class InvalidARNFault < Aws::EmptyStructure; end
+
+    # The requested cluster is not in the `available` state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidCacheClusterStateFault AWS API Documentation
+    #
+    class InvalidCacheClusterStateFault < Aws::EmptyStructure; end
+
+    # The current state of the cache parameter group does not allow the
+    # requested operation to occur.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidCacheParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidCacheParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The current state of the cache security group does not allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidCacheSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The KMS key supplied is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidKMSKeyFault AWS API Documentation
+    #
+    class InvalidKMSKeyFault < Aws::EmptyStructure; end
+
     # Two or more incompatible parameters were specified.
     #
     # @!attribute [rw] message
@@ -3894,6 +4051,31 @@ module Aws::ElastiCache
       :message)
       include Aws::Structure
     end
+
+    # The requested replication group is not in the `available` state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidReplicationGroupStateFault AWS API Documentation
+    #
+    class InvalidReplicationGroupStateFault < Aws::EmptyStructure; end
+
+    # The current state of the snapshot does not allow the requested
+    # operation to occur.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidSnapshotStateFault AWS API Documentation
+    #
+    class InvalidSnapshotStateFault < Aws::EmptyStructure; end
+
+    # An invalid subnet identifier was specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The VPC network is in an invalid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
 
     # The input parameters for the `ListAllowedNodeTypeModifications`
     # operation.
@@ -4806,6 +4988,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The operation was not performed because no changes were required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NoOperationFault AWS API Documentation
+    #
+    class NoOperationFault < Aws::EmptyStructure; end
+
     # Represents a collection of cache nodes in a replication group. One
     # node in the node group is the read/write primary node. All the other
     # nodes are read-only Replica nodes.
@@ -4998,6 +5186,14 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The node group specified by the `NodeGroupId` parameter could not be
+    # found. Please verify that the node group exists and that you spelled
+    # the `NodeGroupId` value correctly.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupNotFoundFault AWS API Documentation
+    #
+    class NodeGroupNotFoundFault < Aws::EmptyStructure; end
+
     # The status of the service update on the node group
     #
     # @!attribute [rw] node_group_id
@@ -5015,6 +5211,28 @@ module Aws::ElastiCache
       :node_group_member_update_status)
       include Aws::Structure
     end
+
+    # The request cannot be processed because it would exceed the maximum
+    # allowed number of node groups (shards) in a single replication group.
+    # The default maximum is 90
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupsPerReplicationGroupQuotaExceededFault AWS API Documentation
+    #
+    class NodeGroupsPerReplicationGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of cache nodes in a single cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeQuotaForClusterExceededFault AWS API Documentation
+    #
+    class NodeQuotaForClusterExceededFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the allowed
+    # number of cache nodes per customer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeQuotaForCustomerExceededFault AWS API Documentation
+    #
+    class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure; end
 
     # Represents an individual cache node in a snapshot of a cluster.
     #
@@ -5555,6 +5773,18 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The specified replication group already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupAlreadyExistsFault AWS API Documentation
+    #
+    class ReplicationGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The targeted replication group is not available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupAlreadyUnderMigrationFault AWS API Documentation
+    #
+    class ReplicationGroupAlreadyUnderMigrationFault < Aws::EmptyStructure; end
+
     # Represents the output of a `DescribeReplicationGroups` operation.
     #
     # @!attribute [rw] marker
@@ -5573,6 +5803,18 @@ module Aws::ElastiCache
       :replication_groups)
       include Aws::Structure
     end
+
+    # The specified replication group does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupNotFoundFault AWS API Documentation
+    #
+    class ReplicationGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The designated replication group is not available for data migration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupNotUnderMigrationFault AWS API Documentation
+    #
+    class ReplicationGroupNotUnderMigrationFault < Aws::EmptyStructure; end
 
     # The settings to be applied to the Redis replication group, either
     # immediately or during the next maintenance window.
@@ -5761,6 +6003,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # You already have a reservation with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeAlreadyExistsFault AWS API Documentation
+    #
+    class ReservedCacheNodeAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Represents the output of a `DescribeReservedCacheNodes` operation.
     #
     # @!attribute [rw] marker
@@ -5779,6 +6027,19 @@ module Aws::ElastiCache
       :reserved_cache_nodes)
       include Aws::Structure
     end
+
+    # The requested reserved cache node was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeNotFoundFault AWS API Documentation
+    #
+    class ReservedCacheNodeNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the user's
+    # cache node quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeQuotaExceededFault AWS API Documentation
+    #
+    class ReservedCacheNodeQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes all of the attributes of a reserved cache node offering.
     #
@@ -5916,6 +6177,12 @@ module Aws::ElastiCache
       :reserved_cache_nodes_offerings)
       include Aws::Structure
     end
+
+    # The requested cache node offering does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOfferingNotFoundFault AWS API Documentation
+    #
+    class ReservedCacheNodesOfferingNotFoundFault < Aws::EmptyStructure; end
 
     # Represents the input of a `ResetCacheParameterGroup` operation.
     #
@@ -6074,6 +6341,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The specified service linked role (SLR) was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceLinkedRoleNotFoundFault AWS API Documentation
+    #
+    class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure; end
+
     # An update that you can apply to your Redis clusters.
     #
     # @!attribute [rw] service_update_name
@@ -6150,6 +6423,12 @@ module Aws::ElastiCache
       :estimated_update_time)
       include Aws::Structure
     end
+
+    # The service update doesn't exist
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceUpdateNotFoundFault AWS API Documentation
+    #
+    class ServiceUpdateNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   An optional marker returned from a prior request. Use this marker
@@ -6445,6 +6724,39 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # You already have a snapshot with the given name.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class SnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # You attempted one of the following operations:
+    #
+    # * Creating a snapshot of a Redis cluster running on a `cache.t1.micro`
+    #   cache node.
+    #
+    # * Creating a snapshot of a cluster that is running Memcached rather
+    #   than Redis.
+    #
+    # Neither of these are supported by ElastiCache.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SnapshotFeatureNotSupportedFault AWS API Documentation
+    #
+    class SnapshotFeatureNotSupportedFault < Aws::EmptyStructure; end
+
+    # The requested snapshot name does not refer to an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SnapshotNotFoundFault AWS API Documentation
+    #
+    class SnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would exceed the maximum
+    # number of snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartMigrationMessage
     #   data as a hash:
     #
@@ -6507,6 +6819,12 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The requested subnet is being used by another cache subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SubnetInUse AWS API Documentation
+    #
+    class SubnetInUse < Aws::EmptyStructure; end
+
     # A cost allocation Tag that can be added to an ElastiCache cluster or
     # replication group. Tags are composed of a Key/Value pair. A tag with a
     # null Value is permitted.
@@ -6549,6 +6867,20 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The requested tag was not found on this resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagNotFoundFault AWS API Documentation
+    #
+    class TagNotFoundFault < Aws::EmptyStructure; end
+
+    # The request cannot be processed because it would cause the resource to
+    # have more than the allowed number of tags. The maximum number of tags
+    # permitted on a resource is 50.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagQuotaPerResourceExceeded AWS API Documentation
+    #
+    class TagQuotaPerResourceExceeded < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TestFailoverMessage
     #   data as a hash:
     #
@@ -6576,6 +6908,12 @@ module Aws::ElastiCache
       :node_group_id)
       include Aws::Structure
     end
+
+    # The `TestFailover` action is not available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverNotAvailableFault AWS API Documentation
+    #
+    class TestFailoverNotAvailableFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] replication_group
     #   Contains all of the attributes of a specific Redis replication

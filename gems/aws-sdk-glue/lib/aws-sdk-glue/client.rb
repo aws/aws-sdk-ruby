@@ -1966,6 +1966,16 @@ module Aws::Glue
     #   The maximum number of times to retry a task for this transform after a
     #   task run fails.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to use with this machine learning transform. You may use tags
+    #   to limit access to the machine learning transform. For more
+    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
+    #   the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #
     # @return [Types::CreateMLTransformResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMLTransformResponse#transform_id #transform_id} => String
@@ -1999,6 +2009,9 @@ module Aws::Glue
     #     number_of_workers: 1,
     #     timeout: 1,
     #     max_retries: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6068,6 +6081,80 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a sortable, filterable list of existing AWS Glue machine
+    # learning transforms in this AWS account, or the resources with the
+    # specified tag. This operation takes the optional `Tags` field, which
+    # you can use as a filter of the responses so that tagged resources can
+    # be retrieved as a group. If you choose to use tag filtering, only
+    # resources with the tags are retrieved.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of a list to return.
+    #
+    # @option params [Types::TransformFilterCriteria] :filter
+    #   A `TransformFilterCriteria` used to filter the machine learning
+    #   transforms.
+    #
+    # @option params [Types::TransformSortCriteria] :sort
+    #   A `TransformSortCriteria` used to sort the machine learning
+    #   transforms.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Specifies to return only these tagged resources.
+    #
+    # @return [Types::ListMLTransformsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMLTransformsResponse#transform_ids #transform_ids} => Array&lt;String&gt;
+    #   * {Types::ListMLTransformsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ml_transforms({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     filter: {
+    #       name: "NameString",
+    #       transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
+    #       status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #       glue_version: "GlueVersionString",
+    #       created_before: Time.now,
+    #       created_after: Time.now,
+    #       last_modified_before: Time.now,
+    #       last_modified_after: Time.now,
+    #       schema: [
+    #         {
+    #           name: "ColumnNameString",
+    #           data_type: "ColumnTypeString",
+    #         },
+    #       ],
+    #     },
+    #     sort: {
+    #       column: "NAME", # required, accepts NAME, TRANSFORM_TYPE, STATUS, CREATED, LAST_MODIFIED
+    #       sort_direction: "DESCENDING", # required, accepts DESCENDING, ASCENDING
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.transform_ids #=> Array
+    #   resp.transform_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMLTransforms AWS API Documentation
+    #
+    # @overload list_ml_transforms(params = {})
+    # @param [Hash] params ({})
+    def list_ml_transforms(params = {}, options = {})
+      req = build_request(:list_ml_transforms, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all trigger resources in this AWS account, or
     # the resources with the specified tag. This operation allows you to see
     # which resources are available in your account, and their names.
@@ -7938,7 +8025,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

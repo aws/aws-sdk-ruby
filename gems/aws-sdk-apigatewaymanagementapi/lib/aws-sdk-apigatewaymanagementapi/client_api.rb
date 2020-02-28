@@ -27,6 +27,8 @@ module Aws::ApiGatewayManagementApi
     DeleteConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectionId"))
     DeleteConnectionRequest.struct_class = Types::DeleteConnectionRequest
 
+    ForbiddenException.struct_class = Types::ForbiddenException
+
     GetConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectionId"))
     GetConnectionRequest.struct_class = Types::GetConnectionRequest
 
@@ -35,9 +37,13 @@ module Aws::ApiGatewayManagementApi
     GetConnectionResponse.add_member(:last_active_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastActiveAt"))
     GetConnectionResponse.struct_class = Types::GetConnectionResponse
 
+    GoneException.struct_class = Types::GoneException
+
     Identity.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "sourceIp"))
     Identity.add_member(:user_agent, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userAgent"))
     Identity.struct_class = Types::Identity
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     PayloadTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     PayloadTooLargeException.struct_class = Types::PayloadTooLargeException

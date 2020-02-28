@@ -26,11 +26,19 @@ module Aws
         end
 
         it 'returns true for error types that match /expired/' do
-          expect(inspector(RetryErrorsSvc::Errors::SomethingExpiredError).expired_credentials?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomethingExpiredError
+            ).expired_credentials?
+          ).to be(true)
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).expired_credentials?).to be(false)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomeRandomError
+            ).expired_credentials?
+          ).to be(false)
         end
       end
 
@@ -59,21 +67,37 @@ module Aws
         end
 
         it 'returns true for error types that match /throttl/' do
-          expect(inspector(RetryErrorsSvc::Errors::Throttled).throttling_error?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::Throttled).throttling_error?
+          ).to be(true)
         end
 
         it 'returns true for response status code 429' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 429).throttling_error?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomeRandomError, 429
+            ).throttling_error?
+          ).to be(true)
+        end
+
+        it 'returns true for modeled throttling errors' do
+          expect_any_instance_of(Errors::ServiceError)
+            .to receive(:throttling?).and_return(true)
+          expect(inspector(Errors::ServiceError).throttling_error?).to be(true)
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).throttling_error?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).throttling_error?
+          ).to be(false)
         end
       end
 
       describe '#checksum?' do
         it 'returns true for CRC32CheckFailed' do
-          expect(inspector(RetryErrorsSvc::Errors::CRC32CheckFailed).checksum?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::CRC32CheckFailed).checksum?
+          ).to be(true)
         end
 
         it 'returns true if the error extends Errors::ChecksumError' do
@@ -81,31 +105,45 @@ module Aws
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?
+          ).to be(false)
         end
       end
 
       describe '#server?' do
         it 'returns true if the error is a 500 level error' do
-          expect(inspector(RetryErrorsSvc::Errors::RandomError, 500).server?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RandomError, 500).server?
+          ).to be(true)
         end
 
         it 'returns false if the error is not a 500 level error' do
-          expect(inspector(RetryErrorsSvc::Errors::RandomError, 404).server?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RandomError, 404).server?
+          ).to be(false)
         end
       end
 
       describe '#networking?' do
         it 'returns true for RequestTimeout' do
-          expect(inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?
+          ).to be(true)
         end
 
         it 'returns true for RequestTimeoutException' do
-          expect(inspector(RetryErrorsSvc::Errors::RequestTimeoutException).networking?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::RequestTimeoutException
+            ).networking?
+          ).to be(true)
         end
 
         it 'returns true for IDPCommunicationError' do
-          expect(inspector(RetryErrorsSvc::Errors::IDPCommunicationError).networking?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::IDPCommunicationError).networking?
+          ).to be(true)
         end
 
         it 'returns true if the error extends NetworkingError' do
@@ -130,6 +168,48 @@ module Aws
           error = double('error')
           expect(inspector(error, 307).networking?).to be(false)
         end
+      end
+
+      describe '#endpoint_discovery?' do
+        let(:operation) { double('operation', endpoint_discovery: true) }
+        let(:context) { double('context', operation: operation, config: config) }
+        let(:config) { double('config', endpoint_cache: endpoint_cache) }
+        let(:endpoint_cache) { double('endpoint_cache') }
+
+        context 'operation is not endpoint_discovery' do
+          let(:operation) { double('operation', endpoint_discovery: false) }
+
+          it 'returns false unless the operation is endpoint_discovery' do
+            expect(inspector(Errors::EndpointDiscoveryError.new, 421).endpoint_discovery?(context))
+              .to be(false)
+          end
+        end
+
+        context 'operation is endpoint_discovery' do
+          it 'returns false when the error is not an EndPointDiscoveryError' do
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 400).endpoint_discovery?(context))
+              .to be(false)
+          end
+
+          it 'returns true when the status code is 421' do
+            expect(endpoint_cache).to receive(:extract_key).with(context).and_return('key')
+            expect(endpoint_cache).to receive(:delete).with('key')
+
+            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 421).endpoint_discovery?(context))
+              .to be(true)
+          end
+
+          it 'returns true for an EndpointDiscoveryError and updates the endpoint_cache' do
+            expect(endpoint_cache).to receive(:extract_key).with(context).and_return('key')
+            expect(endpoint_cache).to receive(:delete).with('key')
+
+            expect(inspector(Errors::EndpointDiscoveryError.new, 400).endpoint_discovery?(context))
+              .to be(true)
+          end
+
+
+        end
+
       end
     end
   end

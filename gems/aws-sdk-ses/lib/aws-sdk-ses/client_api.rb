@@ -325,6 +325,8 @@ module Aws::SES
     VerifyEmailIdentityResponse = Shapes::StructureShape.new(name: 'VerifyEmailIdentityResponse')
     WorkmailAction = Shapes::StructureShape.new(name: 'WorkmailAction')
 
+    AccountSendingPausedException.struct_class = Types::AccountSendingPausedException
+
     AddHeaderAction.add_member(:header_name, Shapes::ShapeRef.new(shape: HeaderName, required: true, location_name: "HeaderName"))
     AddHeaderAction.add_member(:header_value, Shapes::ShapeRef.new(shape: HeaderValue, required: true, location_name: "HeaderValue"))
     AddHeaderAction.struct_class = Types::AddHeaderAction
@@ -452,6 +454,8 @@ module Aws::SES
     CreateTemplateRequest.struct_class = Types::CreateTemplateRequest
 
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
+
+    CustomVerificationEmailInvalidContentException.struct_class = Types::CustomVerificationEmailInvalidContentException
 
     CustomVerificationEmailTemplate.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
     CustomVerificationEmailTemplate.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, location_name: "FromEmailAddress"))
@@ -681,12 +685,18 @@ module Aws::SES
     InvalidCloudWatchDestinationException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
     InvalidCloudWatchDestinationException.struct_class = Types::InvalidCloudWatchDestinationException
 
+    InvalidConfigurationSetException.struct_class = Types::InvalidConfigurationSetException
+
+    InvalidDeliveryOptionsException.struct_class = Types::InvalidDeliveryOptionsException
+
     InvalidFirehoseDestinationException.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
     InvalidFirehoseDestinationException.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, location_name: "EventDestinationName"))
     InvalidFirehoseDestinationException.struct_class = Types::InvalidFirehoseDestinationException
 
     InvalidLambdaFunctionException.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "FunctionArn"))
     InvalidLambdaFunctionException.struct_class = Types::InvalidLambdaFunctionException
+
+    InvalidPolicyException.struct_class = Types::InvalidPolicyException
 
     InvalidRenderingParameterException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
     InvalidRenderingParameterException.struct_class = Types::InvalidRenderingParameterException
@@ -704,6 +714,8 @@ module Aws::SES
     InvalidTemplateException.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
     InvalidTemplateException.struct_class = Types::InvalidTemplateException
 
+    InvalidTrackingOptionsException.struct_class = Types::InvalidTrackingOptionsException
+
     KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "IAMRoleARN"))
     KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "DeliveryStreamARN"))
     KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
@@ -712,6 +724,8 @@ module Aws::SES
     LambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "FunctionArn"))
     LambdaAction.add_member(:invocation_type, Shapes::ShapeRef.new(shape: InvocationType, location_name: "InvocationType"))
     LambdaAction.struct_class = Types::LambdaAction
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConfigurationSetsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
@@ -770,6 +784,8 @@ module Aws::SES
     MailFromDomainAttributes.key = Shapes::ShapeRef.new(shape: Identity)
     MailFromDomainAttributes.value = Shapes::ShapeRef.new(shape: IdentityMailFromDomainAttributes)
 
+    MailFromDomainNotVerifiedException.struct_class = Types::MailFromDomainNotVerifiedException
+
     Message.add_member(:subject, Shapes::ShapeRef.new(shape: Content, required: true, location_name: "Subject"))
     Message.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
     Message.struct_class = Types::Message
@@ -778,6 +794,8 @@ module Aws::SES
     MessageDsn.add_member(:arrival_date, Shapes::ShapeRef.new(shape: ArrivalDate, location_name: "ArrivalDate"))
     MessageDsn.add_member(:extension_fields, Shapes::ShapeRef.new(shape: ExtensionFieldList, location_name: "ExtensionFields"))
     MessageDsn.struct_class = Types::MessageDsn
+
+    MessageRejected.struct_class = Types::MessageRejected
 
     MessageTag.add_member(:name, Shapes::ShapeRef.new(shape: MessageTagName, required: true, location_name: "Name"))
     MessageTag.add_member(:value, Shapes::ShapeRef.new(shape: MessageTagValue, required: true, location_name: "Value"))
@@ -795,6 +813,8 @@ module Aws::SES
     PolicyMap.value = Shapes::ShapeRef.new(shape: Policy)
 
     PolicyNameList.member = Shapes::ShapeRef.new(shape: PolicyName)
+
+    ProductionAccessNotGrantedException.struct_class = Types::ProductionAccessNotGrantedException
 
     PutConfigurationSetDeliveryOptionsRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     PutConfigurationSetDeliveryOptionsRequest.add_member(:delivery_options, Shapes::ShapeRef.new(shape: DeliveryOptions, location_name: "DeliveryOptions"))

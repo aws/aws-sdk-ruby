@@ -6126,6 +6126,13 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # The operation failed because you tried to create, update, or delete an
+    # object by using an invalid account identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WAFInvalidAccountException AWS API Documentation
+    #
+    class WAFInvalidAccountException < Aws::EmptyStructure; end
+
     # The operation failed because there was nothing to do. For example:
     #
     # * You tried to remove a `Rule` from a `WebACL`, but the `Rule` isn't

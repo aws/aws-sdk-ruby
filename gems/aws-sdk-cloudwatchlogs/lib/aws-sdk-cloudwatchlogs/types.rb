@@ -1379,6 +1379,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The operation is not valid on the specified resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Aws::EmptyStructure; end
+
+    # A parameter is specified incorrectly.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
     # The sequence token is not valid. You can get the correct sequence
     # token in the `expectedSequenceToken` field in the
     # `InvalidSequenceTokenException` message.
@@ -1392,6 +1404,12 @@ module Aws::CloudWatchLogs
       :expected_sequence_token)
       include Aws::Structure
     end
+
+    # You have reached the maximum number of resources that can be created.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListTagsLogGroupRequest
     #   data as a hash:
@@ -1674,6 +1692,12 @@ module Aws::CloudWatchLogs
       :default_value)
       include Aws::Structure
     end
+
+    # Multiple requests to update the same resource were in conflict.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OperationAbortedException AWS API Documentation
+    #
+    class OperationAbortedException < Aws::EmptyStructure; end
 
     # Represents a log event.
     #
@@ -2140,6 +2164,18 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # The specified resource already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified resource does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # A policy enabling one or more entities to put logs to a log group in
     # this account.
     #
@@ -2201,6 +2237,12 @@ module Aws::CloudWatchLogs
       :searched_completely)
       include Aws::Structure
     end
+
+    # The service cannot complete the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartQueryRequest
     #   data as a hash:
@@ -2420,6 +2462,12 @@ module Aws::CloudWatchLogs
       :matches)
       include Aws::Structure
     end
+
+    # The most likely cause is an invalid AWS access key ID or secret key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UnrecognizedClientException AWS API Documentation
+    #
+    class UnrecognizedClientException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagLogGroupRequest
     #   data as a hash:

@@ -147,9 +147,15 @@ module Aws::DAX
     Cluster.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     Cluster.struct_class = Types::Cluster
 
+    ClusterAlreadyExistsFault.struct_class = Types::ClusterAlreadyExistsFault
+
     ClusterList.member = Shapes::ShapeRef.new(shape: Cluster)
 
     ClusterNameList.member = Shapes::ShapeRef.new(shape: String)
+
+    ClusterNotFoundFault.struct_class = Types::ClusterNotFoundFault
+
+    ClusterQuotaForCustomerExceededFault.struct_class = Types::ClusterQuotaForCustomerExceededFault
 
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ClusterName"))
     CreateClusterRequest.add_member(:node_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NodeType"))
@@ -289,11 +295,23 @@ module Aws::DAX
     IncreaseReplicationFactorResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     IncreaseReplicationFactorResponse.struct_class = Types::IncreaseReplicationFactorResponse
 
+    InsufficientClusterCapacityFault.struct_class = Types::InsufficientClusterCapacityFault
+
+    InvalidARNFault.struct_class = Types::InvalidARNFault
+
+    InvalidClusterStateFault.struct_class = Types::InvalidClusterStateFault
+
     InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
 
+    InvalidParameterGroupStateFault.struct_class = Types::InvalidParameterGroupStateFault
+
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidSubnet.struct_class = Types::InvalidSubnet
+
+    InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -316,6 +334,12 @@ module Aws::DAX
     NodeIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
     NodeList.member = Shapes::ShapeRef.new(shape: Node)
+
+    NodeNotFoundFault.struct_class = Types::NodeNotFoundFault
+
+    NodeQuotaForClusterExceededFault.struct_class = Types::NodeQuotaForClusterExceededFault
+
+    NodeQuotaForCustomerExceededFault.struct_class = Types::NodeQuotaForCustomerExceededFault
 
     NodeTypeSpecificValue.add_member(:node_type, Shapes::ShapeRef.new(shape: String, location_name: "NodeType"))
     NodeTypeSpecificValue.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
@@ -343,9 +367,15 @@ module Aws::DAX
     ParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     ParameterGroup.struct_class = Types::ParameterGroup
 
+    ParameterGroupAlreadyExistsFault.struct_class = Types::ParameterGroupAlreadyExistsFault
+
     ParameterGroupList.member = Shapes::ShapeRef.new(shape: ParameterGroup)
 
     ParameterGroupNameList.member = Shapes::ShapeRef.new(shape: String)
+
+    ParameterGroupNotFoundFault.struct_class = Types::ParameterGroupNotFoundFault
+
+    ParameterGroupQuotaExceededFault.struct_class = Types::ParameterGroupQuotaExceededFault
 
     ParameterGroupStatus.add_member(:parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ParameterGroupName"))
     ParameterGroupStatus.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: String, location_name: "ParameterApplyStatus"))
@@ -381,6 +411,8 @@ module Aws::DAX
 
     SecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: SecurityGroupMembership)
 
+    ServiceLinkedRoleNotFoundFault.struct_class = Types::ServiceLinkedRoleNotFoundFault
+
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
     Subnet.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SubnetAvailabilityZone"))
     Subnet.struct_class = Types::Subnet
@@ -391,19 +423,35 @@ module Aws::DAX
     SubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     SubnetGroup.struct_class = Types::SubnetGroup
 
+    SubnetGroupAlreadyExistsFault.struct_class = Types::SubnetGroupAlreadyExistsFault
+
+    SubnetGroupInUseFault.struct_class = Types::SubnetGroupInUseFault
+
     SubnetGroupList.member = Shapes::ShapeRef.new(shape: SubnetGroup)
 
     SubnetGroupNameList.member = Shapes::ShapeRef.new(shape: String)
 
+    SubnetGroupNotFoundFault.struct_class = Types::SubnetGroupNotFoundFault
+
+    SubnetGroupQuotaExceededFault.struct_class = Types::SubnetGroupQuotaExceededFault
+
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String)
 
+    SubnetInUse.struct_class = Types::SubnetInUse
+
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet)
+
+    SubnetQuotaExceededFault.struct_class = Types::SubnetQuotaExceededFault
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Tag.struct_class = Types::Tag
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagNotFoundFault.struct_class = Types::TagNotFoundFault
+
+    TagQuotaPerResourceExceeded.struct_class = Types::TagQuotaPerResourceExceeded
 
     TagResourceRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))

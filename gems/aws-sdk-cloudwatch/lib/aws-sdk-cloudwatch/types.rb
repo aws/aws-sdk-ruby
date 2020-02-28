@@ -131,6 +131,12 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # More than one process tried to modify a resource at the same time.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
+
     # Represents a specific dashboard.
     #
     # @!attribute [rw] dashboard_name
@@ -1654,6 +1660,12 @@ module Aws::CloudWatch
       :message)
       include Aws::Structure
     end
+
+    # The operation exceeded one or more limits.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # The quota for alarms for this customer has already been reached.
     #

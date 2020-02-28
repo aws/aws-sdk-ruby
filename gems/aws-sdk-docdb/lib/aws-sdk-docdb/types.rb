@@ -98,6 +98,16 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # The specified CIDR IP or Amazon EC2 security group isn't authorized
+    # for the specified security group.
+    #
+    # Amazon DocumentDB also might not be authorized to perform necessary
+    # actions on your behalf using IAM.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
+
     # Information about an Availability Zone.
     #
     # @!attribute [rw] name
@@ -178,6 +188,12 @@ module Aws::DocDB
       :marker)
       include Aws::Structure
     end
+
+    # `CertificateIdentifier` doesn't refer to an existing certificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CertificateNotFoundFault AWS API Documentation
+    #
+    class CertificateNotFoundFault < Aws::EmptyStructure; end
 
     # The configuration setting for the log types to be enabled for export
     # to Amazon CloudWatch Logs for a specific instance or cluster.
@@ -1183,6 +1199,12 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # You already have a cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains information about an instance that is part of a cluster.
     #
     # @!attribute [rw] db_instance_identifier
@@ -1234,6 +1256,12 @@ module Aws::DocDB
       :db_clusters)
       include Aws::Structure
     end
+
+    # `DBClusterIdentifier` doesn't refer to an existing cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterNotFoundFault AWS API Documentation
+    #
+    class DBClusterNotFoundFault < Aws::EmptyStructure; end
 
     # Detailed information about a cluster parameter group.
     #
@@ -1310,6 +1338,13 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # `DBClusterParameterGroupName` doesn't refer to an existing cluster
+    # parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBClusterParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
     # Represents the output of DBClusterParameterGroups.
     #
     # @!attribute [rw] marker
@@ -1329,6 +1364,13 @@ module Aws::DocDB
       :db_cluster_parameter_groups)
       include Aws::Structure
     end
+
+    # The cluster can't be created because you have reached the maximum
+    # allowed quota of clusters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a cluster.
@@ -1463,6 +1505,12 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # You already have a cluster snapshot with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual cluster snapshot attribute.
     #
     # Manual cluster snapshot attributes are used to authorize other AWS
@@ -1531,6 +1579,13 @@ module Aws::DocDB
       :db_cluster_snapshots)
       include Aws::Structure
     end
+
+    # `DBClusterSnapshotIdentifier` doesn't refer to an existing cluster
+    # snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
 
     # Detailed information about an engine version.
     #
@@ -1764,6 +1819,12 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # You already have a instance with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Represents the output of DescribeDBInstances.
     #
     # @!attribute [rw] marker
@@ -1783,6 +1844,12 @@ module Aws::DocDB
       :db_instances)
       include Aws::Structure
     end
+
+    # `DBInstanceIdentifier` doesn't refer to an existing instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBInstanceNotFoundFault AWS API Documentation
+    #
+    class DBInstanceNotFoundFault < Aws::EmptyStructure; end
 
     # Provides a list of status information for an instance.
     #
@@ -1814,6 +1881,43 @@ module Aws::DocDB
       :message)
       include Aws::Structure
     end
+
+    # A parameter group with the same name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # `DBParameterGroupName` doesn't refer to an existing parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # This request would cause you to exceed the allowed number of parameter
+    # groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # `DBSecurityGroupName` doesn't refer to an existing security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class DBSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # `DBSnapshotIdentifier` is already being used by an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # `DBSnapshotIdentifier` doesn't refer to an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
 
     # Detailed information about a subnet group.
     #
@@ -1854,6 +1958,19 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # `DBSubnetGroupName` is already being used by an existing subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Subnets in the subnet group should cover at least two Availability
+    # Zones unless there is only one Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupDoesNotCoverEnoughAZs AWS API Documentation
+    #
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Aws::EmptyStructure; end
+
     # Represents the output of DescribeDBSubnetGroups.
     #
     # @!attribute [rw] marker
@@ -1873,6 +1990,33 @@ module Aws::DocDB
       :db_subnet_groups)
       include Aws::Structure
     end
+
+    # `DBSubnetGroupName` doesn't refer to an existing subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class DBSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would cause you to exceed the allowed number of subnet
+    # groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would cause you to exceed the allowed number of subnets in
+    # a subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBSubnetQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The upgrade failed because a resource that the depends on can't be
+    # modified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBUpgradeDependencyFailureFault AWS API Documentation
+    #
+    class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
     # Represents the input to DeleteDBCluster.
     #
@@ -3286,6 +3430,110 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # The request would cause you to exceed the allowed number of instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InstanceQuotaExceededFault AWS API Documentation
+    #
+    class InstanceQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The cluster doesn't have enough capacity for the current operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InsufficientDBClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The specified instance class isn't available in the specified
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InsufficientDBInstanceCapacityFault AWS API Documentation
+    #
+    class InsufficientDBInstanceCapacityFault < Aws::EmptyStructure; end
+
+    # There is not enough storage available for the current action. You
+    # might be able to resolve this error by updating your subnet group to
+    # use different Availability Zones that have more storage available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InsufficientStorageClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The provided value isn't a valid cluster snapshot state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBClusterSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBClusterSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The cluster isn't in a valid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBClusterStateFault AWS API Documentation
+    #
+    class InvalidDBClusterStateFault < Aws::EmptyStructure; end
+
+    # The specified instance isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBInstanceStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceStateFault < Aws::EmptyStructure; end
+
+    # The parameter group is in use, or it is in a state that is not valid.
+    # If you are trying to delete the parameter group, you can't delete it
+    # when the parameter group is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidDBParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the security group doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the snapshot doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The subnet group can't be deleted because it's in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBSubnetGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupStateFault < Aws::EmptyStructure; end
+
+    # The subnet isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidDBSubnetStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetStateFault < Aws::EmptyStructure; end
+
+    # You cannot restore from a virtual private cloud (VPC) backup to a
+    # non-VPC DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidRestoreFault AWS API Documentation
+    #
+    class InvalidRestoreFault < Aws::EmptyStructure; end
+
+    # The requested subnet is not valid, or multiple subnets were requested
+    # that are not all in a common virtual private cloud (VPC).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The subnet group doesn't cover all Availability Zones after it is
+    # created because of changes that were made.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # An error occurred when accessing an AWS KMS key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
+    #
+    class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
+
     # Represents the input to ListTagsForResource.
     #
     # @note When making an API call, you may pass ListTagsForResourceMessage
@@ -4248,6 +4496,12 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # The specified resource ID was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Aws::EmptyStructure; end
+
     # Represents the output of ApplyPendingMaintenanceAction.
     #
     # @!attribute [rw] resource_identifier
@@ -4601,6 +4855,19 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # You have exceeded the maximum number of accounts that you can share a
+    # manual DB snapshot with.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SharedSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would cause you to exceed the allowed number of snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartDBClusterMessage
     #   data as a hash:
     #
@@ -4661,6 +4928,20 @@ module Aws::DocDB
       include Aws::Structure
     end
 
+    # The request would cause you to exceed the allowed amount of storage
+    # available across all instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StorageQuotaExceededFault AWS API Documentation
+    #
+    class StorageQuotaExceededFault < Aws::EmptyStructure; end
+
+    # Storage of the specified `StorageType` can't be associated with the
+    # DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/StorageTypeNotSupportedFault AWS API Documentation
+    #
+    class StorageTypeNotSupportedFault < Aws::EmptyStructure; end
+
     # Detailed information about a subnet.
     #
     # @!attribute [rw] subnet_identifier
@@ -4683,6 +4964,12 @@ module Aws::DocDB
       :subnet_status)
       include Aws::Structure
     end
+
+    # The subnet is already in use in the Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Aws::EmptyStructure; end
 
     # Metadata assigned to an Amazon DocumentDB resource consisting of a
     # key-value pair.

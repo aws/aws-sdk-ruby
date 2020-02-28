@@ -2739,6 +2739,9 @@ module Aws::Glue
     #         number_of_workers: 1,
     #         timeout: 1,
     #         max_retries: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -2871,6 +2874,17 @@ module Aws::Glue
     #   a task run fails.
     #   @return [Integer]
     #
+    # @!attribute [rw] tags
+    #   The tags to use with this machine learning transform. You may use
+    #   tags to limit access to the machine learning transform. For more
+    #   information about tags in AWS Glue, see [AWS Tags in AWS Glue][1] in
+    #   the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateMLTransformRequest AWS API Documentation
     #
     class CreateMLTransformRequest < Struct.new(
@@ -2884,7 +2898,8 @@ module Aws::Glue
       :worker_type,
       :number_of_workers,
       :timeout,
-      :max_retries)
+      :max_retries,
+      :tags)
       include Aws::Structure
     end
 
@@ -8187,6 +8202,88 @@ module Aws::Glue
     #
     class ListJobsResponse < Struct.new(
       :job_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMLTransformsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         filter: {
+    #           name: "NameString",
+    #           transform_type: "FIND_MATCHES", # accepts FIND_MATCHES
+    #           status: "NOT_READY", # accepts NOT_READY, READY, DELETING
+    #           glue_version: "GlueVersionString",
+    #           created_before: Time.now,
+    #           created_after: Time.now,
+    #           last_modified_before: Time.now,
+    #           last_modified_after: Time.now,
+    #           schema: [
+    #             {
+    #               name: "ColumnNameString",
+    #               data_type: "ColumnTypeString",
+    #             },
+    #           ],
+    #         },
+    #         sort: {
+    #           column: "NAME", # required, accepts NAME, TRANSFORM_TYPE, STATUS, CREATED, LAST_MODIFIED
+    #           sort_direction: "DESCENDING", # required, accepts DESCENDING, ASCENDING
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if this is a continuation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of a list to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter
+    #   A `TransformFilterCriteria` used to filter the machine learning
+    #   transforms.
+    #   @return [Types::TransformFilterCriteria]
+    #
+    # @!attribute [rw] sort
+    #   A `TransformSortCriteria` used to sort the machine learning
+    #   transforms.
+    #   @return [Types::TransformSortCriteria]
+    #
+    # @!attribute [rw] tags
+    #   Specifies to return only these tagged resources.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMLTransformsRequest AWS API Documentation
+    #
+    class ListMLTransformsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filter,
+      :sort,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transform_ids
+    #   The identifiers of all the machine learning transforms in the
+    #   account, or the machine learning transforms with the specified tags.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, if the returned list does not contain the last
+    #   metric available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListMLTransformsResponse AWS API Documentation
+    #
+    class ListMLTransformsResponse < Struct.new(
+      :transform_ids,
       :next_token)
       include Aws::Structure
     end

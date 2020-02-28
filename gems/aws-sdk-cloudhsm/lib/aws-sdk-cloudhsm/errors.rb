@@ -10,6 +10,17 @@ module Aws::CloudHSM
 
     extend Aws::Errors::DynamicErrors
 
+    class CloudHsmInternalException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudHSM::Types::CloudHsmInternalException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class CloudHsmServiceException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -27,6 +38,17 @@ module Aws::CloudHSM
       # @return [String]
       def retryable
         @data[:retryable]
+      end
+
+    end
+
+    class InvalidRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudHSM::Types::InvalidRequestException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

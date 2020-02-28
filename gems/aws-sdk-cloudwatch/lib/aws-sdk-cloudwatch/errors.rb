@@ -10,6 +10,17 @@ module Aws::CloudWatch
 
     extend Aws::Errors::DynamicErrors
 
+    class ConcurrentModificationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatch::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class DashboardInvalidInputError < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -123,6 +134,17 @@ module Aws::CloudWatch
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CloudWatch::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

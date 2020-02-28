@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2020-02-27)
+------------------
+
+* Feature - This release adds support for adding tags to accelerators and bringing your own IP address to AWS Global Accelerator (BYOIP).
+
 1.13.0 (2019-10-23)
 ------------------
 

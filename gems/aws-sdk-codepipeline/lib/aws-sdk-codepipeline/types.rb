@@ -578,6 +578,12 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The specified action cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionNotFoundException AWS API Documentation
+    #
+    class ActionNotFoundException < Aws::EmptyStructure; end
+
     # Represents information about the version (or revision) of an action.
     #
     # @note When making an API call, you may pass ActionRevision
@@ -732,6 +738,12 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The specified action type cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeNotFoundException AWS API Documentation
+    #
+    class ActionTypeNotFoundException < Aws::EmptyStructure; end
+
     # Returns information about the settings for an action type.
     #
     # @note When making an API call, you may pass ActionTypeSettings
@@ -780,6 +792,12 @@ module Aws::CodePipeline
       :revision_url_template)
       include Aws::Structure
     end
+
+    # The approval action has already been approved or rejected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ApprovalAlreadyCompletedException AWS API Documentation
+    #
+    class ApprovalAlreadyCompletedException < Aws::EmptyStructure; end
 
     # Represents information about the result of an approval request.
     #
@@ -1905,6 +1923,18 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The action declaration was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidActionDeclarationException AWS API Documentation
+    #
+    class InvalidActionDeclarationException < Aws::EmptyStructure; end
+
+    # The approval request already received a response or has expired.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidApprovalTokenException AWS API Documentation
+    #
+    class InvalidApprovalTokenException < Aws::EmptyStructure; end
+
     # The specified resource ARN is invalid.
     #
     # @!attribute [rw] message
@@ -1917,6 +1947,55 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # Reserved for future use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidBlockerDeclarationException AWS API Documentation
+    #
+    class InvalidBlockerDeclarationException < Aws::EmptyStructure; end
+
+    # The client token was specified in an invalid format
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidClientTokenException AWS API Documentation
+    #
+    class InvalidClientTokenException < Aws::EmptyStructure; end
+
+    # The job was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidJobException AWS API Documentation
+    #
+    class InvalidJobException < Aws::EmptyStructure; end
+
+    # The job state was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidJobStateException AWS API Documentation
+    #
+    class InvalidJobStateException < Aws::EmptyStructure; end
+
+    # The next token was specified in an invalid format. Make sure that the
+    # next token you provide is the token returned by a previous call.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
+    # The nonce was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidNonceException AWS API Documentation
+    #
+    class InvalidNonceException < Aws::EmptyStructure; end
+
+    # The stage declaration was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidStageDeclarationException AWS API Documentation
+    #
+    class InvalidStageDeclarationException < Aws::EmptyStructure; end
+
+    # The structure was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidStructureException AWS API Documentation
+    #
+    class InvalidStructureException < Aws::EmptyStructure; end
+
     # The specified resource tags are invalid.
     #
     # @!attribute [rw] message
@@ -1928,6 +2007,18 @@ module Aws::CodePipeline
       :message)
       include Aws::Structure
     end
+
+    # The specified authentication type is in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidWebhookAuthenticationParametersException AWS API Documentation
+    #
+    class InvalidWebhookAuthenticationParametersException < Aws::EmptyStructure; end
+
+    # The specified event filter rule is in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InvalidWebhookFilterPatternException AWS API Documentation
+    #
+    class InvalidWebhookFilterPatternException < Aws::EmptyStructure; end
 
     # Represents information about a job.
     #
@@ -2041,6 +2132,19 @@ module Aws::CodePipeline
       :account_id)
       include Aws::Structure
     end
+
+    # The job was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobNotFoundException AWS API Documentation
+    #
+    class JobNotFoundException < Aws::EmptyStructure; end
+
+    # The number of pipelines associated with the AWS account has exceeded
+    # the limit allowed for the account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListActionExecutionsInput
     #   data as a hash:
@@ -2410,6 +2514,13 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The stage has failed in a later run of the pipeline and the
+    # pipelineExecutionId associated with the request is out of date.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/NotLatestPipelineExecutionException AWS API Documentation
+    #
+    class NotLatestPipelineExecutionException < Aws::EmptyStructure; end
+
     # Represents information about the output of an action.
     #
     # @note When making an API call, you may pass OutputArtifact
@@ -2675,6 +2786,13 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The pipeline execution was specified in an invalid format or cannot be
+    # found, or an execution ID does not belong to the specified pipeline.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionNotFoundException AWS API Documentation
+    #
+    class PipelineExecutionNotFoundException < Aws::EmptyStructure; end
+
     # Unable to stop the pipeline execution. The execution might already be
     # in a `Stopped` state, or it might no longer be in progress.
     #
@@ -2783,6 +2901,18 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The specified pipeline name is already in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineNameInUseException AWS API Documentation
+    #
+    class PipelineNameInUseException < Aws::EmptyStructure; end
+
+    # The pipeline was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineNotFoundException AWS API Documentation
+    #
+    class PipelineNotFoundException < Aws::EmptyStructure; end
+
     # Returns a summary of a pipeline.
     #
     # @!attribute [rw] name
@@ -2811,6 +2941,13 @@ module Aws::CodePipeline
       :updated)
       include Aws::Structure
     end
+
+    # The pipeline version was specified in an invalid format or cannot be
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineVersionNotFoundException AWS API Documentation
+    #
+    class PipelineVersionNotFoundException < Aws::EmptyStructure; end
 
     # Represents the input of a `PollForJobs` action.
     #
@@ -3319,6 +3456,12 @@ module Aws::CodePipeline
     #
     class RegisterWebhookWithThirdPartyOutput < Aws::EmptyStructure; end
 
+    # The resource was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # Represents the input of a `RetryStageExecution` action.
     #
     # @note When making an API call, you may pass RetryStageExecutionInput
@@ -3542,6 +3685,20 @@ module Aws::CodePipeline
       :status)
       include Aws::Structure
     end
+
+    # The stage was specified in an invalid format or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageNotFoundException AWS API Documentation
+    #
+    class StageNotFoundException < Aws::EmptyStructure; end
+
+    # Unable to retry. The pipeline structure or stage state might have
+    # changed while actions awaited retry, or the stage contains no failed
+    # actions.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageNotRetryableException AWS API Documentation
+    #
+    class StageNotRetryableException < Aws::EmptyStructure; end
 
     # Represents information about the state of the stage.
     #
@@ -4024,6 +4181,12 @@ module Aws::CodePipeline
       include Aws::Structure
     end
 
+    # The validation was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ValidationException AWS API Documentation
+    #
+    class ValidationException < Aws::EmptyStructure; end
+
     # The authentication applied to incoming webhook trigger requests.
     #
     # @note When making an API call, you may pass WebhookAuthConfiguration
@@ -4183,6 +4346,13 @@ module Aws::CodePipeline
       :match_equals)
       include Aws::Structure
     end
+
+    # The specified webhook was entered in an invalid format or cannot be
+    # found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookNotFoundException AWS API Documentation
+    #
+    class WebhookNotFoundException < Aws::EmptyStructure; end
 
   end
 end

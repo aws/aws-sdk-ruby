@@ -3415,6 +3415,70 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Searchs for dashboards that belong to a user.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the AWS account that contains the user whose dashboards
+    #   you're searching for.
+    #
+    # @option params [required, Array<Types::DashboardSearchFilter>] :filters
+    #   The filters to apply to the search. Currently, you can search only by
+    #   user name. For example, `"Filters": [ \{ "Name": "QUICKSIGHT_USER",
+    #   "Operator": "StringEquals", "Value":
+    #   "arn:aws:quicksight:us-east-1:1:user/default/UserName1" \} ]`
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::SearchDashboardsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchDashboardsResponse#dashboard_summary_list #dashboard_summary_list} => Array&lt;Types::DashboardSummary&gt;
+    #   * {Types::SearchDashboardsResponse#next_token #next_token} => String
+    #   * {Types::SearchDashboardsResponse#status #status} => Integer
+    #   * {Types::SearchDashboardsResponse#request_id #request_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_dashboards({
+    #     aws_account_id: "AwsAccountId", # required
+    #     filters: [ # required
+    #       {
+    #         operator: "StringEquals", # required, accepts StringEquals
+    #         name: "QUICKSIGHT_USER", # accepts QUICKSIGHT_USER
+    #         value: "String",
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dashboard_summary_list #=> Array
+    #   resp.dashboard_summary_list[0].arn #=> String
+    #   resp.dashboard_summary_list[0].dashboard_id #=> String
+    #   resp.dashboard_summary_list[0].name #=> String
+    #   resp.dashboard_summary_list[0].created_time #=> Time
+    #   resp.dashboard_summary_list[0].last_updated_time #=> Time
+    #   resp.dashboard_summary_list[0].published_version_number #=> Integer
+    #   resp.dashboard_summary_list[0].last_published_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.status #=> Integer
+    #   resp.request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchDashboards AWS API Documentation
+    #
+    # @overload search_dashboards(params = {})
+    # @param [Hash] params ({})
+    def search_dashboards(params = {}, options = {})
+      req = build_request(:search_dashboards, params)
+      req.send_request(options)
+    end
+
     # Assigns one or more tags (key-value pairs) to the specified QuickSight
     # resource.
     #
@@ -4587,7 +4651,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -587,6 +587,10 @@ module Aws::S3
     Bucket.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
     Bucket.struct_class = Types::Bucket
 
+    BucketAlreadyExists.struct_class = Types::BucketAlreadyExists
+
+    BucketAlreadyOwnedByYou.struct_class = Types::BucketAlreadyOwnedByYou
+
     BucketLifecycleConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, required: true, location_name: "Rule"))
     BucketLifecycleConfiguration.struct_class = Types::BucketLifecycleConfiguration
 
@@ -1544,6 +1548,12 @@ module Aws::S3
 
     MultipartUploadList.member = Shapes::ShapeRef.new(shape: MultipartUpload)
 
+    NoSuchBucket.struct_class = Types::NoSuchBucket
+
+    NoSuchKey.struct_class = Types::NoSuchKey
+
+    NoSuchUpload.struct_class = Types::NoSuchUpload
+
     NoncurrentVersionExpiration.add_member(:noncurrent_days, Shapes::ShapeRef.new(shape: Days, location_name: "NoncurrentDays"))
     NoncurrentVersionExpiration.struct_class = Types::NoncurrentVersionExpiration
 
@@ -1574,6 +1584,8 @@ module Aws::S3
     Object.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
     Object.struct_class = Types::Object
 
+    ObjectAlreadyInActiveTierError.struct_class = Types::ObjectAlreadyInActiveTierError
+
     ObjectIdentifier.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location_name: "Key"))
     ObjectIdentifier.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
     ObjectIdentifier.struct_class = Types::ObjectIdentifier
@@ -1595,6 +1607,8 @@ module Aws::S3
 
     ObjectLockRule.add_member(:default_retention, Shapes::ShapeRef.new(shape: DefaultRetention, location_name: "DefaultRetention"))
     ObjectLockRule.struct_class = Types::ObjectLockRule
+
+    ObjectNotInActiveTierError.struct_class = Types::ObjectNotInActiveTierError
 
     ObjectVersion.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
     ObjectVersion.add_member(:size, Shapes::ShapeRef.new(shape: Size, location_name: "Size"))

@@ -8,6 +8,16 @@
 module Aws::SES
   module Types
 
+    # Indicates that email sending is disabled for your entire Amazon SES
+    # account.
+    #
+    # You can enable or disable email sending for your Amazon SES account
+    # using UpdateAccountSendingEnabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AccountSendingPausedException AWS API Documentation
+    #
+    class AccountSendingPausedException < Aws::EmptyStructure; end
+
     # When included in a receipt rule, this action adds a header to the
     # received email.
     #
@@ -1050,6 +1060,13 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateTemplateResponse AWS API Documentation
     #
     class CreateTemplateResponse < Aws::EmptyStructure; end
+
+    # Indicates that custom verification email template provided content is
+    # invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailInvalidContentException AWS API Documentation
+    #
+    class CustomVerificationEmailInvalidContentException < Aws::EmptyStructure; end
 
     # Contains information about a custom verification email template.
     #
@@ -2488,6 +2505,19 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the configuration set is invalid. See the error message
+    # for details.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidConfigurationSetException AWS API Documentation
+    #
+    class InvalidConfigurationSetException < Aws::EmptyStructure; end
+
+    # Indicates that provided delivery option is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidDeliveryOptionsException AWS API Documentation
+    #
+    class InvalidDeliveryOptionsException < Aws::EmptyStructure; end
+
     # Indicates that the Amazon Kinesis Firehose destination is invalid. See
     # the error message for details.
     #
@@ -2526,6 +2556,13 @@ module Aws::SES
       :function_arn)
       include Aws::Structure
     end
+
+    # Indicates that the provided policy is invalid. Check the error stack
+    # for more information about what caused the error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidPolicyException AWS API Documentation
+    #
+    class InvalidPolicyException < Aws::EmptyStructure; end
 
     # Indicates that one or more of the replacement values you provided is
     # invalid. This error may occur when the TemplateData object contains
@@ -2613,6 +2650,20 @@ module Aws::SES
       :template_name)
       include Aws::Structure
     end
+
+    # Indicates that the custom domain to be used for open and click
+    # tracking redirects is invalid. This error appears most often in the
+    # following situations:
+    #
+    # * When the tracking domain you specified is not verified in Amazon
+    #   SES.
+    #
+    # * When the tracking domain you specified is not a valid domain or
+    #   subdomain.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/InvalidTrackingOptionsException AWS API Documentation
+    #
+    class InvalidTrackingOptionsException < Aws::EmptyStructure; end
 
     # Contains the delivery stream ARN and the IAM role ARN associated with
     # an Amazon Kinesis Firehose event destination.
@@ -2728,6 +2779,18 @@ module Aws::SES
       :invocation_type)
       include Aws::Structure
     end
+
+    # Indicates that a resource could not be created because of service
+    # limits. For a list of Amazon SES limits, see the [Amazon SES Developer
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # Represents a request to list the configuration sets associated with
     # your AWS account. Configuration sets enable you to publish email
@@ -3098,6 +3161,19 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the message could not be sent because Amazon SES could
+    # not read the MX record required to use the specified MAIL FROM domain.
+    # For information about editing the custom MAIL FROM domain settings for
+    # an identity, see the [Amazon SES Developer Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MailFromDomainNotVerifiedException AWS API Documentation
+    #
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure; end
+
     # Represents the message to be sent, composed of a subject and a body.
     #
     # @note When making an API call, you may pass Message
@@ -3194,6 +3270,14 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Indicates that the action failed, and the message could not be sent.
+    # Check the error stack for more information about what caused the
+    # error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageRejected AWS API Documentation
+    #
+    class MessageRejected < Aws::EmptyStructure; end
+
     # Contains the name and value of a tag that you can provide to
     # `SendEmail` or `SendRawEmail` to apply to an email.
     #
@@ -3253,6 +3337,12 @@ module Aws::SES
       :template_name)
       include Aws::Structure
     end
+
+    # Indicates that the account has not been granted production access.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ProductionAccessNotGrantedException AWS API Documentation
+    #
+    class ProductionAccessNotGrantedException < Aws::EmptyStructure; end
 
     # A request to modify the delivery options for a configuration set.
     #

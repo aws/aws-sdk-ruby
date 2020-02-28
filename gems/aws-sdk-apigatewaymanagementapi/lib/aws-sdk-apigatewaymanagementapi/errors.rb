@@ -10,6 +10,28 @@ module Aws::ApiGatewayManagementApi
 
     extend Aws::Errors::DynamicErrors
 
+    class ForbiddenException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ApiGatewayManagementApi::Types::ForbiddenException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class GoneException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ApiGatewayManagementApi::Types::GoneException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class PayloadTooLargeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -22,6 +44,17 @@ module Aws::ApiGatewayManagementApi
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ApiGatewayManagementApi::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

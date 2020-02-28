@@ -27,7 +27,7 @@ module Aws
           @calculated_rate      = nil
         end
 
-        def token_bucket_acquire(amount, wait_to_fill=true)
+        def token_bucket_acquire(amount, wait_to_fill = true)
           # Client side throttling is not enabled until we see a
           # throttling error
           return unless @enabled
@@ -37,7 +37,7 @@ module Aws
 
             # Next see if we have enough capacity for the requested amount
             while @current_capacity < amount
-              raise Aws::Errors::CapacityNotAvailableError unless wait_to_fill
+              raise Aws::Errors::RetryCapacityNotAvailableError unless wait_to_fill
               @mutex.sleep((amount - @current_capacity) / @fill_rate)
               token_bucket_refill
             end
@@ -135,4 +135,3 @@ module Aws
     end
   end
 end
-

@@ -8,6 +8,10 @@
 module Aws::ElasticTranscoder
   module Types
 
+    # General authentication failure. The request was not signed correctly.
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # The file to be used as album art. There can be multiple artworks
     # associated with an audio file, to a maximum of 20.
     #
@@ -2145,6 +2149,8 @@ module Aws::ElasticTranscoder
       include Aws::Structure
     end
 
+    class IncompatibleVersionException < Aws::EmptyStructure; end
+
     # The captions to be created, if any.
     #
     # @note When making an API call, you may pass InputCaptions
@@ -2203,6 +2209,11 @@ module Aws::ElasticTranscoder
       :caption_sources)
       include Aws::Structure
     end
+
+    # Elastic Transcoder encountered an unexpected exception while trying to
+    # fulfill the request.
+    #
+    class InternalServiceException < Aws::EmptyStructure; end
 
     # A section of the response body that provides information about the job
     # that is created.
@@ -2907,6 +2918,11 @@ module Aws::ElasticTranscoder
       :encryption)
       include Aws::Structure
     end
+
+    # Too many operations for a given AWS account. For example, the number
+    # of pipelines exceeds the maximum allowed.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # The `ListJobsByPipelineRequest` structure.
     #
@@ -4045,6 +4061,17 @@ module Aws::ElasticTranscoder
       include Aws::Structure
     end
 
+    # The resource you are attempting to change is in use. For example, you
+    # are attempting to delete a pipeline that is currently in use.
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The requested resource does not exist or is not available. For
+    # example, the pipeline to which you're trying to add a job doesn't
+    # exist or is still being created.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # The `TestRoleRequest` structure.
     #
     # @note When making an API call, you may pass TestRoleRequest
@@ -4674,6 +4701,11 @@ module Aws::ElasticTranscoder
       :pipeline)
       include Aws::Structure
     end
+
+    # One or more required parameter values were not provided in the
+    # request.
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
     # The `VideoParameters` structure.
     #

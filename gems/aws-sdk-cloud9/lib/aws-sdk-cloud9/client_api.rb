@@ -75,7 +75,11 @@ module Aws::Cloud9
     UpdateEnvironmentResult = Shapes::StructureShape.new(name: 'UpdateEnvironmentResult')
     UserArn = Shapes::StringShape.new(name: 'UserArn')
 
+    BadRequestException.struct_class = Types::BadRequestException
+
     BoundedEnvironmentIdList.member = Shapes::ShapeRef.new(shape: EnvironmentId)
+
+    ConflictException.struct_class = Types::ConflictException
 
     CreateEnvironmentEC2Request.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "name"))
     CreateEnvironmentEC2Request.add_member(:description, Shapes::ShapeRef.new(shape: EnvironmentDescription, location_name: "description"))
@@ -160,6 +164,12 @@ module Aws::Cloud9
 
     EnvironmentMembersList.member = Shapes::ShapeRef.new(shape: EnvironmentMember)
 
+    ForbiddenException.struct_class = Types::ForbiddenException
+
+    InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListEnvironmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnvironmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListEnvironmentsRequest.struct_class = Types::ListEnvironmentsRequest
@@ -173,6 +183,8 @@ module Aws::Cloud9
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    NotFoundException.struct_class = Types::NotFoundException
 
     PermissionsList.member = Shapes::ShapeRef.new(shape: Permissions)
 
@@ -189,6 +201,8 @@ module Aws::Cloud9
     TagResourceRequest.struct_class = Types::TagResourceRequest
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: EnvironmentArn, required: true, location_name: "ResourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))

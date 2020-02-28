@@ -73,6 +73,18 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # Two or more batch entries in the request have the same `Id`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchEntryIdsNotDistinct AWS API Documentation
+    #
+    class BatchEntryIdsNotDistinct < Aws::EmptyStructure; end
+
+    # The length of all the messages put together is more than the limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchRequestTooLong AWS API Documentation
+    #
+    class BatchRequestTooLong < Aws::EmptyStructure; end
+
     # Gives a detailed description of the result of an action on each entry
     # in the request.
     #
@@ -616,6 +628,12 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # The batch request doesn't contain any entries.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/EmptyBatchRequest AWS API Documentation
+    #
+    class EmptyBatchRequest < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass GetQueueAttributesRequest
     #   data as a hash:
     #
@@ -810,6 +828,31 @@ module Aws::SQS
       :queue_url)
       include Aws::Structure
     end
+
+    # The specified attribute doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAttributeName AWS API Documentation
+    #
+    class InvalidAttributeName < Aws::EmptyStructure; end
+
+    # The `Id` of a batch entry in a batch request doesn't abide by the
+    # specification.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidBatchEntryId AWS API Documentation
+    #
+    class InvalidBatchEntryId < Aws::EmptyStructure; end
+
+    # The specified receipt handle isn't valid for the current version.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidIdFormat AWS API Documentation
+    #
+    class InvalidIdFormat < Aws::EmptyStructure; end
+
+    # The message contains characters outside the allowed set.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidMessageContents AWS API Documentation
+    #
+    class InvalidMessageContents < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListDeadLetterSourceQueuesRequest
     #   data as a hash:
@@ -1059,6 +1102,12 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # The specified message isn't in flight.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageNotInflight AWS API Documentation
+    #
+    class MessageNotInflight < Aws::EmptyStructure; end
+
     # The user-specified message system attribute value. For string data
     # types, the `Value` attribute has the same restrictions on the content
     # as the message body. For more information, see ` SendMessage.`
@@ -1124,6 +1173,23 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # The specified action violates a limit. For example, `ReceiveMessage`
+    # returns this error if the maximum number of inflight messages is
+    # reached and `AddPermission` returns this error if the maximum number
+    # of permissions for the queue is reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/OverLimit AWS API Documentation
+    #
+    class OverLimit < Aws::EmptyStructure; end
+
+    # Indicates that the specified queue previously received a `PurgeQueue`
+    # request within the last 60 seconds (the time it can take to delete the
+    # messages in the queue).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueInProgress AWS API Documentation
+    #
+    class PurgeQueueInProgress < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass PurgeQueueRequest
     #   data as a hash:
     #
@@ -1144,6 +1210,33 @@ module Aws::SQS
       :queue_url)
       include Aws::Structure
     end
+
+    # You must wait 60 seconds after deleting a queue before you can create
+    # another queue with the same name.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDeletedRecently AWS API Documentation
+    #
+    class QueueDeletedRecently < Aws::EmptyStructure; end
+
+    # The specified queue doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDoesNotExist AWS API Documentation
+    #
+    class QueueDoesNotExist < Aws::EmptyStructure; end
+
+    # A queue with this name already exists. Amazon SQS returns this error
+    # only if the request includes attributes whose values differ from those
+    # of the existing queue.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueNameExists AWS API Documentation
+    #
+    class QueueNameExists < Aws::EmptyStructure; end
+
+    # The specified receipt handle isn't valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiptHandleIsInvalid AWS API Documentation
+    #
+    class ReceiptHandleIsInvalid < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ReceiveMessageRequest
     #   data as a hash:
@@ -2150,6 +2243,18 @@ module Aws::SQS
       :tags)
       include Aws::Structure
     end
+
+    # The batch request contains more entries than permissible.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/TooManyEntriesInBatchRequest AWS API Documentation
+    #
+    class TooManyEntriesInBatchRequest < Aws::EmptyStructure; end
+
+    # Error code 400. Unsupported operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/UnsupportedOperation AWS API Documentation
+    #
+    class UnsupportedOperation < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagQueueRequest
     #   data as a hash:

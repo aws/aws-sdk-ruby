@@ -539,6 +539,8 @@ module Aws::SMS
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    TemporarilyUnavailableException.struct_class = Types::TemporarilyUnavailableException
+
     TerminateAppRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: AppId, location_name: "appId"))
     TerminateAppRequest.struct_class = Types::TerminateAppRequest
 

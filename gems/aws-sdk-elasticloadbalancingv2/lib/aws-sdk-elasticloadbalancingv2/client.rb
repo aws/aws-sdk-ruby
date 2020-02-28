@@ -324,7 +324,7 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the resource.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each resource can have a maximum of 10 tags.
+    #   The tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -406,8 +406,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network Load
+    #   Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -2308,7 +2335,8 @@ module Aws::ElasticLoadBalancingV2
     # Balancers, and target groups.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARN) of the resources. You can specify up
+    #   to 20 resources in a single call.
     #
     # @return [Types::DescribeTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2685,12 +2713,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [String] :ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   protocols and ciphers are supported. For more information, see
-    #   [Security Policies][1] in the *Application Load Balancers Guide*.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network Load
+    #   Balancers Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   \[HTTPS and TLS listeners\] The default certificate for the listener.
@@ -4091,7 +4142,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

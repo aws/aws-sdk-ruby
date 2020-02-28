@@ -10,3 +10,4 @@ coverage
 /TODO
 *.DS_Store
 .idea
+.ruby-version

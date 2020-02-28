@@ -7,8 +7,9 @@ module AwsSdkCodeGenerator
       @api = options[:api]
       @module_name = options[:module_name]
       @errors = @api['shapes'].inject([]) do |es, (name, shape)|
-        # only generate error shapes which require customizations
-        if error_needs_definition?(shape)
+        # only generate error shape with non empty members
+        # excluding event shapes marked as error
+        if error_struct?(shape)
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
               name: Underscore.underscore(k),
@@ -22,31 +23,24 @@ module AwsSdkCodeGenerator
             members: members,
             data_type: "#{@module_name}::Types::#{name}",
             retryable: !!shape['retryable'],
-            throttling: shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
+            throttling: throttling?(shape)
           )
         end
         es
       end
     end
 
+    def error_struct?(shape)
+      shape['type'] == 'structure' && !!!shape['event'] &&
+        (shape['error'] || shape['exception'])
+    end
+
     def each(&block)
       @errors.each(&block)
     end
 
-    private
-
-    def error_needs_definition?(shape)
-      error_struct?(shape) && needs_definition?(shape)
-    end
-
-    def error_struct?(shape)
-      shape['type'] == 'structure' && !!!shape['event'] &&
-          (shape['error'] || shape['exception'])
-    end
-
-    def needs_definition?(shape)
-      (shape['members'] && shape['members'].size > 0) ||
-          (shape['retryable'])
+    def throttling?(shape)
+      shape['retryable'] && shape['retryable'].kind_of?(Hash) && shape['retryable']['throttling']
     end
 
 

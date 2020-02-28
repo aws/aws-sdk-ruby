@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2020-02-28)
+------------------
+
+* Feature - Documentation updates for workdocs
+
 1.19.0 (2019-10-23)
 ------------------
 
