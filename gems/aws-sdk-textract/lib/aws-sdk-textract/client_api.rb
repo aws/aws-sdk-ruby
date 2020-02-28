@@ -91,6 +91,8 @@ module Aws::Textract
     Warning = Shapes::StructureShape.new(name: 'Warning')
     Warnings = Shapes::ListShape.new(name: 'Warnings')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AnalyzeDocumentRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     AnalyzeDocumentRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
     AnalyzeDocumentRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
@@ -101,6 +103,8 @@ module Aws::Textract
     AnalyzeDocumentResponse.add_member(:human_loop_activation_output, Shapes::ShapeRef.new(shape: HumanLoopActivationOutput, location_name: "HumanLoopActivationOutput"))
     AnalyzeDocumentResponse.add_member(:analyze_document_model_version, Shapes::ShapeRef.new(shape: String, location_name: "AnalyzeDocumentModelVersion"))
     AnalyzeDocumentResponse.struct_class = Types::AnalyzeDocumentResponse
+
+    BadDocumentException.struct_class = Types::BadDocumentException
 
     Block.add_member(:block_type, Shapes::ShapeRef.new(shape: BlockType, location_name: "BlockType"))
     Block.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -144,6 +148,8 @@ module Aws::Textract
 
     DocumentMetadata.add_member(:pages, Shapes::ShapeRef.new(shape: UInteger, location_name: "Pages"))
     DocumentMetadata.struct_class = Types::DocumentMetadata
+
+    DocumentTooLargeException.struct_class = Types::DocumentTooLargeException
 
     EntityTypes.member = Shapes::ShapeRef.new(shape: EntityType)
 
@@ -203,6 +209,18 @@ module Aws::Textract
 
     IdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidJobIdException.struct_class = Types::InvalidJobIdException
+
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     NotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
     NotificationChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     NotificationChannel.struct_class = Types::NotificationChannel
@@ -214,6 +232,8 @@ module Aws::Textract
     Point.struct_class = Types::Point
 
     Polygon.member = Shapes::ShapeRef.new(shape: Point)
+
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
     Relationship.add_member(:type, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "Type"))
     Relationship.add_member(:ids, Shapes::ShapeRef.new(shape: IdList, location_name: "Ids"))
@@ -244,6 +264,10 @@ module Aws::Textract
 
     StartDocumentTextDetectionResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartDocumentTextDetectionResponse.struct_class = Types::StartDocumentTextDetectionResponse
+
+    ThrottlingException.struct_class = Types::ThrottlingException
+
+    UnsupportedDocumentException.struct_class = Types::UnsupportedDocumentException
 
     Warning.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
     Warning.add_member(:pages, Shapes::ShapeRef.new(shape: Pages, location_name: "Pages"))

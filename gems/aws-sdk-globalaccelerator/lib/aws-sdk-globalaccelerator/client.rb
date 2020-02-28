@@ -264,13 +264,64 @@ module Aws::GlobalAccelerator
 
     # @!group API Operations
 
+    # Advertises an IPv4 address range that is provisioned for use with your
+    # AWS resources through bring your own IP addresses (BYOIP). It can take
+    # a few minutes before traffic to the specified addresses starts routing
+    # to AWS because of propagation delays. To see an AWS CLI example of
+    # advertising an address range, scroll down to **Example**.
+    #
+    # To stop advertising the BYOIP address range, use [
+    # WithdrawByoipCidr][1].
+    #
+    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html
+    # [2]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The address range, in CIDR notation. This must be the exact range that
+    #   you provisioned. You can't advertise only a portion of the
+    #   provisioned range.
+    #
+    # @return [Types::AdvertiseByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdvertiseByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.advertise_byoip_cidr({
+    #     cidr: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidr AWS API Documentation
+    #
+    # @overload advertise_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def advertise_byoip_cidr(params = {}, options = {})
+      req = build_request(:advertise_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Create an accelerator. An accelerator includes one or more listeners
     # that process inbound connections and direct traffic to one or more
     # endpoint groups, each of which includes endpoints, such as Network
     # Load Balancers. To see an AWS CLI example of creating an accelerator,
     # scroll down to **Example**.
     #
-    # You must specify the US-West-2 (Oregon) Region to create or update
+    # If you bring your own IP address ranges to AWS Global Accelerator
+    # (BYOIP), you can assign IP addresses from your own pool to your
+    # accelerator as the static IP address entry points. Only one IP address
+    # from each of your IP address ranges can be used for each accelerator.
+    #
+    # You must specify the US West (Oregon) Region to create or update
     # accelerators.
     #
     # @option params [required, String] :name
@@ -280,6 +331,23 @@ module Aws::GlobalAccelerator
     #
     # @option params [String] :ip_address_type
     #   The value for the address type must be IPv4.
+    #
+    # @option params [Array<String>] :ip_addresses
+    #   Optionally, if you've added your own IP address pool to Global
+    #   Accelerator, you can choose IP addresses from your own pool to use for
+    #   the accelerator's static IP addresses. You can specify one or two
+    #   addresses, separated by a comma. Do not include the /32 suffix.
+    #
+    #   If you specify only one IP address from your IP address range, Global
+    #   Accelerator assigns a second static IP address for the accelerator
+    #   from the AWS IP address pool.
+    #
+    #   For more information, see [Bring Your Own IP Addresses (BYOIP)][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
@@ -292,6 +360,19 @@ module Aws::GlobalAccelerator
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of an accelerator.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Create tags for an accelerator.
+    #
+    #   For more information, see [Tagging in AWS Global Accelerator][1] in
+    #   the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
     # @return [Types::CreateAcceleratorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAcceleratorResponse#accelerator #accelerator} => Types::Accelerator
@@ -301,8 +382,15 @@ module Aws::GlobalAccelerator
     #   resp = client.create_accelerator({
     #     name: "GenericString", # required
     #     ip_address_type: "IPV4", # accepts IPV4
+    #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #     idempotency_token: "IdempotencyToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -382,6 +470,9 @@ module Aws::GlobalAccelerator
     # @option params [required, String] :idempotency_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
     #
     # @return [Types::CreateEndpointGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -478,6 +569,9 @@ module Aws::GlobalAccelerator
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency—that is, the uniqueness—of the request.
     #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Types::CreateListenerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateListenerResponse#listener #listener} => Types::Listener
@@ -515,9 +609,30 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Delete an accelerator. Note: before you can delete an accelerator, you
-    # must disable it and remove all dependent resources (listeners and
-    # endpoint groups).
+    # Delete an accelerator. Before you can delete an accelerator, you must
+    # disable it and remove all dependent resources (listeners and endpoint
+    # groups). To disable the accelerator, update the accelerator to set
+    # `Enabled` to false.
+    #
+    # When you create an accelerator, by default, Global Accelerator
+    # provides you with a set of two static IP addresses. Alternatively, you
+    # can bring your own IP address ranges to Global Accelerator and assign
+    # IP addresses from those ranges.
+    #
+    #  The IP addresses are assigned to your accelerator for as long as it
+    # exists, even if you disable the accelerator and it no longer accepts
+    # or routes traffic. However, when you *delete* an accelerator, you lose
+    # the static IP addresses that are assigned to the accelerator, so you
+    # can no longer route traffic by using them. As a best practice, ensure
+    # that you have permissions in place to avoid inadvertently deleting
+    # accelerators. You can use IAM policies with Global Accelerator to
+    # limit the users who have permissions to delete an accelerator. For
+    # more information, see [Authentication and Access Control][1] in the
+    # *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of an accelerator.
@@ -583,6 +698,51 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Releases the specified address range that you provisioned to use with
+    # your AWS resources through bring your own IP addresses (BYOIP) and
+    # deletes the corresponding address pool. To see an AWS CLI example of
+    # deprovisioning an address range, scroll down to **Example**.
+    #
+    # Before you can release an address range, you must stop advertising it
+    # by using [WithdrawByoipCidr][1] and you must not have any accelerators
+    # that are using static IP addresses allocated from its address range.
+    #
+    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html
+    # [2]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The address range, in CIDR notation. The prefix must be the same
+    #   prefix that you specified when you provisioned the address range.
+    #
+    # @return [Types::DeprovisionByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeprovisionByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deprovision_byoip_cidr({
+    #     cidr: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidr AWS API Documentation
+    #
+    # @overload deprovision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def deprovision_byoip_cidr(params = {}, options = {})
+      req = build_request(:deprovision_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # Describe an accelerator. To see an AWS CLI example of describing an
     # accelerator, scroll down to **Example**.
     #
@@ -623,7 +783,9 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe the attributes of an accelerator.
+    # Describe the attributes of an accelerator. To see an AWS CLI example
+    # of describing the attributes of an accelerator, scroll down to
+    # **Example**.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator with the attributes
@@ -695,7 +857,8 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Describe a listener.
+    # Describe a listener. To see an AWS CLI example of describing a
+    # listener, scroll down to **Example**.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener to describe.
@@ -728,7 +891,9 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the accelerators for an AWS account.
+    # List the accelerators for an AWS account. To see an AWS CLI example of
+    # listing the accelerators for an AWS account, scroll down to
+    # **Example**.
     #
     # @option params [Integer] :max_results
     #   The number of Global Accelerator objects that you want to return with
@@ -776,7 +941,55 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the endpoint groups that are associated with a listener.
+    # Lists the IP address ranges that were specified in calls to
+    # [ProvisionByoipCidr][1].
+    #
+    # To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down
+    # to **Example**.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/ProvisionByoipCidr.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListByoipCidrsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListByoipCidrsResponse#byoip_cidrs #byoip_cidrs} => Array&lt;Types::ByoipCidr&gt;
+    #   * {Types::ListByoipCidrsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_byoip_cidrs({
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidrs #=> Array
+    #   resp.byoip_cidrs[0].cidr #=> String
+    #   resp.byoip_cidrs[0].state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListByoipCidrs AWS API Documentation
+    #
+    # @overload list_byoip_cidrs(params = {})
+    # @param [Hash] params ({})
+    def list_byoip_cidrs(params = {}, options = {})
+      req = build_request(:list_byoip_cidrs, params)
+      req.send_request(options)
+    end
+
+    # List the endpoint groups that are associated with a listener. To see
+    # an AWS CLI example of listing the endpoint groups for listener, scroll
+    # down to **Example**.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -830,7 +1043,8 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # List the listeners for an accelerator.
+    # List the listeners for an accelerator. To see an AWS CLI example of
+    # listing the listeners for an accelerator, scroll down to **Example**.
     #
     # @option params [required, String] :accelerator_arn
     #   The Amazon Resource Name (ARN) of the accelerator for which you want
@@ -877,10 +1091,183 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # List all tags for an accelerator. To see an AWS CLI example of listing
+    # tags for an accelerator, scroll down to **Example**.
+    #
+    # For more information, see [Tagging in AWS Global Accelerator][1] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the accelerator to list tags for. An
+    #   ARN uniquely identifies an accelerator.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Provisions an IP address range to use with your AWS resources through
+    # bring your own IP addresses (BYOIP) and creates a corresponding
+    # address pool. After the address range is provisioned, it is ready to
+    # be advertised using [ AdvertiseByoipCidr][1].
+    #
+    # To see an AWS CLI example of provisioning an address range for BYOIP,
+    # scroll down to **Example**.
+    #
+    # For more information, see [Bring Your Own IP Addresses (BYOIP)][2] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/api/AdvertiseByoipCidr.html
+    # [2]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The public IPv4 address range, in CIDR notation. The most specific IP
+    #   prefix that you can specify is /24. The address range cannot overlap
+    #   with another address range that you've brought to this or another
+    #   Region.
+    #
+    # @option params [required, Types::CidrAuthorizationContext] :cidr_authorization_context
+    #   A signed document that proves that you are authorized to bring the
+    #   specified IP address range to Amazon using BYOIP.
+    #
+    # @return [Types::ProvisionByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProvisionByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.provision_byoip_cidr({
+    #     cidr: "GenericString", # required
+    #     cidr_authorization_context: { # required
+    #       message: "GenericString", # required
+    #       signature: "GenericString", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ProvisionByoipCidr AWS API Documentation
+    #
+    # @overload provision_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def provision_byoip_cidr(params = {}, options = {})
+      req = build_request(:provision_byoip_cidr, params)
+      req.send_request(options)
+    end
+
+    # Add tags to an accelerator resource. To see an AWS CLI example of
+    # adding tags to an accelerator, scroll down to **Example**.
+    #
+    # For more information, see [Tagging in AWS Global Accelerator][1] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
+    #   add tags to. An ARN uniquely identifies a resource.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to add to a resource. A tag consists of a key and a value
+    #   that you define.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Remove tags from a Global Accelerator resource. When you specify a tag
+    # key, the action removes both that key and its associated value. To see
+    # an AWS CLI example of removing tags from an accelerator, scroll down
+    # to **Example**. The operation succeeds even if you attempt to remove
+    # tags from an accelerator that was already removed.
+    #
+    # For more information, see [Tagging in AWS Global Accelerator][1] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the Global Accelerator resource to
+    #   remove tags from. An ARN uniquely identifies a resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag key pairs that you want to remove from the specified
+    #   resources.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Update an accelerator. To see an AWS CLI example of updating an
     # accelerator, scroll down to **Example**.
     #
-    # You must specify the US-West-2 (Oregon) Region to create or update
+    # You must specify the US West (Oregon) Region to create or update
     # accelerators.
     #
     # @option params [required, String] :accelerator_arn
@@ -966,9 +1353,14 @@ module Aws::GlobalAccelerator
     #
     # @option params [String] :flow_logs_s3_prefix
     #   Update the prefix for the location in the Amazon S3 bucket for the
-    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`. If
-    #   you don’t specify a prefix, the flow logs are stored in the root of
-    #   the bucket.
+    #   flow logs. Attribute is required if `FlowLogsEnabled` is `true`.
+    #
+    #   If you don’t specify a prefix, the flow logs are stored in the root of
+    #   the bucket. If you specify slash (/) for the S3 bucket prefix, the log
+    #   file bucket folder structure will include a double slash (//), like
+    #   the following:
+    #
+    #   s3-bucket\_name//AWSLogs/aws\_account\_id
     #
     # @return [Types::UpdateAcceleratorAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1092,7 +1484,8 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
-    # Update a listener.
+    # Update a listener. To see an AWS CLI example of updating listener,
+    # scroll down to **Example**.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener to update.
@@ -1166,6 +1559,49 @@ module Aws::GlobalAccelerator
       req.send_request(options)
     end
 
+    # Stops advertising an address range that is provisioned as an address
+    # pool. You can perform this operation at most once every 10 seconds,
+    # even if you specify different address ranges each time. To see an AWS
+    # CLI example of withdrawing an address range for BYOIP so it will no
+    # longer be advertised by AWS, scroll down to **Example**.
+    #
+    # It can take a few minutes before traffic to the specified addresses
+    # stops routing to AWS because of propagation delays.
+    #
+    # For more information, see [Bring Your Own IP Addresses (BYOIP)][1] in
+    # the *AWS Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #
+    # @option params [required, String] :cidr
+    #   The address range, in CIDR notation.
+    #
+    # @return [Types::WithdrawByoipCidrResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::WithdrawByoipCidrResponse#byoip_cidr #byoip_cidr} => Types::ByoipCidr
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.withdraw_byoip_cidr({
+    #     cidr: "GenericString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.byoip_cidr.cidr #=> String
+    #   resp.byoip_cidr.state #=> String, one of "PENDING_PROVISIONING", "READY", "PENDING_ADVERTISING", "ADVERTISING", "PENDING_WITHDRAWING", "PENDING_DEPROVISIONING", "DEPROVISIONED", "FAILED_PROVISION", "FAILED_ADVERTISING", "FAILED_WITHDRAW", "FAILED_DEPROVISION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidr AWS API Documentation
+    #
+    # @overload withdraw_byoip_cidr(params = {})
+    # @param [Hash] params ({})
+    def withdraw_byoip_cidr(params = {}, options = {})
+      req = build_request(:withdraw_byoip_cidr, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1179,7 +1615,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

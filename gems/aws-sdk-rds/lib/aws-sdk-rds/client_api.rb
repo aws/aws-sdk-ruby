@@ -601,6 +601,12 @@ module Aws::RDS
 
     AttributeValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "AttributeValue")
 
+    AuthorizationAlreadyExistsFault.struct_class = Types::AuthorizationAlreadyExistsFault
+
+    AuthorizationNotFoundFault.struct_class = Types::AuthorizationNotFoundFault
+
+    AuthorizationQuotaExceededFault.struct_class = Types::AuthorizationQuotaExceededFault
+
     AuthorizeDBSecurityGroupIngressMessage.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBSecurityGroupName"))
     AuthorizeDBSecurityGroupIngressMessage.add_member(:cidrip, Shapes::ShapeRef.new(shape: String, location_name: "CIDRIP"))
     AuthorizeDBSecurityGroupIngressMessage.add_member(:ec2_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "EC2SecurityGroupName"))
@@ -631,6 +637,8 @@ module Aws::RDS
     BacktrackDBClusterMessage.add_member(:use_earliest_time_on_point_in_time_unavailable, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseEarliestTimeOnPointInTimeUnavailable"))
     BacktrackDBClusterMessage.struct_class = Types::BacktrackDBClusterMessage
 
+    BackupPolicyNotFoundFault.struct_class = Types::BackupPolicyNotFoundFault
+
     CancelExportTaskMessage.add_member(:export_task_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ExportTaskIdentifier"))
     CancelExportTaskMessage.struct_class = Types::CancelExportTaskMessage
 
@@ -649,6 +657,8 @@ module Aws::RDS
     CertificateMessage.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
     CertificateMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CertificateMessage.struct_class = Types::CertificateMessage
+
+    CertificateNotFoundFault.struct_class = Types::CertificateNotFoundFault
 
     CharacterSet.add_member(:character_set_name, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetName"))
     CharacterSet.add_member(:character_set_description, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetDescription"))
@@ -976,11 +986,17 @@ module Aws::RDS
     CustomAvailabilityZone.add_member(:vpn_details, Shapes::ShapeRef.new(shape: VpnDetails, location_name: "VpnDetails"))
     CustomAvailabilityZone.struct_class = Types::CustomAvailabilityZone
 
+    CustomAvailabilityZoneAlreadyExistsFault.struct_class = Types::CustomAvailabilityZoneAlreadyExistsFault
+
     CustomAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone")
 
     CustomAvailabilityZoneMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CustomAvailabilityZoneMessage.add_member(:custom_availability_zones, Shapes::ShapeRef.new(shape: CustomAvailabilityZoneList, location_name: "CustomAvailabilityZones"))
     CustomAvailabilityZoneMessage.struct_class = Types::CustomAvailabilityZoneMessage
+
+    CustomAvailabilityZoneNotFoundFault.struct_class = Types::CustomAvailabilityZoneNotFoundFault
+
+    CustomAvailabilityZoneQuotaExceededFault.struct_class = Types::CustomAvailabilityZoneQuotaExceededFault
 
     DBCluster.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
     DBCluster.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
@@ -1036,6 +1052,8 @@ module Aws::RDS
     DBCluster.add_member(:domain_memberships, Shapes::ShapeRef.new(shape: DomainMembershipList, location_name: "DomainMemberships"))
     DBCluster.struct_class = Types::DBCluster
 
+    DBClusterAlreadyExistsFault.struct_class = Types::DBClusterAlreadyExistsFault
+
     DBClusterBacktrack.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
     DBClusterBacktrack.add_member(:backtrack_identifier, Shapes::ShapeRef.new(shape: String, location_name: "BacktrackIdentifier"))
     DBClusterBacktrack.add_member(:backtrack_to, Shapes::ShapeRef.new(shape: TStamp, location_name: "BacktrackTo"))
@@ -1049,6 +1067,8 @@ module Aws::RDS
     DBClusterBacktrackMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBClusterBacktrackMessage.add_member(:db_cluster_backtracks, Shapes::ShapeRef.new(shape: DBClusterBacktrackList, location_name: "DBClusterBacktracks"))
     DBClusterBacktrackMessage.struct_class = Types::DBClusterBacktrackMessage
+
+    DBClusterBacktrackNotFoundFault.struct_class = Types::DBClusterBacktrackNotFoundFault
 
     DBClusterCapacityInfo.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
     DBClusterCapacityInfo.add_member(:pending_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PendingCapacity"))
@@ -1069,11 +1089,17 @@ module Aws::RDS
     DBClusterEndpoint.add_member(:db_cluster_endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterEndpointArn"))
     DBClusterEndpoint.struct_class = Types::DBClusterEndpoint
 
+    DBClusterEndpointAlreadyExistsFault.struct_class = Types::DBClusterEndpointAlreadyExistsFault
+
     DBClusterEndpointList.member = Shapes::ShapeRef.new(shape: DBClusterEndpoint, location_name: "DBClusterEndpointList")
 
     DBClusterEndpointMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBClusterEndpointMessage.add_member(:db_cluster_endpoints, Shapes::ShapeRef.new(shape: DBClusterEndpointList, location_name: "DBClusterEndpoints"))
     DBClusterEndpointMessage.struct_class = Types::DBClusterEndpointMessage
+
+    DBClusterEndpointNotFoundFault.struct_class = Types::DBClusterEndpointNotFoundFault
+
+    DBClusterEndpointQuotaExceededFault.struct_class = Types::DBClusterEndpointQuotaExceededFault
 
     DBClusterList.member = Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster")
 
@@ -1088,6 +1114,8 @@ module Aws::RDS
     DBClusterMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBClusterMessage.add_member(:db_clusters, Shapes::ShapeRef.new(shape: DBClusterList, location_name: "DBClusters"))
     DBClusterMessage.struct_class = Types::DBClusterMessage
+
+    DBClusterNotFoundFault.struct_class = Types::DBClusterNotFoundFault
 
     DBClusterOptionGroupMemberships.member = Shapes::ShapeRef.new(shape: DBClusterOptionGroupStatus, location_name: "DBClusterOptionGroup")
 
@@ -1110,14 +1138,24 @@ module Aws::RDS
     DBClusterParameterGroupNameMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterParameterGroupName"))
     DBClusterParameterGroupNameMessage.struct_class = Types::DBClusterParameterGroupNameMessage
 
+    DBClusterParameterGroupNotFoundFault.struct_class = Types::DBClusterParameterGroupNotFoundFault
+
     DBClusterParameterGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBClusterParameterGroupsMessage.add_member(:db_cluster_parameter_groups, Shapes::ShapeRef.new(shape: DBClusterParameterGroupList, location_name: "DBClusterParameterGroups"))
     DBClusterParameterGroupsMessage.struct_class = Types::DBClusterParameterGroupsMessage
+
+    DBClusterQuotaExceededFault.struct_class = Types::DBClusterQuotaExceededFault
 
     DBClusterRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
     DBClusterRole.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBClusterRole.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     DBClusterRole.struct_class = Types::DBClusterRole
+
+    DBClusterRoleAlreadyExistsFault.struct_class = Types::DBClusterRoleAlreadyExistsFault
+
+    DBClusterRoleNotFoundFault.struct_class = Types::DBClusterRoleNotFoundFault
+
+    DBClusterRoleQuotaExceededFault.struct_class = Types::DBClusterRoleQuotaExceededFault
 
     DBClusterRoles.member = Shapes::ShapeRef.new(shape: DBClusterRole, location_name: "DBClusterRole")
 
@@ -1143,6 +1181,8 @@ module Aws::RDS
     DBClusterSnapshot.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
     DBClusterSnapshot.struct_class = Types::DBClusterSnapshot
 
+    DBClusterSnapshotAlreadyExistsFault.struct_class = Types::DBClusterSnapshotAlreadyExistsFault
+
     DBClusterSnapshotAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "AttributeName"))
     DBClusterSnapshotAttribute.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
     DBClusterSnapshotAttribute.struct_class = Types::DBClusterSnapshotAttribute
@@ -1158,6 +1198,8 @@ module Aws::RDS
     DBClusterSnapshotMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBClusterSnapshotMessage.add_member(:db_cluster_snapshots, Shapes::ShapeRef.new(shape: DBClusterSnapshotList, location_name: "DBClusterSnapshots"))
     DBClusterSnapshotMessage.struct_class = Types::DBClusterSnapshotMessage
+
+    DBClusterSnapshotNotFoundFault.struct_class = Types::DBClusterSnapshotNotFoundFault
 
     DBEngineVersion.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     DBEngineVersion.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -1242,6 +1284,8 @@ module Aws::RDS
     DBInstance.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     DBInstance.struct_class = Types::DBInstance
 
+    DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
+
     DBInstanceAutomatedBackup.add_member(:db_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceArn"))
     DBInstanceAutomatedBackup.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
     DBInstanceAutomatedBackup.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
@@ -1273,16 +1317,28 @@ module Aws::RDS
     DBInstanceAutomatedBackupMessage.add_member(:db_instance_automated_backups, Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupList, location_name: "DBInstanceAutomatedBackups"))
     DBInstanceAutomatedBackupMessage.struct_class = Types::DBInstanceAutomatedBackupMessage
 
+    DBInstanceAutomatedBackupNotFoundFault.struct_class = Types::DBInstanceAutomatedBackupNotFoundFault
+
+    DBInstanceAutomatedBackupQuotaExceededFault.struct_class = Types::DBInstanceAutomatedBackupQuotaExceededFault
+
     DBInstanceList.member = Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance")
 
     DBInstanceMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBInstanceMessage.add_member(:db_instances, Shapes::ShapeRef.new(shape: DBInstanceList, location_name: "DBInstances"))
     DBInstanceMessage.struct_class = Types::DBInstanceMessage
 
+    DBInstanceNotFoundFault.struct_class = Types::DBInstanceNotFoundFault
+
     DBInstanceRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
     DBInstanceRole.add_member(:feature_name, Shapes::ShapeRef.new(shape: String, location_name: "FeatureName"))
     DBInstanceRole.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     DBInstanceRole.struct_class = Types::DBInstanceRole
+
+    DBInstanceRoleAlreadyExistsFault.struct_class = Types::DBInstanceRoleAlreadyExistsFault
+
+    DBInstanceRoleNotFoundFault.struct_class = Types::DBInstanceRoleNotFoundFault
+
+    DBInstanceRoleQuotaExceededFault.struct_class = Types::DBInstanceRoleQuotaExceededFault
 
     DBInstanceRoles.member = Shapes::ShapeRef.new(shape: DBInstanceRole, location_name: "DBInstanceRole")
 
@@ -1294,11 +1350,15 @@ module Aws::RDS
 
     DBInstanceStatusInfoList.member = Shapes::ShapeRef.new(shape: DBInstanceStatusInfo, location_name: "DBInstanceStatusInfo")
 
+    DBLogFileNotFoundFault.struct_class = Types::DBLogFileNotFoundFault
+
     DBParameterGroup.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     DBParameterGroup.add_member(:db_parameter_group_family, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupFamily"))
     DBParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     DBParameterGroup.add_member(:db_parameter_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupArn"))
     DBParameterGroup.struct_class = Types::DBParameterGroup
+
+    DBParameterGroupAlreadyExistsFault.struct_class = Types::DBParameterGroupAlreadyExistsFault
 
     DBParameterGroupDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     DBParameterGroupDetails.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1308,6 +1368,10 @@ module Aws::RDS
 
     DBParameterGroupNameMessage.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     DBParameterGroupNameMessage.struct_class = Types::DBParameterGroupNameMessage
+
+    DBParameterGroupNotFoundFault.struct_class = Types::DBParameterGroupNotFoundFault
+
+    DBParameterGroupQuotaExceededFault.struct_class = Types::DBParameterGroupQuotaExceededFault
 
     DBParameterGroupStatus.add_member(:db_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBParameterGroupName"))
     DBParameterGroupStatus.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: String, location_name: "ParameterApplyStatus"))
@@ -1335,7 +1399,13 @@ module Aws::RDS
     DBProxy.add_member(:updated_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedDate"))
     DBProxy.struct_class = Types::DBProxy
 
+    DBProxyAlreadyExistsFault.struct_class = Types::DBProxyAlreadyExistsFault
+
     DBProxyList.member = Shapes::ShapeRef.new(shape: DBProxy)
+
+    DBProxyNotFoundFault.struct_class = Types::DBProxyNotFoundFault
+
+    DBProxyQuotaExceededFault.struct_class = Types::DBProxyQuotaExceededFault
 
     DBProxyTarget.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
     DBProxyTarget.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
@@ -1344,6 +1414,8 @@ module Aws::RDS
     DBProxyTarget.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
     DBProxyTarget.add_member(:type, Shapes::ShapeRef.new(shape: TargetType, location_name: "Type"))
     DBProxyTarget.struct_class = Types::DBProxyTarget
+
+    DBProxyTargetAlreadyRegisteredFault.struct_class = Types::DBProxyTargetAlreadyRegisteredFault
 
     DBProxyTargetGroup.add_member(:db_proxy_name, Shapes::ShapeRef.new(shape: String, location_name: "DBProxyName"))
     DBProxyTargetGroup.add_member(:target_group_name, Shapes::ShapeRef.new(shape: String, location_name: "TargetGroupName"))
@@ -1355,6 +1427,10 @@ module Aws::RDS
     DBProxyTargetGroup.add_member(:updated_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "UpdatedDate"))
     DBProxyTargetGroup.struct_class = Types::DBProxyTargetGroup
 
+    DBProxyTargetGroupNotFoundFault.struct_class = Types::DBProxyTargetGroupNotFoundFault
+
+    DBProxyTargetNotFoundFault.struct_class = Types::DBProxyTargetNotFoundFault
+
     DBSecurityGroup.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "OwnerId"))
     DBSecurityGroup.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupName"))
     DBSecurityGroup.add_member(:db_security_group_description, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupDescription"))
@@ -1363,6 +1439,8 @@ module Aws::RDS
     DBSecurityGroup.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IPRangeList, location_name: "IPRanges"))
     DBSecurityGroup.add_member(:db_security_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupArn"))
     DBSecurityGroup.struct_class = Types::DBSecurityGroup
+
+    DBSecurityGroupAlreadyExistsFault.struct_class = Types::DBSecurityGroupAlreadyExistsFault
 
     DBSecurityGroupMembership.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupName"))
     DBSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
@@ -1375,6 +1453,12 @@ module Aws::RDS
     DBSecurityGroupMessage.struct_class = Types::DBSecurityGroupMessage
 
     DBSecurityGroupNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "DBSecurityGroupName")
+
+    DBSecurityGroupNotFoundFault.struct_class = Types::DBSecurityGroupNotFoundFault
+
+    DBSecurityGroupNotSupportedFault.struct_class = Types::DBSecurityGroupNotSupportedFault
+
+    DBSecurityGroupQuotaExceededFault.struct_class = Types::DBSecurityGroupQuotaExceededFault
 
     DBSecurityGroups.member = Shapes::ShapeRef.new(shape: DBSecurityGroup, location_name: "DBSecurityGroup")
 
@@ -1408,6 +1492,8 @@ module Aws::RDS
     DBSnapshot.add_member(:dbi_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbiResourceId"))
     DBSnapshot.struct_class = Types::DBSnapshot
 
+    DBSnapshotAlreadyExistsFault.struct_class = Types::DBSnapshotAlreadyExistsFault
+
     DBSnapshotAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "AttributeName"))
     DBSnapshotAttribute.add_member(:attribute_values, Shapes::ShapeRef.new(shape: AttributeValueList, location_name: "AttributeValues"))
     DBSnapshotAttribute.struct_class = Types::DBSnapshotAttribute
@@ -1424,6 +1510,8 @@ module Aws::RDS
     DBSnapshotMessage.add_member(:db_snapshots, Shapes::ShapeRef.new(shape: DBSnapshotList, location_name: "DBSnapshots"))
     DBSnapshotMessage.struct_class = Types::DBSnapshotMessage
 
+    DBSnapshotNotFoundFault.struct_class = Types::DBSnapshotNotFoundFault
+
     DBSubnetGroup.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupName"))
     DBSubnetGroup.add_member(:db_subnet_group_description, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupDescription"))
     DBSubnetGroup.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcId"))
@@ -1432,11 +1520,25 @@ module Aws::RDS
     DBSubnetGroup.add_member(:db_subnet_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupArn"))
     DBSubnetGroup.struct_class = Types::DBSubnetGroup
 
+    DBSubnetGroupAlreadyExistsFault.struct_class = Types::DBSubnetGroupAlreadyExistsFault
+
+    DBSubnetGroupDoesNotCoverEnoughAZs.struct_class = Types::DBSubnetGroupDoesNotCoverEnoughAZs
+
     DBSubnetGroupMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DBSubnetGroupMessage.add_member(:db_subnet_groups, Shapes::ShapeRef.new(shape: DBSubnetGroups, location_name: "DBSubnetGroups"))
     DBSubnetGroupMessage.struct_class = Types::DBSubnetGroupMessage
 
+    DBSubnetGroupNotAllowedFault.struct_class = Types::DBSubnetGroupNotAllowedFault
+
+    DBSubnetGroupNotFoundFault.struct_class = Types::DBSubnetGroupNotFoundFault
+
+    DBSubnetGroupQuotaExceededFault.struct_class = Types::DBSubnetGroupQuotaExceededFault
+
     DBSubnetGroups.member = Shapes::ShapeRef.new(shape: DBSubnetGroup, location_name: "DBSubnetGroup")
+
+    DBSubnetQuotaExceededFault.struct_class = Types::DBSubnetQuotaExceededFault
+
+    DBUpgradeDependencyFailureFault.struct_class = Types::DBUpgradeDependencyFailureFault
 
     DeleteCustomAvailabilityZoneMessage.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomAvailabilityZoneId"))
     DeleteCustomAvailabilityZoneMessage.struct_class = Types::DeleteCustomAvailabilityZoneMessage
@@ -1842,6 +1944,8 @@ module Aws::RDS
 
     DomainMembershipList.member = Shapes::ShapeRef.new(shape: DomainMembership, location_name: "DomainMembership")
 
+    DomainNotFoundFault.struct_class = Types::DomainNotFoundFault
+
     DoubleRange.add_member(:from, Shapes::ShapeRef.new(shape: Double, location_name: "From"))
     DoubleRange.add_member(:to, Shapes::ShapeRef.new(shape: Double, location_name: "To"))
     DoubleRange.struct_class = Types::DoubleRange
@@ -1912,6 +2016,8 @@ module Aws::RDS
     EventSubscription.add_member(:event_subscription_arn, Shapes::ShapeRef.new(shape: String, location_name: "EventSubscriptionArn"))
     EventSubscription.struct_class = Types::EventSubscription
 
+    EventSubscriptionQuotaExceededFault.struct_class = Types::EventSubscriptionQuotaExceededFault
+
     EventSubscriptionsList.member = Shapes::ShapeRef.new(shape: EventSubscription, location_name: "EventSubscription")
 
     EventSubscriptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -1938,6 +2044,10 @@ module Aws::RDS
     ExportTask.add_member(:failure_cause, Shapes::ShapeRef.new(shape: String, location_name: "FailureCause"))
     ExportTask.add_member(:warning_message, Shapes::ShapeRef.new(shape: String, location_name: "WarningMessage"))
     ExportTask.struct_class = Types::ExportTask
+
+    ExportTaskAlreadyExistsFault.struct_class = Types::ExportTaskAlreadyExistsFault
+
+    ExportTaskNotFoundFault.struct_class = Types::ExportTaskNotFoundFault
 
     ExportTasksList.member = Shapes::ShapeRef.new(shape: ExportTask, location_name: "ExportTask")
 
@@ -1974,6 +2084,8 @@ module Aws::RDS
     GlobalCluster.add_member(:global_cluster_members, Shapes::ShapeRef.new(shape: GlobalClusterMemberList, location_name: "GlobalClusterMembers"))
     GlobalCluster.struct_class = Types::GlobalCluster
 
+    GlobalClusterAlreadyExistsFault.struct_class = Types::GlobalClusterAlreadyExistsFault
+
     GlobalClusterList.member = Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalClusterMember")
 
     GlobalClusterMember.add_member(:db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterArn"))
@@ -1982,6 +2094,10 @@ module Aws::RDS
     GlobalClusterMember.struct_class = Types::GlobalClusterMember
 
     GlobalClusterMemberList.member = Shapes::ShapeRef.new(shape: GlobalClusterMember, location_name: "GlobalClusterMember")
+
+    GlobalClusterNotFoundFault.struct_class = Types::GlobalClusterNotFoundFault
+
+    GlobalClusterQuotaExceededFault.struct_class = Types::GlobalClusterQuotaExceededFault
 
     GlobalClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     GlobalClustersMessage.add_member(:global_clusters, Shapes::ShapeRef.new(shape: GlobalClusterList, location_name: "GlobalClusters"))
@@ -1992,6 +2108,10 @@ module Aws::RDS
     IPRange.struct_class = Types::IPRange
 
     IPRangeList.member = Shapes::ShapeRef.new(shape: IPRange, location_name: "IPRange")
+
+    IamRoleMissingPermissionsFault.struct_class = Types::IamRoleMissingPermissionsFault
+
+    IamRoleNotFoundFault.struct_class = Types::IamRoleNotFoundFault
 
     ImportInstallationMediaMessage.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomAvailabilityZoneId"))
     ImportInstallationMediaMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
@@ -2010,6 +2130,8 @@ module Aws::RDS
     InstallationMedia.add_member(:failure_cause, Shapes::ShapeRef.new(shape: InstallationMediaFailureCause, location_name: "FailureCause"))
     InstallationMedia.struct_class = Types::InstallationMedia
 
+    InstallationMediaAlreadyExistsFault.struct_class = Types::InstallationMediaAlreadyExistsFault
+
     InstallationMediaFailureCause.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InstallationMediaFailureCause.struct_class = Types::InstallationMediaFailureCause
 
@@ -2018,6 +2140,64 @@ module Aws::RDS
     InstallationMediaMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     InstallationMediaMessage.add_member(:installation_media, Shapes::ShapeRef.new(shape: InstallationMediaList, location_name: "InstallationMedia"))
     InstallationMediaMessage.struct_class = Types::InstallationMediaMessage
+
+    InstallationMediaNotFoundFault.struct_class = Types::InstallationMediaNotFoundFault
+
+    InstanceQuotaExceededFault.struct_class = Types::InstanceQuotaExceededFault
+
+    InsufficientDBClusterCapacityFault.struct_class = Types::InsufficientDBClusterCapacityFault
+
+    InsufficientDBInstanceCapacityFault.struct_class = Types::InsufficientDBInstanceCapacityFault
+
+    InsufficientStorageClusterCapacityFault.struct_class = Types::InsufficientStorageClusterCapacityFault
+
+    InvalidDBClusterCapacityFault.struct_class = Types::InvalidDBClusterCapacityFault
+
+    InvalidDBClusterEndpointStateFault.struct_class = Types::InvalidDBClusterEndpointStateFault
+
+    InvalidDBClusterSnapshotStateFault.struct_class = Types::InvalidDBClusterSnapshotStateFault
+
+    InvalidDBClusterStateFault.struct_class = Types::InvalidDBClusterStateFault
+
+    InvalidDBInstanceAutomatedBackupStateFault.struct_class = Types::InvalidDBInstanceAutomatedBackupStateFault
+
+    InvalidDBInstanceStateFault.struct_class = Types::InvalidDBInstanceStateFault
+
+    InvalidDBParameterGroupStateFault.struct_class = Types::InvalidDBParameterGroupStateFault
+
+    InvalidDBProxyStateFault.struct_class = Types::InvalidDBProxyStateFault
+
+    InvalidDBSecurityGroupStateFault.struct_class = Types::InvalidDBSecurityGroupStateFault
+
+    InvalidDBSnapshotStateFault.struct_class = Types::InvalidDBSnapshotStateFault
+
+    InvalidDBSubnetGroupFault.struct_class = Types::InvalidDBSubnetGroupFault
+
+    InvalidDBSubnetGroupStateFault.struct_class = Types::InvalidDBSubnetGroupStateFault
+
+    InvalidDBSubnetStateFault.struct_class = Types::InvalidDBSubnetStateFault
+
+    InvalidEventSubscriptionStateFault.struct_class = Types::InvalidEventSubscriptionStateFault
+
+    InvalidExportOnlyFault.struct_class = Types::InvalidExportOnlyFault
+
+    InvalidExportSourceStateFault.struct_class = Types::InvalidExportSourceStateFault
+
+    InvalidExportTaskStateFault.struct_class = Types::InvalidExportTaskStateFault
+
+    InvalidGlobalClusterStateFault.struct_class = Types::InvalidGlobalClusterStateFault
+
+    InvalidOptionGroupStateFault.struct_class = Types::InvalidOptionGroupStateFault
+
+    InvalidRestoreFault.struct_class = Types::InvalidRestoreFault
+
+    InvalidS3BucketFault.struct_class = Types::InvalidS3BucketFault
+
+    InvalidSubnet.struct_class = Types::InvalidSubnet
+
+    InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
+
+    KMSKeyNotAccessibleFault.struct_class = Types::KMSKeyNotAccessibleFault
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -2249,11 +2429,15 @@ module Aws::RDS
     OptionGroup.add_member(:option_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupArn"))
     OptionGroup.struct_class = Types::OptionGroup
 
+    OptionGroupAlreadyExistsFault.struct_class = Types::OptionGroupAlreadyExistsFault
+
     OptionGroupMembership.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupName"))
     OptionGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     OptionGroupMembership.struct_class = Types::OptionGroupMembership
 
     OptionGroupMembershipList.member = Shapes::ShapeRef.new(shape: OptionGroupMembership, location_name: "OptionGroupMembership")
+
+    OptionGroupNotFoundFault.struct_class = Types::OptionGroupNotFoundFault
 
     OptionGroupOption.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     OptionGroupOption.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -2292,6 +2476,8 @@ module Aws::RDS
     OptionGroupOptionsMessage.add_member(:option_group_options, Shapes::ShapeRef.new(shape: OptionGroupOptionsList, location_name: "OptionGroupOptions"))
     OptionGroupOptionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     OptionGroupOptionsMessage.struct_class = Types::OptionGroupOptionsMessage
+
+    OptionGroupQuotaExceededFault.struct_class = Types::OptionGroupQuotaExceededFault
 
     OptionGroups.add_member(:option_groups_list, Shapes::ShapeRef.new(shape: OptionGroupsList, location_name: "OptionGroupsList"))
     OptionGroups.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -2410,6 +2596,8 @@ module Aws::RDS
     PendingModifiedValues.add_member(:processor_features, Shapes::ShapeRef.new(shape: ProcessorFeatureList, location_name: "ProcessorFeatures"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
+    PointInTimeRestoreNotEnabledFault.struct_class = Types::PointInTimeRestoreNotEnabledFault
+
     ProcessorFeature.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ProcessorFeature.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     ProcessorFeature.struct_class = Types::ProcessorFeature
@@ -2429,6 +2617,8 @@ module Aws::RDS
 
     PromoteReadReplicaResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     PromoteReadReplicaResult.struct_class = Types::PromoteReadReplicaResult
+
+    ProvisionedIopsNotAvailableInAZFault.struct_class = Types::ProvisionedIopsNotAvailableInAZFault
 
     PurchaseReservedDBInstancesOfferingMessage.add_member(:reserved_db_instances_offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReservedDBInstancesOfferingId"))
     PurchaseReservedDBInstancesOfferingMessage.add_member(:reserved_db_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedDBInstanceId"))
@@ -2522,11 +2712,17 @@ module Aws::RDS
     ReservedDBInstance.add_member(:lease_id, Shapes::ShapeRef.new(shape: String, location_name: "LeaseId"))
     ReservedDBInstance.struct_class = Types::ReservedDBInstance
 
+    ReservedDBInstanceAlreadyExistsFault.struct_class = Types::ReservedDBInstanceAlreadyExistsFault
+
     ReservedDBInstanceList.member = Shapes::ShapeRef.new(shape: ReservedDBInstance, location_name: "ReservedDBInstance")
 
     ReservedDBInstanceMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReservedDBInstanceMessage.add_member(:reserved_db_instances, Shapes::ShapeRef.new(shape: ReservedDBInstanceList, location_name: "ReservedDBInstances"))
     ReservedDBInstanceMessage.struct_class = Types::ReservedDBInstanceMessage
+
+    ReservedDBInstanceNotFoundFault.struct_class = Types::ReservedDBInstanceNotFoundFault
+
+    ReservedDBInstanceQuotaExceededFault.struct_class = Types::ReservedDBInstanceQuotaExceededFault
 
     ReservedDBInstancesOffering.add_member(:reserved_db_instances_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedDBInstancesOfferingId"))
     ReservedDBInstancesOffering.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceClass"))
@@ -2546,6 +2742,8 @@ module Aws::RDS
     ReservedDBInstancesOfferingMessage.add_member(:reserved_db_instances_offerings, Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingList, location_name: "ReservedDBInstancesOfferings"))
     ReservedDBInstancesOfferingMessage.struct_class = Types::ReservedDBInstancesOfferingMessage
 
+    ReservedDBInstancesOfferingNotFoundFault.struct_class = Types::ReservedDBInstancesOfferingNotFoundFault
+
     ResetDBClusterParameterGroupMessage.add_member(:db_cluster_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterParameterGroupName"))
     ResetDBClusterParameterGroupMessage.add_member(:reset_all_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetAllParameters"))
     ResetDBClusterParameterGroupMessage.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
@@ -2555,6 +2753,8 @@ module Aws::RDS
     ResetDBParameterGroupMessage.add_member(:reset_all_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetAllParameters"))
     ResetDBParameterGroupMessage.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     ResetDBParameterGroupMessage.struct_class = Types::ResetDBParameterGroupMessage
+
+    ResourceNotFoundFault.struct_class = Types::ResourceNotFoundFault
 
     ResourcePendingMaintenanceActions.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ResourceIdentifier"))
     ResourcePendingMaintenanceActions.add_member(:pending_maintenance_action_details, Shapes::ShapeRef.new(shape: PendingMaintenanceActionDetails, location_name: "PendingMaintenanceActionDetails"))
@@ -2778,6 +2978,12 @@ module Aws::RDS
     RevokeDBSecurityGroupIngressResult.add_member(:db_security_group, Shapes::ShapeRef.new(shape: DBSecurityGroup, location_name: "DBSecurityGroup"))
     RevokeDBSecurityGroupIngressResult.struct_class = Types::RevokeDBSecurityGroupIngressResult
 
+    SNSInvalidTopicFault.struct_class = Types::SNSInvalidTopicFault
+
+    SNSNoAuthorizationFault.struct_class = Types::SNSNoAuthorizationFault
+
+    SNSTopicArnNotFoundFault.struct_class = Types::SNSTopicArnNotFoundFault
+
     ScalingConfiguration.add_member(:min_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MinCapacity"))
     ScalingConfiguration.add_member(:max_capacity, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxCapacity"))
     ScalingConfiguration.add_member(:auto_pause, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoPause"))
@@ -2792,7 +2998,13 @@ module Aws::RDS
     ScalingConfigurationInfo.add_member(:timeout_action, Shapes::ShapeRef.new(shape: String, location_name: "TimeoutAction"))
     ScalingConfigurationInfo.struct_class = Types::ScalingConfigurationInfo
 
+    SharedSnapshotQuotaExceededFault.struct_class = Types::SharedSnapshotQuotaExceededFault
+
+    SnapshotQuotaExceededFault.struct_class = Types::SnapshotQuotaExceededFault
+
     SourceIdsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SourceId")
+
+    SourceNotFoundFault.struct_class = Types::SourceNotFoundFault
 
     SourceRegion.add_member(:region_name, Shapes::ShapeRef.new(shape: String, location_name: "RegionName"))
     SourceRegion.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
@@ -2861,6 +3073,10 @@ module Aws::RDS
     StopDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
     StopDBInstanceResult.struct_class = Types::StopDBInstanceResult
 
+    StorageQuotaExceededFault.struct_class = Types::StorageQuotaExceededFault
+
+    StorageTypeNotSupportedFault.struct_class = Types::StorageTypeNotSupportedFault
+
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     Subnet.add_member(:subnet_identifier, Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier"))
@@ -2868,9 +3084,17 @@ module Aws::RDS
     Subnet.add_member(:subnet_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetStatus"))
     Subnet.struct_class = Types::Subnet
 
+    SubnetAlreadyInUse.struct_class = Types::SubnetAlreadyInUse
+
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
+
+    SubscriptionAlreadyExistFault.struct_class = Types::SubscriptionAlreadyExistFault
+
+    SubscriptionCategoryNotFoundFault.struct_class = Types::SubscriptionCategoryNotFoundFault
+
+    SubscriptionNotFoundFault.struct_class = Types::SubscriptionNotFoundFault
 
     SupportedCharacterSetsList.member = Shapes::ShapeRef.new(shape: CharacterSet, location_name: "CharacterSet")
 

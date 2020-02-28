@@ -10,6 +10,17 @@ module Aws::ManagedBlockchain
 
     extend Aws::Errors::DynamicErrors
 
+    class AccessDeniedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ManagedBlockchain::Types::AccessDeniedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class IllegalActionException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -22,6 +33,17 @@ module Aws::ManagedBlockchain
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class InternalServiceErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ManagedBlockchain::Types::InternalServiceErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -102,6 +124,17 @@ module Aws::ManagedBlockchain
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ManagedBlockchain::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

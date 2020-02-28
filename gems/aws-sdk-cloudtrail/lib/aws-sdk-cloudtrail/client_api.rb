@@ -132,6 +132,12 @@ module Aws::CloudTrail
 
     AddTagsResponse.struct_class = Types::AddTagsResponse
 
+    CloudTrailARNInvalidException.struct_class = Types::CloudTrailARNInvalidException
+
+    CloudTrailAccessNotEnabledException.struct_class = Types::CloudTrailAccessNotEnabledException
+
+    CloudWatchLogsDeliveryUnavailableException.struct_class = Types::CloudWatchLogsDeliveryUnavailableException
+
     CreateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateTrailRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3BucketName"))
     CreateTrailRequest.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "S3KeyPrefix"))
@@ -246,10 +252,62 @@ module Aws::CloudTrail
     GetTrailStatusResponse.add_member(:time_logging_stopped, Shapes::ShapeRef.new(shape: String, location_name: "TimeLoggingStopped"))
     GetTrailStatusResponse.struct_class = Types::GetTrailStatusResponse
 
+    InsightNotEnabledException.struct_class = Types::InsightNotEnabledException
+
     InsightSelector.add_member(:insight_type, Shapes::ShapeRef.new(shape: InsightType, location_name: "InsightType"))
     InsightSelector.struct_class = Types::InsightSelector
 
     InsightSelectors.member = Shapes::ShapeRef.new(shape: InsightSelector)
+
+    InsufficientDependencyServiceAccessPermissionException.struct_class = Types::InsufficientDependencyServiceAccessPermissionException
+
+    InsufficientEncryptionPolicyException.struct_class = Types::InsufficientEncryptionPolicyException
+
+    InsufficientS3BucketPolicyException.struct_class = Types::InsufficientS3BucketPolicyException
+
+    InsufficientSnsTopicPolicyException.struct_class = Types::InsufficientSnsTopicPolicyException
+
+    InvalidCloudWatchLogsLogGroupArnException.struct_class = Types::InvalidCloudWatchLogsLogGroupArnException
+
+    InvalidCloudWatchLogsRoleArnException.struct_class = Types::InvalidCloudWatchLogsRoleArnException
+
+    InvalidEventCategoryException.struct_class = Types::InvalidEventCategoryException
+
+    InvalidEventSelectorsException.struct_class = Types::InvalidEventSelectorsException
+
+    InvalidHomeRegionException.struct_class = Types::InvalidHomeRegionException
+
+    InvalidInsightSelectorsException.struct_class = Types::InvalidInsightSelectorsException
+
+    InvalidKmsKeyIdException.struct_class = Types::InvalidKmsKeyIdException
+
+    InvalidLookupAttributesException.struct_class = Types::InvalidLookupAttributesException
+
+    InvalidMaxResultsException.struct_class = Types::InvalidMaxResultsException
+
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
+
+    InvalidS3BucketNameException.struct_class = Types::InvalidS3BucketNameException
+
+    InvalidS3PrefixException.struct_class = Types::InvalidS3PrefixException
+
+    InvalidSnsTopicNameException.struct_class = Types::InvalidSnsTopicNameException
+
+    InvalidTagParameterException.struct_class = Types::InvalidTagParameterException
+
+    InvalidTimeRangeException.struct_class = Types::InvalidTimeRangeException
+
+    InvalidTokenException.struct_class = Types::InvalidTokenException
+
+    InvalidTrailNameException.struct_class = Types::InvalidTrailNameException
+
+    KmsException.struct_class = Types::KmsException
+
+    KmsKeyDisabledException.struct_class = Types::KmsKeyDisabledException
+
+    KmsKeyNotFoundException.struct_class = Types::KmsKeyNotFoundException
 
     ListPublicKeysRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Date, location_name: "StartTime"))
     ListPublicKeysRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndTime"))
@@ -293,6 +351,16 @@ module Aws::CloudTrail
     LookupEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     LookupEventsResponse.struct_class = Types::LookupEventsResponse
 
+    MaximumNumberOfTrailsExceededException.struct_class = Types::MaximumNumberOfTrailsExceededException
+
+    NotOrganizationMasterAccountException.struct_class = Types::NotOrganizationMasterAccountException
+
+    OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
+
+    OrganizationNotInAllFeaturesModeException.struct_class = Types::OrganizationNotInAllFeaturesModeException
+
+    OrganizationsNotInUseException.struct_class = Types::OrganizationsNotInUseException
+
     PublicKey.add_member(:value, Shapes::ShapeRef.new(shape: ByteBuffer, location_name: "Value"))
     PublicKey.add_member(:validity_start_time, Shapes::ShapeRef.new(shape: Date, location_name: "ValidityStartTime"))
     PublicKey.add_member(:validity_end_time, Shapes::ShapeRef.new(shape: Date, location_name: "ValidityEndTime"))
@@ -331,11 +399,17 @@ module Aws::CloudTrail
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)
 
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceTag.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ResourceTag.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, location_name: "TagsList"))
     ResourceTag.struct_class = Types::ResourceTag
 
     ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
+
+    ResourceTypeNotSupportedException.struct_class = Types::ResourceTypeNotSupportedException
+
+    S3BucketDoesNotExistException.struct_class = Types::S3BucketDoesNotExistException
 
     StartLoggingRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     StartLoggingRequest.struct_class = Types::StartLoggingRequest
@@ -350,6 +424,8 @@ module Aws::CloudTrail
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     Tag.struct_class = Types::Tag
+
+    TagsLimitExceededException.struct_class = Types::TagsLimitExceededException
 
     TagsList.member = Shapes::ShapeRef.new(shape: Tag)
 
@@ -371,6 +447,8 @@ module Aws::CloudTrail
     Trail.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     Trail.struct_class = Types::Trail
 
+    TrailAlreadyExistsException.struct_class = Types::TrailAlreadyExistsException
+
     TrailInfo.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
     TrailInfo.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     TrailInfo.add_member(:home_region, Shapes::ShapeRef.new(shape: String, location_name: "HomeRegion"))
@@ -380,7 +458,13 @@ module Aws::CloudTrail
 
     TrailNameList.member = Shapes::ShapeRef.new(shape: String)
 
+    TrailNotFoundException.struct_class = Types::TrailNotFoundException
+
+    TrailNotProvidedException.struct_class = Types::TrailNotProvidedException
+
     Trails.member = Shapes::ShapeRef.new(shape: TrailInfo)
+
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
 
     UpdateTrailRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     UpdateTrailRequest.add_member(:s3_bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "S3BucketName"))

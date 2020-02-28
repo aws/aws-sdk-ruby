@@ -8,15 +8,10 @@
 module Aws::CodeGuruProfiler
   module Types
 
-    # The configuration for the agent to use.
-    #
     # @!attribute [rw] period_in_seconds
-    #   Specifies the period to follow the configuration (to profile or not)
-    #   and call back to get a new configuration.
     #   @return [Integer]
     #
     # @!attribute [rw] should_profile
-    #   Specifies if the profiling should be enabled by the agent.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/AgentConfiguration AWS API Documentation
@@ -27,10 +22,6 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Configuration to orchestrate agents to create and report agent
-    # profiles of the profiling group. Agents are orchestrated if they
-    # follow the agent orchestration protocol.
-    #
     # @note When making an API call, you may pass AgentOrchestrationConfig
     #   data as a hash:
     #
@@ -39,7 +30,6 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] profiling_enabled
-    #   If the agents should be enabled to create and report profiles.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/AgentOrchestrationConfig AWS API Documentation
@@ -49,14 +39,15 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # The time range of an aggregated profile.
+    # Information about the time range of the latest available aggregated
+    # profile.
     #
     # @!attribute [rw] period
-    #   The aggregation period of the aggregated profile.
+    #   The time period.
     #   @return [String]
     #
     # @!attribute [rw] start
-    #   The start time of the aggregated profile.
+    #   The start time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/AggregatedProfileTime AWS API Documentation
@@ -67,7 +58,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for ConfigureAgent operation.
+    # The structure representing the configureAgentRequest.
     #
     # @note When making an API call, you may pass ConfigureAgentRequest
     #   data as a hash:
@@ -78,13 +69,9 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] fleet_instance_id
-    #   Identifier of the instance of compute fleet being profiled by the
-    #   agent. For instance, host name in EC2, task id for ECS, function
-    #   name for AWS Lambda
     #   @return [String]
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ConfigureAgentRequest AWS API Documentation
@@ -95,10 +82,9 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for ConfigureAgent operation.
+    # The structure representing the configureAgentResponse.
     #
     # @!attribute [rw] configuration
-    #   The configuration for the agent to use.
     #   @return [Types::AgentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ConfigureAgentResponse AWS API Documentation
@@ -108,7 +94,9 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request can can cause an inconsistent state for the resource.
+    # The requested operation would cause a conflict with the current state
+    # of a service resource associated with the request. Resolve the
+    # conflict before retrying this request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -120,7 +108,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for CreateProfilingGroup operation.
+    # The structure representing the createProfiliingGroupRequest.
     #
     # @note When making an API call, you may pass CreateProfilingGroupRequest
     #   data as a hash:
@@ -134,13 +122,15 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] agent_orchestration_config
-    #   Configuration to orchestrate agents to create and report agent
-    #   profiles of the profiling group. Agents are orchestrated if they
-    #   follow the agent orchestration protocol.
+    #   The agent orchestration configuration.
     #   @return [Types::AgentOrchestrationConfig]
     #
     # @!attribute [rw] client_token
-    #   Client token for the request.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   This parameter specifies a unique identifier for the new profiling
+    #   group that helps ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -159,10 +149,10 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for CreateProfilingGroup operation.
+    # The structure representing the createProfilingGroupResponse.
     #
     # @!attribute [rw] profiling_group
-    #   The description of a profiling group.
+    #   Information about the new profiling group
     #   @return [Types::ProfilingGroupDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/CreateProfilingGroupResponse AWS API Documentation
@@ -172,7 +162,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for DeleteProfilingGroup operation.
+    # The structure representing the deleteProfilingGroupRequest.
     #
     # @note When making an API call, you may pass DeleteProfilingGroupRequest
     #   data as a hash:
@@ -182,7 +172,7 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
+    #   The profiling group name to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DeleteProfilingGroupRequest AWS API Documentation
@@ -192,13 +182,13 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for DeleteProfilingGroup operation.
+    # The structure representing the deleteProfilingGroupResponse.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DeleteProfilingGroupResponse AWS API Documentation
     #
     class DeleteProfilingGroupResponse < Aws::EmptyStructure; end
 
-    # Request for DescribeProfilingGroup operation.
+    # The structure representing the describeProfilingGroupRequest.
     #
     # @note When making an API call, you may pass DescribeProfilingGroupRequest
     #   data as a hash:
@@ -208,7 +198,7 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
+    #   The profiling group name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DescribeProfilingGroupRequest AWS API Documentation
@@ -218,10 +208,10 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for DescribeProfilingGroup operation.
+    # The structure representing the describeProfilingGroupResponse.
     #
     # @!attribute [rw] profiling_group
-    #   The description of a profiling group.
+    #   Information about a profiling group.
     #   @return [Types::ProfilingGroupDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/DescribeProfilingGroupResponse AWS API Documentation
@@ -231,7 +221,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for GetProfile operation.
+    # The structure representing the getProfileRequest.
     #
     # @note When making an API call, you may pass GetProfileRequest
     #   data as a hash:
@@ -246,32 +236,36 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] accept
-    #   The format of the profile to return. Supports application/json or
-    #   application/x-amzn-ion. Defaults to application/x-amzn-ion.
+    #   The format of the profile to return. You can choose
+    #   `application/json` or the default `application/x-amzn-ion`.
     #   @return [String]
     #
     # @!attribute [rw] end_time
-    #   The end time of the profile to get. Either period or endTime must be
-    #   specified. Must be greater than start and the overall time range to
-    #   be in the past and not larger than a week.
+    #   You must specify exactly two of the following parameters:
+    #   `startTime`, `period`, and `endTime`.
     #   @return [Time]
     #
     # @!attribute [rw] max_depth
-    #   Limit the max depth of the profile.
+    #   The maximum depth of the graph.
     #   @return [Integer]
     #
     # @!attribute [rw] period
-    #   The period of the profile to get. Exactly two of `startTime`,
-    #   `period` and `endTime` must be specified. Must be positive and the
-    #   overall time range to be in the past and not larger than a week.
+    #   The period of the profile to get. The time range must be in the past
+    #   and not longer than one week.
+    #
+    #   You must specify exactly two of the following parameters:
+    #   `startTime`, `period`, and `endTime`.
     #   @return [String]
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
+    #   The name of the profiling group to get.
     #   @return [String]
     #
     # @!attribute [rw] start_time
     #   The start time of the profile to get.
+    #
+    #   You must specify exactly two of the following parameters:
+    #   `startTime`, `period`, and `endTime`.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetProfileRequest AWS API Documentation
@@ -286,21 +280,19 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for GetProfile operation.
+    # The structure representing the getProfileResponse.
     #
     # @!attribute [rw] content_encoding
-    #   The content encoding of the profile in the payload.
+    #   The content encoding of the profile.
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The content type of the profile in the payload. Will be
-    #   application/json or application/x-amzn-ion based on Accept header in
-    #   the request.
+    #   The content type of the profile in the payload. It is either
+    #   `application/json` or the default `application/x-amzn-ion`.
     #   @return [String]
     #
     # @!attribute [rw] profile
-    #   The profile representing the aggregation of agent profiles of the
-    #   profiling group for a time range.
+    #   Information about the profile.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/GetProfileResponse AWS API Documentation
@@ -312,7 +304,8 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Unexpected error during processing of request.
+    # The server encountered an internal error and is unable to complete the
+    # request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -324,7 +317,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for ListProfileTimes operation.
+    # The structure representing the listProfileTimesRequest.
     #
     # @note When making an API call, you may pass ListProfileTimesRequest
     #   data as a hash:
@@ -340,24 +333,39 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] end_time
-    #   The end time of the time range to list profiles until.
+    #   The end time of the time range from which to list the profiles.
     #   @return [Time]
     #
     # @!attribute [rw] max_results
-    #   Upper bound on the number of results to list in a single call.
+    #   The maximum number of profile time results returned by
+    #   `ListProfileTimes` in paginated output. When this parameter is used,
+    #   `ListProfileTimes` only returns `maxResults` results in a single
+    #   page with a `nextToken` response element. The remaining results of
+    #   the initial request can be seen by sending another
+    #   `ListProfileTimes` request with the returned `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for paginating results.
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListProfileTimes` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] order_by
     #   The order (ascending or descending by start time of the profile) to
-    #   list the profiles by. Defaults to TIMESTAMP\_DESCENDING.
+    #   use when listing profiles. Defaults to `TIMESTAMP_DESCENDING`.
     #   @return [String]
     #
     # @!attribute [rw] period
-    #   The aggregation period to list the profiles for.
+    #   The aggregation period.
     #   @return [String]
     #
     # @!attribute [rw] profiling_group_name
@@ -365,7 +373,7 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start time of the time range to list the profiles from.
+    #   The start time of the time range from which to list the profiles.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfileTimesRequest AWS API Documentation
@@ -381,15 +389,19 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for ListProfileTimes operation.
+    # The structure representing the listProfileTimesResponse.
     #
     # @!attribute [rw] next_token
-    #   Token for paginating results.
+    #   The `nextToken` value to include in a future `ListProfileTimes`
+    #   request. When the results of a `ListProfileTimes` request exceed
+    #   `maxResults`, this value can be used to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
     #   @return [String]
     #
     # @!attribute [rw] profile_times
-    #   List of start times of the available profiles for the aggregation
-    #   period in the specified time range.
+    #   The list of start times of the available profiles for the
+    #   aggregation period in the specified time range.
     #   @return [Array<Types::ProfileTime>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfileTimesResponse AWS API Documentation
@@ -400,7 +412,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for ListProfilingGroups operation.
+    # The structure representing the listProfilingGroupsRequest.
     #
     # @note When making an API call, you may pass ListProfilingGroupsRequest
     #   data as a hash:
@@ -412,16 +424,30 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] include_description
-    #   If set to true, returns the full description of the profiling groups
-    #   instead of the names. Defaults to false.
+    #   A Boolean value indicating whether to include a description.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   Upper bound on the number of results to list in a single call.
+    #   The maximum number of profiling groups results returned by
+    #   `ListProfilingGroups` in paginated output. When this parameter is
+    #   used, `ListProfilingGroups` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListProfilingGroups` request with the returned `nextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for paginating results.
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListProfilingGroups` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfilingGroupsRequest AWS API Documentation
@@ -433,18 +459,22 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for ListProfilingGroups operation.
+    # The structure representing the listProfilingGroupsResponse.
     #
     # @!attribute [rw] next_token
-    #   Token for paginating results.
+    #   The `nextToken` value to include in a future `ListProfilingGroups`
+    #   request. When the results of a `ListProfilingGroups` request exceed
+    #   `maxResults`, this value can be used to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
     #   @return [String]
     #
     # @!attribute [rw] profiling_group_names
-    #   List of profiling group names.
+    #   Information about profiling group names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] profiling_groups
-    #   List of profiling group descriptions.
+    #   Information about profiling groups.
     #   @return [Array<Types::ProfilingGroupDescription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ListProfilingGroupsResponse AWS API Documentation
@@ -456,7 +486,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for PostAgentProfile operation.
+    # The structure representing the postAgentProfileRequest.
     #
     # @note When making an API call, you may pass PostAgentProfileRequest
     #   data as a hash:
@@ -469,26 +499,17 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] agent_profile
-    #   The profile collected by an agent for a time range.
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The content type of the agent profile in the payload. Recommended to
-    #   send the profile gzipped with content-type application/octet-stream.
-    #   Other accepted values are application/x-amzn-ion and
-    #   application/json for unzipped Ion and JSON respectively.
     #   @return [String]
     #
     # @!attribute [rw] profile_token
-    #   Client generated token to deduplicate the agent profile during
-    #   aggregation.
-    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PostAgentProfileRequest AWS API Documentation
@@ -501,14 +522,13 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for PostAgentProfile operation.
+    # The structure representing the postAgentProfileResponse.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/PostAgentProfileResponse AWS API Documentation
     #
     class PostAgentProfileResponse < Aws::EmptyStructure; end
 
-    # Periods of time used for aggregation of profiles, represented using
-    # ISO 8601 format.
+    # Information about the profile time.
     #
     # @!attribute [rw] start
     #   The start time of the profile.
@@ -524,17 +544,15 @@ module Aws::CodeGuruProfiler
     # The description of a profiling group.
     #
     # @!attribute [rw] agent_orchestration_config
-    #   Configuration to orchestrate agents to create and report agent
-    #   profiles of the profiling group. Agents are orchestrated if they
-    #   follow the agent orchestration protocol.
     #   @return [Types::AgentOrchestrationConfig]
     #
     # @!attribute [rw] arn
-    #   The ARN of the profiling group.
+    #   The Amazon Resource Name (ARN) identifying the profiling group.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The timestamp of when the profiling group was created.
+    #   The time, in milliseconds since the epoch, when the profiling group
+    #   was created.
     #   @return [Time]
     #
     # @!attribute [rw] name
@@ -542,11 +560,12 @@ module Aws::CodeGuruProfiler
     #   @return [String]
     #
     # @!attribute [rw] profiling_status
-    #   The status of profiling of a profiling group.
+    #   The status of the profiling group.
     #   @return [Types::ProfilingStatus]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp of when the profiling group was last updated.
+    #   The time, in milliseconds since the epoch, when the profiling group
+    #   was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ProfilingGroupDescription AWS API Documentation
@@ -561,20 +580,20 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # The status of profiling of a profiling group.
+    # Information about the profiling status.
     #
     # @!attribute [rw] latest_agent_orchestrated_at
-    #   Timestamp of when the last interaction of the agent with
-    #   configureAgent API for orchestration.
+    #   The time, in milliseconds since the epoch, when the latest agent was
+    #   orchestrated.
     #   @return [Time]
     #
     # @!attribute [rw] latest_agent_profile_reported_at
-    #   Timestamp of when the latest agent profile was successfully
-    #   reported.
+    #   The time, in milliseconds since the epoch, when the latest agent was
+    #   reported..
     #   @return [Time]
     #
     # @!attribute [rw] latest_aggregated_profile
-    #   The time range of latest aggregated profile available.
+    #   The latest aggregated profile
     #   @return [Types::AggregatedProfileTime]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/ProfilingStatus AWS API Documentation
@@ -586,7 +605,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request references a resource which does not exist.
+    # The resource specified in the request does not exist.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -598,7 +617,13 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request would cause a service quota to be exceeded.
+    # You have exceeded your service quota. To perform the requested action,
+    # remove some of the relevant resources, or use [Service Quotas][1] to
+    # request a service quota increase.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -610,7 +635,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request was denied due to request throttling.
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -622,7 +647,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Request for UpdateProfilingGroup operation.
+    # The structure representing the updateProfilingGroupRequest.
     #
     # @note When making an API call, you may pass UpdateProfilingGroupRequest
     #   data as a hash:
@@ -635,11 +660,10 @@ module Aws::CodeGuruProfiler
     #       }
     #
     # @!attribute [rw] agent_orchestration_config
-    #   Remote configuration to configure the agents of the profiling group.
     #   @return [Types::AgentOrchestrationConfig]
     #
     # @!attribute [rw] profiling_group_name
-    #   The name of the profiling group.
+    #   The name of the profiling group to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UpdateProfilingGroupRequest AWS API Documentation
@@ -650,10 +674,10 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # Response for UpdateProfilingGroup operation.
+    # The structure representing the updateProfilingGroupResponse.
     #
     # @!attribute [rw] profiling_group
-    #   The description of a profiling group.
+    #   Updated information about the profiling group.
     #   @return [Types::ProfilingGroupDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguruprofiler-2019-07-18/UpdateProfilingGroupResponse AWS API Documentation
@@ -663,7 +687,7 @@ module Aws::CodeGuruProfiler
       include Aws::Structure
     end
 
-    # The input fails to satisfy the constraints of the API.
+    # The parameter is not valid.
     #
     # @!attribute [rw] message
     #   @return [String]

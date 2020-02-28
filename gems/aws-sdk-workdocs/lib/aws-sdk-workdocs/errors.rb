@@ -58,6 +58,17 @@ module Aws::WorkDocs
 
     end
 
+    class DeactivatingLastSystemUserException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkDocs::Types::DeactivatingLastSystemUserException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class DocumentLockedForCommentsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -363,6 +374,17 @@ module Aws::WorkDocs
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class UnauthorizedOperationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkDocs::Types::UnauthorizedOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

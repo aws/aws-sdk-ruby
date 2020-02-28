@@ -109,6 +109,12 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The maximum number of alarms for a deployment group (10) was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AlarmsLimitExceededException AWS API Documentation
+    #
+    class AlarmsLimitExceededException < Aws::EmptyStructure; end
+
     # A revision for an AWS Lambda or Amazon ECS deployment that is a
     # YAML-formatted or JSON-formatted string. For AWS Lambda and Amazon ECS
     # deployments, the revision is the same as the AppSpec file. This method
@@ -151,6 +157,19 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # An application with the specified name with the IAM user or AWS
+    # account already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationAlreadyExistsException AWS API Documentation
+    #
+    class ApplicationAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The application does not exist with the IAM user or AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationDoesNotExistException AWS API Documentation
+    #
+    class ApplicationDoesNotExistException < Aws::EmptyStructure; end
+
     # Information about an application.
     #
     # @!attribute [rw] application_id
@@ -190,6 +209,25 @@ module Aws::CodeDeploy
       :compute_platform)
       include Aws::Structure
     end
+
+    # More applications were attempted to be created than are allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationLimitExceededException AWS API Documentation
+    #
+    class ApplicationLimitExceededException < Aws::EmptyStructure; end
+
+    # The minimum number of required application names was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationNameRequiredException AWS API Documentation
+    #
+    class ApplicationNameRequiredException < Aws::EmptyStructure; end
+
+    # The specified ARN is not supported. For example, it might be an ARN
+    # for a resource that is not expected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ArnNotSupportedException AWS API Documentation
+    #
+    class ArnNotSupportedException < Aws::EmptyStructure; end
 
     # Information about a configuration for automatically rolling back to a
     # previous version of an application revision when a deployment is not
@@ -572,6 +610,13 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The maximum number of names or IDs allowed for this request (100) was
+    # exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchLimitExceededException AWS API Documentation
+    #
+    class BatchLimitExceededException < Aws::EmptyStructure; end
+
     # Information about blue/green deployment options for a deployment
     # group.
     #
@@ -659,6 +704,12 @@ module Aws::CodeDeploy
       :termination_wait_time_in_minutes)
       include Aws::Structure
     end
+
+    # A bucket name is required, but was not provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BucketNameFilterRequiredException AWS API Documentation
+    #
+    class BucketNameFilterRequiredException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ContinueDeploymentInput
     #   data as a hash:
@@ -1400,6 +1451,39 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The deployment is already complete.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentAlreadyCompletedException AWS API Documentation
+    #
+    class DeploymentAlreadyCompletedException < Aws::EmptyStructure; end
+
+    # A deployment to a target was attempted while another deployment was in
+    # progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentAlreadyStartedException AWS API Documentation
+    #
+    class DeploymentAlreadyStartedException < Aws::EmptyStructure; end
+
+    # A deployment configuration with the specified name with the IAM user
+    # or AWS account already exists .
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigAlreadyExistsException AWS API Documentation
+    #
+    class DeploymentConfigAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The deployment configuration does not exist with the IAM user or AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigDoesNotExistException AWS API Documentation
+    #
+    class DeploymentConfigDoesNotExistException < Aws::EmptyStructure; end
+
+    # The deployment configuration is still in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInUseException AWS API Documentation
+    #
+    class DeploymentConfigInUseException < Aws::EmptyStructure; end
+
     # Information about a deployment configuration.
     #
     # @!attribute [rw] deployment_config_id
@@ -1441,6 +1525,38 @@ module Aws::CodeDeploy
       :traffic_routing_config)
       include Aws::Structure
     end
+
+    # The deployment configurations limit was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigLimitExceededException AWS API Documentation
+    #
+    class DeploymentConfigLimitExceededException < Aws::EmptyStructure; end
+
+    # The deployment configuration name was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigNameRequiredException AWS API Documentation
+    #
+    class DeploymentConfigNameRequiredException < Aws::EmptyStructure; end
+
+    # The deployment with the IAM user or AWS account does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentDoesNotExistException AWS API Documentation
+    #
+    class DeploymentDoesNotExistException < Aws::EmptyStructure; end
+
+    # A deployment group with the specified name with the IAM user or AWS
+    # account already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupAlreadyExistsException AWS API Documentation
+    #
+    class DeploymentGroupAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The named deployment group with the IAM user or AWS account does not
+    # exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupDoesNotExistException AWS API Documentation
+    #
+    class DeploymentGroupDoesNotExistException < Aws::EmptyStructure; end
 
     # Information about a deployment group.
     #
@@ -1580,6 +1696,24 @@ module Aws::CodeDeploy
       :ecs_services)
       include Aws::Structure
     end
+
+    # The deployment groups limit was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupLimitExceededException AWS API Documentation
+    #
+    class DeploymentGroupLimitExceededException < Aws::EmptyStructure; end
+
+    # The deployment group name was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupNameRequiredException AWS API Documentation
+    #
+    class DeploymentGroupNameRequiredException < Aws::EmptyStructure; end
+
+    # At least one deployment ID must be specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentIdRequiredException AWS API Documentation
+    #
+    class DeploymentIdRequiredException < Aws::EmptyStructure; end
 
     # Information about a deployment.
     #
@@ -1787,6 +1921,25 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The deployment does not have a status of Ready and can't continue
+    # yet.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentIsNotInReadyStateException AWS API Documentation
+    #
+    class DeploymentIsNotInReadyStateException < Aws::EmptyStructure; end
+
+    # The number of allowed deployments was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentLimitExceededException AWS API Documentation
+    #
+    class DeploymentLimitExceededException < Aws::EmptyStructure; end
+
+    # The specified deployment has not started.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentNotStartedException AWS API Documentation
+    #
+    class DeploymentNotStartedException < Aws::EmptyStructure; end
+
     # Information about the deployment status of the instances in the
     # deployment.
     #
@@ -1931,6 +2084,27 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The provided target ID does not belong to the attempted deployment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTargetDoesNotExistException AWS API Documentation
+    #
+    class DeploymentTargetDoesNotExistException < Aws::EmptyStructure; end
+
+    # A deployment target ID was not provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTargetIdRequiredException AWS API Documentation
+    #
+    class DeploymentTargetIdRequiredException < Aws::EmptyStructure; end
+
+    # The maximum number of targets that can be associated with an Amazon
+    # ECS or AWS Lambda deployment was exceeded. The target list of both
+    # types of deployments must have exactly one item. This exception does
+    # not apply to EC2/On-premises deployments.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentTargetListSizeExceededException AWS API Documentation
+    #
+    class DeploymentTargetListSizeExceededException < Aws::EmptyStructure; end
+
     # Represents the input of a DeregisterOnPremisesInstance operation.
     #
     # @note When making an API call, you may pass DeregisterOnPremisesInstanceInput
@@ -1950,6 +2124,12 @@ module Aws::CodeDeploy
       :instance_name)
       include Aws::Structure
     end
+
+    # The description is too long.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DescriptionTooLongException AWS API Documentation
+    #
+    class DescriptionTooLongException < Aws::EmptyStructure; end
 
     # Diagnostic information about executable scripts that are part of a
     # deployment.
@@ -2094,6 +2274,14 @@ module Aws::CodeDeploy
       :cluster_name)
       include Aws::Structure
     end
+
+    # The Amazon ECS service is associated with more than one deployment
+    # groups. An Amazon ECS service can be associated with only one
+    # deployment group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ECSServiceMappingLimitExceededException AWS API Documentation
+    #
+    class ECSServiceMappingLimitExceededException < Aws::EmptyStructure; end
 
     # Information about the target of an Amazon ECS deployment.
     #
@@ -2665,6 +2853,19 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # No GitHub account connection exists with the named specified in the
+    # call.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GitHubAccountTokenDoesNotExistException AWS API Documentation
+    #
+    class GitHubAccountTokenDoesNotExistException < Aws::EmptyStructure; end
+
+    # The call is missing a required GitHub account connection name.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GitHubAccountTokenNameRequiredException AWS API Documentation
+    #
+    class GitHubAccountTokenNameRequiredException < Aws::EmptyStructure; end
+
     # Information about the location of application artifacts stored in
     # GitHub.
     #
@@ -2725,6 +2926,45 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # No IAM ARN was included in the request. You must use an IAM session
+    # ARN or IAM user ARN in the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamArnRequiredException AWS API Documentation
+    #
+    class IamArnRequiredException < Aws::EmptyStructure; end
+
+    # The request included an IAM session ARN that has already been used to
+    # register a different instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamSessionArnAlreadyRegisteredException AWS API Documentation
+    #
+    class IamSessionArnAlreadyRegisteredException < Aws::EmptyStructure; end
+
+    # The specified IAM user ARN is already registered with an on-premises
+    # instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamUserArnAlreadyRegisteredException AWS API Documentation
+    #
+    class IamUserArnAlreadyRegisteredException < Aws::EmptyStructure; end
+
+    # An IAM user ARN was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/IamUserArnRequiredException AWS API Documentation
+    #
+    class IamUserArnRequiredException < Aws::EmptyStructure; end
+
+    # The specified instance does not exist in the deployment group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceDoesNotExistException AWS API Documentation
+    #
+    class InstanceDoesNotExistException < Aws::EmptyStructure; end
+
+    # The instance ID was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceIdRequiredException AWS API Documentation
+    #
+    class InstanceIdRequiredException < Aws::EmptyStructure; end
+
     # Information about an on-premises instance.
     #
     # @!attribute [rw] instance_name
@@ -2768,6 +3008,31 @@ module Aws::CodeDeploy
       :tags)
       include Aws::Structure
     end
+
+    # The maximum number of allowed on-premises instances in a single call
+    # was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceLimitExceededException AWS API Documentation
+    #
+    class InstanceLimitExceededException < Aws::EmptyStructure; end
+
+    # The specified on-premises instance name is already registered.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceNameAlreadyRegisteredException AWS API Documentation
+    #
+    class InstanceNameAlreadyRegisteredException < Aws::EmptyStructure; end
+
+    # An on-premises instance name was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceNameRequiredException AWS API Documentation
+    #
+    class InstanceNameRequiredException < Aws::EmptyStructure; end
+
+    # The specified on-premises instance is not registered.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceNotRegisteredException AWS API Documentation
+    #
+    class InstanceNotRegisteredException < Aws::EmptyStructure; end
 
     # Information about an instance in a deployment.
     #
@@ -2871,6 +3136,393 @@ module Aws::CodeDeploy
       :instance_label)
       include Aws::Structure
     end
+
+    # The format of the alarm configuration is invalid. Possible causes
+    # include:
+    #
+    # * The alarm list is null.
+    #
+    # * The alarm object is null.
+    #
+    # * The alarm name is empty or null or exceeds the limit of 255
+    #   characters.
+    #
+    # * Two alarms with the same name have been specified.
+    #
+    # * The alarm configuration is enabled, but the alarm list is empty.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidAlarmConfigException AWS API Documentation
+    #
+    class InvalidAlarmConfigException < Aws::EmptyStructure; end
+
+    # The application name was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidApplicationNameException AWS API Documentation
+    #
+    class InvalidApplicationNameException < Aws::EmptyStructure; end
+
+    # The specified ARN is not in a valid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidArnException AWS API Documentation
+    #
+    class InvalidArnException < Aws::EmptyStructure; end
+
+    # The automatic rollback configuration was specified in an invalid
+    # format. For example, automatic rollback is enabled, but an invalid
+    # triggering event type or no event types were listed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidAutoRollbackConfigException AWS API Documentation
+    #
+    class InvalidAutoRollbackConfigException < Aws::EmptyStructure; end
+
+    # The Auto Scaling group was specified in an invalid format or does not
+    # exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidAutoScalingGroupException AWS API Documentation
+    #
+    class InvalidAutoScalingGroupException < Aws::EmptyStructure; end
+
+    # The configuration for the blue/green deployment group was provided in
+    # an invalid format. For information about deployment configuration
+    # format, see CreateDeploymentConfig.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidBlueGreenDeploymentConfigurationException AWS API Documentation
+    #
+    class InvalidBlueGreenDeploymentConfigurationException < Aws::EmptyStructure; end
+
+    # The bucket name either doesn't exist or was specified in an invalid
+    # format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidBucketNameFilterException AWS API Documentation
+    #
+    class InvalidBucketNameFilterException < Aws::EmptyStructure; end
+
+    # The computePlatform is invalid. The computePlatform should be `Lambda`
+    # or `Server`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidComputePlatformException AWS API Documentation
+    #
+    class InvalidComputePlatformException < Aws::EmptyStructure; end
+
+    # The deployed state filter was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeployedStateFilterException AWS API Documentation
+    #
+    class InvalidDeployedStateFilterException < Aws::EmptyStructure; end
+
+    # The ID of the deployment configuration is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentConfigIdException AWS API Documentation
+    #
+    class InvalidDeploymentConfigIdException < Aws::EmptyStructure; end
+
+    # The deployment configuration name was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentConfigNameException AWS API Documentation
+    #
+    class InvalidDeploymentConfigNameException < Aws::EmptyStructure; end
+
+    # The deployment group name was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentGroupNameException AWS API Documentation
+    #
+    class InvalidDeploymentGroupNameException < Aws::EmptyStructure; end
+
+    # At least one of the deployment IDs was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentIdException AWS API Documentation
+    #
+    class InvalidDeploymentIdException < Aws::EmptyStructure; end
+
+    # An instance type was specified for an in-place deployment. Instance
+    # types are supported for blue/green deployments only.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentInstanceTypeException AWS API Documentation
+    #
+    class InvalidDeploymentInstanceTypeException < Aws::EmptyStructure; end
+
+    # The specified deployment status doesn't exist or cannot be
+    # determined.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentStatusException AWS API Documentation
+    #
+    class InvalidDeploymentStatusException < Aws::EmptyStructure; end
+
+    # An invalid deployment style was specified. Valid deployment types
+    # include "IN\_PLACE" and "BLUE\_GREEN." Valid deployment options
+    # include "WITH\_TRAFFIC\_CONTROL" and "WITHOUT\_TRAFFIC\_CONTROL."
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentStyleException AWS API Documentation
+    #
+    class InvalidDeploymentStyleException < Aws::EmptyStructure; end
+
+    # The target ID provided was not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentTargetIdException AWS API Documentation
+    #
+    class InvalidDeploymentTargetIdException < Aws::EmptyStructure; end
+
+    # The wait type is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidDeploymentWaitTypeException AWS API Documentation
+    #
+    class InvalidDeploymentWaitTypeException < Aws::EmptyStructure; end
+
+    # A call was submitted that specified both Ec2TagFilters and Ec2TagSet,
+    # but only one of these data types can be used in a single call.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidEC2TagCombinationException AWS API Documentation
+    #
+    class InvalidEC2TagCombinationException < Aws::EmptyStructure; end
+
+    # The tag was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidEC2TagException AWS API Documentation
+    #
+    class InvalidEC2TagException < Aws::EmptyStructure; end
+
+    # The Amazon ECS service identifier is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidECSServiceException AWS API Documentation
+    #
+    class InvalidECSServiceException < Aws::EmptyStructure; end
+
+    # An invalid fileExistsBehavior option was specified to determine how
+    # AWS CodeDeploy handles files or directories that already exist in a
+    # deployment target location, but weren't part of the previous
+    # successful deployment. Valid values include "DISALLOW,"
+    # "OVERWRITE," and "RETAIN."
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidFileExistsBehaviorException AWS API Documentation
+    #
+    class InvalidFileExistsBehaviorException < Aws::EmptyStructure; end
+
+    # The GitHub token is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidGitHubAccountTokenException AWS API Documentation
+    #
+    class InvalidGitHubAccountTokenException < Aws::EmptyStructure; end
+
+    # The format of the specified GitHub account connection name is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidGitHubAccountTokenNameException AWS API Documentation
+    #
+    class InvalidGitHubAccountTokenNameException < Aws::EmptyStructure; end
+
+    # The IAM session ARN was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidIamSessionArnException AWS API Documentation
+    #
+    class InvalidIamSessionArnException < Aws::EmptyStructure; end
+
+    # The IAM user ARN was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidIamUserArnException AWS API Documentation
+    #
+    class InvalidIamUserArnException < Aws::EmptyStructure; end
+
+    # The IgnoreApplicationStopFailures value is invalid. For AWS Lambda
+    # deployments, `false` is expected. For EC2/On-premises deployments,
+    # `true` or `false` is expected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidIgnoreApplicationStopFailuresValueException AWS API Documentation
+    #
+    class InvalidIgnoreApplicationStopFailuresValueException < Aws::EmptyStructure; end
+
+    # The input was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidInstanceIdException AWS API Documentation
+    #
+    class InvalidInstanceIdException < Aws::EmptyStructure; end
+
+    # The on-premises instance name was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidInstanceNameException AWS API Documentation
+    #
+    class InvalidInstanceNameException < Aws::EmptyStructure; end
+
+    # The specified instance status does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidInstanceStatusException AWS API Documentation
+    #
+    class InvalidInstanceStatusException < Aws::EmptyStructure; end
+
+    # An invalid instance type was specified for instances in a blue/green
+    # deployment. Valid values include "Blue" for an original environment
+    # and "Green" for a replacement environment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidInstanceTypeException AWS API Documentation
+    #
+    class InvalidInstanceTypeException < Aws::EmptyStructure; end
+
+    # The specified key prefix filter was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidKeyPrefixFilterException AWS API Documentation
+    #
+    class InvalidKeyPrefixFilterException < Aws::EmptyStructure; end
+
+    # A lifecycle event hook is invalid. Review the `hooks` section in your
+    # AppSpec file to ensure the lifecycle events and `hooks` functions are
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidLifecycleEventHookExecutionIdException AWS API Documentation
+    #
+    class InvalidLifecycleEventHookExecutionIdException < Aws::EmptyStructure; end
+
+    # The result of a Lambda validation function that verifies a lifecycle
+    # event is invalid. It should return `Succeeded` or `Failed`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidLifecycleEventHookExecutionStatusException AWS API Documentation
+    #
+    class InvalidLifecycleEventHookExecutionStatusException < Aws::EmptyStructure; end
+
+    # An invalid load balancer name, or no load balancer name, was
+    # specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidLoadBalancerInfoException AWS API Documentation
+    #
+    class InvalidLoadBalancerInfoException < Aws::EmptyStructure; end
+
+    # The minimum healthy instance value was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidMinimumHealthyHostValueException AWS API Documentation
+    #
+    class InvalidMinimumHealthyHostValueException < Aws::EmptyStructure; end
+
+    # The next token was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
+    # A call was submitted that specified both OnPremisesTagFilters and
+    # OnPremisesTagSet, but only one of these data types can be used in a
+    # single call.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidOnPremisesTagCombinationException AWS API Documentation
+    #
+    class InvalidOnPremisesTagCombinationException < Aws::EmptyStructure; end
+
+    # An invalid operation was detected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidOperationException AWS API Documentation
+    #
+    class InvalidOperationException < Aws::EmptyStructure; end
+
+    # The registration status was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidRegistrationStatusException AWS API Documentation
+    #
+    class InvalidRegistrationStatusException < Aws::EmptyStructure; end
+
+    # The revision was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidRevisionException AWS API Documentation
+    #
+    class InvalidRevisionException < Aws::EmptyStructure; end
+
+    # The service role ARN was specified in an invalid format. Or, if an
+    # Auto Scaling group was specified, the specified service role does not
+    # grant the appropriate permissions to Amazon EC2 Auto Scaling.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidRoleException AWS API Documentation
+    #
+    class InvalidRoleException < Aws::EmptyStructure; end
+
+    # The column name to sort by is either not present or was specified in
+    # an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidSortByException AWS API Documentation
+    #
+    class InvalidSortByException < Aws::EmptyStructure; end
+
+    # The sort order was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidSortOrderException AWS API Documentation
+    #
+    class InvalidSortOrderException < Aws::EmptyStructure; end
+
+    # The tag was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTagException AWS API Documentation
+    #
+    class InvalidTagException < Aws::EmptyStructure; end
+
+    # The tag filter was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTagFilterException AWS API Documentation
+    #
+    class InvalidTagFilterException < Aws::EmptyStructure; end
+
+    # The specified tags are not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTagsToAddException AWS API Documentation
+    #
+    class InvalidTagsToAddException < Aws::EmptyStructure; end
+
+    # A target is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Aws::EmptyStructure; end
+
+    # The target filter name is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTargetFilterNameException AWS API Documentation
+    #
+    class InvalidTargetFilterNameException < Aws::EmptyStructure; end
+
+    # A target group pair associated with this deployment is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTargetGroupPairException AWS API Documentation
+    #
+    class InvalidTargetGroupPairException < Aws::EmptyStructure; end
+
+    # The target instance configuration is invalid. Possible causes include:
+    #
+    # * Configuration data for target instances was entered for an in-place
+    #   deployment.
+    #
+    # * The limit of 10 tags for a tag type was exceeded.
+    #
+    # * The combined length of the tag names exceeded the limit.
+    #
+    # * A specified tag is not currently applied to any instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTargetInstancesException AWS API Documentation
+    #
+    class InvalidTargetInstancesException < Aws::EmptyStructure; end
+
+    # The specified time range was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTimeRangeException AWS API Documentation
+    #
+    class InvalidTimeRangeException < Aws::EmptyStructure; end
+
+    # The configuration that specifies how traffic is routed during a
+    # deployment is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTrafficRoutingConfigurationException AWS API Documentation
+    #
+    class InvalidTrafficRoutingConfigurationException < Aws::EmptyStructure; end
+
+    # The trigger was specified in an invalid format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidTriggerConfigException AWS API Documentation
+    #
+    class InvalidTriggerConfigException < Aws::EmptyStructure; end
+
+    # The UpdateOutdatedInstancesOnly value is invalid. For AWS Lambda
+    # deployments, `false` is expected. For EC2/On-premises deployments,
+    # `true` or `false` is expected.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidUpdateOutdatedInstancesOnlyValueException AWS API Documentation
+    #
+    class InvalidUpdateOutdatedInstancesOnlyValueException < Aws::EmptyStructure; end
 
     # Information about a Lambda function specified in a deployment.
     #
@@ -3038,6 +3690,19 @@ module Aws::CodeDeploy
       :status)
       include Aws::Structure
     end
+
+    # An attempt to return the status of an already completed lifecycle
+    # event occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LifecycleEventAlreadyCompletedException AWS API Documentation
+    #
+    class LifecycleEventAlreadyCompletedException < Aws::EmptyStructure; end
+
+    # The limit for lifecycle hooks was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LifecycleHookLimitExceededException AWS API Documentation
+    #
+    class LifecycleHookLimitExceededException < Aws::EmptyStructure; end
 
     # Represents the input of a ListApplicationRevisions operation.
     #
@@ -3804,6 +4469,13 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Both an IAM user ARN and an IAM session ARN were included in the
+    # request. Use only one ARN type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MultipleIamArnsProvidedException AWS API Documentation
+    #
+    class MultipleIamArnsProvidedException < Aws::EmptyStructure; end
+
     # Information about groups of on-premises instance tags.
     #
     # @note When making an API call, you may pass OnPremisesTagSet
@@ -3833,6 +4505,12 @@ module Aws::CodeDeploy
       :on_premises_tag_set_list)
       include Aws::Structure
     end
+
+    # The API used does not support the deployment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutLifecycleEventHookExecutionStatusInput
     #   data as a hash:
@@ -4029,6 +4707,24 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The ARN of a resource is required, but was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ResourceArnRequiredException AWS API Documentation
+    #
+    class ResourceArnRequiredException < Aws::EmptyStructure; end
+
+    # The specified resource could not be validated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ResourceValidationException AWS API Documentation
+    #
+    class ResourceValidationException < Aws::EmptyStructure; end
+
+    # The named revision does not exist with the IAM user or AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionDoesNotExistException AWS API Documentation
+    #
+    class RevisionDoesNotExistException < Aws::EmptyStructure; end
+
     # Information about an application revision.
     #
     # @!attribute [rw] revision_location
@@ -4118,6 +4814,18 @@ module Aws::CodeDeploy
       :app_spec_content)
       include Aws::Structure
     end
+
+    # The revision ID was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionRequiredException AWS API Documentation
+    #
+    class RevisionRequiredException < Aws::EmptyStructure; end
+
+    # The role ID was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RoleRequiredException AWS API Documentation
+    #
+    class RoleRequiredException < Aws::EmptyStructure; end
 
     # Information about a deployment rollback.
     #
@@ -4340,6 +5048,18 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # The maximum allowed number of tags was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagLimitExceededException AWS API Documentation
+    #
+    class TagLimitExceededException < Aws::EmptyStructure; end
+
+    # A tag was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagRequiredException AWS API Documentation
+    #
+    class TagRequiredException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TagResourceInput
     #   data as a hash:
     #
@@ -4374,6 +5094,13 @@ module Aws::CodeDeploy
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
+
+    # The number of tag groups included in the tag set list exceeded the
+    # maximum allowed limit of 3.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagSetListLimitExceededException AWS API Documentation
+    #
+    class TagSetListLimitExceededException < Aws::EmptyStructure; end
 
     # Information about a target group in Elastic Load Balancing to use in a
     # deployment. Instances are registered as targets in a target group, and
@@ -4504,6 +5231,12 @@ module Aws::CodeDeploy
       :ec2_tag_set)
       include Aws::Structure
     end
+
+    # An API function was called too frequently.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
 
     # A configuration that shifts traffic from one version of a Lambda
     # function to another in two increments. The original and target Lambda
@@ -4703,6 +5436,19 @@ module Aws::CodeDeploy
       :trigger_events)
       include Aws::Structure
     end
+
+    # The maximum allowed number of triggers was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TriggerTargetsLimitExceededException AWS API Documentation
+    #
+    class TriggerTargetsLimitExceededException < Aws::EmptyStructure; end
+
+    # A call was submitted that is not supported for the specified
+    # deployment type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UnsupportedActionForDeploymentTypeException AWS API Documentation
+    #
+    class UnsupportedActionForDeploymentTypeException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:

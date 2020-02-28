@@ -8,6 +8,12 @@
 module Aws::Textract
   module Types
 
+    # You aren't authorized to perform the action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AnalyzeDocumentRequest
     #   data as a hash:
     #
@@ -91,6 +97,12 @@ module Aws::Textract
       :analyze_document_model_version)
       include Aws::Structure
     end
+
+    # Amazon Textract isn't able to read the document.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/BadDocumentException AWS API Documentation
+    #
+    class BadDocumentException < Aws::EmptyStructure; end
 
     # A `Block` represents items that are recognized in a document within a
     # group of pixels close to each other. The information returned in a
@@ -460,6 +472,14 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # The document can't be processed because it's too large. The maximum
+    # document size for synchronous operations 5 MB. The maximum document
+    # size for asynchronous operations is 500 MB for PDF files.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/DocumentTooLargeException AWS API Documentation
+    #
+    class DocumentTooLargeException < Aws::EmptyStructure; end
+
     # Information about where the following items are located on a document
     # page: detected page, text, key-value pairs, tables, table cells, and
     # selection elements.
@@ -755,6 +775,55 @@ module Aws::Textract
       include Aws::Structure
     end
 
+    # A `ClientRequestToken` input parameter was reused with an operation,
+    # but at least one of the other input parameters is different from the
+    # previous call to the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/IdempotentParameterMismatchException AWS API Documentation
+    #
+    class IdempotentParameterMismatchException < Aws::EmptyStructure; end
+
+    # Amazon Textract experienced a service issue. Try your call again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
+    # An invalid job identifier was passed to GetDocumentAnalysis or to
+    # GetDocumentAnalysis.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidJobIdException AWS API Documentation
+    #
+    class InvalidJobIdException < Aws::EmptyStructure; end
+
+    # An input parameter violated a constraint. For example, in synchronous
+    # operations, an `InvalidParameterException` exception occurs when
+    # neither of the `S3Object` or `Bytes` values are supplied in the
+    # `Document` request parameter. Validate your parameter before calling
+    # the API operation again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # Amazon Textract is unable to access the S3 object that's specified in
+    # the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/InvalidS3ObjectException AWS API Documentation
+    #
+    class InvalidS3ObjectException < Aws::EmptyStructure; end
+
+    # An Amazon Textract service limit was exceeded. For example, if you
+    # start too many asynchronous jobs concurrently, calls to start
+    # operations (`StartDocumentTextDetection`, for example) raise a
+    # LimitExceededException exception (HTTP status code: 400) until the
+    # number of concurrently running jobs is below the Amazon Textract
+    # service limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # The Amazon Simple Notification Service (Amazon SNS) topic to which
     # Amazon Textract publishes the completion status of an asynchronous
     # document operation, such as StartDocumentTextDetection.
@@ -811,6 +880,13 @@ module Aws::Textract
       :y)
       include Aws::Structure
     end
+
+    # The number of requests exceeded your throughput limit. If you want to
+    # increase this limit, contact Amazon Textract.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ProvisionedThroughputExceededException AWS API Documentation
+    #
+    class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
 
     # Information about how blocks are related to each other. A `Block`
     # object contains 0 or more `Relation` objects in a list,
@@ -1036,6 +1112,21 @@ module Aws::Textract
       :job_id)
       include Aws::Structure
     end
+
+    # Amazon Textract is temporarily unable to process the request. Try your
+    # call again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
+
+    # The format of the input document isn't supported. Documents for
+    # synchronous operations can be in PNG or JPEG format. Documents for
+    # asynchronous operations can also be in PDF format.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UnsupportedDocumentException AWS API Documentation
+    #
+    class UnsupportedDocumentException < Aws::EmptyStructure; end
 
     # A warning about an issue that occurred during asynchronous text
     # analysis (StartDocumentAnalysis) or asynchronous document text

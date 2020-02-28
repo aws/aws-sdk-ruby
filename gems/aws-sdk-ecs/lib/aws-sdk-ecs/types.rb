@@ -8,6 +8,12 @@
 module Aws::ECS
   module Types
 
+    # You do not have authorization to perform the requested action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # An object representing a container instance or task attachment.
     #
     # @!attribute [rw] id
@@ -118,6 +124,14 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # You can apply up to 10 custom attributes per resource. You can view
+    # the attributes of a resource with ListAttributes. You can remove
+    # existing attributes on a resource with DeleteAttributes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AttributeLimitExceededException AWS API Documentation
+    #
+    class AttributeLimitExceededException < Aws::EmptyStructure; end
+
     # The details of the Auto Scaling group for the capacity provider.
     #
     # @note When making an API call, you may pass AutoScalingGroupProvider
@@ -222,6 +236,17 @@ module Aws::ECS
       :assign_public_ip)
       include Aws::Structure
     end
+
+    # Your AWS account has been blocked. For more information, contact [AWS
+    # Support][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/BlockedException AWS API Documentation
+    #
+    class BlockedException < Aws::EmptyStructure; end
 
     # The details of a capacity provider.
     #
@@ -525,6 +550,35 @@ module Aws::ECS
       :attachments_status)
       include Aws::Structure
     end
+
+    # You cannot delete a cluster that has registered container instances.
+    # First, deregister the container instances before you can delete the
+    # cluster. For more information, see DeregisterContainerInstance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsContainerInstancesException AWS API Documentation
+    #
+    class ClusterContainsContainerInstancesException < Aws::EmptyStructure; end
+
+    # You cannot delete a cluster that contains services. First, update the
+    # service to reduce its desired task count to 0 and then delete the
+    # service. For more information, see UpdateService and DeleteService.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsServicesException AWS API Documentation
+    #
+    class ClusterContainsServicesException < Aws::EmptyStructure; end
+
+    # You cannot delete a cluster that has active tasks.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterContainsTasksException AWS API Documentation
+    #
+    class ClusterContainsTasksException < Aws::EmptyStructure; end
+
+    # The specified cluster could not be found. You can view your available
+    # clusters with ListClusters. Amazon ECS clusters are Region-specific.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterNotFoundException AWS API Documentation
+    #
+    class ClusterNotFoundException < Aws::EmptyStructure; end
 
     # The settings to use when creating a cluster. This parameter is used to
     # enable CloudWatch Container Insights for a cluster.
@@ -4470,6 +4524,13 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The specified parameter is invalid. Review the available parameters
+    # for the API request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
     # The Linux capabilities for the container that are added to or dropped
     # from the default configuration provided by Docker. For more
     # information on the default capabilities and the non-default available
@@ -4576,6 +4637,12 @@ module Aws::ECS
       :value)
       include Aws::Structure
     end
+
+    # The limit for the resource has been exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # Linux-specific options that are applied to the container, such as
     # Linux KernelCapabilities.
@@ -5750,6 +5817,16 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # Amazon ECS is unable to determine the current version of the Amazon
+    # ECS container agent on the container instance and does not have enough
+    # information to proceed with an update. This could be because the agent
+    # running on the container instance is an older or custom version that
+    # does not use our version information.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MissingVersionException AWS API Documentation
+    #
+    class MissingVersionException < Aws::EmptyStructure; end
+
     # Details on a volume mount point that is used in a container
     # definition.
     #
@@ -5882,6 +5959,14 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # There is no update available for this Amazon ECS container agent. This
+    # could be because the agent is already running the latest version, or
+    # it is so old that there is no update path to the current version.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NoUpdateAvailableException AWS API Documentation
+    #
+    class NoUpdateAvailableException < Aws::EmptyStructure; end
+
     # An object representing a constraint on task placement. For more
     # information, see [Task Placement Constraints][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
@@ -6005,6 +6090,19 @@ module Aws::ECS
       :type)
       include Aws::Structure
     end
+
+    # The specified platform version does not satisfy the task definition's
+    # required capabilities.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlatformTaskDefinitionIncompatibilityException AWS API Documentation
+    #
+    class PlatformTaskDefinitionIncompatibilityException < Aws::EmptyStructure; end
+
+    # The specified platform version does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlatformUnknownException AWS API Documentation
+    #
+    class PlatformUnknownException < Aws::EmptyStructure; end
 
     # Port mappings allow containers to access ports on the host container
     # instance to send or receive traffic. Port mappings are specified as
@@ -7184,6 +7282,18 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The specified resource is in-use and cannot be removed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Aws::EmptyStructure; end
+
+    # The specified resource could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # The type and amount of a resource to assign to a container. The
     # supported resource types are GPUs and Elastic Inference accelerators.
     # For more information, see [Working with GPUs on Amazon ECS][1] or
@@ -7914,6 +8024,22 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The specified service is not active. You can't update a service that
+    # is inactive. If you have previously deleted a service, you can
+    # re-create it with CreateService.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceNotActiveException AWS API Documentation
+    #
+    class ServiceNotActiveException < Aws::EmptyStructure; end
+
+    # The specified service could not be found. You can view your available
+    # services with ListServices. Amazon ECS services are cluster-specific
+    # and Region-specific.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceNotFoundException AWS API Documentation
+    #
+    class ServiceNotFoundException < Aws::EmptyStructure; end
+
     # Details of the service registry.
     #
     # @note When making an API call, you may pass ServiceRegistry
@@ -8641,6 +8767,14 @@ module Aws::ECS
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The specified target could not be found. You can view your available
+    # container instances with ListContainerInstances. Amazon ECS container
+    # instances are cluster-specific and Region-specific.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TargetNotFoundException AWS API Documentation
+    #
+    class TargetNotFoundException < Aws::EmptyStructure; end
 
     # Details on a task in a cluster.
     #
@@ -9625,6 +9759,14 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The specified task set could not be found. You can view your available
+    # task sets with DescribeTaskSets. Task sets are specific to each
+    # cluster, service and Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSetNotFoundException AWS API Documentation
+    #
+    class TaskSetNotFoundException < Aws::EmptyStructure; end
+
     # The container path, mount options, and size of the tmpfs mount.
     #
     # @note When making an API call, you may pass Tmpfs
@@ -9696,6 +9838,12 @@ module Aws::ECS
       :hard_limit)
       include Aws::Structure
     end
+
+    # The specified task is not supported in this Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UnsupportedFeatureException AWS API Documentation
+    #
+    class UnsupportedFeatureException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
@@ -9867,6 +10015,17 @@ module Aws::ECS
       :failures)
       include Aws::Structure
     end
+
+    # There is already a current Amazon ECS container agent update in
+    # progress on the specified container instance. If the container agent
+    # becomes disconnected while it is in a transitional stage, such as
+    # `PENDING` or `STAGING`, the update process can get stuck in that
+    # state. However, when the agent reconnects, it resumes where it stopped
+    # previously.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateInProgressException AWS API Documentation
+    #
+    class UpdateInProgressException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateServicePrimaryTaskSetRequest
     #   data as a hash:

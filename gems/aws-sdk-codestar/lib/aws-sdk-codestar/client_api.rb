@@ -141,6 +141,8 @@ module Aws::CodeStar
     CodeSource.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3"))
     CodeSource.struct_class = Types::CodeSource
 
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "name"))
     CreateProjectRequest.add_member(:id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "id"))
     CreateProjectRequest.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
@@ -225,6 +227,12 @@ module Aws::CodeStar
     GitHubCodeDestination.add_member(:token, Shapes::ShapeRef.new(shape: GitHubPersonalToken, required: true, location_name: "token"))
     GitHubCodeDestination.struct_class = Types::GitHubCodeDestination
 
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidServiceRoleException.struct_class = Types::InvalidServiceRoleException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListProjectsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListProjectsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults", metadata: {"box"=>true}))
     ListProjectsRequest.struct_class = Types::ListProjectsRequest
@@ -268,6 +276,14 @@ module Aws::CodeStar
     ListUserProfilesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUserProfilesResult.struct_class = Types::ListUserProfilesResult
 
+    ProjectAlreadyExistsException.struct_class = Types::ProjectAlreadyExistsException
+
+    ProjectConfigurationException.struct_class = Types::ProjectConfigurationException
+
+    ProjectCreationFailedException.struct_class = Types::ProjectCreationFailedException
+
+    ProjectNotFoundException.struct_class = Types::ProjectNotFoundException
+
     ProjectStatus.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     ProjectStatus.add_member(:reason, Shapes::ShapeRef.new(shape: Reason, location_name: "reason"))
     ProjectStatus.struct_class = Types::ProjectStatus
@@ -305,6 +321,10 @@ module Aws::CodeStar
     TeamMember.add_member(:project_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "projectRole"))
     TeamMember.add_member(:remote_access_allowed, Shapes::ShapeRef.new(shape: RemoteAccessAllowed, location_name: "remoteAccessAllowed", metadata: {"box"=>true}))
     TeamMember.struct_class = Types::TeamMember
+
+    TeamMemberAlreadyAssociatedException.struct_class = Types::TeamMemberAlreadyAssociatedException
+
+    TeamMemberNotFoundException.struct_class = Types::TeamMemberNotFoundException
 
     TeamMemberResult.member = Shapes::ShapeRef.new(shape: TeamMember)
 
@@ -357,6 +377,10 @@ module Aws::CodeStar
     UpdateUserProfileResult.add_member(:last_modified_timestamp, Shapes::ShapeRef.new(shape: LastModifiedTimestamp, location_name: "lastModifiedTimestamp"))
     UpdateUserProfileResult.struct_class = Types::UpdateUserProfileResult
 
+    UserProfileAlreadyExistsException.struct_class = Types::UserProfileAlreadyExistsException
+
+    UserProfileNotFoundException.struct_class = Types::UserProfileNotFoundException
+
     UserProfileSummary.add_member(:user_arn, Shapes::ShapeRef.new(shape: UserArn, location_name: "userArn"))
     UserProfileSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: UserProfileDisplayName, location_name: "displayName"))
     UserProfileSummary.add_member(:email_address, Shapes::ShapeRef.new(shape: Email, location_name: "emailAddress"))
@@ -364,6 +388,8 @@ module Aws::CodeStar
     UserProfileSummary.struct_class = Types::UserProfileSummary
 
     UserProfilesList.member = Shapes::ShapeRef.new(shape: UserProfileSummary)
+
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private

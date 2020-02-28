@@ -8,6 +8,12 @@
 module Aws::CodeBuild
   module Types
 
+    # An AWS service limit was exceeded for the calling AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/AccountLimitExceededException AWS API Documentation
+    #
+    class AccountLimitExceededException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass BatchDeleteBuildsInput
     #   data as a hash:
     #
@@ -1514,6 +1520,12 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # The input value that was provided is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidInputException AWS API Documentation
+    #
+    class InvalidInputException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass InvalidateProjectCacheInput
     #   data as a hash:
     #
@@ -2260,6 +2272,12 @@ module Aws::CodeBuild
       :network_interface_id)
       include Aws::Structure
     end
+
+    # There was a problem with the underlying OAuth provider.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/OAuthProviderException AWS API Documentation
+    #
+    class OAuthProviderException < Aws::EmptyStructure; end
 
     # Additional information about a build phase that has an error. You can
     # use this information for troubleshooting.
@@ -3470,6 +3488,19 @@ module Aws::CodeBuild
       :last_modified)
       include Aws::Structure
     end
+
+    # The specified AWS resource cannot be created, because an AWS resource
+    # with the same settings already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # The specified AWS resource cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # Information about S3 logs for a build project.
     #

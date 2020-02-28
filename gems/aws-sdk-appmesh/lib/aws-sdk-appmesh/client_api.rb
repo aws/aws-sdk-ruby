@@ -20,9 +20,13 @@ module Aws::AppMesh
     AwsCloudMapName = Shapes::StringShape.new(name: 'AwsCloudMapName')
     AwsCloudMapServiceDiscovery = Shapes::StructureShape.new(name: 'AwsCloudMapServiceDiscovery')
     Backend = Shapes::StructureShape.new(name: 'Backend')
+    BackendDefaults = Shapes::StructureShape.new(name: 'BackendDefaults')
     Backends = Shapes::ListShape.new(name: 'Backends')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CertificateAuthorityArns = Shapes::ListShape.new(name: 'CertificateAuthorityArns')
+    ClientPolicy = Shapes::StructureShape.new(name: 'ClientPolicy')
+    ClientPolicyTls = Shapes::StructureShape.new(name: 'ClientPolicyTls')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateMeshInput = Shapes::StructureShape.new(name: 'CreateMeshInput')
     CreateMeshOutput = Shapes::StructureShape.new(name: 'CreateMeshOutput')
@@ -110,6 +114,11 @@ module Aws::AppMesh
     ListVirtualServicesLimit = Shapes::IntegerShape.new(name: 'ListVirtualServicesLimit')
     ListVirtualServicesOutput = Shapes::StructureShape.new(name: 'ListVirtualServicesOutput')
     Listener = Shapes::StructureShape.new(name: 'Listener')
+    ListenerTls = Shapes::StructureShape.new(name: 'ListenerTls')
+    ListenerTlsAcmCertificate = Shapes::StructureShape.new(name: 'ListenerTlsAcmCertificate')
+    ListenerTlsCertificate = Shapes::StructureShape.new(name: 'ListenerTlsCertificate')
+    ListenerTlsFileCertificate = Shapes::StructureShape.new(name: 'ListenerTlsFileCertificate')
+    ListenerTlsMode = Shapes::StringShape.new(name: 'ListenerTlsMode')
     Listeners = Shapes::ListShape.new(name: 'Listeners')
     Logging = Shapes::StructureShape.new(name: 'Logging')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -127,6 +136,7 @@ module Aws::AppMesh
     PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PortProtocol = Shapes::StringShape.new(name: 'PortProtocol')
+    PortSet = Shapes::ListShape.new(name: 'PortSet')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceMetadata = Shapes::StructureShape.new(name: 'ResourceMetadata')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
@@ -154,6 +164,10 @@ module Aws::AppMesh
     TcpRoute = Shapes::StructureShape.new(name: 'TcpRoute')
     TcpRouteAction = Shapes::StructureShape.new(name: 'TcpRouteAction')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TlsValidationContext = Shapes::StructureShape.new(name: 'TlsValidationContext')
+    TlsValidationContextAcmTrust = Shapes::StructureShape.new(name: 'TlsValidationContextAcmTrust')
+    TlsValidationContextFileTrust = Shapes::StructureShape.new(name: 'TlsValidationContextFileTrust')
+    TlsValidationContextTrust = Shapes::StructureShape.new(name: 'TlsValidationContextTrust')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
@@ -212,10 +226,23 @@ module Aws::AppMesh
     Backend.add_member(:virtual_service, Shapes::ShapeRef.new(shape: VirtualServiceBackend, location_name: "virtualService"))
     Backend.struct_class = Types::Backend
 
+    BackendDefaults.add_member(:client_policy, Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
+    BackendDefaults.struct_class = Types::BackendDefaults
+
     Backends.member = Shapes::ShapeRef.new(shape: Backend)
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CertificateAuthorityArns.member = Shapes::ShapeRef.new(shape: Arn)
+
+    ClientPolicy.add_member(:tls, Shapes::ShapeRef.new(shape: ClientPolicyTls, location_name: "tls"))
+    ClientPolicy.struct_class = Types::ClientPolicy
+
+    ClientPolicyTls.add_member(:enforce, Shapes::ShapeRef.new(shape: Boolean, location_name: "enforce", metadata: {"box"=>true}))
+    ClientPolicyTls.add_member(:ports, Shapes::ShapeRef.new(shape: PortSet, location_name: "ports"))
+    ClientPolicyTls.add_member(:validation, Shapes::ShapeRef.new(shape: TlsValidationContext, required: true, location_name: "validation"))
+    ClientPolicyTls.struct_class = Types::ClientPolicyTls
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -223,7 +250,7 @@ module Aws::AppMesh
     CreateMeshInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateMeshInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "meshName"))
     CreateMeshInput.add_member(:spec, Shapes::ShapeRef.new(shape: MeshSpec, location_name: "spec"))
-    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateMeshInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateMeshInput.struct_class = Types::CreateMeshInput
 
     CreateMeshOutput.add_member(:mesh, Shapes::ShapeRef.new(shape: MeshData, required: true, location_name: "mesh"))
@@ -235,7 +262,7 @@ module Aws::AppMesh
     CreateRouteInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateRouteInput.add_member(:route_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "routeName"))
     CreateRouteInput.add_member(:spec, Shapes::ShapeRef.new(shape: RouteSpec, required: true, location_name: "spec"))
-    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateRouteInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateRouteInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "virtualRouterName"))
     CreateRouteInput.struct_class = Types::CreateRouteInput
 
@@ -247,7 +274,7 @@ module Aws::AppMesh
     CreateVirtualNodeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualNodeInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualNodeInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualNodeSpec, required: true, location_name: "spec"))
-    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualNodeInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualNodeInput.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     CreateVirtualNodeInput.struct_class = Types::CreateVirtualNodeInput
 
@@ -259,7 +286,7 @@ module Aws::AppMesh
     CreateVirtualRouterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualRouterInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualRouterInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualRouterSpec, required: true, location_name: "spec"))
-    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualRouterInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualRouterInput.add_member(:virtual_router_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualRouterName"))
     CreateVirtualRouterInput.struct_class = Types::CreateVirtualRouterInput
 
@@ -271,7 +298,7 @@ module Aws::AppMesh
     CreateVirtualServiceInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateVirtualServiceInput.add_member(:mesh_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "meshName"))
     CreateVirtualServiceInput.add_member(:spec, Shapes::ShapeRef.new(shape: VirtualServiceSpec, required: true, location_name: "spec"))
-    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateVirtualServiceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags", metadata: {"tags"=>["not-preview"]}))
     CreateVirtualServiceInput.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     CreateVirtualServiceInput.struct_class = Types::CreateVirtualServiceInput
 
@@ -529,7 +556,23 @@ module Aws::AppMesh
 
     Listener.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheckPolicy, location_name: "healthCheck"))
     Listener.add_member(:port_mapping, Shapes::ShapeRef.new(shape: PortMapping, required: true, location_name: "portMapping"))
+    Listener.add_member(:tls, Shapes::ShapeRef.new(shape: ListenerTls, location_name: "tls"))
     Listener.struct_class = Types::Listener
+
+    ListenerTls.add_member(:certificate, Shapes::ShapeRef.new(shape: ListenerTlsCertificate, required: true, location_name: "certificate"))
+    ListenerTls.add_member(:mode, Shapes::ShapeRef.new(shape: ListenerTlsMode, required: true, location_name: "mode"))
+    ListenerTls.struct_class = Types::ListenerTls
+
+    ListenerTlsAcmCertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "certificateArn"))
+    ListenerTlsAcmCertificate.struct_class = Types::ListenerTlsAcmCertificate
+
+    ListenerTlsCertificate.add_member(:acm, Shapes::ShapeRef.new(shape: ListenerTlsAcmCertificate, location_name: "acm"))
+    ListenerTlsCertificate.add_member(:file, Shapes::ShapeRef.new(shape: ListenerTlsFileCertificate, location_name: "file"))
+    ListenerTlsCertificate.struct_class = Types::ListenerTlsCertificate
+
+    ListenerTlsFileCertificate.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
+    ListenerTlsFileCertificate.add_member(:private_key, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "privateKey"))
+    ListenerTlsFileCertificate.struct_class = Types::ListenerTlsFileCertificate
 
     Listeners.member = Shapes::ShapeRef.new(shape: Listener)
 
@@ -564,6 +607,8 @@ module Aws::AppMesh
     PortMapping.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "port"))
     PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: PortProtocol, required: true, location_name: "protocol"))
     PortMapping.struct_class = Types::PortMapping
+
+    PortSet.member = Shapes::ShapeRef.new(shape: PortNumber)
 
     ResourceInUseException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceInUseException.struct_class = Types::ResourceInUseException
@@ -629,6 +674,19 @@ module Aws::AppMesh
 
     TcpRouteAction.add_member(:weighted_targets, Shapes::ShapeRef.new(shape: WeightedTargets, required: true, location_name: "weightedTargets"))
     TcpRouteAction.struct_class = Types::TcpRouteAction
+
+    TlsValidationContext.add_member(:trust, Shapes::ShapeRef.new(shape: TlsValidationContextTrust, required: true, location_name: "trust"))
+    TlsValidationContext.struct_class = Types::TlsValidationContext
+
+    TlsValidationContextAcmTrust.add_member(:certificate_authority_arns, Shapes::ShapeRef.new(shape: CertificateAuthorityArns, required: true, location_name: "certificateAuthorityArns"))
+    TlsValidationContextAcmTrust.struct_class = Types::TlsValidationContextAcmTrust
+
+    TlsValidationContextFileTrust.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "certificateChain"))
+    TlsValidationContextFileTrust.struct_class = Types::TlsValidationContextFileTrust
+
+    TlsValidationContextTrust.add_member(:acm, Shapes::ShapeRef.new(shape: TlsValidationContextAcmTrust, location_name: "acm"))
+    TlsValidationContextTrust.add_member(:file, Shapes::ShapeRef.new(shape: TlsValidationContextFileTrust, location_name: "file"))
+    TlsValidationContextTrust.struct_class = Types::TlsValidationContextTrust
 
     TooManyRequestsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
@@ -714,6 +772,7 @@ module Aws::AppMesh
     VirtualNodeServiceProvider.add_member(:virtual_node_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "virtualNodeName"))
     VirtualNodeServiceProvider.struct_class = Types::VirtualNodeServiceProvider
 
+    VirtualNodeSpec.add_member(:backend_defaults, Shapes::ShapeRef.new(shape: BackendDefaults, location_name: "backendDefaults"))
     VirtualNodeSpec.add_member(:backends, Shapes::ShapeRef.new(shape: Backends, location_name: "backends"))
     VirtualNodeSpec.add_member(:listeners, Shapes::ShapeRef.new(shape: Listeners, location_name: "listeners"))
     VirtualNodeSpec.add_member(:logging, Shapes::ShapeRef.new(shape: Logging, location_name: "logging"))
@@ -751,6 +810,7 @@ module Aws::AppMesh
     VirtualRouterStatus.add_member(:status, Shapes::ShapeRef.new(shape: VirtualRouterStatusCode, required: true, location_name: "status"))
     VirtualRouterStatus.struct_class = Types::VirtualRouterStatus
 
+    VirtualServiceBackend.add_member(:client_policy, Shapes::ShapeRef.new(shape: ClientPolicy, location_name: "clientPolicy"))
     VirtualServiceBackend.add_member(:virtual_service_name, Shapes::ShapeRef.new(shape: ServiceName, required: true, location_name: "virtualServiceName"))
     VirtualServiceBackend.struct_class = Types::VirtualServiceBackend
 

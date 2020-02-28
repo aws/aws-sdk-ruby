@@ -123,6 +123,8 @@ module Aws::ManagedBlockchain
     VoteValue = Shapes::StringShape.new(name: 'VoteValue')
     VotingPolicy = Shapes::StructureShape.new(name: 'VotingPolicy')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     ApprovalThresholdPolicy.add_member(:threshold_percentage, Shapes::ShapeRef.new(shape: ThresholdPercentageInt, location_name: "ThresholdPercentage"))
     ApprovalThresholdPolicy.add_member(:proposal_duration_in_hours, Shapes::ShapeRef.new(shape: ProposalDurationInt, location_name: "ProposalDurationInHours"))
     ApprovalThresholdPolicy.add_member(:threshold_comparator, Shapes::ShapeRef.new(shape: ThresholdComparator, location_name: "ThresholdComparator"))
@@ -213,6 +215,8 @@ module Aws::ManagedBlockchain
 
     IllegalActionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     IllegalActionException.struct_class = Types::IllegalActionException
+
+    InternalServiceErrorException.struct_class = Types::InternalServiceErrorException
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
@@ -448,6 +452,8 @@ module Aws::ManagedBlockchain
 
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    ThrottlingException.struct_class = Types::ThrottlingException
 
     VoteOnProposalInput.add_member(:network_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "networkId"))
     VoteOnProposalInput.add_member(:proposal_id, Shapes::ShapeRef.new(shape: ResourceIdString, required: true, location: "uri", location_name: "proposalId"))

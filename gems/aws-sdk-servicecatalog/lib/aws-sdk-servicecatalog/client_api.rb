@@ -884,6 +884,8 @@ module Aws::ServiceCatalog
 
     DisassociateTagOptionFromResourceOutput.struct_class = Types::DisassociateTagOptionFromResourceOutput
 
+    DuplicateResourceException.struct_class = Types::DuplicateResourceException
+
     EnableAWSOrganizationsAccessInput.struct_class = Types::EnableAWSOrganizationsAccessInput
 
     EnableAWSOrganizationsAccessOutput.struct_class = Types::EnableAWSOrganizationsAccessOutput
@@ -932,6 +934,10 @@ module Aws::ServiceCatalog
     GetAWSOrganizationsAccessStatusOutput.add_member(:access_status, Shapes::ShapeRef.new(shape: AccessStatus, location_name: "AccessStatus"))
     GetAWSOrganizationsAccessStatusOutput.struct_class = Types::GetAWSOrganizationsAccessStatusOutput
 
+    InvalidParametersException.struct_class = Types::InvalidParametersException
+
+    InvalidStateException.struct_class = Types::InvalidStateException
+
     LaunchPathSummaries.member = Shapes::ShapeRef.new(shape: LaunchPathSummary)
 
     LaunchPathSummary.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
@@ -939,6 +945,8 @@ module Aws::ServiceCatalog
     LaunchPathSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     LaunchPathSummary.add_member(:name, Shapes::ShapeRef.new(shape: PortfolioName, location_name: "Name"))
     LaunchPathSummary.struct_class = Types::LaunchPathSummary
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
@@ -1133,6 +1141,8 @@ module Aws::ServiceCatalog
     Namespaces.member = Shapes::ShapeRef.new(shape: AccountId)
 
     NotificationArns.member = Shapes::ShapeRef.new(shape: NotificationArn)
+
+    OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
 
     OrganizationNode.add_member(:type, Shapes::ShapeRef.new(shape: OrganizationNodeType, location_name: "Type"))
     OrganizationNode.add_member(:value, Shapes::ShapeRef.new(shape: OrganizationNodeValue, location_name: "Value"))
@@ -1423,6 +1433,10 @@ module Aws::ServiceCatalog
 
     ResourceDetails.member = Shapes::ShapeRef.new(shape: ResourceDetail)
 
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceTargetDefinition.add_member(:attribute, Shapes::ShapeRef.new(shape: ResourceAttribute, location_name: "Attribute"))
     ResourceTargetDefinition.add_member(:name, Shapes::ShapeRef.new(shape: PropertyName, location_name: "Name"))
     ResourceTargetDefinition.add_member(:requires_recreation, Shapes::ShapeRef.new(shape: RequiresRecreation, location_name: "RequiresRecreation"))
@@ -1545,6 +1559,8 @@ module Aws::ServiceCatalog
     TagOptionDetail.struct_class = Types::TagOptionDetail
 
     TagOptionDetails.member = Shapes::ShapeRef.new(shape: TagOptionDetail)
+
+    TagOptionNotMigratedException.struct_class = Types::TagOptionNotMigratedException
 
     TagOptionSummaries.member = Shapes::ShapeRef.new(shape: TagOptionSummary)
 

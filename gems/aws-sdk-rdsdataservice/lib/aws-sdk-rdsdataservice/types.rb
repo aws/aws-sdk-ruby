@@ -644,6 +644,12 @@ module Aws::RDSDataService
       include Aws::Structure
     end
 
+    # An internal error occurred.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/InternalServerErrorException AWS API Documentation
+    #
+    class InternalServerErrorException < Aws::EmptyStructure; end
+
     # The `resourceArn`, `secretArn`, or `transactionId` value can't be
     # found.
     #
@@ -781,6 +787,12 @@ module Aws::RDSDataService
       :transaction_status)
       include Aws::Structure
     end
+
+    # The service specified by the `resourceArn` parameter is not available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-data-2018-08-01/ServiceUnavailableError AWS API Documentation
+    #
+    class ServiceUnavailableError < Aws::EmptyStructure; end
 
     # A parameter used in a SQL statement.
     #

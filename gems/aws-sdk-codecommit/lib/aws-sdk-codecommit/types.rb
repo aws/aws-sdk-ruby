@@ -8,6 +8,13 @@
 module Aws::CodeCommit
   module Types
 
+    # The specified Amazon Resource Name (ARN) does not exist in the AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ActorDoesNotExistException AWS API Documentation
+    #
+    class ActorDoesNotExistException < Aws::EmptyStructure; end
+
     # Returns information about a specific approval on a pull request.
     #
     # @!attribute [rw] user_arn
@@ -77,6 +84,19 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The content for the approval rule is empty. You must provide some
+    # content for an approval rule. The content cannot be null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleContentRequiredException AWS API Documentation
+    #
+    class ApprovalRuleContentRequiredException < Aws::EmptyStructure; end
+
+    # The specified approval rule does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleDoesNotExistException AWS API Documentation
+    #
+    class ApprovalRuleDoesNotExistException < Aws::EmptyStructure; end
+
     # Returns information about an event for an approval rule.
     #
     # @!attribute [rw] approval_rule_name
@@ -99,6 +119,19 @@ module Aws::CodeCommit
       :approval_rule_content)
       include Aws::Structure
     end
+
+    # An approval rule with that name already exists. Approval rule names
+    # must be unique within the scope of a pull request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleNameAlreadyExistsException AWS API Documentation
+    #
+    class ApprovalRuleNameAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An approval rule name is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleNameRequiredException AWS API Documentation
+    #
+    class ApprovalRuleNameRequiredException < Aws::EmptyStructure; end
 
     # Returns information about an override event for approval rules for a
     # pull request.
@@ -172,6 +205,44 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The content for the approval rule template is empty. You must provide
+    # some content for an approval rule template. The content cannot be
+    # null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateContentRequiredException AWS API Documentation
+    #
+    class ApprovalRuleTemplateContentRequiredException < Aws::EmptyStructure; end
+
+    # The specified approval rule template does not exist. Verify that the
+    # name is correct and that you are signed in to the AWS Region where the
+    # template was created, and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateDoesNotExistException AWS API Documentation
+    #
+    class ApprovalRuleTemplateDoesNotExistException < Aws::EmptyStructure; end
+
+    # The approval rule template is associated with one or more
+    # repositories. You cannot delete a template that is associated with a
+    # repository. Remove all associations, and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateInUseException AWS API Documentation
+    #
+    class ApprovalRuleTemplateInUseException < Aws::EmptyStructure; end
+
+    # You cannot create an approval rule template with that name because a
+    # template with that name already exists in this AWS Region for your AWS
+    # account. Approval rule template names must be unique.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateNameAlreadyExistsException AWS API Documentation
+    #
+    class ApprovalRuleTemplateNameAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An approval rule template name is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalRuleTemplateNameRequiredException AWS API Documentation
+    #
+    class ApprovalRuleTemplateNameRequiredException < Aws::EmptyStructure; end
+
     # Returns information about a change in the approval state for a pull
     # request.
     #
@@ -190,6 +261,12 @@ module Aws::CodeCommit
       :approval_status)
       include Aws::Structure
     end
+
+    # An approval state is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ApprovalStateRequiredException AWS API Documentation
+    #
+    class ApprovalStateRequiredException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AssociateApprovalRuleTemplateWithRepositoryInput
     #   data as a hash:
@@ -215,6 +292,13 @@ module Aws::CodeCommit
       :repository_name)
       include Aws::Structure
     end
+
+    # The specified Amazon Resource Name (ARN) does not exist in the AWS
+    # account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/AuthorDoesNotExistException AWS API Documentation
+    #
+    class AuthorDoesNotExistException < Aws::EmptyStructure; end
 
     # Returns information about errors in a
     # BatchAssociateApprovalRuleTemplateWithRepositories operation.
@@ -636,6 +720,26 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The before commit ID and the after commit ID are the same, which is
+    # not valid. The before commit ID and the after commit ID must be
+    # different commit IDs.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BeforeCommitIdAndAfterCommitIdAreSameException AWS API Documentation
+    #
+    class BeforeCommitIdAndAfterCommitIdAreSameException < Aws::EmptyStructure; end
+
+    # The specified blob does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobIdDoesNotExistException AWS API Documentation
+    #
+    class BlobIdDoesNotExistException < Aws::EmptyStructure; end
+
+    # A blob ID is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobIdRequiredException AWS API Documentation
+    #
+    class BlobIdRequiredException < Aws::EmptyStructure; end
+
     # Returns information about a specific Git blob object.
     #
     # @!attribute [rw] blob_id
@@ -668,6 +772,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The specified branch does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchDoesNotExistException AWS API Documentation
+    #
+    class BranchDoesNotExistException < Aws::EmptyStructure; end
+
     # Returns information about a branch.
     #
     # @!attribute [rw] branch_name
@@ -685,6 +795,53 @@ module Aws::CodeCommit
       :commit_id)
       include Aws::Structure
     end
+
+    # The specified branch name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameExistsException AWS API Documentation
+    #
+    class BranchNameExistsException < Aws::EmptyStructure; end
+
+    # The specified branch name is not valid because it is a tag name. Enter
+    # the name of a branch in the repository. For a list of valid branch
+    # names, use ListBranches.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameIsTagNameException AWS API Documentation
+    #
+    class BranchNameIsTagNameException < Aws::EmptyStructure; end
+
+    # A branch name is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameRequiredException AWS API Documentation
+    #
+    class BranchNameRequiredException < Aws::EmptyStructure; end
+
+    # The approval rule cannot be deleted from the pull request because it
+    # was created by an approval rule template and applied to the pull
+    # request automatically.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CannotDeleteApprovalRuleFromTemplateException AWS API Documentation
+    #
+    class CannotDeleteApprovalRuleFromTemplateException < Aws::EmptyStructure; end
+
+    # The approval rule cannot be modified for the pull request because it
+    # was created by an approval rule template and applied to the pull
+    # request automatically.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CannotModifyApprovalRuleFromTemplateException AWS API Documentation
+    #
+    class CannotModifyApprovalRuleFromTemplateException < Aws::EmptyStructure; end
+
+    # A client request token is required. A client request token is an
+    # unique, client-generated idempotency token that, when provided in a
+    # request, ensures the request cannot be repeated with a changed
+    # parameter. If a request is received with the same parameters and a
+    # token is included, the request returns information about the initial
+    # request that used that token.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ClientRequestTokenRequiredException AWS API Documentation
+    #
+    class ClientRequestTokenRequiredException < Aws::EmptyStructure; end
 
     # Returns information about a specific comment.
     #
@@ -738,6 +895,46 @@ module Aws::CodeCommit
       :client_request_token)
       include Aws::Structure
     end
+
+    # The comment is empty. You must provide some content for a comment. The
+    # content cannot be null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentContentRequiredException AWS API Documentation
+    #
+    class CommentContentRequiredException < Aws::EmptyStructure; end
+
+    # The comment is too large. Comments are limited to 1,000 characters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentContentSizeLimitExceededException AWS API Documentation
+    #
+    class CommentContentSizeLimitExceededException < Aws::EmptyStructure; end
+
+    # This comment has already been deleted. You cannot edit or delete a
+    # deleted comment.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentDeletedException AWS API Documentation
+    #
+    class CommentDeletedException < Aws::EmptyStructure; end
+
+    # No comment exists with the provided ID. Verify that you have used the
+    # correct ID, and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentDoesNotExistException AWS API Documentation
+    #
+    class CommentDoesNotExistException < Aws::EmptyStructure; end
+
+    # The comment ID is missing or null. A comment ID is required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentIdRequiredException AWS API Documentation
+    #
+    class CommentIdRequiredException < Aws::EmptyStructure; end
+
+    # You cannot modify or delete this comment. Only comment authors can
+    # modify or delete their comments.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommentNotCreatedByCallerException AWS API Documentation
+    #
+    class CommentNotCreatedByCallerException < Aws::EmptyStructure; end
 
     # Returns information about comments on the comparison between two
     # commits.
@@ -905,6 +1102,60 @@ module Aws::CodeCommit
       :additional_data)
       include Aws::Structure
     end
+
+    # The specified commit does not exist or no commit was specified, and
+    # the specified repository has no default branch.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitDoesNotExistException AWS API Documentation
+    #
+    class CommitDoesNotExistException < Aws::EmptyStructure; end
+
+    # The specified commit ID does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitIdDoesNotExistException AWS API Documentation
+    #
+    class CommitIdDoesNotExistException < Aws::EmptyStructure; end
+
+    # A commit ID was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitIdRequiredException AWS API Documentation
+    #
+    class CommitIdRequiredException < Aws::EmptyStructure; end
+
+    # The maximum number of allowed commit IDs in a batch request is 100.
+    # Verify that your batch requests contains no more than 100 commit IDs,
+    # and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitIdsLimitExceededException AWS API Documentation
+    #
+    class CommitIdsLimitExceededException < Aws::EmptyStructure; end
+
+    # A list of commit IDs is required, but was either not specified or the
+    # list was empty.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitIdsListRequiredException AWS API Documentation
+    #
+    class CommitIdsListRequiredException < Aws::EmptyStructure; end
+
+    # The commit message is too long. Provide a shorter string.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitMessageLengthExceededException AWS API Documentation
+    #
+    class CommitMessageLengthExceededException < Aws::EmptyStructure; end
+
+    # A commit was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CommitRequiredException AWS API Documentation
+    #
+    class CommitRequiredException < Aws::EmptyStructure; end
+
+    # The merge cannot be completed because the target branch has been
+    # modified. Another user might have modified the target branch while the
+    # merge was in progress. Wait a few minutes, and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ConcurrentReferenceUpdateException AWS API Documentation
+    #
+    class ConcurrentReferenceUpdateException < Aws::EmptyStructure; end
 
     # Information about conflicts in a merge operation.
     #
@@ -1641,6 +1892,14 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The specified branch is the default branch for the repository, and
+    # cannot be deleted. To delete this branch, you must first set another
+    # branch as the default branch.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DefaultBranchCannotBeDeletedException AWS API Documentation
+    #
+    class DefaultBranchCannotBeDeletedException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteApprovalRuleTemplateInput
     #   data as a hash:
     #
@@ -2152,6 +2411,15 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A file cannot be added to the repository because the specified path
+    # name has the same name as a file that already exists in this
+    # repository. Either provide a different name for the file, or specify a
+    # different path for the file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DirectoryNameConflictsWithFileNameException AWS API Documentation
+    #
+    class DirectoryNameConflictsWithFileNameException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateApprovalRuleTemplateFromRepositoryInput
     #   data as a hash:
     #
@@ -2177,6 +2445,36 @@ module Aws::CodeCommit
       :repository_name)
       include Aws::Structure
     end
+
+    # An encryption integrity check failed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionIntegrityChecksFailedException AWS API Documentation
+    #
+    class EncryptionIntegrityChecksFailedException < Aws::EmptyStructure; end
+
+    # An encryption key could not be accessed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyAccessDeniedException AWS API Documentation
+    #
+    class EncryptionKeyAccessDeniedException < Aws::EmptyStructure; end
+
+    # The encryption key is disabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyDisabledException AWS API Documentation
+    #
+    class EncryptionKeyDisabledException < Aws::EmptyStructure; end
+
+    # No encryption key was found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyNotFoundException AWS API Documentation
+    #
+    class EncryptionKeyNotFoundException < Aws::EmptyStructure; end
+
+    # The encryption key is not available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/EncryptionKeyUnavailableException AWS API Documentation
+    #
+    class EncryptionKeyUnavailableException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass EvaluatePullRequestApprovalRulesInput
     #   data as a hash:
@@ -2279,6 +2577,44 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The commit cannot be created because both a source file and file
+    # content have been specified for the same file. You cannot provide
+    # both. Either specify a source file or provide the file content
+    # directly.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileContentAndSourceFileSpecifiedException AWS API Documentation
+    #
+    class FileContentAndSourceFileSpecifiedException < Aws::EmptyStructure; end
+
+    # The file cannot be added because it is empty. Empty files cannot be
+    # added to the repository with this API.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileContentRequiredException AWS API Documentation
+    #
+    class FileContentRequiredException < Aws::EmptyStructure; end
+
+    # The file cannot be added because it is too large. The maximum file
+    # size is 6 MB, and the combined file content change size is 7 MB.
+    # Consider making these changes using a Git client.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileContentSizeLimitExceededException AWS API Documentation
+    #
+    class FileContentSizeLimitExceededException < Aws::EmptyStructure; end
+
+    # The specified file does not exist. Verify that you have used the
+    # correct file name, full path, and extension.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileDoesNotExistException AWS API Documentation
+    #
+    class FileDoesNotExistException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because no files have been specified as
+    # added, updated, or changed (PutFile or DeleteFile) for the commit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileEntryRequiredException AWS API Documentation
+    #
+    class FileEntryRequiredException < Aws::EmptyStructure; end
+
     # A file to be added, updated, or deleted as part of a commit.
     #
     # @!attribute [rw] absolute_path
@@ -2304,6 +2640,13 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The commit cannot be created because no file mode has been specified.
+    # A file mode is required to update mode permissions for a file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileModeRequiredException AWS API Documentation
+    #
+    class FileModeRequiredException < Aws::EmptyStructure; end
+
     # Information about file modes in a merge or pull request.
     #
     # @!attribute [rw] source
@@ -2328,6 +2671,23 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A file cannot be added to the repository because the specified file
+    # name has the same name as a directory in this repository. Either
+    # provide another name for the file, or add the file in a directory that
+    # does not match the file name.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileNameConflictsWithDirectoryNameException AWS API Documentation
+    #
+    class FileNameConflictsWithDirectoryNameException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because a specified file path points to a
+    # submodule. Verify that the destination files have valid file paths
+    # that do not point to a submodule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FilePathConflictsWithSubmodulePathException AWS API Documentation
+    #
+    class FilePathConflictsWithSubmodulePathException < Aws::EmptyStructure; end
+
     # Information about the size of files in a merge or pull request.
     #
     # @!attribute [rw] source
@@ -2350,6 +2710,18 @@ module Aws::CodeCommit
       :base)
       include Aws::Structure
     end
+
+    # The specified file exceeds the file size limit for AWS CodeCommit. For
+    # more information about limits in AWS CodeCommit, see [AWS CodeCommit
+    # User Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FileTooLargeException AWS API Documentation
+    #
+    class FileTooLargeException < Aws::EmptyStructure; end
 
     # Returns information about a folder in a repository.
     #
@@ -2375,6 +2747,22 @@ module Aws::CodeCommit
       :relative_path)
       include Aws::Structure
     end
+
+    # The commit cannot be created because at least one of the overall
+    # changes in the commit results in a folder whose contents exceed the
+    # limit of 6 MB. Either reduce the number and size of your changes, or
+    # split the changes across multiple folders.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FolderContentSizeLimitExceededException AWS API Documentation
+    #
+    class FolderContentSizeLimitExceededException < Aws::EmptyStructure; end
+
+    # The specified folder does not exist. Either the folder name is not
+    # correct, or you did not enter the full path to the folder.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/FolderDoesNotExistException AWS API Documentation
+    #
+    class FolderDoesNotExistException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass GetApprovalRuleTemplateInput
     #   data as a hash:
@@ -3392,6 +3780,454 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The client request token is not valid. Either the token is not in a
+    # valid format, or the token has been used in a previous request and
+    # cannot be reused.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/IdempotencyParameterMismatchException AWS API Documentation
+    #
+    class IdempotencyParameterMismatchException < Aws::EmptyStructure; end
+
+    # The Amazon Resource Name (ARN) is not valid. Make sure that you have
+    # provided the full ARN for the user who initiated the change for the
+    # pull request, and then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidActorArnException AWS API Documentation
+    #
+    class InvalidActorArnException < Aws::EmptyStructure; end
+
+    # The content for the approval rule is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalRuleContentException AWS API Documentation
+    #
+    class InvalidApprovalRuleContentException < Aws::EmptyStructure; end
+
+    # The name for the approval rule is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalRuleNameException AWS API Documentation
+    #
+    class InvalidApprovalRuleNameException < Aws::EmptyStructure; end
+
+    # The content of the approval rule template is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalRuleTemplateContentException AWS API Documentation
+    #
+    class InvalidApprovalRuleTemplateContentException < Aws::EmptyStructure; end
+
+    # The description for the approval rule template is not valid because it
+    # exceeds the maximum characters allowed for a description. For more
+    # information about limits in AWS CodeCommit, see [AWS CodeCommit User
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalRuleTemplateDescriptionException AWS API Documentation
+    #
+    class InvalidApprovalRuleTemplateDescriptionException < Aws::EmptyStructure; end
+
+    # The name of the approval rule template is not valid. Template names
+    # must be between 1 and 100 valid characters in length. For more
+    # information about limits in AWS CodeCommit, see [AWS CodeCommit User
+    # Guide][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalRuleTemplateNameException AWS API Documentation
+    #
+    class InvalidApprovalRuleTemplateNameException < Aws::EmptyStructure; end
+
+    # The state for the approval is not valid. Valid values include APPROVE
+    # and REVOKE.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidApprovalStateException AWS API Documentation
+    #
+    class InvalidApprovalStateException < Aws::EmptyStructure; end
+
+    # The Amazon Resource Name (ARN) is not valid. Make sure that you have
+    # provided the full ARN for the author of the pull request, and then try
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidAuthorArnException AWS API Documentation
+    #
+    class InvalidAuthorArnException < Aws::EmptyStructure; end
+
+    # The specified blob is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidBlobIdException AWS API Documentation
+    #
+    class InvalidBlobIdException < Aws::EmptyStructure; end
+
+    # The specified reference name is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidBranchNameException AWS API Documentation
+    #
+    class InvalidBranchNameException < Aws::EmptyStructure; end
+
+    # The client request token is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidClientRequestTokenException AWS API Documentation
+    #
+    class InvalidClientRequestTokenException < Aws::EmptyStructure; end
+
+    # The comment ID is not in a valid format. Make sure that you have
+    # provided the full comment ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidCommentIdException AWS API Documentation
+    #
+    class InvalidCommentIdException < Aws::EmptyStructure; end
+
+    # The specified commit is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidCommitException AWS API Documentation
+    #
+    class InvalidCommitException < Aws::EmptyStructure; end
+
+    # The specified commit ID is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidCommitIdException AWS API Documentation
+    #
+    class InvalidCommitIdException < Aws::EmptyStructure; end
+
+    # The specified conflict detail level is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidConflictDetailLevelException AWS API Documentation
+    #
+    class InvalidConflictDetailLevelException < Aws::EmptyStructure; end
+
+    # The specified conflict resolution list is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidConflictResolutionException AWS API Documentation
+    #
+    class InvalidConflictResolutionException < Aws::EmptyStructure; end
+
+    # The specified conflict resolution strategy is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidConflictResolutionStrategyException AWS API Documentation
+    #
+    class InvalidConflictResolutionStrategyException < Aws::EmptyStructure; end
+
+    # The specified continuation token is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidContinuationTokenException AWS API Documentation
+    #
+    class InvalidContinuationTokenException < Aws::EmptyStructure; end
+
+    # The specified deletion parameter is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidDeletionParameterException AWS API Documentation
+    #
+    class InvalidDeletionParameterException < Aws::EmptyStructure; end
+
+    # The pull request description is not valid. Descriptions cannot be more
+    # than 1,000 characters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidDescriptionException AWS API Documentation
+    #
+    class InvalidDescriptionException < Aws::EmptyStructure; end
+
+    # The destination commit specifier is not valid. You must provide a
+    # valid branch name, tag, or full commit ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidDestinationCommitSpecifierException AWS API Documentation
+    #
+    class InvalidDestinationCommitSpecifierException < Aws::EmptyStructure; end
+
+    # The specified email address either contains one or more characters
+    # that are not allowed, or it exceeds the maximum number of characters
+    # allowed for an email address.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidEmailException AWS API Documentation
+    #
+    class InvalidEmailException < Aws::EmptyStructure; end
+
+    # The location of the file is not valid. Make sure that you include the
+    # file name and extension.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidFileLocationException AWS API Documentation
+    #
+    class InvalidFileLocationException < Aws::EmptyStructure; end
+
+    # The specified file mode permission is not valid. For a list of valid
+    # file mode permissions, see PutFile.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidFileModeException AWS API Documentation
+    #
+    class InvalidFileModeException < Aws::EmptyStructure; end
+
+    # The position is not valid. Make sure that the line number exists in
+    # the version of the file you want to comment on.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidFilePositionException AWS API Documentation
+    #
+    class InvalidFilePositionException < Aws::EmptyStructure; end
+
+    # The specified value for the number of conflict files to return is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidMaxConflictFilesException AWS API Documentation
+    #
+    class InvalidMaxConflictFilesException < Aws::EmptyStructure; end
+
+    # The specified value for the number of merge hunks to return is not
+    # valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidMaxMergeHunksException AWS API Documentation
+    #
+    class InvalidMaxMergeHunksException < Aws::EmptyStructure; end
+
+    # The specified number of maximum results is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidMaxResultsException AWS API Documentation
+    #
+    class InvalidMaxResultsException < Aws::EmptyStructure; end
+
+    # The specified merge option is not valid for this operation. Not all
+    # merge strategies are supported for all operations.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidMergeOptionException AWS API Documentation
+    #
+    class InvalidMergeOptionException < Aws::EmptyStructure; end
+
+    # The specified sort order is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidOrderException AWS API Documentation
+    #
+    class InvalidOrderException < Aws::EmptyStructure; end
+
+    # The override status is not valid. Valid statuses are OVERRIDE and
+    # REVOKE.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidOverrideStatusException AWS API Documentation
+    #
+    class InvalidOverrideStatusException < Aws::EmptyStructure; end
+
+    # The parent commit ID is not valid. The commit ID cannot be empty, and
+    # must match the head commit ID for the branch of the repository where
+    # you want to add or update a file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidParentCommitIdException AWS API Documentation
+    #
+    class InvalidParentCommitIdException < Aws::EmptyStructure; end
+
+    # The specified path is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPathException AWS API Documentation
+    #
+    class InvalidPathException < Aws::EmptyStructure; end
+
+    # The pull request event type is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPullRequestEventTypeException AWS API Documentation
+    #
+    class InvalidPullRequestEventTypeException < Aws::EmptyStructure; end
+
+    # The pull request ID is not valid. Make sure that you have provided the
+    # full ID and that the pull request is in the specified repository, and
+    # then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPullRequestIdException AWS API Documentation
+    #
+    class InvalidPullRequestIdException < Aws::EmptyStructure; end
+
+    # The pull request status is not valid. The only valid values are `OPEN`
+    # and `CLOSED`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPullRequestStatusException AWS API Documentation
+    #
+    class InvalidPullRequestStatusException < Aws::EmptyStructure; end
+
+    # The pull request status update is not valid. The only valid update is
+    # from `OPEN` to `CLOSED`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidPullRequestStatusUpdateException AWS API Documentation
+    #
+    class InvalidPullRequestStatusUpdateException < Aws::EmptyStructure; end
+
+    # The specified reference name format is not valid. Reference names must
+    # conform to the Git references format (for example, refs/heads/master).
+    # For more information, see [Git Internals - Git References][1] or
+    # consult your Git documentation.
+    #
+    #
+    #
+    # [1]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReferenceNameException AWS API Documentation
+    #
+    class InvalidReferenceNameException < Aws::EmptyStructure; end
+
+    # Either the enum is not in a valid format, or the specified file
+    # version enum is not valid in respect to the current file version.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRelativeFileVersionEnumException AWS API Documentation
+    #
+    class InvalidRelativeFileVersionEnumException < Aws::EmptyStructure; end
+
+    # Automerge was specified for resolving the conflict, but the
+    # replacement type is not valid or content is missing.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReplacementContentException AWS API Documentation
+    #
+    class InvalidReplacementContentException < Aws::EmptyStructure; end
+
+    # Automerge was specified for resolving the conflict, but the specified
+    # replacement type is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidReplacementTypeException AWS API Documentation
+    #
+    class InvalidReplacementTypeException < Aws::EmptyStructure; end
+
+    # The specified repository description is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryDescriptionException AWS API Documentation
+    #
+    class InvalidRepositoryDescriptionException < Aws::EmptyStructure; end
+
+    # A specified repository name is not valid.
+    #
+    # <note markdown="1"> This exception occurs only when a specified repository name is not
+    # valid. Other exceptions occur when a required repository parameter is
+    # missing, or when a specified repository does not exist.
+    #
+    #  </note>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryNameException AWS API Documentation
+    #
+    class InvalidRepositoryNameException < Aws::EmptyStructure; end
+
+    # One or more branch names specified for the trigger is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerBranchNameException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerBranchNameException < Aws::EmptyStructure; end
+
+    # The custom data provided for the trigger is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerCustomDataException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerCustomDataException < Aws::EmptyStructure; end
+
+    # The Amazon Resource Name (ARN) for the trigger is not valid for the
+    # specified destination. The most common reason for this error is that
+    # the ARN does not meet the requirements for the service type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerDestinationArnException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerDestinationArnException < Aws::EmptyStructure; end
+
+    # One or more events specified for the trigger is not valid. Check to
+    # make sure that all events specified match the requirements for allowed
+    # events.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerEventsException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerEventsException < Aws::EmptyStructure; end
+
+    # The name of the trigger is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerNameException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerNameException < Aws::EmptyStructure; end
+
+    # The AWS Region for the trigger target does not match the AWS Region
+    # for the repository. Triggers must be created in the same Region as the
+    # target for the trigger.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRepositoryTriggerRegionException AWS API Documentation
+    #
+    class InvalidRepositoryTriggerRegionException < Aws::EmptyStructure; end
+
+    # The value for the resource ARN is not valid. For more information
+    # about resources in AWS CodeCommit, see [CodeCommit Resources and
+    # Operations][1] in the AWS CodeCommit User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidResourceArnException AWS API Documentation
+    #
+    class InvalidResourceArnException < Aws::EmptyStructure; end
+
+    # The revision ID is not valid. Use GetPullRequest to determine the
+    # value.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRevisionIdException AWS API Documentation
+    #
+    class InvalidRevisionIdException < Aws::EmptyStructure; end
+
+    # The SHA-256 hash signature for the rule content is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidRuleContentSha256Exception AWS API Documentation
+    #
+    class InvalidRuleContentSha256Exception < Aws::EmptyStructure; end
+
+    # The specified sort by value is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidSortByException AWS API Documentation
+    #
+    class InvalidSortByException < Aws::EmptyStructure; end
+
+    # The source commit specifier is not valid. You must provide a valid
+    # branch name, tag, or full commit ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidSourceCommitSpecifierException AWS API Documentation
+    #
+    class InvalidSourceCommitSpecifierException < Aws::EmptyStructure; end
+
+    # The specified tag is not valid. Key names cannot be prefixed with
+    # aws:.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidSystemTagUsageException AWS API Documentation
+    #
+    class InvalidSystemTagUsageException < Aws::EmptyStructure; end
+
+    # The list of tags is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTagKeysListException AWS API Documentation
+    #
+    class InvalidTagKeysListException < Aws::EmptyStructure; end
+
+    # The map of tags is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTagsMapException AWS API Documentation
+    #
+    class InvalidTagsMapException < Aws::EmptyStructure; end
+
+    # The specified target branch is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTargetBranchException AWS API Documentation
+    #
+    class InvalidTargetBranchException < Aws::EmptyStructure; end
+
+    # The target for the pull request is not valid. A target must contain
+    # the full values for the repository name, source branch, and
+    # destination branch for the pull request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTargetException AWS API Documentation
+    #
+    class InvalidTargetException < Aws::EmptyStructure; end
+
+    # The targets for the pull request is not valid or not in a valid
+    # format. Targets are a list of target objects. Each target object must
+    # contain the full values for the repository name, source branch, and
+    # destination branch for a pull request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTargetsException AWS API Documentation
+    #
+    class InvalidTargetsException < Aws::EmptyStructure; end
+
+    # The title of the pull request is not valid. Pull request titles cannot
+    # exceed 100 characters in length.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/InvalidTitleException AWS API Documentation
+    #
+    class InvalidTitleException < Aws::EmptyStructure; end
+
     # Information about whether a file is binary or textual in a merge or
     # pull request operation.
     #
@@ -3809,6 +4645,84 @@ module Aws::CodeCommit
       :relative_file_version)
       include Aws::Structure
     end
+
+    # The pull request cannot be merged automatically into the destination
+    # branch. You must manually merge the branches and resolve any
+    # conflicts.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ManualMergeRequiredException AWS API Documentation
+    #
+    class ManualMergeRequiredException < Aws::EmptyStructure; end
+
+    # The number of branches for the trigger was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumBranchesExceededException AWS API Documentation
+    #
+    class MaximumBranchesExceededException < Aws::EmptyStructure; end
+
+    # The number of allowed conflict resolution entries was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumConflictResolutionEntriesExceededException AWS API Documentation
+    #
+    class MaximumConflictResolutionEntriesExceededException < Aws::EmptyStructure; end
+
+    # The number of files to load exceeds the allowed limit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumFileContentToLoadExceededException AWS API Documentation
+    #
+    class MaximumFileContentToLoadExceededException < Aws::EmptyStructure; end
+
+    # The number of specified files to change as part of this commit exceeds
+    # the maximum number of files that can be changed in a single commit.
+    # Consider using a Git client for these changes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumFileEntriesExceededException AWS API Documentation
+    #
+    class MaximumFileEntriesExceededException < Aws::EmptyStructure; end
+
+    # The number of items to compare between the source or destination
+    # branches and the merge base has exceeded the maximum allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumItemsToCompareExceededException AWS API Documentation
+    #
+    class MaximumItemsToCompareExceededException < Aws::EmptyStructure; end
+
+    # The number of approvals required for the approval rule exceeds the
+    # maximum number allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumNumberOfApprovalsExceededException AWS API Documentation
+    #
+    class MaximumNumberOfApprovalsExceededException < Aws::EmptyStructure; end
+
+    # You cannot create the pull request because the repository has too many
+    # open pull requests. The maximum number of open pull requests for a
+    # repository is 1,000. Close one or more open pull requests, and then
+    # try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumOpenPullRequestsExceededException AWS API Documentation
+    #
+    class MaximumOpenPullRequestsExceededException < Aws::EmptyStructure; end
+
+    # The maximum number of allowed repository names was exceeded.
+    # Currently, this number is 100.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumRepositoryNamesExceededException AWS API Documentation
+    #
+    class MaximumRepositoryNamesExceededException < Aws::EmptyStructure; end
+
+    # The number of triggers allowed for the repository was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumRepositoryTriggersExceededException AWS API Documentation
+    #
+    class MaximumRepositoryTriggersExceededException < Aws::EmptyStructure; end
+
+    # The maximum number of approval rule templates for a repository has
+    # been exceeded. You cannot associate more than 25 approval rule
+    # templates with a repository.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MaximumRuleTemplatesAssociatedWithRepositoryException AWS API Documentation
+    #
+    class MaximumRuleTemplatesAssociatedWithRepositoryException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass MergeBranchesByFastForwardInput
     #   data as a hash:
@@ -4232,6 +5146,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A merge option or stategy is required, and none was provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MergeOptionRequiredException AWS API Documentation
+    #
+    class MergeOptionRequiredException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass MergePullRequestByFastForwardInput
     #   data as a hash:
     #
@@ -4517,6 +5437,50 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # More than one conflict resolution entries exists for the conflict. A
+    # conflict can have only one conflict resolution entry.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MultipleConflictResolutionEntriesException AWS API Documentation
+    #
+    class MultipleConflictResolutionEntriesException < Aws::EmptyStructure; end
+
+    # You cannot include more than one repository in a pull request. Make
+    # sure you have specified only one repository name in your request, and
+    # then try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/MultipleRepositoriesInPullRequestException AWS API Documentation
+    #
+    class MultipleRepositoriesInPullRequestException < Aws::EmptyStructure; end
+
+    # The user name is not valid because it has exceeded the character limit
+    # for author names.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/NameLengthExceededException AWS API Documentation
+    #
+    class NameLengthExceededException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because no changes will be made to the
+    # repository as a result of this commit. A commit must contain at least
+    # one change.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/NoChangeException AWS API Documentation
+    #
+    class NoChangeException < Aws::EmptyStructure; end
+
+    # The maximum number of approval rule templates has been exceeded for
+    # this AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/NumberOfRuleTemplatesExceededException AWS API Documentation
+    #
+    class NumberOfRuleTemplatesExceededException < Aws::EmptyStructure; end
+
+    # The approval rule cannot be added. The pull request has the maximum
+    # number of approval rules associated with it.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/NumberOfRulesExceededException AWS API Documentation
+    #
+    class NumberOfRulesExceededException < Aws::EmptyStructure; end
+
     # Information about the type of an object in a merge operation.
     #
     # @!attribute [rw] source
@@ -4559,6 +5523,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The pull request has already had its approval rules set to override.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/OverrideAlreadySetException AWS API Documentation
+    #
+    class OverrideAlreadySetException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass OverridePullRequestApprovalRulesInput
     #   data as a hash:
     #
@@ -4595,6 +5565,49 @@ module Aws::CodeCommit
       :override_status)
       include Aws::Structure
     end
+
+    # An override status is required, but no value was provided. Valid
+    # values include OVERRIDE and REVOKE.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/OverrideStatusRequiredException AWS API Documentation
+    #
+    class OverrideStatusRequiredException < Aws::EmptyStructure; end
+
+    # The parent commit ID is not valid because it does not exist. The
+    # specified parent commit ID does not exist in the specified branch of
+    # the repository.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ParentCommitDoesNotExistException AWS API Documentation
+    #
+    class ParentCommitDoesNotExistException < Aws::EmptyStructure; end
+
+    # The file could not be added because the provided parent commit ID is
+    # not the current tip of the specified branch. To view the full commit
+    # ID of the current head of the branch, use GetBranch.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ParentCommitIdOutdatedException AWS API Documentation
+    #
+    class ParentCommitIdOutdatedException < Aws::EmptyStructure; end
+
+    # A parent commit ID is required. To view the full commit ID of a branch
+    # in a repository, use GetBranch or a Git command (for example, git pull
+    # or git log).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ParentCommitIdRequiredException AWS API Documentation
+    #
+    class ParentCommitIdRequiredException < Aws::EmptyStructure; end
+
+    # The specified path does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PathDoesNotExistException AWS API Documentation
+    #
+    class PathDoesNotExistException < Aws::EmptyStructure; end
+
+    # The folderPath for a location cannot be null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PathRequiredException AWS API Documentation
+    #
+    class PathRequiredException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PostCommentForComparedCommitInput
     #   data as a hash:
@@ -4956,6 +5969,28 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The pull request status cannot be updated because it is already
+    # closed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestAlreadyClosedException AWS API Documentation
+    #
+    class PullRequestAlreadyClosedException < Aws::EmptyStructure; end
+
+    # The pull request cannot be merged because one or more approval rules
+    # applied to the pull request have conditions that have not been met.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestApprovalRulesNotSatisfiedException AWS API Documentation
+    #
+    class PullRequestApprovalRulesNotSatisfiedException < Aws::EmptyStructure; end
+
+    # The approval cannot be applied because the user approving the pull
+    # request matches the user who created the pull request. You cannot
+    # approve a pull request that you created.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestCannotBeApprovedByAuthorException AWS API Documentation
+    #
+    class PullRequestCannotBeApprovedByAuthorException < Aws::EmptyStructure; end
+
     # Metadata about the pull request that is used when comparing the pull
     # request source with its destination.
     #
@@ -4987,6 +6022,14 @@ module Aws::CodeCommit
       :merge_base)
       include Aws::Structure
     end
+
+    # The pull request ID could not be found. Make sure that you have
+    # specified the correct repository name and pull request ID, and then
+    # try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestDoesNotExistException AWS API Documentation
+    #
+    class PullRequestDoesNotExistException < Aws::EmptyStructure; end
 
     # Returns information about a pull request event.
     #
@@ -5059,6 +6102,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A pull request ID is required, but none was provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestIdRequiredException AWS API Documentation
+    #
+    class PullRequestIdRequiredException < Aws::EmptyStructure; end
+
     # Returns information about the change in the merge state for a pull
     # request event.
     #
@@ -5126,6 +6175,12 @@ module Aws::CodeCommit
       :pull_request_status)
       include Aws::Structure
     end
+
+    # A pull request status is required, but none was provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PullRequestStatusRequiredException AWS API Documentation
+    #
+    class PullRequestStatusRequiredException < Aws::EmptyStructure; end
 
     # Returns information about a pull request target.
     #
@@ -5223,6 +6278,13 @@ module Aws::CodeCommit
       :source_file)
       include Aws::Structure
     end
+
+    # The commit cannot be created because one or more files specified in
+    # the commit reference both a file and a folder.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileEntryConflictException AWS API Documentation
+    #
+    class PutFileEntryConflictException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutFileInput
     #   data as a hash:
@@ -5379,6 +6441,25 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The specified reference does not exist. You must provide a full commit
+    # ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReferenceDoesNotExistException AWS API Documentation
+    #
+    class ReferenceDoesNotExistException < Aws::EmptyStructure; end
+
+    # A reference name is required, but none was provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReferenceNameRequiredException AWS API Documentation
+    #
+    class ReferenceNameRequiredException < Aws::EmptyStructure; end
+
+    # The specified reference is not a supported type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReferenceTypeNotSupportedException AWS API Documentation
+    #
+    class ReferenceTypeNotSupportedException < Aws::EmptyStructure; end
+
     # Information about a replacement content entry in the conflict of a
     # merge or pull request operation.
     #
@@ -5419,6 +6500,31 @@ module Aws::CodeCommit
       :file_mode)
       include Aws::Structure
     end
+
+    # USE\_NEW\_CONTENT was specified, but no replacement content has been
+    # provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReplacementContentRequiredException AWS API Documentation
+    #
+    class ReplacementContentRequiredException < Aws::EmptyStructure; end
+
+    # A replacement type is required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ReplacementTypeRequiredException AWS API Documentation
+    #
+    class ReplacementTypeRequiredException < Aws::EmptyStructure; end
+
+    # The specified repository does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryDoesNotExistException AWS API Documentation
+    #
+    class RepositoryDoesNotExistException < Aws::EmptyStructure; end
+
+    # A repository resource limit was exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryLimitExceededException AWS API Documentation
+    #
+    class RepositoryLimitExceededException < Aws::EmptyStructure; end
 
     # Information about a repository.
     #
@@ -5479,6 +6585,12 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # The specified repository name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNameExistsException AWS API Documentation
+    #
+    class RepositoryNameExistsException < Aws::EmptyStructure; end
+
     # Information about a repository name and ID.
     #
     # @!attribute [rw] repository_name
@@ -5496,6 +6608,27 @@ module Aws::CodeCommit
       :repository_id)
       include Aws::Structure
     end
+
+    # A repository name is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNameRequiredException AWS API Documentation
+    #
+    class RepositoryNameRequiredException < Aws::EmptyStructure; end
+
+    # At least one repository name object is required, but was not
+    # specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNamesRequiredException AWS API Documentation
+    #
+    class RepositoryNamesRequiredException < Aws::EmptyStructure; end
+
+    # The repository does not contain any pull requests with that pull
+    # request ID. Use GetPullRequest to verify the correct repository name
+    # for the pull request ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNotAssociatedWithPullRequestException AWS API Documentation
+    #
+    class RepositoryNotAssociatedWithPullRequestException < Aws::EmptyStructure; end
 
     # Information about a trigger for a repository.
     #
@@ -5554,6 +6687,26 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # At least one branch name is required, but was not specified in the
+    # trigger configuration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerBranchNameListRequiredException AWS API Documentation
+    #
+    class RepositoryTriggerBranchNameListRequiredException < Aws::EmptyStructure; end
+
+    # A destination ARN for the target service for the trigger is required,
+    # but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerDestinationArnRequiredException AWS API Documentation
+    #
+    class RepositoryTriggerDestinationArnRequiredException < Aws::EmptyStructure; end
+
+    # At least one event for the trigger is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerEventsListRequiredException AWS API Documentation
+    #
+    class RepositoryTriggerEventsListRequiredException < Aws::EmptyStructure; end
+
     # A trigger failed to run.
     #
     # @!attribute [rw] trigger
@@ -5571,6 +6724,70 @@ module Aws::CodeCommit
       :failure_message)
       include Aws::Structure
     end
+
+    # A name for the trigger is required, but was not specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerNameRequiredException AWS API Documentation
+    #
+    class RepositoryTriggerNameRequiredException < Aws::EmptyStructure; end
+
+    # The list of triggers for the repository is required, but was not
+    # specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggersListRequiredException AWS API Documentation
+    #
+    class RepositoryTriggersListRequiredException < Aws::EmptyStructure; end
+
+    # A valid Amazon Resource Name (ARN) for an AWS CodeCommit resource is
+    # required. For a list of valid resources in AWS CodeCommit, see
+    # [CodeCommit Resources and Operations][1] in the AWS CodeCommit User
+    # Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ResourceArnRequiredException AWS API Documentation
+    #
+    class ResourceArnRequiredException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because one of the changes specifies
+    # copying or moving a .gitkeep file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RestrictedSourceFileException AWS API Documentation
+    #
+    class RestrictedSourceFileException < Aws::EmptyStructure; end
+
+    # A revision ID is required, but was not provided.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RevisionIdRequiredException AWS API Documentation
+    #
+    class RevisionIdRequiredException < Aws::EmptyStructure; end
+
+    # The revision ID provided in the request does not match the current
+    # revision ID. Use GetPullRequest to retrieve the current revision ID.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RevisionNotCurrentException AWS API Documentation
+    #
+    class RevisionNotCurrentException < Aws::EmptyStructure; end
+
+    # The file was not added or updated because the content of the file is
+    # exactly the same as the content of that file in the repository and
+    # branch that you specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SameFileContentException AWS API Documentation
+    #
+    class SameFileContentException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because one or more changes in this
+    # commit duplicate actions in the same file path. For example, you
+    # cannot make the same delete request to the same file in the same file
+    # path twice, or make a delete request and a move request to the same
+    # file as part of the same commit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SamePathRequestException AWS API Documentation
+    #
+    class SamePathRequestException < Aws::EmptyStructure; end
 
     # Information about the file mode changes.
     #
@@ -5597,6 +6814,21 @@ module Aws::CodeCommit
       :file_mode)
       include Aws::Structure
     end
+
+    # The source branch and destination branch for the pull request are the
+    # same. You must specify different branches for the source and
+    # destination.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceAndDestinationAreSameException AWS API Documentation
+    #
+    class SourceAndDestinationAreSameException < Aws::EmptyStructure; end
+
+    # The commit cannot be created because no source files or file content
+    # have been specified for the commit.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/SourceFileOrContentRequiredException AWS API Documentation
+    #
+    class SourceFileOrContentRequiredException < Aws::EmptyStructure; end
 
     # Information about a source file that is part of changes made in a
     # commit.
@@ -5682,6 +6914,18 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # A list of tag keys is required. The list cannot be empty or null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagKeysListRequiredException AWS API Documentation
+    #
+    class TagKeysListRequiredException < Aws::EmptyStructure; end
+
+    # The tag policy is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagPolicyException AWS API Documentation
+    #
+    class TagPolicyException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass TagResourceInput
     #   data as a hash:
     #
@@ -5708,6 +6952,12 @@ module Aws::CodeCommit
       :tags)
       include Aws::Structure
     end
+
+    # A map of tags is required.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TagsMapRequiredException AWS API Documentation
+    #
+    class TagsMapRequiredException < Aws::EmptyStructure; end
 
     # Returns information about a target for a pull request.
     #
@@ -5742,6 +6992,20 @@ module Aws::CodeCommit
       :destination_reference)
       include Aws::Structure
     end
+
+    # A pull request target is required. It cannot be empty or null. A pull
+    # request target must contain the full values for the repository name,
+    # source branch, and destination branch for the pull request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TargetRequiredException AWS API Documentation
+    #
+    class TargetRequiredException < Aws::EmptyStructure; end
+
+    # An array of target objects is required. It cannot be empty or null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TargetsRequiredException AWS API Documentation
+    #
+    class TargetsRequiredException < Aws::EmptyStructure; end
 
     # Represents the input of a test repository triggers operation.
     #
@@ -5797,6 +7061,36 @@ module Aws::CodeCommit
       :failed_executions)
       include Aws::Structure
     end
+
+    # The tip of the source branch in the destination repository does not
+    # match the tip of the source branch specified in your request. The pull
+    # request might have been updated. Make sure that you have the latest
+    # changes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TipOfSourceReferenceIsDifferentException AWS API Documentation
+    #
+    class TipOfSourceReferenceIsDifferentException < Aws::EmptyStructure; end
+
+    # The divergence between the tips of the provided commit specifiers is
+    # too great to determine whether there might be any merge conflicts.
+    # Locally compare the specifiers using `git diff` or a diff tool.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TipsDivergenceExceededException AWS API Documentation
+    #
+    class TipsDivergenceExceededException < Aws::EmptyStructure; end
+
+    # A pull request title is required. It cannot be empty or null.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TitleRequiredException AWS API Documentation
+    #
+    class TitleRequiredException < Aws::EmptyStructure; end
+
+    # The maximum number of tags for an AWS CodeCommit resource has been
+    # exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:

@@ -11,7 +11,7 @@ module Aws::AugmentedAIRuntime
 
     include Seahorse::Model
 
-    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
     DeleteHumanLoopRequest = Shapes::StructureShape.new(name: 'DeleteHumanLoopRequest')
@@ -20,16 +20,14 @@ module Aws::AugmentedAIRuntime
     DescribeHumanLoopResponse = Shapes::StructureShape.new(name: 'DescribeHumanLoopResponse')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
-    HumanLoopActivationReason = Shapes::StructureShape.new(name: 'HumanLoopActivationReason')
-    HumanLoopActivationResults = Shapes::StructureShape.new(name: 'HumanLoopActivationResults')
     HumanLoopArn = Shapes::StringShape.new(name: 'HumanLoopArn')
-    HumanLoopInputContent = Shapes::StructureShape.new(name: 'HumanLoopInputContent')
+    HumanLoopDataAttributes = Shapes::StructureShape.new(name: 'HumanLoopDataAttributes')
+    HumanLoopInput = Shapes::StructureShape.new(name: 'HumanLoopInput')
     HumanLoopName = Shapes::StringShape.new(name: 'HumanLoopName')
-    HumanLoopOutputContent = Shapes::StructureShape.new(name: 'HumanLoopOutputContent')
+    HumanLoopOutput = Shapes::StructureShape.new(name: 'HumanLoopOutput')
     HumanLoopStatus = Shapes::StringShape.new(name: 'HumanLoopStatus')
     HumanLoopSummaries = Shapes::ListShape.new(name: 'HumanLoopSummaries')
     HumanLoopSummary = Shapes::StructureShape.new(name: 'HumanLoopSummary')
-    HumanReviewDataAttributes = Shapes::StructureShape.new(name: 'HumanReviewDataAttributes')
     InputContent = Shapes::StringShape.new(name: 'InputContent')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListHumanLoopsRequest = Shapes::StructureShape.new(name: 'ListHumanLoopsRequest')
@@ -48,6 +46,9 @@ module Aws::AugmentedAIRuntime
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
 
     DeleteHumanLoopRequest.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location: "uri", location_name: "HumanLoopName"))
@@ -58,29 +59,24 @@ module Aws::AugmentedAIRuntime
     DescribeHumanLoopRequest.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location: "uri", location_name: "HumanLoopName"))
     DescribeHumanLoopRequest.struct_class = Types::DescribeHumanLoopRequest
 
-    DescribeHumanLoopResponse.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTimestamp"))
+    DescribeHumanLoopResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeHumanLoopResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "FailureReason"))
     DescribeHumanLoopResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: String, location_name: "FailureCode"))
     DescribeHumanLoopResponse.add_member(:human_loop_status, Shapes::ShapeRef.new(shape: HumanLoopStatus, required: true, location_name: "HumanLoopStatus"))
     DescribeHumanLoopResponse.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location_name: "HumanLoopName"))
     DescribeHumanLoopResponse.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, required: true, location_name: "HumanLoopArn"))
     DescribeHumanLoopResponse.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location_name: "FlowDefinitionArn"))
-    DescribeHumanLoopResponse.add_member(:human_loop_input, Shapes::ShapeRef.new(shape: HumanLoopInputContent, required: true, location_name: "HumanLoopInput"))
-    DescribeHumanLoopResponse.add_member(:human_loop_output, Shapes::ShapeRef.new(shape: HumanLoopOutputContent, location_name: "HumanLoopOutput"))
+    DescribeHumanLoopResponse.add_member(:human_loop_output, Shapes::ShapeRef.new(shape: HumanLoopOutput, location_name: "HumanLoopOutput"))
     DescribeHumanLoopResponse.struct_class = Types::DescribeHumanLoopResponse
 
-    HumanLoopActivationReason.add_member(:conditions_matched, Shapes::ShapeRef.new(shape: Boolean, location_name: "ConditionsMatched"))
-    HumanLoopActivationReason.struct_class = Types::HumanLoopActivationReason
+    HumanLoopDataAttributes.add_member(:content_classifiers, Shapes::ShapeRef.new(shape: ContentClassifiers, required: true, location_name: "ContentClassifiers"))
+    HumanLoopDataAttributes.struct_class = Types::HumanLoopDataAttributes
 
-    HumanLoopActivationResults.add_member(:human_loop_activation_reason, Shapes::ShapeRef.new(shape: HumanLoopActivationReason, location_name: "HumanLoopActivationReason"))
-    HumanLoopActivationResults.add_member(:human_loop_activation_conditions_evaluation_results, Shapes::ShapeRef.new(shape: String, location_name: "HumanLoopActivationConditionsEvaluationResults"))
-    HumanLoopActivationResults.struct_class = Types::HumanLoopActivationResults
+    HumanLoopInput.add_member(:input_content, Shapes::ShapeRef.new(shape: InputContent, required: true, location_name: "InputContent"))
+    HumanLoopInput.struct_class = Types::HumanLoopInput
 
-    HumanLoopInputContent.add_member(:input_content, Shapes::ShapeRef.new(shape: InputContent, required: true, location_name: "InputContent"))
-    HumanLoopInputContent.struct_class = Types::HumanLoopInputContent
-
-    HumanLoopOutputContent.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OutputS3Uri"))
-    HumanLoopOutputContent.struct_class = Types::HumanLoopOutputContent
+    HumanLoopOutput.add_member(:output_s3_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OutputS3Uri"))
+    HumanLoopOutput.struct_class = Types::HumanLoopOutput
 
     HumanLoopSummaries.member = Shapes::ShapeRef.new(shape: HumanLoopSummary)
 
@@ -91,14 +87,12 @@ module Aws::AugmentedAIRuntime
     HumanLoopSummary.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, location_name: "FlowDefinitionArn"))
     HumanLoopSummary.struct_class = Types::HumanLoopSummary
 
-    HumanReviewDataAttributes.add_member(:content_classifiers, Shapes::ShapeRef.new(shape: ContentClassifiers, required: true, location_name: "ContentClassifiers"))
-    HumanReviewDataAttributes.struct_class = Types::HumanReviewDataAttributes
-
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: FailureReason, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
     ListHumanLoopsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "CreationTimeAfter"))
     ListHumanLoopsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "CreationTimeBefore"))
+    ListHumanLoopsRequest.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location: "querystring", location_name: "FlowDefinitionArn"))
     ListHumanLoopsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "SortOrder"))
     ListHumanLoopsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListHumanLoopsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults", metadata: {"box"=>true}))
@@ -116,12 +110,11 @@ module Aws::AugmentedAIRuntime
 
     StartHumanLoopRequest.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location_name: "HumanLoopName"))
     StartHumanLoopRequest.add_member(:flow_definition_arn, Shapes::ShapeRef.new(shape: FlowDefinitionArn, required: true, location_name: "FlowDefinitionArn"))
-    StartHumanLoopRequest.add_member(:human_loop_input, Shapes::ShapeRef.new(shape: HumanLoopInputContent, required: true, location_name: "HumanLoopInput"))
-    StartHumanLoopRequest.add_member(:data_attributes, Shapes::ShapeRef.new(shape: HumanReviewDataAttributes, location_name: "DataAttributes"))
+    StartHumanLoopRequest.add_member(:human_loop_input, Shapes::ShapeRef.new(shape: HumanLoopInput, required: true, location_name: "HumanLoopInput"))
+    StartHumanLoopRequest.add_member(:data_attributes, Shapes::ShapeRef.new(shape: HumanLoopDataAttributes, location_name: "DataAttributes"))
     StartHumanLoopRequest.struct_class = Types::StartHumanLoopRequest
 
     StartHumanLoopResponse.add_member(:human_loop_arn, Shapes::ShapeRef.new(shape: HumanLoopArn, location_name: "HumanLoopArn"))
-    StartHumanLoopResponse.add_member(:human_loop_activation_results, Shapes::ShapeRef.new(shape: HumanLoopActivationResults, location_name: "HumanLoopActivationResults"))
     StartHumanLoopResponse.struct_class = Types::StartHumanLoopResponse
 
     StopHumanLoopRequest.add_member(:human_loop_name, Shapes::ShapeRef.new(shape: HumanLoopName, required: true, location_name: "HumanLoopName"))
@@ -204,6 +197,7 @@ module Aws::AugmentedAIRuntime
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:stop_human_loop, Seahorse::Model::Operation.new.tap do |o|

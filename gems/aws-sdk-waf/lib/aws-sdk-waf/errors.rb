@@ -58,6 +58,17 @@ module Aws::WAF
 
     end
 
+    class WAFInvalidAccountException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAF::Types::WAFInvalidAccountException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class WAFInvalidOperationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

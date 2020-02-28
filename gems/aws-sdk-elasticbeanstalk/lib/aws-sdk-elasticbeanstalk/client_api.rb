@@ -422,6 +422,8 @@ module Aws::ElasticBeanstalk
     CheckDNSAvailabilityResultMessage.add_member(:fully_qualified_cname, Shapes::ShapeRef.new(shape: DNSCname, location_name: "FullyQualifiedCNAME"))
     CheckDNSAvailabilityResultMessage.struct_class = Types::CheckDNSAvailabilityResultMessage
 
+    CodeBuildNotInServiceRegionException.struct_class = Types::CodeBuildNotInServiceRegionException
+
     ComposeEnvironmentsMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ComposeEnvironmentsMessage.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, location_name: "GroupName"))
     ComposeEnvironmentsMessage.add_member(:version_labels, Shapes::ShapeRef.new(shape: VersionLabels, location_name: "VersionLabels"))
@@ -783,6 +785,10 @@ module Aws::ElasticBeanstalk
 
     InstancesHealthAttributes.member = Shapes::ShapeRef.new(shape: InstancesHealthAttribute)
 
+    InsufficientPrivilegesException.struct_class = Types::InsufficientPrivilegesException
+
+    InvalidRequestException.struct_class = Types::InvalidRequestException
+
     Latency.add_member(:p999, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "P999"))
     Latency.add_member(:p99, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "P99"))
     Latency.add_member(:p95, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "P95"))
@@ -856,6 +862,8 @@ module Aws::ElasticBeanstalk
 
     ManagedActionHistoryItems.member = Shapes::ShapeRef.new(shape: ManagedActionHistoryItem)
 
+    ManagedActionInvalidStateException.struct_class = Types::ManagedActionInvalidStateException
+
     ManagedActions.member = Shapes::ShapeRef.new(shape: ManagedAction)
 
     MaxAgeRule.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "Enabled"))
@@ -867,6 +875,8 @@ module Aws::ElasticBeanstalk
     MaxCountRule.add_member(:max_count, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "MaxCount"))
     MaxCountRule.add_member(:delete_source_from_s3, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "DeleteSourceFromS3"))
     MaxCountRule.struct_class = Types::MaxCountRule
+
+    OperationInProgressException.struct_class = Types::OperationInProgressException
 
     OptionRestrictionRegex.add_member(:pattern, Shapes::ShapeRef.new(shape: RegexPattern, location_name: "Pattern"))
     OptionRestrictionRegex.add_member(:label, Shapes::ShapeRef.new(shape: RegexLabel, location_name: "Label"))
@@ -932,6 +942,8 @@ module Aws::ElasticBeanstalk
 
     PlatformSummaryList.member = Shapes::ShapeRef.new(shape: PlatformSummary)
 
+    PlatformVersionStillReferencedException.struct_class = Types::PlatformVersionStillReferencedException
+
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Queue.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "URL"))
     Queue.struct_class = Types::Queue
@@ -947,6 +959,8 @@ module Aws::ElasticBeanstalk
     RequestEnvironmentInfoMessage.add_member(:info_type, Shapes::ShapeRef.new(shape: EnvironmentInfoType, required: true, location_name: "InfoType"))
     RequestEnvironmentInfoMessage.struct_class = Types::RequestEnvironmentInfoMessage
 
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourceQuota.add_member(:maximum, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "Maximum"))
     ResourceQuota.struct_class = Types::ResourceQuota
 
@@ -960,6 +974,8 @@ module Aws::ElasticBeanstalk
     ResourceTagsDescriptionMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     ResourceTagsDescriptionMessage.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ResourceTags"))
     ResourceTagsDescriptionMessage.struct_class = Types::ResourceTagsDescriptionMessage
+
+    ResourceTypeNotSupportedException.struct_class = Types::ResourceTypeNotSupportedException
 
     RestartAppServerMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     RestartAppServerMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
@@ -976,6 +992,10 @@ module Aws::ElasticBeanstalk
     S3Location.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     S3Location.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     S3Location.struct_class = Types::S3Location
+
+    S3LocationNotInServiceRegionException.struct_class = Types::S3LocationNotInServiceRegionException
+
+    S3SubscriptionRequiredException.struct_class = Types::S3SubscriptionRequiredException
 
     SingleInstanceHealth.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     SingleInstanceHealth.add_member(:health_status, Shapes::ShapeRef.new(shape: String, location_name: "HealthStatus"))
@@ -999,6 +1019,8 @@ module Aws::ElasticBeanstalk
     SourceBuildInformation.add_member(:source_repository, Shapes::ShapeRef.new(shape: SourceRepository, required: true, location_name: "SourceRepository"))
     SourceBuildInformation.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "SourceLocation"))
     SourceBuildInformation.struct_class = Types::SourceBuildInformation
+
+    SourceBundleDeletionException.struct_class = Types::SourceBundleDeletionException
 
     SourceConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     SourceConfiguration.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
@@ -1039,6 +1061,20 @@ module Aws::ElasticBeanstalk
     TerminateEnvironmentMessage.add_member(:terminate_resources, Shapes::ShapeRef.new(shape: TerminateEnvironmentResources, location_name: "TerminateResources"))
     TerminateEnvironmentMessage.add_member(:force_terminate, Shapes::ShapeRef.new(shape: ForceTerminate, location_name: "ForceTerminate"))
     TerminateEnvironmentMessage.struct_class = Types::TerminateEnvironmentMessage
+
+    TooManyApplicationVersionsException.struct_class = Types::TooManyApplicationVersionsException
+
+    TooManyApplicationsException.struct_class = Types::TooManyApplicationsException
+
+    TooManyBucketsException.struct_class = Types::TooManyBucketsException
+
+    TooManyConfigurationTemplatesException.struct_class = Types::TooManyConfigurationTemplatesException
+
+    TooManyEnvironmentsException.struct_class = Types::TooManyEnvironmentsException
+
+    TooManyPlatformsException.struct_class = Types::TooManyPlatformsException
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     Trigger.add_member(:name, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Name"))
     Trigger.struct_class = Types::Trigger

@@ -8,6 +8,12 @@
 module Aws::ManagedBlockchain
   module Types
 
+    # You do not have sufficient access to perform this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Aws::EmptyStructure; end
+
     # A policy type that defines the voting rules for the network. The rules
     # decide if a proposal is approved. Approval may be based on criteria
     # such as the percentage of `YES` votes and the duration of the
@@ -571,6 +577,13 @@ module Aws::ManagedBlockchain
       :message)
       include Aws::Structure
     end
+
+    # The request processing has failed because of an unknown error,
+    # exception or failure.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/InternalServiceErrorException AWS API Documentation
+    #
+    class InternalServiceErrorException < Aws::EmptyStructure; end
 
     # The action or operation requested is invalid. Verify that the action
     # is typed correctly.
@@ -1877,6 +1890,16 @@ module Aws::ManagedBlockchain
       :message)
       include Aws::Structure
     end
+
+    # The request or operation could not be performed because a service is
+    # throttling requests. The most common source of throttling errors is
+    # launching EC2 instances such that your service limit for EC2 instances
+    # is exceeded. Request a limit increase or delete unused resources if
+    # possible.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass VoteOnProposalInput
     #   data as a hash:
