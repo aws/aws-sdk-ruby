@@ -171,8 +171,9 @@ module Aws
       end
 
       describe '#endpoint_discovery?' do
-        let(:operation) { double('operation', endpoint_discovery: true) }
-        let(:context) { double('context', operation: operation, config: config) }
+        let(:context) do
+          double('context', operation: operation, config: config)
+        end
         let(:config) { double('config', endpoint_cache: endpoint_cache) }
         let(:endpoint_cache) { double('endpoint_cache') }
 
@@ -180,36 +181,51 @@ module Aws
           let(:operation) { double('operation', endpoint_discovery: false) }
 
           it 'returns false unless the operation is endpoint_discovery' do
-            expect(inspector(Errors::EndpointDiscoveryError.new, 421).endpoint_discovery?(context))
-              .to be(false)
+            expect(
+              inspector(
+                Errors::EndpointDiscoveryError.new, 421
+              ).endpoint_discovery?(context)
+            ).to be(false)
           end
         end
 
         context 'operation is endpoint_discovery' do
+          let(:operation) { double('operation', endpoint_discovery: true) }
+
           it 'returns false when the error is not an EndPointDiscoveryError' do
-            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 400).endpoint_discovery?(context))
-              .to be(false)
+            expect(
+              inspector(
+                RetryErrorsSvc::Errors::SomeRandomError, 400
+              ).endpoint_discovery?(context)
+            ).to be(false)
           end
 
           it 'returns true when the status code is 421' do
-            expect(endpoint_cache).to receive(:extract_key).with(context).and_return('key')
+            expect(endpoint_cache).to receive(:extract_key).with(context)
+              .and_return('key')
             expect(endpoint_cache).to receive(:delete).with('key')
 
-            expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 421).endpoint_discovery?(context))
-              .to be(true)
+            expect(
+              inspector(
+                RetryErrorsSvc::Errors::SomeRandomError, 421
+              ).endpoint_discovery?(context)
+            ).to be(true)
           end
 
-          it 'returns true for an EndpointDiscoveryError and updates the endpoint_cache' do
-            expect(endpoint_cache).to receive(:extract_key).with(context).and_return('key')
-            expect(endpoint_cache).to receive(:delete).with('key')
+          context 'EndpointDiscoveryError' do
+            it 'returns true and updates the endpoint_cache' do
+              expect(endpoint_cache).to receive(:extract_key).with(context)
+                .and_return('key')
+              expect(endpoint_cache).to receive(:delete).with('key')
 
-            expect(inspector(Errors::EndpointDiscoveryError.new, 400).endpoint_discovery?(context))
-              .to be(true)
+              expect(
+                inspector(
+                  Errors::EndpointDiscoveryError.new, 400
+                ).endpoint_discovery?(context)
+              ).to be(true)
+            end
           end
-
-
         end
-
       end
     end
   end
