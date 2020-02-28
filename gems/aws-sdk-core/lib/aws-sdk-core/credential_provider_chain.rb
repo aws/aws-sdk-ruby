@@ -28,7 +28,11 @@ module Aws
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
         [:process_credentials, {}],
-        [:instance_profile_credentials, {}]
+        [:instance_profile_credentials, {
+          retries: @config ? @config.instance_profile_credentials_retries : 0,
+          http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
+          http_read_timeout: @config ? @config.instance_profile_credentials_timeout : 1
+        }]
       ]
     end
 
