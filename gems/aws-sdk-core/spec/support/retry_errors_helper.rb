@@ -13,7 +13,7 @@ end
 # Expects a test case defined as a Hash with response and expect keys.
 # response: Hash with status_code and error
 # expect: delay, available_capacity, retries, calculated_rate
-def run_retry(test_cases)
+def handle_with_retry(test_cases)
   # Apply delay expectations first
   test_cases.each do |test_case|
     if test_case[:expect][:delay]
@@ -43,7 +43,7 @@ def run_retry(test_cases)
 end
 
 # apply the expectations from a test case
-# See run_retry for test case definition
+# See handle_with_retry for test case definition
 def apply_expectations(test_case)
   expected = test_case[:expect]
   if expected[:available_capacity]
