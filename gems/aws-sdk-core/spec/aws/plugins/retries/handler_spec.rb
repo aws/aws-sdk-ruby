@@ -32,7 +32,9 @@ module Aws
         resp.context.config = config
         operation.endpoint_discovery = {}
         resp.context.operation = operation
-        resp.context.client =  Seahorse::Client::Base.new(endpoint: 'http://example.com')
+        resp.context.client =  Seahorse::Client::Base.new(
+          endpoint: 'http://example.com'
+        )
       end
 
       context 'standard mode' do
@@ -57,7 +59,7 @@ module Aws
             } # success
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
 
         it 'fails due to max attempts reached' do
@@ -76,7 +78,7 @@ module Aws
             } # failure
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
 
         it 'fails due to retry quota reached after a single retry' do
@@ -93,7 +95,7 @@ module Aws
             }
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
 
         it 'does not retry if the retry quota is 0' do
@@ -106,7 +108,7 @@ module Aws
             }
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
 
         it 'uses exponential backoff timing' do
@@ -135,7 +137,7 @@ module Aws
             }
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
 
         it 'does not exceed the max backoff time' do
@@ -165,7 +167,7 @@ module Aws
             }
           ]
 
-          run_retry(test_case_def)
+          handle_with_retry(test_case_def)
         end
       end
 
@@ -181,7 +183,7 @@ module Aws
         end
 
         it 'verifies cubic calculations for successes' do
-          test_case_def = [
+          successes = [
             {
               response: { status_code: 200, error: nil, timestamp: 5 },
               expect: { calculated_rate: 7.0 }
@@ -212,7 +214,8 @@ module Aws
             }
           ]
 
-          run_retry(test_case_def)
+          # Have to run the method each time because there are no failures
+          successes.each { |success| handle_with_retry([success]) }
         end
       end
     end
