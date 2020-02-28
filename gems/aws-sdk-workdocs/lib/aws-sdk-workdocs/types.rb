@@ -674,6 +674,12 @@ module Aws::WorkDocs
       include Aws::Structure
     end
 
+    # The last user in the organization is being deactivated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivatingLastSystemUserException AWS API Documentation
+    #
+    class DeactivatingLastSystemUserException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteCommentRequest
     #   data as a hash:
     #
@@ -2780,6 +2786,12 @@ module Aws::WorkDocs
       :message)
       include Aws::Structure
     end
+
+    # The operation is not permitted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UnauthorizedOperationException AWS API Documentation
+    #
+    class UnauthorizedOperationException < Aws::EmptyStructure; end
 
     # The caller does not have access to perform the action on the resource.
     #

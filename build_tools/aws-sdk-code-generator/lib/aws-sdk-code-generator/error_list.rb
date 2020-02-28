@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
       @errors = @api['shapes'].inject([]) do |es, (name, shape)|
         # only generate error shape with non empty members
         # excluding event shapes marked as error
-        if non_empty_error_struct?(shape)
+        if error_struct?(shape)
           members = shape['members'].keys.map {|k| Underscore.underscore(k) }
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
@@ -29,10 +29,9 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def non_empty_error_struct?(shape)
+    def error_struct?(shape)
       shape['type'] == 'structure' && !!!shape['event'] &&
-        (shape['error'] || shape['exception']) &&
-        shape['members'] && shape['members'].size > 0
+        (shape['error'] || shape['exception'])
     end
 
     def each(&block)

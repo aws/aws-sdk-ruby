@@ -273,6 +273,8 @@ module Aws::ElastiCache
     UpdateActionStatusList = Shapes::ListShape.new(name: 'UpdateActionStatusList')
     UpdateActionsMessage = Shapes::StructureShape.new(name: 'UpdateActionsMessage')
 
+    APICallRateForCustomerExceededFault.struct_class = Types::APICallRateForCustomerExceededFault
+
     AddTagsToResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     AddTagsToResourceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     AddTagsToResourceMessage.struct_class = Types::AddTagsToResourceMessage
@@ -280,6 +282,10 @@ module Aws::ElastiCache
     AllowedNodeTypeModificationsMessage.add_member(:scale_up_modifications, Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleUpModifications"))
     AllowedNodeTypeModificationsMessage.add_member(:scale_down_modifications, Shapes::ShapeRef.new(shape: NodeTypeList, location_name: "ScaleDownModifications"))
     AllowedNodeTypeModificationsMessage.struct_class = Types::AllowedNodeTypeModificationsMessage
+
+    AuthorizationAlreadyExistsFault.struct_class = Types::AuthorizationAlreadyExistsFault
+
+    AuthorizationNotFoundFault.struct_class = Types::AuthorizationNotFoundFault
 
     AuthorizeCacheSecurityGroupIngressMessage.add_member(:cache_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheSecurityGroupName"))
     AuthorizeCacheSecurityGroupIngressMessage.add_member(:ec2_security_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EC2SecurityGroupName"))
@@ -332,6 +338,8 @@ module Aws::ElastiCache
     CacheCluster.add_member(:at_rest_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AtRestEncryptionEnabled"))
     CacheCluster.struct_class = Types::CacheCluster
 
+    CacheClusterAlreadyExistsFault.struct_class = Types::CacheClusterAlreadyExistsFault
+
     CacheClusterIdList.member = Shapes::ShapeRef.new(shape: String)
 
     CacheClusterList.member = Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster")
@@ -339,6 +347,8 @@ module Aws::ElastiCache
     CacheClusterMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CacheClusterMessage.add_member(:cache_clusters, Shapes::ShapeRef.new(shape: CacheClusterList, location_name: "CacheClusters"))
     CacheClusterMessage.struct_class = Types::CacheClusterMessage
+
+    CacheClusterNotFoundFault.struct_class = Types::CacheClusterNotFoundFault
 
     CacheEngineVersion.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     CacheEngineVersion.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -402,6 +412,8 @@ module Aws::ElastiCache
     CacheParameterGroup.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CacheParameterGroup.struct_class = Types::CacheParameterGroup
 
+    CacheParameterGroupAlreadyExistsFault.struct_class = Types::CacheParameterGroupAlreadyExistsFault
+
     CacheParameterGroupDetails.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CacheParameterGroupDetails.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersList, location_name: "Parameters"))
     CacheParameterGroupDetails.add_member(:cache_node_type_specific_parameters, Shapes::ShapeRef.new(shape: CacheNodeTypeSpecificParametersList, location_name: "CacheNodeTypeSpecificParameters"))
@@ -411,6 +423,10 @@ module Aws::ElastiCache
 
     CacheParameterGroupNameMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     CacheParameterGroupNameMessage.struct_class = Types::CacheParameterGroupNameMessage
+
+    CacheParameterGroupNotFoundFault.struct_class = Types::CacheParameterGroupNotFoundFault
+
+    CacheParameterGroupQuotaExceededFault.struct_class = Types::CacheParameterGroupQuotaExceededFault
 
     CacheParameterGroupStatus.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheParameterGroupName"))
     CacheParameterGroupStatus.add_member(:parameter_apply_status, Shapes::ShapeRef.new(shape: String, location_name: "ParameterApplyStatus"))
@@ -427,6 +443,8 @@ module Aws::ElastiCache
     CacheSecurityGroup.add_member(:ec2_security_groups, Shapes::ShapeRef.new(shape: EC2SecurityGroupList, location_name: "EC2SecurityGroups"))
     CacheSecurityGroup.struct_class = Types::CacheSecurityGroup
 
+    CacheSecurityGroupAlreadyExistsFault.struct_class = Types::CacheSecurityGroupAlreadyExistsFault
+
     CacheSecurityGroupMembership.add_member(:cache_security_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheSecurityGroupName"))
     CacheSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     CacheSecurityGroupMembership.struct_class = Types::CacheSecurityGroupMembership
@@ -439,6 +457,10 @@ module Aws::ElastiCache
 
     CacheSecurityGroupNameList.member = Shapes::ShapeRef.new(shape: String, location_name: "CacheSecurityGroupName")
 
+    CacheSecurityGroupNotFoundFault.struct_class = Types::CacheSecurityGroupNotFoundFault
+
+    CacheSecurityGroupQuotaExceededFault.struct_class = Types::CacheSecurityGroupQuotaExceededFault
+
     CacheSecurityGroups.member = Shapes::ShapeRef.new(shape: CacheSecurityGroup, location_name: "CacheSecurityGroup")
 
     CacheSubnetGroup.add_member(:cache_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "CacheSubnetGroupName"))
@@ -447,13 +469,25 @@ module Aws::ElastiCache
     CacheSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     CacheSubnetGroup.struct_class = Types::CacheSubnetGroup
 
+    CacheSubnetGroupAlreadyExistsFault.struct_class = Types::CacheSubnetGroupAlreadyExistsFault
+
+    CacheSubnetGroupInUse.struct_class = Types::CacheSubnetGroupInUse
+
     CacheSubnetGroupMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     CacheSubnetGroupMessage.add_member(:cache_subnet_groups, Shapes::ShapeRef.new(shape: CacheSubnetGroups, location_name: "CacheSubnetGroups"))
     CacheSubnetGroupMessage.struct_class = Types::CacheSubnetGroupMessage
 
+    CacheSubnetGroupNotFoundFault.struct_class = Types::CacheSubnetGroupNotFoundFault
+
+    CacheSubnetGroupQuotaExceededFault.struct_class = Types::CacheSubnetGroupQuotaExceededFault
+
     CacheSubnetGroups.member = Shapes::ShapeRef.new(shape: CacheSubnetGroup, location_name: "CacheSubnetGroup")
 
+    CacheSubnetQuotaExceededFault.struct_class = Types::CacheSubnetQuotaExceededFault
+
     ClusterIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "ClusterId")
+
+    ClusterQuotaForCustomerExceededFault.struct_class = Types::ClusterQuotaForCustomerExceededFault
 
     CompleteMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     CompleteMigrationMessage.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
@@ -762,11 +796,31 @@ module Aws::ElastiCache
     IncreaseReplicaCountResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     IncreaseReplicaCountResult.struct_class = Types::IncreaseReplicaCountResult
 
+    InsufficientCacheClusterCapacityFault.struct_class = Types::InsufficientCacheClusterCapacityFault
+
+    InvalidARNFault.struct_class = Types::InvalidARNFault
+
+    InvalidCacheClusterStateFault.struct_class = Types::InvalidCacheClusterStateFault
+
+    InvalidCacheParameterGroupStateFault.struct_class = Types::InvalidCacheParameterGroupStateFault
+
+    InvalidCacheSecurityGroupStateFault.struct_class = Types::InvalidCacheSecurityGroupStateFault
+
+    InvalidKMSKeyFault.struct_class = Types::InvalidKMSKeyFault
+
     InvalidParameterCombinationException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterCombinationException.struct_class = Types::InvalidParameterCombinationException
 
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    InvalidReplicationGroupStateFault.struct_class = Types::InvalidReplicationGroupStateFault
+
+    InvalidSnapshotStateFault.struct_class = Types::InvalidSnapshotStateFault
+
+    InvalidSubnet.struct_class = Types::InvalidSubnet
+
+    InvalidVPCNetworkStateFault.struct_class = Types::InvalidVPCNetworkStateFault
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -849,6 +903,8 @@ module Aws::ElastiCache
     ModifyReplicationGroupShardConfigurationResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     ModifyReplicationGroupShardConfigurationResult.struct_class = Types::ModifyReplicationGroupShardConfigurationResult
 
+    NoOperationFault.struct_class = Types::NoOperationFault
+
     NodeGroup.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
     NodeGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     NodeGroup.add_member(:primary_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrimaryEndpoint"))
@@ -890,15 +946,23 @@ module Aws::ElastiCache
 
     NodeGroupMemberUpdateStatusList.member = Shapes::ShapeRef.new(shape: NodeGroupMemberUpdateStatus, location_name: "NodeGroupMemberUpdateStatus")
 
+    NodeGroupNotFoundFault.struct_class = Types::NodeGroupNotFoundFault
+
     NodeGroupUpdateStatus.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
     NodeGroupUpdateStatus.add_member(:node_group_member_update_status, Shapes::ShapeRef.new(shape: NodeGroupMemberUpdateStatusList, location_name: "NodeGroupMemberUpdateStatus"))
     NodeGroupUpdateStatus.struct_class = Types::NodeGroupUpdateStatus
 
     NodeGroupUpdateStatusList.member = Shapes::ShapeRef.new(shape: NodeGroupUpdateStatus, location_name: "NodeGroupUpdateStatus")
 
+    NodeGroupsPerReplicationGroupQuotaExceededFault.struct_class = Types::NodeGroupsPerReplicationGroupQuotaExceededFault
+
     NodeGroupsToRemoveList.member = Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupToRemove")
 
     NodeGroupsToRetainList.member = Shapes::ShapeRef.new(shape: AllowedNodeGroupId, location_name: "NodeGroupToRetain")
+
+    NodeQuotaForClusterExceededFault.struct_class = Types::NodeQuotaForClusterExceededFault
+
+    NodeQuotaForCustomerExceededFault.struct_class = Types::NodeQuotaForCustomerExceededFault
 
     NodeSnapshot.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
     NodeSnapshot.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
@@ -1002,6 +1066,10 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
+    ReplicationGroupAlreadyExistsFault.struct_class = Types::ReplicationGroupAlreadyExistsFault
+
+    ReplicationGroupAlreadyUnderMigrationFault.struct_class = Types::ReplicationGroupAlreadyUnderMigrationFault
+
     ReplicationGroupIdList.member = Shapes::ShapeRef.new(shape: String)
 
     ReplicationGroupList.member = Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup")
@@ -1009,6 +1077,10 @@ module Aws::ElastiCache
     ReplicationGroupMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReplicationGroupMessage.add_member(:replication_groups, Shapes::ShapeRef.new(shape: ReplicationGroupList, location_name: "ReplicationGroups"))
     ReplicationGroupMessage.struct_class = Types::ReplicationGroupMessage
+
+    ReplicationGroupNotFoundFault.struct_class = Types::ReplicationGroupNotFoundFault
+
+    ReplicationGroupNotUnderMigrationFault.struct_class = Types::ReplicationGroupNotUnderMigrationFault
 
     ReplicationGroupPendingModifiedValues.add_member(:primary_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryClusterId"))
     ReplicationGroupPendingModifiedValues.add_member(:automatic_failover_status, Shapes::ShapeRef.new(shape: PendingAutomaticFailoverStatus, location_name: "AutomaticFailoverStatus"))
@@ -1031,11 +1103,17 @@ module Aws::ElastiCache
     ReservedCacheNode.add_member(:reservation_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReservationARN"))
     ReservedCacheNode.struct_class = Types::ReservedCacheNode
 
+    ReservedCacheNodeAlreadyExistsFault.struct_class = Types::ReservedCacheNodeAlreadyExistsFault
+
     ReservedCacheNodeList.member = Shapes::ShapeRef.new(shape: ReservedCacheNode, location_name: "ReservedCacheNode")
 
     ReservedCacheNodeMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReservedCacheNodeMessage.add_member(:reserved_cache_nodes, Shapes::ShapeRef.new(shape: ReservedCacheNodeList, location_name: "ReservedCacheNodes"))
     ReservedCacheNodeMessage.struct_class = Types::ReservedCacheNodeMessage
+
+    ReservedCacheNodeNotFoundFault.struct_class = Types::ReservedCacheNodeNotFoundFault
+
+    ReservedCacheNodeQuotaExceededFault.struct_class = Types::ReservedCacheNodeQuotaExceededFault
 
     ReservedCacheNodesOffering.add_member(:reserved_cache_nodes_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedCacheNodesOfferingId"))
     ReservedCacheNodesOffering.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
@@ -1052,6 +1130,8 @@ module Aws::ElastiCache
     ReservedCacheNodesOfferingMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     ReservedCacheNodesOfferingMessage.add_member(:reserved_cache_nodes_offerings, Shapes::ShapeRef.new(shape: ReservedCacheNodesOfferingList, location_name: "ReservedCacheNodesOfferings"))
     ReservedCacheNodesOfferingMessage.struct_class = Types::ReservedCacheNodesOfferingMessage
+
+    ReservedCacheNodesOfferingNotFoundFault.struct_class = Types::ReservedCacheNodesOfferingNotFoundFault
 
     ResetCacheParameterGroupMessage.add_member(:cache_parameter_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheParameterGroupName"))
     ResetCacheParameterGroupMessage.add_member(:reset_all_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetAllParameters"))
@@ -1083,6 +1163,8 @@ module Aws::ElastiCache
 
     SecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: SecurityGroupMembership)
 
+    ServiceLinkedRoleNotFoundFault.struct_class = Types::ServiceLinkedRoleNotFoundFault
+
     ServiceUpdate.add_member(:service_update_name, Shapes::ShapeRef.new(shape: String, location_name: "ServiceUpdateName"))
     ServiceUpdate.add_member(:service_update_release_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ServiceUpdateReleaseDate"))
     ServiceUpdate.add_member(:service_update_end_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ServiceUpdateEndDate"))
@@ -1098,6 +1180,8 @@ module Aws::ElastiCache
     ServiceUpdate.struct_class = Types::ServiceUpdate
 
     ServiceUpdateList.member = Shapes::ShapeRef.new(shape: ServiceUpdate, location_name: "ServiceUpdate")
+
+    ServiceUpdateNotFoundFault.struct_class = Types::ServiceUpdateNotFoundFault
 
     ServiceUpdateStatusList.member = Shapes::ShapeRef.new(shape: ServiceUpdateStatus)
 
@@ -1135,9 +1219,17 @@ module Aws::ElastiCache
     Snapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     Snapshot.struct_class = Types::Snapshot
 
+    SnapshotAlreadyExistsFault.struct_class = Types::SnapshotAlreadyExistsFault
+
     SnapshotArnsList.member = Shapes::ShapeRef.new(shape: String, location_name: "SnapshotArn")
 
+    SnapshotFeatureNotSupportedFault.struct_class = Types::SnapshotFeatureNotSupportedFault
+
     SnapshotList.member = Shapes::ShapeRef.new(shape: Snapshot, location_name: "Snapshot")
+
+    SnapshotNotFoundFault.struct_class = Types::SnapshotNotFoundFault
+
+    SnapshotQuotaExceededFault.struct_class = Types::SnapshotQuotaExceededFault
 
     StartMigrationMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     StartMigrationMessage.add_member(:customer_node_endpoint_list, Shapes::ShapeRef.new(shape: CustomerNodeEndpointList, required: true, location_name: "CustomerNodeEndpointList"))
@@ -1152,6 +1244,8 @@ module Aws::ElastiCache
 
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
+    SubnetInUse.struct_class = Types::SubnetInUse
+
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
@@ -1163,9 +1257,15 @@ module Aws::ElastiCache
     TagListMessage.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     TagListMessage.struct_class = Types::TagListMessage
 
+    TagNotFoundFault.struct_class = Types::TagNotFoundFault
+
+    TagQuotaPerResourceExceeded.struct_class = Types::TagQuotaPerResourceExceeded
+
     TestFailoverMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
     TestFailoverMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: AllowedNodeGroupId, required: true, location_name: "NodeGroupId"))
     TestFailoverMessage.struct_class = Types::TestFailoverMessage
+
+    TestFailoverNotAvailableFault.struct_class = Types::TestFailoverNotAvailableFault
 
     TestFailoverResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
     TestFailoverResult.struct_class = Types::TestFailoverResult

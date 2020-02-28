@@ -389,6 +389,8 @@ module Aws::CloudFormation
 
     AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
 
+    AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
     AutoDeployment.add_member(:enabled, Shapes::ShapeRef.new(shape: AutoDeploymentNullable, location_name: "Enabled"))
     AutoDeployment.add_member(:retain_stacks_on_account_removal, Shapes::ShapeRef.new(shape: RetainStacksOnAccountRemovalNullable, location_name: "RetainStacksOnAccountRemoval"))
     AutoDeployment.struct_class = Types::AutoDeployment
@@ -405,6 +407,8 @@ module Aws::CloudFormation
     Change.add_member(:type, Shapes::ShapeRef.new(shape: ChangeType, location_name: "Type"))
     Change.add_member(:resource_change, Shapes::ShapeRef.new(shape: ResourceChange, location_name: "ResourceChange"))
     Change.struct_class = Types::Change
+
+    ChangeSetNotFoundException.struct_class = Types::ChangeSetNotFoundException
 
     ChangeSetSummaries.member = Shapes::ShapeRef.new(shape: ChangeSetSummary)
 
@@ -501,6 +505,8 @@ module Aws::CloudFormation
 
     CreateStackSetOutput.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     CreateStackSetOutput.struct_class = Types::CreateStackSetOutput
+
+    CreatedButModifiedException.struct_class = Types::CreatedButModifiedException
 
     DeleteChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     DeleteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
@@ -757,6 +763,16 @@ module Aws::CloudFormation
 
     Imports.member = Shapes::ShapeRef.new(shape: StackName)
 
+    InsufficientCapabilitiesException.struct_class = Types::InsufficientCapabilitiesException
+
+    InvalidChangeSetStatusException.struct_class = Types::InvalidChangeSetStatusException
+
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidStateTransitionException.struct_class = Types::InvalidStateTransitionException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
+
     ListChangeSetsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
     ListChangeSetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListChangeSetsInput.struct_class = Types::ListChangeSetsInput
@@ -876,7 +892,17 @@ module Aws::CloudFormation
 
     LogicalResourceIds.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
 
+    NameAlreadyExistsException.struct_class = Types::NameAlreadyExistsException
+
     NotificationARNs.member = Shapes::ShapeRef.new(shape: NotificationARN)
+
+    OperationIdAlreadyExistsException.struct_class = Types::OperationIdAlreadyExistsException
+
+    OperationInProgressException.struct_class = Types::OperationInProgressException
+
+    OperationNotFoundException.struct_class = Types::OperationNotFoundException
+
+    OperationStatusCheckFailedException.struct_class = Types::OperationStatusCheckFailedException
 
     OrganizationalUnitIdList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitId)
 
@@ -1086,6 +1112,8 @@ module Aws::CloudFormation
     StackInstance.add_member(:last_drift_check_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastDriftCheckTimestamp"))
     StackInstance.struct_class = Types::StackInstance
 
+    StackInstanceNotFoundException.struct_class = Types::StackInstanceNotFoundException
+
     StackInstanceSummaries.member = Shapes::ShapeRef.new(shape: StackInstanceSummary)
 
     StackInstanceSummary.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
@@ -1188,6 +1216,10 @@ module Aws::CloudFormation
     StackSetDriftDetectionDetails.add_member(:failed_stack_instances_count, Shapes::ShapeRef.new(shape: FailedStackInstancesCount, location_name: "FailedStackInstancesCount"))
     StackSetDriftDetectionDetails.struct_class = Types::StackSetDriftDetectionDetails
 
+    StackSetNotEmptyException.struct_class = Types::StackSetNotEmptyException
+
+    StackSetNotFoundException.struct_class = Types::StackSetNotFoundException
+
     StackSetOperation.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
     StackSetOperation.add_member(:stack_set_id, Shapes::ShapeRef.new(shape: StackSetId, location_name: "StackSetId"))
     StackSetOperation.add_member(:action, Shapes::ShapeRef.new(shape: StackSetOperationAction, location_name: "Action"))
@@ -1261,6 +1293,8 @@ module Aws::CloudFormation
 
     StageList.member = Shapes::ShapeRef.new(shape: TemplateStage)
 
+    StaleRequestException.struct_class = Types::StaleRequestException
+
     StopStackSetOperationInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     StopStackSetOperationInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "OperationId"))
     StopStackSetOperationInput.struct_class = Types::StopStackSetOperationInput
@@ -1281,7 +1315,11 @@ module Aws::CloudFormation
 
     TemplateParameters.member = Shapes::ShapeRef.new(shape: TemplateParameter)
 
+    TokenAlreadyExistsException.struct_class = Types::TokenAlreadyExistsException
+
     TransformsList.member = Shapes::ShapeRef.new(shape: TransformName)
+
+    TypeNotFoundException.struct_class = Types::TypeNotFoundException
 
     TypeSummaries.member = Shapes::ShapeRef.new(shape: TypeSummary)
 

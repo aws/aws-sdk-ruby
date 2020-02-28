@@ -433,6 +433,24 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The requested bucket name is not available. The bucket namespace is
+    # shared by all users of the system. Please select a different name and
+    # try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketAlreadyExists AWS API Documentation
+    #
+    class BucketAlreadyExists < Aws::EmptyStructure; end
+
+    # The bucket you tried to create already exists, and you own it. Amazon
+    # S3 returns this error in all AWS Regions except in the North Virginia
+    # Region. For legacy compatibility, if you re-create an existing bucket
+    # that you already own in the North Virginia Region, Amazon S3 returns
+    # 200 OK and resets the bucket access control lists (ACLs).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketAlreadyOwnedByYou AWS API Documentation
+    #
+    class BucketAlreadyOwnedByYou < Aws::EmptyStructure; end
+
     # Specifies the lifecycle configuration for objects in an Amazon S3
     # bucket. For more information, see [Object Lifecycle Management][1] in
     # the *Amazon Simple Storage Service Developer Guide*.
@@ -7614,6 +7632,24 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # The specified bucket does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoSuchBucket AWS API Documentation
+    #
+    class NoSuchBucket < Aws::EmptyStructure; end
+
+    # The specified key does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoSuchKey AWS API Documentation
+    #
+    class NoSuchKey < Aws::EmptyStructure; end
+
+    # The specified multipart upload does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoSuchUpload AWS API Documentation
+    #
+    class NoSuchUpload < Aws::EmptyStructure; end
+
     # Specifies when noncurrent object versions expire. Upon expiration,
     # Amazon S3 permanently deletes the noncurrent object versions. You set
     # this lifecycle configuration action on a bucket that has versioning
@@ -7896,6 +7932,12 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # This operation is not allowed against this storage tier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectAlreadyInActiveTierError AWS API Documentation
+    #
+    class ObjectAlreadyInActiveTierError < Aws::EmptyStructure; end
+
     # Object Identifier is unique value to identify objects.
     #
     # @note When making an API call, you may pass ObjectIdentifier
@@ -8025,6 +8067,13 @@ module Aws::S3
       :default_retention)
       include Aws::Structure
     end
+
+    # The source object of the COPY operation is not in the active tier and
+    # is only stored in Amazon S3 Glacier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectNotInActiveTierError AWS API Documentation
+    #
+    class ObjectNotInActiveTierError < Aws::EmptyStructure; end
 
     # The version of an object.
     #

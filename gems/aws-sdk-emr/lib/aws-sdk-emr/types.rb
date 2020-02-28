@@ -2994,6 +2994,13 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Indicates that an error occurred while processing the request and that
+    # the request was not completed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InternalServerError AWS API Documentation
+    #
+    class InternalServerError < Aws::EmptyStructure; end
+
     # This exception occurs when there is an internal failure in the EMR
     # service.
     #

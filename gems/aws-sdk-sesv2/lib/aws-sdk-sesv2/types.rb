@@ -8,6 +8,25 @@
 module Aws::SESV2
   module Types
 
+    # The message can't be sent because the account's ability to send
+    # email has been permanently restricted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AccountSuspendedException AWS API Documentation
+    #
+    class AccountSuspendedException < Aws::EmptyStructure; end
+
+    # The resource specified in your request already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AlreadyExistsException AWS API Documentation
+    #
+    class AlreadyExistsException < Aws::EmptyStructure; end
+
+    # The input you provided is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BadRequestException AWS API Documentation
+    #
+    class BadRequestException < Aws::EmptyStructure; end
+
     # An object that contains information about a blacklisting event that
     # impacts one of the dedicated IP addresses that is associated with your
     # account.
@@ -150,6 +169,12 @@ module Aws::SESV2
       :default_dimension_value)
       include Aws::Structure
     end
+
+    # The resource is being modified by another operation or thread.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
 
     # An object that represents the content of the email, and optionally a
     # character set specification.
@@ -2172,6 +2197,12 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The specified request includes an invalid or expired token.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/InvalidNextTokenException AWS API Documentation
+    #
+    class InvalidNextTokenException < Aws::EmptyStructure; end
+
     # An object that describes how email sent during the predictive inbox
     # placement test was handled by a certain email provider.
     #
@@ -2223,6 +2254,12 @@ module Aws::SESV2
       :delivery_stream_arn)
       include Aws::Structure
     end
+
+    # There are too many instances of the specified resource type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # A request to obtain a list of configuration sets for your Amazon SES
     # account in the current AWS Region.
@@ -2687,6 +2724,12 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The message can't be sent because the sending domain isn't verified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MailFromDomainNotVerifiedException AWS API Documentation
+    #
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure; end
+
     # Represents the email message that you're sending. The `Message`
     # object consists of a subject line and a message body.
     #
@@ -2734,6 +2777,12 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The message can't be sent because it contains invalid content.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageRejected AWS API Documentation
+    #
+    class MessageRejected < Aws::EmptyStructure; end
+
     # Contains the name and value of a tag that you apply to an email. You
     # can use message tags when you publish email sending events.
     #
@@ -2772,6 +2821,12 @@ module Aws::SESV2
       :value)
       include Aws::Structure
     end
+
+    # The resource you attempted to access doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/NotFoundException AWS API Documentation
+    #
+    class NotFoundException < Aws::EmptyStructure; end
 
     # An object that contains information about email that was sent from the
     # selected domain.
@@ -3842,6 +3897,13 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # The message can't be sent because the account's ability to send
+    # email is currently paused.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SendingPausedException AWS API Documentation
+    #
+    class SendingPausedException < Aws::EmptyStructure; end
+
     # An object that defines an Amazon SNS destination for email events. You
     # can use Amazon SNS to send notification when certain email events
     # occur.
@@ -4133,6 +4195,12 @@ module Aws::SESV2
       :template_data)
       include Aws::Structure
     end
+
+    # Too many requests have been made to the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/TooManyRequestsException AWS API Documentation
+    #
+    class TooManyRequestsException < Aws::EmptyStructure; end
 
     # An object that defines the tracking options for a configuration set.
     # When you use the Amazon SES API v2 to send an email, it contains an

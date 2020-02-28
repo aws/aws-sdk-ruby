@@ -185,6 +185,8 @@ module Aws::ElasticTranscoder
 
     AccessControls.member = Shapes::ShapeRef.new(shape: AccessControl)
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     Artwork.add_member(:input_key, Shapes::ShapeRef.new(shape: WatermarkKey, location_name: "InputKey"))
     Artwork.add_member(:max_width, Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxWidth"))
     Artwork.add_member(:max_height, Shapes::ShapeRef.new(shape: DigitsOrAuto, location_name: "MaxHeight"))
@@ -340,9 +342,13 @@ module Aws::ElasticTranscoder
     HlsContentProtection.add_member(:key_storage_policy, Shapes::ShapeRef.new(shape: KeyStoragePolicy, location_name: "KeyStoragePolicy"))
     HlsContentProtection.struct_class = Types::HlsContentProtection
 
+    IncompatibleVersionException.struct_class = Types::IncompatibleVersionException
+
     InputCaptions.add_member(:merge_policy, Shapes::ShapeRef.new(shape: CaptionMergePolicy, location_name: "MergePolicy"))
     InputCaptions.add_member(:caption_sources, Shapes::ShapeRef.new(shape: CaptionSources, location_name: "CaptionSources"))
     InputCaptions.struct_class = Types::InputCaptions
+
+    InternalServiceException.struct_class = Types::InternalServiceException
 
     Job.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
@@ -409,6 +415,8 @@ module Aws::ElasticTranscoder
     JobWatermarks.member = Shapes::ShapeRef.new(shape: JobWatermark)
 
     Jobs.member = Shapes::ShapeRef.new(shape: Job)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListJobsByPipelineRequest.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "PipelineId"))
     ListJobsByPipelineRequest.add_member(:ascending, Shapes::ShapeRef.new(shape: Ascending, location: "querystring", location_name: "Ascending"))
@@ -544,6 +552,10 @@ module Aws::ElasticTranscoder
     ReadPresetResponse.add_member(:preset, Shapes::ShapeRef.new(shape: Preset, location_name: "Preset"))
     ReadPresetResponse.struct_class = Types::ReadPresetResponse
 
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     SnsTopics.member = Shapes::ShapeRef.new(shape: SnsTopic)
 
     TestRoleRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
@@ -605,6 +617,8 @@ module Aws::ElasticTranscoder
 
     UserMetadata.key = Shapes::ShapeRef.new(shape: String)
     UserMetadata.value = Shapes::ShapeRef.new(shape: String)
+
+    ValidationException.struct_class = Types::ValidationException
 
     VideoParameters.add_member(:codec, Shapes::ShapeRef.new(shape: VideoCodec, location_name: "Codec"))
     VideoParameters.add_member(:codec_options, Shapes::ShapeRef.new(shape: CodecOptions, location_name: "CodecOptions"))

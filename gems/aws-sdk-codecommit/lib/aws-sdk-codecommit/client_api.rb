@@ -517,6 +517,8 @@ module Aws::CodeCommit
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
     blob = Shapes::BlobShape.new(name: 'blob')
 
+    ActorDoesNotExistException.struct_class = Types::ActorDoesNotExistException
+
     Approval.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "userArn"))
     Approval.add_member(:approval_state, Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalState"))
     Approval.struct_class = Types::Approval
@@ -533,10 +535,18 @@ module Aws::CodeCommit
     ApprovalRule.add_member(:origin_approval_rule_template, Shapes::ShapeRef.new(shape: OriginApprovalRuleTemplate, location_name: "originApprovalRuleTemplate"))
     ApprovalRule.struct_class = Types::ApprovalRule
 
+    ApprovalRuleContentRequiredException.struct_class = Types::ApprovalRuleContentRequiredException
+
+    ApprovalRuleDoesNotExistException.struct_class = Types::ApprovalRuleDoesNotExistException
+
     ApprovalRuleEventMetadata.add_member(:approval_rule_name, Shapes::ShapeRef.new(shape: ApprovalRuleName, location_name: "approvalRuleName"))
     ApprovalRuleEventMetadata.add_member(:approval_rule_id, Shapes::ShapeRef.new(shape: ApprovalRuleId, location_name: "approvalRuleId"))
     ApprovalRuleEventMetadata.add_member(:approval_rule_content, Shapes::ShapeRef.new(shape: ApprovalRuleContent, location_name: "approvalRuleContent"))
     ApprovalRuleEventMetadata.struct_class = Types::ApprovalRuleEventMetadata
+
+    ApprovalRuleNameAlreadyExistsException.struct_class = Types::ApprovalRuleNameAlreadyExistsException
+
+    ApprovalRuleNameRequiredException.struct_class = Types::ApprovalRuleNameRequiredException
 
     ApprovalRuleOverriddenEventMetadata.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, location_name: "revisionId"))
     ApprovalRuleOverriddenEventMetadata.add_member(:override_status, Shapes::ShapeRef.new(shape: OverrideStatus, location_name: "overrideStatus"))
@@ -552,7 +562,17 @@ module Aws::CodeCommit
     ApprovalRuleTemplate.add_member(:last_modified_user, Shapes::ShapeRef.new(shape: Arn, location_name: "lastModifiedUser"))
     ApprovalRuleTemplate.struct_class = Types::ApprovalRuleTemplate
 
+    ApprovalRuleTemplateContentRequiredException.struct_class = Types::ApprovalRuleTemplateContentRequiredException
+
+    ApprovalRuleTemplateDoesNotExistException.struct_class = Types::ApprovalRuleTemplateDoesNotExistException
+
+    ApprovalRuleTemplateInUseException.struct_class = Types::ApprovalRuleTemplateInUseException
+
+    ApprovalRuleTemplateNameAlreadyExistsException.struct_class = Types::ApprovalRuleTemplateNameAlreadyExistsException
+
     ApprovalRuleTemplateNameList.member = Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName)
+
+    ApprovalRuleTemplateNameRequiredException.struct_class = Types::ApprovalRuleTemplateNameRequiredException
 
     ApprovalRulesList.member = Shapes::ShapeRef.new(shape: ApprovalRule)
 
@@ -564,9 +584,13 @@ module Aws::CodeCommit
     ApprovalStateChangedEventMetadata.add_member(:approval_status, Shapes::ShapeRef.new(shape: ApprovalState, location_name: "approvalStatus"))
     ApprovalStateChangedEventMetadata.struct_class = Types::ApprovalStateChangedEventMetadata
 
+    ApprovalStateRequiredException.struct_class = Types::ApprovalStateRequiredException
+
     AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
     AssociateApprovalRuleTemplateWithRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     AssociateApprovalRuleTemplateWithRepositoryInput.struct_class = Types::AssociateApprovalRuleTemplateWithRepositoryInput
+
+    AuthorDoesNotExistException.struct_class = Types::AuthorDoesNotExistException
 
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     BatchAssociateApprovalRuleTemplateWithRepositoriesError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
@@ -647,16 +671,36 @@ module Aws::CodeCommit
     BatchGetRepositoriesOutput.add_member(:repositories_not_found, Shapes::ShapeRef.new(shape: RepositoryNotFoundList, location_name: "repositoriesNotFound"))
     BatchGetRepositoriesOutput.struct_class = Types::BatchGetRepositoriesOutput
 
+    BeforeCommitIdAndAfterCommitIdAreSameException.struct_class = Types::BeforeCommitIdAndAfterCommitIdAreSameException
+
+    BlobIdDoesNotExistException.struct_class = Types::BlobIdDoesNotExistException
+
+    BlobIdRequiredException.struct_class = Types::BlobIdRequiredException
+
     BlobMetadata.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
     BlobMetadata.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "path"))
     BlobMetadata.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "mode"))
     BlobMetadata.struct_class = Types::BlobMetadata
 
+    BranchDoesNotExistException.struct_class = Types::BranchDoesNotExistException
+
     BranchInfo.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
     BranchInfo.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId"))
     BranchInfo.struct_class = Types::BranchInfo
 
+    BranchNameExistsException.struct_class = Types::BranchNameExistsException
+
+    BranchNameIsTagNameException.struct_class = Types::BranchNameIsTagNameException
+
     BranchNameList.member = Shapes::ShapeRef.new(shape: BranchName)
+
+    BranchNameRequiredException.struct_class = Types::BranchNameRequiredException
+
+    CannotDeleteApprovalRuleFromTemplateException.struct_class = Types::CannotDeleteApprovalRuleFromTemplateException
+
+    CannotModifyApprovalRuleFromTemplateException.struct_class = Types::CannotModifyApprovalRuleFromTemplateException
+
+    ClientRequestTokenRequiredException.struct_class = Types::ClientRequestTokenRequiredException
 
     Comment.add_member(:comment_id, Shapes::ShapeRef.new(shape: CommentId, location_name: "commentId"))
     Comment.add_member(:content, Shapes::ShapeRef.new(shape: Content, location_name: "content"))
@@ -667,6 +711,18 @@ module Aws::CodeCommit
     Comment.add_member(:deleted, Shapes::ShapeRef.new(shape: IsCommentDeleted, location_name: "deleted"))
     Comment.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "clientRequestToken"))
     Comment.struct_class = Types::Comment
+
+    CommentContentRequiredException.struct_class = Types::CommentContentRequiredException
+
+    CommentContentSizeLimitExceededException.struct_class = Types::CommentContentSizeLimitExceededException
+
+    CommentDeletedException.struct_class = Types::CommentDeletedException
+
+    CommentDoesNotExistException.struct_class = Types::CommentDoesNotExistException
+
+    CommentIdRequiredException.struct_class = Types::CommentIdRequiredException
+
+    CommentNotCreatedByCallerException.struct_class = Types::CommentNotCreatedByCallerException
 
     Comments.member = Shapes::ShapeRef.new(shape: Comment)
 
@@ -702,9 +758,25 @@ module Aws::CodeCommit
     Commit.add_member(:additional_data, Shapes::ShapeRef.new(shape: AdditionalData, location_name: "additionalData"))
     Commit.struct_class = Types::Commit
 
+    CommitDoesNotExistException.struct_class = Types::CommitDoesNotExistException
+
+    CommitIdDoesNotExistException.struct_class = Types::CommitIdDoesNotExistException
+
+    CommitIdRequiredException.struct_class = Types::CommitIdRequiredException
+
     CommitIdsInputList.member = Shapes::ShapeRef.new(shape: ObjectId)
 
+    CommitIdsLimitExceededException.struct_class = Types::CommitIdsLimitExceededException
+
+    CommitIdsListRequiredException.struct_class = Types::CommitIdsListRequiredException
+
+    CommitMessageLengthExceededException.struct_class = Types::CommitMessageLengthExceededException
+
     CommitObjectsList.member = Shapes::ShapeRef.new(shape: Commit)
+
+    CommitRequiredException.struct_class = Types::CommitRequiredException
+
+    ConcurrentReferenceUpdateException.struct_class = Types::ConcurrentReferenceUpdateException
 
     Conflict.add_member(:conflict_metadata, Shapes::ShapeRef.new(shape: ConflictMetadata, location_name: "conflictMetadata"))
     Conflict.add_member(:merge_hunks, Shapes::ShapeRef.new(shape: MergeHunks, location_name: "mergeHunks"))
@@ -805,6 +877,8 @@ module Aws::CodeCommit
     CreateUnreferencedMergeCommitOutput.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
     CreateUnreferencedMergeCommitOutput.struct_class = Types::CreateUnreferencedMergeCommitOutput
 
+    DefaultBranchCannotBeDeletedException.struct_class = Types::DefaultBranchCannotBeDeletedException
+
     DeleteApprovalRuleTemplateInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
     DeleteApprovalRuleTemplateInput.struct_class = Types::DeleteApprovalRuleTemplateInput
 
@@ -895,9 +969,21 @@ module Aws::CodeCommit
 
     DifferenceList.member = Shapes::ShapeRef.new(shape: Difference)
 
+    DirectoryNameConflictsWithFileNameException.struct_class = Types::DirectoryNameConflictsWithFileNameException
+
     DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, required: true, location_name: "approvalRuleTemplateName"))
     DisassociateApprovalRuleTemplateFromRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     DisassociateApprovalRuleTemplateFromRepositoryInput.struct_class = Types::DisassociateApprovalRuleTemplateFromRepositoryInput
+
+    EncryptionIntegrityChecksFailedException.struct_class = Types::EncryptionIntegrityChecksFailedException
+
+    EncryptionKeyAccessDeniedException.struct_class = Types::EncryptionKeyAccessDeniedException
+
+    EncryptionKeyDisabledException.struct_class = Types::EncryptionKeyDisabledException
+
+    EncryptionKeyNotFoundException.struct_class = Types::EncryptionKeyNotFoundException
+
+    EncryptionKeyUnavailableException.struct_class = Types::EncryptionKeyUnavailableException
 
     EvaluatePullRequestApprovalRulesInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
     EvaluatePullRequestApprovalRulesInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
@@ -918,6 +1004,16 @@ module Aws::CodeCommit
     File.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
     File.struct_class = Types::File
 
+    FileContentAndSourceFileSpecifiedException.struct_class = Types::FileContentAndSourceFileSpecifiedException
+
+    FileContentRequiredException.struct_class = Types::FileContentRequiredException
+
+    FileContentSizeLimitExceededException.struct_class = Types::FileContentSizeLimitExceededException
+
+    FileDoesNotExistException.struct_class = Types::FileDoesNotExistException
+
+    FileEntryRequiredException.struct_class = Types::FileEntryRequiredException
+
     FileList.member = Shapes::ShapeRef.new(shape: File)
 
     FileMetadata.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
@@ -925,10 +1021,16 @@ module Aws::CodeCommit
     FileMetadata.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
     FileMetadata.struct_class = Types::FileMetadata
 
+    FileModeRequiredException.struct_class = Types::FileModeRequiredException
+
     FileModes.add_member(:source, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "source"))
     FileModes.add_member(:destination, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "destination"))
     FileModes.add_member(:base, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "base"))
     FileModes.struct_class = Types::FileModes
+
+    FileNameConflictsWithDirectoryNameException.struct_class = Types::FileNameConflictsWithDirectoryNameException
+
+    FilePathConflictsWithSubmodulePathException.struct_class = Types::FilePathConflictsWithSubmodulePathException
 
     FilePaths.member = Shapes::ShapeRef.new(shape: Path)
 
@@ -937,12 +1039,18 @@ module Aws::CodeCommit
     FileSizes.add_member(:base, Shapes::ShapeRef.new(shape: FileSize, location_name: "base"))
     FileSizes.struct_class = Types::FileSizes
 
+    FileTooLargeException.struct_class = Types::FileTooLargeException
+
     FilesMetadata.member = Shapes::ShapeRef.new(shape: FileMetadata)
 
     Folder.add_member(:tree_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "treeId"))
     Folder.add_member(:absolute_path, Shapes::ShapeRef.new(shape: Path, location_name: "absolutePath"))
     Folder.add_member(:relative_path, Shapes::ShapeRef.new(shape: Path, location_name: "relativePath"))
     Folder.struct_class = Types::Folder
+
+    FolderContentSizeLimitExceededException.struct_class = Types::FolderContentSizeLimitExceededException
+
+    FolderDoesNotExistException.struct_class = Types::FolderDoesNotExistException
 
     FolderList.member = Shapes::ShapeRef.new(shape: Folder)
 
@@ -1120,6 +1228,130 @@ module Aws::CodeCommit
     GetRepositoryTriggersOutput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers"))
     GetRepositoryTriggersOutput.struct_class = Types::GetRepositoryTriggersOutput
 
+    IdempotencyParameterMismatchException.struct_class = Types::IdempotencyParameterMismatchException
+
+    InvalidActorArnException.struct_class = Types::InvalidActorArnException
+
+    InvalidApprovalRuleContentException.struct_class = Types::InvalidApprovalRuleContentException
+
+    InvalidApprovalRuleNameException.struct_class = Types::InvalidApprovalRuleNameException
+
+    InvalidApprovalRuleTemplateContentException.struct_class = Types::InvalidApprovalRuleTemplateContentException
+
+    InvalidApprovalRuleTemplateDescriptionException.struct_class = Types::InvalidApprovalRuleTemplateDescriptionException
+
+    InvalidApprovalRuleTemplateNameException.struct_class = Types::InvalidApprovalRuleTemplateNameException
+
+    InvalidApprovalStateException.struct_class = Types::InvalidApprovalStateException
+
+    InvalidAuthorArnException.struct_class = Types::InvalidAuthorArnException
+
+    InvalidBlobIdException.struct_class = Types::InvalidBlobIdException
+
+    InvalidBranchNameException.struct_class = Types::InvalidBranchNameException
+
+    InvalidClientRequestTokenException.struct_class = Types::InvalidClientRequestTokenException
+
+    InvalidCommentIdException.struct_class = Types::InvalidCommentIdException
+
+    InvalidCommitException.struct_class = Types::InvalidCommitException
+
+    InvalidCommitIdException.struct_class = Types::InvalidCommitIdException
+
+    InvalidConflictDetailLevelException.struct_class = Types::InvalidConflictDetailLevelException
+
+    InvalidConflictResolutionException.struct_class = Types::InvalidConflictResolutionException
+
+    InvalidConflictResolutionStrategyException.struct_class = Types::InvalidConflictResolutionStrategyException
+
+    InvalidContinuationTokenException.struct_class = Types::InvalidContinuationTokenException
+
+    InvalidDeletionParameterException.struct_class = Types::InvalidDeletionParameterException
+
+    InvalidDescriptionException.struct_class = Types::InvalidDescriptionException
+
+    InvalidDestinationCommitSpecifierException.struct_class = Types::InvalidDestinationCommitSpecifierException
+
+    InvalidEmailException.struct_class = Types::InvalidEmailException
+
+    InvalidFileLocationException.struct_class = Types::InvalidFileLocationException
+
+    InvalidFileModeException.struct_class = Types::InvalidFileModeException
+
+    InvalidFilePositionException.struct_class = Types::InvalidFilePositionException
+
+    InvalidMaxConflictFilesException.struct_class = Types::InvalidMaxConflictFilesException
+
+    InvalidMaxMergeHunksException.struct_class = Types::InvalidMaxMergeHunksException
+
+    InvalidMaxResultsException.struct_class = Types::InvalidMaxResultsException
+
+    InvalidMergeOptionException.struct_class = Types::InvalidMergeOptionException
+
+    InvalidOrderException.struct_class = Types::InvalidOrderException
+
+    InvalidOverrideStatusException.struct_class = Types::InvalidOverrideStatusException
+
+    InvalidParentCommitIdException.struct_class = Types::InvalidParentCommitIdException
+
+    InvalidPathException.struct_class = Types::InvalidPathException
+
+    InvalidPullRequestEventTypeException.struct_class = Types::InvalidPullRequestEventTypeException
+
+    InvalidPullRequestIdException.struct_class = Types::InvalidPullRequestIdException
+
+    InvalidPullRequestStatusException.struct_class = Types::InvalidPullRequestStatusException
+
+    InvalidPullRequestStatusUpdateException.struct_class = Types::InvalidPullRequestStatusUpdateException
+
+    InvalidReferenceNameException.struct_class = Types::InvalidReferenceNameException
+
+    InvalidRelativeFileVersionEnumException.struct_class = Types::InvalidRelativeFileVersionEnumException
+
+    InvalidReplacementContentException.struct_class = Types::InvalidReplacementContentException
+
+    InvalidReplacementTypeException.struct_class = Types::InvalidReplacementTypeException
+
+    InvalidRepositoryDescriptionException.struct_class = Types::InvalidRepositoryDescriptionException
+
+    InvalidRepositoryNameException.struct_class = Types::InvalidRepositoryNameException
+
+    InvalidRepositoryTriggerBranchNameException.struct_class = Types::InvalidRepositoryTriggerBranchNameException
+
+    InvalidRepositoryTriggerCustomDataException.struct_class = Types::InvalidRepositoryTriggerCustomDataException
+
+    InvalidRepositoryTriggerDestinationArnException.struct_class = Types::InvalidRepositoryTriggerDestinationArnException
+
+    InvalidRepositoryTriggerEventsException.struct_class = Types::InvalidRepositoryTriggerEventsException
+
+    InvalidRepositoryTriggerNameException.struct_class = Types::InvalidRepositoryTriggerNameException
+
+    InvalidRepositoryTriggerRegionException.struct_class = Types::InvalidRepositoryTriggerRegionException
+
+    InvalidResourceArnException.struct_class = Types::InvalidResourceArnException
+
+    InvalidRevisionIdException.struct_class = Types::InvalidRevisionIdException
+
+    InvalidRuleContentSha256Exception.struct_class = Types::InvalidRuleContentSha256Exception
+
+    InvalidSortByException.struct_class = Types::InvalidSortByException
+
+    InvalidSourceCommitSpecifierException.struct_class = Types::InvalidSourceCommitSpecifierException
+
+    InvalidSystemTagUsageException.struct_class = Types::InvalidSystemTagUsageException
+
+    InvalidTagKeysListException.struct_class = Types::InvalidTagKeysListException
+
+    InvalidTagsMapException.struct_class = Types::InvalidTagsMapException
+
+    InvalidTargetBranchException.struct_class = Types::InvalidTargetBranchException
+
+    InvalidTargetException.struct_class = Types::InvalidTargetException
+
+    InvalidTargetsException.struct_class = Types::InvalidTargetsException
+
+    InvalidTitleException.struct_class = Types::InvalidTitleException
+
     IsBinaryFile.add_member(:source, Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "source"))
     IsBinaryFile.add_member(:destination, Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "destination"))
     IsBinaryFile.add_member(:base, Shapes::ShapeRef.new(shape: CapitalBoolean, location_name: "base"))
@@ -1192,6 +1424,28 @@ module Aws::CodeCommit
     Location.add_member(:relative_file_version, Shapes::ShapeRef.new(shape: RelativeFileVersionEnum, location_name: "relativeFileVersion"))
     Location.struct_class = Types::Location
 
+    ManualMergeRequiredException.struct_class = Types::ManualMergeRequiredException
+
+    MaximumBranchesExceededException.struct_class = Types::MaximumBranchesExceededException
+
+    MaximumConflictResolutionEntriesExceededException.struct_class = Types::MaximumConflictResolutionEntriesExceededException
+
+    MaximumFileContentToLoadExceededException.struct_class = Types::MaximumFileContentToLoadExceededException
+
+    MaximumFileEntriesExceededException.struct_class = Types::MaximumFileEntriesExceededException
+
+    MaximumItemsToCompareExceededException.struct_class = Types::MaximumItemsToCompareExceededException
+
+    MaximumNumberOfApprovalsExceededException.struct_class = Types::MaximumNumberOfApprovalsExceededException
+
+    MaximumOpenPullRequestsExceededException.struct_class = Types::MaximumOpenPullRequestsExceededException
+
+    MaximumRepositoryNamesExceededException.struct_class = Types::MaximumRepositoryNamesExceededException
+
+    MaximumRepositoryTriggersExceededException.struct_class = Types::MaximumRepositoryTriggersExceededException
+
+    MaximumRuleTemplatesAssociatedWithRepositoryException.struct_class = Types::MaximumRuleTemplatesAssociatedWithRepositoryException
+
     MergeBranchesByFastForwardInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     MergeBranchesByFastForwardInput.add_member(:source_commit_specifier, Shapes::ShapeRef.new(shape: CommitName, required: true, location_name: "sourceCommitSpecifier"))
     MergeBranchesByFastForwardInput.add_member(:destination_commit_specifier, Shapes::ShapeRef.new(shape: CommitName, required: true, location_name: "destinationCommitSpecifier"))
@@ -1259,6 +1513,8 @@ module Aws::CodeCommit
     MergeOperations.add_member(:destination, Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "destination"))
     MergeOperations.struct_class = Types::MergeOperations
 
+    MergeOptionRequiredException.struct_class = Types::MergeOptionRequiredException
+
     MergeOptions.member = Shapes::ShapeRef.new(shape: MergeOptionTypeEnum)
 
     MergePullRequestByFastForwardInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
@@ -1299,6 +1555,18 @@ module Aws::CodeCommit
     MergePullRequestByThreeWayOutput.add_member(:pull_request, Shapes::ShapeRef.new(shape: PullRequest, location_name: "pullRequest"))
     MergePullRequestByThreeWayOutput.struct_class = Types::MergePullRequestByThreeWayOutput
 
+    MultipleConflictResolutionEntriesException.struct_class = Types::MultipleConflictResolutionEntriesException
+
+    MultipleRepositoriesInPullRequestException.struct_class = Types::MultipleRepositoriesInPullRequestException
+
+    NameLengthExceededException.struct_class = Types::NameLengthExceededException
+
+    NoChangeException.struct_class = Types::NoChangeException
+
+    NumberOfRuleTemplatesExceededException.struct_class = Types::NumberOfRuleTemplatesExceededException
+
+    NumberOfRulesExceededException.struct_class = Types::NumberOfRulesExceededException
+
     ObjectTypes.add_member(:source, Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "source"))
     ObjectTypes.add_member(:destination, Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "destination"))
     ObjectTypes.add_member(:base, Shapes::ShapeRef.new(shape: ObjectTypeEnum, location_name: "base"))
@@ -1308,12 +1576,26 @@ module Aws::CodeCommit
     OriginApprovalRuleTemplate.add_member(:approval_rule_template_name, Shapes::ShapeRef.new(shape: ApprovalRuleTemplateName, location_name: "approvalRuleTemplateName"))
     OriginApprovalRuleTemplate.struct_class = Types::OriginApprovalRuleTemplate
 
+    OverrideAlreadySetException.struct_class = Types::OverrideAlreadySetException
+
     OverridePullRequestApprovalRulesInput.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, required: true, location_name: "pullRequestId"))
     OverridePullRequestApprovalRulesInput.add_member(:revision_id, Shapes::ShapeRef.new(shape: RevisionId, required: true, location_name: "revisionId"))
     OverridePullRequestApprovalRulesInput.add_member(:override_status, Shapes::ShapeRef.new(shape: OverrideStatus, required: true, location_name: "overrideStatus"))
     OverridePullRequestApprovalRulesInput.struct_class = Types::OverridePullRequestApprovalRulesInput
 
+    OverrideStatusRequiredException.struct_class = Types::OverrideStatusRequiredException
+
+    ParentCommitDoesNotExistException.struct_class = Types::ParentCommitDoesNotExistException
+
+    ParentCommitIdOutdatedException.struct_class = Types::ParentCommitIdOutdatedException
+
+    ParentCommitIdRequiredException.struct_class = Types::ParentCommitIdRequiredException
+
     ParentList.member = Shapes::ShapeRef.new(shape: ObjectId)
+
+    PathDoesNotExistException.struct_class = Types::PathDoesNotExistException
+
+    PathRequiredException.struct_class = Types::PathRequiredException
 
     PostCommentForComparedCommitInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PostCommentForComparedCommitInput.add_member(:before_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "beforeCommitId"))
@@ -1372,11 +1654,19 @@ module Aws::CodeCommit
     PullRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: ApprovalRulesList, location_name: "approvalRules"))
     PullRequest.struct_class = Types::PullRequest
 
+    PullRequestAlreadyClosedException.struct_class = Types::PullRequestAlreadyClosedException
+
+    PullRequestApprovalRulesNotSatisfiedException.struct_class = Types::PullRequestApprovalRulesNotSatisfiedException
+
+    PullRequestCannotBeApprovedByAuthorException.struct_class = Types::PullRequestCannotBeApprovedByAuthorException
+
     PullRequestCreatedEventMetadata.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PullRequestCreatedEventMetadata.add_member(:source_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "sourceCommitId"))
     PullRequestCreatedEventMetadata.add_member(:destination_commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "destinationCommitId"))
     PullRequestCreatedEventMetadata.add_member(:merge_base, Shapes::ShapeRef.new(shape: CommitId, location_name: "mergeBase"))
     PullRequestCreatedEventMetadata.struct_class = Types::PullRequestCreatedEventMetadata
+
+    PullRequestDoesNotExistException.struct_class = Types::PullRequestDoesNotExistException
 
     PullRequestEvent.add_member(:pull_request_id, Shapes::ShapeRef.new(shape: PullRequestId, location_name: "pullRequestId"))
     PullRequestEvent.add_member(:event_date, Shapes::ShapeRef.new(shape: EventDate, location_name: "eventDate"))
@@ -1395,6 +1685,8 @@ module Aws::CodeCommit
 
     PullRequestIdList.member = Shapes::ShapeRef.new(shape: PullRequestId)
 
+    PullRequestIdRequiredException.struct_class = Types::PullRequestIdRequiredException
+
     PullRequestMergedStateChangedEventMetadata.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PullRequestMergedStateChangedEventMetadata.add_member(:destination_reference, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "destinationReference"))
     PullRequestMergedStateChangedEventMetadata.add_member(:merge_metadata, Shapes::ShapeRef.new(shape: MergeMetadata, location_name: "mergeMetadata"))
@@ -1408,6 +1700,8 @@ module Aws::CodeCommit
 
     PullRequestStatusChangedEventMetadata.add_member(:pull_request_status, Shapes::ShapeRef.new(shape: PullRequestStatusEnum, location_name: "pullRequestStatus"))
     PullRequestStatusChangedEventMetadata.struct_class = Types::PullRequestStatusChangedEventMetadata
+
+    PullRequestStatusRequiredException.struct_class = Types::PullRequestStatusRequiredException
 
     PullRequestTarget.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     PullRequestTarget.add_member(:source_reference, Shapes::ShapeRef.new(shape: ReferenceName, location_name: "sourceReference"))
@@ -1427,6 +1721,8 @@ module Aws::CodeCommit
     PutFileEntry.add_member(:file_content, Shapes::ShapeRef.new(shape: FileContent, location_name: "fileContent"))
     PutFileEntry.add_member(:source_file, Shapes::ShapeRef.new(shape: SourceFileSpecifier, location_name: "sourceFile"))
     PutFileEntry.struct_class = Types::PutFileEntry
+
+    PutFileEntryConflictException.struct_class = Types::PutFileEntryConflictException
 
     PutFileInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutFileInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, required: true, location_name: "branchName"))
@@ -1451,6 +1747,12 @@ module Aws::CodeCommit
     PutRepositoryTriggersOutput.add_member(:configuration_id, Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
     PutRepositoryTriggersOutput.struct_class = Types::PutRepositoryTriggersOutput
 
+    ReferenceDoesNotExistException.struct_class = Types::ReferenceDoesNotExistException
+
+    ReferenceNameRequiredException.struct_class = Types::ReferenceNameRequiredException
+
+    ReferenceTypeNotSupportedException.struct_class = Types::ReferenceTypeNotSupportedException
+
     ReplaceContentEntries.member = Shapes::ShapeRef.new(shape: ReplaceContentEntry)
 
     ReplaceContentEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
@@ -1458,6 +1760,14 @@ module Aws::CodeCommit
     ReplaceContentEntry.add_member(:content, Shapes::ShapeRef.new(shape: FileContent, location_name: "content"))
     ReplaceContentEntry.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, location_name: "fileMode"))
     ReplaceContentEntry.struct_class = Types::ReplaceContentEntry
+
+    ReplacementContentRequiredException.struct_class = Types::ReplacementContentRequiredException
+
+    ReplacementTypeRequiredException.struct_class = Types::ReplacementTypeRequiredException
+
+    RepositoryDoesNotExistException.struct_class = Types::RepositoryDoesNotExistException
+
+    RepositoryLimitExceededException.struct_class = Types::RepositoryLimitExceededException
 
     RepositoryMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     RepositoryMetadata.add_member(:repository_id, Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
@@ -1473,6 +1783,8 @@ module Aws::CodeCommit
 
     RepositoryMetadataList.member = Shapes::ShapeRef.new(shape: RepositoryMetadata)
 
+    RepositoryNameExistsException.struct_class = Types::RepositoryNameExistsException
+
     RepositoryNameIdPair.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     RepositoryNameIdPair.add_member(:repository_id, Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
     RepositoryNameIdPair.struct_class = Types::RepositoryNameIdPair
@@ -1480,6 +1792,12 @@ module Aws::CodeCommit
     RepositoryNameIdPairList.member = Shapes::ShapeRef.new(shape: RepositoryNameIdPair)
 
     RepositoryNameList.member = Shapes::ShapeRef.new(shape: RepositoryName)
+
+    RepositoryNameRequiredException.struct_class = Types::RepositoryNameRequiredException
+
+    RepositoryNamesRequiredException.struct_class = Types::RepositoryNamesRequiredException
+
+    RepositoryNotAssociatedWithPullRequestException.struct_class = Types::RepositoryNotAssociatedWithPullRequestException
 
     RepositoryNotFoundList.member = Shapes::ShapeRef.new(shape: RepositoryName)
 
@@ -1490,7 +1808,13 @@ module Aws::CodeCommit
     RepositoryTrigger.add_member(:events, Shapes::ShapeRef.new(shape: RepositoryTriggerEventList, required: true, location_name: "events"))
     RepositoryTrigger.struct_class = Types::RepositoryTrigger
 
+    RepositoryTriggerBranchNameListRequiredException.struct_class = Types::RepositoryTriggerBranchNameListRequiredException
+
+    RepositoryTriggerDestinationArnRequiredException.struct_class = Types::RepositoryTriggerDestinationArnRequiredException
+
     RepositoryTriggerEventList.member = Shapes::ShapeRef.new(shape: RepositoryTriggerEventEnum)
+
+    RepositoryTriggerEventsListRequiredException.struct_class = Types::RepositoryTriggerEventsListRequiredException
 
     RepositoryTriggerExecutionFailure.add_member(:trigger, Shapes::ShapeRef.new(shape: RepositoryTriggerName, location_name: "trigger"))
     RepositoryTriggerExecutionFailure.add_member(:failure_message, Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailureMessage, location_name: "failureMessage"))
@@ -1500,13 +1824,33 @@ module Aws::CodeCommit
 
     RepositoryTriggerNameList.member = Shapes::ShapeRef.new(shape: RepositoryTriggerName)
 
+    RepositoryTriggerNameRequiredException.struct_class = Types::RepositoryTriggerNameRequiredException
+
     RepositoryTriggersList.member = Shapes::ShapeRef.new(shape: RepositoryTrigger)
+
+    RepositoryTriggersListRequiredException.struct_class = Types::RepositoryTriggersListRequiredException
+
+    ResourceArnRequiredException.struct_class = Types::ResourceArnRequiredException
+
+    RestrictedSourceFileException.struct_class = Types::RestrictedSourceFileException
+
+    RevisionIdRequiredException.struct_class = Types::RevisionIdRequiredException
+
+    RevisionNotCurrentException.struct_class = Types::RevisionNotCurrentException
+
+    SameFileContentException.struct_class = Types::SameFileContentException
+
+    SamePathRequestException.struct_class = Types::SamePathRequestException
 
     SetFileModeEntries.member = Shapes::ShapeRef.new(shape: SetFileModeEntry)
 
     SetFileModeEntry.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
     SetFileModeEntry.add_member(:file_mode, Shapes::ShapeRef.new(shape: FileModeTypeEnum, required: true, location_name: "fileMode"))
     SetFileModeEntry.struct_class = Types::SetFileModeEntry
+
+    SourceAndDestinationAreSameException.struct_class = Types::SourceAndDestinationAreSameException
+
+    SourceFileOrContentRequiredException.struct_class = Types::SourceFileOrContentRequiredException
 
     SourceFileSpecifier.add_member(:file_path, Shapes::ShapeRef.new(shape: Path, required: true, location_name: "filePath"))
     SourceFileSpecifier.add_member(:is_move, Shapes::ShapeRef.new(shape: IsMove, location_name: "isMove"))
@@ -1529,12 +1873,18 @@ module Aws::CodeCommit
 
     TagKeysList.member = Shapes::ShapeRef.new(shape: TagKey)
 
+    TagKeysListRequiredException.struct_class = Types::TagKeysListRequiredException
+
+    TagPolicyException.struct_class = Types::TagPolicyException
+
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, required: true, location_name: "tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
     TagsMap.key = Shapes::ShapeRef.new(shape: TagKey)
     TagsMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TagsMapRequiredException.struct_class = Types::TagsMapRequiredException
 
     Target.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     Target.add_member(:source_reference, Shapes::ShapeRef.new(shape: ReferenceName, required: true, location_name: "sourceReference"))
@@ -1543,6 +1893,10 @@ module Aws::CodeCommit
 
     TargetList.member = Shapes::ShapeRef.new(shape: Target)
 
+    TargetRequiredException.struct_class = Types::TargetRequiredException
+
+    TargetsRequiredException.struct_class = Types::TargetsRequiredException
+
     TestRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     TestRepositoryTriggersInput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, required: true, location_name: "triggers"))
     TestRepositoryTriggersInput.struct_class = Types::TestRepositoryTriggersInput
@@ -1550,6 +1904,14 @@ module Aws::CodeCommit
     TestRepositoryTriggersOutput.add_member(:successful_executions, Shapes::ShapeRef.new(shape: RepositoryTriggerNameList, location_name: "successfulExecutions"))
     TestRepositoryTriggersOutput.add_member(:failed_executions, Shapes::ShapeRef.new(shape: RepositoryTriggerExecutionFailureList, location_name: "failedExecutions"))
     TestRepositoryTriggersOutput.struct_class = Types::TestRepositoryTriggersOutput
+
+    TipOfSourceReferenceIsDifferentException.struct_class = Types::TipOfSourceReferenceIsDifferentException
+
+    TipsDivergenceExceededException.struct_class = Types::TipsDivergenceExceededException
+
+    TitleRequiredException.struct_class = Types::TitleRequiredException
+
+    TooManyTagsException.struct_class = Types::TooManyTagsException
 
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeysList, required: true, location_name: "tagKeys"))

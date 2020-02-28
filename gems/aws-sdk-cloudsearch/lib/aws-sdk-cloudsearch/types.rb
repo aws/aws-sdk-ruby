@@ -1243,6 +1243,11 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # The request was rejected because it attempted an operation which is
+    # not enabled.
+    #
+    class DisabledOperationException < Aws::EmptyStructure; end
+
     # Options for a search suggester.
     #
     # @note When making an API call, you may pass DocumentSuggesterOptions
@@ -1926,6 +1931,21 @@ module Aws::CloudSearch
       include Aws::Structure
     end
 
+    # An internal error occurred while processing the request. If this
+    # problem persists, report an issue from the [Service Health
+    # Dashboard][1].
+    #
+    #
+    #
+    # [1]: http://status.aws.amazon.com/
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The request was rejected because it specified an invalid type
+    # definition.
+    #
+    class InvalidTypeException < Aws::EmptyStructure; end
+
     # Options for a latlon field. A latlon field contains a location stored
     # as a latitude and longitude value pair. Present if `IndexFieldType`
     # specifies the field is of type `latlon`. All options are enabled by
@@ -1993,6 +2013,11 @@ module Aws::CloudSearch
       :sort_enabled)
       include Aws::Structure
     end
+
+    # The request was rejected because a resource limit has already been
+    # met.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @!attribute [rw] maximum_replication_count
     #   @return [Integer]
@@ -2172,6 +2197,11 @@ module Aws::CloudSearch
       :pending_deletion)
       include Aws::Structure
     end
+
+    # The request was rejected because it attempted to reference a resource
+    # that does not exist.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # The desired instance type and desired number of replicas of each index
     # partition.
@@ -2582,6 +2612,10 @@ module Aws::CloudSearch
       :access_policies)
       include Aws::Structure
     end
+
+    # The request was rejected because it has invalid parameters.
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
   end
 end

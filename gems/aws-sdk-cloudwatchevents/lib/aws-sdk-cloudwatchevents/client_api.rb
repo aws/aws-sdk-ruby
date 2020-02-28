@@ -185,6 +185,8 @@ module Aws::CloudWatchEvents
     BatchRetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "Attempts"))
     BatchRetryStrategy.struct_class = Types::BatchRetryStrategy
 
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     Condition.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Type"))
     Condition.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     Condition.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
@@ -300,8 +302,16 @@ module Aws::CloudWatchEvents
     InputTransformer.add_member(:input_template, Shapes::ShapeRef.new(shape: TransformerInput, required: true, location_name: "InputTemplate"))
     InputTransformer.struct_class = Types::InputTransformer
 
+    InternalException.struct_class = Types::InternalException
+
+    InvalidEventPatternException.struct_class = Types::InvalidEventPatternException
+
+    InvalidStateException.struct_class = Types::InvalidStateException
+
     KinesisParameters.add_member(:partition_key_path, Shapes::ShapeRef.new(shape: TargetPartitionKeyPath, required: true, location_name: "PartitionKeyPath"))
     KinesisParameters.struct_class = Types::KinesisParameters
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListEventBusesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: EventBusName, location_name: "NamePrefix"))
     ListEventBusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -375,6 +385,8 @@ module Aws::CloudWatchEvents
     ListTargetsByRuleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTargetsByRuleResponse.struct_class = Types::ListTargetsByRuleResponse
 
+    ManagedRuleException.struct_class = Types::ManagedRuleException
+
     NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
@@ -391,6 +403,8 @@ module Aws::CloudWatchEvents
     PartnerEventSourceAccountList.member = Shapes::ShapeRef.new(shape: PartnerEventSourceAccount)
 
     PartnerEventSourceList.member = Shapes::ShapeRef.new(shape: PartnerEventSource)
+
+    PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
 
     PutEventsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: PutEventsRequestEntryList, required: true, location_name: "Entries"))
     PutEventsRequest.struct_class = Types::PutEventsRequest
@@ -495,6 +509,10 @@ module Aws::CloudWatchEvents
     RemoveTargetsResultEntry.struct_class = Types::RemoveTargetsResultEntry
 
     RemoveTargetsResultEntryList.member = Shapes::ShapeRef.new(shape: RemoveTargetsResultEntry)
+
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, location_name: "Name"))
     Rule.add_member(:arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "Arn"))

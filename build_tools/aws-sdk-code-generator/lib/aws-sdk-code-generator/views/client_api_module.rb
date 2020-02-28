@@ -304,9 +304,8 @@ module AwsSdkCodeGenerator
       end
 
       def error_struct?(shape)
-        shape['type'] == 'structure' && !!!shape['event']
-          (shape['error'] || shape['exception']) &&
-          shape['members'] && shape['members'].size > 0
+        shape['type'] == 'structure' && !!!shape['event'] &&
+          (shape['error'] || shape['exception'])
       end
 
       def structure_shape_enum

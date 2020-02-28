@@ -181,6 +181,16 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # Specified CIDRIP or EC2 security group is not authorized for the
+    # specified DB security group.
+    #
+    # Neptune may not also be authorized via IAM to perform necessary
+    # actions on your behalf.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
+
     # Specifies an Availability Zone.
     #
     # @!attribute [rw] name
@@ -193,6 +203,12 @@ module Aws::Neptune
       :name)
       include Aws::Structure
     end
+
+    # *CertificateIdentifier* does not refer to an existing certificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/CertificateNotFoundFault AWS API Documentation
+    #
+    class CertificateNotFoundFault < Aws::EmptyStructure; end
 
     # Specifies a character set.
     #
@@ -1884,6 +1900,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # User already has a DB cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains information about an instance that is part of a DB cluster.
     #
     # @!attribute [rw] db_instance_identifier
@@ -1932,6 +1954,12 @@ module Aws::Neptune
       :db_clusters)
       include Aws::Structure
     end
+
+    # *DBClusterIdentifier* does not refer to an existing DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterNotFoundFault AWS API Documentation
+    #
+    class DBClusterNotFoundFault < Aws::EmptyStructure; end
 
     # Contains status information for a DB cluster option group.
     #
@@ -2026,6 +2054,13 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # *DBClusterParameterGroupName* does not refer to an existing DB Cluster
+    # parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBClusterParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterParameterGroups` request. If this parameter is
@@ -2044,6 +2079,13 @@ module Aws::Neptune
       :db_cluster_parameter_groups)
       include Aws::Structure
     end
+
+    # User attempted to create a new DB cluster and the user has already
+    # reached the maximum allowed DB cluster quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB cluster.
@@ -2075,6 +2117,27 @@ module Aws::Neptune
       :status)
       include Aws::Structure
     end
+
+    # The specified IAM role Amazon Resource Name (ARN) is already
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRoleAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterRoleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified IAM role Amazon Resource Name (ARN) is not associated
+    # with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRoleNotFoundFault AWS API Documentation
+    #
+    class DBClusterRoleNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of IAM roles that can be
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterRoleQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterRoleQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details for an Amazon Neptune DB cluster snapshot
     #
@@ -2213,6 +2276,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # User already has a DB cluster snapshot with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual DB cluster snapshot
     # attribute.
     #
@@ -2290,6 +2359,13 @@ module Aws::Neptune
       :db_cluster_snapshots)
       include Aws::Structure
     end
+
+    # *DBClusterSnapshotIdentifier* does not refer to an existing DB cluster
+    # snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the action
     # DescribeDBEngineVersions.
@@ -2703,6 +2779,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # User already has a DB instance with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -2720,6 +2802,12 @@ module Aws::Neptune
       :db_instances)
       include Aws::Structure
     end
+
+    # *DBInstanceIdentifier* does not refer to an existing DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBInstanceNotFoundFault AWS API Documentation
+    #
+    class DBInstanceNotFoundFault < Aws::EmptyStructure; end
 
     # Provides a list of status information for a DB instance.
     #
@@ -2785,6 +2873,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # A DB parameter group with the same name exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] parameters
     #   A list of Parameter values.
     #   @return [Array<Types::Parameter>]
@@ -2813,6 +2907,20 @@ module Aws::Neptune
       :db_parameter_group_name)
       include Aws::Structure
     end
+
+    # *DBParameterGroupName* does not refer to an existing DB parameter
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # Request would result in user exceeding the allowed number of DB
+    # parameter groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # The status of the DB parameter group.
     #
@@ -2878,6 +2986,24 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # *DBSecurityGroupName* does not refer to an existing DB security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class DBSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # *DBSnapshotIdentifier* is already used by an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # *DBSnapshotIdentifier* does not refer to an existing DB snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details of an Amazon Neptune DB subnet group.
     #
     # This data type is used as a response element in the
@@ -2919,6 +3045,19 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # *DBSubnetGroupName* is already used by an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Subnets in the DB subnet group should cover at least two Availability
+    # Zones unless there is only one Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetGroupDoesNotCoverEnoughAZs AWS API Documentation
+    #
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -2936,6 +3075,33 @@ module Aws::Neptune
       :db_subnet_groups)
       include Aws::Structure
     end
+
+    # *DBSubnetGroupName* does not refer to an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class DBSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # Request would result in user exceeding the allowed number of DB subnet
+    # groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # Request would result in user exceeding the allowed number of subnets
+    # in a DB subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBSubnetQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB upgrade failed because a resource the DB depends on could not
+    # be modified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DBUpgradeDependencyFailureFault AWS API Documentation
+    #
+    class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDBClusterMessage
     #   data as a hash:
@@ -4487,6 +4653,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # *Domain* does not refer to an existing Active Directory Domain.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/DomainNotFoundFault AWS API Documentation
+    #
+    class DomainNotFoundFault < Aws::EmptyStructure; end
+
     # A range of double values.
     #
     # @!attribute [rw] from
@@ -4697,6 +4869,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # You have exceeded the number of events you can subscribe to.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/EventSubscriptionQuotaExceededFault AWS API Documentation
+    #
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   DescribeOrderableDBInstanceOptions request. If this parameter is
@@ -4807,6 +4985,117 @@ module Aws::Neptune
       :values)
       include Aws::Structure
     end
+
+    # Request would result in user exceeding the allowed number of DB
+    # instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InstanceQuotaExceededFault AWS API Documentation
+    #
+    class InstanceQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB cluster does not have enough capacity for the current
+    # operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InsufficientDBClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # Specified DB instance class is not available in the specified
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InsufficientDBInstanceCapacityFault AWS API Documentation
+    #
+    class InsufficientDBInstanceCapacityFault < Aws::EmptyStructure; end
+
+    # There is insufficient storage available for the current action. You
+    # may be able to resolve this error by updating your subnet group to use
+    # different Availability Zones that have more storage available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InsufficientStorageClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The supplied value is not a valid DB cluster snapshot state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBClusterSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBClusterSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The DB cluster is not in a valid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBClusterStateFault AWS API Documentation
+    #
+    class InvalidDBClusterStateFault < Aws::EmptyStructure; end
+
+    # The specified DB instance is not in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBInstanceStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceStateFault < Aws::EmptyStructure; end
+
+    # The DB parameter group is in use or is in an invalid state. If you are
+    # attempting to delete the parameter group, you cannot delete it when
+    # the parameter group is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidDBParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB security group does not allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB snapshot does not allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The DB subnet group cannot be deleted because it is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBSubnetGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupStateFault < Aws::EmptyStructure; end
+
+    # The DB subnet is not in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidDBSubnetStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetStateFault < Aws::EmptyStructure; end
+
+    # The event subscription is in an invalid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidEventSubscriptionStateFault AWS API Documentation
+    #
+    class InvalidEventSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # Cannot restore from vpc backup to non-vpc DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidRestoreFault AWS API Documentation
+    #
+    class InvalidRestoreFault < Aws::EmptyStructure; end
+
+    # The requested subnet is invalid, or multiple subnets were requested
+    # that are not all in a common VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # DB subnet group does not cover all Availability Zones after it is
+    # created because users' change.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # Error accessing KMS key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
+    #
+    class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
@@ -5790,6 +6079,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # The designated option group could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/OptionGroupNotFoundFault AWS API Documentation
+    #
+    class OptionGroupNotFoundFault < Aws::EmptyStructure; end
+
     # Contains a list of available options for a DB instance.
     #
     # This data type is used as a response element in the
@@ -6215,6 +6510,12 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # Provisioned IOPS not available in the specified Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ProvisionedIopsNotAvailableInAZFault AWS API Documentation
+    #
+    class ProvisionedIopsNotAvailableInAZFault < Aws::EmptyStructure; end
+
     # A range of integer values.
     #
     # @!attribute [rw] from
@@ -6491,6 +6792,12 @@ module Aws::Neptune
       :parameters)
       include Aws::Structure
     end
+
+    # The specified resource ID was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Aws::EmptyStructure; end
 
     # Describes the pending maintenance actions for a resource.
     #
@@ -6922,6 +7229,44 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # The SNS topic is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SNSInvalidTopicFault AWS API Documentation
+    #
+    class SNSInvalidTopicFault < Aws::EmptyStructure; end
+
+    # There is no SNS authorization.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SNSNoAuthorizationFault AWS API Documentation
+    #
+    class SNSNoAuthorizationFault < Aws::EmptyStructure; end
+
+    # The ARN of the SNS topic could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
+    #
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of accounts that you can share a
+    # manual DB snapshot with.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SharedSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # Request would result in user exceeding the allowed number of DB
+    # snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The source could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SourceNotFoundFault AWS API Documentation
+    #
+    class SourceNotFoundFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass StartDBClusterMessage
     #   data as a hash:
     #
@@ -6988,6 +7333,19 @@ module Aws::Neptune
       include Aws::Structure
     end
 
+    # Request would result in user exceeding the allowed amount of storage
+    # available across all DB instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StorageQuotaExceededFault AWS API Documentation
+    #
+    class StorageQuotaExceededFault < Aws::EmptyStructure; end
+
+    # *StorageType* specified cannot be associated with the DB Instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/StorageTypeNotSupportedFault AWS API Documentation
+    #
+    class StorageTypeNotSupportedFault < Aws::EmptyStructure; end
+
     # Specifies a subnet.
     #
     # This data type is used as a response element in the
@@ -7013,6 +7371,30 @@ module Aws::Neptune
       :subnet_status)
       include Aws::Structure
     end
+
+    # The DB subnet is already in use in the Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Aws::EmptyStructure; end
+
+    # This subscription already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SubscriptionAlreadyExistFault AWS API Documentation
+    #
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure; end
+
+    # The designated subscription category could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SubscriptionCategoryNotFoundFault AWS API Documentation
+    #
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure; end
+
+    # The designated subscription could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptune-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
+    #
+    class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
     # Metadata assigned to an Amazon Neptune resource consisting of a
     # key-value pair.
