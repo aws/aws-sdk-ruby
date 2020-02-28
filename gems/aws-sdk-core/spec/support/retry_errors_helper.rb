@@ -3,7 +3,7 @@ RetryErrorsSvc = ApiHelper.sample_service
 
 # Sets up the handler to run retry tests
 # by calling either the send_handler or passed block
-# handler and resp must be defined outside this helper
+# :handler and :resp must be defined outside this helper
 def handle(send_handler = nil, &block)
   handler.handler = send_handler || block
   handler.call(resp.context)
@@ -65,18 +65,4 @@ def setup_next_response(test_case)
   if response[:timestamp]
     allow(Aws::Util).to receive(:monotonic_seconds).and_return(response[:timestamp])
   end
-end
-
-def success(timestamp, calculated_rate)
-  [{
-    response: { status_code: 200, error: nil, timestamp: timestamp },
-    expect: { calculated_rate: calculated_rate }
-  }]
-end
-
-def throttle(timestamp, calculated_rate)
-  [{
-    response: { status_code: 429, error: nil, timestamp: timestamp },
-    expect: { calculated_rate: calculated_rate }
-  }]
 end

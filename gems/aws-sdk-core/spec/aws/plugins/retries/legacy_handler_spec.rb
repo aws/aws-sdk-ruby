@@ -33,12 +33,6 @@ module Aws
         resp.context.http_response.status_code = 400
       end
 
-      def handle(send_handler = nil, &block)
-        allow(Kernel).to receive(:sleep)
-        handler.handler = send_handler || block
-        handler.call(resp.context)
-      end
-
       it 'does not retry responses that have no error' do
         resp.error = nil
         send_handler = double('send-handler')

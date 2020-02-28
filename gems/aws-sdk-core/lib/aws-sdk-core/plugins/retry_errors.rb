@@ -92,7 +92,7 @@ This option is only used in the `legacy` retry mode.
 
       option(
         :retry_mode,
-        default: 'standard',
+        default: 'legacy',
         doc_type: String,
         docstring: <<-DOCS) do |cfg|
 Specifies which retry algorithm to use. Defaults to `legacy`

@@ -14,12 +14,15 @@ module Aws
       it 'sets the time window correctly from max rate' do
         client_rate_limiter.instance_variable_set(:@last_max_rate, 10)
         client_rate_limiter.send(:calculate_time_window)
-        expect(client_rate_limiter.instance_variable_get(:@time_window)).to be_within(0.1).of(1.9)
+        expect(client_rate_limiter.instance_variable_get(:@time_window))
+          .to be_within(0.1).of(1.9)
       end
 
       it 'decreases rate by beta when throttled' do
         rate_when_throttled = 8
-        new_rate = client_rate_limiter.send(:cubic_throttle, rate_when_throttled)
+        new_rate = client_rate_limiter.send(
+          :cubic_throttle, rate_when_throttled
+        )
         expect(new_rate).to eq(rate_when_throttled * 0.7)
       end
 
@@ -45,7 +48,8 @@ module Aws
 
         client_rate_limiter.send(:update_measured_rate)
         # This should be 1 * 0.8 + 0 * 0.2, or just 0.8
-        expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate)).to be_within(0.1).of(0.8)
+        expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate))
+          .to be_within(0.1).of(0.8)
       end
 
       it 'can measure a constant rate' do
@@ -57,7 +61,8 @@ module Aws
           client_rate_limiter.send(:update_measured_rate)
         end
 
-        expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate)).to be_within(0.1).of(2.0)
+        expect(client_rate_limiter.instance_variable_get(:@measured_tx_rate))
+          .to be_within(0.1).of(2.0)
 
         # if we now wait 10 seconds (0.1 TPS)
         # our rate is somewhere between 2 TPS and 0.1 TPS
@@ -95,12 +100,13 @@ module Aws
         client_rate_limiter.token_bucket_acquire(100, true)
       end
 
-      it 'raises a CapacityNotAvailableError when non block mode fails to acquire a token' do
+      it 'raises CapacityNotAvailableError when it fails to acquire a token' do
         client_rate_limiter.instance_variable_set(:@enabled, true)
         allow(Util).to receive(:monotonic_seconds).and_return(0)
         client_rate_limiter.send(:token_bucket_update_rate, 10)
 
-        expect { client_rate_limiter.token_bucket_acquire(100, false) }.to raise_error(Aws::Errors::CapacityNotAvailableError)
+        expect { client_rate_limiter.token_bucket_acquire(100, false) }
+          .to raise_error(Aws::Errors::CapacityNotAvailableError)
       end
 
       it 'can retrieve at max send rate' do
@@ -116,11 +122,12 @@ module Aws
         end
       end
 
-      it 'wont set rate below the min' do
+      it 'wont set rate below the min fill rate' do
         client_rate_limiter.instance_variable_set(:@enabled, true)
         client_rate_limiter.send(:token_bucket_update_rate, 0.1)
 
-        expect(client_rate_limiter.instance_variable_get(:@fill_rate)).to eq(Retries::ClientRateLimiter::MIN_FILL_RATE)
+        expect(client_rate_limiter.instance_variable_get(:@fill_rate))
+          .to eq(Retries::ClientRateLimiter::MIN_FILL_RATE)
       end
 
       it 'acquires a token only when enabled' do
@@ -134,22 +141,28 @@ module Aws
         expect(client_rate_limiter.instance_variable_get(:@enabled)).to be(true)
       end
 
-      describe 'RetryErrors::ClientRateLimiter ThreadSafety' do
+      context 'thread safety' do
         it 'can change max rate while blocking' do
-          # This isn't a stress test - we just verify we can change the rate while we acquire a token
+          # This isn't a stress test - we just verify we can change the
+          # rate while we acquire a token
           client_rate_limiter.instance_variable_set(:@enabled, true)
-          # Set a rate to 0.5 (the min rate).  This means it will take 2 seconds to acquire a single token
+          # Set a rate to 0.5 (the min rate).  This means it will take
+          # 2 seconds to acquire a single token
           client_rate_limiter.send(:token_bucket_update_rate, 0.5)
 
           # Start a thread to acquire a token
-          test_thread = Thread.new { client_rate_limiter.token_bucket_acquire(1) }
+          test_thread = Thread.new do
+            client_rate_limiter.token_bucket_acquire(1)
+          end
 
           # ensure the new thread has a chance to start
           sleep(0.1)
 
-          # Now in the main thread, update the rate to something really quick (eg 100)
+          # Now in the main thread, update the rate to something really quick.
           # This should let us get a token back very quickly (~0.01 seconds)
-          mutex.synchronize { client_rate_limiter.send(:token_bucket_update_rate, 100) }
+          mutex.synchronize do
+            client_rate_limiter.send(:token_bucket_update_rate, 100)
+          end
           start_time = Aws::Util.monotonic_seconds
           client_rate_limiter.token_bucket_acquire(1)
           main_thread_time = Aws::Util.monotonic_seconds - start_time
@@ -168,28 +181,29 @@ module Aws
           shutdown_threads = false
           threads = []
           n_test_threads = 5
-          acquisitions_by_thread = Array.new(n_test_threads, 0)
+          acquisitions = Array.new(n_test_threads, 0)
 
           n_test_threads.times do |i|
             threads << Thread.new do
               until shutdown_threads
                 client_rate_limiter.token_bucket_acquire(1)
-                acquisitions_by_thread[i] += 1
+                acquisitions[i] += 1
               end
             end
           end
 
-          # run a stress test for a few seconds.  Increase this to stress test more locally
+          # run a stress test for a few seconds.
+          # Increase this to stress test more locally
           sleep(3)
           shutdown_threads = true
           threads.each(&:join)
 
-          # We can't really rely on any guarantees about evenly distributing thread acquisitions
-          # But we can sanity check that our implementation isn't drastically starving a thread
-          # Check that no thread has less than 20% of mean acquisitions
-
-          mean = acquisitions_by_thread.reduce(:+).to_f / acquisitions_by_thread.size
-          expect(acquisitions_by_thread.all? { |x| x > 0.2 * mean }).to be true
+          # We can't really rely on any guarantees about evenly distributing
+          # thread acquisitions. But we can sanity check that our implementation
+          # isn't drastically starving a thread. Check that no thread has
+          # less than 20% of mean acquisitions
+          mean = acquisitions.reduce(:+).to_f / acquisitions.size
+          expect(acquisitions.all? { |x| x > 0.2 * mean }).to be true
         end
       end
     end

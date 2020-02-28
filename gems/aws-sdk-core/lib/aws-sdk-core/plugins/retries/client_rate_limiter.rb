@@ -27,7 +27,7 @@ module Aws
           @calculated_rate      = nil
         end
 
-        def token_bucket_acquire(amount, wait_to_fill=true)
+        def token_bucket_acquire(amount, wait_to_fill = true)
           # Client side throttling is not enabled until we see a
           # throttling error
           return unless @enabled
@@ -135,4 +135,3 @@ module Aws
     end
   end
 end
-
