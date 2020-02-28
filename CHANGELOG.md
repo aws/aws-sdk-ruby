@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AccessAnalyzer - Updated the API for Access Analyzer.
+
+* Feature - Aws::AppMesh - Updated the API, and documentation for AWS App Mesh.
+
+* Feature - Aws::CodeGuruProfiler - Updated the documentation for Amazon CodeGuru Profiler.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::QuickSight - Updated the API, and documentation for Amazon QuickSight.
+
+* Feature - Aws::AugmentedAIRuntime - Updated the API, and documentation for Amazon Augmented AI Runtime.
+
+* Feature - Aws::WorkDocs - Updated the documentation for Amazon WorkDocs.
+
 2.11.454 (2020-02-27)
 ------------------
 
