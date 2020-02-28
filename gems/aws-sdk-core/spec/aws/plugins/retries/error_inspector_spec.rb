@@ -26,11 +26,19 @@ module Aws
         end
 
         it 'returns true for error types that match /expired/' do
-          expect(inspector(RetryErrorsSvc::Errors::SomethingExpiredError).expired_credentials?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomethingExpiredError
+            ).expired_credentials?
+          ).to be(true)
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).expired_credentials?).to be(false)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomeRandomError
+            ).expired_credentials?
+          ).to be(false)
         end
       end
 
@@ -59,21 +67,37 @@ module Aws
         end
 
         it 'returns true for error types that match /throttl/' do
-          expect(inspector(RetryErrorsSvc::Errors::Throttled).throttling_error?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::Throttled).throttling_error?
+          ).to be(true)
         end
 
         it 'returns true for response status code 429' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError, 429).throttling_error?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::SomeRandomError, 429
+            ).throttling_error?
+          ).to be(true)
+        end
+
+        it 'returns true for modeled throttling errors' do
+          expect_any_instance_of(Errors::ServiceError)
+            .to receive(:throttling?).and_return(true)
+          expect(inspector(Errors::ServiceError).throttling_error?).to be(true)
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).throttling_error?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).throttling_error?
+          ).to be(false)
         end
       end
 
       describe '#checksum?' do
         it 'returns true for CRC32CheckFailed' do
-          expect(inspector(RetryErrorsSvc::Errors::CRC32CheckFailed).checksum?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::CRC32CheckFailed).checksum?
+          ).to be(true)
         end
 
         it 'returns true if the error extends Errors::ChecksumError' do
@@ -81,31 +105,45 @@ module Aws
         end
 
         it 'returns false for other errors' do
-          expect(inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?
+          ).to be(false)
         end
       end
 
       describe '#server?' do
         it 'returns true if the error is a 500 level error' do
-          expect(inspector(RetryErrorsSvc::Errors::RandomError, 500).server?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RandomError, 500).server?
+          ).to be(true)
         end
 
         it 'returns false if the error is not a 500 level error' do
-          expect(inspector(RetryErrorsSvc::Errors::RandomError, 404).server?).to be(false)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RandomError, 404).server?
+          ).to be(false)
         end
       end
 
       describe '#networking?' do
         it 'returns true for RequestTimeout' do
-          expect(inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?
+          ).to be(true)
         end
 
         it 'returns true for RequestTimeoutException' do
-          expect(inspector(RetryErrorsSvc::Errors::RequestTimeoutException).networking?).to be(true)
+          expect(
+            inspector(
+              RetryErrorsSvc::Errors::RequestTimeoutException
+            ).networking?
+          ).to be(true)
         end
 
         it 'returns true for IDPCommunicationError' do
-          expect(inspector(RetryErrorsSvc::Errors::IDPCommunicationError).networking?).to be(true)
+          expect(
+            inspector(RetryErrorsSvc::Errors::IDPCommunicationError).networking?
+          ).to be(true)
         end
 
         it 'returns true if the error extends NetworkingError' do
@@ -129,6 +167,18 @@ module Aws
         it 'returns false if the http status code is not 0' do
           error = double('error')
           expect(inspector(error, 307).networking?).to be(false)
+        end
+      end
+
+      describe '#endpoint_discovery?' do
+
+      end
+
+      describe '#modeled_retryable?' do
+        it 'returns true for modeled retryable exceptions' do
+          expect_any_instance_of(Errors::ServiceError)
+            .to receive(:retryable?).and_return(true)
+          expect(inspector(Errors::ServiceError).modeled_retryable?).to be(true)
         end
       end
     end
