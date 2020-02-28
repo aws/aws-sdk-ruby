@@ -305,6 +305,8 @@ module Aws::ElasticsearchService
     DescribeReservedElasticsearchInstancesResponse.add_member(:reserved_elasticsearch_instances, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceList, location_name: "ReservedElasticsearchInstances"))
     DescribeReservedElasticsearchInstancesResponse.struct_class = Types::DescribeReservedElasticsearchInstancesResponse
 
+    DisabledOperationException.struct_class = Types::DisabledOperationException
+
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
     DomainEndpointOptions.add_member(:tls_security_policy, Shapes::ShapeRef.new(shape: TLSSecurityPolicy, location_name: "TLSSecurityPolicy"))
     DomainEndpointOptions.struct_class = Types::DomainEndpointOptions
@@ -437,7 +439,13 @@ module Aws::ElasticsearchService
     InstanceLimits.add_member(:instance_count_limits, Shapes::ShapeRef.new(shape: InstanceCountLimits, location_name: "InstanceCountLimits"))
     InstanceLimits.struct_class = Types::InstanceLimits
 
+    InternalException.struct_class = Types::InternalException
+
+    InvalidTypeException.struct_class = Types::InvalidTypeException
+
     Issues.member = Shapes::ShapeRef.new(shape: Issue)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
 
@@ -554,6 +562,10 @@ module Aws::ElasticsearchService
 
     ReservedElasticsearchInstanceOfferingList.member = Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceOffering)
 
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ServiceSoftwareOptions.add_member(:current_version, Shapes::ShapeRef.new(shape: String, location_name: "CurrentVersion"))
     ServiceSoftwareOptions.add_member(:new_version, Shapes::ShapeRef.new(shape: String, location_name: "NewVersion"))
     ServiceSoftwareOptions.add_member(:update_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpdateAvailable"))
@@ -652,6 +664,8 @@ module Aws::ElasticsearchService
     VPCOptions.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
     VPCOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
     VPCOptions.struct_class = Types::VPCOptions
+
+    ValidationException.struct_class = Types::ValidationException
 
     ZoneAwarenessConfig.add_member(:availability_zone_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AvailabilityZoneCount"))
     ZoneAwarenessConfig.struct_class = Types::ZoneAwarenessConfig

@@ -23,6 +23,10 @@ module Aws::ApiGatewayManagementApi
       include Aws::Structure
     end
 
+    # The caller is not authorized to invoke this operation.
+    #
+    class ForbiddenException < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass GetConnectionRequest
     #   data as a hash:
     #
@@ -53,6 +57,10 @@ module Aws::ApiGatewayManagementApi
       :last_active_at)
       include Aws::Structure
     end
+
+    # The connection with the provided id no longer exists.
+    #
+    class GoneException < Aws::EmptyStructure; end
 
     # @!attribute [rw] source_ip
     #   The source IP address of the TCP connection making the request to
@@ -99,6 +107,11 @@ module Aws::ApiGatewayManagementApi
       :connection_id)
       include Aws::Structure
     end
+
+    # The client is sending more than the allowed number of requests per
+    # unit of time or the WebSocket client side buffer is full.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
   end
 end

@@ -294,6 +294,8 @@ module Aws::Rekognition
     VideoMetadata = Shapes::StructureShape.new(name: 'VideoMetadata')
     VideoTooLargeException = Shapes::StructureShape.new(name: 'VideoTooLargeException')
 
+    AccessDeniedException.struct_class = Types::AccessDeniedException
+
     AgeRange.add_member(:low, Shapes::ShapeRef.new(shape: UInteger, location_name: "Low"))
     AgeRange.add_member(:high, Shapes::ShapeRef.new(shape: UInteger, location_name: "High"))
     AgeRange.struct_class = Types::AgeRange
@@ -739,6 +741,8 @@ module Aws::Rekognition
     HumanLoopQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "ServiceCode"))
     HumanLoopQuotaExceededException.struct_class = Types::HumanLoopQuotaExceededException
 
+    IdempotentParameterMismatchException.struct_class = Types::IdempotentParameterMismatchException
+
     Image.add_member(:bytes, Shapes::ShapeRef.new(shape: ImageBlob, location_name: "Bytes"))
     Image.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Image.struct_class = Types::Image
@@ -746,6 +750,8 @@ module Aws::Rekognition
     ImageQuality.add_member(:brightness, Shapes::ShapeRef.new(shape: Float, location_name: "Brightness"))
     ImageQuality.add_member(:sharpness, Shapes::ShapeRef.new(shape: Float, location_name: "Sharpness"))
     ImageQuality.struct_class = Types::ImageQuality
+
+    ImageTooLargeException.struct_class = Types::ImageTooLargeException
 
     IndexFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
     IndexFacesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -766,6 +772,16 @@ module Aws::Rekognition
     Instance.struct_class = Types::Instance
 
     Instances.member = Shapes::ShapeRef.new(shape: Instance)
+
+    InternalServerError.struct_class = Types::InternalServerError
+
+    InvalidImageFormatException.struct_class = Types::InvalidImageFormatException
+
+    InvalidPaginationTokenException.struct_class = Types::InvalidPaginationTokenException
+
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
+    InvalidS3ObjectException.struct_class = Types::InvalidS3ObjectException
 
     KinesisDataStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisDataArn, location_name: "Arn"))
     KinesisDataStream.struct_class = Types::KinesisDataStream
@@ -793,6 +809,8 @@ module Aws::Rekognition
     Landmark.struct_class = Types::Landmark
 
     Landmarks.member = Shapes::ShapeRef.new(shape: Landmark)
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListCollectionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListCollectionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -900,6 +918,8 @@ module Aws::Rekognition
 
     ProjectVersionDescriptions.member = Shapes::ShapeRef.new(shape: ProjectVersionDescription)
 
+    ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
+
     Reasons.member = Shapes::ShapeRef.new(shape: Reason)
 
     RecognizeCelebritiesRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
@@ -914,6 +934,14 @@ module Aws::Rekognition
     RegionOfInterest.struct_class = Types::RegionOfInterest
 
     RegionsOfInterest.member = Shapes::ShapeRef.new(shape: RegionOfInterest)
+
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceInUseException.struct_class = Types::ResourceInUseException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
 
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
@@ -1090,6 +1118,8 @@ module Aws::Rekognition
 
     TextDetectionResults.member = Shapes::ShapeRef.new(shape: TextDetectionResult)
 
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     TrainingData.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "Assets"))
     TrainingData.struct_class = Types::TrainingData
 
@@ -1117,6 +1147,8 @@ module Aws::Rekognition
     VideoMetadata.add_member(:frame_height, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameHeight"))
     VideoMetadata.add_member(:frame_width, Shapes::ShapeRef.new(shape: ULong, location_name: "FrameWidth"))
     VideoMetadata.struct_class = Types::VideoMetadata
+
+    VideoTooLargeException.struct_class = Types::VideoTooLargeException
 
 
     # @api private

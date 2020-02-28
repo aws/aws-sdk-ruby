@@ -340,6 +340,8 @@ module Aws::WorkDocs
     DeactivateUserRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DeactivateUserRequest.struct_class = Types::DeactivateUserRequest
 
+    DeactivatingLastSystemUserException.struct_class = Types::DeactivatingLastSystemUserException
+
     DeleteCommentRequest.add_member(:authentication_token, Shapes::ShapeRef.new(shape: AuthenticationHeaderType, location: "header", location_name: "Authentication"))
     DeleteCommentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: ResourceIdType, required: true, location: "uri", location_name: "DocumentId"))
     DeleteCommentRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: DocumentVersionIdType, required: true, location: "uri", location_name: "VersionId"))
@@ -774,6 +776,8 @@ module Aws::WorkDocs
 
     TooManySubscriptionsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     TooManySubscriptionsException.struct_class = Types::TooManySubscriptionsException
+
+    UnauthorizedOperationException.struct_class = Types::UnauthorizedOperationException
 
     UnauthorizedResourceAccessException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "Message"))
     UnauthorizedResourceAccessException.struct_class = Types::UnauthorizedResourceAccessException

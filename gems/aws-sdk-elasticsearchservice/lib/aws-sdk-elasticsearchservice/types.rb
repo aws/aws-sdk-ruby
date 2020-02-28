@@ -789,6 +789,11 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # An error occured because the client wanted to access a not supported
+    # operation. Gives http status code of 409.
+    #
+    class DisabledOperationException < Aws::EmptyStructure; end
+
     # Options to configure endpoint for the Elasticsearch domain.
     #
     # @note When making an API call, you may pass DomainEndpointOptions
@@ -1493,6 +1498,22 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The request processing has failed because of an unknown error,
+    # exception or failure (the failure is internal to the service) . Gives
+    # http status code of 500.
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # An exception for trying to create or access sub-resource that is
+    # either invalid or not supported. Gives http status code of 409.
+    #
+    class InvalidTypeException < Aws::EmptyStructure; end
+
+    # An exception for trying to create more than allowed resources or
+    # sub-resources. Gives http status code of 409.
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
+
     # Limits for given InstanceType and for each of it's role.
     #  Limits contains following ` StorageTypes, ` ` InstanceLimits ` and `
     # AdditionalLimits `
@@ -2049,6 +2070,16 @@ module Aws::ElasticsearchService
       :recurring_charges)
       include Aws::Structure
     end
+
+    # An exception for creating a resource that already exists. Gives http
+    # status code of 400.
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An exception for accessing or deleting a resource that does not exist.
+    # Gives http status code of 400.
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # The current options of an Elasticsearch domain service software
     # options.
@@ -2627,6 +2658,11 @@ module Aws::ElasticsearchService
       :security_group_ids)
       include Aws::Structure
     end
+
+    # An exception for missing / invalid input fields. Gives http status
+    # code of 400.
+    #
+    class ValidationException < Aws::EmptyStructure; end
 
     # Specifies the zone awareness configuration for the domain cluster,
     # such as the number of availability zones.

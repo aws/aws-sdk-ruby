@@ -164,6 +164,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # There is concurrent modification on a rule or target.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ConcurrentModificationException AWS API Documentation
+    #
+    class ConcurrentModificationException < Aws::EmptyStructure; end
+
     # A JSON string which you can use to limit the event bus permissions you
     # are granting to only accounts that fulfill the condition. Currently,
     # the only supported condition is membership in a certain AWS
@@ -907,6 +913,24 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # This exception occurs due to unexpected causes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/InternalException AWS API Documentation
+    #
+    class InternalException < Aws::EmptyStructure; end
+
+    # The event pattern is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/InvalidEventPatternException AWS API Documentation
+    #
+    class InvalidEventPatternException < Aws::EmptyStructure; end
+
+    # The specified state is not a valid state for an event source.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Aws::EmptyStructure; end
+
     # This object enables you to specify a JSON path to extract from the
     # event and use as the partition key for the Amazon Kinesis data stream,
     # so that you can control the shard to which the event goes. If you do
@@ -936,6 +960,13 @@ module Aws::EventBridge
       :partition_key_path)
       include Aws::Structure
     end
+
+    # You tried to create more rules or add more targets to a rule than is
+    # allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/LimitExceededException AWS API Documentation
+    #
+    class LimitExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListEventBusesRequest
     #   data as a hash:
@@ -1336,6 +1367,18 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
+    # This rule was created by an AWS service on behalf of your account. It
+    # is managed by that service. If you see this error in response to
+    # `DeleteRule` or `RemoveTargets`, you can use the `Force` parameter in
+    # those calls to delete the rule or remove targets from the rule. You
+    # cannot modify these managed rules by using `DisableRule`,
+    # `EnableRule`, `PutTargets`, `PutRule`, `TagResource`, or
+    # `UntagResource`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ManagedRuleException AWS API Documentation
+    #
+    class ManagedRuleException < Aws::EmptyStructure; end
+
     # This structure specifies the network configuration for an ECS task.
     #
     # @note When making an API call, you may pass NetworkConfiguration
@@ -1417,6 +1460,13 @@ module Aws::EventBridge
       :state)
       include Aws::Structure
     end
+
+    # The event bus policy is too long. For more information, see the
+    # limits.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PolicyLengthExceededException AWS API Documentation
+    #
+    class PolicyLengthExceededException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
@@ -2053,6 +2103,18 @@ module Aws::EventBridge
       :error_message)
       include Aws::Structure
     end
+
+    # The resource you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceAlreadyExistsException AWS API Documentation
+    #
+    class ResourceAlreadyExistsException < Aws::EmptyStructure; end
+
+    # An entity that you specified does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
 
     # Contains information about a rule in Amazon EventBridge.
     #

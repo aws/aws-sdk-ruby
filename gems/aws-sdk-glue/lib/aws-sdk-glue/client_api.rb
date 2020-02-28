@@ -364,6 +364,8 @@ module Aws::Glue
     ListDevEndpointsResponse = Shapes::StructureShape.new(name: 'ListDevEndpointsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResponse = Shapes::StructureShape.new(name: 'ListJobsResponse')
+    ListMLTransformsRequest = Shapes::StructureShape.new(name: 'ListMLTransformsRequest')
+    ListMLTransformsResponse = Shapes::StructureShape.new(name: 'ListMLTransformsResponse')
     ListTriggersRequest = Shapes::StructureShape.new(name: 'ListTriggersRequest')
     ListTriggersResponse = Shapes::StructureShape.new(name: 'ListTriggersResponse')
     ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
@@ -535,6 +537,7 @@ module Aws::Glue
     Token = Shapes::StringShape.new(name: 'Token')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
     TransformFilterCriteria = Shapes::StructureShape.new(name: 'TransformFilterCriteria')
+    TransformIdList = Shapes::ListShape.new(name: 'TransformIdList')
     TransformList = Shapes::ListShape.new(name: 'TransformList')
     TransformParameters = Shapes::StructureShape.new(name: 'TransformParameters')
     TransformSchema = Shapes::ListShape.new(name: 'TransformSchema')
@@ -1060,6 +1063,7 @@ module Aws::Glue
     CreateMLTransformRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
     CreateMLTransformRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateMLTransformRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "MaxRetries"))
+    CreateMLTransformRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateMLTransformRequest.struct_class = Types::CreateMLTransformRequest
 
     CreateMLTransformResponse.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
@@ -1930,6 +1934,17 @@ module Aws::Glue
     ListJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListJobsResponse.struct_class = Types::ListJobsResponse
 
+    ListMLTransformsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMLTransformsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListMLTransformsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: TransformFilterCriteria, location_name: "Filter"))
+    ListMLTransformsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: TransformSortCriteria, location_name: "Sort"))
+    ListMLTransformsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListMLTransformsRequest.struct_class = Types::ListMLTransformsRequest
+
+    ListMLTransformsResponse.add_member(:transform_ids, Shapes::ShapeRef.new(shape: TransformIdList, required: true, location_name: "TransformIds"))
+    ListMLTransformsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListMLTransformsResponse.struct_class = Types::ListMLTransformsResponse
+
     ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
     ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -2402,6 +2417,8 @@ module Aws::Glue
     TransformFilterCriteria.add_member(:last_modified_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAfter"))
     TransformFilterCriteria.add_member(:schema, Shapes::ShapeRef.new(shape: TransformSchema, location_name: "Schema"))
     TransformFilterCriteria.struct_class = Types::TransformFilterCriteria
+
+    TransformIdList.member = Shapes::ShapeRef.new(shape: HashString)
 
     TransformList.member = Shapes::ShapeRef.new(shape: MLTransform)
 
@@ -3865,6 +3882,24 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_ml_transforms, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMLTransforms"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMLTransformsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMLTransformsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

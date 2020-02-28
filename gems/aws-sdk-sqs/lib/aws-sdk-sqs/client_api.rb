@@ -112,6 +112,10 @@ module Aws::SQS
 
     AttributeNameList.member = Shapes::ShapeRef.new(shape: QueueAttributeName, location_name: "AttributeName")
 
+    BatchEntryIdsNotDistinct.struct_class = Types::BatchEntryIdsNotDistinct
+
+    BatchRequestTooLong.struct_class = Types::BatchRequestTooLong
+
     BatchResultErrorEntry.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Id"))
     BatchResultErrorEntry.add_member(:sender_fault, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "SenderFault"))
     BatchResultErrorEntry.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Code"))
@@ -181,6 +185,8 @@ module Aws::SQS
     DeleteQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     DeleteQueueRequest.struct_class = Types::DeleteQueueRequest
 
+    EmptyBatchRequest.struct_class = Types::EmptyBatchRequest
+
     GetQueueAttributesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     GetQueueAttributesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     GetQueueAttributesRequest.struct_class = Types::GetQueueAttributesRequest
@@ -194,6 +200,14 @@ module Aws::SQS
 
     GetQueueUrlResult.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl"))
     GetQueueUrlResult.struct_class = Types::GetQueueUrlResult
+
+    InvalidAttributeName.struct_class = Types::InvalidAttributeName
+
+    InvalidBatchEntryId.struct_class = Types::InvalidBatchEntryId
+
+    InvalidIdFormat.struct_class = Types::InvalidIdFormat
+
+    InvalidMessageContents.struct_class = Types::InvalidMessageContents
 
     ListDeadLetterSourceQueuesRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ListDeadLetterSourceQueuesRequest.struct_class = Types::ListDeadLetterSourceQueuesRequest
@@ -239,6 +253,8 @@ module Aws::SQS
 
     MessageList.member = Shapes::ShapeRef.new(shape: Message, location_name: "Message")
 
+    MessageNotInflight.struct_class = Types::MessageNotInflight
+
     MessageSystemAttributeMap.key = Shapes::ShapeRef.new(shape: MessageSystemAttributeName, location_name: "Name")
     MessageSystemAttributeMap.value = Shapes::ShapeRef.new(shape: String, location_name: "Value")
 
@@ -249,13 +265,25 @@ module Aws::SQS
     MessageSystemAttributeValue.add_member(:data_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataType"))
     MessageSystemAttributeValue.struct_class = Types::MessageSystemAttributeValue
 
+    OverLimit.struct_class = Types::OverLimit
+
+    PurgeQueueInProgress.struct_class = Types::PurgeQueueInProgress
+
     PurgeQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     PurgeQueueRequest.struct_class = Types::PurgeQueueRequest
 
     QueueAttributeMap.key = Shapes::ShapeRef.new(shape: QueueAttributeName, location_name: "Name")
     QueueAttributeMap.value = Shapes::ShapeRef.new(shape: String, location_name: "Value")
 
+    QueueDeletedRecently.struct_class = Types::QueueDeletedRecently
+
+    QueueDoesNotExist.struct_class = Types::QueueDoesNotExist
+
+    QueueNameExists.struct_class = Types::QueueNameExists
+
     QueueUrlList.member = Shapes::ShapeRef.new(shape: String, location_name: "QueueUrl")
+
+    ReceiptHandleIsInvalid.struct_class = Types::ReceiptHandleIsInvalid
 
     ReceiveMessageRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     ReceiveMessageRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
@@ -332,6 +360,10 @@ module Aws::SQS
     TagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     TagQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
     TagQueueRequest.struct_class = Types::TagQueueRequest
+
+    TooManyEntriesInBatchRequest.struct_class = Types::TooManyEntriesInBatchRequest
+
+    UnsupportedOperation.struct_class = Types::UnsupportedOperation
 
     UntagQueueRequest.add_member(:queue_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "QueueUrl"))
     UntagQueueRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))

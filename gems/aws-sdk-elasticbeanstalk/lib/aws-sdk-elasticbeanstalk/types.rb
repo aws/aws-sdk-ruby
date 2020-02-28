@@ -630,6 +630,12 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # AWS CodeBuild is not available in the specified region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CodeBuildNotInServiceRegionException AWS API Documentation
+    #
+    class CodeBuildNotInServiceRegionException < Aws::EmptyStructure; end
+
     # Request to create or update a group of environments.
     #
     # @note When making an API call, you may pass ComposeEnvironmentsMessage
@@ -2934,6 +2940,20 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # The specified account does not have sufficient privileges for one or
+    # more AWS services.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/InsufficientPrivilegesException AWS API Documentation
+    #
+    class InsufficientPrivilegesException < Aws::EmptyStructure; end
+
+    # One or more input parameters is not valid. Please correct the input
+    # parameters and try the operation again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/InvalidRequestException AWS API Documentation
+    #
+    class InvalidRequestException < Aws::EmptyStructure; end
+
     # Represents the average latency for the slowest X percent of requests
     # over the last 10 seconds.
     #
@@ -3250,6 +3270,12 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # Cannot modify the managed action in its current state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ManagedActionInvalidStateException AWS API Documentation
+    #
+    class ManagedActionInvalidStateException < Aws::EmptyStructure; end
+
     # A lifecycle rule that deletes application versions after the specified
     # number of days.
     #
@@ -3317,6 +3343,13 @@ module Aws::ElasticBeanstalk
       :delete_source_from_s3)
       include Aws::Structure
     end
+
+    # Unable to perform the specified operation because another operation
+    # that effects an element in this activity is already in progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OperationInProgressException AWS API Documentation
+    #
+    class OperationInProgressException < Aws::EmptyStructure; end
 
     # A regular expression representing a restriction on a string
     # configuration option value.
@@ -3601,6 +3634,13 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # You cannot delete the platform version because there are still
+    # environments running on it.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/PlatformVersionStillReferencedException AWS API Documentation
+    #
+    class PlatformVersionStillReferencedException < Aws::EmptyStructure; end
+
     # Describes a queue.
     #
     # @!attribute [rw] name
@@ -3698,6 +3738,13 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # A resource doesn't exist for the specified Amazon Resource Name
+    # (ARN).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Aws::EmptyStructure; end
+
     # The AWS Elastic Beanstalk quota information for a single resource type
     # in an AWS account. It reflects the resource's limits for this
     # account.
@@ -3765,6 +3812,13 @@ module Aws::ElasticBeanstalk
       :resource_tags)
       include Aws::Structure
     end
+
+    # The type of the specified Amazon Resource Name (ARN) isn't supported
+    # for this operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceTypeNotSupportedException AWS API Documentation
+    #
+    class ResourceTypeNotSupportedException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RestartAppServerMessage
     #   data as a hash:
@@ -3883,6 +3937,25 @@ module Aws::ElasticBeanstalk
       :s3_key)
       include Aws::Structure
     end
+
+    # The specified S3 bucket does not belong to the S3 region in which the
+    # service is running. The following regions are supported:
+    #
+    # * IAD/us-east-1
+    #
+    # * PDX/us-west-2
+    #
+    # * DUB/eu-west-1
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/S3LocationNotInServiceRegionException AWS API Documentation
+    #
+    class S3LocationNotInServiceRegionException < Aws::EmptyStructure; end
+
+    # The specified account does not have a subscription to Amazon S3.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/S3SubscriptionRequiredException AWS API Documentation
+    #
+    class S3SubscriptionRequiredException < Aws::EmptyStructure; end
 
     # Detailed health information about an Amazon EC2 instance in your
     # Elastic Beanstalk environment.
@@ -4021,6 +4094,13 @@ module Aws::ElasticBeanstalk
       :source_location)
       include Aws::Structure
     end
+
+    # Unable to delete the Amazon S3 source bundle associated with the
+    # application version. The application version was deleted successfully.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceBundleDeletionException AWS API Documentation
+    #
+    class SourceBundleDeletionException < Aws::EmptyStructure; end
 
     # A specification for an environment configuration
     #
@@ -4258,6 +4338,55 @@ module Aws::ElasticBeanstalk
       :force_terminate)
       include Aws::Structure
     end
+
+    # The specified account has reached its limit of application versions.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyApplicationVersionsException AWS API Documentation
+    #
+    class TooManyApplicationVersionsException < Aws::EmptyStructure; end
+
+    # The specified account has reached its limit of applications.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyApplicationsException AWS API Documentation
+    #
+    class TooManyApplicationsException < Aws::EmptyStructure; end
+
+    # The specified account has reached its limit of Amazon S3 buckets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyBucketsException AWS API Documentation
+    #
+    class TooManyBucketsException < Aws::EmptyStructure; end
+
+    # The specified account has reached its limit of configuration
+    # templates.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyConfigurationTemplatesException AWS API Documentation
+    #
+    class TooManyConfigurationTemplatesException < Aws::EmptyStructure; end
+
+    # The specified account has reached its limit of environments.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyEnvironmentsException AWS API Documentation
+    #
+    class TooManyEnvironmentsException < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of allowed platforms associated
+    # with the account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyPlatformsException AWS API Documentation
+    #
+    class TooManyPlatformsException < Aws::EmptyStructure; end
+
+    # The number of tags in the resource would exceed the number of tags
+    # that each resource can have.
+    #
+    # To calculate this, the operation considers both the number of tags the
+    # resource already has and the tags this operation would add if it
+    # succeeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
 
     # Describes a trigger.
     #

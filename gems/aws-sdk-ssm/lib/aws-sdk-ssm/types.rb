@@ -173,6 +173,13 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You must disassociate a document from all instances before you can
+    # delete it.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociatedInstances AWS API Documentation
+    #
+    class AssociatedInstances < Aws::EmptyStructure; end
+
     # Describes an association of a Systems Manager document and an
     # instance.
     #
@@ -234,6 +241,12 @@ module Aws::SSM
       :association_name)
       include Aws::Structure
     end
+
+    # The specified association already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationAlreadyExists AWS API Documentation
+    #
+    class AssociationAlreadyExists < Aws::EmptyStructure; end
 
     # Describes the parameters for a document.
     #
@@ -581,6 +594,12 @@ module Aws::SSM
       :value)
       include Aws::Structure
     end
+
+    # You can have at most 2,000 active associations.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationLimitExceeded AWS API Documentation
+    #
+    class AssociationLimitExceeded < Aws::EmptyStructure; end
 
     # Information about the association.
     #
@@ -6397,6 +6416,12 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # You cannot specify an instance ID in more than one association.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DuplicateInstanceId AWS API Documentation
+    #
+    class DuplicateInstanceId < Aws::EmptyStructure; end
+
     # The EffectivePatch structure defines metadata about a patch along with
     # the approval state of the patch in a particular patch baseline. The
     # approval state includes information about whether the patch is
@@ -8959,6 +8984,10 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidCommandId AWS API Documentation
+    #
+    class InvalidCommandId < Aws::EmptyStructure; end
+
     # One or more of the parameters specified for the delete operation is
     # not valid. Verify all parameters and try again.
     #
@@ -9077,6 +9106,12 @@ module Aws::SSM
       :message)
       include Aws::Structure
     end
+
+    # The specified key is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidFilterKey AWS API Documentation
+    #
+    class InvalidFilterKey < Aws::EmptyStructure; end
 
     # The specified filter option is not valid. Valid options are Equals and
     # BeginsWith. For Path filter, valid options are Recursive and OneLevel.
@@ -9244,6 +9279,18 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The S3 bucket does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidOutputFolder AWS API Documentation
+    #
+    class InvalidOutputFolder < Aws::EmptyStructure; end
+
+    # The output location is not valid or does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidOutputLocation AWS API Documentation
+    #
+    class InvalidOutputLocation < Aws::EmptyStructure; end
+
     # You must specify values for all required parameters in the Systems
     # Manager document. You can only supply values to parameters defined in
     # the Systems Manager document.
@@ -9271,6 +9318,12 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The plugin name is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidPluginName AWS API Documentation
+    #
+    class InvalidPluginName < Aws::EmptyStructure; end
+
     # A policy attribute or its value is invalid.
     #
     # @!attribute [rw] message
@@ -9296,6 +9349,20 @@ module Aws::SSM
       :message)
       include Aws::Structure
     end
+
+    # The resource ID is not valid. Verify that you entered the correct ID
+    # and try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidResourceId AWS API Documentation
+    #
+    class InvalidResourceId < Aws::EmptyStructure; end
+
+    # The resource type is not valid. For example, if you are attempting to
+    # tag an instance, the instance must be a registered, managed instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidResourceType AWS API Documentation
+    #
+    class InvalidResourceType < Aws::EmptyStructure; end
 
     # The specified inventory item result attribute is not valid.
     #
@@ -9794,6 +9861,13 @@ module Aws::SSM
       :content)
       include Aws::Structure
     end
+
+    # The command ID and instance ID you specified did not match any
+    # invocations. Verify the command ID and the instance ID and try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvocationDoesNotExist AWS API Documentation
+    #
+    class InvocationDoesNotExist < Aws::EmptyStructure; end
 
     # The inventory item has invalid content.
     #
@@ -15368,6 +15442,12 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # The updated status is the same as the current status.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StatusUnchanged AWS API Documentation
+    #
+    class StatusUnchanged < Aws::EmptyStructure; end
+
     # Detailed information about an the execution state of an Automation
     # step.
     #
@@ -15791,6 +15871,13 @@ module Aws::SSM
       :session_id)
       include Aws::Structure
     end
+
+    # The `Targets` parameter includes too many tags. Remove one or more
+    # tags and try the command again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/TooManyTagsError AWS API Documentation
+    #
+    class TooManyTagsError < Aws::EmptyStructure; end
 
     # There are concurrent updates for a resource that supports one update
     # at a time.

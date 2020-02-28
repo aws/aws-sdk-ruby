@@ -246,6 +246,8 @@ module Aws::CloudWatch
 
     BatchFailures.member = Shapes::ShapeRef.new(shape: PartialFailure)
 
+    ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
     Counts.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
     DashboardEntries.member = Shapes::ShapeRef.new(shape: DashboardEntry)
@@ -512,6 +514,8 @@ module Aws::CloudWatch
 
     InvalidParameterValueException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
     InvalidParameterValueException.struct_class = Types::InvalidParameterValueException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     LimitExceededFault.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     LimitExceededFault.struct_class = Types::LimitExceededFault

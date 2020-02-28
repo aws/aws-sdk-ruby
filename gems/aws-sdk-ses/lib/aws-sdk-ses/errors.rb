@@ -10,6 +10,17 @@ module Aws::SES
 
     extend Aws::Errors::DynamicErrors
 
+    class AccountSendingPausedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::AccountSendingPausedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class AlreadyExistsException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -86,6 +97,17 @@ module Aws::SES
       # @return [String]
       def configuration_set_name
         @data[:configuration_set_name]
+      end
+
+    end
+
+    class CustomVerificationEmailInvalidContentException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::CustomVerificationEmailInvalidContentException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -201,6 +223,28 @@ module Aws::SES
 
     end
 
+    class InvalidConfigurationSetException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidConfigurationSetException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class InvalidDeliveryOptionsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidDeliveryOptionsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class InvalidFirehoseDestinationException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -234,6 +278,17 @@ module Aws::SES
       # @return [String]
       def function_arn
         @data[:function_arn]
+      end
+
+    end
+
+    class InvalidPolicyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidPolicyException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end
@@ -323,6 +378,50 @@ module Aws::SES
 
     end
 
+    class InvalidTrackingOptionsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::InvalidTrackingOptionsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class MailFromDomainNotVerifiedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::MailFromDomainNotVerifiedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
+    class MessageRejected < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::MessageRejected] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class MissingRenderingAttributeException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -335,6 +434,17 @@ module Aws::SES
       # @return [String]
       def template_name
         @data[:template_name]
+      end
+
+    end
+
+    class ProductionAccessNotGrantedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SES::Types::ProductionAccessNotGrantedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

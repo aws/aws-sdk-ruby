@@ -254,15 +254,9 @@ module Aws::CodeGuruProfiler
 
     # @!group API Operations
 
-    # Provides the configuration to use for an agent of the profiling group.
-    #
     # @option params [String] :fleet_instance_id
-    #   Identifier of the instance of compute fleet being profiled by the
-    #   agent. For instance, host name in EC2, task id for ECS, function name
-    #   for AWS Lambda
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
     #
     # @return [Types::ConfigureAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -289,15 +283,17 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Create a profiling group.
+    # Creates a profiling group.
     #
     # @option params [Types::AgentOrchestrationConfig] :agent_orchestration_config
-    #   Configuration to orchestrate agents to create and report agent
-    #   profiles of the profiling group. Agents are orchestrated if they
-    #   follow the agent orchestration protocol.
+    #   The agent orchestration configuration.
     #
     # @option params [required, String] :client_token
-    #   Client token for the request.
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   This parameter specifies a unique identifier for the new profiling
+    #   group that helps ensure idempotency.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -340,10 +336,10 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Delete a profiling group.
+    # Deletes a profiling group.
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
+    #   The profiling group name to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -362,10 +358,10 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Describe a profiling group.
+    # Describes a profiling group.
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
+    #   The profiling group name.
     #
     # @return [Types::DescribeProfilingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -398,37 +394,46 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Get the aggregated profile of a profiling group for the specified time
-    # range. If the requested time range does not align with the available
-    # aggregated profiles, it will be expanded to attain alignment. If
+    # Gets the aggregated profile of a profiling group for the specified
+    # time range. If the requested time range does not align with the
+    # available aggregated profiles, it is expanded to attain alignment. If
     # aggregated profiles are available only for part of the period
     # requested, the profile is returned from the earliest available to the
-    # latest within the requested time range. For instance, if the requested
-    # time range is from 00:00 to 00:20 and the available profiles are from
-    # 00:15 to 00:25, then the returned profile will be from 00:15 to 00:20.
+    # latest within the requested time range.
+    #
+    # For example, if the requested time range is from 00:00 to 00:20 and
+    # the available profiles are from 00:15 to 00:25, the returned profile
+    # will be from 00:15 to 00:20.
+    #
+    # You must specify exactly two of the following parameters: `startTime`,
+    # `period`, and `endTime`.
     #
     # @option params [String] :accept
-    #   The format of the profile to return. Supports application/json or
-    #   application/x-amzn-ion. Defaults to application/x-amzn-ion.
+    #   The format of the profile to return. You can choose `application/json`
+    #   or the default `application/x-amzn-ion`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The end time of the profile to get. Either period or endTime must be
-    #   specified. Must be greater than start and the overall time range to be
-    #   in the past and not larger than a week.
+    #   You must specify exactly two of the following parameters: `startTime`,
+    #   `period`, and `endTime`.
     #
     # @option params [Integer] :max_depth
-    #   Limit the max depth of the profile.
+    #   The maximum depth of the graph.
     #
     # @option params [String] :period
-    #   The period of the profile to get. Exactly two of `startTime`, `period`
-    #   and `endTime` must be specified. Must be positive and the overall time
-    #   range to be in the past and not larger than a week.
+    #   The period of the profile to get. The time range must be in the past
+    #   and not longer than one week.
+    #
+    #   You must specify exactly two of the following parameters: `startTime`,
+    #   `period`, and `endTime`.
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
+    #   The name of the profiling group to get.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time of the profile to get.
+    #
+    #   You must specify exactly two of the following parameters: `startTime`,
+    #   `period`, and `endTime`.
     #
     # @return [Types::GetProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -467,26 +472,40 @@ module Aws::CodeGuruProfiler
     # range.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-    #   The end time of the time range to list profiles until.
+    #   The end time of the time range from which to list the profiles.
     #
     # @option params [Integer] :max_results
-    #   Upper bound on the number of results to list in a single call.
+    #   The maximum number of profile time results returned by
+    #   `ListProfileTimes` in paginated output. When this parameter is used,
+    #   `ListProfileTimes` only returns `maxResults` results in a single page
+    #   with a `nextToken` response element. The remaining results of the
+    #   initial request can be seen by sending another `ListProfileTimes`
+    #   request with the returned `nextToken` value.
     #
     # @option params [String] :next_token
-    #   Token for paginating results.
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListProfileTimes` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @option params [String] :order_by
     #   The order (ascending or descending by start time of the profile) to
-    #   list the profiles by. Defaults to TIMESTAMP\_DESCENDING.
+    #   use when listing profiles. Defaults to `TIMESTAMP_DESCENDING`.
     #
     # @option params [required, String] :period
-    #   The aggregation period to list the profiles for.
+    #   The aggregation period.
     #
     # @option params [required, String] :profiling_group_name
     #   The name of the profiling group.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-    #   The start time of the time range to list the profiles from.
+    #   The start time of the time range from which to list the profiles.
     #
     # @return [Types::ListProfileTimesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -520,17 +539,31 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # List profiling groups in the account.
+    # Lists profiling groups.
     #
     # @option params [Boolean] :include_description
-    #   If set to true, returns the full description of the profiling groups
-    #   instead of the names. Defaults to false.
+    #   A Boolean value indicating whether to include a description.
     #
     # @option params [Integer] :max_results
-    #   Upper bound on the number of results to list in a single call.
+    #   The maximum number of profiling groups results returned by
+    #   `ListProfilingGroups` in paginated output. When this parameter is
+    #   used, `ListProfilingGroups` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element. The remaining
+    #   results of the initial request can be seen by sending another
+    #   `ListProfilingGroups` request with the returned `nextToken` value.
     #
     # @option params [String] :next_token
-    #   Token for paginating results.
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListProfilingGroups` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
     #
     # @return [Types::ListProfilingGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -571,27 +604,15 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Submit profile collected by an agent belonging to a profiling group
-    # for aggregation.
-    #
     # @option params [required, String, IO] :agent_profile
-    #   The profile collected by an agent for a time range.
     #
     # @option params [required, String] :content_type
-    #   The content type of the agent profile in the payload. Recommended to
-    #   send the profile gzipped with content-type application/octet-stream.
-    #   Other accepted values are application/x-amzn-ion and application/json
-    #   for unzipped Ion and JSON respectively.
     #
     # @option params [String] :profile_token
-    #   Client generated token to deduplicate the agent profile during
-    #   aggregation.
-    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -613,13 +634,12 @@ module Aws::CodeGuruProfiler
       req.send_request(options)
     end
 
-    # Update a profiling group.
+    # Updates a profiling group.
     #
     # @option params [required, Types::AgentOrchestrationConfig] :agent_orchestration_config
-    #   Remote configuration to configure the agents of the profiling group.
     #
     # @option params [required, String] :profiling_group_name
-    #   The name of the profiling group.
+    #   The name of the profiling group to update.
     #
     # @return [Types::UpdateProfilingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -668,7 +688,7 @@ module Aws::CodeGuruProfiler
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codeguruprofiler'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

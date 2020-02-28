@@ -10,6 +10,17 @@ module Aws::EMR
 
     extend Aws::Errors::DynamicErrors
 
+    class InternalServerError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EMR::Types::InternalServerError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class InternalServerException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context

@@ -395,6 +395,8 @@ module Aws::CodePipeline
     ActionExecutionResult.add_member(:external_execution_url, Shapes::ShapeRef.new(shape: Url, location_name: "externalExecutionUrl"))
     ActionExecutionResult.struct_class = Types::ActionExecutionResult
 
+    ActionNotFoundException.struct_class = Types::ActionNotFoundException
+
     ActionRevision.add_member(:revision_id, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revisionId"))
     ActionRevision.add_member(:revision_change_id, Shapes::ShapeRef.new(shape: RevisionChangeIdentifier, required: true, location_name: "revisionChangeId"))
     ActionRevision.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
@@ -424,11 +426,15 @@ module Aws::CodePipeline
 
     ActionTypeList.member = Shapes::ShapeRef.new(shape: ActionType)
 
+    ActionTypeNotFoundException.struct_class = Types::ActionTypeNotFoundException
+
     ActionTypeSettings.add_member(:third_party_configuration_url, Shapes::ShapeRef.new(shape: Url, location_name: "thirdPartyConfigurationUrl"))
     ActionTypeSettings.add_member(:entity_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "entityUrlTemplate"))
     ActionTypeSettings.add_member(:execution_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "executionUrlTemplate"))
     ActionTypeSettings.add_member(:revision_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "revisionUrlTemplate"))
     ActionTypeSettings.struct_class = Types::ActionTypeSettings
+
+    ApprovalAlreadyCompletedException.struct_class = Types::ApprovalAlreadyCompletedException
 
     ApprovalResult.add_member(:summary, Shapes::ShapeRef.new(shape: ApprovalSummary, required: true, location_name: "summary"))
     ApprovalResult.add_member(:status, Shapes::ShapeRef.new(shape: ApprovalStatus, required: true, location_name: "status"))
@@ -605,11 +611,35 @@ module Aws::CodePipeline
 
     InputArtifactList.member = Shapes::ShapeRef.new(shape: InputArtifact)
 
+    InvalidActionDeclarationException.struct_class = Types::InvalidActionDeclarationException
+
+    InvalidApprovalTokenException.struct_class = Types::InvalidApprovalTokenException
+
     InvalidArnException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     InvalidArnException.struct_class = Types::InvalidArnException
 
+    InvalidBlockerDeclarationException.struct_class = Types::InvalidBlockerDeclarationException
+
+    InvalidClientTokenException.struct_class = Types::InvalidClientTokenException
+
+    InvalidJobException.struct_class = Types::InvalidJobException
+
+    InvalidJobStateException.struct_class = Types::InvalidJobStateException
+
+    InvalidNextTokenException.struct_class = Types::InvalidNextTokenException
+
+    InvalidNonceException.struct_class = Types::InvalidNonceException
+
+    InvalidStageDeclarationException.struct_class = Types::InvalidStageDeclarationException
+
+    InvalidStructureException.struct_class = Types::InvalidStructureException
+
     InvalidTagsException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     InvalidTagsException.struct_class = Types::InvalidTagsException
+
+    InvalidWebhookAuthenticationParametersException.struct_class = Types::InvalidWebhookAuthenticationParametersException
+
+    InvalidWebhookFilterPatternException.struct_class = Types::InvalidWebhookFilterPatternException
 
     Job.add_member(:id, Shapes::ShapeRef.new(shape: JobId, location_name: "id"))
     Job.add_member(:data, Shapes::ShapeRef.new(shape: JobData, location_name: "data"))
@@ -633,6 +663,10 @@ module Aws::CodePipeline
     JobDetails.struct_class = Types::JobDetails
 
     JobList.member = Shapes::ShapeRef.new(shape: Job)
+
+    JobNotFoundException.struct_class = Types::JobNotFoundException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListActionExecutionsInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     ListActionExecutionsInput.add_member(:filter, Shapes::ShapeRef.new(shape: ActionExecutionFilter, location_name: "filter"))
@@ -694,6 +728,8 @@ module Aws::CodePipeline
     ListWebhooksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListWebhooksOutput.struct_class = Types::ListWebhooksOutput
 
+    NotLatestPipelineExecutionException.struct_class = Types::NotLatestPipelineExecutionException
+
     OutputArtifact.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, required: true, location_name: "name"))
     OutputArtifact.struct_class = Types::OutputArtifact
 
@@ -727,6 +763,8 @@ module Aws::CodePipeline
     PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
+    PipelineExecutionNotFoundException.struct_class = Types::PipelineExecutionNotFoundException
+
     PipelineExecutionNotStoppableException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     PipelineExecutionNotStoppableException.struct_class = Types::PipelineExecutionNotStoppableException
 
@@ -748,6 +786,10 @@ module Aws::CodePipeline
     PipelineMetadata.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
     PipelineMetadata.struct_class = Types::PipelineMetadata
 
+    PipelineNameInUseException.struct_class = Types::PipelineNameInUseException
+
+    PipelineNotFoundException.struct_class = Types::PipelineNotFoundException
+
     PipelineStageDeclarationList.member = Shapes::ShapeRef.new(shape: StageDeclaration)
 
     PipelineSummary.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "name"))
@@ -755,6 +797,8 @@ module Aws::CodePipeline
     PipelineSummary.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     PipelineSummary.add_member(:updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updated"))
     PipelineSummary.struct_class = Types::PipelineSummary
+
+    PipelineVersionNotFoundException.struct_class = Types::PipelineVersionNotFoundException
 
     PollForJobsInput.add_member(:action_type_id, Shapes::ShapeRef.new(shape: ActionTypeId, required: true, location_name: "actionTypeId"))
     PollForJobsInput.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
@@ -832,6 +876,8 @@ module Aws::CodePipeline
     ResolvedActionConfigurationMap.key = Shapes::ShapeRef.new(shape: String)
     ResolvedActionConfigurationMap.value = Shapes::ShapeRef.new(shape: String)
 
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     RetryStageExecutionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
     RetryStageExecutionInput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
@@ -872,6 +918,10 @@ module Aws::CodePipeline
     StageExecution.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
     StageExecution.add_member(:status, Shapes::ShapeRef.new(shape: StageExecutionStatus, required: true, location_name: "status"))
     StageExecution.struct_class = Types::StageExecution
+
+    StageNotFoundException.struct_class = Types::StageNotFoundException
+
+    StageNotRetryableException.struct_class = Types::StageNotRetryableException
 
     StageState.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, location_name: "stageName"))
     StageState.add_member(:inbound_transition_state, Shapes::ShapeRef.new(shape: TransitionState, location_name: "inboundTransitionState"))
@@ -956,6 +1006,8 @@ module Aws::CodePipeline
     UpdatePipelineOutput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, location_name: "pipeline"))
     UpdatePipelineOutput.struct_class = Types::UpdatePipelineOutput
 
+    ValidationException.struct_class = Types::ValidationException
+
     WebhookAuthConfiguration.add_member(:allowed_ip_range, Shapes::ShapeRef.new(shape: WebhookAuthConfigurationAllowedIPRange, location_name: "AllowedIPRange"))
     WebhookAuthConfiguration.add_member(:secret_token, Shapes::ShapeRef.new(shape: WebhookAuthConfigurationSecretToken, location_name: "SecretToken"))
     WebhookAuthConfiguration.struct_class = Types::WebhookAuthConfiguration
@@ -975,6 +1027,8 @@ module Aws::CodePipeline
     WebhookFilters.member = Shapes::ShapeRef.new(shape: WebhookFilterRule)
 
     WebhookList.member = Shapes::ShapeRef.new(shape: ListWebhookItem)
+
+    WebhookNotFoundException.struct_class = Types::WebhookNotFoundException
 
 
     # @api private

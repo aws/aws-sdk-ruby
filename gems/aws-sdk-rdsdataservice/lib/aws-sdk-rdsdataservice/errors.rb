@@ -42,6 +42,17 @@ module Aws::RDSDataService
 
     end
 
+    class InternalServerErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDSDataService::Types::InternalServerErrorException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+    end
+
     class NotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -54,6 +65,17 @@ module Aws::RDSDataService
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+    end
+
+    class ServiceUnavailableError < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RDSDataService::Types::ServiceUnavailableError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
     end

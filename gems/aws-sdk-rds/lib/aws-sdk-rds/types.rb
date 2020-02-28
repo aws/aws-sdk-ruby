@@ -350,6 +350,29 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified CIDR IP range or Amazon EC2 security group is already
+    # authorized for the specified DB security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationAlreadyExistsFault AWS API Documentation
+    #
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified CIDR IP range or Amazon EC2 security group might not be
+    # authorized for the specified DB security group.
+    #
+    # Or, RDS might not be authorized to perform necessary actions using IAM
+    # on your behalf.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
+
+    # The DB security group authorization quota has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizationQuotaExceededFault AWS API Documentation
+    #
+    class AuthorizationQuotaExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AuthorizeDBSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -540,6 +563,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BackupPolicyNotFoundFault AWS API Documentation
+    #
+    class BackupPolicyNotFoundFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass CancelExportTaskMessage
     #   data as a hash:
     #
@@ -627,6 +654,12 @@ module Aws::RDS
       :marker)
       include Aws::Structure
     end
+
+    # `CertificateIdentifier` doesn't refer to an existing certificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateNotFoundFault AWS API Documentation
+    #
+    class CertificateNotFoundFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
@@ -4506,6 +4539,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `CustomAvailabilityZoneName` is already used by an existing custom
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneAlreadyExistsFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeCustomAvailabilityZones` request. If this parameter is
@@ -4524,6 +4564,19 @@ module Aws::RDS
       :custom_availability_zones)
       include Aws::Structure
     end
+
+    # `CustomAvailabilityZoneId` doesn't refer to an existing custom
+    # Availability Zone identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneNotFoundFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of custom Availability Zones.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneQuotaExceededFault AWS API Documentation
+    #
+    class CustomAvailabilityZoneQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon Aurora DB cluster.
     #
@@ -4892,6 +4945,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The user already has a DB cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # This data type is used as a response element in the
     # `DescribeDBClusterBacktracks` action.
     #
@@ -4964,6 +5023,12 @@ module Aws::RDS
       :db_cluster_backtracks)
       include Aws::Structure
     end
+
+    # `BacktrackIdentifier` doesn't refer to an existing backtrack.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackNotFoundFault AWS API Documentation
+    #
+    class DBClusterBacktrackNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] db_cluster_identifier
     #   A user-supplied DB cluster identifier. This identifier is the unique
@@ -5080,6 +5145,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified custom endpoint can't be created because it already
+    # exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterEndpointAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterEndpoints` request. If this parameter is
@@ -5099,6 +5171,18 @@ module Aws::RDS
       :db_cluster_endpoints)
       include Aws::Structure
     end
+
+    # The specified custom endpoint doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointNotFoundFault AWS API Documentation
+    #
+    class DBClusterEndpointNotFoundFault < Aws::EmptyStructure; end
+
+    # The cluster already has the maximum number of custom endpoints.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterEndpointQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterEndpointQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains information about an instance that is part of a DB cluster.
     #
@@ -5156,6 +5240,12 @@ module Aws::RDS
       :db_clusters)
       include Aws::Structure
     end
+
+    # `DBClusterIdentifier` doesn't refer to an existing DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterNotFoundFault AWS API Documentation
+    #
+    class DBClusterNotFoundFault < Aws::EmptyStructure; end
 
     # Contains status information for a DB cluster option group.
     #
@@ -5253,6 +5343,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBClusterParameterGroupName` doesn't refer to an existing DB cluster
+    # parameter group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBClusterParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterParameterGroups` request. If this parameter is
@@ -5271,6 +5368,13 @@ module Aws::RDS
       :db_cluster_parameter_groups)
       include Aws::Structure
     end
+
+    # The user attempted to create a new DB cluster and the user has already
+    # reached the maximum allowed DB cluster quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB cluster.
@@ -5309,6 +5413,27 @@ module Aws::RDS
       :feature_name)
       include Aws::Structure
     end
+
+    # The specified IAM role Amazon Resource Name (ARN) is already
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterRoleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified IAM role Amazon Resource Name (ARN) isn't associated
+    # with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleNotFoundFault AWS API Documentation
+    #
+    class DBClusterRoleNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the maximum number of IAM roles that can be
+    # associated with the specified DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRoleQuotaExceededFault AWS API Documentation
+    #
+    class DBClusterRoleQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details for an Amazon RDS DB cluster snapshot
     #
@@ -5432,6 +5557,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The user already has a DB cluster snapshot with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual DB cluster snapshot
     # attribute.
     #
@@ -5512,6 +5643,13 @@ module Aws::RDS
       :db_cluster_snapshots)
       include Aws::Structure
     end
+
+    # `DBClusterSnapshotIdentifier` doesn't refer to an existing DB cluster
+    # snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
@@ -6045,6 +6183,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The user already has a DB instance with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # An automated backup of a DB instance. It it consists of system
     # backups, transaction logs, and the database instance properties that
     # existed at the time you deleted the source instance.
@@ -6217,6 +6361,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # No automated backup for this DB instance was found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupNotFoundFault AWS API Documentation
+    #
+    class DBInstanceAutomatedBackupNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for retained automated backups was exceeded. This prevents
+    # you from retaining any additional automated backups. The retained
+    # automated backups quota is the same as your DB Instance quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackupQuotaExceededFault AWS API Documentation
+    #
+    class DBInstanceAutomatedBackupQuotaExceededFault < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeDBInstances` action.
     #
@@ -6237,6 +6395,12 @@ module Aws::RDS
       :db_instances)
       include Aws::Structure
     end
+
+    # `DBInstanceIdentifier` doesn't refer to an existing DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceNotFoundFault AWS API Documentation
+    #
+    class DBInstanceNotFoundFault < Aws::EmptyStructure; end
 
     # Describes an AWS Identity and Access Management (IAM) role that is
     # associated with a DB instance.
@@ -6276,6 +6440,27 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified `RoleArn` or `FeatureName` value is already associated
+    # with the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleAlreadyExistsFault AWS API Documentation
+    #
+    class DBInstanceRoleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified `RoleArn` value doesn't match the specified feature for
+    # the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleNotFoundFault AWS API Documentation
+    #
+    class DBInstanceRoleNotFoundFault < Aws::EmptyStructure; end
+
+    # You can't associate any more AWS Identity and Access Management (IAM)
+    # roles with the DB instance because the quota has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceRoleQuotaExceededFault AWS API Documentation
+    #
+    class DBInstanceRoleQuotaExceededFault < Aws::EmptyStructure; end
+
     # Provides a list of status information for a DB instance.
     #
     # @!attribute [rw] status_type
@@ -6307,6 +6492,12 @@ module Aws::RDS
       :message)
       include Aws::Structure
     end
+
+    # `LogFileName` doesn't refer to an existing DB log file.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBLogFileNotFoundFault AWS API Documentation
+    #
+    class DBLogFileNotFoundFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon RDS DB parameter group.
     #
@@ -6340,6 +6531,12 @@ module Aws::RDS
       :db_parameter_group_arn)
       include Aws::Structure
     end
+
+    # A DB parameter group with the same name exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # Contains the result of a successful invocation of the
     # `DescribeDBParameters` action.
@@ -6375,6 +6572,20 @@ module Aws::RDS
       :db_parameter_group_name)
       include Aws::Structure
     end
+
+    # `DBParameterGroupName` doesn't refer to an existing DB parameter
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupNotFoundFault AWS API Documentation
+    #
+    class DBParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB parameter groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # The status of the DB parameter group.
     #
@@ -6539,6 +6750,27 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified proxy name must be unique for all proxies owned by your
+    # AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyAlreadyExistsFault AWS API Documentation
+    #
+    class DBProxyAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified proxy name doesn't correspond to a proxy owned by your
+    # AWS accoutn in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyNotFoundFault AWS API Documentation
+    #
+    class DBProxyNotFoundFault < Aws::EmptyStructure; end
+
+    # Your AWS account already has the maximum number of proxies in the
+    # specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyQuotaExceededFault AWS API Documentation
+    #
+    class DBProxyQuotaExceededFault < Aws::EmptyStructure; end
+
     # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
     # preview release. It is subject to change.
     #
@@ -6593,6 +6825,13 @@ module Aws::RDS
       :type)
       include Aws::Structure
     end
+
+    # The proxy is already associated with the specified RDS DB instance or
+    # Aurora DB cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetAlreadyRegisteredFault AWS API Documentation
+    #
+    class DBProxyTargetAlreadyRegisteredFault < Aws::EmptyStructure; end
 
     # <note markdown="1"> This is prerelease documentation for the RDS Database Proxy feature in
     # preview release. It is subject to change.
@@ -6661,6 +6900,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified target group isn't available for a proxy owned by your
+    # AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetGroupNotFoundFault AWS API Documentation
+    #
+    class DBProxyTargetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The specified RDS DB instance or Aurora DB cluster isn't available
+    # for a proxy owned by your AWS account in the specified AWS Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBProxyTargetNotFoundFault AWS API Documentation
+    #
+    class DBProxyTargetNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details for an Amazon RDS DB security group.
     #
     # This data type is used as a response element in the
@@ -6706,6 +6959,13 @@ module Aws::RDS
       :db_security_group_arn)
       include Aws::Structure
     end
+
+    # A DB security group with the name specified in `DBSecurityGroupName`
+    # already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSecurityGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the following actions:
     #
@@ -6753,6 +7013,25 @@ module Aws::RDS
       :db_security_groups)
       include Aws::Structure
     end
+
+    # `DBSecurityGroupName` doesn't refer to an existing DB security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class DBSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # A DB security group isn't allowed for this action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupNotSupportedFault AWS API Documentation
+    #
+    class DBSecurityGroupNotSupportedFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB security groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon RDS DB snapshot.
     #
@@ -6922,6 +7201,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSnapshotIdentifier` is already used by an existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class DBSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the name and values of a manual DB snapshot attribute
     #
     # Manual DB snapshot attributes are used to authorize other AWS accounts
@@ -7000,6 +7285,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSnapshotIdentifier` doesn't refer to an existing DB snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the details of an Amazon RDS DB subnet group.
     #
     # This data type is used as a response element in the
@@ -7041,6 +7332,19 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `DBSubnetGroupName` is already used by an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Subnets in the DB subnet group should cover at least two Availability
+    # Zones unless there is only one Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupDoesNotCoverEnoughAZs AWS API Documentation
+    #
+    class DBSubnetGroupDoesNotCoverEnoughAZs < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeDBSubnetGroups` action.
     #
@@ -7061,6 +7365,40 @@ module Aws::RDS
       :db_subnet_groups)
       include Aws::Structure
     end
+
+    # The DBSubnetGroup shouldn't be specified while creating read replicas
+    # that lie in the same region as the source instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupNotAllowedFault AWS API Documentation
+    #
+    class DBSubnetGroupNotAllowedFault < Aws::EmptyStructure; end
+
+    # `DBSubnetGroupName` doesn't refer to an existing DB subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class DBSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # subnets in a DB subnet groups.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetQuotaExceededFault AWS API Documentation
+    #
+    class DBSubnetQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB upgrade failed because a resource the DB depends on can't be
+    # modified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBUpgradeDependencyFailureFault AWS API Documentation
+    #
+    class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteCustomAvailabilityZoneMessage
     #   data as a hash:
@@ -10501,6 +10839,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `Domain` doesn't refer to an existing Active Directory domain.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DomainNotFoundFault AWS API Documentation
+    #
+    class DomainNotFoundFault < Aws::EmptyStructure; end
+
     # A range of double values.
     #
     # @!attribute [rw] from
@@ -10855,6 +11199,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # You have reached the maximum number of event subscriptions.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscriptionQuotaExceededFault AWS API Documentation
+    #
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure; end
+
     # Data returned by the **DescribeEventSubscriptions** action.
     #
     # @!attribute [rw] marker
@@ -11003,6 +11353,18 @@ module Aws::RDS
       :warning_message)
       include Aws::Structure
     end
+
+    # You can't start an export task that's already running.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTaskAlreadyExistsFault AWS API Documentation
+    #
+    class ExportTaskAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The export task doesn't exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ExportTaskNotFoundFault AWS API Documentation
+    #
+    class ExportTaskNotFoundFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   A pagination token that can be used in a later `DescribeExportTasks`
@@ -11179,6 +11541,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterAlreadyExistsFault AWS API Documentation
+    #
+    class GlobalClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # A data structure with information about any primary and secondary
     # clusters associated with an Aurora global database.
     #
@@ -11205,6 +11571,14 @@ module Aws::RDS
       :is_writer)
       include Aws::Structure
     end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterNotFoundFault AWS API Documentation
+    #
+    class GlobalClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/GlobalClusterQuotaExceededFault AWS API Documentation
+    #
+    class GlobalClusterQuotaExceededFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
@@ -11244,6 +11618,19 @@ module Aws::RDS
       :cidrip)
       include Aws::Structure
     end
+
+    # The IAM role requires additional permissions to export to an Amazon S3
+    # bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IamRoleMissingPermissionsFault AWS API Documentation
+    #
+    class IamRoleMissingPermissionsFault < Aws::EmptyStructure; end
+
+    # The IAM role is missing for exporting to an Amazon S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IamRoleNotFoundFault AWS API Documentation
+    #
+    class IamRoleNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ImportInstallationMediaMessage
     #   data as a hash:
@@ -11373,6 +11760,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The specified installation medium has already been imported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaAlreadyExistsFault AWS API Documentation
+    #
+    class InstallationMediaAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the cause of an installation media failure. Installation
     # media is used for a DB engine that requires an on-premises customer
     # provided license, such as Microsoft SQL Server.
@@ -11406,6 +11799,199 @@ module Aws::RDS
       :installation_media)
       include Aws::Structure
     end
+
+    # `InstallationMediaID` doesn't refer to an existing installation
+    # medium.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaNotFoundFault AWS API Documentation
+    #
+    class InstallationMediaNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstanceQuotaExceededFault AWS API Documentation
+    #
+    class InstanceQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The DB cluster doesn't have enough capacity for the current
+    # operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientDBClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The specified DB instance class isn't available in the specified
+    # Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientDBInstanceCapacityFault AWS API Documentation
+    #
+    class InsufficientDBInstanceCapacityFault < Aws::EmptyStructure; end
+
+    # There is insufficient storage available for the current action. You
+    # might be able to resolve this error by updating your subnet group to
+    # use different Availability Zones that have more storage available.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InsufficientStorageClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
+
+    # `Capacity` isn't a valid Aurora Serverless DB cluster capacity. Valid
+    # capacity values are `2`, `4`, `8`, `16`, `32`, `64`, `128`, and `256`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterCapacityFault AWS API Documentation
+    #
+    class InvalidDBClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed on the endpoint while the
+    # endpoint is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterEndpointStateFault AWS API Documentation
+    #
+    class InvalidDBClusterEndpointStateFault < Aws::EmptyStructure; end
+
+    # The supplied value isn't a valid DB cluster snapshot state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBClusterSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed while the cluster is in
+    # this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBClusterStateFault AWS API Documentation
+    #
+    class InvalidDBClusterStateFault < Aws::EmptyStructure; end
+
+    # The automated backup is in an invalid state. For example, this
+    # automated backup is associated with an active instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBInstanceAutomatedBackupStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceAutomatedBackupStateFault < Aws::EmptyStructure; end
+
+    # The DB instance isn't in a valid state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBInstanceStateFault AWS API Documentation
+    #
+    class InvalidDBInstanceStateFault < Aws::EmptyStructure; end
+
+    # The DB parameter group is in use or is in an invalid state. If you are
+    # attempting to delete the parameter group, you can't delete it when
+    # the parameter group is in this state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidDBParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The requested operation can't be performed while the proxy is in this
+    # state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBProxyStateFault AWS API Documentation
+    #
+    class InvalidDBProxyStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB security group doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the DB snapshot doesn't allow deletion.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
+    #
+    class InvalidDBSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The DBSubnetGroup doesn't belong to the same VPC as that of an
+    # existing cross-region read replica of the same source instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetGroupFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupFault < Aws::EmptyStructure; end
+
+    # The DB subnet group cannot be deleted because it's in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetGroupStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetGroupStateFault < Aws::EmptyStructure; end
+
+    # The DB subnet isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSubnetStateFault AWS API Documentation
+    #
+    class InvalidDBSubnetStateFault < Aws::EmptyStructure; end
+
+    # This error can occur if someone else is modifying a subscription. You
+    # should retry the action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidEventSubscriptionStateFault AWS API Documentation
+    #
+    class InvalidEventSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # The export is invalid for exporting to an Amazon S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportOnlyFault AWS API Documentation
+    #
+    class InvalidExportOnlyFault < Aws::EmptyStructure; end
+
+    # The state of the export snapshot is invalid for exporting to an Amazon
+    # S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportSourceStateFault AWS API Documentation
+    #
+    class InvalidExportSourceStateFault < Aws::EmptyStructure; end
+
+    # You can't cancel an export task that has completed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidExportTaskStateFault AWS API Documentation
+    #
+    class InvalidExportTaskStateFault < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidGlobalClusterStateFault AWS API Documentation
+    #
+    class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
+
+    # The option group isn't in the *available* state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidOptionGroupStateFault AWS API Documentation
+    #
+    class InvalidOptionGroupStateFault < Aws::EmptyStructure; end
+
+    # Cannot restore from VPC backup to non-VPC DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidRestoreFault AWS API Documentation
+    #
+    class InvalidRestoreFault < Aws::EmptyStructure; end
+
+    # The specified Amazon S3 bucket name can't be found or Amazon RDS
+    # isn't authorized to access the specified Amazon S3 bucket. Verify the
+    # **SourceS3BucketName** and **S3IngestionRoleArn** values and try
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidS3BucketFault AWS API Documentation
+    #
+    class InvalidS3BucketFault < Aws::EmptyStructure; end
+
+    # The requested subnet is invalid, or multiple subnets were requested
+    # that are not all in a common VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The DB subnet group doesn't cover all Availability Zones after it's
+    # created because of users' change.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # An error occurred accessing an AWS KMS key.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
+    #
+    class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
@@ -13653,6 +14239,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The option group you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupAlreadyExistsFault AWS API Documentation
+    #
+    class OptionGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Provides information on the option groups the DB instance is a member
     # of.
     #
@@ -13674,6 +14266,12 @@ module Aws::RDS
       :status)
       include Aws::Structure
     end
+
+    # The specified option group could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupNotFoundFault AWS API Documentation
+    #
+    class OptionGroupNotFoundFault < Aws::EmptyStructure; end
 
     # Available option.
     #
@@ -13846,6 +14444,12 @@ module Aws::RDS
       :marker)
       include Aws::Structure
     end
+
+    # The quota of 20 option groups was exceeded for this AWS account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupQuotaExceededFault AWS API Documentation
+    #
+    class OptionGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # List of option groups.
     #
@@ -14397,6 +15001,13 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # `SourceDBInstanceIdentifier` refers to a DB instance with
+    # `BackupRetentionPeriod` equal to 0.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PointInTimeRestoreNotEnabledFault AWS API Documentation
+    #
+    class PointInTimeRestoreNotEnabledFault < Aws::EmptyStructure; end
+
     # Contains the processor features of a DB instance class.
     #
     # To specify the number of CPU cores, use the `coreCount` feature name
@@ -14586,6 +15197,12 @@ module Aws::RDS
       :db_instance)
       include Aws::Structure
     end
+
+    # Provisioned IOPS not available in the specified Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProvisionedIopsNotAvailableInAZFault AWS API Documentation
+    #
+    class ProvisionedIopsNotAvailableInAZFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PurchaseReservedDBInstancesOfferingMessage
     #   data as a hash:
@@ -15068,6 +15685,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # User already has a reservation with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceAlreadyExistsFault AWS API Documentation
+    #
+    class ReservedDBInstanceAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the result of a successful invocation of the
     # `DescribeReservedDBInstances` action.
     #
@@ -15088,6 +15711,18 @@ module Aws::RDS
       :reserved_db_instances)
       include Aws::Structure
     end
+
+    # The specified reserved DB Instance not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceNotFoundFault AWS API Documentation
+    #
+    class ReservedDBInstanceNotFoundFault < Aws::EmptyStructure; end
+
+    # Request would exceed the user's DB Instance quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceQuotaExceededFault AWS API Documentation
+    #
+    class ReservedDBInstanceQuotaExceededFault < Aws::EmptyStructure; end
 
     # This data type is used as a response element in the
     # `DescribeReservedDBInstancesOfferings` action.
@@ -15168,6 +15803,12 @@ module Aws::RDS
       :reserved_db_instances_offerings)
       include Aws::Structure
     end
+
+    # Specified offering does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOfferingNotFoundFault AWS API Documentation
+    #
+    class ReservedDBInstancesOfferingNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
     #   data as a hash:
@@ -15293,6 +15934,12 @@ module Aws::RDS
       :parameters)
       include Aws::Structure
     end
+
+    # The specified resource ID was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Aws::EmptyStructure; end
 
     # Describes the pending maintenance actions for a resource.
     #
@@ -17746,6 +18393,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # SNS has responded that there is a problem with the SND topic
+    # specified.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSInvalidTopicFault AWS API Documentation
+    #
+    class SNSInvalidTopicFault < Aws::EmptyStructure; end
+
+    # You do not have permission to publish to the SNS topic ARN.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSNoAuthorizationFault AWS API Documentation
+    #
+    class SNSNoAuthorizationFault < Aws::EmptyStructure; end
+
+    # The SNS topic ARN does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
+    #
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
     # Contains the scaling configuration of an Aurora Serverless DB cluster.
     #
     # For more information, see [Using Amazon Aurora Serverless][1] in the
@@ -17892,6 +18558,26 @@ module Aws::RDS
       :timeout_action)
       include Aws::Structure
     end
+
+    # You have exceeded the maximum number of accounts that you can share a
+    # manual DB snapshot with.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SharedSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SharedSnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # DB snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SnapshotQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The requested source could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceNotFoundFault AWS API Documentation
+    #
+    class SourceNotFoundFault < Aws::EmptyStructure; end
 
     # Contains an AWS Region name as the result of a successful call to the
     # `DescribeSourceRegions` action.
@@ -18284,6 +18970,20 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The request would result in the user exceeding the allowed amount of
+    # storage available across all DB instances.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageQuotaExceededFault AWS API Documentation
+    #
+    class StorageQuotaExceededFault < Aws::EmptyStructure; end
+
+    # Storage of the `StorageType` specified can't be associated with the
+    # DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StorageTypeNotSupportedFault AWS API Documentation
+    #
+    class StorageTypeNotSupportedFault < Aws::EmptyStructure; end
+
     # This data type is used as a response element in the
     # `DescribeDBSubnetGroups` action.
     #
@@ -18310,6 +19010,30 @@ module Aws::RDS
       :subnet_status)
       include Aws::Structure
     end
+
+    # The DB subnet is already in use in the Availability Zone.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Aws::EmptyStructure; end
+
+    # The supplied subscription name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionAlreadyExistFault AWS API Documentation
+    #
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure; end
+
+    # The supplied category does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionCategoryNotFoundFault AWS API Documentation
+    #
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure; end
+
+    # The subscription name does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SubscriptionNotFoundFault AWS API Documentation
+    #
+    class SubscriptionNotFoundFault < Aws::EmptyStructure; end
 
     # Metadata assigned to an Amazon RDS resource consisting of a key-value
     # pair.

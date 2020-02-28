@@ -45,6 +45,13 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The owner of the specified snapshot has not authorized your account to
+    # access the snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccessToSnapshotDeniedFault AWS API Documentation
+    #
+    class AccessToSnapshotDeniedFault < Aws::EmptyStructure; end
+
     # A name value pair that describes an aspect of an account.
     #
     # @!attribute [rw] attribute_name
@@ -107,6 +114,27 @@ module Aws::Redshift
       :attribute_value)
       include Aws::Structure
     end
+
+    # The specified CIDR block or EC2 security group is already authorized
+    # for the specified cluster security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizationAlreadyExistsFault AWS API Documentation
+    #
+    class AuthorizationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified CIDR IP range or EC2 security group is not authorized
+    # for the specified cluster security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizationNotFoundFault AWS API Documentation
+    #
+    class AuthorizationNotFoundFault < Aws::EmptyStructure; end
+
+    # The authorization quota for the cluster security group has been
+    # reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizationQuotaExceededFault AWS API Documentation
+    #
+    class AuthorizationQuotaExceededFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AuthorizeClusterSecurityGroupIngressMessage
     #   data as a hash:
@@ -264,6 +292,20 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The maximum number for a batch delete of snapshots has been reached.
+    # The limit is 100.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchDeleteRequestSizeExceededFault AWS API Documentation
+    #
+    class BatchDeleteRequestSizeExceededFault < Aws::EmptyStructure; end
+
+    # The maximum number for snapshot identifiers has been reached. The
+    # limit is 100.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BatchModifyClusterSnapshotsLimitExceededFault AWS API Documentation
+    #
+    class BatchModifyClusterSnapshotsLimitExceededFault < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass BatchModifyClusterSnapshotsMessage
     #   data as a hash:
     #
@@ -318,6 +360,12 @@ module Aws::Redshift
       :errors)
       include Aws::Structure
     end
+
+    # Could not find the specified S3 bucket.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/BucketNotFoundFault AWS API Documentation
+    #
+    class BucketNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CancelResizeMessage
     #   data as a hash:
@@ -689,6 +737,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The account already has a cluster with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] cluster_identifier
     #   @return [String]
     #
@@ -837,6 +891,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The `ClusterIdentifier` parameter does not refer to an existing
+    # cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterNotFoundFault AWS API Documentation
+    #
+    class ClusterNotFoundFault < Aws::EmptyStructure; end
+
+    # Cluster is already on the latest database revision.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterOnLatestRevisionFault AWS API Documentation
+    #
+    class ClusterOnLatestRevisionFault < Aws::EmptyStructure; end
+
     # Describes a parameter group.
     #
     # @!attribute [rw] parameter_group_name
@@ -865,6 +932,12 @@ module Aws::Redshift
       :tags)
       include Aws::Structure
     end
+
+    # A cluster parameter group with the same name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterParameterGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # Contains the output from the DescribeClusterParameters action.
     #
@@ -907,6 +980,26 @@ module Aws::Redshift
       :parameter_group_status)
       include Aws::Structure
     end
+
+    # The parameter group name does not refer to an existing parameter
+    # group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupNotFoundFault AWS API Documentation
+    #
+    class ClusterParameterGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # cluster parameter groups. For information about increasing your quota,
+    # go to [Limits in Amazon Redshift][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupQuotaExceededFault AWS API Documentation
+    #
+    class ClusterParameterGroupQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes the status of a parameter group.
     #
@@ -1010,6 +1103,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The request would exceed the allowed number of cluster instances for
+    # this account. For information about increasing your quota, go to
+    # [Limits in Amazon Redshift][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterQuotaExceededFault AWS API Documentation
+    #
+    class ClusterQuotaExceededFault < Aws::EmptyStructure; end
+
     # Describes a security group.
     #
     # @!attribute [rw] cluster_security_group_name
@@ -1045,6 +1151,12 @@ module Aws::Redshift
       :tags)
       include Aws::Structure
     end
+
+    # A cluster security group with the same name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterSecurityGroupAlreadyExistsFault < Aws::EmptyStructure; end
 
     # Describes a cluster security group.
     #
@@ -1085,6 +1197,33 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The cluster security group name does not refer to an existing cluster
+    # security group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupNotFoundFault AWS API Documentation
+    #
+    class ClusterSecurityGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # cluster security groups. For information about increasing your quota,
+    # go to [Limits in Amazon Redshift][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupQuotaExceededFault AWS API Documentation
+    #
+    class ClusterSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The value specified as a snapshot identifier is already used by an
+    # existing snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Returns the destination region and retention period that are
     # configured for cross-region snapshot copy.
     #
@@ -1119,6 +1258,20 @@ module Aws::Redshift
       :snapshot_copy_grant_name)
       include Aws::Structure
     end
+
+    # The snapshot identifier does not refer to an existing cluster
+    # snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSnapshotNotFoundFault AWS API Documentation
+    #
+    class ClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in the user exceeding the allowed number of
+    # cluster snapshots.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class ClusterSnapshotQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes a subnet group.
     #
@@ -1159,6 +1312,13 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A *ClusterSubnetGroupName* is already used by an existing cluster
+    # subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroupAlreadyExistsFault AWS API Documentation
+    #
+    class ClusterSubnetGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
     # Contains the output from the DescribeClusterSubnetGroups action.
     #
     # @!attribute [rw] marker
@@ -1181,6 +1341,39 @@ module Aws::Redshift
       :cluster_subnet_groups)
       include Aws::Structure
     end
+
+    # The cluster subnet group name does not refer to an existing cluster
+    # subnet group.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroupNotFoundFault AWS API Documentation
+    #
+    class ClusterSubnetGroupNotFoundFault < Aws::EmptyStructure; end
+
+    # The request would result in user exceeding the allowed number of
+    # cluster subnet groups. For information about increasing your quota, go
+    # to [Limits in Amazon Redshift][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroupQuotaExceededFault AWS API Documentation
+    #
+    class ClusterSubnetGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The request would result in user exceeding the allowed number of
+    # subnets in a cluster subnet groups. For information about increasing
+    # your quota, go to [Limits in Amazon Redshift][1] in the *Amazon
+    # Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetQuotaExceededFault AWS API Documentation
+    #
+    class ClusterSubnetQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes a cluster version, including the parameter group family and
     # description of the version.
@@ -1332,6 +1525,13 @@ module Aws::Redshift
       :snapshot)
       include Aws::Structure
     end
+
+    # Cross-region snapshot copy was temporarily disabled. Try your request
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyToRegionDisabledFault AWS API Documentation
+    #
+    class CopyToRegionDisabledFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateClusterMessage
     #   data as a hash:
@@ -2956,6 +3156,21 @@ module Aws::Redshift
       :tag_keys)
       include Aws::Structure
     end
+
+    # The request cannot be completed because a dependent service is
+    # throttling requests made by Amazon Redshift on your behalf. Wait and
+    # retry the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DependentServiceRequestThrottlingFault AWS API Documentation
+    #
+    class DependentServiceRequestThrottlingFault < Aws::EmptyStructure; end
+
+    # Your request cannot be completed because a dependent internal service
+    # is temporarily unavailable. Wait 30 to 60 seconds and try again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DependentServiceUnavailableFault AWS API Documentation
+    #
+    class DependentServiceUnavailableFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeAccountAttributesMessage
     #   data as a hash:
@@ -5128,6 +5343,19 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The request would exceed the allowed number of event subscriptions for
+    # this account. For information about increasing your quota, go to
+    # [Limits in Amazon Redshift][1] in the *Amazon Redshift Cluster
+    # Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventSubscriptionQuotaExceededFault AWS API Documentation
+    #
+    class EventSubscriptionQuotaExceededFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -5382,6 +5610,13 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # There is already an existing Amazon Redshift HSM client certificate
+    # with the specified identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificateAlreadyExistsFault AWS API Documentation
+    #
+    class HsmClientCertificateAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -5404,6 +5639,25 @@ module Aws::Redshift
       :hsm_client_certificates)
       include Aws::Structure
     end
+
+    # There is no Amazon Redshift HSM client certificate with the specified
+    # identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificateNotFoundFault AWS API Documentation
+    #
+    class HsmClientCertificateNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for HSM client certificates has been reached. For
+    # information about increasing your quota, go to [Limits in Amazon
+    # Redshift][1] in the *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificateQuotaExceededFault AWS API Documentation
+    #
+    class HsmClientCertificateQuotaExceededFault < Aws::EmptyStructure; end
 
     # Returns information about an HSM configuration, which is an object
     # that describes to Amazon Redshift clusters the information they
@@ -5443,6 +5697,13 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # There is already an existing Amazon Redshift HSM configuration with
+    # the specified identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationAlreadyExistsFault AWS API Documentation
+    #
+    class HsmConfigurationAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -5463,6 +5724,25 @@ module Aws::Redshift
       :hsm_configurations)
       include Aws::Structure
     end
+
+    # There is no Amazon Redshift HSM configuration with the specified
+    # identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationNotFoundFault AWS API Documentation
+    #
+    class HsmConfigurationNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for HSM configurations has been reached. For information
+    # about increasing your quota, go to [Limits in Amazon Redshift][1] in
+    # the *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationQuotaExceededFault AWS API Documentation
+    #
+    class HsmConfigurationQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes the status of changes to HSM settings.
     #
@@ -5515,6 +5795,205 @@ module Aws::Redshift
       :tags)
       include Aws::Structure
     end
+
+    # You have exceeded the allowed number of table restore requests. Wait
+    # for your current table restore requests to complete before making a
+    # new request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InProgressTableRestoreQuotaExceededFault AWS API Documentation
+    #
+    class InProgressTableRestoreQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The specified options are incompatible.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IncompatibleOrderableOptions AWS API Documentation
+    #
+    class IncompatibleOrderableOptions < Aws::EmptyStructure; end
+
+    # The number of nodes specified exceeds the allotted capacity of the
+    # cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InsufficientClusterCapacityFault AWS API Documentation
+    #
+    class InsufficientClusterCapacityFault < Aws::EmptyStructure; end
+
+    # The cluster does not have read bucket or put object permissions on the
+    # S3 bucket specified when enabling logging.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InsufficientS3BucketPolicyFault AWS API Documentation
+    #
+    class InsufficientS3BucketPolicyFault < Aws::EmptyStructure; end
+
+    # The cluster parameter group action can not be completed because
+    # another task is in progress that involves the parameter group. Wait a
+    # few moments and try the operation again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterParameterGroupStateFault AWS API Documentation
+    #
+    class InvalidClusterParameterGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the cluster security group is not `available`.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterSecurityGroupStateFault AWS API Documentation
+    #
+    class InvalidClusterSecurityGroupStateFault < Aws::EmptyStructure; end
+
+    # The cluster snapshot schedule state is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterSnapshotScheduleStateFault AWS API Documentation
+    #
+    class InvalidClusterSnapshotScheduleStateFault < Aws::EmptyStructure; end
+
+    # The specified cluster snapshot is not in the `available` state, or
+    # other accounts are authorized to access the snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterSnapshotStateFault AWS API Documentation
+    #
+    class InvalidClusterSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The specified cluster is not in the `available` state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterStateFault AWS API Documentation
+    #
+    class InvalidClusterStateFault < Aws::EmptyStructure; end
+
+    # The cluster subnet group cannot be deleted because it is in use.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterSubnetGroupStateFault AWS API Documentation
+    #
+    class InvalidClusterSubnetGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the subnet is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterSubnetStateFault AWS API Documentation
+    #
+    class InvalidClusterSubnetStateFault < Aws::EmptyStructure; end
+
+    # The provided cluster track name is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidClusterTrackFault AWS API Documentation
+    #
+    class InvalidClusterTrackFault < Aws::EmptyStructure; end
+
+    # The Elastic IP (EIP) is invalid or cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidElasticIpFault AWS API Documentation
+    #
+    class InvalidElasticIpFault < Aws::EmptyStructure; end
+
+    # The specified HSM client certificate is not in the `available` state,
+    # or it is still in use by one or more Amazon Redshift clusters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidHsmClientCertificateStateFault AWS API Documentation
+    #
+    class InvalidHsmClientCertificateStateFault < Aws::EmptyStructure; end
+
+    # The specified HSM configuration is not in the `available` state, or it
+    # is still in use by one or more Amazon Redshift clusters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidHsmConfigurationStateFault AWS API Documentation
+    #
+    class InvalidHsmConfigurationStateFault < Aws::EmptyStructure; end
+
+    # Indicates that the Reserved Node being exchanged is not in an active
+    # state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidReservedNodeStateFault AWS API Documentation
+    #
+    class InvalidReservedNodeStateFault < Aws::EmptyStructure; end
+
+    # The restore is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidRestoreFault AWS API Documentation
+    #
+    class InvalidRestoreFault < Aws::EmptyStructure; end
+
+    # The retention period specified is either in the past or is not a valid
+    # value.
+    #
+    # The value must be either -1 or an integer between 1 and 3,653.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidRetentionPeriodFault AWS API Documentation
+    #
+    class InvalidRetentionPeriodFault < Aws::EmptyStructure; end
+
+    # The S3 bucket name is invalid. For more information about naming
+    # rules, go to [Bucket Restrictions and Limitations][1] in the Amazon
+    # Simple Storage Service (S3) Developer Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidS3BucketNameFault AWS API Documentation
+    #
+    class InvalidS3BucketNameFault < Aws::EmptyStructure; end
+
+    # The string specified for the logging S3 key prefix does not comply
+    # with the documented constraints.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidS3KeyPrefixFault AWS API Documentation
+    #
+    class InvalidS3KeyPrefixFault < Aws::EmptyStructure; end
+
+    # The schedule you submitted isn't valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidScheduleFault AWS API Documentation
+    #
+    class InvalidScheduleFault < Aws::EmptyStructure; end
+
+    # The scheduled action is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidScheduledActionFault AWS API Documentation
+    #
+    class InvalidScheduledActionFault < Aws::EmptyStructure; end
+
+    # The snapshot copy grant can't be deleted because it is used by one or
+    # more clusters.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidSnapshotCopyGrantStateFault AWS API Documentation
+    #
+    class InvalidSnapshotCopyGrantStateFault < Aws::EmptyStructure; end
+
+    # The requested subnet is not valid, or not all of the subnets are in
+    # the same VPC.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidSubnet AWS API Documentation
+    #
+    class InvalidSubnet < Aws::EmptyStructure; end
+
+    # The subscription request is invalid because it is a duplicate request.
+    # This subscription request is already in progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidSubscriptionStateFault AWS API Documentation
+    #
+    class InvalidSubscriptionStateFault < Aws::EmptyStructure; end
+
+    # The value specified for the `sourceDatabaseName`, `sourceSchemaName`,
+    # or `sourceTableName` parameter, or a combination of these, doesn't
+    # exist in the snapshot.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidTableRestoreArgumentFault AWS API Documentation
+    #
+    class InvalidTableRestoreArgumentFault < Aws::EmptyStructure; end
+
+    # The tag is invalid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidTagFault AWS API Documentation
+    #
+    class InvalidTagFault < Aws::EmptyStructure; end
+
+    # The cluster subnet group does not cover all Availability Zones.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/InvalidVPCNetworkStateFault AWS API Documentation
+    #
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
+
+    # The encryption key has exceeded its grant limit in AWS KMS.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LimitExceededFault AWS API Documentation
+    #
+    class LimitExceededFault < Aws::EmptyStructure; end
 
     # Describes the status of logging for a cluster.
     #
@@ -6588,6 +7067,24 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The operation would exceed the number of nodes allowed for a cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NumberOfNodesPerClusterLimitExceededFault AWS API Documentation
+    #
+    class NumberOfNodesPerClusterLimitExceededFault < Aws::EmptyStructure; end
+
+    # The operation would exceed the number of nodes allotted to the
+    # account. For information about increasing your quota, go to [Limits in
+    # Amazon Redshift][1] in the *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/NumberOfNodesQuotaExceededFault AWS API Documentation
+    #
+    class NumberOfNodesQuotaExceededFault < Aws::EmptyStructure; end
+
     # Describes an orderable cluster option.
     #
     # @!attribute [rw] cluster_version
@@ -6984,6 +7481,24 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # User already has a reservation with the given identifier.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeAlreadyExistsFault AWS API Documentation
+    #
+    class ReservedNodeAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # Indicates that the reserved node has already been exchanged.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeAlreadyMigratedFault AWS API Documentation
+    #
+    class ReservedNodeAlreadyMigratedFault < Aws::EmptyStructure; end
+
+    # The specified reserved compute node not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeNotFoundFault AWS API Documentation
+    #
+    class ReservedNodeNotFoundFault < Aws::EmptyStructure; end
+
     # Describes a reserved node offering.
     #
     # @!attribute [rw] reserved_node_offering_id
@@ -7042,6 +7557,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Specified offering does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOfferingNotFoundFault AWS API Documentation
+    #
+    class ReservedNodeOfferingNotFoundFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -7062,6 +7583,18 @@ module Aws::Redshift
       :reserved_node_offerings)
       include Aws::Structure
     end
+
+    # Request would exceed the user's compute node quota. For information
+    # about increasing your quota, go to [Limits in Amazon Redshift][1] in
+    # the *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeQuotaExceededFault AWS API Documentation
+    #
+    class ReservedNodeQuotaExceededFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
@@ -7208,6 +7741,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # A resize operation for the specified cluster is not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeNotFoundFault AWS API Documentation
+    #
+    class ResizeNotFoundFault < Aws::EmptyStructure; end
+
     # Describes the result of a cluster resize operation.
     #
     # @!attribute [rw] target_node_type
@@ -7328,6 +7867,12 @@ module Aws::Redshift
       :data_transfer_progress_percent)
       include Aws::Structure
     end
+
+    # The resource could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResourceNotFoundFault AWS API Documentation
+    #
+    class ResourceNotFoundFault < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RestoreFromClusterSnapshotMessage
     #   data as a hash:
@@ -7937,6 +8482,33 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # Amazon SNS has responded that there is a problem with the specified
+    # Amazon SNS topic.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SNSInvalidTopicFault AWS API Documentation
+    #
+    class SNSInvalidTopicFault < Aws::EmptyStructure; end
+
+    # You do not have permission to publish to the specified Amazon SNS
+    # topic.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SNSNoAuthorizationFault AWS API Documentation
+    #
+    class SNSNoAuthorizationFault < Aws::EmptyStructure; end
+
+    # An Amazon SNS topic with the specified Amazon Resource Name (ARN) does
+    # not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SNSTopicArnNotFoundFault AWS API Documentation
+    #
+    class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # The definition you submitted is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduleDefinitionTypeUnsupportedFault AWS API Documentation
+    #
+    class ScheduleDefinitionTypeUnsupportedFault < Aws::EmptyStructure; end
+
     # Describes a scheduled action. You can use a scheduled action to
     # trigger some Amazon Redshift API operations on a schedule. For
     # information about which API operations can be scheduled, see
@@ -8023,6 +8595,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The scheduled action already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionAlreadyExistsFault AWS API Documentation
+    #
+    class ScheduledActionAlreadyExistsFault < Aws::EmptyStructure; end
+
     # A set of elements to filter the returned scheduled actions.
     #
     # @note When making an API call, you may pass ScheduledActionFilter
@@ -8050,6 +8628,18 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The scheduled action cannot be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionNotFoundFault AWS API Documentation
+    #
+    class ScheduledActionNotFoundFault < Aws::EmptyStructure; end
+
+    # The quota for scheduled actions exceeded.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionQuotaExceededFault AWS API Documentation
+    #
+    class ScheduledActionQuotaExceededFault < Aws::EmptyStructure; end
+
     # The action type that specifies an Amazon Redshift API operation that
     # is supported by the Amazon Redshift scheduler.
     #
@@ -8076,6 +8666,12 @@ module Aws::Redshift
       :resize_cluster)
       include Aws::Structure
     end
+
+    # The action type specified for a scheduled action is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ScheduledActionTypeUnsupportedFault AWS API Documentation
+    #
+    class ScheduledActionTypeUnsupportedFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] marker
     #   An optional parameter that specifies the starting point to return a
@@ -8318,6 +8914,25 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The cluster already has cross-region snapshot copy disabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyAlreadyDisabledFault AWS API Documentation
+    #
+    class SnapshotCopyAlreadyDisabledFault < Aws::EmptyStructure; end
+
+    # The cluster already has cross-region snapshot copy enabled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyAlreadyEnabledFault AWS API Documentation
+    #
+    class SnapshotCopyAlreadyEnabledFault < Aws::EmptyStructure; end
+
+    # Cross-region snapshot copy was temporarily disabled. Try your request
+    # again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyDisabledFault AWS API Documentation
+    #
+    class SnapshotCopyDisabledFault < Aws::EmptyStructure; end
+
     # The snapshot copy grant that grants Amazon Redshift permission to
     # encrypt copied snapshots with the specified customer master key (CMK)
     # from AWS KMS in the destination region.
@@ -8352,6 +8967,13 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The snapshot copy grant can't be created because a grant with the
+    # same name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantAlreadyExistsFault AWS API Documentation
+    #
+    class SnapshotCopyGrantAlreadyExistsFault < Aws::EmptyStructure; end
+
     # @!attribute [rw] marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
@@ -8376,6 +8998,21 @@ module Aws::Redshift
       :snapshot_copy_grants)
       include Aws::Structure
     end
+
+    # The specified snapshot copy grant can't be found. Make sure that the
+    # name is typed correctly and that the grant exists in the destination
+    # region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantNotFoundFault AWS API Documentation
+    #
+    class SnapshotCopyGrantNotFoundFault < Aws::EmptyStructure; end
+
+    # The AWS account has exceeded the maximum number of snapshot copy
+    # grants in this region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotCopyGrantQuotaExceededFault < Aws::EmptyStructure; end
 
     # Describes the errors returned by a snapshot.
     #
@@ -8473,6 +9110,30 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The specified snapshot schedule already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotScheduleAlreadyExistsFault AWS API Documentation
+    #
+    class SnapshotScheduleAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # We could not find the specified snapshot schedule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotScheduleNotFoundFault AWS API Documentation
+    #
+    class SnapshotScheduleNotFoundFault < Aws::EmptyStructure; end
+
+    # You have exceeded the quota of snapshot schedules.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotScheduleQuotaExceededFault AWS API Documentation
+    #
+    class SnapshotScheduleQuotaExceededFault < Aws::EmptyStructure; end
+
+    # The specified snapshot schedule is already being updated.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotScheduleUpdateInProgressFault AWS API Documentation
+    #
+    class SnapshotScheduleUpdateInProgressFault < Aws::EmptyStructure; end
+
     # Describes a sorting entity
     #
     # @note When making an API call, you may pass SnapshotSortingEntity
@@ -8499,6 +9160,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # The specified Amazon Redshift event source could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SourceNotFoundFault AWS API Documentation
+    #
+    class SourceNotFoundFault < Aws::EmptyStructure; end
+
     # Describes a subnet.
     #
     # @!attribute [rw] subnet_identifier
@@ -8520,6 +9187,49 @@ module Aws::Redshift
       :subnet_status)
       include Aws::Structure
     end
+
+    # A specified subnet is already in use by another cluster.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubnetAlreadyInUse AWS API Documentation
+    #
+    class SubnetAlreadyInUse < Aws::EmptyStructure; end
+
+    # There is already an existing event notification subscription with the
+    # specified name.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubscriptionAlreadyExistFault AWS API Documentation
+    #
+    class SubscriptionAlreadyExistFault < Aws::EmptyStructure; end
+
+    # The value specified for the event category was not one of the allowed
+    # values, or it specified a category that does not apply to the
+    # specified source type. The allowed values are Configuration,
+    # Management, Monitoring, and Security.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubscriptionCategoryNotFoundFault AWS API Documentation
+    #
+    class SubscriptionCategoryNotFoundFault < Aws::EmptyStructure; end
+
+    # An Amazon Redshift event with the specified event ID does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubscriptionEventIdNotFoundFault AWS API Documentation
+    #
+    class SubscriptionEventIdNotFoundFault < Aws::EmptyStructure; end
+
+    # An Amazon Redshift event notification subscription with the specified
+    # name does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubscriptionNotFoundFault AWS API Documentation
+    #
+    class SubscriptionNotFoundFault < Aws::EmptyStructure; end
+
+    # The value specified for the event severity was not one of the allowed
+    # values, or it specified a severity that does not apply to the
+    # specified source type. The allowed values are ERROR and INFO.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SubscriptionSeverityNotFoundFault AWS API Documentation
+    #
+    class SubscriptionSeverityNotFoundFault < Aws::EmptyStructure; end
 
     # Describes the operations that are allowed on a maintenance track.
     #
@@ -8545,6 +9255,19 @@ module Aws::Redshift
       :name)
       include Aws::Structure
     end
+
+    # The number of tables in the cluster exceeds the limit for the
+    # requested new cluster node type.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableLimitExceededFault AWS API Documentation
+    #
+    class TableLimitExceededFault < Aws::EmptyStructure; end
+
+    # The specified `TableRestoreRequestId` value was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableRestoreNotFoundFault AWS API Documentation
+    #
+    class TableRestoreNotFoundFault < Aws::EmptyStructure; end
 
     # Describes the status of a RestoreTableFromClusterSnapshot operation.
     #
@@ -8681,6 +9404,12 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # You have exceeded the number of tags allowed.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TagLimitExceededFault AWS API Documentation
+    #
+    class TagLimitExceededFault < Aws::EmptyStructure; end
+
     # A tag and its associated resource.
     #
     # @!attribute [rw] tag
@@ -8773,6 +9502,30 @@ module Aws::Redshift
       :marker)
       include Aws::Structure
     end
+
+    # Your account is not authorized to perform the requested operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnauthorizedOperation AWS API Documentation
+    #
+    class UnauthorizedOperation < Aws::EmptyStructure; end
+
+    # The specified region is incorrect or does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnknownSnapshotCopyRegionFault AWS API Documentation
+    #
+    class UnknownSnapshotCopyRegionFault < Aws::EmptyStructure; end
+
+    # The requested operation isn't supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnsupportedOperationFault AWS API Documentation
+    #
+    class UnsupportedOperationFault < Aws::EmptyStructure; end
+
+    # A request option was specified that is not supported.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/UnsupportedOptionFault AWS API Documentation
+    #
+    class UnsupportedOptionFault < Aws::EmptyStructure; end
 
     # A maintenance track that you can switch the current track to.
     #

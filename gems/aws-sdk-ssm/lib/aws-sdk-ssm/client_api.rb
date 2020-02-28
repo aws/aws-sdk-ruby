@@ -1068,6 +1068,8 @@ module Aws::SSM
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    AssociatedInstances.struct_class = Types::AssociatedInstances
+
     Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     Association.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     Association.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
@@ -1079,6 +1081,8 @@ module Aws::SSM
     Association.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     Association.add_member(:association_name, Shapes::ShapeRef.new(shape: AssociationName, location_name: "AssociationName"))
     Association.struct_class = Types::Association
+
+    AssociationAlreadyExists.struct_class = Types::AssociationAlreadyExists
 
     AssociationDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     AssociationDescription.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -1155,6 +1159,8 @@ module Aws::SSM
     AssociationFilterList.member = Shapes::ShapeRef.new(shape: AssociationFilter)
 
     AssociationIdList.member = Shapes::ShapeRef.new(shape: AssociationId)
+
+    AssociationLimitExceeded.struct_class = Types::AssociationLimitExceeded
 
     AssociationList.member = Shapes::ShapeRef.new(shape: Association)
 
@@ -2081,6 +2087,8 @@ module Aws::SSM
     DuplicateDocumentVersionName.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     DuplicateDocumentVersionName.struct_class = Types::DuplicateDocumentVersionName
 
+    DuplicateInstanceId.struct_class = Types::DuplicateInstanceId
+
     EffectivePatch.add_member(:patch, Shapes::ShapeRef.new(shape: Patch, location_name: "Patch"))
     EffectivePatch.add_member(:patch_status, Shapes::ShapeRef.new(shape: PatchStatus, location_name: "PatchStatus"))
     EffectivePatch.struct_class = Types::EffectivePatch
@@ -2535,6 +2543,8 @@ module Aws::SSM
     InvalidAutomationStatusUpdateException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidAutomationStatusUpdateException.struct_class = Types::InvalidAutomationStatusUpdateException
 
+    InvalidCommandId.struct_class = Types::InvalidCommandId
+
     InvalidDeleteInventoryParametersException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidDeleteInventoryParametersException.struct_class = Types::InvalidDeleteInventoryParametersException
 
@@ -2561,6 +2571,8 @@ module Aws::SSM
 
     InvalidFilter.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidFilter.struct_class = Types::InvalidFilter
+
+    InvalidFilterKey.struct_class = Types::InvalidFilterKey
 
     InvalidFilterOption.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidFilterOption.struct_class = Types::InvalidFilterOption
@@ -2599,17 +2611,27 @@ module Aws::SSM
     InvalidOptionException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidOptionException.struct_class = Types::InvalidOptionException
 
+    InvalidOutputFolder.struct_class = Types::InvalidOutputFolder
+
+    InvalidOutputLocation.struct_class = Types::InvalidOutputLocation
+
     InvalidParameters.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidParameters.struct_class = Types::InvalidParameters
 
     InvalidPermissionType.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidPermissionType.struct_class = Types::InvalidPermissionType
 
+    InvalidPluginName.struct_class = Types::InvalidPluginName
+
     InvalidPolicyAttributeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidPolicyAttributeException.struct_class = Types::InvalidPolicyAttributeException
 
     InvalidPolicyTypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InvalidPolicyTypeException.struct_class = Types::InvalidPolicyTypeException
+
+    InvalidResourceId.struct_class = Types::InvalidResourceId
+
+    InvalidResourceType.struct_class = Types::InvalidResourceType
 
     InvalidResultAttributeException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InvalidResultAttributeException.struct_class = Types::InvalidResultAttributeException
@@ -2721,6 +2743,8 @@ module Aws::SSM
 
     InventoryResultItemMap.key = Shapes::ShapeRef.new(shape: InventoryResultItemKey)
     InventoryResultItemMap.value = Shapes::ShapeRef.new(shape: InventoryResultItem)
+
+    InvocationDoesNotExist.struct_class = Types::InvocationDoesNotExist
 
     ItemContentMismatchException.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
     ItemContentMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -3678,6 +3702,8 @@ module Aws::SSM
     StartSessionResponse.add_member(:stream_url, Shapes::ShapeRef.new(shape: StreamUrl, location_name: "StreamUrl"))
     StartSessionResponse.struct_class = Types::StartSessionResponse
 
+    StatusUnchanged.struct_class = Types::StatusUnchanged
+
     StepExecution.add_member(:step_name, Shapes::ShapeRef.new(shape: String, location_name: "StepName"))
     StepExecution.add_member(:action, Shapes::ShapeRef.new(shape: AutomationActionName, location_name: "Action"))
     StepExecution.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "TimeoutSeconds", metadata: {"box"=>true}))
@@ -3766,6 +3792,8 @@ module Aws::SSM
 
     TerminateSessionResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: SessionId, location_name: "SessionId"))
     TerminateSessionResponse.struct_class = Types::TerminateSessionResponse
+
+    TooManyTagsError.struct_class = Types::TooManyTagsError
 
     TooManyUpdates.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TooManyUpdates.struct_class = Types::TooManyUpdates

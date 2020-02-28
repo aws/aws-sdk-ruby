@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2020-02-28)
+------------------
+
+* Feature - Added a target group attribute to support sticky sessions for Network Load Balancers.
+
 1.39.0 (2019-11-25)
 ------------------
 

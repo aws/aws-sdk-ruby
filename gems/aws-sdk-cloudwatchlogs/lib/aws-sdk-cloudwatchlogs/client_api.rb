@@ -425,8 +425,14 @@ module Aws::CloudWatchLogs
 
     InputLogStreamNames.member = Shapes::ShapeRef.new(shape: LogStreamName)
 
+    InvalidOperationException.struct_class = Types::InvalidOperationException
+
+    InvalidParameterException.struct_class = Types::InvalidParameterException
+
     InvalidSequenceTokenException.add_member(:expected_sequence_token, Shapes::ShapeRef.new(shape: SequenceToken, location_name: "expectedSequenceToken"))
     InvalidSequenceTokenException.struct_class = Types::InvalidSequenceTokenException
+
+    LimitExceededException.struct_class = Types::LimitExceededException
 
     ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
@@ -494,6 +500,8 @@ module Aws::CloudWatchLogs
     MetricTransformation.struct_class = Types::MetricTransformation
 
     MetricTransformations.member = Shapes::ShapeRef.new(shape: MetricTransformation)
+
+    OperationAbortedException.struct_class = Types::OperationAbortedException
 
     OutputLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
     OutputLogEvent.add_member(:message, Shapes::ShapeRef.new(shape: EventMessage, location_name: "message"))
@@ -578,6 +586,10 @@ module Aws::CloudWatchLogs
     RejectedLogEventsInfo.add_member(:expired_log_event_end_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "expiredLogEventEndIndex"))
     RejectedLogEventsInfo.struct_class = Types::RejectedLogEventsInfo
 
+    ResourceAlreadyExistsException.struct_class = Types::ResourceAlreadyExistsException
+
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     ResourcePolicies.member = Shapes::ShapeRef.new(shape: ResourcePolicy)
 
     ResourcePolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
@@ -596,6 +608,8 @@ module Aws::CloudWatchLogs
     SearchedLogStream.struct_class = Types::SearchedLogStream
 
     SearchedLogStreams.member = Shapes::ShapeRef.new(shape: SearchedLogStream)
+
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
     StartQueryRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     StartQueryRequest.add_member(:log_group_names, Shapes::ShapeRef.new(shape: LogGroupNames, location_name: "logGroupNames"))
@@ -642,6 +656,8 @@ module Aws::CloudWatchLogs
 
     TestMetricFilterResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MetricFilterMatches, location_name: "matches"))
     TestMetricFilterResponse.struct_class = Types::TestMetricFilterResponse
+
+    UnrecognizedClientException.struct_class = Types::UnrecognizedClientException
 
     UntagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
     UntagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))

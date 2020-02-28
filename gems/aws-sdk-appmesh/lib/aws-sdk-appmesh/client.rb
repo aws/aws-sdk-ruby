@@ -334,6 +334,12 @@ module Aws::AppMesh
     # If your route matches a request, you can distribute traffic to one or
     # more target virtual nodes with relative weighting.
     #
+    # For more information about routes, see [Routes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/routes.html
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
@@ -632,6 +638,12 @@ module Aws::AppMesh
     #
     #  </note>
     #
+    # For more information about virtual nodes, see [Virtual Nodes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_nodes.html
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 36 letters, numbers, hyphens, and
@@ -666,9 +678,43 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
     #       backends: [
     #         {
     #           virtual_service: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             virtual_service_name: "ServiceName", # required
     #           },
     #         },
@@ -687,6 +733,18 @@ module Aws::AppMesh
     #           port_mapping: { # required
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
     #           },
     #         },
     #       ],
@@ -730,7 +788,19 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.last_updated_at #=> Time
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -742,6 +812,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -770,6 +844,12 @@ module Aws::AppMesh
     # your mesh. After you create your virtual router, create and associate
     # routes for your virtual router that direct incoming requests to
     # different virtual nodes.
+    #
+    # For more information about virtual routers, see [Virtual Routers][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_routers.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -854,6 +934,13 @@ module Aws::AppMesh
     # `virtualServiceName`, and those requests are routed to the virtual
     # node or virtual router that is specified as the provider for the
     # virtual service.
+    #
+    # For more information about virtual services, see [Virtual
+    # Services][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com//app-mesh/latest/userguide/virtual_services.html
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -1113,7 +1200,19 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.last_updated_at #=> Time
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -1125,6 +1224,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -1407,7 +1510,19 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.last_updated_at #=> Time
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -1419,6 +1534,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2239,9 +2358,43 @@ module Aws::AppMesh
     #     client_token: "String",
     #     mesh_name: "ResourceName", # required
     #     spec: { # required
+    #       backend_defaults: {
+    #         client_policy: {
+    #           tls: {
+    #             enforce: false,
+    #             ports: [1],
+    #             validation: { # required
+    #               trust: { # required
+    #                 acm: {
+    #                   certificate_authority_arns: ["Arn"], # required
+    #                 },
+    #                 file: {
+    #                   certificate_chain: "FilePath", # required
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
     #       backends: [
     #         {
     #           virtual_service: {
+    #             client_policy: {
+    #               tls: {
+    #                 enforce: false,
+    #                 ports: [1],
+    #                 validation: { # required
+    #                   trust: { # required
+    #                     acm: {
+    #                       certificate_authority_arns: ["Arn"], # required
+    #                     },
+    #                     file: {
+    #                       certificate_chain: "FilePath", # required
+    #                     },
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             virtual_service_name: "ServiceName", # required
     #           },
     #         },
@@ -2260,6 +2413,18 @@ module Aws::AppMesh
     #           port_mapping: { # required
     #             port: 1, # required
     #             protocol: "grpc", # required, accepts grpc, http, http2, tcp
+    #           },
+    #           tls: {
+    #             certificate: { # required
+    #               acm: {
+    #                 certificate_arn: "Arn", # required
+    #               },
+    #               file: {
+    #                 certificate_chain: "FilePath", # required
+    #                 private_key: "FilePath", # required
+    #               },
+    #             },
+    #             mode: "DISABLED", # required, accepts DISABLED, PERMISSIVE, STRICT
     #           },
     #         },
     #       ],
@@ -2297,7 +2462,19 @@ module Aws::AppMesh
     #   resp.virtual_node.metadata.last_updated_at #=> Time
     #   resp.virtual_node.metadata.uid #=> String
     #   resp.virtual_node.metadata.version #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backend_defaults.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.enforce #=> Boolean
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.ports[0] #=> Integer
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns #=> Array
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.acm.certificate_authority_arns[0] #=> String
+    #   resp.virtual_node.spec.backends[0].virtual_service.client_policy.tls.validation.trust.file.certificate_chain #=> String
     #   resp.virtual_node.spec.backends[0].virtual_service.virtual_service_name #=> String
     #   resp.virtual_node.spec.listeners #=> Array
     #   resp.virtual_node.spec.listeners[0].health_check.healthy_threshold #=> Integer
@@ -2309,6 +2486,10 @@ module Aws::AppMesh
     #   resp.virtual_node.spec.listeners[0].health_check.unhealthy_threshold #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.port #=> Integer
     #   resp.virtual_node.spec.listeners[0].port_mapping.protocol #=> String, one of "grpc", "http", "http2", "tcp"
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.acm.certificate_arn #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.certificate_chain #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.certificate.file.private_key #=> String
+    #   resp.virtual_node.spec.listeners[0].tls.mode #=> String, one of "DISABLED", "PERMISSIVE", "STRICT"
     #   resp.virtual_node.spec.logging.access_log.file.path #=> String
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes #=> Array
     #   resp.virtual_node.spec.service_discovery.aws_cloud_map.attributes[0].key #=> String
@@ -2470,7 +2651,7 @@ module Aws::AppMesh
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appmesh'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

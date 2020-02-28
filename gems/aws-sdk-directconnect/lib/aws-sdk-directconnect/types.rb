@@ -2502,6 +2502,12 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # A tag key was specified more than once.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DuplicateTagKeysException AWS API Documentation
+    #
+    class DuplicateTagKeysException < Aws::EmptyStructure; end
+
     # Information about an interconnect.
     #
     # @!attribute [rw] interconnect_id
@@ -3452,6 +3458,12 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # You have reached the limit on the number of tags that can be assigned.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:

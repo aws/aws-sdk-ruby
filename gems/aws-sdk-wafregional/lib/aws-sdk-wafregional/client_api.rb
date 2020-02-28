@@ -1231,6 +1231,8 @@ module Aws::WAFRegional
     WAFInternalErrorException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     WAFInternalErrorException.struct_class = Types::WAFInternalErrorException
 
+    WAFInvalidAccountException.struct_class = Types::WAFInvalidAccountException
+
     WAFInvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     WAFInvalidOperationException.struct_class = Types::WAFInvalidOperationException
 

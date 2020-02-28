@@ -279,19 +279,18 @@ module Aws::AugmentedAIRuntime
     # Returns information about the specified human loop.
     #
     # @option params [required, String] :human_loop_name
-    #   The name of the human loop.
+    #   The unique name of the human loop.
     #
     # @return [Types::DescribeHumanLoopResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeHumanLoopResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::DescribeHumanLoopResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeHumanLoopResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeHumanLoopResponse#failure_code #failure_code} => String
     #   * {Types::DescribeHumanLoopResponse#human_loop_status #human_loop_status} => String
     #   * {Types::DescribeHumanLoopResponse#human_loop_name #human_loop_name} => String
     #   * {Types::DescribeHumanLoopResponse#human_loop_arn #human_loop_arn} => String
     #   * {Types::DescribeHumanLoopResponse#flow_definition_arn #flow_definition_arn} => String
-    #   * {Types::DescribeHumanLoopResponse#human_loop_input #human_loop_input} => Types::HumanLoopInputContent
-    #   * {Types::DescribeHumanLoopResponse#human_loop_output #human_loop_output} => Types::HumanLoopOutputContent
+    #   * {Types::DescribeHumanLoopResponse#human_loop_output #human_loop_output} => Types::HumanLoopOutput
     #
     # @example Request syntax with placeholder values
     #
@@ -301,14 +300,13 @@ module Aws::AugmentedAIRuntime
     #
     # @example Response structure
     #
-    #   resp.creation_timestamp #=> Time
+    #   resp.creation_time #=> Time
     #   resp.failure_reason #=> String
     #   resp.failure_code #=> String
     #   resp.human_loop_status #=> String, one of "InProgress", "Failed", "Completed", "Stopped", "Stopping"
     #   resp.human_loop_name #=> String
     #   resp.human_loop_arn #=> String
     #   resp.flow_definition_arn #=> String
-    #   resp.human_loop_input.input_content #=> String
     #   resp.human_loop_output.output_s3_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/DescribeHumanLoop AWS API Documentation
@@ -321,14 +319,18 @@ module Aws::AugmentedAIRuntime
     end
 
     # Returns information about human loops, given the specified parameters.
+    # If a human loop was deleted, it will not be included.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
     #   (Optional) The timestamp of the date when you want the human loops to
-    #   begin. For example, `1551000000`.
+    #   begin in ISO 8601 format. For example, `2020-02-24`.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
     #   (Optional) The timestamp of the date before which you want the human
-    #   loops to begin. For example, `1550000000`.
+    #   loops to begin in ISO 8601 format. For example, `2020-02-24`.
+    #
+    # @option params [required, String] :flow_definition_arn
+    #   The Amazon Resource Name (ARN) of a flow definition.
     #
     # @option params [String] :sort_order
     #   An optional value that specifies whether you want the results sorted
@@ -353,6 +355,7 @@ module Aws::AugmentedAIRuntime
     #   resp = client.list_human_loops({
     #     creation_time_after: Time.now,
     #     creation_time_before: Time.now,
+    #     flow_definition_arn: "FlowDefinitionArn", # required
     #     sort_order: "Ascending", # accepts Ascending, Descending
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -386,16 +389,15 @@ module Aws::AugmentedAIRuntime
     # @option params [required, String] :flow_definition_arn
     #   The Amazon Resource Name (ARN) of the flow definition.
     #
-    # @option params [required, Types::HumanLoopInputContent] :human_loop_input
+    # @option params [required, Types::HumanLoopInput] :human_loop_input
     #   An object containing information about the human loop.
     #
-    # @option params [Types::HumanReviewDataAttributes] :data_attributes
+    # @option params [Types::HumanLoopDataAttributes] :data_attributes
     #   Attributes of the data specified by the customer.
     #
     # @return [Types::StartHumanLoopResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartHumanLoopResponse#human_loop_arn #human_loop_arn} => String
-    #   * {Types::StartHumanLoopResponse#human_loop_activation_results #human_loop_activation_results} => Types::HumanLoopActivationResults
     #
     # @example Request syntax with placeholder values
     #
@@ -413,8 +415,6 @@ module Aws::AugmentedAIRuntime
     # @example Response structure
     #
     #   resp.human_loop_arn #=> String
-    #   resp.human_loop_activation_results.human_loop_activation_reason.conditions_matched #=> Boolean
-    #   resp.human_loop_activation_results.human_loop_activation_conditions_evaluation_results #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-a2i-runtime-2019-11-07/StartHumanLoop AWS API Documentation
     #
@@ -460,7 +460,7 @@ module Aws::AugmentedAIRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-augmentedairuntime'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
