@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2020-02-28)
+------------------
+
+* Feature - AWS Glue adds resource tagging support for Machine Learning Transforms and adds a new API, ListMLTransforms to support tag filtering.  With this feature, customers can use tags in AWS Glue to organize and control access to Machine Learning Transforms.
+
 1.48.0 (2020-02-12)
 ------------------
 

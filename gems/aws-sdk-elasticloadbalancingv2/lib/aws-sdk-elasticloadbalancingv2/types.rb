@@ -197,7 +197,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   The tags. Each resource can have a maximum of 10 tags.
+    #   The tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsInput AWS API Documentation
@@ -573,8 +573,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network
+    #   Load Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -1522,7 +1549,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] ssl_policies
-    #   Information about the policies.
+    #   Information about the security policies.
     #   @return [Array<Types::SslPolicy>]
     #
     # @!attribute [rw] next_marker
@@ -1546,7 +1573,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Names (ARN) of the resources.
+    #   The Amazon Resource Names (ARN) of the resources. You can specify up
+    #   to 20 resources in a single call.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTagsInput AWS API Documentation
@@ -1941,8 +1969,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS or TLS listener\] The security policy that defines which
-    #   ciphers and protocols are supported. The default is the current
-    #   predefined security policy.
+    #   protocols and ciphers are supported.
     #   @return [String]
     #
     # @!attribute [rw] default_actions
@@ -2113,7 +2140,9 @@ module Aws::ElasticLoadBalancingV2
     #     is `false`.
     #
     #   * `routing.http2.enabled` - Indicates whether HTTP/2 is enabled. The
-    #     value is `true` or `false`. The default is `true`.
+    #     value is `true` or `false`. The default is `true`. Elastic Load
+    #     Balancing requires that message header names contain only
+    #     alphanumeric characters and hyphens.
     #
     #   The following attributes are supported by only Network Load
     #   Balancers:
@@ -2279,12 +2308,35 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] ssl_policy
     #   \[HTTPS and TLS listeners\] The security policy that defines which
-    #   protocols and ciphers are supported. For more information, see
-    #   [Security Policies][1] in the *Application Load Balancers Guide*.
+    #   protocols and ciphers are supported. The following are the possible
+    #   values:
+    #
+    #   * `ELBSecurityPolicy-2016-08`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-0-2015-04`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-1-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-2017-01`
+    #
+    #   * `ELBSecurityPolicy-TLS-1-2-Ext-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-2018-06`
+    #
+    #   * `ELBSecurityPolicy-FS-1-1-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-2019-08`
+    #
+    #   * `ELBSecurityPolicy-FS-1-2-Res-2019-08`
+    #
+    #   For more information, see [Security Policies][1] in the *Application
+    #   Load Balancers Guide* and [Security Policies][2] in the *Network
+    #   Load Balancers Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
+    #   [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -3619,7 +3671,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] key
     #   The name of the attribute.
     #
-    #   The following attribute is supported by both Application Load
+    #   The following attributes are supported by both Application Load
     #   Balancers and Network Load Balancers:
     #
     #   * `deregistration_delay.timeout_seconds` - The amount of time, in
@@ -3628,7 +3680,12 @@ module Aws::ElasticLoadBalancingV2
     #     range is 0-3600 seconds. The default value is 300 seconds. If the
     #     target is a Lambda function, this attribute is not supported.
     #
-    #   ^
+    #   * `stickiness.enabled` - Indicates whether sticky sessions are
+    #     enabled. The value is `true` or `false`. The default is `false`.
+    #
+    #   * `stickiness.type` - The type of sticky sessions. The possible
+    #     values are `lb_cookie` for Application Load Balancers or
+    #     `source_ip` for Network Load Balancers.
     #
     #   The following attributes are supported by Application Load Balancers
     #   if the target is not a Lambda function:
@@ -3644,12 +3701,6 @@ module Aws::ElasticLoadBalancingV2
     #     time period ends, the target receives its full share of traffic.
     #     The range is 30-900 seconds (15 minutes). Slow start mode is
     #     disabled by default.
-    #
-    #   * `stickiness.enabled` - Indicates whether sticky sessions are
-    #     enabled. The value is `true` or `false`. The default is `false`.
-    #
-    #   * `stickiness.type` - The type of sticky sessions. The possible
-    #     value is `lb_cookie`.
     #
     #   * `stickiness.lb_cookie.duration_seconds` - The time period, in
     #     seconds, during which requests from a client should be routed to

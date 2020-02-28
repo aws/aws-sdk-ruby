@@ -10,22 +10,6 @@ module Aws::AppMesh
 
     extend Aws::Errors::DynamicErrors
 
-    class ServiceUnavailableException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::AppMesh::Types::ServiceUnavailableException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-    end
-
     class ResourceInUseException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -47,38 +31,6 @@ module Aws::AppMesh
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppMesh::Types::BadRequestException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-    end
-
-    class LimitExceededException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::AppMesh::Types::LimitExceededException] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-
-      # @return [String]
-      def message
-        @message || @data[:message]
-      end
-
-    end
-
-    class TooManyRequestsException < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::AppMesh::Types::TooManyRequestsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -138,11 +90,11 @@ module Aws::AppMesh
 
     end
 
-    class TooManyTagsException < ServiceError
+    class NotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::AppMesh::Types::TooManyTagsException] data
+      # @param [Aws::AppMesh::Types::NotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -154,11 +106,59 @@ module Aws::AppMesh
 
     end
 
-    class NotFoundException < ServiceError
+    class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
-      # @param [Aws::AppMesh::Types::NotFoundException] data
+      # @param [Aws::AppMesh::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class LimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppMesh::Types::LimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class TooManyRequestsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppMesh::Types::TooManyRequestsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+    end
+
+    class TooManyTagsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppMesh::Types::TooManyTagsException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

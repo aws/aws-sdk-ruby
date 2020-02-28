@@ -422,6 +422,8 @@ module Aws::ConfigService
     RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
     SchemaVersionId = Shapes::StringShape.new(name: 'SchemaVersionId')
     Scope = Shapes::StructureShape.new(name: 'Scope')
+    SelectAggregateResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigRequest')
+    SelectAggregateResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectAggregateResourceConfigResponse')
     SelectResourceConfigRequest = Shapes::StructureShape.new(name: 'SelectResourceConfigRequest')
     SelectResourceConfigResponse = Shapes::StructureShape.new(name: 'SelectResourceConfigResponse')
     Source = Shapes::StructureShape.new(name: 'Source')
@@ -607,9 +609,9 @@ module Aws::ConfigService
     ConfigExportDeliveryInfo.add_member(:next_delivery_time, Shapes::ShapeRef.new(shape: Date, location_name: "nextDeliveryTime"))
     ConfigExportDeliveryInfo.struct_class = Types::ConfigExportDeliveryInfo
 
-    ConfigRule.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
-    ConfigRule.add_member(:config_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleArn"))
-    ConfigRule.add_member(:config_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleId"))
+    ConfigRule.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConfigRule.add_member(:config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ConfigRuleArn"))
+    ConfigRule.add_member(:config_rule_id, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleId"))
     ConfigRule.add_member(:description, Shapes::ShapeRef.new(shape: EmptiableStringWithCharLimit256, location_name: "Description"))
     ConfigRule.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
     ConfigRule.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
@@ -629,7 +631,7 @@ module Aws::ConfigService
     ConfigRuleComplianceSummaryFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
     ConfigRuleComplianceSummaryFilters.struct_class = Types::ConfigRuleComplianceSummaryFilters
 
-    ConfigRuleEvaluationStatus.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
+    ConfigRuleEvaluationStatus.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
     ConfigRuleEvaluationStatus.add_member(:config_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleArn"))
     ConfigRuleEvaluationStatus.add_member(:config_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleId"))
     ConfigRuleEvaluationStatus.add_member(:last_successful_invocation_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastSuccessfulInvocationTime"))
@@ -637,6 +639,7 @@ module Aws::ConfigService
     ConfigRuleEvaluationStatus.add_member(:last_successful_evaluation_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastSuccessfulEvaluationTime"))
     ConfigRuleEvaluationStatus.add_member(:last_failed_evaluation_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastFailedEvaluationTime"))
     ConfigRuleEvaluationStatus.add_member(:first_activated_time, Shapes::ShapeRef.new(shape: Date, location_name: "FirstActivatedTime"))
+    ConfigRuleEvaluationStatus.add_member(:last_deactivated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastDeactivatedTime"))
     ConfigRuleEvaluationStatus.add_member(:last_error_code, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorCode"))
     ConfigRuleEvaluationStatus.add_member(:last_error_message, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorMessage"))
     ConfigRuleEvaluationStatus.add_member(:first_evaluation_started, Shapes::ShapeRef.new(shape: Boolean, location_name: "FirstEvaluationStarted"))
@@ -785,7 +788,7 @@ module Aws::ConfigService
     DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
     DeleteAggregationAuthorizationRequest.struct_class = Types::DeleteAggregationAuthorizationRequest
 
-    DeleteConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+    DeleteConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
     DeleteConfigRuleRequest.struct_class = Types::DeleteConfigRuleRequest
 
     DeleteConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
@@ -816,7 +819,7 @@ module Aws::ConfigService
     DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
 
     DeleteRemediationConfigurationRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
-    DeleteRemediationConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    DeleteRemediationConfigurationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
     DeleteRemediationConfigurationRequest.struct_class = Types::DeleteRemediationConfigurationRequest
 
     DeleteRemediationConfigurationResponse.struct_class = Types::DeleteRemediationConfigurationResponse
@@ -1086,7 +1089,7 @@ module Aws::ConfigService
     EvaluationResultIdentifier.add_member(:ordering_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "OrderingTimestamp"))
     EvaluationResultIdentifier.struct_class = Types::EvaluationResultIdentifier
 
-    EvaluationResultQualifier.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
+    EvaluationResultQualifier.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
     EvaluationResultQualifier.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
     EvaluationResultQualifier.add_member(:resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ResourceId"))
     EvaluationResultQualifier.struct_class = Types::EvaluationResultQualifier
@@ -1503,7 +1506,7 @@ module Aws::ConfigService
     RecordingGroup.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
     RecordingGroup.struct_class = Types::RecordingGroup
 
-    ReevaluateConfigRuleNames.member = Shapes::ShapeRef.new(shape: StringWithCharLimit64)
+    ReevaluateConfigRuleNames.member = Shapes::ShapeRef.new(shape: ConfigRuleName)
 
     RelatedEventList.member = Shapes::ShapeRef.new(shape: RelatedEvent)
 
@@ -1518,9 +1521,9 @@ module Aws::ConfigService
     RemediationConfiguration.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
     RemediationConfiguration.add_member(:target_type, Shapes::ShapeRef.new(shape: RemediationTargetType, required: true, location_name: "TargetType"))
     RemediationConfiguration.add_member(:target_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "TargetId"))
-    RemediationConfiguration.add_member(:target_version, Shapes::ShapeRef.new(shape: String, location_name: "TargetVersion"))
+    RemediationConfiguration.add_member(:target_version, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TargetVersion"))
     RemediationConfiguration.add_member(:parameters, Shapes::ShapeRef.new(shape: RemediationParameters, location_name: "Parameters"))
-    RemediationConfiguration.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    RemediationConfiguration.add_member(:resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ResourceType"))
     RemediationConfiguration.add_member(:automatic, Shapes::ShapeRef.new(shape: Boolean, location_name: "Automatic"))
     RemediationConfiguration.add_member(:execution_controls, Shapes::ShapeRef.new(shape: ExecutionControls, location_name: "ExecutionControls"))
     RemediationConfiguration.add_member(:maximum_automatic_attempts, Shapes::ShapeRef.new(shape: AutoRemediationAttempts, location_name: "MaximumAutomaticAttempts"))
@@ -1630,6 +1633,18 @@ module Aws::ConfigService
     Scope.add_member(:tag_value, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValue"))
     Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, location_name: "ComplianceResourceId"))
     Scope.struct_class = Types::Scope
+
+    SelectAggregateResourceConfigRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    SelectAggregateResourceConfigRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    SelectAggregateResourceConfigRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    SelectAggregateResourceConfigRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    SelectAggregateResourceConfigRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectAggregateResourceConfigRequest.struct_class = Types::SelectAggregateResourceConfigRequest
+
+    SelectAggregateResourceConfigResponse.add_member(:results, Shapes::ShapeRef.new(shape: Results, location_name: "Results"))
+    SelectAggregateResourceConfigResponse.add_member(:query_info, Shapes::ShapeRef.new(shape: QueryInfo, location_name: "QueryInfo"))
+    SelectAggregateResourceConfigResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SelectAggregateResourceConfigResponse.struct_class = Types::SelectAggregateResourceConfigResponse
 
     SelectResourceConfigRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
     SelectResourceConfigRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -1856,6 +1871,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DeleteRemediationConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchRemediationConfigurationException)
         o.errors << Shapes::ShapeRef.new(shape: RemediationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
       end)
 
       api.add_operation(:delete_remediation_exceptions, Seahorse::Model::Operation.new.tap do |o|
@@ -2525,6 +2541,24 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: PutRetentionConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
+      end)
+
+      api.add_operation(:select_aggregate_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SelectAggregateResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SelectAggregateResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: SelectAggregateResourceConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidExpressionException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:select_resource_config, Seahorse::Model::Operation.new.tap do |o|
