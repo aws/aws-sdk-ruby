@@ -10,10 +10,10 @@ module Aws
         NO_RETRY_INCREMENT = 1
         TIMEOUT_RETRY_COST = 10
 
-        def initialize
+        def initialize(opts = {})
           @mutex              = Mutex.new
-          @max_capacity       = INITIAL_RETRY_TOKENS
-          @available_capacity = INITIAL_RETRY_TOKENS
+          @max_capacity       = opts.fetch(:max_capacity, INITIAL_RETRY_TOKENS)
+          @available_capacity = @max_capacity
         end
 
         # check if there is sufficient capacity to retry

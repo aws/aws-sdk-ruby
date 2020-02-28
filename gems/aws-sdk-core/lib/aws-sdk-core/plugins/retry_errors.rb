@@ -95,9 +95,16 @@ This option is only used in the `legacy` retry mode.
         default: 'legacy',
         doc_type: String,
         docstring: <<-DOCS) do |cfg|
-Specifies which retry algorithm to use. Defaults to `legacy`
-which uses exponential backoff for all retries. Other modes include
-`standard` and `adaptive` which use a token bucket with variable backoff.
+Specifies which retry algorithm to use. Values are:
+  * legacy` - The pre-existing retry behavior.  This is default value if
+    no retry mode is provided.
+  * `standard` - A standardized set of retry rules across the AWS SDKs.
+    This includes support for retry quotas, which limit the number of 
+    unsuccessful retries a client can make.
+  * `adaptive` - An experimental retry mode that includes all the
+    functionality of `standard` mode along with automatic client side
+    throttling.  This is a provisional mode that may change behavior
+    in the future.
         DOCS
         resolve_retry_mode(cfg)
       end
@@ -107,9 +114,10 @@ which uses exponential backoff for all retries. Other modes include
         default: 3,
         doc_type: Integer,
         docstring: <<-DOCS) do |cfg|
-Specifies how many HTTP requests an SDK should make for a single
-SDK operation invocation before giving up. Used in `standard` and
-`adaptive` retry modes.
+An integer representing the maximum number attempts that will be made for
+a single request, including the initial attempt.  For example,
+setting this value to 5 will result in a request being retried up to
+4 times. Used in `standard` and `adaptive` retry modes.
         DOCS
         resolve_max_attempts(cfg)
       end

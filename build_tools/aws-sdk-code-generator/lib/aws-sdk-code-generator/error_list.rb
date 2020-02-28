@@ -10,7 +10,6 @@ module AwsSdkCodeGenerator
         # only generate error shape with non empty members
         # excluding event shapes marked as error
         if error_struct?(shape)
-          members = shape['members'].keys.map {|k| Underscore.underscore(k) }
           members = shape['members'].inject([]) do |arr, (k, v)|
             arr << {
               name: Underscore.underscore(k),
