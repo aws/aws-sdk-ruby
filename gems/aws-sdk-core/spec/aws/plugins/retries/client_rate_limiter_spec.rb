@@ -163,11 +163,11 @@ module Aws
 
         it 'doesnt starve any threads during a stress test' do
           client_rate_limiter.instance_variable_set(:@enabled, true)
-          client_rate_limiter.send(:token_bucket_update_rate, 100)
+          client_rate_limiter.send(:token_bucket_update_rate, 500)
 
           shutdown_threads = false
           threads = []
-          n_test_threads = 10
+          n_test_threads = 5
           acquisitions_by_thread = Array.new(n_test_threads, 0)
 
           n_test_threads.times do |i|
