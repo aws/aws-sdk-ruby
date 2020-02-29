@@ -4,6 +4,7 @@ Unreleased Changes
 1.17.0 (2020-02-28)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - Added SearchDashboards API that allows listing of dashboards that a specific user has access to.
 
 1.16.0 (2019-12-09)
@@ -90,4 +91,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-quicksight`.
-
