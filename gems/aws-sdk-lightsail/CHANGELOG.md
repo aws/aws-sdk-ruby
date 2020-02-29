@@ -4,6 +4,7 @@ Unreleased Changes
 1.28.0 (2020-02-27)
 ------------------
 
+* Issue - This version has been yanked. (#2239)
 * Feature - Adds support to create notification contacts in Amazon Lightsail, and to create instance, database, and load balancer metric alarms that notify you based on the value of a metric relative to a threshold that you specify.
 
 1.27.0 (2020-01-02)
@@ -200,4 +201,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial release of `aws-sdk-lightsail`.
-
