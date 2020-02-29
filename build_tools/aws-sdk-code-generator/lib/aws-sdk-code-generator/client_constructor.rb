@@ -24,12 +24,8 @@ module AwsSdkCodeGenerator
     private
 
     def documented_plugin_options(plugins)
-      i = 0
       plugins.map(&:options).flatten.select(&:documented?).sort_by do |opt|
-        # Stable sort, first required options, then sort by name, then if
-        # two plugins of the same name, use an incrementer.
-        # options.fetch(:plugins) will be ordered.
-        [opt.required ? 'a' : 'b', opt.name, i += 1] #, opt.override ? 'b' : 'a']
+        [opt.required ? 'a' : 'b', opt.name]
       end
     end
 
