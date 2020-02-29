@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Republish the previously yanked version.
+
 1.28.0 (2020-02-27)
 ------------------
 
