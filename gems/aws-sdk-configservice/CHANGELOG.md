@@ -1,10 +1,11 @@
 Unreleased Changes
 ------------------
 
-1.42.0 (2020-02-28)
+1.42.0 (2020-02-29)
 ------------------
 
 * Issue - This version has been yanked. (#2239)
+* Feature - Correcting list of supported resource types.
 
 1.41.0 (2020-02-28)
 ------------------
