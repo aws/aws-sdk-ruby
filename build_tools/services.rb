@@ -8,7 +8,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for new gem builds
-    MINIMUM_CORE_VERSION = "3.71.0"
+    MINIMUM_CORE_VERSION = "3.90.2"
     # Minimum `aws-sdk-core` version for new S3 gem builds
     MINIMUM_CORE_VERSION_S3 = "3.83.0"
 
