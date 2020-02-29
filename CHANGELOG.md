@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.456 (2020-02-29)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 2.11.455 (2020-02-28)
