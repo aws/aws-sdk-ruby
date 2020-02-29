@@ -2,7 +2,7 @@ require 'date'
 
 module Aws
   module Plugins
-    class ClientMetrics < Seahorse::Client::Plugin
+    class ClientMetricsPlugin < Seahorse::Client::Plugin
 
       option(:client_side_monitoring,
         default: false,
