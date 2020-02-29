@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix issue where the `client_metrics.rb` plugin was not loaded because of a refactor.
-
 3.90.1 (2020-02-14)
 ------------------
 
