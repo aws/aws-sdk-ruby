@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.457 (2020-03-02)
+------------------
+
 * Feature - Aws::ComprehendMedical - Updated the API, and documentation for AWS Comprehend Medical.
 
 * Feature - Aws::CloudWatch - Updated the API, documentation, resource interfaces, and waiters for Amazon CloudWatch.
